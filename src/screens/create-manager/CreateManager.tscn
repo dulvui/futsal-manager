@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/screens/create-manager/CreateManager.gd" type="Script" id=2]
+
+[node name="CreateManager" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 64.1447
+margin_top = 71.2718
+margin_right = 850.145
+margin_bottom = 183.272
+theme = ExtResource( 1 )
+text = "CREATE_MANAGER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 167.788
+margin_top = 306.437
+margin_right = 1767.79
+margin_bottom = 766.437
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="GridContainer"]
+margin_top = 5.0
+margin_right = 551.0
+margin_bottom = 117.0
+text = "NAME"
+
+[node name="Name" type="LineEdit" parent="GridContainer"]
+margin_left = 555.0
+margin_right = 1600.0
+margin_bottom = 122.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NatLabel" type="Label" parent="GridContainer"]
+margin_top = 131.0
+margin_right = 551.0
+margin_bottom = 243.0
+text = "NATIONALITY"
+
+[node name="Nat" type="LineEdit" parent="GridContainer"]
+margin_left = 555.0
+margin_top = 126.0
+margin_right = 1600.0
+margin_bottom = 248.0
+
+[node name="BirthLabel" type="Label" parent="GridContainer"]
+margin_top = 257.0
+margin_right = 551.0
+margin_bottom = 369.0
+text = "BIRTH_DATE"
+
+[node name="Birth" type="LineEdit" parent="GridContainer"]
+margin_left = 555.0
+margin_top = 252.0
+margin_right = 1600.0
+margin_bottom = 374.0
+
+[node name="FavTeamLabel" type="Label" parent="GridContainer"]
+margin_top = 383.0
+margin_right = 551.0
+margin_bottom = 495.0
+text = "FAV_TEAM"
+
+[node name="FavTeam" type="LineEdit" parent="GridContainer"]
+margin_left = 555.0
+margin_top = 378.0
+margin_right = 1600.0
+margin_bottom = 500.0
+
+[node name="Continue" type="Button" parent="."]
+margin_left = 1165.29
+margin_top = 876.643
+margin_right = 1521.29
+margin_bottom = 994.643
+text = "CONTINUE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="."]
+margin_left = 363.486
+margin_top = 898.025
+margin_right = 558.486
+margin_bottom = 1016.02
+text = "BACK"
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

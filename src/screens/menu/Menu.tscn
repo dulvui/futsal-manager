@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/screens/menu/Menu.gd" type="Script" id=2]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 579.058
+margin_top = 130.367
+margin_right = 1335.06
+margin_bottom = 242.367
+text = "FUTSAL MANAGER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 800.0
+margin_top = 420.0
+margin_right = 1120.0
+margin_bottom = 660.0
+
+[node name="StartGame" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_right = 320.0
+margin_bottom = 118.0
+text = "Start"
+
+[node name="Settings" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 122.0
+margin_right = 320.0
+margin_bottom = 240.0
+text = "Settings"
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]

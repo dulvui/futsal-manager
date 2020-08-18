@@ -19,12 +19,28 @@ config/name="Futsal Manager"
 run/main_scene="res://src/SplashScreen.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+DataSaver="*res://src/utils/data-saver/DataSaver.gd"
+PlayerGenerator="*res://src/utils/player-generator/PlayerGenerator.gd"
+Players="*res://src/utils/player-generator/Players.gd"
+
 [display]
 
 window/size/width=1920
 window/size/height=1080
 window/size/test_width=768
 window/size/test_height=432
+window/stretch/mode="2d"
+window/stretch/aspect="keep_height"
+
+[gui]
+
+theme/custom="res://theme.tres"
+
+[locale]
+
+translations=PoolStringArray( "res://assets/i18n/FutsalManagerI18N - Sheet1.de.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.en.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.it.translation" )
 
 [rendering]
 
