@@ -7,3 +7,7 @@ func _ready():
 
 func _on_Back_pressed():
 	get_tree().change_scene("res://src/screens/menu/Menu.tscn")
+
+
+func _on_Continue_pressed():
+	get_tree().change_scene("res://src/screens/menu/Menu.tscn")

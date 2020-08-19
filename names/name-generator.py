@@ -11,7 +11,7 @@ import random
 
 ita_players = []
 
-positions = ["GK","WINGER","PIVOT","DEFENDER"]
+positions = ["G","W","P","D","U"] # goal keeper, winger, pivot, defender, universal
 foots = ["L","R","R","R","R"] # 80% right foot
 forms = ["INJURED","RECOVER","GOOD","PERFECT"]
 transfer_states = ["TRANSFER","LOAN","ND"]

@@ -18,3 +18,7 @@ func _ready():
 
 func _on_StartGame_pressed():
 	get_tree().change_scene("res://src/screens/create-manager/CreateManager.tscn")
+
+
+func _on_Settings_pressed():
+	CalendarUtil.next_day()

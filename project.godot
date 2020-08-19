@@ -22,8 +22,9 @@ config/icon="res://icon.png"
 [autoload]
 
 DataSaver="*res://src/utils/data-saver/DataSaver.gd"
-PlayerGenerator="*res://src/utils/player-generator/PlayerGenerator.gd"
-Players="*res://src/utils/player-generator/Players.gd"
+PlayerGenerator="*res://data/player-generator/PlayerGenerator.gd"
+Players="*res://data/player-generator/Players.gd"
+CalendarUtil="*res://src/utils/calendar-util/CalendarUtil.gd"
 
 [display]
 
