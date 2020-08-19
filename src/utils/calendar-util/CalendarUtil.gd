@@ -1,6 +1,6 @@
 extends Node
 
-var months = ["JAN","FEB","MAR","MAY","APR","JUN","JUL","AUG","SEP","OKT","NOV","DEC"]
+var months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OKT","NOV","DEC"]
 var days = ["MON","TUE","WE","THU","FRI","SAT","SUN"]
 
 var year = 2020
@@ -15,28 +15,30 @@ func _ready():
 func next_day():
 	day += 1
 	day_counter += 1
-	if month == 2:
-		if year % 4 == 0:
-			if day > 29:
+	
+	match month:
+		2:
+			if year % 4 == 0:
+				if day > 29:
+					day = 1
+					month += 1
+			else:
+				if day > 28:
+					day = 1
+					month += 1
+		3,5,1,7,8,10,12:
+			if day > 31:
 				day = 1
 				month += 1
-		else:
-			if day > 28:
+		4,5,6,9,11:
+			if day > 30:
 				day = 1
 				month += 1
-		pass
-	elif month%2 == 0:
-		if day > 30:
-			day = 1
-			month += 1
-		if month == 13:
-			year += 1
-			day = 1
-			month = 1
-	else:
-		if day > 31:
-			day = 1
-			month += 1
+	if month == 13:
+		year += 1
+		day = 1
+		month = 1
+
 	print(get_date())
 
 func get_date():
