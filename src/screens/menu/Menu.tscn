@@ -46,3 +46,4 @@ margin_right = 320.0
 margin_bottom = 240.0
 text = "Settings"
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
