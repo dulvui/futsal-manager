@@ -21,4 +21,5 @@ func _on_StartGame_pressed():
 
 
 func _on_Settings_pressed():
-	CalendarUtil.next_day()
+	for i in range(30):
+		CalendarUtil.next_day()
