@@ -9,7 +9,6 @@ func _ready():
 	
 	var teams = Leagues.serie_a["teams"]
 	for team in teams:
-		
 		var team_button = Button.new()
 		team_button.text = team["name"]
 		team_button.connect("pressed",self,"team_selected",[team])
@@ -22,4 +21,5 @@ func _ready():
 
 func team_selected(team):
 	MatchMaker.inizialize_matches()
+	DataSaver.save_team(team)
 	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")

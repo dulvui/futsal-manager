@@ -35,7 +35,14 @@ func inizialize_matches():
 		for i in range(matches.size()):
 			var matchzz = {"home": matches[i]["away"],"away": matches[i]["home"], "result":":"}
 			matches.append(matchzz)
-			
+		
+		#add to calendar
+		
+		var day = 3
+		for i in range(0,matches.size(),5):
+			for j in range(i,i+5):
+				CalendarUtil.calendar[day]["matches"].append(matches[j])
+			day += 7
 			
 		league_started = true
 #		save_all_data()

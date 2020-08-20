@@ -8,6 +8,8 @@ var month
 var day
 var day_counter
 
+var team
+
 var manager
 
 # Called when the node enters the scene tree for the first time.
@@ -23,6 +25,8 @@ func _ready():
 		"birth_date" : "",
 	})
 	
+	team = config.get_value("team", "data",{})
+	
 	year = config.get_value("current_date","year",2020)
 	month = config.get_value("current_date","month",1)
 	day = config.get_value("current_date","day",1)
@@ -37,6 +41,10 @@ func save_manager(new_manager):
 	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
 	
+func save_team(new_team):
+	team = new_team
+	config.set_value("team","data",team)
+	config.save("user://settings.cfg")
 	
 func save_date():
 	config.set_value("current_date","year",CalendarUtil.year)
