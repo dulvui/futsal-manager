@@ -10,3 +10,4 @@ theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="ItemList" type="VBoxContainer" parent="."]
+custom_constants/separation = 1000

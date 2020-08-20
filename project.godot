@@ -25,6 +25,8 @@ DataSaver="*res://src/utils/data-saver/DataSaver.gd"
 PlayerGenerator="*res://data/player-generator/PlayerGenerator.gd"
 Players="*res://data/player-generator/Players.gd"
 CalendarUtil="*res://src/utils/calendar-util/CalendarUtil.gd"
+Leagues="*res://data/legaues/Leagues.gd"
+MatchMaker="*res://src/utils/match-maker/MatchMaker.gd"
 
 [display]
 

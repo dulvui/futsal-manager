@@ -30,20 +30,27 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 800.0
-margin_top = 420.0
-margin_right = 1120.0
-margin_bottom = 660.0
+margin_left = 777.0
+margin_top = 359.0
+margin_right = 1142.0
+margin_bottom = 721.0
 
 [node name="StartGame" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 320.0
+margin_right = 365.0
 margin_bottom = 118.0
 text = "Start"
 
-[node name="Settings" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="PlayerList" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 122.0
-margin_right = 320.0
+margin_right = 365.0
 margin_bottom = 240.0
+text = "Player list"
+
+[node name="Settings" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 244.0
+margin_right = 365.0
+margin_bottom = 362.0
 text = "Settings"
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PlayerList" to="." method="_on_PlayerList_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]

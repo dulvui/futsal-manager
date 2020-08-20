@@ -39,7 +39,37 @@ def get_physical(age,nationality):
 fake_it = Faker('it_IT')
 
 
-for _ in range(50):
+def get_technical(age,nationality):
+
+	factor = 20
+	if age > 34:
+		factor = 54 - age
+	elif age < 18:
+		factor = 16
+
+	pass_factor = max(random.randint(1,factor),4)
+
+	technical = {
+			"crossing" : min(pass_factor + random.randint(-3,3),20),
+			"pass" : min(pass_factor + random.randint(-3,3),20),
+			"long_pass" : min(pass_factor + random.randint(-3,3),20),
+			"tackling" : random.randint(1,20),
+			"corners" : min(pass_factor + random.randint(-3,3),20),
+			"heading" : random.randint(1,20),
+			"interception" : random.randint(1,20),
+			"marking" : random.randint(1,20),
+			"shoot" : random.randint(1,20),
+			"long_shoot" : random.randint(1,20),
+			"penalty" : random.randint(1,20),
+			"finishing" : random.randint(1,20),
+			"technique" : random.randint(1,20),
+			"stop_ball" : random.randint(1,20),
+			"first_touch" : random.randint(1,20),
+ 		}
+	return technical
+
+
+for _ in range(200):
 	birth_date = fake_it.date_time_between(start_date='-45y', end_date='-15y')
 
 
@@ -55,23 +85,7 @@ for _ in range(50):
 			"offensive_movement" : random.randint(1,20),
 			"defensive_movement" : random.randint(1,20),
 		},
-		"technial" : {
-			"crossing" : random.randint(1,20),
-			"pass" : random.randint(1,20),
-			"long_pass" : random.randint(1,20),
-			"tackling" : random.randint(1,20),
-			"corners" : random.randint(1,20),
-			"heading" : random.randint(1,20),
-			"interception" : random.randint(1,20),
-			"marking" : random.randint(1,20),
-			"shoot" : random.randint(1,20),
-			"long_shoot" : random.randint(1,20),
-			"penalty" : random.randint(1,20),
-			"finishing" : random.randint(1,20),
-			"technique" : random.randint(1,20),
-			"stop_ball" : random.randint(1,20),
-			"first_touch" : random.randint(1,20),
- 		},
+		"technial" : get_technical(2020-birth_date.year,"IT"),
 		"physycal" : get_physical(2020-birth_date.year,"IT")
 	}
 
@@ -91,7 +105,8 @@ for _ in range(50):
 		"_potential_growth" : random.randint(1,5),
 		"_injury_potential" :  random.randint(1,20), # _ hidden stats, not visible, just for calcs,
 		"history" : {},
-		"stats" : stats
+		"stats" : stats,
+		"team" : "Free Agent"
 	}
 	ita_players.append(player)
 
