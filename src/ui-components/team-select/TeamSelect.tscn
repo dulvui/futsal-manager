@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/ui-components/team-select/TeamSelect.gd" type="Script" id=1]
+[ext_resource path="res://theme.tres" type="Theme" id=2]
+
+[node name="TeamSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 456.139
+margin_top = 260.142
+margin_right = -463.861
+margin_bottom = -19.8579
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="TeamList" type="VBoxContainer" parent="."]
+margin_left = 416.94
+margin_top = -206.688
+margin_right = 416.94
+margin_bottom = -206.688
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = -324.286
+margin_top = -160.361
+margin_right = 306.714
+margin_bottom = -48.3615
+text = "CHOOSE_TEAM"

@@ -7,12 +7,46 @@ var year = 2020
 var month = 1
 var day = 1
 var day_counter = 1
+var calendar = []
 
 
 func _ready():
+	
+	year = DataSaver.year
+	month = DataSaver.month
+	day = DataSaver.day
+	day_counter = DataSaver.day_counter
+	
+	create_calendar()
+	
 	print(get_date())
 
+func create_calendar():
+	for i in range(10950):
+		var json = {
+			"day" : day,
+			"month" : month,
+			"year" : year,
+			"matches" : [],
+			"trainings" : []
+		}
+		calendar.append(json)
+		calc_date()
+	year = 2020
+	month = 1
+	day = 1
+	day_counter = 1
+
 func next_day():
+	calc_date()
+	# check contracts
+	# generate random news/ emails
+	# check trainings
+	# player growth
+	# pay players/staff
+	
+
+func calc_date():
 	day += 1
 	day_counter += 1
 	
@@ -26,7 +60,7 @@ func next_day():
 				if day > 28:
 					day = 1
 					month += 1
-		3,5,1,7,8,10,12:
+		1,3,5,7,8,10,12:
 			if day > 31:
 				day = 1
 				month += 1
@@ -34,12 +68,15 @@ func next_day():
 			if day > 30:
 				day = 1
 				month += 1
+	
+	
 	if month == 13:
 		year += 1
 		day = 1
 		month = 1
 
-	print(get_date())
+#	print(get_date())
+	DataSaver.save_date()
 
 func get_date():
 	# day + 1 so 1st jan 2020 is wednsday
