@@ -13,8 +13,24 @@ __meta__ = {
 }
 
 [node name="ManagerName" type="Label" parent="."]
-margin_left = 381.304
-margin_top = 42.7631
-margin_right = 837.304
-margin_bottom = 154.763
+margin_left = 235.197
+margin_top = 89.0898
+margin_right = 691.197
+margin_bottom = 201.09
 text = "Hans Viustel"
+
+[node name="TeamName" type="Label" parent="."]
+margin_left = 965.733
+margin_top = 89.0897
+margin_right = 1005.73
+margin_bottom = 201.09
+text = "Barcellona"
+
+[node name="Calendar" type="ScrollContainer" parent="."]
+margin_right = 12.0
+margin_bottom = 12.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="List" type="VBoxContainer" parent="Calendar"]
