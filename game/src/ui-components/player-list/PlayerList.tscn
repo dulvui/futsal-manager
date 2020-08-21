@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/ui-components/player-list/PlayerList.gd" type="Script" id=1]
+[ext_resource path="res://theme.tres" type="Theme" id=2]
+
+[node name="PlayerList" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -520.0
+margin_bottom = -79.9999
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="VBoxContainer" parent="."]
+custom_constants/separation = 980

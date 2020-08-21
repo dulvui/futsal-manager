@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/screens/create-manager/CreateManager.gd" type="Script" id=2]
+
+[node name="CreateManager" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 64.1447
+margin_top = 71.2718
+margin_right = 850.145
+margin_bottom = 183.272
+theme = ExtResource( 1 )
+text = "CREATE_MANAGER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -455.131
+margin_top = -151.512
+margin_right = 344.869
+margin_bottom = 68.4877
+custom_constants/vseparation = 16
+custom_constants/hseparation = 33
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="GridContainer"]
+margin_top = 5.0
+margin_right = 276.0
+margin_bottom = 61.0
+text = "NAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="LineEdit" parent="GridContainer"]
+margin_left = 309.0
+margin_right = 800.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SurNameLabel" type="Label" parent="GridContainer"]
+margin_top = 87.0
+margin_right = 276.0
+margin_bottom = 143.0
+text = "SURNAME"
+
+[node name="SurName" type="LineEdit" parent="GridContainer"]
+margin_left = 309.0
+margin_top = 82.0
+margin_right = 800.0
+margin_bottom = 148.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NatLabel" type="Label" parent="GridContainer"]
+margin_top = 164.0
+margin_right = 276.0
+margin_bottom = 220.0
+text = "NATIONALITY"
+
+[node name="Nat" type="OptionButton" parent="GridContainer"]
+margin_left = 309.0
+margin_top = 164.0
+margin_right = 800.0
+margin_bottom = 220.0
+
+[node name="Continue" type="Button" parent="."]
+margin_left = 1165.29
+margin_top = 876.643
+margin_right = 1521.29
+margin_bottom = 994.643
+text = "CONTINUE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="."]
+margin_left = 363.486
+margin_top = 898.025
+margin_right = 558.486
+margin_bottom = 1016.02
+text = "BACK"
+[connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
