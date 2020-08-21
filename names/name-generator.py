@@ -60,10 +60,10 @@ def get_technical(age,nationality):
 			"marking" : random.randint(1,20),
 			"shoot" : random.randint(1,20),
 			"long_shoot" : random.randint(1,20),
+			"free_kick" : random.randint(1,20),
 			"penalty" : random.randint(1,20),
 			"finishing" : random.randint(1,20),
 			"technique" : random.randint(1,20),
-			"stop_ball" : random.randint(1,20),
 			"first_touch" : random.randint(1,20),
  		}
 	return technical
@@ -89,10 +89,11 @@ for _ in range(200):
 		"physycal" : get_physical(2020-birth_date.year,"IT")
 	}
 
-
+	name_base = fake_it.name_male().replace("Dott. ","").replace("Sig. ","")
 
 	player = {
-		"name":fake_it.name_male().replace("Dott. ","").replace("Sig. ",""),
+		"name":name_base.split()[0],
+		"surname":name_base.split()[1],
 		"birth_date": birth_date.strftime("%m/%d/%Y"),
 		"nationality" : "IT",
 		"moral" : random.randint(1, 4), # 1 to 4, 1 low 4 good

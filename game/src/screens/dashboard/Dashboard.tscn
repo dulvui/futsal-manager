@@ -1,0 +1,178 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/screens/dashboard/Dashboard.gd" type="Script" id=2]
+[ext_resource path="res://src/ui-components/calendar/Calendar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/ui-components/player-list/PlayerList.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/ui-components/formation/Formation.tscn" type="PackedScene" id=5]
+
+[node name="Dashboard" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManagerName" type="Label" parent="."]
+margin_left = 221.345
+margin_top = 80.095
+margin_right = 677.345
+margin_bottom = 192.095
+text = "Hans Viustel"
+
+[node name="TeamName" type="Label" parent="."]
+margin_left = 960.0
+margin_top = 80.095
+margin_right = 1157.0
+margin_bottom = 192.095
+text = "Barcellona"
+
+[node name="Date" type="Label" parent="."]
+margin_left = 1520.0
+margin_top = 88.0
+margin_right = 1763.0
+margin_bottom = 144.0
+text = "24/08/2002"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+margin_left = 45.3572
+margin_top = 282.222
+margin_right = 510.357
+margin_bottom = 522.222
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Team" type="Button" parent="Buttons"]
+margin_right = 464.0
+margin_bottom = 56.0
+text = "TEAM"
+
+[node name="Formation" type="Button" parent="Buttons"]
+margin_top = 60.0
+margin_right = 464.0
+margin_bottom = 116.0
+text = "FORMATION"
+
+[node name="Training" type="Button" parent="Buttons"]
+margin_top = 120.0
+margin_right = 464.0
+margin_bottom = 176.0
+text = "TRAINING"
+
+[node name="Manager" type="Button" parent="Buttons"]
+margin_top = 180.0
+margin_right = 464.0
+margin_bottom = 236.0
+text = "MANAGER"
+
+[node name="Calendar" type="Button" parent="Buttons"]
+margin_top = 240.0
+margin_right = 464.0
+margin_bottom = 296.0
+text = "CALENDAR"
+
+[node name="SearchPlayer" type="Button" parent="Buttons"]
+margin_top = 300.0
+margin_right = 464.0
+margin_bottom = 356.0
+text = "SEARCH_PLAYER"
+
+[node name="Menu" type="Button" parent="Buttons"]
+margin_top = 360.0
+margin_right = 464.0
+margin_bottom = 416.0
+text = "MENU"
+
+[node name="AllPlayersPopup" type="Popup" parent="."]
+margin_left = 280.0
+margin_top = 40.0
+margin_right = 1680.0
+margin_bottom = 1040.0
+
+[node name="Panel" type="Panel" parent="AllPlayersPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="AllPlayerList" parent="AllPlayersPopup" instance=ExtResource( 4 )]
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="CalendarPopup" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -763.762
+margin_top = -459.905
+margin_right = 736.238
+margin_bottom = 540.095
+
+[node name="Panel" type="Panel" parent="CalendarPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Calendar" parent="CalendarPopup" instance=ExtResource( 3 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="PlayerPopUp" type="Popup" parent="."]
+margin_left = 221.345
+margin_top = 46.1784
+margin_right = 1621.34
+margin_bottom = 1046.18
+
+[node name="Panel" type="Panel" parent="PlayerPopUp"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PlayerList" parent="PlayerPopUp" instance=ExtResource( 4 )]
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="FormationPopUp" type="Popup" parent="."]
+visible = true
+margin_left = 221.345
+margin_top = 46.1784
+margin_right = 1621.34
+margin_bottom = 1046.18
+
+[node name="Panel" type="Panel" parent="FormationPopUp"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Formation" parent="FormationPopUp" instance=ExtResource( 5 )]
+margin_left = 50.655
+margin_top = 121.822
+margin_right = 50.655
+margin_bottom = 121.822
+rect_scale = Vector2( 0.7, 0.7 )
+
+[node name="Continue" type="Button" parent="."]
+margin_left = 1410.4
+margin_top = 891.905
+margin_right = 1638.4
+margin_bottom = 953.905
+text = "CONTINUE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Buttons/Team" to="." method="_on_Team_pressed"]
+[connection signal="pressed" from="Buttons/Formation" to="." method="_on_Formation_pressed"]
+[connection signal="pressed" from="Buttons/Training" to="." method="_on_Training_pressed"]
+[connection signal="pressed" from="Buttons/Manager" to="." method="_on_Manager_pressed"]
+[connection signal="pressed" from="Buttons/Calendar" to="." method="_on_Calendar_pressed"]
+[connection signal="pressed" from="Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
+[connection signal="pressed" from="Buttons/Menu" to="." method="_on_Menu_pressed"]
