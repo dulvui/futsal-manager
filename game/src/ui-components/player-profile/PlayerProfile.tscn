@@ -12,157 +12,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Name" type="Label" parent="."]
-margin_left = 50.7665
-margin_top = 45.102
-margin_right = 1250.77
-margin_bottom = 157.102
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 521.0
+margin_bottom = 56.0
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+margin_right = 300.0
+margin_bottom = 56.0
 text = "Abel Hernandez"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Info" type="GridContainer" parent="."]
-margin_left = 147.042
-margin_top = 204.337
-margin_right = 747.042
-margin_bottom = 504.337
-custom_constants/hseparation = 40
-columns = 2
+[node name="Details" type="Button" parent="HBoxContainer"]
+margin_left = 350.0
+margin_right = 521.0
+margin_bottom = 56.0
+text = "DETAILS"
+
+[node name="Select" type="Button" parent="HBoxContainer"]
+margin_left = 571.0
+margin_right = 729.0
+margin_bottom = 56.0
+text = "SELECT"
+
+[node name="DetailPopup" type="Popup" parent="."]
+margin_left = 306.816
+margin_top = 49.9467
+margin_right = 1506.82
+margin_bottom = 1049.95
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PositionLabel" type="Label" parent="Info"]
-margin_right = 276.0
-margin_bottom = 56.0
-text = "POSITION"
+[node name="Panel" type="Panel" parent="DetailPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="Position" type="Label" parent="Info"]
-margin_left = 316.0
-margin_right = 484.0
-margin_bottom = 56.0
-text = "PIVOT"
-
-[node name="AgeLabel" type="Label" parent="Info"]
-margin_top = 60.0
-margin_right = 276.0
-margin_bottom = 116.0
-text = "AGE"
-
-[node name="Age" type="Label" parent="Info"]
-margin_left = 316.0
-margin_top = 60.0
-margin_right = 484.0
-margin_bottom = 116.0
-text = "32"
-
-[node name="NationalityLabel" type="Label" parent="Info"]
-margin_top = 120.0
-margin_right = 276.0
-margin_bottom = 176.0
-text = "NATIONALITY"
-
-[node name="Nationality" type="Label" parent="Info"]
-margin_left = 316.0
-margin_top = 120.0
-margin_right = 484.0
-margin_bottom = 176.0
-text = "Italiana"
-
-[node name="TeamLabel" type="Label" parent="Info"]
-margin_top = 180.0
-margin_right = 276.0
-margin_bottom = 236.0
-text = "TEAM"
-
-[node name="Team" type="Label" parent="Info"]
-margin_left = 316.0
-margin_top = 180.0
-margin_right = 484.0
-margin_bottom = 236.0
-text = "Bronzolo"
-
-[node name="Panel" type="Panel" parent="Info"]
-margin_top = 240.0
-margin_right = 276.0
-margin_bottom = 240.0
-
-[node name="Technical" type="GridContainer" parent="."]
-margin_left = 134.389
-margin_top = 532.449
-margin_right = 934.389
-margin_bottom = 1332.45
-custom_constants/hseparation = 40
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CrossLabel" type="Label" parent="Technical"]
-margin_right = 248.0
-margin_bottom = 56.0
-text = "CROSS"
-
-[node name="Cross" type="Label" parent="Technical"]
-margin_left = 288.0
-margin_right = 323.0
-margin_bottom = 56.0
-text = "12"
-
-[node name="PassLabel" type="Label" parent="Technical"]
-margin_top = 60.0
-margin_right = 248.0
-margin_bottom = 116.0
-text = "PASS"
-
-[node name="Pass" type="Label" parent="Technical"]
-margin_left = 288.0
-margin_top = 60.0
-margin_right = 323.0
-margin_bottom = 116.0
-text = "12"
-
-[node name="LongPassLabel" type="Label" parent="Technical"]
-margin_top = 120.0
-margin_right = 248.0
-margin_bottom = 176.0
-text = "LONG_PASS"
-
-[node name="LongPass" type="Label" parent="Technical"]
-margin_left = 288.0
-margin_top = 120.0
-margin_right = 323.0
-margin_bottom = 176.0
-text = "12"
-
-[node name="TacklingLabel" type="Label" parent="Technical"]
-margin_top = 180.0
-margin_right = 248.0
-margin_bottom = 236.0
-text = "TACKLING"
-
-[node name="Tackling" type="Label" parent="Technical"]
-margin_left = 288.0
-margin_top = 180.0
-margin_right = 323.0
-margin_bottom = 236.0
-text = "12"
-
-[node name="CornerLabel" type="Label" parent="Technical"]
-margin_top = 240.0
-margin_right = 248.0
-margin_bottom = 296.0
-text = "CORNER"
-
-[node name="Corner" type="Label" parent="Technical"]
-margin_left = 288.0
-margin_top = 240.0
-margin_right = 323.0
-margin_bottom = 296.0
-text = "12"
-
-[node name="Mental" type="GridContainer" parent="."]
+[node name="Mental" type="GridContainer" parent="DetailPopup"]
 margin_left = 566.226
 margin_top = 534.898
 margin_right = 1403.23
@@ -173,65 +64,207 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AgressivityLabel" type="Label" parent="Mental"]
+[node name="AgressivityLabel" type="Label" parent="DetailPopup/Mental"]
 margin_right = 362.0
 margin_bottom = 56.0
 text = "AGRESSIVITY"
 
-[node name="Agressivity" type="Label" parent="Mental"]
+[node name="Agressivity" type="Label" parent="DetailPopup/Mental"]
 margin_left = 402.0
 margin_right = 437.0
 margin_bottom = 56.0
 text = "12"
 
-[node name="AnticipationLabel" type="Label" parent="Mental"]
+[node name="AnticipationLabel" type="Label" parent="DetailPopup/Mental"]
 margin_top = 60.0
 margin_right = 362.0
 margin_bottom = 116.0
 text = "ANTICIPATION"
 
-[node name="Anticipation" type="Label" parent="Mental"]
+[node name="Anticipation" type="Label" parent="DetailPopup/Mental"]
 margin_left = 402.0
 margin_top = 60.0
 margin_right = 437.0
 margin_bottom = 116.0
 text = "12"
 
-[node name="DecisionsLabel" type="Label" parent="Mental"]
+[node name="DecisionsLabel" type="Label" parent="DetailPopup/Mental"]
 margin_top = 120.0
 margin_right = 362.0
 margin_bottom = 176.0
 text = "DECISIONS"
 
-[node name="Decisions" type="Label" parent="Mental"]
+[node name="Decisions" type="Label" parent="DetailPopup/Mental"]
 margin_left = 402.0
 margin_top = 120.0
 margin_right = 437.0
 margin_bottom = 176.0
 text = "12"
 
-[node name="ConcentrationLabel" type="Label" parent="Mental"]
+[node name="ConcentrationLabel" type="Label" parent="DetailPopup/Mental"]
 margin_top = 180.0
 margin_right = 362.0
 margin_bottom = 236.0
 text = "CONCENTRATION"
 
-[node name="Concentration" type="Label" parent="Mental"]
+[node name="Concentration" type="Label" parent="DetailPopup/Mental"]
 margin_left = 402.0
 margin_top = 180.0
 margin_right = 437.0
 margin_bottom = 236.0
 text = "12"
 
-[node name="TeamworkLabel" type="Label" parent="Mental"]
+[node name="TeamworkLabel" type="Label" parent="DetailPopup/Mental"]
 margin_top = 240.0
 margin_right = 362.0
 margin_bottom = 296.0
 text = "TEAMWORK"
 
-[node name="Teamwork" type="Label" parent="Mental"]
+[node name="Teamwork" type="Label" parent="DetailPopup/Mental"]
 margin_left = 402.0
 margin_top = 240.0
 margin_right = 437.0
 margin_bottom = 296.0
 text = "12"
+
+[node name="Technical" type="GridContainer" parent="DetailPopup"]
+margin_left = 134.389
+margin_top = 532.449
+margin_right = 934.389
+margin_bottom = 1332.45
+custom_constants/hseparation = 40
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CrossLabel" type="Label" parent="DetailPopup/Technical"]
+margin_right = 248.0
+margin_bottom = 56.0
+text = "CROSS"
+
+[node name="Cross" type="Label" parent="DetailPopup/Technical"]
+margin_left = 288.0
+margin_right = 323.0
+margin_bottom = 56.0
+text = "12"
+
+[node name="PassLabel" type="Label" parent="DetailPopup/Technical"]
+margin_top = 60.0
+margin_right = 248.0
+margin_bottom = 116.0
+text = "PASS"
+
+[node name="Pass" type="Label" parent="DetailPopup/Technical"]
+margin_left = 288.0
+margin_top = 60.0
+margin_right = 323.0
+margin_bottom = 116.0
+text = "12"
+
+[node name="LongPassLabel" type="Label" parent="DetailPopup/Technical"]
+margin_top = 120.0
+margin_right = 248.0
+margin_bottom = 176.0
+text = "LONG_PASS"
+
+[node name="LongPass" type="Label" parent="DetailPopup/Technical"]
+margin_left = 288.0
+margin_top = 120.0
+margin_right = 323.0
+margin_bottom = 176.0
+text = "12"
+
+[node name="TacklingLabel" type="Label" parent="DetailPopup/Technical"]
+margin_top = 180.0
+margin_right = 248.0
+margin_bottom = 236.0
+text = "TACKLING"
+
+[node name="Tackling" type="Label" parent="DetailPopup/Technical"]
+margin_left = 288.0
+margin_top = 180.0
+margin_right = 323.0
+margin_bottom = 236.0
+text = "12"
+
+[node name="CornerLabel" type="Label" parent="DetailPopup/Technical"]
+margin_top = 240.0
+margin_right = 248.0
+margin_bottom = 296.0
+text = "CORNER"
+
+[node name="Corner" type="Label" parent="DetailPopup/Technical"]
+margin_left = 288.0
+margin_top = 240.0
+margin_right = 323.0
+margin_bottom = 296.0
+text = "12"
+
+[node name="Info" type="GridContainer" parent="DetailPopup"]
+margin_left = 147.042
+margin_top = 204.337
+margin_right = 747.042
+margin_bottom = 504.337
+custom_constants/hseparation = 40
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PositionLabel" type="Label" parent="DetailPopup/Info"]
+margin_right = 276.0
+margin_bottom = 56.0
+text = "POSITION"
+
+[node name="Position" type="Label" parent="DetailPopup/Info"]
+margin_left = 316.0
+margin_right = 484.0
+margin_bottom = 56.0
+text = "PIVOT"
+
+[node name="AgeLabel" type="Label" parent="DetailPopup/Info"]
+margin_top = 60.0
+margin_right = 276.0
+margin_bottom = 116.0
+text = "AGE"
+
+[node name="Age" type="Label" parent="DetailPopup/Info"]
+margin_left = 316.0
+margin_top = 60.0
+margin_right = 484.0
+margin_bottom = 116.0
+text = "32"
+
+[node name="NationalityLabel" type="Label" parent="DetailPopup/Info"]
+margin_top = 120.0
+margin_right = 276.0
+margin_bottom = 176.0
+text = "NATIONALITY"
+
+[node name="Nationality" type="Label" parent="DetailPopup/Info"]
+margin_left = 316.0
+margin_top = 120.0
+margin_right = 484.0
+margin_bottom = 176.0
+text = "Italiana"
+
+[node name="TeamLabel" type="Label" parent="DetailPopup/Info"]
+margin_top = 180.0
+margin_right = 276.0
+margin_bottom = 236.0
+text = "TEAM"
+
+[node name="Team" type="Label" parent="DetailPopup/Info"]
+margin_left = 316.0
+margin_top = 180.0
+margin_right = 484.0
+margin_bottom = 236.0
+text = "Bronzolo"
+
+[node name="Panel" type="Panel" parent="DetailPopup/Info"]
+margin_top = 240.0
+margin_right = 276.0
+margin_bottom = 240.0
+[connection signal="pressed" from="HBoxContainer/Details" to="." method="_on_Details_pressed"]
+[connection signal="pressed" from="HBoxContainer/Select" to="." method="_on_Select_pressed"]
