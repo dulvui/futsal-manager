@@ -431,6 +431,7 @@ anims/Fade2-2 = SubResource( 2 )
 anims/Fade3-1 = SubResource( 5 )
 [connection signal="item_selected" from="FormationSelect" to="." method="_on_FormationSelect_item_selected"]
 [connection signal="select_player" from="PlayerSelect/PlayerList" to="." method="_on_PlayerList_select_player"]
+[connection signal="change_player" from="Field/G" to="." method="_on_G_change_player"]
 [connection signal="change_player" from="Field/D" to="." method="_on_D_change_player"]
 [connection signal="change_player" from="Field/WL" to="." method="_on_WL_change_player"]
 [connection signal="change_player" from="Field/WR" to="." method="_on_WR_change_player"]
