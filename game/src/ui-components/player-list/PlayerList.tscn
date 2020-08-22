@@ -14,5 +14,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemList" type="VBoxContainer" parent="."]
-custom_constants/separation = 980
+[node name="Container" type="MarginContainer" parent="."]
+margin_right = 1400.0
+margin_bottom = 1000.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="Container"]
+margin_right = 1400.0
+margin_bottom = 1000.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemList" type="VBoxContainer" parent="Container"]
+margin_right = 1400.0
+margin_bottom = 1000.0
+custom_constants/separation = 80
+__meta__ = {
+"_edit_use_anchors_": false
+}

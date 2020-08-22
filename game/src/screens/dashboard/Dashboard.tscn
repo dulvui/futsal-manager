@@ -143,7 +143,6 @@ margin_right = 0.0
 margin_bottom = 0.0
 
 [node name="FormationPopUp" type="Popup" parent="."]
-visible = true
 margin_left = 221.345
 margin_top = 46.1784
 margin_right = 1621.34
