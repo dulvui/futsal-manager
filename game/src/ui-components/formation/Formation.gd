@@ -71,4 +71,5 @@ func _on_P_change_player(player):
 
 func _on_PlayerList_select_player(player):
 	print("formation select")
-	DataSaver.change_player(player_to_replace,player)
+	DataSaver.change_player(player_to_replace,player[0])
+	_set_players()

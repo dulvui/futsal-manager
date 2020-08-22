@@ -94,6 +94,8 @@ func save_calendar(new_calendar):
 
 func change_player(player_to_replace,player):
 	print("change")
+	print(player_to_replace["name"])
+	print(player["name"])
 	var index = selected_players.find(player_to_replace)
 	var index2 = selected_players.find(player)
 	selected_players[index] = player
