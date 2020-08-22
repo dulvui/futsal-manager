@@ -2,7 +2,7 @@ extends Control
 
 signal player_select
 
-var player
+var player = {}
 
 func set_up_info(new_player):
 	player = new_player
@@ -45,4 +45,4 @@ func _on_Details_pressed():
 
 func _on_Select_pressed():
 	print("select in prfoile")
-	emit_signal("player_select",player)
+	emit_signal("player_select")
