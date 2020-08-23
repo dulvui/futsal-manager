@@ -1,0 +1,139 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/field.png" type="Texture" id=1]
+[ext_resource path="res://src/screens/match/field/ball/Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/screens/match/field/player/Player.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 531.495, 78.8438 )
+
+[node name="Field" type="Control"]
+margin_left = 635.678
+margin_top = 230.963
+margin_right = 1835.68
+margin_bottom = 1030.96
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -528.0
+margin_top = -336.0
+margin_right = 528.0
+margin_bottom = 336.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="HomePlayers" type="Control" parent="."]
+margin_left = 69.4901
+margin_top = 67.7083
+margin_right = 109.49
+margin_bottom = 107.708
+
+[node name="G" parent="HomePlayers" instance=ExtResource( 3 )]
+position = Vector2( 24.9451, 297.56 )
+shirt_color = Color( 0.211765, 0.0196078, 0.0196078, 1 )
+
+[node name="D" parent="HomePlayers" instance=ExtResource( 3 )]
+position = Vector2( 187.089, 114.035 )
+pos = "D"
+shirt_number = "4"
+
+[node name="WL" parent="HomePlayers" instance=ExtResource( 3 )]
+position = Vector2( 187.089, 449.013 )
+pos = "WL"
+shirt_number = "5"
+
+[node name="WR" parent="HomePlayers" instance=ExtResource( 3 )]
+position = Vector2( 445.449, 459.704 )
+pos = "WR"
+shirt_number = "7"
+
+[node name="P" parent="HomePlayers" instance=ExtResource( 3 )]
+position = Vector2( 443.668, 119.38 )
+pos = "P"
+shirt_number = "9"
+
+[node name="AwayPlayers" type="Control" parent="."]
+margin_left = 584.726
+margin_top = 73.6318
+margin_right = 624.726
+margin_bottom = 113.632
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="G" parent="AwayPlayers" instance=ExtResource( 3 )]
+position = Vector2( 459.704, 279.742 )
+shirt_color = Color( 0.0509804, 0.101961, 0.854902, 1 )
+
+[node name="D" parent="AwayPlayers" instance=ExtResource( 3 )]
+position = Vector2( 317.16, 292.215 )
+pos = "D"
+shirt_number = "2"
+shirt_color = Color( 0.113725, 0.854902, 0.909804, 1 )
+
+[node name="WL" parent="AwayPlayers" instance=ExtResource( 3 )]
+position = Vector2( 155.016, 459.704 )
+pos = "WL"
+shirt_number = "3"
+shirt_color = Color( 0.113725, 0.854902, 0.909804, 1 )
+
+[node name="WR" parent="AwayPlayers" instance=ExtResource( 3 )]
+position = Vector2( 174.616, 83.7445 )
+pos = "WR"
+shirt_number = "6"
+shirt_color = Color( 0.113725, 0.854902, 0.909804, 1 )
+
+[node name="P" parent="AwayPlayers" instance=ExtResource( 3 )]
+position = Vector2( 58.7993, 283.306 )
+pos = "P"
+shirt_number = "9"
+shirt_color = Color( 0.113725, 0.854902, 0.909804, 1 )
+
+[node name="Ball" parent="." instance=ExtResource( 2 )]
+position = Vector2( 586.211, 390.214 )
+
+[node name="Walls" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Up" type="StaticBody2D" parent="Walls"]
+collision_layer = 2
+
+[node name="ColissionShape" type="CollisionShape2D" parent="Walls/Up"]
+position = Vector2( 599.649, -15.7442 )
+shape = SubResource( 1 )
+
+[node name="Down" type="StaticBody2D" parent="Walls"]
+position = Vector2( 0, 832 )
+collision_layer = 2
+
+[node name="ColissionShape" type="CollisionShape2D" parent="Walls/Down"]
+position = Vector2( 599.649, -15.7442 )
+shape = SubResource( 1 )
+
+[node name="Left" type="StaticBody2D" parent="Walls"]
+position = Vector2( -209.774, 450.593 )
+scale = Vector2( 0.24915, 5.28634 )
+collision_layer = 2
+
+[node name="ColissionShape" type="CollisionShape2D" parent="Walls/Left"]
+position = Vector2( 599.649, -15.7442 )
+shape = SubResource( 1 )
+
+[node name="Right" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1112.23, 450.593 )
+scale = Vector2( 0.24915, 5.28634 )
+collision_layer = 2
+
+[node name="ColissionShape" type="CollisionShape2D" parent="Walls/Right"]
+position = Vector2( 599.649, -15.7442 )
+shape = SubResource( 1 )

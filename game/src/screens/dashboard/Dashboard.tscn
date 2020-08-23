@@ -175,3 +175,4 @@ __meta__ = {
 [connection signal="pressed" from="Buttons/Calendar" to="." method="_on_Calendar_pressed"]
 [connection signal="pressed" from="Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
 [connection signal="pressed" from="Buttons/Menu" to="." method="_on_Menu_pressed"]
+[connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]

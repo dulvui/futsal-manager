@@ -8,6 +8,7 @@ func set_up_info(new_player):
 	player = new_player
 	$HBoxContainer/Name.text = player["name"] + " " + player["surname"]
 	$DetailPopup/Info/Position.text = player["position"]
+	$HBoxContainer/Position.text = player["position"]
 	$DetailPopup/Info/Age.text = player["birth_date"]
 	$DetailPopup/Info/Nationality.text = player["nationality"]
 	$DetailPopup/Info/Team.text = player["team"]
@@ -18,6 +19,8 @@ func set_up_info(new_player):
 	$DetailPopup/Technical/LongPass.text = str(tech["long_pass"])
 	$DetailPopup/Technical/Tackling.text = str(tech["tackling"])
 	$DetailPopup/Technical/Corner.text = str(tech["corners"])
+	$DetailPopup/Technical/Shoot.text = str(tech["shoot"])
+	$DetailPopup/Technical/LongShoot.text = str(tech["long_shoot"])
 	
 	var mental = player["stats"]["mental"]
 	$DetailPopup/Mental/Agressivity.text = str(mental["agressivity"])
@@ -46,3 +49,7 @@ func _on_Details_pressed():
 func _on_Select_pressed():
 	print("select in prfoile")
 	emit_signal("player_select")
+
+
+func _on_Hide_pressed():
+	$DetailPopup.hide()

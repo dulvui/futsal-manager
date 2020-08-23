@@ -71,8 +71,6 @@ def get_technical(age,nationality):
 
 for _ in range(200):
 	birth_date = fake_it.date_time_between(start_date='-45y', end_date='-15y')
-
-
 	stats = {
 		"mental" :{
 			"agressivity" : random.randint(1,20),

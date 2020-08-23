@@ -100,4 +100,6 @@ func change_player(player_to_replace,player):
 	var index2 = selected_players.find(player)
 	selected_players[index] = player
 	selected_players[index2] = player_to_replace
+	config.set_value("season","players",selected_players)
+	config.save("user://settings.cfg")
 

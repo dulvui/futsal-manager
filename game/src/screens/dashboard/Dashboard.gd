@@ -30,8 +30,6 @@ func _on_Manager_pressed():
 	pass # Replace with function body.
 
 
-
-
 func _on_SearchPlayer_pressed():
 	$AllPlayersPopup.popup_centered()
 
@@ -42,3 +40,7 @@ func _on_Training_pressed():
 
 func _on_Formation_pressed():
 	$FormationPopUp.popup_centered()
+
+
+func _on_Continue_pressed():
+	pass # Replace with function body.
