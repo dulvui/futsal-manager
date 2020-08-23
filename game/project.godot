@@ -41,9 +41,20 @@ window/stretch/aspect="keep_height"
 
 theme/custom="res://theme.tres"
 
+[layer_names]
+
+2d_physics/layer_1="ball"
+2d_physics/layer_2="world"
+2d_physics/layer_3="lines"
+2d_physics/layer_4="player"
+
 [locale]
 
 translations=PoolStringArray( "res://assets/i18n/FutsalManagerI18N - Sheet1.de.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.en.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.it.translation" )
+
+[physics]
+
+2d/default_gravity_vector=Vector2( 0, 0 )
 
 [rendering]
 
