@@ -2,7 +2,7 @@ extends Control
 
 onready var animation_player = $AnimationPlayer
 
-var formations = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1"]
+var formations = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
 var offensive_tactics = ["POSESSION","FAST","WINGS"]
 var defensive_tactics = ["STAY_HIGH","STAY_LOW","PRESSING"]
 

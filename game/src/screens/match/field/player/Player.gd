@@ -1,71 +1,68 @@
-extends KinematicBody2D
+extends Area2D
 
 export (String, "G", "D", "WL", "WR", "P") var pos = "G"
 
-var stats = {}
-var shirtnumber = 1
+var stats = {
+	"goals" : 0,
+	"shots" : 0,
+	"shots_on_target" : 0,
+	"passes" : 0,
+	"passes_success" : 0,
+	"dribblings" : 0,
+	"dribblings_success" : 0,
+	"tackling" : 0,
+	"tackling_success" : 0,
+	"meters_run" : 0,
+}
 var surname = ""
 
-var goals = 0
-var shots = 0
-var shots_on_target = 0
-var passes = 0
-var passes_success = 0
-var dribblings = 0
-var dribblings_success = 0
-var tackling = 0
-var tackling_success = 0
-var meters_run = 0
-
-
 onready var ball = get_parent().get_parent().get_node("Ball")
+var opponent_players
 
 export var shirt_number = "1"
 export var shirt_color = Color.red
 
 var has_ball = false #probably detects when ball enters Ball detector
 
-onready var eyes = $Eyes
-
 func _ready():
 	$Control/ShirtNumber.text = shirt_number
 	$Control/ColorRect.color = shirt_color
+	
+	if get_parent()["name"] == "HomePlayers":
+		opponent_players = get_parent().get_parent().get_node("AwayPlayers")
+	else:
+		opponent_players = get_parent().get_parent().get_node("HomePlayers")
 
 func set_up(player):
-	eyes.cast_to(0,player["visiion"] * 10)
+	pass
 
 func _physics_process(delta):
-	if pos != "G":
-		var direction = (ball.global_position - global_position).normalized()
-		var distance_to_player = global_position.distance_to(ball.global_position)
-		move_and_slide(direction *0.4 * distance_to_player)
-	
-	
-#	print("pla")
+	if not has_ball:
+		mark_nearest_player()
 	look_at(ball.global_position)
-#	print(ball.global_position)
 
 
 func update():
-	if has_ball:
-		pass
-		#move forwards, if playerdetectore detects enemy, pass, dribble, move back or shoot
-		#dependig on tactic and stats of player
-	else:
-		#check where ball is, if near go to ball, else mark player or stay in position
-		pass
+	pass
 
 # move to player or ball, whatever closer is.
 # special movements: cornerns, penlaties, free kicks, kick off, rimessa
-func move():
-	pass
+func move(destination):
+	var direction = (destination.global_position - global_position).normalized()
+	var distance_to_player = global_position.distance_to(destination.global_position)
+	#TWEEN
 	
 
 func pass_ball():
 	pass
+	#TWEEN
 	
-	
-
-# so player can hear other players, when no seeing, depends on teamwork if players shout or not
-func hear():
-	pass
+func mark_nearest_player():
+	var nearest_player_distance = 5000
+	var nearest_player
+	for player in opponent_players.get_children():
+		if player["name"] != "G":
+			if global_position.distance_to(player.global_position) < nearest_player_distance:
+				nearest_player = player
+				nearest_player_distance = global_position.distance_to(player.global_position)
+	#TWEEN
