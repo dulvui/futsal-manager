@@ -22,6 +22,16 @@ func _ready():
 	
 	
 	_set_players()
+	
+	$OffensiveTactics/O1.value = DataSaver.team["offensive_tactics"]["O1"]
+	$OffensiveTactics/O2.value = DataSaver.team["offensive_tactics"]["O2"]
+	$OffensiveTactics/O3.value = DataSaver.team["offensive_tactics"]["O3"]
+	$OffensiveTactics/O4.value = DataSaver.team["offensive_tactics"]["O4"]
+	
+	$DefensiveTactics/D1.value = DataSaver.team["defensive_tactics"]["D1"]
+	$DefensiveTactics/D2.value = DataSaver.team["defensive_tactics"]["D2"]
+	$DefensiveTactics/D3.value = DataSaver.team["defensive_tactics"]["D3"]
+	$DefensiveTactics/D4.value = DataSaver.team["defensive_tactics"]["D4"]
 		
 	animation_player.play("Fade" + DataSaver.team["formation"])
 
@@ -35,43 +45,36 @@ func _on_FormationSelect_item_selected(index):
 	
 
 func _set_players():
+	$Field/G.set_player(DataSaver.team["players"]["G"])
+	$Field/D.set_player(DataSaver.team["players"]["D"])
+	$Field/WL.set_player(DataSaver.team["players"]["WL"])
+	$Field/WR.set_player(DataSaver.team["players"]["WR"])
+	$Field/P.set_player(DataSaver.team["players"]["P"])
 	
-	for player in DataSaver.team["players"]:
-		match player["actual_pos"]:
-			"G":
-				$Field/G.set_player(player)
-			"D":
-				$Field/D.set_player(player)
-			"WL":
-				$Field/WL.set_player(player)
-			"WR":
-				$Field/WR.set_player(player)
-			"P":
-				$Field/P.set_player(player)
 
 
 func _on_D_change_player(player):
-	player_to_replace = player
+	player_to_replace = "D"
 	$PlayerSelect.popup_centered()
 
 
 func _on_WL_change_player(player):
-	player_to_replace = player
+	player_to_replace = "WL"
 	$PlayerSelect.popup_centered()
 
 
 
 func _on_WR_change_player(player):
-	player_to_replace = player
+	player_to_replace = "WR"
 	$PlayerSelect.popup_centered()
 
 
 func _on_P_change_player(player):
-	player_to_replace = player
+	player_to_replace = "P"
 	$PlayerSelect.popup_centered()
 	
 func _on_G_change_player(player):
-	player_to_replace = player
+	player_to_replace = "G"
 	$PlayerSelect.popup_centered()
 
 func _on_PlayerList_select_player(player):
@@ -82,28 +85,72 @@ func _on_PlayerList_select_player(player):
 
 
 func _on_D1_value_changed(value):
-	pass # Replace with function body.
+	DataSaver.team["defensive_tactics"]["D1"] = value
 
 
 func _on_D2_value_changed(value):
-	pass # Replace with function body.
+	DataSaver.team["defensive_tactics"]["D2"] = value
 
 
 func _on_D3_value_changed(value):
-	pass # Replace with function body.
+	DataSaver.team["defensive_tactics"]["D3"] = value
 
 
 func _on_D4_value_changed(value):
-	pass # Replace with function body.
+	DataSaver.team["defensive_tactics"]["D4"] = value
 
 
 func _on_O1_value_changed(value):
-	pass # Replace with function body.
+	DataSaver.team["offensive_tactics"]["O1"] = value
 
 
 func _on_O2_value_changed(value):
-	pass # Replace with function body.
+	DataSaver.team["offensive_tactics"]["O2"] = value
 
 
 func _on_O3_value_changed(value):
-	pass # Replace with function body.
+	DataSaver.team["offensive_tactics"]["O3"] = value
+
+
+func _on_O4_value_changed(value):
+	DataSaver.team["offensive_tactics"]["O4"] = value
+
+
+func _on_D1Info_pressed():
+	$TacticInfoPopUp/TacticInfo.text = tr("D1_INFO")
+	$TacticInfoPopUp.popup_centered()
+
+func _on_D2Info_pressed():
+	$TacticInfoPopUp/TacticInfo.text = tr("D2_INFO")
+	$TacticInfoPopUp.popup_centered()
+	
+
+
+func _on_D3Info_pressed():
+	$TacticInfoPopUp/TacticInfo.text = tr("D3_INFO")
+	$TacticInfoPopUp.popup_centered()
+
+
+func _on_D4Info_pressed():
+	$TacticInfoPopUp/TacticInfo.text = tr("D4_INFO")
+	$TacticInfoPopUp.popup_centered()
+
+
+func _on_01Info_pressed():
+	$TacticInfoPopUp/TacticInfo.text = tr("O1_INFO")
+	$TacticInfoPopUp.popup_centered()
+
+
+func _on_02Info_pressed():
+	$TacticInfoPopUp/TacticInfo.text = tr("O2_INFO")
+	$TacticInfoPopUp.popup_centered()
+
+
+func _on_03Info_pressed():
+	$TacticInfoPopUp/TacticInfo.text = tr("O3_INFO")
+	$TacticInfoPopUp.popup_centered()
+
+
+func _on_04Info_pressed():
+	$TacticInfoPopUp/TacticInfo.text = tr("O4_INFO")
+	$TacticInfoPopUp.popup_centered()

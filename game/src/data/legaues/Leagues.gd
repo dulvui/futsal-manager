@@ -11,7 +11,7 @@ var serie_a = {
 				"name" : "Estadio Central",
 				"capacity" : 200
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 12
 		},
 		{
@@ -22,7 +22,7 @@ var serie_a = {
 				"name" : "Cancha del Norte",
 				"capacity" : 1000
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 16
 		},
 		{
@@ -33,7 +33,7 @@ var serie_a = {
 				"name" : "San German Arena",
 				"capacity" : 1000
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 16
 		},
 		{
@@ -44,7 +44,7 @@ var serie_a = {
 				"name" : "Arena del Sur",
 				"capacity" : 1000
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 16
 		},
 		{
@@ -55,7 +55,7 @@ var serie_a = {
 				"name" : "Cancha Comunal Cisneros",
 				"capacity" : 1000
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 16
 		},
 		{
@@ -66,7 +66,7 @@ var serie_a = {
 				"name" : "Cancha Santa Lucia",
 				"capacity" : 1000
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 16
 		},
 		{
@@ -77,7 +77,7 @@ var serie_a = {
 				"name" : "Envigadio",
 				"capacity" : 1000
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 16
 		},
 		{
@@ -88,7 +88,7 @@ var serie_a = {
 				"name" : "Estadio Bello",
 				"capacity" : 1000
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 16
 		},
 		{
@@ -99,7 +99,7 @@ var serie_a = {
 				"name" : "Comuna 13",
 				"capacity" : 400
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 10
 		},
 		{
@@ -110,7 +110,7 @@ var serie_a = {
 				"name" : "Galizia Stadium",
 				"capacity" : 1000
 			},
-			"players" : [],
+			"players" : {},
 			"prestige" : 16
 		}
 	],
@@ -140,9 +140,23 @@ func add_random_players():
 	var i = 0
 	var shirtnumber = 1
 	for team in serie_a["teams"]:
-		team["players"] = Players.players.slice(i,i+20,1,true)
-		i += 20
-		for player in team["players"]:
+		var players = Players.players.slice(i,i+20,1,true)
+		
+		for player in players:
 			player["team"] = team["name"]
 			player["nr"] = shirtnumber
 			shirtnumber += 1
+		
+		
+		i += 20
+		
+		team["players"]["G"] = players.pop_back()
+		team["players"]["D"] = players.pop_back()
+		team["players"]["WL"] = players.pop_back()
+		team["players"]["WR"] = players.pop_back()
+		team["players"]["P"] = players.pop_back()
+		
+		team["players"]["subs"] = []
+		
+		for player in players:
+			team["players"]["subs"].append(player)
