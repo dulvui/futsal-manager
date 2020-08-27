@@ -1,8 +1,9 @@
 extends Node
 
 
-var home_team = []
-var away_team = []
+var home_team = {}
+var away_team = {}
+
 
 var home_stats = {
 	"goals" : 0,
@@ -55,20 +56,18 @@ var home_possess_counter = 0.0
 
 var home_has_ball
 
+
 func _ready():
-	var base_players = _get_actual_players(DataSaver.team)
-	
-	for player in base_players:
-		player["has_ball"] = false
+	var base_players = DataSaver.team
 	
 	home_team = base_players.duplicate(true)
 	away_team = base_players.duplicate(true)
 	
 	home_has_ball = randi()%2 == 0
 	if home_has_ball:
-		home_team[4]["has_ball"] = true
+		home_team["players"]["P"]["has_ball"] = true
 	else:
-		away_team[4]["has_ball"] = true
+		away_team["players"]["P"]["has_ball"] = true
 
 func set_up(home,away):
 	var base_players = DataSaver.selected_players.duplicate(true)
@@ -89,17 +88,8 @@ func set_up(home,away):
 			
 func update():
 	time += 1
-	for player in home_team:
-		if home_has_ball:
-			_make_offensive_decision(player)
-		else:
-			_make_defensive_decision(player)
-		
-	for player in away_team:
-		if not home_has_ball:
-			_make_offensive_decision(player)
-		else:
-			_make_defensive_decision(player)
+	
+	_make_home_decisions()
 			
 	if home_has_ball:
 		home_possess_counter += 1
@@ -108,10 +98,38 @@ func update():
 	away_stats["possession"] = 100 - home_stats["possession"]
 	
 	
-func _make_offensive_decision(player):
+func _make_home_decisions():
+	if home_has_ball:
+		_make_offensive_decision(home_team["players"]["G"],"G")
+		_make_offensive_decision(home_team["players"]["D"],"D")
+		_make_offensive_decision(home_team["players"]["WL"],"WL")
+		_make_offensive_decision(home_team["players"]["WR"],"WR")
+		_make_offensive_decision(home_team["players"]["P"],"P")
+	else:
+		_make_defensive_decision(home_team["players"]["G"],"G")
+		_make_defensive_decision(home_team["players"]["D"],"D")
+		_make_defensive_decision(home_team["players"]["WL"],"WL")
+		_make_defensive_decision(home_team["players"]["WR"],"WR")
+		_make_defensive_decision(home_team["players"]["P"],"P")
+		
+func _make_away_decisions():
+	if not home_has_ball:
+		_make_offensive_decision(away_team["players"]["G"],"G")
+		_make_offensive_decision(away_team["players"]["D"],"D")
+		_make_offensive_decision(away_team["players"]["WL"],"WL")
+		_make_offensive_decision(away_team["players"]["WR"],"WR")
+		_make_offensive_decision(away_team["players"]["P"],"P")
+	else:
+		_make_defensive_decision(away_team["players"]["G"],"WL")
+		_make_defensive_decision(away_team["players"]["D"],"D")
+		_make_defensive_decision(away_team["players"]["WL"],"WL")
+		_make_defensive_decision(away_team["players"]["WR"],"WR")
+		_make_defensive_decision(away_team["players"]["P"],"P")
+
+func _make_offensive_decision(player,pos):
 	if player["has_ball"]:
 		print(player["name"] + " has ball")
-		var decision = _what_offensive_decision(player) # make it affected by tactic, formation and in which sector player is
+		var decision = _what_offensive_decision(player,pos) # make it affected by tactic, formation and in which sector player is
 		match decision:
 			"PASS":
 				print(" and passes the ball")
@@ -132,11 +150,11 @@ func _make_offensive_decision(player):
 	else:
 		_move(player) # or wait, depending on workrate, teamwork, defensive/offensive movement
 
-func _what_offensive_decision(player):
+func _what_offensive_decision(player,pos):
 	var decision 
 	var o1 = randi()%20
 	
-	match player["actual_pos"]:
+	match pos:
 		"G":
 			if home_has_ball:
 				if o1 < home_team["offensive_tactics"]["O1"]:
@@ -192,7 +210,7 @@ func _what_offensive_decision(player):
 	return decision
 	
 
-func _make_defensive_decision(player):
+func _make_defensive_decision(player,pos):
 	_move(player)
 
 func _move(player):
@@ -220,10 +238,3 @@ func _pass_to(player,position):
 	
 	return success
 	
-	
-func _get_actual_players(team):
-	var actual_players = []
-	for player in team["players"]:
-		if player["actual_pos"] != "S":
-			actual_players.append(player)
-	return actual_players

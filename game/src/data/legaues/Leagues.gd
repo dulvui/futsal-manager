@@ -145,6 +145,7 @@ func add_random_players():
 		for player in players:
 			player["team"] = team["name"]
 			player["nr"] = shirtnumber
+			player["has_ball"] = false
 			shirtnumber += 1
 		
 		
