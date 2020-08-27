@@ -6,8 +6,8 @@ func _ready():
 	$TeamName.text = DataSaver.team["name"]
 	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
-	$PlayerPopUp/PlayerList.add_players(DataSaver.team["players"])
-	$AllPlayersPopup/AllPlayerList.add_players(Players.players)
+	$PlayerPopUp/PlayerList.add_players()
+	$AllPlayersPopup/AllPlayerList.add_all_players()
 	
 	$Date.text = CalendarUtil.get_date()
 
@@ -43,4 +43,4 @@ func _on_Formation_pressed():
 
 
 func _on_Continue_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene("res://src/screens/match/Match.tscn")

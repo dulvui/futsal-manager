@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/ui-components/formation/Formation.gd" type="Script" id=1]
 [ext_resource path="res://theme.tres" type="Theme" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://src/ui-components/player-list/PlayerList.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/field.png" type="Texture" id=5]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "Fade1-1-2"
 length = 0.2
 tracks/0/type = "value"
@@ -58,8 +58,7 @@ tracks/3/keys = {
 "values": [ Vector2( 436, 436 ), Vector2( 236, 200 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Fade1-2-1"
+[sub_resource type="Animation" id=2]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Field/D:rect_position")
@@ -110,7 +109,7 @@ tracks/3/keys = {
 "values": [ Vector2( 436, 436 ), Vector2( 436, 220 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Fade1-3"
 length = 0.2
 tracks/0/type = "value"
@@ -162,7 +161,7 @@ tracks/3/keys = {
 "values": [ Vector2( 436, 436 ), Vector2( 436, 510 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "Fade2-1-1"
 length = 0.2
 tracks/0/type = "value"
@@ -214,8 +213,7 @@ tracks/3/keys = {
 "values": [ Vector2( 436, 436 ), Vector2( 436, 180 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Fade2-2"
+[sub_resource type="Animation" id=5]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Field/P:rect_position")
@@ -266,8 +264,7 @@ tracks/3/keys = {
 "values": [ Vector2( 436, 436 ), Vector2( 636, 550 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Fade3-1"
+[sub_resource type="Animation" id=6]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Field/P:rect_position")
@@ -318,6 +315,58 @@ tracks/3/keys = {
 "values": [ Vector2( 436, 436 ), Vector2( 436, 590 ) ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "Fade4-0"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Field/D:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 436, 436 ), Vector2( 336, 600 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Field/WL:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 436, 436 ), Vector2( 536, 600 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Field/WR:rect_position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 436, 436 ), Vector2( 736, 400 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Field/P:rect_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 436, 436 ), Vector2( 136, 400 ) ]
+}
+
 [node name="Formation" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -333,23 +382,213 @@ margin_top = 208.0
 margin_right = 189.0
 margin_bottom = 264.0
 
-[node name="OffensiceTactics" type="OptionButton" parent="."]
-margin_left = 160.0
-margin_top = 296.0
-margin_right = 189.0
-margin_bottom = 352.0
+[node name="DefensiveTactics" type="GridContainer" parent="."]
+margin_left = 40.0
+margin_top = 588.0
+margin_right = 800.0
+margin_bottom = 772.0
+custom_constants/hseparation = 20
+columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DefensiveTactics" type="OptionButton" parent="."]
-margin_left = 160.0
-margin_top = 416.0
-margin_right = 189.0
-margin_bottom = 472.0
+[node name="Stay" type="Label" parent="DefensiveTactics"]
+margin_right = 229.0
+margin_bottom = 43.0
+text = "STAY"
+
+[node name="D1" type="HSlider" parent="DefensiveTactics"]
+margin_left = 249.0
+margin_right = 512.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+
+[node name="Pressing" type="Label" parent="DefensiveTactics"]
+margin_left = 532.0
+margin_right = 760.0
+margin_bottom = 43.0
+text = "PRESSING"
+
+[node name="Wait" type="Label" parent="DefensiveTactics"]
+margin_top = 47.0
+margin_right = 229.0
+margin_bottom = 90.0
+text = "WAIT"
+
+[node name="D2" type="HSlider" parent="DefensiveTactics"]
+margin_left = 249.0
+margin_top = 47.0
+margin_right = 512.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+
+[node name="Anticipate" type="Label" parent="DefensiveTactics"]
+margin_left = 532.0
+margin_top = 47.0
+margin_right = 760.0
+margin_bottom = 90.0
+text = "ANTICIPATE"
+
+[node name="WeakTackle" type="Label" parent="DefensiveTactics"]
+margin_top = 94.0
+margin_right = 229.0
+margin_bottom = 137.0
+text = "WEAK_TACKLE"
+
+[node name="D3" type="HSlider" parent="DefensiveTactics"]
+margin_left = 249.0
+margin_top = 94.0
+margin_right = 512.0
+margin_bottom = 137.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+
+[node name="HardTackle" type="Label" parent="DefensiveTactics"]
+margin_left = 532.0
+margin_top = 94.0
+margin_right = 760.0
+margin_bottom = 137.0
+text = "HARD_TACKLE"
+
+[node name="MarkZone" type="Label" parent="DefensiveTactics"]
+margin_top = 141.0
+margin_right = 229.0
+margin_bottom = 184.0
+text = "MARK_ZONE"
+
+[node name="D4" type="HSlider" parent="DefensiveTactics"]
+margin_left = 249.0
+margin_top = 141.0
+margin_right = 512.0
+margin_bottom = 184.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+
+[node name="MarkPlayer" type="Label" parent="DefensiveTactics"]
+margin_left = 532.0
+margin_top = 141.0
+margin_right = 760.0
+margin_bottom = 184.0
+text = "MARK_PLAYER"
+
+[node name="OffensiveTactics" type="GridContainer" parent="."]
+margin_left = 40.0
+margin_top = 288.0
+margin_right = 800.0
+margin_bottom = 348.0
+custom_constants/hseparation = 20
+columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Possession" type="Label" parent="OffensiveTactics"]
+margin_right = 218.0
+margin_bottom = 43.0
+text = "POSSESSION"
+
+[node name="O1" type="HSlider" parent="OffensiveTactics"]
+margin_left = 238.0
+margin_right = 518.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+
+[node name="FastAttack" type="Label" parent="OffensiveTactics"]
+margin_left = 538.0
+margin_right = 760.0
+margin_bottom = 43.0
+text = "FAST_ATTACK"
+
+[node name="ShortPass" type="Label" parent="OffensiveTactics"]
+margin_top = 47.0
+margin_right = 218.0
+margin_bottom = 90.0
+text = "SHORT_PASS"
+
+[node name="O2" type="HSlider" parent="OffensiveTactics"]
+margin_left = 238.0
+margin_top = 47.0
+margin_right = 518.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+
+[node name="LongPass" type="Label" parent="OffensiveTactics"]
+margin_left = 538.0
+margin_top = 47.0
+margin_right = 760.0
+margin_bottom = 90.0
+text = "LONG_PASS"
+
+[node name="OpenCourt" type="Label" parent="OffensiveTactics"]
+margin_top = 94.0
+margin_right = 218.0
+margin_bottom = 137.0
+text = "OPEN_COURT"
+
+[node name="O3" type="HSlider" parent="OffensiveTactics"]
+margin_left = 238.0
+margin_top = 94.0
+margin_right = 518.0
+margin_bottom = 137.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+
+[node name="Center" type="Label" parent="OffensiveTactics"]
+margin_left = 538.0
+margin_top = 94.0
+margin_right = 760.0
+margin_bottom = 137.0
+text = "CENTER"
+
+[node name="Rotation" type="Label" parent="OffensiveTactics"]
+margin_top = 141.0
+margin_right = 218.0
+margin_bottom = 184.0
+text = "ROTATION"
+
+[node name="O4" type="HSlider" parent="OffensiveTactics"]
+margin_left = 238.0
+margin_top = 141.0
+margin_right = 518.0
+margin_bottom = 184.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 20.0
+value = 6.0
+
+[node name="Stay" type="Label" parent="OffensiveTactics"]
+margin_left = 538.0
+margin_top = 141.0
+margin_right = 760.0
+margin_bottom = 184.0
+text = "STAY"
 
 [node name="PlayerSelect" type="Popup" parent="."]
 margin_left = 420.0
@@ -396,30 +635,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
-margin_top = 90.0
-margin_right = 64.0
-margin_bottom = 218.0
+margin_left = -164.0
+margin_top = 100.0
+margin_right = -36.0
+margin_bottom = 228.0
 
 [node name="WL" parent="Field" instance=ExtResource( 3 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -284.0
-margin_top = 40.0
-margin_right = -156.0
-margin_bottom = 168.0
+margin_left = 36.0
+margin_top = 100.0
+margin_right = 164.0
+margin_bottom = 228.0
 
 [node name="WR" parent="Field" instance=ExtResource( 3 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 146.0
-margin_top = 40.0
-margin_right = 274.0
-margin_bottom = 168.0
+margin_left = 236.0
+margin_top = -100.0
+margin_right = 364.0
+margin_bottom = 28.0
 rect_pivot_offset = Vector2( -1900, 40 )
 
 [node name="P" parent="Field" instance=ExtResource( 3 )]
@@ -427,19 +666,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.0
-margin_top = -260.0
-margin_right = 64.0
-margin_bottom = -132.0
+margin_left = -364.0
+margin_top = -100.0
+margin_right = -236.0
+margin_bottom = 28.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Fade1-1-2 = SubResource( 3 )
-anims/Fade1-2-1 = SubResource( 1 )
-anims/Fade1-3 = SubResource( 4 )
-anims/Fade2-1-1 = SubResource( 6 )
-anims/Fade2-2 = SubResource( 2 )
-anims/Fade3-1 = SubResource( 5 )
+anims/Fade1-1-2 = SubResource( 1 )
+anims/Fade1-2-1 = SubResource( 2 )
+anims/Fade1-3 = SubResource( 3 )
+anims/Fade2-1-1 = SubResource( 4 )
+anims/Fade2-2 = SubResource( 5 )
+anims/Fade3-1 = SubResource( 6 )
+anims/Fade4-0 = SubResource( 7 )
 [connection signal="item_selected" from="FormationSelect" to="." method="_on_FormationSelect_item_selected"]
+[connection signal="value_changed" from="DefensiveTactics/D1" to="." method="_on_D1_value_changed"]
+[connection signal="value_changed" from="DefensiveTactics/D2" to="." method="_on_D2_value_changed"]
+[connection signal="value_changed" from="DefensiveTactics/D3" to="." method="_on_D3_value_changed"]
+[connection signal="value_changed" from="DefensiveTactics/D4" to="." method="_on_D4_value_changed"]
+[connection signal="value_changed" from="OffensiveTactics/O1" to="." method="_on_O1_value_changed"]
+[connection signal="value_changed" from="OffensiveTactics/O2" to="." method="_on_O2_value_changed"]
+[connection signal="value_changed" from="OffensiveTactics/O3" to="." method="_on_O3_value_changed"]
 [connection signal="select_player" from="PlayerSelect/PlayerList" to="." method="_on_PlayerList_select_player"]
 [connection signal="change_player" from="Field/G" to="." method="_on_G_change_player"]
 [connection signal="change_player" from="Field/D" to="." method="_on_D_change_player"]

@@ -95,7 +95,7 @@ for _ in range(100):
 		player = {
 			"name":fake_it.name_male().replace("Dott. ","").replace("Sig. ",""),
 			"surname":name_base.split()[1],
-			"birth_date": birth_date.strftime("%m/%d/%Y"),
+			"birth_date": birth_date.strftime("%d/%m/%Y"),
 			"nationality" : "IT",
 			"moral" : random.randint(1, 4), # 1 to 4, 1 low 4 good
 			"position" : positions[random.randint(0,len(positions)-1)],
