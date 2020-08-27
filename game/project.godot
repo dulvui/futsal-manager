@@ -27,7 +27,6 @@ Leagues="*res://src/data/legaues/Leagues.gd"
 MatchMaker="*res://src/utils/match-maker/MatchMaker.gd"
 Players="*res://src/data/player-generator/Players.gd"
 PlayerGenerator="*res://src/data/player-generator/PlayerGenerator.gd"
-MatchSimulator="*res://src/utils/match-simulator/MatchSimulator.gd"
 
 [display]
 

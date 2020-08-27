@@ -50,43 +50,43 @@ __meta__ = {
 
 [node name="Team" type="Button" parent="Buttons"]
 margin_right = 464.0
-margin_bottom = 56.0
+margin_bottom = 43.0
 text = "TEAM"
 
 [node name="Formation" type="Button" parent="Buttons"]
-margin_top = 60.0
+margin_top = 47.0
 margin_right = 464.0
-margin_bottom = 116.0
+margin_bottom = 90.0
 text = "FORMATION"
 
 [node name="Training" type="Button" parent="Buttons"]
-margin_top = 120.0
+margin_top = 94.0
 margin_right = 464.0
-margin_bottom = 176.0
+margin_bottom = 137.0
 text = "TRAINING"
 
 [node name="Manager" type="Button" parent="Buttons"]
-margin_top = 180.0
+margin_top = 141.0
 margin_right = 464.0
-margin_bottom = 236.0
+margin_bottom = 184.0
 text = "MANAGER"
 
 [node name="Calendar" type="Button" parent="Buttons"]
-margin_top = 240.0
+margin_top = 188.0
 margin_right = 464.0
-margin_bottom = 296.0
+margin_bottom = 231.0
 text = "CALENDAR"
 
 [node name="SearchPlayer" type="Button" parent="Buttons"]
-margin_top = 300.0
+margin_top = 235.0
 margin_right = 464.0
-margin_bottom = 356.0
+margin_bottom = 278.0
 text = "SEARCH_PLAYER"
 
 [node name="Menu" type="Button" parent="Buttons"]
-margin_top = 360.0
+margin_top = 282.0
 margin_right = 464.0
-margin_bottom = 416.0
+margin_bottom = 325.0
 text = "MENU"
 
 [node name="AllPlayersPopup" type="Popup" parent="."]

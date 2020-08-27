@@ -3,8 +3,6 @@ extends Control
 onready var animation_player = $AnimationPlayer
 
 var formations = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
-var offensive_tactics = ["POSESSION","FAST","WINGS"]
-var defensive_tactics = ["STAY_HIGH","STAY_LOW","PRESSING"]
 
 var player_to_replace
 
@@ -16,36 +14,40 @@ func _ready():
 	for formation in formations:
 		$FormationSelect.add_item(formation)
 		
-	$FormationSelect.selected = formations.find(DataSaver.selected_formation)
+	$FormationSelect.selected = formations.find(DataSaver.team["formation"])
 		
-	for tactic in offensive_tactics:
-		$OffensiceTactics.add_item(tactic)
 		
-	for tactic in defensive_tactics:
-		$DefensiveTactics.add_item(tactic)
-		
-	$PlayerSelect/PlayerList.add_players(DataSaver.selected_players)
+	$PlayerSelect/PlayerList.add_players()
 		
 	
 	
 	_set_players()
 		
-	animation_player.play("Fade" + DataSaver.selected_formation)
+	animation_player.play("Fade" + DataSaver.team["formation"])
 
 func _on_FormationSelect_item_selected(index):
-	animation_player.play_backwards("Fade" + DataSaver.selected_formation)
+	animation_player.play_backwards("Fade" + DataSaver.team["formation"])
 	yield(animation_player,"animation_finished")
 	_set_players()
-	DataSaver.save_formation(formations[index])
-	animation_player.play("Fade" + DataSaver.selected_formation)
+	DataSaver.team["formation"] = formations[index]
+	DataSaver.save_all_data()
+	animation_player.play("Fade" + DataSaver.team["formation"])
 	
 
 func _set_players():
-	$Field/G.set_player(DataSaver.selected_players[0])
-	$Field/D.set_player(DataSaver.selected_players[1])
-	$Field/WL.set_player(DataSaver.selected_players[2])
-	$Field/WR.set_player(DataSaver.selected_players[3])
-	$Field/P.set_player(DataSaver.selected_players[4])
+	
+	for player in DataSaver.team["players"]:
+		match player["actual_pos"]:
+			"G":
+				$Field/G.set_player(player)
+			"D":
+				$Field/D.set_player(player)
+			"WL":
+				$Field/WL.set_player(player)
+			"WR":
+				$Field/WR.set_player(player)
+			"P":
+				$Field/P.set_player(player)
 
 
 func _on_D_change_player(player):
@@ -79,4 +81,29 @@ func _on_PlayerList_select_player(player):
 	$PlayerSelect.hide()
 
 
+func _on_D1_value_changed(value):
+	pass # Replace with function body.
 
+
+func _on_D2_value_changed(value):
+	pass # Replace with function body.
+
+
+func _on_D3_value_changed(value):
+	pass # Replace with function body.
+
+
+func _on_D4_value_changed(value):
+	pass # Replace with function body.
+
+
+func _on_O1_value_changed(value):
+	pass # Replace with function body.
+
+
+func _on_O2_value_changed(value):
+	pass # Replace with function body.
+
+
+func _on_O3_value_changed(value):
+	pass # Replace with function body.
