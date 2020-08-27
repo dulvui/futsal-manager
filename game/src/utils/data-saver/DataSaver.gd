@@ -61,14 +61,19 @@ func save_team(new_team):
 	#hardcoded for now, use generator for this afterwards
 	team["formation"] = "2-2"
 	
-	for player in team["players"]:
-		player["actual_pos"] = "S"
-		
-	team["players"][0]["actual_pos"] = "G"
-	team["players"][1]["actual_pos"] = "D"
-	team["players"][2]["actual_pos"] = "WL"
-	team["players"][3]["actual_pos"] = "WR"
-	team["players"][4]["actual_pos"] = "P"
+	team["offensive_tactics"] = {
+		"O1" : 10,
+		"O2" : 10,
+		"O3" : 10,
+		"O4" : 10
+	}
+	
+	team["defensive_tactics"] = {
+		"D1" : 10,
+		"D2" : 10,
+		"D3" : 10,
+		"D4" : 10
+	}
 	
 	save_all_data()
 	
@@ -85,8 +90,9 @@ func save_calendar(new_calendar):
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
 
-func change_player(player_to_replace,player):
+func change_player(position,player):
 	print("change player")
-	player["actual_pos"] = player_to_replace["actual_pos"]
-	player_to_replace["actual_pos"] = "S"
+	team["players"]["subs"].append(team["players"][position])
+	team["players"][position] = player
+	team["players"]["subs"].erase(player)
 

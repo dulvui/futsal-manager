@@ -111,7 +111,7 @@ func update():
 func _make_offensive_decision(player):
 	if player["has_ball"]:
 		print(player["name"] + " has ball")
-		var decision = _what_decision(player) # make it affected by tactic, formation and in which sector player is
+		var decision = _what_offensive_decision(player) # make it affected by tactic, formation and in which sector player is
 		match decision:
 			"PASS":
 				print(" and passes the ball")
@@ -132,10 +132,62 @@ func _make_offensive_decision(player):
 	else:
 		_move(player) # or wait, depending on workrate, teamwork, defensive/offensive movement
 
-func _what_decision(player):
+func _what_offensive_decision(player):
 	var decision 
+	var o1 = randi()%20
 	
-#	if home_team["tactic"]
+	match player["actual_pos"]:
+		"G":
+			if home_has_ball:
+				if o1 < home_team["offensive_tactics"]["O1"]:
+					#possession
+					# pass to defender
+					pass
+				else:
+					#fast attack
+					#pass to wings or pivot
+					pass
+		"D":
+			if home_has_ball:
+				if o1 < home_team["offensive_tactics"]["O1"]:
+					#possession
+					# pass to winger o goalie
+					pass
+				else:
+					#fast attack
+					#pass to wing or pivot, keypass
+					pass
+		"WL":
+			if home_has_ball:
+				if o1 < home_team["offensive_tactics"]["O1"]:
+					#possession
+					# pass to defender, or winger o goalie
+					pass
+				else:
+					#fast attack
+					#pass to wing or pivot, keypass, dribble
+					pass
+		"WR":
+			if home_has_ball:
+				if o1 < home_team["offensive_tactics"]["O1"]:
+					#possession
+					# pass to defender, or winger o goalie
+					pass
+				else:
+					#fast attack
+					#pass to wing or pivot, keypass, dribble
+					pass
+		"P":
+			if home_has_ball:
+				if o1 < home_team["offensive_tactics"]["O1"]:
+					#possession
+					# pass winger, low probabilty of shot
+					pass
+				else:
+					#fast attack
+					#shoot, pass to wingers, key pass, dribble
+					pass
+		
 	
 	return decision
 	
@@ -158,11 +210,13 @@ func _dribble(player):
 func _wait(player):
 	pass
 	
-func _pass_to(player,player_to):
+func _pass_to(player,position):
 	var success = false
-	print(player["name"] + " passes to " + player_to["name"])
-	player["has_ball"] = false
-	player_to["has_ball"] = true
+	
+#
+#	print(player["name"] + " passes to " + player_to["name"])
+#	player["has_ball"] = false
+#	player_to["has_ball"] = true
 	
 	return success
 	
