@@ -13,7 +13,7 @@ func set_up_info(new_player):
 	$DetailPopup/Info/Nationality.text = player["nationality"]
 	$DetailPopup/Info/Team.text = player["team"]
 	
-	var tech = player["stats"]["technial"]
+	var tech = player["stats"]["technical"]
 	$DetailPopup/Technical/Cross.text = str(tech["crossing"])
 	$DetailPopup/Technical/Pass.text = str(tech["pass"])
 	$DetailPopup/Technical/LongPass.text = str(tech["long_pass"])
