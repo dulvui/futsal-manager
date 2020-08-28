@@ -283,7 +283,9 @@ func _pass_to(player,position):
 			#reduce stamina
 			pass
 		
-		var result = randi()% pass_stats + defender_stats
+		var result = randi()% (pass_stats + defender_stats)
+		
+		print("pass %s vs mark %s = %s"%[str(pass_stats),str(defender_stats),str(result)])
 		
 		if result <= pass_stats:
 			print("SUCCESS")
