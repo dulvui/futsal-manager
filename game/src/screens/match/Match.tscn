@@ -14,6 +14,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MatchSimulator" parent="." instance=ExtResource( 4 )]
+margin_top = -1.0
+margin_bottom = -1.0
+
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -456,7 +460,7 @@ text = "0"
 align = 2
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.1
 autostart = true
 
 [node name="Field" parent="." instance=ExtResource( 1 )]
@@ -464,8 +468,8 @@ margin_left = 566.704
 margin_top = 200.023
 margin_right = 1766.71
 margin_bottom = 1000.02
-
-[node name="MatchSimulator" parent="." instance=ExtResource( 4 )]
+[connection signal="away_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_away_pass"]
+[connection signal="home_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_home_pass"]
 [connection signal="pressed" from="HUD/LeftButtons/Field" to="." method="_on_Field_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Stats" to="." method="_on_Stats_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -60,6 +60,7 @@ def get_technical(age,nationality):
 			"interception" : random.randint(1,20),
 			"marking" : random.randint(1,20),
 			"shoot" : random.randint(1,20),
+			"dribble" : random.randint(1,20),
 			"long_shoot" : random.randint(1,20),
 			"free_kick" : random.randint(1,20),
 			"penalty" : random.randint(1,20),
