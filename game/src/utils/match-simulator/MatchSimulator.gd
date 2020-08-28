@@ -134,13 +134,14 @@ func _make_offensive_decision(player,pos):
 	if player["has_ball"]:
 		print(player["name"] + " has ball")
 		var decision = _what_offensive_decision(player,pos) # make it affected by tactic, formation and in which sector player is
+		print(decision)
 		match decision:
 			"PASS":
 				print(" and passes the ball")
 				_pass_to(player,POS[randi()%POS.size()])
 			"SHOOT":
 				print(" and shoots the ball")
-				_shoot(player)
+				_shoot(player,pos)
 			"DRIBBLE":
 				print(" and dribbles")
 				_dribble(player)
@@ -155,65 +156,74 @@ func _make_offensive_decision(player,pos):
 		_make_defensive_decision(player,pos) # or wait, depending on workrate, teamwork, defensive/offensive movement
 
 func _what_offensive_decision(player,pos):
-	var decision 
+	var decision
 	var o1 = randi()%20
-	
+	print(pos)
 	match pos:
 		"G":
-			if home_has_ball:
-				if o1 < home_team["offensive_tactics"]["O1"]:
-					#possession
-					# pass to defender
-					pass
-				else:
-					#fast attack
-					#pass to wings or pivot
-					pass
+			if o1 < home_team["offensive_tactics"]["O1"]:
+				decision = "PASS"
+			else:
+				#fast attack
+				#pass to wings or pivot
+				decision = "PASS"
 		"D":
-			if home_has_ball:
-				if o1 < home_team["offensive_tactics"]["O1"]:
-					#possession
-					# pass to winger o goalie
-					pass
-				else:
-					#fast attack
-					#pass to wing or pivot, keypass
-					pass
+			if o1 < home_team["offensive_tactics"]["O1"]:
+				#possession
+				# pass to winger o goalie
+				decision = "PASS"
+			else:
+				#fast attack
+				#pass to wing or pivot, keypass
+				decision = "PASS"
 		"WL":
-			if home_has_ball:
-				if o1 < home_team["offensive_tactics"]["O1"]:
-					#possession
-					# pass to defender, or winger o goalie
-					pass
+			if o1 < home_team["offensive_tactics"]["O1"]:
+				#possession
+				# pass to defender, or winger o goalie
+				if randi()%3 == 0:
+					return "SHOOT"
 				else:
-					#fast attack
-					#pass to wing or pivot, keypass, dribble
-					pass
+					decision = "PASS"
+			else:
+				#fast attack
+				#pass to wing or pivot, keypass, dribble
+				if randi()%3 != 0:
+					return "SHOOT"
+				else:
+					decision = "PASS"
 		"WR":
-			if home_has_ball:
-				if o1 < home_team["offensive_tactics"]["O1"]:
-					#possession
-					# pass to defender, or winger o goalie
-					pass
+			if o1 < home_team["offensive_tactics"]["O1"]:
+				#possession
+				# pass to defender, or winger o goalie
+				if randi()%3 == 0:
+					return "SHOOT"
 				else:
-					#fast attack
-					#pass to wing or pivot, keypass, dribble
-					pass
+					decision = "PASS"
+			else:
+				#fast attack
+				#pass to wing or pivot, keypass, dribble
+				if randi()%3 != 0:
+					return "SHOOT"
+				else:
+					decision = "PASS"
 		"P":
-			if home_has_ball:
-				if o1 < home_team["offensive_tactics"]["O1"]:
-					#possession
-					# pass winger, low probabilty of shot
-					pass
+			if o1 < home_team["offensive_tactics"]["O1"]:
+				#possession
+				# pass to defender, or winger o goalie
+				if randi()%4 == 0:
+					return "SHOOT"
 				else:
-					#fast attack
-					#shoot, pass to wingers, key pass, dribble
-					pass
-		
-	return "PASS"
+					decision = "PASS"
+			else:
+				#fast attack
+				#pass to wing or pivot, keypass, dribble
+				if randi()%4 != 0:
+					return "SHOOT"
+				else:
+					decision = "PASS"
 	return decision
 	
-
+		
 func _make_defensive_decision(player,pos):
 	_move(player)
 
@@ -223,8 +233,47 @@ func _move(player):
 func _move_with_ball(player):
 	pass
 	
-func _shoot(player):
-	pass
+func _shoot(player,position):
+	# look also for long shoot in next iteration
+	player["has_ball"] = false
+	var shoot_factor = player["stats"]["technial"]["shoot"]
+	
+	var team_posses
+	var team_no_posses
+	if home_has_ball:
+		team_posses = home_team
+		team_no_posses = away_team
+	else:
+		team_posses = away_team
+		team_no_posses = home_team
+		
+	var nearest_defender = team_no_posses["players"][_get_nearest_defender(position)]
+	var intercept_factor = nearest_defender["stats"]["technial"]["interception"]
+	
+	var result = randi()% (shoot_factor + intercept_factor)
+	
+	print("shoot %s vs intercept %s  = %s"%[str(shoot_factor),str(intercept_factor),str(result)])
+	
+	if result <= shoot_factor:
+		#check goalie stats, but goal for now
+		print("GOALLLLLL")
+		if home_has_ball:
+			home_stats["goals"] += 1
+			home_has_ball = false
+			away_team["players"]["P"]["has_ball"] = true
+		else:
+			away_stats["goals"] += 1
+			home_has_ball = true
+			home_team["players"]["P"]["has_ball"] = true
+	else:
+		print("Interception")
+		if home_has_ball:
+			home_has_ball = false
+			away_team["players"]["D"]["has_ball"] = true
+		else:
+			away_stats["goals"] += 1
+			home_has_ball = true
+			home_team["players"]["D"]["has_ball"] = true
 	
 func _dribble(player):
 	pass
@@ -235,66 +284,48 @@ func _wait(player):
 func _pass_to(player,position):
 	print(player["name"] + " passes to " + position)
 	player["has_ball"] = false
+	
+	var team_posses
+	var team_no_posses
 	if home_has_ball:
-		print("short pass")
-		var pass_stats 
-		
-		var is_short = randi()%20 < home_team["offensive_tactics"]["O1"]
-		
-		if is_short:
-			pass_stats = player["stats"]["technial"]["pass"]
-		else:
-			pass_stats = player["stats"]["technial"]["long_pass"]
-		
-		var nearest_defender = away_team["players"][_get_nearest_defender(position)]
-		var defender_stats = nearest_defender["stats"]["technial"]["marking"]
-		var will_do_pressing = randi()%20 > away_team["defensive_tactics"]["D1"]
-		
-		if will_do_pressing:
-			#reduce stamina
-			pass
-		
-		var result = randi()% pass_stats + defender_stats
-		
-		if result <= pass_stats:
-			print("SUCCESS")
-			home_team["players"][position]["has_ball"] = true
-		else:
-			print("INTERCEPT")
-			print("posses change")
-			home_has_ball = false
-			nearest_defender["has_ball"] = true
+		team_posses = home_team
+		team_no_posses = away_team
 	else:
+		team_posses = away_team
+		team_no_posses = home_team
+	
+	var nearest_defender = team_no_posses["players"][_get_nearest_defender(position)]
+	var pass_stats 
+	
+	var is_short = randi()%20 < team_posses["offensive_tactics"]["O1"]
+	
+	if is_short:
 		print("short pass")
-		var pass_stats 
-		
-		var is_short = randi()%20 < away_team["offensive_tactics"]["O1"]
-		
-		if is_short:
-			pass_stats = player["stats"]["technial"]["pass"]
-		else:
-			pass_stats = player["stats"]["technial"]["long_pass"]
-		
-		var nearest_defender = home_team["players"][_get_nearest_defender(position)]
-		var defender_stats = nearest_defender["stats"]["technial"]["marking"]
-		var will_do_pressing = randi()%20 > home_team["defensive_tactics"]["D1"]
-		
-		if will_do_pressing:
-			#reduce stamina
-			pass
-		
-		var result = randi()% (pass_stats + defender_stats)
-		
-		print("pass %s vs mark %s = %s"%[str(pass_stats),str(defender_stats),str(result)])
-		
-		if result <= pass_stats:
-			print("SUCCESS")
-			away_team["players"][position]["has_ball"] = true
-		else:
-			print("INTERCEPT")
-			print("posses change")
-			home_has_ball = true
-			nearest_defender["has_ball"] = true
+		pass_stats = player["stats"]["technial"]["pass"]
+	else:
+		print("long pass")
+		pass_stats = player["stats"]["technial"]["long_pass"]
+	
+	var defender_stats = nearest_defender["stats"]["technial"]["marking"]
+	var will_do_pressing = randi()%20 > team_no_posses["defensive_tactics"]["D1"]
+	
+	if will_do_pressing:
+		#reduce stamina
+		pass
+	
+	var result = randi()% (pass_stats + defender_stats)
+	
+	print("pass %s vs mark %s = %s"%[str(pass_stats),str(defender_stats),str(result)])
+	
+	
+	if result <= pass_stats:
+		print("SUCCESS")
+		team_posses["players"][position]["has_ball"] = true
+	else:
+		print("INTERCEPT")
+		home_has_ball = not home_has_ball
+		nearest_defender["has_ball"] = true
+	
 		
 	
 func _get_nearest_defender(position):
