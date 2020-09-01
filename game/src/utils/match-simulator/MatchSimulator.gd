@@ -53,9 +53,6 @@ var away_stats = {
 const DECISIONS = ["PASS","DRIBBLE","SHOOT","MOVE","WAIT"]
 const POS = ["G","D","WL","WR","P"]
 
-
-
-
 var time = 0.0
 
 var home_possess_counter = 0.0
@@ -93,9 +90,10 @@ func set_up(home,away):
 			
 			
 			
-func update():
+func update_time():
 	time += 1
-	
+
+func update():
 	if home_has_ball:
 		_make_home_decisions()
 	else:
@@ -161,21 +159,21 @@ func _what_offensive_decision(player,pos):
 		"WL":
 			if factor < 60:
 				decision = "PASS"
-			elif factor < 90:
+			elif factor < 95:
 				decision = "DRIBBLE"
 			else:
 				decision = "SHOOT"
 		"WR":
 			if factor < 60:
 				decision = "PASS"
-			elif factor < 90:
+			elif factor < 95:
 				decision = "DRIBBLE"
 			else:
 				decision = "SHOOT"
 		"P":
 			if factor < 50:
 				decision = "PASS"
-			elif factor < 70:
+			elif factor < 90:
 				decision = "DRIBBLE"
 			else:
 				decision = "SHOOT"

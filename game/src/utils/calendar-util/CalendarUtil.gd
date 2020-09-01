@@ -23,7 +23,7 @@ func _ready():
 
 func create_calendar():
 	var calendar = []
-	for i in range(10950):
+	for i in range(10950): #3020?
 		var json = {
 			"day" : day,
 			"month" : month,
@@ -41,6 +41,8 @@ func create_calendar():
 
 func next_day():
 	calc_date()
+	
+#	MatchMaker.check_date(day,month,year)
 	# check contracts
 	# generate random news/ emails
 	# check trainings
