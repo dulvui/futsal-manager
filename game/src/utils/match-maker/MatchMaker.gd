@@ -8,14 +8,16 @@ func inizialize_matches():
 	var teams = Leagues.serie_a["teams"].duplicate(true)
 	matches = []
 	match_day = 0
+	
 	var random_teams  = teams.duplicate(true) # = teams.duplicate(true)
 	random_teams.shuffle()
 	
 	var last_team = random_teams.pop_front()
 	
 	for i in random_teams.size():
+		var current_match_day = []
 		var matchOne = {"home": last_team["name"],"away": random_teams[0]["name"], "result":":"}
-		matches.append(matchOne)
+		current_match_day.append(matchOne)
 		
 		var copy = random_teams.duplicate(true)
 		copy.remove(0)
@@ -26,22 +28,30 @@ func inizialize_matches():
 			
 			var matchTwo = {"home": copy[away_index]["name"],"away":copy[home_index]["name"], "result":":"}
 			
-			matches.append(matchTwo)
+			current_match_day.append(matchTwo)
+		matches.append(current_match_day)
 		_shift_array(random_teams)
 		
 	# ritorno
-	for i in range(matches.size()):
-		var matchzz = {"home": matches[i]["away"],"away": matches[i]["home"], "result":":"}
-		matches.append(matchzz)
+	var temp_matches = []
+	for match_dayz in matches:
+		var current_match_day = []
+		for matchess in match_dayz:
+			var matchzz = {"home": matchess["away"],"away": matchess["home"], "result":":"}
+			current_match_day.append(matchzz)
+		temp_matches.append(current_match_day)
+	matches.append(temp_matches)
 	
 	#add to calendar
 	
-	var day = 3
-	for i in range(0,matches.size(),5):
-		for j in range(i,i+5):
-			DataSaver.calendar[day]["matches"].append(matches[j])
+	var day = 3 # beacuse year starts with wensday
+	for c_match_days in matches:
+		DataSaver.calendar[day]["matches"] = c_match_days
 		day += 7
 
+func check_date():
+	
+	pass
 
 func _shift_array(array):
 	var temp = array[0]

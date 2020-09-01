@@ -1,23 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/screens/menu/Menu.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="."]
-margin_left = 579.058
-margin_top = 130.367
-margin_right = 1335.06
-margin_bottom = 242.367
-text = "FUTSAL MANAGER"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -30,27 +21,32 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 852.0
-margin_top = 452.0
-margin_right = 1068.0
-margin_bottom = 628.0
+margin_left = 877.0
+margin_top = 471.0
+margin_right = 1042.0
+margin_bottom = 608.0
 
 [node name="Continue" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 216.0
-margin_bottom = 56.0
+margin_right = 165.0
+margin_bottom = 43.0
 text = "CONTINUE"
 
 [node name="StartGame" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 60.0
-margin_right = 216.0
-margin_bottom = 116.0
+margin_top = 47.0
+margin_right = 165.0
+margin_bottom = 90.0
 text = "START"
 
 [node name="Settings" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 120.0
-margin_right = 216.0
-margin_bottom = 176.0
+margin_top = 94.0
+margin_right = 165.0
+margin_bottom = 137.0
 text = "SETTINGS"
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 953.704, 255.684 )
+scale = Vector2( 0.648438, 0.648438 )
+texture = ExtResource( 3 )
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Settings" to="." method="_on_Settings_pressed"]

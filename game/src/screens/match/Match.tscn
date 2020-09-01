@@ -463,6 +463,9 @@ align = 2
 wait_time = 0.1
 autostart = true
 
+[node name="TimerMatchSimulator" type="Timer" parent="."]
+autostart = true
+
 [node name="Field" parent="." instance=ExtResource( 1 )]
 margin_left = 566.704
 margin_top = 200.023
@@ -473,3 +476,4 @@ margin_bottom = 1000.02
 [connection signal="pressed" from="HUD/LeftButtons/Field" to="." method="_on_Field_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Stats" to="." method="_on_Stats_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="TimerMatchSimulator" to="." method="_on_TimerMatchSimulator_timeout"]

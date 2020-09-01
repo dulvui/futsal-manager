@@ -26,9 +26,8 @@ func set_up(matchz):
 	$MatchSimulator.set_up(null,null)
 
 func _on_Timer_timeout():
-	$MatchSimulator.update()
-	
 	$Field.random_pass()
+	$MatchSimulator.update_time()
 	
 
 func _on_Field_pressed():
@@ -49,3 +48,7 @@ func _on_MatchSimulator_away_pass(position):
 func _on_MatchSimulator_home_pass():
 #	$Field.away_pass_to(position)
 	pass
+
+
+func _on_TimerMatchSimulator_timeout():
+	$MatchSimulator.update()
