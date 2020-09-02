@@ -23,10 +23,9 @@ boot_splash/image="res://icon.png"
 
 DataSaver="*res://src/utils/data-saver/DataSaver.gd"
 CalendarUtil="*res://src/utils/calendar-util/CalendarUtil.gd"
+Players="*res://src/data/player-generator/Players.gd"
 Leagues="*res://src/data/legaues/Leagues.gd"
 MatchMaker="*res://src/utils/match-maker/MatchMaker.gd"
-Players="*res://src/data/player-generator/Players.gd"
-PlayerGenerator="*res://src/data/player-generator/PlayerGenerator.gd"
 
 [display]
 

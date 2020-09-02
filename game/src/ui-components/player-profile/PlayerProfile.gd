@@ -13,16 +13,16 @@ func set_up_info(new_player):
 	$DetailPopup/Info/Nationality.text = player["nationality"]
 	$DetailPopup/Info/Team.text = player["team"]
 	
-	var tech = player["stats"]["technical"]
+	var tech = player["technical"]
 	$DetailPopup/Technical/Cross.text = str(tech["crossing"])
 	$DetailPopup/Technical/Pass.text = str(tech["pass"])
 	$DetailPopup/Technical/LongPass.text = str(tech["long_pass"])
 	$DetailPopup/Technical/Tackling.text = str(tech["tackling"])
-	$DetailPopup/Technical/Corner.text = str(tech["corners"])
+#	$DetailPopup/Technical/Corner.text = str(tech["corners"])
 	$DetailPopup/Technical/Shoot.text = str(tech["shoot"])
 	$DetailPopup/Technical/LongShoot.text = str(tech["long_shoot"])
 	
-	var mental = player["stats"]["mental"]
+	var mental = player["mental"]
 	$DetailPopup/Mental/Agressivity.text = str(mental["agressivity"])
 	$DetailPopup/Mental/Anticipation.text = str(mental["aniticipation"])
 	$DetailPopup/Mental/Decisions.text = str(mental["decisions"])

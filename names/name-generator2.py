@@ -25,74 +25,87 @@ forms = ["INJURED","RECOVER","GOOD","PERFECT"]
 # transfer_states = ["TRANSFER","LOAN","FREE_AGENT"]
 # nationalyty = ["BR","ES","ARG","IT","FR","IND","GER","POR"]
 
-def get_physical(age,nationality,prestige):
+def get_physical(age,nationality,prestige,pos):
 
-	factor = 20
+	age_factor = 20
 	if age > 34:
-		factor = 54 - age
+		age_factor = 54 - age
 	elif age < 18:
-		factor = 16
+		age_factor = 16
+
+	pace_factor = max(random.randint(1,age_factor),max(prestige,4))
+	physical_factor = max(random.randint(1,age_factor),max(prestige,4))
+
 
 	physical = {
-		"acceleration" : random.randint(1,factor),
-		"agility" : random.randint(1,factor),
-		"balance" : random.randint(1,factor),
-		"jump" : random.randint(1,factor),
-		"pace" : random.randint(1,factor),
-		"stamina" : random.randint(1,factor),
-		"strength" : random.randint(1,factor),
+		"acceleration" : min(pace_factor + random.randint(-3,3),20),
+		"agility" : min(pace_factor + random.randint(-3,3),20),
+		"balance" : min(physical_factor + random.randint(-3,3),20),
+		"jump" : min(physical_factor + random.randint(-3,3),20),
+		"pace" : min(pace_factor + random.randint(-3,3),20),
+		"stamina" : min(physical_factor + random.randint(-3,3),20),
+		"strength" : min(physical_factor + random.randint(-3,3),20),
 	}
 	return physical
 
-def get_technical(age,nationality,prestige):
+def get_technical(age,nationality,prestige,pos):
 
-	factor = 20
+	age_factor = 20
 	if age > 34:
-		factor = 54 - age
+		age_factor = 54 - age
 	elif age < 18:
-		factor = 16
+		age_factor = 16
 
-	pass_factor = max(random.randint(1,factor),4)
+	# use also pos i calculation
+	pass_factor = max(random.randint(1,age_factor),max(prestige,4))
+	shoot_factor = max(random.randint(1,age_factor),max(prestige,4))
+	technique_factor = max(random.randint(1,age_factor),max(prestige,4))
+	defense_factor = max(random.randint(1,age_factor),max(prestige,4)) 
+
+
+
 
 	technical = {
 			"crossing" : min(pass_factor + random.randint(-3,3),20),
 			"pass" : min(pass_factor + random.randint(-3,3),20),
 			"long_pass" : min(pass_factor + random.randint(-3,3),20),
-			"tackling" : random.randint(1,20),
-			"heading" : random.randint(1,20),
-			"interception" : random.randint(1,20),
-			"marking" : random.randint(1,20),
-			"shoot" : random.randint(1,20),
-			"dribble" : random.randint(1,20),
-			"long_shoot" : random.randint(1,20),
-			"free_kick" : random.randint(1,20),
-			"penalty" : random.randint(1,20),
-			"finishing" : random.randint(1,20),
-			"technique" : random.randint(1,20),
-			"first_touch" : random.randint(1,20),
+			"tackling" : min(defense_factor + random.randint(-3,3),20),
+			"heading" : min(shoot_factor + random.randint(-3,3),20),
+			"interception" : min(defense_factor + random.randint(-3,3),20),
+			"marking" : min(defense_factor + random.randint(-3,3),20),
+			"shoot" : min(shoot_factor + random.randint(-3,3),20),
+			"dribble" : min(technique_factor + random.randint(-3,3),20),
+			"long_shoot" : min(shoot_factor + random.randint(-3,3),20),
+			"free_kick" : min(shoot_factor + random.randint(-3,3),20),
+			"penalty" : min(shoot_factor + random.randint(-3,3),20),
+			"finishing" : min(technique_factor + random.randint(-3,3),20),
+			"technique" : min(technique_factor + random.randint(-3,3),20),
+			"first_touch" : min(technique_factor + random.randint(-3,3),20),
  		}
 	return technical
 
-def get_mental(age,nationality,prestige):
+def get_mental(age,nationality,prestige,pos):
 
-	factor = 20
+	age_factor = 20
 	if age > 34:
-		factor = 54 - age
+		age_factor = 54 - age
 	elif age < 18:
-		factor = 16
+		age_factor = 16
 
-	pass_factor = max(random.randint(1,factor),4)
+	offensive_factor = max(random.randint(1,age_factor),max(prestige,4))
+	defensive_factor = max(random.randint(1,age_factor),max(prestige,4))
+
 
 	mental = {
-			"agressivity" : random.randint(1,20),
-			"aniticipation" : random.randint(1,20),
-			"decisions" : random.randint(1,20),
-			"concentration" : random.randint(1,20),
-			"teamwork" : random.randint(1,20),
-			"vision" : random.randint(1,20),
-			"work_rate" : random.randint(1,20),
-			"offensive_movement" : random.randint(1,20),
-			"defensive_movement" : random.randint(1,20),
+			"agressivity" : min(defensive_factor + random.randint(-3,3),20),
+			"aniticipation" : min(defensive_factor + random.randint(-3,3),20),
+			"decisions" : min(offensive_factor + random.randint(-3,3),20),
+			"concentration" : min(offensive_factor + random.randint(-3,3),20),
+			"teamwork" : min(offensive_factor + random.randint(-3,3),20),
+			"vision" : min(offensive_factor + random.randint(-3,3),20),
+			"work_rate" : min(offensive_factor + random.randint(-3,3),20),
+			"offensive_movement" : min(offensive_factor + random.randint(-3,3),20),
+			"defensive_movement" : min(defensive_factor + random.randint(-3,3),20),
 		}
 	return mental
 
@@ -111,7 +124,17 @@ for _ in range(100):
 #create players
 for _ in range(500):
 	birth_date = fake_it.date_time_between(start_date='-45y', end_date='-15y')
-	prestige = random.randint(1,20)
+
+	prestige = random.randint(1,100)
+	#to make just a few really good and a few really bad
+	if prestige < 10:
+		prestige = random.randint(1,5)
+	if prestige > 90:
+		prestige = random.randint(15,20)
+	else:
+		prestige = random.randint(5,15)
+
+	position = positions[random.randint(0,len(positions)-1)]
 
 	player = {
 		"name":random.choice(ita_names),
@@ -119,7 +142,7 @@ for _ in range(500):
 		"birth_date": birth_date.strftime("%d/%m/%Y"),
 		"nationality" : "IT",
 		"moral" : random.randint(1, 4), # 1 to 4, 1 low 4 good
-		"position" : positions[random.randint(0,len(positions)-1)],
+		"position" : position,
 		"foot" : foots[random.randint(0,len(foots)-1)],
 		"prestige" : prestige,
 		"form" : forms[random.randint(0,len(forms)-1)],
@@ -128,9 +151,9 @@ for _ in range(500):
 		"_potential_growth" : random.randint(1,5),
 		"_injury_potential" :  random.randint(1,20), # _ hidden stats, not visible, just for calcs,
 		"history" : {},
-		"mental" : get_mental(2020-birth_date.year,"IT",prestige),
-		"technial" : get_technical(2020-birth_date.year,"IT",prestige),
-		"physycal" : get_physical(2020-birth_date.year,"IT",prestige),
+		"mental" : get_mental(2020-birth_date.year,"IT",prestige,position),
+		"technical" : get_technical(2020-birth_date.year,"IT",prestige,position),
+		"physycal" : get_physical(2020-birth_date.year,"IT",prestige,position),
 		"team" : "Free Agent",
 		"contract" : {}
 	}
