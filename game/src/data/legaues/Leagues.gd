@@ -138,8 +138,9 @@ var serie_a = {
 
 func add_random_players():
 	var i = 0
-	var shirtnumber = 1
+	var teams = []
 	for team in serie_a["teams"]:
+		var shirtnumber = 1
 		var players = Players.players.slice(i,i+20,1,true)
 		
 		for player in players:
@@ -161,3 +162,6 @@ func add_random_players():
 		
 		for player in players:
 			team["players"]["subs"].append(player)
+		teams.append(team)
+	DataSaver.teams = teams.duplicate(true)
+	DataSaver.save_all_data()

@@ -155,7 +155,6 @@ margin_left = 567.641
 margin_top = 1012.7
 margin_right = 1767.64
 margin_bottom = 1055.7
-max_value = 100.0
 step = 1.0
 value = 50.0
 percent_visible = false
@@ -460,7 +459,7 @@ text = "0"
 align = 2
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 autostart = true
 
 [node name="TimerMatchSimulator" type="Timer" parent="."]
@@ -471,9 +470,23 @@ margin_left = 566.704
 margin_top = 200.023
 margin_right = 1766.71
 margin_bottom = 1000.02
+
+[node name="HalfTimeTimer" type="Timer" parent="."]
+wait_time = 360.0
+one_shot = true
+
+[node name="NextHalf" type="Button" parent="."]
+visible = false
+margin_left = 990.012
+margin_top = 567.966
+margin_right = 1030.01
+margin_bottom = 610.966
+text = "NEXT_HALF"
 [connection signal="away_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_away_pass"]
 [connection signal="home_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_home_pass"]
 [connection signal="pressed" from="HUD/LeftButtons/Field" to="." method="_on_Field_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Stats" to="." method="_on_Stats_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="TimerMatchSimulator" to="." method="_on_TimerMatchSimulator_timeout"]
+[connection signal="timeout" from="HalfTimeTimer" to="." method="_on_HalfTimeTimer_timeout"]
+[connection signal="pressed" from="NextHalf" to="." method="_on_NextHalf_pressed"]

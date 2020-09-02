@@ -5,7 +5,27 @@ var away_team
 
 var match_started = false
 
+var first_half = true
 
+func _ready():
+#	home_team = matchz["home"]["players"].duplicate(true)
+#	away_team = matchz["away"]["players"].duplicate(true)
+
+	var next_match = CalendarUtil.get_next_match()
+	
+	for team in DataSaver.teams:
+		if team["name"] == next_match["home"]:
+			home_team = team
+		if team["name"] == next_match["away"]:
+			away_team = team
+	print(home_team)
+	
+	$HUD/TopBar/Home.text = next_match["home"]
+	$HUD/TopBar/Away.text = next_match["away"]
+	
+	$MatchSimulator.set_up(home_team,away_team)
+	
+	$HalfTimeTimer.start()
 
 func _process(delta):
 	$HUD/TopBar/Time.text = "%02d:%02d"%[int($MatchSimulator.time)/60,int($MatchSimulator.time)%60]
@@ -23,7 +43,7 @@ func _process(delta):
 func set_up(matchz):
 	home_team = matchz["home"]["players"].duplicate(true)
 	away_team = matchz["away"]["players"].duplicate(true)
-	$MatchSimulator.set_up(null,null)
+#	$MatchSimulator.set_up(null,null)
 
 func _on_Timer_timeout():
 	$Field.random_pass()
@@ -52,3 +72,18 @@ func _on_MatchSimulator_home_pass():
 
 func _on_TimerMatchSimulator_timeout():
 	$MatchSimulator.update()
+
+
+func _on_HalfTimeTimer_timeout():
+	if first_half:
+		first_half = false
+		$NextHalf.show()
+
+	$Timer.stop()
+	$TimerMatchSimulator.stop()
+
+
+func _on_NextHalf_pressed():
+	$HalfTimeTimer.start()
+	$Timer.start()
+	$TimerMatchSimulator.start()
