@@ -32,25 +32,28 @@ func inizialize_matches():
 		matches.append(current_match_day)
 		_shift_array(random_teams)
 		
+		
 	# ritorno
 	var temp_matches = []
 	for match_dayz in matches:
-		var current_match_day = []
+		var current_match_dayz = []
 		for matchess in match_dayz:
 			var matchzz = {"home": matchess["away"],"away": matchess["home"], "result":":"}
-			current_match_day.append(matchzz)
-		temp_matches.append(current_match_day)
-	matches.append(temp_matches)
+			current_match_dayz.append(matchzz)
+		temp_matches.append(current_match_dayz)
+		
+	for temp in temp_matches:
+		matches.append(temp)
+	
 	
 	#add to calendar
-	
 	var day = 3 # beacuse year starts with wensday
 	for c_match_days in matches:
-		DataSaver.calendar[day]["matches"] = c_match_days
+		DataSaver.calendar[day]["matches"] = c_match_days.duplicate(true)
 		day += 7
+		
 
 func check_date():
-	
 	pass
 
 func _shift_array(array):

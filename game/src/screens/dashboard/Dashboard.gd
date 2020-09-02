@@ -43,5 +43,5 @@ func _on_Formation_pressed():
 
 
 func _on_Continue_pressed():
-	if DataSaver.calendar
+#	if DataSaver.calendar:
 	CalendarUtil.next_day()

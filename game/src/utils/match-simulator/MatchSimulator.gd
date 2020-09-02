@@ -194,11 +194,11 @@ func _shoot(player,position):
 	
 	# look also for long shoot in next iteration
 	player["has_ball"] = false
-	var shoot_factor = player["stats"]["technical"]["shoot"]
+	var shoot_factor = player["technical"]["shoot"]
 	
 		
 	var nearest_defender = _get_nearest_defender(position)
-	var intercept_factor = nearest_defender["stats"]["technical"]["interception"]
+	var intercept_factor = nearest_defender["technical"]["interception"]
 	
 	var result = randi()% (shoot_factor + intercept_factor)
 	
@@ -228,9 +228,9 @@ func _shoot(player,position):
 			home_team["players"]["D"]["has_ball"] = true
 	
 func _dribble(player,position):
-	var dribble_factor = player["stats"]["technical"]["dribble"]
+	var dribble_factor = player["technical"]["dribble"]
 	var nearest_defender = _get_nearest_defender(position)
-	var defense_factor = nearest_defender["stats"]["technical"]["interception"]
+	var defense_factor = nearest_defender["technical"]["interception"]
 	
 	var result = randi()%(dribble_factor + defense_factor)
 	
@@ -257,12 +257,12 @@ func _pass_to(player,position):
 	
 	if is_short:
 		print("short pass")
-		pass_stats = player["stats"]["technical"]["pass"]
+		pass_stats = player["technical"]["pass"]
 	else:
 		print("long pass")
-		pass_stats = player["stats"]["technical"]["long_pass"]
+		pass_stats = player["technical"]["long_pass"]
 	
-	var defender_stats = nearest_defender["stats"]["technical"]["marking"]
+	var defender_stats = nearest_defender["technical"]["marking"]
 #	var will_do_pressing = randi()%20 > team_no_posses["defensive_tactics"]["D1"]
 #
 #	if will_do_pressing:
