@@ -43,5 +43,7 @@ func _on_Formation_pressed():
 
 
 func _on_Continue_pressed():
-#	if DataSaver.calendar:
-	CalendarUtil.next_day()
+	if DataSaver.calendar[CalendarUtil.day_counter]["matches"].size() > 0:
+		get_tree().change_scene("res://src/screens/match/Match.tscn")
+	else:
+		CalendarUtil.next_day()

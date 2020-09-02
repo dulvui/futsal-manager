@@ -61,33 +61,42 @@ var home_possess_counter = 0.0
 var home_has_ball
 
 
-func _ready():
-	var base_players = DataSaver.team
+#func _ready():
+#	var base_players = DataSaver.team
+#
+#	home_team = base_players.duplicate(true)
+#	away_team = base_players.duplicate(true)
+#
+#	home_has_ball = randi()%2 == 0
+#	if home_has_ball:
+#		home_team["players"]["P"]["has_ball"] = true
+#	else:
+#		away_team["players"]["P"]["has_ball"] = true
+
+func set_up(home,away):
 	
-	home_team = base_players.duplicate(true)
-	away_team = base_players.duplicate(true)
 	
+	home["players"]["G"]["has_ball"]  = false
+	home["players"]["D"]["has_ball"]  = false
+	home["players"]["WL"]["has_ball"]  = false
+	home["players"]["WR"]["has_ball"]  = false
+	home["players"]["P"]["has_ball"]  = false
+
+	away["players"]["G"]["has_ball"]  = false
+	away["players"]["D"]["has_ball"]  = false
+	away["players"]["WL"]["has_ball"]  = false
+	away["players"]["WR"]["has_ball"]  = false
+	away["players"]["P"]["has_ball"]  = false
+
+	home_team = home.duplicate(true)
+	away_team = away.duplicate(true)
+
 	home_has_ball = randi()%2 == 0
 	if home_has_ball:
 		home_team["players"]["P"]["has_ball"] = true
 	else:
 		away_team["players"]["P"]["has_ball"] = true
 
-func set_up(home,away):
-	var base_players = DataSaver.selected_players.duplicate(true)
-	
-	for player in base_players:
-		player["has_ball"] = false
-	
-	home_team = base_players.duplicate(true)
-	away_team = base_players.duplicate(true)
-	
-	home_has_ball = randi()%2 == 0
-	if home_has_ball:
-		home_team[4]["has_ball"] = true
-	else:
-		away_team[4]["has_ball"] = true
-			
 			
 			
 func update_time():
@@ -194,11 +203,11 @@ func _shoot(player,position):
 	
 	# look also for long shoot in next iteration
 	player["has_ball"] = false
-	var shoot_factor = player["technical"]["shoot"]
+	var shoot_factor:int = player["technical"]["shoot"]
 	
 		
 	var nearest_defender = _get_nearest_defender(position)
-	var intercept_factor = nearest_defender["technical"]["interception"]
+	var intercept_factor:int = nearest_defender["technical"]["interception"]
 	
 	var result = randi()% (shoot_factor + intercept_factor)
 	
@@ -228,9 +237,9 @@ func _shoot(player,position):
 			home_team["players"]["D"]["has_ball"] = true
 	
 func _dribble(player,position):
-	var dribble_factor = player["technical"]["dribble"]
+	var dribble_factor:int = player["technical"]["dribble"]
 	var nearest_defender = _get_nearest_defender(position)
-	var defense_factor = nearest_defender["technical"]["interception"]
+	var defense_factor:int = nearest_defender["technical"]["interception"]
 	
 	var result = randi()%(dribble_factor + defense_factor)
 	
@@ -251,7 +260,7 @@ func _pass_to(player,position):
 	
 
 	var nearest_defender = _get_nearest_defender(position)
-	var pass_stats 
+	var pass_stats:int = 1
 	
 	var is_short = randi()%20 < 10 #team_posses["offensive_tactics"]["O1"]
 	
@@ -262,7 +271,7 @@ func _pass_to(player,position):
 		print("long pass")
 		pass_stats = player["technical"]["long_pass"]
 	
-	var defender_stats = nearest_defender["technical"]["marking"]
+	var defender_stats:int = nearest_defender["technical"]["marking"]
 #	var will_do_pressing = randi()%20 > team_no_posses["defensive_tactics"]["D1"]
 #
 #	if will_do_pressing:

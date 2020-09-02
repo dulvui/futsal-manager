@@ -3,7 +3,6 @@ extends ScrollContainer
 
 func _ready():
 	for day in DataSaver.calendar:
-		print(day)
 		var day_label = Label.new()
 		if day["matches"].size() > 0:
 			day_label.text = get_text(day)

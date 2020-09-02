@@ -33,18 +33,18 @@ def get_physical(age,nationality,prestige,pos):
 	elif age < 18:
 		age_factor = 16
 
-	pace_factor = max(random.randint(1,age_factor),max(prestige,4))
-	physical_factor = max(random.randint(1,age_factor),max(prestige,4))
+	pace_factor = min(random.randint(6,age_factor),max(prestige,6))
+	physical_factor = min(random.randint(6,age_factor),max(prestige,6))
 
 
 	physical = {
-		"acceleration" : min(pace_factor + random.randint(-3,3),20),
-		"agility" : min(pace_factor + random.randint(-3,3),20),
-		"balance" : min(physical_factor + random.randint(-3,3),20),
-		"jump" : min(physical_factor + random.randint(-3,3),20),
-		"pace" : min(pace_factor + random.randint(-3,3),20),
-		"stamina" : min(physical_factor + random.randint(-3,3),20),
-		"strength" : min(physical_factor + random.randint(-3,3),20),
+		"acceleration" : min(pace_factor + random.randint(-5,5),20),
+		"agility" : min(pace_factor + random.randint(-5,5),20),
+		"balance" : min(physical_factor + random.randint(-5,5),20),
+		"jump" : min(physical_factor + random.randint(-5,5),20),
+		"pace" : min(pace_factor + random.randint(-5,5),20),
+		"stamina" : min(physical_factor + random.randint(-5,5),20),
+		"strength" : min(physical_factor + random.randint(-5,5),20),
 	}
 	return physical
 
@@ -57,30 +57,27 @@ def get_technical(age,nationality,prestige,pos):
 		age_factor = 16
 
 	# use also pos i calculation
-	pass_factor = max(random.randint(1,age_factor),max(prestige,4))
-	shoot_factor = max(random.randint(1,age_factor),max(prestige,4))
-	technique_factor = max(random.randint(1,age_factor),max(prestige,4))
-	defense_factor = max(random.randint(1,age_factor),max(prestige,4)) 
-
-
-
+	pass_factor = min(random.randint(6,age_factor),max(prestige,6))
+	shoot_factor = min(random.randint(6,age_factor),max(prestige,6))
+	technique_factor = min(random.randint(6,age_factor),max(prestige,6))
+	defense_factor = min(random.randint(6,age_factor),max(prestige,6)) 
 
 	technical = {
-			"crossing" : min(pass_factor + random.randint(-3,3),20),
-			"pass" : min(pass_factor + random.randint(-3,3),20),
-			"long_pass" : min(pass_factor + random.randint(-3,3),20),
-			"tackling" : min(defense_factor + random.randint(-3,3),20),
-			"heading" : min(shoot_factor + random.randint(-3,3),20),
-			"interception" : min(defense_factor + random.randint(-3,3),20),
-			"marking" : min(defense_factor + random.randint(-3,3),20),
-			"shoot" : min(shoot_factor + random.randint(-3,3),20),
-			"dribble" : min(technique_factor + random.randint(-3,3),20),
-			"long_shoot" : min(shoot_factor + random.randint(-3,3),20),
-			"free_kick" : min(shoot_factor + random.randint(-3,3),20),
-			"penalty" : min(shoot_factor + random.randint(-3,3),20),
-			"finishing" : min(technique_factor + random.randint(-3,3),20),
-			"technique" : min(technique_factor + random.randint(-3,3),20),
-			"first_touch" : min(technique_factor + random.randint(-3,3),20),
+			"crossing" : min(pass_factor + random.randint(-5,5),20),
+			"pass" : min(pass_factor + random.randint(-5,5),20),
+			"long_pass" : min(pass_factor + random.randint(-5,5),20),
+			"tackling" : min(defense_factor + random.randint(-5,5),20),
+			"heading" : min(shoot_factor + random.randint(-5,5),20),
+			"interception" : min(defense_factor + random.randint(-5,5),20),
+			"marking" : min(defense_factor + random.randint(-5,5),20),
+			"shoot" : min(shoot_factor + random.randint(-5,5),20),
+			"dribble" : min(technique_factor + random.randint(-5,5),20),
+			"long_shoot" : min(shoot_factor + random.randint(-5,5),20),
+			"free_kick" : min(shoot_factor + random.randint(-5,5),20),
+			"penalty" : min(shoot_factor + random.randint(-5,5),20),
+			"finishing" : min(technique_factor + random.randint(-5,5),20),
+			"technique" : min(technique_factor + random.randint(-5,5),20),
+			"first_touch" : min(technique_factor + random.randint(-5,5),20),
  		}
 	return technical
 
@@ -92,20 +89,20 @@ def get_mental(age,nationality,prestige,pos):
 	elif age < 18:
 		age_factor = 16
 
-	offensive_factor = max(random.randint(1,age_factor),max(prestige,4))
-	defensive_factor = max(random.randint(1,age_factor),max(prestige,4))
+	offensive_factor = min(random.randint(6,age_factor),max(prestige,6))
+	defensive_factor = min(random.randint(6,age_factor),max(prestige,6))
 
 
 	mental = {
-			"agressivity" : min(defensive_factor + random.randint(-3,3),20),
-			"aniticipation" : min(defensive_factor + random.randint(-3,3),20),
-			"decisions" : min(offensive_factor + random.randint(-3,3),20),
-			"concentration" : min(offensive_factor + random.randint(-3,3),20),
-			"teamwork" : min(offensive_factor + random.randint(-3,3),20),
-			"vision" : min(offensive_factor + random.randint(-3,3),20),
-			"work_rate" : min(offensive_factor + random.randint(-3,3),20),
-			"offensive_movement" : min(offensive_factor + random.randint(-3,3),20),
-			"defensive_movement" : min(defensive_factor + random.randint(-3,3),20),
+			"agressivity" : min(defensive_factor + random.randint(-5,5),20),
+			"aniticipation" : min(defensive_factor + random.randint(-5,5),20),
+			"decisions" : min(offensive_factor + random.randint(-5,5),20),
+			"concentration" : min(offensive_factor + random.randint(-5,5),20),
+			"teamwork" : min(offensive_factor + random.randint(-5,5),20),
+			"vision" : min(offensive_factor + random.randint(-5,5),20),
+			"work_rate" : min(offensive_factor + random.randint(-5,5),20),
+			"offensive_movement" : min(offensive_factor + random.randint(-5,5),20),
+			"defensive_movement" : min(defensive_factor + random.randint(-5,5),20),
 		}
 	return mental
 
@@ -127,7 +124,7 @@ for _ in range(500):
 
 	prestige = random.randint(1,100)
 	#to make just a few really good and a few really bad
-	if prestige < 10:
+	if prestige < 30:
 		prestige = random.randint(1,5)
 	if prestige > 90:
 		prestige = random.randint(15,20)
@@ -154,9 +151,10 @@ for _ in range(500):
 		"mental" : get_mental(2020-birth_date.year,"IT",prestige,position),
 		"technical" : get_technical(2020-birth_date.year,"IT",prestige,position),
 		"physycal" : get_physical(2020-birth_date.year,"IT",prestige,position),
-		"team" : "Free Agent",
 		"contract" : {}
 	}
 	ita_players.append(player)
 
 print(ita_players)
+
+# create teams

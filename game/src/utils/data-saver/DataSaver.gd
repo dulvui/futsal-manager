@@ -12,6 +12,7 @@ var season_started
 var calendar
 
 var team
+var teams
 
 var manager
 
@@ -31,6 +32,7 @@ func _ready():
 	calendar = config.get_value("season","calendar",[])
 	
 	team = config.get_value("team", "data",{})
+	teams = config.get_value("teams", "data",[])
 	season_started = config.get_value("season", "started",false)
 	
 	year = config.get_value("current_date","year",2020)
@@ -42,6 +44,7 @@ func save_all_data():
 	config.set_value("manager","data",manager)
 	config.set_value("season","started",season_started)
 	config.set_value("team","data",team)
+	config.set_value("teams","data",teams)
 	config.set_value("current_date","year",CalendarUtil.year)
 	config.set_value("current_date","month",CalendarUtil.month)
 	config.set_value("current_date","day",CalendarUtil.day)
