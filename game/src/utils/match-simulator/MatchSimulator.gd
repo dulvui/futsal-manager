@@ -200,6 +200,10 @@ func _move_with_ball(player):
 	
 func _shoot(player,position):
 	
+	if home_has_ball:
+		home_stats["shots"] += 1
+	else:
+		away_stats["shots"] += 1
 	
 	# look also for long shoot in next iteration
 	player["has_ball"] = false
@@ -258,6 +262,11 @@ func _pass_to(player,position):
 	print(player["name"] + " passes to " + position)
 	player["has_ball"] = false
 	
+	if home_has_ball:
+		home_stats["pass"] += 1
+	else:
+		away_stats["pass"] += 1
+	
 
 	var nearest_defender = _get_nearest_defender(position)
 	var pass_stats:int = 1
@@ -288,8 +297,10 @@ func _pass_to(player,position):
 		emit_signal("home_pass",[position])
 		if home_has_ball:
 			home_team["players"][position]["has_ball"] = true
+			home_stats["pass_success"] += 1
 		else:
 			away_team["players"][position]["has_ball"] = true
+			away_stats["pass_success"] += 1
 	else:
 		print("INTERCEPT")
 		player["has_ball"] = false

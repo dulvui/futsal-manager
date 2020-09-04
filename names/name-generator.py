@@ -1,128 +1,177 @@
 from faker import Faker
 import datetime
 import random
+import json
 
-# def random_date(start, end):
-#     """Generate a random datetime between `start` and `end`"""
-#     return start + datetime.timedelta(
-#         # Get a random amount of seconds between `start` and `end`
-#         seconds=random.randint(0, int((end - start).total_seconds())),
-# )
-
+br_players = []
+esp_players = []
 ita_players = []
+arg_players = []
+rus_players = []
+por_players = []
+fr_players = []
+hol_players = []
 
-positions = ["G","W","P","D","U"] # goal keeper, winger, pivot, defender, universal
+#kazakhstan
+#iran
+
+#TODO with mots common names from wikipedia
+iran_players = []
+indoensesia_players = []
+
+
+positions = ["G","D","W","P","U"] # goal keeper, winger, pivot, defender, universal
 foots = ["L","R","R","R","R"] # 80% right foot
 forms = ["INJURED","RECOVER","GOOD","PERFECT"]
-transfer_states = ["TRANSFER","LOAN","ND"]
-nationalyty = ["BR","ES","ARG","IT","FR","IND","GER","POR"]
+# transfer_states = ["TRANSFER","LOAN","FREE_AGENT"]
+# nationalyty = ["BR","ES","ARG","IT","FR","IND","GER","POR"]
 
-def get_physical(age,nationality):
+def get_physical(age,nationality,prestige,pos):
 
-	factor = 20
+	age_factor = 20
 	if age > 34:
-		factor = 54 - age
+		age_factor = 54 - age
 	elif age < 18:
-		factor = 16
+		age_factor = 16
+
+	pace_factor = min(random.randint(6,age_factor),max(prestige,6))
+	physical_factor = min(random.randint(6,age_factor),max(prestige,6))
+
 
 	physical = {
-		"acceleration" : random.randint(1,factor),
-		"agility" : random.randint(1,factor),
-		"balance" : random.randint(1,factor),
-		"jump" : random.randint(1,factor),
-		"pace" : random.randint(1,factor),
-		"stamina" : random.randint(1,factor),
-		"strength" : random.randint(1,factor),
+		"acceleration" : min(pace_factor + random.randint(-5,5),20),
+		"agility" : min(pace_factor + random.randint(-5,5),20),
+		"balance" : min(physical_factor + random.randint(-5,5),20),
+		"jump" : min(physical_factor + random.randint(-5,5),20),
+		"pace" : min(pace_factor + random.randint(-5,5),20),
+		"stamina" : min(physical_factor + random.randint(-5,5),20),
+		"strength" : min(physical_factor + random.randint(-5,5),20),
 	}
 	return physical
 
-fake_it = Faker('it_IT')
+def get_technical(age,nationality,prestige,pos):
 
-
-def get_technical(age,nationality):
-
-	factor = 20
+	age_factor = 20
 	if age > 34:
-		factor = 54 - age
+		age_factor = 54 - age
 	elif age < 18:
-		factor = 16
+		age_factor = 16
 
-	pass_factor = max(random.randint(1,factor),4)
+	# use also pos i calculation
+	pass_factor = min(random.randint(6,age_factor),max(prestige,6))
+	shoot_factor = min(random.randint(6,age_factor),max(prestige,6))
+	technique_factor = min(random.randint(6,age_factor),max(prestige,6))
+	defense_factor = min(random.randint(6,age_factor),max(prestige,6)) 
 
 	technical = {
-			"crossing" : min(pass_factor + random.randint(-3,3),20),
-			"pass" : min(pass_factor + random.randint(-3,3),20),
-			"long_pass" : min(pass_factor + random.randint(-3,3),20),
-			"tackling" : random.randint(1,20),
-			"corners" : min(pass_factor + random.randint(-3,3),20),
-			"heading" : random.randint(1,20),
-			"interception" : random.randint(1,20),
-			"marking" : random.randint(1,20),
-			"shoot" : random.randint(1,20),
-			"dribble" : random.randint(1,20),
-			"long_shoot" : random.randint(1,20),
-			"free_kick" : random.randint(1,20),
-			"penalty" : random.randint(1,20),
-			"finishing" : random.randint(1,20),
-			"technique" : random.randint(1,20),
-			"first_touch" : random.randint(1,20),
+			"crossing" : min(pass_factor + random.randint(-5,5),20),
+			"pass" : min(pass_factor + random.randint(-5,5),20),
+			"long_pass" : min(pass_factor + random.randint(-5,5),20),
+			"tackling" : min(defense_factor + random.randint(-5,5),20),
+			"heading" : min(shoot_factor + random.randint(-5,5),20),
+			"interception" : min(defense_factor + random.randint(-5,5),20),
+			"marking" : min(defense_factor + random.randint(-5,5),20),
+			"shoot" : min(shoot_factor + random.randint(-5,5),20),
+			"dribble" : min(technique_factor + random.randint(-5,5),20),
+			"long_shoot" : min(shoot_factor + random.randint(-5,5),20),
+			"free_kick" : min(shoot_factor + random.randint(-5,5),20),
+			"penalty" : min(shoot_factor + random.randint(-5,5),20),
+			"finishing" : min(technique_factor + random.randint(-5,5),20),
+			"technique" : min(technique_factor + random.randint(-5,5),20),
+			"first_touch" : min(technique_factor + random.randint(-5,5),20),
  		}
 	return technical
 
+def get_mental(age,nationality,prestige,pos):
 
-for _ in range(200):
-	birth_date = fake_it.date_time_between(start_date='-45y', end_date='-15y')
-	stats = {
-		"mental" :{
-			"agressivity" : random.randint(1,20),
-			"aniticipation" : random.randint(1,20),
-			"decisions" : random.randint(1,20),
-			"concentration" : random.randint(1,20),
-			"teamwork" : random.randint(1,20),
-			"vision" : random.randint(1,20),
-			"work_rate" : random.randint(1,20),
-			"offensive_movement" : random.randint(1,20),
-			"defensive_movement" : random.randint(1,20),
-		},
-		"technical" : get_technical(2020-birth_date.year,"IT"),
-		"physycal" : get_physical(2020-birth_date.year,"IT")
-	}
+	age_factor = 20
+	if age > 34:
+		age_factor = 54 - age
+	elif age < 18:
+		age_factor = 16
 
-	name_base = fake_it.name_male().replace("Dott. ","").replace("Sig. ","")
-
-	player = {
-		"name":name_base.split()[0],
-		"surname":name_base.split()[1],
-		"birth_date": birth_date.strftime("%m/%d/%Y"),
-		"nationality" : "IT",
-		"moral" : random.randint(1, 4), # 1 to 4, 1 low 4 good
-		"position" : positions[random.randint(0,len(positions)-1)],
-		"foot" : foots[random.randint(0,len(foots)-1)],
-		"prestige" : random.randint(1,20),
-		"form" : forms[random.randint(0,len(forms)-1)],
-		"potential" : random.randint(1,5), # like stars in FM,
-		"transfer_state" : "NO",
-		"_potential_growth" : random.randint(1,5),
-		"_injury_potential" :  random.randint(1,20), # _ hidden stats, not visible, just for calcs,
-		"history" : {},
-		"stats" : stats,
-		"team" : "Free Agent"
-	}
-	ita_players.append(player)
-
-print(ita_players)
-# fake_br = Faker('pt_BR')
-# for _ in range(500):
-# 	print(fake_br.name_male())
-# #	print
+	offensive_factor = min(random.randint(6,age_factor),max(prestige,6))
+	defensive_factor = min(random.randint(6,age_factor),max(prestige,6))
 
 
-# fake_es = Faker('es_ES')
-# for _ in range(500):
-# 	print(fake_es.name_male())
-# #	print
+	mental = {
+			"agressivity" : min(defensive_factor + random.randint(-5,5),20),
+			"aniticipation" : min(defensive_factor + random.randint(-5,5),20),
+			"decisions" : min(offensive_factor + random.randint(-5,5),20),
+			"concentration" : min(offensive_factor + random.randint(-5,5),20),
+			"teamwork" : min(offensive_factor + random.randint(-5,5),20),
+			"vision" : min(offensive_factor + random.randint(-5,5),20),
+			"work_rate" : min(offensive_factor + random.randint(-5,5),20),
+			"offensive_movement" : min(offensive_factor + random.randint(-5,5),20),
+			"defensive_movement" : min(defensive_factor + random.randint(-5,5),20),
+		}
+	return mental
 
-# fake_fr = Faker('fr_FR')
-# for _ in range(500):
-# 	print(fake_fr.name_male())
-# #	print
+def create_players(nationality):
+	players = []
+
+	#ITALY
+	fake_it = Faker(nationality)
+
+	names = []
+	surnames = []
+
+	#create names
+	for _ in range(100):
+		name_base = fake_it.name_male().replace("Dott. ","").replace("Sig. ","")
+		names.append(name_base.split()[0])
+		surnames.append(name_base.split()[1])
+
+	#create players
+	for _ in range(500):
+		birth_date = fake_it.date_time_between(start_date='-45y', end_date='-15y')
+
+		prestige = random.randint(1,100)
+		#to make just a few really good and a few really bad
+		if prestige < 30:
+			prestige = random.randint(1,5)
+		if prestige > 90:
+			prestige = random.randint(15,20)
+		else:
+			prestige = random.randint(5,15)
+
+		position = positions[random.randint(0,len(positions)-1)]
+
+		player = {
+			"name":random.choice(names),
+			"surname":random.choice(surnames),
+			"birth_date": birth_date.strftime("%d/%m/%Y"),
+			"nationality" : nationality.split("_")[1],
+			"moral" : random.randint(1, 4), # 1 to 4, 1 low 4 good
+			"position" : position,
+			"foot" : foots[random.randint(0,len(foots)-1)],
+			"prestige" : prestige,
+			"form" : forms[random.randint(0,len(forms)-1)],
+			"potential" : random.randint(1,5), # like stars in FM,
+			"transfer_state" : "NO",
+			"_potential_growth" : random.randint(1,5),
+			"_injury_potential" :  random.randint(1,20), # _ hidden stats, not visible, just for calcs,
+			"history" : {},
+			"mental" : get_mental(2020-birth_date.year,nationality,prestige,position),
+			"technical" : get_technical(2020-birth_date.year,nationality,prestige,position),
+			"physycal" : get_physical(2020-birth_date.year,nationality,prestige,position),
+			"contract" : {}
+		}
+		players.append(player)
+	return players
+	# print(ita_players)
+
+# create teams
+
+ita_players = create_players("it_IT")
+esp_players = create_players("es_ES")
+
+with open('players.json', 'w') as outfile:
+    json.dump(esp_players, outfile)
+
+
+# # now write output to a file
+# twitterDataFile = open("players.json", "w")
+# # magic happens here to make it pretty-printed
+# twitterDataFile.write(str(esp_players))
+# twitterDataFile.close()
