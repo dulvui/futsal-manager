@@ -23,7 +23,7 @@ func _ready():
 
 func create_calendar():
 	var calendar = []
-	for i in range(10950): #3020?
+	for i in range(365): #3020?
 		var json = {
 			"day" : day,
 			"month" : month,
