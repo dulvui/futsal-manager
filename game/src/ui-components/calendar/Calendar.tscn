@@ -2,14 +2,46 @@
 
 [ext_resource path="res://src/ui-components/calendar/Calendar.gd" type="Script" id=1]
 
-[node name="Calendar" type="ScrollContainer"]
-margin_left = 477.521
-margin_top = 256.578
-margin_right = 1877.52
-margin_bottom = 1056.58
+[node name="Calendar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="List" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 296.0
+margin_top = 136.0
+margin_right = -144.0
+margin_bottom = -144.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="List" type="GridContainer" parent="ScrollContainer"]
+columns = 2
+
+[node name="MatchDayPopUp" type="Popup" parent="."]
+margin_left = 296.0
+margin_top = 136.0
+margin_right = 696.0
+margin_bottom = 536.0
+
+[node name="Panel" type="Panel" parent="MatchDayPopUp"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 400.0
+margin_bottom = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MatchDayPopUp"]
+margin_right = 800.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
