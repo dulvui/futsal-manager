@@ -39,15 +39,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Details" type="Button" parent="HBoxContainer"]
+[node name="Prestige" type="Label" parent="HBoxContainer"]
 margin_left = 352.0
-margin_right = 482.0
+margin_top = 6.0
+margin_right = 375.0
+margin_bottom = 49.0
+text = "U"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Details" type="Button" parent="HBoxContainer"]
+margin_left = 425.0
+margin_right = 555.0
 margin_bottom = 56.0
 text = "DETAILS"
 
 [node name="Select" type="Button" parent="HBoxContainer"]
-margin_left = 532.0
-margin_right = 653.0
+margin_left = 605.0
+margin_right = 726.0
 margin_bottom = 56.0
 text = "SELECT"
 
@@ -152,7 +162,7 @@ __meta__ = {
 [node name="CrossLabel" type="Label" parent="DetailPopup/Technical"]
 margin_right = 248.0
 margin_bottom = 56.0
-text = "CROSS"
+text = "INTERCEPT"
 
 [node name="Cross" type="Label" parent="DetailPopup/Technical"]
 margin_left = 288.0
@@ -223,13 +233,13 @@ margin_right = 323.0
 margin_bottom = 236.0
 text = "12"
 
-[node name="CornerLabel" type="Label" parent="DetailPopup/Technical"]
+[node name="InterceptLabel" type="Label" parent="DetailPopup/Technical"]
 margin_top = 240.0
 margin_right = 248.0
 margin_bottom = 296.0
 text = "CORNER"
 
-[node name="Corner" type="Label" parent="DetailPopup/Technical"]
+[node name="Intercept" type="Label" parent="DetailPopup/Technical"]
 margin_left = 288.0
 margin_top = 240.0
 margin_right = 323.0

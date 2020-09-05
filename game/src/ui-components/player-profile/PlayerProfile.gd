@@ -5,7 +5,6 @@ signal player_select
 var player = {}
 
 func set_up_info(new_player):
-	print(new_player)
 	player = new_player
 	$HBoxContainer/Name.text = player["name"] + " " + player["surname"]
 	$DetailPopup/Info/Position.text = player["position"]
@@ -13,13 +12,14 @@ func set_up_info(new_player):
 	$DetailPopup/Info/Age.text = player["birth_date"]
 	$DetailPopup/Info/Nationality.text = player["nationality"]
 	$DetailPopup/Info/Team.text = str(player["prestige"])
+	$HBoxContainer/Prestige.text = str(player["prestige"])
 	
 	var tech = player["technical"]
 	$DetailPopup/Technical/Cross.text = str(tech["crossing"])
 	$DetailPopup/Technical/Pass.text = str(tech["pass"])
 	$DetailPopup/Technical/LongPass.text = str(tech["long_pass"])
 	$DetailPopup/Technical/Tackling.text = str(tech["tackling"])
-#	$DetailPopup/Technical/Corner.text = str(tech["corners"])
+	$DetailPopup/Technical/Intercept.text = str(tech["interception"])
 	$DetailPopup/Technical/Shoot.text = str(tech["shoot"])
 	$DetailPopup/Technical/LongShoot.text = str(tech["long_shoot"])
 	

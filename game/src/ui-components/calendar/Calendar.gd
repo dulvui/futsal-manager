@@ -23,7 +23,8 @@ func get_text(day):
 			return str(day["day"]) + "/" + str(day["month"]) + "/" + str(day["year"]) + matchz["home"] + " vs " + matchz["away"]
 
 func show_all_matches(day):
-	print(day)
+	for child in $MatchDayPopUp/VBoxContainer.get_children():
+		child.queue_free()
 	for matchz in day["matches"]:
 		var label = Label.new()
 		label.text = matchz["home"] + " vs " + matchz["away"]

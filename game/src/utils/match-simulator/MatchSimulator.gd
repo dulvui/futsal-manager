@@ -60,19 +60,6 @@ var home_possess_counter = 0.0
 
 var home_has_ball
 
-
-#func _ready():
-#	var base_players = DataSaver.team
-#
-#	home_team = base_players.duplicate(true)
-#	away_team = base_players.duplicate(true)
-#
-#	home_has_ball = randi()%2 == 0
-#	if home_has_ball:
-#		home_team["players"]["P"]["has_ball"] = true
-#	else:
-#		away_team["players"]["P"]["has_ball"] = true
-
 func set_up(home,away):
 	
 	
@@ -101,6 +88,11 @@ func set_up(home,away):
 			
 func update_time():
 	time += 1
+	if home_has_ball:
+		home_possess_counter += 1
+
+	home_stats["possession"] = (home_possess_counter / time) * 100
+	away_stats["possession"] = 100 - home_stats["possession"]
 
 func update():
 	if home_has_ball:
@@ -108,12 +100,6 @@ func update():
 	else:
 		_make_away_decisions()
 		
-	
-	if home_has_ball:
-		home_possess_counter += 1
-
-	home_stats["possession"] = (home_possess_counter / time) * 100
-	away_stats["possession"] = 100 - home_stats["possession"]
 	
 	
 func _make_home_decisions():
@@ -182,7 +168,7 @@ func _what_offensive_decision(player,pos):
 		"P":
 			if factor < 50:
 				decision = "PASS"
-			elif factor < 90:
+			elif factor < 98:
 				decision = "DRIBBLE"
 			else:
 				decision = "SHOOT"
@@ -213,7 +199,7 @@ func _shoot(player,position):
 	var nearest_defender = _get_nearest_defender(position)
 	var intercept_factor:int = nearest_defender["technical"]["interception"]
 	
-	var result = randi()% (shoot_factor + intercept_factor)
+	var result = randi()% (shoot_factor + (intercept_factor * 3)) #too many golas, increase intercept
 	
 	print("shoot %s vs intercept %s  = %s"%[str(shoot_factor),str(intercept_factor),str(result)])
 	
@@ -236,7 +222,6 @@ func _shoot(player,position):
 			home_has_ball = false
 			away_team["players"]["D"]["has_ball"] = true
 		else:
-			away_stats["goals"] += 1
 			home_has_ball = true
 			home_team["players"]["D"]["has_ball"] = true
 	
@@ -294,7 +279,7 @@ func _pass_to(player,position):
 	
 	if result <= pass_stats:
 		print("SUCCESS")
-		emit_signal("home_pass",[position])
+#		emit_signal("home_pass",[position])
 		if home_has_ball:
 			home_team["players"][position]["has_ball"] = true
 			home_stats["pass_success"] += 1
