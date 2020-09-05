@@ -91,6 +91,7 @@ func match_end():
 	$Dashboard.show()
 	$Timer.stop()
 	$TimerMatchSimulator.stop()
+	
 
 
 func half_time():

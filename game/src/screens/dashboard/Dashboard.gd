@@ -41,7 +41,8 @@ func _on_Continue_pressed():
 		get_tree().change_scene("res://src/screens/match/Match.tscn")
 
 func _on_Email_pressed():
-	if $Email.visible:
-		$Email.hide()
-	else:
-		$Email.show()
+	$EmailPopup.popup_centered()
+
+
+func _on_Table_pressed():
+	$TablePopup.popup_centered()

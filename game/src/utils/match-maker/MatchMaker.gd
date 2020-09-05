@@ -52,10 +52,6 @@ func inizialize_matches():
 		DataSaver.calendar[day]["matches"] = c_match_days.duplicate(true)
 		day += 7
 		
-
-func check_date():
-	pass
-
 func _shift_array(array):
 	var temp = array[0]
 	for i in range(array.size() - 1):

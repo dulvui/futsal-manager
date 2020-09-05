@@ -113,26 +113,6 @@ var serie_a = {
 			"players" : {},
 			"prestige" : 16
 		}
-	],
-	"match_day" : 0,
-	"games" : [],
-	"last_year_table" : [
-		{
-			"id" : 1,
-			"points" : 0,
-			"games_played": 0,
-			"goals_made" : 0,
-			"goals_against" : 0
-		}
-	],
-	"table" : [
-		{
-			"id" : 1,
-			"points" : 0,
-			"games_played": 0,
-			"goals_made" : 0,
-			"goals_against" : 0
-		}
 	]
 }
 
@@ -149,7 +129,6 @@ func add_random_players():
 			player["has_ball"] = false
 			shirtnumber += 1
 		
-		
 		i += 20
 		
 		team["players"]["G"] = players.pop_back()
@@ -162,6 +141,19 @@ func add_random_players():
 		
 		for player in players:
 			team["players"]["subs"].append(player)
-		teams.append(team)
+		
+		DataSaver.table.append({
+			"name" : team["name"],
+			"points" : 0,
+			"games_played": 0,
+			"goals_made" : 0,
+			"goals_against" : 0,
+			"wins" : 0,
+			"draws" : 0,
+			"lost" : 0
+		})
+		
+		teams.append(team)	
+	
 	DataSaver.teams = teams.duplicate(true)
 	DataSaver.save_all_data()

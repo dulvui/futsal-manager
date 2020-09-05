@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/ui-components/table/Table.gd" type="Script" id=1]
+[ext_resource path="res://theme.tres" type="Theme" id=2]
+
+[node name="Table" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/hseparation = 40
+columns = 9
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pos" type="Label" parent="GridContainer"]
+margin_right = 66.0
+margin_bottom = 43.0
+text = "POS"
+
+[node name="Club" type="Label" parent="GridContainer"]
+margin_left = 106.0
+margin_right = 192.0
+margin_bottom = 43.0
+text = "CLUB"
+
+[node name="GP" type="Label" parent="GridContainer"]
+margin_left = 232.0
+margin_right = 278.0
+margin_bottom = 43.0
+text = "GP"
+
+[node name="W" type="Label" parent="GridContainer"]
+margin_left = 318.0
+margin_right = 346.0
+margin_bottom = 43.0
+text = "W"
+
+[node name="D" type="Label" parent="GridContainer"]
+margin_left = 386.0
+margin_right = 409.0
+margin_bottom = 43.0
+text = "D"
+
+[node name="L" type="Label" parent="GridContainer"]
+margin_left = 449.0
+margin_right = 468.0
+margin_bottom = 43.0
+text = "L"
+
+[node name="GM" type="Label" parent="GridContainer"]
+margin_left = 508.0
+margin_right = 560.0
+margin_bottom = 43.0
+text = "GM"
+
+[node name="GA" type="Label" parent="GridContainer"]
+margin_left = 600.0
+margin_right = 647.0
+margin_bottom = 43.0
+text = "GA"
+
+[node name="Pts" type="Label" parent="GridContainer"]
+margin_left = 687.0
+margin_right = 747.0
+margin_bottom = 43.0
+text = "PTS"
