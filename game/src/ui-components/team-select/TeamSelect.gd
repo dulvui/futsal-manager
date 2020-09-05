@@ -20,6 +20,7 @@ func _ready():
 #			player_profile.set_up_info(player)
 
 func team_selected(team):
-	MatchMaker.inizialize_matches()
 	DataSaver.save_team(team)
+	CalendarUtil.create_calendar()
+	MatchMaker.inizialize_matches()
 	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")

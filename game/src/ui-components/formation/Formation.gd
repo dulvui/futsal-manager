@@ -15,12 +15,8 @@ func _ready():
 		$FormationSelect.add_item(formation)
 		
 	$FormationSelect.selected = formations.find(DataSaver.team["formation"])
-		
-		
 	$PlayerSelect/PlayerList.add_players()
 		
-	
-	
 	_set_players()
 	
 	$OffensiveTactics/O1.value = DataSaver.team["offensive_tactics"]["O1"]

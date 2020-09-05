@@ -40,6 +40,23 @@ func _ready():
 	day = config.get_value("current_date","day",1)
 	day_counter = config.get_value("current_date","day_counter",1)
 	
+func reset():
+	manager =  {
+		"name" : "",
+		"surname" : "",
+		"nationality" : "",
+		"birth_date" : "",
+	}
+	
+	calendar = []
+	
+	
+	year = 2020
+	month = 1
+	day = 1
+	day_counter = 1
+	
+	
 func save_all_data():
 	config.set_value("manager","data",manager)
 	config.set_value("season","started",season_started)
@@ -49,6 +66,7 @@ func save_all_data():
 	config.set_value("current_date","month",CalendarUtil.month)
 	config.set_value("current_date","day",CalendarUtil.day)
 	config.set_value("current_date","day_counter",CalendarUtil.day_counter)
+	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
 
 func save_manager(new_manager):

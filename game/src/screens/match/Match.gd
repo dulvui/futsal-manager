@@ -7,6 +7,10 @@ var match_started = false
 
 var first_half = true
 
+var paused = false
+
+var speed_factor = 2
+
 func _ready():
 #	home_team = matchz["home"]["players"].duplicate(true)
 #	away_team = matchz["away"]["players"].duplicate(true)
@@ -18,13 +22,11 @@ func _ready():
 			home_team = team
 		if team["name"] == next_match["away"]:
 			away_team = team
-	print(home_team)
 	
 	$HUD/TopBar/Home.text = next_match["home"]
 	$HUD/TopBar/Away.text = next_match["away"]
 	
 	$MatchSimulator.set_up(home_team,away_team)
-	
 	$HalfTimeTimer.start()
 
 func _process(delta):
@@ -44,16 +46,26 @@ func _process(delta):
 	
 	$HUD/PossessBar.value = $MatchSimulator.home_stats["possession"]
 	
+	$HUD/TopBar/SpeedFactor.text = str(speed_factor + 1) + " X"
+	
 
 
 func set_up(matchz):
 	home_team = matchz["home"]["players"].duplicate(true)
 	away_team = matchz["away"]["players"].duplicate(true)
-#	$MatchSimulator.set_up(null,null)
 
 func _on_Timer_timeout():
 	$Field.random_pass()
 	$MatchSimulator.update_time()
+	
+	if $MatchSimulator.time == 1800:
+		half_time()
+	elif $MatchSimulator.time == 3600:
+		match_end()
+	
+	
+func _on_TimerMatchSimulator_timeout():
+	$MatchSimulator.update()
 	
 
 func _on_Field_pressed():
@@ -75,21 +87,42 @@ func _on_MatchSimulator_home_pass():
 #	$Field.away_pass_to(position)
 	pass
 
-
-func _on_TimerMatchSimulator_timeout():
-	$MatchSimulator.update()
-
-
-func _on_HalfTimeTimer_timeout():
-	if first_half:
-		first_half = false
-		$NextHalf.show()
-
+func match_end():
+	$Dashboard.show()
 	$Timer.stop()
 	$TimerMatchSimulator.stop()
 
 
-func _on_NextHalf_pressed():
-	$HalfTimeTimer.start()
-	$Timer.start()
-	$TimerMatchSimulator.start()
+func half_time():
+	_on_Pause_pressed()
+
+
+
+func _on_Dashboard_pressed():
+	DataSaver.save_all_data()
+	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")
+
+
+func _on_Faster_pressed():
+	if speed_factor < 4:
+		$Timer.wait_time /= 2
+		$TimerMatchSimulator.wait_time = $Timer.wait_time * 5
+		speed_factor += 1
+
+
+func _on_Slower_pressed():
+	if speed_factor > 0:
+		$Timer.wait_time *= 2
+		$TimerMatchSimulator.wait_time = $Timer.wait_time * 5
+		speed_factor -= 1
+	
+
+
+func _on_Pause_pressed():
+	$Timer.paused = not $Timer.paused
+	$TimerMatchSimulator.paused = not $TimerMatchSimulator.paused
+	
+	if $Timer.paused:
+		$HUD/Pause.text = tr("CONTINUE")
+	else:
+		$HUD/Pause.text = tr("PAUSE")

@@ -18,6 +18,7 @@ _global_script_class_icons={
 config/name="Futsal Manager"
 run/main_scene="res://src/screens/splash/SplashScreen.tscn"
 boot_splash/image="res://icon.png"
+config/icon="res://icon.png"
 
 [autoload]
 

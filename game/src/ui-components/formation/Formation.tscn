@@ -647,7 +647,7 @@ text = " i "
 [node name="PlayerSelect" type="Popup" parent="."]
 margin_left = 420.0
 margin_top = 20.0
-margin_right = 1420.0
+margin_right = 1600.0
 margin_bottom = 1020.0
 
 [node name="PlayerList" parent="PlayerSelect" instance=ExtResource( 4 )]

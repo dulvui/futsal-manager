@@ -30,7 +30,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 700.927
 margin_top = 47.2864
-margin_right = 1189.93
+margin_right = 1340.93
 margin_bottom = 103.286
 custom_constants/separation = 20
 __meta__ = {
@@ -39,7 +39,7 @@ __meta__ = {
 
 [node name="Time" type="Label" parent="HUD/TopBar"]
 margin_top = 6.0
-margin_right = 139.0
+margin_right = 233.0
 margin_bottom = 49.0
 size_flags_horizontal = 3
 text = "32sds"
@@ -48,9 +48,9 @@ __meta__ = {
 }
 
 [node name="Home" type="Label" parent="HUD/TopBar"]
-margin_left = 159.0
+margin_left = 253.0
 margin_top = 6.0
-margin_right = 280.0
+margin_right = 374.0
 margin_bottom = 49.0
 text = "Robledo"
 __meta__ = {
@@ -58,9 +58,9 @@ __meta__ = {
 }
 
 [node name="Result" type="Label" parent="HUD/TopBar"]
-margin_left = 300.0
+margin_left = 394.0
 margin_top = 6.0
-margin_right = 346.0
+margin_right = 440.0
 margin_bottom = 49.0
 text = "3:0"
 __meta__ = {
@@ -68,11 +68,21 @@ __meta__ = {
 }
 
 [node name="Away" type="Label" parent="HUD/TopBar"]
-margin_left = 366.0
+margin_left = 460.0
 margin_top = 6.0
-margin_right = 489.0
+margin_right = 583.0
 margin_bottom = 49.0
 text = "Cisneros"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpeedFactor" type="Label" parent="HUD/TopBar"]
+margin_left = 603.0
+margin_top = 6.0
+margin_right = 640.0
+margin_bottom = 49.0
+text = "X2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -83,6 +93,23 @@ margin_top = 36.0218
 margin_right = 1840.62
 margin_bottom = 92.0218
 text = "PAUSE"
+
+[node name="Faster" type="Button" parent="HUD"]
+margin_left = 1559.62
+margin_top = 37.0218
+margin_right = 1696.62
+margin_bottom = 93.0218
+text = "FASTER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slower" type="Button" parent="HUD"]
+margin_left = 1407.62
+margin_top = 36.0218
+margin_right = 1544.62
+margin_bottom = 92.0218
+text = "SLOWER"
 
 [node name="LeftButtons" type="VBoxContainer" parent="HUD"]
 margin_left = 215.352
@@ -458,35 +485,38 @@ size_flags_horizontal = 3
 text = "0"
 align = 2
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
-autostart = true
-
-[node name="TimerMatchSimulator" type="Timer" parent="."]
-autostart = true
-
 [node name="Field" parent="." instance=ExtResource( 1 )]
 margin_left = 566.704
 margin_top = 200.023
 margin_right = 1766.71
 margin_bottom = 1000.02
 
-[node name="HalfTimeTimer" type="Timer" parent="."]
-wait_time = 360.0
-one_shot = true
-
-[node name="NextHalf" type="Button" parent="."]
+[node name="Dashboard" type="Button" parent="."]
 visible = false
 margin_left = 990.012
 margin_top = 567.966
 margin_right = 1030.01
 margin_bottom = 610.966
-text = "NEXT_HALF"
+text = "DASHBOARD"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="HalfTimeTimer" type="Timer" parent="."]
+wait_time = 360.0
+one_shot = true
+
+[node name="TimerMatchSimulator" type="Timer" parent="."]
+autostart = true
 [connection signal="away_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_away_pass"]
 [connection signal="home_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_home_pass"]
+[connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="pressed" from="HUD/Faster" to="." method="_on_Faster_pressed"]
+[connection signal="pressed" from="HUD/Slower" to="." method="_on_Slower_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Field" to="." method="_on_Field_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Stats" to="." method="_on_Stats_pressed"]
+[connection signal="pressed" from="Dashboard" to="." method="_on_Dashboard_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="TimerMatchSimulator" to="." method="_on_TimerMatchSimulator_timeout"]
 [connection signal="timeout" from="HalfTimeTimer" to="." method="_on_HalfTimeTimer_timeout"]
-[connection signal="pressed" from="NextHalf" to="." method="_on_NextHalf_pressed"]
+[connection signal="timeout" from="TimerMatchSimulator" to="." method="_on_TimerMatchSimulator_timeout"]
