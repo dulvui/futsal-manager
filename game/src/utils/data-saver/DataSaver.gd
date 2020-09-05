@@ -13,6 +13,7 @@ var calendar
 
 var team
 var teams
+var table
 
 var manager
 
@@ -30,6 +31,7 @@ func _ready():
 	})
 	
 	calendar = config.get_value("season","calendar",[])
+	table = config.get_value("season","table",[])
 	
 	team = config.get_value("team", "data",{})
 	teams = config.get_value("teams", "data",[])
@@ -49,6 +51,7 @@ func reset():
 	}
 	
 	calendar = []
+	table = []
 	
 	
 	year = 2020
@@ -67,6 +70,7 @@ func save_all_data():
 	config.set_value("current_date","day",CalendarUtil.day)
 	config.set_value("current_date","day_counter",CalendarUtil.day_counter)
 	config.set_value("season","calendar",calendar)
+	config.set_value("season","table",table)
 	config.save("user://settings.cfg")
 
 func save_manager(new_manager):
@@ -103,6 +107,7 @@ func save_date():
 	config.set_value("current_date","month",CalendarUtil.month)
 	config.set_value("current_date","day",CalendarUtil.day)
 	config.set_value("current_date","day_counter",CalendarUtil.day_counter)
+	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
 
 

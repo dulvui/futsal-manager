@@ -79,7 +79,6 @@ func calc_date():
 		day = 1
 		month = 1
 
-#	print(get_date())
 	DataSaver.save_date()
 
 func get_date():
