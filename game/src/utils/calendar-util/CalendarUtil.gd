@@ -16,9 +16,6 @@ func _ready():
 	day = DataSaver.day
 	day_counter = DataSaver.day_counter
 	
-	if DataSaver.calendar.size() == 0:
-		create_calendar()
-	
 	print(get_date())
 
 func create_calendar():

@@ -172,7 +172,7 @@ margin_left = 568.212
 margin_top = 139.036
 margin_right = 1768.21
 margin_bottom = 182.036
-max_value = 3600.0
+max_value = 2400.0
 step = 1.0
 value = 1.0
 percent_visible = false
@@ -257,7 +257,7 @@ margin_top = 47.0
 margin_right = 1052.0
 margin_bottom = 90.0
 size_flags_horizontal = 3
-text = "3"
+text = "0"
 align = 2
 
 [node name="HomeShotsOnTarget" type="Label" parent="Stats/VBoxContainer"]
@@ -265,7 +265,7 @@ margin_top = 94.0
 margin_right = 348.0
 margin_bottom = 137.0
 size_flags_horizontal = 3
-text = "6"
+text = "0"
 
 [node name="ShotsOnTarget" type="Label" parent="Stats/VBoxContainer"]
 margin_left = 352.0
@@ -282,7 +282,7 @@ margin_top = 94.0
 margin_right = 1052.0
 margin_bottom = 137.0
 size_flags_horizontal = 3
-text = "1"
+text = "0"
 align = 2
 
 [node name="HomeCorners" type="Label" parent="Stats/VBoxContainer"]
@@ -290,7 +290,7 @@ margin_top = 141.0
 margin_right = 348.0
 margin_bottom = 184.0
 size_flags_horizontal = 3
-text = "12"
+text = "0"
 
 [node name="Corners" type="Label" parent="Stats/VBoxContainer"]
 margin_left = 352.0
@@ -307,7 +307,7 @@ margin_top = 141.0
 margin_right = 1052.0
 margin_bottom = 184.0
 size_flags_horizontal = 3
-text = "3"
+text = "0"
 align = 2
 
 [node name="HomeFreeKicks" type="Label" parent="Stats/VBoxContainer"]
@@ -315,7 +315,7 @@ margin_top = 188.0
 margin_right = 348.0
 margin_bottom = 231.0
 size_flags_horizontal = 3
-text = "4"
+text = "0"
 
 [node name="FreeKicks" type="Label" parent="Stats/VBoxContainer"]
 margin_left = 352.0
@@ -332,7 +332,7 @@ margin_top = 188.0
 margin_right = 1052.0
 margin_bottom = 231.0
 size_flags_horizontal = 3
-text = "2"
+text = "0"
 align = 2
 
 [node name="HomeThrowIn" type="Label" parent="Stats/VBoxContainer"]
@@ -340,7 +340,7 @@ margin_top = 235.0
 margin_right = 348.0
 margin_bottom = 278.0
 size_flags_horizontal = 3
-text = "15"
+text = "0"
 
 [node name="ThrowIn" type="Label" parent="Stats/VBoxContainer"]
 margin_left = 352.0
@@ -357,7 +357,7 @@ margin_top = 235.0
 margin_right = 1052.0
 margin_bottom = 278.0
 size_flags_horizontal = 3
-text = "18"
+text = "0"
 align = 2
 
 [node name="HomeFouls" type="Label" parent="Stats/VBoxContainer"]
@@ -365,7 +365,7 @@ margin_top = 282.0
 margin_right = 348.0
 margin_bottom = 325.0
 size_flags_horizontal = 3
-text = "2"
+text = "0"
 
 [node name="Fouls" type="Label" parent="Stats/VBoxContainer"]
 margin_left = 352.0
@@ -382,7 +382,7 @@ margin_top = 282.0
 margin_right = 1052.0
 margin_bottom = 325.0
 size_flags_horizontal = 3
-text = "4"
+text = "0"
 align = 2
 
 [node name="HomePass" type="Label" parent="Stats/VBoxContainer"]
@@ -390,7 +390,7 @@ margin_top = 329.0
 margin_right = 348.0
 margin_bottom = 372.0
 size_flags_horizontal = 3
-text = "124"
+text = "0"
 
 [node name="Pass" type="Label" parent="Stats/VBoxContainer"]
 margin_left = 352.0
@@ -407,7 +407,7 @@ margin_top = 329.0
 margin_right = 1052.0
 margin_bottom = 372.0
 size_flags_horizontal = 3
-text = "48"
+text = "0"
 align = 2
 
 [node name="HomePassSuccess" type="Label" parent="Stats/VBoxContainer"]
@@ -457,7 +457,7 @@ margin_top = 423.0
 margin_right = 1052.0
 margin_bottom = 466.0
 size_flags_horizontal = 3
-text = "1"
+text = "0"
 align = 2
 
 [node name="HomeRedCards" type="Label" parent="Stats/VBoxContainer"]
@@ -503,10 +503,6 @@ text = "DASHBOARD"
 wait_time = 0.2
 autostart = true
 
-[node name="HalfTimeTimer" type="Timer" parent="."]
-wait_time = 360.0
-one_shot = true
-
 [node name="TimerMatchSimulator" type="Timer" parent="."]
 autostart = true
 [connection signal="away_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_away_pass"]
@@ -518,5 +514,4 @@ autostart = true
 [connection signal="pressed" from="HUD/LeftButtons/Stats" to="." method="_on_Stats_pressed"]
 [connection signal="pressed" from="Dashboard" to="." method="_on_Dashboard_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="HalfTimeTimer" to="." method="_on_HalfTimeTimer_timeout"]
 [connection signal="timeout" from="TimerMatchSimulator" to="." method="_on_TimerMatchSimulator_timeout"]

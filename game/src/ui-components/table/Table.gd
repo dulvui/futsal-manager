@@ -3,6 +3,7 @@ extends Control
 
 func _ready():
 	var pos = 1
+	DataSaver.table.sort_custom(self,"point_sorter")
 	for team in DataSaver.table:
 		var pos_label = Label.new()
 		pos_label.text = str(pos)
@@ -40,3 +41,9 @@ func _ready():
 		var points_label = Label.new()
 		points_label.text = str(team["points"])
 		$GridContainer.add_child(points_label)
+
+
+func point_sorter(a, b):
+	if a["points"] > b["points"]:
+		return true
+	return false
