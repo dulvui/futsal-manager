@@ -49,7 +49,7 @@ func inizialize_matches():
 	#add to calendar
 	var day = 3 # beacuse year starts with wensday
 	for c_match_days in matches:
-		DataSaver.calendar[day]["matches"] = c_match_days.duplicate(true)
+		DataSaver.calendar[day]["matches"] = c_match_days
 		day += 7
 		
 func _shift_array(array):

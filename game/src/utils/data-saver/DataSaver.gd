@@ -72,6 +72,7 @@ func save_all_data():
 	config.set_value("season","calendar",calendar)
 	config.set_value("season","table",table)
 	config.save("user://settings.cfg")
+	print("all data saved")
 
 func save_manager(new_manager):
 	manager = new_manager
@@ -100,8 +101,6 @@ func save_team(new_team):
 		"D4" : 10
 	}
 	
-	save_all_data()
-	
 func save_date():
 	config.set_value("current_date","year",CalendarUtil.year)
 	config.set_value("current_date","month",CalendarUtil.month)
@@ -109,7 +108,6 @@ func save_date():
 	config.set_value("current_date","day_counter",CalendarUtil.day_counter)
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
-
 
 func save_calendar(new_calendar):
 	calendar = new_calendar
@@ -122,3 +120,33 @@ func change_player(position,player):
 	team["players"][position] = player
 	team["players"]["subs"].erase(player)
 
+func save_result(home_name,home_goals,away_name,away_goals):
+#	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
+	for team in table:
+		if team["name"] == home_name:
+			team["goals_made"] += home_goals
+			team["goals_against"] += away_goals
+			if home_goals > away_goals:
+				team["wins"] += 1
+				team["points"] += 3
+			elif  home_goals == away_goals:
+				team["draws"] += 1
+				team["points"] += 1
+			else:
+				team["lost"] += 1
+			team["games_played"] += 1
+			
+		elif team["name"] == away_name:
+			team["goals_made"] += away_goals
+			team["goals_against"] += home_goals
+			if away_goals > home_goals:
+				team["wins"] += 1
+				team["points"] += 3
+			elif  home_goals == away_goals:
+				team["draws"] += 1
+				team["points"] += 1
+			else:
+				team["lost"] += 1
+			team["games_played"] += 1
+	config.set_value("season","table",table)
+	config.save("user://settings.cfg")

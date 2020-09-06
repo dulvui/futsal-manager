@@ -21,6 +21,11 @@ func _ready():
 
 func team_selected(team):
 	DataSaver.save_team(team)
+	print("team saved")
 	CalendarUtil.create_calendar()
+	print("calendar created")
 	MatchMaker.inizialize_matches()
+	print("matches initialized")
+	DataSaver.save_all_data()
+	
 	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")
