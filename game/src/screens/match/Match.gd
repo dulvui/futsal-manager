@@ -17,11 +17,12 @@ func _ready():
 
 	var next_match = CalendarUtil.get_next_match()
 	
-	for team in DataSaver.teams:
-		if team["name"] == next_match["home"]:
-			home_team = team
-		if team["name"] == next_match["away"]:
-			away_team = team
+	if next_match != null:
+		for team in DataSaver.teams:
+			if team["name"] == next_match["home"]:
+				home_team = team
+			if team["name"] == next_match["away"]:
+				away_team = team
 	
 	$HUD/TopBar/Home.text = next_match["home"]
 	$HUD/TopBar/Away.text = next_match["away"]

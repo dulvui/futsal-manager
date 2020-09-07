@@ -4,22 +4,36 @@
 [ext_resource path="res://theme.tres" type="Theme" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.105882, 0.254902, 0.694118, 1 )
+content_margin_left = 40.0
+content_margin_right = 40.0
+content_margin_top = 60.0
+content_margin_bottom = 60.0
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="PlayerList" type="ScrollContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -520.0
-margin_bottom = -79.9999
+margin_bottom = -280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource( 2 )
 custom_styles/bg = SubResource( 1 )
+scroll_horizontal_enabled = false
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ItemList" type="VBoxContainer" parent="."]
-custom_constants/separation = 60
+margin_left = 40.0
+margin_top = 60.0
+margin_right = 1360.0
+margin_bottom = 740.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 68
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

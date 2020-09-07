@@ -5,7 +5,7 @@
 [ext_resource path="res://button-normal.tres" type="StyleBox" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
+size = 42
 font_data = ExtResource( 1 )
 
 [resource]
@@ -21,3 +21,4 @@ Button/styles/focus = ExtResource( 2 )
 Button/styles/hover = ExtResource( 2 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 2 )
+VBoxContainer/constants/separation = 8

@@ -6,7 +6,6 @@ func _ready():
 	$TeamName.text = DataSaver.team["name"]
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
-	$PlayerPopUp/PlayerList.add_players()
 	$AllPlayersPopup/AllPlayerList.add_all_players()
 	
 	$Date.text = CalendarUtil.get_date()
