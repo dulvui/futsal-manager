@@ -61,8 +61,6 @@ var home_possess_counter = 0.0
 var home_has_ball
 
 func set_up(home,away):
-	
-	
 	home["players"]["G"]["has_ball"]  = false
 	home["players"]["D"]["has_ball"]  = false
 	home["players"]["WL"]["has_ball"]  = false
@@ -84,6 +82,29 @@ func set_up(home,away):
 	else:
 		away_team["players"]["P"]["has_ball"] = true
 
+func change_players(new_home_team,new_away_team):
+	home_team = new_home_team.duplicate(true)
+	away_team = new_away_team.duplicate(true)
+	
+	home_team["players"]["G"]["has_ball"]  = false
+	home_team["players"]["D"]["has_ball"]  = false
+	home_team["players"]["WL"]["has_ball"]  = false
+	home_team["players"]["WR"]["has_ball"]  = false
+	home_team["players"]["P"]["has_ball"]  = false
+
+	away_team["players"]["G"]["has_ball"]  = false
+	away_team["players"]["D"]["has_ball"]  = false
+	away_team["players"]["WL"]["has_ball"]  = false
+	away_team["players"]["WR"]["has_ball"]  = false
+	away_team["players"]["P"]["has_ball"]  = false
+	
+	
+	#make better and look who has ball after interuption
+	home_has_ball = randi()%2 == 0
+	if home_has_ball:
+		home_team["players"]["P"]["has_ball"] = true
+	else:
+		away_team["players"]["P"]["has_ball"] = true
 			
 			
 func update_time():
@@ -120,7 +141,7 @@ func _make_away_decisions():
 
 func _make_offensive_decision(player,pos):
 	if player["has_ball"]:
-		print(player["name"] + " has ball")
+		print(player["surname"] + " has ball")
 		var decision = _what_offensive_decision(player,pos) # make it affected by tactic, formation and in which sector player is
 		match decision:
 			"PASS":

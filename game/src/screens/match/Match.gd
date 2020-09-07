@@ -157,7 +157,7 @@ func _on_Formation_change():
 			if team["name"] == next_match["away"]:
 				away_team = team
 	# need to chaneg players in simulator too
-#	$MatchSimulator.set_up(home_team,away_team)
+	$MatchSimulator.change_players(home_team,away_team)
 	
 	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
 	$Field.set_numbers(home_team["players"],away_team["players"])
