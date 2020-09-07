@@ -168,10 +168,3 @@ esp_players = create_players("es_ES")
 
 with open('players.json', 'w') as outfile:
     json.dump(esp_players, outfile)
-
-
-# # now write output to a file
-# twitterDataFile = open("players.json", "w")
-# # magic happens here to make it pretty-printed
-# twitterDataFile.write(str(esp_players))
-# twitterDataFile.close()
