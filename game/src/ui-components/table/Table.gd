@@ -46,4 +46,6 @@ func _ready():
 func point_sorter(a, b):
 	if a["points"] > b["points"]:
 		return true
+	elif a["points"] == b["points"] and a["goals_made"] - a["goals_against"] > b["goals_made"] - b["goals_against"]:
+		return true
 	return false

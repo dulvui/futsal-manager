@@ -13,6 +13,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,26 +29,27 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 877.0
-margin_top = 471.0
-margin_right = 1042.0
-margin_bottom = 608.0
+margin_left = 825.0
+margin_top = 428.0
+margin_right = 1094.0
+margin_bottom = 651.0
+custom_constants/separation = 8
 
 [node name="Continue" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 165.0
-margin_bottom = 43.0
+margin_right = 269.0
+margin_bottom = 69.0
 text = "CONTINUE"
 
 [node name="StartGame" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 47.0
-margin_right = 165.0
-margin_bottom = 90.0
+margin_top = 77.0
+margin_right = 269.0
+margin_bottom = 146.0
 text = "START"
 
 [node name="Settings" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 94.0
-margin_right = 165.0
-margin_bottom = 137.0
+margin_top = 154.0
+margin_right = 269.0
+margin_bottom = 223.0
 text = "SETTINGS"
 
 [node name="icon" type="Sprite" parent="."]
