@@ -65,7 +65,7 @@ func calc_date():
 			if day > 31:
 				day = 1
 				month += 1
-		4,5,6,9,11:
+		4,6,9,11:
 			if day > 30:
 				day = 1
 				month += 1
