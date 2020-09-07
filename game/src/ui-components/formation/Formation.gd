@@ -1,5 +1,7 @@
 extends Control
 
+signal change
+
 onready var animation_player = $AnimationPlayer
 
 var formations = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
@@ -15,7 +17,6 @@ func _ready():
 		$FormationSelect.add_item(formation)
 		
 	$FormationSelect.selected = formations.find(DataSaver.team["formation"])
-	$PlayerSelect/PlayerList.add_players()
 		
 	_set_players()
 	
@@ -78,6 +79,7 @@ func _on_PlayerList_select_player(player):
 	DataSaver.change_player(player_to_replace,player[0])
 	_set_players()
 	$PlayerSelect.hide()
+	emit_signal("change")
 
 
 func _on_D1_value_changed(value):

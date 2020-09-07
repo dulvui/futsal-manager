@@ -119,6 +119,10 @@ func change_player(position,player):
 	team["players"]["subs"].append(team["players"][position])
 	team["players"][position] = player
 	team["players"]["subs"].erase(player)
+	
+	for new_team in teams:
+		if new_team["name"] == team["name"]:
+			team = new_team
 
 func save_result(home_name,home_goals,away_name,away_goals):
 #	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
