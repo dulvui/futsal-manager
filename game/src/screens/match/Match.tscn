@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/screens/match/field/Field.tscn" type="PackedScene" id=1]
 [ext_resource path="res://theme.tres" type="Theme" id=2]
 [ext_resource path="res://src/screens/match/Match.gd" type="Script" id=3]
 [ext_resource path="res://src/utils/match-simulator/MatchSimulator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/ui-components/formation/Formation.tscn" type="PackedScene" id=5]
 
 [node name="Match" type="Control"]
 anchor_right = 1.0
@@ -38,9 +39,8 @@ __meta__ = {
 }
 
 [node name="Time" type="Label" parent="HUD/TopBar"]
-margin_top = 6.0
-margin_right = 233.0
-margin_bottom = 49.0
+margin_right = 128.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 text = "32sds"
 __meta__ = {
@@ -48,40 +48,36 @@ __meta__ = {
 }
 
 [node name="Home" type="Label" parent="HUD/TopBar"]
-margin_left = 253.0
-margin_top = 6.0
-margin_right = 374.0
-margin_bottom = 49.0
+margin_left = 148.0
+margin_right = 307.0
+margin_bottom = 56.0
 text = "Robledo"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Result" type="Label" parent="HUD/TopBar"]
-margin_left = 394.0
-margin_top = 6.0
-margin_right = 440.0
-margin_bottom = 49.0
+margin_left = 327.0
+margin_right = 387.0
+margin_bottom = 56.0
 text = "3:0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Away" type="Label" parent="HUD/TopBar"]
-margin_left = 460.0
-margin_top = 6.0
-margin_right = 583.0
-margin_bottom = 49.0
+margin_left = 407.0
+margin_right = 570.0
+margin_bottom = 56.0
 text = "Cisneros"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SpeedFactor" type="Label" parent="HUD/TopBar"]
-margin_left = 603.0
-margin_top = 6.0
+margin_left = 590.0
 margin_right = 640.0
-margin_bottom = 49.0
+margin_bottom = 56.0
 text = "X2"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -121,50 +117,50 @@ __meta__ = {
 }
 
 [node name="Field" type="Button" parent="HUD/LeftButtons"]
-margin_right = 251.0
-margin_bottom = 43.0
+margin_right = 252.0
+margin_bottom = 56.0
 text = "FIELD"
 
 [node name="Stats" type="Button" parent="HUD/LeftButtons"]
-margin_top = 47.0
-margin_right = 251.0
-margin_bottom = 90.0
+margin_top = 64.0
+margin_right = 252.0
+margin_bottom = 120.0
 text = "STATS"
 
 [node name="Change" type="Button" parent="HUD/LeftButtons"]
-margin_top = 94.0
-margin_right = 251.0
-margin_bottom = 137.0
+margin_top = 128.0
+margin_right = 252.0
+margin_bottom = 184.0
 text = "CHANGE"
 
 [node name="Tactics" type="Button" parent="HUD/LeftButtons"]
-margin_top = 141.0
-margin_right = 251.0
-margin_bottom = 184.0
+margin_top = 192.0
+margin_right = 252.0
+margin_bottom = 248.0
 text = "TACTICS"
 
 [node name="Formation" type="Button" parent="HUD/LeftButtons"]
-margin_top = 188.0
-margin_right = 251.0
-margin_bottom = 231.0
+margin_top = 256.0
+margin_right = 252.0
+margin_bottom = 312.0
 text = "FORMATION"
 
 [node name="Table" type="Button" parent="HUD/LeftButtons"]
-margin_top = 235.0
-margin_right = 251.0
-margin_bottom = 278.0
+margin_top = 320.0
+margin_right = 252.0
+margin_bottom = 376.0
 text = "TABLE"
 
 [node name="Matches" type="Button" parent="HUD/LeftButtons"]
-margin_top = 282.0
-margin_right = 251.0
-margin_bottom = 325.0
+margin_top = 384.0
+margin_right = 252.0
+margin_bottom = 440.0
 text = "MATCHES"
 
 [node name="Votes" type="Button" parent="HUD/LeftButtons"]
-margin_top = 329.0
-margin_right = 251.0
-margin_bottom = 372.0
+margin_top = 448.0
+margin_right = 252.0
+margin_bottom = 504.0
 text = "VOTES"
 
 [node name="TimeBar" type="ProgressBar" parent="HUD"]
@@ -210,7 +206,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="GridContainer" parent="Stats"]
 margin_right = 1054.0
-margin_bottom = 614.0
+margin_bottom = 656.0
 columns = 3
 
 [node name="HomePossession" type="Label" parent="Stats/VBoxContainer"]
@@ -499,6 +495,20 @@ margin_right = 1030.01
 margin_bottom = 610.966
 text = "DASHBOARD"
 
+[node name="FormationPopup" type="Popup" parent="."]
+margin_right = 1200.0
+margin_bottom = 800.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="FormationPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Formation" parent="FormationPopup" instance=ExtResource( 5 )]
+rect_scale = Vector2( 0.7, 0.7 )
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
@@ -512,6 +522,8 @@ autostart = true
 [connection signal="pressed" from="HUD/Slower" to="." method="_on_Slower_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Field" to="." method="_on_Field_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Stats" to="." method="_on_Stats_pressed"]
+[connection signal="pressed" from="HUD/LeftButtons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Dashboard" to="." method="_on_Dashboard_pressed"]
+[connection signal="change" from="FormationPopup/Formation" to="." method="_on_Formation_change"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="TimerMatchSimulator" to="." method="_on_TimerMatchSimulator_timeout"]

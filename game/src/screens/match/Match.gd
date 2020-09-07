@@ -28,6 +28,9 @@ func _ready():
 	$HUD/TopBar/Away.text = next_match["away"]
 	
 	$MatchSimulator.set_up(home_team,away_team)
+	$Field.set_numbers(home_team["players"],away_team["players"])
+	
+	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
 	
 #	match_end()
 	
@@ -131,4 +134,32 @@ func _on_Pause_pressed():
 	if $Timer.paused:
 		$HUD/Pause.text = tr("CONTINUE")
 	else:
+		$FormationPopup.hide()
 		$HUD/Pause.text = tr("PAUSE")
+
+
+func _on_Formation_pressed():
+	$Timer.paused = true
+	$TimerMatchSimulator.paused = true
+	$HUD/Pause.text = tr("PAUSE")
+	$FormationPopup.popup_centered()
+
+
+func _on_Formation_change():
+	print("change numebrs")
+	var next_match = CalendarUtil.get_next_match()
+	
+	if next_match != null:
+		for team in DataSaver.teams:
+			if team["name"] == next_match["home"]:
+				home_team = team
+				print(home_team["players"]["G"])
+			if team["name"] == next_match["away"]:
+				away_team = team
+	# need to chaneg players in simulator too
+#	$MatchSimulator.set_up(home_team,away_team)
+	
+	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
+	$Field.set_numbers(home_team["players"],away_team["players"])
+
+	
