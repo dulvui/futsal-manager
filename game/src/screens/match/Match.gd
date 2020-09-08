@@ -163,3 +163,7 @@ func _on_Formation_change():
 	$Field.set_numbers(home_team["players"],away_team["players"])
 
 	
+
+
+func _on_SKIP_pressed():
+	match_end()

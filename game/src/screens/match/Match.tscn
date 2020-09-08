@@ -515,6 +515,13 @@ autostart = true
 
 [node name="TimerMatchSimulator" type="Timer" parent="."]
 autostart = true
+
+[node name="SKIP" type="Button" parent="."]
+margin_left = 142.705
+margin_top = 97.515
+margin_right = 230.705
+margin_bottom = 153.515
+text = "SKIP"
 [connection signal="away_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_away_pass"]
 [connection signal="home_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_home_pass"]
 [connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
@@ -527,3 +534,4 @@ autostart = true
 [connection signal="change" from="FormationPopup/Formation" to="." method="_on_Formation_change"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="TimerMatchSimulator" to="." method="_on_TimerMatchSimulator_timeout"]
+[connection signal="pressed" from="SKIP" to="." method="_on_SKIP_pressed"]
