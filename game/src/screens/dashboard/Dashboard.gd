@@ -3,7 +3,7 @@ extends Control
 
 func _ready():
 	$ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
-	$TeamName.text = DataSaver.team["name"]
+	$TeamName.text = DataSaver.selected_team
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
 	$AllPlayersPopup/AllPlayerList.add_all_players()
@@ -39,6 +39,7 @@ func _on_Continue_pressed():
 	EmailUtil.update()
 	$EmailPopup/Email.update_messages()
 	$Date.text = CalendarUtil.get_date()
+	$FormationPopUp/Formation/PlayerSelect/PlayerList.add_players()
 	DataSaver.save_all_data()
 	if DataSaver.calendar[CalendarUtil.day_counter]["matches"].size() > 0:
 		get_tree().change_scene("res://src/screens/match/Match.tscn")
@@ -53,5 +54,5 @@ func _on_Table_pressed():
 
 func _on_AllPlayerList_select_player(player):
 	print("offer for " + player["surname"])
-	TransferUtil.make_offer(player,"team","new_team","420K")
+	TransferUtil.make_offer(player,"420K")
 	$EmailPopup/Email.update_messages()

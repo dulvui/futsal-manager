@@ -19,7 +19,7 @@ func _ready():
 		
 func get_text(day):
 	for matchz in day["matches"]:
-		if matchz["home"] == DataSaver.team["name"] or matchz["away"] == DataSaver.team["name"]:
+		if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
 			return str(day["day"]) + "/" + str(day["month"]) + "/" + str(day["year"]) + matchz["home"] + " vs " + matchz["away"]
 
 func show_all_matches(day):
