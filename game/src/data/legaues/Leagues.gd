@@ -131,11 +131,11 @@ func add_random_players():
 		
 		i += 20
 		
-		team["players"]["G"] = players.pop_back()
-		team["players"]["D"] = players.pop_back()
-		team["players"]["WL"] = players.pop_back()
-		team["players"]["WR"] = players.pop_back()
-		team["players"]["P"] = players.pop_back()
+		team["players"]["active"] = []
+		
+		#look for correct positions and best players
+		for j in range(5):
+			team["players"]["active"].append(players.pop_back())
 		
 		team["players"]["subs"] = []
 		

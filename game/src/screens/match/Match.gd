@@ -12,9 +12,6 @@ var paused = false
 var speed_factor = 2
 
 func _ready():
-#	home_team = matchz["home"]["players"].duplicate(true)
-#	away_team = matchz["away"]["players"].duplicate(true)
-
 	var next_match = CalendarUtil.get_next_match()
 	
 	if next_match != null:
@@ -28,7 +25,7 @@ func _ready():
 	$HUD/TopBar/Away.text = next_match["away"]
 	
 	$MatchSimulator.set_up(home_team,away_team)
-	$Field.set_numbers(home_team["players"],away_team["players"])
+	$Field.set_numbers(home_team["players"]["active"],away_team["players"]["active"])
 	
 	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
 	
@@ -153,16 +150,13 @@ func _on_Formation_change():
 		for team in DataSaver.teams:
 			if team["name"] == next_match["home"]:
 				home_team = team
-				print(home_team["players"]["G"])
 			if team["name"] == next_match["away"]:
 				away_team = team
 	# need to chaneg players in simulator too
 	$MatchSimulator.change_players(home_team,away_team)
 	
 	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
-	$Field.set_numbers(home_team["players"],away_team["players"])
-
-	
+	$Field.set_numbers(home_team["players"]["active"],away_team["players"]["active"])
 
 
 func _on_SKIP_pressed():

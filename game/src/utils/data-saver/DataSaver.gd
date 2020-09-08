@@ -11,7 +11,9 @@ var day_counter
 var season_started
 var calendar
 
-var team
+var formation = "2-2"
+
+var selected_team
 var teams
 var table
 
@@ -38,7 +40,7 @@ func _ready():
 	table = config.get_value("season","table",[])
 	current_transfers = config.get_value("season","current_transfers",[])
 	
-	team = config.get_value("team", "data",{})
+	selected_team = config.get_value("selected_team", "data","")
 	teams = config.get_value("teams", "data",[])
 	season_started = config.get_value("season", "started",false)
 	
@@ -62,7 +64,8 @@ func reset():
 	
 	calendar = []
 	table = []
-	
+	current_transfers = []
+	messages = []
 	
 	year = 2020
 	month = 1
@@ -73,7 +76,7 @@ func reset():
 func save_all_data():
 	config.set_value("manager","data",manager)
 	config.set_value("season","started",season_started)
-	config.set_value("team","data",team)
+	config.set_value("selected_team","data",selected_team)
 	config.set_value("teams","data",teams)
 	config.set_value("current_date","year",CalendarUtil.year)
 	config.set_value("current_date","month",CalendarUtil.month)
@@ -93,25 +96,25 @@ func save_manager(new_manager):
 	
 func save_team(new_team):
 	season_started = true
-	team = new_team
+	selected_team = new_team["name"]
 	
 	
 	#hardcoded for now, use generator for this afterwards
-	team["formation"] = "2-2"
-	
-	team["offensive_tactics"] = {
-		"O1" : 10,
-		"O2" : 10,
-		"O3" : 10,
-		"O4" : 10
-	}
-	
-	team["defensive_tactics"] = {
-		"D1" : 10,
-		"D2" : 10,
-		"D3" : 10,
-		"D4" : 10
-	}
+#	team["formation"] = "2-2"
+#
+#	team["offensive_tactics"] = {
+#		"O1" : 10,
+#		"O2" : 10,
+#		"O3" : 10,
+#		"O4" : 10
+#	}
+#
+#	team["defensive_tactics"] = {
+#		"D1" : 10,
+#		"D2" : 10,
+#		"D3" : 10,
+#		"D4" : 10
+#	}
 	
 func save_date():
 	config.set_value("current_date","year",CalendarUtil.year)
@@ -125,16 +128,25 @@ func save_calendar(new_calendar):
 	calendar = new_calendar
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
-
+	
+func make_transfer(transfer):
+	#remove player from team
+	print(transfer["player"])
+	for team in teams:
+		if team["name"] == transfer["player"]["team"]:
+			team["players"]["subs"].erase(transfer["player"])
+	
+	#add player to team
+	for team in teams:
+		if team["name"] == DataSaver.selected_team:
+			team["players"]["subs"].append(transfer["player"])
+	
 func change_player(position,player):
 	print("change player")
-	team["players"]["subs"].append(team["players"][position])
-	team["players"][position] = player
+	var team = DataSaver.get_selected_team()
+	team["players"]["subs"].append(team["players"]["active"][position])
+	team["players"]["active"][position] = player
 	team["players"]["subs"].erase(player)
-	
-	for new_team in teams:
-		if new_team["name"] == team["name"]:
-			team = new_team
 
 func save_result(home_name,home_goals,away_name,away_goals):
 #	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
@@ -166,3 +178,8 @@ func save_result(home_name,home_goals,away_name,away_goals):
 			team["games_played"] += 1
 	config.set_value("season","table",table)
 	config.save("user://settings.cfg")
+	
+func get_selected_team():
+	for team in teams:
+		if team["name"] == selected_team:
+			return team

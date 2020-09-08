@@ -84,5 +84,5 @@ func get_date():
 
 func get_next_match():
 	for matchz in DataSaver.calendar[day_counter]["matches"]:
-		if matchz["home"] == DataSaver.team["name"] or matchz["away"] == DataSaver.team["name"]:
+		if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
 			return matchz

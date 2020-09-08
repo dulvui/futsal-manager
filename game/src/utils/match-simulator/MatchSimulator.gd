@@ -8,7 +8,6 @@ signal away_pass
 var home_team = {}
 var away_team = {}
 
-
 var home_stats = {
 	"goals" : 0,
 	"possession" : 50,
@@ -51,7 +50,6 @@ var away_stats = {
 }
 
 const DECISIONS = ["PASS","DRIBBLE","SHOOT","MOVE","WAIT"]
-const POS = ["G","D","WL","WR","P"]
 
 var time = 0.0
 
@@ -61,50 +59,38 @@ var home_possess_counter = 0.0
 var home_has_ball
 
 func set_up(home,away):
-	home["players"]["G"]["has_ball"]  = false
-	home["players"]["D"]["has_ball"]  = false
-	home["players"]["WL"]["has_ball"]  = false
-	home["players"]["WR"]["has_ball"]  = false
-	home["players"]["P"]["has_ball"]  = false
+	for player in home["players"]["active"]:
+		player["has_ball"]  = false
 
-	away["players"]["G"]["has_ball"]  = false
-	away["players"]["D"]["has_ball"]  = false
-	away["players"]["WL"]["has_ball"]  = false
-	away["players"]["WR"]["has_ball"]  = false
-	away["players"]["P"]["has_ball"]  = false
+	for player in away["players"]["active"]:
+		player["has_ball"]  = false
 
 	home_team = home.duplicate(true)
 	away_team = away.duplicate(true)
 
 	home_has_ball = randi()%2 == 0
 	if home_has_ball:
-		home_team["players"]["P"]["has_ball"] = true
+		home_team["players"]["active"][4]["has_ball"] = true
 	else:
-		away_team["players"]["P"]["has_ball"] = true
+		away_team["players"]["active"][4]["has_ball"] = true
 
 func change_players(new_home_team,new_away_team):
 	home_team = new_home_team.duplicate(true)
 	away_team = new_away_team.duplicate(true)
 	
-	home_team["players"]["G"]["has_ball"]  = false
-	home_team["players"]["D"]["has_ball"]  = false
-	home_team["players"]["WL"]["has_ball"]  = false
-	home_team["players"]["WR"]["has_ball"]  = false
-	home_team["players"]["P"]["has_ball"]  = false
+	for player in home_team["players"]["active"]:
+		player["has_ball"]  = false
 
-	away_team["players"]["G"]["has_ball"]  = false
-	away_team["players"]["D"]["has_ball"]  = false
-	away_team["players"]["WL"]["has_ball"]  = false
-	away_team["players"]["WR"]["has_ball"]  = false
-	away_team["players"]["P"]["has_ball"]  = false
+	for player in away_team["players"]["active"]:
+		player["has_ball"]  = false
 	
 	
 	#make better and look who has ball after interuption
 	home_has_ball = randi()%2 == 0
 	if home_has_ball:
-		home_team["players"]["P"]["has_ball"] = true
+		home_team["players"]["active"][4]["has_ball"] = true
 	else:
-		away_team["players"]["P"]["has_ball"] = true
+		away_team["players"]["active"][4]["has_ball"] = true
 			
 			
 func update_time():
@@ -124,19 +110,19 @@ func update():
 	
 	
 func _make_home_decisions():
-	_make_offensive_decision(home_team["players"]["G"],"G")
-	_make_offensive_decision(home_team["players"]["D"],"D")
-	_make_offensive_decision(home_team["players"]["WL"],"WL")
-	_make_offensive_decision(home_team["players"]["WR"],"WR")
-	_make_offensive_decision(home_team["players"]["P"],"P")
+	_make_offensive_decision(home_team["players"]["active"][0],0)
+	_make_offensive_decision(home_team["players"]["active"][1],1)
+	_make_offensive_decision(home_team["players"]["active"][2],2)
+	_make_offensive_decision(home_team["players"]["active"][3],3)
+	_make_offensive_decision(home_team["players"]["active"][4],4)
 
 		
 func _make_away_decisions():
-	_make_offensive_decision(away_team["players"]["G"],"G")
-	_make_offensive_decision(away_team["players"]["D"],"D")
-	_make_offensive_decision(away_team["players"]["WL"],"WL")
-	_make_offensive_decision(away_team["players"]["WR"],"WR")
-	_make_offensive_decision(away_team["players"]["P"],"P")
+	_make_offensive_decision(away_team["players"]["active"][0],0)
+	_make_offensive_decision(away_team["players"]["active"][1],1)
+	_make_offensive_decision(away_team["players"]["active"][2],2)
+	_make_offensive_decision(away_team["players"]["active"][3],3)
+	_make_offensive_decision(away_team["players"]["active"][4],4)
 
 
 func _make_offensive_decision(player,pos):
@@ -146,7 +132,7 @@ func _make_offensive_decision(player,pos):
 		match decision:
 			"PASS":
 				print(" and passes the ball")
-				_pass_to(player,POS[randi()%POS.size()])
+				_pass_to(player,randi()%5)
 			"SHOOT":
 				print(" and shoots the ball")
 				_shoot(player,pos)
@@ -168,25 +154,25 @@ func _what_offensive_decision(player,pos):
 	var factor = randi()%100
 	
 	match pos:
-		"G":
+		0:
 			decision = "PASS"
-		"D":
+		1:
 			decision = "PASS"
-		"WL":
+		2:
 			if factor < 60:
 				decision = "PASS"
 			elif factor < 95:
 				decision = "DRIBBLE"
 			else:
 				decision = "SHOOT"
-		"WR":
+		3:
 			if factor < 60:
 				decision = "PASS"
 			elif factor < 95:
 				decision = "DRIBBLE"
 			else:
 				decision = "SHOOT"
-		"P":
+		4:
 			if factor < 50:
 				decision = "PASS"
 			elif factor < 98:
@@ -231,20 +217,20 @@ func _shoot(player,position):
 			emit_signal("home_goal")
 			home_stats["goals"] += 1
 			home_has_ball = false
-			away_team["players"]["P"]["has_ball"] = true
+			away_team["players"]["active"][4]["has_ball"] = true
 		else:
 			emit_signal("away_goal")
 			away_stats["goals"] += 1
 			home_has_ball = true
-			home_team["players"]["P"]["has_ball"] = true
+			home_team["players"]["active"][4]["has_ball"] = true
 	else:
 		print("Interception")
 		if home_has_ball:
 			home_has_ball = false
-			away_team["players"]["D"]["has_ball"] = true
+			away_team["players"]["active"][1]["has_ball"] = true
 		else:
 			home_has_ball = true
-			home_team["players"]["D"]["has_ball"] = true
+			home_team["players"]["active"][1]["has_ball"] = true
 	
 func _dribble(player,position):
 	var dribble_factor:int = player["technical"]["dribble"]
@@ -265,7 +251,7 @@ func _wait(player):
 	pass
 	
 func _pass_to(player,position):
-	print(player["name"] + " passes to " + position)
+	print(player["name"] + " passes to " + str(position))
 	player["has_ball"] = false
 	
 	if home_has_ball:
@@ -302,10 +288,10 @@ func _pass_to(player,position):
 		print("SUCCESS")
 #		emit_signal("home_pass",[position])
 		if home_has_ball:
-			home_team["players"][position]["has_ball"] = true
+			home_team["players"]["active"][position]["has_ball"] = true
 			home_stats["pass_success"] += 1
 		else:
-			away_team["players"][position]["has_ball"] = true
+			away_team["players"]["active"][position]["has_ball"] = true
 			away_stats["pass_success"] += 1
 	else:
 		print("INTERCEPT")
@@ -319,45 +305,34 @@ func _pass_to(player,position):
 func _get_nearest_defender(position):
 	var team
 	if home_has_ball:
-		team = home_team["players"]
+		return home_team["players"]["active"][position]
 	else:
-		team = away_team["players"]
-	match position:
-		"G":
-			return team["P"]
-		"D":
-			return team["P"]
-		"WL":
-			return team["WR"]
-		"WR":
-			return team["WL"]
-		"P":
-			return team["D"]
+		return away_team["players"]["active"][position]
 			
 func _give_nearest_defender_ball(position):
 	var team
 	if home_has_ball:
 		match position:
-			"G":
-				home_team["players"]["P"]["has_ball"] = true
-			"D":
-				home_team["players"]["P"]["has_ball"] = true
-			"WL":
-				home_team["players"]["WR"]["has_ball"] = true
-			"WR":
-				home_team["players"]["WL"]["has_ball"] = true
-			"P":
-				home_team["players"]["D"]["has_ball"] = true
+			0:
+				home_team["players"]["active"][4]["has_ball"] = true
+			1:
+				home_team["players"]["active"][4]["has_ball"] = true
+			2:
+				home_team["players"]["active"][2]["has_ball"] = true
+			3:
+				home_team["players"]["active"][3]["has_ball"] = true
+			4:
+				home_team["players"]["active"][1]["has_ball"] = true
 	else:
 		match position:
-			"G":
-				away_team["players"]["P"]["has_ball"] = true
-			"D":
-				away_team["players"]["P"]["has_ball"] = true
-			"WL":
-				away_team["players"]["WR"]["has_ball"] = true
-			"WR":
-				away_team["players"]["WL"]["has_ball"] = true
-			"P":
-				away_team["players"]["D"]["has_ball"] = true
+			0:
+				away_team["players"]["active"][4]["has_ball"] = true
+			1:
+				away_team["players"]["active"][4]["has_ball"] = true
+			2:
+				away_team["players"]["active"][2]["has_ball"] = true
+			3:
+				away_team["players"]["active"][3]["has_ball"] = true
+			4:
+				away_team["players"]["active"][1]["has_ball"] = true
 	

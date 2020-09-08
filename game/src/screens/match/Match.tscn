@@ -522,6 +522,9 @@ margin_top = 97.515
 margin_right = 230.705
 margin_bottom = 153.515
 text = "SKIP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="away_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_away_pass"]
 [connection signal="home_pass" from="MatchSimulator" to="." method="_on_MatchSimulator_home_pass"]
 [connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
