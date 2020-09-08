@@ -30,6 +30,7 @@ func make_offer(player,current_team,new_team,money):
 		"money" : money
 	}
 	emit_signal("transfer_mail",[transfer,"TRANSFER"])
+	print("transfer messgae ")
 	current_transfers.append(transfer)
 	
 # tells you if the club has intention to give the player away

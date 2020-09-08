@@ -50,7 +50,7 @@ func _ready():
 	messages = config.get_value("mail","messages",[])
 	
 	#connect mail util with all other utils that send messages
-	TransferUtil.connect("transfer_mail",EmailUtil,"message")
+	
 	
 func reset():
 	manager =  {

@@ -37,7 +37,7 @@ func _on_Continue_pressed():
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
 	EmailUtil.update()
-	$EmailPopup/Email.update()
+	$EmailPopup/Email.update_messages()
 	$Date.text = CalendarUtil.get_date()
 	DataSaver.save_all_data()
 	if DataSaver.calendar[CalendarUtil.day_counter]["matches"].size() > 0:
@@ -49,3 +49,9 @@ func _on_Email_pressed():
 
 func _on_Table_pressed():
 	$TablePopup.popup_centered()
+
+
+func _on_AllPlayerList_select_player(player):
+	print("offer for " + player["surname"])
+	TransferUtil.make_offer(player,"team","new_team","420K")
+	$EmailPopup/Email.update_messages()
