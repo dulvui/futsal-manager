@@ -15,6 +15,8 @@ var team
 var teams
 var table
 
+var current_transfers
+
 var manager
 
 # Called when the node enters the scene tree for the first time.
@@ -32,6 +34,7 @@ func _ready():
 	
 	calendar = config.get_value("season","calendar",[])
 	table = config.get_value("season","table",[])
+	current_transfers = config.get_value("season","current_transfers",[])
 	
 	team = config.get_value("team", "data",{})
 	teams = config.get_value("teams", "data",[])
@@ -71,6 +74,7 @@ func save_all_data():
 	config.set_value("current_date","day_counter",CalendarUtil.day_counter)
 	config.set_value("season","calendar",calendar)
 	config.set_value("season","table",table)
+	config.set_value("season","current_transfers",current_transfers)
 	config.save("user://settings.cfg")
 	print("all data saved")
 
