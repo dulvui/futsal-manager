@@ -92,5 +92,5 @@ func add_all_players():
 		
 func select_player(player):
 	print("change in lst")
-	emit_signal("select_player",[player])
+	emit_signal("select_player",player)
 		

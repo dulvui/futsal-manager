@@ -185,4 +185,5 @@ __meta__ = {
 [connection signal="pressed" from="Buttons/Email" to="." method="_on_Email_pressed"]
 [connection signal="pressed" from="Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
 [connection signal="pressed" from="Buttons/Menu" to="." method="_on_Menu_pressed"]
+[connection signal="select_player" from="AllPlayersPopup/AllPlayerList" to="." method="_on_AllPlayerList_select_player"]
 [connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]

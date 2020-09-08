@@ -4,15 +4,6 @@ var messages = []
 
 func _ready():
 	messages = DataSaver.messages
-	
-	var ts_message = {
-		"title" : "TRANSFER",
-		"message" : "You made an",
-		"days" : 7,
-		"type" : "TRANSFER",
-		"read" : false
-	}
-	messages.append(ts_message)
 
 
 # make update method connected to new day signal of calendar
@@ -22,12 +13,13 @@ func update():
 		if message["days"] < 1:
 			messages.erase(message)
 
-func message(new_message,type):
-	print("new mail with message " + new_message)
-	if type == "TRANSFER":
+func message(new_message):
+	print("new mail")
+	if new_message[1] == "TRANSFER":
+		print("TRANSFER")
 		var ts_message = {
 			"title" : "TRANSFER",
-			"message" : "You made an " + new_message["money"] + " offer for " + new_message["player"]["name"] + " " + new_message["player"]["surname"],
+			"message" : "You made an " + new_message[0]["money"] + " offer for " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
 			"days" : 7,
 			"type" : "TRANSFER",
 			"read" : false
