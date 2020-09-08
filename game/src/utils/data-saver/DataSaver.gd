@@ -17,6 +17,8 @@ var table
 
 var current_transfers
 
+var messages
+
 var manager
 
 # Called when the node enters the scene tree for the first time.
@@ -44,6 +46,11 @@ func _ready():
 	month = config.get_value("current_date","month",1)
 	day = config.get_value("current_date","day",1)
 	day_counter = config.get_value("current_date","day_counter",1)
+	
+	messages = config.get_value("mail","messages",[])
+	
+	#connect mail util with all other utils that send messages
+	TransferUtil.connect("transfer_mail",EmailUtil,"message")
 	
 func reset():
 	manager =  {
@@ -75,6 +82,7 @@ func save_all_data():
 	config.set_value("season","calendar",calendar)
 	config.set_value("season","table",table)
 	config.set_value("season","current_transfers",current_transfers)
+	config.set_value("mail","messages",messages)
 	config.save("user://settings.cfg")
 	print("all data saved")
 

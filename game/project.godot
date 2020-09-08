@@ -28,6 +28,7 @@ Players="*res://src/data/player-generator/Players.gd"
 Leagues="*res://src/data/legaues/Leagues.gd"
 MatchMaker="*res://src/utils/match-maker/MatchMaker.gd"
 TransferUtil="*res://src/utils/transfer-util/TransferUtil.gd"
+EmailUtil="*res://src/utils/email-util/EmailUtil.gd"
 
 [display]
 
