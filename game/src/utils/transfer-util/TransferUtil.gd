@@ -8,6 +8,7 @@ var transfers_active = false
 
 func _ready():
 	current_transfers = DataSaver.current_transfers
+	
 
 func update_day():
 	
@@ -17,7 +18,7 @@ func update_day():
 		for transfer in current_transfers:
 			transfer["days"] -= 1
 			if transfer["days"] < 1:
-				emit_signal("transfer_mail",[transfer])
+				emit_signal("transfer_mail",[transfer,"TRANSFER"])
 				
 		_make_random_transfer_requests()
 
@@ -28,6 +29,7 @@ func make_offer(player,current_team,new_team,money):
 		"new_team" : new_team,
 		"money" : money
 	}
+	emit_signal("transfer_mail",[transfer,"TRANSFER"])
 	current_transfers.append(transfer)
 	
 # tells you if the club has intention to give the player away
