@@ -35,6 +35,9 @@ func _on_Formation_pressed():
 
 func _on_Continue_pressed():
 	CalendarUtil.next_day()
+	TransferUtil.update_day()
+	EmailUtil.update()
+	$EmailPopup/Email.update()
 	$Date.text = CalendarUtil.get_date()
 	DataSaver.save_all_data()
 	if DataSaver.calendar[CalendarUtil.day_counter]["matches"].size() > 0:

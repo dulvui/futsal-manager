@@ -20,7 +20,7 @@ __meta__ = {
 }
 
 [node name="Mails" type="GridContainer" parent="ScrollContainer"]
-columns = 4
+columns = 2
 
 [node name="DetailPopUp" type="Popup" parent="."]
 anchor_left = 0.5
