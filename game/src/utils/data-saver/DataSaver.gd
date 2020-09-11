@@ -1,18 +1,17 @@
 extends Node
 
-
 var config
 
-var year
-var month
-var day
-var day_counter
+var manager
 
-var season_started
+var day_counter
+var day
+var month
+var year
+
 var calendar
 
 var formation = "2-2"
-
 var selected_team
 var teams
 var table
@@ -21,7 +20,6 @@ var current_transfers
 
 var messages
 
-var manager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,7 +40,6 @@ func _ready():
 	
 	selected_team = config.get_value("selected_team", "data","")
 	teams = config.get_value("teams", "data",[])
-	season_started = config.get_value("season", "started",false)
 	
 	year = config.get_value("current_date","year",2020)
 	month = config.get_value("current_date","month",1)
@@ -75,7 +72,6 @@ func reset():
 	
 func save_all_data():
 	config.set_value("manager","data",manager)
-	config.set_value("season","started",season_started)
 	config.set_value("selected_team","data",selected_team)
 	config.set_value("teams","data",teams)
 	config.set_value("current_date","year",CalendarUtil.year)
@@ -95,11 +91,10 @@ func save_manager(new_manager):
 	config.save("user://settings.cfg")
 	
 func save_team(new_team):
-	season_started = true
+	teams = Leagues.serie_a["teams"]
 	selected_team = new_team["name"]
 	
-	
-	#hardcoded for now, use generator for this afterwards
+#	hardcoded for now, use generator for this afterwards
 #	team["formation"] = "2-2"
 #
 #	team["offensive_tactics"] = {
@@ -135,6 +130,7 @@ func make_transfer(transfer):
 	for team in teams:
 		if team["name"] == transfer["player"]["team"]:
 			team["players"]["subs"].erase(transfer["player"])
+			team["players"]["active"].erase(transfer["player"])
 	
 	#add player to team
 	for team in teams:

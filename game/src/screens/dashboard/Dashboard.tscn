@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/screens/dashboard/Dashboard.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://src/ui-components/formation/Formation.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/ui-components/email/Email.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/ui-components/table/Table.tscn" type="PackedScene" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.905882, 0.121569, 0.121569, 1 )
 
 [node name="Dashboard" type="Control"]
 anchor_right = 1.0
@@ -42,10 +45,10 @@ __meta__ = {
 }
 
 [node name="Calendar" parent="." instance=ExtResource( 3 )]
-margin_left = 616.0
-margin_top = 176.0
-margin_right = -136.0
-margin_bottom = -240.0
+margin_left = 656.0
+margin_top = 232.0
+margin_right = -168.0
+margin_bottom = -256.0
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 margin_left = 45.3572
@@ -56,45 +59,58 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Team" type="Button" parent="Buttons"]
+[node name="Formation" type="Button" parent="Buttons"]
 margin_right = 464.0
 margin_bottom = 56.0
-text = "TEAM"
-
-[node name="Formation" type="Button" parent="Buttons"]
-margin_top = 64.0
-margin_right = 464.0
-margin_bottom = 120.0
 text = "FORMATION"
 
 [node name="Training" type="Button" parent="Buttons"]
-margin_top = 128.0
+margin_top = 64.0
 margin_right = 464.0
-margin_bottom = 184.0
+margin_bottom = 120.0
 text = "TRAINING"
 
 [node name="Table" type="Button" parent="Buttons"]
-margin_top = 192.0
+margin_top = 128.0
 margin_right = 464.0
-margin_bottom = 248.0
+margin_bottom = 184.0
 text = "TABLE"
 
 [node name="Email" type="Button" parent="Buttons"]
+margin_top = 192.0
+margin_right = 464.0
+margin_bottom = 248.0
+text = "EMAIL"
+
+[node name="Panel" type="Panel" parent="Buttons/Email"]
+margin_left = 358.943
+margin_top = 1.77841
+margin_right = 414.943
+margin_bottom = 54.7784
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MailCounter" type="Label" parent="Buttons/Email/Panel"]
+margin_right = 56.0
+margin_bottom = 56.0
+text = "12"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SearchPlayer" type="Button" parent="Buttons"]
 margin_top = 256.0
 margin_right = 464.0
 margin_bottom = 312.0
-text = "EMAIL"
-
-[node name="SearchPlayer" type="Button" parent="Buttons"]
-margin_top = 320.0
-margin_right = 464.0
-margin_bottom = 376.0
 text = "SEARCH_PLAYER"
 
 [node name="Menu" type="Button" parent="Buttons"]
-margin_top = 384.0
+margin_top = 320.0
 margin_right = 464.0
-margin_bottom = 440.0
+margin_bottom = 376.0
 text = "MENU"
 
 [node name="AllPlayersPopup" type="Popup" parent="."]
@@ -108,20 +124,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="AllPlayerList" parent="AllPlayersPopup" instance=ExtResource( 4 )]
-margin_right = 0.0
-margin_bottom = 0.0
-
-[node name="PlayerPopUp" type="Popup" parent="."]
-margin_left = 221.345
-margin_top = 46.1784
-margin_right = 1621.34
-margin_bottom = 1046.18
-
-[node name="Panel" type="Panel" parent="PlayerPopUp"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="PlayerList" parent="PlayerPopUp" instance=ExtResource( 4 )]
 margin_right = 0.0
 margin_bottom = 0.0
 
@@ -178,7 +180,6 @@ text = "CONTINUE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="Buttons/Team" to="." method="_on_Team_pressed"]
 [connection signal="pressed" from="Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Buttons/Training" to="." method="_on_Training_pressed"]
 [connection signal="pressed" from="Buttons/Table" to="." method="_on_Table_pressed"]
