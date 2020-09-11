@@ -1,9 +1,9 @@
 extends Control
 
 
-func _ready():
-	if not DataSaver.season_started:
-		$CenterContainer/VBoxContainer/Continue.hide()
+#func _ready():
+#	if DataSaver.selected_team.length() > 0:
+#	$CenterContainer/VBoxContainer/Continue.hide()
 
 func _on_StartGame_pressed():
 	DataSaver.reset()

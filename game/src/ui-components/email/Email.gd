@@ -27,6 +27,7 @@ func update_messages():
 
 
 func show_message(message):
+	message["read"] = true
 	$DetailPopUp/Title.text = message["title"]
 	$DetailPopUp/Message.text = message["message"]
 	$DetailPopUp.popup_centered()

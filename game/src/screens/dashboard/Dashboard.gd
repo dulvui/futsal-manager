@@ -11,11 +11,9 @@ func _ready():
 	
 	$Date.text = CalendarUtil.get_date()
 	
-	
-	
-func _on_Team_pressed():
-	$PlayerPopUp.popup_centered()
 
+func _process(delta):
+	$Buttons/Email/Panel/MailCounter.text = str(EmailUtil.count_unread_messages())
 
 func _on_Menu_pressed():
 	get_tree().change_scene("res://src/screens/menu/Menu.tscn")

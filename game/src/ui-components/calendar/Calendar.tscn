@@ -13,10 +13,6 @@ __meta__ = {
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 296.0
-margin_top = 136.0
-margin_right = -144.0
-margin_bottom = -144.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

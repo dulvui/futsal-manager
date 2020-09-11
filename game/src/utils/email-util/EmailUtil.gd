@@ -12,6 +12,13 @@ func update():
 		message["days"] -= 1
 		if message["days"] < 1:
 			messages.erase(message)
+			
+func count_unread_messages():
+	var counter = 0
+	for message in messages:
+		if not message["read"]:
+			counter += 1
+	return counter
 
 func message(new_message):
 	print("new mail")
