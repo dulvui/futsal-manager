@@ -56,5 +56,17 @@ func _on_Table_pressed():
 
 func _on_AllPlayerList_select_player(player):
 	print("offer for " + player["surname"])
-	TransferUtil.make_offer(player,4200)
+	$PlayerOfferPopup/PlayerOffer.set_player(player)
+	$PlayerOfferPopup/PlayerOffer.show()
+	$PlayerOfferPopup.popup_centered()
+#	TransferUtil.make_offer(player,4200)
+#	$EmailPopup/Email.update_messages()
+
+
+func _on_PlayerOffer_hide():
+	$PlayerOfferPopup.hide()
+
+
+func _on_PlayerOffer_confirm():
 	$EmailPopup/Email.update_messages()
+	$PlayerOfferPopup.hide()

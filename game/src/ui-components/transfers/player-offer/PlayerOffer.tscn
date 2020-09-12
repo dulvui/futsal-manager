@@ -165,3 +165,5 @@ text = "CANCEL"
 [connection signal="text_changed" from="Details/Money/Amount" to="." method="_on_Amount_text_changed"]
 [connection signal="pressed" from="Details/Money/More" to="." method="_on_More_pressed"]
 [connection signal="item_selected" from="Details/ExchangePlayers" to="." method="_on_ExchangePlayers_item_selected"]
+[connection signal="pressed" from="Confirm" to="." method="_on_Confirm_pressed"]
+[connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]
