@@ -1,0 +1,167 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/ui-components/transfers/player-offer/PlayerOffer.gd" type="Script" id=2]
+
+[node name="PlayerOffer" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Label" parent="."]
+margin_left = 240.0
+margin_top = 56.0
+margin_right = 1547.0
+margin_bottom = 264.0
+text = "Ricardinho del Levante vale 5M.
+Il tuo osservatore ritiene che sia dia aquistare senza pensarci due volte."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Details" type="GridContainer" parent="."]
+margin_left = 344.0
+margin_top = 272.0
+margin_right = 1392.0
+margin_bottom = 640.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TypeLabel" type="Label" parent="Details"]
+margin_right = 522.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+text = "TYPE"
+
+[node name="Types" type="OptionButton" parent="Details"]
+margin_left = 526.0
+margin_right = 1048.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+
+[node name="MoneyLabel" type="Label" parent="Details"]
+margin_top = 65.0
+margin_right = 522.0
+margin_bottom = 121.0
+size_flags_horizontal = 3
+text = "MONEY"
+
+[node name="Money" type="HBoxContainer" parent="Details"]
+margin_left = 526.0
+margin_top = 60.0
+margin_right = 1048.0
+margin_bottom = 126.0
+size_flags_horizontal = 3
+
+[node name="Less" type="Button" parent="Details/Money"]
+margin_right = 19.0
+margin_bottom = 66.0
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="LineEdit" parent="Details/Money"]
+margin_left = 23.0
+margin_right = 496.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+text = "15000"
+align = 1
+
+[node name="More" type="Button" parent="Details/Money"]
+margin_left = 500.0
+margin_right = 522.0
+margin_bottom = 66.0
+text = "+"
+
+[node name="DateLabel" type="Label" parent="Details"]
+margin_top = 130.0
+margin_right = 522.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+text = "DATE"
+
+[node name="Date" type="OptionButton" parent="Details"]
+margin_left = 526.0
+margin_top = 130.0
+margin_right = 1048.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+
+[node name="ExchangePlayersLabel" type="Label" parent="Details"]
+margin_top = 190.0
+margin_right = 522.0
+margin_bottom = 246.0
+size_flags_horizontal = 3
+text = "PLAYERS"
+
+[node name="ExchangePlayers" type="OptionButton" parent="Details"]
+margin_left = 526.0
+margin_top = 190.0
+margin_right = 1048.0
+margin_bottom = 246.0
+size_flags_horizontal = 3
+
+[node name="ExchangePlayersLabel2" type="Label" parent="."]
+margin_left = 344.0
+margin_top = 616.0
+margin_right = 866.0
+margin_bottom = 672.0
+size_flags_horizontal = 3
+text = "PLAYER_LIST"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 880.0
+margin_top = 536.0
+margin_right = 1408.0
+margin_bottom = 768.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectedPlayers" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 528.0
+size_flags_horizontal = 3
+
+[node name="Total" type="Label" parent="."]
+margin_left = 872.0
+margin_top = 792.0
+margin_right = 1394.0
+margin_bottom = 848.0
+size_flags_horizontal = 3
+text = "150000"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Confirm" type="Button" parent="."]
+margin_left = 1072.0
+margin_top = 888.0
+margin_right = 1265.0
+margin_bottom = 944.0
+text = "CONFIRM"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="Button" parent="."]
+margin_left = 672.0
+margin_top = 896.0
+margin_right = 865.0
+margin_bottom = 952.0
+text = "CANCEL"
+[connection signal="pressed" from="Details/Money/Less" to="." method="_on_Less_pressed"]
+[connection signal="text_changed" from="Details/Money/Amount" to="." method="_on_Amount_text_changed"]
+[connection signal="pressed" from="Details/Money/More" to="." method="_on_More_pressed"]
+[connection signal="item_selected" from="Details/ExchangePlayers" to="." method="_on_ExchangePlayers_item_selected"]
