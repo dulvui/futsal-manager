@@ -1,6 +1,9 @@
 extends Control
 
+signal confirm
+
 var team
+var player
 
 var regex = RegEx.new()
 var oldtext = ""
@@ -30,8 +33,9 @@ func _ready():
 func _process(delta):
 	$Total.text = str(total)
 
-func set_player(player):
-	$Info.text = "The player " + player["name"] + " has a value of " + player["contract"]["price"]
+func set_player(new_player):
+	player = new_player
+	$Info.text = "The player " + player["name"] + " has a value of " + str(player["price"])
 
 
 func _on_More_pressed():
@@ -92,6 +96,26 @@ func _on_Amount_text_changed(new_text):
 		oldtext = $Details/Money/Amount.text
 	else:
 		$Details/Money/Amount.text = oldtext
+	
 	amount = int($Details/Money/Amount.text)
+	if amount > team["budget"]:
+		amount = team["budget"]
+		$Details/Money/Amount.text = str(amount)
+		
 	_calc_total()
 	$Details/Money/Amount.set_cursor_position($Details/Money/Amount.text.length())
+
+
+func _on_Confirm_pressed():
+	var transfer = {
+		"player" : player,
+		"money" : amount,
+		"exchange_players" : selected_players,
+		"days" : (randi()%5)+1
+	}
+	TransferUtil.make_offer(transfer)
+	emit_signal("confirm")
+
+
+func _on_Cancel_pressed():
+	hide()

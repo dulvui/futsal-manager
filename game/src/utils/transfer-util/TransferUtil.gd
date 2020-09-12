@@ -8,7 +8,7 @@ var transfers_active = true
 
 func _ready():
 	current_transfers = DataSaver.current_transfers
-	
+
 
 func update_day():
 	
@@ -26,12 +26,7 @@ func update_day():
 					
 		_make_random_transfer_requests()
 
-func make_offer(player,money):
-	var transfer = {
-		"player" : player,
-		"money" : money,
-		"days" : (randi()%5)+1
-	}
+func make_offer(transfer):
 	emit_signal("transfer_mail",[transfer,"TRANSFER"])
 	print("transfer message")
 	current_transfers.append(transfer)
