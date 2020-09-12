@@ -107,6 +107,26 @@ def get_mental(age,nationality,prestige,pos):
 		}
 	return mental
 
+def get_price(age,prestige,pos):
+	age_factor = min(abs(age - 30),20)
+	pos_factor = 0
+	if pos == "G":
+		pos_factor = 5
+	elif pos == "D":
+		pos_factor = 10
+	elif pos == "W":
+		pos_factor = 15
+	else:
+		pos_factor = 20
+
+	total_factor = age_factor + pos_factor + prestige
+
+	return random.randint(total_factor-20,total_factor) * 10000
+
+
+def get_contract():
+	return
+
 def create_players(nationality):
 	players = []
 
@@ -138,6 +158,7 @@ def create_players(nationality):
 		position = positions[random.randint(0,len(positions)-1)]
 
 		player = {
+			"price" : get_price(2020-birth_date.year,prestige,position),
 			"name":random.choice(names),
 			"surname":random.choice(surnames),
 			"birth_date": birth_date.strftime("%d/%m/%Y"),
@@ -148,7 +169,6 @@ def create_players(nationality):
 			"prestige" : prestige,
 			"form" : forms[random.randint(0,len(forms)-1)],
 			"potential" : random.randint(1,5), # like stars in FM,
-			"transfer_state" : "NO",
 			"_potential_growth" : random.randint(1,5),
 			"_injury_potential" :  random.randint(1,20), # _ hidden stats, not visible, just for calcs,
 			"history" : {},
