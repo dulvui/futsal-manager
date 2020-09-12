@@ -7,7 +7,10 @@ func _ready():
 		$ScrollContainer/Mails.add_child(title_label)
 		
 		var button = Button.new()
-		button.text = "READ"
+		if message["read"]:
+			button.text = "READ"
+		else:
+			button.text = "*READ*"
 		button.connect("pressed",self,"show_message",[message])
 		$ScrollContainer/Mails.add_child(button)
 
@@ -21,7 +24,10 @@ func update_messages():
 		$ScrollContainer/Mails.add_child(title_label)
 		
 		var button = Button.new()
-		button.text = "READ"
+		if message["read"]:
+			button.text = "READ"
+		else:
+			button.text = "*READ*"
 		button.connect("pressed",self,"show_message",[message])
 		$ScrollContainer/Mails.add_child(button)
 

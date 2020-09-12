@@ -62,7 +62,9 @@ func reset():
 	calendar = []
 	table = []
 	current_transfers = []
+	TransferUtil.current_transfers = []
 	messages = []
+	EmailUtil.messages = []
 	
 	year = 2020
 	month = 1
@@ -131,11 +133,15 @@ func make_transfer(transfer):
 		if team["name"] == transfer["player"]["team"]:
 			team["players"]["subs"].erase(transfer["player"])
 			team["players"]["active"].erase(transfer["player"])
+			team["budget"] += transfer["money"]
 	
 	#add player to team
 	for team in teams:
 		if team["name"] == DataSaver.selected_team:
 			team["players"]["subs"].append(transfer["player"])
+			team["budget"] -= transfer["money"]
+			#handle also special contracts with bonus on future sell etc.
+			
 	
 func change_player(position,player):
 	print("change player")
@@ -179,3 +185,9 @@ func get_selected_team():
 	for team in teams:
 		if team["name"] == selected_team:
 			return team
+
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		save_all_data()
+		get_tree().quit() # default behavior

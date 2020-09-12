@@ -27,6 +27,13 @@ margin_right = 677.345
 margin_bottom = 192.095
 text = "Hans Viustel"
 
+[node name="Budget" type="Label" parent="."]
+margin_left = 221.345
+margin_top = 168.0
+margin_right = 677.345
+margin_bottom = 280.0
+text = "400.000 $"
+
 [node name="TeamName" type="Label" parent="."]
 margin_left = 960.0
 margin_top = 80.095

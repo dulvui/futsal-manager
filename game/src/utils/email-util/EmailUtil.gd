@@ -29,7 +29,7 @@ func message(new_message):
 			if new_message[0]["success"]:
 				ts_message = {
 					"title" : "TRANSFER",
-					"message" : "You bought for" + new_message[0]["money"] + " " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
+					"message" : "You bought for" + str(new_message[0]["money"]) + " " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
 					"days" : 7,
 					"type" : "TRANSFER",
 					"read" : false
@@ -37,7 +37,7 @@ func message(new_message):
 			else:
 				ts_message = {
 					"title" : "TRANSFER",
-					"message" : "You couldnt buy for" + new_message[0]["money"] + " " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
+					"message" : "You couldnt buy for" + str(new_message[0]["money"]) + " " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
 					"days" : 7,
 					"type" : "TRANSFER",
 					"read" : false
@@ -45,7 +45,7 @@ func message(new_message):
 		else:
 			ts_message = {
 			"title" : "TRANSFER",
-			"message" : "You made an " + new_message[0]["money"] + " offer for " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
+			"message" : "You made an " + str(new_message[0]["money"]) + " offer for " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
 			"days" : 7,
 			"type" : "TRANSFER",
 			"read" : false
