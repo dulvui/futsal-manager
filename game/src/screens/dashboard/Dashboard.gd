@@ -1,10 +1,13 @@
 extends Control
 
+onready var team = DataSaver.get_selected_team()
+
 
 func _ready():
 	$ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	$TeamName.text = DataSaver.selected_team
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
+	
 	
 	$AllPlayersPopup/AllPlayerList.add_all_players()
 	$FormationPopUp/Formation/PlayerSelect/PlayerList.add_players()
@@ -14,6 +17,7 @@ func _ready():
 
 func _process(delta):
 	$Buttons/Email/Panel/MailCounter.text = str(EmailUtil.count_unread_messages())
+	$Budget.text = str(team["budget"])
 
 func _on_Menu_pressed():
 	get_tree().change_scene("res://src/screens/menu/Menu.tscn")
@@ -52,5 +56,5 @@ func _on_Table_pressed():
 
 func _on_AllPlayerList_select_player(player):
 	print("offer for " + player["surname"])
-	TransferUtil.make_offer(player,"420K")
+	TransferUtil.make_offer(player,4200)
 	$EmailPopup/Email.update_messages()
