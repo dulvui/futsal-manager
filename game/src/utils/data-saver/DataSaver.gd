@@ -136,15 +136,24 @@ func make_transfer(transfer):
 	print(transfer["player"])
 	for team in teams:
 		if team["name"] == transfer["player"]["team"]:
+			if team["players"]["active"].has(transfer["player"]):
+				team["players"]["active"].erase(transfer["player"])
+				team["players"]["active"].append(team["players"]["subs"].pop_front())
 			team["players"]["subs"].erase(transfer["player"])
-			team["players"]["active"].erase(transfer["player"])
 			team["budget"] += transfer["money"]
+			for player in transfer["exchange_players"]:
+				team["players"]["subs"].append(player)
 	
 	#add player to team
 	for team in teams:
 		if team["name"] == DataSaver.selected_team:
 			team["players"]["subs"].append(transfer["player"])
 			team["budget"] -= transfer["money"]
+			for player in transfer["exchange_players"]:
+				if team["players"]["active"].has(player):
+					team["players"]["active"].erase(player)
+					team["players"]["active"].append(team["players"]["subs"].pop_front())
+				team["players"]["subs"].erase(player)
 			#handle also special contracts with bonus on future sell etc.
 			
 	
