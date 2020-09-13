@@ -39,7 +39,7 @@ func _ready():
 	current_transfers = config.get_value("season","current_transfers",[])
 	
 	selected_team = config.get_value("selected_team", "data","")
-	teams = config.get_value("teams", "data",[])
+	teams = config.get_value("teams", "data",{})
 	
 	year = config.get_value("current_date","year",2020)
 	month = config.get_value("current_date","month",1)

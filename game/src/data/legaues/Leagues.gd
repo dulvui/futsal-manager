@@ -1,159 +1,26 @@
 extends Node
 
-
-var serie_a = {
-	"teams" : [
-		{
-			"id":1,
-			"name": "Centro",
-			"budget" : 10000,
-			"stadium" : {
-				"name" : "Estadio Central",
-				"capacity" : 200
-			},
-			"players" : {},
-			"prestige" : 12
-		},
-		{
-			"id":2,
-			"name": "Niquia",
-			"budget" : 50000,
-			"stadium" : {
-				"name" : "Cancha del Norte",
-				"capacity" : 1000
-			},
-			"players" : {},
-			"prestige" : 16
-		},
-		{
-			"id":3,
-			"name": "Robledo",
-			"budget" : 50000,
-			"stadium" : {
-				"name" : "San German Arena",
-				"capacity" : 1000
-			},
-			"players" : {},
-			"prestige" : 16
-		},
-		{
-			"id":4,
-			"name": "Suramericana",
-			"budget" : 50000,
-			"stadium" : {
-				"name" : "Arena del Sur",
-				"capacity" : 1000
-			},
-			"players" : {},
-			"prestige" : 16
-		},
-		{
-			"id":5,
-			"name": "Cisneros",
-			"budget" : 50000,
-			"stadium" : {
-				"name" : "Cancha Comunal Cisneros",
-				"capacity" : 1000
-			},
-			"players" : {},
-			"prestige" : 16
-		},
-		{
-			"id":6,
-			"name": "Floresta",
-			"budget" : 50000,
-			"stadium" : {
-				"name" : "Cancha Santa Lucia",
-				"capacity" : 1000
-			},
-			"players" : {},
-			"prestige" : 16
-		},
-		{
-			"id":7,
-			"name": "Envigado",
-			"budget" : 50000,
-			"stadium" : {
-				"name" : "Envigadio",
-				"capacity" : 1000
-			},
-			"players" : {},
-			"prestige" : 16
-		},
-		{
-			"id":8,
-			"name": "Bello",
-			"budget" : 50000,
-			"stadium" : {
-				"name" : "Estadio Bello",
-				"capacity" : 1000
-			},
-			"players" : {},
-			"prestige" : 16
-		},
-		{
-			"id":9,
-			"name": "San Javier",
-			"budget" : 50000,
-			"stadium" : {
-				"name" : "Comuna 13",
-				"capacity" : 400
-			},
-			"players" : {},
-			"prestige" : 10
-		},
-		{
-			"id":10,
-			"name": "El Poblado",
-			"budget" : 50000,
-			"stadium" : {
-				"name" : "Galizia Stadium",
-				"capacity" : 1000
-			},
-			"players" : {},
-			"prestige" : 16
-		}
-	]
-}
+var serie_a = {"teams" : []}
 
 func add_random_players():
-	var i = 0
-	var teams = []
-	for team in serie_a["teams"]:
-		var shirtnumber = 1
-		var players = Players.players.slice(i,i+20,1,true)
-		
-		for player in players:
-			player["team"] = team["name"]
-			player["nr"] = shirtnumber
-			player["has_ball"] = false
-			shirtnumber += 1
-		
-		i += 20
-		
-		team["players"]["active"] = []
-		
-		#look for correct positions and best players
-		for j in range(5):
-			team["players"]["active"].append(players.pop_back())
-		
-		team["players"]["subs"] = []
-		
-		for player in players:
-			team["players"]["subs"].append(player)
-		
-		DataSaver.table.append({
-			"name" : team["name"],
-			"points" : 0,
-			"games_played": 0,
-			"goals_made" : 0,
-			"goals_against" : 0,
-			"wins" : 0,
-			"draws" : 0,
-			"lost" : 0
-		})
-		
-		teams.append(team)	
+	var file = File.new()
+	file.open("res://assets/ita_serie_a.json", file.READ)
+	var json = file.get_as_text()
+	serie_a["teams"] = JSON.parse(json).result
+	file.close()
+	DataSaver.teams = serie_a.duplicate(true)
 	
-	DataSaver.teams = teams.duplicate(true)
+	for team in DataSaver.teams["teams"]: 
+		DataSaver.table.append({
+						   "name" : team["name"],
+						   "points" : 0,
+						   "games_played": 0,
+						   "goals_made" : 0,
+						   "goals_against" : 0,
+						   "wins" : 0,
+						   "draws" : 0,
+						   "lost" : 0
+				   })
+
+	
 	DataSaver.save_all_data()
