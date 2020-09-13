@@ -52,10 +52,30 @@ func message(new_message):
 		}
 		messages.append(ts_message)
 	# contract
-	else:
+	elif new_message[1] == "CONTRACT_OFFER":
 		var ts_message = {
 			"title" : "CONTRACT",
 			"message" : "You need to make an contract offer for " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
+			"days" : 7,
+			"type" : new_message[1],
+			"read" : false,
+			"content" : new_message[0]
+		}
+		messages.append(ts_message)
+	elif new_message[1] == "CONTRACT_OFFER_MADE":
+		var ts_message = {
+			"title" : "CONTRACT",
+			"message" : "You made an contract offer for " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
+			"days" : 7,
+			"type" : new_message[1],
+			"read" : false,
+			"content" : new_message[0]
+		}
+		messages.append(ts_message)
+	elif new_message[1] == "CONTRACT_SIGNED":
+		var ts_message = {
+			"title" : "new player",
+			"message" : "The player acceptet " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"] + " the contract",
 			"days" : 7,
 			"type" : new_message[1],
 			"read" : false,
