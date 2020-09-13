@@ -1,8 +1,7 @@
 extends Node
 
-var current_contract_offers = []
-
 var def_contract = {
+	"player" : {},
 	"price" : 0,
 	"money/week" : 0,
 	"start_date" : "01/01/2020",
@@ -16,12 +15,6 @@ var def_contract = {
 		"inter_cup_title" : 0,
 	},
 	"buy_clause" : 0,
+	"days" : (randi()%5)+1,
 	"is_on_loan" : false # if player is on loan, the other squad gets copy of contract with percentage of income
 }
-
-
-func _ready():
-	current_contract_offers = DataSaver.current_contract_offers
-
-func make_contract_offer(player,contract):
-	pass
