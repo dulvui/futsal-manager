@@ -24,7 +24,7 @@ func update_day():
 						transfer["success"] = true
 		#				if transfer["success"]:
 		#					DataSaver.make_transfer(transfer)
-						emit_signal("transfer_mail",[transfer,"CONTRACT"])
+						emit_signal("transfer_mail",[transfer,"CONTRACT_OFFER"])
 		#				current_transfers.erase(transfer)
 						transfer["days"] = (randi()%5)+1
 						transfer["state"] = "MAKE_CONTRACT_OFFER"

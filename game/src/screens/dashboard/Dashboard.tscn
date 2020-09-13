@@ -54,6 +54,7 @@ __meta__ = {
 }
 
 [node name="Calendar" parent="." instance=ExtResource( 3 )]
+visible = false
 margin_left = 656.0
 margin_top = 232.0
 margin_right = -168.0
@@ -85,10 +86,16 @@ margin_right = 464.0
 margin_bottom = 184.0
 text = "TABLE"
 
-[node name="Email" type="Button" parent="Buttons"]
+[node name="Calendar" type="Button" parent="Buttons"]
 margin_top = 192.0
 margin_right = 464.0
 margin_bottom = 248.0
+text = "TABLE"
+
+[node name="Email" type="Button" parent="Buttons"]
+margin_top = 256.0
+margin_right = 464.0
+margin_bottom = 312.0
 text = "EMAIL"
 
 [node name="Panel" type="Panel" parent="Buttons/Email"]
@@ -111,15 +118,15 @@ __meta__ = {
 }
 
 [node name="SearchPlayer" type="Button" parent="Buttons"]
-margin_top = 256.0
-margin_right = 464.0
-margin_bottom = 312.0
-text = "SEARCH_PLAYER"
-
-[node name="Menu" type="Button" parent="Buttons"]
 margin_top = 320.0
 margin_right = 464.0
 margin_bottom = 376.0
+text = "SEARCH_PLAYER"
+
+[node name="Menu" type="Button" parent="Buttons"]
+margin_top = 384.0
+margin_right = 464.0
+margin_bottom = 440.0
 text = "MENU"
 
 [node name="AllPlayersPopup" type="Popup" parent="."]
@@ -153,22 +160,11 @@ margin_right = 50.655
 margin_bottom = 121.822
 rect_scale = Vector2( 0.7, 0.7 )
 
-[node name="EmailPopup" type="Popup" parent="."]
-margin_right = 1609.0
-margin_bottom = 778.0
-
-[node name="Panel" type="Panel" parent="EmailPopup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Email" parent="EmailPopup" instance=ExtResource( 6 )]
-margin_left = 200.0
-margin_top = 168.0
-margin_right = -129.0
-margin_bottom = -49.9996
+[node name="Email" parent="." instance=ExtResource( 6 )]
+margin_left = 672.0
+margin_top = 196.0
+margin_right = -144.0
+margin_bottom = -246.0
 
 [node name="TablePopup" type="Popup" parent="."]
 margin_right = 1200.0
@@ -208,12 +204,14 @@ anchor_bottom = 1.0
 [connection signal="pressed" from="Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Buttons/Training" to="." method="_on_Training_pressed"]
 [connection signal="pressed" from="Buttons/Table" to="." method="_on_Table_pressed"]
+[connection signal="pressed" from="Buttons/Calendar" to="." method="_on_Calendar_pressed"]
 [connection signal="pressed" from="Buttons/Email" to="." method="_on_Email_pressed"]
 [connection signal="pressed" from="Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
 [connection signal="pressed" from="Buttons/Menu" to="." method="_on_Menu_pressed"]
 [connection signal="select_player" from="AllPlayersPopup/AllPlayerList" to="." method="_on_AllPlayerList_select_player"]
-[connection signal="offer_contract" from="EmailPopup/Email" to="." method="_on_Email_offer_contract"]
+[connection signal="offer_contract" from="Email" to="." method="_on_Email_offer_contract"]
 [connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
 [connection signal="confirm" from="PlayerOfferPopup/PlayerOffer" to="." method="_on_PlayerOffer_confirm"]
 [connection signal="hide" from="PlayerOfferPopup/PlayerOffer" to="." method="_on_PlayerOffer_hide"]
 [connection signal="cancel" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_cancel"]
+[connection signal="confirm" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_confirm"]

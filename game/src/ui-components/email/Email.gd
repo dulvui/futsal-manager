@@ -36,16 +36,22 @@ func update_messages():
 
 func show_message(message):
 	message["read"] = true
+	$DetailPopUp/Action.hide()
+	$DetailPopUp/Title.text = message["title"]
+	$DetailPopUp.popup_centered()
 	
 	
-	if message["type"] == "CONTRACT":
+	if message["type"] == "CONTRACT_OFFER":
 		$DetailPopUp/Action.text = tr("OFFER_CONTRACT")
 		$DetailPopUp/Action.connect("pressed",self,"show_offer_contract",[message["content"]])
 		$DetailPopUp/Message.text = message["message"]
-	elif message["type"] == "CONTRACT_SIGNED":
-		$DetailPopUp/Message.text = "you sigfned the player"
-	$DetailPopUp/Title.text = message["title"]
-	$DetailPopUp.popup_centered()
+		$DetailPopUp/Action.show()
+	elif message["type"] == "CONTRACT_OFFER_MADE":
+		$DetailPopUp/Message.text = "you made a conttract offer the player"
+	#transfer
+	else:
+		$DetailPopUp/Message.text = message["message"]
+
 
 func show_offer_contract(content):
 	emit_signal("offer_contract",content)

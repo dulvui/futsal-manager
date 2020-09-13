@@ -39,7 +39,7 @@ func _on_Continue_pressed():
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
 	EmailUtil.update()
-	$EmailPopup/Email.update_messages()
+	$Email.update_messages()
 	$Date.text = CalendarUtil.get_date()
 	$FormationPopUp/Formation/PlayerSelect/PlayerList.add_players()
 	DataSaver.save_all_data()
@@ -47,7 +47,8 @@ func _on_Continue_pressed():
 		get_tree().change_scene("res://src/screens/match/Match.tscn")
 
 func _on_Email_pressed():
-	$EmailPopup.popup_centered()
+	$Calendar.hide()
+	$Email.show()
 
 
 func _on_Table_pressed():
@@ -68,7 +69,7 @@ func _on_PlayerOffer_hide():
 
 
 func _on_PlayerOffer_confirm():
-	$EmailPopup/Email.update_messages()
+	$Email.update_messages()
 	$PlayerOfferPopup.hide()
 
 
@@ -80,4 +81,14 @@ func _on_Email_offer_contract(content):
 
 
 func _on_ContractOffer_cancel():
+	$ContractPopup.hide()
+
+
+func _on_Calendar_pressed():
+	$Email.hide()
+	$Calendar.show()
+
+
+func _on_ContractOffer_confirm():
+	$Email.update_messages()
 	$ContractPopup.hide()

@@ -1,6 +1,7 @@
 extends Control
 
 signal cancel
+signal confirm
 
 var income = 0
 var years = 1
@@ -78,14 +79,14 @@ func _on_Confirm_pressed():
 		#send loan contracts with other signal or type
 		"is_on_loan" : false # if player is on loan, the other squad gets copy of contract with percentage of income
 	}
-	print(def_contract)
 	for transferz in TransferUtil.current_transfers:
 		if transfer == transferz:
 			transferz["contract"] = def_contract
 			transferz["days"] = 3
 			transferz["state"] = "CONTRACT_PENDING"
 			print("CAZOOOOOOOO")
-	emit_signal("cancel")
+			EmailUtil.message([transfer,"CONTRACT_OFFER_MADE"])
+	emit_signal("confirm")
 #	ContractUtil.current_contract_offers.append(def_contract)
 
 
