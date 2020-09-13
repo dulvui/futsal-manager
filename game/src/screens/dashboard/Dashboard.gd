@@ -70,3 +70,14 @@ func _on_PlayerOffer_hide():
 func _on_PlayerOffer_confirm():
 	$EmailPopup/Email.update_messages()
 	$PlayerOfferPopup.hide()
+
+
+func _on_Email_offer_contract(content):
+	print("contract content")
+	print(content)
+	$ContractPopup/ContractOffer.set_up(content)
+	$ContractPopup.popup_centered()
+
+
+func _on_ContractOffer_cancel():
+	$ContractPopup.hide()

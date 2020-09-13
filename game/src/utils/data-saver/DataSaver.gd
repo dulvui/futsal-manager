@@ -17,7 +17,6 @@ var teams
 var table
 
 var current_transfers
-var current_contract_offers
 
 var messages
 
@@ -38,7 +37,6 @@ func _ready():
 	calendar = config.get_value("season","calendar",[])
 	table = config.get_value("season","table",[])
 	current_transfers = config.get_value("season","current_transfers",[])
-	current_contract_offers = config.get_value("season","current_contract_offers",[])
 	
 	selected_team = config.get_value("selected_team", "data","")
 	teams = config.get_value("teams", "data",[])
@@ -67,8 +65,6 @@ func reset():
 	TransferUtil.current_transfers = []
 	messages = []
 	EmailUtil.messages = []
-	current_contract_offers = []
-	ContractUtil.current_contract_offers = []
 	
 	year = 2020
 	month = 1
@@ -87,7 +83,6 @@ func save_all_data():
 	config.set_value("season","calendar",calendar)
 	config.set_value("season","table",table)
 	config.set_value("season","current_transfers",TransferUtil.current_transfers)
-	config.set_value("season","current_contract_offers",ContractUtil.current_contract_offers)
 	config.set_value("mail","messages",EmailUtil.messages)
 	config.save("user://settings.cfg")
 	print("all data saved")

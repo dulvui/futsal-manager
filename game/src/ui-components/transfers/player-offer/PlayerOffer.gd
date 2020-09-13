@@ -111,7 +111,9 @@ func _on_Confirm_pressed():
 		"player" : player,
 		"money" : amount,
 		"exchange_players" : selected_players,
-		"days" : (randi()%5)+1
+		"days" : (randi()%5)+1,
+		"contract" : {},
+		"state" : "TEAM_PENDING" #0 is offer, 1 is contract pending, 2 is contract result
 	}
 	TransferUtil.make_offer(transfer)
 	emit_signal("confirm")

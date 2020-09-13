@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/screens/dashboard/Dashboard.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/ui-components/email/Email.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/ui-components/table/Table.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/ui-components/transfers/player-offer/PlayerOffer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/ui-components/transfers/contract-offer/ContractOffer.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.905882, 0.121569, 0.121569, 1 )
@@ -198,6 +199,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="PlayerOffer" parent="PlayerOfferPopup" instance=ExtResource( 8 )]
+
+[node name="ContractPopup" type="Popup" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ContractOffer" parent="ContractPopup" instance=ExtResource( 9 )]
 [connection signal="pressed" from="Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Buttons/Training" to="." method="_on_Training_pressed"]
 [connection signal="pressed" from="Buttons/Table" to="." method="_on_Table_pressed"]
@@ -205,6 +212,8 @@ anchor_bottom = 1.0
 [connection signal="pressed" from="Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
 [connection signal="pressed" from="Buttons/Menu" to="." method="_on_Menu_pressed"]
 [connection signal="select_player" from="AllPlayersPopup/AllPlayerList" to="." method="_on_AllPlayerList_select_player"]
+[connection signal="offer_contract" from="EmailPopup/Email" to="." method="_on_Email_offer_contract"]
 [connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
 [connection signal="confirm" from="PlayerOfferPopup/PlayerOffer" to="." method="_on_PlayerOffer_confirm"]
 [connection signal="hide" from="PlayerOfferPopup/PlayerOffer" to="." method="_on_PlayerOffer_hide"]
+[connection signal="cancel" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_cancel"]

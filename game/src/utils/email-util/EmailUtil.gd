@@ -10,7 +10,7 @@ func _ready():
 func update():
 	for message in messages:
 		message["days"] -= 1
-		if message["days"] < 1:
+		if message["days"] < 1 and message["read"]:
 			messages.erase(message)
 			
 func count_unread_messages():
@@ -49,6 +49,17 @@ func message(new_message):
 			"days" : 7,
 			"type" : "TRANSFER",
 			"read" : false
+		}
+		messages.append(ts_message)
+	# contract
+	else:
+		var ts_message = {
+			"title" : "CONTRACT",
+			"message" : "You need to make an contract offer for " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
+			"days" : 7,
+			"type" : new_message[1],
+			"read" : false,
+			"content" : new_message[0]
 		}
 		messages.append(ts_message)
 	
