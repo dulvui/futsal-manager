@@ -24,7 +24,6 @@ config/icon="res://icon.png"
 
 DataSaver="*res://src/utils/data-saver/DataSaver.gd"
 CalendarUtil="*res://src/utils/calendar-util/CalendarUtil.gd"
-Players="*res://src/data/player-generator/Players.gd"
 Leagues="*res://src/data/legaues/Leagues.gd"
 MatchMaker="*res://src/utils/match-maker/MatchMaker.gd"
 TransferUtil="*res://src/utils/transfer-util/TransferUtil.gd"

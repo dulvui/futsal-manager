@@ -15,61 +15,62 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/hseparation = 40
+custom_constants/vseparation = 0
+custom_constants/hseparation = 64
 columns = 9
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Pos" type="Label" parent="GridContainer"]
-margin_right = 66.0
-margin_bottom = 43.0
+margin_right = 86.0
+margin_bottom = 56.0
 text = "POS"
 
 [node name="Club" type="Label" parent="GridContainer"]
-margin_left = 106.0
-margin_right = 192.0
-margin_bottom = 43.0
+margin_left = 150.0
+margin_right = 263.0
+margin_bottom = 56.0
 text = "CLUB"
 
 [node name="GP" type="Label" parent="GridContainer"]
-margin_left = 232.0
-margin_right = 278.0
-margin_bottom = 43.0
+margin_left = 327.0
+margin_right = 387.0
+margin_bottom = 56.0
 text = "GP"
 
 [node name="W" type="Label" parent="GridContainer"]
-margin_left = 318.0
-margin_right = 346.0
-margin_bottom = 43.0
+margin_left = 451.0
+margin_right = 488.0
+margin_bottom = 56.0
 text = "W"
 
 [node name="D" type="Label" parent="GridContainer"]
-margin_left = 386.0
-margin_right = 409.0
-margin_bottom = 43.0
+margin_left = 552.0
+margin_right = 582.0
+margin_bottom = 56.0
 text = "D"
 
 [node name="L" type="Label" parent="GridContainer"]
-margin_left = 449.0
-margin_right = 468.0
-margin_bottom = 43.0
+margin_left = 646.0
+margin_right = 671.0
+margin_bottom = 56.0
 text = "L"
 
 [node name="GM" type="Label" parent="GridContainer"]
-margin_left = 508.0
-margin_right = 560.0
-margin_bottom = 43.0
+margin_left = 735.0
+margin_right = 804.0
+margin_bottom = 56.0
 text = "GM"
 
 [node name="GA" type="Label" parent="GridContainer"]
-margin_left = 600.0
-margin_right = 647.0
-margin_bottom = 43.0
+margin_left = 868.0
+margin_right = 930.0
+margin_bottom = 56.0
 text = "GA"
 
 [node name="Pts" type="Label" parent="GridContainer"]
-margin_left = 687.0
-margin_right = 747.0
-margin_bottom = 43.0
+margin_left = 994.0
+margin_right = 1072.0
+margin_bottom = 56.0
 text = "PTS"

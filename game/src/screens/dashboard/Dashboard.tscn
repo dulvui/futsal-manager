@@ -90,7 +90,7 @@ text = "TABLE"
 margin_top = 192.0
 margin_right = 464.0
 margin_bottom = 248.0
-text = "TABLE"
+text = "CALENDAR"
 
 [node name="Email" type="Button" parent="Buttons"]
 margin_top = 256.0
