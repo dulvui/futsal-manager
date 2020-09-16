@@ -1,9 +1,25 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=2]
 [ext_resource path="res://src/screens/match/Match.gd" type="Script" id=3]
 [ext_resource path="res://src/utils/match-simulator/MatchSimulator.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui-components/formation/Formation.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Goal"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Goal:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.2, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 6, 6 ), Vector2( 12, 12 ), Vector2( 6, 6 ) ]
+}
 
 [node name="Match" type="Control"]
 anchor_right = 1.0
@@ -521,6 +537,24 @@ text = "SKIP"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Goal" type="Label" parent="."]
+visible = false
+margin_left = 1112.44
+margin_top = 550.921
+margin_right = 1234.44
+margin_bottom = 606.921
+rect_scale = Vector2( 6, 6 )
+rect_pivot_offset = Vector2( 61, 28 )
+text = "GOAL"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Goal = SubResource( 1 )
+[connection signal="away_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_away_goal"]
+[connection signal="home_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_home_goal"]
 [connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="HUD/Faster" to="." method="_on_Faster_pressed"]
 [connection signal="pressed" from="HUD/Slower" to="." method="_on_Slower_pressed"]

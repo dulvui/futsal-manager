@@ -9,6 +9,8 @@ var first_half = true
 
 var paused = false
 
+onready var animation_player = $AnimationPlayer
+
 var speed_factor = 2
 
 func _ready():
@@ -157,3 +159,25 @@ func _on_Formation_change():
 
 func _on_SKIP_pressed():
 	match_end()
+
+
+func _on_MatchSimulator_home_goal():
+	$Timer.paused = true
+	$TimerMatchSimulator.paused = true
+	$Goal.show()
+	animation_player.play("Goal")
+	yield(animation_player,"animation_finished")
+	$Goal.hide()
+	$Timer.paused = false
+	$TimerMatchSimulator.paused = false
+
+
+func _on_MatchSimulator_away_goal():
+	$Timer.paused = true
+	$TimerMatchSimulator.paused = true
+	$Goal.show()
+	animation_player.play("Goal")
+	yield(animation_player,"animation_finished")
+	$Goal.hide()
+	$Timer.paused = false
+	$TimerMatchSimulator.paused = false
