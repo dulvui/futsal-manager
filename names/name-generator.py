@@ -47,7 +47,7 @@ def get_physical(age, nationality, prestige, pos):
     elif age < 18:
         age_factor = 16
 
-    pace_factor = min(random.randint(6, age_factor), max(prestige, 6))
+    pace_factor = min(random.randint(9, age_factor), max(prestige, 9))
     physical_factor = min(random.randint(6, age_factor), max(prestige, 6))
 
     physical = {
@@ -197,7 +197,7 @@ def create_player(nationality,position,nr, team):
 		"history": {},
 		"mental": get_mental(2020-birth_date.year, nationality, prestige, position),
 		"technical": get_technical(2020-birth_date.year, nationality, prestige, position),
-		"physycal": get_physical(2020-birth_date.year, nationality, prestige, position),
+		"fisical": get_physical(2020-birth_date.year, nationality, prestige, position),
 		"contract": {},
 		"nr" : nr
 	}
@@ -232,7 +232,8 @@ ita_serie_a = [
 		},
 		"history": {
 			"years" : []
-		}
+		},
+		"formation" : "2-2"
 	},
 	{
 		"name": "C5 Napoli",
@@ -247,6 +248,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Futsal Roma",
@@ -261,6 +263,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Milano",
@@ -275,6 +278,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Torino",
@@ -289,6 +293,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Genova",
@@ -303,6 +308,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Bologna",
@@ -317,6 +323,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Firenze",
@@ -331,6 +338,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Verona",
@@ -345,6 +353,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Brescia",
@@ -359,6 +368,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Bari",
@@ -373,6 +383,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Parma",
@@ -387,6 +398,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 	{
 		"name": "Cagliari",
@@ -401,6 +413,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+			"formation" : "2-2"
 	},
 	{
 		"name": "Lazio",
@@ -415,6 +428,7 @@ ita_serie_a = [
 				"name" : "Estadio Central",
 				"capacity" : 5000
 			},
+		"formation" : "2-2"
 	},
 ]
 

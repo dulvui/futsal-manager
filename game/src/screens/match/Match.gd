@@ -24,8 +24,7 @@ func _ready():
 	$HUD/TopBar/Home.text = next_match["home"]
 	$HUD/TopBar/Away.text = next_match["away"]
 	
-	$MatchSimulator.set_up(home_team,away_team)
-	$Field.set_numbers(home_team["players"]["active"],away_team["players"]["active"])
+	$MatchSimulator.set_up(home_team,away_team,true)
 	
 	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
 	
@@ -53,7 +52,6 @@ func _process(delta):
 	
 
 func _on_Timer_timeout():
-	$Field.random_pass()
 	$MatchSimulator.update_time()
 	
 	if $MatchSimulator.time == 1200:
@@ -67,12 +65,12 @@ func _on_TimerMatchSimulator_timeout():
 	
 
 func _on_Field_pressed():
-	$Field.show()
+	$MatchSimulator.show()
 	$Stats.hide()
 
 
 func _on_Stats_pressed():
-	$Field.hide()
+	$MatchSimulator.hide()
 	$Stats.show()
 
 
@@ -154,9 +152,7 @@ func _on_Formation_change():
 				away_team = team
 	# need to chaneg players in simulator too
 	$MatchSimulator.change_players(home_team,away_team)
-	
 	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
-	$Field.set_numbers(home_team["players"]["active"],away_team["players"]["active"])
 
 
 func _on_SKIP_pressed():

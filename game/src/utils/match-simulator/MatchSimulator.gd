@@ -5,6 +5,8 @@ signal away_goal
 signal home_pass
 signal away_pass
 
+const Player = preload("res://src/screens/match/field/player/Player.tscn")
+
 var home_team = {}
 var away_team = {}
 
@@ -55,48 +57,82 @@ var time = 0.0
 
 var home_possess_counter = 0.0
 
+var formation_pos_mapping = {
+	"2-2" : [3,7,9,19,17],
+	"1-2-1" : [3,8,12,14,18],
+	"1-1-2" : [3,8,13,19,17],
+	"2-1-1" : [3,7,9,13,18],
+	"4-0" : [3,7,9,15,18],
+	"3-1" : [3,8,7,9,18],
+	"1-3" : [3,8,17,19,18],
+}
 
 var home_has_ball
 
-func set_up(home,away):
-	for player in home["players"]["active"]:
+func set_up(home,away, match_started):
+	for i in range(home["players"]["active"].size()):
+		var player = home["players"]["active"][i]
 		player["has_ball"]  = false
+		var real_player = Player.instance()
+		real_player.set_up(player,get_node("HomeFieldSpots/FieldSpot" + str(formation_pos_mapping[home["formation"]][i])).global_position,Color.red)
+		add_child(real_player)
+		player["real"] = real_player
 
-	for player in away["players"]["active"]:
+	for i in range(away["players"]["active"].size()):
+		var player = away["players"]["active"][i]
 		player["has_ball"]  = false
+		var real_player = Player.instance()
+		real_player.set_up(player,get_node("AwayFieldSpots/FieldSpot" + str(formation_pos_mapping[away["formation"]][i])).global_position,Color.blue)
+		add_child(real_player)
+		player["real"] = real_player
 
 	home_team = home.duplicate(true)
 	away_team = away.duplicate(true)
 
-	home_has_ball = randi()%2 == 0
-	if home_has_ball:
-		home_team["players"]["active"][4]["has_ball"] = true
-	else:
-		away_team["players"]["active"][4]["has_ball"] = true
+	if match_started:
+		home_has_ball = randi()%2 == 0
+		if home_has_ball:
+			home_team["players"]["active"][4]["has_ball"] = true
+		else:
+			away_team["players"]["active"][4]["has_ball"] = true
 
 func change_players(new_home_team,new_away_team):
 	home_team = new_home_team.duplicate(true)
 	away_team = new_away_team.duplicate(true)
 	
-	for player in home_team["players"]["active"]:
+	for i in range(home_team["players"]["active"].size()):
+		var player = home_team["players"]["active"][i]
 		player["has_ball"]  = false
+		var real_player = Player.instance()
+		real_player.set_up(player,get_node("HomeFieldSpots/FieldSpot" + str(formation_pos_mapping[home_team["formation"]][i])).global_position,Color.red)
+		add_child(real_player)
+		player["real"] = real_player
 
-	for player in away_team["players"]["active"]:
+	for i in range(away_team["players"]["active"].size()):
+		var player = away_team["players"]["active"][i]
 		player["has_ball"]  = false
+		var real_player = Player.instance()
+		real_player.set_up(player,get_node("AwayFieldSpots/FieldSpot" + str(formation_pos_mapping[away_team["formation"]][i])).global_position,Color.blue)
+		add_child(real_player)
+		player["real"] = real_player
 	
 	
-	#make better and look who has ball after interuption
+	#make better and look who has ball after interruption
 	home_has_ball = randi()%2 == 0
 	if home_has_ball:
 		home_team["players"]["active"][4]["has_ball"] = true
 	else:
 		away_team["players"]["active"][4]["has_ball"] = true
+		
+	
 			
 			
 func update_time():
 	time += 1
 	if home_has_ball:
 		home_possess_counter += 1
+		
+#	$Field.random_pass()
 
 	home_stats["possession"] = (home_possess_counter / time) * 100
 	away_stats["possession"] = 100 - home_stats["possession"]
@@ -146,12 +182,43 @@ func _make_offensive_decision(player,pos):
 				print(" and waits")
 				_wait(player)
 #
-#	else:
-#		_make_defensive_decision(player,pos) # or wait, depending on workrate, teamwork, defensive/offensive movement
+	else:
+		print(player["surname"])
+		var decision = _what_offensive_decision_no_ball(player,pos) # make it affected by tactic, formation and in which sector player is
+		match decision:
+			"MOVE":
+				print(" moves")
+				_move_with_ball(player)
+			"WAIT":
+				print(" waits")
+				_wait(player)
 
 func _what_offensive_decision(player,pos):
 	var decision
 	var factor = randi()%100
+	
+	# look around: check if goal can be scored,
+	# check if player is in good pass position
+	# else move, dribble or wait depending on mentality of team
+	# move towards best free position nearest to goal until next iteration
+	
+	#look around: get position of other players and value:nearest_d_distance + goal_distance
+	# value gets tollerance by vision stats of player, so if 20 no tollerance, 0 full tollerance
+	
+	# pass ball: pass to positon of player, if no defender intercepts, pass goes trough
+	
+	# intercept passes: move towards player or ball depending on team mentality
+	# player has area that detects ball, if intercepts player gets possesion,
+	# else ball can go trough player, like a tunnel ;)
+	
+	#player receives pass, if ball comes into player area, he stops the ball,
+	# depending on player stats of first touch
+	
+	#move: player accelaerates and gets max velocity depending on stats
+	# moves from one position to next from iteration to interation
+	# calculate best position to move depending on mentality stats of player
+	
+	
 	
 	match pos:
 		0:
@@ -181,11 +248,27 @@ func _what_offensive_decision(player,pos):
 				decision = "SHOOT"
 	return decision
 	
-		
+
+
+func _what_offensive_decision_no_ball(player,pos):
+	pass
+	
 func _make_defensive_decision(player,pos):
+	
+	# depending on team mentality the player marks in zone or the player
+	# with stats of player, so attacker that has good def stats also marks good
+	# so the better the stats the better postion the player gets itself
+	# to intercept the ball
+	
+	# player marks nearest player, depending on vision stats
+	# so players with bad vision and defensive movement,
+	# could mark the same player until one sees the error(how ?)
+	
 	_move(player)
 
 func _move(player):
+	# players move freely around, if corner etc move to team tactic position
+	# player calls "prima" o "seconda" with visual emoji too if used
 	pass
 	
 func _move_with_ball(player):
@@ -218,11 +301,13 @@ func _shoot(player,position):
 			home_stats["goals"] += 1
 			home_has_ball = false
 			away_team["players"]["active"][4]["has_ball"] = true
+			$Ball.move_to($AwayGoal/ShootSpotCenter.global_position)
 		else:
 			emit_signal("away_goal")
 			away_stats["goals"] += 1
 			home_has_ball = true
 			home_team["players"]["active"][4]["has_ball"] = true
+			$Ball.move_to($HomeGoal/ShootSpotCenter.global_position)
 	else:
 		print("Interception")
 		if home_has_ball:
@@ -290,9 +375,11 @@ func _pass_to(player,position):
 		if home_has_ball:
 			home_team["players"]["active"][position]["has_ball"] = true
 			home_stats["pass_success"] += 1
+			$Ball.move_to(home_team["players"]["active"][position]["real"].ball_pos)
 		else:
 			away_team["players"]["active"][position]["has_ball"] = true
 			away_stats["pass_success"] += 1
+			$Ball.move_to(away_team["players"]["active"][position]["real"].ball_pos)
 	else:
 		print("INTERCEPT")
 		player["has_ball"] = false
@@ -336,3 +423,11 @@ func _give_nearest_defender_ball(position):
 			4:
 				away_team["players"]["active"][1]["has_ball"] = true
 	
+
+
+func _on_GameField_body_exited(body):
+	# check if ball exited in corner or on side, then prepare corner or kickin
+	pass # Replace with function body.
+
+
+
