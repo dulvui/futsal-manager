@@ -70,24 +70,27 @@ var formation_pos_mapping = {
 var home_has_ball
 
 func set_up(home,away, match_started):
-	for i in range(home["players"]["active"].size()):
-		var player = home["players"]["active"][i]
-		player["has_ball"]  = false
-		var real_player = Player.instance()
-		real_player.set_up(player,get_node("HomeFieldSpots/FieldSpot" + str(formation_pos_mapping[home["formation"]][i])).global_position,Color.red)
-		add_child(real_player)
-		player["real"] = real_player
-
-	for i in range(away["players"]["active"].size()):
-		var player = away["players"]["active"][i]
-		player["has_ball"]  = false
-		var real_player = Player.instance()
-		real_player.set_up(player,get_node("AwayFieldSpots/FieldSpot" + str(formation_pos_mapping[away["formation"]][i])).global_position,Color.blue)
-		add_child(real_player)
-		player["real"] = real_player
-
 	home_team = home.duplicate(true)
 	away_team = away.duplicate(true)
+	
+	
+	for i in range(home_team["players"]["active"].size()):
+		var player = home_team["players"]["active"][i]
+		player["has_ball"]  = false
+		var real_player = Player.instance()
+		real_player.set_up(player,get_node("HomeFieldSpots/FieldSpot" + str(formation_pos_mapping[home_team["formation"]][i])).global_position,Color.red)
+		add_child(real_player)
+		player["real"] = real_player
+
+	for i in range(away_team["players"]["active"].size()):
+		var player = away_team["players"]["active"][i]
+		player["has_ball"]  = false
+		var real_player = Player.instance()
+		real_player.set_up(player,get_node("AwayFieldSpots/FieldSpot" + str(formation_pos_mapping[away_team["formation"]][i])).global_position,Color.blue)
+		add_child(real_player)
+		player["real"] = real_player
+
+
 
 	if match_started:
 		home_has_ball = randi()%2 == 0

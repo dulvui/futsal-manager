@@ -2,9 +2,11 @@ extends Node2D
 
 signal goal
 
+var center_spot
+
 
 func _ready():
-	pass # Replace with function body.
+	center_spot = $ShootSpotCenter.global_position
 
 
 func _on_GoalDetector_body_entered(body):

@@ -33,10 +33,10 @@ export var shirt_color = Color.red
 var has_ball = false #probably detects when ball enters Ball detector
 
 func _ready():
-	if get_parent()["name"] == "HomePlayers":
-		opponent_players = get_parent().get_parent().get_node("AwayPlayers")
-	else:
-		opponent_players = get_parent().get_parent().get_node("HomePlayers")
+#	if get_parent()["name"] == "HomePlayers":
+#		opponent_players = get_parent().get_parent().get_node("AwayPlayers")
+#	else:
+#		opponent_players = get_parent().get_parent().get_node("HomePlayers")
 		
 	ball_pos = $BallPosition.global_position
 	print("ball_pos " + str(ball_pos))
