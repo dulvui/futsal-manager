@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/field.png" type="Texture" id=6]
 [ext_resource path="res://src/screens/match/field/goal/Goal.tscn" type="PackedScene" id=7]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 744.579, 422.423 )
 
 [node name="MatchSimulator" type="Control"]
@@ -44,7 +44,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameField"]
 position = Vector2( 962.85, 521.872 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="HomeGoal" parent="." instance=ExtResource( 7 )]
 position = Vector2( 161.774, 519.137 )
@@ -117,66 +117,65 @@ position = Vector2( 958.618, 676.368 )
 position = Vector2( 958.618, 823.368 )
 
 [node name="AwayFieldSpots" type="Node2D" parent="."]
-position = Vector2( 2037.24, 1046.52 )
-rotation = 3.14159
+position = Vector2( 651.309, 2.82922 )
 
 [node name="FieldSpot1" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 438.618, 215.368 )
-
-[node name="FieldSpot2" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 438.618, 373.368 )
-
-[node name="FieldSpot3" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 438.618, 524.368 )
-
-[node name="FieldSpot4" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 438.618, 676.368 )
-
-[node name="FieldSpot5" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 438.618, 823.368 )
-
-[node name="FieldSpot6" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 614.618, 215.368 )
-
-[node name="FieldSpot7" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 614.618, 373.368 )
-
-[node name="FieldSpot8" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 613.618, 524.368 )
-
-[node name="FieldSpot9" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 614.618, 676.368 )
-
-[node name="FieldSpot10" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 614.618, 823.368 )
-
-[node name="FieldSpot11" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 782.618, 215.368 )
-
-[node name="FieldSpot12" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 782.618, 373.368 )
-
-[node name="FieldSpot13" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 781.618, 524.368 )
-
-[node name="FieldSpot14" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 782.618, 676.368 )
-
-[node name="FieldSpot15" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 782.618, 823.368 )
-
-[node name="FieldSpot16" parent="AwayFieldSpots" instance=ExtResource( 2 )]
 position = Vector2( 958.618, 215.368 )
 
-[node name="FieldSpot17" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+[node name="FieldSpot2" parent="AwayFieldSpots" instance=ExtResource( 2 )]
 position = Vector2( 958.618, 373.368 )
 
-[node name="FieldSpot18" parent="AwayFieldSpots" instance=ExtResource( 2 )]
-position = Vector2( 957.618, 524.368 )
+[node name="FieldSpot3" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 958.618, 524.368 )
 
-[node name="FieldSpot19" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+[node name="FieldSpot4" parent="AwayFieldSpots" instance=ExtResource( 2 )]
 position = Vector2( 958.618, 676.368 )
 
-[node name="FieldSpot20" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+[node name="FieldSpot5" parent="AwayFieldSpots" instance=ExtResource( 2 )]
 position = Vector2( 958.618, 823.368 )
+
+[node name="FieldSpot6" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 782.618, 215.368 )
+
+[node name="FieldSpot7" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 782.618, 373.368 )
+
+[node name="FieldSpot8" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 781.618, 524.368 )
+
+[node name="FieldSpot9" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 782.618, 676.368 )
+
+[node name="FieldSpot10" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 782.618, 823.368 )
+
+[node name="FieldSpot11" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 590.618, 215.368 )
+
+[node name="FieldSpot12" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 590.618, 373.368 )
+
+[node name="FieldSpot13" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 589.618, 524.368 )
+
+[node name="FieldSpot14" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 590.618, 676.368 )
+
+[node name="FieldSpot15" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 590.618, 823.368 )
+
+[node name="FieldSpot16" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 430.618, 215.368 )
+
+[node name="FieldSpot17" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 430.618, 373.368 )
+
+[node name="FieldSpot18" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 429.618, 524.368 )
+
+[node name="FieldSpot19" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 430.618, 676.368 )
+
+[node name="FieldSpot20" parent="AwayFieldSpots" instance=ExtResource( 2 )]
+position = Vector2( 430.618, 823.368 )
 [connection signal="body_exited" from="GameField" to="." method="_on_GameField_body_exited"]
