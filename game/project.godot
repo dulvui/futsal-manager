@@ -50,6 +50,7 @@ theme/custom="res://theme.tres"
 2d_physics/layer_2="world"
 2d_physics/layer_3="lines"
 2d_physics/layer_4="player"
+2d_physics/layer_5="field-spots"
 
 [locale]
 

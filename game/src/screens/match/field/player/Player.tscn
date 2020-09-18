@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/screens/match/field/player/Player.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -46,3 +48,22 @@ shape = SubResource( 1 )
 
 [node name="BallPosition" type="Position2D" parent="."]
 position = Vector2( 50.6627, -0.894508 )
+
+[node name="FieldSpotDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FieldSpotDetector"]
+scale = Vector2( 20, 20 )
+shape = SubResource( 2 )
+
+[node name="Vision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+scale = Vector2( 20, 20 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="FieldSpotDetector" to="." method="_on_FieldSpotDetector_area_entered"]
+[connection signal="area_exited" from="FieldSpotDetector" to="." method="_on_FieldSpotDetector_area_exited"]
+[connection signal="body_entered" from="Vision" to="." method="_on_Vision_body_entered"]
