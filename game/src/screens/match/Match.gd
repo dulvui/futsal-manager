@@ -11,7 +11,7 @@ var paused = false
 
 onready var animation_player = $AnimationPlayer
 
-var speed_factor = 2
+var speed_factor = 0
 
 func _ready():
 	var next_match = CalendarUtil.get_next_match()
@@ -52,18 +52,14 @@ func _process(delta):
 	
 	$HUD/TopBar/SpeedFactor.text = str(speed_factor + 1) + " X"
 	
-
-func _on_Timer_timeout():
-	$MatchSimulator.update_time()
-	
-	if $MatchSimulator.time == 1200:
-		half_time()
-	elif $MatchSimulator.time == 2400:
-		match_end()
 	
 	
 func _on_TimerMatchSimulator_timeout():
 	$MatchSimulator.update()
+	if $MatchSimulator.time == 1200:
+		half_time()
+	elif $MatchSimulator.time == 2400:
+		match_end()
 	
 
 func _on_Field_pressed():
@@ -87,7 +83,6 @@ func _on_MatchSimulator_home_pass():
 
 func match_end():
 	$Dashboard.show()
-	$Timer.stop()
 	$TimerMatchSimulator.stop()
 	DataSaver.save_result(home_team["name"],$MatchSimulator.home_stats["goals"],away_team["name"],$MatchSimulator.away_stats["goals"])
 	
@@ -111,24 +106,21 @@ func _on_Dashboard_pressed():
 
 func _on_Faster_pressed():
 	if speed_factor < 4:
-		$Timer.wait_time /= 2
-		$TimerMatchSimulator.wait_time = $Timer.wait_time * 5
+		$TimerMatchSimulator.wait_time /= 2
 		speed_factor += 1
 
 
 func _on_Slower_pressed():
 	if speed_factor > 0:
-		$Timer.wait_time *= 2
-		$TimerMatchSimulator.wait_time = $Timer.wait_time * 5
+		$TimerMatchSimulator.wait_time *= 2
 		speed_factor -= 1
 	
 
 
 func _on_Pause_pressed():
-	$Timer.paused = not $Timer.paused
 	$TimerMatchSimulator.paused = not $TimerMatchSimulator.paused
 	
-	if $Timer.paused:
+	if $TimerMatchSimulator.paused:
 		$HUD/Pause.text = tr("CONTINUE")
 	else:
 		$FormationPopup.hide()
@@ -136,7 +128,6 @@ func _on_Pause_pressed():
 
 
 func _on_Formation_pressed():
-	$Timer.paused = true
 	$TimerMatchSimulator.paused = true
 	$HUD/Pause.text = tr("PAUSE")
 	$FormationPopup.popup_centered()
@@ -162,22 +153,22 @@ func _on_SKIP_pressed():
 
 
 func _on_MatchSimulator_home_goal():
-	$Timer.paused = true
 	$TimerMatchSimulator.paused = true
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
-	$Timer.paused = false
 	$TimerMatchSimulator.paused = false
 
 
 func _on_MatchSimulator_away_goal():
-	$Timer.paused = true
 	$TimerMatchSimulator.paused = true
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
-	$Timer.paused = false
 	$TimerMatchSimulator.paused = false
+
+
+func _on_StartTimer_timeout():
+	$TimerMatchSimulator.start()

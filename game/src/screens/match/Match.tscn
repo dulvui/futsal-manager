@@ -521,12 +521,7 @@ anchor_bottom = 1.0
 [node name="Formation" parent="FormationPopup" instance=ExtResource( 5 )]
 rect_scale = Vector2( 0.7, 0.7 )
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
-autostart = true
-
 [node name="TimerMatchSimulator" type="Timer" parent="."]
-autostart = true
 
 [node name="SKIP" type="Button" parent="."]
 margin_left = 142.705
@@ -553,6 +548,10 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Goal = SubResource( 1 )
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
 [connection signal="away_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_away_goal"]
 [connection signal="home_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_home_goal"]
 [connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
@@ -563,6 +562,6 @@ anims/Goal = SubResource( 1 )
 [connection signal="pressed" from="HUD/LeftButtons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Dashboard" to="." method="_on_Dashboard_pressed"]
 [connection signal="change" from="FormationPopup/Formation" to="." method="_on_Formation_change"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="TimerMatchSimulator" to="." method="_on_TimerMatchSimulator_timeout"]
 [connection signal="pressed" from="SKIP" to="." method="_on_SKIP_pressed"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

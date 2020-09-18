@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/utils/match-simulator/MatchSimulator.gd" type="Script" id=1]
 [ext_resource path="res://src/screens/match/field/field-spot/FieldSpot.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/screens/match/field/ball/Ball.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/field.png" type="Texture" id=6]
 [ext_resource path="res://src/screens/match/field/goal/Goal.tscn" type="PackedScene" id=7]
 
@@ -29,9 +28,6 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Ball" parent="." instance=ExtResource( 5 )]
-position = Vector2( 964.443, 523.962 )
 
 [node name="Walls" type="StaticBody2D" parent="."]
 visible = false
