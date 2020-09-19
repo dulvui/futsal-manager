@@ -6,7 +6,6 @@ signal home_pass
 signal away_pass
 
 const Player = preload("res://src/screens/match/field/player/Player.tscn")
-const Ball = preload("res://src/screens/match/field/ball/Ball.tscn")
 
 var home_team = {}
 var away_team = {}
@@ -70,33 +69,33 @@ var formation_pos_mapping = {
 
 var home_has_ball
 
-var ball
-
+var start_pos = Vector2(1000,1400)
 
 
 func _ready():
-	ball = Ball.instance()
-	ball.position = Vector2(500,500)
-	add_child(ball)
+	pass
 
 func set_up(home,away, match_started):
 	home_team = home.duplicate(true)
 	away_team = away.duplicate(true)
 	
-	
 	for i in range(home_team["players"]["active"].size()):
 		var player = home_team["players"]["active"][i]
 		player["has_ball"]  = false
+		player["field"]  = "home" # change on halftime
 		var real_player = Player.instance()
 		real_player.set_up(player,get_node("HomeFieldSpots/FieldSpot" + str(formation_pos_mapping[home_team["formation"]][i])).global_position,Color.red)
+		real_player.position = start_pos
 		add_child(real_player)
 		player["real"] = real_player
 
 	for i in range(away_team["players"]["active"].size()):
 		var player = away_team["players"]["active"][i]
 		player["has_ball"]  = false
+		player["field"]  = "away"
 		var real_player = Player.instance()
 		real_player.set_up(player,get_node("AwayFieldSpots/FieldSpot" + str(formation_pos_mapping[away_team["formation"]][i])).global_position,Color.blue)
+		real_player.position = start_pos
 		add_child(real_player)
 		player["real"] = real_player
 
@@ -114,16 +113,20 @@ func change_players(new_home_team,new_away_team):
 	for i in range(home_team["players"]["active"].size()):
 		var player = home_team["players"]["active"][i]
 		player["has_ball"]  = false
+		player["field"]  = "home"
 		var real_player = Player.instance()
 		real_player.set_up(player,get_node("HomeFieldSpots/FieldSpot" + str(formation_pos_mapping[home_team["formation"]][i])).global_position,Color.red)
+		real_player.position = start_pos
 		add_child(real_player)
 		player["real"] = real_player
 
 	for i in range(away_team["players"]["active"].size()):
 		var player = away_team["players"]["active"][i]
 		player["has_ball"]  = false
+		player["field"]  = "away"
 		var real_player = Player.instance()
 		real_player.set_up(player,get_node("AwayFieldSpots/FieldSpot" + str(formation_pos_mapping[away_team["formation"]][i])).global_position,Color.blue)
+		real_player.position = start_pos		
 		add_child(real_player)
 		player["real"] = real_player
 	
@@ -154,10 +157,10 @@ func update():
 
 func _on_GameField_body_exited(body):
 	print("ball exits field")
-	ball.queue_free()
-	ball = Ball.instance()
-	ball.position = Vector2(500,500)
-	add_child(ball)
+	print($Ball.position)
+	$Ball.position = Vector2(1000,500)
+	#check corner, kickin, or gk has ball
+	get_tree().call_group("player", "exit_state")
 
 
 

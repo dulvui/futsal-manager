@@ -72,7 +72,6 @@ func _on_Stats_pressed():
 	$Stats.show()
 
 
-
 func _on_MatchSimulator_away_pass(position):
 #	$Field.home_pass_to(position)
 	pass

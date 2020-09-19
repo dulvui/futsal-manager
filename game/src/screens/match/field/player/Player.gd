@@ -3,13 +3,14 @@ extends KinematicBody2D
 export (String, "G", "D", "WL", "WR", "P") var pos = "G"
 
 var current_destination
-
-var player_states = ["MOVING","WAITING","SHOOTING"]
-
+enum player_states {MOVING,WAITING,SHOOTING,KICK_OFF,GK,
+						KICK_IN,CORNER,PENALTY,FREE_KICK}
+var current_state
 
 var visible_field_spots = []
 
-var ball_pos
+var visible_team_players = []
+var visible_opponent_players = []
 
 var stats = {
 	"goals" : 0,
@@ -29,24 +30,39 @@ var stats = {
 var player
 var surname = ""
 
-onready var ball = get_parent().ball
-var opponent_players
+onready var ball = get_parent().get_node("Ball")
 
 export var shirt_number = "1"
 export var shirt_color = Color.red
 
+var ball_pos
+
 var has_ball = false #probably detects when ball enters Ball detector
 
-func _ready():	
+var looking = false
+
+func _ready():
 	ball_pos = $BallPosition.global_position
 	
 func _physics_process(delta):
-	if ball != null:
+	if ball !=  null and not looking:
 		look_at(ball.global_position)
 	_move()
 
 
 func update_decision(team_has_ball,has_ball):
+	match current_state:
+		player_states.KICK_OFF:
+			pass
+		player_states.KICK_IN:
+			pass
+		player_states.MOVING:
+			pass
+		player_states.CORNER:
+			pass
+	
+	
+	
 	if team_has_ball:
 		if has_ball:
 			make_offensive_with_ball_decision()
@@ -54,6 +70,8 @@ func update_decision(team_has_ball,has_ball):
 			make_offensive_no_ball_decision()
 	else:
 		make_defensive_decision()
+		
+#	move_to_spot()
 		
 	
 func set_up(new_player, pos, color):
@@ -90,7 +108,7 @@ func make_offensive_with_ball_decision():
 		shoot()
 	elif check_pass():
 		print("PASSES")
-		pass_to_player()
+		pass_to_player(player)
 	elif check_move():
 		print("MOVES")
 		move_to_spot()
@@ -104,13 +122,13 @@ func make_offensive_no_ball_decision():
 	
 	if check_bpp():
 		print("MOVES TO BPP")
-		move(null)
+		move_to_spot()
 	else:
 		print("WAITS")
 		wait()
 
 func make_defensive_decision():
-	pass
+	mark_nearest_player()
 	
 func check_shoot():
 	#check current field spot if goal is possible
@@ -123,7 +141,17 @@ func check_pass():
 	# get value of players fieldspot if the can score a goal
 	# or even if they could make a good pass or move (make prediction of actions)
 	# if one value is good enough, pick highest and pass
-	pass
+	
+	# check players in vision area and look with raycast at it, if no toher collider
+	# pass can be done
+	looking = true
+	for player in visible_team_players:
+		look_at(player.global_position)
+		var collider = $Head.get_collider()
+		if collider == player:
+			print("PAS POSSIBLE")
+	looking = false
+	return true
 	
 func check_move():
 	# check nearest field spots or in fieldspot detector
@@ -132,15 +160,15 @@ func check_move():
 	return true
 	
 func check_bpp():
-	pass
+	return true
 
 func shoot():
 	var direction
 	ball.apply_central_impulse(direction)
 	
-func pass_to_player():
-	var direction
-	ball.apply_central_impulse(direction)
+func pass_to_player(new_player):
+#	ball.move_to(new_player.global_position)
+	pass
 	
 func wait():
 	pass
@@ -179,16 +207,14 @@ func pass_ball():
 	
 # move to player or ball, whatever closer is.
 func mark_nearest_player():
-	var nearest_player_distance = 5000
-	var nearest_player
-#	for player in opponent_players.get_children():
-#		if player["name"] != "G":
-#			if global_position.distance_to(player.global_position) < nearest_player_distance:
-#				nearest_player = player
-#				nearest_player_distance = global_position.distance_to(player.global_position)
-	#TWEEN
-
-
+	var distance = 9999999999
+	var player_to_mark
+	for visible_player in visible_opponent_players:
+		if global_position.distance_to(visible_player.global_position) < distance:
+			distance = global_position.distance_to(visible_player.global_position)
+			player_to_mark = visible_player
+	if player_to_mark != null:
+		current_destination = player_to_mark.global_position + Vector2(-80,0) # to mark a bit behind player
 # to get visible fiel spots
 func _on_FieldSpotDetector_area_entered(area):
 	visible_field_spots.append(area.get_parent())
@@ -196,8 +222,17 @@ func _on_FieldSpotDetector_area_entered(area):
 # checks if ball or player enters vision field
 # also players tha ball can be passed to??
 func _on_Vision_body_entered(body):
-	pass # Replace with function body.
+	if body.is_in_group("player"):
+		if body.player["field"] == player["field"]:
+			visible_team_players.append(body)
+		else:
+			visible_opponent_players.append(body)
 
 
 func _on_FieldSpotDetector_area_exited(area):
 	visible_field_spots.erase(area.get_parent())
+
+
+func _on_Vision_body_exited(body):
+	visible_opponent_players.erase(body)
+	visible_team_players.erase(body)

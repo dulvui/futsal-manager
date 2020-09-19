@@ -8,10 +8,8 @@
 script = ExtResource( 1 )
 
 [node name="HomeGoalRayCast" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, 800 )
 
 [node name="AwayGoalRayCast" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, 800 )
 
 [node name="Spot" type="Area2D" parent="."]
 collision_layer = 16
