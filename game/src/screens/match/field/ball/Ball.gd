@@ -1,5 +1,5 @@
-extends RigidBody2D
+extends Area2D
 
 
 func move_to(destination):
-	pass
+	$Tween.interpolate_property(self,"position",position,destination,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
