@@ -14,21 +14,17 @@ func set_up_info(new_player):
 	$DetailPopup/Info/Team.text = str(player["prestige"])
 	$HBoxContainer/Prestige.text = str(player["prestige"])
 	
-	var tech = player["technical"]
-	$DetailPopup/Technical/Cross.text = str(tech["crossing"])
-	$DetailPopup/Technical/Pass.text = str(tech["pass"])
-	$DetailPopup/Technical/LongPass.text = str(tech["long_pass"])
-	$DetailPopup/Technical/Tackling.text = str(tech["tackling"])
-	$DetailPopup/Technical/Intercept.text = str(tech["interception"])
-	$DetailPopup/Technical/Shoot.text = str(tech["shoot"])
-	$DetailPopup/Technical/LongShoot.text = str(tech["long_shoot"])
-	
-	var mental = player["mental"]
-	$DetailPopup/Mental/Agressivity.text = str(mental["agressivity"])
-	$DetailPopup/Mental/Anticipation.text = str(mental["aniticipation"])
-	$DetailPopup/Mental/Decisions.text = str(mental["decisions"])
-	$DetailPopup/Mental/Concentration.text = str(mental["concentration"])
-	$DetailPopup/Mental/Teamwork.text = str(mental["teamwork"])
+	for key in player["mental"].keys():
+		var ui = $DetailPopup/Mental.get_node(key)
+		ui.text = str(player["mental"][key])
+
+	for key in player["fisical"].keys():
+		var ui = $DetailPopup/Fisical.get_node(key)
+		ui.text = str(player["fisical"][key])
+		
+	for key in player["technical"].keys():
+		var ui = $DetailPopup/Technical.get_node(key)
+		ui.text = str(player["technical"][key])
 	
 	# paint stats numbers
 	for child in $DetailPopup.get_children():
