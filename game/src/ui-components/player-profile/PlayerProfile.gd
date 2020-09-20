@@ -6,7 +6,7 @@ var player = {}
 
 func set_up_info(new_player):
 	player = new_player
-	$HBoxContainer/Name.text = player["name"] + " " + player["surname"]
+	$HBoxContainer/Name.text = player["name"].substr(0,1) + ". " + player["surname"]
 	$DetailPopup/Info/Position.text = player["position"]
 	$HBoxContainer/Position.text = player["position"]
 	$DetailPopup/Info/Age.text = player["birth_date"]

@@ -7,6 +7,8 @@ var match_started = false
 
 var first_half = true
 
+
+
 var paused = false
 
 onready var animation_player = $AnimationPlayer
