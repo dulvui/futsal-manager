@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[node name="TrainingDay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 336.0
+margin_top = 288.0
+margin_right = -1384.0
+margin_bottom = -592.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 101, 102 )
+scale = Vector2( 0.391, 0.391 )
+texture = ExtResource( 1 )

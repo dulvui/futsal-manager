@@ -28,7 +28,7 @@ func _on_SearchPlayer_pressed():
 
 
 func _on_Training_pressed():
-	pass # Replace with function body.
+	$TrainingPopup.popup_centered()
 
 
 func _on_Formation_pressed():
