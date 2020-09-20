@@ -44,4 +44,17 @@ alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LegaueSelect" type="OptionButton" parent="."]
+margin_left = 60.3213
+margin_top = 161.915
+margin_right = 460.321
+margin_bottom = 217.915
+
+[node name="TeamSelect" type="OptionButton" parent="."]
+margin_left = 66.6709
+margin_top = 253.984
+margin_right = 466.671
+margin_bottom = 309.984
 [connection signal="text_changed" from="NameSearch" to="." method="_on_NameSearch_text_changed"]
+[connection signal="item_selected" from="TeamSelect" to="." method="_on_TeamSelect_item_selected"]
