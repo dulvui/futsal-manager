@@ -172,6 +172,9 @@ func create_real_player(player,i):
 func pass_to(player):
 	print(player["name"])
 	print("PASS in sim")
+	# passes to player and random defender of sector tires to intercept
+	#if pass OVER TWO SECTORS two players wil intercept, if present int sector
+	# switch has ball attribute
 	
 func shoot(player):
 	print(player["name"])

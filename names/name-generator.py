@@ -52,9 +52,6 @@ def get_physical(age, nationality, prestige, pos):
 
     physical = {
         "acceleration": min(pace_factor + random.randint(-5, 5), 20),
-        "agility": min(pace_factor + random.randint(-5, 5), 20),
-        "balance": min(physical_factor + random.randint(-5, 5), 20),
-        "jump": min(physical_factor + random.randint(-5, 5), 20),
         "pace": min(pace_factor + random.randint(-5, 5), 20),
         "stamina": min(physical_factor + random.randint(-5, 5), 20),
         "strength": min(physical_factor + random.randint(-5, 5), 20),
@@ -77,20 +74,19 @@ def get_technical(age, nationality, prestige, pos):
     defense_factor = min(random.randint(6, age_factor), max(prestige, 6))
 
     technical = {
-        "crossing": min(pass_factor + random.randint(-5, 5), 20),
+        "cross": min(pass_factor + random.randint(-5, 5), 20),
         "pass": min(pass_factor + random.randint(-5, 5), 20),
         "long_pass": min(pass_factor + random.randint(-5, 5), 20),
         "tackling": min(defense_factor + random.randint(-5, 5), 20),
         "heading": min(shoot_factor + random.randint(-5, 5), 20),
-        "interception": min(defense_factor + random.randint(-5, 5), 20),
-        "marking": min(defense_factor + random.randint(-5, 5), 20),
-        "shoot": min(shoot_factor + random.randint(-5, 5), 20),
+        "intercept": min(defense_factor + random.randint(-5, 5), 20),
+        "shoot_power": min(shoot_factor + random.randint(-5, 5), 20),
+		"shoot_precision": min(shoot_factor + random.randint(-5, 5), 20),
         "dribble": min(technique_factor + random.randint(-5, 5), 20),
         "long_shoot": min(shoot_factor + random.randint(-5, 5), 20),
         "free_kick": min(shoot_factor + random.randint(-5, 5), 20),
         "penalty": min(shoot_factor + random.randint(-5, 5), 20),
         "finishing": min(technique_factor + random.randint(-5, 5), 20),
-        "technique": min(technique_factor + random.randint(-5, 5), 20),
         "first_touch": min(technique_factor + random.randint(-5, 5), 20),
     }
     return technical
@@ -109,14 +105,13 @@ def get_mental(age, nationality, prestige, pos):
 
     mental = {
         "agressivity": min(defensive_factor + random.randint(-5, 5), 20),
-        "aniticipation": min(defensive_factor + random.randint(-5, 5), 20),
+        "anticipation": min(defensive_factor + random.randint(-5, 5), 20),
         "decisions": min(offensive_factor + random.randint(-5, 5), 20),
         "concentration": min(offensive_factor + random.randint(-5, 5), 20),
         "teamwork": min(offensive_factor + random.randint(-5, 5), 20),
         "vision": min(offensive_factor + random.randint(-5, 5), 20),
-        "work_rate": min(offensive_factor + random.randint(-5, 5), 20),
         "offensive_movement": min(offensive_factor + random.randint(-5, 5), 20),
-        "defensive_movement": min(defensive_factor + random.randint(-5, 5), 20),
+        "marking": min(defensive_factor + random.randint(-5, 5), 20),
     }
     return mental
 
