@@ -56,5 +56,28 @@ margin_left = 66.6709
 margin_top = 253.984
 margin_right = 466.671
 margin_bottom = 309.984
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PositionSelect" type="OptionButton" parent="."]
+margin_left = 66.6709
+margin_top = 361.928
+margin_right = 466.671
+margin_bottom = 417.928
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FootSelect" type="OptionButton" parent="."]
+margin_left = 66.6709
+margin_top = 481.928
+margin_right = 466.671
+margin_bottom = 537.928
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="text_changed" from="NameSearch" to="." method="_on_NameSearch_text_changed"]
 [connection signal="item_selected" from="TeamSelect" to="." method="_on_TeamSelect_item_selected"]
+[connection signal="item_selected" from="PositionSelect" to="." method="_on_PositionSelect_item_selected"]
+[connection signal="item_selected" from="FootSelect" to="." method="_on_FootSelect_item_selected"]
