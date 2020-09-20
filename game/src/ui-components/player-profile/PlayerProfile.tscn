@@ -13,8 +13,12 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_right = 521.0
-margin_bottom = 56.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 74.0
+margin_right = -1027.0
+margin_bottom = -950.0
 custom_constants/separation = 50
 __meta__ = {
 "_edit_use_anchors_": false
@@ -59,23 +63,36 @@ margin_bottom = 56.0
 text = "SELECT"
 
 [node name="DetailPopup" type="Popup" parent="."]
-margin_left = 306.816
-margin_top = 49.9467
-margin_right = 1506.82
-margin_bottom = 1049.95
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 74.0
+margin_right = -4.0
+margin_bottom = -4.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="DetailPopup"]
+[node name="TabContainer" type="TabContainer" parent="DetailPopup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Mental" type="GridContainer" parent="DetailPopup"]
-margin_left = 620.147
-margin_top = 311.469
-margin_right = 1057.15
-margin_bottom = 787.469
+[node name="Info" type="Control" parent="DetailPopup/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 74.0
+margin_right = 36.0
+margin_bottom = 36.0
+
+[node name="Mental" type="GridContainer" parent="DetailPopup/TabContainer/Info"]
+margin_left = 696.0
+margin_top = 372.0
+margin_right = 1133.0
+margin_bottom = 908.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_constants/hseparation = 40
 columns = 2
@@ -83,125 +100,125 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleLabel" type="Label" parent="DetailPopup/Mental"]
+[node name="TitleLabel" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_right = 362.0
 margin_bottom = 56.0
 text = "MENTAL"
 
-[node name="Title" type="Label" parent="DetailPopup/Mental"]
+[node name="Title" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_left = 402.0
 margin_right = 437.0
 margin_bottom = 56.0
 
-[node name="AgressivityLabel" type="Label" parent="DetailPopup/Mental"]
+[node name="AgressivityLabel" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_top = 60.0
 margin_right = 362.0
 margin_bottom = 116.0
 text = "AGRESSIVITY"
 
-[node name="agressivity" type="Label" parent="DetailPopup/Mental"]
+[node name="agressivity" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_left = 402.0
 margin_top = 60.0
 margin_right = 437.0
 margin_bottom = 116.0
 text = "12"
 
-[node name="AnticipationLabel" type="Label" parent="DetailPopup/Mental"]
+[node name="AnticipationLabel" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_top = 120.0
 margin_right = 362.0
 margin_bottom = 176.0
 text = "ANTICIPATION"
 
-[node name="anticipation" type="Label" parent="DetailPopup/Mental"]
+[node name="anticipation" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_left = 402.0
 margin_top = 120.0
 margin_right = 437.0
 margin_bottom = 176.0
 text = "12"
 
-[node name="DecisionsLabel" type="Label" parent="DetailPopup/Mental"]
+[node name="DecisionsLabel" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_top = 180.0
 margin_right = 362.0
 margin_bottom = 236.0
 text = "DECISIONS"
 
-[node name="decisions" type="Label" parent="DetailPopup/Mental"]
+[node name="decisions" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_left = 402.0
 margin_top = 180.0
 margin_right = 437.0
 margin_bottom = 236.0
 text = "12"
 
-[node name="ConcentrationLabel" type="Label" parent="DetailPopup/Mental"]
+[node name="ConcentrationLabel" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_top = 240.0
 margin_right = 362.0
 margin_bottom = 296.0
 text = "CONCENTRATION"
 
-[node name="concentration" type="Label" parent="DetailPopup/Mental"]
+[node name="concentration" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_left = 402.0
 margin_top = 240.0
 margin_right = 437.0
 margin_bottom = 296.0
 text = "12"
 
-[node name="TeamworkLabel" type="Label" parent="DetailPopup/Mental"]
+[node name="TeamworkLabel" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_top = 300.0
 margin_right = 362.0
 margin_bottom = 356.0
 text = "TEAMWORK"
 
-[node name="teamwork" type="Label" parent="DetailPopup/Mental"]
+[node name="teamwork" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_left = 402.0
 margin_top = 300.0
 margin_right = 437.0
 margin_bottom = 356.0
 text = "12"
 
-[node name="VisionLabel" type="Label" parent="DetailPopup/Mental"]
+[node name="VisionLabel" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_top = 360.0
 margin_right = 362.0
 margin_bottom = 416.0
 text = "VISION"
 
-[node name="vision" type="Label" parent="DetailPopup/Mental"]
+[node name="vision" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_left = 402.0
 margin_top = 360.0
 margin_right = 437.0
 margin_bottom = 416.0
 text = "12"
 
-[node name="OffMovementLabel" type="Label" parent="DetailPopup/Mental"]
+[node name="OffMovementLabel" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_top = 420.0
 margin_right = 362.0
 margin_bottom = 476.0
 text = "OFF_MOVE"
 
-[node name="offensive_movement" type="Label" parent="DetailPopup/Mental"]
+[node name="offensive_movement" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_left = 402.0
 margin_top = 420.0
 margin_right = 437.0
 margin_bottom = 476.0
 text = "12"
 
-[node name="MarkingLabel" type="Label" parent="DetailPopup/Mental"]
+[node name="MarkingLabel" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_top = 480.0
 margin_right = 362.0
 margin_bottom = 536.0
 text = "MARKING"
 
-[node name="marking" type="Label" parent="DetailPopup/Mental"]
+[node name="marking" type="Label" parent="DetailPopup/TabContainer/Info/Mental"]
 margin_left = 402.0
 margin_top = 480.0
 margin_right = 437.0
 margin_bottom = 536.0
 text = "12"
 
-[node name="Technical" type="GridContainer" parent="DetailPopup"]
-margin_left = 94.0716
-margin_top = 333.381
-margin_right = 460.072
-margin_bottom = 1169.38
+[node name="Technical" type="GridContainer" parent="DetailPopup/TabContainer/Info"]
+margin_left = 90.0716
+margin_top = 259.381
+margin_right = 456.072
+margin_bottom = 1155.38
 rect_scale = Vector2( 0.7, 0.7 )
 custom_constants/hseparation = 40
 columns = 2
@@ -209,203 +226,203 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleLabel" type="Label" parent="DetailPopup/Technical"]
+[node name="TitleLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_right = 291.0
 margin_bottom = 56.0
 text = "TECHNICAL"
 
-[node name="Title" type="Label" parent="DetailPopup/Technical"]
+[node name="Title" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
 margin_right = 366.0
 margin_bottom = 56.0
 
-[node name="CrossLabel" type="Label" parent="DetailPopup/Technical"]
+[node name="CrossLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_top = 60.0
 margin_right = 291.0
 margin_bottom = 116.0
 text = "CROSS"
 
-[node name="cross" type="Label" parent="DetailPopup/Technical"]
+[node name="cross" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
 margin_top = 60.0
 margin_right = 366.0
 margin_bottom = 116.0
 text = "12"
 
-[node name="ShootPowerLabel" type="Label" parent="DetailPopup/Technical"]
+[node name="ShootPowerLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_top = 120.0
 margin_right = 291.0
 margin_bottom = 176.0
 text = "SHOOT_PWR"
 
-[node name="shoot_power" type="Label" parent="DetailPopup/Technical"]
+[node name="shoot_power" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
 margin_top = 120.0
 margin_right = 366.0
 margin_bottom = 176.0
 text = "12"
 
-[node name="ShootPrecisionLabel" type="Label" parent="DetailPopup/Technical"]
+[node name="ShootPrecisionLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_top = 180.0
 margin_right = 291.0
 margin_bottom = 236.0
 text = "SHOOT_PRC"
 
-[node name="shoot_precision" type="Label" parent="DetailPopup/Technical"]
+[node name="shoot_precision" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
 margin_top = 180.0
 margin_right = 366.0
 margin_bottom = 236.0
 text = "12"
 
-[node name="LongShootLabel" type="Label" parent="DetailPopup/Technical"]
+[node name="LongShootLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_top = 240.0
 margin_right = 291.0
 margin_bottom = 296.0
 text = "LONG_SHOOT"
 
-[node name="long_shoot" type="Label" parent="DetailPopup/Technical"]
+[node name="long_shoot" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
 margin_top = 240.0
 margin_right = 366.0
 margin_bottom = 296.0
 text = "12"
 
-[node name="LongPass" type="Label" parent="DetailPopup/Technical"]
-margin_top = 240.0
-margin_right = 291.0
-margin_bottom = 296.0
-text = "LONG_PASS"
-
-[node name="long_pass" type="Label" parent="DetailPopup/Technical"]
-margin_left = 331.0
-margin_top = 240.0
-margin_right = 366.0
-margin_bottom = 296.0
-text = "12"
-
-[node name="PassLabel" type="Label" parent="DetailPopup/Technical"]
+[node name="LongPass" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_top = 300.0
 margin_right = 291.0
 margin_bottom = 356.0
+text = "LONG_SHOOT"
+
+[node name="long_pass" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_left = 331.0
+margin_top = 300.0
+margin_right = 366.0
+margin_bottom = 356.0
+text = "12"
+
+[node name="PassLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_top = 360.0
+margin_right = 291.0
+margin_bottom = 416.0
 text = "PASS"
 
-[node name="pass" type="Label" parent="DetailPopup/Technical"]
+[node name="pass" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
-margin_top = 300.0
+margin_top = 360.0
 margin_right = 366.0
-margin_bottom = 356.0
+margin_bottom = 416.0
 text = "12"
 
-[node name="TacklingLabel" type="Label" parent="DetailPopup/Technical"]
-margin_top = 360.0
+[node name="TacklingLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_top = 420.0
 margin_right = 291.0
-margin_bottom = 416.0
+margin_bottom = 476.0
 text = "TACKLING"
 
-[node name="tackling" type="Label" parent="DetailPopup/Technical"]
+[node name="tackling" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
-margin_top = 360.0
+margin_top = 420.0
 margin_right = 366.0
-margin_bottom = 416.0
+margin_bottom = 476.0
 text = "12"
 
-[node name="InterceptLabel" type="Label" parent="DetailPopup/Technical"]
-margin_top = 420.0
+[node name="InterceptLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_top = 480.0
 margin_right = 291.0
-margin_bottom = 476.0
+margin_bottom = 536.0
 text = "CORNER"
 
-[node name="intercept" type="Label" parent="DetailPopup/Technical"]
+[node name="intercept" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
-margin_top = 420.0
+margin_top = 480.0
 margin_right = 366.0
-margin_bottom = 476.0
+margin_bottom = 536.0
 text = "12"
 
-[node name="HeadingLabel" type="Label" parent="DetailPopup/Technical"]
-margin_top = 480.0
+[node name="HeadingLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_top = 540.0
 margin_right = 291.0
-margin_bottom = 536.0
+margin_bottom = 596.0
 text = "HEADING"
 
-[node name="heading" type="Label" parent="DetailPopup/Technical"]
+[node name="heading" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
-margin_top = 480.0
+margin_top = 540.0
 margin_right = 366.0
-margin_bottom = 536.0
+margin_bottom = 596.0
 text = "12"
 
-[node name="DribbleLabel" type="Label" parent="DetailPopup/Technical"]
-margin_top = 540.0
+[node name="DribbleLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_top = 600.0
 margin_right = 291.0
-margin_bottom = 596.0
+margin_bottom = 656.0
 text = "DRIBBLE"
 
-[node name="dribble" type="Label" parent="DetailPopup/Technical"]
+[node name="dribble" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
-margin_top = 540.0
+margin_top = 600.0
 margin_right = 366.0
-margin_bottom = 596.0
+margin_bottom = 656.0
 text = "12"
 
-[node name="FreeKickLabel" type="Label" parent="DetailPopup/Technical"]
-margin_top = 600.0
+[node name="FreeKickLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_top = 660.0
 margin_right = 291.0
-margin_bottom = 656.0
+margin_bottom = 716.0
 text = "FREE_KICK"
 
-[node name="free_kick" type="Label" parent="DetailPopup/Technical"]
+[node name="free_kick" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
-margin_top = 600.0
+margin_top = 660.0
 margin_right = 366.0
-margin_bottom = 656.0
+margin_bottom = 716.0
 text = "12"
 
-[node name="PenaltyLabel" type="Label" parent="DetailPopup/Technical"]
-margin_top = 660.0
+[node name="PenaltyLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_top = 720.0
 margin_right = 291.0
-margin_bottom = 716.0
+margin_bottom = 776.0
 text = "PENALTY"
 
-[node name="penalty" type="Label" parent="DetailPopup/Technical"]
+[node name="penalty" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
-margin_top = 660.0
+margin_top = 720.0
 margin_right = 366.0
-margin_bottom = 716.0
+margin_bottom = 776.0
 text = "12"
 
-[node name="FinishingLabel" type="Label" parent="DetailPopup/Technical"]
-margin_top = 720.0
+[node name="FinishingLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_top = 780.0
 margin_right = 291.0
-margin_bottom = 776.0
+margin_bottom = 836.0
 text = "FINISHING"
 
-[node name="finishing" type="Label" parent="DetailPopup/Technical"]
+[node name="finishing" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
-margin_top = 720.0
+margin_top = 780.0
 margin_right = 366.0
-margin_bottom = 776.0
+margin_bottom = 836.0
 text = "12"
 
-[node name="FirstTouchLabel" type="Label" parent="DetailPopup/Technical"]
-margin_top = 780.0
+[node name="FirstTouchLabel" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
+margin_top = 840.0
 margin_right = 291.0
-margin_bottom = 836.0
+margin_bottom = 896.0
 text = "FIRST_TOUCH"
 
-[node name="first_touch" type="Label" parent="DetailPopup/Technical"]
+[node name="first_touch" type="Label" parent="DetailPopup/TabContainer/Info/Technical"]
 margin_left = 331.0
-margin_top = 780.0
+margin_top = 840.0
 margin_right = 366.0
-margin_bottom = 836.0
+margin_bottom = 896.0
 text = "12"
 
-[node name="Fisical" type="GridContainer" parent="DetailPopup"]
-margin_left = 620.147
-margin_top = 734.053
-margin_right = 986.147
-margin_bottom = 1030.05
+[node name="Fisical" type="GridContainer" parent="DetailPopup/TabContainer/Info"]
+margin_left = 1312.0
+margin_top = 318.669
+margin_right = 1678.0
+margin_bottom = 614.669
 rect_scale = Vector2( 0.7, 0.7 )
 custom_constants/hseparation = 40
 columns = 2
@@ -413,140 +430,174 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleLabel" type="Label" parent="DetailPopup/Fisical"]
+[node name="TitleLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_right = 291.0
 margin_bottom = 56.0
 text = "FISICAL"
 
-[node name="Title" type="Label" parent="DetailPopup/Fisical"]
+[node name="Title" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_left = 331.0
 margin_right = 366.0
 margin_bottom = 56.0
 
-[node name="AccelerationLabel" type="Label" parent="DetailPopup/Fisical"]
+[node name="AccelerationLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_top = 60.0
 margin_right = 291.0
 margin_bottom = 116.0
 text = "INTERCEPT"
 
-[node name="acceleration" type="Label" parent="DetailPopup/Fisical"]
+[node name="acceleration" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_left = 331.0
 margin_top = 60.0
 margin_right = 366.0
 margin_bottom = 116.0
 text = "12"
 
-[node name="PaceLabel" type="Label" parent="DetailPopup/Fisical"]
+[node name="PaceLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_top = 120.0
 margin_right = 291.0
 margin_bottom = 176.0
 text = "SHOOT"
 
-[node name="pace" type="Label" parent="DetailPopup/Fisical"]
+[node name="pace" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_left = 331.0
 margin_top = 120.0
 margin_right = 366.0
 margin_bottom = 176.0
 text = "12"
 
-[node name="StaminaLabel" type="Label" parent="DetailPopup/Fisical"]
+[node name="StaminaLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_top = 180.0
 margin_right = 291.0
 margin_bottom = 236.0
 text = "LONG_SHOOT"
 
-[node name="stamina" type="Label" parent="DetailPopup/Fisical"]
+[node name="stamina" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_left = 331.0
 margin_top = 180.0
 margin_right = 366.0
 margin_bottom = 236.0
 text = "12"
 
-[node name="StrengthLabel" type="Label" parent="DetailPopup/Fisical"]
+[node name="StrengthLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_top = 240.0
 margin_right = 291.0
 margin_bottom = 296.0
 text = "PASS"
 
-[node name="strength" type="Label" parent="DetailPopup/Fisical"]
+[node name="strength" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_left = 331.0
 margin_top = 240.0
 margin_right = 366.0
 margin_bottom = 296.0
 text = "12"
 
-[node name="Info" type="GridContainer" parent="DetailPopup"]
-margin_left = 23.5697
-margin_top = 17.8687
-margin_right = 623.57
-margin_bottom = 317.869
+[node name="Info" type="GridContainer" parent="DetailPopup/TabContainer/Info"]
+margin_left = 48.0
+margin_top = 4.0
+margin_right = 648.0
+margin_bottom = 304.0
 custom_constants/hseparation = 40
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PositionLabel" type="Label" parent="DetailPopup/Info"]
+[node name="PositionLabel" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_right = 276.0
 margin_bottom = 56.0
 text = "POSITION"
 
-[node name="Position" type="Label" parent="DetailPopup/Info"]
+[node name="Position" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_left = 316.0
 margin_right = 484.0
 margin_bottom = 56.0
 text = "PIVOT"
 
-[node name="AgeLabel" type="Label" parent="DetailPopup/Info"]
+[node name="AgeLabel" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_top = 60.0
 margin_right = 276.0
 margin_bottom = 116.0
 text = "AGE"
 
-[node name="Age" type="Label" parent="DetailPopup/Info"]
+[node name="Age" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_left = 316.0
 margin_top = 60.0
 margin_right = 484.0
 margin_bottom = 116.0
 text = "32"
 
-[node name="NationalityLabel" type="Label" parent="DetailPopup/Info"]
+[node name="NationalityLabel" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_top = 120.0
 margin_right = 276.0
 margin_bottom = 176.0
 text = "NATIONALITY"
 
-[node name="Nationality" type="Label" parent="DetailPopup/Info"]
+[node name="Nationality" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_left = 316.0
 margin_top = 120.0
 margin_right = 484.0
 margin_bottom = 176.0
 text = "Italiana"
 
-[node name="TeamLabel" type="Label" parent="DetailPopup/Info"]
+[node name="TeamLabel" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_top = 180.0
 margin_right = 276.0
 margin_bottom = 236.0
 text = "TEAM"
 
-[node name="Team" type="Label" parent="DetailPopup/Info"]
+[node name="Team" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_left = 316.0
 margin_top = 180.0
 margin_right = 484.0
 margin_bottom = 236.0
 text = "Bronzolo"
 
-[node name="Panel" type="Panel" parent="DetailPopup/Info"]
+[node name="Panel" type="Panel" parent="DetailPopup/TabContainer/Info/Info"]
 margin_top = 240.0
 margin_right = 276.0
 margin_bottom = 240.0
 
-[node name="Hide" type="Button" parent="DetailPopup"]
-margin_left = 1108.0
-margin_top = 76.0
-margin_right = 1148.0
-margin_bottom = 132.0
+[node name="Hide" type="Button" parent="DetailPopup/TabContainer/Info"]
+margin_left = 1104.0
+margin_top = 2.0
+margin_right = 1144.0
+margin_bottom = 58.0
+text = "X"
+
+[node name="Story" type="Control" parent="DetailPopup/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 74.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Hide" type="Button" parent="DetailPopup/TabContainer/Story"]
+margin_left = 1104.0
+margin_top = 2.0
+margin_right = 1144.0
+margin_bottom = 58.0
+text = "X"
+
+[node name="Contract" type="Control" parent="DetailPopup/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 74.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Hide" type="Button" parent="DetailPopup/TabContainer/Contract"]
+margin_left = 1104.0
+margin_top = 2.0
+margin_right = 1144.0
+margin_bottom = 58.0
 text = "X"
 [connection signal="pressed" from="HBoxContainer/Details" to="." method="_on_Details_pressed"]
 [connection signal="pressed" from="HBoxContainer/Select" to="." method="_on_Select_pressed"]
-[connection signal="pressed" from="DetailPopup/Hide" to="." method="_on_Hide_pressed"]
+[connection signal="pressed" from="DetailPopup/TabContainer/Info/Hide" to="." method="_on_Hide_pressed"]
+[connection signal="pressed" from="DetailPopup/TabContainer/Story/Hide" to="." method="_on_Hide_pressed"]
+[connection signal="pressed" from="DetailPopup/TabContainer/Contract/Hide" to="." method="_on_Hide_pressed"]
