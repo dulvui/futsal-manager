@@ -6,6 +6,11 @@ const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProf
 
 var name_search = ""
 var team_search = ""
+var position_search = ""
+var foot_search = ""
+
+const POSITIONS = ["G","D","WL","WR","P","U"]
+const FOOT = ["R","L","RL"]
 
 func _ready():
 	$LegaueSelect.add_item("ITALIA")
@@ -14,6 +19,15 @@ func _ready():
 	for team in DataSaver.teams:
 		if team["name"] != DataSaver.selected_team:
 			$TeamSelect.add_item(team["name"])
+			
+	$PositionSelect.add_item("NO_POS")
+	for pos in POSITIONS:
+		$PositionSelect.add_item(pos)
+		
+	$FootSelect.add_item("NO_FOOT")
+	for foot in FOOT:
+		$FootSelect.add_item(foot)
+	
 func add_players():
 	for child in $ScrollContainer/ItemList.get_children():
 		child.queue_free()
@@ -73,9 +87,10 @@ func select_player(player):
 func filter_player(player):
 	if name_search.length() == 0 or name_search.to_upper() in player["surname"].to_upper():
 		if team_search.length() == 0 or team_search == player["team"]:
-			return true
-		else:
-			return false
+			if team_search.length() == 0 or team_search == player["team"]:
+				if position_search.length() == 0 or position_search == player["position"]:
+					if foot_search.length() == 0 or foot_search == player["foot"]:
+						return true
 	return false
 
 func _on_NameSearch_text_changed(new_text):
@@ -93,4 +108,20 @@ func _on_TeamSelect_item_selected(index):
 		team_search = teams[index-1]["name"]
 	else:
 		team_search = ""
+	add_all_players()
+
+
+func _on_PositionSelect_item_selected(index):
+	if index > 0:
+		position_search = POSITIONS[index-1]
+	else:
+		position_search = ""
+	add_all_players()
+
+
+func _on_FootSelect_item_selected(index):
+	if index > 0:
+		foot_search = FOOT[index-1]
+	else:
+		foot_search = ""
 	add_all_players()
