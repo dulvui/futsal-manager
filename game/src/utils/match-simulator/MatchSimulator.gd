@@ -51,94 +51,17 @@ var away_stats = {
 	"red_cards" : 0
 }
 
-const DECISIONS = ["PASS","DRIBBLE","SHOOT","MOVE","WAIT"]
+const SECTOR_SIZE = 200
 
 var time = 0.0
 
 var home_possess_counter = 0.0
 
-var formation_pos_mapping = {
-	"2-2" : [3,7,9,19,17],
-	"1-2-1" : [3,8,12,14,18],
-	"1-1-2" : [3,8,13,19,17],
-	"2-1-1" : [3,7,9,13,18],
-	"4-0" : [3,7,9,15,18],
-	"3-1" : [3,8,7,9,18],
-	"1-3" : [3,8,17,19,18],
-}
-
 var home_has_ball
-
-var start_pos = Vector2(1000,1400)
-
 
 func _ready():
 	pass
-
-func set_up(home,away, match_started):
-	home_team = home.duplicate(true)
-	away_team = away.duplicate(true)
 	
-	for i in range(home_team["players"]["active"].size()):
-		var player = home_team["players"]["active"][i]
-		player["has_ball"]  = false
-		player["field"]  = "home" # change on halftime
-		var real_player = Player.instance()
-		real_player.set_up(player,get_node("HomeFieldSpots/FieldSpot" + str(formation_pos_mapping[home_team["formation"]][i])).global_position,Color.red)
-		real_player.position = start_pos
-		add_child(real_player)
-		player["real"] = real_player
-
-	for i in range(away_team["players"]["active"].size()):
-		var player = away_team["players"]["active"][i]
-		player["has_ball"]  = false
-		player["field"]  = "away"
-		var real_player = Player.instance()
-		real_player.set_up(player,get_node("AwayFieldSpots/FieldSpot" + str(formation_pos_mapping[away_team["formation"]][i])).global_position,Color.blue)
-		real_player.position = start_pos
-		add_child(real_player)
-		player["real"] = real_player
-
-	if match_started:
-		home_has_ball = randi()%2 == 0
-		if home_has_ball:
-			home_team["players"]["active"][4]["has_ball"] = true
-		else:
-			away_team["players"]["active"][4]["has_ball"] = true
-
-func change_players(new_home_team,new_away_team):
-	home_team = new_home_team.duplicate(true)
-	away_team = new_away_team.duplicate(true)
-	
-	for i in range(home_team["players"]["active"].size()):
-		var player = home_team["players"]["active"][i]
-		player["has_ball"]  = false
-		player["field"]  = "home"
-		var real_player = Player.instance()
-		real_player.set_up(player,get_node("HomeFieldSpots/FieldSpot" + str(formation_pos_mapping[home_team["formation"]][i])).global_position,Color.red)
-		real_player.position = start_pos
-		add_child(real_player)
-		player["real"] = real_player
-
-	for i in range(away_team["players"]["active"].size()):
-		var player = away_team["players"]["active"][i]
-		player["has_ball"]  = false
-		player["field"]  = "away"
-		var real_player = Player.instance()
-		real_player.set_up(player,get_node("AwayFieldSpots/FieldSpot" + str(formation_pos_mapping[away_team["formation"]][i])).global_position,Color.blue)
-		real_player.position = start_pos		
-		add_child(real_player)
-		player["real"] = real_player
-	
-	
-	#make better and look who has ball after interruption
-	home_has_ball = randi()%2 == 0
-	if home_has_ball:
-		home_team["players"]["active"][4]["has_ball"] = true
-	else:
-		away_team["players"]["active"][4]["has_ball"] = true
-	
-
 func update():
 	time += 1
 	if home_has_ball:
@@ -154,13 +77,119 @@ func update():
 	for player in away_team["players"]["active"]:
 		player["real"].update_decision(!home_has_ball,player["has_ball"])
 
+func set_up(home,away, match_started):
+	home_team = home.duplicate(true)
+	away_team = away.duplicate(true)
+	
+	for i in range(home_team["players"]["active"].size()):
+		var player = home_team["players"]["active"][i]
+		player["has_ball"]  = false
+		player["home"]  = true # change on halftime
+		player["real"] = create_real_player(player,i)
 
-func _on_GameField_body_exited(body):
-	print("ball exits field")
-	print($Ball.position)
-	$Ball.position = Vector2(1000,500)
-	#check corner, kickin, or gk has ball
-	get_tree().call_group("player", "exit_state")
+	for i in range(away_team["players"]["active"].size()):
+		var player = away_team["players"]["active"][i]
+		player["has_ball"]  = false
+		player["home"]  = false
+		player["real"] = create_real_player(player,i)
+
+	if match_started:
+		home_has_ball = randi()%2 == 0
+		if home_has_ball:
+			home_team["players"]["active"][4]["has_ball"] = true
+		else:
+			away_team["players"]["active"][4]["has_ball"] = true
+
+func get_team_players_in_sector(home,sector_pos):
+	var team_players = []
+	if home:
+		var current_sector = sector_pos / SECTOR_SIZE
+		for player in home_team["players"]["active"]:
+			if player["real"].sector_pos / SECTOR_SIZE == current_sector:
+				team_players.append(player)
+	else:
+		var current_sector = 6 - (sector_pos / SECTOR_SIZE)
+		for player in away_team["players"]["active"]:
+			if player["real"].sector_pos / SECTOR_SIZE == current_sector:
+				team_players.append(player)
+				
+	return team_players
+	
+func get_sector_with_most_opponent_players(home,sector_pos):
+	var team_players = []
+	if home:
+		var current_sector = sector_pos / SECTOR_SIZE
+		for player in home_team["players"]["active"]:
+			if player["real"].sector_pos / SECTOR_SIZE == current_sector:
+				team_players.append(player)
+	else:
+		var current_sector = 12 - (sector_pos / SECTOR_SIZE)
+		for player in away_team["players"]["active"]:
+			if player["real"].sector_pos / SECTOR_SIZE == current_sector:
+				team_players.append(player)
+				
+	return team_players
+	
+				
+func change_players(new_home_team,new_away_team):
+	home_team = new_home_team.duplicate(true)
+	away_team = new_away_team.duplicate(true)
+	
+	for i in range(home_team["players"]["active"].size()):
+		var player = home_team["players"]["active"][i]
+		player["has_ball"]  = false
+		player["home"]  = true
+		player["real"] = create_real_player(player,i)
+
+	for i in range(away_team["players"]["active"].size()):
+		var player = away_team["players"]["active"][i]
+		player["has_ball"]  = false
+		player["home"]  = false
+		player["real"] = create_real_player(player,i)
+	
+	
+	#make better and look who has ball after interruption
+	home_has_ball = randi()%2 == 0
+	if home_has_ball:
+		home_team["players"]["active"][4]["has_ball"] = true
+	else:
+		away_team["players"]["active"][4]["has_ball"] = true
 
 
+
+func create_real_player(player,i):
+	var real_player = Player.instance()
+	real_player.set_up(player,i)
+	real_player.connect("pass_to",self,"pass_to")
+	real_player.connect("shoot",self,"shoot")
+	real_player.connect("move_up",self,"move_up")
+	real_player.connect("move_down",self,"move_up")
+	real_player.connect("wait",self,"wait")
+	real_player.connect("dribble",self,"dribble")
+	add_child(real_player)
+	return real_player
+
+func pass_to(player):
+	print(player["name"])
+	print("PASS in sim")
+	
+func shoot(player):
+	print(player["name"])
+	print("PASS in sim")
+
+func move_up(player):
+	print(player["name"])
+	print("MOVES UP in sim")
+
+func move_down(player):
+	print(player["name"])
+	print("MOVES DOWN in sim")
+	
+func wait(player):
+	print(player["name"])
+	print("WAITS in sim")
+	
+func dribble(player):
+	print(player["name"])
+	print("DRIBBLES in sim")
 

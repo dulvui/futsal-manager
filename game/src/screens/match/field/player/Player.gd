@@ -1,16 +1,22 @@
-extends KinematicBody2D
+extends Area2D
 
 export (String, "G", "D", "WL", "WR", "P") var pos = "G"
 
-var current_destination
-enum player_states {MOVING,WAITING,SHOOTING,KICK_OFF,GK,
-						KICK_IN,CORNER,PENALTY,FREE_KICK}
-var current_state
+signal shoot
+signal pass_to
+signal pass_out # if he makes bad pas then ball goes out of field
+signal dribble
+signal wait
+signal move_up
+signal move_down
 
-var visible_field_spots = []
+var sector_pos
 
-var visible_team_players = []
-var visible_opponent_players = []
+var max_sector
+var min_sector
+
+var wait_counter = 0 # counts waits and after x  waits do action
+
 
 var stats = {
 	"goals" : 0,
@@ -25,8 +31,6 @@ var stats = {
 	"meters_run" : 0,
 }
 
-
-
 var player
 var surname = ""
 
@@ -39,30 +43,12 @@ var ball_pos
 
 var has_ball = false #probably detects when ball enters Ball detector
 
-var looking = false
-
 func _ready():
 	ball_pos = $BallPosition.global_position
-	
-func _physics_process(delta):
-	if ball !=  null and not looking:
-		look_at(ball.global_position)
-	_move()
 
+	
 
 func update_decision(team_has_ball,has_ball):
-	match current_state:
-		player_states.KICK_OFF:
-			pass
-		player_states.KICK_IN:
-			pass
-		player_states.MOVING:
-			pass
-		player_states.CORNER:
-			pass
-	
-	
-	
 	if team_has_ball:
 		if has_ball:
 			make_offensive_with_ball_decision()
@@ -71,168 +57,170 @@ func update_decision(team_has_ball,has_ball):
 	else:
 		make_defensive_decision()
 		
-#	move_to_spot()
-		
 	
-func set_up(new_player, pos, color):
+func set_up(new_player,field_pos):
 	player = new_player
-	$Control/ShirtNumber.text = str(player["nr"])
-	$Control/ColorRect.color = color
-	current_destination = pos
-
-# look around: check if goal can be scored,
-# check if player is in good pass position
-# else move, dribble or wait depending on mentality of team
-# move towards best free position nearest to goal until next iteration
-
-#look around: get position of other players and value:nearest_d_distance + goal_distance
-# value gets tollerance by vision stats of player, so if 20 no tollerance, 0 full tollerance
-
-# pass ball: pass to positon of player, if no defender intercepts, pass goes trough
-
-# intercept passes: move towards player or ball depending on team mentality
-# player has area that detects ball, if intercepts player gets possesion,
-# else ball can go trough player, like a tunnel ;)
-
-#player receives pass, if ball comes into player area, he stops the ball,
-# depending on player stats of first touch
-
-#move: player accelaerates and gets max velocity depending on stats
-# moves from one position to next from iteration to interation
-# calculate best position to move depending on mentality stats of player
-func make_offensive_with_ball_decision():
-	print(player["surname"])
+	if player["home"]:
+		sector_pos = (field_pos+1) * 200
+	else:
+		sector_pos = 1200 -( (field_pos+1) * 200)
 	
-	if check_shoot():
+	min_sector = sector_pos - 300
+	if min_sector < 0:
+		min_sector = 0
+	max_sector = sector_pos + 300
+	if max_sector > 1200:
+		max_sector = 1200
+	
+	
+#	$Control/ShirtNumber.text = str(player["nr"])
+#	$Control/ColorRect.color = color
+
+func make_offensive_with_ball_decision():
+	print(player["surname"] + " has ball")
+	
+	# make all checks and the make decision
+	var shoot_factor = check_shoot()
+	var pass_factor = check_pass()
+	var move_up_factor = check_move_up()
+	var move_down_factor = check_move_down()
+	var wait_factor = randi()%20
+	
+	var sum: int = shoot_factor + pass_factor + move_up_factor + move_down_factor + wait_factor
+	var decision_factor = randi()%sum
+	
+	if decision_factor < shoot_factor:
 		print("SHOOTS")
-		shoot()
-	elif check_pass():
-		print("PASSES")
-		pass_to_player(player)
-	elif check_move():
-		print("MOVES")
-		move_to_spot()
+		emit_signal("shoot",player)
+	elif decision_factor < shoot_factor + pass_factor:
+		print("PASS")
+		emit_signal("pass_to",player)
+	elif decision_factor < shoot_factor + pass_factor + move_up_factor:
+		print("MOVES UP")
+		move_up()
+		emit_signal("move_up",player)
+	elif decision_factor < shoot_factor + pass_factor + move_up_factor + move_down_factor:
+		print("MOVES DOWN")
+		move_down()
+		emit_signal("move_down",player)
 	else:
 		print("WAITS")
-		wait()
-		
+		emit_signal("wait",player)
+	
 	
 func make_offensive_no_ball_decision():
-	print(player["surname"])
+	print(player["surname"] + " team has ball")
 	
-	if check_bpp():
-		print("MOVES TO BPP")
-		move_to_spot()
+	var move_down_factor = check_move_down()
+	var move_up_factor = check_move_up()
+	var wait_factor = randi()%20 # make depending on player stats and tema mentality
+	
+	var sum = move_up_factor + move_down_factor + wait_factor
+	var decision_factor = randi()%sum
+	
+	if decision_factor < move_up_factor:
+		print("MOVES UP")
+		move_up()
+		emit_signal("move_up",player)
+	elif decision_factor < move_up_factor + move_down_factor:
+		print("MOVES DOWN")
+		move_down()
+		emit_signal("move_down",player)
 	else:
 		print("WAITS")
-		wait()
-
+		emit_signal("wait",player)
 func make_defensive_decision():
-	mark_nearest_player()
+	# check which sector has most opponent players and with ball and move there
+	print(player["surname"] + " defends")
+	
+	var move_down_factor = check_move_down()
+	var move_up_factor = check_move_up()
+	var wait_factor = randi()%20 # make depending on player stats and tema mentality
+	
+	var decision_factor = randi()%(move_up_factor + move_down_factor + wait_factor)
+	
+	if decision_factor < move_up_factor:
+		print("MOVES UP")
+		emit_signal("move_up",player)
+		move_down()
+	elif decision_factor < move_up_factor + move_down_factor:
+		print("MOVES DOWN")
+		emit_signal("move_down",player)
+		move_up()
+	else:
+		print("WAITS")
+		emit_signal("wait",player)
 	
 func check_shoot():
-	#check current field spot if goal is possible
-	# if near to goal, player may also shoot if intercepted by goalkeeper or d
-	pass
+	# check team mentality, if shooting from distance already shooting from far sectors
+	var shoot_factor = get_sector() + 8 # +8 to make max 20
+	var opponent_players_in_sector = get_parent().get_team_players_in_sector(!player["home"],sector_pos)
+	shoot_factor -= opponent_players_in_sector.size() * 4
+	shoot_factor = max(shoot_factor,0)
+	return shoot_factor
+	
+	
 	
 func check_pass():
-	# ierate over other players
-	#check with player raycast if pass possible to player
-	# get value of players fieldspot if the can score a goal
-	# or even if they could make a good pass or move (make prediction of actions)
-	# if one value is good enough, pick highest and pass
+	#add player vision affect
+	#add pass mentality
+	var pass_factor = 0 
+	var opponent_players_in_sector = get_parent().get_team_players_in_sector(!player["home"],sector_pos)
+	var team_players_in_sector = get_parent().get_team_players_in_sector(player["home"],sector_pos)
+	pass_factor -= opponent_players_in_sector.size() * 3
+	pass_factor += opponent_players_in_sector.size() * 5
+	pass_factor = max(pass_factor,0)
+	return pass_factor
 	
-	# check players in vision area and look with raycast at it, if no toher collider
-	# pass can be done
-	looking = true
-	for player in visible_team_players:
-		look_at(player.global_position)
-		var collider = $Head.get_collider()
-		if collider == player:
-			print("PAS POSSIBLE")
-	looking = false
-	return true
+func check_move_up():
+	# check opponentn players in next secor, if no players move up imedialtly
+	var move_factor = 20
+	var opponent_players_in_next_sector = []
+	var team_players_in_next_sector = []
+	if sector_pos < 1000:
+		opponent_players_in_next_sector = get_parent().get_team_players_in_sector(!player["home"],sector_pos + 200)
+		team_players_in_next_sector = get_parent().get_team_players_in_sector(player["home"],sector_pos + 200)
+	move_factor -= opponent_players_in_next_sector.size() * 4
+	move_factor += team_players_in_next_sector.size() * 5
+	move_factor = min(move_factor,20)
+	return move_factor
 	
-func check_move():
-	# check nearest field spots or in fieldspot detector
-	# choose that with best value
-	# player is in state MOVING until reaches the spot, or defender intecepts
-	return true
+func check_move_down():
+	var move_factor = 20
+	var opponent_players_in_prev_sector = []
+	var team_players_in_prev_sector = []
+	if sector_pos > 200:
+		opponent_players_in_prev_sector = get_parent().get_team_players_in_sector(!player["home"],sector_pos + 200)
+		team_players_in_prev_sector = get_parent().get_team_players_in_sector(player["home"],sector_pos + 200)
+	move_factor -= opponent_players_in_prev_sector.size() * 4
+	move_factor += team_players_in_prev_sector.size() * 5
+	move_factor = min(move_factor,20)
+	return move_factor
 	
-func check_bpp():
-	return true
-
-func shoot():
-	var direction
-	ball.apply_central_impulse(direction)
-	
-func pass_to_player(new_player):
-#	ball.move_to(new_player.global_position)
-	pass
-	
-func wait():
-	pass
-#func move():
-#	pass
-	
-func _move():
-	var direction = (current_destination - global_position).normalized()
-	#accelerate before
-	move_and_slide(direction * player["fisical"]["pace"] * 50)
-	ball_pos = $BallPosition.global_position
+func move_down():
+	if player["home"]:
+		sector_pos -= player["fisical"]["pace"]
+	else:
+		sector_pos += player["fisical"]["pace"]
+	if sector_pos > max_sector:
+		sector_pos = max_sector
+	if sector_pos < min_sector:
+		sector_pos = min_sector
 
 # special movements: cornerns, penlaties, free kicks, kick off, rimessa
-func move(destination):
-	current_destination = destination
+func move_up():
+	if player["home"]:
+		sector_pos += player["fisical"]["pace"]
+	else:
+		sector_pos -= player["fisical"]["pace"]
+	if sector_pos > max_sector:
+		sector_pos = max_sector
+	if sector_pos < min_sector:
+		sector_pos = min_sector
 	
-func move_to_spot():
-	if visible_field_spots.size() > 0:
-		var field_spot_value = visible_field_spots[0].get_home_goal_value()
-		var field_spot
-		for i in range(visible_field_spots.size()):
-			if field_spot_value < visible_field_spots[i].get_home_goal_value():
-				field_spot_value = visible_field_spots[i].get_home_goal_value()
-				field_spot = visible_field_spots[i]
-		if field_spot != null:
-			current_destination = field_spot.global_position
-
+func get_sector():
+	if player["home"]:
+		return  sector_pos / 200
+	else:
+		return 12 - (sector_pos / 200)
 	
-	
-
-func pass_ball():
-	#make calculations if pass is succesful,
-	# the sned succes signal, else fail
-	pass
-	#TWEEN
-	
-# move to player or ball, whatever closer is.
-func mark_nearest_player():
-	var distance = 9999999999
-	var player_to_mark
-	for visible_player in visible_opponent_players:
-		if global_position.distance_to(visible_player.global_position) < distance:
-			distance = global_position.distance_to(visible_player.global_position)
-			player_to_mark = visible_player
-	if player_to_mark != null:
-		current_destination = player_to_mark.global_position + Vector2(-80,0) # to mark a bit behind player
-# to get visible fiel spots
-func _on_FieldSpotDetector_area_entered(area):
-	visible_field_spots.append(area.get_parent())
-
-# checks if ball or player enters vision field
-# also players tha ball can be passed to??
-func _on_Vision_body_entered(body):
-	if body.is_in_group("player"):
-		if body.player["field"] == player["field"]:
-			visible_team_players.append(body)
-		else:
-			visible_opponent_players.append(body)
-
-
-func _on_FieldSpotDetector_area_exited(area):
-	visible_field_spots.erase(area.get_parent())
-
-
-func _on_Vision_body_exited(body):
-	visible_opponent_players.erase(body)
-	visible_team_players.erase(body)
