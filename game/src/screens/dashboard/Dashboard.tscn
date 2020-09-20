@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/screens/dashboard/Dashboard.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/ui-components/table/Table.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/ui-components/transfers/player-offer/PlayerOffer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/ui-components/transfers/contract-offer/ContractOffer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/ui-components/tranining/Training.tscn" type="PackedScene" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.905882, 0.121569, 0.121569, 1 )
@@ -201,6 +202,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ContractOffer" parent="ContractPopup" instance=ExtResource( 9 )]
+
+[node name="TrainingPopup" type="Popup" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -320.0
+margin_bottom = -680.0
+
+[node name="Training" parent="TrainingPopup" instance=ExtResource( 10 )]
 [connection signal="pressed" from="Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Buttons/Training" to="." method="_on_Training_pressed"]
 [connection signal="pressed" from="Buttons/Table" to="." method="_on_Table_pressed"]
