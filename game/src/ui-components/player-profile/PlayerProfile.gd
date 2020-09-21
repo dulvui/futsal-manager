@@ -12,6 +12,8 @@ func set_up_info(new_player):
 	$DetailPopup/TabContainer/Info/Info/Age.text = player["birth_date"]
 	$DetailPopup/TabContainer/Info/Info/Nationality.text = player["nationality"]
 	$DetailPopup/TabContainer/Info/Info/Team.text = str(player["prestige"])
+	$DetailPopup/TabContainer/Info/Info/Foot.text = player["foot"]
+	$DetailPopup/TabContainer/Info/Info/Nr.text = str(player["nr"])
 	$HBoxContainer/Prestige.text = str(player["prestige"])
 	
 	for key in player["mental"].keys():
