@@ -63,6 +63,7 @@ margin_bottom = 56.0
 text = "SELECT"
 
 [node name="DetailPopup" type="Popup" parent="."]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -85,14 +86,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 74.0
-margin_right = 36.0
-margin_bottom = 36.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="Mental" type="GridContainer" parent="DetailPopup/TabContainer/Info"]
-margin_left = 696.0
-margin_top = 372.0
-margin_right = 1133.0
-margin_bottom = 908.0
+margin_left = 72.0
+margin_top = 414.0
+margin_right = 509.0
+margin_bottom = 950.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_constants/hseparation = 40
 columns = 2
@@ -215,10 +216,10 @@ margin_bottom = 536.0
 text = "12"
 
 [node name="Technical" type="GridContainer" parent="DetailPopup/TabContainer/Info"]
-margin_left = 90.0716
-margin_top = 259.381
-margin_right = 456.072
-margin_bottom = 1155.38
+margin_left = 928.0
+margin_top = 164.0
+margin_right = 1294.0
+margin_bottom = 1060.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_constants/hseparation = 40
 columns = 2
@@ -419,10 +420,10 @@ margin_bottom = 896.0
 text = "12"
 
 [node name="Fisical" type="GridContainer" parent="DetailPopup/TabContainer/Info"]
-margin_left = 1312.0
-margin_top = 318.669
-margin_right = 1678.0
-margin_bottom = 614.669
+margin_left = 532.0
+margin_top = 414.0
+margin_right = 898.0
+margin_bottom = 710.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_constants/hseparation = 40
 columns = 2
@@ -527,36 +528,57 @@ margin_right = 484.0
 margin_bottom = 116.0
 text = "32"
 
-[node name="NationalityLabel" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
+[node name="FootLabel" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_top = 120.0
 margin_right = 276.0
 margin_bottom = 176.0
+text = "FOOT"
+
+[node name="Foot" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
+margin_left = 316.0
+margin_top = 120.0
+margin_right = 484.0
+margin_bottom = 176.0
+text = "32"
+
+[node name="NationalityLabel" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
+margin_top = 180.0
+margin_right = 276.0
+margin_bottom = 236.0
 text = "NATIONALITY"
 
 [node name="Nationality" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_left = 316.0
-margin_top = 120.0
+margin_top = 180.0
 margin_right = 484.0
-margin_bottom = 176.0
+margin_bottom = 236.0
 text = "Italiana"
 
 [node name="TeamLabel" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
-margin_top = 180.0
+margin_top = 240.0
 margin_right = 276.0
-margin_bottom = 236.0
+margin_bottom = 296.0
 text = "TEAM"
 
 [node name="Team" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
 margin_left = 316.0
-margin_top = 180.0
+margin_top = 240.0
 margin_right = 484.0
-margin_bottom = 236.0
+margin_bottom = 296.0
 text = "Bronzolo"
 
-[node name="Panel" type="Panel" parent="DetailPopup/TabContainer/Info/Info"]
-margin_top = 240.0
+[node name="NrLabel" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
+margin_top = 300.0
 margin_right = 276.0
-margin_bottom = 240.0
+margin_bottom = 356.0
+text = "NR"
+
+[node name="Nr" type="Label" parent="DetailPopup/TabContainer/Info/Info"]
+margin_left = 316.0
+margin_top = 300.0
+margin_right = 484.0
+margin_bottom = 356.0
+text = "Bronzolo"
 
 [node name="Hide" type="Button" parent="DetailPopup/TabContainer/Info"]
 margin_left = 1104.0
