@@ -14,8 +14,11 @@ var current_page = 0
 var all_players = []
 var current_players = []
 
+var info_type = "GENERAL"
+
 const POSITIONS = ["G","D","WL","WR","P","U"]
-const FOOT = ["R","L","RL"]
+const INFO_TYPES = ["GENERAL","FISICAL","MENTAL"]
+const FOOTS = ["R","L","RL"]
 
 func _ready():
 	for team in DataSaver.teams:
@@ -39,8 +42,11 @@ func _ready():
 		$PositionSelect.add_item(pos)
 		
 	$FootSelect.add_item("NO_FOOT")
-	for foot in FOOT:
+	for foot in FOOTS:
 		$FootSelect.add_item(foot)
+	
+	for info_type in INFO_TYPES:
+		$InfoSelect.add_item(info_type)
 
 func _process(delta):
 	$PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
@@ -54,13 +60,13 @@ func add_players():
 		var player_profile = PlayerProfile.instance()
 		player_profile.connect("player_select",self,"select_player",[player])
 		$CurrentPlayers.add_child(player_profile)
-		player_profile.set_up_info(player)
+		player_profile.set_up_info(player,info_type)
 	
 	for player in team["players"]["subs"]:
 		var player_profile = PlayerProfile.instance()
 		player_profile.connect("player_select",self,"select_player",[player])
 		$CurrentPlayers.add_child(player_profile)
-		player_profile.set_up_info(player)
+		player_profile.set_up_info(player,info_type)
 		
 func add_match_players():
 	var team = DataSaver.get_selected_team()
@@ -68,13 +74,13 @@ func add_match_players():
 		var player_profile = PlayerProfile.instance()
 		player_profile.connect("player_select",self,"select_player",[player])
 		$CurrentPlayers.add_child(player_profile)
-		player_profile.set_up_info(player)
+		player_profile.set_up_info(player,info_type)
 	
 	for player in team["players"]["subs"].slice(0,9):
 		var player_profile = PlayerProfile.instance()
 		player_profile.connect("player_select",self,"select_player",[player])
 		$CurrentPlayers.add_child(player_profile)
-		player_profile.set_up_info(player)
+		player_profile.set_up_info(player,info_type)
 	
 		
 func add_all_players(filter):
@@ -91,7 +97,7 @@ func add_all_players(filter):
 	for player in current_players.slice(current_page*10,((current_page + 1) * 10)-1):
 		var player_profile = PlayerProfile.instance()
 		player_profile.connect("player_select",self,"select_player",[player])
-		player_profile.set_up_info(player)
+		player_profile.set_up_info(player,info_type)
 		$CurrentPlayers.add_child(player_profile)
 			
 func select_player(player):
@@ -135,7 +141,7 @@ func _on_PositionSelect_item_selected(index):
 
 func _on_FootSelect_item_selected(index):
 	if index > 0:
-		foot_search = FOOT[index-1]
+		foot_search = FOOTS[index-1]
 	else:
 		foot_search = ""
 	add_all_players(true)
@@ -152,4 +158,9 @@ func _on_Prev_pressed():
 	current_page -= 1
 	if current_page < 0:
 		current_page = 0
+	add_all_players(false)
+
+
+func _on_InfoSelect_item_selected(index):
+	info_type = INFO_TYPES[index]
 	add_all_players(false)

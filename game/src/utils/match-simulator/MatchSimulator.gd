@@ -53,6 +53,57 @@ var away_stats = {
 
 const SECTOR_SIZE = 200
 
+var sectors = [
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	},
+	{
+		"home_players" : [],
+		"away_players" : [],
+	}
+]
+
 var time = 0.0
 
 var home_possess_counter = 0.0
@@ -63,6 +114,7 @@ func _ready():
 	pass
 	
 func update():
+	update_sectors()
 	time += 1
 	if home_has_ball:
 		home_possess_counter += 1
@@ -76,6 +128,7 @@ func update():
 		
 	for player in away_team["players"]["active"]:
 		player["real"].update_decision(!home_has_ball,player["has_ball"])
+		
 
 func set_up(home,away, match_started):
 	home_team = home.duplicate(true)
@@ -101,34 +154,10 @@ func set_up(home,away, match_started):
 			away_team["players"]["active"][4]["has_ball"] = true
 
 func get_team_players_in_sector(home,sector_pos):
-	var team_players = []
 	if home:
-		var current_sector = sector_pos / SECTOR_SIZE
-		for player in home_team["players"]["active"]:
-			if player["real"].sector_pos / SECTOR_SIZE == current_sector:
-				team_players.append(player)
+		return sectors[sector_pos/200]["home_players"]
 	else:
-		var current_sector = 6 - (sector_pos / SECTOR_SIZE)
-		for player in away_team["players"]["active"]:
-			if player["real"].sector_pos / SECTOR_SIZE == current_sector:
-				team_players.append(player)
-				
-	return team_players
-	
-func get_sector_with_most_opponent_players(home,sector_pos):
-	var team_players = []
-	if home:
-		var current_sector = sector_pos / SECTOR_SIZE
-		for player in home_team["players"]["active"]:
-			if player["real"].sector_pos / SECTOR_SIZE == current_sector:
-				team_players.append(player)
-	else:
-		var current_sector = 12 - (sector_pos / SECTOR_SIZE)
-		for player in away_team["players"]["active"]:
-			if player["real"].sector_pos / SECTOR_SIZE == current_sector:
-				team_players.append(player)
-				
-	return team_players
+		return sectors[sector_pos/200]["away_players"]
 	
 				
 func change_players(new_home_team,new_away_team):
@@ -171,10 +200,68 @@ func create_real_player(player,i):
 
 func pass_to(player):
 	print(player["name"])
+	player["has_ball"] = false
 	print("PASS in sim")
-	# passes to player and random defender of sector tires to intercept
-	#if pass OVER TWO SECTORS two players wil intercept, if present int sector
-	# switch has ball attribute
+	
+	#check if pass is successfull
+	
+	
+	var team_players
+	var opponent_players
+	#make pass
+	if player["home"]:
+		home_stats["pass"] += 1
+		team_players = sectors[player["real"].current_sector]["home_players"]
+		opponent_players = sectors[player["real"].current_sector]["away_players"]
+	else:
+		away_stats["pass"] += 1		
+		team_players = sectors[player["real"].current_sector]["away_players"]
+		opponent_players = sectors[player["real"].current_sector]["home_players"]
+	team_players.shuffle()
+	opponent_players.shuffle()
+	
+	var random_receiver = team_players[0]
+	
+	#if nno opponent player in sector, pass is succesful
+	if opponent_players.size() == 0:
+		random_receiver["real"].player["has_ball"] = true
+		if player["home"]:
+			home_stats["pass_success"] += 1
+		else:
+			away_stats["pass_success"] += 1
+	else:
+		var random_defender = opponent_players[0]
+
+		
+		#check interception
+		# results: intercept, no_intercept, no_intercept_but ball goes out of field
+		
+		#add also concentration and stamina
+		var defense_factor:int = random_defender["technical"]["intercept"]
+		var pass_factor:int = player["technical"]["pass"] * 3
+		var intercept_factor:int = defense_factor + pass_factor
+		
+		var random_factor = randi()%intercept_factor
+		var intercept_result = random_factor < defense_factor
+		#check receiver first touch, he could not be able to stop it
+		#reslts: success, no_stop_out_of_field, no_stop_defender_gets_ball
+		
+		#make pass
+		if intercept_result:
+			random_defender["real"].player["has_ball"] = true
+			if player["home"]:
+				home_has_ball = false
+			else:
+				home_has_ball = true
+		else:
+			random_receiver["real"].player["has_ball"] = true
+			if player["home"]:
+				home_stats["pass_success"] += 1
+			else:
+				away_stats["pass_success"] += 1
+		# passes to player and random defender of sector tires to intercept
+		#if pass OVER TWO SECTORS two players wil intercept, if present int sector
+		# switch has ball attribute
 	
 func shoot(player):
 	print(player["name"])
@@ -195,4 +282,13 @@ func wait(player):
 func dribble(player):
 	print(player["name"])
 	print("DRIBBLES in sim")
+	
+func update_sectors():
+	for sector in sectors:
+		sector["home_players"] = []
+		sector["away_players"] = []
+	for player in home_team["players"]["active"]:
+		sectors[player["real"].current_sector]["home_players"].append(player)
+	for player in away_team["players"]["active"]:
+		sectors[player["real"].current_sector]["away_players"].append(player)
 
