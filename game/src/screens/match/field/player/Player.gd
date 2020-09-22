@@ -11,6 +11,7 @@ signal move_up
 signal move_down
 
 var sector_pos
+var current_sector
 
 var max_sector
 var min_sector
@@ -57,6 +58,7 @@ func update_decision(team_has_ball,has_ball):
 	else:
 		make_defensive_decision()
 		
+		
 	
 func set_up(new_player,field_pos):
 	player = new_player
@@ -64,6 +66,7 @@ func set_up(new_player,field_pos):
 		sector_pos = (field_pos+1) * 200
 	else:
 		sector_pos = 1200 -( (field_pos+1) * 200)
+	current_sector = sector_pos/200
 	
 	min_sector = sector_pos - 300
 	if min_sector < 0:
@@ -84,7 +87,7 @@ func make_offensive_with_ball_decision():
 	var pass_factor = check_pass()
 	var move_up_factor = check_move_up()
 	var move_down_factor = check_move_down()
-	var wait_factor = randi()%20
+	var wait_factor = 3
 	
 	var sum: int = shoot_factor + pass_factor + move_up_factor + move_down_factor + wait_factor
 	var decision_factor = randi()%sum
@@ -92,14 +95,14 @@ func make_offensive_with_ball_decision():
 	if decision_factor < shoot_factor:
 		print("SHOOTS")
 		emit_signal("shoot",player)
-	elif decision_factor < shoot_factor + pass_factor:
+	elif decision_factor < (shoot_factor + pass_factor):
 		print("PASS")
 		emit_signal("pass_to",player)
-	elif decision_factor < shoot_factor + pass_factor + move_up_factor:
+	elif decision_factor < (shoot_factor + pass_factor + move_up_factor):
 		print("MOVES UP")
 		move_up()
 		emit_signal("move_up",player)
-	elif decision_factor < shoot_factor + pass_factor + move_up_factor + move_down_factor:
+	elif decision_factor < (shoot_factor + pass_factor + move_up_factor + move_down_factor):
 		print("MOVES DOWN")
 		move_down()
 		emit_signal("move_down",player)
@@ -109,7 +112,7 @@ func make_offensive_with_ball_decision():
 	
 	
 func make_offensive_no_ball_decision():
-	print(player["surname"] + " team has ball")
+#	print(player["surname"] + " team has ball")
 	
 	var move_down_factor = check_move_down()
 	var move_up_factor = check_move_up()
@@ -119,19 +122,19 @@ func make_offensive_no_ball_decision():
 	var decision_factor = randi()%sum
 	
 	if decision_factor < move_up_factor:
-		print("MOVES UP")
+#		print("MOVES UP")
 		move_up()
 		emit_signal("move_up",player)
 	elif decision_factor < move_up_factor + move_down_factor:
-		print("MOVES DOWN")
+#		print("MOVES DOWN")
 		move_down()
 		emit_signal("move_down",player)
 	else:
-		print("WAITS")
+#		print("WAITS")
 		emit_signal("wait",player)
 func make_defensive_decision():
 	# check which sector has most opponent players and with ball and move there
-	print(player["surname"] + " defends")
+#	print(player["surname"] + " defends")
 	
 	var move_down_factor = check_move_down()
 	var move_up_factor = check_move_up()
@@ -140,23 +143,23 @@ func make_defensive_decision():
 	var decision_factor = randi()%(move_up_factor + move_down_factor + wait_factor)
 	
 	if decision_factor < move_up_factor:
-		print("MOVES UP")
+#		print("MOVES UP")
 		emit_signal("move_up",player)
 		move_down()
 	elif decision_factor < move_up_factor + move_down_factor:
-		print("MOVES DOWN")
+#		print("MOVES DOWN")
 		emit_signal("move_down",player)
 		move_up()
 	else:
-		print("WAITS")
+#		print("WAITS")
 		emit_signal("wait",player)
 	
 func check_shoot():
 	# check team mentality, if shooting from distance already shooting from far sectors
-	var shoot_factor = get_sector() + 8 # +8 to make max 20
+	var shoot_factor = current_sector + 8 # +8 to make max 20
 	var opponent_players_in_sector = get_parent().get_team_players_in_sector(!player["home"],sector_pos)
 	shoot_factor -= opponent_players_in_sector.size() * 4
-	shoot_factor = max(shoot_factor,0)
+	shoot_factor = max(shoot_factor,1)
 	return shoot_factor
 	
 	
@@ -164,13 +167,13 @@ func check_shoot():
 func check_pass():
 	#add player vision affect
 	#add pass mentality
-	var pass_factor = 0 
+	var pass_factor = 1
 	var opponent_players_in_sector = get_parent().get_team_players_in_sector(!player["home"],sector_pos)
 	var team_players_in_sector = get_parent().get_team_players_in_sector(player["home"],sector_pos)
 	pass_factor -= opponent_players_in_sector.size() * 3
 	pass_factor += opponent_players_in_sector.size() * 5
-	pass_factor = max(pass_factor,0)
-	return pass_factor
+	pass_factor = max(pass_factor,1)
+	return pass_factor * 4
 	
 func check_move_up():
 	# check opponentn players in next secor, if no players move up imedialtly
@@ -192,8 +195,8 @@ func check_move_down():
 	if sector_pos > 200:
 		opponent_players_in_prev_sector = get_parent().get_team_players_in_sector(!player["home"],sector_pos + 200)
 		team_players_in_prev_sector = get_parent().get_team_players_in_sector(player["home"],sector_pos + 200)
-	move_factor -= opponent_players_in_prev_sector.size() * 4
-	move_factor += team_players_in_prev_sector.size() * 5
+	move_factor -= opponent_players_in_prev_sector.size() * 3
+	move_factor += team_players_in_prev_sector.size() * 4
 	move_factor = min(move_factor,20)
 	return move_factor
 	
@@ -206,6 +209,11 @@ func move_down():
 		sector_pos = max_sector
 	if sector_pos < min_sector:
 		sector_pos = min_sector
+	if player["home"]:
+		current_sector = sector_pos / 200
+	else:
+		current_sector = (1200 - sector_pos) / 200
+	
 
 # special movements: cornerns, penlaties, free kicks, kick off, rimessa
 func move_up():
@@ -218,9 +226,9 @@ func move_up():
 	if sector_pos < min_sector:
 		sector_pos = min_sector
 	
-func get_sector():
 	if player["home"]:
-		return  sector_pos / 200
+		current_sector = sector_pos / 200
 	else:
-		return 12 - (sector_pos / 200)
+		current_sector = (1200 - sector_pos) / 200
+	
 	

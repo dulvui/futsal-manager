@@ -4,17 +4,37 @@ signal player_select
 
 var player = {}
 
-func set_up_info(new_player):
+func set_up_info(new_player,info_type):
 	player = new_player
-	$HBoxContainer/Name.text = player["name"].substr(0,1) + ". " + player["surname"]
+	
+	$Info/Name.text = player["name"].substr(0,1) + ". " + player["surname"]
+	$Info/General/Position.text = player["position"]
+	$Info/General/Prestige.text = str(player["prestige"])
+	
+	for key in player["mental"].keys():
+		var label = Label.new()
+		label.text = str(player["mental"][key])
+		$Info/Mental.add_child(label)
+		
+	for key in player["fisical"].keys():
+		var label = Label.new()
+		label.text = str(player["fisical"][key])
+		$Info/Fisical.add_child(label)
+		
+	match info_type:
+		"GENERAL":
+			$Info/General.show()
+		"MENTAL":
+			$Info/Mental.show()
+		"FISICAL":
+			$Info/Fisical.show()
+			
 	$DetailPopup/TabContainer/Info/Info/Position.text = player["position"]
-	$HBoxContainer/Position.text = player["position"]
 	$DetailPopup/TabContainer/Info/Info/Age.text = player["birth_date"]
 	$DetailPopup/TabContainer/Info/Info/Nationality.text = player["nationality"]
 	$DetailPopup/TabContainer/Info/Info/Team.text = str(player["prestige"])
 	$DetailPopup/TabContainer/Info/Info/Foot.text = player["foot"]
 	$DetailPopup/TabContainer/Info/Info/Nr.text = str(player["nr"])
-	$HBoxContainer/Prestige.text = str(player["prestige"])
 	
 	for key in player["mental"].keys():
 		var ui = $DetailPopup/TabContainer/Info/Mental.get_node(key)
