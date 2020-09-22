@@ -47,6 +47,8 @@ func _process(delta):
 	$Stats/VBoxContainer/AwayPassSuccess.text = "%d "%$MatchSimulator.away_stats["pass_success"]
 	$Stats/VBoxContainer/HomeShots.text = "%d "%$MatchSimulator.home_stats["shots"]
 	$Stats/VBoxContainer/AwayShots.text = "%d "%$MatchSimulator.away_stats["shots"]
+	$Stats/VBoxContainer/AwayShotsOnTarget.text = "%d "%$MatchSimulator.away_stats["shots_on_target"]
+	$Stats/VBoxContainer/HomeShotsOnTarget.text = "%d "%$MatchSimulator.home_stats["shots_on_target"]
 	
 	$HUD/TimeBar.value = $MatchSimulator.time
 	
@@ -106,7 +108,7 @@ func _on_Dashboard_pressed():
 
 
 func _on_Faster_pressed():
-	if speed_factor < 4:
+	if speed_factor < 6:
 		$TimerMatchSimulator.wait_time /= 2
 		speed_factor += 1
 

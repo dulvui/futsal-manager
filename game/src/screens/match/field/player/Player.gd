@@ -83,11 +83,13 @@ func make_offensive_with_ball_decision():
 	print(player["surname"] + " has ball")
 	
 	# make all checks and the make decision
+	
+	#modify multiplactors by team mentality
 	var shoot_factor = check_shoot()
-	var pass_factor = check_pass()
-	var move_up_factor = check_move_up()
-	var move_down_factor = check_move_down()
-	var wait_factor = 3
+	var pass_factor = check_pass() * 60
+	var move_up_factor = check_move_up() * 10
+	var move_down_factor = check_move_down() * 10
+	var wait_factor = 20
 	
 	var sum: int = shoot_factor + pass_factor + move_up_factor + move_down_factor + wait_factor
 	var decision_factor = randi()%sum
@@ -173,7 +175,7 @@ func check_pass():
 	pass_factor -= opponent_players_in_sector.size() * 3
 	pass_factor += opponent_players_in_sector.size() * 5
 	pass_factor = max(pass_factor,1)
-	return pass_factor * 4
+	return pass_factor
 	
 func check_move_up():
 	# check opponentn players in next secor, if no players move up imedialtly
