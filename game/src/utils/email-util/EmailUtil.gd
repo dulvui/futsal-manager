@@ -2,7 +2,7 @@ extends Node
 
 var messages = []
 
-enum MESSAGE_TYPES {TRANSFER,TRANSFER_OFFER,CONTRACT_SIGNED,CONTRACT_OFFER}
+enum MESSAGE_TYPES {TRANSFER,TRANSFER_OFFER,CONTRACT_SIGNED,CONTRACT_OFFER,CONTRACT_OFFER_MADE,NEXT_MATCH}
 
 func _ready():
 	messages = DataSaver.messages
@@ -85,6 +85,17 @@ func message(content,type):
 				"content" : content
 			}
 			messages.append(ts_message)
+			
+		MESSAGE_TYPES.NEXT_MATCH:
+			var message = {
+				"title" : "next match",
+				"message" : "The next match is " + str(content),
+				"days" : 7,
+				"type" : type,
+				"read" : false,
+				"content" : content
+			}
+			messages.append(message)
 	
 	
 
