@@ -2,6 +2,8 @@ extends Node
 
 var config
 
+var language
+
 var manager
 
 var day_counter
@@ -33,6 +35,7 @@ func _ready():
 		"nationality" : "",
 		"birth_date" : "",
 	})
+	language = config.get_value("settings","language","ND")
 	
 	calendar = config.get_value("season","calendar",[])
 	table = config.get_value("season","table",[])
@@ -71,7 +74,12 @@ func reset():
 	day = 1
 	day_counter = 1
 	
-	
+func set_lang(lang):
+	language = lang
+	config.set_value("settings","language", language)
+	config.save("user://settings.cfg")
+	print("lang set to " + language)
+
 func save_all_data():
 	config.set_value("manager","data",manager)
 	config.set_value("selected_team","data",selected_team)
