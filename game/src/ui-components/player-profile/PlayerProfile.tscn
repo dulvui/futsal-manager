@@ -461,7 +461,7 @@ margin_bottom = 56.0
 margin_top = 60.0
 margin_right = 291.0
 margin_bottom = 116.0
-text = "INTERCEPT"
+text = "ACCELERATION"
 
 [node name="acceleration" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_left = 331.0
@@ -474,7 +474,7 @@ text = "12"
 margin_top = 120.0
 margin_right = 291.0
 margin_bottom = 176.0
-text = "SHOOT"
+text = "PACE"
 
 [node name="pace" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_left = 331.0
@@ -487,7 +487,7 @@ text = "12"
 margin_top = 180.0
 margin_right = 291.0
 margin_bottom = 236.0
-text = "LONG_SHOOT"
+text = "STAMINA"
 
 [node name="stamina" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_left = 331.0
@@ -500,7 +500,7 @@ text = "12"
 margin_top = 240.0
 margin_right = 291.0
 margin_bottom = 296.0
-text = "PASS"
+text = "STRENGTH"
 
 [node name="strength" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_left = 331.0
