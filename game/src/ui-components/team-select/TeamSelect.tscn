@@ -12,6 +12,9 @@ margin_right = -463.861
 margin_bottom = -19.8579
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TeamList" type="VBoxContainer" parent="."]
 margin_left = 416.94
@@ -22,10 +25,3 @@ custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Label" type="Label" parent="."]
-margin_left = -324.286
-margin_top = -160.361
-margin_right = 306.714
-margin_bottom = -48.3615
-text = "CHOOSE_TEAM"

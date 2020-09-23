@@ -20,7 +20,7 @@ func update_day():
 					if transfer["state"] == "TEAM_PENDING":
 #						transfer["success"] = randi()%2 == 0
 						transfer["success"] = true
-						emit_signal("transfer_mail",[transfer,"CONTRACT_OFFER"])
+						EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER)
 						transfer["days"] = (randi()%5)+1
 						transfer["state"] = "MAKE_CONTRACT_OFFER"
 					elif transfer["state"] == "CONTRACT_PENDING":
@@ -28,12 +28,11 @@ func update_day():
 		#				if transfer["success"]:
 						transfer["state"] = "SUCCESS"
 						DataSaver.make_transfer(transfer)
-						emit_signal("transfer_mail",[transfer,"CONTRACT_SIGNED"])
-		#				current_transfers.erase(transfer)
+						EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.CONTRACT_SIGNED)
 		_make_random_transfer_requests()
 
 func make_offer(transfer):
-	emit_signal("transfer_mail",[transfer,"TRANSFER"])
+	EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.TRANSFER)
 	print("transfer message")
 	current_transfers.append(transfer)
 	

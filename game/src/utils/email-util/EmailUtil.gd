@@ -2,6 +2,8 @@ extends Node
 
 var messages = []
 
+enum MESSAGE_TYPES {TRANSFER,TRANSFER_OFFER,CONTRACT_SIGNED,CONTRACT_OFFER}
+
 func _ready():
 	messages = DataSaver.messages
 
@@ -20,68 +22,69 @@ func count_unread_messages():
 			counter += 1
 	return counter
 
-func message(new_message):
-	print("new mail")
-	if new_message[1] == "TRANSFER":
-		print("TRANSFER")
-		var ts_message
-		if new_message[0].has("success"):
-			if new_message[0]["success"]:
-				ts_message = {
-					"title" : "TRANSFER",
-					"message" : "You bought for" + str(new_message[0]["money"]) + " " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
-					"days" : 7,
-					"type" : "TRANSFER",
-					"read" : false
-				}
+func message(content,type):
+	print("new " + str(type) + " mail")
+	match type:
+		MESSAGE_TYPES.TRANSFER:
+			print("TRANSFER")
+			var ts_message
+			if content.has("success"):
+				if content["success"]:
+					ts_message = {
+						"title" : "TRANSFER",
+						"message" : "You bought for" + str(content["money"]) + " " + content["player"]["name"] + " " + content["player"]["surname"],
+						"days" : 7,
+						"type" : type,
+						"read" : false
+					}
+				else:
+					ts_message = {
+						"title" : "TRANSFER",
+						"message" : "You couldnt buy for" + str(content["money"]) + " " + content["player"]["name"] + " " + content["player"]["surname"],
+						"days" : 7,
+						"type" : type,
+						"read" : false
+					}
 			else:
 				ts_message = {
-					"title" : "TRANSFER",
-					"message" : "You couldnt buy for" + str(new_message[0]["money"]) + " " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
-					"days" : 7,
-					"type" : "TRANSFER",
-					"read" : false
-				}
-		else:
-			ts_message = {
-			"title" : "TRANSFER",
-			"message" : "You made an " + str(new_message[0]["money"]) + " offer for " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
-			"days" : 7,
-			"type" : "TRANSFER",
-			"read" : false
-		}
-		messages.append(ts_message)
-	# contract
-	elif new_message[1] == "CONTRACT_OFFER":
-		var ts_message = {
-			"title" : "CONTRACT",
-			"message" : "You need to make an contract offer for " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
-			"days" : 7,
-			"type" : new_message[1],
-			"read" : false,
-			"content" : new_message[0]
-		}
-		messages.append(ts_message)
-	elif new_message[1] == "CONTRACT_OFFER_MADE":
-		var ts_message = {
-			"title" : "CONTRACT",
-			"message" : "You made an contract offer for " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"],
-			"days" : 7,
-			"type" : new_message[1],
-			"read" : false,
-			"content" : new_message[0]
-		}
-		messages.append(ts_message)
-	elif new_message[1] == "CONTRACT_SIGNED":
-		var ts_message = {
-			"title" : "new player",
-			"message" : "The player acceptet " + new_message[0]["player"]["name"] + " " + new_message[0]["player"]["surname"] + " the contract",
-			"days" : 7,
-			"type" : new_message[1],
-			"read" : false,
-			"content" : new_message[0]
-		}
-		messages.append(ts_message)
+				"title" : "TRANSFER",
+				"message" : "You made an " + str(content["money"]) + " offer for " + content["player"]["name"] + " " + content["player"]["surname"],
+				"days" : 7,
+				"type" : type,
+				"read" : false
+			}
+			messages.append(ts_message)
+		# contract
+		MESSAGE_TYPES.CONTRACT_OFFER:
+			var ts_message = {
+				"title" : "CONTRACT",
+				"message" : "You need to make an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"],
+				"days" : 7,
+				"type" : type,
+				"read" : false,
+				"content" : content
+			}
+			messages.append(ts_message)
+		MESSAGE_TYPES.CONTRACT_OFFER_MADE:
+			var ts_message = {
+				"title" : "CONTRACT",
+				"message" : "You made an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"],
+				"days" : 7,
+				"type" : type,
+				"read" : false,
+				"content" : content
+			}
+			messages.append(ts_message)
+		MESSAGE_TYPES.CONTRACT_SIGNED:
+			var ts_message = {
+				"title" : "new player",
+				"message" : "The player acceptet " + content["player"]["name"] + " " + content["player"]["surname"] + " the contract",
+				"days" : 7,
+				"type" : type,
+				"read" : false,
+				"content" : content
+			}
+			messages.append(ts_message)
 	
 	
 

@@ -67,8 +67,9 @@ func _on_TimerMatchSimulator_timeout():
 	
 
 func _on_Field_pressed():
-	$MatchSimulator.show()
-	$Stats.hide()
+#	$MatchSimulator.show()
+#	$Stats.hide()
+	pass
 
 
 func _on_Stats_pressed():
@@ -157,11 +158,15 @@ func _on_SKIP_pressed():
 
 func _on_MatchSimulator_home_goal():
 	$TimerMatchSimulator.paused = true
+	$Stats.hide() #make animation
+	$MatchSimulator.show()
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
 	$TimerMatchSimulator.paused = false
+	$Stats.show() #make animation
+	$MatchSimulator.hide()
 
 
 func _on_MatchSimulator_away_goal():

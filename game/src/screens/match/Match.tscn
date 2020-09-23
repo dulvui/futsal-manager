@@ -31,6 +31,7 @@ __meta__ = {
 }
 
 [node name="MatchSimulator" parent="." instance=ExtResource( 4 )]
+visible = false
 margin_left = 477.745
 margin_top = 224.59
 margin_right = 477.745
@@ -47,10 +48,10 @@ __meta__ = {
 [node name="TopBar" type="HBoxContainer" parent="HUD"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 700.927
-margin_top = 47.2864
-margin_right = 1340.93
-margin_bottom = 103.286
+margin_left = 549.736
+margin_top = 44.7666
+margin_right = 1189.74
+margin_bottom = 100.767
 custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
@@ -102,16 +103,19 @@ __meta__ = {
 }
 
 [node name="Pause" type="Button" parent="HUD"]
-margin_left = 1703.62
+margin_left = 1727.62
 margin_top = 36.0218
-margin_right = 1840.62
+margin_right = 1864.62
 margin_bottom = 92.0218
 text = "PAUSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Faster" type="Button" parent="HUD"]
-margin_left = 1559.62
+margin_left = 1511.62
 margin_top = 37.0218
-margin_right = 1696.62
+margin_right = 1670.62
 margin_bottom = 93.0218
 text = "FASTER"
 __meta__ = {
@@ -119,9 +123,9 @@ __meta__ = {
 }
 
 [node name="Slower" type="Button" parent="HUD"]
-margin_left = 1407.62
+margin_left = 1279.62
 margin_top = 36.0218
-margin_right = 1544.62
+margin_right = 1453.62
 margin_bottom = 92.0218
 text = "SLOWER"
 
@@ -212,7 +216,6 @@ margin_bottom = 21.5
 text = "POSSESSION"
 
 [node name="Stats" type="MarginContainer" parent="."]
-visible = false
 margin_left = 642.0
 margin_top = 218.0
 margin_right = 1696.0
@@ -228,273 +231,273 @@ margin_bottom = 656.0
 columns = 3
 
 [node name="HomePossession" type="Label" parent="Stats/VBoxContainer"]
-margin_right = 348.0
-margin_bottom = 43.0
+margin_right = 317.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 text = "45%"
 
 [node name="Possession" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_right = 700.0
-margin_bottom = 43.0
+margin_left = 321.0
+margin_right = 732.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 text = "POSSESSION"
 align = 1
 
 [node name="AwayPossession" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_right = 1052.0
-margin_bottom = 43.0
+margin_left = 736.0
+margin_right = 1053.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 text = "55%"
 align = 2
 
 [node name="HomeShots" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 47.0
-margin_right = 348.0
-margin_bottom = 90.0
+margin_top = 60.0
+margin_right = 317.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 text = "12"
 
 [node name="Shots" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 47.0
-margin_right = 700.0
-margin_bottom = 90.0
+margin_left = 321.0
+margin_top = 60.0
+margin_right = 732.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 text = "SHOTS"
 align = 1
 
 [node name="AwayShots" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 47.0
-margin_right = 1052.0
-margin_bottom = 90.0
+margin_left = 736.0
+margin_top = 60.0
+margin_right = 1053.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 text = "0"
 align = 2
 
 [node name="HomeShotsOnTarget" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 94.0
-margin_right = 348.0
-margin_bottom = 137.0
+margin_top = 120.0
+margin_right = 317.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 text = "0"
 
 [node name="ShotsOnTarget" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 94.0
-margin_right = 700.0
-margin_bottom = 137.0
+margin_left = 321.0
+margin_top = 120.0
+margin_right = 732.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 text = "SHOTS_ON_TARGET"
 align = 1
 
 [node name="AwayShotsOnTarget" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 94.0
-margin_right = 1052.0
-margin_bottom = 137.0
+margin_left = 736.0
+margin_top = 120.0
+margin_right = 1053.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 text = "0"
 align = 2
 
 [node name="HomeCorners" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 141.0
-margin_right = 348.0
-margin_bottom = 184.0
+margin_top = 180.0
+margin_right = 317.0
+margin_bottom = 236.0
 size_flags_horizontal = 3
 text = "0"
 
 [node name="Corners" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 141.0
-margin_right = 700.0
-margin_bottom = 184.0
+margin_left = 321.0
+margin_top = 180.0
+margin_right = 732.0
+margin_bottom = 236.0
 size_flags_horizontal = 3
 text = "CORNERS"
 align = 1
 
 [node name="AwayCorners" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 141.0
-margin_right = 1052.0
-margin_bottom = 184.0
+margin_left = 736.0
+margin_top = 180.0
+margin_right = 1053.0
+margin_bottom = 236.0
 size_flags_horizontal = 3
 text = "0"
 align = 2
 
 [node name="HomeFreeKicks" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 188.0
-margin_right = 348.0
-margin_bottom = 231.0
+margin_top = 240.0
+margin_right = 317.0
+margin_bottom = 296.0
 size_flags_horizontal = 3
 text = "0"
 
 [node name="FreeKicks" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 188.0
-margin_right = 700.0
-margin_bottom = 231.0
+margin_left = 321.0
+margin_top = 240.0
+margin_right = 732.0
+margin_bottom = 296.0
 size_flags_horizontal = 3
 text = "FREE_KICKS"
 align = 1
 
 [node name="AwayFreeKicks" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 188.0
-margin_right = 1052.0
-margin_bottom = 231.0
+margin_left = 736.0
+margin_top = 240.0
+margin_right = 1053.0
+margin_bottom = 296.0
 size_flags_horizontal = 3
 text = "0"
 align = 2
 
 [node name="HomeThrowIn" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 235.0
-margin_right = 348.0
-margin_bottom = 278.0
+margin_top = 300.0
+margin_right = 317.0
+margin_bottom = 356.0
 size_flags_horizontal = 3
 text = "0"
 
 [node name="ThrowIn" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 235.0
-margin_right = 700.0
-margin_bottom = 278.0
+margin_left = 321.0
+margin_top = 300.0
+margin_right = 732.0
+margin_bottom = 356.0
 size_flags_horizontal = 3
 text = "THROW_INS"
 align = 1
 
 [node name="AwayThrowIn" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 235.0
-margin_right = 1052.0
-margin_bottom = 278.0
+margin_left = 736.0
+margin_top = 300.0
+margin_right = 1053.0
+margin_bottom = 356.0
 size_flags_horizontal = 3
 text = "0"
 align = 2
 
 [node name="HomeFouls" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 282.0
-margin_right = 348.0
-margin_bottom = 325.0
+margin_top = 360.0
+margin_right = 317.0
+margin_bottom = 416.0
 size_flags_horizontal = 3
 text = "0"
 
 [node name="Fouls" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 282.0
-margin_right = 700.0
-margin_bottom = 325.0
+margin_left = 321.0
+margin_top = 360.0
+margin_right = 732.0
+margin_bottom = 416.0
 size_flags_horizontal = 3
 text = "FOULS"
 align = 1
 
 [node name="AwayFouls" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 282.0
-margin_right = 1052.0
-margin_bottom = 325.0
+margin_left = 736.0
+margin_top = 360.0
+margin_right = 1053.0
+margin_bottom = 416.0
 size_flags_horizontal = 3
 text = "0"
 align = 2
 
 [node name="HomePass" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 329.0
-margin_right = 348.0
-margin_bottom = 372.0
+margin_top = 420.0
+margin_right = 317.0
+margin_bottom = 476.0
 size_flags_horizontal = 3
 text = "0"
 
 [node name="Pass" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 329.0
-margin_right = 700.0
-margin_bottom = 372.0
+margin_left = 321.0
+margin_top = 420.0
+margin_right = 732.0
+margin_bottom = 476.0
 size_flags_horizontal = 3
 text = "PASS"
 align = 1
 
 [node name="AwayPass" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 329.0
-margin_right = 1052.0
-margin_bottom = 372.0
+margin_left = 736.0
+margin_top = 420.0
+margin_right = 1053.0
+margin_bottom = 476.0
 size_flags_horizontal = 3
 text = "0"
 align = 2
 
 [node name="HomePassSuccess" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 376.0
-margin_right = 348.0
-margin_bottom = 419.0
+margin_top = 480.0
+margin_right = 317.0
+margin_bottom = 536.0
 size_flags_horizontal = 3
 text = "100 - 90%"
 
 [node name="PassSuccess" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 376.0
-margin_right = 700.0
-margin_bottom = 419.0
+margin_left = 321.0
+margin_top = 480.0
+margin_right = 732.0
+margin_bottom = 536.0
 size_flags_horizontal = 3
 text = "PASS_SUCCESS"
 align = 1
 
 [node name="AwayPassSuccess" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 376.0
-margin_right = 1052.0
-margin_bottom = 419.0
+margin_left = 736.0
+margin_top = 480.0
+margin_right = 1053.0
+margin_bottom = 536.0
 size_flags_horizontal = 3
 text = "60% - 26"
 align = 2
 
 [node name="HomeYellowCards" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 423.0
-margin_right = 348.0
-margin_bottom = 466.0
+margin_top = 540.0
+margin_right = 317.0
+margin_bottom = 596.0
 size_flags_horizontal = 3
 text = "0"
 
 [node name="YellowCards" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 423.0
-margin_right = 700.0
-margin_bottom = 466.0
+margin_left = 321.0
+margin_top = 540.0
+margin_right = 732.0
+margin_bottom = 596.0
 size_flags_horizontal = 3
 text = "YELLOW_CARDS"
 align = 1
 
 [node name="AwayYellowCards" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 423.0
-margin_right = 1052.0
-margin_bottom = 466.0
+margin_left = 736.0
+margin_top = 540.0
+margin_right = 1053.0
+margin_bottom = 596.0
 size_flags_horizontal = 3
 text = "0"
 align = 2
 
 [node name="HomeRedCards" type="Label" parent="Stats/VBoxContainer"]
-margin_top = 470.0
-margin_right = 348.0
-margin_bottom = 513.0
+margin_top = 600.0
+margin_right = 317.0
+margin_bottom = 656.0
 size_flags_horizontal = 3
 text = "0"
 
 [node name="RedCards" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 352.0
-margin_top = 470.0
-margin_right = 700.0
-margin_bottom = 513.0
+margin_left = 321.0
+margin_top = 600.0
+margin_right = 732.0
+margin_bottom = 656.0
 size_flags_horizontal = 3
 text = "RED_CARDS"
 align = 1
 
 [node name="AwayRedCards" type="Label" parent="Stats/VBoxContainer"]
-margin_left = 704.0
-margin_top = 470.0
-margin_right = 1052.0
-margin_bottom = 513.0
+margin_left = 736.0
+margin_top = 600.0
+margin_right = 1053.0
+margin_bottom = 656.0
 size_flags_horizontal = 3
 text = "0"
 align = 2

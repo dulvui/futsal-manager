@@ -342,12 +342,14 @@ func shoot(player):
 				if player["home"]:
 					emit_signal("home_goal")
 					print("HOME GOAL")
+					show_goal(player)
 					home_stats["goals"] += 1
 					home_has_ball = false
 					away_team["players"]["active"][4]["real"].player["has_ball"] = true
 				else:
 					emit_signal("away_goal")
 					print("AWAY GOAL")
+					show_goal(player)
 					away_stats["goals"] += 1
 					home_has_ball = true
 					home_team["players"]["active"][4]["real"].player["has_ball"] = true
@@ -398,3 +400,5 @@ func update_sectors():
 	for player in away_team["players"]["active"]:
 		sectors[player["real"].current_sector]["away_players"].append(player)
 
+func show_goal(player):
+	pass

@@ -85,7 +85,7 @@ func _on_Confirm_pressed():
 			transferz["days"] = 3
 			transferz["state"] = "CONTRACT_PENDING"
 			print("CAZOOOOOOOO")
-			EmailUtil.message([transfer,"CONTRACT_OFFER_MADE"])
+			EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER_MADE)
 	emit_signal("confirm")
 #	ContractUtil.current_contract_offers.append(def_contract)
 
