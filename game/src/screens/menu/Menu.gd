@@ -11,7 +11,7 @@ func _on_StartGame_pressed():
 
 
 func _on_Settings_pressed():
-	pass
+	get_tree().change_scene("res://src/screens/language-pick/LanguagePicker.tscn")
 
 
 
