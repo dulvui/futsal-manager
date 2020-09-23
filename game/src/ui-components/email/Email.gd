@@ -51,6 +51,8 @@ func show_message(message):
 	#transfer
 	else:
 		$DetailPopUp/Message.text = message["message"]
+		
+	update_messages()
 
 
 func show_offer_contract(content):

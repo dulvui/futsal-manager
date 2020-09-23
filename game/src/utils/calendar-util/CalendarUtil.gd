@@ -46,6 +46,14 @@ func next_day():
 	# player growth
 	# pay players/staff
 	
+	
+	if DataSaver.calendar[day_counter + 1]["matches"].size() > 0:
+		var next_match
+		for matchz in DataSaver.calendar[day_counter + 1]["matches"]:
+			if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
+				next_match = matchz
+		EmailUtil.message(next_match,EmailUtil.MESSAGE_TYPES.NEXT_MATCH)
+	
 
 func calc_date():
 	day += 1
