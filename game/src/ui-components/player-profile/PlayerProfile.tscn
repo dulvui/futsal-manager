@@ -448,64 +448,64 @@ __meta__ = {
 }
 
 [node name="TitleLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
-margin_right = 291.0
+margin_right = 322.0
 margin_bottom = 56.0
 text = "FISICAL"
 
 [node name="Title" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
-margin_left = 331.0
-margin_right = 366.0
+margin_left = 362.0
+margin_right = 397.0
 margin_bottom = 56.0
 
 [node name="AccelerationLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_top = 60.0
-margin_right = 291.0
+margin_right = 322.0
 margin_bottom = 116.0
 text = "ACCELERATION"
 
 [node name="acceleration" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
-margin_left = 331.0
+margin_left = 362.0
 margin_top = 60.0
-margin_right = 366.0
+margin_right = 397.0
 margin_bottom = 116.0
 text = "12"
 
 [node name="PaceLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_top = 120.0
-margin_right = 291.0
+margin_right = 322.0
 margin_bottom = 176.0
 text = "PACE"
 
 [node name="pace" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
-margin_left = 331.0
+margin_left = 362.0
 margin_top = 120.0
-margin_right = 366.0
+margin_right = 397.0
 margin_bottom = 176.0
 text = "12"
 
 [node name="StaminaLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_top = 180.0
-margin_right = 291.0
+margin_right = 322.0
 margin_bottom = 236.0
 text = "STAMINA"
 
 [node name="stamina" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
-margin_left = 331.0
+margin_left = 362.0
 margin_top = 180.0
-margin_right = 366.0
+margin_right = 397.0
 margin_bottom = 236.0
 text = "12"
 
 [node name="StrengthLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
 margin_top = 240.0
-margin_right = 291.0
+margin_right = 322.0
 margin_bottom = 296.0
 text = "STRENGTH"
 
 [node name="strength" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
-margin_left = 331.0
+margin_left = 362.0
 margin_top = 240.0
-margin_right = 366.0
+margin_right = 397.0
 margin_bottom = 296.0
 text = "12"
 

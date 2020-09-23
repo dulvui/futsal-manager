@@ -55,6 +55,9 @@ func add_players():
 	for child in $CurrentPlayers.get_children():
 		child.queue_free()
 		
+	$TeamSelect.hide()
+	$LegaueSelect.hide()
+		
 	var team = DataSaver.get_selected_team()
 	for player in team["players"]["active"]:
 		var player_profile = PlayerProfile.instance()
@@ -69,6 +72,11 @@ func add_players():
 		player_profile.set_up_info(player,info_type)
 		
 func add_match_players():
+	for child in $CurrentPlayers.get_children():
+		child.queue_free()
+	
+	$TeamSelect.hide()
+	$LegaueSelect.hide()
 	var team = DataSaver.get_selected_team()
 	for player in team["players"]["active"]:
 		var player_profile = PlayerProfile.instance()
@@ -86,6 +94,9 @@ func add_match_players():
 func add_all_players(filter):
 	for child in $CurrentPlayers.get_children():
 		child.queue_free()
+		
+	var vbox = VBoxContainer.new()
+	vbox.add_constant_override("separation", 60)
 	
 	if filter:
 		current_players = []
@@ -98,8 +109,10 @@ func add_all_players(filter):
 		var player_profile = PlayerProfile.instance()
 		player_profile.connect("player_select",self,"select_player",[player])
 		player_profile.set_up_info(player,info_type)
-		$CurrentPlayers.add_child(player_profile)
-			
+		vbox.add_child(player_profile)
+	$CurrentPlayers.add_child(vbox)
+	
+
 func select_player(player):
 	print("change in lst")
 	emit_signal("select_player",player)

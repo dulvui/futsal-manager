@@ -16,6 +16,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CurrentPlayers" type="MarginContainer" parent="."]
+margin_left = 587.339
+margin_top = 31.748
+margin_right = 1387.34
+margin_bottom = 831.748
+rect_pivot_offset = Vector2( 400, 400 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="NameSearch" type="LineEdit" parent="."]
 margin_left = 40.0
 margin_top = 60.0
@@ -24,20 +33,6 @@ margin_bottom = 126.0
 placeholder_text = "NAME"
 caret_blink = true
 caret_blink_speed = 0.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CurrentPlayers" type="VBoxContainer" parent="."]
-margin_left = 665.437
-margin_top = 60.0
-margin_right = 1665.44
-margin_bottom = 1060.0
-rect_scale = Vector2( 0.7, 0.7 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 68
-alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
