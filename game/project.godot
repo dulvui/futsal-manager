@@ -29,7 +29,6 @@ Leagues="*res://src/data/legaues/Leagues.gd"
 MatchMaker="*res://src/utils/match-maker/MatchMaker.gd"
 TransferUtil="*res://src/utils/transfer-util/TransferUtil.gd"
 EmailUtil="*res://src/utils/email-util/EmailUtil.gd"
-Global="*res://src/utils/global/Global.tscn"
 ContractUtil="*res://src/utils/contract-util/ContractUtil.gd"
 
 [display]

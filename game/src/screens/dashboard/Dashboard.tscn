@@ -13,6 +13,10 @@
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.905882, 0.121569, 0.121569, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [node name="Dashboard" type="Control"]
 anchor_right = 1.0
@@ -110,10 +114,12 @@ __meta__ = {
 }
 
 [node name="MailCounter" type="Label" parent="Buttons/Email/Panel"]
+margin_top = -3.0
 margin_right = 56.0
-margin_bottom = 56.0
+margin_bottom = 53.0
 text = "12"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

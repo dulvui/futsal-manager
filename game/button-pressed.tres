@@ -2,9 +2,7 @@
 
 [resource]
 bg_color = Color( 0.960938, 0.709442, 0.733394, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 expand_margin_left = 15.0
 expand_margin_right = 15.0
+shadow_size = 5
+shadow_offset = Vector2( 0, 5 )
