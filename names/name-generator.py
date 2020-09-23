@@ -133,11 +133,72 @@ def get_price(age, prestige, pos):
     return random.randint(total_factor-20, total_factor) * 10000
 
 
-def get_contract(player):
-	# check prestige of player and team and make contract, years are random, money depending on prestige etc
-    return
+def get_contract(prestige, position, age):
+	global fake_it
+	
+	past = random.randint(1,2)
+	future = random.randint(1,3)
+
+	price_factor = random.randint()
 
 
+	contract = {
+		"price" : 0,
+		"money/week" : 0,
+		"start_date" : fake_it.date_time_between(start_date='-'+ past +'y',end_date='-1y').strftime("%d/%m/%Y"),
+		"end_date" : fake_it.date_time_between(start_date='+1', end_date='+' + future + 'y').strftime("%d/%m/%Y"),
+		"bonus" : {
+			"goal" : 0,
+			"clean_sheet" : 0,
+			"assist" : 0,
+			"league_title" : 0,
+			"nat_cup_title" : 0,
+			"inter_cup_title" : 0,
+		},
+		"buy_clause" : 0,
+		"is_on_loan" : "" # if player is on loan, original team name is here
+	}
+	return contract
+
+def get_history(prestige, position, age, contract, potential_growth):
+	global fake_it
+	
+	past = random.randint(1,2)
+	future = random.randint(1,3)
+
+	price_factor = random.randint()
+	
+	# look at years in contract, so before he played in other club
+	# look at potential growth and stats of player and increase price over years
+	# save also price evolution
+
+	history = [
+		{
+			"year": "",
+			"teams" : [
+				{
+					"name" : "",
+					"price" : 0,
+					"games_played" : 0,
+					"goals" : 0,
+					"assists" : 0,
+					"yellow_card" : 0,
+					"red_card" : 0,
+					"average_vote" : 0.0
+				} # if player had transfer, another team gets added here
+			],
+			"actual" : { # make own for every competition like cups like in fm 13
+				"price" : 0,
+				"games_played" : 0,
+				"goals" : 0,
+				"assists" : 0,
+				"yellow_card" : 0,
+				"red_card" : 0,
+				"average_vote" : 0.0
+			}
+		}
+	]
+	return history
 
 def create_player(nationality,position,nr, team):
 	global names
@@ -173,6 +234,9 @@ def create_player(nationality,position,nr, team):
 
 	# position = positions[random.randint(0, len(positions)-1)]
 
+	contract =  get_contract(prestige,position,2020-birth_date.year)
+	potential_growth =  random.randint(1, 5)
+
 	player = {
 		"team" : team,
 		"price": get_price(2020-birth_date.year, prestige, position),
@@ -185,15 +249,15 @@ def create_player(nationality,position,nr, team):
 		"foot": foots[random.randint(0, len(foots)-1)],
 		"prestige": prestige,
 		"form": forms[random.randint(0, len(forms)-1)],
-		"potential": random.randint(1, 5),  # like stars in FM,
-		"_potential_growth": random.randint(1, 5),
+		"_potential_growth": potential_growth,
 		# _ hidden stats, not visible, just for calcs,
 		"_injury_potential":  random.randint(1, 20),
-		"history": {},
+		"_loyality" : "", # if player is loay, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
+		"history": get_history(prestige, position, 2020-birth_date.year, contract, potential_growth),
 		"mental": get_mental(2020-birth_date.year, nationality, prestige, position),
 		"technical": get_technical(2020-birth_date.year, nationality, prestige, position),
 		"fisical": get_physical(2020-birth_date.year, nationality, prestige, position),
-		"contract": {},
+		"contract": contract,
 		"nr" : nr
 	}
 	return player
@@ -207,7 +271,7 @@ def create_player(nationality,position,nr, team):
 # create teams
 ita_serie_a = [
     {
-		"name": "Palermo",
+		"name": "Acqua&Sapone C5",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -216,8 +280,8 @@ ita_serie_a = [
 			"subs" : []
 		},
 		"stadium" : {
-				"name" : "Estadio Central",
-				"capacity" : 5000
+				"name" : "Tocha Stadium",
+				"capacity" : 800
 		},
 		"manager" : {
 			"name" : "",
@@ -231,7 +295,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "C5 Napoli",
+		"name": "Pesaro C5",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -240,13 +304,13 @@ ita_serie_a = [
 			"subs" : []
 		},
 		"stadium" : {
-				"name" : "Estadio Central",
+				"name" : "Palazzetto dello Sport PalaCercola",
 				"capacity" : 5000
 			},
 		"formation" : "2-2"
 	},
 	{
-		"name": "Futsal Roma",
+		"name": "Real Rieti",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 800000,
@@ -261,7 +325,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "Milano",
+		"name": "Meta Catania",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -276,7 +340,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "Torino",
+		"name": "Napoli Calcio A 5",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -291,7 +355,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "Genova",
+		"name": "Feldi Eboli",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -306,7 +370,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "Bologna",
+		"name": "Came Dosson C5",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -321,7 +385,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "Firenze",
+		"name": "Maritime Futsal Augusta",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -336,7 +400,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "Verona",
+		"name": "Civitella Colormax C5",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -351,7 +415,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "Brescia",
+		"name": "Lazio Calcio A 5",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -366,7 +430,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "Bari",
+		"name": "Latina Calcio A 5",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -381,7 +445,7 @@ ita_serie_a = [
 		"formation" : "2-2"
 	},
 	{
-		"name": "Parma",
+		"name": "Real Futsal Arzignano",
      	"prestige": 12,
 		"budget" : 9000000,
 		"salary" : 1000,
@@ -606,3 +670,5 @@ for team in ita_serie_a:
 
 with open('ita_serie_a.json', 'w') as outfile:
     json.dump(ita_serie_a, outfile)
+
+print("done")
