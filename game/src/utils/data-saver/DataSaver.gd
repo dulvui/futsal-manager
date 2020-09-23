@@ -75,6 +75,7 @@ func reset():
 	day_counter = 1
 	
 func set_lang(lang):
+	TranslationServer.set_locale(lang)
 	language = lang
 	config.set_value("settings","language", language)
 	config.save("user://settings.cfg")
