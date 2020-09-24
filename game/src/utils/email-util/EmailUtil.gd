@@ -24,78 +24,43 @@ func count_unread_messages():
 
 func message(content,type):
 	print("new " + str(type) + " mail")
+	
+	var message = {
+		"title" : "TRANSFER",
+		"message" : "",
+		"days" : 7,
+		"type" : type,
+		"read" : false
+	}
+	
 	match type:
 		MESSAGE_TYPES.TRANSFER:
-			print("TRANSFER")
-			var ts_message
+			message["title"] = "TRANSFER"
 			if content.has("success"):
 				if content["success"]:
-					ts_message = {
-						"title" : "TRANSFER",
-						"message" : "You bought for" + str(content["money"]) + " " + content["player"]["name"] + " " + content["player"]["surname"],
-						"days" : 7,
-						"type" : type,
-						"read" : false
-					}
+					message["message"] = "You bought for" + str(content["money"]) + " " + content["player"]["name"] + " " + content["player"]["surname"]
 				else:
-					ts_message = {
-						"title" : "TRANSFER",
-						"message" : "You couldnt buy for" + str(content["money"]) + " " + content["player"]["name"] + " " + content["player"]["surname"],
-						"days" : 7,
-						"type" : type,
-						"read" : false
-					}
+					message["message"] = "You couldnt buy for" + str(content["money"]) + " " + content["player"]["name"] + " " + content["player"]["surname"]
 			else:
-				ts_message = {
-				"title" : "TRANSFER",
-				"message" : "You made an " + str(content["money"]) + " offer for " + content["player"]["name"] + " " + content["player"]["surname"],
-				"days" : 7,
-				"type" : type,
-				"read" : false
-			}
-			messages.append(ts_message)
+				message["message"] = "You made an " + str(content["money"]) + " offer for " + content["player"]["name"] + " " + content["player"]["surname"]
 		# contract
 		MESSAGE_TYPES.CONTRACT_OFFER:
-			var ts_message = {
-				"title" : "CONTRACT",
-				"message" : "You need to make an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"],
-				"days" : 7,
-				"type" : type,
-				"read" : false,
-				"content" : content
-			}
-			messages.append(ts_message)
+			message["message"] = "You need to make an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"]
+			message["title"] = "CONTRACT OFFER"
 		MESSAGE_TYPES.CONTRACT_OFFER_MADE:
-			var ts_message = {
-				"title" : "CONTRACT",
-				"message" : "You made an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"],
-				"days" : 7,
-				"type" : type,
-				"read" : false,
-				"content" : content
-			}
-			messages.append(ts_message)
+			message["message"] = "You made an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"]
+			message["title"] = "CONTRACT OFFER MADE"
 		MESSAGE_TYPES.CONTRACT_SIGNED:
-			var ts_message = {
-				"title" : "new player",
-				"message" : "The player acceptet " + content["player"]["name"] + " " + content["player"]["surname"] + " the contract",
-				"days" : 7,
-				"type" : type,
-				"read" : false,
-				"content" : content
-			}
-			messages.append(ts_message)
-			
+			message["message"] = "The player acceptet " + content["player"]["name"] + " " + content["player"]["surname"] + " the contract"
+			message["title"] = "CONTRACT_SIGNED"
 		MESSAGE_TYPES.NEXT_MATCH:
-			var message = {
-				"title" : "next match",
-				"message" : "The next match is " + str(content),
-				"days" : 7,
-				"type" : type,
-				"read" : false,
-				"content" : content
-			}
-			messages.append(message)
+			var team_name = content["home"]
+			if team_name == DataSaver.selected_team:
+				team_name = content["away"]
+			message["message"] = "The next match is against " + team_name + ".\nThe quotes are: "
+			message["title"] = "NEXT MATCH"
+			
+	messages.append(message)
 	
 	
 

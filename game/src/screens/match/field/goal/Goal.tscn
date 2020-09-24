@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://src/screens/match/field/goal/Goal.gd" type="Script" id=1]
-
-[node name="Goal" type="Node2D"]
-scale = Vector2( 3, 3 )
-script = ExtResource( 1 )
