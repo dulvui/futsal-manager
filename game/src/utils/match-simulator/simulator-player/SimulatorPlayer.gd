@@ -1,6 +1,6 @@
 extends Node
 
-var pos = "G"
+var pos = 0 # 0 is G, D is 1 etc
 
 signal shoot
 signal pass_to
@@ -51,17 +51,23 @@ func kick_off():
 	sector_pos = start_pos
 
 func update_decision(team_has_ball,has_ball):
-	if team_has_ball:
-		if has_ball:
-			make_offensive_with_ball_decision()
+	if pos > 0: # if not goalkeeper
+		if team_has_ball:
+			if has_ball:
+				make_offensive_with_ball_decision()
+			else:
+				make_offensive_no_ball_decision()
 		else:
-			make_offensive_no_ball_decision()
+			make_defensive_decision()
 	else:
-		make_defensive_decision()
+		if team_has_ball:
+			if has_ball:
+				make_goalkeeper_decision()
 		
 		
 	
 func set_up(new_player,field_pos):
+	pos = field_pos
 	player = new_player
 	if player["home"]:
 		sector_pos = (field_pos+1) * 200
@@ -113,7 +119,26 @@ func make_offensive_with_ball_decision():
 	else:
 		print("WAITS")
 		emit_signal("wait",player)
+
+
+func make_goalkeeper_decision():
+	print(player["surname"] + " as G has ball")
 	
+	# make all checks and the make decision
+	
+	#modify multiplactors by team mentality
+	var pass_factor = check_pass() * 50
+	var wait_factor = 20
+	
+	var sum: int = pass_factor +  wait_factor
+	var decision_factor = randi()%sum
+	
+	if decision_factor <  pass_factor:
+		print("PASS")
+		emit_signal("pass_to",player)
+	else:
+		print("WAITS")
+		emit_signal("wait",player)
 	
 func make_offensive_no_ball_decision():
 #	print(player["surname"] + " team has ball")
