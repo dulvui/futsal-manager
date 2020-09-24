@@ -8,5 +8,5 @@ func _ready():
 	$Control/ShirtNumber.text = str(nr)
 
 func move_to(destination):
-	$Tween.interpolate_property(self,"position",position,Vector2(destination,position.y),1,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self,"position",position,destination,0.5,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
