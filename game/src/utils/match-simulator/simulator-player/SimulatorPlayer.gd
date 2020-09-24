@@ -1,6 +1,6 @@
-extends Area2D
+extends Node
 
-export (String, "G", "D", "WL", "WR", "P") var pos = "G"
+var pos = "G"
 
 signal shoot
 signal pass_to
@@ -18,6 +18,7 @@ var min_sector
 
 var wait_counter = 0 # counts waits and after x  waits do action
 
+var start_pos
 
 var stats = {
 	"goals" : 0,
@@ -40,14 +41,14 @@ onready var ball = get_parent().get_node("Ball")
 export var shirt_number = "1"
 export var shirt_color = Color.red
 
-var ball_pos
 
 var has_ball = false #probably detects when ball enters Ball detector
 
 func _ready():
-	ball_pos = $BallPosition.global_position
+	add_to_group("simulator_player")
 
-	
+func kick_off():
+	sector_pos = start_pos
 
 func update_decision(team_has_ball,has_ball):
 	if team_has_ball:
@@ -67,6 +68,7 @@ func set_up(new_player,field_pos):
 	else:
 		sector_pos = 1200 -( (field_pos+1) * 200)
 	current_sector = sector_pos/200
+	start_pos = sector_pos
 	
 	min_sector = sector_pos - 300
 	if min_sector < 0:
@@ -204,9 +206,9 @@ func check_move_down():
 	
 func move_down():
 	if player["home"]:
-		sector_pos -= player["fisical"]["pace"]
+		sector_pos -= player["fisical"]["pace"] * 10
 	else:
-		sector_pos += player["fisical"]["pace"]
+		sector_pos += player["fisical"]["pace"] * 10
 	if sector_pos > max_sector:
 		sector_pos = max_sector
 	if sector_pos < min_sector:
@@ -220,9 +222,9 @@ func move_down():
 # special movements: cornerns, penlaties, free kicks, kick off, rimessa
 func move_up():
 	if player["home"]:
-		sector_pos += player["fisical"]["pace"]
+		sector_pos += player["fisical"]["pace"] * 10
 	else:
-		sector_pos -= player["fisical"]["pace"]
+		sector_pos -= player["fisical"]["pace"] * 10
 	if sector_pos > max_sector:
 		sector_pos = max_sector
 	if sector_pos < min_sector:
@@ -233,4 +235,4 @@ func move_up():
 	else:
 		current_sector = (1200 - sector_pos) / 200
 	
-	
+
