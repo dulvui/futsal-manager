@@ -70,16 +70,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="NatLabel" type="Label" parent="GridContainer"]
-margin_top = 164.0
+margin_top = 166.0
 margin_right = 276.0
-margin_bottom = 220.0
+margin_bottom = 222.0
 text = "NATIONALITY"
 
 [node name="Nat" type="OptionButton" parent="GridContainer"]
 margin_left = 309.0
 margin_top = 164.0
 margin_right = 800.0
-margin_bottom = 220.0
+margin_bottom = 224.0
 
 [node name="Continue" type="Button" parent="."]
 margin_left = 1165.29

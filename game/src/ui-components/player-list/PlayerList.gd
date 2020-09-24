@@ -51,25 +51,32 @@ func _ready():
 func _process(delta):
 	$PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
 
-func add_players():
+func add_subs():
 	for child in $CurrentPlayers.get_children():
 		child.queue_free()
 		
 	$TeamSelect.hide()
 	$LegaueSelect.hide()
-		
-	var team = DataSaver.get_selected_team()
-	for player in team["players"]["active"]:
-		var player_profile = PlayerProfile.instance()
-		player_profile.connect("player_select",self,"select_player",[player])
-		$CurrentPlayers.add_child(player_profile)
-		player_profile.set_up_info(player,info_type)
 	
+	var vbox = VBoxContainer.new()
+	vbox.add_constant_override("separation", 60)
+	
+#	if filter:
+	current_players = []
+	current_page = 0
+	
+	var team = DataSaver.get_selected_team()
 	for player in team["players"]["subs"]:
+		if filter_player(player):
+			current_players.append(player)
+				
+	for player in current_players.slice(current_page*10,((current_page + 1) * 10)-1):
 		var player_profile = PlayerProfile.instance()
 		player_profile.connect("player_select",self,"select_player",[player])
-		$CurrentPlayers.add_child(player_profile)
 		player_profile.set_up_info(player,info_type)
+		vbox.add_child(player_profile)
+	$CurrentPlayers.add_child(vbox)
+	
 		
 func add_match_players():
 	for child in $CurrentPlayers.get_children():

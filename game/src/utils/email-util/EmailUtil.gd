@@ -4,7 +4,15 @@ var messages = []
 
 const MAX_MESSAGES = 30
 
-enum MESSAGE_TYPES {TRANSFER,TRANSFER_OFFER,CONTRACT_SIGNED,CONTRACT_OFFER,CONTRACT_OFFER_MADE,NEXT_MATCH}
+enum MESSAGE_TYPES {
+					TRANSFER,
+					TRANSFER_OFFER,
+					CONTRACT_SIGNED,
+					CONTRACT_OFFER,
+					CONTRACT_OFFER_MADE,
+					NEXT_MATCH,
+					WELCOME_MANAGER
+				}
 
 func _ready():
 	messages = DataSaver.messages
@@ -52,7 +60,9 @@ func message(content,type):
 				team_name = content["away"]
 			message["message"] = "The next match is against " + team_name + ".\nThe quotes are: "
 			message["title"] = "NEXT MATCH"
-			
+		MESSAGE_TYPES.WELCOME_MANAGER:
+			message["message"] = "The team " + DataSaver.selected_team + " welcomes you as the new Manager!"
+			message["title"] = "WELCOME MANAGER"
 	messages.append(message)
 	
 	if messages.size() > MAX_MESSAGES:
