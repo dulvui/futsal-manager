@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/utils/match-simulator/MatchSimulator.gd" type="Script" id=1]
 [ext_resource path="res://src/screens/match/field/ball/Ball.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/field.png" type="Texture" id=6]
-[ext_resource path="res://src/screens/match/field/goal/Goal.tscn" type="PackedScene" id=7]
 
 [node name="MatchSimulator" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -720.0
+margin_bottom = -480.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -16,10 +17,6 @@ __meta__ = {
 [node name="Field" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 163.0
-margin_top = 48.0
-margin_right = -166.0
-margin_bottom = -101.0
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
@@ -27,17 +24,5 @@ __meta__ = {
 }
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
-position = Vector2( 968.093, 509.118 )
-
-[node name="Walls" type="StaticBody2D" parent="."]
-visible = false
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
-polygon = PoolVector2Array( -1.04868, -10.087, -6.12402, 1065.7, 1923.7, 1086.67, 1929.69, 10.8868, 0.477936, -0.11496, 20.8455, -270.795, -18.1105, -333.724, -3.12738, -345.71, 71.788, -396.653, 20.8455, -501.534, 2468.73, -519.28, 2397.42, 1615.85, -495.85, 1628.03, -495.85, -459.753, -66.0563, -435.609 )
-
-[node name="HomeGoal" parent="." instance=ExtResource( 7 )]
-position = Vector2( 161.774, 519.137 )
-
-[node name="AwayGoal" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1764.77, 519.137 )
-rotation = -3.14159
+position = Vector2( 600.757, 299.455 )
+scale = Vector2( 0.6, 0.6 )
