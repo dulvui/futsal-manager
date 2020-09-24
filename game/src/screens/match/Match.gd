@@ -7,8 +7,6 @@ var match_started = false
 
 var first_half = true
 
-
-
 var paused = false
 
 onready var animation_player = $AnimationPlayer
@@ -54,7 +52,7 @@ func _process(delta):
 	
 	$HUD/PossessBar.value = $MatchSimulator.home_stats["possession"]
 	
-	$HUD/TopBar/SpeedFactor.text = str(speed_factor + 1) + " X"
+	$HUD/SpeedFactor.text = str(speed_factor + 1) + " X"
 	
 	
 	
@@ -67,8 +65,8 @@ func _on_TimerMatchSimulator_timeout():
 	
 
 func _on_Field_pressed():
-#	$MatchSimulator.show()
-#	$Stats.hide()
+	$MatchSimulator.show()
+	$Stats.hide()
 	pass
 
 

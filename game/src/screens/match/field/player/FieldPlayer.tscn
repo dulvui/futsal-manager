@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
-[ext_resource path="res://src/screens/match/field/player/Player.gd" type="Script" id=2]
+[ext_resource path="res://src/screens/match/field/player/FieldPlayer.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 
-[node name="Player" type="Area2D" groups=[
+[node name="FieldPlayer" type="Area2D" groups=[
 "player",
 ]]
 collision_layer = 8
@@ -45,6 +45,3 @@ __meta__ = {
 [node name="Ball Detector" type="CollisionShape2D" parent="."]
 scale = Vector2( 3, 3 )
 shape = SubResource( 1 )
-
-[node name="BallPosition" type="Position2D" parent="."]
-position = Vector2( 50.6627, -0.894508 )

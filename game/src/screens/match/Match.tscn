@@ -31,12 +31,10 @@ __meta__ = {
 }
 
 [node name="MatchSimulator" parent="." instance=ExtResource( 4 )]
-visible = false
-margin_left = 477.745
-margin_top = 224.59
-margin_right = 477.745
-margin_bottom = 224.59
-rect_scale = Vector2( 0.7, 0.7 )
+margin_left = 568.212
+margin_top = 191.789
+margin_right = -151.788
+margin_bottom = -288.211
 
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
@@ -48,9 +46,9 @@ __meta__ = {
 [node name="TopBar" type="HBoxContainer" parent="HUD"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 549.736
+margin_left = 784.933
 margin_top = 44.7666
-margin_right = 1189.74
+margin_right = 1424.94
 margin_bottom = 100.767
 custom_constants/separation = 20
 __meta__ = {
@@ -58,7 +56,7 @@ __meta__ = {
 }
 
 [node name="Time" type="Label" parent="HUD/TopBar"]
-margin_right = 128.0
+margin_right = 198.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 text = "32sds"
@@ -67,8 +65,8 @@ __meta__ = {
 }
 
 [node name="Home" type="Label" parent="HUD/TopBar"]
-margin_left = 148.0
-margin_right = 307.0
+margin_left = 218.0
+margin_right = 377.0
 margin_bottom = 56.0
 text = "Robledo"
 __meta__ = {
@@ -76,8 +74,8 @@ __meta__ = {
 }
 
 [node name="Result" type="Label" parent="HUD/TopBar"]
-margin_left = 327.0
-margin_right = 387.0
+margin_left = 397.0
+margin_right = 457.0
 margin_bottom = 56.0
 text = "3:0"
 __meta__ = {
@@ -85,55 +83,56 @@ __meta__ = {
 }
 
 [node name="Away" type="Label" parent="HUD/TopBar"]
-margin_left = 407.0
-margin_right = 570.0
+margin_left = 477.0
+margin_right = 640.0
 margin_bottom = 56.0
 text = "Cisneros"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SpeedFactor" type="Label" parent="HUD/TopBar"]
-margin_left = 590.0
-margin_right = 640.0
-margin_bottom = 56.0
-text = "X2"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Pause" type="Button" parent="HUD"]
-margin_left = 1727.62
-margin_top = 36.0218
-margin_right = 1864.62
-margin_bottom = 92.0218
+margin_left = 1449.39
+margin_top = 920.0
+margin_right = 1586.39
+margin_bottom = 976.0
 text = "PAUSE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SpeedFactor" type="Label" parent="HUD"]
+margin_left = 1104.0
+margin_top = 920.0
+margin_right = 1154.0
+margin_bottom = 976.0
+text = "X2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Faster" type="Button" parent="HUD"]
-margin_left = 1511.62
-margin_top = 37.0218
-margin_right = 1670.62
-margin_bottom = 93.0218
+margin_left = 1216.0
+margin_top = 920.0
+margin_right = 1375.0
+margin_bottom = 976.0
 text = "FASTER"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Slower" type="Button" parent="HUD"]
-margin_left = 1279.62
-margin_top = 36.0218
-margin_right = 1453.62
-margin_bottom = 92.0218
+margin_left = 856.0
+margin_top = 920.0
+margin_right = 1030.0
+margin_bottom = 976.0
 text = "SLOWER"
 
 [node name="LeftButtons" type="VBoxContainer" parent="HUD"]
-margin_left = 215.352
-margin_top = 337.73
-margin_right = 467.352
-margin_bottom = 753.73
+margin_left = 112.008
+margin_top = 316.348
+margin_right = 364.008
+margin_bottom = 820.349
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -197,9 +196,9 @@ percent_visible = false
 
 [node name="PossessBar" type="ProgressBar" parent="HUD"]
 margin_left = 567.641
-margin_top = 1012.7
+margin_top = 810.7
 margin_right = 1767.64
-margin_bottom = 1055.7
+margin_bottom = 853.7
 step = 1.0
 value = 50.0
 percent_visible = false
@@ -216,11 +215,12 @@ margin_bottom = 21.5
 text = "POSSESSION"
 
 [node name="Stats" type="MarginContainer" parent="."]
-margin_left = 642.0
-margin_top = 218.0
-margin_right = 1696.0
-margin_bottom = 832.0
-rect_scale = Vector2( 1.097, 1.12636 )
+visible = false
+margin_left = 683.2
+margin_top = 201.6
+margin_right = 1737.2
+margin_bottom = 857.6
+rect_scale = Vector2( 0.9, 0.9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -556,8 +556,6 @@ anims/Goal = SubResource( 1 )
 wait_time = 3.0
 one_shot = true
 autostart = true
-[connection signal="away_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_away_goal"]
-[connection signal="home_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_home_goal"]
 [connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="HUD/Faster" to="." method="_on_Faster_pressed"]
 [connection signal="pressed" from="HUD/Slower" to="." method="_on_Slower_pressed"]

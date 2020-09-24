@@ -5,7 +5,7 @@ signal away_goal
 signal home_pass
 signal away_pass
 
-const Player = preload("res://src/screens/match/field/player/Player.tscn")
+const Player = preload("res://src/utils/match-simulator/simulator-player/SimulatorPlayer.gd")
 
 var home_team = {}
 var away_team = {}
@@ -110,8 +110,6 @@ var home_possess_counter = 0.0
 
 var home_has_ball
 
-func _ready():
-	pass
 	
 func update():
 	update_sectors()
@@ -203,7 +201,7 @@ func change_players(new_home_team,new_away_team):
 
 
 func create_real_player(player,i):
-	var real_player = Player.instance()
+	var real_player = Player.new()
 	real_player.set_up(player,i)
 	real_player.connect("pass_to",self,"pass_to")
 	real_player.connect("shoot",self,"shoot")
@@ -353,6 +351,7 @@ func shoot(player):
 					away_stats["goals"] += 1
 					home_has_ball = true
 					home_team["players"]["active"][4]["real"].player["has_ball"] = true
+				get_tree().call_group("simulator_player","kick_off")
 			else:
 				if player["home"]:
 					home_has_ball = false

@@ -2,9 +2,10 @@
 
 [ext_resource path="res://assets/field.png" type="Texture" id=1]
 [ext_resource path="res://src/screens/match/field/ball/Ball.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/screens/match/field/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/screens/match/field/player/FieldPlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/screens/match/field/goal/Goal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/screens/match/field/field-spot/FieldSpot.tscn" type="PackedScene" id=6]
+
 
 [sub_resource type="GDScript" id=3]
 script/source = "
