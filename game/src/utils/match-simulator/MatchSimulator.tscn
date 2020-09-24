@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/utils/match-simulator/MatchSimulator.gd" type="Script" id=1]
-[ext_resource path="res://src/screens/match/field/ball/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/utils/match-simulator/visual/player/FieldPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/utils/match-simulator/visual/ball/Ball.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/field.png" type="Texture" id=6]
 
 [node name="MatchSimulator" type="Control"]
@@ -23,6 +24,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HomePlayers" type="Node2D" parent="."]
+
+[node name="G" parent="HomePlayers" instance=ExtResource( 2 )]
+position = Vector2( 85.9978, 277.492 )
+
+[node name="D" parent="HomePlayers" instance=ExtResource( 2 )]
+position = Vector2( 230.632, 292.629 )
+nr = 4
+
+[node name="WL" parent="HomePlayers" instance=ExtResource( 2 )]
+position = Vector2( 350.039, 119.404 )
+nr = 5
+
+[node name="WR" parent="HomePlayers" instance=ExtResource( 2 )]
+position = Vector2( 363.494, 457.444 )
+nr = 7
+
+[node name="P" parent="HomePlayers" instance=ExtResource( 2 )]
+position = Vector2( 541.764, 301.037 )
+nr = 9
+
+[node name="AwayPlayers" type="Node2D" parent="."]
+
+[node name="G" parent="AwayPlayers" instance=ExtResource( 2 )]
+position = Vector2( 1110.21, 297.674 )
+color = Color( 0.2, 0.6, 0.235294, 1 )
+
+[node name="D" parent="AwayPlayers" instance=ExtResource( 2 )]
+position = Vector2( 980.712, 302.719 )
+color = Color( 0.2, 0.6, 0.235294, 1 )
+nr = 4
+
+[node name="WL" parent="AwayPlayers" instance=ExtResource( 2 )]
+position = Vector2( 807.487, 489.398 )
+color = Color( 0.2, 0.6, 0.235294, 1 )
+nr = 5
+
+[node name="WR" parent="AwayPlayers" instance=ExtResource( 2 )]
+position = Vector2( 800.76, 73.9954 )
+color = Color( 0.2, 0.6, 0.235294, 1 )
+nr = 7
+
+[node name="P" parent="AwayPlayers" instance=ExtResource( 2 )]
+position = Vector2( 654.444, 253.947 )
+color = Color( 0.2, 0.6, 0.235294, 1 )
+nr = 9
+
 [node name="Ball" parent="." instance=ExtResource( 3 )]
-position = Vector2( 600.757, 299.455 )
-scale = Vector2( 0.6, 0.6 )
+position = Vector2( 605.445, 292.632 )

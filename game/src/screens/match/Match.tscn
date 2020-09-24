@@ -138,50 +138,50 @@ __meta__ = {
 }
 
 [node name="Field" type="Button" parent="HUD/LeftButtons"]
-margin_right = 252.0
-margin_bottom = 56.0
+margin_right = 264.0
+margin_bottom = 60.0
 text = "FIELD"
 
 [node name="Stats" type="Button" parent="HUD/LeftButtons"]
-margin_top = 64.0
-margin_right = 252.0
-margin_bottom = 120.0
+margin_top = 68.0
+margin_right = 264.0
+margin_bottom = 128.0
 text = "STATS"
 
 [node name="Change" type="Button" parent="HUD/LeftButtons"]
-margin_top = 128.0
-margin_right = 252.0
-margin_bottom = 184.0
+margin_top = 136.0
+margin_right = 264.0
+margin_bottom = 196.0
 text = "CHANGE"
 
 [node name="Tactics" type="Button" parent="HUD/LeftButtons"]
-margin_top = 192.0
-margin_right = 252.0
-margin_bottom = 248.0
+margin_top = 204.0
+margin_right = 264.0
+margin_bottom = 264.0
 text = "TACTICS"
 
 [node name="Formation" type="Button" parent="HUD/LeftButtons"]
-margin_top = 256.0
-margin_right = 252.0
-margin_bottom = 312.0
+margin_top = 272.0
+margin_right = 264.0
+margin_bottom = 332.0
 text = "FORMATION"
 
 [node name="Table" type="Button" parent="HUD/LeftButtons"]
-margin_top = 320.0
-margin_right = 252.0
-margin_bottom = 376.0
+margin_top = 340.0
+margin_right = 264.0
+margin_bottom = 400.0
 text = "TABLE"
 
 [node name="Matches" type="Button" parent="HUD/LeftButtons"]
-margin_top = 384.0
-margin_right = 252.0
-margin_bottom = 440.0
+margin_top = 408.0
+margin_right = 264.0
+margin_bottom = 468.0
 text = "MATCHES"
 
 [node name="Votes" type="Button" parent="HUD/LeftButtons"]
-margin_top = 448.0
-margin_right = 252.0
-margin_bottom = 504.0
+margin_top = 476.0
+margin_right = 264.0
+margin_bottom = 536.0
 text = "VOTES"
 
 [node name="TimeBar" type="ProgressBar" parent="HUD"]

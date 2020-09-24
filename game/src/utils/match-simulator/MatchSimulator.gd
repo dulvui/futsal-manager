@@ -112,6 +112,29 @@ var home_has_ball
 
 var action_buffer = []
 
+
+func set_up(home,away, match_started):
+	home_team = home.duplicate(true)
+	away_team = away.duplicate(true)
+	
+	for i in range(home_team["players"]["active"].size()):
+		var player = home_team["players"]["active"][i]
+		player["has_ball"]  = false
+		player["home"]  = true # change on halftime
+		player["real"] = create_real_player(player,i)
+
+	for i in range(away_team["players"]["active"].size()):
+		var player = away_team["players"]["active"][i]
+		player["has_ball"]  = false
+		player["home"]  = false
+		player["real"] = create_real_player(player,i)
+
+	if match_started:
+		home_has_ball = randi()%2 == 0
+		if home_has_ball:
+			home_team["players"]["active"][4]["has_ball"] = true
+		else:
+			away_team["players"]["active"][4]["has_ball"] = true
 	
 func update():
 	update_sectors()
@@ -144,30 +167,9 @@ func update():
 	if player_has_ball == 2:
 		print("2 Players has ball")
 		
+	update_field_players()
 		
 
-func set_up(home,away, match_started):
-	home_team = home.duplicate(true)
-	away_team = away.duplicate(true)
-	
-	for i in range(home_team["players"]["active"].size()):
-		var player = home_team["players"]["active"][i]
-		player["has_ball"]  = false
-		player["home"]  = true # change on halftime
-		player["real"] = create_real_player(player,i)
-
-	for i in range(away_team["players"]["active"].size()):
-		var player = away_team["players"]["active"][i]
-		player["has_ball"]  = false
-		player["home"]  = false
-		player["real"] = create_real_player(player,i)
-
-	if match_started:
-		home_has_ball = randi()%2 == 0
-		if home_has_ball:
-			home_team["players"]["active"][4]["has_ball"] = true
-		else:
-			away_team["players"]["active"][4]["has_ball"] = true
 
 func get_team_players_in_sector(home,sector_pos):
 	if home:
@@ -200,8 +202,39 @@ func change_players(new_home_team,new_away_team):
 	else:
 		away_team["players"]["active"][4]["has_ball"] = true
 
-
-
+func update_field_players():
+	$HomePlayers/G.position.x = home_team["players"]["active"][0]["real"].sector_pos
+	if home_team["players"]["active"][0]["real"].player["has_ball"]:
+		$Ball.move_to($HomePlayers/G.position)
+	$HomePlayers/D.position.x = home_team["players"]["active"][1]["real"].sector_pos
+	if home_team["players"]["active"][1]["real"].player["has_ball"]:
+		$Ball.move_to($HomePlayers/D.position)
+	$HomePlayers/WL.position.x = home_team["players"]["active"][2]["real"].sector_pos
+	if home_team["players"]["active"][2]["real"].player["has_ball"]:
+		$Ball.move_to($HomePlayers/WL.position)
+	$HomePlayers/WR.position.x = home_team["players"]["active"][3]["real"].sector_pos
+	if home_team["players"]["active"][3]["real"].player["has_ball"]:
+		$Ball.move_to($HomePlayers/WR.position)
+	$HomePlayers/P.position.x = home_team["players"]["active"][4]["real"].sector_pos
+	if home_team["players"]["active"][4]["real"].player["has_ball"]:
+		$Ball.move_to($HomePlayers/P.position)
+	
+	$AwayPlayers/G.position.x = away_team["players"]["active"][0]["real"].sector_pos
+	if away_team["players"]["active"][0]["real"].player["has_ball"]:
+		$Ball.move_to($AwayPlayers/G.position)
+	$AwayPlayers/D.position.x = away_team["players"]["active"][1]["real"].sector_pos
+	if away_team["players"]["active"][1]["real"].player["has_ball"]:
+		$Ball.move_to($AwayPlayers/D.position)
+	$AwayPlayers/WL.position.x = away_team["players"]["active"][2]["real"].sector_pos
+	if away_team["players"]["active"][2]["real"].player["has_ball"]:
+		$Ball.move_to($AwayPlayers/WL.position)
+	$AwayPlayers/WR.position.x = away_team["players"]["active"][3]["real"].sector_pos
+	if away_team["players"]["active"][3]["real"].player["has_ball"]:
+		$Ball.move_to($AwayPlayers/WR.position)
+	$AwayPlayers/P.position.x = away_team["players"]["active"][4]["real"].sector_pos
+	if away_team["players"]["active"][4]["real"].player["has_ball"]:
+		$Ball.move_to($AwayPlayers/P.position)
+	
 func create_real_player(player,i):
 	var real_player = Player.new()
 	real_player.set_up(player,i)
@@ -227,13 +260,20 @@ func pass_to(player):
 		team_players = sectors[player["real"].current_sector]["home_players"]
 		opponent_players = sectors[player["real"].current_sector]["away_players"]
 	else:
-		away_stats["pass"] += 1		
+		away_stats["pass"] += 1
 		team_players = sectors[player["real"].current_sector]["away_players"]
 		opponent_players = sectors[player["real"].current_sector]["home_players"]
 	team_players.shuffle()
 	opponent_players.shuffle()
 	
 	var random_receiver = team_players[0]
+	
+	#to fix goalies passes itself bug
+	if random_receiver == player:
+		if home_has_ball:
+			random_receiver = home_team["players"]["active"][1]
+		else:
+			random_receiver = away_team["players"]["active"][1]
 	
 	#if nno opponent player in sector, pass is succesful
 	if opponent_players.size() == 0:
