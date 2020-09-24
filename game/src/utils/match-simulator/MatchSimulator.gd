@@ -203,35 +203,35 @@ func change_players(new_home_team,new_away_team):
 		away_team["players"]["active"][4]["has_ball"] = true
 
 func update_field_players():
-	$HomePlayers/G.position.x = home_team["players"]["active"][0]["real"].sector_pos
+	$HomePlayers/G.move_to(home_team["players"]["active"][0]["real"].sector_pos)
 	if home_team["players"]["active"][0]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/G.position)
-	$HomePlayers/D.position.x = home_team["players"]["active"][1]["real"].sector_pos
+	$HomePlayers/D.move_to(home_team["players"]["active"][1]["real"].sector_pos)
 	if home_team["players"]["active"][1]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/D.position)
-	$HomePlayers/WL.position.x = home_team["players"]["active"][2]["real"].sector_pos
+	$HomePlayers/WL.move_to(home_team["players"]["active"][2]["real"].sector_pos)
 	if home_team["players"]["active"][2]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/WL.position)
-	$HomePlayers/WR.position.x = home_team["players"]["active"][3]["real"].sector_pos
+	$HomePlayers/WR.move_to(home_team["players"]["active"][3]["real"].sector_pos)
 	if home_team["players"]["active"][3]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/WR.position)
-	$HomePlayers/P.position.x = home_team["players"]["active"][4]["real"].sector_pos
+	$HomePlayers/P.move_to(home_team["players"]["active"][4]["real"].sector_pos)
 	if home_team["players"]["active"][4]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/P.position)
 	
-	$AwayPlayers/G.position.x = away_team["players"]["active"][0]["real"].sector_pos
+	$AwayPlayers/G.move_to(away_team["players"]["active"][0]["real"].sector_pos)
 	if away_team["players"]["active"][0]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/G.position)
-	$AwayPlayers/D.position.x = away_team["players"]["active"][1]["real"].sector_pos
+	$AwayPlayers/D.move_to(away_team["players"]["active"][1]["real"].sector_pos)
 	if away_team["players"]["active"][1]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/D.position)
-	$AwayPlayers/WL.position.x = away_team["players"]["active"][2]["real"].sector_pos
+	$AwayPlayers/WL.move_to(away_team["players"]["active"][2]["real"].sector_pos)
 	if away_team["players"]["active"][2]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/WL.position)
-	$AwayPlayers/WR.position.x = away_team["players"]["active"][3]["real"].sector_pos
+	$AwayPlayers/WR.move_to(away_team["players"]["active"][3]["real"].sector_pos)
 	if away_team["players"]["active"][3]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/WR.position)
-	$AwayPlayers/P.position.x = away_team["players"]["active"][4]["real"].sector_pos
+	$AwayPlayers/P.move_to(away_team["players"]["active"][4]["real"].sector_pos)
 	if away_team["players"]["active"][4]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/P.position)
 	

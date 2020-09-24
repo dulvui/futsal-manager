@@ -44,3 +44,5 @@ __meta__ = {
 [node name="Ball Detector" type="CollisionShape2D" parent="."]
 scale = Vector2( 3, 3 )
 shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]

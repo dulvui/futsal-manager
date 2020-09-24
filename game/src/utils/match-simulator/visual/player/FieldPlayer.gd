@@ -7,7 +7,6 @@ func _ready():
 	$Control/ColorRect.color = color
 	$Control/ShirtNumber.text = str(nr)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func move_to(destination):
+	$Tween.interpolate_property(self,"position",position,Vector2(destination,position.y),1,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
