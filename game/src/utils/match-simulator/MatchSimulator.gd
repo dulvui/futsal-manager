@@ -394,6 +394,7 @@ func shoot(player):
 					home_has_ball = true
 					home_team["players"]["active"][4]["real"].player["has_ball"] = true
 				get_tree().call_group("simulator_player","kick_off")
+				$Ball.kick_off()
 			else:
 				if player["home"]:
 					home_has_ball = false
