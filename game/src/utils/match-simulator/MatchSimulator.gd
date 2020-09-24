@@ -110,6 +110,8 @@ var home_possess_counter = 0.0
 
 var home_has_ball
 
+var action_buffer = []
+
 	
 func update():
 	update_sectors()
@@ -376,19 +378,14 @@ func move_up(player):
 	pass
 
 func move_down(player):
-#	print(player["name"])
-#	print("MOVES DOWN in sim")
-	pass
+	action_buffer.append(player,"DRIBBLE")
 	
 func wait(player):
-#	print(player["name"])
-#	print("WAITS in sim")
-	pass
+	action_buffer.append(player,"WAIT")
 	
 func dribble(player):
-#	print(player["name"])
-#	print("DRIBBLES in sim")
-	pass
+	action_buffer.append(player,"DRIBBLE")
+
 	
 func update_sectors():
 	for sector in sectors:
@@ -401,3 +398,9 @@ func update_sectors():
 
 func show_goal(player):
 	pass
+	
+func add_action(player,current_action):
+	var action = {"player":player,"action" :current_action}
+#	action_buffer.append(action)
+	if action_buffer.size()>10:
+		action_buffer.pop_front()
