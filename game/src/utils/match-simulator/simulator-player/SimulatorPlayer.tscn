@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/utils/match-simulator/simulator-player/SimulatorPlayer.gd" type="Script" id=1]
+
+[node name="SimulatorPlayer" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Head" type="RayCast2D" parent="."]
+cast_to = Vector2( 0, 1200 )
