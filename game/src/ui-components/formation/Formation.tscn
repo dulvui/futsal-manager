@@ -6,7 +6,6 @@
 [ext_resource path="res://src/ui-components/player-list/PlayerList.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/field.png" type="Texture" id=5]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "Fade1-1-2"
 length = 0.2
@@ -398,14 +397,15 @@ __meta__ = {
 }
 
 [node name="Stay" type="Label" parent="DefensiveTactics"]
+margin_top = 2.0
 margin_right = 300.0
-margin_bottom = 56.0
+margin_bottom = 58.0
 text = "STAY"
 
 [node name="D1" type="HSlider" parent="DefensiveTactics"]
 margin_left = 320.0
-margin_right = 395.0
-margin_bottom = 56.0
+margin_right = 383.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 1.0
@@ -413,28 +413,29 @@ max_value = 20.0
 value = 6.0
 
 [node name="Pressing" type="Label" parent="DefensiveTactics"]
-margin_left = 415.0
-margin_right = 714.0
-margin_bottom = 56.0
+margin_left = 403.0
+margin_top = 2.0
+margin_right = 702.0
+margin_bottom = 58.0
 text = "PRESSING"
 
 [node name="D1Info" type="Button" parent="DefensiveTactics"]
-margin_left = 734.0
+margin_left = 722.0
 margin_right = 760.0
-margin_bottom = 56.0
+margin_bottom = 60.0
 text = " i "
 
 [node name="Wait" type="Label" parent="DefensiveTactics"]
-margin_top = 60.0
+margin_top = 66.0
 margin_right = 300.0
-margin_bottom = 116.0
+margin_bottom = 122.0
 text = "WAIT"
 
 [node name="D2" type="HSlider" parent="DefensiveTactics"]
 margin_left = 320.0
-margin_top = 60.0
-margin_right = 395.0
-margin_bottom = 116.0
+margin_top = 64.0
+margin_right = 383.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 1.0
@@ -442,30 +443,30 @@ max_value = 20.0
 value = 6.0
 
 [node name="Anticipate" type="Label" parent="DefensiveTactics"]
-margin_left = 415.0
-margin_top = 60.0
-margin_right = 714.0
-margin_bottom = 116.0
+margin_left = 403.0
+margin_top = 66.0
+margin_right = 702.0
+margin_bottom = 122.0
 text = "ANTICIPATE"
 
 [node name="D2Info" type="Button" parent="DefensiveTactics"]
-margin_left = 734.0
-margin_top = 60.0
+margin_left = 722.0
+margin_top = 64.0
 margin_right = 760.0
-margin_bottom = 116.0
+margin_bottom = 124.0
 text = " i "
 
 [node name="WeakTackle" type="Label" parent="DefensiveTactics"]
-margin_top = 120.0
+margin_top = 130.0
 margin_right = 300.0
-margin_bottom = 176.0
+margin_bottom = 186.0
 text = "WEAK_TACKLE"
 
 [node name="D3" type="HSlider" parent="DefensiveTactics"]
 margin_left = 320.0
-margin_top = 120.0
-margin_right = 395.0
-margin_bottom = 176.0
+margin_top = 128.0
+margin_right = 383.0
+margin_bottom = 188.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 1.0
@@ -473,30 +474,30 @@ max_value = 20.0
 value = 6.0
 
 [node name="HardTackle" type="Label" parent="DefensiveTactics"]
-margin_left = 415.0
-margin_top = 120.0
-margin_right = 714.0
-margin_bottom = 176.0
+margin_left = 403.0
+margin_top = 130.0
+margin_right = 702.0
+margin_bottom = 186.0
 text = "HARD_TACKLE"
 
 [node name="D3Info" type="Button" parent="DefensiveTactics"]
-margin_left = 734.0
-margin_top = 120.0
+margin_left = 722.0
+margin_top = 128.0
 margin_right = 760.0
-margin_bottom = 176.0
+margin_bottom = 188.0
 text = " i "
 
 [node name="MarkZone" type="Label" parent="DefensiveTactics"]
-margin_top = 180.0
+margin_top = 194.0
 margin_right = 300.0
-margin_bottom = 236.0
+margin_bottom = 250.0
 text = "MARK_ZONE"
 
 [node name="D4" type="HSlider" parent="DefensiveTactics"]
 margin_left = 320.0
-margin_top = 180.0
-margin_right = 395.0
-margin_bottom = 236.0
+margin_top = 192.0
+margin_right = 383.0
+margin_bottom = 252.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 1.0
@@ -504,17 +505,17 @@ max_value = 20.0
 value = 6.0
 
 [node name="MarkPlayer" type="Label" parent="DefensiveTactics"]
-margin_left = 415.0
-margin_top = 180.0
-margin_right = 714.0
-margin_bottom = 236.0
+margin_left = 403.0
+margin_top = 194.0
+margin_right = 702.0
+margin_bottom = 250.0
 text = "MARK_PLAYER"
 
 [node name="D4Info" type="Button" parent="DefensiveTactics"]
-margin_left = 734.0
-margin_top = 180.0
+margin_left = 722.0
+margin_top = 192.0
 margin_right = 760.0
-margin_bottom = 236.0
+margin_bottom = 252.0
 text = " i "
 
 [node name="OffensiveTactics" type="GridContainer" parent="."]
@@ -529,14 +530,15 @@ __meta__ = {
 }
 
 [node name="Possession" type="Label" parent="OffensiveTactics"]
+margin_top = 2.0
 margin_right = 284.0
-margin_bottom = 56.0
+margin_bottom = 58.0
 text = "POSSESSION"
 
 [node name="O1" type="HSlider" parent="OffensiveTactics"]
 margin_left = 304.0
-margin_right = 402.0
-margin_bottom = 56.0
+margin_right = 390.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 1.0
@@ -544,28 +546,29 @@ max_value = 20.0
 value = 6.0
 
 [node name="FastAttack" type="Label" parent="OffensiveTactics"]
-margin_left = 422.0
-margin_right = 714.0
-margin_bottom = 56.0
+margin_left = 410.0
+margin_top = 2.0
+margin_right = 702.0
+margin_bottom = 58.0
 text = "FAST_ATTACK"
 
 [node name="01Info" type="Button" parent="OffensiveTactics"]
-margin_left = 734.0
+margin_left = 722.0
 margin_right = 760.0
-margin_bottom = 56.0
+margin_bottom = 60.0
 text = " i "
 
 [node name="ShortPass" type="Label" parent="OffensiveTactics"]
-margin_top = 60.0
+margin_top = 66.0
 margin_right = 284.0
-margin_bottom = 116.0
+margin_bottom = 122.0
 text = "SHORT_PASS"
 
 [node name="O2" type="HSlider" parent="OffensiveTactics"]
 margin_left = 304.0
-margin_top = 60.0
-margin_right = 402.0
-margin_bottom = 116.0
+margin_top = 64.0
+margin_right = 390.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 1.0
@@ -573,30 +576,30 @@ max_value = 20.0
 value = 6.0
 
 [node name="LongPass" type="Label" parent="OffensiveTactics"]
-margin_left = 422.0
-margin_top = 60.0
-margin_right = 714.0
-margin_bottom = 116.0
+margin_left = 410.0
+margin_top = 66.0
+margin_right = 702.0
+margin_bottom = 122.0
 text = "LONG_PASS"
 
 [node name="02Info" type="Button" parent="OffensiveTactics"]
-margin_left = 734.0
-margin_top = 60.0
+margin_left = 722.0
+margin_top = 64.0
 margin_right = 760.0
-margin_bottom = 116.0
+margin_bottom = 124.0
 text = " i "
 
 [node name="OpenCourt" type="Label" parent="OffensiveTactics"]
-margin_top = 120.0
+margin_top = 130.0
 margin_right = 284.0
-margin_bottom = 176.0
+margin_bottom = 186.0
 text = "OPEN_COURT"
 
 [node name="O3" type="HSlider" parent="OffensiveTactics"]
 margin_left = 304.0
-margin_top = 120.0
-margin_right = 402.0
-margin_bottom = 176.0
+margin_top = 128.0
+margin_right = 390.0
+margin_bottom = 188.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 1.0
@@ -604,30 +607,30 @@ max_value = 20.0
 value = 6.0
 
 [node name="Center" type="Label" parent="OffensiveTactics"]
-margin_left = 422.0
-margin_top = 120.0
-margin_right = 714.0
-margin_bottom = 176.0
+margin_left = 410.0
+margin_top = 130.0
+margin_right = 702.0
+margin_bottom = 186.0
 text = "CENTER"
 
 [node name="03Info" type="Button" parent="OffensiveTactics"]
-margin_left = 734.0
-margin_top = 120.0
+margin_left = 722.0
+margin_top = 128.0
 margin_right = 760.0
-margin_bottom = 176.0
+margin_bottom = 188.0
 text = " i "
 
 [node name="Dribble" type="Label" parent="OffensiveTactics"]
-margin_top = 180.0
+margin_top = 194.0
 margin_right = 284.0
-margin_bottom = 236.0
+margin_bottom = 250.0
 text = "DRIBBLE"
 
 [node name="O4" type="HSlider" parent="OffensiveTactics"]
 margin_left = 304.0
-margin_top = 180.0
-margin_right = 402.0
-margin_bottom = 236.0
+margin_top = 192.0
+margin_right = 390.0
+margin_bottom = 252.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 min_value = 1.0
@@ -635,17 +638,17 @@ max_value = 20.0
 value = 6.0
 
 [node name="Pass" type="Label" parent="OffensiveTactics"]
-margin_left = 422.0
-margin_top = 180.0
-margin_right = 714.0
-margin_bottom = 236.0
+margin_left = 410.0
+margin_top = 194.0
+margin_right = 702.0
+margin_bottom = 250.0
 text = "PASS"
 
 [node name="04Info" type="Button" parent="OffensiveTactics"]
-margin_left = 734.0
-margin_top = 180.0
+margin_left = 722.0
+margin_top = 192.0
 margin_right = 760.0
-margin_bottom = 236.0
+margin_bottom = 252.0
 text = " i "
 
 [node name="PlayerSelect" type="Popup" parent="."]

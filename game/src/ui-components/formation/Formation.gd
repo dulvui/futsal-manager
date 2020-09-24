@@ -54,6 +54,7 @@ func _on_FormationSelect_item_selected(index):
 
 func _set_players():
 	var team = DataSaver.get_selected_team()
+	$PlayerSelect/PlayerList.add_subs()
 	$Field/G.set_player(team["players"]["active"][0])
 	$Field/D.set_player(team["players"]["active"][1])
 	$Field/WL.set_player(team["players"]["active"][2])

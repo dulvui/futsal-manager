@@ -28,4 +28,6 @@ func team_selected(team):
 	print("matches initialized")
 	DataSaver.save_all_data()
 	
+	EmailUtil.message(null,EmailUtil.MESSAGE_TYPES.WELCOME_MANAGER)
+	
 	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")

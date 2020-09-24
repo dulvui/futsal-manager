@@ -10,7 +10,7 @@ func _ready():
 	
 	
 	$AllPlayersPopup/AllPlayerList.add_all_players(false)
-	$FormationPopUp/Formation/PlayerSelect/PlayerList.add_players()
+	$FormationPopUp/Formation/PlayerSelect/PlayerList.add_subs()
 	
 	$Date.text = CalendarUtil.get_date()
 	
@@ -40,7 +40,7 @@ func _on_Continue_pressed():
 	TransferUtil.update_day()
 	$Email.update_messages()
 	$Date.text = CalendarUtil.get_date()
-	$FormationPopUp/Formation/PlayerSelect/PlayerList.add_players()
+	$FormationPopUp/Formation/PlayerSelect/PlayerList.add_subs()
 	DataSaver.save_all_data()
 	if DataSaver.calendar[CalendarUtil.day_counter]["matches"].size() > 0:
 		get_tree().change_scene("res://src/screens/match/Match.tscn")

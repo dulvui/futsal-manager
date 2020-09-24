@@ -378,13 +378,16 @@ func move_up(player):
 	pass
 
 func move_down(player):
-	action_buffer.append(player,"DRIBBLE")
+#	action_buffer.append(player,"DRIBBLE")
+	pass
 	
 func wait(player):
-	action_buffer.append(player,"WAIT")
+#	action_buffer.append(player,"WAIT")
+	pass
 	
 func dribble(player):
-	action_buffer.append(player,"DRIBBLE")
+#	action_buffer.append(player,"DRIBBLE")
+	pass
 
 	
 func update_sectors():
