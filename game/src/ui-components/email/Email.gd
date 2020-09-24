@@ -3,34 +3,23 @@ extends Control
 signal offer_contract
 
 func _ready():
-	for message in EmailUtil.messages:
-		var title_label = Label.new()
-		title_label.text = message["title"]
-		$ScrollContainer/Mails.add_child(title_label)
-		
-		var button = Button.new()
-		if message["read"]:
-			button.text = "READ"
-		else:
-			button.text = "*READ*"
-		button.connect("pressed",self,"show_message",[message])
-		$ScrollContainer/Mails.add_child(button)
+	update_messages()
 
 func update_messages():
 	for child in $ScrollContainer/Mails.get_children():
 		child.queue_free()
 	
-	for message in EmailUtil.messages:
+	for i in range(EmailUtil.messages.size()-1,-1,-1):
 		var title_label = Label.new()
-		title_label.text = message["title"]
+		title_label.text = EmailUtil.messages[i]["title"]
 		$ScrollContainer/Mails.add_child(title_label)
 		
 		var button = Button.new()
-		if message["read"]:
+		if EmailUtil.messages[i]["read"]:
 			button.text = "READ"
 		else:
 			button.text = "*READ*"
-		button.connect("pressed",self,"show_message",[message])
+		button.connect("pressed",self,"show_message",[EmailUtil.messages[i]])
 		$ScrollContainer/Mails.add_child(button)
 
 
