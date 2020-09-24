@@ -137,7 +137,6 @@ func set_up(home,away, match_started):
 			away_team["players"]["active"][4]["has_ball"] = true
 	
 func update():
-	update_sectors()
 	time += 1
 	if home_has_ball:
 		home_possess_counter += 1
@@ -203,118 +202,63 @@ func change_players(new_home_team,new_away_team):
 		away_team["players"]["active"][4]["has_ball"] = true
 
 func update_field_players():
-	$HomePlayers/G.move_to(home_team["players"]["active"][0]["real"].sector_pos)
+	$HomePlayers/G.move_to(home_team["players"]["active"][0]["real"].current_pos)
 	if home_team["players"]["active"][0]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/G.position)
-	$HomePlayers/D.move_to(home_team["players"]["active"][1]["real"].sector_pos)
+	$HomePlayers/D.move_to(home_team["players"]["active"][1]["real"].current_pos)
 	if home_team["players"]["active"][1]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/D.position)
-	$HomePlayers/WL.move_to(home_team["players"]["active"][2]["real"].sector_pos)
+	$HomePlayers/WL.move_to(home_team["players"]["active"][2]["real"].current_pos)
 	if home_team["players"]["active"][2]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/WL.position)
-	$HomePlayers/WR.move_to(home_team["players"]["active"][3]["real"].sector_pos)
+	$HomePlayers/WR.move_to(home_team["players"]["active"][3]["real"].current_pos)
 	if home_team["players"]["active"][3]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/WR.position)
-	$HomePlayers/P.move_to(home_team["players"]["active"][4]["real"].sector_pos)
+	$HomePlayers/P.move_to(home_team["players"]["active"][4]["real"].current_pos)
 	if home_team["players"]["active"][4]["real"].player["has_ball"]:
 		$Ball.move_to($HomePlayers/P.position)
 	
-	$AwayPlayers/G.move_to(away_team["players"]["active"][0]["real"].sector_pos)
+	$AwayPlayers/G.move_to(away_team["players"]["active"][0]["real"].current_pos)
 	if away_team["players"]["active"][0]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/G.position)
-	$AwayPlayers/D.move_to(away_team["players"]["active"][1]["real"].sector_pos)
+	$AwayPlayers/D.move_to(away_team["players"]["active"][1]["real"].current_pos)
 	if away_team["players"]["active"][1]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/D.position)
-	$AwayPlayers/WL.move_to(away_team["players"]["active"][2]["real"].sector_pos)
+	$AwayPlayers/WL.move_to(away_team["players"]["active"][2]["real"].current_pos)
 	if away_team["players"]["active"][2]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/WL.position)
-	$AwayPlayers/WR.move_to(away_team["players"]["active"][3]["real"].sector_pos)
+	$AwayPlayers/WR.move_to(away_team["players"]["active"][3]["real"].current_pos)
 	if away_team["players"]["active"][3]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/WR.position)
-	$AwayPlayers/P.move_to(away_team["players"]["active"][4]["real"].sector_pos)
+	$AwayPlayers/P.move_to(away_team["players"]["active"][4]["real"].current_pos)
 	if away_team["players"]["active"][4]["real"].player["has_ball"]:
 		$Ball.move_to($AwayPlayers/P.position)
 	
-func create_real_player(player,i):
+func create_real_player(player,pos):
 	var real_player = Player.new()
-	real_player.set_up(player,i)
+	match pos:
+		0:
+			real_player.set_up(player,Vector2(100,300),pos)
+		1:
+			real_player.set_up(player,Vector2(250,300),pos)
+		2:
+			real_player.set_up(player,Vector2(350,400),pos)
+		3:
+			real_player.set_up(player,Vector2(350,500),pos)
+		4:
+			real_player.set_up(player,Vector2(500,300),pos)
+				
 	real_player.connect("pass_to",self,"pass_to")
 	real_player.connect("shoot",self,"shoot")
-	real_player.connect("move_up",self,"move_up")
-	real_player.connect("move_down",self,"move_up")
-	real_player.connect("wait",self,"wait")
 	real_player.connect("dribble",self,"dribble")
 	add_child(real_player)
 	return real_player
 
 func pass_to(player):
 	print(player["name"])
-	player["real"].player["has_ball"] = false
 	print("PASS in sim")
 	
-	var team_players
-	var opponent_players
-	#make pass
-	if player["home"]:
-		home_stats["pass"] += 1
-		team_players = sectors[player["real"].current_sector]["home_players"]
-		opponent_players = sectors[player["real"].current_sector]["away_players"]
-	else:
-		away_stats["pass"] += 1
-		team_players = sectors[player["real"].current_sector]["away_players"]
-		opponent_players = sectors[player["real"].current_sector]["home_players"]
-	team_players.shuffle()
-	opponent_players.shuffle()
 	
-	var random_receiver = team_players[0]
-	
-	#to fix goalies passes itself bug
-	if random_receiver == player:
-		if home_has_ball:
-			random_receiver = home_team["players"]["active"][1]
-		else:
-			random_receiver = away_team["players"]["active"][1]
-	
-	#if nno opponent player in sector, pass is succesful
-	if opponent_players.size() == 0:
-		random_receiver["real"].player["has_ball"] = true
-		if player["home"]:
-			home_stats["pass_success"] += 1
-		else:
-			away_stats["pass_success"] += 1
-	else:
-		var random_defender = opponent_players[0]
-
-		
-		#check interception
-		# results: intercept, no_intercept, no_intercept_but ball goes out of field
-		
-		#add also concentration and stamina
-		var defense_factor:int = random_defender["technical"]["intercept"]
-		var pass_factor:int = player["technical"]["pass"] * 3
-		var intercept_factor:int = defense_factor + pass_factor
-		
-		var random_factor = randi()%intercept_factor
-		var intercept_result = random_factor < defense_factor
-		#check receiver first touch, he could not be able to stop it
-		#reslts: success, no_stop_out_of_field, no_stop_defender_gets_ball
-		
-		#make pass
-		if intercept_result:
-			random_defender["real"].player["has_ball"] = true
-			if player["home"]:
-				home_has_ball = false
-			else:
-				home_has_ball = true
-		else:
-			random_receiver["real"].player["has_ball"] = true
-			if player["home"]:
-				home_stats["pass_success"] += 1
-			else:
-				away_stats["pass_success"] += 1
-		# passes to player and random defender of sector tires to intercept
-		#if pass OVER TWO SECTORS two players wil intercept, if present int sector
-		# switch has ball attribute
 	
 func shoot(player):
 	print(player["name"])
@@ -430,15 +374,6 @@ func dribble(player):
 #	action_buffer.append(player,"DRIBBLE")
 	pass
 
-	
-func update_sectors():
-	for sector in sectors:
-		sector["home_players"] = []
-		sector["away_players"] = []
-	for player in home_team["players"]["active"]:
-		sectors[player["real"].current_sector]["home_players"].append(player)
-	for player in away_team["players"]["active"]:
-		sectors[player["real"].current_sector]["away_players"].append(player)
 
 func show_goal(player):
 	pass
