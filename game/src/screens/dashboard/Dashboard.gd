@@ -38,7 +38,6 @@ func _on_Formation_pressed():
 func _on_Continue_pressed():
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
-	EmailUtil.update()
 	$Email.update_messages()
 	$Date.text = CalendarUtil.get_date()
 	$FormationPopUp/Formation/PlayerSelect/PlayerList.add_players()

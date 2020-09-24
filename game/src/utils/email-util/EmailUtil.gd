@@ -2,19 +2,13 @@ extends Node
 
 var messages = []
 
+const MAX_MESSAGES = 30
+
 enum MESSAGE_TYPES {TRANSFER,TRANSFER_OFFER,CONTRACT_SIGNED,CONTRACT_OFFER,CONTRACT_OFFER_MADE,NEXT_MATCH}
 
 func _ready():
 	messages = DataSaver.messages
 
-
-# make update method connected to new day signal of calendar
-func update():
-	for message in messages:
-		message["days"] -= 1
-		if message["days"] < 1 and message["read"]:
-			messages.erase(message)
-			
 func count_unread_messages():
 	var counter = 0
 	for message in messages:
@@ -28,7 +22,6 @@ func message(content,type):
 	var message = {
 		"title" : "TRANSFER",
 		"message" : "",
-		"days" : 7,
 		"type" : type,
 		"read" : false
 	}
@@ -61,6 +54,9 @@ func message(content,type):
 			message["title"] = "NEXT MATCH"
 			
 	messages.append(message)
+	
+	if messages.size() > MAX_MESSAGES:
+		messages.pop_front()
 	
 	
 
