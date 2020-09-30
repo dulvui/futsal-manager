@@ -59,8 +59,6 @@ func _on_AllPlayerList_select_player(player):
 	$PlayerOfferPopup/PlayerOffer.set_player(player)
 	$PlayerOfferPopup/PlayerOffer.show()
 	$PlayerOfferPopup.popup_centered()
-#	TransferUtil.make_offer(player,4200)
-#	$EmailPopup/Email.update_messages()
 
 
 func _on_PlayerOffer_hide():

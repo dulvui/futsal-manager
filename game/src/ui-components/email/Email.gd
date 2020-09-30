@@ -9,7 +9,7 @@ func update_messages():
 	for child in $ScrollContainer/Mails.get_children():
 		child.queue_free()
 	
-	for i in range(EmailUtil.messages.size()-1,-1,-1):
+	for i in range(EmailUtil.messages.size()-1,-1,-1): # reverse list
 		var title_label = Label.new()
 		title_label.text = EmailUtil.messages[i]["title"]
 		$ScrollContainer/Mails.add_child(title_label)
