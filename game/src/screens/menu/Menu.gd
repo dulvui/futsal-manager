@@ -7,6 +7,7 @@ extends Control
 
 func _on_StartGame_pressed():
 	DataSaver.reset()
+	GameAnalytics.event("START")
 	get_tree().change_scene("res://src/screens/create-manager/CreateManager.tscn")
 
 
