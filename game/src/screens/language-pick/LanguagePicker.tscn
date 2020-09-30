@@ -60,7 +60,7 @@ texture_normal = ExtResource( 3 )
 
 [node name="German" type="TextureButton" parent="HBoxContainer"]
 margin_left = 672.0
-margin_right = 736.0
+margin_right = 800.0
 margin_bottom = 128.0
 texture_normal = ExtResource( 1 )
 [connection signal="pressed" from="HBoxContainer/English" to="." method="_on_English_pressed"]
