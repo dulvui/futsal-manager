@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/screens/gdpr-consent/GDPRConsent.gd" type="Script" id=2]
+
+[node name="GDPRConsent" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 449.956
+margin_top = 290.868
+margin_right = -464.044
+margin_bottom = -402.132
+text = "GDR_CONSENT"
+
+[node name="Title" type="Label" parent="."]
+margin_left = 767.133
+margin_top = 80.9086
+margin_right = 1017.13
+margin_bottom = 136.909
+text = "GDPR_TITLE"
+
+[node name="Consent" type="Button" parent="."]
+margin_left = 1264.0
+margin_top = 792.0
+margin_right = 1477.0
+margin_bottom = 852.0
+text = "CONSENT"
+
+[node name="Decline" type="Button" parent="."]
+margin_left = 600.0
+margin_top = 792.0
+margin_right = 789.0
+margin_bottom = 852.0
+text = "DECLINE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Consent" to="." method="_on_Consent_pressed"]
+[connection signal="pressed" from="Decline" to="." method="_on_Decline_pressed"]

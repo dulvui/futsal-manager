@@ -4,6 +4,10 @@ var config
 
 var language
 
+enum GDPR_CONSENTS {ND,ACCEPT,DECLINE}
+
+var gdpr_consent # ND,SCCEPt, DECLINE
+
 var manager
 
 var day_counter
@@ -36,6 +40,8 @@ func _ready():
 		"birth_date" : "",
 	})
 	language = config.get_value("settings","language","ND")
+	
+	gdpr_consent = config.get_value("gdpr","consent",GDPR_CONSENTS.ND)
 	
 	calendar = config.get_value("season","calendar",[])
 	table = config.get_value("season","table",[])
@@ -82,6 +88,7 @@ func set_lang(lang):
 	print("lang set to " + language)
 
 func save_all_data():
+	config.set_value("gdpr","consent",gdpr_consent)
 	config.set_value("manager","data",manager)
 	config.set_value("selected_team","data",selected_team)
 	config.set_value("teams","data",teams)

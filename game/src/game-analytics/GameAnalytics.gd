@@ -20,7 +20,10 @@ func _ready():
 #		GameAnalytics.configureAvailableResourceItemTypes(["boost", "lives"])
 
 		GameAnalytics.init("cd0e542f8e7bc2d3c33689e1e3dc7601", "9de227b0dd5d0ed253305294f1de52e5987d3783")
-
+	
+	if DataSaver.gdpr_consent == DataSaver.GDPR_CONSENTS.DECLINE:
+		GDPR_disable_events()
+	
 func GDPR_disable_events():
 	GameAnalytics.setEnabledEventSubmission(false);
 	
