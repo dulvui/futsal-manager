@@ -52,12 +52,12 @@ func set_up(new_player,new_kick_off_pos,new_pos):
 	if player["home"]:
 		kick_off_pos = new_kick_off_pos
 		goal_pos = Vector2(1200,300)
-		attack_pos = kick_off_pos + Vector2(600,0)
+		attack_pos = kick_off_pos + Vector2(400,0)
 		defense_pos = kick_off_pos - Vector2(50,0)
 	else:
 		kick_off_pos = Vector2(1200,600) - new_kick_off_pos
 		goal_pos = Vector2(0,300)
-		attack_pos = kick_off_pos - Vector2(600,0)
+		attack_pos = kick_off_pos - Vector2(400,0)
 		defense_pos = kick_off_pos + Vector2(50,0)
 	current_pos = kick_off_pos
 	
@@ -89,7 +89,7 @@ func make_offensive_with_ball_decision():
 	
 	#modify multiplactors by team mentality
 	var shoot_factor = check_shoot()
-	var pass_factor = check_pass() * 40
+	var pass_factor = check_pass() * 300
 	var move_to_attackpos_factor = 80
 	var wait_factor = 20
 	
@@ -98,9 +98,11 @@ func make_offensive_with_ball_decision():
 	
 	if decision_factor < shoot_factor:
 		print("SHOOTS")
+		player["has_ball"] = false
 		emit_signal("shoot",player)
 	elif decision_factor < (shoot_factor + pass_factor):
 		print("PASS")
+		player["has_ball"] = false
 		emit_signal("pass_to",player)
 	elif decision_factor < (shoot_factor + pass_factor + move_to_attackpos_factor):
 		print("MOVES to attack pos")
@@ -151,18 +153,25 @@ func check_shoot():
 	
 	
 func check_pass():
-	#add player vision affect
-	#add pass mentality
-	var pass_factor = 1
-
-	return pass_factor
+	#-1 no pass, else pos to pas
+	var pass_factor = -1
+	var team_players = get_parent().home_team["players"]["active"]
+	for player in team_players:
+		if not player["has_ball"]:
+			var pol = player["real"].current_pos
+#			$Head.look_at(pol)
+#			var collider = $Head.get_collider()
+#			if collider != null:
+#				print(collider["name"])
+#	return pass_factor
+	return 20
 	
 	
 func move_to_defenese_pos():
 	var distance = current_pos.distance_to(defense_pos)
 	var direction = (defense_pos - current_pos).normalized()
 	if distance > 20:
-		current_pos += direction*player["fisical"]["pace"]
+		current_pos += direction*player["fisical"]["pace"] * 5
 	
 
 # special movements: cornerns, penlaties, free kicks, kick off, rimessa
@@ -171,7 +180,7 @@ func move_to_attack_pos():
 	var distance = current_pos.distance_to(attack_pos)
 	var direction = (attack_pos - current_pos).normalized()
 	if distance > 20:
-		current_pos += direction*player["fisical"]["pace"] * 20
+		current_pos += direction*player["fisical"]["pace"] * 5
 	
 func move_to_bpp():
 	#like in book to bring in player movemnts, but just in player near area
