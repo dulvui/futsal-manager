@@ -16,7 +16,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentPlayers" type="MarginContainer" parent="."]
+[node name="CurrentPlayers" type="VBoxContainer" parent="."]
 margin_left = 587.339
 margin_top = 31.748
 margin_right = 1387.34
@@ -24,6 +24,10 @@ margin_bottom = 831.748
 rect_pivot_offset = Vector2( 400, 400 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 70
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NameSearch" type="LineEdit" parent="."]
 margin_left = 40.0
