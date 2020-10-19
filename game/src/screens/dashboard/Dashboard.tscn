@@ -76,31 +76,31 @@ __meta__ = {
 
 [node name="Formation" type="Button" parent="Buttons"]
 margin_right = 464.0
-margin_bottom = 56.0
+margin_bottom = 60.0
 text = "FORMATION"
 
 [node name="Training" type="Button" parent="Buttons"]
-margin_top = 64.0
+margin_top = 68.0
 margin_right = 464.0
-margin_bottom = 120.0
+margin_bottom = 128.0
 text = "TRAINING"
 
 [node name="Table" type="Button" parent="Buttons"]
-margin_top = 128.0
+margin_top = 136.0
 margin_right = 464.0
-margin_bottom = 184.0
+margin_bottom = 196.0
 text = "TABLE"
 
 [node name="Calendar" type="Button" parent="Buttons"]
-margin_top = 192.0
+margin_top = 204.0
 margin_right = 464.0
-margin_bottom = 248.0
+margin_bottom = 264.0
 text = "CALENDAR"
 
 [node name="Email" type="Button" parent="Buttons"]
-margin_top = 256.0
+margin_top = 272.0
 margin_right = 464.0
-margin_bottom = 312.0
+margin_bottom = 332.0
 text = "EMAIL"
 
 [node name="Panel" type="Panel" parent="Buttons/Email"]
@@ -125,30 +125,26 @@ __meta__ = {
 }
 
 [node name="SearchPlayer" type="Button" parent="Buttons"]
-margin_top = 320.0
+margin_top = 340.0
 margin_right = 464.0
-margin_bottom = 376.0
+margin_bottom = 400.0
 text = "SEARCH_PLAYER"
 
 [node name="Menu" type="Button" parent="Buttons"]
-margin_top = 384.0
+margin_top = 408.0
 margin_right = 464.0
-margin_bottom = 440.0
+margin_bottom = 468.0
 text = "MENU"
 
 [node name="AllPlayersPopup" type="Popup" parent="."]
-margin_left = 280.0
-margin_top = 40.0
-margin_right = 1680.0
-margin_bottom = 1040.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="AllPlayersPopup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="AllPlayerList" parent="AllPlayersPopup" instance=ExtResource( 4 )]
-margin_right = 0.0
-margin_bottom = 0.0
 
 [node name="FormationPopUp" type="Popup" parent="."]
 margin_left = 221.345
