@@ -85,7 +85,7 @@ func _on_MatchSimulator_home_pass():
 
 func match_end():
 	$Dashboard.show()
-	$TimerMatchSimulator.stop()
+	$MatchSimulator.match_end()
 	DataSaver.save_result(home_team["name"],$MatchSimulator.home_stats["goals"],away_team["name"],$MatchSimulator.away_stats["goals"])
 	
 	#simulate all games for now. needs also support for other leagues
@@ -97,7 +97,7 @@ func match_end():
 			DataSaver.save_result(matchday["home"],randi()%10,matchday["away"],randi()%10)
 
 func half_time():
-	_on_Pause_pressed()
+	$HUD/Pause.text = tr("CONTINUE")
 
 
 
@@ -108,21 +108,21 @@ func _on_Dashboard_pressed():
 
 func _on_Faster_pressed():
 	if speed_factor < 6:
-		$TimerMatchSimulator.wait_time /= 2
 		speed_factor += 1
+		$MatchSimulator.faster()
 
 
 func _on_Slower_pressed():
 	if speed_factor > 0:
-		$TimerMatchSimulator.wait_time *= 2
 		speed_factor -= 1
+		$MatchSimulator.slower()
 	
 
 
 func _on_Pause_pressed():
-	$TimerMatchSimulator.paused = not $TimerMatchSimulator.paused
+	var paused = $MatchSimulator.pause_toggle()
 	
-	if $TimerMatchSimulator.paused:
+	if paused:
 		$HUD/Pause.text = tr("CONTINUE")
 	else:
 		$FormationPopup.hide()
@@ -130,13 +130,13 @@ func _on_Pause_pressed():
 
 
 func _on_Formation_pressed():
-	$TimerMatchSimulator.paused = true
+	$MatchSimulator.pause()
 	$HUD/Pause.text = tr("PAUSE")
 	$FormationPopup.popup_centered()
 
 
 func _on_Formation_change():
-	print("change numebrs")
+	print("change formation")
 	var next_match = CalendarUtil.get_next_match()
 	
 	if next_match != null:
@@ -155,26 +155,37 @@ func _on_SKIP_pressed():
 
 
 func _on_MatchSimulator_home_goal():
-	$TimerMatchSimulator.paused = true
+	$MatchSimulator.pause()
 	$Stats.hide() #make animation
 	$MatchSimulator.show()
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
-	$TimerMatchSimulator.paused = false
 	$Stats.show() #make animation
 	$MatchSimulator.hide()
+	$MatchSimulator.continue_match()
 
 
 func _on_MatchSimulator_away_goal():
-	$TimerMatchSimulator.paused = true
+	$Stats.hide() #make animation
+	$MatchSimulator.show()
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
-	$TimerMatchSimulator.paused = false
+	$Stats.show() #make animation
+	$MatchSimulator.hide()
+	$MatchSimulator.continue_match()
 
 
 func _on_StartTimer_timeout():
-	$TimerMatchSimulator.start()
+	$MatchSimulator.start_match()
+
+
+func _on_MatchSimulator_half_time():
+	half_time()
+
+
+func _on_MatchSimulator_match_end():
+	match_end()
