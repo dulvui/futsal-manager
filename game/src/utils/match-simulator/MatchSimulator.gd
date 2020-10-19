@@ -5,6 +5,10 @@ signal away_goal
 signal home_pass
 signal away_pass
 
+signal half_time
+signal match_end
+
+
 const Player = preload("res://src/utils/match-simulator/simulator-player/SimulatorPlayer.gd")
 
 var home_team = {}
@@ -112,6 +116,13 @@ var home_has_ball
 
 var action_buffer = []
 
+var match_timer
+
+func _ready():
+	match_timer = Timer.new()
+	match_timer.wait_time = 1
+	match_timer.connect("timeout",self,"update")
+	add_child(match_timer)
 
 func set_up(home,away, match_started):
 	home_team = home.duplicate(true)
@@ -138,37 +149,66 @@ func set_up(home,away, match_started):
 	
 func update():
 	time += 1
-	if home_has_ball:
-		home_possess_counter += 1
-	home_stats["possession"] = (home_possess_counter / time) * 100
-	away_stats["possession"] = 100 - home_stats["possession"]
 	
-	var player_has_ball = 0
+	if time == 1200: #halftime
+		pause()
+		emit_signal("half_time")
+	elif time == 2400:
+		match_end()
+		emit_signal("match_end")
+	else:
 	
-	# add pos to update_decision
-	for player in home_team["players"]["active"]:
-		player["real"].update_decision(home_has_ball,player["has_ball"])
+	
+		if home_has_ball:
+			home_possess_counter += 1
+		home_stats["possession"] = (home_possess_counter / time) * 100
+		away_stats["possession"] = 100 - home_stats["possession"]
 		
-		if player["real"].player["has_ball"]:
-			print("PLAYER " + player["surname"] + " HAS BALL")
-			player_has_ball += 1
+		var player_has_ball = 0
 		
-	for player in away_team["players"]["active"]:
-		player["real"].update_decision(!home_has_ball,player["has_ball"])
-		
-		if player["real"].player["has_ball"]:
-			print("PLAYER " + player["surname"] + " HAS BALL")
-			player_has_ball += 1
+		# add pos to update_decision
+		for player in home_team["players"]["active"]:
+			player["real"].update_decision(home_has_ball,player["has_ball"])
 			
-	if player_has_ball == 0:
-		print("no Player has ball")
-		
-	if player_has_ball == 2:
-		print("2 Players has ball")
-		
-	update_field_players()
+			if player["real"].player["has_ball"]:
+				print("PLAYER " + player["surname"] + " HAS BALL")
+				player_has_ball += 1
+			
+		for player in away_team["players"]["active"]:
+			player["real"].update_decision(!home_has_ball,player["has_ball"])
+			
+			if player["real"].player["has_ball"]:
+				print("PLAYER " + player["surname"] + " HAS BALL")
+				player_has_ball += 1
+				
+		if player_has_ball == 0:
+			print("no Player has ball")
+			
+		if player_has_ball == 2:
+			print("2 Players has ball")
+			
+		update_field_players()
 		
 
+func start_match():
+	match_timer.start()
+	
+func pause():
+	match_timer.paused = true
+	
+func pause_toggle():
+	match_timer.paused = not match_timer.paused
+	return match_timer.paused
+	
+
+func match_end():
+	match_timer.stop()
+	
+func faster():
+	match_timer.wait_time = match_timer.wait_time / 2
+	
+func slower():
+	match_timer.wait_time = match_timer.wait_time * 2
 
 func get_team_players_in_sector(home,sector_pos):
 	if home:
@@ -242,7 +282,7 @@ func create_real_player(player,pos):
 		1:
 			real_player.set_up(player,Vector2(250,300),pos)
 		2:
-			real_player.set_up(player,Vector2(350,400),pos)
+			real_player.set_up(player,Vector2(350,100),pos)
 		3:
 			real_player.set_up(player,Vector2(350,500),pos)
 		4:
@@ -257,7 +297,10 @@ func create_real_player(player,pos):
 func pass_to(player):
 	print(player["name"])
 	print("PASS in sim")
-	
+	if player["home"]:
+		home_team["players"]["active"][randi()%5]["has_ball"] = true
+	else:
+		away_team["players"]["active"][randi()%5]["has_ball"] = true
 	
 	
 func shoot(player):
