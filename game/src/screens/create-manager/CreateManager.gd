@@ -21,4 +21,4 @@ func _on_Continue_pressed():
 			"nationality" : $GridContainer/Nat.items[$GridContainer/Nat.selected]
 		}
 		DataSaver.save_manager(manager)
-		get_tree().change_scene("res://src/ui-components/team-select/TeamSelect.tscn")
+		get_tree().change_scene("res://src/screens/team-select/TeamSelect.tscn")

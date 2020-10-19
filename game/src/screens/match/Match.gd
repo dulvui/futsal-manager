@@ -30,8 +30,6 @@ func _ready():
 	
 	$FormationPopup/Formation/PlayerList.add_match_players()
 	
-#	match_end()
-	
 
 func _process(delta):
 	$HUD/TopBar/Time.text = "%02d:%02d"%[int($MatchSimulator.time)/60,int($MatchSimulator.time)%60]
