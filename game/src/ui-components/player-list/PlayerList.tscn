@@ -14,6 +14,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CurrentPlayers" type="VBoxContainer" parent="."]
 margin_left = 746.079
 margin_top = 73.0205
@@ -117,6 +124,13 @@ text = "NEXT"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Close" type="Button" parent="."]
+margin_left = 1776.0
+margin_top = 60.0
+margin_right = 1815.0
+margin_bottom = 120.0
+text = "X"
 [connection signal="text_changed" from="NameSearch" to="." method="_on_NameSearch_text_changed"]
 [connection signal="item_selected" from="TeamSelect" to="." method="_on_TeamSelect_item_selected"]
 [connection signal="item_selected" from="PositionSelect" to="." method="_on_PositionSelect_item_selected"]
@@ -124,3 +138,4 @@ __meta__ = {
 [connection signal="item_selected" from="InfoSelect" to="." method="_on_InfoSelect_item_selected"]
 [connection signal="pressed" from="Paginator/Prev" to="." method="_on_Prev_pressed"]
 [connection signal="pressed" from="Paginator/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]
