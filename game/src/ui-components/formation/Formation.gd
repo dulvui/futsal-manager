@@ -91,7 +91,7 @@ func _on_PlayerList_select_player(player):
 	print("formation select")
 	DataSaver.change_player(player_to_replace,player)
 	_set_players()
-	$PlayerSelect.hide()
+	$PlayerList.hide()
 	emit_signal("change")
 
 
