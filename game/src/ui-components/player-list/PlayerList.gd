@@ -47,9 +47,10 @@ func _ready():
 	
 	for info_type in INFO_TYPES:
 		$InfoSelect.add_item(info_type)
+		
+	$Paginator/PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
+	
 
-func _process(delta):
-	$PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
 
 func add_subs():
 	for child in $CurrentPlayers.get_children():
@@ -110,6 +111,9 @@ func add_all_players(filter):
 		player_profile.connect("player_select",self,"select_player",[player])
 		player_profile.set_up_info(player,info_type)
 		$CurrentPlayers.add_child(player_profile)
+		
+	$Paginator/PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
+	
 	
 
 func select_player(player):
