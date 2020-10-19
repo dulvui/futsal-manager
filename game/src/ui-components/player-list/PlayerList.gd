@@ -180,3 +180,7 @@ func _on_Prev_pressed():
 func _on_InfoSelect_item_selected(index):
 	info_type = INFO_TYPES[index]
 	add_all_players(false)
+
+
+func _on_Close_pressed():
+	hide()

@@ -651,16 +651,6 @@ margin_right = 760.0
 margin_bottom = 252.0
 text = " i "
 
-[node name="PlayerSelect" type="Popup" parent="."]
-margin_left = 420.0
-margin_top = 20.0
-margin_right = 1600.0
-margin_bottom = 1020.0
-
-[node name="PlayerList" parent="PlayerSelect" instance=ExtResource( 4 )]
-margin_right = 0.0
-margin_bottom = 0.0
-
 [node name="Field" type="Control" parent="."]
 margin_left = 840.0
 margin_top = 40.0
@@ -755,6 +745,9 @@ text = "text"
 align = 1
 valign = 1
 
+[node name="PlayerList" parent="." instance=ExtResource( 4 )]
+visible = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Fade1-1-2 = SubResource( 1 )
 anims/Fade1-2-1 = SubResource( 2 )
@@ -780,9 +773,9 @@ anims/Fade4-0 = SubResource( 7 )
 [connection signal="pressed" from="OffensiveTactics/03Info" to="." method="_on_03Info_pressed"]
 [connection signal="value_changed" from="OffensiveTactics/O4" to="." method="_on_O4_value_changed"]
 [connection signal="pressed" from="OffensiveTactics/04Info" to="." method="_on_04Info_pressed"]
-[connection signal="select_player" from="PlayerSelect/PlayerList" to="." method="_on_PlayerList_select_player"]
 [connection signal="change_player" from="Field/G" to="." method="_on_G_change_player"]
 [connection signal="change_player" from="Field/D" to="." method="_on_D_change_player"]
 [connection signal="change_player" from="Field/WL" to="." method="_on_WL_change_player"]
 [connection signal="change_player" from="Field/WR" to="." method="_on_WR_change_player"]
 [connection signal="change_player" from="Field/P" to="." method="_on_P_change_player"]
+[connection signal="select_player" from="PlayerList" to="." method="_on_PlayerList_select_player"]

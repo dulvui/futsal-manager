@@ -9,8 +9,8 @@ func _ready():
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
 	
-	$AllPlayersPopup/AllPlayerList.add_all_players(false)
-	$FormationPopUp/Formation/PlayerSelect/PlayerList.add_subs()
+	$AllPlayerList.add_all_players(false)
+	$FormationPopUp/Formation/PlayerList.add_subs()
 	
 	$Date.text = CalendarUtil.get_date()
 	
@@ -24,7 +24,7 @@ func _on_Menu_pressed():
 
 
 func _on_SearchPlayer_pressed():
-	$AllPlayersPopup.popup_centered()
+	$AllPlayerList.show()
 
 
 func _on_Training_pressed():
