@@ -60,10 +60,7 @@ func set_up(new_player,new_kick_off_pos,new_pos):
 		attack_pos = kick_off_pos - Vector2(400,0)
 		defense_pos = kick_off_pos + Vector2(50,0)
 	current_pos = kick_off_pos
-	
-	
-	
-	
+
 
 func update_decision(team_has_ball,has_ball):
 	if pos > 0: # if not goalkeeper
