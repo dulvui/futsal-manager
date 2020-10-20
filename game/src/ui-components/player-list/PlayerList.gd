@@ -166,14 +166,14 @@ func _on_FootSelect_item_selected(index):
 func _on_Next_pressed():
 	current_page += 1
 	if current_page > current_players.size()/10:
-		current_page = current_players.size()/10
+		current_page = 0
 	add_all_players(false)
 
 
 func _on_Prev_pressed():
 	current_page -= 1
 	if current_page < 0:
-		current_page = 0
+		current_page = current_players.size() / 10
 	add_all_players(false)
 
 
