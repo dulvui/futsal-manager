@@ -84,7 +84,7 @@ func calc_date():
 		day = 1
 		month = 1
 
-	DataSaver.save_date()
+#	DataSaver.save_date()
 
 func get_date():
 	# day + 1 so 1st jan 2020 is wednsday

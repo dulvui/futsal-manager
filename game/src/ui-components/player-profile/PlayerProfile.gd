@@ -2,6 +2,8 @@ extends Control
 
 signal player_select
 
+const DetailNumber = preload("res://src/ui-components/detail-number/DetailNumber.tscn")
+
 var player = {}
 
 func set_up_info(new_player,info_type):
@@ -12,14 +14,14 @@ func set_up_info(new_player,info_type):
 	$Info/General/Prestige.text = str(player["prestige"])
 	
 	for key in player["mental"].keys():
-		var label = Label.new()
-		label.text = str(player["mental"][key])
-		$Info/Mental.add_child(label)
+		var value = DetailNumber.instance()
+		value.set_up(player["mental"][key])
+		$Info/Mental.add_child(value)
 		
 	for key in player["fisical"].keys():
-		var label = Label.new()
-		label.text = str(player["fisical"][key])
-		$Info/Fisical.add_child(label)
+		var value = DetailNumber.instance()
+		value.set_up(player["fisical"][key])
+		$Info/Fisical.add_child(value)
 		
 	match info_type:
 		"GENERAL":

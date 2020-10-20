@@ -28,9 +28,7 @@ func _ready():
 	
 	$MatchSimulator.set_up(home_team,away_team,true)
 	
-	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
-	
-#	match_end()
+	$FormationPopup/Formation/PlayerList.add_match_players()
 	
 
 func _process(delta):
