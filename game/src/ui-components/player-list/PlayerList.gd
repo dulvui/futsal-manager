@@ -16,6 +16,10 @@ var current_players = []
 
 var info_type = "GENERAL"
 
+const MENTAL_TITLES = ["A","B","CON","PLAPLA"]
+const FISICAL_TITLES = ["C","D","E"]
+const GENERAL_TITLES = ["POS","PR."]
+
 const POSITIONS = ["G","D","WL","WR","P","U"]
 const INFO_TYPES = ["GENERAL","FISICAL","MENTAL"]
 const FOOTS = ["R","L","RL"]
@@ -50,7 +54,11 @@ func _ready():
 		
 	$Paginator/PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
 	
-
+	for title in GENERAL_TITLES:
+		var label = Label.new()
+		label.text = title
+		$Titles/Details.add_child(label)
+	
 
 func add_subs():
 	for child in $CurrentPlayers.get_children():
@@ -128,6 +136,7 @@ func filter_player(player):
 					if foot_search.length() == 0 or foot_search == player["foot"]:
 						return true
 	return false
+		
 
 func _on_NameSearch_text_changed(new_text):
 	name_search = new_text
@@ -180,7 +189,27 @@ func _on_Prev_pressed():
 func _on_InfoSelect_item_selected(index):
 	info_type = INFO_TYPES[index]
 	add_all_players(false)
-
+	
+	for child in $Titles/Details.get_children():
+		child.queue_free()
+	
+	
+	match info_type:
+		"GENERAL":
+			for title in GENERAL_TITLES:
+				var label = Label.new()
+				label.text = title
+				$Titles/Details.add_child(label)
+		"MENTAL":
+			for title in MENTAL_TITLES:
+				var label = Label.new()
+				label.text = title
+				$Titles/Details.add_child(label)
+		"FISICAL":
+			for title in FISICAL_TITLES:
+				var label = Label.new()
+				label.text = title
+				$Titles/Details.add_child(label)
 
 func _on_Close_pressed():
 	hide()

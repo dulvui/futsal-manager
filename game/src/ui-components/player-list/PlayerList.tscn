@@ -21,6 +21,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Titles" type="HBoxContainer" parent="."]
+margin_left = 752.0
+margin_top = 60.0
+margin_right = 873.0
+margin_bottom = 116.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="Titles"]
+margin_right = 300.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 300, 0 )
+text = "NAME"
+
+[node name="Details" type="HBoxContainer" parent="Titles"]
+margin_left = 304.0
+margin_right = 304.0
+margin_bottom = 56.0
+
 [node name="CurrentPlayers" type="VBoxContainer" parent="."]
 margin_left = 746.079
 margin_top = 73.0205
