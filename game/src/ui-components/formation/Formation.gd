@@ -54,7 +54,7 @@ func _on_FormationSelect_item_selected(index):
 
 func _set_players():
 	var team = DataSaver.get_selected_team()
-	$PlayerSelect/PlayerList.add_subs()
+	$PlayerList.add_subs()
 	$Field/G.set_player(team["players"]["active"][0])
 	$Field/D.set_player(team["players"]["active"][1])
 	$Field/WL.set_player(team["players"]["active"][2])
@@ -65,33 +65,33 @@ func _set_players():
 
 func _on_D_change_player(player):
 	player_to_replace = 1
-	$PlayerSelect.popup_centered()
+	$PlayerList.show()
 
 
 func _on_WL_change_player(player):
 	player_to_replace = 2
-	$PlayerSelect.popup_centered()
+	$PlayerList.show()
 
 
 
 func _on_WR_change_player(player):
 	player_to_replace = 3
-	$PlayerSelect.popup_centered()
+	$PlayerList.show()
 
 
 func _on_P_change_player(player):
 	player_to_replace = 4
-	$PlayerSelect.popup_centered()
+	$PlayerList.show()
 	
 func _on_G_change_player(player):
 	player_to_replace = 0
-	$PlayerSelect.popup_centered()
+	$PlayerList.show()
 
 func _on_PlayerList_select_player(player):
 	print("formation select")
 	DataSaver.change_player(player_to_replace,player)
 	_set_players()
-	$PlayerSelect.hide()
+	$PlayerList.hide()
 	emit_signal("change")
 
 

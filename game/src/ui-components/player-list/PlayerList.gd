@@ -47,9 +47,10 @@ func _ready():
 	
 	for info_type in INFO_TYPES:
 		$InfoSelect.add_item(info_type)
+		
+	$Paginator/PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
+	
 
-func _process(delta):
-	$PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
 
 func add_subs():
 	for child in $CurrentPlayers.get_children():
@@ -57,9 +58,6 @@ func add_subs():
 		
 	$TeamSelect.hide()
 	$LegaueSelect.hide()
-	
-	var vbox = VBoxContainer.new()
-	vbox.add_constant_override("separation", 60)
 	
 #	if filter:
 	current_players = []
@@ -74,8 +72,7 @@ func add_subs():
 		var player_profile = PlayerProfile.instance()
 		player_profile.connect("player_select",self,"select_player",[player])
 		player_profile.set_up_info(player,info_type)
-		vbox.add_child(player_profile)
-	$CurrentPlayers.add_child(vbox)
+		$CurrentPlayers.add_child(player_profile)
 	
 		
 func add_match_players():
@@ -102,9 +99,6 @@ func add_all_players(filter):
 	for child in $CurrentPlayers.get_children():
 		child.queue_free()
 		
-	var vbox = VBoxContainer.new()
-	vbox.add_constant_override("separation", 60)
-	
 	if filter:
 		current_players = []
 		current_page = 0
@@ -116,8 +110,10 @@ func add_all_players(filter):
 		var player_profile = PlayerProfile.instance()
 		player_profile.connect("player_select",self,"select_player",[player])
 		player_profile.set_up_info(player,info_type)
-		vbox.add_child(player_profile)
-	$CurrentPlayers.add_child(vbox)
+		$CurrentPlayers.add_child(player_profile)
+		
+	$Paginator/PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
+	
 	
 
 func select_player(player):
@@ -184,3 +180,7 @@ func _on_Prev_pressed():
 func _on_InfoSelect_item_selected(index):
 	info_type = INFO_TYPES[index]
 	add_all_players(false)
+
+
+func _on_Close_pressed():
+	hide()
