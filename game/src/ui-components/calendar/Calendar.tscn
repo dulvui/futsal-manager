@@ -10,15 +10,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+columns = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="List" type="GridContainer" parent="ScrollContainer"]
-columns = 2
 
 [node name="MatchDayPopUp" type="Popup" parent="."]
 margin_left = 296.0
@@ -36,6 +34,28 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MatchDayPopUp"]
+margin_right = 800.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TrainingPopUp" type="Popup" parent="."]
+margin_left = 296.0
+margin_top = 136.0
+margin_right = 696.0
+margin_bottom = 536.0
+
+[node name="Panel" type="Panel" parent="TrainingPopUp"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 400.0
+margin_bottom = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TrainingPopUp"]
 margin_right = 800.0
 margin_bottom = 600.0
 __meta__ = {

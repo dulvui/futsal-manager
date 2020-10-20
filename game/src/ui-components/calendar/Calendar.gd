@@ -1,5 +1,10 @@
 extends Control
 
+const Day = preload("res://src/ui-components/calendar/day/Day.tscn")
+
+
+# get current month and show in paginator
+# max back and forward is full current season
 
 func _ready():
 	for day in DataSaver.calendar:
