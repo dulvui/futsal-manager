@@ -39,28 +39,17 @@ func set_up_info(new_player,info_type):
 	$DetailPopup/TabContainer/Info/Info/Nr.text = str(player["nr"])
 	
 	for key in player["mental"].keys():
-		var ui = $DetailPopup/TabContainer/Info/Mental.get_node(key)
-		ui.text = str(player["mental"][key])
+		var label = $DetailPopup/TabContainer/Info/Mental.get_node(key)
+		label.set_up(player["mental"][key])
 
 	for key in player["fisical"].keys():
-		var ui = $DetailPopup/TabContainer/Info/Fisical.get_node(key)
-		ui.text = str(player["fisical"][key])
-		
+		var label = $DetailPopup/TabContainer/Info/Fisical.get_node(key)
+		label.set_up(player["fisical"][key])
+
 	for key in player["technical"].keys():
-		var ui = $DetailPopup/TabContainer/Info/Technical.get_node(key)
-		ui.text = str(player["technical"][key])
-	
-	# paint stats numbers
-	for child in $DetailPopup/TabContainer/Info.get_children():
-		for child_child in child.get_children():
-			if child_child is Label and child_child.text.is_valid_integer():
-				if int(child_child.text) < 11 :
-					child_child.add_color_override("font_color", Color.red)
-				elif int(child_child.text) < 16:
-					child_child.add_color_override("font_color", Color.blue)
-				else:
-					child_child.add_color_override("font_color", Color.green)
-					
+		var label = $DetailPopup/TabContainer/Info/Technical.get_node(key)
+		label.set_up(player["technical"][key])
+
 
 
 func _on_Details_pressed():
