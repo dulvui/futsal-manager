@@ -55,14 +55,6 @@ func _process(delta):
 	$HUD/SpeedFactor.text = str(speed_factor + 1) + " X"
 	
 	
-	
-func _on_TimerMatchSimulator_timeout():
-	$MatchSimulator.update()
-	if $MatchSimulator.time == 1200:
-		half_time()
-	elif $MatchSimulator.time == 2400:
-		match_end()
-	
 
 func _on_Field_pressed():
 	$MatchSimulator.show()
