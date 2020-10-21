@@ -10,6 +10,7 @@ signal dribble
 var attack_pos
 var defense_pos
 var kick_off_pos
+
 var current_pos
 
 var goal_pos
@@ -141,7 +142,7 @@ func make_defensive_decision():
 	
 func check_shoot():
 	# check team mentality, if shooting from distance already shooting from far sectors
-	var shoot_factor = 0
+	var shoot_factor = 50
 	
 #	$Head.look_at(goal_pos)
 	
