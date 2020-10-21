@@ -8,4 +8,6 @@ signal click
 # if something set, else do nothing
 
 func set_up(day):
-	pass
+	$Label.text = str(day["day"])
+	if day["matches"].size() > 0:
+		$Match.text = "M"

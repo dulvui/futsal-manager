@@ -1,11 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/ui-components/calendar/day/Day.gd" type="Script" id=1]
+[ext_resource path="res://theme.tres" type="Theme" id=2]
 
 [node name="Day" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -1820.0
+margin_bottom = -980.0
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="."]
+margin_left = 49.0814
+margin_top = 35.0952
+margin_right = 89.0814
+margin_bottom = 91.0952
+text = "31"
+
+[node name="Match" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 56.0
