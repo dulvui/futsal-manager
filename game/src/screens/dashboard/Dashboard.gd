@@ -52,7 +52,7 @@ func _on_Email_pressed():
 
 
 func _on_Table_pressed():
-	$TablePopup.popup_centered()
+	$Table.show()
 
 
 func _on_AllPlayerList_select_player(player):
