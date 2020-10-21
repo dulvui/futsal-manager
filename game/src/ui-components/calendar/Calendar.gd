@@ -7,20 +7,22 @@ const Day = preload("res://src/ui-components/calendar/day/Day.tscn")
 # max back and forward is full current season
 
 func _ready():
-	for day in DataSaver.calendar:
-		var day_label = Label.new()
-		if day["matches"].size() > 0:
-			day_label.text = get_text(day)
-		else:
-			day_label.text = str(day["day"]) + "/" + str(day["month"]) + "/" + str(day["year"]) + " no match"
+	var current_day = CalendarUtil.get_day()
+	for day in range(current_day["day"] - 1,31):
+#		var day_label = Label.new()
+#		if day["matches"].size() > 0:
+#			day_label.text = get_text(day)
+#		else:
+#			day_label.text = str(day["day"]) + "/" + str(day["month"]) + "/" + str(day["year"]) + " no match"
+#
+#		var button = Button.new()
+#		button.text = tr('ALL_GAMES')
+#
+#		button.connect("pressed",self,"show_all_matches",[day])
 		
-		var button = Button.new()
-		button.text = tr('ALL_GAMES')
-		
-		button.connect("pressed",self,"show_all_matches",[day])
-		
-		$ScrollContainer/List.add_child(day_label)
-		$ScrollContainer/List.add_child(button)
+		var calendar_day = Day.instance()
+		calendar_day.set_up(DataSaver.calendar[day])
+		$GridContainer.add_child(calendar_day)
 		
 func get_text(day):
 	for matchz in day["matches"]:
@@ -36,3 +38,7 @@ func show_all_matches(day):
 		$MatchDayPopUp/VBoxContainer.add_child(label)
 	$MatchDayPopUp.popup_centered()
 	
+
+
+func _on_Close_pressed():
+	hide()

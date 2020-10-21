@@ -90,6 +90,12 @@ func get_date():
 	# day + 1 so 1st jan 2020 is wednsday
 	return days[(day_counter+1)%7] + " " + str(day) + " " + months[month-1] + " " + str(year)
 
+func get_day():
+	if DataSaver.calendar:
+		return DataSaver.calendar[day_counter]
+	else:
+		return 1 # to fix crash if just started
+
 func get_next_match():
 	for matchz in DataSaver.calendar[day_counter]["matches"]:
 		if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
