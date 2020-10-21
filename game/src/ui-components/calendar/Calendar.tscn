@@ -86,4 +86,34 @@ text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Paginator" type="HBoxContainer" parent="."]
+margin_left = 720.0
+margin_top = 936.0
+margin_right = 1170.0
+margin_bottom = 996.0
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prev" type="Button" parent="Paginator"]
+margin_right = 121.0
+margin_bottom = 60.0
+text = "PREV"
+
+[node name="Page" type="Label" parent="Paginator"]
+margin_left = 171.0
+margin_top = 2.0
+margin_right = 279.0
+margin_bottom = 58.0
+text = "wewe"
+
+[node name="Next" type="Button" parent="Paginator"]
+margin_left = 329.0
+margin_right = 450.0
+margin_bottom = 60.0
+text = "NEXT"
 [connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]
+[connection signal="pressed" from="Paginator/Prev" to="." method="_on_Prev_pressed"]
+[connection signal="pressed" from="Paginator/Next" to="." method="_on_Next_pressed"]
