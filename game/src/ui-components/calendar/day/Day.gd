@@ -9,7 +9,14 @@ signal click
 
 func set_up(day, current_day):
 	$Label.text = str(day["day"] + 1)
+	var team_name
 	if day["matches"].size() > 0:
-		$Match.text = "M"
+		for matchz in day["matches"]:
+			if matchz != null:
+				if DataSaver.selected_team == matchz["home"]:
+					team_name = matchz["away"]
+				elif DataSaver.selected_team == matchz["away"]:
+					team_name = matchz["home"]
+		$Match.text = team_name
 	if current_day:
 		$ColorRect.color = Color.red
