@@ -22,18 +22,21 @@ func create_calendar():
 	month = 0
 	day = 0
 	
+	var day_counter = 0
+	
 	var calendar = []
-	for i in 365: #3020?
+	for i in 366: #3020?
 		var json = {
 			"day" : day,
 			"year" : year,
 			"matches" : [],
 			"trainings" : [],
-			"week_day" : days[(day + 2)%7] # + 2 because 1 jan 2020 is wensday
+			"week_day" : days[(day_counter + 2)%7] # + 2 because 1 jan 2020 is wensday
 		}
 		if day == 0:
 			calendar.append([])
 		calendar[month].append(json)
+		day_counter += 1
 		calc_date(true)
 	year = 2020
 	month = 0
