@@ -301,6 +301,11 @@ func create_real_player(player,pos):
 func pass_to(player):
 	print(player["name"])
 	print("PASS in sim")
+	
+	# do pass and check if player in sector can intercept
+	
+	# vecotre mathematics
+	
 	if player["home"]:
 		home_stats["pass"] += 1
 		home_team["players"]["active"][randi()%5]["has_ball"] = true
