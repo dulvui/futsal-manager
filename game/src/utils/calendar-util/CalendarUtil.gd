@@ -107,7 +107,7 @@ func calc_date(start_up=false):
 
 func get_date():
 	# day + 1 so 1st jan 2020 is wednsday
-	return days[(day)%7] + " " + str(day + 1) + " " + months[month] + " " + str(year)
+	return days[(day+2)%7] + " " + str(day + 1) + " " + months[month] + " " + str(year)
 
 func get_next_match():
 	for matchz in DataSaver.calendar[DataSaver.month][DataSaver.day]["matches"]:
