@@ -196,6 +196,9 @@ func start_match():
 func pause():
 	match_timer.paused = true
 	
+func continue_match():
+	match_timer.paused = false
+	
 func pause_toggle():
 	match_timer.paused = not match_timer.paused
 	return match_timer.paused
@@ -298,8 +301,10 @@ func pass_to(player):
 	print(player["name"])
 	print("PASS in sim")
 	if player["home"]:
+		home_stats["pass"] += 1
 		home_team["players"]["active"][randi()%5]["has_ball"] = true
 	else:
+		away_stats["pass"] += 1
 		away_team["players"]["active"][randi()%5]["has_ball"] = true
 	
 	
@@ -315,7 +320,7 @@ func shoot(player):
 	else:
 		away_stats["shots"] += 1
 		
-	for sector_index in range(player["real"].current_sector,12):
+	for sector_index in range(SECTOR_SIZE/int(player["real"].current_pos.x),12):
 		var opponent_players
 		if player["home"]:
 			opponent_players = sectors[sector_index]["away_players"]

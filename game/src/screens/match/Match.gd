@@ -152,20 +152,21 @@ func _on_MatchSimulator_home_goal():
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
-	$Stats.show() #make animation
-	$MatchSimulator.hide()
+#	$Stats.show() #make animation
+#	$MatchSimulator.hide()
 	$MatchSimulator.continue_match()
 
 
 func _on_MatchSimulator_away_goal():
+	$MatchSimulator.pause()
 	$Stats.hide() #make animation
 	$MatchSimulator.show()
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
-	$Stats.show() #make animation
-	$MatchSimulator.hide()
+#	$Stats.show() #make animation
+#	$MatchSimulator.hide()
 	$MatchSimulator.continue_match()
 
 
