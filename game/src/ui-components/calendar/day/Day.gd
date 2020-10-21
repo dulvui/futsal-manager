@@ -17,6 +17,10 @@ func set_up(day, current_day):
 					team_name = matchz["away"]
 				elif DataSaver.selected_team == matchz["away"]:
 					team_name = matchz["home"]
+					$ColorRect.color = Color.gray
 		$Match.text = team_name
 	if current_day:
-		$ColorRect.color = Color.red
+		if $ColorRect.color != Color.gray:
+			$ColorRect.color = Color.red
+		else:
+			$ColorRect.color = Color.lightpink
