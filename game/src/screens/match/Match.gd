@@ -79,8 +79,8 @@ func match_end():
 	DataSaver.save_result(home_team["name"],$MatchSimulator.home_stats["goals"],away_team["name"],$MatchSimulator.away_stats["goals"])
 	
 	#simulate all games for now. needs also support for other leagues
-	print(DataSaver.calendar[CalendarUtil.day_counter]["matches"].size())
-	for matchday in DataSaver.calendar[CalendarUtil.day_counter]["matches"]:
+#	print(DataSaver.calendar[CalendarUtil.day_counter]["matches"].size())
+	for matchday in DataSaver.calendar[DataSaver.month][DataSaver.day]["matches"]:
 		print(matchday["home"])
 		if matchday["home"] != home_team["name"]:
 			print(matchday["home"] + " vs " + matchday["away"])
