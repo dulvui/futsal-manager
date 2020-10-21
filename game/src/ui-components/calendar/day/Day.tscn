@@ -36,3 +36,15 @@ margin_left = 46.0346
 margin_top = 33.3354
 margin_right = 86.0346
 margin_bottom = 89.3354
+
+[node name="WeekDay" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 104.941
+margin_right = 73.0
+margin_bottom = 160.941
+rect_scale = Vector2( 0.6, 0.6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "WE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
