@@ -20,7 +20,7 @@ func _ready():
 		for team in DataSaver.teams:
 			if team["name"] == next_match["home"]:
 				home_team = team
-			if team["name"] == next_match["away"]:
+			elif team["name"] == next_match["away"]:
 				away_team = team
 	
 	$HUD/TopBar/Home.text = next_match["home"]

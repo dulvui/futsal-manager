@@ -23,7 +23,7 @@ func set_up():
 		$GridContainer.add_child(calendar_day)
 		
 		
-	$Paginator/Page.text = str(current_month)
+	$Paginator/Page.text = CalendarUtil.months[current_month]
 	
 
 func get_text(day):

@@ -6,9 +6,9 @@
 [node name="Day" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1820.0
-margin_bottom = -980.0
-rect_min_size = Vector2( 100, 100 )
+margin_right = -1780.0
+margin_bottom = -940.0
+rect_min_size = Vector2( 140, 140 )
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -23,12 +23,16 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 49.0814
-margin_top = 35.0952
-margin_right = 89.0814
-margin_bottom = 91.0952
+margin_left = 107.815
+margin_top = 104.941
+margin_right = 147.815
+margin_bottom = 160.941
+rect_scale = Vector2( 0.6, 0.6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "31"
 
 [node name="Match" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 56.0
+margin_left = 46.0346
+margin_top = 33.3354
+margin_right = 86.0346
+margin_bottom = 89.3354
