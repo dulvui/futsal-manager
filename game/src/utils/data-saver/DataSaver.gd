@@ -10,7 +10,6 @@ var gdpr_consent # ND,SCCEPt, DECLINE
 
 var manager
 
-var day_counter
 var day
 var month
 var year
@@ -53,7 +52,6 @@ func _ready():
 	year = config.get_value("current_date","year",2020)
 	month = config.get_value("current_date","month",1)
 	day = config.get_value("current_date","day",1)
-	day_counter = config.get_value("current_date","day_counter",1)
 	
 	messages = config.get_value("mail","messages",[])
 	
@@ -78,7 +76,6 @@ func reset():
 	year = 2020
 	month = 1
 	day = 1
-	day_counter = 1
 	
 func set_lang(lang):
 	TranslationServer.set_locale(lang)
@@ -95,7 +92,6 @@ func save_all_data():
 	config.set_value("current_date","year",CalendarUtil.year)
 	config.set_value("current_date","month",CalendarUtil.month)
 	config.set_value("current_date","day",CalendarUtil.day)
-	config.set_value("current_date","day_counter",CalendarUtil.day_counter)
 	config.set_value("season","calendar",calendar)
 	config.set_value("season","table",table)
 	config.set_value("season","current_transfers",TransferUtil.current_transfers)
