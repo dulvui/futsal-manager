@@ -24,3 +24,5 @@ func set_up(day, current_day):
 			$ColorRect.color = Color.red
 		else:
 			$ColorRect.color = Color.lightpink
+	
+	$WeekDay.text = day["week_day"]

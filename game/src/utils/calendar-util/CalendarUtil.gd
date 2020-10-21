@@ -28,7 +28,8 @@ func create_calendar():
 			"day" : day,
 			"year" : year,
 			"matches" : [],
-			"trainings" : []
+			"trainings" : [],
+			"week_day" : days[(day + 2)%7] # + 2 because 1 jan 2020 is wensday
 		}
 		if day == 0:
 			calendar.append([])
