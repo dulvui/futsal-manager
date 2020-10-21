@@ -136,23 +136,6 @@ margin_right = 464.0
 margin_bottom = 468.0
 text = "MENU"
 
-[node name="FormationPopUp" type="Popup" parent="."]
-margin_left = 221.345
-margin_top = 46.1784
-margin_right = 1621.34
-margin_bottom = 1046.18
-
-[node name="Panel" type="Panel" parent="FormationPopUp"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Formation" parent="FormationPopUp" instance=ExtResource( 5 )]
-margin_left = 50.655
-margin_top = 121.822
-margin_right = 50.655
-margin_bottom = 121.822
-rect_scale = Vector2( 0.7, 0.7 )
-
 [node name="Email" parent="." instance=ExtResource( 6 )]
 margin_left = 672.0
 margin_top = 196.0
@@ -201,6 +184,17 @@ margin_bottom = -680.0
 
 [node name="AllPlayerList" parent="." instance=ExtResource( 4 )]
 visible = false
+
+[node name="Formation" parent="." instance=ExtResource( 5 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -540.0
+margin_right = 960.0
+margin_bottom = 540.0
 [connection signal="pressed" from="Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Buttons/Training" to="." method="_on_Training_pressed"]
 [connection signal="pressed" from="Buttons/Table" to="." method="_on_Table_pressed"]

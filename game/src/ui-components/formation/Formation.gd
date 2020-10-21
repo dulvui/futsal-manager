@@ -165,3 +165,7 @@ func _on_03Info_pressed():
 func _on_04Info_pressed():
 	$TacticInfoPopUp/TacticInfo.text = tr("O4_INFO")
 	$TacticInfoPopUp.popup_centered()
+
+
+func _on_Close_pressed():
+	hide()
