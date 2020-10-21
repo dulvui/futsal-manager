@@ -6,7 +6,6 @@ var days = ["MON","TUE","WE","THU","FRI","SAT","SUN"]
 var year = 2020
 var month = 1
 var day = 1
-var day_counter = 1
 
 
 func _ready():
@@ -14,26 +13,30 @@ func _ready():
 	year = DataSaver.year
 	month = DataSaver.month
 	day = DataSaver.day
-	day_counter = DataSaver.day_counter
 	
 	print(get_date())
 
 func create_calendar():
+	
+	year = 2020
+	month = 1
+	day = 1
+	
 	var calendar = []
-	for i in range(365): #3020?
+	for i in range(1,366): #3020?
 		var json = {
 			"day" : day,
-			"month" : month,
 			"year" : year,
 			"matches" : [],
 			"trainings" : []
 		}
-		calendar.append(json)
+		if day == 1:
+			calendar.append([])
+		calendar[month-1].append(json)
 		calc_date()
 	year = 2020
 	month = 1
 	day = 1
-	day_counter = 1
 	DataSaver.save_calendar(calendar)
 
 func next_day():
@@ -47,9 +50,9 @@ func next_day():
 	# pay players/staff
 	
 	
-	if DataSaver.calendar[day_counter + 1]["matches"].size() > 0:
+	if DataSaver.calendar[month-1][day-1]["matches"].size() > 0:
 		var next_match
-		for matchz in DataSaver.calendar[day_counter + 1]["matches"]:
+		for matchz in DataSaver.calendar[month-1][day-1]["matches"]:
 			if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
 				next_match = matchz
 		EmailUtil.message(next_match,EmailUtil.MESSAGE_TYPES.NEXT_MATCH)
@@ -57,8 +60,6 @@ func next_day():
 
 func calc_date():
 	day += 1
-	day_counter += 1
-	
 	match month:
 		2:
 			if year % 4 == 0:
@@ -86,17 +87,12 @@ func calc_date():
 
 #	DataSaver.save_date()
 
+
 func get_date():
 	# day + 1 so 1st jan 2020 is wednsday
-	return days[(day_counter+1)%7] + " " + str(day) + " " + months[month-1] + " " + str(year)
-
-func get_day():
-	if DataSaver.calendar:
-		return DataSaver.calendar[day_counter]
-	else:
-		return 1 # to fix crash if just started
+	return days[(day+1)%7] + " " + str(day) + " " + months[month-1] + " " + str(year)
 
 func get_next_match():
-	for matchz in DataSaver.calendar[day_counter]["matches"]:
+	for matchz in DataSaver.calendar[month][day]["matches"]:
 		if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
 			return matchz

@@ -42,7 +42,7 @@ func _on_Continue_pressed():
 	$Date.text = CalendarUtil.get_date()
 	$FormationPopUp/Formation/PlayerList.add_subs()
 	DataSaver.save_all_data()
-	if DataSaver.calendar[CalendarUtil.day_counter]["matches"].size() > 0:
+	if DataSaver.calendar[DataSaver.month][DataSaver.day]["matches"].size() > 0:
 		get_tree().change_scene("res://src/screens/match/Match.tscn")
 
 func _on_Email_pressed():
