@@ -123,6 +123,7 @@ func _ready():
 	match_timer.wait_time = 1
 	match_timer.connect("timeout",self,"update")
 	add_child(match_timer)
+	start_match()
 
 func set_up(home,away, match_started):
 	home_team = home.duplicate(true)
