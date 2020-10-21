@@ -246,37 +246,37 @@ func change_players(new_home_team,new_away_team):
 		away_team["players"]["active"][4]["has_ball"] = true
 
 func update_field_players():
-	$HomePlayers/G.move_to(home_team["players"]["active"][0]["real"].current_pos)
+	$HomePlayers/G.move_to(home_team["players"]["active"][0]["real"].current_pos, match_timer.wait_time)
 	if home_team["players"]["active"][0]["real"].player["has_ball"]:
-		$Ball.move_to($HomePlayers/G.position)
-	$HomePlayers/D.move_to(home_team["players"]["active"][1]["real"].current_pos)
+		$Ball.move_to($HomePlayers/G.position, match_timer.wait_time)
+	$HomePlayers/D.move_to(home_team["players"]["active"][1]["real"].current_pos, match_timer.wait_time)
 	if home_team["players"]["active"][1]["real"].player["has_ball"]:
-		$Ball.move_to($HomePlayers/D.position)
-	$HomePlayers/WL.move_to(home_team["players"]["active"][2]["real"].current_pos)
+		$Ball.move_to($HomePlayers/D.position, match_timer.wait_time)
+	$HomePlayers/WL.move_to(home_team["players"]["active"][2]["real"].current_pos, match_timer.wait_time)
 	if home_team["players"]["active"][2]["real"].player["has_ball"]:
-		$Ball.move_to($HomePlayers/WL.position)
-	$HomePlayers/WR.move_to(home_team["players"]["active"][3]["real"].current_pos)
+		$Ball.move_to($HomePlayers/WL.position, match_timer.wait_time)
+	$HomePlayers/WR.move_to(home_team["players"]["active"][3]["real"].current_pos, match_timer.wait_time)
 	if home_team["players"]["active"][3]["real"].player["has_ball"]:
-		$Ball.move_to($HomePlayers/WR.position)
-	$HomePlayers/P.move_to(home_team["players"]["active"][4]["real"].current_pos)
+		$Ball.move_to($HomePlayers/WR.position, match_timer.wait_time)
+	$HomePlayers/P.move_to(home_team["players"]["active"][4]["real"].current_pos, match_timer.wait_time)
 	if home_team["players"]["active"][4]["real"].player["has_ball"]:
-		$Ball.move_to($HomePlayers/P.position)
+		$Ball.move_to($HomePlayers/P.position, match_timer.wait_time)
 	
-	$AwayPlayers/G.move_to(away_team["players"]["active"][0]["real"].current_pos)
+	$AwayPlayers/G.move_to(away_team["players"]["active"][0]["real"].current_pos, match_timer.wait_time)
 	if away_team["players"]["active"][0]["real"].player["has_ball"]:
-		$Ball.move_to($AwayPlayers/G.position)
-	$AwayPlayers/D.move_to(away_team["players"]["active"][1]["real"].current_pos)
+		$Ball.move_to($AwayPlayers/G.position, match_timer.wait_time)
+	$AwayPlayers/D.move_to(away_team["players"]["active"][1]["real"].current_pos, match_timer.wait_time)
 	if away_team["players"]["active"][1]["real"].player["has_ball"]:
-		$Ball.move_to($AwayPlayers/D.position)
-	$AwayPlayers/WL.move_to(away_team["players"]["active"][2]["real"].current_pos)
+		$Ball.move_to($AwayPlayers/D.position, match_timer.wait_time)
+	$AwayPlayers/WL.move_to(away_team["players"]["active"][2]["real"].current_pos, match_timer.wait_time)
 	if away_team["players"]["active"][2]["real"].player["has_ball"]:
-		$Ball.move_to($AwayPlayers/WL.position)
-	$AwayPlayers/WR.move_to(away_team["players"]["active"][3]["real"].current_pos)
+		$Ball.move_to($AwayPlayers/WL.position, match_timer.wait_time)
+	$AwayPlayers/WR.move_to(away_team["players"]["active"][3]["real"].current_pos, match_timer.wait_time)
 	if away_team["players"]["active"][3]["real"].player["has_ball"]:
-		$Ball.move_to($AwayPlayers/WR.position)
-	$AwayPlayers/P.move_to(away_team["players"]["active"][4]["real"].current_pos)
+		$Ball.move_to($AwayPlayers/WR.position, match_timer.wait_time)
+	$AwayPlayers/P.move_to(away_team["players"]["active"][4]["real"].current_pos, match_timer.wait_time)
 	if away_team["players"]["active"][4]["real"].player["has_ball"]:
-		$Ball.move_to($AwayPlayers/P.position)
+		$Ball.move_to($AwayPlayers/P.position, match_timer.wait_time)
 	
 func create_real_player(player,pos):
 	var real_player = Player.new()

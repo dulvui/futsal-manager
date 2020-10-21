@@ -88,8 +88,8 @@ func make_offensive_with_ball_decision():
 	#modify multiplactors by team mentality
 	var shoot_factor = check_shoot()
 	var pass_factor = check_pass() * 300
-	var move_to_attackpos_factor = 80
-	var wait_factor = 20
+	var move_to_attackpos_factor = 100
+	var wait_factor = 5
 	
 	var sum: int = shoot_factor + pass_factor + move_to_attackpos_factor + wait_factor
 	var decision_factor = randi()%sum
@@ -137,16 +137,18 @@ func make_offensive_no_ball_decision():
 		
 
 func make_defensive_decision():
-	#check if player should try to attack player or stay in positon, when defense pos reached
-	pass
+	var distance = current_pos.distance_to(defense_pos)
+	if distance > 20:
+		move_to_defenese_pos()
+#	else:
+#		move_to_bpp()
 	
 func check_shoot():
 	# check team mentality, if shooting from distance already shooting from far sectors
-	var shoot_factor = 50
 	
 #	$Head.look_at(goal_pos)
 	
-	return shoot_factor
+	return min(0,current_pos.x - 600)
 	
 	
 	

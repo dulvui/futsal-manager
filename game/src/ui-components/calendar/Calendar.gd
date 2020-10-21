@@ -44,6 +44,8 @@ func set_up():
 		days.invert()
 		for day in DataSaver.calendar[current_month]:
 			days.append(day)
+			
+	# TODO check if days need to be added to fill table
 				
 	for day in days:
 			var calendar_day = Day.instance()
