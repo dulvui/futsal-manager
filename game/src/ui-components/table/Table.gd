@@ -49,3 +49,7 @@ func point_sorter(a, b):
 	elif a["points"] == b["points"] and a["goals_made"] - a["goals_against"] > b["goals_made"] - b["goals_against"]:
 		return true
 	return false
+
+
+func _on_Close_pressed():
+	hide()
