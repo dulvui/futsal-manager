@@ -39,6 +39,7 @@ func _on_Continue_pressed():
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
 	$Email.update_messages()
+	$Calendar.set_up()
 	$Date.text = CalendarUtil.get_date()
 	$FormationPopUp/Formation/PlayerList.add_subs()
 	DataSaver.save_all_data()
