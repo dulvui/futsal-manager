@@ -40,3 +40,7 @@ func _on_Match_pressed(matches):
 		label.align = Label.ALIGN_CENTER
 		$MatchPopup/VBoxContainer.add_child(label)
 	$MatchPopup.popup_centered()
+
+
+func _on_Close_pressed():
+	$MatchPopup.hide()
