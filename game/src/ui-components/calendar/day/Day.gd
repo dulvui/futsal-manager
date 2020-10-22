@@ -18,6 +18,8 @@ func set_up(day, current_day):
 				elif DataSaver.selected_team == matchz["away"]:
 					team_name = matchz["home"]
 					$ColorRect.color = Color.gray
+		$Match.connect("pressed",self,"_on_Match_pressed",[day["matches"]])
+		$Match.show()
 		$Match.text = team_name
 	if current_day:
 		if $ColorRect.color != Color.gray:
@@ -26,3 +28,19 @@ func set_up(day, current_day):
 			$ColorRect.color = Color.lightpink
 	
 	$WeekDay.text = day["week_day"]
+
+
+func _on_Match_pressed(matches):
+	for child in $MatchPopup/VBoxContainer.get_children():
+		child.queue_free()
+		
+	for matchz in matches:
+		var label = Label.new()
+		label.text = matchz["home"] + " : " + matchz["away"]
+		label.align = Label.ALIGN_CENTER
+		$MatchPopup/VBoxContainer.add_child(label)
+	$MatchPopup.popup_centered()
+
+
+func _on_Close_pressed():
+	$MatchPopup.hide()
