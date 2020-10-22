@@ -51,6 +51,7 @@ margin_right = 168.252
 margin_bottom = 85.3984
 rect_scale = Vector2( 0.6, 0.6 )
 rect_pivot_offset = Vector2( 100, 40 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "sdddsff"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -66,6 +67,7 @@ margin_top = 79.4583
 margin_right = 1057.03
 margin_bottom = 679.458
 rect_pivot_offset = Vector2( 300, 300 )
+popup_exclusive = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -78,3 +80,11 @@ anchor_bottom = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
+
+[node name="Close" type="Button" parent="MatchPopup"]
+margin_left = 507.968
+margin_top = 34.9228
+margin_right = 546.968
+margin_bottom = 94.9228
+text = "X"
+[connection signal="pressed" from="MatchPopup/Close" to="." method="_on_Close_pressed"]
