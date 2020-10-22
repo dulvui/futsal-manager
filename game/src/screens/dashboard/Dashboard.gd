@@ -47,7 +47,6 @@ func _on_Continue_pressed():
 		get_tree().change_scene("res://src/screens/match/Match.tscn")
 
 func _on_Email_pressed():
-	$Calendar.hide()
 	$Email.show()
 
 
@@ -83,7 +82,6 @@ func _on_ContractOffer_cancel():
 
 
 func _on_Calendar_pressed():
-	$Email.hide()
 	$Calendar.show()
 
 

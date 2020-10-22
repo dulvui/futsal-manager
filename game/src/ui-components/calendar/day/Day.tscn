@@ -31,12 +31,6 @@ rect_scale = Vector2( 0.6, 0.6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "31"
 
-[node name="Match" type="Label" parent="."]
-margin_left = 46.0346
-margin_top = 33.3354
-margin_right = 86.0346
-margin_bottom = 89.3354
-
 [node name="WeekDay" type="Label" parent="."]
 margin_left = 10.0
 margin_top = 104.941
@@ -48,3 +42,49 @@ text = "WE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Match" type="Button" parent="."]
+visible = false
+margin_left = -31.748
+margin_top = 25.3984
+margin_right = 168.252
+margin_bottom = 85.3984
+rect_scale = Vector2( 0.6, 0.6 )
+rect_pivot_offset = Vector2( 100, 40 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "sdddsff"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MatchPopup" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 457.032
+margin_top = 79.4583
+margin_right = 1057.03
+margin_bottom = 679.458
+rect_pivot_offset = Vector2( 300, 300 )
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="MatchPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MatchPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Close" type="Button" parent="MatchPopup"]
+margin_left = 507.968
+margin_top = 34.9228
+margin_right = 546.968
+margin_bottom = 94.9228
+text = "X"
+[connection signal="pressed" from="MatchPopup/Close" to="." method="_on_Close_pressed"]
