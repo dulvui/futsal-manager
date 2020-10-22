@@ -20,9 +20,9 @@ func update_day():
 					if transfer["state"] == "TEAM_PENDING":
 #						transfer["success"] = randi()%2 == 0
 						transfer["success"] = true
-						EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER)
 						transfer["days"] = (randi()%5)+1
 						transfer["state"] = "MAKE_CONTRACT_OFFER"
+						EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER)
 					elif transfer["state"] == "CONTRACT_PENDING":
 						transfer["success"] = randi()%2 == 0
 		#				if transfer["success"]:

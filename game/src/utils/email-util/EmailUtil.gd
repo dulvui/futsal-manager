@@ -48,6 +48,7 @@ func message(content,type):
 		MESSAGE_TYPES.CONTRACT_OFFER:
 			message["message"] = "You need to make an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"]
 			message["title"] = "CONTRACT OFFER"
+			message["content"] = content
 		MESSAGE_TYPES.CONTRACT_OFFER_MADE:
 			message["message"] = "You made an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"]
 			message["title"] = "CONTRACT OFFER MADE"
