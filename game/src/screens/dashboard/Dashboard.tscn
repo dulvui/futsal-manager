@@ -181,6 +181,7 @@ margin_right = -320.0
 margin_bottom = -680.0
 
 [node name="Training" parent="TrainingPopup" instance=ExtResource( 10 )]
+margin_bottom = -176.0
 
 [node name="AllPlayerList" parent="." instance=ExtResource( 4 )]
 visible = false
