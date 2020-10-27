@@ -72,6 +72,9 @@ var away_goal
 var home_team
 var away_team
 
+var formation = "2-2" # TODO use real one
+
+
 func _ready():
 	match_timer = Timer.new()
 	match_timer.wait_time = 1
@@ -79,9 +82,14 @@ func _ready():
 	add_child(match_timer)
 	start_match()
 
-func set_up(home,away, match_started):
-	home_team = home.duplicate(true)
-	away_team = away.duplicate(true)
+func set_up(home,away):
+	var home_players = home.duplicate(true)["players"]["active"]
+	var away_players = away.duplicate(true)["players"]["active"]
+	
+	home_team = Team.new()
+	away_team = Team.new()
+	home_team.set_up(home_players,away_players,formation)
+	away_team.set_up(away_players,home_players,formation)
 	
 	
 func update():
@@ -94,12 +102,13 @@ func update():
 		match_end()
 		emit_signal("match_end")
 	else:
+		home_team.update()
+		away_team.update()
 	
-	
-		if home_has_ball:
-			home_possess_counter += 1
-		home_stats["possession"] = (home_possess_counter / time) * 100
-		away_stats["possession"] = 100 - home_stats["possession"]
+#		if home_has_ball:
+#			home_possess_counter += 1
+#		home_stats["possession"] = (home_possess_counter / time) * 100
+#		away_stats["possession"] = 100 - home_stats["possession"]
 
 func start_match():
 	match_timer.start()
@@ -126,45 +135,13 @@ func slower():
 	
 				
 func change_players(new_home_team,new_away_team):
-	home_team = new_home_team.duplicate(true)
-	away_team = new_away_team.duplicate(true)
+	var home_players = new_home_team.duplicate(true)["players"]["active"]
+	var away_players = new_away_team.duplicate(true)["players"]["active"]
 	
-	for i in range(home_team["players"]["active"].size()):
-		var player = home_team["players"]["active"][i]
-		player["has_ball"]  = false
-		player["home"]  = true
-		player["real"] = create_real_player(player,i)
-
-	for i in range(away_team["players"]["active"].size()):
-		var player = away_team["players"]["active"][i]
-		player["has_ball"]  = false
-		player["home"]  = false
-		player["real"] = create_real_player(player,i)
-	
-	
-	#make better and look who has ball after interruption
-	home_has_ball = randi()%2 == 0
-	if home_has_ball:
-		home_team["players"]["active"][4]["has_ball"] = true
-	else:
-		away_team["players"]["active"][4]["has_ball"] = true
-
-func create_real_player(player,pos):
-	var real_player = Player.new()
-	match pos:
-		0:
-			real_player.set_up(player,Vector2(100,300),pos)
-		1:
-			real_player.set_up(player,Vector2(250,300),pos)
-		2:
-			real_player.set_up(player,Vector2(350,100),pos)
-		3:
-			real_player.set_up(player,Vector2(350,500),pos)
-		4:
-			real_player.set_up(player,Vector2(500,300),pos)
-				
-	real_player.connect("pass_to",self,"pass_to")
-	real_player.connect("shoot",self,"shoot")
-	real_player.connect("dribble",self,"dribble")
-	add_child(real_player)
-	return real_player
+	home_team = Team.new()
+	away_team = Team.new()
+	home_team.set_up(home_players,away_players,formation)
+	away_team.set_up(away_players,home_players,formation)
+#	Some how change players of Team.gd
+#	home_team.set_up(home_team,away_team)
+#	away_team.set_up(away_team,home_team)
