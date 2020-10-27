@@ -2,6 +2,14 @@ extends Node
 
 const Player = preload("res://src/utils/match-simulator/simulator-player/SimulatorPlayer.gd")
 
+
+enum states {
+	DEFENDING,ATTACKING,KICKOFF,
+	CORNER,KICKIN,FREEKICK,PENALTY,
+	SIXFOUL,ENTER_FIELD,EXIT_FIELD,
+	SUBSTITUTION,INJURY,RED_CARD # might move some to players like red card
+}
+
 var state
 
 var players = []
@@ -10,6 +18,8 @@ var player_control
 var player_receive
 var player_support
 var player_closest_to_ball
+
+var distance_player_closest_to_ball
 
 # Called when the node enters the scene tree for the first time.
 func update_wait_players():
