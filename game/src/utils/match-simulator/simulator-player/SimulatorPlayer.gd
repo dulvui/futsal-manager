@@ -30,7 +30,7 @@ var kick_in_region
 
 var distance_to_ball
 
-var vertex_buffers = [] # ???????
+var vertex_buffers = [] # ??????? probably for visual
 
 onready var ball = get_parent().get_node("Ball")
 

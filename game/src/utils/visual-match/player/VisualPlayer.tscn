@@ -1,7 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
-[ext_resource path="res://src/utils/match-simulator/visual/player/FieldPlayer.gd" type="Script" id=2]
+[ext_resource path="res://src/utils/visual-match/player/VisualPlayer.gd" type="Script" id=2]
+
+
 
 [sub_resource type="CircleShape2D" id=1]
 
