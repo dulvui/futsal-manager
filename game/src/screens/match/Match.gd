@@ -26,7 +26,7 @@ func _ready():
 	$HUD/TopBar/Home.text = next_match["home"]
 	$HUD/TopBar/Away.text = next_match["away"]
 	
-	$MatchSimulator.set_up(home_team,away_team,true)
+	$MatchSimulator.set_up(home_team,away_team)
 	
 	$FormationPopup/Formation/PlayerList.add_match_players()
 	
