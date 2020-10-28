@@ -17,6 +17,8 @@ var stats = {
 var player
 
 # simple soccer
+var position
+
 var role
 
 var steering # velocity or so
@@ -38,7 +40,9 @@ func _ready():
 	add_to_group("simulator_player")
 
 func set_up(player, role, formation):
-	pass
+	home_region = formation["home_region"][role]
+	kick_off_region = home_region
+	
 
 func kick_off():
 	pass
