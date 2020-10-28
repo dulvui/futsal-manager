@@ -72,8 +72,13 @@ var away_goal
 var home_team
 var away_team
 
-var formation = "2-2" # TODO use real one
 
+# using 18 regions: 6 * 3
+var formation = {
+	"name" : "2-2",
+	"home_regions" : [1,6,8,3,5],
+	# add other regions
+}
 
 func _ready():
 	match_timer = Timer.new()
