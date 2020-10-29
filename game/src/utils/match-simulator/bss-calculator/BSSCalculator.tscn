@@ -7,27 +7,109 @@
 script = ExtResource( 1 )
 
 [node name="FieldSpot1" parent="." instance=ExtResource( 2 )]
+position = Vector2( 10, 10 )
 
 [node name="FieldSpot2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 64 )
+position = Vector2( 10, 30 )
 
 [node name="FieldSpot3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 128 )
+position = Vector2( 10, 50 )
 
 [node name="FieldSpot4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 64, 0 )
+position = Vector2( 10, 70 )
 
 [node name="FieldSpot5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 64, 64 )
+position = Vector2( 10, 90 )
 
 [node name="FieldSpot6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 64, 128 )
+position = Vector2( 10, 110 )
 
 [node name="FieldSpot7" parent="." instance=ExtResource( 2 )]
-position = Vector2( 128, 0 )
+position = Vector2( 30, 10 )
 
 [node name="FieldSpot8" parent="." instance=ExtResource( 2 )]
-position = Vector2( 128, 64 )
+position = Vector2( 30, 30 )
 
 [node name="FieldSpot9" parent="." instance=ExtResource( 2 )]
-position = Vector2( 128, 128 )
+position = Vector2( 30, 50 )
+
+[node name="FieldSpot10" parent="." instance=ExtResource( 2 )]
+position = Vector2( 30, 70 )
+
+[node name="FieldSpot11" parent="." instance=ExtResource( 2 )]
+position = Vector2( 30, 90 )
+
+[node name="FieldSpot12" parent="." instance=ExtResource( 2 )]
+position = Vector2( 30, 110 )
+
+[node name="FieldSpot13" parent="." instance=ExtResource( 2 )]
+position = Vector2( 50, 10 )
+
+[node name="FieldSpot14" parent="." instance=ExtResource( 2 )]
+position = Vector2( 50, 30 )
+
+[node name="FieldSpot15" parent="." instance=ExtResource( 2 )]
+position = Vector2( 50, 50 )
+
+[node name="FieldSpot16" parent="." instance=ExtResource( 2 )]
+position = Vector2( 50, 70 )
+
+[node name="FieldSpot17" parent="." instance=ExtResource( 2 )]
+position = Vector2( 50, 90 )
+
+[node name="FieldSpot18" parent="." instance=ExtResource( 2 )]
+position = Vector2( 50, 110 )
+
+[node name="FieldSpot19" parent="." instance=ExtResource( 2 )]
+position = Vector2( 70, 10 )
+
+[node name="FieldSpot20" parent="." instance=ExtResource( 2 )]
+position = Vector2( 70, 30 )
+
+[node name="FieldSpot21" parent="." instance=ExtResource( 2 )]
+position = Vector2( 70, 50 )
+
+[node name="FieldSpot22" parent="." instance=ExtResource( 2 )]
+position = Vector2( 70, 70 )
+
+[node name="FieldSpot23" parent="." instance=ExtResource( 2 )]
+position = Vector2( 70, 90 )
+
+[node name="FieldSpot24" parent="." instance=ExtResource( 2 )]
+position = Vector2( 70, 110 )
+
+[node name="FieldSpot25" parent="." instance=ExtResource( 2 )]
+position = Vector2( 90, 10 )
+
+[node name="FieldSpot26" parent="." instance=ExtResource( 2 )]
+position = Vector2( 90, 30 )
+
+[node name="FieldSpot27" parent="." instance=ExtResource( 2 )]
+position = Vector2( 90, 50 )
+
+[node name="FieldSpot28" parent="." instance=ExtResource( 2 )]
+position = Vector2( 90, 70 )
+
+[node name="FieldSpot29" parent="." instance=ExtResource( 2 )]
+position = Vector2( 90, 90 )
+
+[node name="FieldSpot30" parent="." instance=ExtResource( 2 )]
+position = Vector2( 90, 110 )
+
+[node name="FieldSpot31" parent="." instance=ExtResource( 2 )]
+position = Vector2( 110, 10 )
+
+[node name="FieldSpot32" parent="." instance=ExtResource( 2 )]
+position = Vector2( 110, 30 )
+
+[node name="FieldSpot33" parent="." instance=ExtResource( 2 )]
+position = Vector2( 110, 50 )
+
+[node name="FieldSpot34" parent="." instance=ExtResource( 2 )]
+position = Vector2( 110, 70 )
+
+[node name="FieldSpot35" parent="." instance=ExtResource( 2 )]
+position = Vector2( 110, 90 )
+
+[node name="FieldSpot36" parent="." instance=ExtResource( 2 )]
+position = Vector2( 110, 110 )
