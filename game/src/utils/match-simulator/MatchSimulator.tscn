@@ -32,48 +32,48 @@ scale = Vector2( 3, 3 )
 position = Vector2( 56, 96 )
 
 [node name="G" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 100, 300 )
+position = Vector2( 168, 286.719 )
 
 [node name="D" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 230.632, 292.629 )
+position = Vector2( 361, 87.404 )
 nr = 4
 
 [node name="WL" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 350.039, 119.404 )
+position = Vector2( 361, 472 )
 nr = 5
 
 [node name="WR" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 363.494, 457.444 )
+position = Vector2( 568, 479 )
 nr = 7
 
 [node name="P" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 541.764, 301.037 )
+position = Vector2( 553, 95 )
 nr = 9
 
 [node name="AwayPlayers" type="Node2D" parent="."]
 position = Vector2( 136, 112 )
 
 [node name="G" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 1110.21, 297.674 )
+position = Vector2( 1096, 272 )
 color = Color( 0.2, 0.6, 0.235294, 1 )
 
 [node name="D" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 980.712, 302.719 )
+position = Vector2( 928, 272 )
 color = Color( 0.2, 0.6, 0.235294, 1 )
 nr = 4
 
 [node name="WL" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 807.487, 489.398 )
+position = Vector2( 873, 464 )
 color = Color( 0.2, 0.6, 0.235294, 1 )
 nr = 5
 
 [node name="WR" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 800.76, 73.9954 )
+position = Vector2( 872, 77 )
 color = Color( 0.2, 0.6, 0.235294, 1 )
 nr = 7
 
 [node name="P" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 654.444, 253.947 )
+position = Vector2( 681, 266.269 )
 color = Color( 0.2, 0.6, 0.235294, 1 )
 nr = 9
 
