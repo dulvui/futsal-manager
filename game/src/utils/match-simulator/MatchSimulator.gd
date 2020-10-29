@@ -9,9 +9,6 @@ signal half_time
 signal match_end
 
 
-const Team = preload("res://src/utils/match-simulator/actors/team/Team.gd")
-
-
 var home_stats = {
 	"goals" : 0,
 	"possession" : 50,
@@ -77,6 +74,7 @@ var away_team
 var formation = {
 	"name" : "2-2",
 	"home_regions" : [1,6,8,3,5],
+	"positions" : [[100,600],[200,800],[200,400],[400,800],[400,400]]
 	# add other regions
 }
 
@@ -84,6 +82,10 @@ func _ready():
 	match_timer = Timer.new()
 	match_timer.wait_time = 1
 	match_timer.connect("timeout",self,"update")
+	
+	home_team = $HomeTeam
+	away_team = $AwayTeam
+	
 	add_child(match_timer)
 	start_match()
 
@@ -91,13 +93,8 @@ func set_up(home,away):
 	var home_players = home.duplicate(true)["players"]["active"]
 	var away_players = away.duplicate(true)["players"]["active"]
 	
-	home_team = Team.new()
-	away_team = Team.new()
-	home_team.set_up(home_players,away_players,formation)
-	away_team.set_up(away_players,home_players,formation)
-	
-	$BSSCalculatorAway.set_up($Field/AwayGoal)
-	$BSSCalculatorHome.set_up($Field/HomeGoal)
+	home_team.set_up(home_players,away_players,formation,$Field/AwayGoal,$Ball)
+	away_team.set_up(away_players,home_players,formation,$Field/HomeGoal,$Ball)
 	
 	
 func update():
@@ -146,10 +143,8 @@ func change_players(new_home_team,new_away_team):
 	var home_players = new_home_team.duplicate(true)["players"]["active"]
 	var away_players = new_away_team.duplicate(true)["players"]["active"]
 	
-	home_team = Team.new()
-	away_team = Team.new()
-	home_team.set_up(home_players,away_players,formation)
-	away_team.set_up(away_players,home_players,formation)
+#	home_team.set_up(home_players,away_players,formation)
+#	away_team.set_up(away_players,home_players,formation)
 #	Some how change players of Team.gd
 #	home_team.set_up(home_team,away_team)
 #	away_team.set_up(away_team,home_team)
