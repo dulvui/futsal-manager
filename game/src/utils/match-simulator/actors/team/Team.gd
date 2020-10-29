@@ -1,6 +1,6 @@
 extends Node
 
-const Player = preload("res://src/utils/match-simulator/simulator-player/SimulatorPlayer.gd")
+const Player = preload("res://src/utils/match-simulator/actors/player/Player.gd")
 
 
 enum states {
@@ -23,14 +23,15 @@ var player_closest_to_ball
 var distance_player_closest_to_ball
 
 func set_up(home_players,away_players,formation):
-	for i in home_players.size():
-		var player = Player.new()
-		player.set_up(home_players[i],i,formation)
-		players.append(player)
-	for i in away_players.size():
-		var player = Player.new()
-		player.set_up(away_players[i],i,formation)
-		players.append(player)
+#	for i in home_players.size():
+#		var player = Player.new()
+#		player.set_up(home_players[i],i,formation)
+#		players.append(player)
+#	for i in away_players.size():
+#		var player = Player.new()
+#		player.set_up(away_players[i],i,formation)
+#		players.append(player)
+	pass
 	
 
 func update():

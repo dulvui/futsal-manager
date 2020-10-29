@@ -9,7 +9,7 @@ signal half_time
 signal match_end
 
 
-const Team = preload("res://src/utils/match-simulator/simulator-team/SimulatorTeam.gd")
+const Team = preload("res://src/utils/match-simulator/actors/team/Team.gd")
 
 
 var home_stats = {
@@ -95,6 +95,9 @@ func set_up(home,away):
 	away_team = Team.new()
 	home_team.set_up(home_players,away_players,formation)
 	away_team.set_up(away_players,home_players,formation)
+	
+	$BSSCalculatorAway.set_up($Field/AwayGoal)
+	$BSSCalculatorHome.set_up($Field/HomeGoal)
 	
 	
 func update():
