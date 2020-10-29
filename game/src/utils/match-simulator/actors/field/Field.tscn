@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/utils/match-simulator/actors/field/Field.gd" type="Script" id=1]
+[ext_resource path="res://src/utils/match-simulator/actors/goal/Goal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/field.png" type="Texture" id=3]
+
+[node name="Field" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Floor" type="Sprite" parent="."]
+position = Vector2( 304.901, 161.253 )
+texture = ExtResource( 3 )
+
+[node name="HomeGoal" parent="." instance=ExtResource( 2 )]
+position = Vector2( 8.409, 126.134 )
+
+[node name="AwayGoal" parent="." instance=ExtResource( 2 )]
+position = Vector2( 599.559, 195.929 )
+rotation = 3.14159
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( 296, 320, -8, 320, -8, 0, 616, 0, 616, 320, 312, 320, 312, 344, 640, 344, 640, -24, -32, -24, -32, 344, 296, 344 )

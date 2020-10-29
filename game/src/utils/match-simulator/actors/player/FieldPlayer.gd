@@ -1,7 +1,7 @@
 extends Node
 
 
-const SimulatorPlayer = preload("res://src/utils/match-simulator/simulator-player/SimulatorPlayer.gd")
+const SimulatorPlayer = preload("res://src/utils/match-simulator/actors/player/SimulatorPlayer.gd")
 
 enum states {CHASE,KICK,WAIT,HOME,SUPPORT} 
 enum roles {DC,DL,DR,CL,CR,CC,AL,AR,AC} 
