@@ -8,6 +8,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func set_up(goal):
+	var distance = $GoalRayCast.global_position.distance_to(goal.center)
+#	$GoalRayCast.cast_to = Vector2(0,distance)
 	$GoalRayCast.cast_to = goal.center - $GoalRayCast.global_position
 #	$AwayGoalRayCast.cast_to = away_goal_spot - $AwayGoalRayCast.global_position
 

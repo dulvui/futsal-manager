@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/utils/match-simulator/actors/field/Field.gd" type="Script" id=1]
 [ext_resource path="res://src/utils/match-simulator/actors/goal/Goal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/field.png" type="Texture" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.9
 
 [node name="Field" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,6 +22,9 @@ position = Vector2( 599.559, 195.929 )
 rotation = 3.14159
 
 [node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+physics_material_override = SubResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
 polygon = PoolVector2Array( 296, 320, -8, 320, -8, 0, 616, 0, 616, 320, 312, 320, 312, 344, 640, 344, 640, -24, -32, -24, -32, 344, 296, 344 )

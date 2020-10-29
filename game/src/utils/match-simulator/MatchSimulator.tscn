@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/utils/match-simulator/MatchSimulator.gd" type="Script" id=1]
 [ext_resource path="res://src/utils/match-simulator/actors/field/Field.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/utils/match-simulator/actors/ball/Ball.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/utils/match-simulator/actors/player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/utils/match-simulator/bss-calculator/BSSCalculator.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/utils/match-simulator/actors/team/Team.tscn" type="PackedScene" id=5]
 
 [node name="MatchSimulator" type="Control"]
 anchor_right = 1.0
@@ -20,62 +19,11 @@ __meta__ = {
 position = Vector2( 104, 56 )
 scale = Vector2( 2, 2 )
 
-[node name="BSSCalculatorHome" parent="." instance=ExtResource( 5 )]
-position = Vector2( 225, 189 )
-scale = Vector2( 3, 3 )
+[node name="HomeTeam" parent="." instance=ExtResource( 5 )]
+position = Vector2( 724, 91 )
 
-[node name="BSSCalculatorAway" parent="." instance=ExtResource( 5 )]
-position = Vector2( 817, 191 )
-scale = Vector2( 3, 3 )
-
-[node name="HomePlayers" type="Node2D" parent="."]
-position = Vector2( 56, 96 )
-
-[node name="G" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 168, 286.719 )
-
-[node name="D" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 361, 87.404 )
-nr = 4
-
-[node name="WL" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 361, 472 )
-nr = 5
-
-[node name="WR" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 568, 479 )
-nr = 7
-
-[node name="P" parent="HomePlayers" instance=ExtResource( 4 )]
-position = Vector2( 553, 95 )
-nr = 9
-
-[node name="AwayPlayers" type="Node2D" parent="."]
-position = Vector2( 136, 112 )
-
-[node name="G" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 1096, 272 )
-color = Color( 0.2, 0.6, 0.235294, 1 )
-
-[node name="D" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 928, 272 )
-color = Color( 0.2, 0.6, 0.235294, 1 )
-nr = 4
-
-[node name="WL" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 873, 464 )
-color = Color( 0.2, 0.6, 0.235294, 1 )
-nr = 5
-
-[node name="WR" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 872, 77 )
-color = Color( 0.2, 0.6, 0.235294, 1 )
-nr = 7
-
-[node name="P" parent="AwayPlayers" instance=ExtResource( 4 )]
-position = Vector2( 681, 266.269 )
-color = Color( 0.2, 0.6, 0.235294, 1 )
-nr = 9
+[node name="AwayTeam" parent="." instance=ExtResource( 5 )]
+position = Vector2( 126, 91 )
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
 position = Vector2( 712, 384 )

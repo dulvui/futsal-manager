@@ -1,6 +1,6 @@
 extends Node
 
-const Player = preload("res://src/utils/match-simulator/actors/player/Player.gd")
+const Player = preload("res://src/utils/match-simulator/actors/player/Player.tscn")
 
 
 enum states {
@@ -22,16 +22,18 @@ var player_closest_to_ball
 
 var distance_player_closest_to_ball
 
-func set_up(home_players,away_players,formation):
-#	for i in home_players.size():
-#		var player = Player.new()
-#		player.set_up(home_players[i],i,formation)
-#		players.append(player)
-#	for i in away_players.size():
-#		var player = Player.new()
-#		player.set_up(away_players[i],i,formation)
-#		players.append(player)
-	pass
+func set_up(home_players,away_players,formation,goal,ball):
+	for i in home_players.size():
+		var player = Player.instance()
+		player.set_up(home_players[i],i,formation,ball)
+		add_child(player)
+		players.append(player)
+	for i in away_players.size():
+		var player = Player.instance()
+		player.set_up(away_players[i],i,formation,ball)
+		add_child(player)
+		players.append(player)
+	$BSSCalculator.set_up(goal)
 	
 
 func update():
@@ -86,8 +88,16 @@ func is_opponent_within_radius():
 	
 func request_pass():
 	pass
-	
+
+# check position but could be weird, so use area or line
+# to see if player is in area or crossed line
 func count_players_at_home():
 	pass
+	
+func get_player_closest_to_ball():
+	player_closest_to_ball = players[0]
+	for i in range(1,players.size()):
+		if players[i].distance_to_ball < player_closest_to_ball.distance_to_ball:
+			player_closest_to_ball = players[i]
 	
 
