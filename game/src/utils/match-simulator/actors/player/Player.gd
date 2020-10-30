@@ -28,20 +28,23 @@ var velocity = 3
 var acceleration
 var direction
 
+var at_home
+
 func _ready():
 	$Control/ColorRect.color = color
 	$Control/ShirtNumber.text = str(nr)
 	
 	
 func _physics_process(delta):
-	if ball:
+	if ball and state == states.CHASE:
 		dinstance_to_ball = global_position.distance_to(target)
 		direction = (target - global_position).normalized()
 		if dinstance_to_ball > 1:
 			move_and_slide(velocity * direction * dinstance_to_ball)
 		target = ball.global_position
 
-func set_up(new_player, new_role, new_formation,new_ball):
+func set_up(is_at_home,new_player, new_role, new_formation,new_ball):
+	at_home = is_at_home
 #	color = teamcolor
 	player = new_player
 	formation = new_formation
@@ -53,9 +56,15 @@ func set_up(new_player, new_role, new_formation,new_ball):
 	
 	target = ball.global_position
 	
-	position = Vector2(formation["positions"][role][0],formation["positions"][role][1])
+	if not at_home:
+		position = Vector2(formation["positions"][role][0],formation["positions"][role][1])
+	else:
+		position = Vector2(600 - formation["positions"][role][0],formation["positions"][role][1])
 	#place player to homeregion
 
+
+func chase():
+	state = states.CHASE
 
 func is_ahead_of_attacker():
 	pass

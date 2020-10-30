@@ -22,18 +22,20 @@ var player_closest_to_ball
 
 var distance_player_closest_to_ball
 
-func set_up(home_players,away_players,formation,goal,ball):
+var at_home
+
+func set_up(is_at_home,home_players,away_players,formation,goal,ball):
+	at_home = is_at_home
+
 	for i in home_players.size():
 		var player = Player.instance()
-		player.set_up(home_players[i],i,formation,ball)
+		player.set_up(at_home,home_players[i],i,formation,ball)
 		add_child(player)
 		players.append(player)
-	for i in away_players.size():
-		var player = Player.instance()
-		player.set_up(away_players[i],i,formation,ball)
-		add_child(player)
-		players.append(player)
+	opponent_players = away_players
 	$BSSCalculator.set_up(goal)
+	
+	players[4].chase()
 	
 
 func update():
