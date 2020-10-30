@@ -74,7 +74,7 @@ var away_team
 var formation = {
 	"name" : "2-2",
 	"home_regions" : [1,6,8,3,5],
-	"positions" : [[100,600],[200,800],[200,400],[400,800],[400,400]]
+	"positions" : [[100,300],[200,400],[200,200],[400,400],[400,200]]
 	# add other regions
 }
 
@@ -95,8 +95,8 @@ func set_up(home,away):
 	var home_players = home.duplicate(true)["players"]["active"]
 	var away_players = away.duplicate(true)["players"]["active"]
 	
-	home_team.set_up(home_players,away_players,formation,$Field/AwayGoal,$Ball)
-	away_team.set_up(away_players,home_players,formation,$Field/HomeGoal,$Ball)
+	home_team.set_up(true, home_players,away_players,formation,$Field/AwayGoal,$Ball)
+	away_team.set_up(false, away_players,home_players,formation,$Field/HomeGoal,$Ball)
 	
 	
 func update():
