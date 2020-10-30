@@ -19,10 +19,10 @@ __meta__ = {
 position = Vector2( 104, 56 )
 scale = Vector2( 2, 2 )
 
-[node name="HomeTeam" parent="." instance=ExtResource( 5 )]
+[node name="AwayTeam" parent="." instance=ExtResource( 5 )]
 position = Vector2( 724, 91 )
 
-[node name="AwayTeam" parent="." instance=ExtResource( 5 )]
+[node name="HomeTeam" parent="." instance=ExtResource( 5 )]
 position = Vector2( 126, 91 )
 
 [node name="Ball" parent="." instance=ExtResource( 3 )]
