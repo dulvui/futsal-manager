@@ -79,6 +79,8 @@ var formation = {
 }
 
 func _ready():
+	Engine.time_scale = 1
+	
 	match_timer = Timer.new()
 	match_timer.wait_time = 1
 	match_timer.connect("timeout",self,"update")
@@ -133,10 +135,12 @@ func match_end():
 	match_timer.stop()
 	
 func faster():
-	match_timer.wait_time = match_timer.wait_time / 2
+	Engine.time_scale *=  2
+	match_timer.wait_time /= 2
 	
 func slower():
-	match_timer.wait_time = match_timer.wait_time * 2
+	Engine.time_scale /= 2
+	match_timer.wait_time *=  2
 	
 				
 func change_players(new_home_team,new_away_team):

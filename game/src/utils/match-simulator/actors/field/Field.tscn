@@ -4,8 +4,8 @@
 [ext_resource path="res://src/utils/match-simulator/actors/goal/Goal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/field.png" type="Texture" id=3]
 
-[sub_resource type="PhysicsMaterial" id=1]
-bounce = 0.9
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 544, 985.134 )
 
 [node name="Field" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,10 +21,32 @@ position = Vector2( 8.409, 126.134 )
 position = Vector2( 599.559, 195.929 )
 rotation = 3.14159
 
-[node name="Walls" type="StaticBody2D" parent="."]
-collision_layer = 3
-collision_mask = 3
-physics_material_override = SubResource( 1 )
+[node name="Walls" type="Node2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
-polygon = PoolVector2Array( 296, 320, -8, 320, -8, 0, 616, 0, 616, 320, 312, 320, 312, 344, 640, 344, 640, -24, -32, -24, -32, 344, 296, 344 )
+[node name="Left" type="StaticBody2D" parent="Walls"]
+position = Vector2( -96, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left"]
+position = Vector2( -488, 161.134 )
+shape = SubResource( 3 )
+
+[node name="Right" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1680, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right"]
+position = Vector2( -488, 161.134 )
+shape = SubResource( 3 )
+
+[node name="Top" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1680, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top"]
+position = Vector2( -1376, -1032 )
+shape = SubResource( 3 )
+
+[node name="Top2" type="StaticBody2D" parent="Walls"]
+position = Vector2( 1680, 2384 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top2"]
+position = Vector2( -1376, -1032 )
+shape = SubResource( 3 )
