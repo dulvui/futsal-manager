@@ -28,19 +28,24 @@ var velocity = 3
 var acceleration
 var direction
 
+var joint
+
 var at_home
 
 func _ready():
 	$Control/ColorRect.color = color
 	$Control/ShirtNumber.text = str(nr)
 	
+	joint = $CollisionShape2D/DampedSpringJoint2D
+
 	
 func _physics_process(delta):
 	if ball and state == states.CHASE:
 		dinstance_to_ball = global_position.distance_to(target)
 		direction = (target - global_position).normalized()
-		if dinstance_to_ball > 1:
-			move_and_slide(velocity * direction * dinstance_to_ball)
+		if dinstance_to_ball < 100:
+			joint.node_b = ball.get_path()
+		move_and_slide(velocity * direction * dinstance_to_ball)
 		target = ball.global_position
 
 func set_up(is_at_home,new_player, new_role, new_formation,new_ball):

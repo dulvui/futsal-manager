@@ -34,8 +34,8 @@ func set_up(is_at_home,home_players,away_players,formation,goal,ball):
 		players.append(player)
 	opponent_players = away_players
 	$BSSCalculator.set_up(goal)
-	
-	players[4].chase()
+	if at_home:
+		players[4].chase()
 	
 
 func update():
