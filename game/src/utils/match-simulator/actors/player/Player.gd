@@ -56,7 +56,7 @@ func set_up(is_at_home,new_player, new_role, new_formation,new_ball):
 	
 	target = ball.global_position
 	
-	if not at_home:
+	if at_home:
 		position = Vector2(formation["positions"][role][0],formation["positions"][role][1])
 	else:
 		position = Vector2(600 - formation["positions"][role][0],formation["positions"][role][1])
