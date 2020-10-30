@@ -24,7 +24,7 @@ var target
 var has_ball # is function is_controlling player in simple soccer
 var ball
 
-var velocity = 1
+var velocity = 3
 var acceleration
 var direction
 

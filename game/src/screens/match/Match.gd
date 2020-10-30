@@ -89,7 +89,7 @@ func _on_Dashboard_pressed():
 
 
 func _on_Faster_pressed():
-	if speed_factor < 6:
+	if speed_factor < 2:
 		speed_factor += 1
 		$MatchSimulator.faster()
 
