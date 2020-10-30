@@ -47,6 +47,10 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="CollisionShape2D"]
+scale = Vector2( 20, 20 )
+node_a = NodePath("../..")
+
 [node name="Head" type="RayCast2D" parent="."]
 cast_to = Vector2( 0, 400 )
 
