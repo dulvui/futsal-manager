@@ -136,10 +136,12 @@ func match_end():
 	
 func faster():
 	Engine.time_scale *=  2
+	Engine.iterations_per_second *= 2
 	match_timer.wait_time /= 2
 	
 func slower():
 	Engine.time_scale /= 2
+	Engine.iterations_per_second /= 2	
 	match_timer.wait_time *=  2
 	
 				
