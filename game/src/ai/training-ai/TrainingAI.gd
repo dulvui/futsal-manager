@@ -1,16 +1,16 @@
 extends Node
 
+# will be emitted on injury with player and injury details as parameter
+signal injury
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+# trains the players and increases therir stats depending on 
+# training plan, players can also injure during training 
+func train_players(players, plan):
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+# dependfing on your team and traingin abilities
+# and tactics, plan according trainings for month/week ??
+# could be used if training gets delegated
+func plan_trainings():
+	pass
