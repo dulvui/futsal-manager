@@ -38,13 +38,17 @@ func _ready():
 	
 	joint = $CollisionShape2D/DampedSpringJoint2D
 
+var has_ball_now = false
 	
 func _physics_process(delta):
 	if ball and state == states.CHASE:
 		dinstance_to_ball = global_position.distance_to(target)
 		direction = (target - global_position).normalized()
-		if dinstance_to_ball < 100:
-			joint.node_b = ball.get_path()
+		if not has_ball_now:
+			if dinstance_to_ball < 80:
+				joint.add_child(ball)
+				joint.node_b = ball.get_path()
+				has_ball_now = true
 		move_and_slide(velocity * direction * dinstance_to_ball)
 		target = ball.global_position
 

@@ -59,6 +59,7 @@ translations=PoolStringArray( "res://assets/i18n/FutsalManagerI18N - Sheet1.de.t
 
 [physics]
 
+common/physics_fps=180
 2d/default_gravity_vector=Vector2( 0, 0 )
 
 [rendering]
