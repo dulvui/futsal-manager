@@ -5,12 +5,11 @@
 [ext_resource path="res://button-normal.tres" type="StyleBox" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0196078, 0.168627, 0.247059, 1 )
+bg_color = Color( 0.0196078, 0.458824, 0.972549, 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 42
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
 font_data = ExtResource( 1 )
 
 [resource]
