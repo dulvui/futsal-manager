@@ -141,7 +141,7 @@ func faster():
 	
 func slower():
 	Engine.time_scale /= 2
-	Engine.iterations_per_second /= 2	
+	Engine.iterations_per_second /= 2
 	match_timer.wait_time *=  2
 	
 				
