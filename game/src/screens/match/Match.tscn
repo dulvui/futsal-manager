@@ -2,8 +2,9 @@
 
 [ext_resource path="res://theme.tres" type="Theme" id=2]
 [ext_resource path="res://src/screens/match/Match.gd" type="Script" id=3]
-[ext_resource path="res://src/utils/match-simulator/MatchSimulator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/utils/match-simulator/visual/MatchSimulator.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui-components/formation/Formation.tscn" type="PackedScene" id=5]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Goal"
