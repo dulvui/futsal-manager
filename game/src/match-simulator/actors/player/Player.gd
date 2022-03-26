@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Node2D
 
 const SimulatorPlayer = preload("res://src/match-simulator/actors/player/SimulatorPlayer.gd")
 
@@ -25,40 +25,19 @@ var has_ball # is function is_controlling player in simple soccer
 var ball
 
 var velocity = 3
-var acceleration
-var direction
-
-var joint
-
-var at_home
 
 func _ready():
 	$Control/ColorRect.color = color
 	$Control/ShirtNumber.text = str(nr)
 	
-	joint = $CollisionShape2D/DampedSpringJoint2D
 
 var has_ball_now = false
-	
-func _physics_process(delta):
-	if ball and state == states.CHASE:
-		dinstance_to_ball = global_position.distance_to(target)
-		direction = (target - global_position).normalized()
-		if not has_ball_now:
-			if dinstance_to_ball < 80:
-				joint.add_child(ball)
-				joint.node_b = ball.get_path()
-				has_ball_now = true
-		move_and_slide(velocity * direction * dinstance_to_ball)
-		target = ball.global_position
 
-func set_up(is_at_home,new_player, new_role, new_formation,new_ball):
-	at_home = is_at_home
-#	color = teamcolor
-	player = new_player
-	formation = new_formation
-	role = new_role
-	ball = new_ball
+func set_up(at_home, _player, _role, _formation,_ball):
+	player = _player
+	formation = _formation
+	role = _role
+	ball = _ball
 	nr = player["nr"]
 #	$Control/ColorRect.color = Color.aliceblue
 #	$Control/ShirtNumber.text = str(nr)

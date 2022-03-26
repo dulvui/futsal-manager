@@ -1,17 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/match-simulator/actors/player/Player.gd" type="Script" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 31.448
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 85.104
-
-[node name="Player" type="KinematicBody2D" groups=["player"]]
-collision_layer = 0
-collision_mask = 2147483659
+[node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource( 2 )
 
 [node name="Control" type="Control" parent="."]
@@ -42,27 +34,3 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
-[node name="DampedSpringJoint2D" type="PinJoint2D" parent="CollisionShape2D"]
-position = Vector2( 2.2839, -31.9107 )
-rotation = 3.14159
-node_a = NodePath("../..")
-
-[node name="Head" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, 400 )
-
-[node name="Vision" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
-shape = SubResource( 2 )
-
-[node name="PassDestinationLeft" type="Position2D" parent="."]
-position = Vector2( -96, 0 )
-
-[node name="PassDestinationRight" type="Position2D" parent="."]
-position = Vector2( 86, 0 )
-
-[node name="PassDestinationCenter" type="Position2D" parent="."]
