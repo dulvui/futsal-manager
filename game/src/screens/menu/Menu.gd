@@ -6,7 +6,6 @@ extends Control
 #	$CenterContainer/VBoxContainer/Continue.hide()
 
 func _on_StartGame_pressed():
-	DataSaver.reset()
 	get_tree().change_scene("res://src/screens/create-manager/CreateManager.tscn")
 
 
