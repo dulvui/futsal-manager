@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/match-simulator/actors/player/Player.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 31.448
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 85.104
+
+[node name="Player" type="KinematicBody2D" groups=["player"]]
+collision_layer = 0
+collision_mask = 2147483659
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 32, 32 )
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+margin_right = 64.0
+margin_bottom = 64.0
+color = Color( 0.290196, 0.101961, 0.101961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShirtNumber" type="Label" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "21"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="DampedSpringJoint2D" type="PinJoint2D" parent="CollisionShape2D"]
+position = Vector2( 2.2839, -31.9107 )
+rotation = 3.14159
+node_a = NodePath("../..")
+
+[node name="Head" type="RayCast2D" parent="."]
+cast_to = Vector2( 0, 400 )
+
+[node name="Vision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+shape = SubResource( 2 )
+
+[node name="PassDestinationLeft" type="Position2D" parent="."]
+position = Vector2( -96, 0 )
+
+[node name="PassDestinationRight" type="Position2D" parent="."]
+position = Vector2( 86, 0 )
+
+[node name="PassDestinationCenter" type="Position2D" parent="."]
