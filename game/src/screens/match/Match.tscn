@@ -1,10 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://src/match-simulator/MatchSimulator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://theme.tres" type="Theme" id=2]
 [ext_resource path="res://src/screens/match/Match.gd" type="Script" id=3]
-[ext_resource path="res://src/utils/match-simulator/visual/MatchSimulator.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui-components/formation/Formation.tscn" type="PackedScene" id=5]
-
 
 [sub_resource type="Animation" id=1]
 resource_name = "Goal"
@@ -31,11 +30,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MatchSimulator" parent="." instance=ExtResource( 4 )]
-margin_left = 455.966
-margin_top = 117.706
-margin_right = -64.0339
-margin_bottom = -162.293
+[node name="MatchSimulator" parent="." instance=ExtResource( 1 )]
+margin_left = 444.0
+margin_top = 112.0
+margin_right = -276.0
+margin_bottom = -368.0
 
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
@@ -139,49 +138,49 @@ __meta__ = {
 }
 
 [node name="Field" type="Button" parent="HUD/LeftButtons"]
-margin_right = 264.0
+margin_right = 252.0
 margin_bottom = 56.0
 text = "FIELD"
 
 [node name="Stats" type="Button" parent="HUD/LeftButtons"]
 margin_top = 64.0
-margin_right = 264.0
+margin_right = 252.0
 margin_bottom = 120.0
 text = "STATS"
 
 [node name="Change" type="Button" parent="HUD/LeftButtons"]
 margin_top = 128.0
-margin_right = 264.0
+margin_right = 252.0
 margin_bottom = 184.0
 text = "CHANGE"
 
 [node name="Tactics" type="Button" parent="HUD/LeftButtons"]
 margin_top = 192.0
-margin_right = 264.0
+margin_right = 252.0
 margin_bottom = 248.0
 text = "TACTICS"
 
 [node name="Formation" type="Button" parent="HUD/LeftButtons"]
 margin_top = 256.0
-margin_right = 264.0
+margin_right = 252.0
 margin_bottom = 312.0
 text = "FORMATION"
 
 [node name="Table" type="Button" parent="HUD/LeftButtons"]
 margin_top = 320.0
-margin_right = 264.0
+margin_right = 252.0
 margin_bottom = 376.0
 text = "TABLE"
 
 [node name="Matches" type="Button" parent="HUD/LeftButtons"]
 margin_top = 384.0
-margin_right = 264.0
+margin_right = 252.0
 margin_bottom = 440.0
 text = "MATCHES"
 
 [node name="Votes" type="Button" parent="HUD/LeftButtons"]
 margin_top = 448.0
-margin_right = 264.0
+margin_right = 252.0
 margin_bottom = 504.0
 text = "VOTES"
 
@@ -555,10 +554,7 @@ anims/Goal = SubResource( 1 )
 wait_time = 0.5
 one_shot = true
 autostart = true
-[connection signal="away_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_away_goal"]
-[connection signal="half_time" from="MatchSimulator" to="." method="_on_MatchSimulator_half_time"]
-[connection signal="home_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_home_goal"]
-[connection signal="match_end" from="MatchSimulator" to="." method="_on_MatchSimulator_match_end"]
+
 [connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="HUD/Faster" to="." method="_on_Faster_pressed"]
 [connection signal="pressed" from="HUD/Slower" to="." method="_on_Slower_pressed"]
