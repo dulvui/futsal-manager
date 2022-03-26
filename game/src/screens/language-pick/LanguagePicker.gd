@@ -26,7 +26,4 @@ func _on_Spanish_pressed():
 	next_screen()
 	
 func next_screen():
-	if DataSaver.gdpr_consent == DataSaver.GDPR_CONSENTS.ND:
-		get_tree().change_scene("res://src/screens/gdpr-consent/GDPRConsent.tscn")
-	else:
-		get_tree().change_scene("res://src/screens/menu/Menu.tscn")
+	get_tree().change_scene("res://src/screens/menu/Menu.tscn")
