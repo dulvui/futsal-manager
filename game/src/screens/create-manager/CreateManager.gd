@@ -20,5 +20,6 @@ func _on_Continue_pressed():
 			"surname" :$GridContainer/SurName.text,
 			"nationality" : $GridContainer/Nat.items[$GridContainer/Nat.selected]
 		}
+		DataSaver.reset()
 		DataSaver.save_manager(manager)
 		get_tree().change_scene("res://src/screens/team-select/TeamSelect.tscn")
