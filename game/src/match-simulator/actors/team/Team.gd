@@ -24,6 +24,27 @@ var distance_player_closest_to_ball
 
 var at_home
 
+var statistics = {
+	"goals" : 0,
+	"possession" : 50,
+	"shots" : 0,
+	"shots_on_target" : 0,
+	"pass" : 0,
+	"pass_success" : 0,
+	"free_kicks" : 0,
+	"penalty" : 0,
+	"penalty_kick" : 0, # after 6 fouls
+	"fouls" : 0,
+	"tackles" : 0,
+	"tackles_success" : 0,
+	"corners" : 0,
+	"headers" : 0,
+	"headers_success" : 0,
+	"throw_in" : 0, #rimessa
+	"yellow_cards" : 0,
+	"red_cards" : 0
+}
+
 func set_up(is_at_home,home_players,away_players,formation,goal,ball):
 	at_home = is_at_home
 
