@@ -9,6 +9,8 @@ var first_half = true
 
 var paused = false
 
+onready var match_simulator = $MatchSimulator
+
 onready var animation_player = $AnimationPlayer
 
 var speed_factor = 0
@@ -26,49 +28,49 @@ func _ready():
 	$HUD/TopBar/Home.text = next_match["home"]
 	$HUD/TopBar/Away.text = next_match["away"]
 	
-	$MatchSimulator.set_up(home_team,away_team)
+	match_simulator.set_up(home_team,away_team)
 	
 	$FormationPopup/Formation/PlayerList.add_match_players()
 	
 
 func _process(delta):
-	$HUD/TopBar/Time.text = "%02d:%02d"%[int($MatchSimulator.time)/60,int($MatchSimulator.time)%60]
-	$HUD/TopBar/Result.text = "%d - %d"%[$MatchSimulator.home_stats["goals"],$MatchSimulator.away_stats["goals"]]
+	$HUD/TopBar/Time.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
+	$HUD/TopBar/Result.text = "%d - %d"%[match_simulator.home_team.statistics["goals"],match_simulator.away_team.statistics["goals"]]
 	
-	$Stats/VBoxContainer/HomePossession.text = "%d "%$MatchSimulator.home_stats["possession"]
-	$Stats/VBoxContainer/AwayPossession.text = "%d "%$MatchSimulator.away_stats["possession"]
-	$Stats/VBoxContainer/HomePass.text = "%d "%$MatchSimulator.home_stats["pass"]
-	$Stats/VBoxContainer/AwayPass.text = "%d "%$MatchSimulator.away_stats["pass"]
-	$Stats/VBoxContainer/HomePassSuccess.text = "%d "%$MatchSimulator.home_stats["pass_success"]
-	$Stats/VBoxContainer/AwayPassSuccess.text = "%d "%$MatchSimulator.away_stats["pass_success"]
-	$Stats/VBoxContainer/HomeShots.text = "%d "%$MatchSimulator.home_stats["shots"]
-	$Stats/VBoxContainer/AwayShots.text = "%d "%$MatchSimulator.away_stats["shots"]
-	$Stats/VBoxContainer/AwayShotsOnTarget.text = "%d "%$MatchSimulator.away_stats["shots_on_target"]
-	$Stats/VBoxContainer/HomeShotsOnTarget.text = "%d "%$MatchSimulator.home_stats["shots_on_target"]
+	$Stats/VBoxContainer/HomePossession.text = "%d "%match_simulator.home_team.statistics["possession"]
+	$Stats/VBoxContainer/AwayPossession.text = "%d "%match_simulator.away_team.statistics["possession"]
+	$Stats/VBoxContainer/HomePass.text = "%d "%match_simulator.home_team.statistics["pass"]
+	$Stats/VBoxContainer/AwayPass.text = "%d "%match_simulator.away_team.statistics["pass"]
+	$Stats/VBoxContainer/HomePassSuccess.text = "%d "%match_simulator.home_team.statistics["pass_success"]
+	$Stats/VBoxContainer/AwayPassSuccess.text = "%d "%match_simulator.away_team.statistics["pass_success"]
+	$Stats/VBoxContainer/HomeShots.text = "%d "%match_simulator.home_team.statistics["shots"]
+	$Stats/VBoxContainer/AwayShots.text = "%d "%match_simulator.away_team.statistics["shots"]
+	$Stats/VBoxContainer/AwayShotsOnTarget.text = "%d "%match_simulator.away_team.statistics["shots_on_target"]
+	$Stats/VBoxContainer/HomeShotsOnTarget.text = "%d "%match_simulator.home_team.statistics["shots_on_target"]
 	
-	$HUD/TimeBar.value = $MatchSimulator.time
+	$HUD/TimeBar.value = match_simulator.time
 	
-	$HUD/PossessBar.value = $MatchSimulator.home_stats["possession"]
+	$HUD/PossessBar.value = match_simulator.home_team.statistics["possession"]
 	
 	$HUD/SpeedFactor.text = str(speed_factor + 1) + " X"
 	
 	
 
 func _on_Field_pressed():
-	$MatchSimulator.show()
+	match_simulator.show()
 	$Stats.hide()
 	pass
 
 
 func _on_Stats_pressed():
-	$MatchSimulator.hide()
+	match_simulator.hide()
 	$Stats.show()
 
 
 func match_end():
 	$Dashboard.show()
-	$MatchSimulator.match_end()
-	DataSaver.save_result(home_team["name"],$MatchSimulator.home_stats["goals"],away_team["name"],$MatchSimulator.away_stats["goals"])
+	match_simulator.match_end()
+	DataSaver.save_result(home_team["name"],match_simulator.home_team.statistics["goals"],away_team["name"],match_simulator.away_team.statistics["goals"])
 	
 	#simulate all games for now. needs also support for other leagues
 #	print(DataSaver.calendar[CalendarUtil.day_counter]["matches"].size())
@@ -91,18 +93,18 @@ func _on_Dashboard_pressed():
 func _on_Faster_pressed():
 	if speed_factor < 2:
 		speed_factor += 1
-		$MatchSimulator.faster()
+		match_simulator.faster()
 
 
 func _on_Slower_pressed():
 	if speed_factor > 0:
 		speed_factor -= 1
-		$MatchSimulator.slower()
+		match_simulator.slower()
 	
 
 
 func _on_Pause_pressed():
-	var paused = $MatchSimulator.pause_toggle()
+	var paused = match_simulator.pause_toggle()
 	
 	if paused:
 		$HUD/Pause.text = tr("CONTINUE")
@@ -112,7 +114,7 @@ func _on_Pause_pressed():
 
 
 func _on_Formation_pressed():
-	$MatchSimulator.pause()
+	match_simulator.pause()
 	$HUD/Pause.text = tr("PAUSE")
 	$FormationPopup.popup_centered()
 
@@ -128,7 +130,7 @@ func _on_Formation_change():
 			if team["name"] == next_match["away"]:
 				away_team = team
 	# need to chaneg players in simulator too
-	$MatchSimulator.change_players(home_team,away_team)
+	match_simulator.change_players(home_team,away_team)
 	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
 
 
@@ -137,33 +139,33 @@ func _on_SKIP_pressed():
 
 
 func _on_MatchSimulator_home_goal():
-	$MatchSimulator.pause()
+	match_simulator.pause()
 	$Stats.hide() #make animation
-	$MatchSimulator.show()
+	match_simulator.show()
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
 #	$Stats.show() #make animation
-#	$MatchSimulator.hide()
-	$MatchSimulator.continue_match()
+#	match_simulator.hide()
+	match_simulator.continue_match()
 
 
 func _on_MatchSimulator_away_goal():
-	$MatchSimulator.pause()
+	match_simulator.pause()
 	$Stats.hide() #make animation
-	$MatchSimulator.show()
+	match_simulator.show()
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
 #	$Stats.show() #make animation
-#	$MatchSimulator.hide()
-	$MatchSimulator.continue_match()
+#	match_simulator.hide()
+	match_simulator.continue_match()
 
 
 func _on_StartTimer_timeout():
-	$MatchSimulator.start_match()
+	match_simulator.start_match()
 
 
 func _on_MatchSimulator_half_time():
