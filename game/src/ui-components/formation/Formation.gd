@@ -31,15 +31,15 @@ func _ready():
 #	$DefensiveTactics/D3.value = DataSaver.team["defensive_tactics"]["D3"]
 #	$DefensiveTactics/D4.value = DataSaver.team["defensive_tactics"]["D4"]
 
-	$OffensiveTactics/O1.value = 10
-	$OffensiveTactics/O2.value = 10
-	$OffensiveTactics/O3.value = 10
-	$OffensiveTactics/O4.value = 10
-
-	$DefensiveTactics/D1.value = 10
-	$DefensiveTactics/D2.value = 10
-	$DefensiveTactics/D3.value = 10
-	$DefensiveTactics/D4.value = 10
+#	$OffensiveTactics/O1.value = 10
+#	$OffensiveTactics/O2.value = 10
+#	$OffensiveTactics/O3.value = 10
+#	$OffensiveTactics/O4.value = 10
+#
+#	$DefensiveTactics/D1.value = 10
+#	$DefensiveTactics/D2.value = 10
+#	$DefensiveTactics/D3.value = 10
+#	$DefensiveTactics/D4.value = 10
 		
 	animation_player.play("Fade" + DataSaver.formation)
 
