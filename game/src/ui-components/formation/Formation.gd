@@ -63,33 +63,33 @@ func _set_players():
 	
 
 
-func _on_D_change_player(player):
+func _on_D_change_player(_player):
 	player_to_replace = 1
 	$PlayerList.show()
 
 
-func _on_WL_change_player(player):
+func _on_WL_change_player(_player):
 	player_to_replace = 2
 	$PlayerList.show()
 
 
 
-func _on_WR_change_player(player):
+func _on_WR_change_player(_player):
 	player_to_replace = 3
 	$PlayerList.show()
 
 
-func _on_P_change_player(player):
+func _on_P_change_player(_player):
 	player_to_replace = 4
 	$PlayerList.show()
 	
-func _on_G_change_player(player):
+func _on_G_change_player(_player):
 	player_to_replace = 0
 	$PlayerList.show()
 
-func _on_PlayerList_select_player(player):
+func _on_PlayerList_select_player(_player):
 	print("formation select")
-	DataSaver.change_player(player_to_replace,player)
+	DataSaver.change_player(player_to_replace,_player)
 	_set_players()
 	$PlayerList.hide()
 	emit_signal("change")

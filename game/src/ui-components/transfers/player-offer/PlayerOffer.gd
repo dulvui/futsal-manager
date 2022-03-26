@@ -22,13 +22,13 @@ func _ready():
 	$Details/Money/Amount.text = str(amount)
 	
 	team = DataSaver.get_selected_team()
-	for player in team["players"]["active"]:
-		$Details/ExchangePlayers.add_item(player["name"] + " " + str(player["price"]/1000) + "K")
-		exchange_players.append(player)
+	for active_player in team["players"]["active"]:
+		$Details/ExchangePlayers.add_item(active_player["name"] + " " + str(active_player["price"]/1000) + "K")
+		exchange_players.append(active_player)
 		
-	for player in team["players"]["subs"]:
-		$Details/ExchangePlayers.add_item(player["name"] + " " + str(player["price"]/1000) + "K")
-		exchange_players.append(player)
+	for sub_player in team["players"]["subs"]:
+		$Details/ExchangePlayers.add_item(sub_player["name"] + " " + str(sub_player["price"]/1000) + "K")
+		exchange_players.append(sub_player)
 
 func _process(delta):
 	$Total.text = str(total)
@@ -54,33 +54,33 @@ func _on_Less_pressed():
 
 
 func _on_ExchangePlayers_item_selected(index):
-	var player = exchange_players[index]
+	var exchange_player = exchange_players[index]
 	exchange_players.remove(index)
 	
 	selected_players.append(player)
 
 	var remove_button = Button.new()
-	remove_button.text = player["name"] + " " + str(player["price"]/1000) + "K"
-	remove_button.connect("pressed",self,"remove_from_list",[player])
+	remove_button.text = exchange_player["name"] + " " + str(exchange_player["price"]/1000) + "K"
+	remove_button.connect("pressed",self,"remove_from_list",[exchange_player])
 	$ScrollContainer/SelectedPlayers.add_child(remove_button)
 	
 	$Details/ExchangePlayers.remove_item(index)
 	
 	_calc_total()
 	
-func remove_from_list(player):
+func remove_from_list(_player):
 	for child in $ScrollContainer/SelectedPlayers.get_children():
 		child.queue_free()
-	selected_players.erase(player)
-	exchange_players.append(player)
+	selected_players.erase(_player)
+	exchange_players.append(_player)
 	
-	for player in selected_players:
+	for _player in selected_players:
 		var remove_button = Button.new()
-		remove_button.text = player["name"] + " " + str(player["price"]/1000) + "K"
-		remove_button.connect("pressed",self,"remove_from_list",[player])
+		remove_button.text = _player["name"] + " " + str(_player["price"]/1000) + "K"
+		remove_button.connect("pressed",self,"remove_from_list",[_player])
 		$ScrollContainer/SelectedPlayers.add_child(remove_button)
 	
-	$Details/ExchangePlayers.add_item(player["name"])
+	$Details/ExchangePlayers.add_item(_player["name"])
 	_calc_total()
 	
 func _calc_total():

@@ -15,7 +15,7 @@ func _ready():
 	$Date.text = CalendarUtil.get_date()
 	
 
-func _process(delta):
+func _process(_delta):
 	$Buttons/Email/Panel/MailCounter.text = str(EmailUtil.count_unread_messages())
 	$Budget.text = str(team["budget"])
 

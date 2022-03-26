@@ -1,15 +1,25 @@
 extends Node2D
 
-const SimulatorPlayer = preload("res://src/match-simulator/actors/player/SimulatorPlayer.gd")
-
-
 export var color = Color.rebeccapurple
 export var nr:int = 1
 
 enum states {CHASE,KICK,WAIT,HOME,SUPPORT} 
 enum roles {DC,DL,DR,CL,CR,CC,AL,AR,AC} 
 
-var player
+var stats = {
+	"goals" : 0,
+	"shots" : 0,
+	"shots_on_target" : 0,
+	"passes" : 0,
+	"passes_success" : 0,
+	"dribblings" : 0,
+	"dribblings_success" : 0,
+	"tackling" : 0,
+	"tackling_success" : 0,
+	"meters_run" : 0,
+}
+
+var profile
 var formation
 
 var state
@@ -28,17 +38,16 @@ var velocity = 3
 
 func _ready():
 	$Control/ColorRect.color = color
-	$Control/ShirtNumber.text = str(nr)
+	$Control/ShirtNumber.text = str(profile["nr"])
 	
 
 var has_ball_now = false
 
-func set_up(at_home, _player, _role, _formation,_ball):
-	player = _player
+func set_up(at_home, _profile, _role, _formation,_ball):
+	profile = _profile
 	formation = _formation
 	role = _role
 	ball = _ball
-	nr = player["nr"]
 #	$Control/ColorRect.color = Color.aliceblue
 #	$Control/ShirtNumber.text = str(nr)
 	
