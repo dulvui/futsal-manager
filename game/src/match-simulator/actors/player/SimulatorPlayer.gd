@@ -2,18 +2,7 @@ extends Node
 
 enum roles {G,DC,DL,DR,CL,CC,CR,PL,PC,PR}
 
-var stats = {
-	"goals" : 0,
-	"shots" : 0,
-	"shots_on_target" : 0,
-	"passes" : 0,
-	"passes_success" : 0,
-	"dribblings" : 0,
-	"dribblings_success" : 0,
-	"tackling" : 0,
-	"tackling_success" : 0,
-	"meters_run" : 0,
-}
+
 var player
 
 # simple soccer
