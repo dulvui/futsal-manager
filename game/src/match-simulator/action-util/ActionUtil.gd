@@ -17,17 +17,19 @@ enum State {NORMAL, KICK_OFF, PENALTY, FREE_KICK, KICK_IN, CORNER}
 onready var log_richtext = get_node("../Log")
 
 
-var home_team
-var away_team
+onready var home_team = $HomeTeam
+onready var away_team = $AwayTeam
 
 var current_state
 
 func _ready():
 	randomize()
 
-func set_up(_home_team,_away_team):
-	home_team = _home_team
-	away_team = _away_team
+func set_up(_home_team, _away_team):
+	home_team.set_up(_home_team)
+	
+	away_team.set_up(_away_team)
+
 	current_state = State.KICK_OFF
 
 
@@ -159,9 +161,10 @@ func _update_current_state(result):
 
 
 func _log(attack, result):
-	print(State.keys()[current_state])
-	print(home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"])
-	print("attack: " + str(Attack.keys()[attack]) + " - defense: ")
-	print(result)
+#	print(State.keys()[current_state])
+#	print(home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"])
+#	print("attack: " + str(Attack.keys()[attack]) + " - defense: ")
+#	print(result)
 	
-	log_richtext.add_text("attack: " + str(Attack.keys()[attack]) + " - defense:\n")
+	log_richtext.add_text("\n" + home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + "  ")
+	log_richtext.add_text("attack: " + str(Attack.keys()[attack]) + " - defense: " + str(result))
