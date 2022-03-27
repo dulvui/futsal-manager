@@ -26,7 +26,7 @@ func _ready():
 	$HUD/TopBar/Home.text = next_match["home"]
 	$HUD/TopBar/Away.text = next_match["away"]
 	
-	match_simulator.set_up(home_team,away_team)
+#	match_simulator.set_up(home_team,away_team)
 	
 	$FormationPopup/Formation/PlayerList.add_match_players()
 	
@@ -57,7 +57,6 @@ func _process(delta):
 func _on_Field_pressed():
 	match_simulator.show()
 	$Stats.hide()
-	pass
 
 
 func _on_Stats_pressed():
@@ -164,6 +163,7 @@ func _on_MatchSimulator_away_goal():
 
 func _on_StartTimer_timeout():
 	match_simulator.start_match()
+	pass
 
 
 func _on_MatchSimulator_half_time():
