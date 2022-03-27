@@ -31,10 +31,7 @@ __meta__ = {
 }
 
 [node name="MatchSimulator" parent="." instance=ExtResource( 1 )]
-margin_left = 444.0
-margin_top = 112.0
-margin_right = -276.0
-margin_bottom = -368.0
+position = Vector2( 566, 252 )
 
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
