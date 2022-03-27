@@ -1,7 +1,5 @@
 extends Node2D
 
-class_name Player
-
 enum Role {DEFENSE, CENTER, ATTACK}
 
 enum Traits {DRIBBLER, PASSER, ROCK, POWER_SHOT} # TODO add more
@@ -60,7 +58,7 @@ var attributes = {
 	}
 }
 
-export var profile = {
+var profile = {
 	"name" : "Ronaldinho",
 	"number" : 10
 }
@@ -69,19 +67,11 @@ var current_state
 var current_sector
 
 
-func set_up(team_has_ball, _role, attributes = null):
-	role = _role
+func set_up(player):
+	profile["name"] = player["surname"]
+	profile["number"] = player["nr"]
 	
-	if team_has_ball:
-		current_state = ActionUtil.State.KICK_OFF
-	else:
-		current_state = ActionUtil.State.KICK_OFF
-	
-	match(role):
-		Role.DEFENSE:
-			current_sector = ActionUtil.Sector.DEFENSE
-		Role.CENTER,Role.ATTACK:
-			current_sector = ActionUtil.Sector.CENTER
+
 			
 func update():
 	# reduce stamina

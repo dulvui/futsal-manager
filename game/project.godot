@@ -13,15 +13,9 @@ _global_script_classes=[ {
 "class": "ActionUtil",
 "language": "GDScript",
 "path": "res://src/match-simulator/action-util/ActionUtil.gd"
-}, {
-"base": "Node2D",
-"class": "Player",
-"language": "GDScript",
-"path": "res://src/match-simulator/team/player/Player.gd"
 } ]
 _global_script_class_icons={
-"ActionUtil": "",
-"Player": ""
+"ActionUtil": ""
 }
 
 [application]

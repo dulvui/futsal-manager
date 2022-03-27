@@ -1,25 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/match-simulator/MatchSimulator.gd" type="Script" id=1]
-[ext_resource path="res://src/match-simulator/team/Team.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/match-simulator/action-util/ActionUtil.tscn" type="PackedScene" id=3]
 
 [node name="MatchSimulator" type="Node2D"]
 script = ExtResource( 1 )
-
-[node name="HomeTeam" parent="." instance=ExtResource( 2 )]
-
-[node name="AwayTeam" parent="." instance=ExtResource( 2 )]
 
 [node name="ActionUtil" parent="." instance=ExtResource( 3 )]
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Log" type="RichTextLabel" parent="."]
-margin_left = 116.0
-margin_top = 65.0
-margin_right = 948.0
-margin_bottom = 439.0
+margin_top = 8.0
+margin_right = 1192.0
+margin_bottom = 600.0
 scroll_following = true
 __meta__ = {
 "_edit_use_anchors_": false

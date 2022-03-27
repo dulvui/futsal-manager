@@ -8,26 +8,39 @@ signal match_end
 
 const HALF_TIME = 1200 # seconds for halftime
 
-onready var home_team = $HomeTeam
-onready var away_team = $AwayTeam
 onready var action_util = $ActionUtil
 
 
 var time = 0
 onready var timer = $Timer
 
-func _ready():
+func set_up(home_team, away_team):
 	action_util.set_up(home_team,away_team)
 
-func _update_game():
-	home_team.update_stats(time)
-	away_team.update_stats(time)
+func _on_Timer_timeout():
+	time += 1
 	
-	action_util.update()
+	if time == HALF_TIME:
+		timer.pause = true
+		emit_signal("half_time")
+	elif time == HALF_TIME * 2:
+		timer.stop()
+		emit_signal("match_end")
+	else:
+		action_util.update()
 	
 func pause_toggle():
 	timer.paused = not timer.paused
 	return timer.paused
+	
+func pause():
+	timer.paused = true
+	
+func continue_match():
+	timer.paused = false
+	
+func match_end():
+	timer.stop()
 	
 func faster():
 	Engine.time_scale *=  2
@@ -45,22 +58,18 @@ func start_match():
 	
 	# coin toss for ball
 	if randi() % 2 == 1:
-		home_team.has_ball = true
+		action_util.home_team.has_ball = true
 	else:
-		away_team.has_ball = true
-	
-	home_team.set_up()
-	away_team.set_up()
+		action_util.away_team.has_ball = true
 
-
-func _on_Timer_timeout():
-	time += 1
+		
+func change_players(new_home_team,new_away_team):
+#	var home_players = new_home_team.duplicate(true)["players"]["active"]
+#	var away_players = new_away_team.duplicate(true)["players"]["active"]
+	pass
 	
-	if time == HALF_TIME:
-		timer.pause = true
-		emit_signal("half_time")
-	elif time == HALF_TIME * 2:
-		timer.stop()
-		emit_signal("match_end")
-	else:
-		_update_game()
+#	home_team.set_up(home_players,away_players,formation)
+#	away_team.set_up(away_players,home_players,formation)
+#	Some how change players of Team.gd
+#	home_team.set_up(home_team,away_team)
+#	away_team.set_up(away_team,home_team)
