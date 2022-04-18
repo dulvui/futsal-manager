@@ -33,22 +33,22 @@ func _ready():
 
 func _process(delta):
 	$HUD/TopBar/Time.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
-	$HUD/TopBar/Result.text = "%d - %d"%[match_simulator.action_util.home_team.statistics["goals"],match_simulator.action_util.away_team.statistics["goals"]]
+	$HUD/TopBar/Result.text = "%d - %d"%[match_simulator.action_util.home_stats.statistics["goals"],match_simulator.action_util.away_stats.statistics["goals"]]
 	
-	$Stats/VBoxContainer/HomePossession.text = "%d "%match_simulator.action_util.home_team.statistics["possession"]
-	$Stats/VBoxContainer/AwayPossession.text = "%d "%match_simulator.action_util.away_team.statistics["possession"]
-	$Stats/VBoxContainer/HomePass.text = "%d "%match_simulator.action_util.home_team.statistics["pass"]
-	$Stats/VBoxContainer/AwayPass.text = "%d "%match_simulator.action_util.away_team.statistics["pass"]
-	$Stats/VBoxContainer/HomePassSuccess.text = "%d "%match_simulator.action_util.home_team.statistics["pass_success"]
-	$Stats/VBoxContainer/AwayPassSuccess.text = "%d "%match_simulator.action_util.away_team.statistics["pass_success"]
-	$Stats/VBoxContainer/HomeShots.text = "%d "%match_simulator.action_util.home_team.statistics["shots"]
-	$Stats/VBoxContainer/AwayShots.text = "%d "%match_simulator.action_util.away_team.statistics["shots"]
-	$Stats/VBoxContainer/AwayShotsOnTarget.text = "%d "%match_simulator.action_util.away_team.statistics["shots_on_target"]
-	$Stats/VBoxContainer/HomeShotsOnTarget.text = "%d "%match_simulator.action_util.home_team.statistics["shots_on_target"]
+	$Stats/VBoxContainer/HomePossession.text = "%d "%match_simulator.action_util.home_stats.statistics["possession"]
+	$Stats/VBoxContainer/AwayPossession.text = "%d "%match_simulator.action_util.away_stats.statistics["possession"]
+	$Stats/VBoxContainer/HomePass.text = "%d "%match_simulator.action_util.home_stats.statistics["pass"]
+	$Stats/VBoxContainer/AwayPass.text = "%d "%match_simulator.action_util.away_stats.statistics["pass"]
+	$Stats/VBoxContainer/HomePassSuccess.text = "%d "%match_simulator.action_util.home_stats.statistics["pass_success"]
+	$Stats/VBoxContainer/AwayPassSuccess.text = "%d "%match_simulator.action_util.away_stats.statistics["pass_success"]
+	$Stats/VBoxContainer/HomeShots.text = "%d "%match_simulator.action_util.home_stats.statistics["shots"]
+	$Stats/VBoxContainer/AwayShots.text = "%d "%match_simulator.action_util.away_stats.statistics["shots"]
+	$Stats/VBoxContainer/AwayShotsOnTarget.text = "%d "%match_simulator.action_util.away_stats.statistics["shots_on_target"]
+	$Stats/VBoxContainer/HomeShotsOnTarget.text = "%d "%match_simulator.action_util.home_stats.statistics["shots_on_target"]
 	
 	$HUD/TimeBar.value = match_simulator.time
 	
-	$HUD/PossessBar.value = match_simulator.action_util.home_team.statistics["possession"]
+	$HUD/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
 	
 	$HUD/SpeedFactor.text = str(speed_factor + 1) + " X"
 	
@@ -67,7 +67,7 @@ func _on_Stats_pressed():
 func match_end():
 	$Dashboard.show()
 	match_simulator.match_end()
-	DataSaver.save_result(home_team["name"],match_simulator.action_util.home_team.statistics["goals"],away_team["name"],match_simulator.action_util.away_team.statistics["goals"])
+	DataSaver.save_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
 	
 	#simulate all games for now. needs also support for other leagues
 #	print(DataSaver.calendar[CalendarUtil.day_counter]["matches"].size())
