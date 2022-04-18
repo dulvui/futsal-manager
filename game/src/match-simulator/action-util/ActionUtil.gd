@@ -24,7 +24,8 @@ onready var log_richtext = get_node("../Log")
 onready var home_team = $HomeTeam
 onready var away_team = $AwayTeam
 
-
+onready var home_stats = $HomeStatistics
+onready var away_stats = $AwayStatistics
 
 var current_state
 
@@ -60,8 +61,8 @@ func update(time):
 	match attack:
 		Attack.PASS:
 			_increase_pass(result)
-		Attack.RUN, Attack.DRIBBLE:
-			_change_defender()
+		Attack.SHOOT, Attack.HEADER:
+			_increase_shots(result)
 	
 	_update_current_state(result)
 	
@@ -72,8 +73,8 @@ func update(time):
 	home_team.update_players()
 	away_team.update_players()
 	
-	home_team.update_possession(time)
-	away_team.update_possession(time)
+	home_stats.update_possession(home_team.has_ball)
+	away_stats.update_possession(away_team.has_ball)
 	
 	_log(attack, result)
 
@@ -221,6 +222,12 @@ func _change_attacker():
 		
 func _increase_pass(success):
 	if away_team.has_ball:
-		away_team.increase_pass(success)
+		away_stats.increase_pass(success)
 	else:
-		home_team.increase_pass(success)
+		home_stats.increase_pass(success)
+		
+func _increase_shots(on_target):
+	if away_team.has_ball:
+		away_stats.increase_shots(on_target)
+	else:
+		home_stats.increase_shots(on_target)
