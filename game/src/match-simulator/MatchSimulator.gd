@@ -27,7 +27,7 @@ func _on_Timer_timeout():
 		timer.stop()
 		emit_signal("match_end")
 	else:
-		action_util.update()
+		action_util.update(time)
 	
 func pause_toggle():
 	timer.paused = not timer.paused

@@ -15,9 +15,6 @@ margin_top = 8.0
 margin_right = 1192.0
 margin_bottom = 600.0
 scroll_following = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="possession_change" from="ActionUtil" to="." method="_on_ActionUtil_possession_change"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

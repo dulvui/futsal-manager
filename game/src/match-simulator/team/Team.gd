@@ -40,7 +40,7 @@ var tactics = {
 }
 
 # to calculate possession
-var possession_counter = 0
+var possession_counter = 0.0
 
 var has_ball = false
 
@@ -58,7 +58,7 @@ func set_up(team): # TODO add tactics
 	
 func update_stats(time):
 	if has_ball:
-		possession_counter += 1
+		possession_counter += 1.0
 	statistics.possession = (possession_counter / time) * 100
 	
 func update_players():
