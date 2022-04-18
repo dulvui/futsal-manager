@@ -56,10 +56,16 @@ func set_up(team): # TODO add tactics
 
 	active_player = players[-1]
 	
-func update_stats(time):
+func update_possession(time):
 	if has_ball:
 		possession_counter += 1.0
 	statistics.possession = (possession_counter / time) * 100
+	
+func increase_pass(success):
+	statistics.pass += 1
+	if success:
+		statistics.pass_success += 1
+	
 	
 func update_players():
 	for player in players:

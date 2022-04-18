@@ -24,6 +24,8 @@ onready var log_richtext = get_node("../Log")
 onready var home_team = $HomeTeam
 onready var away_team = $AwayTeam
 
+
+
 var current_state
 
 func _ready():
@@ -42,16 +44,24 @@ func update(time):
 	
 	var result = _get_result(attack)
 	
+	# change active players and possession
 	if result:
 		match attack:
 			Attack.PASS, Attack.CROSS:
 				_change_players()
 			Attack.RUN, Attack.DRIBBLE:
-				_change_defending_player()
+				_change_defender()
 	else:
 		emit_signal("possession_change")
 		_change_possession()
-		_change_attacking_player()
+		_change_attacker()
+		
+	# increase stats
+	match attack:
+		Attack.PASS:
+			_increase_pass(result)
+		Attack.RUN, Attack.DRIBBLE:
+			_change_defender()
 	
 	_update_current_state(result)
 	
@@ -62,8 +72,8 @@ func update(time):
 	home_team.update_players()
 	away_team.update_players()
 	
-	home_team.update_stats(time)
-	away_team.update_stats(time)	
+	home_team.update_possession(time)
+	away_team.update_possession(time)
 	
 	_log(attack, result)
 
@@ -72,61 +82,61 @@ func update(time):
 func _get_result(attack):
 	# select attributes to use as value for random result calculation
 	
-	var attacking_player
-	var defending_player
+	var attacker
+	var defender
 	
-	var attacking_player_attributes = 0
-	var defending_player_attributes = 0
+	var attacker_attributes = 0
+	var defender_attributes = 0
 	
 	if home_team.has_ball:
-		attacking_player = home_team.active_player
-		defending_player = away_team.active_player
+		attacker = home_team.active_player
+		defender = away_team.active_player
 	else:
-		attacking_player = away_team.active_player
-		defending_player = home_team.active_player
+		attacker = away_team.active_player
+		defender = home_team.active_player
 	
 	
 	if current_state == State.NORMAL:
 		match attack:
 			Attack.SHOOT:
 				# check sector and pick long_shoot
-				attacking_player_attributes = attacking_player.attributes["technical"]["shooting"]
-				defending_player_attributes = defending_player.attributes["technical"]["blocking"]
+				attacker_attributes = attacker.attributes["technical"]["shooting"]
+				defender_attributes = defender.attributes["technical"]["blocking"]
 			Attack.PASS:
-				attacking_player_attributes = attacking_player.attributes["technical"]["passing"]
-				defending_player_attributes = defending_player.attributes["technical"]["interception"]
+				attacker_attributes = attacker.attributes["technical"]["passing"]
+				defender_attributes = defender.attributes["technical"]["interception"]
 			Attack.CROSS:
-				attacking_player_attributes = attacking_player.attributes["technical"]["crossing"]
-				defending_player_attributes = defending_player.attributes["technical"]["interception"]
+				attacker_attributes = attacker.attributes["technical"]["crossing"]
+				defender_attributes = defender.attributes["technical"]["interception"]
 			Attack.DRIBBLE:
-				attacking_player_attributes = attacking_player.attributes["technical"]["dribbling"]
-				defending_player_attributes = defending_player.attributes["technical"]["tackling"]
+				attacker_attributes = attacker.attributes["technical"]["dribbling"]
+				defender_attributes = defender.attributes["technical"]["tackling"]
 			Attack.HEADER:
-				attacking_player_attributes = attacking_player.attributes["technical"]["heading"]
-				defending_player_attributes = defending_player.attributes["technical"]["heading"]
+				attacker_attributes = attacker.attributes["technical"]["heading"]
+				defender_attributes = defender.attributes["technical"]["heading"]
 			# use player preferences/attirbutes and team tactics pressing or wait
 			Attack.RUN:
-				attacking_player_attributes = attacking_player.attributes["physical"]["pace"]
-				attacking_player_attributes += attacking_player.attributes["physical"]["acceleration"]
+				attacker_attributes = attacker.attributes["physical"]["pace"]
+				attacker_attributes += attacker.attributes["physical"]["acceleration"]
 				if randi() % 2 == 0: 
 #					return Defense.RUN
-					defending_player_attributes = attacking_player.attributes["physical"]["pace"]
-					defending_player_attributes += attacking_player.attributes["physical"]["acceleration"]
+					defender_attributes = attacker.attributes["physical"]["pace"]
+					defender_attributes += attacker.attributes["physical"]["acceleration"]
 				else:
 #					return Defense.TACKLE
-					defending_player_attributes = attacking_player.attributes["technical"]["tackling"]
-					defending_player_attributes += attacking_player.attributes["physical"]["balance"]
+					defender_attributes = attacker.attributes["technical"]["tackling"]
+					defender_attributes += attacker.attributes["physical"]["balance"]
 #			Attack.WAIT:
 #				return Defense.WAIT
 	else:
 		return true
 	
 	# calculate random winner
-	var max_value = attacking_player_attributes + defending_player_attributes
+	var max_value = attacker_attributes + defender_attributes
 	
 	var random = randi() % max_value
 	
-	if random < attacking_player_attributes:
+	if random < attacker_attributes:
 		return true
 	return false
 	
@@ -197,14 +207,20 @@ func _change_players():
 	home_team.change_active_player()
 	away_team.change_active_player()
 	
-func _change_defending_player():
+func _change_defender():
 	if home_team.has_ball:
 		away_team.change_active_player()
 	else:
 		home_team.change_active_player()
 
-func _change_attacking_player():
+func _change_attacker():
 	if away_team.has_ball:
 		away_team.change_active_player()
 	else:
 		home_team.change_active_player()
+		
+func _increase_pass(success):
+	if away_team.has_ball:
+		away_team.increase_pass(success)
+	else:
+		home_team.increase_pass(success)
