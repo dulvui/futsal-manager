@@ -77,3 +77,49 @@ func update():
 	# reduce stamina
 	# increase stats
 	pass
+
+func get_attack_attributes(attack):
+	match attack:
+		ActionUtil.Attack.SHOOT:
+			# check sector and pick long_shoot
+			return attributes["technical"]["shooting"]
+		ActionUtil.Attack.PASS:
+			return attributes["technical"]["passing"]
+		ActionUtil.Attack.CROSS:
+			return attributes["technical"]["crossing"]
+		ActionUtil.Attack.DRIBBLE:
+			return attributes["technical"]["dribbling"]
+		ActionUtil.Attack.HEADER:
+			return attributes["technical"]["heading"]
+		ActionUtil.Attack.RUN:
+			var attacker_attributes =  attributes["physical"]["pace"]
+			attacker_attributes += attributes["physical"]["acceleration"]
+			return attacker_attributes
+
+
+func get_defense_attributes(attack):
+	match attack:
+		ActionUtil.Attack.SHOOT:
+			# check sector and pick long_shoot
+			return attributes["technical"]["blocking"]
+		ActionUtil.Attack.PASS:
+			return attributes["technical"]["interception"]
+		ActionUtil.Attack.CROSS:
+			return attributes["technical"]["interception"]
+		ActionUtil.Attack.DRIBBLE:
+			return attributes["technical"]["tackling"]
+		ActionUtil.Attack.HEADER:
+			return attributes["technical"]["heading"]
+		# use player preferences/attirbutes and team tactics pressing or wait
+		ActionUtil.Attack.RUN:
+			var defender_attributes
+			if randi() % 2 == 0: 
+#					return Defense.RUN
+				defender_attributes = attributes["physical"]["pace"]
+				defender_attributes += attributes["physical"]["acceleration"]
+			else:
+#					return Defense.TACKLE
+				defender_attributes = attributes["technical"]["tackling"]
+				defender_attributes += attributes["physical"]["balance"]
+				
+			return defender_attributes

@@ -18,7 +18,7 @@ var statistics = {
 	"tackles_success" : 0,
 	"corners" : 0,
 	"headers" : 0,
-	"headers_success" : 0,
+	"headers_on_target" : 0,
 	"yellow_cards" : 0,
 	"red_cards" : 0
 }
@@ -38,3 +38,11 @@ func increase_shots(on_target):
 	statistics.shots += 1
 	if on_target:
 		statistics.shots_on_target += 1
+		
+func increase_headers(on_target):
+	statistics.headers += 1
+	if on_target:
+		statistics.headers_on_target += 1
+		
+func increase_goals():
+	statistics.goals += 1
