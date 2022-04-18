@@ -37,7 +37,7 @@ func set_up(_home_team, _away_team):
 	current_state = State.KICK_OFF
 
 
-func update():
+func update(time):
 	var attack = _attack()
 	
 	var result = _get_result(attack)
@@ -61,6 +61,9 @@ func update():
 	
 	home_team.update_players()
 	away_team.update_players()
+	
+	home_team.update_stats(time)
+	away_team.update_stats(time)	
 	
 	_log(attack, result)
 
