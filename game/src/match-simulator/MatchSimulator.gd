@@ -62,6 +62,7 @@ func start_match():
 	else:
 		action_util.away_team.has_ball = true
 
+
 		
 func change_players(new_home_team,new_away_team):
 #	var home_players = new_home_team.duplicate(true)["players"]["active"]
