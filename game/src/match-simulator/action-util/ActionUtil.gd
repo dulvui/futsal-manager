@@ -7,7 +7,8 @@ extends Node
 
 signal possession_change
 # goal signals for visual actions
-signal goal
+signal home_goal
+signal away_goal
 signal nearly_goal
 
 class_name ActionUtil
@@ -46,6 +47,8 @@ func update(time):
 	
 	var result = _get_result(attack)
 	
+	var goal = false
+	
 	# change active players and possession
 	if result:
 		match attack:
@@ -53,6 +56,22 @@ func update(time):
 				_change_players()
 			Attack.RUN, Attack.DRIBBLE:
 				_change_defender()
+			Attack.SHOOT, Attack.HEADER:
+				var goalkepper_attributes
+				if home_team.has_ball:
+					goalkepper_attributes = away_team.get_goalkeeper_attributes()
+				else:
+					goalkepper_attributes = home_team.get_goalkeeper_attributes()
+				
+				var random_goal = randi() % int(goalkepper_attributes)
+				if random_goal < goalkepper_attributes / 20:
+					goal = true
+					if home_team.has_ball:
+						home_stats.increase_goals()
+						emit_signal("home_goal")
+					else:
+						away_stats.increase_goals()
+						emit_signal("away_goal")
 	else:
 		emit_signal("possession_change")
 		_change_possession()
@@ -62,10 +81,12 @@ func update(time):
 	match attack:
 		Attack.PASS:
 			_increase_pass(result)
-		Attack.SHOOT, Attack.HEADER:
+		Attack.SHOOT:
 			_increase_shots(result)
+		Attack.HEADER:
+			_increase_headers(result)
 	
-	_update_current_state(result)
+	_update_current_state(goal)
 	
 	# add random occurencies like corners, fouls etc...
 	
@@ -97,14 +118,17 @@ func _get_result(attack):
 	else:
 		return true
 	
-	# calculate random winner
+	# calculate random action winner
 	var max_value = attacker_attributes + defender_attributes
-	
-	var random = randi() % max_value
+	var random = randi() % int(max_value)
+	var result = false
 	
 	if random < attacker_attributes:
-		return true
-	return false
+		result = true
+
+			
+				
+	return result
 	
 func _attack():
 	# improve later watching current sector and player attributes
@@ -149,10 +173,13 @@ func _defend(attack):
 					return Defense.WAIT
 
 
-func _update_current_state(result):
-	match current_state:
-		State.KICK_OFF, State.CORNER, State.FREE_KICK, State.PENALTY:
-			current_state = State.NORMAL
+func _update_current_state(goal):
+	if goal:
+		current_state = State.KICK_OFF
+	else:
+		match current_state:
+			State.KICK_OFF, State.CORNER, State.FREE_KICK, State.PENALTY:
+				current_state = State.NORMAL
 
 
 func _log(attack, result):

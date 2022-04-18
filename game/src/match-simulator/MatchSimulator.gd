@@ -74,3 +74,11 @@ func change_players(new_home_team,new_away_team):
 #	Some how change players of Team.gd
 #	home_team.set_up(home_team,away_team)
 #	away_team.set_up(away_team,home_team)
+
+
+func _on_ActionUtil_away_goal():
+	emit_signal("away_goal")
+
+
+func _on_ActionUtil_home_goal():
+	emit_signal("home_goal")
