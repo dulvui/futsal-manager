@@ -21,7 +21,7 @@ func _on_Timer_timeout():
 	time += 1
 	
 	if time == HALF_TIME:
-		timer.pause = true
+		timer.paused = true
 		emit_signal("half_time")
 	elif time == HALF_TIME * 2:
 		timer.stop()

@@ -88,7 +88,7 @@ func _on_Dashboard_pressed():
 
 
 func _on_Faster_pressed():
-	if speed_factor < 2:
+	if speed_factor < 10:
 		speed_factor += 1
 		match_simulator.faster()
 
@@ -163,7 +163,6 @@ func _on_MatchSimulator_away_goal():
 
 func _on_StartTimer_timeout():
 	match_simulator.start_match()
-	pass
 
 
 func _on_MatchSimulator_half_time():
