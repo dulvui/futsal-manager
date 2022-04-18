@@ -5,6 +5,10 @@
 
 extends Node
 
+signal possession_change
+signal goal
+signal nearly_goal
+
 class_name ActionUtil
 
 # in which sector of the field the player is situated
@@ -38,7 +42,14 @@ func update():
 	
 	var result = _get_result(attack)
 	
+	if not result:
+		emit_signal("possession_change")
+		_change_possession()
+	
+	
 	_update_current_state(result)
+	
+	
 	
 	# add random occurencies like corners, fouls etc...
 	
@@ -168,3 +179,12 @@ func _log(attack, result):
 	
 	log_richtext.add_text("\n" + home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + "  ")
 	log_richtext.add_text("attack: " + str(Attack.keys()[attack]) + " - defense: " + str(result))
+
+func _change_possession():
+	home_team.has_ball = not home_team.has_ball
+	away_team.has_ball = not away_team.has_ball
+	
+	home_team.active_player = home_team.players[(randi() % 4) + 1]
+	away_team.active_player = away_team.players[(randi() % 4) + 1]
+	
+	

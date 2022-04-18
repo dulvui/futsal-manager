@@ -19,4 +19,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="possession_change" from="ActionUtil" to="." method="_on_ActionUtil_possession_change"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
