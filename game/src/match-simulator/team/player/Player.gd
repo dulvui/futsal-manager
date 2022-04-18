@@ -21,7 +21,7 @@ var stats = {
 
 var attributes = {
 	'mental': {
-		'agressivity': 4,
+		'aggression': 4,
 		'aniticipation': 11, 
 		'decisions': 13,
 		'concentration': 15,
@@ -29,17 +29,15 @@ var attributes = {
 		'vision': 11,
 		'work_rate': 3,
 		'offensive_movement': 3,
-		'defensive_movement': 17
+		'marking': 17
 	},
 	'technical': {
 		'crossing': 11,
 		'passing': 11,
 		'long_passing': 12,
 		'tackling': 13,
-		'corners': 8,
 		'heading': 2,
 		'interception': 18,
-		'marking': 11,
 		'shooting': 16,
 		'long_shooting': 7,
 		'penalty': 1,
@@ -51,7 +49,6 @@ var attributes = {
 		'pace': 11,
 		'acceleration': 1,
 		'agility': 1,
-		'balance': 4,
 		'jump': 9,
 		'stamina': 6,
 		'strength': 3
@@ -70,7 +67,7 @@ var current_sector
 func set_up(player):
 	profile["name"] = player["surname"]
 	profile["number"] = player["nr"]
-	
+	attributes = player["attributes"]
 
 			
 func update():
@@ -120,6 +117,6 @@ func get_defense_attributes(attack):
 			else:
 #					return Defense.TACKLE
 				defender_attributes = attributes["technical"]["tackling"]
-				defender_attributes += attributes["physical"]["balance"]
+				defender_attributes += attributes["physical"]["pace"]
 				
 			return defender_attributes

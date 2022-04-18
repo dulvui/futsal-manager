@@ -13,42 +13,46 @@ func set_up_info(new_player,info_type):
 	$Info/General/Position.text = player["position"]
 	$Info/General/Prestige.text = str(player["prestige"])
 	
-	for key in player["mental"].keys():
-		var value = DetailNumber.instance()
-		value.set_up(player["mental"][key])
-		$Info/Mental.add_child(value)
-		
-	for key in player["fisical"].keys():
-		var value = DetailNumber.instance()
-		value.set_up(player["fisical"][key])
-		$Info/Fisical.add_child(value)
-		
-	match info_type:
-		"GENERAL":
-			$Info/General.show()
-		"MENTAL":
-			$Info/Mental.show()
-		"FISICAL":
-			$Info/Fisical.show()
-			
-	$DetailPopup/TabContainer/Info/Info/Position.text = player["position"]
-	$DetailPopup/TabContainer/Info/Info/Age.text = player["birth_date"]
-	$DetailPopup/TabContainer/Info/Info/Nationality.text = player["nationality"]
-	$DetailPopup/TabContainer/Info/Info/Team.text = str(player["prestige"])
-	$DetailPopup/TabContainer/Info/Info/Foot.text = player["foot"]
-	$DetailPopup/TabContainer/Info/Info/Nr.text = str(player["nr"])
+	# TODO create profile for goalpkeeper
+	# AND make labels dynamic by keys
 	
-	for key in player["mental"].keys():
-		var label = $DetailPopup/TabContainer/Info/Mental.get_node(key)
-		label.set_up(player["mental"][key])
-
-	for key in player["fisical"].keys():
-		var label = $DetailPopup/TabContainer/Info/Fisical.get_node(key)
-		label.set_up(player["fisical"][key])
-
-	for key in player["technical"].keys():
-		var label = $DetailPopup/TabContainer/Info/Technical.get_node(key)
-		label.set_up(player["technical"][key])
+#	if player["position"] != "G":
+#		for key in player["attributes"]["mental"].keys():
+#			var value = DetailNumber.instance()
+#			value.set_up(player["attributes"]["mental"][key])
+#			$Info/Mental.add_child(value)
+#
+#		for key in player["attributes"]["physical"].keys():
+#			var value = DetailNumber.instance()
+#			value.set_up(player["attributes"]["physical"][key])
+#			$Info/Fisical.add_child(value)
+#
+#		match info_type:
+#			"GENERAL":
+#				$Info/General.show()
+#			"MENTAL":
+#				$Info/Mental.show()
+#			"FISICAL":
+#				$Info/Fisical.show()
+#
+#		$DetailPopup/TabContainer/Info/Info/Position.text = player["position"]
+#		$DetailPopup/TabContainer/Info/Info/Age.text = player["birth_date"]
+#		$DetailPopup/TabContainer/Info/Info/Nationality.text = player["nationality"]
+#		$DetailPopup/TabContainer/Info/Info/Team.text = str(player["prestige"])
+#		$DetailPopup/TabContainer/Info/Info/Foot.text = player["foot"]
+#		$DetailPopup/TabContainer/Info/Info/Nr.text = str(player["nr"])
+#
+#		for key in player["attributes"]["mental"].keys():
+#			var label = $DetailPopup/TabContainer/Info/Mental.get_node(key)
+#			label.set_up(player["attributes"]["mental"][key])
+#
+#		for key in player["attributes"]["fisical"].keys():
+#			var label = $DetailPopup/TabContainer/Info/Fisical.get_node(key)
+#			label.set_up(player["attributes"]["fisical"][key])
+#
+#		for key in player["attributes"]["technical"].keys():
+#			var label = $DetailPopup/TabContainer/Info/Technical.get_node(key)
+#			label.set_up(player["attributes"]["technical"][key])
 
 
 

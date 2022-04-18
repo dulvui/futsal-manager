@@ -4,6 +4,11 @@ enum Attack {KICK, PASS, WAIT}
 enum Defend {SAFE, WAIT}
 enum State {ATTACK, DEFEND, PENALTY, FREE_KICK, CORNER}
 
+var profile = {
+	"name" : "Ronaldinho",
+	"number" : 10
+}
+
 var stats = {
 	"passes" : 0,
 	"passes_success" : 0,
@@ -22,15 +27,7 @@ var attributes = {
 
 var current_state
 
-func set_up(team_has_ball):
-	if team_has_ball:
-		current_state = State.ATTACK
-	else:
-		current_state = State.DEFEND
-
-
-func attack() -> Dictionary:
-	return {}
-	
-func defend(attack) -> Dictionary:
-	return {}
+func set_up(player):
+	profile["name"] = player["surname"]
+	profile["number"] = player["nr"]
+	attributes = player["attributes"]
