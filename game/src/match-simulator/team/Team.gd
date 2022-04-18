@@ -29,7 +29,7 @@ var has_ball = false
 var active_player
 
 func set_up(team): # TODO add tactics
-	var team_players = team["players"]["active"]
+	var team_players = team["players"]["active"].duplicate(true)
 	goalkeeper = Goalkeeper.instance()
 	goalkeeper.set_up(team_players.pop_front())
 	
