@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Futsal Manager
+Upstream-Contact: Simon Dalvai <simon.dalvai@posteo.de>
+Source: https://github.com/dulvui/futsal-manager
+
+Files: game/src/* names/*
+Copyright: 2022 Simon Dalvai <simon.dalvai@posteo.de>
+License: AGPL-3.0-or-later
