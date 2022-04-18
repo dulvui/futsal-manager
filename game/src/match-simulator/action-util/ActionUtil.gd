@@ -42,14 +42,18 @@ func update():
 	
 	var result = _get_result(attack)
 	
-	if not result:
+	if result:
+		match attack:
+			Attack.PASS, Attack.CROSS:
+				_change_players()
+			Attack.RUN, Attack.DRIBBLE:
+				_change_defending_player()
+	else:
 		emit_signal("possession_change")
 		_change_possession()
-	
+		_change_attacking_player()
 	
 	_update_current_state(result)
-	
-	
 	
 	# add random occurencies like corners, fouls etc...
 	
@@ -59,6 +63,7 @@ func update():
 	away_team.update_players()
 	
 	_log(attack, result)
+
 	
 # returns true if attack wins, false if defense wins
 func _get_result(attack):
@@ -183,8 +188,20 @@ func _log(attack, result):
 func _change_possession():
 	home_team.has_ball = not home_team.has_ball
 	away_team.has_ball = not away_team.has_ball
+
 	
-	home_team.active_player = home_team.players[(randi() % 4) + 1]
-	away_team.active_player = away_team.players[(randi() % 4) + 1]
+func _change_players():
+	home_team.change_active_player()
+	away_team.change_active_player()
 	
-	
+func _change_defending_player():
+	if home_team.has_ball:
+		away_team.change_active_player()
+	else:
+		home_team.change_active_player()
+
+func _change_attacking_player():
+	if away_team.has_ball:
+		away_team.change_active_player()
+	else:
+		home_team.change_active_player()
