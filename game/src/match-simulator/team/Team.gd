@@ -65,3 +65,8 @@ func update_players():
 	for player in players:
 		player.update()
 
+func change_active_player():
+	var other_players = players.duplicate()
+	other_players.remove(players.find(active_player))
+	
+	active_player = other_players[(randi() % 3) + 1]
