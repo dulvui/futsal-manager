@@ -6,6 +6,7 @@
 extends Node
 
 signal possession_change
+# goal signals for visual actions
 signal goal
 signal nearly_goal
 
@@ -83,52 +84,16 @@ func update(time):
 func _get_result(attack):
 	# select attributes to use as value for random result calculation
 	
-	var attacker
-	var defender
-	
 	var attacker_attributes = 0
 	var defender_attributes = 0
 	
-	if home_team.has_ball:
-		attacker = home_team.active_player
-		defender = away_team.active_player
-	else:
-		attacker = away_team.active_player
-		defender = home_team.active_player
-	
-	
 	if current_state == State.NORMAL:
-		match attack:
-			Attack.SHOOT:
-				# check sector and pick long_shoot
-				attacker_attributes = attacker.attributes["technical"]["shooting"]
-				defender_attributes = defender.attributes["technical"]["blocking"]
-			Attack.PASS:
-				attacker_attributes = attacker.attributes["technical"]["passing"]
-				defender_attributes = defender.attributes["technical"]["interception"]
-			Attack.CROSS:
-				attacker_attributes = attacker.attributes["technical"]["crossing"]
-				defender_attributes = defender.attributes["technical"]["interception"]
-			Attack.DRIBBLE:
-				attacker_attributes = attacker.attributes["technical"]["dribbling"]
-				defender_attributes = defender.attributes["technical"]["tackling"]
-			Attack.HEADER:
-				attacker_attributes = attacker.attributes["technical"]["heading"]
-				defender_attributes = defender.attributes["technical"]["heading"]
-			# use player preferences/attirbutes and team tactics pressing or wait
-			Attack.RUN:
-				attacker_attributes = attacker.attributes["physical"]["pace"]
-				attacker_attributes += attacker.attributes["physical"]["acceleration"]
-				if randi() % 2 == 0: 
-#					return Defense.RUN
-					defender_attributes = attacker.attributes["physical"]["pace"]
-					defender_attributes += attacker.attributes["physical"]["acceleration"]
-				else:
-#					return Defense.TACKLE
-					defender_attributes = attacker.attributes["technical"]["tackling"]
-					defender_attributes += attacker.attributes["physical"]["balance"]
-#			Attack.WAIT:
-#				return Defense.WAIT
+		if home_team.has_ball:
+			attacker_attributes = home_team.active_player.get_attack_attributes(attack)
+			defender_attributes = away_team.active_player.get_defense_attributes(attack)
+		else:
+			attacker_attributes = away_team.active_player.get_attack_attributes(attack)
+			defender_attributes = home_team.active_player.get_defense_attributes(attack)
 	else:
 		return true
 	
@@ -231,3 +196,15 @@ func _increase_shots(on_target):
 		away_stats.increase_shots(on_target)
 	else:
 		home_stats.increase_shots(on_target)
+
+func _increase_headers(on_target):
+	if away_team.has_ball:
+		away_stats.increase_headers(on_target)
+	else:
+		home_stats.increase_headers(on_target)
+		
+func increase_goals():
+	if away_team.has_ball:
+		away_stats.increase_goals()
+	else:
+		home_stats.increase_goals()
