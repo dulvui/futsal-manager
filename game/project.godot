@@ -35,6 +35,7 @@ MatchMaker="*res://src/utils/match-maker/MatchMaker.gd"
 TransferUtil="*res://src/utils/transfer-util/TransferUtil.gd"
 EmailUtil="*res://src/utils/email-util/EmailUtil.gd"
 ContractUtil="*res://src/utils/contract-util/ContractUtil.gd"
+Constants="*res://src/Constants.gd"
 
 [display]
 

@@ -64,7 +64,7 @@ func update(time):
 					goalkepper_attributes = home_team.get_goalkeeper_attributes()
 				
 				var random_goal = randi() % int(goalkepper_attributes)
-				if random_goal < goalkepper_attributes / 20:
+				if random_goal < goalkepper_attributes / Constants.GOAL_KEEPER_FACTOR:
 					goal = true
 					if home_team.has_ball:
 						home_stats.increase_goals()

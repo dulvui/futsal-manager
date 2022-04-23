@@ -8,6 +8,8 @@ signal match_end
 
 const HALF_TIME = 1200 # seconds for halftime
 
+
+
 onready var action_util = $ActionUtil
 
 
@@ -43,14 +45,14 @@ func match_end():
 	timer.stop()
 	
 func faster():
-	Engine.time_scale *=  2
-	Engine.iterations_per_second *= 2
-	timer.wait_time /= 2
+	Engine.time_scale *=  Constants.MATCH_SPEED_FACTOR
+	Engine.iterations_per_second *= Constants.SPEED_FACTOR
+	timer.wait_time /= Constants.SPEED_FACTOR
 	
 func slower():
-	Engine.time_scale /= 2
-	Engine.iterations_per_second /= 2
-	timer.wait_time *=  2
+	Engine.time_scale /= Constants.SPEED_FACTOR
+	Engine.iterations_per_second /= Constants.SPEED_FACTOR
+	timer.wait_time *= Constants.SPEED_FACTOR
 
 
 func start_match():

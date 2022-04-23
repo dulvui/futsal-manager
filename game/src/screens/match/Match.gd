@@ -88,7 +88,7 @@ func _on_Dashboard_pressed():
 
 
 func _on_Faster_pressed():
-	if speed_factor < 10:
+	if speed_factor < 3:
 		speed_factor += 1
 		match_simulator.faster()
 
