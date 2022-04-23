@@ -82,12 +82,12 @@ func get_attack_attributes(attack):
 			return attributes["technical"]["shooting"]
 		ActionUtil.Attack.PASS:
 			return attributes["technical"]["passing"]
-		ActionUtil.Attack.CROSS:
-			return attributes["technical"]["crossing"]
+#		ActionUtil.Attack.CROSS:
+#			return attributes["technical"]["crossing"]
 		ActionUtil.Attack.DRIBBLE:
 			return attributes["technical"]["dribbling"]
-		ActionUtil.Attack.HEADER:
-			return attributes["technical"]["heading"]
+#		ActionUtil.Attack.HEADER:
+#			return attributes["technical"]["heading"]
 		ActionUtil.Attack.RUN:
 			var attacker_attributes =  attributes["physical"]["pace"]
 			attacker_attributes += attributes["physical"]["acceleration"]
@@ -101,12 +101,12 @@ func get_defense_attributes(attack):
 			return attributes["technical"]["blocking"]
 		ActionUtil.Attack.PASS:
 			return attributes["technical"]["interception"]
-		ActionUtil.Attack.CROSS:
-			return attributes["technical"]["interception"]
+#		ActionUtil.Attack.CROSS:
+#			return attributes["technical"]["interception"]
 		ActionUtil.Attack.DRIBBLE:
 			return attributes["technical"]["tackling"]
-		ActionUtil.Attack.HEADER:
-			return attributes["technical"]["heading"]
+#		ActionUtil.Attack.HEADER:
+#			return attributes["technical"]["heading"]
 		# use player preferences/attirbutes and team tactics pressing or wait
 		ActionUtil.Attack.RUN:
 			var defender_attributes
