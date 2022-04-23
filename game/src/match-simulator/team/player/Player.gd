@@ -81,7 +81,7 @@ func get_attack_attributes(attack):
 			# check sector and pick long_shoot
 			return attributes["technical"]["shooting"]
 		ActionUtil.Attack.PASS:
-			return attributes["technical"]["passing"]
+			return attributes["technical"]["passing"] * Constants.PASS_SUCCESS_FACTOR
 #		ActionUtil.Attack.CROSS:
 #			return attributes["technical"]["crossing"]
 		ActionUtil.Attack.DRIBBLE:
