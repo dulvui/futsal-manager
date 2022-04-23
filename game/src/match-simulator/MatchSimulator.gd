@@ -46,13 +46,13 @@ func match_end():
 	
 func faster():
 	Engine.time_scale *=  Constants.MATCH_SPEED_FACTOR
-	Engine.iterations_per_second *= Constants.SPEED_FACTOR
-	timer.wait_time /= Constants.SPEED_FACTOR
+	Engine.iterations_per_second *= Constants.MATCH_SPEED_FACTOR
+	timer.wait_time /= Constants.MATCH_SPEED_FACTOR
 	
 func slower():
-	Engine.time_scale /= Constants.SPEED_FACTOR
-	Engine.iterations_per_second /= Constants.SPEED_FACTOR
-	timer.wait_time *= Constants.SPEED_FACTOR
+	Engine.time_scale /= Constants.MATCH_SPEED_FACTOR
+	Engine.iterations_per_second /= Constants.MATCH_SPEED_FACTOR
+	timer.wait_time *= Constants.MATCH_SPEED_FACTOR
 
 
 func start_match():
