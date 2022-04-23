@@ -16,9 +16,13 @@ class_name ActionUtil
 # in which sector of the field the player is situated
 # so better decisions can be made depeneding on the sector a player is
 enum Sector {ATTACK, CENTER, DEFENSE}
-enum Attack {PASS, DRIBBLE, RUN, SHOOT, CROSS, HEADER}
-enum Defense {INTERCEPT, WAIT, TACKLE, RUN, BLOCK, HEADER}
 enum State {NORMAL, KICK_OFF, PENALTY, FREE_KICK, KICK_IN, CORNER}
+
+enum Defense {INTERCEPT, WAIT, TACKLE, RUN, BLOCK, HEADER}
+
+enum Attack {PASS, DRIBBLE, RUN, SHOOT}
+enum Pass { SHORT_PASS, LONG_PASS, CROSS}
+enum Shoot {SHOOT, LONG_SHOOT, HEADER}
 
 onready var log_richtext = get_node("../Log")
 
@@ -52,11 +56,11 @@ func update(time):
 	# change active players and possession
 	if result:
 		match attack:
-			Attack.PASS, Attack.CROSS:
+			Attack.PASS: # , AttackCROSS
 				_change_players()
 			Attack.RUN, Attack.DRIBBLE:
 				_change_defender()
-			Attack.SHOOT, Attack.HEADER:
+			Attack.SHOOT: # , Attack.HEADER
 				var goalkepper_attributes
 				if home_team.has_ball:
 					goalkepper_attributes = away_team.get_goalkeeper_attributes()
@@ -83,8 +87,8 @@ func update(time):
 			_increase_pass(result)
 		Attack.SHOOT:
 			_increase_shots(result)
-		Attack.HEADER:
-			_increase_headers(result)
+#		Attack.HEADER:
+#			_increase_headers(result)
 	
 	_update_current_state(goal)
 	
@@ -143,7 +147,20 @@ func _attack():
 			else:
 				return Attack.PASS
 		State.NORMAL:
-			return Attack.values()[randi() % Attack.size()]
+			var random_attack_factor = randi() % Constants.ATTACK_FACTOR
+			var attack
+#enum Attack {PASS = 40, DRIBBLE = 60, RUN = 80, SHOOT = 90}
+			
+			if random_attack_factor < Constants.PASS_FACTOR:
+				attack = Attack.PASS
+			elif random_attack_factor < Constants.DRIBBLE_FACTOR:
+				attack = Attack.DRIBBLE
+			elif random_attack_factor < Constants.RUN_FACTOR:
+				attack = Attack.RUN
+			else:
+				attack = Attack.SHOOT
+			
+			return attack
 
 
 func _defend(attack):
@@ -158,12 +175,12 @@ func _defend(attack):
 			match attack:
 				Attack.SHOOT:
 					return Defense.BLOCK
-				Attack.CROSS,Attack.PASS:
+				Attack.PASS: # Attack.CROSS,
 					return Defense.INTERCEPT
 				Attack.DRIBBLE:
 					return Defense.TACKLE
-				Attack.HEADER:
-					return Defense.HEADER
+#				Attack.HEADER:
+#					return Defense.HEADER
 				Attack.RUN:
 					if randi() % 2 == 0: # use player preferences/attirbutes
 						return Defense.RUN
