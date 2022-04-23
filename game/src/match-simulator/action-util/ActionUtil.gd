@@ -73,9 +73,11 @@ func update(time):
 					if home_team.has_ball:
 						home_stats.increase_goals()
 						emit_signal("home_goal")
+						_change_possession()
 					else:
 						away_stats.increase_goals()
 						emit_signal("away_goal")
+						_change_possession()
 	else:
 		emit_signal("possession_change")
 		_change_possession()
@@ -129,9 +131,6 @@ func _get_result(attack):
 	
 	if random < attacker_attributes:
 		result = true
-
-			
-				
 	return result
 	
 func _attack():
@@ -151,13 +150,14 @@ func _attack():
 			var attack
 #enum Attack {PASS = 40, DRIBBLE = 60, RUN = 80, SHOOT = 90}
 			
-			if random_attack_factor < Constants.PASS_FACTOR:
+			if random_attack_factor < Constants.RUN_FACTOR:
+				attack = Attack.RUN
+			elif random_attack_factor < Constants.PASS_FACTOR:
 				attack = Attack.PASS
 			elif random_attack_factor < Constants.DRIBBLE_FACTOR:
 				attack = Attack.DRIBBLE
-			elif random_attack_factor < Constants.RUN_FACTOR:
-				attack = Attack.RUN
 			else:
+				print("random_attack_factor: " + str(random_attack_factor))
 				attack = Attack.SHOOT
 			
 			return attack
@@ -198,20 +198,14 @@ func _update_current_state(goal):
 			State.KICK_OFF, State.CORNER, State.FREE_KICK, State.PENALTY:
 				current_state = State.NORMAL
 
-
 func _log(attack, result):
-#	print(State.keys()[current_state])
-#	print(home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"])
-#	print("attack: " + str(Attack.keys()[attack]) + " - defense: ")
-#	print(result)
-	
 	log_richtext.add_text("\n" + home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + "  ")
 	log_richtext.add_text("attack: " + str(Attack.keys()[attack]) + " - defense: " + str(result))
 
+# PLAYER/POSSESSION CHANGE
 func _change_possession():
 	home_team.has_ball = not home_team.has_ball
 	away_team.has_ball = not away_team.has_ball
-
 	
 func _change_players():
 	home_team.change_active_player()
@@ -228,7 +222,9 @@ func _change_attacker():
 		away_team.change_active_player()
 	else:
 		home_team.change_active_player()
-		
+
+
+# STATISTICS
 func _increase_pass(success):
 	if away_team.has_ball:
 		away_stats.increase_pass(success)
