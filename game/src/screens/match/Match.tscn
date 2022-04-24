@@ -206,15 +206,11 @@ margin_bottom = 21.5
 text = "POSSESSION"
 
 [node name="Stats" type="MarginContainer" parent="."]
-visible = false
 margin_left = 683.2
 margin_top = 201.6
 margin_right = 1737.2
 margin_bottom = 857.6
 rect_scale = Vector2( 0.9, 0.9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="GridContainer" parent="Stats"]
 margin_right = 1054.0

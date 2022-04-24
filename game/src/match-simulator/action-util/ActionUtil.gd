@@ -61,15 +61,16 @@ func update(time):
 			Attack.RUN, Attack.DRIBBLE:
 				_change_defender()
 			Attack.SHOOT: # , Attack.HEADER
-				var goalkepper_attributes
+				var goalkeeper_attributes
 				if home_team.has_ball:
-					goalkepper_attributes = away_team.get_goalkeeper_attributes()
+					goalkeeper_attributes = away_team.get_goalkeeper_attributes()
 				else:
-					goalkepper_attributes = home_team.get_goalkeeper_attributes()
+					goalkeeper_attributes = home_team.get_goalkeeper_attributes()
 				
-				var random_goal = randi() % int(goalkepper_attributes)
-				if random_goal < goalkepper_attributes / Constants.GOAL_KEEPER_FACTOR:
+				var random_goal = randi() % int(goalkeeper_attributes)
+				if random_goal < goalkeeper_attributes / Constants.GOAL_KEEPER_FACTOR:
 					goal = true
+					print("GOAL")
 					if home_team.has_ball:
 						home_stats.increase_goals()
 						emit_signal("home_goal")
@@ -157,7 +158,6 @@ func _attack():
 			elif random_attack_factor < Constants.DRIBBLE_FACTOR:
 				attack = Attack.DRIBBLE
 			else:
-				print("random_attack_factor: " + str(random_attack_factor))
 				attack = Attack.SHOOT
 			
 			return attack
@@ -232,6 +232,7 @@ func _increase_pass(success):
 		home_stats.increase_pass(success)
 		
 func _increase_shots(on_target):
+	print("_increase_shots: " + str(on_target))
 	if away_team.has_ball:
 		away_stats.increase_shots(on_target)
 	else:

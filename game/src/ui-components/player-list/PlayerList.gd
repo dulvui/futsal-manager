@@ -24,6 +24,7 @@ const POSITIONS = ["G","D","WL","WR","P","U"]
 const INFO_TYPES = ["GENERAL","FISICAL","MENTAL"]
 const FOOTS = ["R","L","RL"]
 
+
 func _ready():
 	for team in DataSaver.teams:
 		if team["name"] != DataSaver.selected_team:
@@ -81,6 +82,8 @@ func add_subs():
 		player_profile.connect("player_select",self,"select_player",[player])
 		player_profile.set_up_info(player,info_type)
 		$CurrentPlayers.add_child(player_profile)
+		
+	$Paginator/PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
 	
 		
 func add_match_players():

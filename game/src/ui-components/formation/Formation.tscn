@@ -372,9 +372,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
@@ -384,302 +381,31 @@ __meta__ = {
 }
 
 [node name="FormationSelect" type="OptionButton" parent="."]
-margin_left = 160.0
-margin_top = 208.0
-margin_right = 189.0
-margin_bottom = 264.0
+margin_left = 117.0
+margin_top = 77.0
+margin_right = 196.0
+margin_bottom = 133.0
+text = "2-2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="DefensiveTactics" type="GridContainer" parent="."]
-margin_left = 40.0
-margin_top = 588.0
-margin_right = 800.0
-margin_bottom = 772.0
-custom_constants/hseparation = 20
-columns = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Stay" type="Label" parent="DefensiveTactics"]
-margin_top = 2.0
-margin_right = 300.0
-margin_bottom = 58.0
-text = "STAY"
-
-[node name="D1" type="HSlider" parent="DefensiveTactics"]
-margin_left = 320.0
-margin_right = 383.0
-margin_bottom = 60.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 20.0
-value = 6.0
-
-[node name="Pressing" type="Label" parent="DefensiveTactics"]
-margin_left = 403.0
-margin_top = 2.0
-margin_right = 702.0
-margin_bottom = 58.0
-text = "PRESSING"
-
-[node name="D1Info" type="Button" parent="DefensiveTactics"]
-margin_left = 722.0
-margin_right = 760.0
-margin_bottom = 60.0
-text = " i "
-
-[node name="Wait" type="Label" parent="DefensiveTactics"]
-margin_top = 66.0
-margin_right = 300.0
-margin_bottom = 122.0
-text = "WAIT"
-
-[node name="D2" type="HSlider" parent="DefensiveTactics"]
-margin_left = 320.0
-margin_top = 64.0
-margin_right = 383.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 20.0
-value = 6.0
-
-[node name="Anticipate" type="Label" parent="DefensiveTactics"]
-margin_left = 403.0
-margin_top = 66.0
-margin_right = 702.0
-margin_bottom = 122.0
-text = "ANTICIPATE"
-
-[node name="D2Info" type="Button" parent="DefensiveTactics"]
-margin_left = 722.0
-margin_top = 64.0
-margin_right = 760.0
-margin_bottom = 124.0
-text = " i "
-
-[node name="WeakTackle" type="Label" parent="DefensiveTactics"]
-margin_top = 130.0
-margin_right = 300.0
-margin_bottom = 186.0
-text = "WEAK_TACKLE"
-
-[node name="D3" type="HSlider" parent="DefensiveTactics"]
-margin_left = 320.0
-margin_top = 128.0
-margin_right = 383.0
-margin_bottom = 188.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 20.0
-value = 6.0
-
-[node name="HardTackle" type="Label" parent="DefensiveTactics"]
-margin_left = 403.0
-margin_top = 130.0
-margin_right = 702.0
-margin_bottom = 186.0
-text = "HARD_TACKLE"
-
-[node name="D3Info" type="Button" parent="DefensiveTactics"]
-margin_left = 722.0
-margin_top = 128.0
-margin_right = 760.0
-margin_bottom = 188.0
-text = " i "
-
-[node name="MarkZone" type="Label" parent="DefensiveTactics"]
-margin_top = 194.0
-margin_right = 300.0
-margin_bottom = 250.0
-text = "MARK_ZONE"
-
-[node name="D4" type="HSlider" parent="DefensiveTactics"]
-margin_left = 320.0
-margin_top = 192.0
-margin_right = 383.0
-margin_bottom = 252.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 20.0
-value = 6.0
-
-[node name="MarkPlayer" type="Label" parent="DefensiveTactics"]
-margin_left = 403.0
-margin_top = 194.0
-margin_right = 702.0
-margin_bottom = 250.0
-text = "MARK_PLAYER"
-
-[node name="D4Info" type="Button" parent="DefensiveTactics"]
-margin_left = 722.0
-margin_top = 192.0
-margin_right = 760.0
-margin_bottom = 252.0
-text = " i "
-
-[node name="OffensiveTactics" type="GridContainer" parent="."]
-margin_left = 40.0
-margin_top = 288.0
-margin_right = 800.0
-margin_bottom = 348.0
-custom_constants/hseparation = 20
-columns = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Possession" type="Label" parent="OffensiveTactics"]
-margin_top = 2.0
-margin_right = 284.0
-margin_bottom = 58.0
-text = "POSSESSION"
-
-[node name="O1" type="HSlider" parent="OffensiveTactics"]
-margin_left = 304.0
-margin_right = 390.0
-margin_bottom = 60.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 20.0
-value = 6.0
-
-[node name="FastAttack" type="Label" parent="OffensiveTactics"]
-margin_left = 410.0
-margin_top = 2.0
-margin_right = 702.0
-margin_bottom = 58.0
-text = "FAST_ATTACK"
-
-[node name="01Info" type="Button" parent="OffensiveTactics"]
-margin_left = 722.0
-margin_right = 760.0
-margin_bottom = 60.0
-text = " i "
-
-[node name="ShortPass" type="Label" parent="OffensiveTactics"]
-margin_top = 66.0
-margin_right = 284.0
-margin_bottom = 122.0
-text = "SHORT_PASS"
-
-[node name="O2" type="HSlider" parent="OffensiveTactics"]
-margin_left = 304.0
-margin_top = 64.0
-margin_right = 390.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 20.0
-value = 6.0
-
-[node name="LongPass" type="Label" parent="OffensiveTactics"]
-margin_left = 410.0
-margin_top = 66.0
-margin_right = 702.0
-margin_bottom = 122.0
-text = "LONG_PASS"
-
-[node name="02Info" type="Button" parent="OffensiveTactics"]
-margin_left = 722.0
-margin_top = 64.0
-margin_right = 760.0
-margin_bottom = 124.0
-text = " i "
-
-[node name="OpenCourt" type="Label" parent="OffensiveTactics"]
-margin_top = 130.0
-margin_right = 284.0
-margin_bottom = 186.0
-text = "OPEN_COURT"
-
-[node name="O3" type="HSlider" parent="OffensiveTactics"]
-margin_left = 304.0
-margin_top = 128.0
-margin_right = 390.0
-margin_bottom = 188.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 20.0
-value = 6.0
-
-[node name="Center" type="Label" parent="OffensiveTactics"]
-margin_left = 410.0
-margin_top = 130.0
-margin_right = 702.0
-margin_bottom = 186.0
-text = "CENTER"
-
-[node name="03Info" type="Button" parent="OffensiveTactics"]
-margin_left = 722.0
-margin_top = 128.0
-margin_right = 760.0
-margin_bottom = 188.0
-text = " i "
-
-[node name="Dribble" type="Label" parent="OffensiveTactics"]
-margin_top = 194.0
-margin_right = 284.0
-margin_bottom = 250.0
-text = "DRIBBLE"
-
-[node name="O4" type="HSlider" parent="OffensiveTactics"]
-margin_left = 304.0
-margin_top = 192.0
-margin_right = 390.0
-margin_bottom = 252.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 1.0
-max_value = 20.0
-value = 6.0
-
-[node name="Pass" type="Label" parent="OffensiveTactics"]
-margin_left = 410.0
-margin_top = 194.0
-margin_right = 702.0
-margin_bottom = 250.0
-text = "PASS"
-
-[node name="04Info" type="Button" parent="OffensiveTactics"]
-margin_left = 722.0
-margin_top = 192.0
-margin_right = 760.0
-margin_bottom = 252.0
-text = " i "
 
 [node name="Field" type="Control" parent="."]
 margin_left = 840.0
 margin_top = 40.0
 margin_right = 1840.0
 margin_bottom = 1040.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="Field"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1020.0
-margin_top = 19.9999
-margin_right = 1020.0
-margin_bottom = 19.9999
+margin_left = 1023.0
+margin_top = 23.0
+margin_right = 1023.0
+margin_bottom = 23.0
 rect_rotation = 90.0
 texture = ExtResource( 5 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="G" parent="Field" instance=ExtResource( 3 )]
 anchor_left = 0.5
@@ -696,30 +422,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -164.0
-margin_top = 100.0
-margin_right = -36.0
-margin_bottom = 228.0
+margin_left = 23.0
+margin_top = -51.5
+margin_right = 151.0
+margin_bottom = 76.5
 
 [node name="WL" parent="Field" instance=ExtResource( 3 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 36.0
-margin_top = 100.0
-margin_right = 164.0
-margin_bottom = 228.0
+margin_left = 23.0
+margin_top = -51.5
+margin_right = 151.0
+margin_bottom = 76.5
 
 [node name="WR" parent="Field" instance=ExtResource( 3 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 236.0
-margin_top = -100.0
-margin_right = 364.0
-margin_bottom = 28.0
+margin_left = 23.0
+margin_top = -51.5
+margin_right = 151.0
+margin_bottom = 76.5
 rect_pivot_offset = Vector2( -1900, 40 )
 
 [node name="P" parent="Field" instance=ExtResource( 3 )]
@@ -727,10 +453,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -364.0
-margin_top = -100.0
-margin_right = -236.0
-margin_bottom = 28.0
+margin_left = 23.0
+margin_top = -51.5
+margin_right = 151.0
+margin_bottom = 76.5
 
 [node name="TacticInfoPopUp" type="Popup" parent="."]
 margin_left = 680.0
@@ -770,23 +496,8 @@ margin_top = 22.6274
 margin_right = 1868.99
 margin_bottom = 82.6274
 text = "X"
+
 [connection signal="item_selected" from="FormationSelect" to="." method="_on_FormationSelect_item_selected"]
-[connection signal="value_changed" from="DefensiveTactics/D1" to="." method="_on_D1_value_changed"]
-[connection signal="pressed" from="DefensiveTactics/D1Info" to="." method="_on_D1Info_pressed"]
-[connection signal="value_changed" from="DefensiveTactics/D2" to="." method="_on_D2_value_changed"]
-[connection signal="pressed" from="DefensiveTactics/D2Info" to="." method="_on_D2Info_pressed"]
-[connection signal="value_changed" from="DefensiveTactics/D3" to="." method="_on_D3_value_changed"]
-[connection signal="pressed" from="DefensiveTactics/D3Info" to="." method="_on_D3Info_pressed"]
-[connection signal="value_changed" from="DefensiveTactics/D4" to="." method="_on_D4_value_changed"]
-[connection signal="pressed" from="DefensiveTactics/D4Info" to="." method="_on_D4Info_pressed"]
-[connection signal="value_changed" from="OffensiveTactics/O1" to="." method="_on_O1_value_changed"]
-[connection signal="pressed" from="OffensiveTactics/01Info" to="." method="_on_01Info_pressed"]
-[connection signal="value_changed" from="OffensiveTactics/O2" to="." method="_on_O2_value_changed"]
-[connection signal="pressed" from="OffensiveTactics/02Info" to="." method="_on_02Info_pressed"]
-[connection signal="value_changed" from="OffensiveTactics/O3" to="." method="_on_O3_value_changed"]
-[connection signal="pressed" from="OffensiveTactics/03Info" to="." method="_on_03Info_pressed"]
-[connection signal="value_changed" from="OffensiveTactics/O4" to="." method="_on_O4_value_changed"]
-[connection signal="pressed" from="OffensiveTactics/04Info" to="." method="_on_04Info_pressed"]
 [connection signal="change_player" from="Field/G" to="." method="_on_G_change_player"]
 [connection signal="change_player" from="Field/D" to="." method="_on_D_change_player"]
 [connection signal="change_player" from="Field/WL" to="." method="_on_WL_change_player"]

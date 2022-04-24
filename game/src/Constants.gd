@@ -5,13 +5,13 @@ extends Node
 const MATCH_SPEED_FACTOR = 4
 
 # bigger number => more saves
-const GOAL_KEEPER_FACTOR = 10
+const GOAL_KEEPER_FACTOR = 5
 
 # factor for defining attack (0 - 100)
 const ATTACK_FACTOR = 1000
-const RUN_FACTOR = 600
-const PASS_FACTOR = 800
-const DRIBBLE_FACTOR = 990
+const RUN_FACTOR = 800
+const PASS_FACTOR = 900
+const DRIBBLE_FACTOR = 988
 const SHOOT_FACTOR = 1000
 
 # attack success factors
