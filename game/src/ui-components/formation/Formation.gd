@@ -21,25 +21,6 @@ func _ready():
 		
 	_set_players()
 	
-#	$OffensiveTactics/O1.value = DataSaver.team["offensive_tactics"]["O1"]
-#	$OffensiveTactics/O2.value = DataSaver.team["offensive_tactics"]["O2"]
-#	$OffensiveTactics/O3.value = DataSaver.team["offensive_tactics"]["O3"]
-#	$OffensiveTactics/O4.value = DataSaver.team["offensive_tactics"]["O4"]
-#
-#	$DefensiveTactics/D1.value = DataSaver.team["defensive_tactics"]["D1"]
-#	$DefensiveTactics/D2.value = DataSaver.team["defensive_tactics"]["D2"]
-#	$DefensiveTactics/D3.value = DataSaver.team["defensive_tactics"]["D3"]
-#	$DefensiveTactics/D4.value = DataSaver.team["defensive_tactics"]["D4"]
-
-#	$OffensiveTactics/O1.value = 10
-#	$OffensiveTactics/O2.value = 10
-#	$OffensiveTactics/O3.value = 10
-#	$OffensiveTactics/O4.value = 10
-#
-#	$DefensiveTactics/D1.value = 10
-#	$DefensiveTactics/D2.value = 10
-#	$DefensiveTactics/D3.value = 10
-#	$DefensiveTactics/D4.value = 10
 		
 	animation_player.play("Fade" + DataSaver.formation)
 
@@ -93,78 +74,6 @@ func _on_PlayerList_select_player(_player):
 	_set_players()
 	$PlayerList.hide()
 	emit_signal("change")
-
-
-#func _on_D1_value_changed(value):
-#	DataSaver.team["defensive_tactics"]["D1"] = value
-#
-#
-#func _on_D2_value_changed(value):
-#	DataSaver.team["defensive_tactics"]["D2"] = value
-#
-#
-#func _on_D3_value_changed(value):
-#	DataSaver.team["defensive_tactics"]["D3"] = value
-#
-#
-#func _on_D4_value_changed(value):
-#	DataSaver.team["defensive_tactics"]["D4"] = value
-#
-#
-#func _on_O1_value_changed(value):
-#	DataSaver.team["offensive_tactics"]["O1"] = value
-#
-#
-#func _on_O2_value_changed(value):
-#	DataSaver.team["offensive_tactics"]["O2"] = value
-#
-#
-#func _on_O3_value_changed(value):
-#	DataSaver.team["offensive_tactics"]["O3"] = value
-#
-#
-#func _on_O4_value_changed(value):
-#	DataSaver.team["offensive_tactics"]["O4"] = value
-
-
-func _on_D1Info_pressed():
-	$TacticInfoPopUp/TacticInfo.text = tr("D1_INFO")
-	$TacticInfoPopUp.popup_centered()
-
-func _on_D2Info_pressed():
-	$TacticInfoPopUp/TacticInfo.text = tr("D2_INFO")
-	$TacticInfoPopUp.popup_centered()
-	
-
-
-func _on_D3Info_pressed():
-	$TacticInfoPopUp/TacticInfo.text = tr("D3_INFO")
-	$TacticInfoPopUp.popup_centered()
-
-
-func _on_D4Info_pressed():
-	$TacticInfoPopUp/TacticInfo.text = tr("D4_INFO")
-	$TacticInfoPopUp.popup_centered()
-
-
-func _on_01Info_pressed():
-	$TacticInfoPopUp/TacticInfo.text = tr("O1_INFO")
-	$TacticInfoPopUp.popup_centered()
-
-
-func _on_02Info_pressed():
-	$TacticInfoPopUp/TacticInfo.text = tr("O2_INFO")
-	$TacticInfoPopUp.popup_centered()
-
-
-func _on_03Info_pressed():
-	$TacticInfoPopUp/TacticInfo.text = tr("O3_INFO")
-	$TacticInfoPopUp.popup_centered()
-
-
-func _on_04Info_pressed():
-	$TacticInfoPopUp/TacticInfo.text = tr("O4_INFO")
-	$TacticInfoPopUp.popup_centered()
 
 
 func _on_Close_pressed():
