@@ -34,6 +34,8 @@ func _ready():
 			for player in team["players"]["subs"]:
 				all_players.append(player)
 				current_players.append(player)
+				
+	$Table.set_up(all_players)
 			
 	$LegaueSelect.add_item("ITALIA")
 	
