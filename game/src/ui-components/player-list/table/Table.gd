@@ -95,19 +95,36 @@ func _ready():
 #	]
 #	set_up(test_content, 10)
 	
-func set_up(_content):
+func set_up(_content, _headers):
 	content = _content
+	headers = _headers
+	
+		
+	# flatten attributes
+	for item in content:
+		for key in item["attributes"]["mental"].keys():
+			item[key] = item["attributes"]["mental"][key]
+		for key in item["attributes"]["physical"].keys():
+			item[key] = item["attributes"]["physical"][key]
+		for key in item["attributes"]["technical"].keys():
+			item[key] = item["attributes"]["technical"][key]
+		for key in item["attributes"]["goal_keeper"].keys():
+			item[key] = item["attributes"]["goal_keeper"][key]
+		item.erase("attribute")
+		
+	
 	_set_up_headers()
 	_set_up_content()
 	
-	
-func _set_up_headers():
-	headers = content[0].keys()
-	
+	# set up sort memory
 	for header in headers:
 		sort_memory[header] = "no"
+
+
+func _set_up_headers():
+	for header in headers:
 		var button = Button.new()
-		button.text = header
+		button.text = header.substr(0,3)
 		button.connect("button_down",self,"_sort",[header])
 		headers_container.add_child(button)
 	
@@ -115,12 +132,12 @@ func _set_up_content():
 	content_container.queue_free()
 	content_container = GridContainer.new()
 	$MarginContainer.add_child(content_container)
-		
+	
 	content_container.columns = headers.size()
 	for item in content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
-		for value in item.values():
+		for header in headers:
 			var label = Label.new()
-			label.text = str(value)
+			label.text = str(item[header])
 			content_container.add_child(label)
 	
 func _sort(value):
