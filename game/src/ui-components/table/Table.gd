@@ -1,6 +1,7 @@
 extends Control
 
 
+
 func _ready():
 	var pos = 1
 	DataSaver.table.sort_custom(self,"point_sorter")

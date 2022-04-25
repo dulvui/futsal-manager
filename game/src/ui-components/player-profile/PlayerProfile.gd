@@ -2,7 +2,7 @@ extends Control
 
 signal player_select
 
-const DetailNumber = preload("res://src/ui-components/player-profile/detail-number/DetailNumber.tscn")
+const DetailNumber = preload("res://src/ui-components/color-number/ColorNumber.tscn")
 
 var player = {}
 

@@ -17,10 +17,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Table" parent="." instance=ExtResource( 3 )]
-margin_left = 512.0
-margin_top = 8.0
-margin_right = -168.0
-margin_bottom = -184.0
+margin_top = 24.0
+margin_right = -8.0
+margin_bottom = -16.0
 
 [node name="Titles" type="HBoxContainer" parent="."]
 visible = false
@@ -66,6 +65,7 @@ __meta__ = {
 }
 
 [node name="LegaueSelect" type="OptionButton" parent="."]
+visible = false
 margin_left = 60.3213
 margin_top = 161.915
 margin_right = 460.321
@@ -75,6 +75,7 @@ __meta__ = {
 }
 
 [node name="TeamSelect" type="OptionButton" parent="."]
+visible = false
 margin_left = 66.6709
 margin_top = 253.984
 margin_right = 466.671
@@ -84,6 +85,7 @@ __meta__ = {
 }
 
 [node name="PositionSelect" type="OptionButton" parent="."]
+visible = false
 margin_left = 66.6709
 margin_top = 361.928
 margin_right = 466.671
@@ -93,6 +95,7 @@ __meta__ = {
 }
 
 [node name="FootSelect" type="OptionButton" parent="."]
+visible = false
 margin_left = 66.6709
 margin_top = 481.928
 margin_right = 466.671
@@ -102,6 +105,7 @@ __meta__ = {
 }
 
 [node name="InfoSelect" type="OptionButton" parent="."]
+visible = false
 margin_left = 107.943
 margin_top = 609.562
 margin_right = 387.943
