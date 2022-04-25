@@ -17,10 +17,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Table" parent="." instance=ExtResource( 3 )]
-margin_left = 616.0
-margin_top = 120.0
-margin_right = 1736.0
-margin_bottom = 864.0
+margin_left = 512.0
+margin_top = 8.0
+margin_right = -168.0
+margin_bottom = -184.0
 
 [node name="Titles" type="HBoxContainer" parent="."]
 visible = false
@@ -108,6 +108,7 @@ margin_right = 387.943
 margin_bottom = 665.562
 
 [node name="Paginator" type="HBoxContainer" parent="."]
+visible = false
 margin_left = 824.0
 margin_top = 896.0
 margin_right = 1348.0

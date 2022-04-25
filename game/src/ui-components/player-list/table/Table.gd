@@ -1,12 +1,15 @@
 extends Control
 
+const SIZE = 10
+var current_page = 0
+
 var headers
 var content
 
 var sorter = ContentSort.new()
 
 
-onready var content_container = $ScrollContainer/Content
+onready var content_container = $MarginContainer/Content
 onready var headers_container = $Headers
 
 func _ready():
@@ -109,10 +112,10 @@ func _set_up_headers():
 func _set_up_content():
 	content_container.queue_free()
 	content_container = GridContainer.new()
-	$ScrollContainer.add_child(content_container)
+	$MarginContainer.add_child(content_container)
 		
 	content_container.columns = headers.size()
-	for item in content:
+	for item in content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
 		for value in item.values():
 			var label = Label.new()
 			label.text = str(value)
@@ -131,3 +134,15 @@ class ContentSort:
 		if a[value] < b[value]:
 			return true
 		return false
+
+
+func _on_Next_pressed():
+	if current_page < content.size() / SIZE:
+		current_page += 1
+		_set_up_content()
+
+
+func _on_Prev_pressed():
+	if current_page > 0:
+		current_page -= 1
+		_set_up_content()
