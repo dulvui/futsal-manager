@@ -4,6 +4,8 @@
 [ext_resource path="res://theme.tres" type="Theme" id=2]
 
 [node name="Table" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
@@ -12,9 +14,28 @@ margin_right = 1920.0
 margin_bottom = 104.0
 custom_constants/separation = 80
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
-margin_top = 136.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_top = 120.0
 margin_right = 1920.0
-margin_bottom = 712.0
+margin_bottom = 960.0
 
-[node name="Content" type="GridContainer" parent="ScrollContainer"]
+[node name="Content" type="GridContainer" parent="MarginContainer"]
+margin_right = 1920.0
+margin_bottom = 840.0
+
+[node name="Next" type="Button" parent="."]
+margin_left = 1192.0
+margin_top = 976.0
+margin_right = 1301.0
+margin_bottom = 1032.0
+text = "NEXT"
+
+[node name="Prev" type="Button" parent="."]
+margin_left = 624.0
+margin_top = 976.0
+margin_right = 733.0
+margin_bottom = 1032.0
+text = "PREV"
+
+[connection signal="pressed" from="Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="Prev" to="." method="_on_Prev_pressed"]
