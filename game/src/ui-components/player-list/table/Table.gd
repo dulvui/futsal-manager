@@ -1,6 +1,14 @@
 extends Control
 
+const ColorNumber = preload("res://src/ui-components/color-number/ColorNumber.tscn")
+const NameLabel = preload("res://src/ui-components/player-list/table/name-label/NameLabel.tscn")
+
+
 const SIZE = 10
+
+onready var content_container = $MarginContainer/Content
+
+
 var current_page = 0
 
 var headers
@@ -9,91 +17,6 @@ var content
 var sorter = ContentSort.new()
 var sort_memory = {} # to save wich value is already sorted and how
 
-
-onready var content_container = $MarginContainer/Content
-onready var headers_container = $Headers
-
-func _ready():
-	pass
-	# TEST
-#	var test_content = [
-#		{
-#		"a" : "hans",
-#		"b" : 10,
-#		"c" : 20
-#		},
-#		{
-#		"a" : "zuis",
-#		"b" : 30,
-#		"c" : 20
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		},
-#		{
-#		"a" : "aabb",
-#		"b" : 10,
-#		"c" : 90
-#		}
-#	]
-#	set_up(test_content, 10)
 	
 func set_up(_content, _headers):
 	content = _content
@@ -112,8 +35,6 @@ func set_up(_content, _headers):
 			item[key] = item["attributes"]["goal_keeper"][key]
 		item.erase("attribute")
 		
-	
-	_set_up_headers()
 	_set_up_content()
 	
 	# set up sort memory
@@ -124,20 +45,27 @@ func set_up(_content, _headers):
 func _set_up_headers():
 	for header in headers:
 		var button = Button.new()
-		button.text = header.substr(0,3)
+		button.text = header.substr(0,4)
 		button.connect("button_down",self,"_sort",[header])
-		headers_container.add_child(button)
+		content_container.add_child(button)
 	
 func _set_up_content():
 	content_container.queue_free()
 	content_container = GridContainer.new()
 	$MarginContainer.add_child(content_container)
 	
+	_set_up_headers()
+	
 	content_container.columns = headers.size()
 	for item in content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
 		for header in headers:
-			var label = Label.new()
-			label.text = str(item[header])
+			var label
+			if typeof(item[header]) == 3:
+				label = ColorNumber.instance()
+				label.set_up(item[header])
+			else:
+				label = NameLabel.instance()
+				label.set_name(item[header])
 			content_container.add_child(label)
 	
 func _sort(value):

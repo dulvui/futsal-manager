@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/ui-components/color-number/ColorNumber.gd" type="Script" id=2]
+
+[node name="ColorNumber" type="Control"]
+rect_min_size = Vector2( 52, 52 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.917647, 0.878431, 0.878431, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -1.0
+margin_top = -2.0
+margin_right = 51.0
+margin_bottom = 54.0
+size_flags_horizontal = 2
+text = "12"
+align = 1
+valign = 1
