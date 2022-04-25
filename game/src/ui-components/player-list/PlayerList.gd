@@ -34,8 +34,11 @@ func _ready():
 			for player in team["players"]["subs"]:
 				all_players.append(player)
 				current_players.append(player)
-				
-	$Table.set_up(all_players)
+	
+	var headers = ["surname"]
+	for mental in Constants.MENTAL:
+		headers.append(mental)
+	$Table.set_up(all_players.duplicate(true), headers)
 			
 	$LegaueSelect.add_item("ITALIA")
 	

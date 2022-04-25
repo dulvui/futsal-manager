@@ -32,7 +32,7 @@ fake_it = Faker("it_IT")
 names = []
 surnames = []
 
-team_id = 15 # last id of serie-a team is 14
+team_id = 15  # last id of serie-a team is 14
 player_id = 1
 
 
@@ -43,7 +43,7 @@ for _ in range(100):
     surnames.append(name_base.split()[1])
 
 
-def get_goalkeeper_attributes(age, nationality, prestige):
+def get_goalkeeper_attributes(age, nationality, prestige, position):
 
     age_factor = 20
     if age > 34:
@@ -53,14 +53,24 @@ def get_goalkeeper_attributes(age, nationality, prestige):
 
     factor = min(random.randint(6, age_factor), max(prestige, 6))
 
-    physical = {
-        "reflexes": min(factor + random.randint(-5, 5), 20),
-        "positioning": min(factor + random.randint(-5, 5), 20),
-        "kicking": min(factor + random.randint(-5, 5), 20),
-        "handling": min(factor + random.randint(-5, 5), 20),
-        "diving": min(factor + random.randint(-5, 5), 20),
-        "speed": min(factor + random.randint(-5, 5), 20),
-    }
+    if position == "G":
+        physical = {
+            "reflexes": min(factor + random.randint(-5, 5), 20),
+            "positioning": min(factor + random.randint(-5, 5), 20),
+            "kicking": min(factor + random.randint(-5, 5), 20),
+            "handling": min(factor + random.randint(-5, 5), 20),
+            "diving": min(factor + random.randint(-5, 5), 20),
+            "speed": min(factor + random.randint(-5, 5), 20),
+        }
+    else:
+        physical = {
+            "reflexes": -1,
+            "positioning":-1,
+            "kicking": -1,
+            "handling": -1,
+            "diving": -1,
+            "speed": -1,
+        }
     return physical
 
 
@@ -75,14 +85,24 @@ def get_physical(age, nationality, prestige, pos):
     pace_factor = min(random.randint(9, age_factor), max(prestige, 9))
     physical_factor = min(random.randint(6, age_factor), max(prestige, 6))
 
-    physical = {
-        "pace": min(pace_factor + random.randint(-5, 5), 20),
-        "acceleration": min(pace_factor + random.randint(-5, 5), 20),
-        "stamina": min(physical_factor + random.randint(-5, 5), 20),
-        "strength": min(physical_factor + random.randint(-5, 5), 20),
-        "agility": min(physical_factor + random.randint(-5, 5), 20),
-        "jump": min(physical_factor + random.randint(-5, 5), 20),
-    }
+    if pos != "G":
+        physical = {
+            "pace": min(pace_factor + random.randint(-5, 5), 20),
+            "acceleration": min(pace_factor + random.randint(-5, 5), 20),
+            "stamina": min(physical_factor + random.randint(-5, 5), 20),
+            "strength": min(physical_factor + random.randint(-5, 5), 20),
+            "agility": min(physical_factor + random.randint(-5, 5), 20),
+            "jump": min(physical_factor + random.randint(-5, 5), 20),
+        }
+    else:
+        physical = {
+            "pace": -1,
+            "acceleration": -1,
+            "stamina": -1,
+            "strength": -1,
+            "agility": -1,
+            "jump": -1,
+        }
     return physical
 
 
@@ -100,20 +120,36 @@ def get_technical(age, nationality, prestige, pos):
     technique_factor = min(random.randint(6, age_factor), max(prestige, 6))
     defense_factor = min(random.randint(6, age_factor), max(prestige, 6))
 
-    technical = {
-        "crossing": min(pass_factor + random.randint(-5, 5), 20),
-        "passing": min(pass_factor + random.randint(-5, 5), 20),
-        "long_passing": min(pass_factor + random.randint(-5, 5), 20),
-        "tackling": min(defense_factor + random.randint(-5, 5), 20),
-        "heading": min(shoot_factor + random.randint(-5, 5), 20),
-        "interception": min(defense_factor + random.randint(-5, 5), 20),
-        "shooting": min(shoot_factor + random.randint(-5, 5), 20),
-        "long_shooting": min(shoot_factor + random.randint(-5, 5), 20),
-        "penalty": min(technique_factor + random.randint(-5, 5), 20),
-        "finishing": min(shoot_factor + random.randint(-5, 5), 20),
-        "dribbling": min(shoot_factor + random.randint(-5, 5), 20),
-        "blocking": min(shoot_factor + random.randint(-5, 5), 20),
-    }
+    if pos != "G":
+        technical = {
+            "crossing": min(pass_factor + random.randint(-5, 5), 20),
+            "passing": min(pass_factor + random.randint(-5, 5), 20),
+            "long_passing": min(pass_factor + random.randint(-5, 5), 20),
+            "tackling": min(defense_factor + random.randint(-5, 5), 20),
+            "heading": min(shoot_factor + random.randint(-5, 5), 20),
+            "interception": min(defense_factor + random.randint(-5, 5), 20),
+            "shooting": min(shoot_factor + random.randint(-5, 5), 20),
+            "long_shooting": min(shoot_factor + random.randint(-5, 5), 20),
+            "penalty": min(technique_factor + random.randint(-5, 5), 20),
+            "finishing": min(shoot_factor + random.randint(-5, 5), 20),
+            "dribbling": min(shoot_factor + random.randint(-5, 5), 20),
+            "blocking": min(shoot_factor + random.randint(-5, 5), 20),
+        }
+    else:
+        technical = {
+            "crossing": -1,
+            "passing": -1,
+            "long_passing": -1,
+            "tackling": -1,
+            "heading": -1,
+            "interception": -1,
+            "shooting": -1,
+            "long_shooting": -1,
+            "penalty": -1,
+            "finishing": -1,
+            "dribbling": -1,
+            "blocking": -1,
+        }
     return technical
 
 
@@ -285,16 +321,14 @@ def create_player(nationality, position, nr, team):
         "nr": nr
     }
 
-    if position == "G":
-        player["attributes"] = get_goalkeeper_attributes(
-            2020-birth_date.year, nationality, prestige)
-    else:
-        player["attributes"] = {
-            "mental": get_mental(2020-birth_date.year, nationality, prestige, position),
-            "technical": get_technical(2020-birth_date.year, nationality, prestige, position),
-            "physical": get_physical(2020-birth_date.year, nationality, prestige, position),
-        }
-    
+    player["attributes"] = {
+        "goal_keeper": get_goalkeeper_attributes(
+            2020-birth_date.year, nationality, prestige, position),
+        "mental": get_mental(2020-birth_date.year, nationality, prestige, position),
+        "technical": get_technical(2020-birth_date.year, nationality, prestige, position),
+        "physical": get_physical(2020-birth_date.year, nationality, prestige, position),
+    }
+
     player_id += 1
 
     return player
@@ -308,7 +342,7 @@ def create_player(nationality, position, nr, team):
 # create teams
 ita_serie_a = [
     {
-        "id" : 1,
+        "id": 1,
         "name": "Acqua&Sapone C5",
         "prestige": 12,
                 "budget": 9000000,
@@ -333,7 +367,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 2,
+        "id": 2,
         "name": "Pesaro C5",
         "prestige": 12,
                 "budget": 9000000,
@@ -349,7 +383,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 3,
+        "id": 3,
         "name": "Real Rieti",
         "prestige": 12,
                 "budget": 9000000,
@@ -365,7 +399,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 4,
+        "id": 4,
         "name": "Meta Catania",
         "prestige": 12,
                 "budget": 9000000,
@@ -381,7 +415,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 5,
+        "id": 5,
         "name": "Napoli Calcio A 5",
         "prestige": 12,
                 "budget": 9000000,
@@ -397,7 +431,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 6,
+        "id": 6,
         "name": "Feldi Eboli",
         "prestige": 12,
                 "budget": 9000000,
@@ -413,7 +447,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 7,
+        "id": 7,
         "name": "Came Dosson C5",
         "prestige": 12,
                 "budget": 9000000,
@@ -429,7 +463,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 8,
+        "id": 8,
         "name": "Maritime Futsal Augusta",
         "prestige": 12,
                 "budget": 9000000,
@@ -445,7 +479,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 9,
+        "id": 9,
         "name": "Civitella Colormax C5",
         "prestige": 12,
                 "budget": 9000000,
@@ -461,7 +495,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 10,
+        "id": 10,
         "name": "Lazio Calcio A 5",
         "prestige": 12,
                 "budget": 9000000,
@@ -477,7 +511,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 11,
+        "id": 11,
         "name": "Latina Calcio A 5",
         "prestige": 12,
                 "budget": 9000000,
@@ -493,7 +527,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 12,
+        "id": 12,
         "name": "Real Futsal Arzignano",
         "prestige": 12,
                 "budget": 9000000,
@@ -509,7 +543,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 13,
+        "id": 13,
         "name": "Cagliari",
         "prestige": 12,
                 "budget": 9000000,
@@ -525,7 +559,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id" : 14,
+        "id": 14,
         "name": "Lazio",
         "prestige": 12,
                 "budget": 9000000,
