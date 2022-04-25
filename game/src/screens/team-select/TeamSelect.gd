@@ -1,4 +1,4 @@
-extends Control
+extends CenterContainer
 
 const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
 
@@ -12,7 +12,7 @@ func _ready():
 		var team_button = Button.new()
 		team_button.text = team["name"]
 		team_button.connect("pressed",self,"team_selected",[team])
-		$TeamList.add_child(team_button)
+		$Teams.add_child(team_button)
 		
 #		for player in team["players"]:
 #			var player_profile = PlayerProfile.instance()
