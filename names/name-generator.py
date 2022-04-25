@@ -32,6 +32,10 @@ fake_it = Faker("it_IT")
 names = []
 surnames = []
 
+team_id = 15 # last id of serie-a team is 14
+player_id = 1
+
+
 # create names
 for _ in range(100):
     name_base = fake_it.name_male().replace("Dott. ", "").replace("Sig. ", "")
@@ -227,6 +231,7 @@ def create_player(nationality, position, nr, team):
     global names
     global surnames
     global fake_it
+    global player_id
     # player = {}
 
     # ITALY
@@ -259,6 +264,7 @@ def create_player(nationality, position, nr, team):
     potential_growth = random.randint(1, 5)
 
     player = {
+        "id": player_id,
         "team": team,
         "price": get_price(2020-birth_date.year, prestige, position),
         "name": random.choice(names),
@@ -288,6 +294,8 @@ def create_player(nationality, position, nr, team):
             "technical": get_technical(2020-birth_date.year, nationality, prestige, position),
             "physical": get_physical(2020-birth_date.year, nationality, prestige, position),
         }
+    
+    player_id += 1
 
     return player
     # print(ita_players)
@@ -300,6 +308,7 @@ def create_player(nationality, position, nr, team):
 # create teams
 ita_serie_a = [
     {
+        "id" : 1,
         "name": "Acqua&Sapone C5",
         "prestige": 12,
                 "budget": 9000000,
@@ -324,6 +333,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 2,
         "name": "Pesaro C5",
         "prestige": 12,
                 "budget": 9000000,
@@ -339,6 +349,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 3,
         "name": "Real Rieti",
         "prestige": 12,
                 "budget": 9000000,
@@ -354,6 +365,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 4,
         "name": "Meta Catania",
         "prestige": 12,
                 "budget": 9000000,
@@ -369,6 +381,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 5,
         "name": "Napoli Calcio A 5",
         "prestige": 12,
                 "budget": 9000000,
@@ -384,6 +397,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 6,
         "name": "Feldi Eboli",
         "prestige": 12,
                 "budget": 9000000,
@@ -399,6 +413,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 7,
         "name": "Came Dosson C5",
         "prestige": 12,
                 "budget": 9000000,
@@ -414,6 +429,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 8,
         "name": "Maritime Futsal Augusta",
         "prestige": 12,
                 "budget": 9000000,
@@ -429,6 +445,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 9,
         "name": "Civitella Colormax C5",
         "prestige": 12,
                 "budget": 9000000,
@@ -444,6 +461,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 10,
         "name": "Lazio Calcio A 5",
         "prestige": 12,
                 "budget": 9000000,
@@ -459,6 +477,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 11,
         "name": "Latina Calcio A 5",
         "prestige": 12,
                 "budget": 9000000,
@@ -474,6 +493,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 12,
         "name": "Real Futsal Arzignano",
         "prestige": 12,
                 "budget": 9000000,
@@ -489,6 +509,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 13,
         "name": "Cagliari",
         "prestige": 12,
                 "budget": 9000000,
@@ -504,6 +525,7 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
+        "id" : 14,
         "name": "Lazio",
         "prestige": 12,
                 "budget": 9000000,
