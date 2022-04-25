@@ -16,8 +16,8 @@ var current_players = []
 
 var info_type = "GENERAL"
 
-const MENTAL_TITLES = ["A","B","CON","PLAPLA"]
-const FISICAL_TITLES = ["C","D","E"]
+const MENTAL_TITLES = ["ag","an","co","de","ma","om","tw","vi","wr"]
+const FISICAL_TITLES = ["acc","agi","jum","pac","sta","str"]
 const GENERAL_TITLES = ["POS","PR."]
 
 const POSITIONS = ["G","D","WL","WR","P","U"]
