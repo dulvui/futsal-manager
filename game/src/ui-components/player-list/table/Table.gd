@@ -7,6 +7,7 @@ var headers
 var content
 
 var sorter = ContentSort.new()
+var sort_memory = {} # to save wich value is already sorted and how
 
 
 onready var content_container = $MarginContainer/Content
@@ -104,6 +105,7 @@ func _set_up_headers():
 	headers = content[0].keys()
 	
 	for header in headers:
+		sort_memory[header] = "no"
 		var button = Button.new()
 		button.text = header
 		button.connect("button_down",self,"_sort",[header])
@@ -123,15 +125,25 @@ func _set_up_content():
 	
 func _sort(value):
 	sorter.value = value
-	content.sort_custom(sorter, "sort_ascending")
+	content.sort_custom(sorter, _get_sorting(value))
 	_set_up_content()
 	
-
+func _get_sorting(value):
+	if sort_memory[value] == "ascending":
+		sort_memory[value] = "descending"
+	else:
+		sort_memory[value] = "ascending"
+	return sort_memory[value]
 
 class ContentSort:
 	var value
-	func sort_ascending(a, b):
+	func ascending(a, b):
 		if a[value] < b[value]:
+			return true
+		return false
+		
+	func descending(a, b):
+		if a[value] > b[value]:
 			return true
 		return false
 
