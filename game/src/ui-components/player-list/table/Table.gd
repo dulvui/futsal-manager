@@ -7,6 +7,7 @@ const NameLabel = preload("res://src/ui-components/player-list/table/name-label/
 const SIZE = 10
 
 onready var content_container = $MarginContainer/Content
+onready var pages = $Pages
 
 
 var current_page = 0
@@ -40,7 +41,8 @@ func set_up(_content, _headers):
 	# set up sort memory
 	for header in headers:
 		sort_memory[header] = "no"
-
+	
+	pages.text = "1/" + str((content.size()/SIZE) + 1)
 
 func _set_up_headers():
 	for header in headers:
@@ -97,9 +99,12 @@ func _on_Next_pressed():
 	if current_page < content.size() / SIZE:
 		current_page += 1
 		_set_up_content()
+	pages.text = str(current_page + 1) + "/" + str((content.size()/SIZE) + 1)
 
 
 func _on_Prev_pressed():
 	if current_page > 0:
 		current_page -= 1
 		_set_up_content()
+	pages.text = str(current_page + 1) + "/" + str((content.size()/SIZE) + 1)
+
