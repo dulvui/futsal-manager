@@ -8,6 +8,7 @@ const SIZE = 10
 
 onready var content_container = $MarginContainer/Content
 onready var pages = $Pages
+onready var player_profile = $PlayerProfile
 
 
 var current_page = 0
@@ -34,7 +35,7 @@ func set_up(_content, _headers):
 			item[key] = item["attributes"]["technical"][key]
 		for key in item["attributes"]["goal_keeper"].keys():
 			item[key] = item["attributes"]["goal_keeper"][key]
-		item.erase("attribute")
+#		item.erase("attribute")
 		
 	_set_up_content()
 	
@@ -51,6 +52,11 @@ func _set_up_headers():
 		button.connect("button_down",self,"_sort",[header])
 		content_container.add_child(button)
 	
+	# info label
+	var label = Label.new()
+	label.text = "i"
+	content_container.add_child(label)
+	
 func _set_up_content():
 	content_container.queue_free()
 	content_container = GridContainer.new()
@@ -58,7 +64,7 @@ func _set_up_content():
 	
 	_set_up_headers()
 	
-	content_container.columns = headers.size()
+	content_container.columns = headers.size() + 1
 	for item in content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
 		for header in headers:
 			var label
@@ -69,6 +75,15 @@ func _set_up_content():
 				label = NameLabel.instance()
 				label.set_name(item[header])
 			content_container.add_child(label)
+		#info button
+		var button = Button.new()
+		button.text = "i"
+		button.connect("button_down",self,"show_info",[item])
+		content_container.add_child(button)
+		
+func show_info(player):
+	player_profile.set_up_info(player)
+#	player_profile.show()
 	
 func _sort(value):
 	sorter.value = value

@@ -1,97 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/ui-components/player-profile/PlayerProfile.gd" type="Script" id=2]
-[ext_resource path="res://assets/eyes.png" type="Texture" id=3]
-[ext_resource path="res://assets/shopping_cart.png" type="Texture" id=4]
 
 [node name="PlayerProfile" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-
-[node name="Info" type="HBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 74.0
-margin_right = -716.0
-margin_bottom = -946.0
-size_flags_horizontal = 3
-custom_constants/separation = 50
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Name" type="Label" parent="Info"]
-margin_right = 1036.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 250, 0 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Abel Hernandez"
-clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="General" type="HBoxContainer" parent="Info"]
-visible = false
-margin_left = 543.0
-margin_right = 1036.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 400, 60 )
-size_flags_horizontal = 3
-
-[node name="Position" type="Label" parent="Info/General"]
-margin_top = 2.0
-margin_right = 30.0
-margin_bottom = 58.0
-text = "U"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Prestige" type="Label" parent="Info/General"]
-margin_left = 34.0
-margin_top = 2.0
-margin_right = 64.0
-margin_bottom = 58.0
-text = "U"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Mental" type="HBoxContainer" parent="Info"]
-visible = false
-margin_left = 750.0
-margin_right = 1150.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 400, 60 )
-size_flags_horizontal = 3
-custom_constants/separation = 12
-
-[node name="Fisical" type="HBoxContainer" parent="Info"]
-visible = false
-margin_left = 1200.0
-margin_right = 1600.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 400, 60 )
-size_flags_horizontal = 3
-custom_constants/separation = 52
-
-[node name="Details" type="Button" parent="Info"]
-margin_left = 1086.0
-margin_right = 1118.0
-margin_bottom = 60.0
-icon = ExtResource( 3 )
-
-[node name="Select" type="Button" parent="Info"]
-margin_left = 1168.0
-margin_right = 1200.0
-margin_bottom = 60.0
-icon = ExtResource( 4 )
 
 [node name="DetailPopup" type="Popup" parent="."]
 anchor_right = 1.0
@@ -176,13 +92,13 @@ __meta__ = {
 }
 
 [node name="TitleLabel" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
-margin_right = 322.0
+margin_right = 155.0
 margin_bottom = 56.0
 text = "FISICAL"
 
 [node name="Title" type="Label" parent="DetailPopup/TabContainer/Info/Fisical"]
-margin_left = 362.0
-margin_right = 414.0
+margin_left = 195.0
+margin_right = 195.0
 margin_bottom = 56.0
 
 [node name="Info" type="GridContainer" parent="DetailPopup/TabContainer/Info"]
@@ -311,8 +227,6 @@ margin_right = 1144.0
 margin_bottom = 58.0
 text = "X"
 
-[connection signal="pressed" from="Info/Details" to="." method="_on_Details_pressed"]
-[connection signal="pressed" from="Info/Select" to="." method="_on_Select_pressed"]
 [connection signal="pressed" from="DetailPopup/TabContainer/Info/Hide" to="." method="_on_Hide_pressed"]
 [connection signal="pressed" from="DetailPopup/TabContainer/Story/Hide" to="." method="_on_Hide_pressed"]
 [connection signal="pressed" from="DetailPopup/TabContainer/Contract/Hide" to="." method="_on_Hide_pressed"]

@@ -41,17 +41,6 @@ margin_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CurrentPlayers" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 746.079
-margin_top = 73.0205
-margin_right = 1546.08
-margin_bottom = 873.02
-rect_pivot_offset = Vector2( 400, 400 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 70
-
 [node name="NameSearch" type="LineEdit" parent="."]
 margin_left = 40.0
 margin_top = 60.0
@@ -111,38 +100,6 @@ margin_top = 609.562
 margin_right = 387.943
 margin_bottom = 665.562
 
-[node name="Paginator" type="HBoxContainer" parent="."]
-visible = false
-margin_left = 824.0
-margin_top = 896.0
-margin_right = 1348.0
-margin_bottom = 956.0
-custom_constants/separation = 80
-
-[node name="Prev" type="Button" parent="Paginator"]
-margin_right = 109.0
-margin_bottom = 60.0
-text = "PREV"
-
-[node name="PageCounter" type="Label" parent="Paginator"]
-margin_left = 189.0
-margin_top = 2.0
-margin_right = 311.0
-margin_bottom = 58.0
-text = "12/100"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Next" type="Button" parent="Paginator"]
-margin_left = 391.0
-margin_right = 500.0
-margin_bottom = 60.0
-text = "NEXT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Close" type="Button" parent="."]
 margin_left = 1776.0
 margin_top = 60.0
@@ -155,6 +112,4 @@ text = "X"
 [connection signal="item_selected" from="PositionSelect" to="." method="_on_PositionSelect_item_selected"]
 [connection signal="item_selected" from="FootSelect" to="." method="_on_FootSelect_item_selected"]
 [connection signal="item_selected" from="InfoSelect" to="." method="_on_InfoSelect_item_selected"]
-[connection signal="pressed" from="Paginator/Prev" to="." method="_on_Prev_pressed"]
-[connection signal="pressed" from="Paginator/Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]
