@@ -95,4 +95,5 @@ margin_top = 56.0
 margin_right = 1831.0
 margin_bottom = 116.0
 text = "X"
+
 [connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]

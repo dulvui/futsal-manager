@@ -33,5 +33,12 @@ margin_right = 669.0
 margin_bottom = 944.0
 text = "PREV"
 
+[node name="Pages" type="Label" parent="."]
+margin_left = 880.0
+margin_top = 888.0
+margin_right = 920.0
+margin_bottom = 944.0
+text = "1/12"
+
 [connection signal="pressed" from="Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="Prev" to="." method="_on_Prev_pressed"]
