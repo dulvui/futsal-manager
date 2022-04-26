@@ -9,4 +9,4 @@ func set_up(value):
 	elif value < 16:
 		$Label.add_color_override("font_color", Color.blue)
 	else:
-		$Label.add_color_override("font_color", Color.green)
+		$Label.add_color_override("font_color", Color.darkgreen)

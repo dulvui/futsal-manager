@@ -1,8 +1,8 @@
 [gd_resource type="StyleBoxFlat" format=2]
 
 [resource]
+content_margin_left = 10.0
+content_margin_right = 10.0
 bg_color = Color( 0.870588, 0.435294, 0.47451, 1 )
-expand_margin_left = 15.0
-expand_margin_right = 15.0
 shadow_size = 5
 shadow_offset = Vector2( 0, 3 )

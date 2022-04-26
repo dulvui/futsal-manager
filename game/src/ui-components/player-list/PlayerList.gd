@@ -9,14 +9,9 @@ var team_search = ""
 var position_search = ""
 var foot_search = ""
 
-var current_page = 0
-
 var all_players = []
 var current_players = []
 
-var info_type = "GENERAL"
-
-const MENTAL_TITLES = ["ag","an","co","de","ma","om","tw","vi","wr"]
 const FISICAL_TITLES = ["acc","agi","jum","pac","sta","str"]
 const GENERAL_TITLES = ["POS","PR."]
 
@@ -54,12 +49,7 @@ func _ready():
 	$FootSelect.add_item("NO_FOOT")
 	for foot in FOOTS:
 		$FootSelect.add_item(foot)
-	
-	for info_type in INFO_TYPES:
-		$InfoSelect.add_item(info_type)
 		
-	$Paginator/PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
-	
 	for title in GENERAL_TITLES:
 		var label = Label.new()
 		label.text = title
@@ -67,70 +57,13 @@ func _ready():
 	
 
 func add_subs():
-	for child in $CurrentPlayers.get_children():
-		child.queue_free()
-		
-	$TeamSelect.hide()
-	$LegaueSelect.hide()
-	
-#	if filter:
-	current_players = []
-	current_page = 0
-	
-	var team = DataSaver.get_selected_team()
-	for player in team["players"]["subs"]:
-		if filter_player(player):
-			current_players.append(player)
-				
-	for player in current_players.slice(current_page*10,((current_page + 1) * 10)-1):
-		var player_profile = PlayerProfile.instance()
-		player_profile.connect("player_select",self,"select_player",[player])
-		player_profile.set_up_info(player,info_type)
-		$CurrentPlayers.add_child(player_profile)
-		
-	$Paginator/PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
-	
+	pass
 		
 func add_match_players():
-	for child in $CurrentPlayers.get_children():
-		child.queue_free()
-	
-	$TeamSelect.hide()
-	$LegaueSelect.hide()
-	var team = DataSaver.get_selected_team()
-	for player in team["players"]["active"]:
-		var player_profile = PlayerProfile.instance()
-		player_profile.connect("player_select",self,"select_player",[player])
-		$CurrentPlayers.add_child(player_profile)
-		player_profile.set_up_info(player,info_type)
-	
-	for player in team["players"]["subs"].slice(0,9):
-		var player_profile = PlayerProfile.instance()
-		player_profile.connect("player_select",self,"select_player",[player])
-		$CurrentPlayers.add_child(player_profile)
-		player_profile.set_up_info(player,info_type)
-	
+	pass
 		
 func add_all_players(filter):
-	for child in $CurrentPlayers.get_children():
-		child.queue_free()
-		
-	if filter:
-		current_players = []
-		current_page = 0
-		for player in all_players:
-			if filter_player(player):
-				current_players.append(player)
-				
-	for player in current_players.slice(current_page*10,((current_page + 1) * 10)-1):
-		var player_profile = PlayerProfile.instance()
-		player_profile.connect("player_select",self,"select_player",[player])
-		player_profile.set_up_info(player,info_type)
-		$CurrentPlayers.add_child(player_profile)
-		
-	$Paginator/PageCounter.text = str(current_page + 1) + "/" + str(current_players.size()/10 + 1)
-	
-	
+	pass
 
 func select_player(player):
 	print("change in lst")
@@ -179,45 +112,6 @@ func _on_FootSelect_item_selected(index):
 		foot_search = ""
 	add_all_players(true)
 
-
-func _on_Next_pressed():
-	current_page += 1
-	if current_page > current_players.size()/10:
-		current_page = 0
-	add_all_players(false)
-
-
-func _on_Prev_pressed():
-	current_page -= 1
-	if current_page < 0:
-		current_page = current_players.size() / 10
-	add_all_players(false)
-
-
-func _on_InfoSelect_item_selected(index):
-	info_type = INFO_TYPES[index]
-	add_all_players(false)
-	
-	for child in $Titles/Details.get_children():
-		child.queue_free()
-	
-	
-	match info_type:
-		"GENERAL":
-			for title in GENERAL_TITLES:
-				var label = Label.new()
-				label.text = title
-				$Titles/Details.add_child(label)
-		"MENTAL":
-			for title in MENTAL_TITLES:
-				var label = Label.new()
-				label.text = title
-				$Titles/Details.add_child(label)
-		"FISICAL":
-			for title in FISICAL_TITLES:
-				var label = Label.new()
-				label.text = title
-				$Titles/Details.add_child(label)
 
 func _on_Close_pressed():
 	hide()
