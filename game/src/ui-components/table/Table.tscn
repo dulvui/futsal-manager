@@ -6,6 +6,8 @@
 [node name="Table" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -688.0
+margin_bottom = -336.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -20,21 +22,12 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -808.0
-margin_top = -424.0
-margin_right = 1112.0
-margin_bottom = 656.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_scale = Vector2( 0.8, 0.8 )
 custom_constants/vseparation = 0
 custom_constants/hseparation = 64
 columns = 9
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Pos" type="Label" parent="GridContainer"]
 margin_right = 86.0
@@ -90,6 +83,7 @@ margin_bottom = 56.0
 text = "PTS"
 
 [node name="Close" type="Button" parent="."]
+visible = false
 margin_left = 1792.0
 margin_top = 56.0
 margin_right = 1831.0
