@@ -33,6 +33,7 @@ func _ready():
 	var headers = ["surname"]
 	for mental in Constants.MENTAL:
 		headers.append(mental)
+		
 	$Table.set_up(all_players.duplicate(true), headers)
 			
 	$LegaueSelect.add_item("ITALIA")
@@ -80,8 +81,7 @@ func filter_player(player):
 		
 
 func _on_NameSearch_text_changed(new_text):
-	name_search = new_text
-	add_all_players(true)
+	$Table.filter(new_text, "surname")
 
 
 func _on_TeamSelect_item_selected(index):

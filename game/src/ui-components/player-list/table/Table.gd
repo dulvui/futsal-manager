@@ -16,7 +16,8 @@ onready var pages = $Pages
 var current_page = 0
 
 var headers
-var content
+var content # base content
+var current_content # current visible content, can be filtered
 
 var sorter = ContentSort.new()
 var sort_memory = {} # to save wich value is already sorted and how
@@ -24,6 +25,7 @@ var sort_memory = {} # to save wich value is already sorted and how
 	
 func set_up(_content, _headers):
 	content = _content
+	current_content = content
 	headers = _headers
 	
 		
@@ -44,8 +46,6 @@ func set_up(_content, _headers):
 	# set up sort memory
 	for header in headers:
 		sort_memory[header] = "no"
-	
-	pages.text = "1/" + str((content.size()/SIZE) + 1)
 
 func _set_up_headers():
 	for header in headers:
@@ -67,7 +67,7 @@ func _set_up_content():
 	_set_up_headers()
 	
 	content_container.columns = headers.size() + 1
-	for item in content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
+	for item in current_content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
 		for header in headers:
 			var label
 			if typeof(item[header]) == 3:
@@ -83,11 +83,26 @@ func _set_up_content():
 		button.connect("button_down",self,"show_info",[item])
 		content_container.add_child(button)
 		
+	update_pages()
+
+
+func filter(value, key):
+	if value and key:
+		current_page = 0
+		var filtered_content = []
+		for item in content:
+			if value.to_upper() in item[key].to_upper():
+				filtered_content.append(item)
+		current_content = filtered_content
+	else:
+		current_content = content
+	_set_up_content()
+	
+
 func show_info(player):
 	var player_profile = PlayerProfile.instance()
 	add_child(player_profile)
 	player_profile.set_up_info(player)
-#	player_profile.show()
 	
 func _sort(value):
 	sorter.value = value
@@ -115,15 +130,18 @@ class ContentSort:
 
 
 func _on_Next_pressed():
-	if current_page < content.size() / SIZE:
+	if current_page < current_content.size() / SIZE:
 		current_page += 1
 		_set_up_content()
-	pages.text = str(current_page + 1) + "/" + str((content.size()/SIZE) + 1)
+	update_pages()
 
 
 func _on_Prev_pressed():
 	if current_page > 0:
 		current_page -= 1
 		_set_up_content()
-	pages.text = str(current_page + 1) + "/" + str((content.size()/SIZE) + 1)
+	update_pages()
 
+func update_pages():
+	pages.text = str(current_page + 1) + "/" + str((current_content.size()/SIZE) + 1)
+	
