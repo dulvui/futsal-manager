@@ -322,7 +322,7 @@ def create_player(nationality, position, nr, team):
     }
 
     player["attributes"] = {
-        "goal_keeper": get_goalkeeper_attributes(
+        "goalkeeper": get_goalkeeper_attributes(
             2020-birth_date.year, nationality, prestige, position),
         "mental": get_mental(2020-birth_date.year, nationality, prestige, position),
         "technical": get_technical(2020-birth_date.year, nationality, prestige, position),
