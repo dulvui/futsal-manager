@@ -52,10 +52,10 @@ func change_active_player():
 
 func get_goalkeeper_attributes():
 	var attributes = 0
-	attributes +=  goalkeeper.attributes["reflexes"]
-	attributes +=  goalkeeper.attributes["positioning"]
-	attributes +=  goalkeeper.attributes["kicking"]
-	attributes +=  goalkeeper.attributes["handling"]
-	attributes +=  goalkeeper.attributes["diving"]
-	attributes +=  goalkeeper.attributes["speed"]
+	attributes +=  goalkeeper.attributes["goalkeeper"]["reflexes"]
+	attributes +=  goalkeeper.attributes["goalkeeper"]["positioning"]
+	attributes +=  goalkeeper.attributes["goalkeeper"]["kicking"]
+	attributes +=  goalkeeper.attributes["goalkeeper"]["handling"]
+	attributes +=  goalkeeper.attributes["goalkeeper"]["diving"]
+	attributes +=  goalkeeper.attributes["goalkeeper"]["speed"]
 	return attributes
