@@ -2,13 +2,15 @@ extends Control
 
 const ColorNumber = preload("res://src/ui-components/color-number/ColorNumber.tscn")
 const NameLabel = preload("res://src/ui-components/player-list/table/name-label/NameLabel.tscn")
+const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
+
 
 
 const SIZE = 10
 
 onready var content_container = $MarginContainer/Content
 onready var pages = $Pages
-onready var player_profile = $PlayerProfile
+#onready var player_profile = $PlayerProfile
 
 
 var current_page = 0
@@ -33,8 +35,8 @@ func set_up(_content, _headers):
 			item[key] = item["attributes"]["physical"][key]
 		for key in item["attributes"]["technical"].keys():
 			item[key] = item["attributes"]["technical"][key]
-		for key in item["attributes"]["goal_keeper"].keys():
-			item[key] = item["attributes"]["goal_keeper"][key]
+		for key in item["attributes"]["goalkeeper"].keys():
+			item[key] = item["attributes"]["goalkeeper"][key]
 #		item.erase("attribute")
 		
 	_set_up_content()
@@ -82,6 +84,8 @@ func _set_up_content():
 		content_container.add_child(button)
 		
 func show_info(player):
+	var player_profile = PlayerProfile.instance()
+	add_child(player_profile)
 	player_profile.set_up_info(player)
 #	player_profile.show()
 	
