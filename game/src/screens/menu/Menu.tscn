@@ -29,26 +29,26 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 852.0
+margin_left = 842.0
 margin_top = 448.0
-margin_right = 1068.0
+margin_right = 1078.0
 margin_bottom = 632.0
 custom_constants/separation = 8
 
 [node name="Continue" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 216.0
+margin_right = 236.0
 margin_bottom = 56.0
 text = "CONTINUE"
 
 [node name="StartGame" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 64.0
-margin_right = 216.0
+margin_right = 236.0
 margin_bottom = 120.0
 text = "START"
 
 [node name="Settings" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 128.0
-margin_right = 216.0
+margin_right = 236.0
 margin_bottom = 184.0
 text = "SETTINGS"
 

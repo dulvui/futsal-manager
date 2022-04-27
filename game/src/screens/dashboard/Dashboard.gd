@@ -47,11 +47,16 @@ func _on_Continue_pressed():
 		get_tree().change_scene("res://src/screens/match/Match.tscn")
 
 func _on_Email_pressed():
+	_hide_all()
 	$Email.show()
 
-
 func _on_Table_pressed():
+	_hide_all()
 	$Table.show()
+	
+func _on_Calendar_pressed():
+	_hide_all()
+	$Calendar.show()
 
 
 func _on_AllPlayerList_select_player(player):
@@ -81,10 +86,11 @@ func _on_ContractOffer_cancel():
 	$ContractPopup.hide()
 
 
-func _on_Calendar_pressed():
-	$Calendar.show()
-
-
 func _on_ContractOffer_confirm():
 	$Email.update_messages()
 	$ContractPopup.hide()
+	
+func _hide_all():
+	$Table.hide()
+	$Email.hide()
+	$Calendar.hide()

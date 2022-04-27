@@ -6,6 +6,8 @@
 [node name="Calendar" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -656.0
+margin_bottom = -296.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -22,10 +24,8 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 304.0
-margin_top = 56.0
-margin_right = -328.0
-margin_bottom = -124.0
+margin_right = -120.0
+margin_bottom = -200.0
 custom_constants/vseparation = 20
 custom_constants/hseparation = 40
 columns = 7
@@ -78,42 +78,41 @@ __meta__ = {
 }
 
 [node name="Close" type="Button" parent="."]
-margin_left = 1775.97
-margin_top = 53.8174
-margin_right = 1814.97
-margin_bottom = 113.817
+visible = false
+margin_left = 1152.0
+margin_top = 32.0
+margin_right = 1199.0
+margin_bottom = 91.9996
 text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Paginator" type="HBoxContainer" parent="."]
-margin_left = 720.0
-margin_top = 936.0
-margin_right = 1170.0
-margin_bottom = 996.0
+margin_left = 360.0
+margin_top = 816.0
+margin_right = 826.0
+margin_bottom = 876.0
 custom_constants/separation = 50
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Prev" type="Button" parent="Paginator"]
-margin_right = 121.0
+margin_right = 129.0
 margin_bottom = 60.0
 text = "PREV"
 
 [node name="Page" type="Label" parent="Paginator"]
-margin_left = 171.0
+margin_left = 179.0
 margin_top = 2.0
-margin_right = 279.0
+margin_right = 287.0
 margin_bottom = 58.0
 text = "wewe"
 
 [node name="Next" type="Button" parent="Paginator"]
-margin_left = 329.0
-margin_right = 450.0
+margin_left = 337.0
+margin_right = 466.0
 margin_bottom = 60.0
 text = "NEXT"
+
 [connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]
 [connection signal="pressed" from="Paginator/Prev" to="." method="_on_Prev_pressed"]
 [connection signal="pressed" from="Paginator/Next" to="." method="_on_Next_pressed"]
