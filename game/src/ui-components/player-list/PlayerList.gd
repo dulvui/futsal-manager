@@ -20,9 +20,9 @@ const INFO_TYPES = ["GENERAL","FISICAL","MENTAL"]
 const FOOTS = ["R","L","RL"]
 
 
-func _ready():
+func set_up(selected_team = false):
 	for team in DataSaver.teams:
-		if team["name"] != DataSaver.selected_team:
+		if not selected_team or team["name"] == DataSaver.selected_team:
 			for player in team["players"]["active"]:
 				all_players.append(player)
 				current_players.append(player)
@@ -55,16 +55,11 @@ func _ready():
 		var label = Label.new()
 		label.text = title
 		$Titles/Details.add_child(label)
-	
 
-func add_subs():
-	pass
 		
 func add_match_players():
 	pass
-		
-func add_all_players(filter):
-	pass
+
 
 func select_player(player):
 	print("change in lst")
@@ -84,33 +79,33 @@ func _on_NameSearch_text_changed(new_text):
 	$Table.filter(new_text, "surname")
 
 
-func _on_TeamSelect_item_selected(index):
-	var teams = []
-	for team in DataSaver.teams:
-		if team["name"] != DataSaver.selected_team:
-			teams.append(team)
-	
-	if index > 0:
-		team_search = teams[index-1]["name"]
-	else:
-		team_search = ""
-	add_all_players(true)
+#func _on_TeamSelect_item_selected(index):
+#	var teams = []
+#	for team in DataSaver.teams:
+#		if team["name"] != DataSaver.selected_team:
+#			teams.append(team)
+#
+#	if index > 0:
+#		team_search = teams[index-1]["name"]
+#	else:
+#		team_search = ""
+#	add_all_players(true)
 
 
-func _on_PositionSelect_item_selected(index):
-	if index > 0:
-		position_search = POSITIONS[index-1]
-	else:
-		position_search = ""
-	add_all_players(true)
-
-
-func _on_FootSelect_item_selected(index):
-	if index > 0:
-		foot_search = FOOTS[index-1]
-	else:
-		foot_search = ""
-	add_all_players(true)
+#func _on_PositionSelect_item_selected(index):
+#	if index > 0:
+#		position_search = POSITIONS[index-1]
+#	else:
+#		position_search = ""
+#	add_all_players(true)
+#
+#
+#func _on_FootSelect_item_selected(index):
+#	if index > 0:
+#		foot_search = FOOTS[index-1]
+#	else:
+#		foot_search = ""
+#	add_all_players(true)
 
 
 func _on_Close_pressed():

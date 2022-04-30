@@ -55,12 +55,12 @@ func _process(delta):
 	
 
 func _on_Field_pressed():
-	match_simulator.show()
+	$Log.show()
 	$Stats.hide()
 
 
 func _on_Stats_pressed():
-	match_simulator.hide()
+	$Log.hide()
 	$Stats.show()
 
 

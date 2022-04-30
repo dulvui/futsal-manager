@@ -8,11 +8,8 @@ func _ready():
 	$TeamName.text = DataSaver.selected_team
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
-	
-	$AllPlayerList.add_all_players(false)
-	$Formation/PlayerList.add_subs()
-	
 	$Date.text = CalendarUtil.get_date()
+	$AllPlayerList.set_up()
 	
 
 func _process(_delta):
