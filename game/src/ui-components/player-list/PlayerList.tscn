@@ -107,6 +107,7 @@ margin_right = 1815.0
 margin_bottom = 120.0
 text = "X"
 
+[connection signal="select_player" from="Table" to="." method="_on_Table_select_player"]
 [connection signal="text_changed" from="NameSearch" to="." method="_on_NameSearch_text_changed"]
 [connection signal="item_selected" from="TeamSelect" to="." method="_on_TeamSelect_item_selected"]
 [connection signal="item_selected" from="PositionSelect" to="." method="_on_PositionSelect_item_selected"]

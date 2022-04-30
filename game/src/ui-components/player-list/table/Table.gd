@@ -1,10 +1,10 @@
 extends Control
 
+signal select_player
+
 const ColorNumber = preload("res://src/ui-components/color-number/ColorNumber.tscn")
 const NameLabel = preload("res://src/ui-components/player-list/table/name-label/NameLabel.tscn")
 const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
-
-
 
 const SIZE = 10
 
@@ -59,6 +59,11 @@ func _set_up_headers():
 	label.text = "i"
 	content_container.add_child(label)
 	
+	# change label
+	var lable_change = Label.new()
+	lable_change.text = "c"
+	content_container.add_child(lable_change)
+	
 func _set_up_content():
 	content_container.queue_free()
 	content_container = GridContainer.new()
@@ -66,7 +71,7 @@ func _set_up_content():
 	
 	_set_up_headers()
 	
-	content_container.columns = headers.size() + 1
+	content_container.columns = headers.size() + 2 # +2 for info and change button
 	for item in current_content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
 		for header in headers:
 			var label
@@ -77,11 +82,18 @@ func _set_up_content():
 				label = NameLabel.instance()
 				label.set_name(item[header])
 			content_container.add_child(label)
+			
 		#info button
 		var button = Button.new()
 		button.text = "i"
 		button.connect("button_down",self,"show_info",[item])
 		content_container.add_child(button)
+		
+		#change button
+		var button_change = Button.new()
+		button_change.text = "c"
+		button_change.connect("button_down",self,"change_player",[item])
+		content_container.add_child(button_change)
 		
 	update_pages()
 
@@ -103,6 +115,9 @@ func show_info(player):
 	var player_profile = PlayerProfile.instance()
 	add_child(player_profile)
 	player_profile.set_up_info(player)
+	
+func change_player(player):
+	emit_signal("select_player",player)
 	
 func _sort(value):
 	sorter.value = value

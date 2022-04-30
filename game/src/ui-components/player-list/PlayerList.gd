@@ -60,11 +60,6 @@ func set_up(selected_team = false):
 func add_match_players():
 	pass
 
-
-func select_player(player):
-	print("change in lst")
-	emit_signal("select_player",player)
-		
 func filter_player(player):
 	if name_search.length() == 0 or name_search.to_upper() in player["surname"].to_upper():
 		if team_search.length() == 0 or team_search == player["team"]:
@@ -110,3 +105,8 @@ func _on_NameSearch_text_changed(new_text):
 
 func _on_Close_pressed():
 	hide()
+
+
+func _on_Table_select_player(player):
+	print("change in list")
+	emit_signal("select_player",player)

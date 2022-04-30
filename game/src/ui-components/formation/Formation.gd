@@ -31,9 +31,10 @@ func _on_FormationSelect_item_selected(index):
 	animation_player.play("Fade" + DataSaver.formation)
 	
 
-func _set_players():
+func _set_players(set_up=true):
 	var team = DataSaver.get_selected_team()
-	$PlayerList.set_up(true)
+	if set_up:
+		$PlayerList.set_up(true)
 	$Field/G.set_player(team["players"]["active"][0])
 	$Field/D.set_player(team["players"]["active"][1])
 	$Field/WL.set_player(team["players"]["active"][2])
@@ -69,7 +70,7 @@ func _on_G_change_player(_player):
 func _on_PlayerList_select_player(_player):
 	print("formation select")
 	DataSaver.change_player(player_to_replace,_player)
-	_set_players()
+	_set_players(false)
 	$PlayerList.hide()
 	emit_signal("change")
 
