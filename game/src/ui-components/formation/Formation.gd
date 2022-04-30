@@ -11,8 +11,6 @@ var player_to_replace
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	
 	for formation in formations:
 		$FormationSelect.add_item(formation)
 		
@@ -35,7 +33,7 @@ func _on_FormationSelect_item_selected(index):
 
 func _set_players():
 	var team = DataSaver.get_selected_team()
-	$PlayerList.add_subs()
+	$PlayerList.set_up(true)
 	$Field/G.set_player(team["players"]["active"][0])
 	$Field/D.set_player(team["players"]["active"][1])
 	$Field/WL.set_player(team["players"]["active"][2])
