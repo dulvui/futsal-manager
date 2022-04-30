@@ -10,6 +10,7 @@ signal possession_change
 signal home_goal
 signal away_goal
 signal nearly_goal
+signal action_message
 
 class_name ActionUtil
 
@@ -23,9 +24,6 @@ enum Defense {INTERCEPT, WAIT, TACKLE, RUN, BLOCK, HEADER}
 enum Attack {PASS, DRIBBLE, RUN, SHOOT}
 enum Pass { SHORT_PASS, LONG_PASS, CROSS}
 enum Shoot {SHOOT, LONG_SHOOT, HEADER}
-
-onready var log_richtext = get_node("../Log")
-
 
 onready var home_team = $HomeTeam
 onready var away_team = $AwayTeam
@@ -199,8 +197,8 @@ func _update_current_state(goal):
 				current_state = State.NORMAL
 
 func _log(attack, result):
-	log_richtext.add_text("\n" + home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + "  ")
-	log_richtext.add_text("attack: " + str(Attack.keys()[attack]) + " - defense: " + str(result))
+	emit_signal("action_message","\n" + home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + "  ")
+	emit_signal("action_message","attack: " + str(Attack.keys()[attack]) + " - defense: " + str(result))
 
 # PLAYER/POSSESSION CHANGE
 func _change_possession():

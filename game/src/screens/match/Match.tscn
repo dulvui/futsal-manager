@@ -33,9 +33,6 @@ position = Vector2( 568, 198 )
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TopBar" type="HBoxContainer" parent="HUD"]
 anchor_left = 0.5
@@ -204,6 +201,13 @@ margin_top = -21.5
 margin_right = 99.5
 margin_bottom = 21.5
 text = "POSSESSION"
+
+[node name="Log" type="RichTextLabel" parent="."]
+margin_left = 581.0
+margin_top = 207.0
+margin_right = 1763.0
+margin_bottom = 774.0
+scroll_following = true
 
 [node name="Stats" type="MarginContainer" parent="."]
 visible = false
@@ -518,9 +522,6 @@ margin_top = 97.515
 margin_right = 230.705
 margin_bottom = 153.515
 text = "SKIP"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Goal" type="Label" parent="."]
 visible = false
@@ -543,6 +544,7 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
+[connection signal="action_message" from="MatchSimulator" to="." method="_on_MatchSimulator_action_message"]
 [connection signal="away_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_away_goal"]
 [connection signal="half_time" from="MatchSimulator" to="." method="_on_MatchSimulator_half_time"]
 [connection signal="home_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_home_goal"]

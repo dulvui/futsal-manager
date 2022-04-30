@@ -2,13 +2,11 @@ extends Node2D
 
 signal home_goal
 signal away_goal
-
+signal action_message
 signal half_time
 signal match_end
 
 const HALF_TIME = 1200 # seconds for halftime
-
-
 
 onready var action_util = $ActionUtil
 
@@ -84,3 +82,7 @@ func _on_ActionUtil_away_goal():
 
 func _on_ActionUtil_home_goal():
 	emit_signal("home_goal")
+
+
+func _on_ActionUtil_action_message(message):
+	emit_signal("action_message", message)
