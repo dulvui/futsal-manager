@@ -158,7 +158,6 @@ func make_transfer(transfer):
 			
 	
 func change_player(position,player):
-	print("change player")
 	var team = DataSaver.get_selected_team()
 	team["players"]["subs"].append(team["players"]["active"][position])
 	team["players"]["active"][position] = player
