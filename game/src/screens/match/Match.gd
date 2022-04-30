@@ -137,25 +137,19 @@ func _on_SKIP_pressed():
 
 func _on_MatchSimulator_home_goal():
 	match_simulator.pause()
-#	match_simulator.show()
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
-#	$Stats.show() #make animation
-#	match_simulator.hide()
 	match_simulator.continue_match()
 
 
 func _on_MatchSimulator_away_goal():
 	match_simulator.pause()
-#	match_simulator.show()
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
-#	$Stats.show() #make animation
-#	match_simulator.hide()
 	match_simulator.continue_match()
 
 
@@ -169,3 +163,7 @@ func _on_MatchSimulator_half_time():
 
 func _on_MatchSimulator_match_end():
 	match_end()
+
+
+func _on_MatchSimulator_action_message(message):
+	$Log.add_text(message)
