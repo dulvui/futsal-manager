@@ -5,7 +5,7 @@ extends Node
 const MATCH_SPEED_FACTOR = 4
 
 # bigger number => more saves
-const GOAL_KEEPER_FACTOR = 8
+const GOAL_KEEPER_FACTOR = 15
 
 # factor for defining attack (0 - 100)
 const ATTACK_FACTOR = 1000
