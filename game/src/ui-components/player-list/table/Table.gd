@@ -121,7 +121,7 @@ func change_player(player):
 	
 func _sort(value):
 	sorter.value = value
-	content.sort_custom(sorter, _get_sorting(value))
+	current_content.sort_custom(sorter, _get_sorting(value))
 	_set_up_content()
 	
 func _get_sorting(value):
