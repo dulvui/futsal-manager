@@ -74,11 +74,10 @@ __meta__ = {
 }
 
 [node name="PositionSelect" type="OptionButton" parent="."]
-visible = false
-margin_left = 66.6709
-margin_top = 361.928
-margin_right = 466.671
-margin_bottom = 417.928
+margin_left = 512.0
+margin_top = 64.0
+margin_right = 912.0
+margin_bottom = 120.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
