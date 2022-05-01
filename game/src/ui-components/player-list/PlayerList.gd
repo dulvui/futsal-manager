@@ -87,12 +87,12 @@ func _on_NameSearch_text_changed(new_text):
 #	add_all_players(true)
 
 
-#func _on_PositionSelect_item_selected(index):
-#	if index > 0:
-#		position_search = POSITIONS[index-1]
-#	else:
-#		position_search = ""
-#	add_all_players(true)
+func _on_PositionSelect_item_selected(index):
+	if index > 0:
+		position_search = POSITIONS[index-1]
+	else:
+		position_search = ""
+	$Table.filter(position_search, "position")
 #
 #
 #func _on_FootSelect_item_selected(index):
