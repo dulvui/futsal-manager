@@ -65,17 +65,13 @@ func _on_NameSearch_text_changed(text):
 	_filter_table()
 
 
-#func _on_TeamSelect_item_selected(index):
-#	var teams = []
-#	for team in DataSaver.teams:
-#		if team["name"] != DataSaver.selected_team:
-#			teams.append(team)
-#
-#	if index > 0:
-#		team_search = teams[index-1]["name"]
-#	else:
-#		team_search = ""
-#	add_all_players(true)
+func _on_TeamSelect_item_selected(index):
+	if index > 0:
+		active_filters["team"] = $TeamSelect.get_item_text(index)
+	else:
+		active_filters["team"] = ""
+	_filter_table()
+	
 
 
 func _on_PositionSelect_item_selected(index):

@@ -64,11 +64,10 @@ __meta__ = {
 }
 
 [node name="TeamSelect" type="OptionButton" parent="."]
-visible = false
-margin_left = 66.6709
-margin_top = 253.984
-margin_right = 466.671
-margin_bottom = 309.984
+margin_left = 1032.0
+margin_top = 65.0
+margin_right = 1432.0
+margin_bottom = 121.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -76,7 +75,7 @@ __meta__ = {
 [node name="PositionSelect" type="OptionButton" parent="."]
 margin_left = 512.0
 margin_top = 65.0
-margin_right = 912.0
+margin_right = 680.0
 margin_bottom = 121.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -93,9 +92,9 @@ __meta__ = {
 }
 
 [node name="InfoSelect" type="OptionButton" parent="."]
-margin_left = 1008.0
+margin_left = 738.0
 margin_top = 65.0
-margin_right = 1288.0
+margin_right = 1018.0
 margin_bottom = 121.0
 
 [node name="Close" type="Button" parent="."]
