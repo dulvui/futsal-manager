@@ -18,6 +18,12 @@ const SHOOT_FACTOR = 1000
 # bigger number => more success
 const PASS_SUCCESS_FACTOR = 3 # attack 3 : 1 defense
 
-const MENTAL = ["aggression","anticipation","decisions","concentration",
-				"teamwork","vision","work_rate","offensive_movement","marking"]
+const ATTRIBUTES = {
+	"mental" : ["aggression","anticipation","decisions","concentration",
+				"teamwork","vision","work_rate","offensive_movement","marking"],
+	"physical" : ["pace","acceleration","stamina","strength", "agility","jump"],
+	"goalkeeper": ["reflexes","positioning","kicking","handling","diving","speed"],
+	"technical": ["crossing","passing","long_passing","tackling","heading","interception",
+					"shooting","long_shooting","penalty","finishing","dribbling","blocking"],
+}
 

@@ -23,29 +23,33 @@ var sorter = ContentSort.new()
 var sort_memory = {} # to save wich value is already sorted and how
 
 	
-func set_up(_content, _headers):
-	content = _content
-	current_content = content
+func set_up(_headers,_content=null):
 	headers = _headers
 	
+	# if content, table is setup for first time
+	# else headers are changed
+	if _content:
+		content = _content
+		current_content = content
 		
-	# flatten attributes
-	for item in content:
-		for key in item["attributes"]["mental"].keys():
-			item[key] = item["attributes"]["mental"][key]
-		for key in item["attributes"]["physical"].keys():
-			item[key] = item["attributes"]["physical"][key]
-		for key in item["attributes"]["technical"].keys():
-			item[key] = item["attributes"]["technical"][key]
-		for key in item["attributes"]["goalkeeper"].keys():
-			item[key] = item["attributes"]["goalkeeper"][key]
-#		item.erase("attribute")
-		
-	_set_up_content()
-	
+		# flatten attributes
+		for item in content:
+			for key in item["attributes"]["mental"].keys():
+				item[key] = item["attributes"]["mental"][key]
+			for key in item["attributes"]["physical"].keys():
+				item[key] = item["attributes"]["physical"][key]
+			for key in item["attributes"]["technical"].keys():
+				item[key] = item["attributes"]["technical"][key]
+			for key in item["attributes"]["goalkeeper"].keys():
+				item[key] = item["attributes"]["goalkeeper"][key]
+
 	# set up sort memory
 	for header in headers:
 		sort_memory[header] = "no"
+		
+	_set_up_content()
+	
+
 
 func _set_up_headers():
 	for header in headers:
