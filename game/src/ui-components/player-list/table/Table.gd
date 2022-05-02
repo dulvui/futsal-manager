@@ -98,12 +98,20 @@ func _set_up_content():
 	update_pages()
 
 
-func filter(value, key):
-	if value and key:
+func filter(filters: Dictionary):
+	if filters:
 		current_page = 0
 		var filtered_content = []
 		for item in content:
-			if value.to_upper() in item[key].to_upper():
+			var filter_counter = 0
+			var valid_filter_counter = 0 # because value can be empty
+			for key in filters.keys():
+				var value = filters[key]
+				if value:
+					valid_filter_counter += 1
+					if value.to_upper() in item[key].to_upper():
+						filter_counter += 1
+			if filter_counter == valid_filter_counter:
 				filtered_content.append(item)
 		current_content = filtered_content
 	else:

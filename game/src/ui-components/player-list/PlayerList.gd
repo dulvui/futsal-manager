@@ -4,13 +4,11 @@ signal select_player
 
 const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
 
-var name_search = ""
 var team_search = ""
-var position_search = ""
 var foot_search = ""
 
 var all_players = []
-var current_players = []
+var active_filters = {}
 
 const FISICAL_TITLES = ["acc","agi","jum","pac","sta","str"]
 const GENERAL_TITLES = ["POS","PR."]
@@ -25,10 +23,8 @@ func set_up(selected_team = false):
 		if not selected_team or team["name"] == DataSaver.selected_team:
 			for player in team["players"]["active"]:
 				all_players.append(player)
-				current_players.append(player)
 			for player in team["players"]["subs"]:
 				all_players.append(player)
-				current_players.append(player)
 	
 	var headers = ["surname"]
 	for mental in Constants.MENTAL:
@@ -60,18 +56,10 @@ func set_up(selected_team = false):
 func add_match_players():
 	pass
 
-func filter_player(player):
-	if name_search.length() == 0 or name_search.to_upper() in player["surname"].to_upper():
-		if team_search.length() == 0 or team_search == player["team"]:
-			if team_search.length() == 0 or team_search == player["team"]:
-				if position_search.length() == 0 or position_search == player["position"]:
-					if foot_search.length() == 0 or foot_search == player["foot"]:
-						return true
-	return false
-		
 
-func _on_NameSearch_text_changed(new_text):
-	$Table.filter(new_text, "surname")
+func _on_NameSearch_text_changed(text):
+	active_filters["surname"] = text
+	_filter_table()
 
 
 #func _on_TeamSelect_item_selected(index):
@@ -89,11 +77,10 @@ func _on_NameSearch_text_changed(new_text):
 
 func _on_PositionSelect_item_selected(index):
 	if index > 0:
-		position_search = POSITIONS[index-1]
+		active_filters["position"] = POSITIONS[index-1]
 	else:
-		position_search = ""
-	$Table.filter(position_search, "position")
-#
+		active_filters["position"] = ""
+	_filter_table()
 #
 #func _on_FootSelect_item_selected(index):
 #	if index > 0:
@@ -102,6 +89,8 @@ func _on_PositionSelect_item_selected(index):
 #		foot_search = ""
 #	add_all_players(true)
 
+func _filter_table():
+	$Table.filter(active_filters)
 
 func _on_Close_pressed():
 	hide()
