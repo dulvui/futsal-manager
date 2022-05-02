@@ -83,6 +83,18 @@ func _on_PositionSelect_item_selected(index):
 		active_filters["position"] = POSITIONS[index-1]
 	else:
 		active_filters["position"] = ""
+	
+	var headers = ["surname"]
+	if active_filters["position"] == "G":
+		for attribute in Constants.ATTRIBUTES["goalkeeper"]:
+			headers.append(attribute)
+		$InfoSelect.select(INFO_TYPES.size() - 1)
+	else:
+		for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
+			headers.append(attribute)
+		$InfoSelect.select(0)
+
+	$Table.set_up(headers)
 	_filter_table()
 #
 #func _on_FootSelect_item_selected(index):
@@ -106,7 +118,6 @@ func _on_Table_select_player(player):
 
 func _on_InfoSelect_item_selected(index):
 	var headers = ["surname"]
-	print(INFO_TYPES[index])
-	for mental in Constants.ATTRIBUTES[INFO_TYPES[index]]:
-		headers.append(mental)
+	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
+		headers.append(attribute)
 	$Table.set_up(headers)

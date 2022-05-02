@@ -89,13 +89,13 @@ func _set_up_content():
 			
 		#info button
 		var button = Button.new()
-		button.text = "i"
+		button.text = "info"
 		button.connect("button_down",self,"show_info",[item])
 		content_container.add_child(button)
 		
 		#change button
 		var button_change = Button.new()
-		button_change.text = "c"
+		button_change.text = "chose"
 		button_change.connect("button_down",self,"change_player",[item])
 		content_container.add_child(button_change)
 		
