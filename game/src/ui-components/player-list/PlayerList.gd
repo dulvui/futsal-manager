@@ -14,7 +14,7 @@ const FISICAL_TITLES = ["acc","agi","jum","pac","sta","str"]
 const GENERAL_TITLES = ["POS","PR."]
 
 const POSITIONS = ["G","D","WL","WR","P","U"]
-const INFO_TYPES = ["GENERAL","FISICAL","MENTAL"]
+const INFO_TYPES = ["mental","physical","technical","goalkeeper"]
 const FOOTS = ["R","L","RL"]
 
 
@@ -27,10 +27,10 @@ func set_up(selected_team = false):
 				all_players.append(player)
 	
 	var headers = ["surname"]
-	for mental in Constants.MENTAL:
-		headers.append(mental)
+	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
+		headers.append(attribute)
 		
-	$Table.set_up(all_players.duplicate(true), headers)
+	$Table.set_up(headers, all_players.duplicate(true))
 			
 	$LegaueSelect.add_item("ITALIA")
 	
@@ -51,6 +51,9 @@ func set_up(selected_team = false):
 		var label = Label.new()
 		label.text = title
 		$Titles/Details.add_child(label)
+		
+	for info_type in INFO_TYPES:
+		$InfoSelect.add_item(info_type)
 
 		
 func add_match_players():
@@ -99,3 +102,11 @@ func _on_Close_pressed():
 func _on_Table_select_player(player):
 	print("change in list")
 	emit_signal("select_player",player)
+
+
+func _on_InfoSelect_item_selected(index):
+	var headers = ["surname"]
+	print(INFO_TYPES[index])
+	for mental in Constants.ATTRIBUTES[INFO_TYPES[index]]:
+		headers.append(mental)
+	$Table.set_up(headers)
