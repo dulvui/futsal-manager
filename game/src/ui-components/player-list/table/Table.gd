@@ -54,7 +54,7 @@ func set_up(_headers,_content=null):
 func _set_up_headers():
 	for header in headers:
 		var button = Button.new()
-		button.text = header.substr(0,4)
+		button.text = header.substr(0,3)
 		button.connect("button_down",self,"_sort",[header])
 		content_container.add_child(button)
 	
