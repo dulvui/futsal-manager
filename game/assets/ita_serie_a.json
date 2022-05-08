@@ -4,7 +4,7 @@
         "name": "Acqua&Sapone C5",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -2400,7 +2400,7 @@
         "name": "Pesaro C5",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -4787,7 +4787,7 @@
         "name": "Real Rieti",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 800000,
+        "salary_budget": 800000,
         "players": {
             "active": [
                 {
@@ -7483,7 +7483,7 @@
         "name": "Meta Catania",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -9870,7 +9870,7 @@
         "name": "Napoli Calcio A 5",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -12566,7 +12566,7 @@
         "name": "Feldi Eboli",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -14747,7 +14747,7 @@
         "name": "Came Dosson C5",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -17134,7 +17134,7 @@
         "name": "Maritime Futsal Augusta",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -19212,7 +19212,7 @@
         "name": "Civitella Colormax C5",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -21702,7 +21702,7 @@
         "name": "Lazio Calcio A 5",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -23883,7 +23883,7 @@
         "name": "Latina Calcio A 5",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -26373,7 +26373,7 @@
         "name": "Real Futsal Arzignano",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -28657,7 +28657,7 @@
         "name": "Cagliari",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
@@ -30735,7 +30735,7 @@
         "name": "Lazio",
         "prestige": 12,
         "budget": 9000000,
-        "salary": 1000,
+        "salary_budget": 1000,
         "players": {
             "active": [
                 {
