@@ -22,8 +22,8 @@ func set_up(new_transfer):
 	$Info.text = "The player " + player["name"] + " " +  player["surname"] + " had a contract..."
 
 func _on_IncomeMore_pressed():
-#	if income < team["salary_budget"]:
-	income += 1000
+	if income  < team["salary_budget"]:
+		income += 1000
 	$GridContainer/Income.text = str(income)
 
 func _on_IncomeLess_pressed():

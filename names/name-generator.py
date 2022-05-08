@@ -346,7 +346,7 @@ ita_serie_a = [
         "name": "Acqua&Sapone C5",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -371,7 +371,7 @@ ita_serie_a = [
         "name": "Pesaro C5",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -387,7 +387,7 @@ ita_serie_a = [
         "name": "Real Rieti",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 800000,
+                "salary_budget": 800000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -403,7 +403,7 @@ ita_serie_a = [
         "name": "Meta Catania",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -419,7 +419,7 @@ ita_serie_a = [
         "name": "Napoli Calcio A 5",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -435,7 +435,7 @@ ita_serie_a = [
         "name": "Feldi Eboli",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -451,7 +451,7 @@ ita_serie_a = [
         "name": "Came Dosson C5",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -467,7 +467,7 @@ ita_serie_a = [
         "name": "Maritime Futsal Augusta",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -483,7 +483,7 @@ ita_serie_a = [
         "name": "Civitella Colormax C5",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -499,7 +499,7 @@ ita_serie_a = [
         "name": "Lazio Calcio A 5",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -515,7 +515,7 @@ ita_serie_a = [
         "name": "Latina Calcio A 5",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -531,7 +531,7 @@ ita_serie_a = [
         "name": "Real Futsal Arzignano",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -547,7 +547,7 @@ ita_serie_a = [
         "name": "Cagliari",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -563,7 +563,7 @@ ita_serie_a = [
         "name": "Lazio",
         "prestige": 12,
                 "budget": 9000000,
-                "salary": 1000,
+                "salary_budget": 1000,
                 "players": {
                     "active": [],
                     "subs": []
@@ -581,7 +581,7 @@ ita_serie_b = [
         "name": "Palermo",
         "prestige": 12,
                 "budget": 1000,
-                "salary": 1000
+                "salary_budget": 1000
     },
     {
         "name": "C5 Napoli",
@@ -642,7 +642,7 @@ ita_serie_c = [
         "name": "Palermo",
         "prestige": 12,
                 "budget": 1000,
-                "salary": 1000
+                "salary_budget": 1000
     },
     {
         "name": "C5 Napoli",
