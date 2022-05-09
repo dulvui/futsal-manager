@@ -14,6 +14,7 @@ onready var pages = $Pages
 
 
 var current_page = 0
+var max_page = 0
 
 var headers
 var content # base content
@@ -42,7 +43,7 @@ func set_up(_headers,_content=null):
 				item[key] = item["attributes"]["technical"][key]
 			for key in item["attributes"]["goalkeeper"].keys():
 				item[key] = item["attributes"]["goalkeeper"][key]
-
+				
 	# set up sort memory
 	for header in headers:
 		sort_memory[header] = "no"
@@ -73,6 +74,7 @@ func _set_up_content():
 	content_container = GridContainer.new()
 	$MarginContainer.add_child(content_container)
 	
+	_update_max_page()
 	_set_up_headers()
 	
 	content_container.columns = headers.size() + 2 # +2 for info and change button
@@ -99,7 +101,7 @@ func _set_up_content():
 		button_change.connect("button_down",self,"change_player",[item])
 		content_container.add_child(button_change)
 		
-	update_pages()
+	_update_pages()
 
 
 func filter(filters: Dictionary):
@@ -157,18 +159,23 @@ class ContentSort:
 
 
 func _on_Next_pressed():
-	if current_page < current_content.size() / SIZE:
+	if current_page < max_page - 1:
 		current_page += 1
 		_set_up_content()
-	update_pages()
+	_update_pages()
 
 
 func _on_Prev_pressed():
 	if current_page > 0:
 		current_page -= 1
 		_set_up_content()
-	update_pages()
+	_update_pages()
+	
+func _update_max_page():
+	max_page = current_content.size()/SIZE
+	if current_content.size() % SIZE != 0:
+		max_page += 1
 
-func update_pages():
-	pages.text = str(current_page + 1) + "/" + str((current_content.size()/SIZE) + 1)
+func _update_pages():
+	pages.text = str(current_page + 1) + "/" + str(max_page)
 	
