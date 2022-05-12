@@ -38,45 +38,26 @@ func _ready():
 
 func set_up(_home_team, _away_team):
 	home_team.set_up(_home_team)
-	
 	away_team.set_up(_away_team)
-
+	
 	current_state = State.KICK_OFF
 
 
 func update(time):
 	var attack = _attack()
-	
-	var result = _get_result(attack)
+	var attack_success = _get_result(attack)
 	
 	var goal = false
 	
 	# change active players and possession
-	if result:
+	if attack_success:
 		match attack:
 			Attack.PASS: # , AttackCROSS
 				_change_players()
 			Attack.RUN, Attack.DRIBBLE:
 				_change_defender()
 			Attack.SHOOT: # , Attack.HEADER
-				var goalkeeper_attributes
-				if home_team.has_ball:
-					goalkeeper_attributes = away_team.get_goalkeeper_attributes()
-				else:
-					goalkeeper_attributes = home_team.get_goalkeeper_attributes()
-				
-				var random_goal = randi() % int(goalkeeper_attributes)
-				if random_goal < goalkeeper_attributes / Constants.GOAL_KEEPER_FACTOR:
-					goal = true
-					print("GOAL")
-					if home_team.has_ball:
-						home_stats.increase_goals()
-						emit_signal("home_goal")
-						_change_possession()
-					else:
-						away_stats.increase_goals()
-						emit_signal("away_goal")
-						_change_possession()
+				goal = _check_goal()
 	else:
 		emit_signal("possession_change")
 		_change_possession()
@@ -85,26 +66,39 @@ func update(time):
 	# increase stats
 	match attack:
 		Attack.PASS:
-			_increase_pass(result)
+			_increase_pass(attack_success)
 		Attack.SHOOT:
-			_increase_shots(result)
+			_increase_shots(attack_success)
 #		Attack.HEADER:
 #			_increase_headers(result)
 	
-	_update_current_state(goal)
-	
 	# add random occurencies like corners, fouls etc...
-	
-	# if shoot and no interception, goalkepper needs to safe
-	
+	# if shoot and no interception, goalkepper needs to saf
 	home_team.update_players()
 	away_team.update_players()
-	
 	home_stats.update_possession(home_team.has_ball)
 	away_stats.update_possession(away_team.has_ball)
-	
-	_log(attack, result)
+	_update_current_state(goal)
+	_log(attack, attack_success)
 
+func _check_goal():
+	var goalkeeper_attributes
+	if home_team.has_ball:
+		goalkeeper_attributes = away_team.get_goalkeeper_attributes()
+	else:
+		goalkeeper_attributes = home_team.get_goalkeeper_attributes()
+	
+	var random_goal = randi() % int(goalkeeper_attributes)
+	if random_goal < goalkeeper_attributes / Constants.GOAL_KEEPER_FACTOR:
+		if home_team.has_ball:
+			home_stats.increase_goals()
+			emit_signal("home_goal")
+		else:
+			away_stats.increase_goals()
+			emit_signal("away_goal")
+		_change_possession()
+		return true
+	return false
 	
 # returns true if attack wins, false if defense wins
 func _get_result(attack):
@@ -146,47 +140,14 @@ func _attack():
 				return Attack.PASS
 		State.NORMAL:
 			var random_attack_factor = randi() % Constants.ATTACK_FACTOR
-			var attack
-#enum Attack {PASS = 40, DRIBBLE = 60, RUN = 80, SHOOT = 90}
-			
 			if random_attack_factor < Constants.RUN_FACTOR:
-				attack = Attack.RUN
+				return Attack.RUN
 			elif random_attack_factor < Constants.PASS_FACTOR:
-				attack = Attack.PASS
+				return Attack.PASS
 			elif random_attack_factor < Constants.DRIBBLE_FACTOR:
-				attack = Attack.DRIBBLE
+				return Attack.DRIBBLE
 			else:
-				attack = Attack.SHOOT
-			
-			return attack
-
-
-func _defend(attack):
-	match current_state:
-		State.KICK_OFF:
-			return Defense.WAIT
-		State.PENALTY, State.FREE_KICK, State.PENALTY:
-			return Defense.WAIT
-		State.CORNER:
-			return Defense.INTERCEPT
-		State.NORMAL:
-			match attack:
-				Attack.SHOOT:
-					return Defense.BLOCK
-				Attack.PASS: # Attack.CROSS,
-					return Defense.INTERCEPT
-				Attack.DRIBBLE:
-					return Defense.TACKLE
-#				Attack.HEADER:
-#					return Defense.HEADER
-				Attack.RUN:
-					if randi() % 2 == 0: # use player preferences/attirbutes
-						return Defense.RUN
-					else:
-						return Defense.TACKLE
-				Attack.WAIT:
-					return Defense.WAIT
-
+				return Attack.SHOOT
 
 func _update_current_state(goal):
 	if goal:
