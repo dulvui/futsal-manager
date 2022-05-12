@@ -5,6 +5,7 @@ enum Role {DEFENSE, CENTER, ATTACK}
 enum Traits {DRIBBLER, PASSER, ROCK, POWER_SHOT} # TODO add more
 
 var role
+var stamina
 
 var stats = {
 	"goals" : 0,
@@ -68,12 +69,11 @@ func set_up(player):
 	profile["name"] = player["surname"]
 	profile["number"] = player["nr"]
 	attributes = player["attributes"]
+	stamina = attributes["physical"]["stamina"]
 
 			
 func update():
-	# reduce stamina
-	# increase stats
-	pass
+	stamina -= 0.01
 
 func get_attack_attributes(attack):
 	match attack:
