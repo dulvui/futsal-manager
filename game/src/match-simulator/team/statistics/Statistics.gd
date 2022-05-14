@@ -46,3 +46,6 @@ func increase_headers(on_target):
 		
 func increase_goals():
 	statistics.goals += 1
+	
+func increase_corners():
+	statistics.corners += 1
