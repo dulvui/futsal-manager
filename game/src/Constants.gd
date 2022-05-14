@@ -10,6 +10,7 @@ const GOAL_KEEPER_FACTOR = 15
 # 0 - 100
 const MAX_FACTOR = 100
 const CORNER_AFTER_SAFE_FACTOR = 20
+const KICK_IN_FACTOR = 10
 
 
 # factor for defining attack (0 - 100)
