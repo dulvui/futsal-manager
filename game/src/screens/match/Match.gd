@@ -47,6 +47,8 @@ func _process(delta):
 	$Stats/VBoxContainer/HomeShotsOnTarget.text = "%d "%match_simulator.action_util.home_stats.statistics["shots_on_target"]
 	$Stats/VBoxContainer/HomeCorners.text = "%d "%match_simulator.action_util.home_stats.statistics["corners"]
 	$Stats/VBoxContainer/AwayCorners.text = "%d "%match_simulator.action_util.away_stats.statistics["corners"]
+	$Stats/VBoxContainer/HomeThrowIn.text = "%d "%match_simulator.action_util.home_stats.statistics["kick_ins"]
+	$Stats/VBoxContainer/AwayThrowIn.text = "%d "%match_simulator.action_util.away_stats.statistics["kick_ins"]
 	
 	$HUD/TimeBar.value = match_simulator.time
 	

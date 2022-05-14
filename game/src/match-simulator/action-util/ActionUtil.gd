@@ -49,6 +49,7 @@ func update(time):
 	
 	var goal = false
 	var corner = false
+	var kick_in = false
 	
 	# change active players and possession
 	if attack_success:
@@ -62,11 +63,13 @@ func update(time):
 				if not goal:
 					corner = _check_corner()
 	else:
+		kick_in = _check_kick_in()
 		emit_signal("possession_change")
 		_change_possession()
 		_change_attacker()
-		
-	_update_current_state(goal,corner)
+	
+	if not goal and not corner and not kick_in:
+		_update_current_state()
 	
 	
 	# increase stats
@@ -79,6 +82,8 @@ func update(time):
 #			_increase_headers(result)
 	if corner:
 		_increase_corners()
+	elif kick_in:
+		_increase_kick_ins()
 		
 	home_team.update_players()
 	away_team.update_players()
@@ -107,9 +112,16 @@ func _check_goal():
 	return false
 	
 func _check_corner():
-	var random_corner = randi() % Constants.MAX_FACTOR
-	if random_corner < Constants.CORNER_AFTER_SAFE_FACTOR:
+	var random = randi() % Constants.MAX_FACTOR
+	if random < Constants.CORNER_AFTER_SAFE_FACTOR:
 		current_state = State.CORNER
+		return true
+	return false
+	
+func _check_kick_in():
+	var random = randi() % Constants.MAX_FACTOR
+	if random < Constants.KICK_IN_FACTOR:
+		current_state = State.KICK_IN
 		return true
 	return false
 	
@@ -142,7 +154,7 @@ func _get_result(attack):
 func _attack():
 	# improve later watching current sector and player attributes
 	match current_state:
-		State.KICK_OFF:
+		State.KICK_OFF, State.KICK_IN:
 			return Attack.PASS
 		State.PENALTY, State.FREE_KICK, State.PENALTY:
 			return Attack.SHOOT
@@ -162,15 +174,10 @@ func _attack():
 			else:
 				return Attack.SHOOT
 
-func _update_current_state(goal, corner):
-	if goal:
-		current_state = State.KICK_OFF
-	elif corner:
-		current_state = State.CORNER
-	else:
-		match current_state:
-			State.KICK_OFF, State.CORNER, State.FREE_KICK, State.PENALTY:
-				current_state = State.NORMAL
+func _update_current_state():
+	match current_state:
+		State.KICK_OFF, State.CORNER, State.FREE_KICK, State.PENALTY, State.KICK_IN:
+			current_state = State.NORMAL
 
 func _log(attack, result):
 	emit_signal("action_message","\n" + home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + "  ")
@@ -229,3 +236,9 @@ func _increase_corners():
 		away_stats.increase_corners()
 	else:
 		home_stats.increase_corners()
+		
+func _increase_kick_ins():
+	if away_team.has_ball:
+		away_stats.increase_kick_ins()
+	else:
+		home_stats.increase_kick_ins()
