@@ -21,9 +21,9 @@ enum State {NORMAL, KICK_OFF, PENALTY, FREE_KICK, KICK_IN, CORNER}
 
 enum Defense {INTERCEPT, WAIT, TACKLE, RUN, BLOCK, HEADER}
 
-enum Attack {PASS, DRIBBLE, RUN, SHOOT}
-enum Pass { SHORT_PASS, LONG_PASS, CROSS}
-enum Shoot {SHOOT, LONG_SHOOT, HEADER}
+enum Attack {PASS, CROSS, DRIBBLE, RUN, SHOOT}
+#enum Pass { SHORT_PASS, LONG_PASS, CROSS}
+#enum Shoot {SHOOT, LONG_SHOOT, HEADER}
 
 onready var home_team = $HomeTeam
 onready var away_team = $AwayTeam
@@ -48,6 +48,7 @@ func update(time):
 	var attack_success = _get_result(attack)
 	
 	var goal = false
+	var corner = false
 	
 	# change active players and possession
 	if attack_success:
@@ -58,11 +59,16 @@ func update(time):
 				_change_defender()
 			Attack.SHOOT: # , Attack.HEADER
 				goal = _check_goal()
+				if not goal:
+					corner = _check_corner()
 	else:
 		emit_signal("possession_change")
 		_change_possession()
 		_change_attacker()
 		
+	_update_current_state(goal,corner)
+	
+	
 	# increase stats
 	match attack:
 		Attack.PASS:
@@ -71,14 +77,13 @@ func update(time):
 			_increase_shots(attack_success)
 #		Attack.HEADER:
 #			_increase_headers(result)
-	
-	# add random occurencies like corners, fouls etc...
-	# if shoot and no interception, goalkepper needs to saf
+	if corner:
+		_increase_corners()
+		
 	home_team.update_players()
 	away_team.update_players()
 	home_stats.update_possession(home_team.has_ball)
 	away_stats.update_possession(away_team.has_ball)
-	_update_current_state(goal)
 	_log(attack, attack_success)
 
 func _check_goal():
@@ -90,6 +95,7 @@ func _check_goal():
 	
 	var random_goal = randi() % int(goalkeeper_attributes)
 	if random_goal < goalkeeper_attributes / Constants.GOAL_KEEPER_FACTOR:
+		# GOAL
 		if home_team.has_ball:
 			home_stats.increase_goals()
 			emit_signal("home_goal")
@@ -97,6 +103,13 @@ func _check_goal():
 			away_stats.increase_goals()
 			emit_signal("away_goal")
 		_change_possession()
+		return true
+	return false
+	
+func _check_corner():
+	var random_corner = randi() % Constants.MAX_FACTOR
+	if random_corner < Constants.CORNER_AFTER_SAFE_FACTOR:
+		current_state = State.CORNER
 		return true
 	return false
 	
@@ -149,9 +162,11 @@ func _attack():
 			else:
 				return Attack.SHOOT
 
-func _update_current_state(goal):
+func _update_current_state(goal, corner):
 	if goal:
 		current_state = State.KICK_OFF
+	elif corner:
+		current_state = State.CORNER
 	else:
 		match current_state:
 			State.KICK_OFF, State.CORNER, State.FREE_KICK, State.PENALTY:
@@ -208,3 +223,9 @@ func increase_goals():
 		away_stats.increase_goals()
 	else:
 		home_stats.increase_goals()
+		
+func _increase_corners():
+	if away_team.has_ball:
+		away_stats.increase_corners()
+	else:
+		home_stats.increase_corners()
