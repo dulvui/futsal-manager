@@ -8,15 +8,11 @@ var formations = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
 
 var player_to_replace
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	for formation in formations:
 		$FormationSelect.add_item(formation)
 		
 	$FormationSelect.selected = formations.find("2-2")
-#	$FormationSelect.selected = formations.find(DataSaver.team["formation"])
-		
 	_set_players()
 	
 		

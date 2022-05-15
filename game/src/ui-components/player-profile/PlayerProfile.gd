@@ -54,8 +54,5 @@ func set_up_info(_player):
 func _on_Hide_pressed():
 	$DetailPopup.hide()
 
-
-
-
 func _on_DetailPopup_hide():
 	queue_free()

@@ -10,8 +10,6 @@ const SIZE = 10
 
 onready var content_container = $MarginContainer/Content
 onready var pages = $Pages
-#onready var player_profile = $PlayerProfile
-
 
 var current_page = 0
 var max_page = 0
