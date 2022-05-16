@@ -80,6 +80,10 @@ func _on_Stats_pressed():
 
 
 func match_end():
+	$HUD/Faster.hide()
+	$HUD/Slower.hide()
+	$HUD/Pause.hide()
+	$HUD/SpeedFactor.hide()
 	$Dashboard.show()
 	match_simulator.match_end()
 	DataSaver.save_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])

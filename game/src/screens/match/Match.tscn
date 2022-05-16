@@ -521,10 +521,10 @@ align = 2
 
 [node name="Dashboard" type="Button" parent="."]
 visible = false
-margin_left = 990.012
-margin_top = 567.966
-margin_right = 1030.01
-margin_bottom = 610.966
+margin_left = 1062.0
+margin_top = 953.0
+margin_right = 1344.0
+margin_bottom = 1009.0
 text = "DASHBOARD"
 
 [node name="FormationPopup" type="Popup" parent="."]
