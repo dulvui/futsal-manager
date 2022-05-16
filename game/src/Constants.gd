@@ -5,12 +5,27 @@ extends Node
 const MATCH_SPEED_FACTOR = 4
 
 # bigger number => more saves
-const GOAL_KEEPER_FACTOR = 15
+const GOAL_KEEPER_FACTOR = {
+	"NORMAL" : 15,
+	"FREE_KICK": 25,
+	"PENALTY" : 45
+}
 
 # 0 - 100
 const MAX_FACTOR = 100
 const CORNER_AFTER_SAFE_FACTOR = 20
 const KICK_IN_FACTOR = 10
+
+const FOUL_FACTOR = 2
+
+# lower than PENALTY_FACTOR is free kick
+const PENALTY_FACTOR = 5
+
+
+# rest is no card
+const YELLOW_CARD_FACTOR = 80
+const RED_CARD_FACTOR = 97
+
 
 
 # factor for defining attack (0 - 100)

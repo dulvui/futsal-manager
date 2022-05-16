@@ -12,7 +12,7 @@ var statistics = {
 	"pass_success" : 0,
 	"kick_ins" : 0,
 	"free_kicks" : 0,
-	"penalty" : 0,
+	"penalties" : 0,
 	"penalty_kick" : 0, # after 6 fouls
 	"fouls" : 0,
 	"tackles" : 0,
@@ -53,3 +53,18 @@ func increase_corners():
 	
 func increase_kick_ins():
 	statistics.kick_ins += 1
+	
+func increase_fouls():
+	statistics.fouls += 1
+	
+func increase_free_kicks():
+	statistics.free_kicks += 1
+
+func increase_penalties():
+	statistics.penalties += 1
+
+func increase_red_cards():
+	statistics.red_cards += 1
+	
+func increase_yellow_cards():
+	statistics.yellow_cards += 1
