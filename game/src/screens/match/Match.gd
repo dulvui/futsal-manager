@@ -181,4 +181,4 @@ func _on_MatchSimulator_match_end():
 
 
 func _on_MatchSimulator_action_message(message):
-	$Log.add_text(message)
+	$Log.add_text($HUD/TopBar/Time.text + " " + message + "\n")

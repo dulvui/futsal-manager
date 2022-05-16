@@ -66,16 +66,10 @@ func update(time):
 	else:
 		foul = _check_foul()
 		if foul:
-			var penalty = _check_penalty()
 			var card = _check_card()
 			print("Foul with " + card + " card.")
 			emit_signal("action_message","Foul with " + card + " card.")
-			if penalty:
-				print("PENALTY")
-				emit_signal("action_message","PENALTY")
-			else:
-				print("FREE KICK")
-				emit_signal("action_message","FREE_KICK")
+			var penalty = _check_penalty()	
 		else:
 			kick_in = _check_kick_in()
 		emit_signal("possession_change")
@@ -103,7 +97,7 @@ func update(time):
 	away_team.update_players()
 	home_stats.update_possession(home_team.has_ball)
 	away_stats.update_possession(away_team.has_ball)
-	_log(attack, attack_success)
+#	_log(attack, attack_success)
 
 func _check_goal():
 	var goalkeeper_attributes
@@ -121,9 +115,11 @@ func _check_goal():
 		# GOAL
 		if home_team.has_ball:
 			home_stats.increase_goals()
+			emit_signal("action_message","GOAL for " + home_team.name)
 			emit_signal("home_goal")
 		else:
 			away_stats.increase_goals()
+			emit_signal("action_message","GOAL for " + away_team.name)
 			emit_signal("away_goal")
 		_change_possession()
 		return true
@@ -149,9 +145,11 @@ func _check_penalty():
 	if random > Constants.PENALTY_FACTOR:
 		current_state = State.FREE_KICK
 		_increase_free_kicks()
+		emit_signal("action_message","FREE_KICK")
 		return true
 	else:
 		current_state = State.PENALTY
+		emit_signal("action_message","PENALTY")
 		_increase_penalties()
 		return true
 	return false

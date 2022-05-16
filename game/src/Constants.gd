@@ -23,8 +23,8 @@ const PENALTY_FACTOR = 5
 
 
 # rest is no card
-const YELLOW_CARD_FACTOR = 80
-const RED_CARD_FACTOR = 97
+const YELLOW_CARD_FACTOR = 70
+const RED_CARD_FACTOR = 95
 
 
 
