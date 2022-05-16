@@ -47,6 +47,7 @@ func update(time):
 	var attack = _attack()
 	var attack_success = _get_result(attack)
 	
+	var foul = false
 	var goal = false
 	var corner = false
 	var kick_in = false
@@ -63,13 +64,26 @@ func update(time):
 				if not goal:
 					corner = _check_corner()
 	else:
-		kick_in = _check_kick_in()
+		foul = _check_foul()
+		if foul:
+			var penalty = _check_penalty()
+			var card = _check_card()
+			print("Foul with " + card + " card.")
+			emit_signal("action_message","Foul with " + card + " card.")
+			if penalty:
+				print("PENALTY")
+				emit_signal("action_message","PENALTY")
+			else:
+				print("FREE KICK")
+				emit_signal("action_message","FREE_KICK")
+		else:
+			kick_in = _check_kick_in()
 		emit_signal("possession_change")
 		_change_possession()
 		_change_attacker()
 	
-	if not goal and not corner and not kick_in:
-		_update_current_state()
+	if not goal and not corner and not kick_in and not foul:
+		current_state = State.NORMAL
 	
 	
 	# increase stats
@@ -99,7 +113,11 @@ func _check_goal():
 		goalkeeper_attributes = home_team.get_goalkeeper_attributes()
 	
 	var random_goal = randi() % int(goalkeeper_attributes)
-	if random_goal < goalkeeper_attributes / Constants.GOAL_KEEPER_FACTOR:
+	
+	print(State.keys()[current_state])
+	goalkeeper_attributes = goalkeeper_attributes / Constants.GOAL_KEEPER_FACTOR[State.keys()[current_state]]
+
+	if random_goal < goalkeeper_attributes:
 		# GOAL
 		if home_team.has_ball:
 			home_stats.increase_goals()
@@ -115,8 +133,38 @@ func _check_corner():
 	var random = randi() % Constants.MAX_FACTOR
 	if random < Constants.CORNER_AFTER_SAFE_FACTOR:
 		current_state = State.CORNER
+		_increase_corners()
 		return true
 	return false
+	
+func _check_foul():
+	var random = randi() % Constants.MAX_FACTOR
+	if random < Constants.FOUL_FACTOR:
+		_increase_fouls()
+		return true
+	return false
+	
+func _check_penalty():
+	var random = randi() % Constants.MAX_FACTOR
+	if random > Constants.PENALTY_FACTOR:
+		current_state = State.FREE_KICK
+		_increase_free_kicks()
+		return true
+	else:
+		current_state = State.PENALTY
+		_increase_penalties()
+		return true
+	return false
+	
+func _check_card():
+	var random = randi() % Constants.MAX_FACTOR
+	if random > Constants.RED_CARD_FACTOR:
+		_increase_red_cards()
+		return "red"
+	elif random > Constants.YELLOW_CARD_FACTOR:
+		_increase_yellow_cards()
+		return "yellow"
+	return "no-card"
 	
 func _check_kick_in():
 	var random = randi() % Constants.MAX_FACTOR
@@ -173,11 +221,6 @@ func _attack():
 				return Attack.DRIBBLE
 			else:
 				return Attack.SHOOT
-
-func _update_current_state():
-	match current_state:
-		State.KICK_OFF, State.CORNER, State.FREE_KICK, State.PENALTY, State.KICK_IN:
-			current_state = State.NORMAL
 
 func _log(attack, result):
 	emit_signal("action_message","\n" + home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + "  ")
@@ -242,3 +285,33 @@ func _increase_kick_ins():
 		away_stats.increase_kick_ins()
 	else:
 		home_stats.increase_kick_ins()
+
+func _increase_fouls():
+	if away_team.has_ball:
+		home_stats.increase_fouls()
+	else:
+		away_stats.increase_fouls()
+		
+func _increase_free_kicks():
+	if away_team.has_ball:
+		home_stats.increase_free_kicks()
+	else:
+		away_stats.increase_free_kicks()
+		
+func _increase_penalties():
+	if away_team.has_ball:
+		home_stats.increase_penalties()
+	else:
+		away_stats.increase_penalties()
+		
+func _increase_red_cards():
+	if away_team.has_ball:
+		home_stats.increase_red_cards()
+	else:
+		away_stats.increase_red_cards()
+		
+func _increase_yellow_cards():
+	if away_team.has_ball:
+		home_stats.increase_yellow_cards()
+	else:
+		away_stats.increase_yellow_cards()

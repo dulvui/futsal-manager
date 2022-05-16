@@ -49,6 +49,17 @@ func _process(delta):
 	$Stats/VBoxContainer/AwayCorners.text = "%d "%match_simulator.action_util.away_stats.statistics["corners"]
 	$Stats/VBoxContainer/HomeThrowIn.text = "%d "%match_simulator.action_util.home_stats.statistics["kick_ins"]
 	$Stats/VBoxContainer/AwayThrowIn.text = "%d "%match_simulator.action_util.away_stats.statistics["kick_ins"]
+	$Stats/VBoxContainer/HomeFouls.text = "%d "%match_simulator.action_util.home_stats.statistics["fouls"]
+	$Stats/VBoxContainer/AwayFouls.text = "%d "%match_simulator.action_util.away_stats.statistics["fouls"]
+	$Stats/VBoxContainer/HomeFreeKicks.text = "%d "%match_simulator.action_util.home_stats.statistics["free_kicks"]
+	$Stats/VBoxContainer/AwayFreeKicks.text = "%d "%match_simulator.action_util.away_stats.statistics["free_kicks"]
+	$Stats/VBoxContainer/HomePenalties.text = "%d "%match_simulator.action_util.home_stats.statistics["penalties"]
+	$Stats/VBoxContainer/AwayPenalties.text = "%d "%match_simulator.action_util.away_stats.statistics["penalties"]
+	$Stats/VBoxContainer/HomeYellowCards.text = "%d "%match_simulator.action_util.home_stats.statistics["yellow_cards"]
+	$Stats/VBoxContainer/AwayYellowCards.text = "%d "%match_simulator.action_util.away_stats.statistics["yellow_cards"]
+	$Stats/VBoxContainer/HomeRedCards.text = "%d "%match_simulator.action_util.home_stats.statistics["red_cards"]
+	$Stats/VBoxContainer/AwayRedCards.text = "%d "%match_simulator.action_util.away_stats.statistics["red_cards"]
+	
 	
 	$HUD/TimeBar.value = match_simulator.time
 	
