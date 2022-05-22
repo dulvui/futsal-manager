@@ -1047,6 +1047,8 @@ def assign_players_to_team(teams):
             team["players"]["subs"].append(u)
             nr += 1
 
+    return teams
+
 ita_serie_a = assign_players_to_team(ita_serie_a)
 with open('ita_serie_a.json', 'w') as outfile:
     json.dump(ita_serie_a, outfile)
