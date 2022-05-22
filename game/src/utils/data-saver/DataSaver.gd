@@ -14,7 +14,10 @@ var calendar
 
 var formation = "2-2"
 var selected_team
+# leagues of current league
 var teams
+# all teasm available in game
+var all_teams
 var table
 
 var current_transfers
@@ -42,6 +45,8 @@ func _ready():
 	
 	selected_team = config.get_value("selected_team", "data","")
 	teams = config.get_value("teams", "data",{})
+	all_teams = config.get_value("all_teams", "data",{})
+	
 	
 	year = config.get_value("current_date","year",2020)
 	month = config.get_value("current_date","month",1)
@@ -82,6 +87,7 @@ func save_all_data():
 	config.set_value("manager","data",manager)
 	config.set_value("selected_team","data",selected_team)
 	config.set_value("teams","data",teams)
+	config.set_value("all_teams","data",all_teams)
 	config.set_value("current_date","year",CalendarUtil.year)
 	config.set_value("current_date","month",CalendarUtil.month)
 	config.set_value("current_date","day",CalendarUtil.day)
@@ -100,6 +106,8 @@ func save_manager(new_manager):
 func select_team(_teams, _selected_team):
 	teams = _teams.duplicate(true)
 	selected_team = _selected_team["name"]
+	
+	all_teams = Leagues.get_all_teams()
 	
 	# init table
 	for team in teams:

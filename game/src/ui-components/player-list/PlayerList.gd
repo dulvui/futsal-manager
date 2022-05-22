@@ -19,7 +19,7 @@ const FOOTS = ["R","L","RL"]
 
 
 func set_up(selected_team = false):
-	for team in DataSaver.teams:
+	for team in DataSaver.all_teams:
 		if not selected_team or team["name"] == DataSaver.selected_team:
 			for player in team["players"]["active"]:
 				all_players.append(player)
