@@ -65,7 +65,7 @@ def get_goalkeeper_attributes(age, nationality, prestige, position):
     else:
         physical = {
             "reflexes": -1,
-            "positioning":-1,
+            "positioning": -1,
             "kicking": -1,
             "handling": -1,
             "diving": -1,
@@ -342,48 +342,45 @@ def create_player(nationality, position, nr, team):
 # create teams
 ita_serie_a = [
     {
-        "id": 1,
         "name": "Acqua&Sapone C5",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Tocha Stadium",
+            "name": "Tocha Stadium",
                     "capacity": 800
-                },
+        },
         "manager": {
-                    "name": "",
+            "name": "",
                     "surname": "",
                     "birthdate": "",
                     "nationality": "",
-                },
+        },
         "history": {
-                    "years": []
-                },
+            "years": []
+        },
         "formation": "2-2"
     },
     {
-        "id": 2,
         "name": "Pesaro C5",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Palazzetto dello Sport PalaCercola",
+            "name": "Palazzetto dello Sport PalaCercola",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 3,
         "name": "Real Rieti",
         "prestige": 12,
                 "budget": 9000000,
@@ -399,179 +396,168 @@ ita_serie_a = [
         "formation": "2-2"
     },
     {
-        "id": 4,
         "name": "Meta Catania",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 5,
         "name": "Napoli Calcio A 5",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 6,
         "name": "Feldi Eboli",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 7,
         "name": "Came Dosson C5",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 8,
         "name": "Maritime Futsal Augusta",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 9,
         "name": "Civitella Colormax C5",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 10,
         "name": "Lazio Calcio A 5",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 11,
         "name": "Latina Calcio A 5",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 12,
         "name": "Real Futsal Arzignano",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 13,
         "name": "Cagliari",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
     {
-        "id": 14,
         "name": "Lazio",
         "prestige": 12,
-                "budget": 9000000,
-                "salary_budget": 1000,
-                "players": {
-                    "active": [],
-                    "subs": []
-                },
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
         "stadium": {
-                    "name": "Estadio Central",
+            "name": "Estadio Central",
                     "capacity": 5000
-                },
+        },
         "formation": "2-2"
     },
 ]
@@ -580,180 +566,498 @@ ita_serie_b = [
     {
         "name": "Palermo",
         "prestige": 12,
-                "budget": 1000,
-                "salary_budget": 1000
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
-        "name": "C5 Napoli",
-        "prestige": 12
+        "name": "C5 Napoli B",
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Futsal Roma",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Milano",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Torino",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Genova",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Bologna",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Firenze",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Verona",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Brescia",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Bari",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Parma",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Cagliari",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Lazio",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
 ]
 
 ita_serie_c = [
     {
         "name": "Palermo",
-        "prestige": 12,
-                "budget": 1000,
-                "salary_budget": 1000
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "C5 Napoli",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Futsal Roma",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Milano",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Torino",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Genova",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Bologna",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Firenze",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Verona",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Brescia",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Bari",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Parma",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Cagliari",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
     {
         "name": "Lazio",
-        "prestige": 12
+        "prestige": 8,
+        "budget": 9000000,
+        "salary_budget": 1000,
+        "players": {
+            "active": [],
+            "subs": []
+        },
+        "stadium": {
+            "name": "Estadio Central",
+                    "capacity": 5000
+        },
+        "formation": "2-2"
     },
 ]
 
 
-# fill ita serie a teams with players
-for team in ita_serie_a:
-    nr = 1
+def assign_players_to_team(teams):
+    id = 1
+    # fill ita serie a teams with players
+    for team in teams:
+        
+        team["id"] = id
+        id += 1
 
-    # G
-    g1 = create_player("it_IT", "G", nr, team["name"])
-    nr += 1
-    team["players"]["active"].append(g1)
-    for _ in range(0, random.randint(3, 5)):
-        g2 = create_player("it_IT", "G", nr, team["name"])
-        team["players"]["subs"].append(g2)
+        nr = 1
+        # G
+        g1 = create_player("it_IT", "G", nr, team["name"])
         nr += 1
-    # D
-    d1 = create_player("it_IT", "D", nr, team["name"])
-    team["players"]["active"].append(d1)
-    nr += 1
-    for _ in range(0, random.randint(3, 5)):
-        d2 = create_player("it_IT", "D", nr, team["name"])
-        team["players"]["subs"].append(d2)
+        team["players"]["active"].append(g1)
+        for _ in range(0, random.randint(3, 5)):
+            g2 = create_player("it_IT", "G", nr, team["name"])
+            team["players"]["subs"].append(g2)
+            nr += 1
+        # D
+        d1 = create_player("it_IT", "D", nr, team["name"])
+        team["players"]["active"].append(d1)
         nr += 1
-    # WL
-    wl1 = create_player("it_IT", "WL", nr, team["name"])
-    team["players"]["active"].append(wl1)
-    nr += 1
-    for _ in range(0, random.randint(2, 4)):
-        wl2 = create_player("it_IT", "WL", nr, team["name"])
-        team["players"]["subs"].append(wl2)
+        for _ in range(0, random.randint(3, 5)):
+            d2 = create_player("it_IT", "D", nr, team["name"])
+            team["players"]["subs"].append(d2)
+            nr += 1
+        # WL
+        wl1 = create_player("it_IT", "WL", nr, team["name"])
+        team["players"]["active"].append(wl1)
         nr += 1
+        for _ in range(0, random.randint(2, 4)):
+            wl2 = create_player("it_IT", "WL", nr, team["name"])
+            team["players"]["subs"].append(wl2)
+            nr += 1
 
-    # WR
-    wr1 = create_player("it_IT", "WR", nr, team["name"])
-    team["players"]["active"].append(wr1)
-    nr += 1
-    for _ in range(0, random.randint(2, 4)):
-        wl2 = create_player("it_IT", "WR", nr, team["name"])
-        team["players"]["subs"].append(wl2)
+        # WR
+        wr1 = create_player("it_IT", "WR", nr, team["name"])
+        team["players"]["active"].append(wr1)
         nr += 1
-    # P
-    p1 = create_player("it_IT", "P", nr, team["name"])
-    team["players"]["active"].append(p1)
-    nr += 1
-
-    for _ in range(0, random.randint(2, 4)):
-        p2 = create_player("it_IT", "P", nr, team["name"])
-        team["players"]["subs"].append(p2)
-        nr += 1
-
-    # U
-    for _ in range(0, random.randint(1, 2)):
-        u = create_player("it_IT", "U", nr, team["name"])
-        team["players"]["subs"].append(u)
+        for _ in range(0, random.randint(2, 4)):
+            wl2 = create_player("it_IT", "WR", nr, team["name"])
+            team["players"]["subs"].append(wl2)
+            nr += 1
+        # P
+        p1 = create_player("it_IT", "P", nr, team["name"])
+        team["players"]["active"].append(p1)
         nr += 1
 
+        for _ in range(0, random.randint(2, 4)):
+            p2 = create_player("it_IT", "P", nr, team["name"])
+            team["players"]["subs"].append(p2)
+            nr += 1
 
+        # U
+        for _ in range(0, random.randint(1, 2)):
+            u = create_player("it_IT", "U", nr, team["name"])
+            team["players"]["subs"].append(u)
+            nr += 1
+
+ita_serie_a = assign_players_to_team(ita_serie_a)
 with open('ita_serie_a.json', 'w') as outfile:
     json.dump(ita_serie_a, outfile)
+print("Serie A done")
 
-print("done")
+ita_serie_b = assign_players_to_team(ita_serie_b)
+with open('ita_serie_b.json', 'w') as outfile:
+    json.dump(ita_serie_b, outfile)
+print("Serie B done")
+
+ita_serie_c = assign_players_to_team(ita_serie_c)
+with open('ita_serie_c.json', 'w') as outfile:
+    json.dump(ita_serie_c, outfile)
+print("Serie C done")
