@@ -5,7 +5,7 @@ var match_day = 0
 
 
 func inizialize_matches():
-	var teams = Leagues.serie_a["teams"].duplicate(true)
+	var teams = DataSaver.teams.duplicate(true)
 	matches = []
 	match_day = 0
 	

@@ -97,9 +97,23 @@ func save_manager(new_manager):
 	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
 	
-func save_team(new_team):
-	teams = Leagues.serie_a["teams"]
-	selected_team = new_team["name"]
+func select_team(_teams, _selected_team):
+	teams = _teams.duplicate(true)
+	selected_team = _selected_team["name"]
+	
+	# init table
+	for team in teams:
+		table.append({
+					   "name" : team["name"],
+					   "points" : 0,
+					   "games_played": 0,
+					   "goals_made" : 0,
+					   "goals_against" : 0,
+					   "wins" : 0,
+					   "draws" : 0,
+					   "lost" : 0
+				   })
+	save_all_data()
 	
 #	hardcoded for now, use generator for this afterwards
 #	team["formation"] = "2-2"
