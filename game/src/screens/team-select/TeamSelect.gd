@@ -1,26 +1,29 @@
-extends CenterContainer
+extends TabContainer
 
 const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
 
 
 func _ready():
 	
-	Leagues.add_random_players()
+	Leagues.init_teams()
 	
-	var teams = Leagues.serie_a["teams"]
-	for team in teams:
-		var team_button = Button.new()
-		team_button.text = team["name"]
-		team_button.connect("pressed",self,"team_selected",[team])
-		$Teams.add_child(team_button)
-		
-#		for player in team["players"]:
-#			var player_profile = PlayerProfile.instance()
-#			$TeamList.add_child(player_profile)
-#			player_profile.set_up_info(player)
+	for nation in Leagues.leagues:
+		for league in Leagues.leagues[nation]:
+			for teams in  Leagues.leagues[nation][league].keys():
+				var center_container = CenterContainer.new()
+				center_container.name = league
+				var grid = GridContainer.new()
+				grid.columns = 2
+				for team in Leagues.leagues[nation][league][teams]:
+					var team_button = Button.new()
+					team_button.text = team["name"]
+					team_button.connect("pressed",self,"team_selected",[Leagues.leagues[nation][league][teams],team])
+					grid.add_child(team_button)
+				center_container.add_child(grid)
+				add_child(center_container)
 
-func team_selected(team):
-	DataSaver.save_team(team)
+func team_selected(teams, selected_team):
+	DataSaver.select_team(teams,selected_team)
 	print("team saved")
 	CalendarUtil.create_calendar()
 	print("calendar created")
