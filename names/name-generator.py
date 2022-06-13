@@ -564,7 +564,7 @@ ita_serie_a = [
 
 ita_serie_b = [
     {
-        "name": "Palermo",
+        "name": "Palermo B",
         "prestige": 12,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -594,7 +594,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Futsal Roma",
+        "name": "Futsal Roma B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -609,7 +609,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Milano",
+        "name": "Milano B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -624,7 +624,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Torino",
+        "name": "Torino B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -639,7 +639,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Genova",
+        "name": "Genova B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -654,7 +654,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Bologna",
+        "name": "Bologna B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -669,7 +669,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Firenze",
+        "name": "Firenze B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -684,7 +684,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Verona",
+        "name": "Verona B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -699,7 +699,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Brescia",
+        "name": "Brescia B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -714,7 +714,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Bari",
+        "name": "Bari B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -729,7 +729,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Parma",
+        "name": "Parma B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -744,7 +744,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Cagliari",
+        "name": "Cagliari B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -759,7 +759,7 @@ ita_serie_b = [
         "formation": "2-2"
     },
     {
-        "name": "Lazio",
+        "name": "Lazio B",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -777,7 +777,7 @@ ita_serie_b = [
 
 ita_serie_c = [
     {
-        "name": "Palermo",
+        "name": "Palermo C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -792,7 +792,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "C5 Napoli",
+        "name": "C5 Napoli C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -807,7 +807,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Futsal Roma",
+        "name": "Futsal Roma C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -822,7 +822,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Milano",
+        "name": "Milano C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -837,7 +837,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Torino",
+        "name": "Torino C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -852,7 +852,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Genova",
+        "name": "Genova C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -867,7 +867,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Bologna",
+        "name": "Bologna C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -882,7 +882,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Firenze",
+        "name": "Firenze C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -897,7 +897,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Verona",
+        "name": "Verona C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -912,7 +912,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Brescia",
+        "name": "Brescia C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -927,7 +927,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Bari",
+        "name": "Bari C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -942,7 +942,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Parma",
+        "name": "Parma C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -957,7 +957,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Cagliari",
+        "name": "Cagliari C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
@@ -972,7 +972,7 @@ ita_serie_c = [
         "formation": "2-2"
     },
     {
-        "name": "Lazio",
+        "name": "Lazio C",
         "prestige": 8,
         "budget": 9000000,
         "salary_budget": 1000,
