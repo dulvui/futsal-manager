@@ -4,8 +4,25 @@ extends Control
 
 func _ready():
 	var pos = 1
-	DataSaver.table.sort_custom(self,"point_sorter")
-	for team in DataSaver.table:
+	
+	# transform table dictionary to array
+	var table_array = []
+	for key in DataSaver.table:
+		table_array.append({
+			"name" : key,
+			"points" : DataSaver.table[key]["points"],
+			"games_played": DataSaver.table[key]["games_played"],
+			"goals_made" : DataSaver.table[key]["goals_made"],
+			"goals_against" : DataSaver.table[key]["goals_against"],
+			"wins" : DataSaver.table[key]["wins"],
+			"draws" : DataSaver.table[key]["draws"],
+			"lost" : DataSaver.table[key]["lost"]
+		 })
+		
+	table_array.sort_custom(self,"point_sorter")
+	
+	
+	for team in table_array:
 		var pos_label = Label.new()
 		pos_label.text = str(pos)
 		pos += 1

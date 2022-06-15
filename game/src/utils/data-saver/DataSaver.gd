@@ -40,7 +40,7 @@ func _ready():
 	language = config.get_value("settings","language","ND")
 	
 	calendar = config.get_value("season","calendar",[])
-	table = config.get_value("season","table",[])
+	table = config.get_value("season","table",{})
 	current_transfers = config.get_value("season","current_transfers",[])
 	
 	selected_team = config.get_value("selected_team", "data","")
@@ -66,7 +66,7 @@ func reset():
 	}
 	
 	calendar = []
-	table = []
+	table = {}
 	current_transfers = []
 	TransferUtil.current_transfers = []
 	messages = []
@@ -111,16 +111,15 @@ func select_team(_teams, _selected_team):
 	
 	# init table
 	for team in teams:
-		table.append({
-					   "name" : team["name"],
-					   "points" : 0,
-					   "games_played": 0,
-					   "goals_made" : 0,
-					   "goals_against" : 0,
-					   "wins" : 0,
-					   "draws" : 0,
-					   "lost" : 0
-				   })
+		table[team["name"]] = {
+		   "points" : 0,
+		   "games_played": 0,
+		   "goals_made" : 0,
+		   "goals_against" : 0,
+		   "wins" : 0,
+		   "draws" : 0,
+		   "lost" : 0
+		}
 	save_all_data()
 	
 #	hardcoded for now, use generator for this afterwards
@@ -185,34 +184,30 @@ func change_player(position,player):
 	team["players"]["active"][position] = player
 	team["players"]["subs"].erase(player)
 
-func save_result(home_name,home_goals,away_name,away_goals):
+func set_result(home_name,home_goals,away_name,away_goals):
 #	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
-	for team in table:
-		if team["name"] == home_name:
-			team["goals_made"] += home_goals
-			team["goals_against"] += away_goals
-			if home_goals > away_goals:
-				team["wins"] += 1
-				team["points"] += 3
-			elif  home_goals == away_goals:
-				team["draws"] += 1
-				team["points"] += 1
-			else:
-				team["lost"] += 1
-			team["games_played"] += 1
-			
-		elif team["name"] == away_name:
-			team["goals_made"] += away_goals
-			team["goals_against"] += home_goals
-			if away_goals > home_goals:
-				team["wins"] += 1
-				team["points"] += 3
-			elif  home_goals == away_goals:
-				team["draws"] += 1
-				team["points"] += 1
-			else:
-				team["lost"] += 1
-			team["games_played"] += 1
+	table[home_name]["goals_made"] += home_goals
+	table[home_name]["goals_against"] += away_goals
+	table[away_name]["goals_made"] += away_goals
+	table[away_name]["goals_against"] += home_goals
+	
+	if home_goals > away_goals:
+		table[home_name]["wins"] += 1
+		table[home_name]["points"] += 3
+		table[away_name]["lost"] += 1
+	elif  home_goals == away_goals:
+		table[home_name]["draws"] += 1
+		table[home_name]["points"] += 1
+		table[away_name]["draws"] += 1
+		table[away_name]["points"] += 1
+	else:
+		table[away_name]["wins"] += 1
+		table[away_name]["points"] += 3
+		table[home_name]["lost"] += 1
+	table[home_name]["games_played"] += 1
+	table[away_name]["games_played"] += 1
+
+func save_table():
 	config.set_value("season","table",table)
 	config.save("user://settings.cfg")
 	

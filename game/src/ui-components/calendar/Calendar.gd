@@ -81,8 +81,6 @@ func _on_Prev_pressed():
 		current_month = 0
 	set_up()
 	
-	
-
 func _on_Next_pressed():
 	current_month += 1
 	if current_month > 11:
