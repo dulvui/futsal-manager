@@ -60,16 +60,6 @@ func get_text(day):
 		if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
 			return str(day["day"]) + "/" + str(day["month"]) + "/" + str(day["year"]) + matchz["home"] + " vs " + matchz["away"]
 
-func show_all_matches(day):
-	for child in $MatchDayPopUp/VBoxContainer.get_children():
-		child.queue_free()
-	for matchz in day["matches"]:
-		var label = Label.new()
-		label.text = matchz["home"] + " vs " + matchz["away"]
-		$MatchDayPopUp/VBoxContainer.add_child(label)
-	$MatchDayPopUp.popup_centered()
-	
-
 
 func _on_Close_pressed():
 	hide()
