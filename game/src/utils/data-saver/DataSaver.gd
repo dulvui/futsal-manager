@@ -184,7 +184,7 @@ func change_player(position,player):
 	team["players"]["active"][position] = player
 	team["players"]["subs"].erase(player)
 
-func set_result(home_name,home_goals,away_name,away_goals):
+func set_table_result(home_name,home_goals,away_name,away_goals):
 #	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
 	table[home_name]["goals_made"] += home_goals
 	table[home_name]["goals_against"] += away_goals

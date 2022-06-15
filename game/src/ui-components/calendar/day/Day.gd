@@ -36,7 +36,8 @@ func _on_Match_pressed(matches):
 		
 	for matchz in matches:
 		var label = Label.new()
-		label.text = matchz["home"] + " : " + matchz["away"]
+		print(matchz)
+		label.text = matchz["home"] + " " + matchz["result"] + " " + matchz["away"]
 		label.align = Label.ALIGN_CENTER
 		$MatchPopup/VBoxContainer.add_child(label)
 	$MatchPopup.popup_centered()
