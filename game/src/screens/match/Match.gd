@@ -86,15 +86,15 @@ func match_end():
 	$HUD/SpeedFactor.hide()
 	$Dashboard.show()
 	match_simulator.match_end()
-	DataSaver.save_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
+	DataSaver.set_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
 	
 	
 	#simulate all games for now.
 	for matchday in DataSaver.calendar[DataSaver.month][DataSaver.day]["matches"]:
-		print(matchday["home"])
 		if matchday["home"] != home_team["name"]:
 			print(matchday["home"] + " vs " + matchday["away"])
-			DataSaver.save_result(matchday["home"],randi()%10,matchday["away"],randi()%10)
+			DataSaver.set_result(matchday["home"],randi()%10,matchday["away"],randi()%10)
+	DataSaver.save_table()
 
 func half_time():
 	$HUD/Pause.text = tr("CONTINUE")
