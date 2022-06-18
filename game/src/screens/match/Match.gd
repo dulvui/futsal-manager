@@ -176,6 +176,7 @@ func _on_MatchSimulator_home_goal():
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
+	visual_action.queue_free()
 	match_simulator.continue_match()
 	$Log.show()
 
@@ -194,6 +195,7 @@ func _on_MatchSimulator_away_goal():
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
+	visual_action.queue_free()
 	match_simulator.continue_match()
 	$Log.show()
 
