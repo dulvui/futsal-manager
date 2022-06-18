@@ -90,6 +90,5 @@ func _on_Timer_timeout():
 	
 	if is_final_action:
 		emit_signal("action_finished")
-		queue_free()
 	else:
 		_action()

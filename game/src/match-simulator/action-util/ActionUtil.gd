@@ -162,13 +162,13 @@ func _check_goal():
 	if random_goal < goalkeeper_attributes:
 		# GOAL
 		if home_team.has_ball:
-			home_stats.increase_goals()
-			emit_signal("action_message","GOAL for " + home_team.name)
 			emit_signal("home_goal")
+			emit_signal("action_message","GOAL for " + home_team.name)
+			home_stats.increase_goals()
 		else:
-			away_stats.increase_goals()
-			emit_signal("action_message","GOAL for " + away_team.name)
 			emit_signal("away_goal")
+			emit_signal("action_message","GOAL for " + away_team.name)
+			away_stats.increase_goals()
 		_change_possession()
 		return true
 	return false
