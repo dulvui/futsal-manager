@@ -1,49 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/match-simulator/visual-action/actors/player/VisualPlayer.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
-
-[node name="Player" type="KinematicBody2D" groups=["player"]]
+[node name="VisualPlayer" type="Node2D" groups=["player"]]
 script = ExtResource( 2 )
 
-[node name="Control" type="Control" parent="."]
-margin_left = -32.0
-margin_top = -32.0
-margin_right = 32.0
-margin_bottom = 32.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_pivot_offset = Vector2( 32, 32 )
-theme = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 64.0
 margin_bottom = 64.0
 color = Color( 0.290196, 0.101961, 0.101961, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="ShirtNumber" type="Label" parent="Control"]
+[node name="ShirtNumber" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 64.0
+margin_bottom = 64.0
+theme = ExtResource( 1 )
 text = "1"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
-[node name="BallControl" type="StaticBody2D" parent="."]
-position = Vector2( -16, 32 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BallControl"]
-polygon = PoolVector2Array( 0, -16, 0, 8, 32, 8, 32, -16, 48, -16, 48, 24, -16, 24, -16, -16 )

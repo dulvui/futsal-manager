@@ -1,7 +1,5 @@
-extends RigidBody2D
+extends Node2D
 
-func _ready():
-	pass
-	
-func move(destination):
-	apply_central_impulse(destination - global_position)
+func move(final_position, time):
+	$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_QUINT, Tween.EASE_OUT)
+	$Tween.start()

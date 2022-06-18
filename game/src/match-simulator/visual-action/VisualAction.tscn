@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/match-simulator/visual-action/actors/field/Field.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/match-simulator/visual-action/actors/ball/Ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/match-simulator/visual-action/VisualAction.gd" type="Script" id=3]
 [ext_resource path="res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn" type="PackedScene" id=4]
-
-[sub_resource type="PhysicsMaterial" id=1]
-bounce = 0.16
 
 [node name="VisualAction" type="Node2D"]
 script = ExtResource( 3 )
@@ -16,21 +13,20 @@ position = Vector2( 896, -792 )
 rotation = 1.5708
 
 [node name="Ball" parent="." instance=ExtResource( 2 )]
-position = Vector2( 176, 312 )
-physics_material_override = SubResource( 1 )
+position = Vector2( 183, 352 )
 
 [node name="Attacker" parent="." instance=ExtResource( 4 )]
-position = Vector2( 448, 96 )
+position = Vector2( 112, 320 )
 color = Color( 0.921569, 0.156863, 0.117647, 1 )
 nr = 10
 
 [node name="Attacker2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 176, 288 )
+position = Vector2( 672, 320 )
 color = Color( 0.921569, 0.156863, 0.117647, 1 )
 nr = 11
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
+autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
