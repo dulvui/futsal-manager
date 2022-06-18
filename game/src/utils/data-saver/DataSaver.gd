@@ -211,6 +211,7 @@ func save_table():
 	config.set_value("season","table",table)
 	config.save("user://settings.cfg")
 	
+	
 func get_selected_team():
 	for team in teams:
 		if team["name"] == selected_team:
