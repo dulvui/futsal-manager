@@ -4,14 +4,12 @@ const VisualPlayer = preload("res://src/match-simulator/visual-action/actors/pla
 
 const MAX_POSITIONS = 10
 const MIN_POSITIONS = 2
-const POSITION_RANGE = MAX_POSITIONS - MIN_POSITIONS
 
 const MAX_PLAYERS = 5
 const MIN_PLAYERS = 2
-const PLAYER_RANGE = MAX_PLAYERS - MIN_PLAYERS
 
-const WIDTH = 200
-const HEIGHT = 200
+const WIDTH = 500
+const HEIGHT = 800
 
 onready var attacker = $Attacker
 onready var attacker2 = $Attacker2
@@ -35,7 +33,10 @@ func _ready():
 	_actions_setup()
 	
 func _actions_setup():
-	for i in (randf() * POSITION_RANGE) + MIN_POSITIONS:
+	for i in rand_range(MIN_POSITIONS, MAX_POSITIONS):
+		
+		# make positons move towards goal
+		# with +/- tolerance, so that i can also move a bit backwards
 		var action = {
 			"position": Vector2(randi() % WIDTH, randi() % HEIGHT),
 			"action": ACTIONS.values()[randi() % ACTIONS.size()]
@@ -44,24 +45,36 @@ func _actions_setup():
 	print(actions)
 	
 func _player_setup():
-	for i in (randf() * PLAYER_RANGE) + MIN_PLAYERS:
+	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
 		var player = VisualPlayer.instance()
-		player.set_up({"nr" : 1})
+		player.set_up(i + 5, Vector2(randi() % WIDTH, randi() % HEIGHT))
 		players.append(player)
+		$Players.add_child(player)
 	
 
 func _action():
 	var action = actions.pop_front()
 	
+	print(action)
 	if action:
-		ball.move(action.position, timer.wait_time)
-		# attacker.
+		ball.move(action.position, timer.wait_time / 2)
+		match(action["action"]):
+			ACTIONS.PASS:
+				print("pass")
+				players[randi() % players.size()].move(action.position, timer.wait_time)
+			ACTIONS.DRIBBLE:
+				print("dribble")
+				players[randi() % players.size()].move(action.position, timer.wait_time)
+			ACTIONS.RUN:
+				players[randi() % players.size()].move(action.position, timer.wait_time)
+				print("run")
 	else:
-		# shoot
-		pass
+		print("shoot")
+		ball.move($Field/Goal/Center.global_position, timer.wait_time / 2)
+
 
 func _on_Timer_timeout():
-	timer.wait_time = (randf() * 5) + 1
+	timer.wait_time = (randf() * 2) + 1
 	timer.start()
 	
 	_action()
