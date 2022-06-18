@@ -30,6 +30,14 @@ script = ExtResource( 3 )
 [node name="MatchSimulator" parent="." instance=ExtResource( 1 )]
 position = Vector2( 568, 198 )
 
+[node name="VisualAction" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 605.0
+margin_top = 228.0
+margin_right = -171.0
+margin_bottom = -264.0
+
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0

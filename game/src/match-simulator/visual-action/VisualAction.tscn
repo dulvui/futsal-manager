@@ -8,8 +8,6 @@
 script = ExtResource( 3 )
 
 [node name="Field" parent="." instance=ExtResource( 1 )]
-position = Vector2( 896, -792 )
-rotation = 1.5708
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -18,6 +16,6 @@ autostart = true
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Ball" parent="." instance=ExtResource( 2 )]
-position = Vector2( 448, 176 )
+position = Vector2( 536, 280 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

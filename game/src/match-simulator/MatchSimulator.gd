@@ -6,6 +6,7 @@ signal action_message
 signal half_time
 signal match_end
 
+
 const HALF_TIME = 1200 # seconds for halftime
 
 onready var action_util = $ActionUtil
@@ -78,6 +79,7 @@ func change_players(new_home_team,new_away_team):
 
 func _on_ActionUtil_away_goal():
 	emit_signal("away_goal")
+	
 
 
 func _on_ActionUtil_home_goal():
