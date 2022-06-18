@@ -11,9 +11,3 @@ script = ExtResource( 3 )
 scale = Vector2( 0.595556, 0.595556 )
 texture = ExtResource( 1 )
 centered = false
-
-[node name="HomeGoal" type="Position2D" parent="."]
-position = Vector2( -8, 88 )
-
-[node name="AwayGoal" type="Position2D" parent="."]
-position = Vector2( 365.333, 88 )

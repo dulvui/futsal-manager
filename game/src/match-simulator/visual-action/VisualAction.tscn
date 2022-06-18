@@ -18,4 +18,10 @@ autostart = true
 [node name="Ball" parent="." instance=ExtResource( 2 )]
 position = Vector2( 536, 280 )
 
+[node name="HomeGoal" type="Position2D" parent="."]
+position = Vector2( -32, 280 )
+
+[node name="AwayGoal" type="Position2D" parent="."]
+position = Vector2( 1096, 280 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

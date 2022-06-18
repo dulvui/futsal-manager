@@ -78,14 +78,14 @@ func _action():
 		print("shoot")
 		is_final_action = true
 		if is_home_goal:
-			ball.move($Field.home_goal_center, timer.wait_time / 3)
+			ball.move($HomeGoal.global_position, timer.wait_time / 3, true)
 		else:
-			ball.move($Field.away_goal_center, timer.wait_time / 3)
+			ball.move($AwayGoal.global_position, timer.wait_time / 3, true)
 		
 
 
 func _on_Timer_timeout():
-	timer.wait_time = (randf() * 2) + 1
+	timer.wait_time = rand_range(0.5,1.5)
 	timer.start()
 	
 	if is_final_action:
