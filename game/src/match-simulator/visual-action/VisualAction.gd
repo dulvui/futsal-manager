@@ -1,5 +1,7 @@
 extends Node2D
 
+signal action_finished 
+
 const VisualPlayer = preload("res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn")
 
 const MAX_POSITIONS = 10
@@ -8,8 +10,8 @@ const MIN_POSITIONS = 2
 const MAX_PLAYERS = 5
 const MIN_PLAYERS = 2
 
-const WIDTH = 500
-const HEIGHT = 800
+onready var WIDTH = $Field.width
+onready var HEIGHT = $Field.height
 
 onready var attacker = $Attacker
 onready var attacker2 = $Attacker2
@@ -21,16 +23,21 @@ enum ACTIONS {PASS, RUN, DRIBBLE}
 
 # list of random positions on the field, where the ball and at least one player moves
 var actions = []
-
 var players = []
+
+var is_final_action = false
+
+var is_home_goal
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	
+func set_up(home_goal):
 	_player_setup()
 	_actions_setup()
+	is_home_goal = home_goal
 	
 func _actions_setup():
 	for i in rand_range(MIN_POSITIONS, MAX_POSITIONS):
@@ -42,7 +49,6 @@ func _actions_setup():
 			"action": ACTIONS.values()[randi() % ACTIONS.size()]
 		}
 		actions.append(action)
-	print(actions)
 	
 func _player_setup():
 	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
@@ -70,11 +76,20 @@ func _action():
 				print("run")
 	else:
 		print("shoot")
-		ball.move($Field/Goal/Center.global_position, timer.wait_time / 2)
+		is_final_action = true
+		if is_home_goal:
+			ball.move($Field.home_goal_center, timer.wait_time / 3)
+		else:
+			ball.move($Field.away_goal_center, timer.wait_time / 3)
+		
 
 
 func _on_Timer_timeout():
 	timer.wait_time = (randf() * 2) + 1
 	timer.start()
 	
-	_action()
+	if is_final_action:
+		emit_signal("action_finished")
+		queue_free()
+	else:
+		_action()

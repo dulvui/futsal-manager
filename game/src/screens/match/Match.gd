@@ -1,5 +1,7 @@
 extends Control
 
+const VisualAction = preload("res://src/match-simulator/visual-action/VisualAction.tscn")
+
 var home_team
 var away_team
 
@@ -100,7 +102,7 @@ func match_end():
 			DataSaver.set_table_result(matchday["home"],home_goals,matchday["away"],away_goals)
 		else:
 			matchday["result"] = str(match_simulator.action_util.home_stats.statistics["goals"]) + ":" + str(match_simulator.action_util.away_stats.statistics["goals"])
-	DataSaver.save_table()
+	DataSaver.save_all_data()
 
 func half_time():
 	$HUD/Pause.text = tr("CONTINUE")
@@ -162,20 +164,39 @@ func _on_SKIP_pressed():
 
 func _on_MatchSimulator_home_goal():
 	match_simulator.pause()
+	
+	$Log.hide()
+	$Stats.hide()
+	var visual_action = VisualAction.instance()
+	$VisualAction.add_child(visual_action)
+	visual_action.set_up(false)
+	yield(visual_action, "action_finished")
+	
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
 	match_simulator.continue_match()
+	$Log.show()
 
 
 func _on_MatchSimulator_away_goal():
 	match_simulator.pause()
+
+	$Log.hide()
+	$Stats.hide()
+	var visual_action = VisualAction.instance()
+	$VisualAction.add_child(visual_action)
+	visual_action.set_up(true)
+	yield(visual_action, "action_finished")
+	
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
 	$Goal.hide()
 	match_simulator.continue_match()
+	$Log.show()
+
 
 
 func _on_StartTimer_timeout():
