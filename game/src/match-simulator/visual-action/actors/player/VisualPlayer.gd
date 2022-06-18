@@ -7,7 +7,6 @@ enum states {CHASE,KICK,WAIT,HOME,SUPPORT}
 
 var destination = Vector2(0,200)
 
-var profile
 
 var state
 
@@ -20,7 +19,10 @@ func _ready():
 	$ColorRect.color = color
 
 
-func set_up(_profile):
-	profile = _profile
-	if profile:
-		$ShirtNumber.text = str(profile["nr"])
+func set_up(nr, start_position):
+	position = start_position
+	$ShirtNumber.text = str(nr)
+	
+func move(final_position, time):
+	$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_QUINT, Tween.EASE_OUT)
+	$Tween.start()
