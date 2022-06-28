@@ -60,7 +60,7 @@ func _player_setup(home_goal):
 	var rand_number = (randi() % 10) + 2
 	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
 		var player = VisualPlayer.instance()
-		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.blue)
+		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.blue, true)
 		$HomePlayers.add_child(player)
 		if home_goal:
 			attacking_players.append(player)
@@ -71,8 +71,7 @@ func _player_setup(home_goal):
 	rand_number = (randi() % 10) + 2	
 	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
 		var player = VisualPlayer.instance()
-		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.red)
-		# invert rotation to face opposite goal
+		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.red, false)
 		$AwayPlayers.add_child(player)
 		if home_goal:
 			defending_players.append(player)

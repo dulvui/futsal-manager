@@ -28,10 +28,10 @@ position = Vector2( -32, 280 )
 position = Vector2( 1096, 280 )
 
 [node name="HomeGoalkeeper" parent="." instance=ExtResource( 4 )]
-position = Vector2( 24, 240 )
+position = Vector2( 104, 271 )
 
 [node name="AwayGoalkeeper" parent="." instance=ExtResource( 4 )]
-position = Vector2( 976, 248 )
+position = Vector2( 992, 280 )
 color = Color( 0.839216, 0.811765, 0.141176, 1 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
