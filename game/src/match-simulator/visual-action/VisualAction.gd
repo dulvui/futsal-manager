@@ -23,7 +23,9 @@ enum ACTIONS {PASS, RUN, DRIBBLE}
 
 # list of random positions on the field, where the ball and at least one player moves
 var actions = []
-var players = []
+var attacking_players = []
+var defending_players = []
+
 
 var is_final_action = false
 
@@ -35,7 +37,7 @@ func _ready():
 	randomize()
 	
 func set_up(home_goal):
-	_player_setup()
+	_player_setup(home_goal)
 	_actions_setup()
 	is_home_goal = home_goal
 	
@@ -50,12 +52,28 @@ func _actions_setup():
 		}
 		actions.append(action)
 	
-func _player_setup():
+func _player_setup(home_goal):
+	#home
+	var rand_number = (randi() % 10) + 2
 	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
 		var player = VisualPlayer.instance()
-		player.set_up(i + 5, Vector2(randi() % WIDTH, randi() % HEIGHT))
-		players.append(player)
-		$Players.add_child(player)
+		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.blue)
+		$HomePlayers.add_child(player)
+		if home_goal:
+			attacking_players.append(player)
+		else:
+			defending_players.append(player)
+	
+	# away
+	rand_number = (randi() % 10) + 2	
+	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
+		var player = VisualPlayer.instance()
+		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.red)
+		$AwayPlayers.add_child(player)
+		if home_goal:
+			defending_players.append(player)
+		else:
+			attacking_players.append(player)
 	
 
 func _action():
@@ -64,16 +82,21 @@ func _action():
 	print(action)
 	if action:
 		ball.move(action.position, timer.wait_time / 2)
+		var defender_position_distance = Vector2(rand_range(-50,50),rand_range(-50,50))
 		match(action["action"]):
 			ACTIONS.PASS:
 				print("pass")
-				players[randi() % players.size()].move(action.position, timer.wait_time)
+				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
+				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
 			ACTIONS.DRIBBLE:
 				print("dribble")
-				players[randi() % players.size()].move(action.position, timer.wait_time)
+				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
+				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
 			ACTIONS.RUN:
-				players[randi() % players.size()].move(action.position, timer.wait_time)
+				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
+				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
 				print("run")
+		get_tree().call_group("player", "wait", timer.wait_time)
 	else:
 		print("shoot")
 		is_final_action = true
