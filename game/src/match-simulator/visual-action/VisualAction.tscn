@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/match-simulator/visual-action/actors/field/Field.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/match-simulator/visual-action/actors/ball/Ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/match-simulator/visual-action/VisualAction.gd" type="Script" id=3]
+[ext_resource path="res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn" type="PackedScene" id=4]
 
 [node name="VisualAction" type="Node2D"]
 script = ExtResource( 3 )
@@ -25,5 +26,12 @@ position = Vector2( -32, 280 )
 
 [node name="AwayGoal" type="Position2D" parent="."]
 position = Vector2( 1096, 280 )
+
+[node name="HomeGoalkeeper" parent="." instance=ExtResource( 4 )]
+position = Vector2( 24, 240 )
+
+[node name="AwayGoalkeeper" parent="." instance=ExtResource( 4 )]
+position = Vector2( 976, 248 )
+color = Color( 0.839216, 0.811765, 0.141176, 1 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
