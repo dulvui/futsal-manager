@@ -13,7 +13,9 @@ script = ExtResource( 3 )
 one_shot = true
 autostart = true
 
-[node name="Players" type="Node2D" parent="."]
+[node name="HomePlayers" type="Node2D" parent="."]
+
+[node name="AwayPlayers" type="Node2D" parent="."]
 
 [node name="Ball" parent="." instance=ExtResource( 2 )]
 position = Vector2( 536, 280 )
