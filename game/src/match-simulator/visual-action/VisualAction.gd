@@ -31,6 +31,9 @@ var is_final_action = false
 
 var is_home_goal
 
+func _physics_process(delta):
+	$HomeGoalkeeper.look_at($Ball.global_position)
+	$AwayGoalkeeper.look_at($Ball.global_position)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -69,6 +72,7 @@ func _player_setup(home_goal):
 	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
 		var player = VisualPlayer.instance()
 		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.red)
+		# invert rotation to face opposite goal
 		$AwayPlayers.add_child(player)
 		if home_goal:
 			defending_players.append(player)
@@ -96,7 +100,7 @@ func _action():
 				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
 				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
 				print("run")
-		get_tree().call_group("player", "wait", timer.wait_time)
+		get_tree().call_group("player", "random_movement", timer.wait_time)
 	else:
 		print("shoot")
 		is_final_action = true

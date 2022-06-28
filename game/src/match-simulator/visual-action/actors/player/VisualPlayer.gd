@@ -31,7 +31,7 @@ func move(final_position, time):
 	$Tween.start()
 	moved = true
 	
-func wait(time):
+func random_movement(time):
 	if moved:
 		moved = false
 	else:
