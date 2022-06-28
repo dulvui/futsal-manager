@@ -21,10 +21,14 @@ func _ready():
 	pass
 
 
-func set_up(nr, start_position, color):
+func set_up(nr, start_position, color, home_player):
 	position = start_position
 	$ShirtNumber.text = str(nr)
 	$ColorRect.color = color
+	if home_player:
+		rotation_degrees = -90
+	else:
+		rotation_degrees = 90
 	
 func move(final_position, time):
 	$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_QUINT, Tween.EASE_OUT)

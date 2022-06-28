@@ -4,7 +4,6 @@
 [ext_resource path="res://src/match-simulator/visual-action/actors/player/VisualPlayer.gd" type="Script" id=2]
 
 [node name="VisualPlayer" type="Node2D" groups=["player"]]
-rotation = 1.5708
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
