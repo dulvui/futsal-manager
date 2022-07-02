@@ -59,6 +59,18 @@ func _ready():
 		var points_label = Label.new()
 		points_label.text = str(team["points"])
 		$GridContainer.add_child(points_label)
+		
+		
+		if team["name"] == DataSaver.selected_team:
+			pos_label.add_color_override("font_color", Color.gold)
+			name_label.add_color_override("font_color", Color.gold)
+			games_played_label.add_color_override("font_color", Color.gold)
+			wins_label.add_color_override("font_color", Color.gold)
+			draws_label.add_color_override("font_color", Color.gold)
+			lost_label.add_color_override("font_color", Color.gold)
+			goals_made_label.add_color_override("font_color", Color.gold)
+			goals_against_label.add_color_override("font_color", Color.gold)
+			points_label.add_color_override("font_color", Color.gold)
 
 
 func point_sorter(a, b):
