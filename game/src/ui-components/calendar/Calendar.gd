@@ -10,8 +10,8 @@ var current_month
 var start_month
 
 func _ready():
-	current_month = DataSaver.month
-	start_month = DataSaver.month
+	current_month = DataSaver.date.month
+	start_month = DataSaver.date.month
 	set_up()
 
 func set_up():
@@ -49,7 +49,7 @@ func set_up():
 				
 	for day in days:
 			var calendar_day = Day.instance()
-			calendar_day.set_up(day, current_month == start_month and day["day"] == DataSaver.day)
+			calendar_day.set_up(day, current_month == start_month and day["day"] == DataSaver.date.day)
 			$GridContainer.add_child(calendar_day)
 		
 	$Paginator/Page.text = CalendarUtil.months[current_month]

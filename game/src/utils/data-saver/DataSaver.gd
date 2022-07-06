@@ -6,18 +6,19 @@ var language
 
 var manager
 
-var day
-var month
-var year
-
 var calendar
+# dictionary {year,month,day}
+var date
 
 var formation = "2-2"
 var selected_team
-# leagues of current league
+
+# teams of current playing league
 var teams
-# all teasm available in game
+
+# all teams of all leagues
 var all_teams
+
 var table
 
 var current_transfers
@@ -48,10 +49,7 @@ func _ready():
 	all_teams = config.get_value("all_teams", "data",{})
 	
 	
-	year = config.get_value("current_date","year",2020)
-	month = config.get_value("current_date","month",1)
-	day = config.get_value("current_date","day",1)
-	
+	date = config.get_value("current_date","date", OS.get_date())
 	messages = config.get_value("mail","messages",[])
 	
 	#connect mail util with all other utils that send messages
@@ -72,9 +70,7 @@ func reset():
 	messages = []
 	EmailUtil.messages = []
 	
-	year = 2020
-	month = 1
-	day = 1
+	date = OS.get_date()
 	
 func set_lang(lang):
 	TranslationServer.set_locale(lang)
@@ -88,9 +84,7 @@ func save_all_data():
 	config.set_value("selected_team","data",selected_team)
 	config.set_value("teams","data",teams)
 	config.set_value("all_teams","data",all_teams)
-	config.set_value("current_date","year",CalendarUtil.year)
-	config.set_value("current_date","month",CalendarUtil.month)
-	config.set_value("current_date","day",CalendarUtil.day)
+	config.set_value("current_date","date",CalendarUtil.date)
 	config.set_value("season","calendar",calendar)
 	config.set_value("season","table",table)
 	config.set_value("season","current_transfers",TransferUtil.current_transfers)
@@ -140,10 +134,7 @@ func select_team(_teams, _selected_team):
 #	}
 	
 func save_date():
-	config.set_value("current_date","year",CalendarUtil.year)
-	config.set_value("current_date","month",CalendarUtil.month)
-	config.set_value("current_date","day",CalendarUtil.day)
-	config.set_value("current_date","day_counter",CalendarUtil.day_counter)
+	config.set_value("current_date","date",CalendarUtil.date)
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
 
