@@ -9,7 +9,7 @@ const Day = preload("res://src/ui-components/calendar/day/Day.tscn")
 var current_month
 
 func _ready():
-	current_month = DataSaver.date.month - 1
+	current_month = DataSaver.date.month
 	set_up()
 
 func set_up():
@@ -20,7 +20,7 @@ func set_up():
 	
 	for i in range(0, DataSaver.calendar[current_month].size()):
 		var calendar_day = Day.instance()
-		calendar_day.set_up(DataSaver.calendar[current_month][i], i)
+		calendar_day.set_up(DataSaver.calendar[current_month][i], i, current_month)
 		$GridContainer.add_child(calendar_day)
 #
 	$Paginator/Page.text = CalendarUtil.MONTHS[current_month - 1]

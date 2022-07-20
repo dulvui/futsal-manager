@@ -11,17 +11,25 @@ var date
 
 func _ready():
 	date = DataSaver.date
+	
+func initial_date():
+	date = OS.get_date()
+	
+	# set month to 1st of june
+	date.day = 1
+	date.month = 6
+	return date
 
 func create_calendar():
-	
-	date = OS.get_date()
 	
 	var calendar = []
 	
 	var temp_date = date.duplicate(true)
 	
-	# set month to 1st
+	# set month to 1st of june
 	temp_date.day = 1
+	temp_date.month = 6
+	
 	
 	# create months
 	for i in range(0,12):

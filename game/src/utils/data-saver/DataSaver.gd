@@ -49,7 +49,7 @@ func _ready():
 	all_teams = config.get_value("all_teams", "data",{})
 	
 	
-	date = config.get_value("current_date","date", OS.get_date())
+	date = config.get_value("current_date","date", CalendarUtil.initial_date())
 	messages = config.get_value("mail","messages",[])
 	
 	#connect mail util with all other utils that send messages
@@ -70,7 +70,7 @@ func reset():
 	messages = []
 	EmailUtil.messages = []
 	
-	date = OS.get_date()
+	date = CalendarUtil.initial_date()
 	
 func set_lang(lang):
 	TranslationServer.set_locale(lang)
