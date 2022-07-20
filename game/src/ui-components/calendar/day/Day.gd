@@ -8,7 +8,7 @@ signal click
 # if something set, else do nothing
 
 func set_up(day, current_day):
-	$Label.text = str(day["day"] + 1)
+	$Label.text = str(current_day + 1)
 	var team_name
 	if day["matches"].size() > 0:
 		for matchz in day["matches"]:
@@ -21,13 +21,13 @@ func set_up(day, current_day):
 		$Match.connect("pressed",self,"_on_Match_pressed",[day["matches"]])
 		$Match.show()
 		$Match.text = team_name
-	if current_day:
+	if current_day + 1 == DataSaver.date.day:
 		if $ColorRect.color != Color.gray:
 			$ColorRect.color = Color.red
 		else:
 			$ColorRect.color = Color.lightpink
 	
-	$WeekDay.text = day["week_day"]
+	$WeekDay.text = day["weekday"]
 
 
 func _on_Match_pressed(matches):

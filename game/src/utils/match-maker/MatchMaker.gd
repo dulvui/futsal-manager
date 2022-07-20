@@ -58,18 +58,19 @@ func inizialize_matches():
 	
 	
 	#add to calendar
-	var day = 3 # beacuse year starts with wensday
-	var month = 0
+	var day = DataSaver.date.day
+	var month = DataSaver.date.month - 1
 	
-	for c_match_days in matches:
+	for match_days in matches:
 		# TODO check weekends
 		if day >= DataSaver.calendar[month].size():
+			month += 1
+			day = 1
 			for i in 7:
-				if DataSaver.calendar[month + 1][i]["week_day"] == "SAT":
+				if DataSaver.calendar[month][i]["weekday"] == "6": # 6 is  saturday
 					day = i
 					break
-			month += 1
-		DataSaver.calendar[month][day]["matches"] = c_match_days
+		DataSaver.calendar[month][day]["matches"] = match_days
 		day += 7
 		
 func _shift_array(array):
