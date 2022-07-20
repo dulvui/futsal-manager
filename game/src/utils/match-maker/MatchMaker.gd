@@ -59,7 +59,7 @@ func inizialize_matches():
 	
 	#add to calendar
 	var day = DataSaver.date.day
-	var month = DataSaver.date.month - 1
+	var month = DataSaver.date.month
 	
 	for match_days in matches:
 		# TODO check weekends

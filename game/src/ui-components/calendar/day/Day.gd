@@ -7,7 +7,7 @@ signal click
 # on click emits signal, to show match or training popup in calendar
 # if something set, else do nothing
 
-func set_up(day, current_day):
+func set_up(day, current_day, current_month):
 	$Label.text = str(current_day + 1)
 	var team_name
 	if day["matches"].size() > 0:
@@ -21,7 +21,7 @@ func set_up(day, current_day):
 		$Match.connect("pressed",self,"_on_Match_pressed",[day["matches"]])
 		$Match.show()
 		$Match.text = team_name
-	if current_day + 1 == DataSaver.date.day:
+	if current_day + 1 == DataSaver.date.day and current_month == DataSaver.date.month:
 		if $ColorRect.color != Color.gray:
 			$ColorRect.color = Color.red
 		else:
