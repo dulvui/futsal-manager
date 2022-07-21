@@ -28,13 +28,13 @@ config/icon="res://icon.png"
 
 [autoload]
 
-DataSaver="*res://src/utils/data-saver/DataSaver.gd"
-CalendarUtil="*res://src/utils/calendar-util/CalendarUtil.gd"
+DataSaver="*res://src/DataSaver.gd"
+CalendarUtil="*res://src/utils/CalendarUtil.gd"
 Leagues="*res://src/data/legaues/Leagues.gd"
-MatchMaker="*res://src/utils/match-maker/MatchMaker.gd"
-TransferUtil="*res://src/utils/transfer-util/TransferUtil.gd"
-EmailUtil="*res://src/utils/email-util/EmailUtil.gd"
-ContractUtil="*res://src/utils/contract-util/ContractUtil.gd"
+MatchMaker="*res://src/utils/MatchMaker.gd"
+TransferUtil="*res://src/utils/TransferUtil.gd"
+EmailUtil="*res://src/utils/EmailUtil.gd"
+ContractUtil="*res://src/utils/ContractUtil.gd"
 Constants="*res://src/Constants.gd"
 
 [display]
