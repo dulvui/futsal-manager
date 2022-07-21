@@ -79,7 +79,7 @@ func next_day():
 
 
 func get_date():
-	return DAYS[date.weekday - 1] + " " + str(date.day) + " " + MONTHS[date.month - 1] + " " + str(date.year)
+	return DAYS[date.weekday - 1] + " " + str(date.day) + " " + MONTHS[date.month] + " " + str(date.year)
 
 func get_next_match():
 	for matchz in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day - 1]["matches"]:
