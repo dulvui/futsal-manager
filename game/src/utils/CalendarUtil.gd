@@ -52,23 +52,6 @@ func next_day():
 	date = _get_next_day(date)
 	DataSaver.date = date
 	
-#	MatchMaker.check_date(day,month,year)
-	# check contracts
-	# generate random news/ emails
-	# check trainings
-	# player growth
-	# pay players/staff
-	
-	# check month bounds
-#	var next_dayz
-#	var next_monthz
-#	if date.day > DataSaver.calendar[date.month].size() :
-#		next_dayz = 0
-#		next_monthz = DataSaver.month + 1 #TODO check months bounds
-#	else:
-#		next_dayz = date.day + 1
-#		next_monthz = date.month
-	
 	if DataSaver.calendar[date.month][date.day - 1]["matches"].size() > 0:
 		var next_match
 		for matchz in DataSaver.calendar[date.month][date.day - 1]["matches"]:
@@ -78,7 +61,7 @@ func next_day():
 
 
 
-func get_date():
+func get_dashborad_date():
 	return DAYS[date.weekday - 1] + " " + str(date.day) + " " + MONTHS[date.month] + " " + str(date.year)
 
 func get_next_match():

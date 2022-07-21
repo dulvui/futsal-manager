@@ -8,7 +8,7 @@ func _ready():
 	$TeamName.text = DataSaver.selected_team
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
-	$Date.text = CalendarUtil.get_date()
+	$Date.text = CalendarUtil.get_dashborad_date()
 	$AllPlayerList.set_up()
 	
 
@@ -37,7 +37,7 @@ func _on_Continue_pressed():
 	TransferUtil.update_day()
 	$Email.update_messages()
 	$Calendar.set_up()
-	$Date.text = CalendarUtil.get_date()
+	$Date.text = CalendarUtil.get_dashborad_date()
 	DataSaver.save_all_data()
 	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day - 1]["matches"].size() > 0:
 		get_tree().change_scene("res://src/screens/match/Match.tscn")
