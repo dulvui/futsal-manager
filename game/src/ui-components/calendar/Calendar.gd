@@ -17,12 +17,11 @@ func set_up():
 	for child in $GridContainer.get_children():
 		child.queue_free()
 	
-	# start with monday
+	# start with monday: fill with transparent days
 	var monday_counter = 7
 	while DataSaver.calendar[current_month][monday_counter]["weekday"] != "MON":
 		var calendar_day = Day.instance()
-#		var last_month_day = DataSaver.calendar[current_month].size() - monday_counter
-#		calendar_day.set_up(DataSaver.calendar[current_month - 1][last_month_day],last_month_day , current_month - 1)
+		calendar_day.modulate = Color(0,0,0,0)
 		$GridContainer.add_child(calendar_day)
 		monday_counter -= 1
 		
