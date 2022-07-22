@@ -65,9 +65,9 @@ func inizialize_matches():
 		# TODO check weekends
 		if day >= DataSaver.calendar[month].size():
 			month += 1
-			day = 1
+			day = 0
 			for i in 7:
-				if DataSaver.calendar[month][i]["weekday"] == "6": # 6 is  saturday
+				if DataSaver.calendar[month][i]["weekday"] == "SAT":
 					day = i
 					break
 		DataSaver.calendar[month][day]["matches"] = match_days
