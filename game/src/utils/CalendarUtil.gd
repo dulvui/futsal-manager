@@ -52,9 +52,9 @@ func next_day():
 	date = _get_next_day(date)
 	DataSaver.date = date
 	
-	if DataSaver.calendar[date.month][date.day - 1]["matches"].size() > 0:
+	if date.day < DataSaver.calendar[date.month].size() and DataSaver.calendar[date.month][date.day]["matches"].size() > 0:
 		var next_match
-		for matchz in DataSaver.calendar[date.month][date.day - 1]["matches"]:
+		for matchz in DataSaver.calendar[date.month][date.day]["matches"]:
 			if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
 				next_match = matchz
 		EmailUtil.message(next_match,EmailUtil.MESSAGE_TYPES.NEXT_MATCH)
