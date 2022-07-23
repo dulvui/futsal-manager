@@ -4,20 +4,15 @@ var config
 
 var language
 
-var manager
-
 var calendar
-# dictionary {year,month,day}
 var date
-
-var formation = "2-2"
-var selected_team
-
-# teams of current playing league
-var teams
 
 # all teams of all leagues
 var all_teams
+# teams of current playing league
+var teams
+var selected_team
+var manager
 
 var table
 
@@ -77,7 +72,6 @@ func set_lang(lang):
 	language = lang
 	config.set_value("settings","language", language)
 	config.save("user://settings.cfg")
-	print("lang set to " + language)
 
 func save_all_data():
 	config.set_value("manager","data",manager)
@@ -115,23 +109,6 @@ func select_team(_teams, _selected_team):
 		   "lost" : 0
 		}
 	save_all_data()
-	
-#	hardcoded for now, use generator for this afterwards
-#	team["formation"] = "2-2"
-#
-#	team["offensive_tactics"] = {
-#		"O1" : 10,
-#		"O2" : 10,
-#		"O3" : 10,
-#		"O4" : 10
-#	}
-#
-#	team["defensive_tactics"] = {
-#		"D1" : 10,
-#		"D2" : 10,
-#		"D3" : 10,
-#		"D4" : 10
-#	}
 	
 func save_date():
 	config.set_value("current_date","date",CalendarUtil.date)
@@ -209,6 +186,7 @@ func get_selected_team():
 			return team
 
 
+# save on quit on mobile
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		save_all_data()

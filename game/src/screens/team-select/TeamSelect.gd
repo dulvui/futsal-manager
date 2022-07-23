@@ -29,8 +29,8 @@ func team_selected(teams, selected_team):
 	print("calendar created")
 	MatchMaker.inizialize_matches()
 	print("matches initialized")
-	DataSaver.save_all_data()
 	
 	EmailUtil.message(null,EmailUtil.MESSAGE_TYPES.WELCOME_MANAGER)
 	
+	DataSaver.save_all_data()
 	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")
