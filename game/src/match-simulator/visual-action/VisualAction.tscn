@@ -19,19 +19,21 @@ autostart = true
 [node name="AwayPlayers" type="Node2D" parent="."]
 
 [node name="Ball" parent="." instance=ExtResource( 2 )]
-position = Vector2( 536, 280 )
+position = Vector2( 600, 304 )
 
 [node name="HomeGoal" type="Position2D" parent="."]
-position = Vector2( -32, 280 )
+position = Vector2( -16, 304 )
 
 [node name="AwayGoal" type="Position2D" parent="."]
-position = Vector2( 1096, 280 )
+position = Vector2( 1224, 304 )
 
 [node name="HomeGoalkeeper" parent="." instance=ExtResource( 4 )]
-position = Vector2( 104, 271 )
+position = Vector2( 64, 304 )
+is_field_player = false
 
 [node name="AwayGoalkeeper" parent="." instance=ExtResource( 4 )]
-position = Vector2( 992, 280 )
+position = Vector2( 1136, 304 )
 color = Color( 0.839216, 0.811765, 0.141176, 1 )
+is_field_player = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

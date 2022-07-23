@@ -4,10 +4,9 @@
 [ext_resource path="res://src/match-simulator/visual-action/actors/field/Field.gd" type="Script" id=3]
 
 [node name="Field" type="Node2D"]
-scale = Vector2( 3, 3 )
+scale = Vector2( 2, 2 )
 script = ExtResource( 3 )
 
 [node name="Floor" type="Sprite" parent="."]
-scale = Vector2( 0.595556, 0.595556 )
 texture = ExtResource( 1 )
 centered = false
