@@ -31,49 +31,64 @@ var is_final_action = false
 
 var is_home_goal
 
-func _physics_process(delta):
-	$HomeGoalkeeper.look_at($Ball.global_position)
-	$AwayGoalkeeper.look_at($Ball.global_position)
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+
+func _physics_process(delta):
+	# look at ball
+	$HomeGoalkeeper.look_at($Ball.global_position)
+	$AwayGoalkeeper.look_at($Ball.global_position)
+	for player in attacking_players:
+		player.look_at($Ball.global_position)
+	for player in defending_players:
+		player.look_at($Ball.global_position)
+
 	
 func set_up(home_goal):
-	_player_setup(home_goal)
-	_actions_setup()
 	is_home_goal = home_goal
+	_player_setup()
+	_actions_setup()
 	
 func _actions_setup():
+	var x = WIDTH / 2
+	var y = HEIGHT / 2
+	
 	for i in rand_range(MIN_POSITIONS, MAX_POSITIONS):
 		
 		# make positons move towards goal
 		# with +/- tolerance, so that i can also move a bit backwards
+		if is_home_goal:
+			x -= randi() % (WIDTH / MAX_POSITIONS / 2)
+		else:
+			x += randi() % (WIDTH / MAX_POSITIONS / 2)
+			
+		y = randi() % HEIGHT
+		
 		var action = {
-			"position": Vector2(randi() % WIDTH, randi() % HEIGHT),
+			"position": Vector2(x, y),
 			"action": ACTIONS.values()[randi() % ACTIONS.size()]
 		}
 		actions.append(action)
 	
-func _player_setup(home_goal):
+func _player_setup():
 	#home
 	var rand_number = (randi() % 10) + 2
 	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
 		var player = VisualPlayer.instance()
 		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.blue, true)
 		$HomePlayers.add_child(player)
-		if home_goal:
+		if is_home_goal:
 			attacking_players.append(player)
 		else:
 			defending_players.append(player)
 	
 	# away
-	rand_number = (randi() % 10) + 2	
+	rand_number = (randi() % 10) + 2
 	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
 		var player = VisualPlayer.instance()
 		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.red, false)
 		$AwayPlayers.add_child(player)
-		if home_goal:
+		if is_home_goal:
 			defending_players.append(player)
 		else:
 			attacking_players.append(player)

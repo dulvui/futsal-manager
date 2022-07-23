@@ -17,28 +17,27 @@ var velocity = 1
 
 var moved = false
 
-func _ready():
-	pass
+export var is_field_player = true
 
 
 func set_up(nr, start_position, color, home_player):
 	position = start_position
 	$ShirtNumber.text = str(nr)
 	$ColorRect.color = color
-	if home_player:
-		rotation_degrees = -90
-	else:
-		rotation_degrees = 90
+	if home_player and is_field_player:
+		rotation_degrees -= 180
 	
 func move(final_position, time):
-	$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_QUINT, Tween.EASE_OUT)
-	$Tween.start()
-	moved = true
+	if is_field_player:
+		$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Tween.start()
+		moved = true
 	
 func random_movement(time):
-	if moved:
-		moved = false
-	else:
-		var final_position = position - Vector2(rand_range(-50,50),rand_range(-50,50))
-		$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_QUINT, Tween.EASE_OUT)
-		$Tween.start()
+	if is_field_player:
+		if moved:
+			moved = false
+		else:
+			var final_position = position - Vector2(rand_range(-50,50),rand_range(-50,50))
+			$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
