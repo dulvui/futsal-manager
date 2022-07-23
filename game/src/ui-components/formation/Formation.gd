@@ -16,15 +16,15 @@ func _ready():
 	_set_players()
 	
 		
-	animation_player.play("Fade" + DataSaver.formation)
+	animation_player.play("Fade" + DataSaver.get_selected_team()["formation"])
 
 func _on_FormationSelect_item_selected(index):
-	animation_player.play_backwards("Fade" + DataSaver.formation)
+	animation_player.play_backwards("Fade" + DataSaver.get_selected_team()["formation"] )
 	yield(animation_player,"animation_finished")
 	_set_players()
-	DataSaver.formation = formations[index]
+	DataSaver.get_selected_team()["formation"] = formations[index]
 	DataSaver.save_all_data()
-	animation_player.play("Fade" + DataSaver.formation)
+	animation_player.play("Fade" + DataSaver.get_selected_team()["formation"] )
 	
 
 func _set_players(set_up=true):
