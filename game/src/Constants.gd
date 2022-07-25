@@ -6,9 +6,9 @@ const MATCH_SPEED_FACTOR = 4
 
 # bigger number => more saves
 const GOAL_KEEPER_FACTOR = {
-	"NORMAL" : 1, # 15
-	"FREE_KICK": 2, # 25
-	"PENALTY" : 4 # 25
+	"NORMAL" : 15, # 15
+	"FREE_KICK": 25, # 25
+	"PENALTY" : 45 # 45
 }
 
 # 0 - 100

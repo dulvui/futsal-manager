@@ -10,6 +10,7 @@ var match_started = false
 var first_half = true
 
 onready var match_simulator = $MatchSimulator
+onready var stats = $Stats
 
 onready var animation_player = $AnimationPlayer
 
@@ -34,34 +35,9 @@ func _ready():
 	
 
 func _process(delta):
+	stats.update_stats(match_simulator.action_util.home_stats, match_simulator.action_util.away_stats)
 	$HUD/TopBar/Time.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 	$HUD/TopBar/Result.text = "%d - %d"%[match_simulator.action_util.home_stats.statistics["goals"],match_simulator.action_util.away_stats.statistics["goals"]]
-	
-	$Stats/VBoxContainer/HomePossession.text = "%d "%match_simulator.action_util.home_stats.statistics["possession"]
-	$Stats/VBoxContainer/AwayPossession.text = "%d "%match_simulator.action_util.away_stats.statistics["possession"]
-	$Stats/VBoxContainer/HomePass.text = "%d "%match_simulator.action_util.home_stats.statistics["pass"]
-	$Stats/VBoxContainer/AwayPass.text = "%d "%match_simulator.action_util.away_stats.statistics["pass"]
-	$Stats/VBoxContainer/HomePassSuccess.text = "%d "%match_simulator.action_util.home_stats.statistics["pass_success"]
-	$Stats/VBoxContainer/AwayPassSuccess.text = "%d "%match_simulator.action_util.away_stats.statistics["pass_success"]
-	$Stats/VBoxContainer/HomeShots.text = "%d "%match_simulator.action_util.home_stats.statistics["shots"]
-	$Stats/VBoxContainer/AwayShots.text = "%d "%match_simulator.action_util.away_stats.statistics["shots"]
-	$Stats/VBoxContainer/AwayShotsOnTarget.text = "%d "%match_simulator.action_util.away_stats.statistics["shots_on_target"]
-	$Stats/VBoxContainer/HomeShotsOnTarget.text = "%d "%match_simulator.action_util.home_stats.statistics["shots_on_target"]
-	$Stats/VBoxContainer/HomeCorners.text = "%d "%match_simulator.action_util.home_stats.statistics["corners"]
-	$Stats/VBoxContainer/AwayCorners.text = "%d "%match_simulator.action_util.away_stats.statistics["corners"]
-	$Stats/VBoxContainer/HomeThrowIn.text = "%d "%match_simulator.action_util.home_stats.statistics["kick_ins"]
-	$Stats/VBoxContainer/AwayThrowIn.text = "%d "%match_simulator.action_util.away_stats.statistics["kick_ins"]
-	$Stats/VBoxContainer/HomeFouls.text = "%d "%match_simulator.action_util.home_stats.statistics["fouls"]
-	$Stats/VBoxContainer/AwayFouls.text = "%d "%match_simulator.action_util.away_stats.statistics["fouls"]
-	$Stats/VBoxContainer/HomeFreeKicks.text = "%d "%match_simulator.action_util.home_stats.statistics["free_kicks"]
-	$Stats/VBoxContainer/AwayFreeKicks.text = "%d "%match_simulator.action_util.away_stats.statistics["free_kicks"]
-	$Stats/VBoxContainer/HomePenalties.text = "%d "%match_simulator.action_util.home_stats.statistics["penalties"]
-	$Stats/VBoxContainer/AwayPenalties.text = "%d "%match_simulator.action_util.away_stats.statistics["penalties"]
-	$Stats/VBoxContainer/HomeYellowCards.text = "%d "%match_simulator.action_util.home_stats.statistics["yellow_cards"]
-	$Stats/VBoxContainer/AwayYellowCards.text = "%d "%match_simulator.action_util.away_stats.statistics["yellow_cards"]
-	$Stats/VBoxContainer/HomeRedCards.text = "%d "%match_simulator.action_util.home_stats.statistics["red_cards"]
-	$Stats/VBoxContainer/AwayRedCards.text = "%d "%match_simulator.action_util.away_stats.statistics["red_cards"]
-	
 	
 	$HUD/TimeBar.value = match_simulator.time
 	

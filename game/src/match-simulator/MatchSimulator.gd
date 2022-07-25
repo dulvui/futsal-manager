@@ -44,13 +44,9 @@ func match_end():
 	timer.stop()
 	
 func faster():
-#	Engine.time_scale *=  Constants.MATCH_SPEED_FACTOR
-#	Engine.iterations_per_second *= Constants.MATCH_SPEED_FACTOR
 	timer.wait_time /= Constants.MATCH_SPEED_FACTOR
 	
 func slower():
-#	Engine.time_scale /= Constants.MATCH_SPEED_FACTOR
-#	Engine.iterations_per_second /= Constants.MATCH_SPEED_FACTOR
 	timer.wait_time *= Constants.MATCH_SPEED_FACTOR
 
 
