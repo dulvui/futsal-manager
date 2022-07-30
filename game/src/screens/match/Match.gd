@@ -5,6 +5,10 @@ const VisualAction = preload("res://src/match-simulator/visual-action/VisualActi
 var home_team
 var away_team
 
+var home_goals = 0
+var away_goals = 0
+
+
 var match_started = false
 
 var first_half = true
@@ -37,7 +41,6 @@ func _ready():
 func _process(delta):
 	stats.update_stats(match_simulator.action_util.home_stats, match_simulator.action_util.away_stats)
 	$HUD/TopBar/Time.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
-	$HUD/TopBar/Result.text = "%d - %d"%[match_simulator.action_util.home_stats.statistics["goals"],match_simulator.action_util.away_stats.statistics["goals"]]
 	
 	$HUD/TimeBar.value = match_simulator.time
 	
@@ -45,6 +48,7 @@ func _process(delta):
 	
 	$HUD/SpeedFactor.text = str(speed_factor + 1) + " X"
 	
+	$HUD/TopBar/Result.text = "%d - %d"%[home_goals,away_goals]
 	
 
 func _on_Field_pressed():
@@ -148,6 +152,8 @@ func _on_MatchSimulator_home_goal():
 	visual_action.set_up(false)
 	yield(visual_action, "action_finished")
 	
+	home_goals += 1
+	
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
@@ -155,6 +161,8 @@ func _on_MatchSimulator_home_goal():
 	visual_action.queue_free()
 	match_simulator.continue_match()
 	$Log.show()
+	
+	
 
 
 func _on_MatchSimulator_away_goal():
@@ -167,6 +175,8 @@ func _on_MatchSimulator_away_goal():
 	visual_action.set_up(true)
 	yield(visual_action, "action_finished")
 	
+	away_goals += 1
+	
 	$Goal.show()
 	animation_player.play("Goal")
 	yield(animation_player,"animation_finished")
@@ -174,8 +184,7 @@ func _on_MatchSimulator_away_goal():
 	visual_action.queue_free()
 	match_simulator.continue_match()
 	$Log.show()
-
-
+	
 
 func _on_StartTimer_timeout():
 	match_simulator.start_match()
