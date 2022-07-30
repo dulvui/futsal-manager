@@ -7,9 +7,6 @@ const VisualPlayer = preload("res://src/match-simulator/visual-action/actors/pla
 const MAX_POSITIONS = 10
 const MIN_POSITIONS = 2
 
-const MAX_PLAYERS = 5
-const MIN_PLAYERS = 2
-
 onready var WIDTH = $Field.width
 onready var HEIGHT = $Field.height
 
@@ -76,7 +73,7 @@ func _actions_setup():
 func _player_setup():
 	#home
 	var rand_number = (randi() % 10) + 2
-	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
+	for i in 4:
 		var player = VisualPlayer.instance()
 		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.blue, true)
 		$HomePlayers.add_child(player)
@@ -87,7 +84,7 @@ func _player_setup():
 	
 	# away
 	rand_number = (randi() % 10) + 2
-	for i in rand_range(MIN_PLAYERS, MAX_PLAYERS):
+	for i in 4:
 		var player = VisualPlayer.instance()
 		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.red, false)
 		$AwayPlayers.add_child(player)
