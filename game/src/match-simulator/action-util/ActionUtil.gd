@@ -9,7 +9,9 @@ signal possession_change
 # goal signals for visual actions
 signal home_goal
 signal away_goal
-signal nearly_goal
+signal home_shot
+signal away_shot
+
 signal action_message
 
 class_name ActionUtil
@@ -160,7 +162,7 @@ func _check_goal():
 	goalkeeper_attributes = goalkeeper_attributes / Constants.GOAL_KEEPER_FACTOR[State.keys()[current_state]]
 
 	if random_goal < goalkeeper_attributes:
-		# GOAL
+		# goal
 		if home_team.has_ball:
 			emit_signal("home_goal")
 			emit_signal("action_message","GOAL for " + home_team.name)
@@ -171,6 +173,15 @@ func _check_goal():
 			away_stats.increase_goals()
 		_change_possession()
 		return true
+	else:
+		# no goal, but could become shot visual action
+		if randi() % Constants.VISUAL_ACTION_SHOTS == 0:
+			print("visual action shot, no goal")
+			if home_team.has_ball:
+				emit_signal("home_shot")
+			else:
+				emit_signal("away_shot")
+		
 	return false
 	
 	

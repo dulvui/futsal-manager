@@ -31,6 +31,8 @@ var is_final_action = false
 
 var is_home_goal
 
+var is_goal
+
 func _ready():
 	randomize()
 
@@ -44,8 +46,9 @@ func _physics_process(delta):
 		player.look_at($Ball.global_position)
 
 	
-func set_up(home_goal):
+func set_up(home_goal, _is_goal):
 	is_home_goal = home_goal
+	is_goal = _is_goal
 	_player_setup()
 	_actions_setup()
 	
@@ -118,10 +121,16 @@ func _action():
 	else:
 		print("shoot")
 		is_final_action = true
+		
+		var shot_deviation = Vector2(0,rand_range(-50,50))
+		
+		if not is_goal:
+			shot_deviation = Vector2(0,rand_range(-250,250))
+		
 		if is_home_goal:
-			ball.move($HomeGoal.global_position, timer.wait_time / 3, true)
+			ball.move($HomeGoal.global_position + shot_deviation, timer.wait_time / 3, true)
 		else:
-			ball.move($AwayGoal.global_position, timer.wait_time / 3, true)
+			ball.move($AwayGoal.global_position + shot_deviation, timer.wait_time / 3, true)
 		
 
 

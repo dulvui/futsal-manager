@@ -4,6 +4,9 @@ extends Node
 # match fast forward speed factor
 const MATCH_SPEED_FACTOR = 4
 
+# factor if shot becomes a visual action
+const VISUAL_ACTION_SHOTS = 10
+
 # bigger number => more saves
 const GOAL_KEEPER_FACTOR = {
 	"NORMAL" : 15, # 15
@@ -27,13 +30,13 @@ const YELLOW_CARD_FACTOR = 65
 const RED_CARD_FACTOR = 90
 
 
-
 # factor for defining attack (0 - 100)
 const ATTACK_FACTOR = 1000
 const RUN_FACTOR = 450
 const PASS_FACTOR = 900
 const DRIBBLE_FACTOR = 950
 const SHOOT_FACTOR = 1000
+
 
 # attack success factors
 # bigger number => more success

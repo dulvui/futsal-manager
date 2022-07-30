@@ -12,6 +12,8 @@ script = ExtResource( 1 )
 
 [connection signal="action_message" from="ActionUtil" to="." method="_on_ActionUtil_action_message"]
 [connection signal="away_goal" from="ActionUtil" to="." method="_on_ActionUtil_away_goal"]
+[connection signal="away_shot" from="ActionUtil" to="." method="_on_ActionUtil_away_shot"]
 [connection signal="home_goal" from="ActionUtil" to="." method="_on_ActionUtil_home_goal"]
+[connection signal="home_shot" from="ActionUtil" to="." method="_on_ActionUtil_home_shot"]
 [connection signal="possession_change" from="ActionUtil" to="." method="_on_ActionUtil_possession_change"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

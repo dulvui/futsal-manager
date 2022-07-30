@@ -2,7 +2,14 @@ extends Node2D
 
 signal home_goal
 signal away_goal
+
+signal home_shot
+signal away_shot
+
+
+# commentator mesages in log
 signal action_message
+
 signal half_time
 signal match_end
 
@@ -84,3 +91,11 @@ func _on_ActionUtil_home_goal():
 
 func _on_ActionUtil_action_message(message):
 	emit_signal("action_message", message)
+
+
+func _on_ActionUtil_home_shot():
+	emit_signal("home_shot")
+
+
+func _on_ActionUtil_away_shot():
+	emit_signal("away_shot")

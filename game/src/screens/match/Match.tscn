@@ -31,7 +31,7 @@ script = ExtResource( 3 )
 [node name="MatchSimulator" parent="." instance=ExtResource( 1 )]
 position = Vector2( 568, 198 )
 
-[node name="VisualAction" type="Control" parent="."]
+[node name="VisualActionContainer" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 571.0
@@ -272,8 +272,10 @@ autostart = true
 
 [connection signal="action_message" from="MatchSimulator" to="." method="_on_MatchSimulator_action_message"]
 [connection signal="away_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_away_goal"]
+[connection signal="away_shot" from="MatchSimulator" to="." method="_on_MatchSimulator_away_shot"]
 [connection signal="half_time" from="MatchSimulator" to="." method="_on_MatchSimulator_half_time"]
 [connection signal="home_goal" from="MatchSimulator" to="." method="_on_MatchSimulator_home_goal"]
+[connection signal="home_shot" from="MatchSimulator" to="." method="_on_MatchSimulator_home_shot"]
 [connection signal="match_end" from="MatchSimulator" to="." method="_on_MatchSimulator_match_end"]
 [connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="HUD/Faster" to="." method="_on_Faster_pressed"]
