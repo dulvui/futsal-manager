@@ -149,7 +149,7 @@ func _on_MatchSimulator_home_goal():
 	$Stats.hide()
 	var visual_action = VisualAction.instance()
 	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(false, true)
+	visual_action.set_up(false, true, home_team, away_team)
 	yield(visual_action, "action_finished")
 	
 	home_goals += 1
@@ -169,7 +169,7 @@ func _on_MatchSimulator_away_goal():
 	$Stats.hide()
 	var visual_action = VisualAction.instance()
 	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(true, true)
+	visual_action.set_up(true, true, home_team, away_team)
 	yield(visual_action, "action_finished")
 	
 	away_goals += 1
@@ -189,7 +189,7 @@ func _on_MatchSimulator_home_shot():
 	$Stats.hide()
 	var visual_action = VisualAction.instance()
 	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(false, false)
+	visual_action.set_up(false, false, home_team, away_team)
 	yield(visual_action, "action_finished")
 	
 	visual_action.queue_free()
@@ -203,7 +203,7 @@ func _on_MatchSimulator_away_shot():
 	$Stats.hide()
 	var visual_action = VisualAction.instance()
 	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(true, false)
+	visual_action.set_up(true, false, home_team, away_team)
 	yield(visual_action, "action_finished")
 	
 	visual_action.queue_free()

@@ -43,10 +43,10 @@ func _physics_process(delta):
 		player.look_at($Ball.global_position)
 
 	
-func set_up(home_goal, _is_goal):
+func set_up(home_goal, _is_goal, home_team, away_team):
 	is_home_goal = home_goal
 	is_goal = _is_goal
-	_player_setup()
+	_player_setup(home_team, away_team)
 	_actions_setup()
 	
 func _actions_setup():
@@ -70,28 +70,33 @@ func _actions_setup():
 		}
 		actions.append(action)
 	
-func _player_setup():
+func _player_setup(_home_team, _away_team):
+	var home_team = _home_team.duplicate(true)
+	var away_team = _away_team.duplicate(true)
+	
 	#home
-	var rand_number = (randi() % 10) + 2
-	for i in 4:
-		var player = VisualPlayer.instance()
-		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.blue, true)
-		$HomePlayers.add_child(player)
+	var goalkeeper_home = home_team.players.active.pop_front()
+	$HomeGoalkeeper/ShirtNumber.text = str(goalkeeper_home["nr"])
+	for player in home_team.players.active:
+		var visual_player = VisualPlayer.instance()
+		visual_player.set_up(player["nr"], Vector2(randi() % WIDTH, randi() % HEIGHT), Color.blue, true)
+		$HomePlayers.add_child(visual_player)
 		if is_home_goal:
-			attacking_players.append(player)
+			attacking_players.append(visual_player)
 		else:
-			defending_players.append(player)
+			defending_players.append(visual_player)
 	
 	# away
-	rand_number = (randi() % 10) + 2
-	for i in 4:
-		var player = VisualPlayer.instance()
-		player.set_up(i + rand_number, Vector2(randi() % WIDTH, randi() % HEIGHT), Color.red, false)
-		$AwayPlayers.add_child(player)
+	var goalkeeper_away = away_team.players.active.pop_front()
+	$AwayGoalkeeper/ShirtNumber.text = str(goalkeeper_away["nr"])
+	for player in away_team.players.active:
+		var visual_player = VisualPlayer.instance()
+		visual_player.set_up(player["nr"], Vector2(randi() % WIDTH, randi() % HEIGHT), Color.red, false)
+		$AwayPlayers.add_child(visual_player)
 		if is_home_goal:
-			defending_players.append(player)
+			defending_players.append(visual_player)
 		else:
-			attacking_players.append(player)
+			attacking_players.append(visual_player)
 	
 
 func _action():
