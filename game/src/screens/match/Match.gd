@@ -142,6 +142,7 @@ func _on_SKIP_pressed():
 
 
 func _on_MatchSimulator_home_goal():
+	$HUD/Pause.disabled = true
 	match_simulator.pause()
 	
 	$Log.hide()
@@ -161,7 +162,10 @@ func _on_MatchSimulator_home_goal():
 	match_simulator.continue_match()
 	$Log.show()
 	
+	$HUD/Pause.disabled = false
+	
 func _on_MatchSimulator_away_goal():
+	$HUD/Pause.disabled = true
 	match_simulator.pause()
 
 	$Log.hide()
@@ -180,8 +184,10 @@ func _on_MatchSimulator_away_goal():
 	visual_action.queue_free()
 	match_simulator.continue_match()
 	$Log.show()
+	$HUD/Pause.disabled = false
 	
 func _on_MatchSimulator_home_shot():
+	$HUD/Pause.disabled = true
 	match_simulator.pause()
 	
 	$Log.hide()
@@ -194,8 +200,11 @@ func _on_MatchSimulator_home_shot():
 	visual_action.queue_free()
 	match_simulator.continue_match()
 	$Log.show()
+	$HUD/Pause.disabled = false
+	
 
 func _on_MatchSimulator_away_shot():
+	$HUD/Pause.disabled = true
 	match_simulator.pause()
 	
 	$Log.hide()
@@ -208,6 +217,8 @@ func _on_MatchSimulator_away_shot():
 	visual_action.queue_free()
 	match_simulator.continue_match()
 	$Log.show()
+	$HUD/Pause.disabled = false
+	
 	
 
 func _on_StartTimer_timeout():
