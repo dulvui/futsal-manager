@@ -135,7 +135,6 @@ func _on_Formation_change():
 				away_team = team
 	# need to chaneg players in simulator too
 	match_simulator.change_players(home_team,away_team)
-	$FormationPopup/Formation/PlayerSelect/PlayerList.add_match_players()
 
 
 func _on_SKIP_pressed():
