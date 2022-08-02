@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/match-simulator/visual-action/actors/player/VisualPlayer.gd" type="Script" id=2]
+[ext_resource path="res://assets/player.png" type="Texture" id=3]
 
 [node name="VisualPlayer" type="Node2D" groups=["player"]]
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
@@ -18,10 +20,9 @@ color = Color( 0.290196, 0.101961, 0.101961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -32.0
-margin_top = -32.0
+margin_top = -99.0
 margin_right = 32.0
-margin_bottom = 32.0
-rect_rotation = 90.0
+margin_bottom = -35.0
 rect_pivot_offset = Vector2( 32, 32 )
 theme = ExtResource( 1 )
 text = "1"
@@ -29,3 +30,6 @@ align = 1
 valign = 1
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )

@@ -35,12 +35,12 @@ func _ready():
 
 func _physics_process(delta):
 	# look at ball
-	$HomeGoalkeeper.look_at($Ball.global_position)
-	$AwayGoalkeeper.look_at($Ball.global_position)
+	$HomeGoalkeeper.sprite.look_at($Ball.global_position)
+	$AwayGoalkeeper.sprite.look_at($Ball.global_position)
 	for player in attacking_players:
-		player.look_at($Ball.global_position)
+		player.sprite.look_at($Ball.global_position)
 	for player in defending_players:
-		player.look_at($Ball.global_position)
+		player.sprite.look_at($Ball.global_position)
 
 	
 func set_up(home_goal, _is_goal, home_team, away_team):

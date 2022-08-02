@@ -17,6 +17,8 @@ var velocity = 1
 
 var moved = false
 
+onready var sprite = $Sprite
+
 export var is_field_player = true
 
 
@@ -24,8 +26,9 @@ func set_up(nr, start_position, color, home_player):
 	position = start_position
 	$ShirtNumber.text = str(nr)
 	$ColorRect.color = color
-	if home_player and is_field_player:
-		rotation_degrees -= 180
+	$Sprite.self_modulate = color
+#	if home_player and is_field_player:
+#		rotation_degrees -= 180
 	
 func move(final_position, time):
 	if is_field_player:
