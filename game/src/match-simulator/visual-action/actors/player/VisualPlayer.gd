@@ -17,18 +17,16 @@ var velocity = 1
 
 var moved = false
 
-onready var sprite = $Sprite
+onready var sprite = $Sprites
 
 export var is_field_player = true
 
 
-func set_up(nr, start_position, color, home_player):
-	position = start_position
+func set_up(nr, color, home_player, start_position = null):
+	if start_position:
+		position = start_position
 	$ShirtNumber.text = str(nr)
-	$ColorRect.color = color
-	$Sprite.self_modulate = color
-#	if home_player and is_field_player:
-#		rotation_degrees -= 180
+	$Sprites/Body.self_modulate = color
 	
 func move(final_position, time):
 	if is_field_player:

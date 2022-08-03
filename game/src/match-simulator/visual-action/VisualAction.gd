@@ -76,10 +76,10 @@ func _player_setup(_home_team, _away_team):
 	
 	#home
 	var goalkeeper_home = home_team.players.active.pop_front()
-	$HomeGoalkeeper/ShirtNumber.text = str(goalkeeper_home["nr"])
+	$HomeGoalkeeper.set_up(goalkeeper_home["nr"], Color.lightblue, true)
 	for player in home_team.players.active:
 		var visual_player = VisualPlayer.instance()
-		visual_player.set_up(player["nr"], Vector2(randi() % WIDTH, randi() % HEIGHT), Color.blue, true)
+		visual_player.set_up(player["nr"], Color.blue, true, Vector2(randi() % WIDTH, randi() % HEIGHT))
 		$HomePlayers.add_child(visual_player)
 		if is_home_goal:
 			attacking_players.append(visual_player)
@@ -88,10 +88,10 @@ func _player_setup(_home_team, _away_team):
 	
 	# away
 	var goalkeeper_away = away_team.players.active.pop_front()
-	$AwayGoalkeeper/ShirtNumber.text = str(goalkeeper_away["nr"])
+	$AwayGoalkeeper.set_up(goalkeeper_away["nr"], Color.lightcoral, true)
 	for player in away_team.players.active:
 		var visual_player = VisualPlayer.instance()
-		visual_player.set_up(player["nr"], Vector2(randi() % WIDTH, randi() % HEIGHT), Color.red, false)
+		visual_player.set_up(player["nr"], Color.red, false, Vector2(randi() % WIDTH, randi() % HEIGHT))
 		$AwayPlayers.add_child(visual_player)
 		if is_home_goal:
 			defending_players.append(visual_player)

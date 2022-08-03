@@ -14,12 +14,12 @@ script = ExtResource( 3 )
 one_shot = true
 autostart = true
 
+[node name="Ball" parent="." instance=ExtResource( 2 )]
+position = Vector2( 600, 304 )
+
 [node name="HomePlayers" type="Node2D" parent="."]
 
 [node name="AwayPlayers" type="Node2D" parent="."]
-
-[node name="Ball" parent="." instance=ExtResource( 2 )]
-position = Vector2( 600, 304 )
 
 [node name="HomeGoal" type="Position2D" parent="."]
 position = Vector2( -16, 304 )
