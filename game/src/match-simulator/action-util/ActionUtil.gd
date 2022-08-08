@@ -7,8 +7,7 @@ extends Node
 
 signal possession_change
 # signals for visual actions
-# 1 param: boolean home
-signal goal
+# 2 param: boolean is_goal, is_home
 signal shot
 # TODO
 signal penalty
@@ -174,14 +173,14 @@ func _check_goal():
 		else:
 			emit_signal("action_message","GOAL for " + away_team.name)
 			away_stats.increase_goals()
-		emit_signal("goal", home_team.has_ball)
+		emit_signal("shot",true, home_team.has_ball)
 		_change_possession()
 		return true
 	else:
 		# no goal, but could become shot visual action
 		if randi() % Constants.VISUAL_ACTION_SHOTS == 0:
 			print("visual action shot, no goal")
-			emit_signal("shot", home_team.has_ball)
+			emit_signal("shot", false, home_team.has_ball)
 		
 	return false
 	

@@ -11,7 +11,6 @@ script = ExtResource( 1 )
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="action_message" from="ActionUtil" to="." method="_on_ActionUtil_action_message"]
-[connection signal="goal" from="ActionUtil" to="." method="_on_ActionUtil_goal"]
 [connection signal="possession_change" from="ActionUtil" to="." method="_on_ActionUtil_possession_change"]
 [connection signal="shot" from="ActionUtil" to="." method="_on_ActionUtil_shot"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

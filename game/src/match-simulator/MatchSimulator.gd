@@ -1,8 +1,6 @@
 extends Node2D
 
-signal goal
 signal shot
-
 
 # commentator mesages in log
 signal action_message
@@ -80,10 +78,5 @@ func change_players(new_home_team,new_away_team):
 func _on_ActionUtil_action_message(message):
 	emit_signal("action_message", message)
 
-
-func _on_ActionUtil_goal(home):
-	emit_signal("goal", home)
-
-
-func _on_ActionUtil_shot(home):
-	emit_signal("away_shot", home)
+func _on_ActionUtil_shot(is_goal, is_home):
+	emit_signal("shot", is_goal, is_home)

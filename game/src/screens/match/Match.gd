@@ -141,8 +141,7 @@ func _on_SKIP_pressed():
 	match_end()
 
 
-
-func _on_MatchSimulator_goal(home):
+func _on_MatchSimulator_shot(is_goal, is_home):
 	$HUD/Pause.disabled = true
 	match_simulator.pause()
 	
@@ -150,35 +149,19 @@ func _on_MatchSimulator_goal(home):
 	$Stats.hide()
 	var visual_action = VisualAction.instance()
 	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(home, true, home_team, away_team)
+	visual_action.set_up(is_home, is_goal, home_team, away_team)
 	yield(visual_action, "action_finished")
 	
-	if home:
-		home_goals += 1
-	else:
-		away_goals += 1
-	
-	$Goal.show()
-	animation_player.play("Goal")
-	yield(animation_player,"animation_finished")
-	$Goal.hide()
-	visual_action.queue_free()
-	match_simulator.continue_match()
-	$Log.show()
-	
-	$HUD/Pause.disabled = false
-
-
-func _on_MatchSimulator_shot(home):
-	$HUD/Pause.disabled = true
-	match_simulator.pause()
-	
-	$Log.hide()
-	$Stats.hide()
-	var visual_action = VisualAction.instance()
-	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(home, false, home_team, away_team)
-	yield(visual_action, "action_finished")
+	if is_goal:
+		if is_home:
+			home_goals += 1
+		else:
+			away_goals += 1
+		
+		$Goal.show()
+		animation_player.play("Goal")
+		yield(animation_player,"animation_finished")
+		$Goal.hide()
 	
 	visual_action.queue_free()
 	match_simulator.continue_match()
