@@ -141,7 +141,8 @@ func _on_SKIP_pressed():
 	match_end()
 
 
-func _on_MatchSimulator_home_goal():
+
+func _on_MatchSimulator_goal(home):
 	$HUD/Pause.disabled = true
 	match_simulator.pause()
 	
@@ -149,10 +150,13 @@ func _on_MatchSimulator_home_goal():
 	$Stats.hide()
 	var visual_action = VisualAction.instance()
 	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(false, true, home_team, away_team)
+	visual_action.set_up(home, true, home_team, away_team)
 	yield(visual_action, "action_finished")
 	
-	home_goals += 1
+	if home:
+		home_goals += 1
+	else:
+		away_goals += 1
 	
 	$Goal.show()
 	animation_player.play("Goal")
@@ -163,47 +167,9 @@ func _on_MatchSimulator_home_goal():
 	$Log.show()
 	
 	$HUD/Pause.disabled = false
-	
-func _on_MatchSimulator_away_goal():
-	$HUD/Pause.disabled = true
-	match_simulator.pause()
 
-	$Log.hide()
-	$Stats.hide()
-	var visual_action = VisualAction.instance()
-	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(true, true, home_team, away_team)
-	yield(visual_action, "action_finished")
-	
-	away_goals += 1
-	
-	$Goal.show()
-	animation_player.play("Goal")
-	yield(animation_player,"animation_finished")
-	$Goal.hide()
-	visual_action.queue_free()
-	match_simulator.continue_match()
-	$Log.show()
-	$HUD/Pause.disabled = false
-	
-func _on_MatchSimulator_home_shot():
-	$HUD/Pause.disabled = true
-	match_simulator.pause()
-	
-	$Log.hide()
-	$Stats.hide()
-	var visual_action = VisualAction.instance()
-	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(false, false, home_team, away_team)
-	yield(visual_action, "action_finished")
-	
-	visual_action.queue_free()
-	match_simulator.continue_match()
-	$Log.show()
-	$HUD/Pause.disabled = false
-	
 
-func _on_MatchSimulator_away_shot():
+func _on_MatchSimulator_shot(home):
 	$HUD/Pause.disabled = true
 	match_simulator.pause()
 	
@@ -211,14 +177,13 @@ func _on_MatchSimulator_away_shot():
 	$Stats.hide()
 	var visual_action = VisualAction.instance()
 	$VisualActionContainer.add_child(visual_action)
-	visual_action.set_up(true, false, home_team, away_team)
+	visual_action.set_up(home, false, home_team, away_team)
 	yield(visual_action, "action_finished")
 	
 	visual_action.queue_free()
 	match_simulator.continue_match()
 	$Log.show()
 	$HUD/Pause.disabled = false
-	
 	
 
 func _on_StartTimer_timeout():
@@ -235,8 +200,3 @@ func _on_MatchSimulator_match_end():
 
 func _on_MatchSimulator_action_message(message):
 	$Log.add_text($HUD/TopBar/Time.text + " " + message + "\n")
-
-
-
-
-

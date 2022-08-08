@@ -58,9 +58,9 @@ func _actions_setup():
 		# make positons move towards goal
 		# with +/- tolerance, so that i can also move a bit backwards
 		if is_home_goal:
-			x -= randi() % (WIDTH / MAX_POSITIONS / 2)
-		else:
 			x += randi() % (WIDTH / MAX_POSITIONS / 2)
+		else:
+			x -= randi() % (WIDTH / MAX_POSITIONS / 2)
 			
 		y = randi() % HEIGHT
 		
@@ -130,9 +130,9 @@ func _action():
 			shot_deviation = Vector2(0,rand_range(-250,250))
 		
 		if is_home_goal:
-			ball.move($HomeGoal.global_position + shot_deviation, timer.wait_time / 3, true)
-		else:
 			ball.move($AwayGoal.global_position + shot_deviation, timer.wait_time / 3, true)
+		else:
+			ball.move($HomeGoal.global_position + shot_deviation, timer.wait_time / 3, true)
 		
 
 

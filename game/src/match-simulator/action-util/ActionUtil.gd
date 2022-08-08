@@ -6,11 +6,14 @@
 extends Node
 
 signal possession_change
-# goal signals for visual actions
-signal home_goal
-signal away_goal
-signal home_shot
-signal away_shot
+# signals for visual actions
+# 1 param: boolean home
+signal goal
+signal shot
+# TODO
+signal penalty
+signal freekick
+signal corner
 
 signal action_message
 
@@ -64,14 +67,16 @@ func update(time):
 			Attack.SHOOT: # , Attack.HEADER
 				goal = _check_goal()
 				if not goal:
+					# TODO emit corner signal for visual action
 					corner = _check_corner()
 	else:
 		foul = _check_foul()
 		if foul:
+			# TODO emit ponalty/freekick signal for visual action
 			var card = _check_card()
 			print("Foul with " + card + " card.")
 			emit_signal("action_message","Foul with " + card + " card.")
-			var penalty = _check_penalty()
+			_check_penalty_or_freekick()
 		else:
 			kick_in = _check_kick_in()
 #		emit_signal("possession_change")
@@ -164,23 +169,19 @@ func _check_goal():
 	if random_goal < goalkeeper_attributes:
 		# goal
 		if home_team.has_ball:
-			emit_signal("home_goal")
 			emit_signal("action_message","GOAL for " + home_team.name)
 			home_stats.increase_goals()
 		else:
-			emit_signal("away_goal")
 			emit_signal("action_message","GOAL for " + away_team.name)
 			away_stats.increase_goals()
+		emit_signal("goal", home_team.has_ball)
 		_change_possession()
 		return true
 	else:
 		# no goal, but could become shot visual action
 		if randi() % Constants.VISUAL_ACTION_SHOTS == 0:
 			print("visual action shot, no goal")
-			if home_team.has_ball:
-				emit_signal("home_shot")
-			else:
-				emit_signal("away_shot")
+			emit_signal("shot", home_team.has_ball)
 		
 	return false
 	
@@ -201,7 +202,7 @@ func _check_foul():
 		return true
 	return false
 	
-func _check_penalty():
+func _check_penalty_or_freekick():
 	var random = randi() % Constants.MAX_FACTOR
 	if random > Constants.PENALTY_FACTOR:
 		current_state = State.FREE_KICK
