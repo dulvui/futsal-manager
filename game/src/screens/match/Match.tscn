@@ -46,14 +46,14 @@ margin_bottom = 40.0
 [node name="TopBar" type="HBoxContainer" parent="HUD"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 784.933
-margin_top = 44.7666
-margin_right = 1424.94
-margin_bottom = 100.767
+margin_left = 551.0
+margin_top = 45.0
+margin_right = 1735.0
+margin_bottom = 101.0
 custom_constants/separation = 20
 
 [node name="Time" type="Label" parent="HUD/TopBar"]
-margin_right = 198.0
+margin_right = 742.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 text = "32sds"
@@ -62,8 +62,8 @@ __meta__ = {
 }
 
 [node name="Home" type="Label" parent="HUD/TopBar"]
-margin_left = 218.0
-margin_right = 377.0
+margin_left = 762.0
+margin_right = 921.0
 margin_bottom = 56.0
 text = "Robledo"
 __meta__ = {
@@ -71,8 +71,8 @@ __meta__ = {
 }
 
 [node name="Result" type="Label" parent="HUD/TopBar"]
-margin_left = 397.0
-margin_right = 457.0
+margin_left = 941.0
+margin_right = 1001.0
 margin_bottom = 56.0
 text = "3:0"
 __meta__ = {
@@ -80,8 +80,8 @@ __meta__ = {
 }
 
 [node name="Away" type="Label" parent="HUD/TopBar"]
-margin_left = 477.0
-margin_right = 640.0
+margin_left = 1021.0
+margin_right = 1184.0
 margin_bottom = 56.0
 text = "Cisneros"
 __meta__ = {
