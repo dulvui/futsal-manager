@@ -4,17 +4,11 @@ signal action_finished
 
 const VisualPlayer = preload("res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn")
 
-const MAX_POSITIONS = 10
-const MIN_POSITIONS = 2
-
 onready var WIDTH = $Field.width
 onready var HEIGHT = $Field.height
 
 onready var timer = $Timer
 onready var ball = $Ball
-
-# shoot is final action, happens always
-enum ACTIONS {PASS, RUN, DRIBBLE} 
 
 # list of random positions on the field, where the ball and at least one player moves
 var actions = []
@@ -44,32 +38,27 @@ func _physics_process(delta):
 func set_up(home_goal, _is_goal, home_team, away_team, action_buffer):
 	is_home_goal = home_goal
 	is_goal = _is_goal
+	actions = action_buffer.duplicate(true)
 	_player_setup(home_team, away_team)
 	_actions_setup()
 	
-	print("action_buffer")
-	print(action_buffer)
-	
+
+
 func _actions_setup():
 	var x = WIDTH / 2
 	var y = HEIGHT / 2
 	
-	for i in rand_range(MIN_POSITIONS, MAX_POSITIONS):
-		
+	for action in actions:
 		# make positons move towards goal
 		# with +/- tolerance, so that i can also move a bit backwards
-		if is_home_goal:
-			x += randi() % (WIDTH / MAX_POSITIONS / 2)
+		if action["home_has_ball"]:
+			x += randi() % (WIDTH / 6)
 		else:
-			x -= randi() % (WIDTH / MAX_POSITIONS / 2)
+			x -= randi() % (WIDTH / 6)
 			
 		y = randi() % HEIGHT
 		
-		var action = {
-			"position": Vector2(x, y),
-			"action": ACTIONS.values()[randi() % ACTIONS.size()]
-		}
-		actions.append(action)
+		action["position"] = Vector2(x, y)
 	
 func _player_setup(_home_team, _away_team):
 	var home_team = _home_team.duplicate(true)
@@ -102,21 +91,20 @@ func _player_setup(_home_team, _away_team):
 
 func _action():
 	var action = actions.pop_front()
-	
-	print(action)
+		
 	if action:
 		ball.move(action.position, timer.wait_time / 2)
 		var defender_position_distance = Vector2(rand_range(-50,50),rand_range(-50,50))
 		match(action["action"]):
-			ACTIONS.PASS:
+			ActionUtil.Attack.PASS, ActionUtil.Attack.CROSS:
 				print("pass")
 				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
 				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
-			ACTIONS.DRIBBLE:
+			ActionUtil.Attack.DRIBBLE:
 				print("dribble")
 				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
 				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
-			ACTIONS.RUN:
+			ActionUtil.Attack.RUN:
 				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
 				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
 				print("run")

@@ -38,6 +38,7 @@ onready var away_stats = $AwayStatistics
 
 var current_state
 
+const MAX_ACTION_BUFFER_SIZE = 10
 var action_buffer = []
 
 func _ready():
@@ -159,8 +160,8 @@ func _log(attack, result):
 
 func _action_buffer(attack, result):
 	action_buffer.append({
-		"attack" : attack,
-		"result" : result,
+		"action" : attack,
+		"success" : result,
 		"active_player" : {
 			"home" : home_team.active_player.profile["name"],
 			"away" : away_team.active_player.profile["name"],
@@ -168,7 +169,7 @@ func _action_buffer(attack, result):
 		"home_has_ball" : home_team.has_ball
 	})
 	
-	if action_buffer.size() > 30:
+	if action_buffer.size() > MAX_ACTION_BUFFER_SIZE:
 		action_buffer.pop_front()
 
 func _check_goal():
