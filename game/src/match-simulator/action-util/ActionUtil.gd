@@ -37,6 +37,8 @@ onready var away_stats = $AwayStatistics
 
 var current_state
 
+var action_buffer = []
+
 func _ready():
 	randomize()
 
@@ -152,7 +154,21 @@ func _attack():
 func _log(attack, result):
 	emit_signal("action_message","\n" + home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + "  ")
 	emit_signal("action_message","attack: " + str(Attack.keys()[attack]) + " - defense: " + str(result))
+
+func _action_buffer(attack, result):
+	action_buffer.append({
+		"attack" : attack,
+		"result" : result,
+		"active_player" : {
+			"home" : home_team.active_player.profile["name"],
+			"away" : away_team.active_player.profile["name"],
+		},
+		"home_has_ball" : home_team.has_ball
+	})
 	
+	if action_buffer.size() > 30:
+		action_buffer.pop_front()
+
 func _check_goal():
 	var goalkeeper_attributes
 	if home_team.has_ball:

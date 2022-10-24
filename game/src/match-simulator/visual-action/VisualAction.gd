@@ -10,8 +10,6 @@ const MIN_POSITIONS = 2
 onready var WIDTH = $Field.width
 onready var HEIGHT = $Field.height
 
-onready var attacker = $Attacker
-onready var attacker2 = $Attacker2
 onready var timer = $Timer
 onready var ball = $Ball
 
@@ -43,11 +41,14 @@ func _physics_process(delta):
 		player.sprite.look_at($Ball.global_position)
 
 	
-func set_up(home_goal, _is_goal, home_team, away_team):
+func set_up(home_goal, _is_goal, home_team, away_team, action_buffer):
 	is_home_goal = home_goal
 	is_goal = _is_goal
 	_player_setup(home_team, away_team)
 	_actions_setup()
+	
+	print("action_buffer")
+	print(action_buffer)
 	
 func _actions_setup():
 	var x = WIDTH / 2
