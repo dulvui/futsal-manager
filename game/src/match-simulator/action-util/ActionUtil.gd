@@ -5,6 +5,9 @@
 
 extends Node
 
+class_name ActionUtil
+
+
 signal possession_change
 # signals for visual actions
 # 2 param: boolean is_goal, is_home
@@ -15,8 +18,6 @@ signal freekick
 signal corner
 
 signal action_message
-
-class_name ActionUtil
 
 # in which sector of the field the player is situated
 # so better decisions can be made depeneding on the sector a player is
@@ -101,6 +102,7 @@ func update(time):
 	home_stats.update_possession(home_team.has_ball)
 	away_stats.update_possession(away_team.has_ball)
 	_log(attack, attack_success)
+	_action_buffer(attack, attack_success)
 	
 # returns true if attack wins, false if defense wins
 func _get_result(attack):
