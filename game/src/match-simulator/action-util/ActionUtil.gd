@@ -159,14 +159,21 @@ func _log(attack, result):
 	emit_signal("action_message","attack: " + str(Attack.keys()[attack]) + " - defense: " + str(result))
 
 func _action_buffer(attack, result):
+	var attacking_player
+	var defending_player
+	
+	if home_team.has_ball:
+		attacking_player = home_team.active_player["profile"]["number"]
+		defending_player = away_team.active_player["profile"]["number"]
+	else:
+		attacking_player = away_team.active_player["profile"]["number"]
+		defending_player = home_team.active_player["profile"]["number"]
+	
 	action_buffer.append({
 		"action" : attack,
 		"success" : result,
-		"active_player" : {
-			"home" : home_team.active_player.profile["name"],
-			"away" : away_team.active_player.profile["name"],
-		},
-		"home_has_ball" : home_team.has_ball
+		"attacking_player" : attacking_player,
+		"defending_player" : defending_player,
 	})
 	
 	if action_buffer.size() > MAX_ACTION_BUFFER_SIZE:

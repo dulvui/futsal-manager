@@ -22,9 +22,10 @@ onready var sprite = $Sprites
 export var is_field_player = true
 
 
-func set_up(nr, color, home_player, start_position = null):
+func set_up(_nr, color, home_player, start_position = null):
 	if start_position:
 		position = start_position
+	nr = _nr
 	$ShirtNumber.text = str(nr)
 	$Sprites/Body.self_modulate = color
 	

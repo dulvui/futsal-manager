@@ -51,10 +51,7 @@ func _actions_setup():
 	for action in actions:
 		# make positons move towards goal
 		# with +/- tolerance, so that i can also move a bit backwards
-		if action["home_has_ball"]:
-			x += randi() % (WIDTH / 6)
-		else:
-			x -= randi() % (WIDTH / 6)
+		x += (randi() % (WIDTH / 6)) * ((randi() % 3) - 1)
 			
 		y = randi() % HEIGHT
 		
@@ -98,15 +95,15 @@ func _action():
 		match(action["action"]):
 			ActionUtil.Attack.PASS, ActionUtil.Attack.CROSS:
 				print("pass")
-				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
-				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
+				_get_player_by_nr(attacking_players, action["attacking_player"]).move(action.position, timer.wait_time)
+				_get_player_by_nr(defending_players, action["defending_player"]).move(action.position - defender_position_distance, timer.wait_time)
 			ActionUtil.Attack.DRIBBLE:
 				print("dribble")
-				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
-				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
+				_get_player_by_nr(attacking_players, action["attacking_player"]).move(action.position, timer.wait_time)
+				_get_player_by_nr(defending_players, action["defending_player"]).move(action.position - defender_position_distance, timer.wait_time)
 			ActionUtil.Attack.RUN:
-				attacking_players[randi() % attacking_players.size()].move(action.position, timer.wait_time)
-				defending_players[randi() % defending_players.size()].move(action.position - defender_position_distance, timer.wait_time)
+				_get_player_by_nr(attacking_players, action["attacking_player"]).move(action.position, timer.wait_time)
+				_get_player_by_nr(defending_players, action["defending_player"]).move(action.position - defender_position_distance, timer.wait_time)
 				print("run")
 		get_tree().call_group("player", "random_movement", timer.wait_time)
 	else:
@@ -123,6 +120,14 @@ func _action():
 		else:
 			ball.move($HomeGoal.global_position + shot_deviation, timer.wait_time / 3, true)
 		
+
+func _get_player_by_nr(players, nr):
+	for player in players:
+		if player["nr"] == nr:
+			return player
+	# in case the player has been changed or send of the pitch
+	# TODO fix logical problem
+	return players[randi() % players.size()]
 
 
 func _on_Timer_timeout():
