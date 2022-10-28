@@ -49,11 +49,14 @@ func _actions_setup():
 	var y = HEIGHT / 2
 	
 	for action in actions:
-		# make positons move towards goal
-		# with +/- tolerance, so that i can also move a bit backwards
 		x += (randi() % (WIDTH / 6)) * ((randi() % 3) - 1)
 			
 		y = randi() % HEIGHT
+		
+		# TODO
+		# assign every player a postion according to the formation
+		# ball position is set near active players position
+		
 		
 		action["position"] = Vector2(x, y)
 	

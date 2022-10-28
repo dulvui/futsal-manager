@@ -48,7 +48,7 @@ func change_active_player():
 	var other_players = players.duplicate()
 	other_players.remove(players.find(active_player))
 	
-	active_player = other_players[(randi() % 3)]
+	active_player = other_players[(randi() % other_players.size())]
 
 func get_goalkeeper_attributes():
 	var attributes = 0
