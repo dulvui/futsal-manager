@@ -14,8 +14,8 @@ var home_team
 var away_team
 
 var actions = []
-var attacking_players = []
-var defending_players = []
+var home_visual_players = []
+var away_visual_players = []
 
 var is_final_action = false
 
@@ -52,16 +52,16 @@ const POSITION_RANGE = 40
 func _ready():
 	randomize()
 	
-	_actions_setup()
 	_player_setup()
+	_actions_setup()
 
 func _physics_process(delta):
 	# look at ball
 	$HomeGoalkeeper.sprite.look_at($Ball.global_position)
 	$AwayGoalkeeper.sprite.look_at($Ball.global_position)
-	for player in attacking_players:
+	for player in home_visual_players:
 		player.sprite.look_at($Ball.global_position)
-	for player in defending_players:
+	for player in away_visual_players:
 		player.sprite.look_at($Ball.global_position)
 
 	
@@ -74,20 +74,26 @@ func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer):
 
 
 func _actions_setup():
-	var x = WIDTH / 2
-	var y = HEIGHT / 2
-	
 	for action in actions:
-		x += (randi() % (WIDTH / 6)) * ((randi() % 3) - 1)
-			
-		y = randi() % HEIGHT
+		var nr = action["attacking_player"]
 		
 		# TODO
-		# assign every player a postion according to the formation
-		# ball position is set near active players position
+		# problem if posses changes during game
+		# or a player change was made
+		if action["is_home"]:
+			for player in home_visual_players:
+				if player.nr == nr:
+					action["position"] = player.position
+					break
+		else:
+			for player in away_visual_players:
+				if player.nr == nr:
+					action["position"] = player.position
+					break
 		
 		
-		action["position"] = Vector2(x, y)
+		
+		
 
 func _player_setup():
 	#home
@@ -98,10 +104,7 @@ func _player_setup():
 		var visual_player = VisualPlayer.instance()
 		visual_player.set_up(player["nr"], Color.blue, true, _get_player_position(home_index, true))
 		$HomePlayers.add_child(visual_player)
-		if is_home_goal:
-			attacking_players.append(visual_player)
-		else:
-			defending_players.append(visual_player)
+		home_visual_players.append(visual_player)
 		home_index += 1
 	
 	# away
@@ -112,10 +115,7 @@ func _player_setup():
 		var visual_player = VisualPlayer.instance()
 		visual_player.set_up(player["nr"], Color.red, false, _get_player_position(away_index, false))
 		$AwayPlayers.add_child(visual_player)
-		if is_home_goal:
-			defending_players.append(visual_player)
-		else:
-			attacking_players.append(visual_player)
+		away_visual_players.append(visual_player)
 		away_index += 1
 
 # index: of player in active players representing the position in field
@@ -149,20 +149,6 @@ func _action():
 		
 	if action:
 		ball.move(action.position, timer.wait_time / 2)
-		var defender_position_distance = Vector2(rand_range(-50,50),rand_range(-50,50))
-		match(action["action"]):
-			ActionUtil.Attack.PASS, ActionUtil.Attack.CROSS:
-				print("pass")
-				_get_player_by_nr(attacking_players, action["attacking_player"]).move(action.position, timer.wait_time)
-				_get_player_by_nr(defending_players, action["defending_player"]).move(action.position - defender_position_distance, timer.wait_time)
-			ActionUtil.Attack.DRIBBLE:
-				print("dribble")
-				_get_player_by_nr(attacking_players, action["attacking_player"]).move(action.position, timer.wait_time)
-				_get_player_by_nr(defending_players, action["defending_player"]).move(action.position - defender_position_distance, timer.wait_time)
-			ActionUtil.Attack.RUN:
-				_get_player_by_nr(attacking_players, action["attacking_player"]).move(action.position, timer.wait_time)
-				_get_player_by_nr(defending_players, action["defending_player"]).move(action.position - defender_position_distance, timer.wait_time)
-				print("run")
 		get_tree().call_group("player", "random_movement", timer.wait_time)
 	else:
 		print("shoot")

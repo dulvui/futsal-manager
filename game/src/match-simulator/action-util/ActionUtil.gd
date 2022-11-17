@@ -171,6 +171,7 @@ func _action_buffer(attack, result):
 	
 	action_buffer.append({
 		"action" : attack,
+		"is_home" : home_team.has_ball,
 		"success" : result,
 		"attacking_player" : attacking_player,
 		"defending_player" : defending_player,
