@@ -1,6 +1,6 @@
 extends Node2D
 
-signal action_finished 
+signal action_finished
 
 const VisualPlayer = preload("res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn")
 
@@ -10,11 +10,12 @@ onready var HEIGHT = $Field.height
 onready var timer = $Timer
 onready var ball = $Ball
 
-# list of random positions on the field, where the ball and at least one player moves
+var home_team
+var away_team
+
 var actions = []
 var attacking_players = []
 var defending_players = []
-
 
 var is_final_action = false
 
@@ -22,8 +23,37 @@ var is_home_goal
 
 var is_goal
 
+# position - formation mapping
+var formations = {
+	"2-2" : ["DL","DR","AL","AR"]
+}
+
+onready var positions = {
+	"DL" : {
+		"attack" : Vector2(WIDTH * 3 / 8, HEIGHT * 3 / 4),
+		"defense" : Vector2(WIDTH * 1 / 8, HEIGHT * 3 / 4)
+	},
+	"DR" : {
+		"attack" : Vector2(WIDTH * 3 / 8, HEIGHT / 4),
+		"defense" : Vector2(WIDTH * 1 / 8, HEIGHT / 4)
+	},
+	"AL" : {
+		"attack" : Vector2(WIDTH * 7 / 8, HEIGHT * 3 / 4),
+		"defense" : Vector2(WIDTH * 3 / 8, HEIGHT * 3 / 4)
+	},
+	"AR" : {
+		"attack" : Vector2(WIDTH * 7 / 8, HEIGHT / 4),
+		"defense" : Vector2(WIDTH * 3 / 8, HEIGHT / 4)
+	}
+}
+# defines +/- the player differs from nomrla position
+const POSITION_RANGE = 40
+
 func _ready():
 	randomize()
+	
+	_actions_setup()
+	_player_setup()
 
 func _physics_process(delta):
 	# look at ball
@@ -35,13 +65,12 @@ func _physics_process(delta):
 		player.sprite.look_at($Ball.global_position)
 
 	
-func set_up(home_goal, _is_goal, home_team, away_team, action_buffer):
+func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer):
 	is_home_goal = home_goal
 	is_goal = _is_goal
 	actions = action_buffer.duplicate(true)
-	_player_setup(home_team, away_team)
-	_actions_setup()
-	
+	home_team = _home_team.duplicate(true)
+	away_team = _away_team.duplicate(true)
 
 
 func _actions_setup():
@@ -59,35 +88,61 @@ func _actions_setup():
 		
 		
 		action["position"] = Vector2(x, y)
-	
-func _player_setup(_home_team, _away_team):
-	var home_team = _home_team.duplicate(true)
-	var away_team = _away_team.duplicate(true)
-	
+
+func _player_setup():
 	#home
+	var home_index = 0
 	var goalkeeper_home = home_team.players.active.pop_front()
 	$HomeGoalkeeper.set_up(goalkeeper_home["nr"], Color.lightblue, true)
 	for player in home_team.players.active:
 		var visual_player = VisualPlayer.instance()
-		visual_player.set_up(player["nr"], Color.blue, true, Vector2(randi() % WIDTH, randi() % HEIGHT))
+		visual_player.set_up(player["nr"], Color.blue, true, _get_player_position(home_index, true))
 		$HomePlayers.add_child(visual_player)
 		if is_home_goal:
 			attacking_players.append(visual_player)
 		else:
 			defending_players.append(visual_player)
+		home_index += 1
 	
 	# away
+	var away_index = 0
 	var goalkeeper_away = away_team.players.active.pop_front()
 	$AwayGoalkeeper.set_up(goalkeeper_away["nr"], Color.lightcoral, true)
 	for player in away_team.players.active:
 		var visual_player = VisualPlayer.instance()
-		visual_player.set_up(player["nr"], Color.red, false, Vector2(randi() % WIDTH, randi() % HEIGHT))
+		visual_player.set_up(player["nr"], Color.red, false, _get_player_position(away_index, false))
 		$AwayPlayers.add_child(visual_player)
 		if is_home_goal:
 			defending_players.append(visual_player)
 		else:
 			attacking_players.append(visual_player)
+		away_index += 1
+
+# index: of player in active players representing the position in field
+# action_type: attack or defense
+func _get_player_position(index, is_home_team):
+	# change valuse depending on formation
+	# very index means differnet positon
+	# for MVP only use 2-2 fomration
 	
+	var action_type = "defense"
+	if (is_home_team and is_home_goal) or (not is_home_team and not is_home_goal):
+		action_type = "attack"
+	
+	var field_position = formations["2-2"][index]
+	var minimum = positions[field_position][action_type]
+	var maximum = positions[field_position][action_type]
+	
+	# TODO adapt values depending on tactics
+	var x = rand_range(minimum.x - POSITION_RANGE, minimum.x + POSITION_RANGE)
+	var y = rand_range(minimum.y - POSITION_RANGE, minimum.y + POSITION_RANGE)
+	
+	# if away team move to other side
+	if not is_home_team:
+		x = WIDTH - x
+		y = HEIGHT - y
+	
+	return Vector2(x,y)
 
 func _action():
 	var action = actions.pop_front()

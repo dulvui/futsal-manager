@@ -239,7 +239,7 @@ func _check_penalty_or_freekick():
 		emit_signal("action_message","PENALTY")
 		_increase_penalties()
 		return true
-	return false
+
 	
 func _check_card():
 	var random = randi() % Constants.MAX_FACTOR

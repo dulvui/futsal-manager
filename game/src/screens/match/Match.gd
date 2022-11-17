@@ -150,8 +150,8 @@ func _on_MatchSimulator_shot(is_goal, is_home):
 	
 	# Visual Action
 	var visual_action = VisualAction.instance()
-	$VisualActionContainer.add_child(visual_action)
 	visual_action.set_up(is_home, is_goal, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
+	$VisualActionContainer.add_child(visual_action)
 	yield(visual_action, "action_finished")
 	
 	if is_goal:
