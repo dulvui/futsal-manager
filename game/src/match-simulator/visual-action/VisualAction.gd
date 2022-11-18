@@ -146,10 +146,17 @@ func _get_player_position(index, is_home_team):
 
 func _action():
 	var action = actions.pop_front()
+	
+	print(action)
+	
+	# TODO
+	# iterate over players and move active players
+	# according to action
+	# other players make random move
 		
 	if action:
 		ball.move(action.position, timer.wait_time / 2)
-		get_tree().call_group("player", "random_movement", timer.wait_time)
+		get_tree().call_group("player", "random_movement", timer.wait_time, WIDTH, HEIGHT)
 	else:
 		print("shoot")
 		is_final_action = true
