@@ -8,38 +8,45 @@ var moved = false
 onready var sprite = $Sprites
 export var is_field_player = true
 
+var field_width
+var field_height
 
-func set_up(_nr, color, is_home_player, start_position = null):
+
+func set_up(_nr, color, is_home_player, _field_width, _field_height, start_position = null):
 	if start_position:
 		position = start_position
 	nr = _nr
 	$ShirtNumber.text = str(nr)
 	$Sprites/Body.self_modulate = color
+	field_height = _field_height
+	field_width = _field_width
 	
-func move(final_position, time):
+func move(destination, time):
 	if is_field_player:
-		$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		destination = stay_inside_field(destination)
+		$Tween.interpolate_property(self, "position", position, destination, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 		moved = true
-		
+		return destination
 	
-func random_movement(time, field_width, field_height):
+func random_movement(time):
 	if is_field_player:
 		if moved:
 			moved = false
 		else:
-			var final_position = position - Vector2(rand_range(-50,50),rand_range(-50,50))
-			
-			# player should not go outside the field
-			if final_position.x < 0:
-				final_position.x = rand_range(0, 25)
-			if final_position.y < 0:
-				final_position.y = rand_range(0, 25)
-			if final_position.x > field_width:
-				final_position.x = rand_range(field_width - 25, field_width)
-			if final_position.y > field_height:
-				final_position.y = rand_range(field_height - 25, field_height)
-			
+			var final_position = stay_inside_field(position - Vector2(rand_range(-50,50),rand_range(-50,50)))
 			
 			$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
+
+func stay_inside_field(destination):
+			# player should not go outside the field
+		if destination.x < 0:
+			destination.x = rand_range(20, 45)
+		if destination.y < 0:
+			destination.y = rand_range(20, 45)
+		if destination.x > field_width:
+			destination.x = rand_range(field_width - 45, field_width - 25)
+		if destination.y > field_height:
+			destination.y = rand_range(field_height - 45, field_height - 25)
+		return destination

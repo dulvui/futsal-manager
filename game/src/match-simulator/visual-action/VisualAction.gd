@@ -4,6 +4,8 @@ signal action_finished
 
 const VisualPlayer = preload("res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn")
 
+const RUN_DISTANCE = 300
+
 onready var WIDTH = $Field.width
 onready var HEIGHT = $Field.height
 
@@ -74,10 +76,10 @@ func _player_setup():
 	#home
 	var home_index = 0
 	var goalkeeper_home = home_team.players.active.pop_front()
-	$HomeGoalkeeper.set_up(goalkeeper_home["nr"], Color.lightblue, true)
+	$HomeGoalkeeper.set_up(goalkeeper_home["nr"], Color.lightblue, true, WIDTH, HEIGHT)
 	for player in home_team.players.active:
 		var visual_player = VisualPlayer.instance()
-		visual_player.set_up(player["nr"], Color.blue, true, _get_player_position(home_index, true))
+		visual_player.set_up(player["nr"], Color.blue, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
 		$HomePlayers.add_child(visual_player)
 		home_visual_players.append(visual_player)
 		home_index += 1
@@ -85,10 +87,10 @@ func _player_setup():
 	# away
 	var away_index = 0
 	var goalkeeper_away = away_team.players.active.pop_front()
-	$AwayGoalkeeper.set_up(goalkeeper_away["nr"], Color.lightcoral, true)
+	$AwayGoalkeeper.set_up(goalkeeper_away["nr"], Color.lightcoral, true, WIDTH, HEIGHT)
 	for player in away_team.players.active:
 		var visual_player = VisualPlayer.instance()
-		visual_player.set_up(player["nr"], Color.red, false, _get_player_position(away_index, false))
+		visual_player.set_up(player["nr"], Color.red, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
 		$AwayPlayers.add_child(visual_player)
 		away_visual_players.append(visual_player)
 		away_index += 1
@@ -138,22 +140,34 @@ func _action():
 	# penalty
 		
 	if action:
-		var nr = action["attacking_player"]
+		var attack_nr = action["attacking_player"]
+		var defense_nr = action["defending_player"]
 		
 		# finb current player position
 		if action["is_home"]:
 			for player in home_visual_players:
-				if player.nr == nr:
-					action["position"] = player.position
+				if player.nr == attack_nr:
+					if action["action"] == "RUN":
+						var desitionation = player.position +  Vector2(rand_range(-RUN_DISTANCE,RUN_DISTANCE),rand_range(-RUN_DISTANCE,RUN_DISTANCE))
+						desitionation = player.move(desitionation, timer.wait_time)
+						action["position"] = desitionation
+					else:
+						action["position"] = player.position
 					break
 		else:
 			for player in away_visual_players:
-				if player.nr == nr:
-					action["position"] = player.position
+				if player.nr == attack_nr:
+					if action["action"] == "RUN":
+						var desitionation = player.position +  Vector2(rand_range(-RUN_DISTANCE,RUN_DISTANCE),rand_range(-RUN_DISTANCE,RUN_DISTANCE))
+						desitionation = player.move(desitionation, timer.wait_time)
+						action["position"] = desitionation
+					else:
+						action["position"] = player.position
 					break
+			
 		
 		ball.move(action.position, timer.wait_time / 2)
-		get_tree().call_group("player", "random_movement", timer.wait_time, WIDTH, HEIGHT)
+		get_tree().call_group("player", "random_movement", timer.wait_time)
 	else:
 		print("shoot")
 		is_final_action = true
