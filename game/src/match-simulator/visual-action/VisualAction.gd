@@ -51,9 +51,7 @@ const POSITION_RANGE = 40
 
 func _ready():
 	randomize()
-	
 	_player_setup()
-	_actions_setup()
 
 func _physics_process(delta):
 	# look at ball
@@ -71,29 +69,6 @@ func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer):
 	actions = action_buffer.duplicate(true)
 	home_team = _home_team.duplicate(true)
 	away_team = _away_team.duplicate(true)
-
-
-func _actions_setup():
-	for action in actions:
-		var nr = action["attacking_player"]
-		
-		# TODO
-		# problem if posses changes during game
-		# or a player change was made
-		if action["is_home"]:
-			for player in home_visual_players:
-				if player.nr == nr:
-					action["position"] = player.position
-					break
-		else:
-			for player in away_visual_players:
-				if player.nr == nr:
-					action["position"] = player.position
-					break
-		
-		
-		
-		
 
 func _player_setup():
 	#home
@@ -149,12 +124,31 @@ func _action():
 	
 	print(action)
 	
+
+	
 	# TODO
 	# iterate over players and move active players
 	# according to action
 	# other players make random move
+	
+	# TODO
+	# handle corners, freekick etc
 		
 	if action:
+		var nr = action["attacking_player"]
+		
+		# finb current player position
+		if action["is_home"]:
+			for player in home_visual_players:
+				if player.nr == nr:
+					action["position"] = player.position
+					break
+		else:
+			for player in away_visual_players:
+				if player.nr == nr:
+					action["position"] = player.position
+					break
+		
 		ball.move(action.position, timer.wait_time / 2)
 		get_tree().call_group("player", "random_movement", timer.wait_time, WIDTH, HEIGHT)
 	else:

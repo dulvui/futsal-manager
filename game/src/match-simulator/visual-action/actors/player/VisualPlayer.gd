@@ -21,6 +21,7 @@ func move(final_position, time):
 		$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 		moved = true
+		
 	
 func random_movement(time, field_width, field_height):
 	if is_field_player:
