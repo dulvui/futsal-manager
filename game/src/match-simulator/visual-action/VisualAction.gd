@@ -132,7 +132,10 @@ func _action():
 	# other players make random move
 	
 	# TODO
-	# handle corners, freekick etc
+	# corner
+	# foul
+	# free kick
+	# penalty
 		
 	if action:
 		var nr = action["attacking_player"]

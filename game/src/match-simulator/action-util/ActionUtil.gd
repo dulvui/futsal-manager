@@ -170,7 +170,8 @@ func _action_buffer(attack, result):
 		defending_player = home_team.active_player["profile"]["number"]
 	
 	action_buffer.append({
-		"action" : attack,
+		"action" : Attack.keys()[attack],
+		"state" : State.keys()[current_state],
 		"is_home" : home_team.has_ball,
 		"success" : result,
 		"attacking_player" : attacking_player,
