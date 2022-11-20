@@ -134,6 +134,3 @@ func _reset_options():
 	$TeamSelect.selected = 0
 	$FootSelect.selected = 0
 	$InfoSelect.selected = 0
-	
-	
-	

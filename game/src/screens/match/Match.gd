@@ -35,8 +35,6 @@ func _ready():
 	
 	match_simulator.set_up(home_team,away_team)
 	
-	$FormationPopup/Formation/PlayerList.add_match_players()
-	
 
 func _process(delta):
 	stats.update_stats(match_simulator.action_util.home_stats, match_simulator.action_util.away_stats)
