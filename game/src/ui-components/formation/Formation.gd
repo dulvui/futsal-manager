@@ -57,7 +57,7 @@ func _on_PlayerList_select_player(_player):
 	print("formation select")
 	_change_player(_player)
 	_set_active_players()
-	$PlayerList.set_up(true, false)
+	$PlayerList.set_up_players(true, false)
 	$PlayerList.hide()
 	emit_signal("change")
 	

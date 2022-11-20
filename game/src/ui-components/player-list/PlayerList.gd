@@ -19,20 +19,9 @@ const FOOTS = ["R","L","RL"]
 
 
 func set_up(use_selected_team, include_active_players):
-	all_players = []
-	for team in DataSaver.get_teams():
-		if not use_selected_team or team["name"] == DataSaver.team_name:
-			if include_active_players:
-				for player in team["players"]["active"]:
-					all_players.append(player)
-			for player in team["players"]["subs"]:
-				all_players.append(player)
 	
-	var headers = ["surname"]
-	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
-		headers.append(attribute)
-		
-	$Table.set_up(headers, all_players.duplicate(true))
+	set_up_players(use_selected_team, include_active_players)
+
 			
 	$LegaueSelect.add_item("ITALIA")
 	
@@ -58,8 +47,21 @@ func set_up(use_selected_team, include_active_players):
 		$InfoSelect.add_item(info_type)
 
 
-func add_match_players():
-	pass
+func set_up_players(use_selected_team, include_active_players):
+	all_players = []
+	for team in DataSaver.get_teams():
+		if not use_selected_team or team["name"] == DataSaver.team_name:
+			if include_active_players:
+				for player in team["players"]["active"]:
+					all_players.append(player)
+			for player in team["players"]["subs"]:
+				all_players.append(player)
+	
+	var headers = ["surname"]
+	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
+		headers.append(attribute)
+		
+	$Table.set_up(headers, all_players.duplicate(true))
 	
 func remove_player(player_id):
 	active_filters["id"] = player_id
