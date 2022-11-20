@@ -65,7 +65,10 @@ func _change_player(player):
 	var team = DataSaver.get_selected_team()
 	team["players"]["subs"].append(team["players"]["active"][player_to_replace])
 	team["players"]["active"][player_to_replace] = player
-	team["players"]["subs"].erase(player)
+	for sub_index in team["players"]["subs"].size():
+		if team["players"]["subs"][sub_index]["id"] == player["id"]:
+			team["players"]["subs"].remove(sub_index)
+			break
 
 func _on_Close_pressed():
 	hide()
