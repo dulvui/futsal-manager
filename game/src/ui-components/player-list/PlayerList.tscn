@@ -53,7 +53,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LegaueSelect" type="OptionButton" parent="."]
+[node name="LeagueSelect" type="OptionButton" parent="."]
 visible = false
 margin_left = 60.3213
 margin_top = 161.915

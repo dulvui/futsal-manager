@@ -23,7 +23,7 @@ func set_up(use_selected_team, include_active_players):
 	set_up_players(use_selected_team, include_active_players)
 
 			
-	$LegaueSelect.add_item("ITALIA")
+	$LeagueSelect.add_item("ITALIA")
 	
 	$TeamSelect.add_item("NO_TEAM")
 	for team in DataSaver.get_teams():
@@ -48,6 +48,8 @@ func set_up(use_selected_team, include_active_players):
 
 
 func set_up_players(use_selected_team, include_active_players):
+	_reset_options()
+	
 	all_players = []
 	for team in DataSaver.get_teams():
 		if not use_selected_team or team["name"] == DataSaver.team_name:
@@ -124,3 +126,14 @@ func _on_InfoSelect_item_selected(index):
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
 	$Table.set_up(headers)
+	
+
+func _reset_options():
+	$LeagueSelect.selected = 0
+	$PositionSelect.selected = 0
+	$TeamSelect.selected = 0
+	$FootSelect.selected = 0
+	$InfoSelect.selected = 0
+	
+	
+	
