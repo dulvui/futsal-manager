@@ -61,7 +61,7 @@ func _ready():
 		$GridContainer.add_child(points_label)
 		
 		
-		if team["name"] == DataSaver.selected_team:
+		if team["name"] == DataSaver.team_name:
 			pos_label.add_color_override("font_color", Color.gold)
 			name_label.add_color_override("font_color", Color.gold)
 			games_played_label.add_color_override("font_color", Color.gold)

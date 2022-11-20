@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 
 [node name="VBoxContainer" type="GridContainer" parent="."]
 margin_right = 1054.0
-margin_bottom = 656.0
+margin_bottom = 716.0
 columns = 3
 
 [node name="HomePossession" type="Label" parent="VBoxContainer"]

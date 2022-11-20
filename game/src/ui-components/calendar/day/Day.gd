@@ -13,9 +13,9 @@ func set_up(day, current_day, current_month):
 	if day["matches"].size() > 0:
 		for matchz in day["matches"]:
 			if matchz != null:
-				if DataSaver.selected_team == matchz["home"]:
+				if DataSaver.team_name == matchz["home"]:
 					team_name = matchz["away"]
-				elif DataSaver.selected_team == matchz["away"]:
+				elif DataSaver.team_name == matchz["away"]:
 					team_name = matchz["home"]
 					$ColorRect.color = Color.gray
 		$Match.connect("pressed",self,"_on_Match_pressed",[day["matches"]])

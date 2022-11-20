@@ -5,11 +5,11 @@ var match_day = 0
 
 
 func inizialize_matches():
-	var teams = DataSaver.teams.duplicate(true)
+	var teams = DataSaver.get_teams(DataSaver.league_id).duplicate(true)
 	matches = []
 	match_day = 0
 	
-	var random_teams  = teams.duplicate(true) # = teams.duplicate(true)
+	var random_teams  = teams.duplicate(true)
 	random_teams.shuffle()
 	
 	var last_team = random_teams.pop_front()

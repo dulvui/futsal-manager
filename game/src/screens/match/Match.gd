@@ -24,7 +24,7 @@ func _ready():
 	var next_match = CalendarUtil.get_next_match()
 	
 	if next_match != null:
-		for team in DataSaver.teams:
+		for team in DataSaver.get_teams():
 			if team["name"] == next_match["home"]:
 				home_team = team
 			elif team["name"] == next_match["away"]:
@@ -128,7 +128,7 @@ func _on_Formation_change():
 	var next_match = CalendarUtil.get_next_match()
 	
 	if next_match != null:
-		for team in DataSaver.teams:
+		for team in DataSaver.get_teams():
 			if team["name"] == next_match["home"]:
 				home_team = team
 			if team["name"] == next_match["away"]:

@@ -65,7 +65,7 @@ func next_day():
 	var next_match
 	if next_match_day < DataSaver.calendar[next_match_month].size():
 		for matchz in DataSaver.calendar[next_match_month][next_match_day]["matches"]:
-			if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
+			if matchz["home"] == DataSaver.team_name or matchz["away"] == DataSaver.team_name:
 				next_match = matchz
 	
 	if next_match:
@@ -78,7 +78,7 @@ func get_dashborad_date():
 
 func get_next_match():
 	for matchz in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day - 1]["matches"]:
-		if matchz["home"] == DataSaver.selected_team or matchz["away"] == DataSaver.selected_team:
+		if matchz["home"] == DataSaver.team_name or matchz["away"] == DataSaver.team_name:
 			return matchz
 
 

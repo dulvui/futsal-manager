@@ -5,11 +5,11 @@ onready var team = DataSaver.get_selected_team()
 
 func _ready():
 	$ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
-	$TeamName.text = DataSaver.selected_team
+	$TeamName.text = DataSaver.team_name
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
 	$Date.text = CalendarUtil.get_dashborad_date()
-	$AllPlayerList.set_up()
+	$AllPlayerList.set_up(false, true)
 	
 
 func _process(_delta):

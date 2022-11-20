@@ -4,26 +4,24 @@ const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProf
 
 
 func _ready():
+	DataSaver.init_teams()
 	
-	Leagues.init_teams()
-	
-	for nation in Leagues.leagues:
-		for league in Leagues.leagues[nation]:
-			for teams in  Leagues.leagues[nation][league].keys():
-				var center_container = CenterContainer.new()
-				center_container.name = league
-				var grid = GridContainer.new()
-				grid.columns = 2
-				for team in Leagues.leagues[nation][league][teams]:
-					var team_button = Button.new()
-					team_button.text = team["name"]
-					team_button.connect("pressed",self,"team_selected",[Leagues.leagues[nation][league][teams],team])
-					grid.add_child(team_button)
-				center_container.add_child(grid)
-				add_child(center_container)
+	for nation in DataSaver.leagues:
+		for league in DataSaver.leagues[nation]:
+			var center_container = CenterContainer.new()
+			center_container.name = league["name"]
+			var grid = GridContainer.new()
+			grid.columns = 2
+			for team in league["teams"]:
+				var team_button = Button.new()
+				team_button.text = team["name"]
+				team_button.connect("pressed",self,"team_selected",[league["id"],team["name"]])
+				grid.add_child(team_button)
+			center_container.add_child(grid)
+			add_child(center_container)
 
-func team_selected(teams, selected_team):
-	DataSaver.select_team(teams,selected_team)
+func team_selected(league_id, selected_team):
+	DataSaver.select_team(league_id,selected_team)
 	print("team saved")
 	CalendarUtil.create_calendar()
 	print("calendar created")

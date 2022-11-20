@@ -13,24 +13,21 @@ func _ready():
 		$FormationSelect.add_item(formation)
 		
 	$FormationSelect.selected = formations.find("2-2")
-	_set_players()
-	
-		
+	_set_active_players()
+	$PlayerList.set_up(true, false)
 	animation_player.play("Fade" + DataSaver.get_selected_team()["formation"])
 
 func _on_FormationSelect_item_selected(index):
 	animation_player.play_backwards("Fade" + DataSaver.get_selected_team()["formation"] )
 	yield(animation_player,"animation_finished")
-	_set_players()
+	_set_active_players()
 	DataSaver.get_selected_team()["formation"] = formations[index]
 	DataSaver.save_all_data()
 	animation_player.play("Fade" + DataSaver.get_selected_team()["formation"] )
 	
 
-func _set_players(set_up=true):
+func _set_active_players():
 	var team = DataSaver.get_selected_team()
-	if set_up:
-		$PlayerList.set_up(true)
 	$Field/G.set_player(team["players"]["active"][0])
 	$Field/D.set_player(team["players"]["active"][1])
 	$Field/WL.set_player(team["players"]["active"][2])
@@ -66,7 +63,8 @@ func _on_G_change_player(_player):
 func _on_PlayerList_select_player(_player):
 	print("formation select")
 	DataSaver.change_player(player_to_replace,_player)
-	_set_players(false)
+	_set_active_players()
+	$PlayerList.set_up(true, false)
 	$PlayerList.hide()
 	emit_signal("change")
 

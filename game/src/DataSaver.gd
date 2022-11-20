@@ -7,11 +7,30 @@ var language
 var calendar
 var date
 
-# all teams of all leagues
-var all_teams
-# teams of current playing league
-var teams
-var selected_team
+var leagues = {
+	"IT": [
+		{
+			"id" : 0,
+			"name" : "Serie A",
+			"file" : "ita_serie_a.json",
+			"teams" : []
+		},
+		{
+			"id" : 1,
+			"name" : "Serie B",
+			"file" : "ita_serie_b.json",
+			"teams" : []
+		},
+		{
+			"id" : 2,
+			"name" : "Serie C",
+			"file" : "ita_serie_c.json",
+			"teams" : []
+		},
+	]
+}
+var league_id
+var team_name
 var manager
 
 var table
@@ -39,10 +58,9 @@ func _ready():
 	table = config.get_value("season","table",{})
 	current_transfers = config.get_value("season","current_transfers",[])
 	
-	selected_team = config.get_value("selected_team", "data","")
-	teams = config.get_value("teams", "data",{})
-	all_teams = config.get_value("all_teams", "data",{})
-	
+	team_name = config.get_value("team", "name", null)
+	league_id = config.get_value("league", "id", null)
+	leagues = config.get_value("leagues", "data", leagues)
 	
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
 	messages = config.get_value("mail","messages",[])
@@ -75,9 +93,9 @@ func set_lang(lang):
 
 func save_all_data():
 	config.set_value("manager","data",manager)
-	config.set_value("selected_team","data",selected_team)
-	config.set_value("teams","data",teams)
-	config.set_value("all_teams","data",all_teams)
+	config.set_value("team","name", team_name)
+	config.set_value("league","id", league_id)
+	config.set_value("leagues","data",leagues)
 	config.set_value("current_date","date",CalendarUtil.date)
 	config.set_value("season","calendar",calendar)
 	config.set_value("season","table",table)
@@ -91,22 +109,20 @@ func save_manager(new_manager):
 	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
 	
-func select_team(_teams, _selected_team):
-	teams = _teams.duplicate(true)
-	selected_team = _selected_team["name"]
-	
-	all_teams = Leagues.get_all_teams()
-	
+func select_team(_league_id, _team_name):
+#	teams = _teams.duplicate(true)
+	league_id = _league_id
+	team_name = _team_name
 	# init table
-	for team in teams:
+	for team in get_teams(league_id):
 		table[team["name"]] = {
-		   "points" : 0,
-		   "games_played": 0,
-		   "goals_made" : 0,
-		   "goals_against" : 0,
-		   "wins" : 0,
-		   "draws" : 0,
-		   "lost" : 0
+			"points" : 0,
+			"games_played": 0,
+			"goals_made" : 0,
+			"goals_against" : 0,
+			"wins" : 0,
+			"draws" : 0,
+			"lost" : 0
 		}
 	save_all_data()
 	
@@ -123,6 +139,9 @@ func save_calendar(new_calendar):
 func make_transfer(transfer):
 	#remove player from team
 	print(transfer["player"])
+	
+	var teams = get_teams()
+	
 	for team in teams:
 		if team["name"] == transfer["player"]["team"]:
 			if team["players"]["active"].has(transfer["player"]):
@@ -135,7 +154,7 @@ func make_transfer(transfer):
 	
 	#add player to team
 	for team in teams:
-		if team["name"] == DataSaver.selected_team:
+		if team["name"] == DataSaver.team_name:
 			team["players"]["subs"].append(transfer["player"])
 			team["budget"] -= transfer["money"]
 			for player in transfer["exchange_players"]:
@@ -147,7 +166,7 @@ func make_transfer(transfer):
 			
 	
 func change_player(position,player):
-	var team = DataSaver.get_selected_team()
+	var team = get_selected_team()
 	team["players"]["subs"].append(team["players"]["active"][position])
 	team["players"]["active"][position] = player
 	team["players"]["subs"].erase(player)
@@ -181,9 +200,31 @@ func save_table():
 	
 	
 func get_selected_team():
-	for team in teams:
-		if team["name"] == selected_team:
+	for team in get_teams(league_id):
+		if team["name"] == team_name:
 			return team
+
+
+func init_teams():
+	# check if leagues not leoaded yet
+	for nation in leagues:
+		for league in leagues[nation]:
+			var file = File.new()
+			file.open("res://assets/" + league["file"], file.READ)
+			var json = file.get_as_text()
+			league["teams"] = JSON.parse(json).result
+			file.close()
+
+func get_teams(league_id = null):
+	var all_teams = []
+	for nation in leagues:
+		for league in leagues[nation]:
+			if league_id == null:
+				all_teams.append_array(league["teams"].duplicate(true))
+			else:
+				if league["id"] == league_id:
+					all_teams.append_array(league["teams"].duplicate(true))
+	return all_teams
 
 
 # save on quit on mobile

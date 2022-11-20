@@ -57,12 +57,12 @@ func message(content,type):
 			message["title"] = "CONTRACT_SIGNED"
 		MESSAGE_TYPES.NEXT_MATCH:
 			var team_name = content["home"]
-			if team_name == DataSaver.selected_team:
+			if team_name == DataSaver.team_name:
 				team_name = content["away"]
 			message["message"] = "The next match is against " + team_name + ".\nThe quotes are: "
 			message["title"] = "NEXT MATCH"
 		MESSAGE_TYPES.WELCOME_MANAGER:
-			message["message"] = "The team " + DataSaver.selected_team + " welcomes you as the new Manager!"
+			message["message"] = "The team " + DataSaver.team_name + " welcomes you as the new Manager!"
 			message["title"] = "WELCOME MANAGER"
 	messages.append(message)
 	

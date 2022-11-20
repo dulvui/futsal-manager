@@ -18,11 +18,13 @@ const INFO_TYPES = ["mental","physical","technical","goalkeeper"]
 const FOOTS = ["R","L","RL"]
 
 
-func set_up(selected_team = false):
-	for team in DataSaver.all_teams:
-		if not selected_team or team["name"] == DataSaver.selected_team:
-			for player in team["players"]["active"]:
-				all_players.append(player)
+func set_up(use_selected_team, include_active_players):
+	all_players = []
+	for team in DataSaver.get_teams():
+		if not use_selected_team or team["name"] == DataSaver.team_name:
+			if include_active_players:
+				for player in team["players"]["active"]:
+					all_players.append(player)
 			for player in team["players"]["subs"]:
 				all_players.append(player)
 	
@@ -35,8 +37,8 @@ func set_up(selected_team = false):
 	$LegaueSelect.add_item("ITALIA")
 	
 	$TeamSelect.add_item("NO_TEAM")
-	for team in DataSaver.teams:
-		if team["name"] != DataSaver.selected_team:
+	for team in DataSaver.get_teams():
+		if team["name"] != DataSaver.team_name:
 			$TeamSelect.add_item(team["name"])
 			
 	$PositionSelect.add_item("NO_POS")
@@ -55,10 +57,13 @@ func set_up(selected_team = false):
 	for info_type in INFO_TYPES:
 		$InfoSelect.add_item(info_type)
 
-		
+
 func add_match_players():
 	pass
-
+	
+func remove_player(player_id):
+	active_filters["id"] = player_id
+	_filter_table(true)
 
 func _on_NameSearch_text_changed(text):
 	active_filters["surname"] = text
@@ -100,8 +105,8 @@ func _on_PositionSelect_item_selected(index):
 #		foot_search = ""
 #	add_all_players(true)
 
-func _filter_table():
-	$Table.filter(active_filters)
+func _filter_table(exclusive = false):
+	$Table.filter(active_filters, exclusive)
 
 func _on_Close_pressed():
 	hide()
