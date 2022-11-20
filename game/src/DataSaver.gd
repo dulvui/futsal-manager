@@ -163,13 +163,7 @@ func make_transfer(transfer):
 					team["players"]["active"].append(team["players"]["subs"].pop_front())
 				team["players"]["subs"].erase(player)
 			#handle also special contracts with bonus on future sell etc.
-			
-	
-func change_player(position,player):
-	var team = get_selected_team()
-	team["players"]["subs"].append(team["players"]["active"][position])
-	team["players"]["active"][position] = player
-	team["players"]["subs"].erase(player)
+
 
 func set_table_result(home_name,home_goals,away_name,away_goals):
 #	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
@@ -220,10 +214,10 @@ func get_teams(league_id = null):
 	for nation in leagues:
 		for league in leagues[nation]:
 			if league_id == null:
-				all_teams.append_array(league["teams"].duplicate(true))
+				all_teams.append_array(league["teams"])
 			else:
 				if league["id"] == league_id:
-					all_teams.append_array(league["teams"].duplicate(true))
+					all_teams.append_array(league["teams"])
 	return all_teams
 
 

@@ -24,7 +24,6 @@ func _on_FormationSelect_item_selected(index):
 	DataSaver.get_selected_team()["formation"] = formations[index]
 	DataSaver.save_all_data()
 	animation_player.play("Fade" + DataSaver.get_selected_team()["formation"] )
-	
 
 func _set_active_players():
 	var team = DataSaver.get_selected_team()
@@ -33,24 +32,18 @@ func _set_active_players():
 	$Field/WL.set_player(team["players"]["active"][2])
 	$Field/WR.set_player(team["players"]["active"][3])
 	$Field/P.set_player(team["players"]["active"][4])
-	
-
 
 func _on_D_change_player(_player):
 	player_to_replace = 1
 	$PlayerList.show()
 
-
 func _on_WL_change_player(_player):
 	player_to_replace = 2
 	$PlayerList.show()
 
-
-
 func _on_WR_change_player(_player):
 	player_to_replace = 3
 	$PlayerList.show()
-
 
 func _on_P_change_player(_player):
 	player_to_replace = 4
@@ -62,12 +55,17 @@ func _on_G_change_player(_player):
 
 func _on_PlayerList_select_player(_player):
 	print("formation select")
-	DataSaver.change_player(player_to_replace,_player)
+	_change_player(_player)
 	_set_active_players()
 	$PlayerList.set_up(true, false)
 	$PlayerList.hide()
 	emit_signal("change")
-
+	
+func _change_player(player):
+	var team = DataSaver.get_selected_team()
+	team["players"]["subs"].append(team["players"]["active"][player_to_replace])
+	team["players"]["active"][player_to_replace] = player
+	team["players"]["subs"].erase(player)
 
 func _on_Close_pressed():
 	hide()
