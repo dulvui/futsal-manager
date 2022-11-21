@@ -26,13 +26,14 @@ func _ready():
 	if next_match != null:
 		for team in DataSaver.get_teams():
 			if team["name"] == next_match["home"]:
-				home_team = team
+				home_team = team.duplicate(true)
 			elif team["name"] == next_match["away"]:
-				away_team = team
+				away_team = team.duplicate(true)
 	
 	$HUD/TopBar/Home.text = next_match["home"]
 	$HUD/TopBar/Away.text = next_match["away"]
 	
+	$Formation.set_up(home_team)
 	match_simulator.set_up(home_team,away_team)
 	
 
@@ -111,27 +112,18 @@ func _on_Pause_pressed():
 	if paused:
 		$HUD/Pause.text = tr("CONTINUE")
 	else:
-		$FormationPopup.hide()
+		$Formation.hide()
 		$HUD/Pause.text = tr("PAUSE")
 
 
 func _on_Formation_pressed():
 	match_simulator.pause()
 	$HUD/Pause.text = tr("PAUSE")
-	$FormationPopup.popup_centered()
+	$Formation.show()
 
 
 func _on_Formation_change():
 	print("change formation")
-	var next_match = CalendarUtil.get_next_match()
-	
-	if next_match != null:
-		for team in DataSaver.get_teams():
-			if team["name"] == next_match["home"]:
-				home_team = team
-			if team["name"] == next_match["away"]:
-				away_team = team
-	# need to chaneg players in simulator too
 	match_simulator.change_players(home_team,away_team)
 
 

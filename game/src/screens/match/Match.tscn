@@ -228,19 +228,8 @@ margin_right = 1344.0
 margin_bottom = 1009.0
 text = "DASHBOARD"
 
-[node name="FormationPopup" type="Popup" parent="."]
-margin_right = 1200.0
-margin_bottom = 800.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="FormationPopup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Formation" parent="FormationPopup" instance=ExtResource( 5 )]
-rect_scale = Vector2( 0.7, 0.7 )
+[node name="Formation" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="SKIP" type="Button" parent="."]
 margin_left = 142.705
@@ -281,6 +270,6 @@ autostart = true
 [connection signal="pressed" from="HUD/LeftButtons/Stats" to="." method="_on_Stats_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Dashboard" to="." method="_on_Dashboard_pressed"]
-[connection signal="change" from="FormationPopup/Formation" to="." method="_on_Formation_change"]
+[connection signal="change" from="Formation" to="." method="_on_Formation_change"]
 [connection signal="pressed" from="SKIP" to="." method="_on_SKIP_pressed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

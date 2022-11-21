@@ -64,7 +64,7 @@ func update(time):
 	if attack_success:
 		match attack:
 			Attack.PASS: # , AttackCROSS
-				_change_players()
+				_change_active_players()
 			Attack.RUN, Attack.DRIBBLE:
 				_change_defender()
 			Attack.SHOOT: # , Attack.HEADER
@@ -104,6 +104,13 @@ func update(time):
 	away_stats.update_possession(away_team.has_ball)
 	_log(attack, attack_success)
 	_action_buffer(attack, attack_success)
+	
+func change_players(_home_team,_away_team):
+	# reset action buffer, becasue change happened and
+	# changed player is not visible in field anymore
+	action_buffer = []
+	home_team.set_up(_home_team)
+	away_team.set_up(_away_team)
 	
 # returns true if attack wins, false if defense wins
 func _get_result(attack):
@@ -266,7 +273,7 @@ func _change_possession():
 	home_team.has_ball = not home_team.has_ball
 	away_team.has_ball = not away_team.has_ball
 	
-func _change_players():
+func _change_active_players():
 	home_team.change_active_player()
 	away_team.change_active_player()
 	

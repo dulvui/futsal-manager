@@ -8,7 +8,7 @@ enum Mentality {ULTRA_OFFENSIVE, OFFENSIVE, NORMAL, DEFENSIVE, ULTRA_DEFENSIVE}
 enum Passing {LONG, SHORT, DIRECT, NORMAL}
 enum Formations {TT=22,OTO=121,OOT=112,TOO=211,TO=31,OT=13}
 
-var players = []
+var players
 var goalkeeper
 
 # trainer tactics settings
@@ -29,13 +29,14 @@ var has_ball = false
 var active_player
 
 func set_up(team): # TODO add tactics
-	var team_players = team["players"]["active"].duplicate(true)
+	players = []
+	var team_players = team["players"]["active"]
 	goalkeeper = Goalkeeper.instance()
-	goalkeeper.set_up(team_players.pop_front())
+	goalkeeper.set_up(team_players[0])
 	
-	for team_player in team_players:
+	for i in team_players.size() - 1:
 		var player = Player.instance()
-		player.set_up(team_player)
+		player.set_up(team_players[i + 1])
 		players.append(player)
 
 	active_player = players[-1]

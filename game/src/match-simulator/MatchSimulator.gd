@@ -63,16 +63,8 @@ func start_match():
 
 
 		
-func change_players(new_home_team,new_away_team):
-#	var home_players = new_home_team.duplicate(true)["players"]["active"]
-#	var away_players = new_away_team.duplicate(true)["players"]["active"]
-	pass
-	
-#	home_team.set_up(home_players,away_players,formation)
-#	away_team.set_up(away_players,home_players,formation)
-#	Some how change players of Team.gd
-#	home_team.set_up(home_team,away_team)
-#	away_team.set_up(away_team,home_team)
+func change_players(home_team,away_team):
+	action_util.change_players(home_team,away_team)
 
 
 func _on_ActionUtil_action_message(message):

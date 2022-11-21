@@ -11,6 +11,8 @@ func _ready():
 	$Date.text = CalendarUtil.get_dashborad_date()
 	$AllPlayerList.set_up(false, true)
 	
+	$Formation.set_up()
+	
 
 func _process(_delta):
 	$Buttons/Email/Panel/MailCounter.text = str(EmailUtil.count_unread_messages())
