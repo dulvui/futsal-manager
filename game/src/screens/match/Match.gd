@@ -8,6 +8,8 @@ var away_team
 var home_goals = 0
 var away_goals = 0
 
+var last_active_view
+
 
 var match_started = false
 
@@ -36,6 +38,8 @@ func _ready():
 	$Formation.set_up(home_team)
 	match_simulator.set_up(home_team,away_team)
 	
+	last_active_view = $Log
+	
 
 func _process(delta):
 	stats.update_stats(match_simulator.action_util.home_stats, match_simulator.action_util.away_stats)
@@ -53,11 +57,13 @@ func _process(delta):
 func _on_Field_pressed():
 	$Log.show()
 	$Stats.hide()
+	last_active_view = $Log
 
 
 func _on_Stats_pressed():
 	$Log.hide()
 	$Stats.show()
+	last_active_view = $Stats
 
 
 func match_end():
@@ -157,7 +163,7 @@ func _on_MatchSimulator_shot(is_goal, is_home):
 	
 	visual_action.queue_free()
 	match_simulator.continue_match()
-	$Log.show()
+	last_active_view.show()
 	$HUD/Pause.disabled = false
 	
 
@@ -174,4 +180,7 @@ func _on_MatchSimulator_match_end():
 
 
 func _on_MatchSimulator_action_message(message):
-	$Log.add_text($HUD/TopBar/Time.text + " " + message + "\n")
+	if $Log.get_line_count() > 9:
+		$Log.remove_line(0)
+	$Log.newline()
+	$Log.add_text($HUD/TopBar/Time.text + " " + message)

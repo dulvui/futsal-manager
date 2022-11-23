@@ -162,8 +162,7 @@ func _attack():
 				return Attack.SHOOT
 
 func _log(attack, result):
-	emit_signal("action_message","\n" + home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + "  ")
-	emit_signal("action_message","attack: " + str(Attack.keys()[attack]) + " - defense: " + str(result))
+	emit_signal("action_message",home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + " " + str(Attack.keys()[attack]) + " - " + str(result))
 
 func _action_buffer(attack, result):
 	var attacking_player
