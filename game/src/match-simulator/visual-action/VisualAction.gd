@@ -166,7 +166,7 @@ func _action():
 					break
 			
 		
-		ball.move(action.position, timer.wait_time / 2)
+		ball.move(action.position, timer.wait_time)
 		get_tree().call_group("player", "random_movement", timer.wait_time)
 	else:
 		print("shoot")
