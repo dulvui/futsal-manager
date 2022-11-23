@@ -80,27 +80,28 @@ margin_bottom = 56.0
 text = "FORMATION"
 
 [node name="Training" type="Button" parent="Buttons"]
+visible = false
 margin_top = 64.0
 margin_right = 464.0
 margin_bottom = 120.0
 text = "TRAINING"
 
 [node name="Table" type="Button" parent="Buttons"]
-margin_top = 128.0
+margin_top = 64.0
 margin_right = 464.0
-margin_bottom = 184.0
+margin_bottom = 120.0
 text = "TABLE"
 
 [node name="Calendar" type="Button" parent="Buttons"]
-margin_top = 192.0
+margin_top = 128.0
 margin_right = 464.0
-margin_bottom = 248.0
+margin_bottom = 184.0
 text = "CALENDAR"
 
 [node name="Email" type="Button" parent="Buttons"]
-margin_top = 256.0
+margin_top = 192.0
 margin_right = 464.0
-margin_bottom = 312.0
+margin_bottom = 248.0
 text = "EMAIL"
 
 [node name="Panel" type="Panel" parent="Buttons/Email"]
@@ -125,15 +126,15 @@ __meta__ = {
 }
 
 [node name="SearchPlayer" type="Button" parent="Buttons"]
-margin_top = 320.0
+margin_top = 256.0
 margin_right = 464.0
-margin_bottom = 376.0
+margin_bottom = 312.0
 text = "SEARCH_PLAYER"
 
 [node name="Menu" type="Button" parent="Buttons"]
-margin_top = 384.0
+margin_top = 320.0
 margin_right = 464.0
-margin_bottom = 440.0
+margin_bottom = 376.0
 text = "MENU"
 
 [node name="Email" parent="." instance=ExtResource( 6 )]
