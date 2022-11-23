@@ -82,4 +82,5 @@ margin_left = 474.265
 margin_top = 501.174
 margin_right = 514.265
 margin_bottom = 557.174
+
 [connection signal="pressed" from="DetailPopUp/Action" to="." method="_on_Action_pressed"]

@@ -8,6 +8,7 @@ const Day = preload("res://src/ui-components/calendar/day/Day.tscn")
 
 var current_month
 
+
 func _ready():
 	current_month = DataSaver.date.month
 	set_up()
