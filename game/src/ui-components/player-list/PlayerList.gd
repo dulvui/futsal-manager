@@ -18,16 +18,16 @@ const INFO_TYPES = ["mental","physical","technical","goalkeeper"]
 const FOOTS = ["R","L","RL"]
 
 
-func set_up(use_selected_team, include_active_players):
+func set_up(include_active_players, active_team = null):
 	
-	set_up_players(use_selected_team, include_active_players)
+	set_up_players(include_active_players, active_team)
 
 			
 	$LeagueSelect.add_item("ITALIA")
 	
 	$TeamSelect.add_item("NO_TEAM")
 	for team in DataSaver.get_teams():
-		if team["name"] != DataSaver.team_name:
+		if team ==null or team["name"] != DataSaver.team_name:
 			$TeamSelect.add_item(team["name"])
 			
 	$PositionSelect.add_item("NO_POS")
@@ -47,17 +47,23 @@ func set_up(use_selected_team, include_active_players):
 		$InfoSelect.add_item(info_type)
 
 
-func set_up_players(use_selected_team, include_active_players):
+func set_up_players(include_active_players, active_team = null):
 	_reset_options()
 	
 	all_players = []
-	for team in DataSaver.get_teams():
-		if not use_selected_team or team["name"] == DataSaver.team_name:
+	if active_team == null:
+		for team in DataSaver.get_teams():
 			if include_active_players:
 				for player in team["players"]["active"]:
 					all_players.append(player)
 			for player in team["players"]["subs"]:
 				all_players.append(player)
+	else:
+		if include_active_players:
+			for player in active_team["players"]["active"]:
+				all_players.append(player)
+		for player in active_team["players"]["subs"]:
+			all_players.append(player)
 	
 	var headers = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:

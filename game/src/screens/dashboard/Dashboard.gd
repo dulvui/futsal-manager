@@ -9,7 +9,7 @@ func _ready():
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
 	$Date.text = CalendarUtil.get_dashborad_date()
-	$AllPlayerList.set_up(false, true)
+	$AllPlayerList.set_up(true)
 	
 	$Formation.set_up()
 	
