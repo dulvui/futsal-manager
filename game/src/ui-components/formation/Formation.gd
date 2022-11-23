@@ -27,7 +27,7 @@ func _on_FormationSelect_item_selected(index):
 	yield(animation_player,"animation_finished")
 	_set_active_players()
 	team["formation"] = formations[index]
-	DataSaver.save_all_data()
+#	DataSaver.save_all_data()
 	animation_player.play("Fade" + team["formation"] )
 
 func _set_active_players():

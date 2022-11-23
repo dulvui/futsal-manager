@@ -87,7 +87,7 @@ func match_end():
 			DataSaver.set_table_result(matchday["home"],home_goals,matchday["away"],away_goals)
 		else:
 			matchday["result"] = str(match_simulator.action_util.home_stats.statistics["goals"]) + ":" + str(match_simulator.action_util.away_stats.statistics["goals"])
-	DataSaver.save_all_data()
+#	DataSaver.save_all_data()
 
 func half_time():
 	$HUD/Pause.text = tr("CONTINUE")
