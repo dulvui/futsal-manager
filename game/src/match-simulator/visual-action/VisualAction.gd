@@ -63,8 +63,16 @@ func _physics_process(delta):
 		player.sprite.look_at($Ball.global_position)
 	for player in away_visual_players:
 		player.sprite.look_at($Ball.global_position)
-
-	
+		
+	# referee
+	$Referee/Sprites.look_at($Ball.global_position)
+	$Referee2/Sprites.look_at($Ball.global_position)
+	if ball.position.x < WIDTH / 2:
+		$Referee.follow_ball(ball.position)
+	else:
+		$Referee2.follow_ball(ball.position)
+		
+		
 func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer):
 	is_home_goal = home_goal
 	is_goal = _is_goal
