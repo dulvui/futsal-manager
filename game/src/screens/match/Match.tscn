@@ -40,16 +40,16 @@ margin_right = -205.0
 margin_bottom = -270.0
 
 [node name="HUD" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="TopBar" type="HBoxContainer" parent="HUD"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 551.0
-margin_top = 45.0
-margin_right = 1735.0
-margin_bottom = 101.0
+margin_left = -389.0
+margin_top = 19.0
+margin_right = 795.0
+margin_bottom = 75.0
 custom_constants/separation = 20
 
 [node name="Time" type="Label" parent="HUD/TopBar"]
@@ -90,19 +90,16 @@ __meta__ = {
 
 [node name="Pause" type="Button" parent="HUD"]
 margin_left = 1449.39
-margin_top = 952.0
+margin_top = 976.0
 margin_right = 1606.39
-margin_bottom = 1008.0
+margin_bottom = 1032.0
 text = "PAUSE"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SpeedFactor" type="Label" parent="HUD"]
 margin_left = 1104.0
-margin_top = 952.0
+margin_top = 976.0
 margin_right = 1154.0
-margin_bottom = 1008.0
+margin_bottom = 1032.0
 text = "X2"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -110,9 +107,9 @@ __meta__ = {
 
 [node name="Faster" type="Button" parent="HUD"]
 margin_left = 1216.0
-margin_top = 952.0
+margin_top = 976.0
 margin_right = 1395.0
-margin_bottom = 1008.0
+margin_bottom = 1032.0
 text = "FASTER"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -120,9 +117,9 @@ __meta__ = {
 
 [node name="Slower" type="Button" parent="HUD"]
 margin_left = 856.0
-margin_top = 952.0
+margin_top = 976.0
 margin_right = 1050.0
-margin_bottom = 1008.0
+margin_bottom = 1032.0
 text = "SLOWER"
 
 [node name="LeftButtons" type="VBoxContainer" parent="HUD"]
@@ -187,9 +184,9 @@ text = "VOTES"
 
 [node name="TimeBar" type="ProgressBar" parent="HUD"]
 margin_left = 568.212
-margin_top = 139.036
+margin_top = 83.036
 margin_right = 1768.21
-margin_bottom = 182.036
+margin_bottom = 126.036
 max_value = 2400.0
 step = 1.0
 value = 1.0
@@ -197,9 +194,9 @@ percent_visible = false
 
 [node name="PossessBar" type="ProgressBar" parent="HUD"]
 margin_left = 567.641
-margin_top = 866.7
+margin_top = 906.7
 margin_right = 1767.64
-margin_bottom = 909.7
+margin_bottom = 949.7
 step = 1.0
 value = 50.0
 percent_visible = false

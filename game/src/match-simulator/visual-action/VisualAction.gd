@@ -67,11 +67,7 @@ func _physics_process(delta):
 	# referee
 	$Referee/Sprites.look_at($Ball.global_position)
 	$Referee2/Sprites.look_at($Ball.global_position)
-	if ball.position.x < WIDTH / 2:
-		$Referee.follow_ball(ball.position)
-	else:
-		$Referee2.follow_ball(ball.position)
-		
+
 		
 func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer):
 	is_home_goal = home_goal
@@ -175,6 +171,13 @@ func _action():
 			
 		
 		ball.move(action.position, timer.wait_time)
+		
+		# referee
+		if action.position.x < WIDTH / 2:
+			$Referee.follow_ball(action.position, timer.wait_time )
+		else:
+			$Referee2.follow_ball(action.position, timer.wait_time)
+		
 		get_tree().call_group("player", "random_movement", timer.wait_time)
 	else:
 		print("shoot")
