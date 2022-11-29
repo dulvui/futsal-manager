@@ -27,7 +27,7 @@ var attributes = {
 
 var current_state
 
-func set_up(player):
+func set_up(player) -> void:
 	profile["name"] = player["surname"]
 	profile["number"] = player["nr"]
 	attributes = player["attributes"]

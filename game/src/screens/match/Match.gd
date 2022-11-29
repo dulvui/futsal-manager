@@ -22,7 +22,7 @@ onready var animation_player = $AnimationPlayer
 
 var speed_factor = 0
 
-func _ready():
+func _ready() -> void:
 	var next_match = CalendarUtil.get_next_match()
 	
 	if next_match != null:
@@ -41,7 +41,7 @@ func _ready():
 	last_active_view = $Log
 	
 
-func _process(delta):
+func _process(delta) -> void:
 	stats.update_stats(match_simulator.action_util.home_stats, match_simulator.action_util.away_stats)
 	$HUD/TopBar/Time.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 	
@@ -54,19 +54,19 @@ func _process(delta):
 	$HUD/TopBar/Result.text = "%d - %d"%[home_goals,away_goals]
 	
 
-func _on_Field_pressed():
+func _on_Field_pressed() -> void:
 	$Log.show()
 	$Stats.hide()
 	last_active_view = $Log
 
 
-func _on_Stats_pressed():
+func _on_Stats_pressed() -> void:
 	$Log.hide()
 	$Stats.show()
 	last_active_view = $Stats
 
 
-func match_end():
+func match_end() -> void:
 	$HUD/Faster.hide()
 	$HUD/Slower.hide()
 	$HUD/Pause.hide()
@@ -89,30 +89,30 @@ func match_end():
 			matchday["result"] = str(match_simulator.action_util.home_stats.statistics["goals"]) + ":" + str(match_simulator.action_util.away_stats.statistics["goals"])
 #	DataSaver.save_all_data()
 
-func half_time():
+func half_time() -> void:
 	$HUD/Pause.text = tr("CONTINUE")
 
 
 
-func _on_Dashboard_pressed():
+func _on_Dashboard_pressed() -> void:
 	DataSaver.save_all_data()
 	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")
 
 
-func _on_Faster_pressed():
+func _on_Faster_pressed() -> void:
 	if speed_factor < 3:
 		speed_factor += 1
 		match_simulator.faster()
 
 
-func _on_Slower_pressed():
+func _on_Slower_pressed() -> void:
 	if speed_factor > 0:
 		speed_factor -= 1
 		match_simulator.slower()
 	
 
 
-func _on_Pause_pressed():
+func _on_Pause_pressed() -> void:
 	var paused = match_simulator.pause_toggle()
 	
 	if paused:
@@ -122,22 +122,22 @@ func _on_Pause_pressed():
 		$HUD/Pause.text = tr("PAUSE")
 
 
-func _on_Formation_pressed():
+func _on_Formation_pressed() -> void:
 	match_simulator.pause()
 	$HUD/Pause.text = tr("PAUSE")
 	$Formation.show()
 
 
-func _on_Formation_change():
+func _on_Formation_change() -> void:
 	print("change formation")
 	match_simulator.change_players(home_team,away_team)
 
 
-func _on_SKIP_pressed():
+func _on_SKIP_pressed() -> void:
 	match_end()
 
 
-func _on_MatchSimulator_shot(is_goal, is_home):
+func _on_MatchSimulator_shot(is_goal, is_home) -> void:
 	$HUD/Pause.disabled = true
 	match_simulator.pause()
 	
@@ -167,19 +167,19 @@ func _on_MatchSimulator_shot(is_goal, is_home):
 	$HUD/Pause.disabled = false
 	
 
-func _on_StartTimer_timeout():
+func _on_StartTimer_timeout() -> void:
 	match_simulator.start_match()
 
 
-func _on_MatchSimulator_half_time():
+func _on_MatchSimulator_half_time() -> void:
 	half_time()
 
 
-func _on_MatchSimulator_match_end():
+func _on_MatchSimulator_match_end() -> void:
 	match_end()
 
 
-func _on_MatchSimulator_action_message(message):
+func _on_MatchSimulator_action_message(message) -> void:
 	if $Log.get_line_count() > 9:
 		$Log.remove_line(0)
 	$Log.newline()

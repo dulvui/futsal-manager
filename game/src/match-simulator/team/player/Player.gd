@@ -65,17 +65,17 @@ var current_state
 var current_sector
 
 
-func set_up(player):
+func set_up(player) -> void:
 	profile["name"] = player["surname"]
 	profile["number"] = player["nr"]
 	attributes = player["attributes"]
 	stamina = attributes["physical"]["stamina"]
 
 			
-func update():
+func update() -> void:
 	stamina -= 0.01
 
-func get_attack_attributes(attack):
+func get_attack_attributes(attack) -> int:
 	match attack:
 		ActionUtil.Attack.SHOOT:
 			# check sector and pick long_shoot
@@ -92,9 +92,11 @@ func get_attack_attributes(attack):
 			var attacker_attributes =  attributes["physical"]["pace"]
 			attacker_attributes += attributes["physical"]["acceleration"]
 			return attacker_attributes
+	# should never happen
+	return -1
 
 
-func get_defense_attributes(attack):
+func get_defense_attributes(attack) -> int:
 	match attack:
 		ActionUtil.Attack.SHOOT:
 			# check sector and pick long_shoot
@@ -120,3 +122,5 @@ func get_defense_attributes(attack):
 				defender_attributes += attributes["physical"]["pace"]
 				
 			return defender_attributes
+	# should never happen
+	return -1

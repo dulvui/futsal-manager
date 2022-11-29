@@ -41,17 +41,17 @@ var current_state
 const MAX_ACTION_BUFFER_SIZE = 10
 var action_buffer = []
 
-func _ready():
+func _ready() -> void:
 	randomize()
 
-func set_up(_home_team, _away_team):
+func set_up(_home_team, _away_team) -> void:
 	home_team.set_up(_home_team)
 	away_team.set_up(_away_team)
 	
 	current_state = State.KICK_OFF
 
 
-func update(time):
+func update(time) -> void:
 	var attack = _attack()
 	var attack_success = _get_result(attack)
 	
@@ -105,7 +105,7 @@ func update(time):
 	_log(attack, attack_success)
 	_action_buffer(attack, attack_success)
 	
-func change_players(_home_team,_away_team):
+func change_players(_home_team,_away_team) -> void:
 	# reset action buffer, becasue change happened and
 	# changed player is not visible in field anymore
 	action_buffer = []
@@ -113,7 +113,7 @@ func change_players(_home_team,_away_team):
 	away_team.set_up(_away_team)
 	
 # returns true if attack wins, false if defense wins
-func _get_result(attack):
+func _get_result(attack) -> bool:
 	# select attributes to use as value for random result calculation
 	
 	var attacker_attributes = 0
@@ -138,7 +138,7 @@ func _get_result(attack):
 		result = true
 	return result
 	
-func _attack():
+func _attack() -> String:
 	# improve later watching current sector and player attributes
 	match current_state:
 		State.KICK_OFF, State.KICK_IN:
@@ -160,11 +160,14 @@ func _attack():
 				return Attack.DRIBBLE
 			else:
 				return Attack.SHOOT
+				
+	# should never happen
+	return ""
 
-func _log(attack, result):
+func _log(attack, result) -> void:
 	emit_signal("action_message",home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + " " + str(Attack.keys()[attack]) + " - " + str(result))
 
-func _action_buffer(attack, result):
+func _action_buffer(attack, result) -> void:
 	var attacking_player
 	var defending_player
 	
@@ -187,7 +190,7 @@ func _action_buffer(attack, result):
 	if action_buffer.size() > MAX_ACTION_BUFFER_SIZE:
 		action_buffer.pop_front()
 
-func _check_goal():
+func _check_goal() -> bool:
 	var goalkeeper_attributes
 	if home_team.has_ball:
 		goalkeeper_attributes = away_team.get_goalkeeper_attributes()
@@ -220,7 +223,7 @@ func _check_goal():
 	
 	
 # ACTION EVENT CHECKS
-func _check_corner():
+func _check_corner() -> bool:
 	var random = randi() % Constants.MAX_FACTOR
 	if random < Constants.CORNER_AFTER_SAFE_FACTOR:
 		current_state = State.CORNER
@@ -228,14 +231,14 @@ func _check_corner():
 		return true
 	return false
 	
-func _check_foul():
+func _check_foul() -> bool:
 	var random = randi() % Constants.MAX_FACTOR
 	if random < Constants.FOUL_FACTOR:
 		_increase_fouls()
 		return true
 	return false
 	
-func _check_penalty_or_freekick():
+func _check_penalty_or_freekick() -> bool:
 	var random = randi() % Constants.MAX_FACTOR
 	if random > Constants.PENALTY_FACTOR:
 		current_state = State.FREE_KICK
@@ -249,7 +252,7 @@ func _check_penalty_or_freekick():
 		return true
 
 	
-func _check_card():
+func _check_card() -> String:
 	var random = randi() % Constants.MAX_FACTOR
 	if random > Constants.RED_CARD_FACTOR:
 		_increase_red_cards()
@@ -259,7 +262,7 @@ func _check_card():
 		return "yellow"
 	return "no-card"
 	
-func _check_kick_in():
+func _check_kick_in() -> bool:
 	var random = randi() % Constants.MAX_FACTOR
 	if random < Constants.KICK_IN_FACTOR:
 		current_state = State.KICK_IN
@@ -268,21 +271,21 @@ func _check_kick_in():
 	return false
 
 # PLAYER/POSSESSION CHANGE
-func _change_possession():
+func _change_possession() -> void:
 	home_team.has_ball = not home_team.has_ball
 	away_team.has_ball = not away_team.has_ball
 	
-func _change_active_players():
+func _change_active_players() -> void:
 	home_team.change_active_player()
 	away_team.change_active_player()
 	
-func _change_defender():
+func _change_defender() -> void:
 	if home_team.has_ball:
 		away_team.change_active_player()
 	else:
 		home_team.change_active_player()
 
-func _change_attacker():
+func _change_attacker() -> void:
 	if away_team.has_ball:
 		away_team.change_active_player()
 	else:
@@ -290,68 +293,68 @@ func _change_attacker():
 
 
 # STATISTICS
-func _increase_pass(success):
+func _increase_pass(success) -> void:
 	if away_team.has_ball:
 		away_stats.increase_pass(success)
 	else:
 		home_stats.increase_pass(success)
 		
-func _increase_shots(on_target):
+func _increase_shots(on_target) -> void:
 	print("_increase_shots: " + str(on_target))
 	if away_team.has_ball:
 		away_stats.increase_shots(on_target)
 	else:
 		home_stats.increase_shots(on_target)
 
-func _increase_headers(on_target):
+func _increase_headers(on_target) -> void:
 	if away_team.has_ball:
 		away_stats.increase_headers(on_target)
 	else:
 		home_stats.increase_headers(on_target)
 		
-func increase_goals():
+func increase_goals() -> void:
 	if away_team.has_ball:
 		away_stats.increase_goals()
 	else:
 		home_stats.increase_goals()
 		
-func _increase_corners():
+func _increase_corners() -> void:
 	if away_team.has_ball:
 		away_stats.increase_corners()
 	else:
 		home_stats.increase_corners()
 		
-func _increase_kick_ins():
+func _increase_kick_ins() -> void:
 	if away_team.has_ball:
 		away_stats.increase_kick_ins()
 	else:
 		home_stats.increase_kick_ins()
 
-func _increase_fouls():
+func _increase_fouls() -> void:
 	if away_team.has_ball:
 		home_stats.increase_fouls()
 	else:
 		away_stats.increase_fouls()
 		
-func _increase_free_kicks():
+func _increase_free_kicks() -> void:
 	if away_team.has_ball:
 		home_stats.increase_free_kicks()
 	else:
 		away_stats.increase_free_kicks()
 		
-func _increase_penalties():
+func _increase_penalties() -> void:
 	if away_team.has_ball:
 		home_stats.increase_penalties()
 	else:
 		away_stats.increase_penalties()
 		
-func _increase_red_cards():
+func _increase_red_cards() -> void:
 	if away_team.has_ball:
 		home_stats.increase_red_cards()
 	else:
 		away_stats.increase_red_cards()
 		
-func _increase_yellow_cards():
+func _increase_yellow_cards() -> void:
 	if away_team.has_ball:
 		home_stats.increase_yellow_cards()
 	else:
