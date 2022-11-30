@@ -51,11 +51,11 @@ onready var positions = {
 # defines +/- the player differs from nomrla position
 const POSITION_RANGE = 40
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	_player_setup()
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	# look at ball
 	$HomeGoalkeeper.sprite.look_at($Ball.global_position)
 	$AwayGoalkeeper.sprite.look_at($Ball.global_position)
@@ -69,14 +69,14 @@ func _physics_process(delta):
 	$Referee2/Sprites.look_at($Ball.global_position)
 
 		
-func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer):
+func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer) -> void:
 	is_home_goal = home_goal
 	is_goal = _is_goal
 	actions = action_buffer.duplicate(true)
 	home_team = _home_team.duplicate(true)
 	away_team = _away_team.duplicate(true)
 
-func _player_setup():
+func _player_setup() -> void:
 	#home
 	var home_index = 0
 	var goalkeeper_home = home_team.players.active.pop_front()
@@ -101,7 +101,7 @@ func _player_setup():
 
 # index: of player in active players representing the position in field
 # action_type: attack or defense
-func _get_player_position(index, is_home_team):
+func _get_player_position(index, is_home_team) -> Vector2:
 	# change valuse depending on formation
 	# very index means differnet positon
 	# for MVP only use 2-2 fomration
@@ -125,7 +125,7 @@ func _get_player_position(index, is_home_team):
 	
 	return Vector2(x,y)
 
-func _action():
+func _action() -> void:
 	var action = actions.pop_front()
 	
 	print(action)
@@ -194,7 +194,7 @@ func _action():
 			ball.move($HomeGoal.global_position + shot_deviation, timer.wait_time / 3, true)
 		
 
-func _get_player_by_nr(players, nr):
+func _get_player_by_nr(players, nr) -> Dictionary:
 	for player in players:
 		if player["nr"] == nr:
 			return player
@@ -203,7 +203,7 @@ func _get_player_by_nr(players, nr):
 	return players[randi() % players.size()]
 
 
-func _on_Timer_timeout():
+func _on_Timer_timeout() -> void:
 	timer.wait_time = rand_range(0.5,1.5)
 	timer.start()
 	

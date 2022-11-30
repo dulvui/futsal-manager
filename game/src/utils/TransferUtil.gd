@@ -6,11 +6,11 @@ var current_transfers = []
 
 var transfers_active = true
 
-func _ready():
+func _ready() -> void:
 	current_transfers = DataSaver.current_transfers
 
 
-func update_day():
+func update_day() -> void:
 	#check with calendar if treansfer market is open, then send start/stop mail
 	if transfers_active:
 		for transfer in current_transfers:
@@ -31,16 +31,16 @@ func update_day():
 						EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.CONTRACT_SIGNED)
 		_make_random_transfer_requests()
 
-func make_offer(transfer):
+func make_offer(transfer) -> void:
 	EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.TRANSFER)
 	print("transfer message")
 	current_transfers.append(transfer)
 	
 # tells you if the club has intention to give the player away
-func request_info():
+func request_info() -> void:
 	pass
 	
 	
 # ai for transfer market that makes transfers for other teams
-func _make_random_transfer_requests():
+func _make_random_transfer_requests() -> void:
 	pass

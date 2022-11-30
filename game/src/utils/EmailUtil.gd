@@ -14,17 +14,17 @@ enum MESSAGE_TYPES {
 					WELCOME_MANAGER
 				}
 
-func _ready():
+func _ready() -> void:
 	messages = DataSaver.messages
 
-func count_unread_messages():
+func count_unread_messages() -> int:
 	var counter = 0
 	for message in messages:
 		if not message["read"]:
 			counter += 1
 	return counter
 
-func message(content,type):
+func message(content,type) -> void:
 	print("new " + str(type) + " mail")
 	
 	var message = {

@@ -9,10 +9,10 @@ var date
 
 
 
-func _ready():
+func _ready() -> void:
 	date = DataSaver.date
 	
-func initial_date():
+func initial_date() -> Dictionary:
 	date = OS.get_date()
 	
 	# set month to 1st of june
@@ -20,7 +20,7 @@ func initial_date():
 	date.month = 6
 	return date
 
-func create_calendar():
+func create_calendar() -> void:
 	
 	var calendar = []
 	
@@ -48,7 +48,7 @@ func create_calendar():
 		
 	DataSaver.save_calendar(calendar)
 
-func next_day():
+func next_day() -> void:
 	date = _get_next_day(date)
 	DataSaver.date = date
 	
@@ -73,17 +73,18 @@ func next_day():
 
 
 
-func get_dashborad_date():
+func get_dashborad_date() -> String:
 	return DAYS[date.weekday - 1] + " " + str(date.day) + " " + MONTHS[date.month] + " " + str(date.year)
 
-func get_next_match():
+func get_next_match() -> Dictionary:
 	for matchz in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day - 1]["matches"]:
 		if matchz["home"] == DataSaver.team_name or matchz["away"] == DataSaver.team_name:
 			return matchz
+	return {}
 
 
-func _get_next_day(date):
-	var unix_time = OS.get_unix_time_from_datetime(date)
+func _get_next_day(_date) -> Dictionary:
+	var unix_time = OS.get_unix_time_from_datetime(_date)
 	unix_time += DAY_IN_SECONDS
 	var next_day = OS.get_datetime_from_unix_time(unix_time)
 	next_day.erase("hour")

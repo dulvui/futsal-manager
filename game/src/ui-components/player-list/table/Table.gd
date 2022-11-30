@@ -22,7 +22,7 @@ var sorter = ContentSort.new()
 var sort_memory = {} # to save wich value is already sorted and how
 
 	
-func set_up(_headers,_content=null):
+func set_up(_headers,_content=null) -> void:
 	headers = _headers
 	
 	# if content, table is setup for first time
@@ -50,7 +50,7 @@ func set_up(_headers,_content=null):
 	
 
 
-func _set_up_headers():
+func _set_up_headers() -> void:
 	for header in headers:
 		var button = Button.new()
 		button.text = header.substr(0,3)
@@ -67,7 +67,7 @@ func _set_up_headers():
 	lable_change.text = "c"
 	content_container.add_child(lable_change)
 	
-func _set_up_content():
+func _set_up_content() -> void:
 	content_container.queue_free()
 	content_container = GridContainer.new()
 	$MarginContainer.add_child(content_container)
@@ -102,7 +102,7 @@ func _set_up_content():
 	_update_pages()
 
 
-func filter(filters: Dictionary, exlusive = false):
+func filter(filters: Dictionary, exlusive = false) -> void:
 	if filters:
 		current_page = 0
 		var filtered_content = []
@@ -128,20 +128,20 @@ func filter(filters: Dictionary, exlusive = false):
 	_set_up_content()
 	
 
-func show_info(player):
+func show_info(player) -> void:
 	var player_profile = PlayerProfile.instance()
 	add_child(player_profile)
 	player_profile.set_up_info(player)
 	
-func change_player(player):
+func change_player(player) -> void:
 	emit_signal("select_player",player)
 	
-func _sort(value):
+func _sort(value) -> void:
 	sorter.value = value
 	current_content.sort_custom(sorter, _get_sorting(value))
 	_set_up_content()
 	
-func _get_sorting(value):
+func _get_sorting(value) -> String:
 	if sort_memory[value] == "ascending":
 		sort_memory[value] = "descending"
 	else:
@@ -150,35 +150,35 @@ func _get_sorting(value):
 
 class ContentSort:
 	var value
-	func ascending(a, b):
+	func ascending(a, b) -> bool:
 		if a[value] < b[value]:
 			return true
 		return false
 		
-	func descending(a, b):
+	func descending(a, b) -> bool:
 		if a[value] > b[value]:
 			return true
 		return false
 
 
-func _on_Next_pressed():
+func _on_Next_pressed() -> void:
 	if current_page < max_page - 1:
 		current_page += 1
 		_set_up_content()
 	_update_pages()
 
 
-func _on_Prev_pressed():
+func _on_Prev_pressed() -> void:
 	if current_page > 0:
 		current_page -= 1
 		_set_up_content()
 	_update_pages()
 	
-func _update_max_page():
+func _update_max_page() -> void:
 	max_page = current_content.size()/SIZE
 	if current_content.size() % SIZE != 0:
 		max_page += 1
 
-func _update_pages():
+func _update_pages() -> void:
 	pages.text = str(current_page + 1) + "/" + str(max_page)
 	

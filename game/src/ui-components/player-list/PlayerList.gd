@@ -18,7 +18,7 @@ const INFO_TYPES = ["mental","physical","technical","goalkeeper"]
 const FOOTS = ["R","L","RL"]
 
 
-func set_up(include_active_players, active_team = null):
+func set_up(include_active_players, active_team = null) -> void:
 	
 	set_up_players(include_active_players, active_team)
 
@@ -47,7 +47,7 @@ func set_up(include_active_players, active_team = null):
 		$InfoSelect.add_item(info_type)
 
 
-func set_up_players(include_active_players, active_team = null):
+func set_up_players(include_active_players, active_team = null) -> void:
 	_reset_options()
 	
 	all_players = []
@@ -71,16 +71,16 @@ func set_up_players(include_active_players, active_team = null):
 		
 	$Table.set_up(headers, all_players.duplicate(true))
 	
-func remove_player(player_id):
+func remove_player(player_id) -> void:
 	active_filters["id"] = player_id
 	_filter_table(true)
 
-func _on_NameSearch_text_changed(text):
+func _on_NameSearch_text_changed(text) -> void:
 	active_filters["surname"] = text
 	_filter_table()
 
 
-func _on_TeamSelect_item_selected(index):
+func _on_TeamSelect_item_selected(index) -> void:
 	if index > 0:
 		active_filters["team"] = $TeamSelect.get_item_text(index)
 	else:
@@ -89,7 +89,7 @@ func _on_TeamSelect_item_selected(index):
 	
 
 
-func _on_PositionSelect_item_selected(index):
+func _on_PositionSelect_item_selected(index) -> void:
 	if index > 0:
 		active_filters["position"] = POSITIONS[index-1]
 	else:
@@ -115,26 +115,26 @@ func _on_PositionSelect_item_selected(index):
 #		foot_search = ""
 #	add_all_players(true)
 
-func _filter_table(exclusive = false):
+func _filter_table(exclusive = false) -> void:
 	$Table.filter(active_filters, exclusive)
 
 func _on_Close_pressed():
 	hide()
 
 
-func _on_Table_select_player(player):
+func _on_Table_select_player(player) -> void:
 	print("change in list")
 	emit_signal("select_player",player)
 
 
-func _on_InfoSelect_item_selected(index):
+func _on_InfoSelect_item_selected(index) -> void:
 	var headers = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
 	$Table.set_up(headers)
 	
 
-func _reset_options():
+func _reset_options() -> void:
 	$LeagueSelect.selected = 0
 	$PositionSelect.selected = 0
 	$TeamSelect.selected = 0

@@ -17,10 +17,10 @@ onready var action_util = $ActionUtil
 var time = 0
 onready var timer = $Timer
 
-func set_up(home_team, away_team):
+func set_up(home_team, away_team) -> void:
 	action_util.set_up(home_team,away_team)
 
-func _on_Timer_timeout():
+func _on_Timer_timeout() -> void:
 	time += 1
 	
 	if time == HALF_TIME:
@@ -32,27 +32,27 @@ func _on_Timer_timeout():
 	else:
 		action_util.update(time)
 	
-func pause_toggle():
+func pause_toggle() -> bool:
 	timer.paused = not timer.paused
 	return timer.paused
 	
-func pause():
+func pause() -> void:
 	timer.paused = true
 	
-func continue_match():
+func continue_match() -> void:
 	timer.paused = false
 	
-func match_end():
+func match_end() -> void:
 	timer.stop()
 	
-func faster():
+func faster() -> void:
 	timer.wait_time /= Constants.MATCH_SPEED_FACTOR
 	
-func slower():
+func slower() -> void:
 	timer.wait_time *= Constants.MATCH_SPEED_FACTOR
 
 
-func start_match():
+func start_match() -> void:
 	timer.start()
 	
 	# coin toss for ball
@@ -63,12 +63,12 @@ func start_match():
 
 
 		
-func change_players(home_team,away_team):
+func change_players(home_team,away_team) -> void:
 	action_util.change_players(home_team,away_team)
 
 
-func _on_ActionUtil_action_message(message):
+func _on_ActionUtil_action_message(message) -> void:
 	emit_signal("action_message", message)
 
-func _on_ActionUtil_shot(is_goal, is_home):
+func _on_ActionUtil_shot(is_goal, is_home) -> void:
 	emit_signal("shot", is_goal, is_home)

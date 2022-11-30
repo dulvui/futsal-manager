@@ -12,24 +12,25 @@ var field_width
 var field_height
 
 
-func set_up(_nr, color, is_home_player, _field_width, _field_height, start_position = null):
+func set_up(_nr, _color, is_home_player, _field_width, _field_height, start_position = null) -> void:
 	if start_position:
 		position = start_position
 	nr = _nr
 	$ShirtNumber.text = str(nr)
-	$Sprites/Body.self_modulate = color
+	$Sprites/Body.self_modulate = _color
 	field_height = _field_height
 	field_width = _field_width
 	
-func move(destination, time):
+func move(destination, time) -> Vector2:
 	if is_field_player:
 		destination = _stay_inside_field(destination)
 		$Tween.interpolate_property(self, "position", position, destination, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$Tween.start()
 		moved = true
 		return destination
+	return Vector2.ZERO
 	
-func random_movement(time):
+func random_movement(time) -> void:
 	if is_field_player:
 		if moved:
 			moved = false
@@ -38,7 +39,7 @@ func random_movement(time):
 			$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 
-func _stay_inside_field(destination):
+func _stay_inside_field(destination: Vector2) -> Vector2:
 			# player should not go outside the field
 		if destination.x < 0:
 			destination.x = rand_range(20, 45)

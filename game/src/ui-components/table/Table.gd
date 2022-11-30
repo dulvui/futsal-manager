@@ -2,7 +2,7 @@ extends Control
 
 
 
-func _ready():
+func _ready() -> void:
 	var pos = 1
 	
 	# transform table dictionary to array
@@ -73,7 +73,7 @@ func _ready():
 			points_label.add_color_override("font_color", Color.gold)
 
 
-func point_sorter(a, b):
+func point_sorter(a, b) -> bool:
 	if a["points"] > b["points"]:
 		return true
 	elif a["points"] == b["points"] and a["goals_made"] - a["goals_against"] > b["goals_made"] - b["goals_against"]:
@@ -81,5 +81,5 @@ func point_sorter(a, b):
 	return false
 
 
-func _on_Close_pressed():
+func _on_Close_pressed() -> void:
 	hide()

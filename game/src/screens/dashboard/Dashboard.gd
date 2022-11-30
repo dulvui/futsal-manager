@@ -3,7 +3,7 @@ extends Control
 onready var team = DataSaver.get_selected_team()
 
 
-func _ready():
+func _ready() -> void:
 	$ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	$TeamName.text = DataSaver.team_name
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
@@ -14,27 +14,27 @@ func _ready():
 	$Formation.set_up()
 	
 
-func _process(_delta):
+func _process(_delta) -> void:
 	$Buttons/Email/Panel/MailCounter.text = str(EmailUtil.count_unread_messages())
 	$Budget.text = str(team["budget"])
 
-func _on_Menu_pressed():
+func _on_Menu_pressed() -> void:
 	get_tree().change_scene("res://src/screens/menu/Menu.tscn")
 
 
-func _on_SearchPlayer_pressed():
+func _on_SearchPlayer_pressed() -> void:
 	$AllPlayerList.show()
 
 
-func _on_Training_pressed():
+func _on_Training_pressed() -> void:
 	$TrainingPopup.popup_centered()
 
 
-func _on_Formation_pressed():
+func _on_Formation_pressed() -> void:
 	$Formation.show()
 
 
-func _on_Continue_pressed():
+func _on_Continue_pressed() -> void:
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
 	$Email.update_messages()
@@ -45,51 +45,51 @@ func _on_Continue_pressed():
 	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day - 1]["matches"].size() > 0:
 		get_tree().change_scene("res://src/screens/match/Match.tscn")
 
-func _on_Email_pressed():
+func _on_Email_pressed() -> void:
 	_hide_all()
 	$Email.show()
 
-func _on_Table_pressed():
+func _on_Table_pressed() -> void:
 	_hide_all()
 	$Table.show()
 	
-func _on_Calendar_pressed():
+func _on_Calendar_pressed() -> void:
 	_hide_all()
 	$Calendar.show()
 
 
-func _on_AllPlayerList_select_player(player):
+func _on_AllPlayerList_select_player(player) -> void:
 	print("offer for " + player["surname"])
 	$PlayerOfferPopup/PlayerOffer.set_player(player)
 	$PlayerOfferPopup/PlayerOffer.show()
 	$PlayerOfferPopup.popup_centered()
 
 
-func _on_PlayerOffer_hide():
+func _on_PlayerOffer_hide() -> void:
 	$PlayerOfferPopup.hide()
 
 
-func _on_PlayerOffer_confirm():
+func _on_PlayerOffer_confirm() -> void:
 	$Email.update_messages()
 	$PlayerOfferPopup.hide()
 
 
-func _on_Email_offer_contract(content):
+func _on_Email_offer_contract(content) -> void:
 	print("contract content")
 	print(content)
 	$ContractPopup/ContractOffer.set_up(content)
 	$ContractPopup.popup_centered()
 
 
-func _on_ContractOffer_cancel():
+func _on_ContractOffer_cancel() -> void:
 	$ContractPopup.hide()
 
 
-func _on_ContractOffer_confirm():
+func _on_ContractOffer_confirm() -> void:
 	$Email.update_messages()
 	$ContractPopup.hide()
 	
-func _hide_all():
+func _hide_all() -> void:
 	$Table.hide()
 	$Email.hide()
 	$Calendar.hide()

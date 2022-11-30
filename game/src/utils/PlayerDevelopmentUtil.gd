@@ -13,12 +13,12 @@ extends Node
 # good teams make good training
 
 
-func make_season_development():
+func make_season_development() -> void:
 	pass
 	
-func make_training():
+func make_training() -> void:
 	pass
 
-func check_injuries():
+func check_injuries() -> void:
 	pass
 

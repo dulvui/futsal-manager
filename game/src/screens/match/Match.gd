@@ -79,12 +79,12 @@ func match_end() -> void:
 	#simulate all games for now.
 	for matchday in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day - 1]["matches"]:
 		if matchday["home"] != home_team["name"]:
-			var home_goals = randi()%10
-			var away_goals = randi()%10
+			var random_home_goals = randi()%10
+			var random_away_goals = randi()%10
 			
-			matchday["result"] = str(home_goals) + ":" + str(away_goals)
+			matchday["result"] = str(random_home_goals) + ":" + str(random_away_goals)
 			print(matchday["home"] + " vs " + matchday["away"])
-			DataSaver.set_table_result(matchday["home"],home_goals,matchday["away"],away_goals)
+			DataSaver.set_table_result(matchday["home"],random_home_goals,matchday["away"],random_away_goals)
 		else:
 			matchday["result"] = str(match_simulator.action_util.home_stats.statistics["goals"]) + ":" + str(match_simulator.action_util.away_stats.statistics["goals"])
 #	DataSaver.save_all_data()

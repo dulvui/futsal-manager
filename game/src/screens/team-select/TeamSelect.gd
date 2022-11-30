@@ -3,7 +3,7 @@ extends TabContainer
 const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
 
 
-func _ready():
+func _ready() -> void:
 	DataSaver.init_teams()
 	
 	for nation in DataSaver.leagues:
@@ -20,7 +20,7 @@ func _ready():
 			center_container.add_child(grid)
 			add_child(center_container)
 
-func team_selected(league_id, selected_team):
+func team_selected(league_id, selected_team) -> void:
 	DataSaver.select_team(league_id,selected_team)
 	print("team saved")
 	CalendarUtil.create_calendar()

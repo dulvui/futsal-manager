@@ -4,7 +4,7 @@ var matches = []
 var match_day = 0
 
 
-func inizialize_matches():
+func inizialize_matches() -> void:
 	var teams = DataSaver.get_teams(DataSaver.league_id).duplicate(true)
 	matches = []
 	match_day = 0
@@ -73,7 +73,7 @@ func inizialize_matches():
 		DataSaver.calendar[month][day]["matches"] = match_days
 		day += 7
 		
-func _shift_array(array):
+func _shift_array(array) -> void:
 	var temp = array[0]
 	for i in range(array.size() - 1):
 		array[i] = array[i+1]

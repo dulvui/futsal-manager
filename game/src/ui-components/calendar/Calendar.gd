@@ -9,11 +9,11 @@ const Day = preload("res://src/ui-components/calendar/day/Day.tscn")
 var current_month
 
 
-func _ready():
+func _ready() -> void:
 	current_month = DataSaver.date.month
 	set_up()
 
-func set_up():
+func set_up() -> void:
 	# clean grid container
 	for child in $GridContainer.get_children():
 		child.queue_free()

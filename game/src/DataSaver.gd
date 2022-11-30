@@ -41,7 +41,7 @@ var messages
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	randomize()
 	config = ConfigFile.new()
 	config.load("user://settings.cfg")
@@ -68,7 +68,7 @@ func _ready():
 	#connect mail util with all other utils that send messages
 	
 	
-func reset():
+func reset() -> void:
 	manager =  {
 		"name" : "",
 		"surname" : "",
@@ -85,13 +85,13 @@ func reset():
 	
 	date = CalendarUtil.initial_date()
 	
-func set_lang(lang):
+func set_lang(lang) -> void:
 	TranslationServer.set_locale(lang)
 	language = lang
 	config.set_value("settings","language", language)
 	config.save("user://settings.cfg")
 
-func save_all_data():
+func save_all_data() -> void:
 	config.set_value("manager","data",manager)
 	config.set_value("team","name", team_name)
 	config.set_value("league","id", league_id)
@@ -104,12 +104,12 @@ func save_all_data():
 	config.save("user://settings.cfg")
 	print("all data saved")
 
-func save_manager(new_manager):
+func save_manager(new_manager) -> void:
 	manager = new_manager
 	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
 	
-func select_team(_league_id, _team_name):
+func select_team(_league_id, _team_name) -> void:
 #	teams = _teams.duplicate(true)
 	league_id = _league_id
 	team_name = _team_name
@@ -126,17 +126,17 @@ func select_team(_league_id, _team_name):
 		}
 	save_all_data()
 	
-func save_date():
+func save_date() -> void:
 	config.set_value("current_date","date",CalendarUtil.date)
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
 
-func save_calendar(new_calendar):
+func save_calendar(new_calendar) -> void:
 	calendar = new_calendar
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
 	
-func make_transfer(transfer):
+func make_transfer(transfer) -> void:
 	#remove player from team
 	print(transfer["player"])
 	
@@ -165,7 +165,7 @@ func make_transfer(transfer):
 			#handle also special contracts with bonus on future sell etc.
 
 
-func set_table_result(home_name,home_goals,away_name,away_goals):
+func set_table_result(home_name,home_goals,away_name,away_goals) -> void:
 #	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
 	table[home_name]["goals_made"] += home_goals
 	table[home_name]["goals_against"] += away_goals
@@ -188,18 +188,19 @@ func set_table_result(home_name,home_goals,away_name,away_goals):
 	table[home_name]["games_played"] += 1
 	table[away_name]["games_played"] += 1
 
-func save_table():
+func save_table() -> void:
 	config.set_value("season","table",table)
 	config.save("user://settings.cfg")
 	
 	
-func get_selected_team():
+func get_selected_team() -> Dictionary:
 	for team in get_teams(league_id):
 		if team["name"] == team_name:
 			return team
+	return {}
 
 
-func init_teams():
+func init_teams() -> void:
 	# check if leagues not leoaded yet
 	for nation in leagues:
 		for league in leagues[nation]:
@@ -209,20 +210,20 @@ func init_teams():
 			league["teams"] = JSON.parse(json).result
 			file.close()
 
-func get_teams(league_id = null):
+func get_teams(_league_id = null) -> Array:
 	var all_teams = []
 	for nation in leagues:
 		for league in leagues[nation]:
-			if league_id == null:
+			if _league_id == null:
 				all_teams.append_array(league["teams"])
 			else:
-				if league["id"] == league_id:
+				if league["id"] == _league_id:
 					all_teams.append_array(league["teams"])
 	return all_teams
 
 
 # save on quit on mobile
-func _notification(what):
+func _notification(what) -> void:
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		save_all_data()
 		get_tree().quit() # default behavior

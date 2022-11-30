@@ -28,7 +28,7 @@ var has_ball = false
 # player that is attacking/defending
 var active_player
 
-func set_up(team): # TODO add tactics
+func set_up(team) -> void: # TODO add tactics
 	players = []
 	var team_players = team["players"]["active"]
 	goalkeeper = Goalkeeper.instance()
@@ -41,17 +41,17 @@ func set_up(team): # TODO add tactics
 
 	active_player = players[-1]
 	
-func update_players():
+func update_players() -> void:
 	for player in players:
 		player.update()
 
-func change_active_player():
+func change_active_player() -> void:
 	var other_players = players.duplicate()
 	other_players.remove(players.find(active_player))
 	
 	active_player = other_players[(randi() % other_players.size())]
 
-func get_goalkeeper_attributes():
+func get_goalkeeper_attributes() -> int:
 	var attributes = 0
 	attributes +=  goalkeeper.attributes["goalkeeper"]["reflexes"]
 	attributes +=  goalkeeper.attributes["goalkeeper"]["positioning"]

@@ -2,10 +2,10 @@ extends Control
 
 signal offer_contract
 
-func _ready():
+func _ready() -> void:
 	update_messages()
 
-func update_messages():
+func update_messages() -> void:
 	for child in $ScrollContainer/Mails.get_children():
 		child.queue_free()
 	
@@ -23,7 +23,7 @@ func update_messages():
 		$ScrollContainer/Mails.add_child(button)
 
 
-func show_message(message):
+func show_message(message) -> void:
 	message["read"] = true
 	$DetailPopUp/Action.hide()
 	$DetailPopUp/Title.text = message["title"]
@@ -44,8 +44,8 @@ func show_message(message):
 	update_messages()
 
 
-func show_offer_contract(content):
+func show_offer_contract(content) -> void:
 	emit_signal("offer_contract",content)
 
-func _on_Action_pressed():
+func _on_Action_pressed() -> void:
 	pass # Replace with function body.

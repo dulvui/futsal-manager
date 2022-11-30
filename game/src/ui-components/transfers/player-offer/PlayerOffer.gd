@@ -14,7 +14,7 @@ var amount = 0
 var exchange_players = []
 var selected_players = []
 
-func _ready():
+func _ready() -> void:
 	regex.compile("^[0-9]*$")
 	$Details/Types.add_item("TRANSFER")
 	$Details/Types.add_item("LOAN")
@@ -30,22 +30,22 @@ func _ready():
 		$Details/ExchangePlayers.add_item(sub_player["name"] + " " + str(sub_player["price"]/1000) + "K")
 		exchange_players.append(sub_player)
 
-func _process(delta):
+func _process(_delta) -> void:
 	$Total.text = str(total)
 
-func set_player(new_player):
+func set_player(new_player) -> void:
 	player = new_player
 	$Info.text = "The player " + player["name"] + " has a value of " + str(player["price"])
 
 
-func _on_More_pressed():
+func _on_More_pressed() -> void:
 	if  amount < team["budget"]:
 		amount += 1000
 		$Details/Money/Amount.text = str(amount)
 		
 	_calc_total()
 
-func _on_Less_pressed():
+func _on_Less_pressed() -> void:
 	if  amount > 0:
 		amount -= 1000
 		$Details/Money/Amount.text = str(amount)
@@ -53,7 +53,7 @@ func _on_Less_pressed():
 	_calc_total()
 
 
-func _on_ExchangePlayers_item_selected(index):
+func _on_ExchangePlayers_item_selected(index) -> void:
 	var exchange_player = exchange_players[index]
 	exchange_players.remove(index)
 	
@@ -68,7 +68,7 @@ func _on_ExchangePlayers_item_selected(index):
 	
 	_calc_total()
 	
-func remove_from_list(_player):
+func remove_from_list(_player) -> void:
 	for child in $ScrollContainer/SelectedPlayers.get_children():
 		child.queue_free()
 	selected_players.erase(_player)
@@ -83,14 +83,14 @@ func remove_from_list(_player):
 	$Details/ExchangePlayers.add_item(_player["name"])
 	_calc_total()
 	
-func _calc_total():
+func _calc_total() -> void:
 	total = amount
-	for player in selected_players:
-		total += player["price"] # use other calculated value be setimating importanc efor new tweam
+	for selected_player in selected_players:
+		total += selected_player["price"] # use other calculated value be setimating importanc efor new tweam
 	
 
 
-func _on_Amount_text_changed(new_text):
+func _on_Amount_text_changed(new_text) -> void:
 	if regex.search(new_text):
 		$Details/Money/Amount.text = new_text   
 		oldtext = $Details/Money/Amount.text
@@ -106,7 +106,7 @@ func _on_Amount_text_changed(new_text):
 	$Details/Money/Amount.set_cursor_position($Details/Money/Amount.text.length())
 
 
-func _on_Confirm_pressed():
+func _on_Confirm_pressed() -> void:
 	var transfer = {
 		"player" : player,
 		"money" : amount,
@@ -119,5 +119,5 @@ func _on_Confirm_pressed():
 	emit_signal("confirm")
 
 
-func _on_Cancel_pressed():
+func _on_Cancel_pressed() -> void:
 	hide()

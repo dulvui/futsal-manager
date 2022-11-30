@@ -7,7 +7,7 @@ signal click
 # on click emits signal, to show match or training popup in calendar
 # if something set, else do nothing
 
-func set_up(day, current_day, current_month):
+func set_up(day, current_day, current_month) -> void:
 	$Label.text = str(current_day + 1)
 	var team_name
 	if day["matches"].size() > 0:
@@ -31,7 +31,7 @@ func set_up(day, current_day, current_month):
 	$WeekDay.text = day["weekday"]
 
 
-func _on_Match_pressed(matches):
+func _on_Match_pressed(matches) -> void:
 	for child in $MatchPopup/VBoxContainer.get_children():
 		child.queue_free()
 		
@@ -44,5 +44,5 @@ func _on_Match_pressed(matches):
 	$MatchPopup.popup_centered()
 
 
-func _on_Close_pressed():
+func _on_Close_pressed() -> void:
 	$MatchPopup.hide()

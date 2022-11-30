@@ -6,7 +6,7 @@ const DetailNumber = preload("res://src/ui-components/color-number/ColorNumber.t
 
 var player = {}
 
-func set_up_info(_player):
+func set_up_info(_player) -> void:
 	player = _player
 	
 	$DetailPopup/TabContainer/Info/Info/Name.text = player["surname"] + " " + player["name"]
@@ -51,8 +51,8 @@ func set_up_info(_player):
 
 	$DetailPopup.popup_centered()
 
-func _on_Hide_pressed():
+func _on_Hide_pressed() -> void:
 	$DetailPopup.hide()
 
-func _on_DetailPopup_hide():
+func _on_DetailPopup_hide() -> void:
 	queue_free()

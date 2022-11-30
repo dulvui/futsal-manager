@@ -1,7 +1,7 @@
 extends MarginContainer
 
 
-func update_stats(home_stats, away_stats):
+func update_stats(home_stats, away_stats) -> void:
 	$VBoxContainer/HomePossession.text = "%d "%home_stats.statistics["possession"]
 	$VBoxContainer/AwayPossession.text = "%d "%away_stats.statistics["possession"]
 	$VBoxContainer/HomePass.text = "%d "%home_stats.statistics["pass"]

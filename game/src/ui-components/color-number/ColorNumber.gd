@@ -1,7 +1,7 @@
 extends Control
 
 
-func set_up(value):
+func set_up(value) -> void:
 	$Label.text = str(value)
 	
 	if value < 11 :
