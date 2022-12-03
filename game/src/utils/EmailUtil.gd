@@ -30,6 +30,8 @@ func message(content,type) -> void:
 	var message = {
 		"title" : "TRANSFER",
 		"message" : "",
+		"sender" : "info@" + DataSaver.team_name.to_lower().replace(" ", "") + ".com",
+		"date" : CalendarUtil.get_dashborad_date(),
 		"type" : type,
 		"read" : false
 	}

@@ -27,6 +27,8 @@ func show_message(message) -> void:
 	message["read"] = true
 	$DetailPopUp/Action.hide()
 	$DetailPopUp/Subject.text = message["title"]
+	$DetailPopUp/Details/Date.text = message["date"]
+	$DetailPopUp/Details/Sender.text = message["sender"]
 	$DetailPopUp.popup_centered()
 	
 	
