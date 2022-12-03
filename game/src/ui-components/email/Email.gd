@@ -26,7 +26,7 @@ func update_messages() -> void:
 func show_message(message) -> void:
 	message["read"] = true
 	$DetailPopUp/Action.hide()
-	$DetailPopUp/Title.text = message["title"]
+	$DetailPopUp/Subject.text = message["title"]
 	$DetailPopUp.popup_centered()
 	
 	
@@ -49,3 +49,7 @@ func show_offer_contract(content) -> void:
 
 func _on_Action_pressed() -> void:
 	pass # Replace with function body.
+
+
+func _on_Close_pressed():
+	$DetailPopUp.hide()

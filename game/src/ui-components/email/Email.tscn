@@ -15,9 +15,6 @@ __meta__ = {
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Mails" type="GridContainer" parent="ScrollContainer"]
 columns = 2
@@ -27,35 +24,73 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -400.0
-margin_top = -300.0
-margin_right = 400.0
-margin_bottom = 300.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = -840.0
+margin_top = -494.0
+margin_right = 802.0
+margin_bottom = 466.0
+
+[node name="Border" type="Panel" parent="DetailPopUp"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="DetailPopUp"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 22.0
+margin_top = 17.0
+margin_right = -19.0
+margin_bottom = -15.0
 
-[node name="Title" type="Label" parent="DetailPopUp"]
-margin_left = 100.0
-margin_top = 31.113
-margin_right = 700.0
-margin_bottom = 81.113
+[node name="Subject" type="Label" parent="DetailPopUp"]
+margin_left = 85.0
+margin_top = 67.0
+margin_right = 685.0
+margin_bottom = 123.0
 text = "Messi"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Details" type="HBoxContainer" parent="DetailPopUp"]
+margin_left = 83.0
+margin_top = 138.0
+margin_right = 1524.0
+margin_bottom = 194.0
+custom_constants/separation = 16
+
+[node name="From" type="Label" parent="DetailPopUp/Details"]
+margin_right = 131.0
+margin_bottom = 56.0
+text = "FROM:"
+
+[node name="Sender" type="Label" parent="DetailPopUp/Details"]
+margin_left = 147.0
+margin_right = 543.0
+margin_bottom = 56.0
+text = "info@realmadrid.com"
+
+[node name="VSeparator" type="VSeparator" parent="DetailPopUp/Details"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 559.0
+margin_right = 1228.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+
+[node name="Date" type="Label" parent="DetailPopUp/Details"]
+margin_left = 1244.0
+margin_right = 1441.0
+margin_bottom = 56.0
+text = "29.12.2022"
+align = 2
+
 [node name="Message" type="RichTextLabel" parent="DetailPopUp"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 80.6102
-margin_top = 121.574
-margin_right = -53.3898
-margin_bottom = -42.4265
+margin_left = 81.0
+margin_top = 210.0
+margin_right = -102.0
+margin_bottom = -117.0
 text = "Messi wants to join your club
 
 
@@ -78,9 +113,18 @@ d
 "
 
 [node name="Action" type="Button" parent="DetailPopUp"]
-margin_left = 474.265
-margin_top = 501.174
-margin_right = 514.265
-margin_bottom = 557.174
+margin_left = 1226.0
+margin_top = 858.0
+margin_right = 1405.0
+margin_bottom = 914.0
+text = "ACTION"
+
+[node name="Close" type="Button" parent="DetailPopUp"]
+margin_left = 1557.0
+margin_top = 36.0
+margin_right = 1577.0
+margin_bottom = 92.0
+text = "X"
 
 [connection signal="pressed" from="DetailPopUp/Action" to="." method="_on_Action_pressed"]
+[connection signal="pressed" from="DetailPopUp/Close" to="." method="_on_Close_pressed"]
