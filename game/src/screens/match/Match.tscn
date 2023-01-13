@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/match-simulator/MatchSimulator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://theme.tres" type="Theme" id=2]
 [ext_resource path="res://src/screens/match/Match.gd" type="Script" id=3]
-[ext_resource path="res://src/ui-components/match-statistics/MatchStats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/ui-components/match/statistics/MatchStats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui-components/formation/Formation.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/ui-components/match/events/MatchEvents.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Goal"
@@ -53,7 +54,7 @@ margin_bottom = 75.0
 custom_constants/separation = 20
 
 [node name="Time" type="Label" parent="HUD/TopBar"]
-margin_right = 742.0
+margin_right = 738.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 text = "32sds"
@@ -62,8 +63,8 @@ __meta__ = {
 }
 
 [node name="Home" type="Label" parent="HUD/TopBar"]
-margin_left = 762.0
-margin_right = 921.0
+margin_left = 758.0
+margin_right = 917.0
 margin_bottom = 56.0
 text = "Robledo"
 __meta__ = {
@@ -71,10 +72,10 @@ __meta__ = {
 }
 
 [node name="Result" type="Label" parent="HUD/TopBar"]
-margin_left = 941.0
+margin_left = 937.0
 margin_right = 1001.0
 margin_bottom = 56.0
-text = "3:0"
+text = "0:0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -127,9 +128,6 @@ margin_left = 112.008
 margin_top = 316.348
 margin_right = 364.008
 margin_bottom = 820.349
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Field" type="Button" parent="HUD/LeftButtons"]
 margin_right = 272.0
@@ -142,6 +140,12 @@ margin_right = 272.0
 margin_bottom = 120.0
 text = "STATS"
 
+[node name="Events" type="Button" parent="HUD/LeftButtons"]
+margin_top = 128.0
+margin_right = 272.0
+margin_bottom = 184.0
+text = "EVENTS"
+
 [node name="Change" type="Button" parent="HUD/LeftButtons"]
 visible = false
 margin_top = 128.0
@@ -150,15 +154,15 @@ margin_bottom = 184.0
 text = "CHANGE"
 
 [node name="Tactics" type="Button" parent="HUD/LeftButtons"]
-margin_top = 128.0
-margin_right = 272.0
-margin_bottom = 184.0
-text = "TACTICS"
-
-[node name="Formation" type="Button" parent="HUD/LeftButtons"]
 margin_top = 192.0
 margin_right = 272.0
 margin_bottom = 248.0
+text = "TACTICS"
+
+[node name="Formation" type="Button" parent="HUD/LeftButtons"]
+margin_top = 256.0
+margin_right = 272.0
+margin_bottom = 312.0
 text = "FORMATION"
 
 [node name="Table" type="Button" parent="HUD/LeftButtons"]
@@ -232,6 +236,12 @@ text = "DASHBOARD"
 [node name="Formation" parent="." instance=ExtResource( 5 )]
 visible = false
 
+[node name="Events" parent="." instance=ExtResource( 6 )]
+margin_left = 562.0
+margin_top = 162.0
+margin_right = -136.0
+margin_bottom = -234.0
+
 [node name="SKIP" type="Button" parent="."]
 margin_left = 142.705
 margin_top = 97.515
@@ -269,6 +279,7 @@ autostart = true
 [connection signal="pressed" from="HUD/Slower" to="." method="_on_Slower_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Field" to="." method="_on_Field_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Stats" to="." method="_on_Stats_pressed"]
+[connection signal="pressed" from="HUD/LeftButtons/Events" to="." method="_on_Events_pressed"]
 [connection signal="pressed" from="HUD/LeftButtons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Dashboard" to="." method="_on_Dashboard_pressed"]
 [connection signal="change" from="Formation" to="." method="_on_Formation_change"]

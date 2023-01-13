@@ -1,21 +1,17 @@
 extends Node2D
 
 signal shot
-
-# commentator mesages in log
 signal action_message
-
 signal half_time
 signal match_end
 
+const HALF_TIME:int = 1200 # seconds for halftime
 
-const HALF_TIME = 1200 # seconds for halftime
-
-onready var action_util = $ActionUtil
+onready var action_util:Node = $ActionUtil
 
 
-var time = 0
-onready var timer = $Timer
+var time:int = 0
+onready var timer:Timer = $Timer
 
 func set_up(home_team, away_team) -> void:
 	action_util.set_up(home_team,away_team)
@@ -70,5 +66,5 @@ func change_players(home_team,away_team) -> void:
 func _on_ActionUtil_action_message(message) -> void:
 	emit_signal("action_message", message)
 
-func _on_ActionUtil_shot(is_goal, is_home) -> void:
-	emit_signal("shot", is_goal, is_home)
+func _on_ActionUtil_shot(is_goal, is_home, player) -> void:
+	emit_signal("shot", is_goal, is_home, player)

@@ -1,26 +1,27 @@
 extends Control
 
-const VisualAction = preload("res://src/match-simulator/visual-action/VisualAction.tscn")
+const VisualAction:PackedScene = preload("res://src/match-simulator/visual-action/VisualAction.tscn")
 
-var home_team
-var away_team
+onready var match_simulator:Node2D = $MatchSimulator
+onready var stats:MarginContainer = $Stats
+onready var comments:RichTextLabel = $Log
+onready var events:ScrollContainer = $Events
+onready var animation_player:AnimationPlayer = $AnimationPlayer
+onready var time_label:Label = $HUD/TopBar/Time
+onready var result_label:Label = $HUD/TopBar/Result
 
-var home_goals = 0
-var away_goals = 0
+var last_active_view:Control
 
-var last_active_view
+var home_team:Dictionary
+var away_team:Dictionary
 
+var home_goals:int = 0
+var away_goals:int = 0
+var speed_factor:int = 0
 
-var match_started = false
+var match_started:bool = false
+var first_half:bool = true
 
-var first_half = true
-
-onready var match_simulator = $MatchSimulator
-onready var stats = $Stats
-
-onready var animation_player = $AnimationPlayer
-
-var speed_factor = 0
 
 func _ready() -> void:
 	var next_match = CalendarUtil.get_next_match()
@@ -38,32 +39,18 @@ func _ready() -> void:
 	$Formation.set_up(home_team)
 	match_simulator.set_up(home_team,away_team)
 	
-	last_active_view = $Log
+	last_active_view = comments
 	
 
 func _process(delta) -> void:
 	stats.update_stats(match_simulator.action_util.home_stats, match_simulator.action_util.away_stats)
-	$HUD/TopBar/Time.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
+	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 	
 	$HUD/TimeBar.value = match_simulator.time
 	
 	$HUD/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
 	
 	$HUD/SpeedFactor.text = str(speed_factor + 1) + " X"
-	
-	$HUD/TopBar/Result.text = "%d - %d"%[home_goals,away_goals]
-	
-
-func _on_Field_pressed() -> void:
-	$Log.show()
-	$Stats.hide()
-	last_active_view = $Log
-
-
-func _on_Stats_pressed() -> void:
-	$Log.hide()
-	$Stats.show()
-	last_active_view = $Stats
 
 
 func match_end() -> void:
@@ -89,9 +76,31 @@ func match_end() -> void:
 			matchday["result"] = str(match_simulator.action_util.home_stats.statistics["goals"]) + ":" + str(match_simulator.action_util.away_stats.statistics["goals"])
 #	DataSaver.save_all_data()
 
+
 func half_time() -> void:
 	$HUD/Pause.text = tr("CONTINUE")
 
+
+func _on_Field_pressed() -> void:
+	_hide_views()
+	last_active_view = comments
+
+
+func _on_Stats_pressed() -> void:
+	_hide_views()
+	stats.show()
+	last_active_view = stats
+	
+
+func _on_Events_pressed() -> void:
+	_hide_views()
+	events.show()
+	last_active_view = events
+	
+func _hide_views() -> void:
+	comments.hide()
+	events.hide()
+	events.hide()
 
 
 func _on_Dashboard_pressed() -> void:
@@ -137,12 +146,10 @@ func _on_SKIP_pressed() -> void:
 	match_end()
 
 
-func _on_MatchSimulator_shot(is_goal, is_home) -> void:
+func _on_MatchSimulator_shot(is_goal, is_home, player) -> void:
 	$HUD/Pause.disabled = true
 	match_simulator.pause()
-	
-	$Log.hide()
-	$Stats.hide()
+	_hide_views()
 	
 	# Visual Action
 	var visual_action = VisualAction.instance()
@@ -160,6 +167,11 @@ func _on_MatchSimulator_shot(is_goal, is_home) -> void:
 		animation_player.play("Goal")
 		yield(animation_player,"animation_finished")
 		$Goal.hide()
+		
+		result_label.text = "%d - %d"%[home_goals,away_goals]
+		
+		events.append("%s - %s:%s %s" % [time_label.text, str(home_goals), str(away_goals), player["profile"]["name"]])
+
 	
 	visual_action.queue_free()
 	match_simulator.continue_match()
@@ -180,7 +192,7 @@ func _on_MatchSimulator_match_end() -> void:
 
 
 func _on_MatchSimulator_action_message(message) -> void:
-	if $Log.get_line_count() > 9:
-		$Log.remove_line(0)
-	$Log.newline()
-	$Log.add_text($HUD/TopBar/Time.text + " " + message)
+	if comments.get_line_count() > 9:
+		comments.remove_line(0)
+	comments.newline()
+	comments.add_text(time_label.text + " " + message)

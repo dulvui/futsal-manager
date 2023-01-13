@@ -210,14 +210,19 @@ func _check_goal() -> bool:
 		else:
 			emit_signal("action_message","GOAL for " + away_team.name)
 			away_stats.increase_goals()
-		emit_signal("shot",true, home_team.has_ball)
+		if home_team.has_ball:
+			emit_signal("shot",true, home_team.has_ball, home_team.active_player)
+		else:
+			emit_signal("shot",true, home_team.has_ball, away_team.active_player)
 		_change_possession()
 		return true
 	else:
 		# no goal, but could become shot visual action
 		if randi() % Constants.VISUAL_ACTION_SHOTS == 0:
-			print("visual action shot, no goal")
-			emit_signal("shot", false, home_team.has_ball)
+			if home_team.has_ball:
+				emit_signal("shot",true, home_team.has_ball, home_team.active_player)
+			else:
+				emit_signal("shot",true, home_team.has_ball, away_team.active_player)
 		
 	return false
 	
