@@ -2,47 +2,47 @@ extends Node
 
 
 # match fast forward speed factor
-const MATCH_SPEED_FACTOR = 4
+const MATCH_SPEED_FACTOR:int = 4
 
 # factor if shot becomes a visual action
-const VISUAL_ACTION_SHOTS_FACTOR = 10
+const VISUAL_ACTION_SHOTS_FACTOR:int = 10
 
 # bigger number => more saves
-const GOAL_KEEPER_FACTOR = {
+const GOAL_KEEPER_FACTOR:Dictionary = {
 	"NORMAL" : 15, # 15
 	"FREE_KICK": 25, # 25
 	"PENALTY" : 45 # 45
 }
 
 # 0 - 100
-const MAX_FACTOR = 100
-const CORNER_AFTER_SAFE_FACTOR = 20
-const KICK_IN_FACTOR = 10
+const MAX_FACTOR:int = 100
+const CORNER_AFTER_SAFE_FACTOR:int = 20
+const KICK_IN_FACTOR:int = 10
 
-const FOUL_FACTOR = 2
+const FOUL_FACTOR:int = 2
 
 # lower than PENALTY_FACTOR is free kick
-const PENALTY_FACTOR = 5
+const PENALTY_FACTOR:int = 5
 
 
 # rest is no card
-const YELLOW_CARD_FACTOR = 65
-const RED_CARD_FACTOR = 90
+const YELLOW_CARD_FACTOR:int = 65
+const RED_CARD_FACTOR:int = 90
 
 
 # factor for defining attack (0 - 100)
-const ATTACK_FACTOR = 1000
-const RUN_FACTOR = 450
-const PASS_FACTOR = 900
-const DRIBBLE_FACTOR = 950
-const SHOOT_FACTOR = 1000
+const ATTACK_FACTOR:int = 1000
+const RUN_FACTOR:int = 450
+const PASS_FACTOR:int = 900
+const DRIBBLE_FACTOR:int = 950
+const SHOOT_FACTOR:int = 1000
 
 
 # attack success factors
 # bigger number => more success
-const PASS_SUCCESS_FACTOR = 3 # attack 3 : 1 defense
+const PASS_SUCCESS_FACTOR:int = 3 # attack 3 : 1 defense
 
-const ATTRIBUTES = {
+const ATTRIBUTES:Dictionary = {
 	"mental" : ["aggression","anticipation","decisions","concentration",
 				"teamwork","vision","work_rate","offensive_movement","marking"],
 	"physical" : ["pace","acceleration","stamina","strength", "agility","jump"],

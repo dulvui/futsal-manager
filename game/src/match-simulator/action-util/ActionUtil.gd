@@ -43,7 +43,7 @@ var action_buffer:Array = []
 func _ready() -> void:
 	randomize()
 
-func set_up(_home_team, _away_team) -> void:
+func set_up(_home_team:Dictionary, _away_team:Dictionary) -> void:
 	home_team.set_up(_home_team)
 	away_team.set_up(_away_team)
 	
@@ -104,7 +104,7 @@ func update() -> void:
 	_log(attack, attack_success)
 	_action_buffer(attack, attack_success)
 	
-func change_players(_home_team,_away_team) -> void:
+func change_players(_home_team:Dictionary,_away_team:Dictionary) -> void:
 	# reset action buffer, becasue change happened and
 	# changed player is not visible in field anymore
 	action_buffer = []
@@ -112,7 +112,7 @@ func change_players(_home_team,_away_team) -> void:
 	away_team.set_up(_away_team)
 	
 # returns true if attack wins, false if defense wins
-func _get_result(attack) -> bool:
+func _get_result(attack:int) -> bool:
 	# select attributes to use as value for random result calculation
 	
 	var attacker_attributes:int = 0
@@ -160,10 +160,10 @@ func _attack() -> int:
 			else:
 				return Attack.SHOOT
 
-func _log(attack, result) -> void:
+func _log(attack:int, result:bool) -> void:
 	emit_signal("action_message",home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + " " + str(Attack.keys()[attack]) + " - " + str(result))
 
-func _action_buffer(attack, result) -> void:
+func _action_buffer(attack:int, result:bool) -> void:
 	var attacking_player_nr:int
 	var defending_player_nr:int
 	
@@ -288,13 +288,13 @@ func _change_attacker() -> void:
 
 
 # STATISTICS
-func _increase_pass(success) -> void:
+func _increase_pass(success:bool) -> void:
 	if away_team.has_ball:
 		away_stats.increase_pass(success)
 	else:
 		home_stats.increase_pass(success)
 		
-func _increase_shots(on_target) -> void:
+func _increase_shots(on_target:bool) -> void:
 	if away_team.has_ball:
 		away_stats.increase_shots(on_target)
 	else:

@@ -43,14 +43,12 @@ func _ready() -> void:
 	last_active_view = comments
 	
 
-func _process(delta) -> void:
-	stats.update_stats(match_simulator.action_util.home_stats, match_simulator.action_util.away_stats)
+func _process(delta:float) -> void:
+	stats.update_stats(match_simulator.action_util.home_stats.statistics, match_simulator.action_util.away_stats.statistics)
 	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 	
 	$HUD/TimeBar.value = match_simulator.time
-	
 	$HUD/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
-	
 	$HUD/SpeedFactor.text = str(speed_factor + 1) + " X"
 
 
@@ -84,6 +82,7 @@ func half_time() -> void:
 
 func _on_Field_pressed() -> void:
 	_hide_views()
+	comments.show()
 	last_active_view = comments
 
 
@@ -100,9 +99,17 @@ func _on_Events_pressed() -> void:
 	
 func _hide_views() -> void:
 	comments.hide()
-	events.hide()
+	stats.hide()
 	events.hide()
 
+func _toggle_view_buttons() -> void:
+	$HUD/LeftButtons/Change.disabled = not $HUD/LeftButtons/Change.disabled 
+	$HUD/LeftButtons/Events.disabled = not $HUD/LeftButtons/Events.disabled
+	$HUD/LeftButtons/Stats.disabled = not $HUD/LeftButtons/Stats.disabled
+	$HUD/LeftButtons/Field.disabled = not $HUD/LeftButtons/Field.disabled
+	$HUD/LeftButtons/Formation.disabled = not $HUD/LeftButtons/Formation.disabled
+	$HUD/LeftButtons/Tactics.disabled = not $HUD/LeftButtons/Tactics.disabled
+	
 
 func _on_Dashboard_pressed() -> void:
 	DataSaver.save_all_data()
@@ -155,6 +162,7 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Dictionary) -> v
 	$HUD/Pause.disabled = true
 	match_simulator.pause()
 	_hide_views()
+	_toggle_view_buttons()
 	
 	# Visual Action
 	var visual_action:Node = VisualAction.instance()
@@ -182,6 +190,8 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Dictionary) -> v
 	match_simulator.continue_match()
 	last_active_view.show()
 	$HUD/Pause.disabled = false
+	_toggle_view_buttons()
+
 	
 
 func _on_StartTimer_timeout() -> void:
@@ -196,7 +206,7 @@ func _on_MatchSimulator_match_end() -> void:
 	match_end()
 
 
-func _on_MatchSimulator_action_message(message) -> void:
+func _on_MatchSimulator_action_message(message:String) -> void:
 	if comments.get_line_count() > 9:
 		comments.remove_line(0)
 	comments.newline()

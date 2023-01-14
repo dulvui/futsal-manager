@@ -94,7 +94,7 @@ margin_left = 1449.39
 margin_top = 976.0
 margin_right = 1606.39
 margin_bottom = 1032.0
-text = "PAUSE"
+text = "START"
 
 [node name="SpeedFactor" type="Label" parent="HUD"]
 margin_left = 1104.0

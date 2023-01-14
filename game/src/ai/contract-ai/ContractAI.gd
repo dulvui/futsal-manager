@@ -3,7 +3,7 @@ extends Node
 
 # checks the contract of your team and returns the players that run out 
 # the next 6, 3, 1 months in and according json
-func check_contracts_your_team(players) -> void:
+func check_contracts_your_team(players:Array) -> void:
 	pass
 	
 # checks the contract of all other teams and decides depending on teams

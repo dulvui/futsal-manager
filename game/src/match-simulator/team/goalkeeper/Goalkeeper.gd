@@ -1,22 +1,18 @@
 extends Node2D
 
-enum Attack {KICK, PASS, WAIT}
-enum Defend {SAFE, WAIT}
-enum State {ATTACK, DEFEND, PENALTY, FREE_KICK, CORNER}
-
-var profile = {
+var profile:Dictionary = {
 	"name" : "Ronaldinho",
 	"number" : 10
 }
 
-var stats = {
+var stats:Dictionary = {
 	"passes" : 0,
 	"passes_success" : 0,
 	"safes" : 0
 }
 
 # update to goalkeeper attributes
-var attributes = {
+var attributes:Dictionary = {
 	'reflexes': 4,
 	'positioning': 11,
 	'kicking': 13,
@@ -24,8 +20,6 @@ var attributes = {
 	'diving': 7,
 	'speed' : 7
 }
-
-var current_state
 
 func set_up(player) -> void:
 	profile["name"] = player["surname"]

@@ -3,7 +3,7 @@ extends Node2D
 const moveTrans = Tween.TRANS_LINEAR
 const moveEase = Tween.EASE_OUT
 
-func move(final_position, time, is_global_position = false) -> void:
+func move(final_position:Vector2, time:float, is_global_position:bool = false) -> void:
 	if is_global_position:
 		$Tween.interpolate_property(self, "global_position", global_position, final_position, time, moveTrans, moveEase)
 	else:

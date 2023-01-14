@@ -14,7 +14,7 @@ onready var timer:Timer = $Timer
 var time:int = 0
 
 
-func set_up(home_team, away_team) -> void:
+func set_up(home_team:Dictionary, away_team:Dictionary) -> void:
 	action_util.set_up(home_team,away_team)
 
 
@@ -65,11 +65,11 @@ func start_match() -> void:
 	action_util.away_team.has_ball = not coin
 
 
-func change_players(home_team,away_team) -> void:
+func change_players(home_team:Dictionary,away_team:Dictionary) -> void:
 	action_util.change_players(home_team,away_team)
 
 
-func _on_ActionUtil_action_message(message) -> void:
+func _on_ActionUtil_action_message(message:String) -> void:
 	emit_signal("action_message", message)
 
 

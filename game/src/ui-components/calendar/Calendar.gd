@@ -36,17 +36,17 @@ func set_up() -> void:
 	$Paginator/Page.text = CalendarUtil.MONTHS[current_month]
 	
 
-func _on_Close_pressed():
+func _on_Close_pressed() -> void:
 	hide()
 
 
-func _on_Prev_pressed():
+func _on_Prev_pressed() -> void:
 	current_month -= 1
 	if current_month < 0:
 		current_month = 0
 	set_up()
 	
-func _on_Next_pressed():
+func _on_Next_pressed() -> void:
 	current_month += 1
 	if current_month > 11:
 		current_month = 11
