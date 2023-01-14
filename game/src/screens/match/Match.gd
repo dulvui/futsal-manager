@@ -24,7 +24,8 @@ var first_half:bool = true
 
 
 func _ready() -> void:
-	var next_match = CalendarUtil.get_next_match()
+	randomize()
+	var next_match:Dictionary = CalendarUtil.get_next_match()
 	
 	if next_match != null:
 		for team in DataSaver.get_teams():
@@ -122,7 +123,7 @@ func _on_Slower_pressed() -> void:
 
 
 func _on_Pause_pressed() -> void:
-	var paused = match_simulator.pause_toggle()
+	var paused:bool = match_simulator.pause_toggle()
 	
 	if paused:
 		$HUD/Pause.text = tr("CONTINUE")
@@ -138,7 +139,6 @@ func _on_Formation_pressed() -> void:
 
 
 func _on_Formation_change() -> void:
-	print("change formation")
 	match_simulator.change_players(home_team,away_team)
 
 
@@ -146,13 +146,18 @@ func _on_SKIP_pressed() -> void:
 	match_end()
 
 
-func _on_MatchSimulator_shot(is_goal, is_home, player) -> void:
+func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Dictionary) -> void:
+	if not is_goal and randi() % Constants.VISUAL_ACTION_SHOTS_FACTOR > 0:
+		# no goal, but show some shoots
+		return
+	
+	# show visual action
 	$HUD/Pause.disabled = true
 	match_simulator.pause()
 	_hide_views()
 	
 	# Visual Action
-	var visual_action = VisualAction.instance()
+	var visual_action:Node = VisualAction.instance()
 	visual_action.set_up(is_home, is_goal, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
 	$VisualActionContainer.add_child(visual_action)
 	yield(visual_action, "action_finished")
@@ -170,7 +175,7 @@ func _on_MatchSimulator_shot(is_goal, is_home, player) -> void:
 		
 		result_label.text = "%d - %d"%[home_goals,away_goals]
 		
-		events.append("%s - %s:%s %s" % [time_label.text, str(home_goals), str(away_goals), player["profile"]["name"]])
+		events.append("%s - %s:%s %s" % [time_label.text, str(home_goals), str(away_goals), player["name"]])
 
 	
 	visual_action.queue_free()

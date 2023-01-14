@@ -16,7 +16,6 @@ signal shot
 signal penalty
 signal freekick
 signal corner
-
 signal action_message
 
 # in which sector of the field the player is situated
@@ -30,16 +29,16 @@ enum Attack {PASS, CROSS, DRIBBLE, RUN, SHOOT}
 #enum Pass { SHORT_PASS, LONG_PASS, CROSS}
 #enum Shoot {SHOOT, LONG_SHOOT, HEADER}
 
-onready var home_team = $HomeTeam
-onready var away_team = $AwayTeam
+onready var home_team:Node2D = $HomeTeam
+onready var away_team:Node2D = $AwayTeam
 
-onready var home_stats = $HomeStatistics
-onready var away_stats = $AwayStatistics
+onready var home_stats:Node = $HomeStatistics
+onready var away_stats:Node = $AwayStatistics
 
-var current_state
+var current_state:int
 
-const MAX_ACTION_BUFFER_SIZE = 10
-var action_buffer = []
+const MAX_ACTION_BUFFER_SIZE:int = 10
+var action_buffer:Array = []
 
 func _ready() -> void:
 	randomize()
@@ -51,14 +50,14 @@ func set_up(_home_team, _away_team) -> void:
 	current_state = State.KICK_OFF
 
 
-func update(time) -> void:
-	var attack = _attack()
-	var attack_success = _get_result(attack)
+func update() -> void:
+	var attack:int = _attack()
+	var attack_success:bool = _get_result(attack)
 	
-	var foul = false
-	var goal = false
-	var corner = false
-	var kick_in = false
+	var foul:bool = false
+	var goal:bool = false
+	var corner:bool = false
+	var kick_in:bool = false
 	
 	# change active players and possession
 	if attack_success:
@@ -116,8 +115,8 @@ func change_players(_home_team,_away_team) -> void:
 func _get_result(attack) -> bool:
 	# select attributes to use as value for random result calculation
 	
-	var attacker_attributes = 0
-	var defender_attributes = 0
+	var attacker_attributes:int = 0
+	var defender_attributes:int = 0
 	
 	if current_state == State.NORMAL:
 		if home_team.has_ball:
@@ -130,15 +129,15 @@ func _get_result(attack) -> bool:
 		return true
 	
 	# calculate random action winner
-	var max_value = attacker_attributes + defender_attributes
-	var random = randi() % int(max_value)
-	var result = false
+	var max_value:int = attacker_attributes + defender_attributes
+	var random:int = randi() % int(max_value)
+	var result:bool = false
 	
 	if random < attacker_attributes:
 		result = true
 	return result
 	
-func _attack() -> String:
+func _attack() -> int:
 	# improve later watching current sector and player attributes
 	match current_state:
 		State.KICK_OFF, State.KICK_IN:
@@ -150,8 +149,8 @@ func _attack() -> String:
 				return Attack.CROSS
 			else:
 				return Attack.PASS
-		State.NORMAL:
-			var random_attack_factor = randi() % Constants.ATTACK_FACTOR
+		_:
+			var random_attack_factor:int = randi() % Constants.ATTACK_FACTOR
 			if random_attack_factor < Constants.RUN_FACTOR:
 				return Attack.RUN
 			elif random_attack_factor < Constants.PASS_FACTOR:
@@ -160,76 +159,67 @@ func _attack() -> String:
 				return Attack.DRIBBLE
 			else:
 				return Attack.SHOOT
-				
-	# should never happen
-	return ""
 
 func _log(attack, result) -> void:
 	emit_signal("action_message",home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + " " + str(Attack.keys()[attack]) + " - " + str(result))
 
 func _action_buffer(attack, result) -> void:
-	var attacking_player
-	var defending_player
+	var attacking_player_nr:int
+	var defending_player_nr:int
 	
 	if home_team.has_ball:
-		attacking_player = home_team.active_player["profile"]["number"]
-		defending_player = away_team.active_player["profile"]["number"]
+		attacking_player_nr = home_team.active_player["profile"]["number"]
+		defending_player_nr = away_team.active_player["profile"]["number"]
 	else:
-		attacking_player = away_team.active_player["profile"]["number"]
-		defending_player = home_team.active_player["profile"]["number"]
+		attacking_player_nr = away_team.active_player["profile"]["number"]
+		defending_player_nr = home_team.active_player["profile"]["number"]
 	
 	action_buffer.append({
 		"action" : Attack.keys()[attack],
 		"state" : State.keys()[current_state],
 		"is_home" : home_team.has_ball,
 		"success" : result,
-		"attacking_player" : attacking_player,
-		"defending_player" : defending_player,
+		"attacking_player_nr" : attacking_player_nr,
+		"defending_player_nr" : defending_player_nr,
 	})
 	
 	if action_buffer.size() > MAX_ACTION_BUFFER_SIZE:
 		action_buffer.pop_front()
 
 func _check_goal() -> bool:
-	var goalkeeper_attributes
+	var goalkeeper_attributes:int
 	if home_team.has_ball:
 		goalkeeper_attributes = away_team.get_goalkeeper_attributes()
 	else:
 		goalkeeper_attributes = home_team.get_goalkeeper_attributes()
 	
-	var random_goal = randi() % int(goalkeeper_attributes)
+	var random_goal:int = randi() % int(goalkeeper_attributes)
 	
-	print(State.keys()[current_state])
 	goalkeeper_attributes = goalkeeper_attributes / Constants.GOAL_KEEPER_FACTOR[State.keys()[current_state]]
 
 	if random_goal < goalkeeper_attributes:
 		# goal
 		if home_team.has_ball:
+			emit_signal("shot",true, home_team.has_ball, home_team.active_player["profile"])
 			emit_signal("action_message","GOAL for " + home_team.name)
 			home_stats.increase_goals()
 		else:
+			emit_signal("shot",true, home_team.has_ball, away_team.active_player["profile"])
 			emit_signal("action_message","GOAL for " + away_team.name)
 			away_stats.increase_goals()
-		if home_team.has_ball:
-			emit_signal("shot",true, home_team.has_ball, home_team.active_player)
-		else:
-			emit_signal("shot",true, home_team.has_ball, away_team.active_player)
 		_change_possession()
 		return true
 	else:
-		# no goal, but could become shot visual action
-		if randi() % Constants.VISUAL_ACTION_SHOTS == 0:
-			if home_team.has_ball:
-				emit_signal("shot",true, home_team.has_ball, home_team.active_player)
-			else:
-				emit_signal("shot",true, home_team.has_ball, away_team.active_player)
-		
+		if home_team.has_ball:
+			emit_signal("shot",false, home_team.has_ball, home_team.active_player["profile"])
+		else:
+			emit_signal("shot",false, home_team.has_ball, away_team.active_player["profile"])
 	return false
 	
 	
 # ACTION EVENT CHECKS
 func _check_corner() -> bool:
-	var random = randi() % Constants.MAX_FACTOR
+	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.CORNER_AFTER_SAFE_FACTOR:
 		current_state = State.CORNER
 		_increase_corners()
@@ -237,14 +227,14 @@ func _check_corner() -> bool:
 	return false
 	
 func _check_foul() -> bool:
-	var random = randi() % Constants.MAX_FACTOR
+	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.FOUL_FACTOR:
 		_increase_fouls()
 		return true
 	return false
 	
 func _check_penalty_or_freekick() -> bool:
-	var random = randi() % Constants.MAX_FACTOR
+	var random:int = randi() % Constants.MAX_FACTOR
 	if random > Constants.PENALTY_FACTOR:
 		current_state = State.FREE_KICK
 		_increase_free_kicks()
@@ -258,7 +248,7 @@ func _check_penalty_or_freekick() -> bool:
 
 	
 func _check_card() -> String:
-	var random = randi() % Constants.MAX_FACTOR
+	var random:int = randi() % Constants.MAX_FACTOR
 	if random > Constants.RED_CARD_FACTOR:
 		_increase_red_cards()
 		return "red"
@@ -268,7 +258,7 @@ func _check_card() -> String:
 	return "no-card"
 	
 func _check_kick_in() -> bool:
-	var random = randi() % Constants.MAX_FACTOR
+	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.KICK_IN_FACTOR:
 		current_state = State.KICK_IN
 		_increase_kick_ins()
@@ -305,7 +295,6 @@ func _increase_pass(success) -> void:
 		home_stats.increase_pass(success)
 		
 func _increase_shots(on_target) -> void:
-	print("_increase_shots: " + str(on_target))
 	if away_team.has_ball:
 		away_stats.increase_shots(on_target)
 	else:

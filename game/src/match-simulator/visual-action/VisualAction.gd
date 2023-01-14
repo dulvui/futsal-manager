@@ -144,8 +144,8 @@ func _action() -> void:
 	# penalty
 		
 	if action:
-		var attack_nr = action["attacking_player"]
-		var defense_nr = action["defending_player"]
+		var attack_nr = action["attacking_player_nr"]
+		var defense_nr = action["defending_player_nr"]
 		
 		# finb current player position
 		if action["is_home"]:

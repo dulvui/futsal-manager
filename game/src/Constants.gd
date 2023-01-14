@@ -5,7 +5,7 @@ extends Node
 const MATCH_SPEED_FACTOR = 4
 
 # factor if shot becomes a visual action
-const VISUAL_ACTION_SHOTS = 10
+const VISUAL_ACTION_SHOTS_FACTOR = 10
 
 # bigger number => more saves
 const GOAL_KEEPER_FACTOR = {
