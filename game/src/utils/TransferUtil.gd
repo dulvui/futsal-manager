@@ -31,7 +31,7 @@ func update_day() -> void:
 						EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.CONTRACT_SIGNED)
 		_make_random_transfer_requests()
 
-func make_offer(transfer) -> void:
+func make_offer(transfer:Dictionary) -> void:
 	EmailUtil.message(transfer,EmailUtil.MESSAGE_TYPES.TRANSFER)
 	print("transfer message")
 	current_transfers.append(transfer)

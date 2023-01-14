@@ -1,38 +1,38 @@
 extends Node
 
-var matches = []
-var match_day = 0
+var matches:Array = []
+var match_day:int = 0
 
 
 func inizialize_matches() -> void:
-	var teams = DataSaver.get_teams(DataSaver.league_id).duplicate(true)
+	var teams:Array = DataSaver.get_teams(DataSaver.league_id).duplicate(true)
 	matches = []
 	match_day = 0
 	
-	var random_teams  = teams.duplicate(true)
+	var random_teams:Array  = teams.duplicate(true)
 	random_teams.shuffle()
 	
-	var last_team = random_teams.pop_front()
+	var last_team:Dictionary = random_teams.pop_front()
 	
-	var home = true
+	var home:bool = true
 	
 	for i in random_teams.size():
-		var current_match_day = []
-		var matchOne
+		var current_match_day:Array = []
+		var matchOne:Dictionary
 		if home:
 			matchOne = {"home": last_team["name"],"away": random_teams[0]["name"], "result":":"}
 		else:
 			matchOne = {"home": random_teams[0]["name"],"away": last_team["name"], "result":":"}
 		current_match_day.append(matchOne)
 		
-		var copy = random_teams.duplicate(true)
+		var copy:Array = random_teams.duplicate(true)
 		copy.remove(0)
 		
 		for j in range(0,(teams.size()/2) - 1):
-			var home_index = j
-			var away_index = - j - 1
+			var home_index:int = j
+			var away_index:int = - j - 1
 			
-			var matchTwo
+			var matchTwo:Dictionary
 			if home:
 				matchTwo = {"home": copy[home_index]["name"],"away":copy[away_index]["name"], "result":":"}
 			else:
@@ -40,26 +40,24 @@ func inizialize_matches() -> void:
 			current_match_day.append(matchTwo)
 		matches.append(current_match_day)
 		_shift_array(random_teams)
-		home = !home
-		print("home " + str(home))
-		
+		home = not home
+
 		
 	# ritorno
-	var temp_matches = []
+	var temp_matches:Array = []
 	for match_dayz in matches:
-		var current_match_dayz = []
+		var current_match_dayz:Array = []
 		for matchess in match_dayz:
-			var matchzz = {"home": matchess["away"],"away": matchess["home"], "result":":"}
+			var matchzz:Dictionary = {"home": matchess["away"],"away": matchess["home"], "result":":"}
 			current_match_dayz.append(matchzz)
 		temp_matches.append(current_match_dayz)
 		
 	for temp in temp_matches:
 		matches.append(temp)
 	
-	
 	#add to calendar
-	var day = DataSaver.date.day
-	var month = DataSaver.date.month
+	var day:int = DataSaver.date.day
+	var month:int = DataSaver.date.month
 	
 	for match_days in matches:
 		# TODO check weekends
@@ -73,8 +71,8 @@ func inizialize_matches() -> void:
 		DataSaver.calendar[month][day]["matches"] = match_days
 		day += 7
 		
-func _shift_array(array) -> void:
-	var temp = array[0]
+func _shift_array(array:Array) -> void:
+	var temp:Dictionary = array[0]
 	for i in range(array.size() - 1):
 		array[i] = array[i+1]
 	array[array.size() - 1] = temp

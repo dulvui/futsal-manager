@@ -1,13 +1,13 @@
 extends Node
 
-var config
+var config:ConfigFile
 
-var language
+var language:String
 
-var calendar
-var date
+var calendar:Array
+var date:Dictionary
 
-var leagues = {
+var leagues:Dictionary = {
 	"IT": [
 		{
 			"id" : 0,
@@ -29,15 +29,15 @@ var leagues = {
 		},
 	]
 }
-var league_id
-var team_name
-var manager
+var league_id:int
+var team_name:String
+var manager:Dictionary
 
-var table
+var table:Dictionary
 
-var current_transfers
+var current_transfers:Array
 
-var messages
+var messages:Array
 
 
 # Called when the node enters the scene tree for the first time.
@@ -85,7 +85,7 @@ func reset() -> void:
 	
 	date = CalendarUtil.initial_date()
 	
-func set_lang(lang) -> void:
+func set_lang(lang:String) -> void:
 	TranslationServer.set_locale(lang)
 	language = lang
 	config.set_value("settings","language", language)
@@ -104,13 +104,12 @@ func save_all_data() -> void:
 	config.save("user://settings.cfg")
 	print("all data saved")
 
-func save_manager(new_manager) -> void:
+func save_manager(new_manager:Dictionary) -> void:
 	manager = new_manager
 	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
 	
-func select_team(_league_id, _team_name) -> void:
-#	teams = _teams.duplicate(true)
+func select_team(_league_id:int, _team_name:String) -> void:
 	league_id = _league_id
 	team_name = _team_name
 	# init table
@@ -131,16 +130,13 @@ func save_date() -> void:
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
 
-func save_calendar(new_calendar) -> void:
+func save_calendar(new_calendar:Array) -> void:
 	calendar = new_calendar
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
 	
-func make_transfer(transfer) -> void:
-	#remove player from team
-	print(transfer["player"])
-	
-	var teams = get_teams()
+func make_transfer(transfer:Dictionary) -> void:
+	var teams:Array = get_teams()
 	
 	for team in teams:
 		if team["name"] == transfer["player"]["team"]:
@@ -165,7 +161,7 @@ func make_transfer(transfer) -> void:
 			#handle also special contracts with bonus on future sell etc.
 
 
-func set_table_result(home_name,home_goals,away_name,away_goals) -> void:
+func set_table_result(home_name:String,home_goals:int,away_name:String,away_goals:int) -> void:
 #	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
 	table[home_name]["goals_made"] += home_goals
 	table[home_name]["goals_against"] += away_goals
@@ -204,17 +200,17 @@ func init_teams() -> void:
 	# check if leagues not leoaded yet
 	for nation in leagues:
 		for league in leagues[nation]:
-			var file = File.new()
+			var file:File = File.new()
 			file.open("res://assets/" + league["file"], file.READ)
-			var json = file.get_as_text()
+			var json:String = file.get_as_text()
 			league["teams"] = JSON.parse(json).result
 			file.close()
 
-func get_teams(_league_id = null) -> Array:
-	var all_teams = []
+func get_teams(_league_id:int = -1) -> Array:
+	var all_teams:Array = []
 	for nation in leagues:
 		for league in leagues[nation]:
-			if _league_id == null:
+			if _league_id == -1:
 				all_teams.append_array(league["teams"])
 			else:
 				if league["id"] == _league_id:

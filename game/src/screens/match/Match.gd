@@ -126,7 +126,6 @@ func _on_Slower_pressed() -> void:
 	if speed_factor > 0:
 		speed_factor -= 1
 		match_simulator.slower()
-	
 
 
 func _on_Pause_pressed() -> void:

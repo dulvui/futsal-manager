@@ -1,6 +1,6 @@
 extends Node
 
-var def_contract = {
+var def_contract:Dictionary = {
 	"player" : {},
 	"price" : 0,
 	"money/week" : 0,

@@ -1,8 +1,8 @@
 extends Node
 
-var messages = []
+var messages:Array = []
 
-const MAX_MESSAGES = 30
+const MAX_MESSAGES:int = 30
 
 enum MESSAGE_TYPES {
 					TRANSFER,
@@ -18,16 +18,16 @@ func _ready() -> void:
 	messages = DataSaver.messages
 
 func count_unread_messages() -> int:
-	var counter = 0
+	var counter:int = 0
 	for message in messages:
 		if not message["read"]:
 			counter += 1
 	return counter
 
-func message(content,type) -> void:
+func message(content:Dictionary,type:int) -> void:
 	print("new " + str(type) + " mail")
 	
-	var message = {
+	var message:Dictionary = {
 		"title" : "TRANSFER",
 		"message" : "",
 		"sender" : "info@" + DataSaver.team_name.to_lower().replace(" ", "") + ".com",
