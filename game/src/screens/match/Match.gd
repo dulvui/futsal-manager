@@ -86,15 +86,11 @@ func match_end() -> void:
 		for copy_player in home_team["players"]["active"]:
 			if real_player["nr"] == copy_player["nr"]:
 				real_player["history"][DataSaver.current_season]["actual"] = copy_player["history"][DataSaver.current_season]["actual"]
-				if real_player["history"][DataSaver.current_season]["actual"]["goals"] > 0:
-					print(real_player["surname"])
 					
 	for real_player in away_team_real["players"]["active"]:
 		for copy_player in away_team["players"]["active"]:
 			if real_player["nr"] == copy_player["nr"]:
 				real_player["history"][DataSaver.current_season]["actual"] = copy_player["history"][DataSaver.current_season]["actual"]
-				if real_player["history"][DataSaver.current_season]["actual"]["goals"] > 0:
-					print(real_player["surname"])
 
 func half_time() -> void:
 	$HUD/Pause.text = tr("CONTINUE")
