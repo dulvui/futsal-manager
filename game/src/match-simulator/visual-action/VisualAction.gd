@@ -75,7 +75,11 @@ func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer) -> void:
 	actions = action_buffer.duplicate(true)
 	home_team = _home_team.duplicate(true)
 	away_team = _away_team.duplicate(true)
-
+	
+	# reduce actons randomly
+	actions = actions.slice(randi() % actions.size() - 3, actions.size())
+	
+	
 func _player_setup() -> void:
 	#home
 	var home_index = 0
