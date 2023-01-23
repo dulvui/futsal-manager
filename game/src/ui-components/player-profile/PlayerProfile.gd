@@ -48,6 +48,9 @@ func set_up_info(_player) -> void:
 		var value = DetailNumber.instance()
 		value.set_up(player["attributes"]["goalkeeper"][key])
 		$DetailPopup/TabContainer/Info/Goalkeeper.add_child(value)
+		
+	#history
+	$DetailPopup/TabContainer/History/Actual/Goals.text = str(player["history"][DataSaver.current_season]["actual"]["goals"])
 
 	$DetailPopup.popup_centered()
 

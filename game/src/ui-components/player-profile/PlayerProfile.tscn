@@ -23,9 +23,6 @@ __meta__ = {
 [node name="TabContainer" type="TabContainer" parent="DetailPopup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Info" type="Control" parent="DetailPopup/TabContainer"]
 anchor_right = 1.0
@@ -224,7 +221,7 @@ margin_right = 1864.0
 margin_bottom = 82.0
 text = "X"
 
-[node name="Story" type="Control" parent="DetailPopup/TabContainer"]
+[node name="History" type="Control" parent="DetailPopup/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -233,12 +230,34 @@ margin_top = 74.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Hide" type="Button" parent="DetailPopup/TabContainer/Story"]
+[node name="Hide" type="Button" parent="DetailPopup/TabContainer/History"]
 margin_left = 1104.0
 margin_top = 2.0
 margin_right = 1144.0
 margin_bottom = 58.0
 text = "X"
+
+[node name="Actual" type="GridContainer" parent="DetailPopup/TabContainer/History"]
+margin_left = 48.0
+margin_top = 4.0
+margin_right = 648.0
+margin_bottom = 304.0
+custom_constants/hseparation = 40
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoalsLabel" type="Label" parent="DetailPopup/TabContainer/History/Actual"]
+margin_right = 276.0
+margin_bottom = 56.0
+text = "GOALS"
+
+[node name="Goals" type="Label" parent="DetailPopup/TabContainer/History/Actual"]
+margin_left = 316.0
+margin_right = 545.0
+margin_bottom = 56.0
+text = "Viustel Hans"
 
 [node name="Contract" type="Control" parent="DetailPopup/TabContainer"]
 visible = false
@@ -258,5 +277,5 @@ text = "X"
 
 [connection signal="hide" from="DetailPopup" to="." method="_on_DetailPopup_hide"]
 [connection signal="pressed" from="DetailPopup/TabContainer/Info/Hide" to="." method="_on_Hide_pressed"]
-[connection signal="pressed" from="DetailPopup/TabContainer/Story/Hide" to="." method="_on_Hide_pressed"]
+[connection signal="pressed" from="DetailPopup/TabContainer/History/Hide" to="." method="_on_Hide_pressed"]
 [connection signal="pressed" from="DetailPopup/TabContainer/Contract/Hide" to="." method="_on_Hide_pressed"]

@@ -73,5 +73,5 @@ func _on_ActionUtil_action_message(message:String) -> void:
 	emit_signal("action_message", message)
 
 
-func _on_ActionUtil_shot(is_goal:bool, is_home:bool, player:Dictionary) -> void:
+func _on_ActionUtil_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 	emit_signal("shot", is_goal, is_home, player)

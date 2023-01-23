@@ -7,12 +7,14 @@ const MATCH_SPEED_FACTOR:int = 4
 # factor if shot becomes a visual action
 const VISUAL_ACTION_SHOTS_FACTOR:int = 10
 
-# bigger number => more saves
+# percentage of keeper saving shots
 const GOAL_KEEPER_FACTOR:Dictionary = {
-	"NORMAL" : 15, # 15
-	"FREE_KICK": 25, # 25
-	"PENALTY" : 45 # 45
+	"NORMAL" : 0.95,
+	"FREE_KICK": 0.85,
+	"PENALTY" : 0.6
 }
+# percentage of how weaker away keaper is
+const GOAL_KEEPER_AWAY_FACTOR = 0.9
 
 # 0 - 100
 const MAX_FACTOR:int = 100

@@ -37,7 +37,7 @@ onready var away_stats:Node = $AwayStatistics
 
 var current_state:int
 
-const MAX_ACTION_BUFFER_SIZE:int = 10
+const MAX_ACTION_BUFFER_SIZE:int = 5
 var action_buffer:Array = []
 
 func _ready() -> void:
@@ -195,25 +195,28 @@ func _check_goal() -> bool:
 	
 	var random_goal:int = randi() % int(goalkeeper_attributes)
 	
-	goalkeeper_attributes = goalkeeper_attributes / Constants.GOAL_KEEPER_FACTOR[State.keys()[current_state]]
-
-	if random_goal < goalkeeper_attributes:
+	goalkeeper_attributes *= Constants.GOAL_KEEPER_FACTOR[State.keys()[current_state]]
+	
+	#decrease more if away keeper has to save
+	if home_team.has_ball:
+		goalkeeper_attributes *= Constants.GOAL_KEEPER_AWAY_FACTOR
+	
+	if random_goal > goalkeeper_attributes:
 		# goal
 		if home_team.has_ball:
-			emit_signal("shot",true, home_team.has_ball, home_team.active_player["profile"])
+			emit_signal("shot",true, home_team.has_ball, home_team.active_player)
 			emit_signal("action_message","GOAL for " + home_team.name)
-			home_stats.increase_goals()
 		else:
-			emit_signal("shot",true, home_team.has_ball, away_team.active_player["profile"])
+			emit_signal("shot",true, home_team.has_ball, away_team.active_player)
 			emit_signal("action_message","GOAL for " + away_team.name)
-			away_stats.increase_goals()
+		_increase_goals()
 		_change_possession()
 		return true
 	else:
 		if home_team.has_ball:
-			emit_signal("shot",false, home_team.has_ball, home_team.active_player["profile"])
+			emit_signal("shot",false, home_team.has_ball, home_team.active_player)
 		else:
-			emit_signal("shot",false, home_team.has_ball, away_team.active_player["profile"])
+			emit_signal("shot",false, home_team.has_ball, away_team.active_player)
 	return false
 	
 	
@@ -306,10 +309,12 @@ func _increase_headers(on_target) -> void:
 	else:
 		home_stats.increase_headers(on_target)
 		
-func increase_goals() -> void:
+func _increase_goals() -> void:
 	if away_team.has_ball:
+		away_team.active_player["history"]["actual"]["goals"] += 1
 		away_stats.increase_goals()
 	else:
+		home_team.active_player["history"]["actual"]["goals"] += 1
 		home_stats.increase_goals()
 		
 func _increase_corners() -> void:

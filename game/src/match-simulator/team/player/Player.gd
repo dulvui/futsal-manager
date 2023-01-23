@@ -4,12 +4,12 @@ enum Role {DEFENSE, CENTER, ATTACK}
 
 enum Traits {DRIBBLER, PASSER, ROCK, POWER_SHOT} # TODO add more
 
-var role
-var stamina
+var stamina:float
 
-var stats = {
+var stats:Dictionary = {
 	"goals" : 0,
 	"shots" : 0,
+	"assists" : 0,
 	"shots_on_target" : 0,
 	"passes" : 0,
 	"passes_success" : 0,
@@ -20,7 +20,7 @@ var stats = {
 	"meters_run" : 0,
 }
 
-var attributes = {
+var attributes:Dictionary = {
 	'mental': {
 		'aggression': 4,
 		'aniticipation': 11, 
@@ -56,13 +56,12 @@ var attributes = {
 	}
 }
 
-var profile = {
+var profile:Dictionary = {
 	"name" : "Ronaldinho",
 	"number" : 10
 }
 
-var current_state
-var current_sector
+var history:Dictionary
 
 
 func set_up(player) -> void:
@@ -70,8 +69,9 @@ func set_up(player) -> void:
 	profile["number"] = player["nr"]
 	attributes = player["attributes"]
 	stamina = attributes["physical"]["stamina"]
+	
+	history = player["history"][DataSaver.current_season]
 
-			
 func update() -> void:
 	stamina -= 0.01
 

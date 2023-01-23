@@ -15,6 +15,10 @@ var last_active_view:Control
 var home_team:Dictionary
 var away_team:Dictionary
 
+# to acces player data
+var home_team_real:Dictionary
+var away_team_real:Dictionary
+
 var home_goals:int = 0
 var away_goals:int = 0
 var speed_factor:int = 0
@@ -30,14 +34,16 @@ func _ready() -> void:
 	if next_match != null:
 		for team in DataSaver.get_teams():
 			if team["name"] == next_match["home"]:
+				home_team_real = team
 				home_team = team.duplicate(true)
 			elif team["name"] == next_match["away"]:
+				away_team_real = team
 				away_team = team.duplicate(true)
 	
 	$HUD/TopBar/Home.text = next_match["home"]
 	$HUD/TopBar/Away.text = next_match["away"]
 	
-	$Formation.set_up(home_team)
+	$Formation.set_up()
 	match_simulator.set_up(home_team,away_team)
 	
 	last_active_view = comments
@@ -75,6 +81,20 @@ func match_end() -> void:
 			matchday["result"] = str(match_simulator.action_util.home_stats.statistics["goals"]) + ":" + str(match_simulator.action_util.away_stats.statistics["goals"])
 #	DataSaver.save_all_data()
 
+	#save players history PoC
+	for real_player in home_team_real["players"]["active"]:
+		for copy_player in home_team["players"]["active"]:
+			if real_player["nr"] == copy_player["nr"]:
+				real_player["history"][DataSaver.current_season]["actual"] = copy_player["history"][DataSaver.current_season]["actual"]
+				if real_player["history"][DataSaver.current_season]["actual"]["goals"] > 0:
+					print(real_player["surname"])
+					
+	for real_player in away_team_real["players"]["active"]:
+		for copy_player in away_team["players"]["active"]:
+			if real_player["nr"] == copy_player["nr"]:
+				real_player["history"][DataSaver.current_season]["actual"] = copy_player["history"][DataSaver.current_season]["actual"]
+				if real_player["history"][DataSaver.current_season]["actual"]["goals"] > 0:
+					print(real_player["surname"])
 
 func half_time() -> void:
 	$HUD/Pause.text = tr("CONTINUE")
@@ -152,7 +172,7 @@ func _on_SKIP_pressed() -> void:
 	match_end()
 
 
-func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Dictionary) -> void:
+func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 	if not is_goal and randi() % Constants.VISUAL_ACTION_SHOTS_FACTOR > 0:
 		# no goal, but show some shoots
 		return
@@ -182,7 +202,7 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Dictionary) -> v
 		
 		result_label.text = "%d - %d"%[home_goals,away_goals]
 		
-		events.append_text("%s  %s - %s  %s" % [time_label.text, str(home_goals), str(away_goals), player["name"]])
+		events.append_text("%s  %s - %s  %s" % [time_label.text, str(home_goals), str(away_goals), player["profile"]["name"]])
 
 	
 	visual_action.queue_free()
@@ -190,7 +210,6 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Dictionary) -> v
 	last_active_view.show()
 	$HUD/Pause.disabled = false
 	_toggle_view_buttons()
-
 	
 
 func _on_StartTimer_timeout() -> void:
