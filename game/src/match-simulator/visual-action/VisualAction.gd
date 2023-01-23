@@ -2,15 +2,15 @@ extends Node2D
 
 signal action_finished
 
-const VisualPlayer = preload("res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn")
+const VisualPlayer:PackedScene = preload("res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn")
 
-const RUN_DISTANCE = 300
+const RUN_DISTANCE:int = 300
 
-onready var WIDTH = $Field.width
-onready var HEIGHT = $Field.height
+onready var WIDTH:int = $Field.width
+onready var HEIGHT:int = $Field.height
 
-onready var timer = $Timer
-onready var ball = $Ball
+onready var timer:Timer = $Timer
+onready var ball:Node2D = $Ball
 
 var home_team
 var away_team

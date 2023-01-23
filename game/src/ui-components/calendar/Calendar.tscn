@@ -24,9 +24,10 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 56.0
-margin_right = -64.0
-margin_bottom = -200.0
+margin_left = 66.0
+margin_top = 5.0
+margin_right = -54.0
+margin_bottom = -195.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 10
 columns = 7
@@ -68,10 +69,10 @@ __meta__ = {
 }
 
 [node name="Paginator" type="HBoxContainer" parent="."]
-margin_left = 360.0
-margin_top = 816.0
-margin_right = 826.0
-margin_bottom = 876.0
+margin_left = 395.0
+margin_top = 945.0
+margin_right = 861.0
+margin_bottom = 1005.0
 custom_constants/separation = 50
 
 [node name="Prev" type="Button" parent="Paginator"]

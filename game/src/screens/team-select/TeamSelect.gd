@@ -1,6 +1,6 @@
 extends TabContainer
 
-const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
+const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
 
 
 func _ready() -> void:
@@ -8,12 +8,12 @@ func _ready() -> void:
 	
 	for nation in DataSaver.leagues:
 		for league in DataSaver.leagues[nation]:
-			var center_container = CenterContainer.new()
+			var center_container:CenterContainer = CenterContainer.new()
 			center_container.name = league["name"]
-			var grid = GridContainer.new()
+			var grid:GridContainer = GridContainer.new()
 			grid.columns = 2
 			for team in league["teams"]:
-				var team_button = Button.new()
+				var team_button:Button = Button.new()
 				team_button.text = team["name"]
 				team_button.connect("pressed",self,"team_selected",[league["id"],team["name"]])
 				grid.add_child(team_button)
