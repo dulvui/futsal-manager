@@ -70,8 +70,6 @@ func _ready() -> void:
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
 	messages = config.get_value("mail","messages",[])
 	
-	#connect mail util with all other utils that send messages
-	
 	
 func reset() -> void:
 	manager =  {
@@ -225,7 +223,6 @@ func get_teams(_league_id:int = -1) -> Array:
 	
 func next_season() -> void:
 	current_season += 1
-	date.year += 1
 		
 	# TODO
 	# teams go to upper/lower division
@@ -233,11 +230,13 @@ func next_season() -> void:
 	# set new goals for manager
 	# player contracts
 	
-	CalendarUtil.create_calendar()
+	CalendarUtil.create_calendar(true)
 	MatchMaker.inizialize_matches()
 	
 	EmailUtil.message({},EmailUtil.MESSAGE_TYPES.NEXT_SEASON)
 	DataSaver.save_all_data()
+	
+	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")
 
 
 # save on quit on mobile

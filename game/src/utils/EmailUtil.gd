@@ -69,7 +69,7 @@ func message(content:Dictionary,type:int) -> void:
 			message["title"] = "WELCOME MANAGER"
 		MESSAGE_TYPES.NEXT_SEASON:
 			message["message"] = "The new season begins."
-			message["title"] = "SEASON " + DataSaver.date.year + " STARTS"
+			message["title"] = "SEASON " + str(DataSaver.date.year) + " STARTS"
 	messages.append(message)
 	
 	if messages.size() > MAX_MESSAGES:

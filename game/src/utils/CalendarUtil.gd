@@ -6,9 +6,13 @@ const DAY_IN_SECONDS:int = 86400
 
 var date:Dictionary
 
-# start at 1st of june
+# season start at 1st of june
 const START_DAY = 0
-const START_MONTH = 5 
+const START_MONTH = 5
+
+# season end 30th of november
+const END_DAY = 29
+const END_MONTH = 10 
 
 func _ready() -> void:
 	date = DataSaver.date
@@ -20,10 +24,20 @@ func initial_date() -> Dictionary:
 	date.month = START_MONTH
 	return date
 
-func create_calendar() -> void:
+func create_calendar(next_season:bool = false) -> void:
+	if next_season:
+		DataSaver.date.year += 1
+		DataSaver.date.day = START_DAY
+		DataSaver.date.month = START_MONTH
+		
+		DataSaver.date = _get_next_day(DataSaver.date)
+		date = DataSaver.date
+
 	
 	var calendar:Array = []
 	var temp_date:Dictionary = date.duplicate(true)
+	
+
 	
 	# create months
 	for i in range(0,12):

@@ -3,6 +3,7 @@ extends Control
 onready var team = DataSaver.get_selected_team()
 
 var match_ready:bool = false
+var next_season:bool = false
 
 func _ready() -> void:
 	$ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
@@ -21,6 +22,11 @@ func _ready() -> void:
 		else:
 			$Continue.text = "START_MATCH"
 			match_ready = true
+			
+	if DataSaver.date.month == CalendarUtil.END_MONTH and DataSaver.date.day == CalendarUtil.END_DAY:
+		next_season = true
+		$Continue.text = "NEXT_SEASON"
+		
 	
 
 func _process(_delta) -> void:
@@ -47,6 +53,16 @@ func _on_Continue_pressed() -> void:
 	if match_ready:
 		get_tree().change_scene("res://src/screens/match/Match.tscn")
 		return
+	
+	if next_season:
+		DataSaver.next_season()
+		return
+	
+	if DataSaver.date.month == CalendarUtil.END_MONTH and DataSaver.date.day == CalendarUtil.END_DAY:
+		next_season = true
+		$Continue.text = "NEXT_SEASON"
+		return
+		
 
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
@@ -58,6 +74,7 @@ func _on_Continue_pressed() -> void:
 	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
 		$Continue.text = "START_MATCH"
 		match_ready = true
+
 
 func _on_Email_pressed() -> void:
 	_hide_all()
