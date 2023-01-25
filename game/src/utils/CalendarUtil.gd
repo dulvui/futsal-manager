@@ -6,43 +6,38 @@ const DAY_IN_SECONDS:int = 86400
 
 var date:Dictionary
 
-
-
+# start at 1st of june
+const START_DAY = 0
+const START_MONTH = 5 
 
 func _ready() -> void:
 	date = DataSaver.date
 	
 func initial_date() -> Dictionary:
-	date = OS.get_date()
+	date = Time.get_date_dict_from_system()
 	
-	# set month to 1st of june
-	date.day = 1
-	date.month = 6
+	date.day = START_DAY
+	date.month = START_MONTH
 	return date
 
 func create_calendar() -> void:
 	
 	var calendar:Array = []
-	
 	var temp_date:Dictionary = date.duplicate(true)
-	
-	# set month to 1st of june
-	temp_date.day = 1
-	temp_date.month = 6
-	
 	
 	# create months
 	for i in range(0,12):
 		calendar.append([])
 	
 	# create days
-	for i in 365: #chek if year has really 365 days
+	# TODO check if year has really 365 days
+	for i in 365: 
 		var day:Dictionary = {
 			"matches" : [],
 			"trainings" : [],
-			"weekday" : DAYS[temp_date.weekday - 1]
+			"weekday" : DAYS[temp_date.weekday]
 		}
-		calendar[temp_date.month - 1].append(day)
+		calendar[temp_date.month].append(day)
 		
 		temp_date = _get_next_day(temp_date)
 		
@@ -58,7 +53,7 @@ func next_day() -> void:
 	var next_match_day:int = date.day
 	
 	# if next match is the first of the next month
-	if date.day == DataSaver.calendar[date.month].size() - 1 and DataSaver.calendar[date.month + 1 ][0]["matches"].size() > 0:
+	if date.day == DataSaver.calendar[date.month].size() - 1 and DataSaver.calendar[(date.month + 1) % 12][0]["matches"].size() > 0:
 		next_match_month = date.month + 1
 		next_match_day = 0
 	
@@ -74,21 +69,33 @@ func next_day() -> void:
 
 
 func get_dashborad_date() -> String:
-	return DAYS[date.weekday - 1] + " " + str(date.day) + " " + MONTHS[date.month] + " " + str(date.year)
+	return DAYS[date.weekday] + " " + str(date.day + 1) + " " + MONTHS[date.month] + " " + str(date.year)
 
 func get_next_match() -> Dictionary:
-	for matchz in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day - 1]["matches"]:
+	for matchz in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"]:
 		if matchz["home"] == DataSaver.team_name or matchz["away"] == DataSaver.team_name:
 			return matchz
 	return {}
 
 
 func _get_next_day(_date:Dictionary) -> Dictionary:
-	var unix_time:int = OS.get_unix_time_from_datetime(_date)
+	# add 1, because will substract 1 in next steps
+	_date.month += 1
+	_date.day += 1
+	_date.weekday += 1
+	
+	# increment date by one day
+	var unix_time:int = Time.get_unix_time_from_datetime_dict(_date)
 	unix_time += DAY_IN_SECONDS
-	var next_day:Dictionary = OS.get_datetime_from_unix_time(unix_time)
+	var next_day:Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
+	
 	next_day.erase("hour")
 	next_day.erase("minute")
 	next_day.erase("second")
+	
+	# make date array friendly by starting from 0
+	next_day.month -= 1
+	next_day.day -= 1
+	next_day.weekday -= 1
 	
 	return next_day

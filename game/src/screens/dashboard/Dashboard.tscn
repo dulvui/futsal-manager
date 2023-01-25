@@ -70,9 +70,6 @@ margin_left = 45.3572
 margin_top = 282.222
 margin_right = 510.357
 margin_bottom = 522.222
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Formation" type="Button" parent="Buttons"]
 margin_right = 464.0

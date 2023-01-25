@@ -2,6 +2,7 @@ extends Control
 
 onready var team = DataSaver.get_selected_team()
 
+var match_ready:bool = false
 
 func _ready() -> void:
 	$ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
@@ -12,6 +13,14 @@ func _ready() -> void:
 	$AllPlayerList.set_up(true)
 	
 	$Formation.set_up()
+	
+	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
+		if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"][0]["result"].length() > 1:
+			$Continue.text = "CONTINUE"
+			match_ready = false
+		else:
+			$Continue.text = "START_MATCH"
+			match_ready = true
 	
 
 func _process(_delta) -> void:
@@ -35,6 +44,10 @@ func _on_Formation_pressed() -> void:
 
 
 func _on_Continue_pressed() -> void:
+	if match_ready:
+		get_tree().change_scene("res://src/screens/match/Match.tscn")
+		return
+
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
 	$Email.update_messages()
@@ -42,8 +55,9 @@ func _on_Continue_pressed() -> void:
 	$Date.text = CalendarUtil.get_dashborad_date()
 	# increases mobile performance not saving on every continue
 	#DataSaver.save_all_data()
-	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day - 1]["matches"].size() > 0:
-		get_tree().change_scene("res://src/screens/match/Match.tscn")
+	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
+		$Continue.text = "START_MATCH"
+		match_ready = true
 
 func _on_Email_pressed() -> void:
 	_hide_all()

@@ -11,6 +11,7 @@ enum MESSAGE_TYPES {
 					CONTRACT_OFFER,
 					CONTRACT_OFFER_MADE,
 					NEXT_MATCH,
+					NEXT_SEASON,
 					WELCOME_MANAGER
 				}
 
@@ -66,6 +67,9 @@ func message(content:Dictionary,type:int) -> void:
 		MESSAGE_TYPES.WELCOME_MANAGER:
 			message["message"] = "The team " + DataSaver.team_name + " welcomes you as the new Manager!"
 			message["title"] = "WELCOME MANAGER"
+		MESSAGE_TYPES.NEXT_SEASON:
+			message["message"] = "The new season begins."
+			message["title"] = "SEASON " + DataSaver.date.year + " STARTS"
 	messages.append(message)
 	
 	if messages.size() > MAX_MESSAGES:

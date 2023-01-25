@@ -69,7 +69,7 @@ func match_end() -> void:
 	
 	
 	#simulate all games for now.
-	for matchday in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day - 1]["matches"]:
+	for matchday in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"]:
 		if matchday["home"] != home_team["name"]:
 			var random_home_goals = randi()%10
 			var random_away_goals = randi()%10

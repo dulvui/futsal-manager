@@ -222,6 +222,22 @@ func get_teams(_league_id:int = -1) -> Array:
 				if league["id"] == _league_id:
 					all_teams.append_array(league["teams"])
 	return all_teams
+	
+func next_season() -> void:
+	current_season += 1
+	date.year += 1
+		
+	# TODO
+	# teams go to upper/lower division
+	# financial stuff
+	# set new goals for manager
+	# player contracts
+	
+	CalendarUtil.create_calendar()
+	MatchMaker.inizialize_matches()
+	
+	EmailUtil.message({},EmailUtil.MESSAGE_TYPES.NEXT_SEASON)
+	DataSaver.save_all_data()
 
 
 # save on quit on mobile

@@ -21,7 +21,7 @@ func set_up(day, current_day, current_month) -> void:
 		$Match.connect("pressed",self,"_on_Match_pressed",[day["matches"]])
 		$Match.show()
 		$Match.text = team_name
-	if current_day + 1 == DataSaver.date.day and DataSaver.date.month == current_month:
+	if current_day == DataSaver.date.day and DataSaver.date.month == current_month:
 		if $ColorRect.color != Color.gray:
 			$ColorRect.color = Color.red
 		else:
