@@ -1,5 +1,6 @@
 # Godot-specific ignores
 game/.import/
+.import/
 game/export.cfg
 game/export_presets.cfg
 

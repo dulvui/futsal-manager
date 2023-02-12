@@ -1,0 +1,53 @@
+name: Android upload
+
+on:
+  push:
+    paths:
+      - "version"
+      - ".github/workflows/upload-android.yml"
+
+env:
+  RELEASE_KEY_STORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+  SERVICE_ACCOUNT_JSON: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
+  DEBUG_KEY_STORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_DEBUG_BASE64 }}
+  EXPORT_PRESET_CFG: ${{ secrets.GODOT_EXPORTS_PRESET_CFG }}
+  WORKING_DIRECTORY: game
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/prod'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Create service-account.json
+        run: echo $SERVICE_ACCOUNT_JSON > service-account.json
+
+      - name: Create release keystore
+        run: echo $RELEASE_KEY_STORE_BASE64 | base64 --decode > keystore.keystore
+
+      - name: Create debug keystore
+        run: echo $DEBUG_KEY_STORE_BASE64 | base64 --decode > debug.keystore
+
+      - name: Set version number and version code
+        run: |
+          echo "VERSION_NAME=$(cat version | cut -f1 -d-)" >> $GITHUB_ENV
+          echo "VERSION_CODE=$(cat version | cut -f2 -d-)" >> $GITHUB_ENV
+
+      - name: Change driver to GLES2
+        run: echo 'quality/driver/driver_name="GLES2"' >> game/project.godot
+
+      - name: Create and config export_presets.cfg
+        run: |
+          echo $EXPORT_PRESET_CFG > $WORKING_DIRECTORY/export_presets.cfg
+          sed -i "s|KEYSTORE_PATH|$GITHUB_WORKSPACE/keystore.keystore|g" $WORKING_DIRECTORY/export_presets.cfg
+          sed -i "s|VERSION_CODE|$VERSION_CODE|g" $WORKING_DIRECTORY/export_presets.cfg
+          sed -i "s|VERSION_NAME|$VERSION_NAME|g" $WORKING_DIRECTORY/export_presets.cfg
+
+      - name: Export signed apk and upload to internal testing
+        uses: dulvui/godot-android-upload@v1
+        with:
+          working-directory: $WORKING_DIRECTORY
+          package-name: com.simondalvai.futsalmanager
+          release-file: ./FutsalManager.apk
