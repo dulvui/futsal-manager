@@ -42,9 +42,56 @@ jobs:
           sed -i "s|VERSION_CODE|$VERSION_CODE|g" $WORKING_DIRECTORY/export_presets.cfg
           sed -i "s|VERSION_NAME|$VERSION_NAME|g" $WORKING_DIRECTORY/export_presets.cfg
 
-      - name: Export signed aab and upload to internal testing
-        uses: dulvui/godot-android-upload@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v3
         with:
-          working-directory: $WORKING_DIRECTORY
-          package-name: com.simondalvai.futsalmanager
-          release-file: ./FutsalManager.aab
+          distribution: 'temurin'
+          java-version: 11
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Download and config Godot Engine headless linux server and templates
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        run: |
+          wget -q https://downloads.tuxfamily.org/godotengine/${{ inputs.godot-version }}/Godot_v${{ inputs.godot-version }}-stable_linux_headless.64.zip
+          wget -q https://downloads.tuxfamily.org/godotengine/${{ inputs.godot-version }}/Godot_v${{ inputs.godot-version }}-stable_export_templates.tpz
+          mkdir ~/.cache
+          mkdir -p ~/.config/godot
+          mkdir -p ~/.local/share/godot/templates/${{ inputs.godot-version }}.stable
+          unzip Godot_v${{ inputs.godot-version }}-stable_linux_headless.64.zip
+          mv Godot_v${{ inputs.godot-version }}-stable_linux_headless.64 /usr/local/bin/godot
+          unzip Godot_v${{ inputs.godot-version }}-stable_export_templates.tpz
+          mv templates/* ~/.local/share/godot/templates/${{ inputs.godot-version }}.stable
+          rm -f Godot_v${{ inputs.godot-version }}-stable_linux_headless.64.zip Godot_v${{ inputs.godot-version }}-stable_export_templates.tpz
+          godot -e -q
+      - name: Set Android SDK path in Godot Editor settings
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        env:
+          SETTINGS: |
+            export/android/android_sdk_path = "/usr/local/lib/android/sdk"
+            export/android/shutdown_adb_on_exit = true
+            export/android/force_system_user = false
+        run: echo $SETTINGS >> ~/.config/godot/editor_settings-3.tres
+
+
+      - name: Install Android build template
+        env: 
+          GODOT_VERSION: {{ inputs.godot-version }}-stable
+        run: |
+          mkdir -p ${{ inputs.working-directory }}/android/plugins
+          mkdir -p ${{ inputs.working-directory }}/android/build
+          echo $GODOT_VERSION >> ${{ inputs.working-directory }}/android/.build_version
+          unzip ~/.local/share/godot/templates/${{ inputs.godot-version }}.stable/android_source.zip  -d ${{ inputs.working-directory }}/android/build
+
+      - name: Export
+        run: godot --path ${{ inputs.working-directory }} --export Android
+
+      - name: Publish to Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: ${{ inputs.service-account-json }}
+          packageName: ${{ inputs.package-name }}
+          releaseFiles: ${{ inputs.release-file }}
+          track: ${{ inputs.release-track }}
+          status: completed
