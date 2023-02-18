@@ -35,9 +35,6 @@ jobs:
           echo "VERSION_NAME=$(cat version | cut -f1 -d-)" >> $GITHUB_ENV
           echo "VERSION_CODE=$(cat version | cut -f2 -d-)" >> $GITHUB_ENV
 
-      - name: Change driver to GLES2
-        run: echo 'quality/driver/driver_name="GLES2"' >> game/project.godot
-
       - name: Create and config export_presets.cfg
         run: |
           echo $EXPORT_PRESET_CFG > $WORKING_DIRECTORY/export_presets.cfg
@@ -45,9 +42,9 @@ jobs:
           sed -i "s|VERSION_CODE|$VERSION_CODE|g" $WORKING_DIRECTORY/export_presets.cfg
           sed -i "s|VERSION_NAME|$VERSION_NAME|g" $WORKING_DIRECTORY/export_presets.cfg
 
-      - name: Export signed apk and upload to internal testing
+      - name: Export signed aab and upload to internal testing
         uses: dulvui/godot-android-upload@v1
         with:
           working-directory: $WORKING_DIRECTORY
           package-name: com.simondalvai.futsalmanager
-          release-file: ./FutsalManager.apk
+          release-file: ./FutsalManager.aab
