@@ -77,6 +77,7 @@ jobs:
         run: |
           mkdir -p $WORKING_DIRECTORY/android/plugins
           mkdir -p $WORKING_DIRECTORY/android/build
+          touch $WORKING_DIRECTORY/android/build/.gdignore
           echo "3.5.1.stable" >> $WORKING_DIRECTORY/android/.build_version
           unzip ~/.local/share/godot/templates/3.5.1.stable/android_source.zip  -d $WORKING_DIRECTORY/android/build
 
