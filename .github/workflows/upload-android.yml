@@ -92,3 +92,4 @@ jobs:
           releaseFiles: FutsalManager.aab
           track: 'internal'
           status: completed
+          changesNotSentForReview: true
