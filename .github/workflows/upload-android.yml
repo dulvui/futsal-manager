@@ -43,7 +43,7 @@ jobs:
           sed -i "s|VERSION_NAME|$VERSION_NAME|g" $WORKING_DIRECTORY/export_presets.cfg
 
       - name: Export signed aab and upload to internal testing
-        uses: dulvui/godot-android-upload@v1.0.1
+        uses: dulvui/godot-android-upload@v1.0.0
         with:
           working-directory: $WORKING_DIRECTORY
           package-name: com.simondalvai.futsalmanager
