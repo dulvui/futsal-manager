@@ -76,22 +76,22 @@ margin_bottom = 1005.0
 custom_constants/separation = 50
 
 [node name="Prev" type="Button" parent="Paginator"]
-margin_right = 129.0
+margin_right = 41.0
 margin_bottom = 60.0
-text = "PREV"
+text = "<"
 
 [node name="Page" type="Label" parent="Paginator"]
-margin_left = 179.0
+margin_left = 91.0
 margin_top = 2.0
-margin_right = 287.0
+margin_right = 199.0
 margin_bottom = 58.0
 text = "wewe"
 
 [node name="Next" type="Button" parent="Paginator"]
-margin_left = 337.0
-margin_right = 466.0
+margin_left = 249.0
+margin_right = 290.0
 margin_bottom = 60.0
-text = "NEXT"
+text = ">"
 
 [connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]
 [connection signal="pressed" from="Paginator/Prev" to="." method="_on_Prev_pressed"]

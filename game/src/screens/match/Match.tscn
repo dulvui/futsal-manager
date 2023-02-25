@@ -109,19 +109,19 @@ __meta__ = {
 [node name="Faster" type="Button" parent="HUD"]
 margin_left = 1216.0
 margin_top = 976.0
-margin_right = 1395.0
+margin_right = 1277.0
 margin_bottom = 1032.0
-text = "FASTER"
+text = "+1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Slower" type="Button" parent="HUD"]
-margin_left = 856.0
+margin_left = 982.0
 margin_top = 976.0
 margin_right = 1050.0
 margin_bottom = 1032.0
-text = "SLOWER"
+text = "-1"
 
 [node name="LeftButtons" type="VBoxContainer" parent="HUD"]
 margin_left = 112.008
