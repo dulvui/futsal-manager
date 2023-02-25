@@ -79,6 +79,7 @@ func reset() -> void:
 		"birth_date" : "",
 	}
 	
+	current_season = 0
 	calendar = []
 	table = {}
 	current_transfers = []
