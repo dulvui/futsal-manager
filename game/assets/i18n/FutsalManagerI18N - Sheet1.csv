@@ -1,7 +1,21 @@
 keys,en,de,it
-CREATE_MANAGER,Create Manager,spielen,gioca
-NAME,Name,baelle,palle
-BIRTH_DATE,Birth date,levels,livelli
+CREATE_MANAGER,Create Manager,Manager erstellen,Crea mister
+NAME,Name,Name,Nome
+SURNAME,Surname,Nachname,Cognome
+BIRTH_DATE,Birth date,Geburtstag,Compleanno
 FAV_TEAM,Favourite Team,Liebliengs-Team,Squadra favorita
+NATIONALITY,Nationality,Nationalität,Naziolanità
 BACK,Back,Zurück,Indietro
 CONTINUE,Continue,Weiter,Avanti
+FIELD,field,Feld,campo
+STATS,Stats,Stats,Stats
+EVENTS,Events,Events,Eventi
+TACTICS,Tactics,Taktiken,Tattiche
+FORMATION,Formation,Aufstellung,Formazione
+START,Start,Start,Inizia
+CALENDAR,Calendar,Kalender,Calendario
+TABLE,Table,Tabelle,Classifica
+EMAIL,E-Mail,E-Mail,E-Mail
+SEARCH_PLAYER,Search player,Spieler suchen,Cerca giocatore
+MENU,Menu,Menü,Menu
+SETTINGS,Settings,Einstellungen,Impostazioni
