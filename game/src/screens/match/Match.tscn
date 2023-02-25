@@ -243,6 +243,7 @@ margin_right = -136.0
 margin_bottom = -234.0
 
 [node name="SKIP" type="Button" parent="."]
+visible = false
 margin_left = 142.705
 margin_top = 97.515
 margin_right = 230.705
