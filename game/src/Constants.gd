@@ -9,9 +9,9 @@ const VISUAL_ACTION_SHOTS_FACTOR:int = 10
 
 # percentage of keeper saving shots
 const GOAL_KEEPER_FACTOR:Dictionary = {
-	"NORMAL" : 0.95,
-	"FREE_KICK": 0.85,
-	"PENALTY" : 0.6
+	"NORMAL" : 0.98,
+	"FREE_KICK": 0.90,
+	"PENALTY" : 0.7
 }
 # percentage of how weaker away keaper is
 const GOAL_KEEPER_AWAY_FACTOR = 0.9
