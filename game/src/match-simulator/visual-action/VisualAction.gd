@@ -19,11 +19,13 @@ var actions = []
 var home_visual_players = []
 var away_visual_players = []
 
-var is_final_action = false
+var is_final_action:bool = false
 
-var is_home_goal
+var is_home_goal:bool
 
-var is_goal
+var is_goal:bool
+
+var is_shooting:bool = false
 
 # position - formation mapping
 var formations = {
@@ -57,8 +59,9 @@ func _ready() -> void:
 
 func _physics_process(delta) -> void:
 	# look at ball
-	$HomeGoalkeeper.sprite.look_at($Ball.global_position)
-	$AwayGoalkeeper.sprite.look_at($Ball.global_position)
+	if not is_shooting:
+		$HomeGoalkeeper.sprite.look_at($Ball.global_position)
+		$AwayGoalkeeper.sprite.look_at($Ball.global_position)
 	for player in home_visual_players:
 		player.sprite.look_at($Ball.global_position)
 	for player in away_visual_players:
@@ -186,16 +189,30 @@ func _action() -> void:
 	else:
 		print("shoot")
 		is_final_action = true
+		is_shooting = true
 		
 		var shot_deviation = Vector2(0,rand_range(-50,50))
 		
 		if not is_goal:
 			shot_deviation = Vector2(0,rand_range(-250,250))
+			
+			# stop ball on goalkeeper position
+			if is_home_goal:
+				shot_deviation.x -= 90
+			else:
+				shot_deviation.x += 90
 		
+
 		if is_home_goal:
 			ball.move($AwayGoal.global_position + shot_deviation, timer.wait_time / 3, true)
+			# goalkeeper save
+			if shot_deviation.y < 100 and shot_deviation.y > -100:
+				$AwayGoalkeeper.move($AwayGoal.position + shot_deviation, timer.wait_time / 3)
 		else:
 			ball.move($HomeGoal.global_position + shot_deviation, timer.wait_time / 3, true)
+			# goalkeeper save
+			if shot_deviation.y < 100 and shot_deviation.y > -100:
+				$HomeGoalkeeper.move($HomeGoal.position + shot_deviation, timer.wait_time / 3)
 		
 
 func _get_player_by_nr(players, nr) -> Dictionary:

@@ -14,7 +14,7 @@ const GOAL_KEEPER_FACTOR:Dictionary = {
 	"PENALTY" : 0.7
 }
 # percentage of how weaker away keaper is
-const GOAL_KEEPER_AWAY_FACTOR = 0.9
+const GOAL_KEEPER_AWAY_FACTOR = 0.95
 
 # 0 - 100
 const MAX_FACTOR:int = 100
