@@ -154,7 +154,7 @@ func _action() -> void:
 		var attack_nr = action["attacking_player_nr"]
 		var defense_nr = action["defending_player_nr"]
 		
-		# finb current player position
+		# find current player position
 		if action["is_home"]:
 			for player in home_visual_players:
 				if player.nr == attack_nr:

@@ -7,7 +7,7 @@ FAV_TEAM,Favourite Team,Liebliengs-Team,Squadra favorita
 NATIONALITY,Nationality,Nationalität,Naziolanità
 BACK,Back,Zurück,Indietro
 CONTINUE,Continue,Weiter,Avanti
-FIELD,field,Feld,campo
+FIELD,Field,Feld,campo
 STATS,Stats,Stats,Stats
 EVENTS,Events,Events,Eventi
 TACTICS,Tactics,Taktiken,Tattiche
@@ -19,3 +19,6 @@ EMAIL,E-Mail,E-Mail,E-Mail
 SEARCH_PLAYER,Search player,Spieler suchen,Cerca giocatore
 MENU,Menu,Menü,Menu
 SETTINGS,Settings,Einstellungen,Impostazioni
+START_MATCH,Start match,Spielbeginn,Inizia partita
+NEXT_MATCH,Next match,Nächstes Spiel,Prossima partita
+WELCOME,Welcome,Wilkommen,Benvenuto
