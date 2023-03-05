@@ -55,6 +55,7 @@ jobs:
           releaseFiles: FutsalManager.aab
           track: "internal"
           status: completed
+          changesNotSentForReview: true
 
       - name: Bundle aab to apk
         run: |
