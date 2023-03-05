@@ -51,7 +51,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJson: service-account.json
-          packageName: com.simondalvai.futsalmamanger
+          packageName: com.simondalvai.futsalmanager
           releaseFiles: FutsalManager.aab
           track: "internal"
           status: completed
