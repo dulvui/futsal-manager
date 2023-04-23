@@ -6,11 +6,15 @@ const VisualPlayer:PackedScene = preload("res://src/match-simulator/visual-actio
 
 const RUN_DISTANCE:int = 300
 
-onready var WIDTH:int = $Field.width
-onready var HEIGHT:int = $Field.height
+@onready
+var WIDTH:int = $Field.width
+@onready
+var HEIGHT:int = $Field.height
 
-onready var timer:Timer = $Timer
-onready var ball:Node2D = $Ball
+@onready
+var timer:Timer = $Timer
+@onready
+var ball:Node2D = $Ball
 
 var home_team
 var away_team
@@ -32,7 +36,8 @@ var formations = {
 	"2-2" : ["DL","DR","AL","AR"]
 }
 
-onready var positions = {
+@onready
+var positions = {
 	"DL" : {
 		"attack" : Vector2(WIDTH * 3 / 8, HEIGHT * 3 / 4),
 		"defense" : Vector2(WIDTH * 1 / 8, HEIGHT * 3 / 4)
@@ -87,10 +92,10 @@ func _player_setup() -> void:
 	#home
 	var home_index = 0
 	var goalkeeper_home = home_team.players.active.pop_front()
-	$HomeGoalkeeper.set_up(goalkeeper_home["nr"], Color.lightblue, true, WIDTH, HEIGHT)
+	$HomeGoalkeeper.set_up(goalkeeper_home["nr"], Color.LIGHT_BLUE, true, WIDTH, HEIGHT)
 	for player in home_team.players.active:
 		var visual_player = VisualPlayer.instantiate()
-		visual_player.set_up(player["nr"], Color.blue, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
+		visual_player.set_up(player["nr"], Color.BLUE, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
 		$HomePlayers.add_child(visual_player)
 		home_visual_players.append(visual_player)
 		home_index += 1
@@ -98,10 +103,10 @@ func _player_setup() -> void:
 	# away
 	var away_index = 0
 	var goalkeeper_away = away_team.players.active.pop_front()
-	$AwayGoalkeeper.set_up(goalkeeper_away["nr"], Color.lightcoral, true, WIDTH, HEIGHT)
+	$AwayGoalkeeper.set_up(goalkeeper_away["nr"], Color.LIGHT_CORAL, true, WIDTH, HEIGHT)
 	for player in away_team.players.active:
 		var visual_player = VisualPlayer.instantiate()
-		visual_player.set_up(player["nr"], Color.red, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
+		visual_player.set_up(player["nr"], Color.RED, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
 		$AwayPlayers.add_child(visual_player)
 		away_visual_players.append(visual_player)
 		away_index += 1
@@ -122,8 +127,8 @@ func _get_player_position(index, is_home_team) -> Vector2:
 	var maximum = positions[field_position][action_type]
 	
 	# TODO adapt values depending on tactics
-	var x = rand_range(minimum.x - POSITION_RANGE, minimum.x + POSITION_RANGE)
-	var y = rand_range(minimum.y - POSITION_RANGE, minimum.y + POSITION_RANGE)
+	var x = randi_range(minimum.x - POSITION_RANGE, minimum.x + POSITION_RANGE)
+	var y = randi_range(minimum.y - POSITION_RANGE, minimum.y + POSITION_RANGE)
 	
 	# if away team move to other side
 	if not is_home_team:
@@ -159,7 +164,7 @@ func _action() -> void:
 			for player in home_visual_players:
 				if player.nr == attack_nr:
 					if action["action"] == "RUN":
-						var desitionation = player.position +  Vector2(rand_range(-RUN_DISTANCE,RUN_DISTANCE),rand_range(-RUN_DISTANCE,RUN_DISTANCE))
+						var desitionation = player.position +  Vector2(randi_range(-RUN_DISTANCE,RUN_DISTANCE),randi_range(-RUN_DISTANCE,RUN_DISTANCE))
 						desitionation = player.move(desitionation, timer.wait_time)
 						action["position"] = desitionation
 					else:
@@ -169,7 +174,7 @@ func _action() -> void:
 			for player in away_visual_players:
 				if player.nr == attack_nr:
 					if action["action"] == "RUN":
-						var desitionation = player.position +  Vector2(rand_range(-RUN_DISTANCE,RUN_DISTANCE),rand_range(-RUN_DISTANCE,RUN_DISTANCE))
+						var desitionation = player.position +  Vector2(randi_range(-RUN_DISTANCE,RUN_DISTANCE),randi_range(-RUN_DISTANCE,RUN_DISTANCE))
 						desitionation = player.move(desitionation, timer.wait_time)
 						action["position"] = desitionation
 					else:
@@ -191,10 +196,10 @@ func _action() -> void:
 		is_final_action = true
 		is_shooting = true
 		
-		var shot_deviation = Vector2(0,rand_range(-50,50))
+		var shot_deviation = Vector2(0,randi_range(-50,50))
 		
 		if not is_goal:
-			shot_deviation = Vector2(0,rand_range(-250,250))
+			shot_deviation = Vector2(0,randi_range(-250,250))
 			
 			# stop ball on goalkeeper position
 			if is_home_goal:
@@ -225,7 +230,7 @@ func _get_player_by_nr(players, nr) -> Dictionary:
 
 
 func _on_Timer_timeout() -> void:
-	timer.wait_time = rand_range(0.5,1.5)
+	timer.wait_time = randf_range(0.5,1.5)
 	timer.start()
 	
 	if is_final_action:

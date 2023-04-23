@@ -1,12 +1,16 @@
 extends Node2D
 
-export var color = Color.rebeccapurple
-export var nr:int = 1
+@export
+var color = Color.REBECCA_PURPLE
+@export 
+var nr:int = 1
 
 var moved = false
 
-onready var sprite = $Sprites
-export var is_field_player = true
+@onready
+var sprite = $Sprites
+@export 
+var is_field_player = true
 
 var field_width
 var field_height

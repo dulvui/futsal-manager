@@ -29,11 +29,15 @@ enum Attack {PASS, CROSS, DRIBBLE, RUN, SHOOT}
 #enum Pass { SHORT_PASS, LONG_PASS, CROSS}
 #enum Shoot {SHOOT, LONG_SHOOT, HEADER}
 
-onready var home_team:Node2D = $HomeTeam
-onready var away_team:Node2D = $AwayTeam
+@onready 
+var home_team:Node2D = $HomeTeam
+@onready 
+var away_team:Node2D = $AwayTeam
 
-onready var home_stats:Node = $HomeStatistics
-onready var away_stats:Node = $AwayStatistics
+@onready 
+var home_stats:Node = $HomeStatistics
+@onready 
+var away_stats:Node = $AwayStatistics
 
 var current_state:int
 
