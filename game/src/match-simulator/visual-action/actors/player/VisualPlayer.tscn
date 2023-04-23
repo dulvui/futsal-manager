@@ -1,32 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://bl168omsaktr0"]
 
-[ext_resource path="res://theme.tres" type="Theme" id=1]
-[ext_resource path="res://src/match-simulator/visual-action/actors/player/VisualPlayer.gd" type="Script" id=2]
-[ext_resource path="res://assets/body.png" type="Texture" id=3]
-[ext_resource path="res://assets/head.png" type="Texture" id=4]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
+[ext_resource type="Script" path="res://src/match-simulator/visual-action/actors/player/VisualPlayer.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://b5ocixr2ach6x" path="res://assets/body.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cmslh22vxx0tu" path="res://assets/head.png" id="4"]
 
 [node name="VisualPlayer" type="Node2D" groups=["player"]]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="ShirtNumber" type="Label" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -32.0
-margin_top = -99.0
-margin_right = 32.0
-margin_bottom = -35.0
-rect_pivot_offset = Vector2( 32, 32 )
-theme = ExtResource( 1 )
+theme = ExtResource("1")
 text = "1"
-align = 1
-valign = 1
-
-[node name="Tween" type="Tween" parent="."]
 
 [node name="Sprites" type="Node2D" parent="."]
 
-[node name="Body" type="Sprite" parent="Sprites"]
-texture = ExtResource( 3 )
+[node name="Body" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("3")
 
-[node name="Head" type="Sprite" parent="Sprites"]
-texture = ExtResource( 4 )
+[node name="Head" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("4")

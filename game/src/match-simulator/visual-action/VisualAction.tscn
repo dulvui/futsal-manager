@@ -3,10 +3,11 @@
 [ext_resource type="PackedScene" path="res://src/match-simulator/visual-action/actors/field/Field.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://src/match-simulator/visual-action/actors/ball/Ball.tscn" id="2"]
 [ext_resource type="Script" path="res://src/match-simulator/visual-action/VisualAction.gd" id="3"]
-[ext_resource type="PackedScene" path="res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://src/match-simulator/visual-action/actors/referee/Referee.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://bl168omsaktr0" path="res://src/match-simulator/visual-action/actors/player/VisualPlayer.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://bmbdm3wnodvew" path="res://src/match-simulator/visual-action/actors/referee/Referee.tscn" id="5"]
 
 [node name="VisualAction" type="Node2D"]
+scale = Vector2(0.7, 0.7)
 script = ExtResource("3")
 
 [node name="Field" parent="." instance=ExtResource("1")]

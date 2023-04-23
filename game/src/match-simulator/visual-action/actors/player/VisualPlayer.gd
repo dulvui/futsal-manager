@@ -16,6 +16,7 @@ var field_width
 var field_height
 
 
+
 func set_up(_nr, _color, is_home_player, _field_width, _field_height, start_position = null) -> void:
 	if start_position:
 		position = start_position
@@ -26,9 +27,10 @@ func set_up(_nr, _color, is_home_player, _field_width, _field_height, start_posi
 	field_width = _field_width
 	
 func move(destination, time) -> Vector2:
+	var tween:Tween = create_tween()
 	destination = _stay_inside_field(destination)
-	$Tween.interpolate_property(self, "position", position, destination, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	tween.tween_property(self, "position", destination, time)
+#	tween.start()
 	moved = true
 	return destination
 	
@@ -38,8 +40,9 @@ func random_movement(time) -> void:
 			moved = false
 		else:
 			var final_position = _stay_inside_field(position - Vector2(randf_range(-50,50),randf_range(-50,50)))
-			$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
+			var tween:Tween = create_tween()
+			tween.tween_property(self, "position", final_position, time)
+#			tween.start()
 
 func _stay_inside_field(destination: Vector2) -> Vector2:
 			# player should not go outside the field
