@@ -71,7 +71,7 @@ func match_end() -> void:
 	$HUD/Pause.hide()
 	$HUD/SpeedFactor.hide()
 	$Dashboard.show()
-	match_simulator.match_end()
+	match_simulator.match_finished()
 	DataSaver.set_table_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
 	
 	
@@ -190,7 +190,7 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 	var visual_action:Node = VisualAction.instantiate()
 	visual_action.set_up(is_home, is_goal, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
 	$VisualActionContainer.add_child(visual_action)
-	yield(visual_action, "action_finished")
+	await visual_action.action_finished
 	
 	if is_goal:
 		if is_home:
@@ -200,7 +200,7 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 		
 		$Goal.show()
 		animation_player.play("Goal")
-		yield(animation_player,"animation_finished")
+		await animation_player.animation_finished
 		$Goal.hide()
 		
 		result_label.text = "%d - %d"%[home_goals,away_goals]
@@ -229,6 +229,6 @@ func _on_MatchSimulator_match_end() -> void:
 
 func _on_MatchSimulator_action_message(message:String) -> void:
 	if comments.get_line_count() > 9:
-		comments.remove_line(0)
+		comments.remove_paragraph(0)
 	comments.newline()
 	comments.add_text(time_label.text + " " + message)

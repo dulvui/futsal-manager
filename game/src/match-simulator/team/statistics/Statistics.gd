@@ -8,8 +8,8 @@ var statistics = {
 	"possession" : 50,
 	"shots" : 0,
 	"shots_on_target" : 0,
-	"pass" : 0,
-	"pass_success" : 0,
+	"passes" : 0,
+	"passes_success" : 0,
 	"kick_ins" : 0,
 	"free_kicks" : 0,
 	"penalties" : 0,
@@ -31,9 +31,9 @@ func update_possession(has_ball) -> void:
 	statistics.possession = (possession_counter / time) * 100
 
 func increase_pass(success) -> void:
-	statistics.pass += 1
+	statistics.passes += 1
 	if success:
-		statistics.pass_success += 1
+		statistics.passes_success += 1
 		
 func increase_shots(on_target) -> void:
 	statistics.shots += 1

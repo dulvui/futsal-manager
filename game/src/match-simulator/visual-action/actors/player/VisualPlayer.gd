@@ -37,18 +37,18 @@ func random_movement(time) -> void:
 		if moved:
 			moved = false
 		else:
-			var final_position = _stay_inside_field(position - Vector2(rand_range(-50,50),rand_range(-50,50)))
+			var final_position = _stay_inside_field(position - Vector2(randf_range(-50,50),randf_range(-50,50)))
 			$Tween.interpolate_property(self, "position", position, final_position, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 
 func _stay_inside_field(destination: Vector2) -> Vector2:
 			# player should not go outside the field
 		if destination.x < 0:
-			destination.x = rand_range(20, 45)
+			destination.x = randf_range(20, 45)
 		if destination.y < 0:
-			destination.y = rand_range(20, 45)
+			destination.y = randf_range(20, 45)
 		if destination.x > field_width:
-			destination.x = rand_range(field_width - 45, field_width - 25)
+			destination.x = randf_range(field_width - 45, field_width - 25)
 		if destination.y > field_height:
-			destination.y = rand_range(field_height - 45, field_height - 25)
+			destination.y = randf_range(field_height - 45, field_height - 25)
 		return destination

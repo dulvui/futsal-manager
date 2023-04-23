@@ -8,5 +8,5 @@ func move(final_position:Vector2, time:float, is_global_position:bool = false) -
 		$Tween.interpolate_property(self, "global_position", global_position, final_position, time, moveTrans, moveEase)
 	else:
 		$Tween.interpolate_property(self, "position", position, final_position, time, moveTrans, moveEase)
-	$Tween.interpolate_property(self, "rotation", rand_range(-5,5), rand_range(-5,5), time, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$Tween.interpolate_property(self, "rotation", randf_range(-5,5), randf_range(-5,5), time, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	$Tween.start()

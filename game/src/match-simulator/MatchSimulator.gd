@@ -46,7 +46,7 @@ func continue_match() -> void:
 	timer.paused = false
 
 
-func match_end() -> void:
+func match_finished() -> void:
 	timer.stop()
 
 

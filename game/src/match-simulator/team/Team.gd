@@ -47,7 +47,7 @@ func update_players() -> void:
 
 func change_active_player() -> void:
 	var other_players = players.duplicate()
-	other_players.remove(players.find(active_player))
+	other_players.remove_at(players.find(active_player))
 	
 	active_player = other_players[(randi() % other_players.size())]
 

@@ -1,270 +1,253 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://d35g7n0y5crlg"]
 
-[ext_resource path="res://src/match-simulator/MatchSimulator.tscn" type="PackedScene" id=1]
-[ext_resource path="res://theme.tres" type="Theme" id=2]
-[ext_resource path="res://src/screens/match/Match.gd" type="Script" id=3]
-[ext_resource path="res://src/ui-components/match/statistics/MatchStats.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/ui-components/formation/Formation.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/ui-components/match/events/MatchEvents.tscn" type="PackedScene" id=6]
+[ext_resource type="PackedScene" uid="uid://ck5f72rt3q5km" path="res://src/match-simulator/MatchSimulator.tscn" id="1"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
+[ext_resource type="Script" path="res://src/screens/match/Match.gd" id="3"]
+[ext_resource type="PackedScene" path="res://src/ui-components/match/statistics/MatchStats.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://src/ui-components/formation/Formation.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://5agy8ull675s" path="res://src/ui-components/match/events/MatchEvents.tscn" id="6"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "Goal"
 length = 2.0
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Goal:rect_scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.2, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Vector2( 6, 6 ), Vector2( 12, 12 ), Vector2( 6, 6 ) ]
+"values": [Vector2(6, 6), Vector2(12, 12), Vector2(6, 6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7wx2m"]
+_data = {
+"Goal": SubResource("1")
 }
 
 [node name="Match" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 2 )
-script = ExtResource( 3 )
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2")
+script = ExtResource("3")
 
-[node name="MatchSimulator" parent="." instance=ExtResource( 1 )]
-position = Vector2( 568, 198 )
+[node name="MatchSimulator" parent="." instance=ExtResource("1")]
+position = Vector2(568, 198)
 
 [node name="VisualActionContainer" type="Control" parent="."]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 571.0
-margin_top = 222.0
-margin_right = -205.0
-margin_bottom = -270.0
 
 [node name="HUD" type="Control" parent="."]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TopBar" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -389.0
-margin_top = 19.0
-margin_right = 795.0
-margin_bottom = 75.0
-custom_constants/separation = 20
+offset_left = -68.0
+offset_top = 88.0
+offset_right = 133.0
+offset_bottom = 113.0
+grow_horizontal = 2
 
 [node name="Time" type="Label" parent="HUD/TopBar"]
-margin_right = 738.0
-margin_bottom = 56.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "32sds"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Home" type="Label" parent="HUD/TopBar"]
-margin_left = 758.0
-margin_right = 917.0
-margin_bottom = 56.0
+layout_mode = 2
 text = "Robledo"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Result" type="Label" parent="HUD/TopBar"]
-margin_left = 937.0
-margin_right = 1001.0
-margin_bottom = 56.0
+layout_mode = 2
 text = "0:0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Away" type="Label" parent="HUD/TopBar"]
-margin_left = 1021.0
-margin_right = 1184.0
-margin_bottom = 56.0
+layout_mode = 2
 text = "Cisneros"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Pause" type="Button" parent="HUD"]
-margin_left = 1449.39
-margin_top = 976.0
-margin_right = 1606.39
-margin_bottom = 1032.0
+layout_mode = 0
+offset_left = 1013.0
+offset_top = 569.0
+offset_right = 1081.0
+offset_bottom = 591.0
 text = "START"
 
 [node name="SpeedFactor" type="Label" parent="HUD"]
-margin_left = 1104.0
-margin_top = 976.0
-margin_right = 1154.0
-margin_bottom = 1032.0
+layout_mode = 0
+offset_left = 702.0
+offset_top = 563.0
+offset_right = 721.0
+offset_bottom = 588.0
 text = "X2"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Faster" type="Button" parent="HUD"]
-margin_left = 1216.0
-margin_top = 976.0
-margin_right = 1277.0
-margin_bottom = 1032.0
+layout_mode = 0
+offset_left = 758.0
+offset_top = 569.0
+offset_right = 791.0
+offset_bottom = 591.0
 text = "+1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Slower" type="Button" parent="HUD"]
-margin_left = 982.0
-margin_top = 976.0
-margin_right = 1050.0
-margin_bottom = 1032.0
+layout_mode = 0
+offset_left = 641.0
+offset_top = 567.0
+offset_right = 673.0
+offset_bottom = 589.0
 text = "-1"
 
 [node name="LeftButtons" type="VBoxContainer" parent="HUD"]
-margin_left = 112.008
-margin_top = 316.348
-margin_right = 364.008
-margin_bottom = 820.349
+layout_mode = 0
+offset_left = 31.0
+offset_top = 207.0
+offset_right = 144.0
+offset_bottom = 349.0
 
 [node name="Field" type="Button" parent="HUD/LeftButtons"]
-margin_right = 272.0
-margin_bottom = 56.0
+layout_mode = 2
 text = "FIELD"
 
 [node name="Stats" type="Button" parent="HUD/LeftButtons"]
-margin_top = 64.0
-margin_right = 272.0
-margin_bottom = 120.0
+layout_mode = 2
 text = "STATS"
 
 [node name="Events" type="Button" parent="HUD/LeftButtons"]
-margin_top = 128.0
-margin_right = 272.0
-margin_bottom = 184.0
+layout_mode = 2
 text = "EVENTS"
 
 [node name="Change" type="Button" parent="HUD/LeftButtons"]
 visible = false
-margin_top = 128.0
-margin_right = 272.0
-margin_bottom = 184.0
+layout_mode = 2
 text = "CHANGE"
 
 [node name="Tactics" type="Button" parent="HUD/LeftButtons"]
-margin_top = 192.0
-margin_right = 272.0
-margin_bottom = 248.0
+layout_mode = 2
 text = "TACTICS"
 
 [node name="Formation" type="Button" parent="HUD/LeftButtons"]
-margin_top = 256.0
-margin_right = 272.0
-margin_bottom = 312.0
+layout_mode = 2
 text = "FORMATION"
 
 [node name="Table" type="Button" parent="HUD/LeftButtons"]
 visible = false
-margin_top = 256.0
-margin_right = 272.0
-margin_bottom = 312.0
+layout_mode = 2
 text = "TABLE"
 
 [node name="Matches" type="Button" parent="HUD/LeftButtons"]
 visible = false
-margin_top = 256.0
-margin_right = 272.0
-margin_bottom = 312.0
+layout_mode = 2
 text = "MATCHES"
 
 [node name="Votes" type="Button" parent="HUD/LeftButtons"]
 visible = false
-margin_top = 256.0
-margin_right = 272.0
-margin_bottom = 312.0
+layout_mode = 2
 text = "VOTES"
 
 [node name="TimeBar" type="ProgressBar" parent="HUD"]
-margin_left = 568.212
-margin_top = 83.036
-margin_right = 1768.21
-margin_bottom = 126.036
+layout_mode = 0
+offset_left = 422.0
+offset_top = 121.0
+offset_right = 1022.0
+offset_bottom = 147.0
 max_value = 2400.0
 step = 1.0
 value = 1.0
-percent_visible = false
+show_percentage = false
 
 [node name="PossessBar" type="ProgressBar" parent="HUD"]
-margin_left = 567.641
-margin_top = 906.7
-margin_right = 1767.64
-margin_bottom = 949.7
+layout_mode = 0
+offset_left = 420.0
+offset_top = 517.0
+offset_right = 1020.0
+offset_bottom = 543.0
 step = 1.0
 value = 50.0
-percent_visible = false
+show_percentage = false
 
 [node name="Label" type="Label" parent="HUD/PossessBar"]
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -99.5
-margin_top = -21.5
-margin_right = 99.5
-margin_bottom = 21.5
+offset_left = -40.0
+offset_top = -9.0
+offset_right = 61.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "POSSESSION"
 
 [node name="Log" type="RichTextLabel" parent="."]
-margin_left = 581.0
-margin_top = 207.0
-margin_right = 1763.0
-margin_bottom = 774.0
+layout_mode = 0
+offset_left = 459.0
+offset_top = 171.0
+offset_right = 958.0
+offset_bottom = 483.0
 scroll_following = true
 
-[node name="Stats" parent="." instance=ExtResource( 4 )]
+[node name="Stats" parent="." instance=ExtResource("4")]
+layout_mode = 0
+offset_left = 502.0
+offset_top = 163.0
+offset_right = 803.0
+offset_bottom = 507.0
 
 [node name="Dashboard" type="Button" parent="."]
 visible = false
-margin_left = 1062.0
-margin_top = 953.0
-margin_right = 1344.0
-margin_bottom = 1009.0
+layout_mode = 0
+offset_left = 120.0
+offset_top = 541.0
+offset_right = 239.0
+offset_bottom = 563.0
 text = "DASHBOARD"
 
-[node name="Formation" parent="." instance=ExtResource( 5 )]
+[node name="Formation" parent="." instance=ExtResource("5")]
 visible = false
+anchors_preset = 0
 
-[node name="Events" parent="." instance=ExtResource( 6 )]
-margin_left = 562.0
-margin_top = 162.0
-margin_right = -136.0
-margin_bottom = -234.0
+[node name="Events" parent="." instance=ExtResource("6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 470.0
+offset_top = 218.0
+offset_right = 470.0
+offset_bottom = 218.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="SKIP" type="Button" parent="."]
 visible = false
-margin_left = 142.705
-margin_top = 97.515
-margin_right = 230.705
-margin_bottom = 153.515
+layout_mode = 0
 text = "SKIP"
 
 [node name="Goal" type="Label" parent="."]
 visible = false
-margin_left = 1112.44
-margin_top = 550.921
-margin_right = 1234.44
-margin_bottom = 606.921
-rect_scale = Vector2( 6, 6 )
-rect_pivot_offset = Vector2( 61, 28 )
+layout_mode = 0
 text = "GOAL"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Goal = SubResource( 1 )
+libraries = {
+"": SubResource("AnimationLibrary_7wx2m")
+}
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 0.5
