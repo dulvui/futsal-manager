@@ -28,22 +28,42 @@ anchor_bottom = 1.0
 
 [node name="ManagerName" type="Label" parent="."]
 layout_mode = 0
+offset_left = 277.0
+offset_top = 118.0
+offset_right = 364.0
+offset_bottom = 143.0
 text = "Hans Viustel"
 
 [node name="Budget" type="Label" parent="."]
 layout_mode = 0
+offset_left = 844.0
+offset_top = 124.0
+offset_right = 922.0
+offset_bottom = 149.0
 text = "400.000 $"
 
 [node name="TeamName" type="Label" parent="."]
 layout_mode = 0
+offset_left = 375.0
+offset_top = 119.0
+offset_right = 449.0
+offset_bottom = 144.0
 text = "Barcellona"
 
 [node name="Date" type="Label" parent="."]
 layout_mode = 0
+offset_left = 965.0
+offset_top = 123.0
+offset_right = 1055.0
+offset_bottom = 148.0
 text = "24/08/2002"
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 0
+offset_left = 66.0
+offset_top = 180.0
+offset_right = 218.0
+offset_bottom = 352.0
 
 [node name="Formation" type="Button" parent="Buttons"]
 layout_mode = 2
@@ -82,7 +102,14 @@ layout_mode = 2
 text = "MENU"
 
 [node name="Email" parent="." instance=ExtResource("6")]
-anchors_preset = 0
+layout_mode = 1
+anchors_preset = 15
+offset_left = 334.0
+offset_top = 172.0
+offset_right = 334.0
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Table" parent="." instance=ExtResource("7")]
 visible = false
@@ -94,9 +121,14 @@ margin_bottom = -152.0
 
 [node name="Continue" type="Button" parent="."]
 layout_mode = 0
+offset_left = 970.0
+offset_top = 589.0
+offset_right = 1073.0
+offset_bottom = 611.0
 text = "CONTINUE"
 
 [node name="Calendar" parent="." instance=ExtResource("3")]
+visible = false
 layout_mode = 1
 offset_left = 324.0
 offset_top = 70.0
