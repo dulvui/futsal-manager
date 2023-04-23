@@ -21,7 +21,7 @@ func set_up_info(_player) -> void:
 		var label = Label.new()
 		label.text = tr(key.to_upper())
 		$DetailPopup/TabContainer/Info/Mental.add_child(label)
-		var value = DetailNumber.instance()
+		var value = DetailNumber.instantiate()
 		value.set_up(player["attributes"]["mental"][key])
 		$DetailPopup/TabContainer/Info/Mental.add_child(value)
 
@@ -29,7 +29,7 @@ func set_up_info(_player) -> void:
 		var label = Label.new()
 		label.text = tr(key.to_upper())
 		$DetailPopup/TabContainer/Info/Fisical.add_child(label)
-		var value = DetailNumber.instance()
+		var value = DetailNumber.instantiate()
 		value.set_up(player["attributes"]["physical"][key])
 		$DetailPopup/TabContainer/Info/Fisical.add_child(value)
 
@@ -37,7 +37,7 @@ func set_up_info(_player) -> void:
 		var label = Label.new()
 		label.text = tr(key.to_upper())
 		$DetailPopup/TabContainer/Info/Technical.add_child(label)
-		var value = DetailNumber.instance()
+		var value = DetailNumber.instantiate()
 		value.set_up(player["attributes"]["technical"][key])
 		$DetailPopup/TabContainer/Info/Technical.add_child(value)
 		
@@ -45,7 +45,7 @@ func set_up_info(_player) -> void:
 		var label = Label.new()
 		label.text = tr(key.to_upper())
 		$DetailPopup/TabContainer/Info/Goalkeeper.add_child(label)
-		var value = DetailNumber.instance()
+		var value = DetailNumber.instantiate()
 		value.set_up(player["attributes"]["goalkeeper"][key])
 		$DetailPopup/TabContainer/Info/Goalkeeper.add_child(value)
 		

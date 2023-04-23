@@ -89,7 +89,7 @@ func _player_setup() -> void:
 	var goalkeeper_home = home_team.players.active.pop_front()
 	$HomeGoalkeeper.set_up(goalkeeper_home["nr"], Color.lightblue, true, WIDTH, HEIGHT)
 	for player in home_team.players.active:
-		var visual_player = VisualPlayer.instance()
+		var visual_player = VisualPlayer.instantiate()
 		visual_player.set_up(player["nr"], Color.blue, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
 		$HomePlayers.add_child(visual_player)
 		home_visual_players.append(visual_player)
@@ -100,7 +100,7 @@ func _player_setup() -> void:
 	var goalkeeper_away = away_team.players.active.pop_front()
 	$AwayGoalkeeper.set_up(goalkeeper_away["nr"], Color.lightcoral, true, WIDTH, HEIGHT)
 	for player in away_team.players.active:
-		var visual_player = VisualPlayer.instance()
+		var visual_player = VisualPlayer.instantiate()
 		visual_player.set_up(player["nr"], Color.red, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
 		$AwayPlayers.add_child(visual_player)
 		away_visual_players.append(visual_player)

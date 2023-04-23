@@ -17,15 +17,15 @@ func set_up(day, current_day, current_month) -> void:
 					team_name = matchz["away"]
 				elif DataSaver.team_name == matchz["away"]:
 					team_name = matchz["home"]
-					$ColorRect.color = Color.gray
-		$Match.connect("pressed",self,"_on_Match_pressed",[day["matches"]])
+					$ColorRect.color = Color.GRAY
+		$Match.pressed.connect(_on_Match_pressed.bind($Match, [day["matches"]]))
 		$Match.show()
 		$Match.text = team_name
 	if current_day == DataSaver.date.day and DataSaver.date.month == current_month:
-		if $ColorRect.color != Color.gray:
-			$ColorRect.color = Color.red
+		if $ColorRect.color != Color.GRAY:
+			$ColorRect.color = Color.RED
 		else:
-			$ColorRect.color = Color.lightpink
+			$ColorRect.color = Color.LIGHT_PINK
 			
 	
 	$WeekDay.text = day["weekday"]
@@ -39,7 +39,9 @@ func _on_Match_pressed(matches) -> void:
 		var label = Label.new()
 		print(matchz)
 		label.text = matchz["home"] + " " + matchz["result"] + " " + matchz["away"]
-		label.align = Label.ALIGN_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		
 		$MatchPopup/VBoxContainer.add_child(label)
 	$MatchPopup.popup_centered()
 

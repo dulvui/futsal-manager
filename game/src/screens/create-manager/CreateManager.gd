@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 func _on_Back_pressed() -> void:
-	get_tree().change_scene("res://src/screens/menu/Menu.tscn")
+	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
 
 
 func _on_Continue_pressed() -> void:
@@ -22,4 +22,4 @@ func _on_Continue_pressed() -> void:
 		}
 		DataSaver.reset()
 		DataSaver.save_manager(manager)
-		get_tree().change_scene("res://src/screens/team-select/TeamSelect.tscn")
+		get_tree().change_scene_to_file("res://src/screens/team-select/TeamSelect.tscn")

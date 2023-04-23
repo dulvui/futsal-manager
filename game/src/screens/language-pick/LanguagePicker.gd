@@ -26,4 +26,4 @@ func _on_Spanish_pressed() -> void:
 	next_screen()
 	
 func next_screen() -> void:
-	get_tree().change_scene("res://src/screens/menu/Menu.tscn")
+	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")

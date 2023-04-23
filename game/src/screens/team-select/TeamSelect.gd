@@ -31,4 +31,4 @@ func team_selected(league_id, selected_team) -> void:
 	EmailUtil.message({},EmailUtil.MESSAGE_TYPES.WELCOME_MANAGER)
 	
 	DataSaver.save_all_data()
-	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")
+	get_tree().change_scene_to_file("res://src/screens/dashboard/Dashboard.tscn")

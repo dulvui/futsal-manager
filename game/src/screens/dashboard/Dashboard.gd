@@ -34,7 +34,7 @@ func _process(_delta) -> void:
 	$Budget.text = str(team["budget"])
 
 func _on_Menu_pressed() -> void:
-	get_tree().change_scene("res://src/screens/menu/Menu.tscn")
+	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
 
 
 func _on_SearchPlayer_pressed() -> void:
@@ -51,7 +51,7 @@ func _on_Formation_pressed() -> void:
 
 func _on_Continue_pressed() -> void:
 	if match_ready:
-		get_tree().change_scene("res://src/screens/match/Match.tscn")
+		get_tree().change_scene_to_file("res://src/screens/match/Match.tscn")
 		return
 	
 	if next_season:

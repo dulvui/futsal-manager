@@ -235,7 +235,7 @@ func next_season() -> void:
 	EmailUtil.message({},EmailUtil.MESSAGE_TYPES.NEXT_SEASON)
 	DataSaver.save_all_data()
 	
-	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")
+	get_tree().change_scene_to_file("res://src/screens/dashboard/Dashboard.tscn")
 
 
 # save on quit on mobile

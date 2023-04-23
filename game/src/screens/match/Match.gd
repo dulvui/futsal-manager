@@ -129,7 +129,7 @@ func _toggle_view_buttons() -> void:
 
 func _on_Dashboard_pressed() -> void:
 	DataSaver.save_all_data()
-	get_tree().change_scene("res://src/screens/dashboard/Dashboard.tscn")
+	get_tree().change_scene_to_file("res://src/screens/dashboard/Dashboard.tscn")
 
 
 func _on_Faster_pressed() -> void:
@@ -180,7 +180,7 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 	_toggle_view_buttons()
 	
 	# Visual Action
-	var visual_action:Node = VisualAction.instance()
+	var visual_action:Node = VisualAction.instantiate()
 	visual_action.set_up(is_home, is_goal, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
 	$VisualActionContainer.add_child(visual_action)
 	yield(visual_action, "action_finished")

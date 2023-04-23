@@ -80,10 +80,10 @@ func _set_up_content() -> void:
 		for header in headers:
 			var label
 			if typeof(item[header]) == 3:
-				label = ColorNumber.instance()
+				label = ColorNumber.instantiate()
 				label.set_up(item[header])
 			else:
-				label = NameLabel.instance()
+				label = NameLabel.instantiate()
 				label.set_name(item[header])
 			content_container.add_child(label)
 			
@@ -129,7 +129,7 @@ func filter(filters: Dictionary, exlusive = false) -> void:
 	
 
 func show_info(player) -> void:
-	var player_profile = PlayerProfile.instance()
+	var player_profile = PlayerProfile.instantiate()
 	add_child(player_profile)
 	player_profile.set_up_info(player)
 	

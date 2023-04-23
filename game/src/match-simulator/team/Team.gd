@@ -31,11 +31,11 @@ var active_player
 func set_up(team) -> void: # TODO add tactics
 	players = []
 	var team_players = team["players"]["active"]
-	goalkeeper = Goalkeeper.instance()
+	goalkeeper = Goalkeeper.instantiate()
 	goalkeeper.set_up(team_players[0])
 	
 	for i in team_players.size() - 1:
-		var player = Player.instance()
+		var player = Player.instantiate()
 		player.set_up(team_players[i + 1])
 		players.append(player)
 
