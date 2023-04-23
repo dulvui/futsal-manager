@@ -1,12 +1,10 @@
 extends Control
 
-
-
 func _ready() -> void:
-	var pos = 1
+	var pos:int = 1
 	
 	# transform table dictionary to array
-	var table_array = []
+	var table_array:Array = []
 	for key in DataSaver.table:
 		table_array.append({
 			"name" : key,
@@ -17,63 +15,65 @@ func _ready() -> void:
 			"wins" : DataSaver.table[key]["wins"],
 			"draws" : DataSaver.table[key]["draws"],
 			"lost" : DataSaver.table[key]["lost"]
-		 })
+		})
 		
-	table_array.sort_custom(self,"point_sorter")
+	table_array.sort_custom(point_sorter)
 	
 	
 	for team in table_array:
-		var pos_label = Label.new()
+		var pos_label:Label = Label.new()
 		pos_label.text = str(pos)
 		pos += 1
 		$GridContainer.add_child(pos_label)
 		
-		var name_label = Label.new()
+		var name_label:Label = Label.new()
 		name_label.text = team["name"]
 		$GridContainer.add_child(name_label)
 		
-		var games_played_label = Label.new()
+		var games_played_label:Label = Label.new()
 		games_played_label.text = str(team["wins"] + team["draws"] + team["lost"])
 		$GridContainer.add_child(games_played_label)
 
-		var wins_label = Label.new()
+		var wins_label:Label = Label.new()
 		wins_label.text = str(team["wins"])
 		$GridContainer.add_child(wins_label)
 		
-		var draws_label = Label.new()
+		var draws_label:Label = Label.new()
 		draws_label.text = str(team["draws"])
 		$GridContainer.add_child(draws_label)
 		
-		var lost_label = Label.new()
+		var lost_label:Label = Label.new()
 		lost_label.text = str(team["lost"])
 		$GridContainer.add_child(lost_label)
 		
-		var goals_made_label = Label.new()
+		var goals_made_label:Label = Label.new()
 		goals_made_label.text = str(team["goals_made"])
 		$GridContainer.add_child(goals_made_label)
 		
-		var goals_against_label = Label.new()
+		var goals_against_label:Label = Label.new()
 		goals_against_label.text = str(team["goals_against"])
 		$GridContainer.add_child(goals_against_label)
 		
-		var points_label = Label.new()
+		var points_label:Label = Label.new()
 		points_label.text = str(team["points"])
 		$GridContainer.add_child(points_label)
 		
+		var label_settings:LabelSettings = LabelSettings.new()
+		label_settings.font_color = Color.GOLD
 		
 		if team["name"] == DataSaver.team_name:
-			pos_label.add_color_override("font_color", Color.gold)
-			name_label.add_color_override("font_color", Color.gold)
-			games_played_label.add_color_override("font_color", Color.gold)
-			wins_label.add_color_override("font_color", Color.gold)
-			draws_label.add_color_override("font_color", Color.gold)
-			lost_label.add_color_override("font_color", Color.gold)
-			goals_made_label.add_color_override("font_color", Color.gold)
-			goals_against_label.add_color_override("font_color", Color.gold)
-			points_label.add_color_override("font_color", Color.gold)
+			pos_label.label_settings = label_settings
+			name_label.label_settings = label_settings
+			games_played_label.label_settings = label_settings
+			wins_label.label_settings = label_settings
+			draws_label.label_settings = label_settings
+			lost_label.label_settings = label_settings
+			goals_made_label.label_settings = label_settings
+			goals_against_label.label_settings = label_settings
+			points_label.label_settings = label_settings
 
 
-func point_sorter(a, b) -> bool:
+func point_sorter(a:Dictionary, b:Dictionary) -> bool:
 	if a["points"] > b["points"]:
 		return true
 	elif a["points"] == b["points"] and a["goals_made"] - a["goals_against"] > b["goals_made"] - b["goals_against"]:

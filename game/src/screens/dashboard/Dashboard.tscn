@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" path="res://src/ui-components/player-list/PlayerList.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/ui-components/formation/Formation.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://src/ui-components/email/Email.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://src/ui-components/table/Table.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui-components/table/Table.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://src/ui-components/transfers/player-offer/PlayerOffer.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/ui-components/transfers/contract-offer/ContractOffer.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://src/ui-components/tranining/Training.tscn" id="10"]
@@ -91,6 +91,9 @@ layout_mode = 0
 
 [node name="MailCounter" type="Label" parent="Buttons/Email/Panel"]
 layout_mode = 0
+offset_left = 129.0
+offset_right = 143.0
+offset_bottom = 25.0
 text = "12"
 
 [node name="SearchPlayer" type="Button" parent="Buttons"]
@@ -114,10 +117,12 @@ grow_vertical = 2
 [node name="Table" parent="." instance=ExtResource("7")]
 visible = false
 anchors_preset = 0
-margin_left = 600.0
-margin_top = 184.0
-margin_right = -88.0
-margin_bottom = -152.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 340.0
+offset_top = 162.0
+offset_right = 340.0
+offset_bottom = 162.0
 
 [node name="Continue" type="Button" parent="."]
 layout_mode = 0
