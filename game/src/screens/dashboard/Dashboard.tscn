@@ -1,204 +1,150 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://c8mhb22bae1my"]
 
-[ext_resource path="res://theme.tres" type="Theme" id=1]
-[ext_resource path="res://src/screens/dashboard/Dashboard.gd" type="Script" id=2]
-[ext_resource path="res://src/ui-components/calendar/Calendar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/ui-components/player-list/PlayerList.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/ui-components/formation/Formation.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/ui-components/email/Email.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/ui-components/table/Table.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/ui-components/transfers/player-offer/PlayerOffer.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/ui-components/transfers/contract-offer/ContractOffer.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/ui-components/tranining/Training.tscn" type="PackedScene" id=10]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.905882, 0.121569, 0.121569, 1 )
-corner_radius_top_left = 30
-corner_radius_top_right = 30
-corner_radius_bottom_right = 30
-corner_radius_bottom_left = 30
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
+[ext_resource type="Script" path="res://src/screens/dashboard/Dashboard.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://c51vyn54bk7q4" path="res://src/ui-components/calendar/Calendar.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://src/ui-components/player-list/PlayerList.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://src/ui-components/formation/Formation.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://src/ui-components/email/Email.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://src/ui-components/table/Table.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://src/ui-components/transfers/player-offer/PlayerOffer.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://src/ui-components/transfers/contract-offer/ContractOffer.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://src/ui-components/tranining/Training.tscn" id="10"]
 
 [node name="Dashboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ManagerName" type="Label" parent="."]
-margin_left = 221.345
-margin_top = 80.095
-margin_right = 677.345
-margin_bottom = 192.095
+layout_mode = 0
 text = "Hans Viustel"
 
 [node name="Budget" type="Label" parent="."]
-margin_left = 221.345
-margin_top = 168.0
-margin_right = 677.345
-margin_bottom = 280.0
+layout_mode = 0
 text = "400.000 $"
 
 [node name="TeamName" type="Label" parent="."]
-margin_left = 960.0
-margin_top = 80.095
-margin_right = 1157.0
-margin_bottom = 192.095
+layout_mode = 0
 text = "Barcellona"
 
 [node name="Date" type="Label" parent="."]
-margin_left = 1520.0
-margin_top = 88.0
-margin_right = 1763.0
-margin_bottom = 144.0
+layout_mode = 0
 text = "24/08/2002"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Buttons" type="VBoxContainer" parent="."]
-margin_left = 45.3572
-margin_top = 282.222
-margin_right = 510.357
-margin_bottom = 522.222
+layout_mode = 0
 
 [node name="Formation" type="Button" parent="Buttons"]
-margin_right = 464.0
-margin_bottom = 56.0
+layout_mode = 2
 text = "FORMATION"
 
 [node name="Training" type="Button" parent="Buttons"]
 visible = false
-margin_top = 64.0
-margin_right = 464.0
-margin_bottom = 120.0
+layout_mode = 2
 text = "TRAINING"
 
 [node name="Table" type="Button" parent="Buttons"]
-margin_top = 64.0
-margin_right = 464.0
-margin_bottom = 120.0
+layout_mode = 2
 text = "TABLE"
 
 [node name="Calendar" type="Button" parent="Buttons"]
-margin_top = 128.0
-margin_right = 464.0
-margin_bottom = 184.0
+layout_mode = 2
 text = "CALENDAR"
 
 [node name="Email" type="Button" parent="Buttons"]
-margin_top = 192.0
-margin_right = 464.0
-margin_bottom = 248.0
+layout_mode = 2
 text = "EMAIL"
 
 [node name="Panel" type="Panel" parent="Buttons/Email"]
-margin_left = 358.943
-margin_top = 1.77841
-margin_right = 414.943
-margin_bottom = 54.7784
-custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 0
 
 [node name="MailCounter" type="Label" parent="Buttons/Email/Panel"]
-margin_top = -3.0
-margin_right = 56.0
-margin_bottom = 53.0
+layout_mode = 0
 text = "12"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SearchPlayer" type="Button" parent="Buttons"]
-margin_top = 256.0
-margin_right = 464.0
-margin_bottom = 312.0
+layout_mode = 2
 text = "SEARCH_PLAYER"
 
 [node name="Menu" type="Button" parent="Buttons"]
-margin_top = 320.0
-margin_right = 464.0
-margin_bottom = 376.0
+layout_mode = 2
 text = "MENU"
 
-[node name="Email" parent="." instance=ExtResource( 6 )]
-margin_left = 672.0
-margin_top = 196.0
-margin_right = -144.0
-margin_bottom = -246.0
+[node name="Email" parent="." instance=ExtResource("6")]
+anchors_preset = 0
 
-[node name="Table" parent="." instance=ExtResource( 7 )]
+[node name="Table" parent="." instance=ExtResource("7")]
 visible = false
+anchors_preset = 0
 margin_left = 600.0
 margin_top = 184.0
 margin_right = -88.0
 margin_bottom = -152.0
 
 [node name="Continue" type="Button" parent="."]
-margin_left = 1523.0
-margin_top = 986.0
-margin_right = 1759.0
-margin_bottom = 1048.0
+layout_mode = 0
 text = "CONTINUE"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Calendar" parent="." instance=ExtResource( 3 )]
-margin_left = 727.0
-margin_top = 156.0
-margin_right = 39.0
-margin_bottom = -160.0
-rect_scale = Vector2( 0.8, 0.8 )
+[node name="Calendar" parent="." instance=ExtResource("3")]
+layout_mode = 1
+offset_left = 324.0
+offset_top = 70.0
+offset_right = -113.0
+offset_bottom = -131.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PlayerOfferPopup" type="Popup" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="PlayerOfferPopup"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="PlayerOffer" parent="PlayerOfferPopup" instance=ExtResource( 8 )]
+[node name="PlayerOffer" parent="PlayerOfferPopup" instance=ExtResource("8")]
+layout_mode = 3
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ContractPopup" type="Popup" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
 
-[node name="ContractOffer" parent="ContractPopup" instance=ExtResource( 9 )]
+[node name="ContractOffer" parent="ContractPopup" instance=ExtResource("9")]
+layout_mode = 3
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TrainingPopup" type="Popup" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -320.0
-margin_bottom = -680.0
 
-[node name="Training" parent="TrainingPopup" instance=ExtResource( 10 )]
-margin_bottom = -176.0
+[node name="Training" parent="TrainingPopup" instance=ExtResource("10")]
+layout_mode = 3
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="AllPlayerList" parent="." instance=ExtResource( 4 )]
+[node name="AllPlayerList" parent="." instance=ExtResource("4")]
 visible = false
+anchors_preset = 0
 
-[node name="Formation" parent="." instance=ExtResource( 5 )]
+[node name="Formation" parent="." instance=ExtResource("5")]
 visible = false
+anchors_preset = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -960.0
-margin_top = -540.0
-margin_right = 960.0
-margin_bottom = 540.0
 
 [connection signal="pressed" from="Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Buttons/Training" to="." method="_on_Training_pressed"]
@@ -209,8 +155,6 @@ margin_bottom = 540.0
 [connection signal="pressed" from="Buttons/Menu" to="." method="_on_Menu_pressed"]
 [connection signal="offer_contract" from="Email" to="." method="_on_Email_offer_contract"]
 [connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
-[connection signal="confirm" from="PlayerOfferPopup/PlayerOffer" to="." method="_on_PlayerOffer_confirm"]
-[connection signal="hide" from="PlayerOfferPopup/PlayerOffer" to="." method="_on_PlayerOffer_hide"]
 [connection signal="cancel" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_cancel"]
 [connection signal="confirm" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_confirm"]
 [connection signal="select_player" from="AllPlayerList" to="." method="_on_AllPlayerList_select_player"]

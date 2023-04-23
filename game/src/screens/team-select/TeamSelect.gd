@@ -15,7 +15,7 @@ func _ready() -> void:
 			for team in league["teams"]:
 				var team_button:Button = Button.new()
 				team_button.text = team["name"]
-				team_button.connect("pressed",self,"team_selected",[league["id"],team["name"]])
+				team_button.pressed.connect(team_selected.bind(league["id"], team["name"]))
 				grid.add_child(team_button)
 			center_container.add_child(grid)
 			add_child(center_container)

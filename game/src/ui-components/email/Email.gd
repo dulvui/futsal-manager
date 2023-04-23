@@ -19,7 +19,7 @@ func update_messages() -> void:
 			button.text = "READ"
 		else:
 			button.text = "*READ*"
-		button.pressed.connect(show_message.bind(button, [EmailUtil.messages[i]]))
+		button.pressed.connect(show_message.bind(EmailUtil.messages[i]))
 		$ScrollContainer/Mails.add_child(button)
 
 
@@ -34,7 +34,7 @@ func show_message(message) -> void:
 	
 	if message["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER:
 		$DetailPopUp/Action.text = tr("OFFER_CONTRACT")
-		$DetailPopUp/Action.pressed.connect(show_offer_contract.bind($DetailPopUp/Action, [message["content"]]))
+		$DetailPopUp/Action.pressed.connect(show_offer_contract.bind(message["content"]))
 		$DetailPopUp/Message.text = message["message"]
 		$DetailPopUp/Action.show()
 	elif message["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER_MADE:

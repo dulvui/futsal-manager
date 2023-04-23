@@ -18,7 +18,7 @@ func set_up(day, current_day, current_month) -> void:
 				elif DataSaver.team_name == matchz["away"]:
 					team_name = matchz["home"]
 					$ColorRect.color = Color.GRAY
-		$Match.pressed.connect(_on_Match_pressed.bind($Match, [day["matches"]]))
+		$Match.pressed.connect(_on_Match_pressed.bind(day["matches"]))
 		$Match.show()
 		$Match.text = team_name
 	if current_day == DataSaver.date.day and DataSaver.date.month == current_month:
@@ -32,6 +32,7 @@ func set_up(day, current_day, current_month) -> void:
 
 
 func _on_Match_pressed(matches) -> void:
+	print("matchchh")
 	for child in $MatchPopup/VBoxContainer.get_children():
 		child.queue_free()
 		

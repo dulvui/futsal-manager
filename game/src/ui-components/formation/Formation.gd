@@ -2,7 +2,8 @@ extends Control
 
 signal change
 
-onready var animation_player:AnimationPlayer = $AnimationPlayer
+@onready 
+var animation_player:AnimationPlayer = $AnimationPlayer
 
 var formations:Array = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
 var player_to_replace:int
@@ -22,7 +23,7 @@ func set_up(active_team:Dictionary = DataSaver.get_selected_team()) -> void:
 
 func _on_FormationSelect_item_selected(index:int) -> void:
 	animation_player.play_backwards("Fade" + team["formation"] )
-	yield(animation_player,"animation_finished")
+	await animation_player.animation_finished
 	_set_active_players()
 	team["formation"] = formations[index]
 #	DataSaver.save_all_data()

@@ -1,4 +1,4 @@
 extends Control
 
-func set_name(name) -> void:
+func set_text(name) -> void:
 	$Label.text = name

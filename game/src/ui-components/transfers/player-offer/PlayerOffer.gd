@@ -61,26 +61,28 @@ func _on_ExchangePlayers_item_selected(index) -> void:
 
 	var remove_button = Button.new()
 	remove_button.text = exchange_player["name"] + " " + str(exchange_player["price"]/1000) + "K"
-	remove_button.connect("pressed",self,"remove_from_list",[exchange_player])
+	remove_button.pressed.connect(remove_from_list.bind(exchange_player))
 	$ScrollContainer/SelectedPlayers.add_child(remove_button)
 	
 	$Details/ExchangePlayers.remove_item(index)
 	
 	_calc_total()
 	
-func remove_from_list(_player) -> void:
+func remove_from_list(player) -> void:
 	for child in $ScrollContainer/SelectedPlayers.get_children():
 		child.queue_free()
-	selected_players.erase(_player)
-	exchange_players.append(_player)
+	selected_players.erase(player)
+	exchange_players.append(player)
 	
-	for _player in selected_players:
+	# might be broken after Godot 4 upgrade, check _player and selected player
+	# before only _player existed
+	for selected_player in selected_players:
 		var remove_button = Button.new()
-		remove_button.text = _player["name"] + " " + str(_player["price"]/1000) + "K"
-		remove_button.connect("pressed",self,"remove_from_list",[_player])
+		remove_button.text = selected_player["name"] + " " + str(selected_player["price"]/1000) + "K"
+		remove_button.pressed.connect(remove_from_list.bind(selected_player))
 		$ScrollContainer/SelectedPlayers.add_child(remove_button)
 	
-	$Details/ExchangePlayers.add_item(_player["name"])
+	$Details/ExchangePlayers.add_item(player["name"])
 	_calc_total()
 	
 func _calc_total() -> void:

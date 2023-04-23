@@ -8,8 +8,11 @@ const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProf
 
 const SIZE = 10
 
-onready var content_container = $MarginContainer/Content
-onready var pages = $Pages
+@onready
+var content_container = $MarginContainer/Content
+
+@onready
+var pages = $Pages
 
 var current_page = 0
 var max_page = 0
@@ -54,7 +57,7 @@ func _set_up_headers() -> void:
 	for header in headers:
 		var button = Button.new()
 		button.text = header.substr(0,3)
-		button.connect("button_down",self,"_sort",[header])
+		button.button_down.connect(_sort.bind(button, header))
 		content_container.add_child(button)
 	
 	# info label
@@ -84,19 +87,19 @@ func _set_up_content() -> void:
 				label.set_up(item[header])
 			else:
 				label = NameLabel.instantiate()
-				label.set_name(item[header])
+				label.set_text(item[header])
 			content_container.add_child(label)
 			
 		#info button
 		var button = Button.new()
 		button.text = "info"
-		button.connect("button_down",self,"show_info",[item])
+		button.button_down.connect(show_info.bind(item))
 		content_container.add_child(button)
 		
 		#change button
 		var button_change = Button.new()
 		button_change.text = "chose"
-		button_change.connect("button_down",self,"change_player",[item])
+		button_change.button_down.connect(change_player.bind(item))
 		content_container.add_child(button_change)
 		
 	_update_pages()

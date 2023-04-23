@@ -1,91 +1,56 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://b1dale6j23rs1"]
 
-[ext_resource path="res://src/ui-components/calendar/day/Day.gd" type="Script" id=1]
-[ext_resource path="res://theme.tres" type="Theme" id=2]
+[ext_resource type="Script" path="res://src/ui-components/calendar/day/Day.gd" id="1"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
 
 [node name="Day" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1780.0
-margin_bottom = -940.0
-rect_min_size = Vector2( 140, 140 )
-theme = ExtResource( 2 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+theme = ExtResource("2")
+script = ExtResource("1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_right = -1114.0
+offset_bottom = -612.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="."]
-margin_left = 107.815
-margin_top = 104.941
-margin_right = 147.815
-margin_bottom = 160.941
-rect_scale = Vector2( 0.6, 0.6 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+layout_mode = 0
 text = "31"
 
 [node name="WeekDay" type="Label" parent="."]
-margin_left = 10.0
-margin_top = 104.941
-margin_right = 73.0
-margin_bottom = 160.941
-rect_scale = Vector2( 0.6, 0.6 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+layout_mode = 0
+offset_left = 24.0
+offset_right = 48.0
+offset_bottom = 25.0
 text = "WE"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Match" type="Button" parent="."]
 visible = false
-margin_left = -31.748
-margin_top = 25.3984
-margin_right = 168.252
-margin_bottom = 85.3984
-rect_scale = Vector2( 0.6, 0.6 )
-rect_pivot_offset = Vector2( 100, 40 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+layout_mode = 0
 text = "sdddsff"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MatchPopup" type="Popup" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 457.0
-margin_top = 79.0
-margin_right = 1378.0
-margin_bottom = 679.0
-rect_pivot_offset = Vector2( 300, 300 )
-popup_exclusive = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="MatchPopup"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MatchPopup"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
 
 [node name="Close" type="Button" parent="MatchPopup"]
-margin_left = 809.0
-margin_top = 35.0
-margin_right = 856.0
-margin_bottom = 95.0
 text = "X"
 
 [connection signal="pressed" from="MatchPopup/Close" to="." method="_on_Close_pressed"]

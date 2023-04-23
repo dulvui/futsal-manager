@@ -1,6 +1,7 @@
 extends Control
 
-onready var team = DataSaver.get_selected_team()
+@onready
+var team = DataSaver.get_selected_team()
 
 var match_ready:bool = false
 var next_season:bool = false
