@@ -205,10 +205,8 @@ func init_teams() -> void:
 	# check if leagues not leoaded yet
 	for nation in leagues:
 		for league in leagues[nation]:
-			var file:File = File.new()
-			file.open("res://assets/" + league["file"], file.READ)
-			var json:String = file.get_as_text()
-			league["teams"] = JSON.parse(json).result
+			var file:FileAccess = FileAccess.open("res://assets/" + league["file"], FileAccess.READ)
+			league["teams"] = JSON.parse_string(file.get_as_text())
 			file.close()
 
 func get_teams(_league_id:int = -1) -> Array:
@@ -242,6 +240,6 @@ func next_season() -> void:
 
 # save on quit on mobile
 func _notification(what) -> void:
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_all_data()
 		get_tree().quit() # default behavior

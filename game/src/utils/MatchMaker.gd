@@ -26,7 +26,7 @@ func inizialize_matches() -> void:
 		current_match_day.append(matchOne)
 		
 		var copy:Array = random_teams.duplicate(true)
-		copy.remove(0)
+		copy.remove_at(0)
 		
 		for j in range(0,(teams.size()/2) - 1):
 			var home_index:int = j

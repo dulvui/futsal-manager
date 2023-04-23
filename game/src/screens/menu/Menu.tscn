@@ -1,57 +1,49 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b4woicggddkls"]
 
-[ext_resource path="res://theme.tres" type="Theme" id=1]
-[ext_resource path="res://src/screens/menu/Menu.gd" type="Script" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
+[ext_resource type="Script" path="res://src/screens/menu/Menu.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://caxdir30m2j4v" path="res://icon.png" id="3"]
 
 [node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="icon" type="Sprite2D" parent="."]
+position = Vector2(578, 138)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 842.0
-margin_top = 448.0
-margin_right = 1078.0
-margin_bottom = 632.0
-custom_constants/separation = 8
+layout_mode = 2
 
 [node name="Continue" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 236.0
-margin_bottom = 56.0
+layout_mode = 2
 text = "CONTINUE"
 
 [node name="StartGame" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 64.0
-margin_right = 236.0
-margin_bottom = 120.0
+layout_mode = 2
 text = "START"
 
 [node name="Settings" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 128.0
-margin_right = 236.0
-margin_bottom = 184.0
+layout_mode = 2
 text = "SETTINGS"
-
-[node name="icon" type="Sprite" parent="."]
-position = Vector2( 953.704, 255.684 )
-scale = Vector2( 0.648438, 0.648438 )
-texture = ExtResource( 3 )
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
