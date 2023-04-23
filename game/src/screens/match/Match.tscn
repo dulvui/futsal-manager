@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d35g7n0y5crlg"]
+[gd_scene load_steps=11 format=3 uid="uid://d35g7n0y5crlg"]
 
 [ext_resource type="PackedScene" uid="uid://ck5f72rt3q5km" path="res://src/match-simulator/MatchSimulator.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
@@ -7,25 +7,44 @@
 [ext_resource type="PackedScene" path="res://src/ui-components/formation/Formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://5agy8ull675s" path="res://src/ui-components/match/events/MatchEvents.tscn" id="6"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_3ady1"]
+font_size = 84
+
 [sub_resource type="Animation" id="1"]
 resource_name = "Goal"
 length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Goal:rect_scale")
-tracks/0/interp = 2
+tracks/0/path = NodePath("Goal:scale")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.2, 2),
+"times": PackedFloat32Array(0, 1.1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(6, 6), Vector2(12, 12), Vector2(6, 6)]
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8fa8s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Goal:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7wx2m"]
 _data = {
-"Goal": SubResource("1")
+"Goal": SubResource("1"),
+"RESET": SubResource("Animation_8fa8s")
 }
 
 [node name="Match" type="Control"]
@@ -249,7 +268,13 @@ text = "SKIP"
 [node name="Goal" type="Label" parent="."]
 visible = false
 layout_mode = 0
+offset_left = 566.0
+offset_top = 259.0
+offset_right = 806.0
+offset_bottom = 379.0
+pivot_offset = Vector2(120, 60)
 text = "GOAL"
+label_settings = SubResource("LabelSettings_3ady1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
