@@ -41,7 +41,7 @@ layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 5
+theme_override_constants/v_separation = 0
 columns = 9
 
 [node name="Pos" type="Label" parent="GridContainer"]
