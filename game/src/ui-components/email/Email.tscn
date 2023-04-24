@@ -26,6 +26,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Message" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 667.0
