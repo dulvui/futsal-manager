@@ -4,6 +4,7 @@ signal offer_contract
 
 func _ready() -> void:
 	update_messages()
+	$Message.hide()
 
 func update_messages() -> void:
 	for child in $ScrollContainer/Mails.get_children():
@@ -25,23 +26,23 @@ func update_messages() -> void:
 
 func show_message(message) -> void:
 	message["read"] = true
-	$DetailPopUp/Action.hide()
-	$DetailPopUp/Subject.text = message["title"]
-	$DetailPopUp/Details/Date.text = message["date"]
-	$DetailPopUp/Details/Sender.text = message["sender"]
-	$DetailPopUp.popup_centered()
+	$Message/Action.hide()
+	$Message/Subject.text = message["title"]
+	$Message/Details/Date.text = message["date"]
+	$Message/Details/Sender.text = message["sender"]
+	$Message.show()
 	
 	
 	if message["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER:
-		$DetailPopUp/Action.text = tr("OFFER_CONTRACT")
-		$DetailPopUp/Action.pressed.connect(show_offer_contract.bind(message["content"]))
-		$DetailPopUp/Message.text = message["message"]
-		$DetailPopUp/Action.show()
+		$Message/Action.text = tr("OFFER_CONTRACT")
+		$Message/Action.pressed.connect(show_offer_contract.bind(message["content"]))
+		$Message/Message.text = message["message"]
+		$Message/Action.show()
 	elif message["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER_MADE:
-		$DetailPopUp/Message.text = "you made a conttract offer the player"
+		$Message/Message.text = "you made a conttract offer the player"
 	#transfer
 	else:
-		$DetailPopUp/Message.text = message["message"]
+		$Message/Message.text = message["message"]
 		
 	update_messages()
 
@@ -54,4 +55,4 @@ func _on_Action_pressed() -> void:
 
 
 func _on_Close_pressed():
-	$DetailPopUp.hide()
+	$Message.hide()
