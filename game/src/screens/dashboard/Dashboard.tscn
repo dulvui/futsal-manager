@@ -3,9 +3,9 @@
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/dashboard/Dashboard.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://c51vyn54bk7q4" path="res://src/ui-components/calendar/Calendar.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/ui-components/player-list/PlayerList.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dq4dr3oe20mb8" path="res://src/ui-components/player-list/PlayerList.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/ui-components/formation/Formation.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://src/ui-components/email/Email.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://dcv0qm4k1wi4q" path="res://src/ui-components/email/Email.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui-components/table/Table.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://src/ui-components/transfers/player-offer/PlayerOffer.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/ui-components/transfers/contract-offer/ContractOffer.tscn" id="9"]
@@ -106,7 +106,6 @@ text = "MENU"
 
 [node name="Email" parent="." instance=ExtResource("6")]
 layout_mode = 1
-anchors_preset = 15
 offset_left = 334.0
 offset_top = 172.0
 offset_right = 334.0
@@ -123,6 +122,8 @@ offset_left = 340.0
 offset_top = 162.0
 offset_right = 340.0
 offset_bottom = 162.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Continue" type="Button" parent="."]
 layout_mode = 0
@@ -139,8 +140,6 @@ offset_left = 324.0
 offset_top = 70.0
 offset_right = -113.0
 offset_bottom = -131.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="PlayerOfferPopup" type="Popup" parent="."]
 
