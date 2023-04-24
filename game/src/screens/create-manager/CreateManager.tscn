@@ -28,10 +28,10 @@ metadata/_edit_use_anchors_ = true
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.325781
-anchor_top = 0.411111
-anchor_right = 0.632031
-anchor_bottom = 0.629167
+anchor_left = 0.315625
+anchor_top = 0.345833
+anchor_right = 0.621875
+anchor_bottom = 0.563889
 grow_horizontal = 2
 grow_vertical = 2
 columns = 2
@@ -65,10 +65,10 @@ layout_mode = 2
 [node name="Continue" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.603125
-anchor_top = 0.783333
-anchor_right = 0.683594
-anchor_bottom = 0.815278
+anchor_left = 0.492188
+anchor_top = 0.683333
+anchor_right = 0.604688
+anchor_bottom = 0.730556
 grow_horizontal = 2
 grow_vertical = 2
 text = "CONTINUE"
@@ -77,12 +77,12 @@ metadata/_edit_use_anchors_ = true
 [node name="Back" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.388281
-anchor_top = 0.786111
-anchor_right = 0.4375
-anchor_bottom = 0.819444
+anchor_left = 0.015625
+anchor_top = 0.0208333
+anchor_right = 0.0648438
+anchor_bottom = 0.0694444
 offset_bottom = -1.0
-text = "BACK"
+text = "<"
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]

@@ -42,6 +42,10 @@ window/size/test_height=720
 
 theme/custom="res://theme.tres"
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/i18n/FutsalManagerI18N - Sheet1.de.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.en.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.it.translation")
+
 [layer_names]
 
 2d_physics/layer_1="ball"
