@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/ui-components/formation/Formation.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
-[ext_resource type="PackedScene" path="res://src/ui-components/formation/player/FormationPlayer.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cmwiocyu2rdxq" path="res://src/ui-components/formation/player/FormationPlayer.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://dq4dr3oe20mb8" path="res://src/ui-components/player-list/PlayerList.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://cctv8141lfp0o" path="res://assets/field.png" id="5"]
 
@@ -427,8 +427,8 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 779.0
 offset_top = 113.0
-offset_right = 779.0
-offset_bottom = 113.0
+offset_right = 839.0
+offset_bottom = 173.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -441,8 +441,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 781.0
 offset_top = 177.0
-offset_right = 781.0
-offset_bottom = 177.0
+offset_right = 841.0
+offset_bottom = 237.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -455,8 +455,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 686.0
 offset_top = 233.0
-offset_right = 686.0
-offset_bottom = 233.0
+offset_right = 746.0
+offset_bottom = 293.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -469,8 +469,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 865.0
 offset_top = 239.0
-offset_right = 865.0
-offset_bottom = 239.0
+offset_right = 925.0
+offset_bottom = 299.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -483,8 +483,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 788.0
 offset_top = 327.0
-offset_right = 788.0
-offset_bottom = 327.0
+offset_right = 848.0
+offset_bottom = 387.0
 grow_horizontal = 2
 grow_vertical = 2
 
