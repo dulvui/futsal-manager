@@ -44,10 +44,10 @@ text = "400.000 $"
 
 [node name="TeamName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 375.0
-offset_top = 119.0
-offset_right = 449.0
-offset_bottom = 144.0
+offset_left = 593.0
+offset_top = 123.0
+offset_right = 717.0
+offset_bottom = 160.0
 text = "Barcellona"
 
 [node name="Date" type="Label" parent="."]
@@ -179,6 +179,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="Formation" parent="." instance=ExtResource("5")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -189,8 +190,6 @@ offset_left = -602.0
 offset_top = -164.0
 offset_right = -602.0
 offset_bottom = -164.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [connection signal="pressed" from="Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Buttons/Training" to="." method="_on_Training_pressed"]
