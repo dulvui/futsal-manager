@@ -63,8 +63,8 @@ func _ready() -> void:
 	table = config.get_value("season","table",{})
 	current_transfers = config.get_value("season","current_transfers",[])
 	
-	team_name = config.get_value("team", "name", null)
-	league_id = config.get_value("league", "id", null)
+	team_name = config.get_value("team", "name", "")
+	league_id = config.get_value("league", "id", -1)
 	leagues = config.get_value("leagues", "data", leagues)
 	
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
