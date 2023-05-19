@@ -68,7 +68,7 @@ func _change_player(player:Dictionary) -> void:
 	team["players"]["active"][player_to_replace] = player
 	for sub_index in team["players"]["subs"].size():
 		if team["players"]["subs"][sub_index]["id"] == player["id"]:
-			team["players"]["subs"].remove(sub_index)
+			team["players"]["subs"].remove_at(sub_index)
 			return
 
 func _on_Close_pressed() -> void:

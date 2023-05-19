@@ -55,7 +55,7 @@ func _on_Less_pressed() -> void:
 
 func _on_ExchangePlayers_item_selected(index) -> void:
 	var exchange_player = exchange_players[index]
-	exchange_players.remove(index)
+	exchange_players.remove_at(index)
 	
 	selected_players.append(player)
 
