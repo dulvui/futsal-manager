@@ -21,7 +21,6 @@ var headers
 var content # base content
 var current_content # current visible content, can be filtered
 
-var sorter = ContentSort.new()
 var sort_memory = {} # to save wich value is already sorted and how
 
 	
@@ -47,7 +46,7 @@ func set_up(_headers,_content=null) -> void:
 				
 	# set up sort memory
 	for header in headers:
-		sort_memory[header] = "no"
+		sort_memory[header] = false
 		
 	_set_up_content()
 	
@@ -57,7 +56,7 @@ func _set_up_headers() -> void:
 	for header in headers:
 		var button = Button.new()
 		button.text = header.substr(0,3)
-		button.button_down.connect(_sort.bind(button, header))
+		button.button_down.connect(_sort.bind(header))
 		content_container.add_child(button)
 	
 	# info label
@@ -140,28 +139,15 @@ func change_player(player) -> void:
 	emit_signal("select_player",player)
 	
 func _sort(value) -> void:
-	sorter.value = value
-	current_content.sort_custom(sorter, _get_sorting(value))
-	_set_up_content()
+	current_content.sort_custom(func(a, b): return a[value] < b[value])
 	
-func _get_sorting(value) -> String:
-	if sort_memory[value] == "ascending":
-		sort_memory[value] = "descending"
-	else:
-		sort_memory[value] = "ascending"
-	return sort_memory[value]
+	sort_memory[value] = not sort_memory[value]
+	
+	if sort_memory[value]:
+		current_content.reverse()
+	
+	_set_up_content()
 
-class ContentSort:
-	var value
-	func ascending(a, b) -> bool:
-		if a[value] < b[value]:
-			return true
-		return false
-		
-	func descending(a, b) -> bool:
-		if a[value] > b[value]:
-			return true
-		return false
 
 
 func _on_Next_pressed() -> void:
