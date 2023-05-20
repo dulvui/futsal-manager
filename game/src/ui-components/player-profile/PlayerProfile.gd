@@ -1,12 +1,10 @@
 extends Control
 
-signal player_select
+const DetailNumber:PackedScene = preload("res://src/ui-components/color-number/ColorNumber.tscn")
 
-const DetailNumber = preload("res://src/ui-components/color-number/ColorNumber.tscn")
+var player:Dictionary = {}
 
-var player = {}
-
-func set_up_info(_player) -> void:
+func set_up_info(_player:Dictionary) -> void:
 	player = _player
 	
 	$TabContainer/Info/Info/Name.text = player["surname"] + " " + player["name"]
@@ -56,6 +54,3 @@ func set_up_info(_player) -> void:
 
 func _on_Hide_pressed() -> void:
 	hide()
-
-func _on_DetailPopup_hide() -> void:
-	queue_free()

@@ -13,6 +13,14 @@ grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("2")
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -160,10 +168,6 @@ text = "X"
 visible = false
 layout_mode = 2
 
-[node name="Hide" type="Button" parent="TabContainer/History"]
-layout_mode = 0
-text = "X"
-
 [node name="Actual" type="GridContainer" parent="TabContainer/History"]
 layout_mode = 0
 columns = 2
@@ -177,17 +181,7 @@ layout_mode = 2
 text = "Viustel Hans"
 
 [node name="Contract" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
-[node name="Hide" type="Button" parent="TabContainer/Contract"]
-visible = false
-layout_mode = 0
-offset_left = 931.0
-offset_top = 77.0
-offset_right = 966.0
-offset_bottom = 111.0
-text = "X"
-
 [connection signal="pressed" from="TabContainer/Info/Hide" to="." method="_on_Hide_pressed"]
-[connection signal="pressed" from="TabContainer/History/Hide" to="." method="_on_Hide_pressed"]
-[connection signal="pressed" from="TabContainer/Contract/Hide" to="." method="_on_Hide_pressed"]

@@ -19,7 +19,12 @@ visible = false
 layout_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(800, 300)
 layout_mode = 0
+offset_left = 88.0
+offset_top = 156.0
+offset_right = 1202.0
+offset_bottom = 573.0
 
 [node name="Content" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -28,26 +33,26 @@ theme_override_constants/v_separation = 20
 
 [node name="Next" type="Button" parent="."]
 layout_mode = 0
-offset_left = 712.0
-offset_top = 547.0
-offset_right = 774.0
-offset_bottom = 569.0
+offset_left = 738.0
+offset_top = 637.0
+offset_right = 819.0
+offset_bottom = 671.0
 text = "NEXT"
 
 [node name="Prev" type="Button" parent="."]
 layout_mode = 0
-offset_left = 406.0
-offset_top = 544.0
-offset_right = 468.0
-offset_bottom = 566.0
+offset_left = 432.0
+offset_top = 634.0
+offset_right = 510.0
+offset_bottom = 668.0
 text = "PREV"
 
 [node name="Pages" type="Label" parent="."]
 layout_mode = 0
-offset_left = 580.0
-offset_top = 546.0
-offset_right = 606.0
-offset_bottom = 571.0
+offset_left = 606.0
+offset_top = 636.0
+offset_right = 657.0
+offset_bottom = 673.0
 text = "1/12"
 
 [connection signal="pressed" from="Next" to="." method="_on_Next_pressed"]
