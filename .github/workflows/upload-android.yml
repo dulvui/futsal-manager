@@ -46,16 +46,17 @@ jobs:
         uses: dulvui/godot-android-export@v2.0.0
         with:
           working-directory: $WORKING_DIRECTORY
+          godot-version: 4.0.3
 
-      - name: Publish to Play Store
-        uses: r0adkll/upload-google-play@v1
-        with:
-          serviceAccountJson: service-account.json
-          packageName: com.simondalvai.futsalmanager
-          releaseFiles: FutsalManager.aab
-          track: "internal"
-          status: completed
-          changesNotSentForReview: true
+      # - name: Publish to Play Store
+      #   uses: r0adkll/upload-google-play@v1
+      #   with:
+      #     serviceAccountJson: service-account.json
+      #     packageName: com.simondalvai.futsalmanager
+      #     releaseFiles: FutsalManager.aab
+      #     track: "internal"
+      #     status: completed
+      #     changesNotSentForReview: true
 
       - name: Bundle aab to apk
         run: |
