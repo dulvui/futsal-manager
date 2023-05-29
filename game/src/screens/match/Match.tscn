@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ck5f72rt3q5km" path="res://src/match-simulator/MatchSimulator.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
 [ext_resource type="Script" path="res://src/screens/match/Match.gd" id="3"]
-[ext_resource type="PackedScene" path="res://src/ui-components/match/statistics/MatchStats.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://bc6kfu3avld0" path="res://src/ui-components/match/statistics/MatchStats.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui-components/formation/Formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://5agy8ull675s" path="res://src/ui-components/match/events/MatchEvents.tscn" id="6"]
 
@@ -232,8 +232,8 @@ scroll_following = true
 layout_mode = 0
 offset_left = 502.0
 offset_top = 163.0
-offset_right = 803.0
-offset_bottom = 507.0
+offset_right = 942.0
+offset_bottom = 651.0
 
 [node name="Dashboard" type="Button" parent="."]
 visible = false
@@ -247,16 +247,20 @@ text = "DASHBOARD"
 [node name="Formation" parent="." instance=ExtResource("5")]
 visible = false
 anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Events" parent="." instance=ExtResource("6")]
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 470.0
-offset_top = 218.0
-offset_right = 470.0
-offset_bottom = 218.0
+offset_left = 431.0
+offset_top = 145.0
+offset_right = 1010.0
+offset_bottom = 489.0
 grow_horizontal = 1
 grow_vertical = 1
 
