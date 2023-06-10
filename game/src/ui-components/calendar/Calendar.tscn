@@ -25,8 +25,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 80
-theme_override_constants/v_separation = 80
+theme_override_constants/h_separation = 124
+theme_override_constants/v_separation = 114
 columns = 7
 
 [node name="TrainingPopUp" type="Popup" parent="."]
@@ -39,11 +39,12 @@ anchor_bottom = 1.0
 [node name="VBoxContainer" type="VBoxContainer" parent="TrainingPopUp"]
 
 [node name="Close" type="Button" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 1091.0
-offset_top = 25.0
-offset_right = 1122.0
-offset_bottom = 47.0
+offset_left = 1157.0
+offset_top = 47.0
+offset_right = 1192.0
+offset_bottom = 81.0
 text = "X"
 
 [node name="Paginator" type="HBoxContainer" parent="."]

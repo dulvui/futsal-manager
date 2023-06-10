@@ -8,6 +8,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1174.0
+offset_bottom = -650.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2")
 script = ExtResource("1")
 
@@ -27,14 +31,18 @@ text = "31"
 
 [node name="WeekDay" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_right = 48.0
-offset_bottom = 25.0
+offset_left = 39.0
+offset_right = 75.0
+offset_bottom = 37.0
 text = "WE"
 
 [node name="Match" type="Button" parent="."]
 visible = false
 layout_mode = 0
+offset_left = -1.0
+offset_top = 34.0
+offset_right = 105.0
+offset_bottom = 68.0
 text = "sdddsff"
 
 [node name="MatchPopup" type="Popup" parent="."]
