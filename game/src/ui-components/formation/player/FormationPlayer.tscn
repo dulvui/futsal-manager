@@ -31,10 +31,10 @@ horizontal_alignment = 1
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 0
-offset_left = -16.0
-offset_top = 36.0
-offset_right = 80.0
-offset_bottom = 61.0
+offset_left = -28.0
+offset_top = 32.0
+offset_right = 98.0
+offset_bottom = 69.0
 text = "Fischnaller"
 horizontal_alignment = 1
 

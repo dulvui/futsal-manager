@@ -94,8 +94,10 @@ text = "X"
 
 [node name="Table" parent="." instance=ExtResource("3")]
 layout_mode = 1
-offset_top = 2.0
-offset_bottom = 2.0
+offset_left = 104.0
+offset_top = 184.0
+offset_right = 72.0
+offset_bottom = -96.0
 
 [connection signal="text_changed" from="NameSearch" to="." method="_on_NameSearch_text_changed"]
 [connection signal="item_selected" from="TeamSelect" to="." method="_on_TeamSelect_item_selected"]

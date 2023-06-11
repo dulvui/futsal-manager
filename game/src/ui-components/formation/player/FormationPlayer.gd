@@ -2,10 +2,10 @@ extends Control
 
 signal change_player
 
-var player
+var player:Dictionary
 
 
-func set_player(new_player) -> void:
+func set_player(new_player:Dictionary) -> void:
 	player = new_player
 	$Name.text = player["surname"]
 	$Nr.text = str(player["nr"])
