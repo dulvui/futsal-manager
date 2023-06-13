@@ -11,7 +11,6 @@ var all_players = []
 var active_filters = {}
 
 const FISICAL_TITLES = ["acc","agi","jum","pac","sta","str"]
-const GENERAL_TITLES = ["POS","PR."]
 
 const POSITIONS = ["G","D","WL","WR","P","U"]
 const INFO_TYPES = ["mental","physical","technical","goalkeeper"]
@@ -37,11 +36,6 @@ func set_up(include_active_players, active_team = null) -> void:
 	$FootSelect.add_item("NO_FOOT")
 	for foot in FOOTS:
 		$FootSelect.add_item(foot)
-		
-	for title in GENERAL_TITLES:
-		var label = Label.new()
-		label.text = title
-		$Titles/Details.add_child(label)
 		
 	for info_type in INFO_TYPES:
 		$InfoSelect.add_item(info_type)

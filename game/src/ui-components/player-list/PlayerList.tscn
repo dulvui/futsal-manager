@@ -24,26 +24,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Titles" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 48.0
-offset_right = 146.0
-offset_bottom = 85.0
-
-[node name="NameLabel" type="Label" parent="Titles"]
-layout_mode = 2
-text = "NAME"
-
-[node name="Details" type="HBoxContainer" parent="Titles"]
-layout_mode = 2
-
 [node name="NameSearch" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 198.0
+offset_left = 160.0
 offset_top = 45.0
 offset_right = 374.0
-offset_bottom = 84.0
+offset_bottom = 87.0
 placeholder_text = "NAME"
 caret_blink = true
 
@@ -57,17 +43,17 @@ offset_bottom = 83.0
 
 [node name="TeamSelect" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 631.0
-offset_top = 45.0
-offset_right = 691.0
-offset_bottom = 79.0
+offset_left = 744.0
+offset_top = 48.0
+offset_right = 969.0
+offset_bottom = 82.0
 
 [node name="PositionSelect" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 712.0
-offset_top = 43.0
-offset_right = 768.0
-offset_bottom = 82.0
+offset_left = 392.0
+offset_top = 48.0
+offset_right = 528.0
+offset_bottom = 80.0
 
 [node name="FootSelect" type="OptionButton" parent="."]
 visible = false
@@ -79,17 +65,17 @@ offset_bottom = 88.0
 
 [node name="InfoSelect" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 521.0
-offset_top = 39.0
-offset_right = 602.0
-offset_bottom = 82.0
+offset_left = 552.0
+offset_top = 48.0
+offset_right = 720.0
+offset_bottom = 81.0
 
 [node name="Close" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1065.0
-offset_top = 33.0
-offset_right = 1100.0
-offset_bottom = 67.0
+offset_left = 1200.0
+offset_top = 48.0
+offset_right = 1235.0
+offset_bottom = 82.0
 text = "X"
 
 [node name="Table" parent="." instance=ExtResource("3")]
