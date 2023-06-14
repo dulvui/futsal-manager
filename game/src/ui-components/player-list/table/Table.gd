@@ -1,10 +1,10 @@
 extends Control
 
 signal select_player
+signal info_player
 
 const ColorNumber = preload("res://src/ui-components/color-number/ColorNumber.tscn")
 const NameLabel = preload("res://src/ui-components/player-list/table/name-label/NameLabel.tscn")
-const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
 
 const SIZE = 10
 
@@ -131,9 +131,7 @@ func filter(filters: Dictionary, exlusive = false) -> void:
 	
 
 func show_info(player) -> void:
-	var player_profile = PlayerProfile.instantiate()
-	add_child(player_profile)
-	player_profile.set_up_info(player)
+	emit_signal("info_player", player)
 	
 func change_player(player) -> void:
 	emit_signal("select_player",player)

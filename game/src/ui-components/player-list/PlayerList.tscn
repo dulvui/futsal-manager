@@ -80,10 +80,10 @@ text = "X"
 
 [node name="Table" parent="." instance=ExtResource("3")]
 layout_mode = 1
-offset_left = 104.0
-offset_top = 184.0
-offset_right = 72.0
-offset_bottom = -96.0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = -24.0
+offset_bottom = 0.0
 
 [connection signal="text_changed" from="NameSearch" to="." method="_on_NameSearch_text_changed"]
 [connection signal="item_selected" from="TeamSelect" to="." method="_on_TeamSelect_item_selected"]
@@ -91,4 +91,5 @@ offset_bottom = -96.0
 [connection signal="item_selected" from="FootSelect" to="." method="_on_FootSelect_item_selected"]
 [connection signal="item_selected" from="InfoSelect" to="." method="_on_InfoSelect_item_selected"]
 [connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]
+[connection signal="info_player" from="Table" to="." method="_on_table_info_player"]
 [connection signal="select_player" from="Table" to="." method="_on_Table_select_player"]

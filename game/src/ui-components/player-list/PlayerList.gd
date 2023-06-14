@@ -134,3 +134,9 @@ func _reset_options() -> void:
 	$TeamSelect.selected = 0
 	$FootSelect.selected = 0
 	$InfoSelect.selected = 0
+
+
+func _on_table_info_player(player):
+	var player_profile = PlayerProfile.instantiate()
+	add_child(player_profile)
+	player_profile.set_up_info(player)
