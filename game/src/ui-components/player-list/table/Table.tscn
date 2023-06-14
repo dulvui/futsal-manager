@@ -14,42 +14,41 @@ grow_vertical = 2
 theme = ExtResource("2")
 script = ExtResource("1")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(800, 300)
-layout_mode = 0
-offset_left = 88.0
-offset_top = 121.0
-offset_right = 1202.0
-offset_bottom = 538.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -109.0
+offset_right = 640.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 4
+alignment = 1
 
-[node name="Content" type="GridContainer" parent="MarginContainer"]
+[node name="Prev" type="Button" parent="HBoxContainer"]
 layout_mode = 2
+text = "PREV"
+
+[node name="Pages" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "1/12"
+
+[node name="Next" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "NEXT"
+
+[node name="Content" type="GridContainer" parent="."]
+layout_mode = 2
+offset_top = 79.0
+offset_right = 1280.0
+offset_bottom = 541.0
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 
-[node name="Next" type="Button" parent="."]
-layout_mode = 0
-offset_left = 784.0
-offset_top = 622.0
-offset_right = 865.0
-offset_bottom = 656.0
-text = "NEXT"
-
-[node name="Prev" type="Button" parent="."]
-layout_mode = 0
-offset_left = 478.0
-offset_top = 619.0
-offset_right = 556.0
-offset_bottom = 653.0
-text = "PREV"
-
-[node name="Pages" type="Label" parent="."]
-layout_mode = 0
-offset_left = 652.0
-offset_top = 621.0
-offset_right = 703.0
-offset_bottom = 658.0
-text = "1/12"
-
-[connection signal="pressed" from="Next" to="." method="_on_Next_pressed"]
-[connection signal="pressed" from="Prev" to="." method="_on_Prev_pressed"]
+[connection signal="pressed" from="HBoxContainer/Prev" to="." method="_on_Prev_pressed"]
+[connection signal="pressed" from="HBoxContainer/Next" to="." method="_on_Next_pressed"]

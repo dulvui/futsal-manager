@@ -9,10 +9,10 @@ const NameLabel = preload("res://src/ui-components/player-list/table/name-label/
 const SIZE = 10
 
 @onready
-var content_container = $MarginContainer/Content
+var content_container = $Content
 
 @onready
-var pages = $Pages
+var pages = $HBoxContainer/Pages
 
 var current_page = 0
 var max_page = 0
@@ -72,7 +72,7 @@ func _set_up_headers() -> void:
 func _set_up_content() -> void:
 	content_container.queue_free()
 	content_container = GridContainer.new()
-	$MarginContainer.add_child(content_container)
+	add_child(content_container)
 	
 	_update_max_page()
 	_set_up_headers()

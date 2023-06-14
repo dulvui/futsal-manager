@@ -81,7 +81,7 @@ text = "X"
 [node name="Table" parent="." instance=ExtResource("3")]
 layout_mode = 1
 offset_left = 8.0
-offset_top = 48.0
+offset_top = 112.0
 offset_right = -24.0
 offset_bottom = 0.0
 
