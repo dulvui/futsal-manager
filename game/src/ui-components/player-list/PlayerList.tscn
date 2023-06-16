@@ -80,9 +80,8 @@ text = "X"
 
 [node name="Table" parent="." instance=ExtResource("3")]
 layout_mode = 1
-offset_left = 8.0
+offset_left = 4.0
 offset_top = 112.0
-offset_right = -24.0
 offset_bottom = 0.0
 
 [connection signal="text_changed" from="NameSearch" to="." method="_on_NameSearch_text_changed"]

@@ -9,22 +9,22 @@ const NameLabel = preload("res://src/ui-components/player-list/table/name-label/
 const SIZE = 10
 
 @onready
-var content_container = $Content
+var content_container = $CenterContainer/VBoxContainer/Content
 
 @onready
-var pages = $HBoxContainer/Pages
+var pages = $CenterContainer/VBoxContainer/HBoxContainer/Pages
 
-var current_page = 0
-var max_page = 0
+var current_page:int = 0
+var max_page:int = 0
 
-var headers
-var content # base content
-var current_content # current visible content, can be filtered
+var headers:Array
+var content:Array # base content
+var current_content:Array # current visible content, can be filtered
 
-var sort_memory = {} # to save wich value is already sorted and how
+var sort_memory:Dictionary = {} # to save wich value is already sorted and how
 
 	
-func set_up(_headers,_content=null) -> void:
+func set_up(_headers:Array,_content=null) -> void:
 	headers = _headers
 	
 	# if content, table is setup for first time
@@ -70,9 +70,8 @@ func _set_up_headers() -> void:
 	content_container.add_child(lable_change)
 	
 func _set_up_content() -> void:
-	content_container.queue_free()
-	content_container = GridContainer.new()
-	add_child(content_container)
+	for child in content_container.get_children():
+		content_container.remove_child(child)
 	
 	_update_max_page()
 	_set_up_headers()
