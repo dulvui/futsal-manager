@@ -18,7 +18,7 @@ func _ready() -> void:
 func set_up(active_team:Dictionary = DataSaver.get_selected_team()) -> void:
 	team = active_team
 	_set_active_players()
-	$PlayerList.set_up(false, team)
+	$PlayerList.set_up(true, team)
 	animation_player.play("Fade" + team["formation"])
 
 func _on_FormationSelect_item_selected(index:int) -> void:
@@ -59,7 +59,7 @@ func _on_G_change_player(_player) -> void:
 func _on_PlayerList_select_player(_player) -> void:
 	_change_player(_player)
 	_set_active_players()
-	$PlayerList.set_up_players(false, team)
+	$PlayerList.set_up_players(true, team)
 	$PlayerList.hide()
 	emit_signal("change")
 	
