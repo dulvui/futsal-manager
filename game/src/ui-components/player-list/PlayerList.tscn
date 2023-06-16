@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/ui-components/player-list/PlayerList.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
-[ext_resource type="PackedScene" uid="uid://bmsr4wbngmfmw" path="res://src/ui-components/player-list/table/Table.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bmsr4wbngmfmw" path="res://src/ui-components/player-list/table/PlayerTable.tscn" id="3"]
 
 [node name="PlayerList" type="Control"]
 layout_mode = 3
