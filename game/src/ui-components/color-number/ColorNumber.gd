@@ -4,9 +4,13 @@ extends Control
 func set_up(value:int) -> void:
 	$Label.text = str(value)
 	
+	var label_settings:LabelSettings = LabelSettings.new()
+	
 	if value < 11 :
-		$Label.label_settings.font_color = Color.RED
+		label_settings.font_color = Color.RED
 	elif value < 16:
-		$Label.label_settings.font_color = Color.BLUE
+		label_settings.font_color = Color.BLUE
 	else:
-		$Label.label_settings.font_color = Color.DARK_GREEN
+		label_settings.font_color = Color.DARK_GREEN
+	
+	$Label.label_settings = label_settings
