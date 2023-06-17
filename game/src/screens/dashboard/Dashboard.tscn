@@ -28,42 +28,42 @@ anchor_bottom = 1.0
 
 [node name="ManagerName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 277.0
-offset_top = 118.0
-offset_right = 364.0
-offset_bottom = 143.0
+offset_left = 53.0
+offset_top = 38.0
+offset_right = 197.0
+offset_bottom = 75.0
 text = "Hans Viustel"
 
 [node name="Budget" type="Label" parent="."]
 layout_mode = 0
-offset_left = 844.0
-offset_top = 124.0
-offset_right = 922.0
-offset_bottom = 149.0
+offset_left = 644.0
+offset_top = 44.0
+offset_right = 755.0
+offset_bottom = 81.0
 text = "400.000 $"
 
 [node name="TeamName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 593.0
-offset_top = 123.0
-offset_right = 717.0
-offset_bottom = 160.0
+offset_left = 393.0
+offset_top = 43.0
+offset_right = 517.0
+offset_bottom = 80.0
 text = "Barcellona"
 
 [node name="Date" type="Label" parent="."]
 layout_mode = 0
-offset_left = 965.0
-offset_top = 123.0
-offset_right = 1055.0
-offset_bottom = 148.0
+offset_left = 765.0
+offset_top = 43.0
+offset_right = 895.0
+offset_bottom = 80.0
 text = "24/08/2002"
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 66.0
-offset_top = 180.0
-offset_right = 218.0
-offset_bottom = 352.0
+offset_left = 1033.0
+offset_top = 141.0
+offset_right = 1239.0
+offset_bottom = 385.0
 
 [node name="Formation" type="Button" parent="Buttons"]
 layout_mode = 2
@@ -91,9 +91,9 @@ layout_mode = 0
 
 [node name="MailCounter" type="Label" parent="Buttons/Email/Panel"]
 layout_mode = 0
-offset_left = 129.0
-offset_right = 143.0
-offset_bottom = 25.0
+offset_left = 161.0
+offset_right = 189.0
+offset_bottom = 37.0
 text = "12"
 
 [node name="SearchPlayer" type="Button" parent="Buttons"]
@@ -106,39 +106,40 @@ text = "MENU"
 
 [node name="Email" parent="." instance=ExtResource("6")]
 layout_mode = 1
-offset_left = 334.0
-offset_top = 172.0
-offset_right = 334.0
-offset_bottom = 172.0
+offset_left = 54.0
+offset_top = 106.0
+offset_right = -286.0
+offset_bottom = -147.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Table" parent="." instance=ExtResource("7")]
+visible = false
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 320.0
-offset_top = 158.0
-offset_right = 920.0
-offset_bottom = 558.0
+offset_left = 50.0
+offset_top = 111.0
+offset_right = 650.0
+offset_bottom = 511.0
 grow_horizontal = 1
 grow_vertical = 1
 
 [node name="Continue" type="Button" parent="."]
 layout_mode = 0
-offset_left = 970.0
-offset_top = 589.0
-offset_right = 1073.0
-offset_bottom = 611.0
+offset_left = 1088.0
+offset_top = 651.0
+offset_right = 1232.0
+offset_bottom = 685.0
 text = "CONTINUE"
 
 [node name="Calendar" parent="." instance=ExtResource("3")]
 visible = false
 layout_mode = 1
-offset_left = 324.0
-offset_top = 70.0
-offset_right = -113.0
-offset_bottom = -131.0
+offset_left = 66.0
+offset_top = 102.0
+offset_right = -371.0
+offset_bottom = -99.0
 
 [node name="PlayerOfferPopup" type="Popup" parent="."]
 
