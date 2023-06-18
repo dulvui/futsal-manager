@@ -15,6 +15,7 @@ func set_up(day, current_day, current_month) -> void:
 			if matchz != null:
 				if DataSaver.team_name == matchz["home"]:
 					team_name = matchz["away"]
+					$ColorRect.color = Color.DARK_GRAY
 				elif DataSaver.team_name == matchz["away"]:
 					team_name = matchz["home"]
 					$ColorRect.color = Color.GRAY
@@ -24,6 +25,8 @@ func set_up(day, current_day, current_month) -> void:
 	if current_day == DataSaver.date.day and DataSaver.date.month == current_month:
 		if $ColorRect.color != Color.GRAY:
 			$ColorRect.color = Color.RED
+		elif $ColorRect.color != Color.DARK_GRAY:
+			$ColorRect.color = Color.DARK_RED
 		else:
 			$ColorRect.color = Color.LIGHT_PINK
 			
