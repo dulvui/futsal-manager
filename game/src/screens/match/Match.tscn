@@ -60,180 +60,169 @@ script = ExtResource("3")
 [node name="MatchSimulator" parent="." instance=ExtResource("1")]
 position = Vector2(568, 198)
 
-[node name="VisualActionContainer" type="Control" parent="."]
+[node name="HUD" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 287.0
-offset_top = 157.0
-offset_right = -77.0
-offset_bottom = -149.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HUD" type="Control" parent="."]
-anchors_preset = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="TopBar" type="HBoxContainer" parent="HUD"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -68.0
-offset_top = 88.0
-offset_right = 133.0
-offset_bottom = 113.0
-grow_horizontal = 2
-
-[node name="Time" type="Label" parent="HUD/TopBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "32sds"
-
-[node name="Home" type="Label" parent="HUD/TopBar"]
-layout_mode = 2
-text = "Robledo"
-
-[node name="Result" type="Label" parent="HUD/TopBar"]
-layout_mode = 2
-text = "0:0"
-
-[node name="Away" type="Label" parent="HUD/TopBar"]
-layout_mode = 2
-text = "Cisneros"
-
 [node name="Pause" type="Button" parent="HUD"]
 layout_mode = 0
-offset_left = 1013.0
-offset_top = 569.0
-offset_right = 1081.0
-offset_bottom = 591.0
+offset_left = 1124.0
+offset_top = 579.0
+offset_right = 1216.0
+offset_bottom = 613.0
 text = "START"
 
-[node name="SpeedFactor" type="Label" parent="HUD"]
+[node name="Buttons" type="VBoxContainer" parent="HUD"]
 layout_mode = 0
-offset_left = 702.0
-offset_top = 563.0
-offset_right = 721.0
-offset_bottom = 588.0
-text = "X2"
+offset_left = 1063.0
+offset_top = 215.0
+offset_right = 1227.0
+offset_bottom = 417.0
 
-[node name="Faster" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 758.0
-offset_top = 569.0
-offset_right = 791.0
-offset_bottom = 591.0
-text = "+1"
-
-[node name="Slower" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 641.0
-offset_top = 567.0
-offset_right = 673.0
-offset_bottom = 589.0
-text = "-1"
-
-[node name="LeftButtons" type="VBoxContainer" parent="HUD"]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 207.0
-offset_right = 144.0
-offset_bottom = 349.0
-
-[node name="Field" type="Button" parent="HUD/LeftButtons"]
+[node name="Field" type="Button" parent="HUD/Buttons"]
 layout_mode = 2
 text = "FIELD"
 
-[node name="Stats" type="Button" parent="HUD/LeftButtons"]
+[node name="Stats" type="Button" parent="HUD/Buttons"]
 layout_mode = 2
 text = "STATS"
 
-[node name="Events" type="Button" parent="HUD/LeftButtons"]
+[node name="Events" type="Button" parent="HUD/Buttons"]
 layout_mode = 2
 text = "EVENTS"
 
-[node name="Change" type="Button" parent="HUD/LeftButtons"]
+[node name="Change" type="Button" parent="HUD/Buttons"]
 visible = false
 layout_mode = 2
 text = "CHANGE"
 
-[node name="Tactics" type="Button" parent="HUD/LeftButtons"]
+[node name="Tactics" type="Button" parent="HUD/Buttons"]
 layout_mode = 2
 text = "TACTICS"
 
-[node name="Formation" type="Button" parent="HUD/LeftButtons"]
+[node name="Formation" type="Button" parent="HUD/Buttons"]
 layout_mode = 2
 text = "FORMATION"
 
-[node name="Table" type="Button" parent="HUD/LeftButtons"]
+[node name="Table" type="Button" parent="HUD/Buttons"]
 visible = false
 layout_mode = 2
 text = "TABLE"
 
-[node name="Matches" type="Button" parent="HUD/LeftButtons"]
+[node name="Matches" type="Button" parent="HUD/Buttons"]
 visible = false
 layout_mode = 2
 text = "MATCHES"
 
-[node name="Votes" type="Button" parent="HUD/LeftButtons"]
+[node name="Votes" type="Button" parent="HUD/Buttons"]
 visible = false
 layout_mode = 2
 text = "VOTES"
 
-[node name="TimeBar" type="ProgressBar" parent="HUD"]
+[node name="CentralContainer" type="VBoxContainer" parent="HUD"]
+custom_minimum_size = Vector2(860, 640)
 layout_mode = 0
-offset_left = 422.0
-offset_top = 121.0
-offset_right = 1022.0
-offset_bottom = 147.0
+offset_left = 52.0
+offset_top = 21.0
+offset_right = 1008.0
+offset_bottom = 675.0
+
+[node name="TopBar" type="VBoxContainer" parent="HUD/CentralContainer"]
+custom_minimum_size = Vector2(780, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Labels" type="HBoxContainer" parent="HUD/CentralContainer/TopBar"]
+layout_mode = 2
+alignment = 1
+
+[node name="Time" type="Label" parent="HUD/CentralContainer/TopBar/Labels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "32sds"
+
+[node name="Home" type="Label" parent="HUD/CentralContainer/TopBar/Labels"]
+layout_mode = 2
+text = "Robledo"
+
+[node name="Result" type="Label" parent="HUD/CentralContainer/TopBar/Labels"]
+layout_mode = 2
+text = "0:0"
+
+[node name="Away" type="Label" parent="HUD/CentralContainer/TopBar/Labels"]
+layout_mode = 2
+text = "Cisneros"
+
+[node name="TimeBar" type="ProgressBar" parent="HUD/CentralContainer/TopBar"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
 max_value = 2400.0
 step = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="PossessBar" type="ProgressBar" parent="HUD"]
-layout_mode = 0
-offset_left = 420.0
-offset_top = 517.0
-offset_right = 1020.0
-offset_bottom = 543.0
+[node name="MainBar" type="MarginContainer" parent="HUD/CentralContainer"]
+custom_minimum_size = Vector2(840, 460)
+layout_mode = 2
+
+[node name="Log" type="RichTextLabel" parent="HUD/CentralContainer/MainBar"]
+visible = false
+layout_mode = 2
+scroll_following = true
+
+[node name="Stats" parent="HUD/CentralContainer/MainBar" instance=ExtResource("4")]
+layout_mode = 2
+
+[node name="Events" parent="HUD/CentralContainer/MainBar" instance=ExtResource("6")]
+layout_mode = 2
+
+[node name="VisualActionContainer" type="Control" parent="HUD/CentralContainer/MainBar"]
+layout_mode = 2
+
+[node name="BottomBar" type="VBoxContainer" parent="HUD/CentralContainer"]
+custom_minimum_size = Vector2(780, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PossessBar" type="ProgressBar" parent="HUD/CentralContainer/BottomBar"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
 step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="HUD/PossessBar"]
+[node name="Label" type="Label" parent="HUD/CentralContainer/BottomBar/PossessBar"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -9.0
-offset_right = 61.0
-offset_bottom = 16.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "POSSESSION"
+horizontal_alignment = 1
 
-[node name="Log" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 459.0
-offset_top = 171.0
-offset_right = 958.0
-offset_bottom = 483.0
-scroll_following = true
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/CentralContainer/BottomBar"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
 
-[node name="Stats" parent="." instance=ExtResource("4")]
-layout_mode = 0
-offset_left = 502.0
-offset_top = 163.0
-offset_right = 942.0
-offset_bottom = 651.0
+[node name="Slower" type="Button" parent="HUD/CentralContainer/BottomBar/HBoxContainer"]
+layout_mode = 2
+text = "-1"
+
+[node name="SpeedFactor" type="Label" parent="HUD/CentralContainer/BottomBar/HBoxContainer"]
+layout_mode = 2
+text = "X2"
+
+[node name="Faster" type="Button" parent="HUD/CentralContainer/BottomBar/HBoxContainer"]
+layout_mode = 2
+text = "+1"
 
 [node name="Dashboard" type="Button" parent="."]
 visible = false
@@ -243,26 +232,6 @@ offset_top = 541.0
 offset_right = 239.0
 offset_bottom = 563.0
 text = "DASHBOARD"
-
-[node name="Formation" parent="." instance=ExtResource("5")]
-visible = false
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Events" parent="." instance=ExtResource("6")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 431.0
-offset_top = 145.0
-offset_right = 1010.0
-offset_bottom = 489.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="SKIP" type="Button" parent="."]
 layout_mode = 0
@@ -283,6 +252,10 @@ pivot_offset = Vector2(120, 60)
 text = "GOAL"
 label_settings = SubResource("LabelSettings_3ady1")
 
+[node name="Formation" parent="." instance=ExtResource("5")]
+visible = false
+layout_mode = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_7wx2m")
@@ -298,13 +271,13 @@ autostart = true
 [connection signal="match_end" from="MatchSimulator" to="." method="_on_MatchSimulator_match_end"]
 [connection signal="shot" from="MatchSimulator" to="." method="_on_MatchSimulator_shot"]
 [connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
-[connection signal="pressed" from="HUD/Faster" to="." method="_on_Faster_pressed"]
-[connection signal="pressed" from="HUD/Slower" to="." method="_on_Slower_pressed"]
-[connection signal="pressed" from="HUD/LeftButtons/Field" to="." method="_on_Field_pressed"]
-[connection signal="pressed" from="HUD/LeftButtons/Stats" to="." method="_on_Stats_pressed"]
-[connection signal="pressed" from="HUD/LeftButtons/Events" to="." method="_on_Events_pressed"]
-[connection signal="pressed" from="HUD/LeftButtons/Formation" to="." method="_on_Formation_pressed"]
+[connection signal="pressed" from="HUD/Buttons/Field" to="." method="_on_Field_pressed"]
+[connection signal="pressed" from="HUD/Buttons/Stats" to="." method="_on_Stats_pressed"]
+[connection signal="pressed" from="HUD/Buttons/Events" to="." method="_on_Events_pressed"]
+[connection signal="pressed" from="HUD/Buttons/Formation" to="." method="_on_Formation_pressed"]
+[connection signal="pressed" from="HUD/CentralContainer/BottomBar/HBoxContainer/Slower" to="." method="_on_Slower_pressed"]
+[connection signal="pressed" from="HUD/CentralContainer/BottomBar/HBoxContainer/Faster" to="." method="_on_Faster_pressed"]
 [connection signal="pressed" from="Dashboard" to="." method="_on_Dashboard_pressed"]
-[connection signal="change" from="Formation" to="." method="_on_Formation_change"]
 [connection signal="pressed" from="SKIP" to="." method="_on_SKIP_pressed"]
+[connection signal="change" from="Formation" to="." method="_on_Formation_change"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

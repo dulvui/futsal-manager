@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bmbdm3wnodvew" path="res://src/match-simulator/visual-action/actors/referee/Referee.tscn" id="5"]
 
 [node name="VisualAction" type="Node2D"]
-scale = Vector2(0.7, 0.7)
+position = Vector2(111, 50)
+scale = Vector2(0.6, 0.6)
 script = ExtResource("3")
 
 [node name="Field" parent="." instance=ExtResource("1")]

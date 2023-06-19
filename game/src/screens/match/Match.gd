@@ -5,17 +5,17 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready
 var match_simulator:Node2D = $MatchSimulator
 @onready
-var stats:MarginContainer = $Stats
+var stats:MarginContainer = $HUD/CentralContainer/MainBar/Stats
 @onready
-var comments:RichTextLabel = $Log
+var comments:RichTextLabel = $HUD/CentralContainer/MainBar/Log
 @onready
-var events:ScrollContainer = $Events
+var events:ScrollContainer = $HUD/CentralContainer/MainBar/Events
 @onready
 var animation_player:AnimationPlayer = $AnimationPlayer
 @onready
-var time_label:Label = $HUD/TopBar/Time
+var time_label:Label = $HUD/CentralContainer/TopBar/Labels/Time
 @onready
-var result_label:Label = $HUD/TopBar/Result
+var result_label:Label = $HUD/CentralContainer/TopBar/Labels/Result
 
 var last_active_view:Control
 
@@ -47,8 +47,8 @@ func _ready() -> void:
 				away_team_real = team
 				away_team = team.duplicate(true)
 	
-	$HUD/TopBar/Home.text = next_match["home"]
-	$HUD/TopBar/Away.text = next_match["away"]
+	$HUD/CentralContainer/TopBar/Labels/Home.text = next_match["home"]
+	$HUD/CentralContainer/TopBar/Labels/Away.text = next_match["away"]
 	
 	$Formation.set_up()
 	match_simulator.set_up(home_team,away_team)
@@ -60,16 +60,16 @@ func _process(delta:float) -> void:
 	stats.update_stats(match_simulator.action_util.home_stats.statistics, match_simulator.action_util.away_stats.statistics)
 	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 	
-	$HUD/TimeBar.value = match_simulator.time
-	$HUD/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
-	$HUD/SpeedFactor.text = str(speed_factor + 1) + " X"
+	$HUD/CentralContainer/TopBar/TimeBar.value = match_simulator.time
+	$HUD/CentralContainer/BottomBar/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
+	$HUD/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(speed_factor + 1) + " X"
 
 
 func match_end() -> void:
-	$HUD/Faster.hide()
-	$HUD/Slower.hide()
-	$HUD/Pause.hide()
-	$HUD/SpeedFactor.hide()
+	$HUD/CentralContainer/BottomBar/HBoxContainer/Faster.hide()
+	$HUD/CentralContainer/BottomBar/HBoxContainer/Slower.hide()
+	$HUD/CentralContainer/BottomBar/HBoxContainer/Pause.hide()
+	$HUD/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.hide()
 	$Dashboard.show()
 	match_simulator.match_finished()
 	DataSaver.set_table_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
@@ -126,12 +126,12 @@ func _hide_views() -> void:
 	events.hide()
 
 func _toggle_view_buttons() -> void:
-	$HUD/LeftButtons/Change.disabled = not $HUD/LeftButtons/Change.disabled 
-	$HUD/LeftButtons/Events.disabled = not $HUD/LeftButtons/Events.disabled
-	$HUD/LeftButtons/Stats.disabled = not $HUD/LeftButtons/Stats.disabled
-	$HUD/LeftButtons/Field.disabled = not $HUD/LeftButtons/Field.disabled
-	$HUD/LeftButtons/Formation.disabled = not $HUD/LeftButtons/Formation.disabled
-	$HUD/LeftButtons/Tactics.disabled = not $HUD/LeftButtons/Tactics.disabled
+	$HUD/Buttons/Change.disabled = not $HUD/Buttons/Change.disabled 
+	$HUD/Buttons/Events.disabled = not $HUD/Buttons/Events.disabled
+	$HUD/Buttons/Stats.disabled = not $HUD/Buttons/Stats.disabled
+	$HUD/Buttons/Field.disabled = not $HUD/Buttons/Field.disabled
+	$HUD/Buttons/Formation.disabled = not $HUD/Buttons/Formation.disabled
+	$HUD/Buttons/Tactics.disabled = not $HUD/Buttons/Tactics.disabled
 	
 
 func _on_Dashboard_pressed() -> void:
@@ -189,7 +189,7 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 	# Visual Action
 	var visual_action:Node = VisualAction.instantiate()
 	visual_action.set_up(is_home, is_goal, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
-	$VisualActionContainer.add_child(visual_action)
+	$HUD/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
 	await visual_action.action_finished
 	
 	if is_goal:
