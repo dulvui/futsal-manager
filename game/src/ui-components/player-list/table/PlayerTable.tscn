@@ -40,9 +40,17 @@ layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
+[node name="First" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "<<"
+
+[node name="Prev5" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "- 5"
+
 [node name="Prev" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "PREV"
+text = "<"
 
 [node name="Pages" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -50,7 +58,19 @@ text = "1/12"
 
 [node name="Next" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "NEXT"
+text = ">"
 
+[node name="Next5" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "+ 5"
+
+[node name="Last" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ">>"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/First" to="." method="_on_first_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Prev5" to="." method="_on_prev_5_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Prev" to="." method="_on_Prev_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Next5" to="." method="_on_next_5_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Last" to="." method="_on_last_pressed"]

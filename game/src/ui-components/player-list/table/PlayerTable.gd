@@ -151,6 +151,37 @@ func _on_Next_pressed() -> void:
 	if current_page < max_page - 1:
 		current_page += 1
 		_set_up_content()
+		_update_pages()
+		
+
+func _on_next_5_pressed():
+	if current_page < max_page - 5:
+		current_page += 5
+	else:
+		current_page = max_page - 1
+	_set_up_content()
+	_update_pages()
+
+
+func _on_last_pressed():
+	current_page = max_page - 1
+	_set_up_content()
+	_update_pages()
+	
+
+func _on_first_pressed():
+	current_page = 0
+	_set_up_content()
+	_update_pages()
+	
+
+
+func _on_prev_5_pressed():
+	if current_page > 4:
+		current_page -= 5
+	else:
+		current_page = 0
+	_set_up_content()
 	_update_pages()
 
 
@@ -158,7 +189,7 @@ func _on_Prev_pressed() -> void:
 	if current_page > 0:
 		current_page -= 1
 		_set_up_content()
-	_update_pages()
+		_update_pages()
 	
 func _update_max_page() -> void:
 	max_page = current_content.size()/SIZE
