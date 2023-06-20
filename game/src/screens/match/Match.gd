@@ -28,7 +28,6 @@ var away_team_real:Dictionary
 
 var home_goals:int = 0
 var away_goals:int = 0
-var speed_factor:int = 0
 
 var match_started:bool = false
 var first_half:bool = true
@@ -62,7 +61,7 @@ func _process(delta:float) -> void:
 	
 	$HUD/HSplitContainer/CentralContainer/TopBar/TimeBar.value = match_simulator.time
 	$HUD/HSplitContainer/CentralContainer/BottomBar/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
-	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(speed_factor + 1) + " X"
+	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(DataSaver.speed_factor + 1) + " X"
 
 
 func match_end() -> void:
@@ -140,14 +139,14 @@ func _on_Dashboard_pressed() -> void:
 
 
 func _on_Faster_pressed() -> void:
-	if speed_factor < 3:
-		speed_factor += 1
+	if DataSaver.speed_factor < 3:
+		DataSaver.speed_factor += 1
 		match_simulator.faster()
 
 
 func _on_Slower_pressed() -> void:
-	if speed_factor > 0:
-		speed_factor -= 1
+	if DataSaver.speed_factor > 0:
+		DataSaver.speed_factor -= 1
 		match_simulator.slower()
 
 

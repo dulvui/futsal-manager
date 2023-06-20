@@ -10,6 +10,8 @@ var date:Dictionary
 # saves wich season this is, starting from 0
 var current_season:int
 
+var speed_factor:int = 0
+
 var leagues:Dictionary = {
 	"IT": [
 		{
@@ -70,6 +72,9 @@ func _ready() -> void:
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
 	messages = config.get_value("mail","messages",[])
 	
+	speed_factor = config.get_value("match","speed_factor",0)
+	
+	
 	
 func reset() -> void:
 	manager =  {
@@ -106,6 +111,7 @@ func save_all_data() -> void:
 	config.set_value("season","current_transfers",TransferUtil.current_transfers)
 	config.set_value("mail","messages",EmailUtil.messages)
 	config.set_value("season","current_season",current_season)
+	config.set_value("match","speed_factor",speed_factor)
 	config.save("user://settings.cfg")
 	print("all data saved")
 
