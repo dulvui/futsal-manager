@@ -3,8 +3,12 @@
 [ext_resource type="Script" path="res://src/ui-components/match/statistics/MatchStats.gd" id="1"]
 
 [node name="Stats" type="MarginContainer"]
-offset_right = 1060.0
+offset_right = 1281.0
 offset_bottom = 444.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 script = ExtResource("1")
 
 [node name="VBoxContainer" type="GridContainer" parent="."]
@@ -21,11 +25,13 @@ text = "45%"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "POSSESSION"
+horizontal_alignment = 1
 
 [node name="AwayPossession" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "55%"
+horizontal_alignment = 2
 
 [node name="HomeShots" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -36,11 +42,13 @@ text = "12"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SHOTS"
+horizontal_alignment = 1
 
 [node name="AwayShots" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2
 
 [node name="HomeShotsOnTarget" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -51,11 +59,13 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SHOTS_ON_TARGET"
+horizontal_alignment = 1
 
 [node name="AwayShotsOnTarget" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2
 
 [node name="HomeFouls" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -66,11 +76,13 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "FOULS"
+horizontal_alignment = 1
 
 [node name="AwayFouls" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2
 
 [node name="HomeFreeKicks" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -81,11 +93,13 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "FREE_KICKS"
+horizontal_alignment = 1
 
 [node name="AwayFreeKicks" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2
 
 [node name="HomePenalties" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -96,11 +110,13 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PENALTIES"
+horizontal_alignment = 1
 
 [node name="AwayPenalties" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2
 
 [node name="HomeThrowIn" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -111,11 +127,13 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "THROW_INS"
+horizontal_alignment = 1
 
 [node name="AwayThrowIn" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2
 
 [node name="HomeCorners" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -126,11 +144,13 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "CORNERS"
+horizontal_alignment = 1
 
 [node name="AwayCorners" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2
 
 [node name="HomePass" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -141,11 +161,13 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PASS"
+horizontal_alignment = 1
 
 [node name="AwayPass" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2
 
 [node name="HomePassSuccess" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -156,11 +178,13 @@ text = "100 - 90%"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PASS_SUCCESS"
+horizontal_alignment = 1
 
 [node name="AwayPassSuccess" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "60% - 26"
+horizontal_alignment = 2
 
 [node name="HomeYellowCards" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -171,11 +195,13 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "YELLOW_CARDS"
+horizontal_alignment = 1
 
 [node name="AwayYellowCards" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2
 
 [node name="HomeRedCards" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -186,8 +212,10 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "RED_CARDS"
+horizontal_alignment = 1
 
 [node name="AwayRedCards" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "0"
+horizontal_alignment = 2

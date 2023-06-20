@@ -2,8 +2,8 @@ extends MarginContainer
 
 
 func update_stats(home_stats:Dictionary, away_stats:Dictionary) -> void:
-	$VBoxContainer/HomePossession.text = "%d "%home_stats["possession"]
-	$VBoxContainer/AwayPossession.text = "%d "%away_stats["possession"]
+	$VBoxContainer/HomePossession.text = "%d "%home_stats["possession"] + "%"
+	$VBoxContainer/AwayPossession.text = "%d "%away_stats["possession"] + "%"
 	$VBoxContainer/HomePass.text = "%d "%home_stats["passes"]
 	$VBoxContainer/AwayPass.text = "%d "%away_stats["passes"]
 	$VBoxContainer/HomePassSuccess.text = "%d "%home_stats["passes_success"]

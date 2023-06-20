@@ -123,11 +123,11 @@ custom_minimum_size = Vector2(840, 460)
 layout_mode = 2
 
 [node name="Log" type="RichTextLabel" parent="HUD/HSplitContainer/CentralContainer/MainBar"]
-visible = false
 layout_mode = 2
 scroll_following = true
 
 [node name="Stats" parent="HUD/HSplitContainer/CentralContainer/MainBar" instance=ExtResource("4")]
+visible = false
 layout_mode = 2
 
 [node name="Events" parent="HUD/HSplitContainer/CentralContainer/MainBar" instance=ExtResource("6")]
@@ -220,6 +220,7 @@ layout_mode = 2
 text = "VOTES"
 
 [node name="HSeparator" type="HSeparator" parent="HUD/HSplitContainer/Buttons"]
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 

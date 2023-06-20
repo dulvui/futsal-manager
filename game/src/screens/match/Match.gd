@@ -228,7 +228,7 @@ func _on_MatchSimulator_match_end() -> void:
 
 
 func _on_MatchSimulator_action_message(message:String) -> void:
-	if comments.get_line_count() > 9:
+	if comments.get_line_count() > 12:
 		comments.remove_paragraph(0)
 	comments.newline()
 	comments.add_text(time_label.text + " " + message)
