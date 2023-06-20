@@ -68,9 +68,9 @@ func _process(delta:float) -> void:
 func match_end() -> void:
 	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Faster.hide()
 	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Slower.hide()
-	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Pause.hide()
 	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.hide()
-	$Dashboard.show()
+	$HUD/HSplitContainer/Buttons/Pause.hide()
+	$HUD/HSplitContainer/Buttons/Dashboard.show()
 	match_simulator.match_finished()
 	DataSaver.set_table_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
 	

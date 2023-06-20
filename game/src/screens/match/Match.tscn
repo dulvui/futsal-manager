@@ -124,6 +124,7 @@ layout_mode = 2
 
 [node name="Log" type="RichTextLabel" parent="HUD/HSplitContainer/CentralContainer/MainBar"]
 layout_mode = 2
+fit_content = true
 scroll_following = true
 
 [node name="Stats" parent="HUD/HSplitContainer/CentralContainer/MainBar" instance=ExtResource("4")]
@@ -232,13 +233,9 @@ text = "PAUSE"
 layout_mode = 2
 text = "SKIP"
 
-[node name="Dashboard" type="Button" parent="."]
+[node name="Dashboard" type="Button" parent="HUD/HSplitContainer/Buttons"]
 visible = false
-layout_mode = 0
-offset_left = 120.0
-offset_top = 541.0
-offset_right = 239.0
-offset_bottom = 563.0
+layout_mode = 2
 text = "DASHBOARD"
 
 [node name="Goal" type="Label" parent="."]
@@ -278,6 +275,6 @@ autostart = true
 [connection signal="pressed" from="HUD/HSplitContainer/Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="HUD/HSplitContainer/Buttons/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="HUD/HSplitContainer/Buttons/SKIP" to="." method="_on_SKIP_pressed"]
-[connection signal="pressed" from="Dashboard" to="." method="_on_Dashboard_pressed"]
+[connection signal="pressed" from="HUD/HSplitContainer/Buttons/Dashboard" to="." method="_on_Dashboard_pressed"]
 [connection signal="change" from="Formation" to="." method="_on_Formation_change"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
