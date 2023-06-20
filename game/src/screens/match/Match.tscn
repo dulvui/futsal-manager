@@ -60,106 +60,57 @@ script = ExtResource("3")
 [node name="MatchSimulator" parent="." instance=ExtResource("1")]
 position = Vector2(568, 198)
 
-[node name="HUD" type="Control" parent="."]
+[node name="HUD" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 
-[node name="Pause" type="Button" parent="HUD"]
-layout_mode = 0
-offset_left = 1124.0
-offset_top = 579.0
-offset_right = 1216.0
-offset_bottom = 613.0
-text = "START"
-
-[node name="Buttons" type="VBoxContainer" parent="HUD"]
-layout_mode = 0
-offset_left = 1063.0
-offset_top = 215.0
-offset_right = 1227.0
-offset_bottom = 417.0
-
-[node name="Field" type="Button" parent="HUD/Buttons"]
+[node name="HSplitContainer" type="HSplitContainer" parent="HUD"]
 layout_mode = 2
-text = "FIELD"
+theme_override_constants/separation = 40
+dragger_visibility = 1
 
-[node name="Stats" type="Button" parent="HUD/Buttons"]
-layout_mode = 2
-text = "STATS"
-
-[node name="Events" type="Button" parent="HUD/Buttons"]
-layout_mode = 2
-text = "EVENTS"
-
-[node name="Change" type="Button" parent="HUD/Buttons"]
-visible = false
-layout_mode = 2
-text = "CHANGE"
-
-[node name="Tactics" type="Button" parent="HUD/Buttons"]
-layout_mode = 2
-text = "TACTICS"
-
-[node name="Formation" type="Button" parent="HUD/Buttons"]
-layout_mode = 2
-text = "FORMATION"
-
-[node name="Table" type="Button" parent="HUD/Buttons"]
-visible = false
-layout_mode = 2
-text = "TABLE"
-
-[node name="Matches" type="Button" parent="HUD/Buttons"]
-visible = false
-layout_mode = 2
-text = "MATCHES"
-
-[node name="Votes" type="Button" parent="HUD/Buttons"]
-visible = false
-layout_mode = 2
-text = "VOTES"
-
-[node name="CentralContainer" type="VBoxContainer" parent="HUD"]
+[node name="CentralContainer" type="VBoxContainer" parent="HUD/HSplitContainer"]
 custom_minimum_size = Vector2(860, 640)
-layout_mode = 0
-offset_left = 52.0
-offset_top = 21.0
-offset_right = 1008.0
-offset_bottom = 675.0
+layout_mode = 2
+alignment = 1
 
-[node name="TopBar" type="VBoxContainer" parent="HUD/CentralContainer"]
+[node name="TopBar" type="VBoxContainer" parent="HUD/HSplitContainer/CentralContainer"]
 custom_minimum_size = Vector2(780, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Labels" type="HBoxContainer" parent="HUD/CentralContainer/TopBar"]
+[node name="Labels" type="HBoxContainer" parent="HUD/HSplitContainer/CentralContainer/TopBar"]
 layout_mode = 2
 alignment = 1
 
-[node name="Time" type="Label" parent="HUD/CentralContainer/TopBar/Labels"]
+[node name="Time" type="Label" parent="HUD/HSplitContainer/CentralContainer/TopBar/Labels"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "32sds"
 
-[node name="Home" type="Label" parent="HUD/CentralContainer/TopBar/Labels"]
+[node name="Home" type="Label" parent="HUD/HSplitContainer/CentralContainer/TopBar/Labels"]
 layout_mode = 2
 text = "Robledo"
 
-[node name="Result" type="Label" parent="HUD/CentralContainer/TopBar/Labels"]
+[node name="Result" type="Label" parent="HUD/HSplitContainer/CentralContainer/TopBar/Labels"]
 layout_mode = 2
 text = "0:0"
 
-[node name="Away" type="Label" parent="HUD/CentralContainer/TopBar/Labels"]
+[node name="Away" type="Label" parent="HUD/HSplitContainer/CentralContainer/TopBar/Labels"]
 layout_mode = 2
 text = "Cisneros"
 
-[node name="TimeBar" type="ProgressBar" parent="HUD/CentralContainer/TopBar"]
+[node name="TimeBar" type="ProgressBar" parent="HUD/HSplitContainer/CentralContainer/TopBar"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 max_value = 2400.0
@@ -167,37 +118,37 @@ step = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="MainBar" type="MarginContainer" parent="HUD/CentralContainer"]
+[node name="MainBar" type="MarginContainer" parent="HUD/HSplitContainer/CentralContainer"]
 custom_minimum_size = Vector2(840, 460)
 layout_mode = 2
 
-[node name="Log" type="RichTextLabel" parent="HUD/CentralContainer/MainBar"]
+[node name="Log" type="RichTextLabel" parent="HUD/HSplitContainer/CentralContainer/MainBar"]
 visible = false
 layout_mode = 2
 scroll_following = true
 
-[node name="Stats" parent="HUD/CentralContainer/MainBar" instance=ExtResource("4")]
+[node name="Stats" parent="HUD/HSplitContainer/CentralContainer/MainBar" instance=ExtResource("4")]
 layout_mode = 2
 
-[node name="Events" parent="HUD/CentralContainer/MainBar" instance=ExtResource("6")]
+[node name="Events" parent="HUD/HSplitContainer/CentralContainer/MainBar" instance=ExtResource("6")]
 layout_mode = 2
 
-[node name="VisualActionContainer" type="Control" parent="HUD/CentralContainer/MainBar"]
+[node name="VisualActionContainer" type="Control" parent="HUD/HSplitContainer/CentralContainer/MainBar"]
 layout_mode = 2
 
-[node name="BottomBar" type="VBoxContainer" parent="HUD/CentralContainer"]
+[node name="BottomBar" type="VBoxContainer" parent="HUD/HSplitContainer/CentralContainer"]
 custom_minimum_size = Vector2(780, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="PossessBar" type="ProgressBar" parent="HUD/CentralContainer/BottomBar"]
+[node name="PossessBar" type="ProgressBar" parent="HUD/HSplitContainer/CentralContainer/BottomBar"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="HUD/CentralContainer/BottomBar/PossessBar"]
+[node name="Label" type="Label" parent="HUD/HSplitContainer/CentralContainer/BottomBar/PossessBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -207,22 +158,78 @@ grow_vertical = 2
 text = "POSSESSION"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/CentralContainer/BottomBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/HSplitContainer/CentralContainer/BottomBar"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Slower" type="Button" parent="HUD/CentralContainer/BottomBar/HBoxContainer"]
+[node name="Slower" type="Button" parent="HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer"]
 layout_mode = 2
 text = "-1"
 
-[node name="SpeedFactor" type="Label" parent="HUD/CentralContainer/BottomBar/HBoxContainer"]
+[node name="SpeedFactor" type="Label" parent="HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer"]
 layout_mode = 2
 text = "X2"
 
-[node name="Faster" type="Button" parent="HUD/CentralContainer/BottomBar/HBoxContainer"]
+[node name="Faster" type="Button" parent="HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer"]
 layout_mode = 2
 text = "+1"
+
+[node name="Buttons" type="VBoxContainer" parent="HUD/HSplitContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Field" type="Button" parent="HUD/HSplitContainer/Buttons"]
+layout_mode = 2
+text = "FIELD"
+
+[node name="Stats" type="Button" parent="HUD/HSplitContainer/Buttons"]
+layout_mode = 2
+text = "STATS"
+
+[node name="Events" type="Button" parent="HUD/HSplitContainer/Buttons"]
+layout_mode = 2
+text = "EVENTS"
+
+[node name="Change" type="Button" parent="HUD/HSplitContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "CHANGE"
+
+[node name="Tactics" type="Button" parent="HUD/HSplitContainer/Buttons"]
+layout_mode = 2
+text = "TACTICS"
+
+[node name="Formation" type="Button" parent="HUD/HSplitContainer/Buttons"]
+layout_mode = 2
+text = "FORMATION"
+
+[node name="Table" type="Button" parent="HUD/HSplitContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "TABLE"
+
+[node name="Matches" type="Button" parent="HUD/HSplitContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "MATCHES"
+
+[node name="Votes" type="Button" parent="HUD/HSplitContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "VOTES"
+
+[node name="HSeparator" type="HSeparator" parent="HUD/HSplitContainer/Buttons"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Pause" type="Button" parent="HUD/HSplitContainer/Buttons"]
+layout_mode = 2
+text = "PAUSE"
+
+[node name="SKIP" type="Button" parent="HUD/HSplitContainer/Buttons"]
+layout_mode = 2
+text = "SKIP"
 
 [node name="Dashboard" type="Button" parent="."]
 visible = false
@@ -232,14 +239,6 @@ offset_top = 541.0
 offset_right = 239.0
 offset_bottom = 563.0
 text = "DASHBOARD"
-
-[node name="SKIP" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1173.0
-offset_top = 28.0
-offset_right = 1243.0
-offset_bottom = 62.0
-text = "SKIP"
 
 [node name="Goal" type="Label" parent="."]
 visible = false
@@ -270,14 +269,14 @@ autostart = true
 [connection signal="half_time" from="MatchSimulator" to="." method="_on_MatchSimulator_half_time"]
 [connection signal="match_end" from="MatchSimulator" to="." method="_on_MatchSimulator_match_end"]
 [connection signal="shot" from="MatchSimulator" to="." method="_on_MatchSimulator_shot"]
-[connection signal="pressed" from="HUD/Pause" to="." method="_on_Pause_pressed"]
-[connection signal="pressed" from="HUD/Buttons/Field" to="." method="_on_Field_pressed"]
-[connection signal="pressed" from="HUD/Buttons/Stats" to="." method="_on_Stats_pressed"]
-[connection signal="pressed" from="HUD/Buttons/Events" to="." method="_on_Events_pressed"]
-[connection signal="pressed" from="HUD/Buttons/Formation" to="." method="_on_Formation_pressed"]
-[connection signal="pressed" from="HUD/CentralContainer/BottomBar/HBoxContainer/Slower" to="." method="_on_Slower_pressed"]
-[connection signal="pressed" from="HUD/CentralContainer/BottomBar/HBoxContainer/Faster" to="." method="_on_Faster_pressed"]
+[connection signal="pressed" from="HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Slower" to="." method="_on_Slower_pressed"]
+[connection signal="pressed" from="HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Faster" to="." method="_on_Faster_pressed"]
+[connection signal="pressed" from="HUD/HSplitContainer/Buttons/Field" to="." method="_on_Field_pressed"]
+[connection signal="pressed" from="HUD/HSplitContainer/Buttons/Stats" to="." method="_on_Stats_pressed"]
+[connection signal="pressed" from="HUD/HSplitContainer/Buttons/Events" to="." method="_on_Events_pressed"]
+[connection signal="pressed" from="HUD/HSplitContainer/Buttons/Formation" to="." method="_on_Formation_pressed"]
+[connection signal="pressed" from="HUD/HSplitContainer/Buttons/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="pressed" from="HUD/HSplitContainer/Buttons/SKIP" to="." method="_on_SKIP_pressed"]
 [connection signal="pressed" from="Dashboard" to="." method="_on_Dashboard_pressed"]
-[connection signal="pressed" from="SKIP" to="." method="_on_SKIP_pressed"]
 [connection signal="change" from="Formation" to="." method="_on_Formation_change"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
