@@ -5,10 +5,6 @@
 [node name="Stats" type="MarginContainer"]
 offset_right = 1281.0
 offset_bottom = 444.0
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
 script = ExtResource("1")
 
 [node name="VBoxContainer" type="GridContainer" parent="."]
