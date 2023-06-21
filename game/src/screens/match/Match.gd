@@ -162,7 +162,7 @@ func _on_Pause_pressed() -> void:
 
 func _on_Formation_pressed() -> void:
 	match_simulator.pause()
-	$HUD/HSplitContainer/Buttons/Pause.text = tr("PAUSE")
+	$HUD/HSplitContainer/Buttons/Pause.text = tr("CONTINUE")
 	$Formation.show()
 
 
