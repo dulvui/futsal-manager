@@ -43,8 +43,10 @@ layout_mode = 2
 text = "<"
 
 [node name="Page" type="Label" parent="VBoxContainer/Paginator"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "wewe"
+horizontal_alignment = 1
 
 [node name="Next" type="Button" parent="VBoxContainer/Paginator"]
 layout_mode = 2
