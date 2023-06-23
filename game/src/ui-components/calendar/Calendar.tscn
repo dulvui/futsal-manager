@@ -18,25 +18,46 @@ layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 130
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 520)
+layout_mode = 2
+theme_override_constants/h_separation = 120
 theme_override_constants/v_separation = 100
 columns = 7
 
-[node name="TrainingPopUp" type="Popup" parent="."]
+[node name="Paginator" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
 
-[node name="Panel" type="Panel" parent="TrainingPopUp"]
+[node name="Prev" type="Button" parent="VBoxContainer/Paginator"]
+layout_mode = 2
+text = "<"
+
+[node name="Page" type="Label" parent="VBoxContainer/Paginator"]
+layout_mode = 2
+text = "wewe"
+
+[node name="Next" type="Button" parent="VBoxContainer/Paginator"]
+layout_mode = 2
+text = ">"
+
+[node name="TrainingPopUp" type="Popup" parent="VBoxContainer/Paginator"]
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Paginator/TrainingPopUp"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TrainingPopUp"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Paginator/TrainingPopUp"]
 
 [node name="Close" type="Button" parent="."]
 visible = false
@@ -47,25 +68,6 @@ offset_right = 1192.0
 offset_bottom = 81.0
 text = "X"
 
-[node name="Paginator" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 498.0
-offset_top = 515.0
-offset_right = 605.0
-offset_bottom = 540.0
-
-[node name="Prev" type="Button" parent="Paginator"]
-layout_mode = 2
-text = "<"
-
-[node name="Page" type="Label" parent="Paginator"]
-layout_mode = 2
-text = "wewe"
-
-[node name="Next" type="Button" parent="Paginator"]
-layout_mode = 2
-text = ">"
-
+[connection signal="pressed" from="VBoxContainer/Paginator/Prev" to="." method="_on_Prev_pressed"]
+[connection signal="pressed" from="VBoxContainer/Paginator/Next" to="." method="_on_Next_pressed"]
 [connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]
-[connection signal="pressed" from="Paginator/Prev" to="." method="_on_Prev_pressed"]
-[connection signal="pressed" from="Paginator/Next" to="." method="_on_Next_pressed"]
