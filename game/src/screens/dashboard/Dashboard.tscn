@@ -22,122 +22,115 @@ theme = ExtResource("1")
 script = ExtResource("2")
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="ManagerName" type="Label" parent="."]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 38.0
-offset_right = 197.0
-offset_bottom = 75.0
+[node name="Main" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="TopBar" type="HBoxContainer" parent="Main/VBoxContainer"]
+layout_mode = 2
+
+[node name="ManagerName" type="Label" parent="Main/VBoxContainer/TopBar"]
+layout_mode = 2
 text = "Hans Viustel"
 
-[node name="Budget" type="Label" parent="."]
-layout_mode = 0
-offset_left = 644.0
-offset_top = 44.0
-offset_right = 755.0
-offset_bottom = 81.0
-text = "400.000 $"
-
-[node name="TeamName" type="Label" parent="."]
-layout_mode = 0
-offset_left = 393.0
-offset_top = 43.0
-offset_right = 517.0
-offset_bottom = 80.0
+[node name="TeamName" type="Label" parent="Main/VBoxContainer/TopBar"]
+layout_mode = 2
 text = "Barcellona"
 
-[node name="Date" type="Label" parent="."]
-layout_mode = 0
-offset_left = 765.0
-offset_top = 43.0
-offset_right = 895.0
-offset_bottom = 80.0
+[node name="VSeparator" type="VSeparator" parent="Main/VBoxContainer/TopBar"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Budget" type="Label" parent="Main/VBoxContainer/TopBar"]
+layout_mode = 2
+text = "400.000 $"
+
+[node name="Date" type="Label" parent="Main/VBoxContainer/TopBar"]
+layout_mode = 2
 text = "24/08/2002"
 
-[node name="Buttons" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 1033.0
-offset_top = 141.0
-offset_right = 1239.0
-offset_bottom = 385.0
+[node name="HSplitContainer" type="HSplitContainer" parent="Main/VBoxContainer"]
+layout_mode = 2
+split_offset = 10
+dragger_visibility = 1
 
-[node name="Formation" type="Button" parent="Buttons"]
+[node name="Content" type="MarginContainer" parent="Main/VBoxContainer/HSplitContainer"]
+custom_minimum_size = Vector2(900, 600)
+layout_mode = 2
+
+[node name="Email" parent="Main/VBoxContainer/HSplitContainer/Content" instance=ExtResource("6")]
+layout_mode = 2
+
+[node name="Table" parent="Main/VBoxContainer/HSplitContainer/Content" instance=ExtResource("7")]
+visible = false
+layout_mode = 2
+
+[node name="Calendar" parent="Main/VBoxContainer/HSplitContainer/Content" instance=ExtResource("3")]
+visible = false
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Main/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="Formation" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
 layout_mode = 2
 text = "FORMATION"
 
-[node name="Training" type="Button" parent="Buttons"]
+[node name="Training" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
 visible = false
 layout_mode = 2
 text = "TRAINING"
 
-[node name="Table" type="Button" parent="Buttons"]
+[node name="Table" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
 layout_mode = 2
 text = "TABLE"
 
-[node name="Calendar" type="Button" parent="Buttons"]
+[node name="Calendar" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
 layout_mode = 2
 text = "CALENDAR"
 
-[node name="Email" type="Button" parent="Buttons"]
+[node name="Email" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
 layout_mode = 2
 text = "EMAIL"
 
-[node name="Panel" type="Panel" parent="Buttons/Email"]
+[node name="Counter" type="Label" parent="Main/VBoxContainer/HSplitContainer/Buttons/Email"]
 layout_mode = 0
-
-[node name="MailCounter" type="Label" parent="Buttons/Email/Panel"]
-layout_mode = 0
-offset_left = 161.0
-offset_right = 189.0
+offset_left = 206.0
+offset_right = 234.0
 offset_bottom = 37.0
 text = "12"
 
-[node name="SearchPlayer" type="Button" parent="Buttons"]
+[node name="SearchPlayer" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
 layout_mode = 2
 text = "SEARCH_PLAYER"
 
-[node name="Menu" type="Button" parent="Buttons"]
+[node name="Menu" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
 layout_mode = 2
 text = "MENU"
 
-[node name="Email" parent="." instance=ExtResource("6")]
-layout_mode = 1
-offset_left = 54.0
-offset_top = 106.0
-offset_right = -286.0
-offset_bottom = -147.0
-
-[node name="Table" parent="." instance=ExtResource("7")]
-visible = false
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 50.0
-offset_top = 111.0
-offset_right = 650.0
-offset_bottom = 511.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Continue" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1088.0
-offset_top = 651.0
-offset_right = 1232.0
-offset_bottom = 685.0
+[node name="Continue" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
+layout_mode = 2
 text = "CONTINUE"
-
-[node name="Calendar" parent="." instance=ExtResource("3")]
-visible = false
-layout_mode = 1
-offset_left = 66.0
-offset_top = 102.0
-offset_right = -371.0
-offset_bottom = -99.0
 
 [node name="PlayerOfferPopup" type="Popup" parent="."]
 
@@ -176,15 +169,15 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="Buttons/Formation" to="." method="_on_Formation_pressed"]
-[connection signal="pressed" from="Buttons/Training" to="." method="_on_Training_pressed"]
-[connection signal="pressed" from="Buttons/Table" to="." method="_on_Table_pressed"]
-[connection signal="pressed" from="Buttons/Calendar" to="." method="_on_Calendar_pressed"]
-[connection signal="pressed" from="Buttons/Email" to="." method="_on_Email_pressed"]
-[connection signal="pressed" from="Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
-[connection signal="pressed" from="Buttons/Menu" to="." method="_on_Menu_pressed"]
-[connection signal="offer_contract" from="Email" to="." method="_on_Email_offer_contract"]
-[connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
+[connection signal="offer_contract" from="Main/VBoxContainer/HSplitContainer/Content/Email" to="." method="_on_Email_offer_contract"]
+[connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Formation" to="." method="_on_Formation_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Training" to="." method="_on_Training_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Table" to="." method="_on_Table_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Calendar" to="." method="_on_Calendar_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Email" to="." method="_on_Email_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Menu" to="." method="_on_Menu_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="cancel" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_cancel"]
 [connection signal="confirm" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_confirm"]
 [connection signal="select_player" from="AllPlayerList" to="." method="_on_AllPlayerList_select_player"]

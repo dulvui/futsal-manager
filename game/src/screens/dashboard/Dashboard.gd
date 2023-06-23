@@ -3,36 +3,38 @@ extends Control
 @onready
 var team = DataSaver.get_selected_team()
 
+@onready
+var continue_button = $Main/VBoxContainer/HSplitContainer/Buttons/Continue
+
 var match_ready:bool = false
 var next_season:bool = false
 
 func _ready() -> void:
-	$ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
-	$TeamName.text = DataSaver.team_name
+	$Main/VBoxContainer/TopBar/ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
+	$Main/VBoxContainer/TopBar/TeamName.text = DataSaver.team_name
+	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
 #	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
-	$Date.text = CalendarUtil.get_dashborad_date()
 	$AllPlayerList.set_up(true)
-	
 	$Formation.set_up()
 	
 	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
 		if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"][0]["result"].length() > 1:
-			$Continue.text = "CONTINUE"
+			continue_button.text = "CONTINUE"
 			match_ready = false
 		else:
-			$Continue.text = "START_MATCH"
+			continue_button.text = "START_MATCH"
 			match_ready = true
 			
 	if DataSaver.date.month == CalendarUtil.END_MONTH and DataSaver.date.day == CalendarUtil.END_DAY:
 		next_season = true
-		$Continue.text = "NEXT_SEASON"
+		continue_button.text = "NEXT_SEASON"
 		
 	
 
 func _process(_delta) -> void:
-	$Buttons/Email/Panel/MailCounter.text = str(EmailUtil.count_unread_messages())
-	$Budget.text = str(team["budget"])
+	$Main/VBoxContainer/HSplitContainer/Buttons/Email/Counter.text = str(EmailUtil.count_unread_messages())
+	$Main/VBoxContainer/TopBar/Budget.text = str(team["budget"])
 
 func _on_Menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
@@ -61,33 +63,33 @@ func _on_Continue_pressed() -> void:
 	
 	if DataSaver.date.month == CalendarUtil.END_MONTH and DataSaver.date.day == CalendarUtil.END_DAY:
 		next_season = true
-		$Continue.text = "NEXT_SEASON"
+		continue_button.text = "NEXT_SEASON"
 		return
 		
 
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
-	$Email.update_messages()
-	$Calendar.set_up()
-	$Date.text = CalendarUtil.get_dashborad_date()
+	$Main/VBoxContainer/HSplitContainer/Content/Email.update_messages()
+	$Main/VBoxContainer/HSplitContainer/Content/Calendar.set_up()
+	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
 	# increases mobile performance not saving on every continue
 	#DataSaver.save_all_data()
 	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
-		$Continue.text = "START_MATCH"
+		continue_button.text = "START_MATCH"
 		match_ready = true
 
 
 func _on_Email_pressed() -> void:
 	_hide_all()
-	$Email.show()
+	$Main/VBoxContainer/HSplitContainer/Content/Email.show()
 
 func _on_Table_pressed() -> void:
 	_hide_all()
-	$Table.show()
+	$Main/VBoxContainer/HSplitContainer/Content/Table.show()
 	
 func _on_Calendar_pressed() -> void:
 	_hide_all()
-	$Calendar.show()
+	$Main/VBoxContainer/HSplitContainer/Content/Calendar.show()
 
 
 func _on_AllPlayerList_select_player(player) -> void:
@@ -118,10 +120,10 @@ func _on_ContractOffer_cancel() -> void:
 
 
 func _on_ContractOffer_confirm() -> void:
-	$Email.update_messages()
+	$Main/VBoxContainer/HSplitContainer/Content/Email.update_messages()
 	$ContractPopup.hide()
 	
 func _hide_all() -> void:
-	$Table.hide()
-	$Email.hide()
-	$Calendar.hide()
+	$Main/VBoxContainer/HSplitContainer/Content/Table.hide()
+	$Main/VBoxContainer/HSplitContainer/Content/Email.hide()
+	$Main/VBoxContainer/HSplitContainer/Content/Calendar.hide()
