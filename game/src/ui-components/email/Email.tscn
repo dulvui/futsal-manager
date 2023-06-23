@@ -8,6 +8,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2")
 script = ExtResource("1")
 
@@ -20,20 +22,7 @@ anchor_bottom = 1.0
 layout_mode = 2
 columns = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Message" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 667.0
-offset_bottom = 326.0
-
-[node name="Border" type="Panel" parent="Message"]
-modulate = Color(0, 0, 0, 1)
+[node name="MessageContainer" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,59 +30,67 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="Message"]
+[node name="Panel" type="Panel" parent="MessageContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 4.0
-offset_right = -5.0
-offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Subject" type="Label" parent="Message"]
-offset_left = 55.0
-offset_top = 16.0
-offset_right = 96.0
-offset_bottom = 41.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MessageContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="TopBar" type="HBoxContainer" parent="MessageContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="SubjectLabel" type="Label" parent="MessageContainer/VBoxContainer/TopBar"]
+layout_mode = 2
+text = "SUBJECT"
+
+[node name="SubjectText" type="Label" parent="MessageContainer/VBoxContainer/TopBar"]
+layout_mode = 2
 text = "Messi"
 
-[node name="Details" type="HBoxContainer" parent="Message"]
-offset_left = 54.0
-offset_top = 41.0
-offset_right = 341.0
-offset_bottom = 66.0
-
-[node name="From" type="Label" parent="Message/Details"]
-layout_mode = 2
-text = "FROM:"
-
-[node name="Sender" type="Label" parent="Message/Details"]
-layout_mode = 2
-text = "info@realmadrid.com"
-
-[node name="VSeparator" type="VSeparator" parent="Message/Details"]
+[node name="VSeparator" type="VSeparator" parent="MessageContainer/VBoxContainer/TopBar"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Date" type="Label" parent="Message/Details"]
+[node name="Close" type="Button" parent="MessageContainer/VBoxContainer/TopBar"]
+layout_mode = 2
+text = "X"
+
+[node name="Details" type="HBoxContainer" parent="MessageContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="From" type="Label" parent="MessageContainer/VBoxContainer/Details"]
+layout_mode = 2
+text = "FROM:"
+
+[node name="Sender" type="Label" parent="MessageContainer/VBoxContainer/Details"]
+layout_mode = 2
+text = "info@realmadrid.com"
+
+[node name="VSeparator" type="VSeparator" parent="MessageContainer/VBoxContainer/Details"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Date" type="Label" parent="MessageContainer/VBoxContainer/Details"]
 layout_mode = 2
 text = "29.12.2022"
 
-[node name="Message" type="RichTextLabel" parent="Message"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 55.0
-offset_top = 79.0
-offset_right = -70.0
-offset_bottom = -73.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Message" type="RichTextLabel" parent="MessageContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 text = "Messi wants to join your club
 
 
@@ -113,21 +110,18 @@ d
 
 
 
+sadasd
+
+
 "
 
-[node name="Action" type="Button" parent="Message"]
-offset_left = 451.0
-offset_top = 276.0
-offset_right = 532.0
-offset_bottom = 298.0
+[node name="BottomBar" type="HBoxContainer" parent="MessageContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Action" type="Button" parent="MessageContainer/VBoxContainer/BottomBar"]
+layout_mode = 2
 text = "ACTION"
 
-[node name="Close" type="Button" parent="Message"]
-offset_left = 611.0
-offset_top = 19.0
-offset_right = 642.0
-offset_bottom = 41.0
-text = "X"
-
-[connection signal="pressed" from="Message/Action" to="." method="_on_Action_pressed"]
-[connection signal="pressed" from="Message/Close" to="." method="_on_Close_pressed"]
+[connection signal="pressed" from="MessageContainer/VBoxContainer/TopBar/Close" to="." method="_on_Close_pressed"]
+[connection signal="pressed" from="MessageContainer/VBoxContainer/BottomBar/Action" to="." method="_on_Action_pressed"]

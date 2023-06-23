@@ -2,9 +2,15 @@ extends Control
 
 signal offer_contract
 
+@onready
+var action_button:Button = $MessageContainer/VBoxContainer/BottomBar/Action
+
+@onready
+var message:RichTextLabel = $MessageContainer/VBoxContainer/Message
+
 func _ready() -> void:
 	update_messages()
-	$Message.hide()
+	$MessageContainer.hide()
 
 func update_messages() -> void:
 	for child in $ScrollContainer/Mails.get_children():
@@ -24,25 +30,25 @@ func update_messages() -> void:
 		$ScrollContainer/Mails.add_child(button)
 
 
-func show_message(message) -> void:
-	message["read"] = true
-	$Message/Action.hide()
-	$Message/Subject.text = message["title"]
-	$Message/Details/Date.text = message["date"]
-	$Message/Details/Sender.text = message["sender"]
-	$Message.show()
+func show_message(message_text:Dictionary) -> void:
+	message_text["read"] = true
+	action_button.hide()
+	$MessageContainer/VBoxContainer/TopBar/SubjectText.text = message_text["title"]
+	$MessageContainer/VBoxContainer/Details/Date.text = message_text["date"]
+	$MessageContainer/VBoxContainer/Details/Sender.text = message_text["sender"]
+	$MessageContainer.show()
 	
 	
-	if message["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER:
-		$Message/Action.text = tr("OFFER_CONTRACT")
-		$Message/Action.pressed.connect(show_offer_contract.bind(message["content"]))
-		$Message/Message.text = message["message"]
-		$Message/Action.show()
-	elif message["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER_MADE:
-		$Message/Message.text = "you made a conttract offer the player"
+	if message_text["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER:
+		action_button.text = tr("OFFER_CONTRACT")
+		action_button.pressed.connect(show_offer_contract.bind(message_text["content"]))
+		message.text = message_text["message"]
+		action_button.show()
+	elif message_text["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER_MADE:
+		message_text.text = "you made a conttract offer the player"
 	#transfer
 	else:
-		$Message/Message.text = message["message"]
+		message.text = message_text["message"]
 		
 	update_messages()
 
@@ -55,4 +61,4 @@ func _on_Action_pressed() -> void:
 
 
 func _on_Close_pressed():
-	$Message.hide()
+	$MessageContainer.hide()

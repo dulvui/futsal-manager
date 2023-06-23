@@ -110,8 +110,6 @@ offset_left = 54.0
 offset_top = 106.0
 offset_right = -286.0
 offset_bottom = -147.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Table" parent="." instance=ExtResource("7")]
 visible = false
