@@ -9,10 +9,7 @@ var color_rect:ColorRect = $ColorRect
 var match_button:Button = $MarginContainer/VBoxContainer/Match
 
 @onready
-var weekday_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/WeekDay
-
-@onready
-var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
+var month_day_label:Label = $MarginContainer/VBoxContainer/MonthDay
 
 # day button of calendar
 
@@ -32,8 +29,10 @@ func set_up(day, current_day, current_month) -> void:
 					team_name = matchz["home"]
 					color_rect.color = Color.DEEP_SKY_BLUE
 		match_button.pressed.connect(_on_Match_pressed.bind(day["matches"]))
-		match_button.show()
 		match_button.text = team_name
+	else:
+		match_button.hide()
+		
 	if current_day == DataSaver.date.day and DataSaver.date.month == current_month:
 		if color_rect.color != Color.DODGER_BLUE:
 			color_rect.color = Color.RED
@@ -43,12 +42,11 @@ func set_up(day, current_day, current_month) -> void:
 			color_rect.color = Color.LIGHT_PINK
 			
 	
-	weekday_label.text = day["weekday"]
 
 
 func _on_Match_pressed(matches) -> void:
 	print("matchchh")
-	for child in match_button.get_node("Popup/VBoxContainer").get_children():
+	for child in $MatchPopup/VBoxContainer.get_children():
 		child.queue_free()
 		
 	for matchz in matches:
@@ -58,9 +56,9 @@ func _on_Match_pressed(matches) -> void:
 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		
-		match_button.get_node("Popup/VBoxContainer").add_child(label)
-	match_button.get_node("Popup/VBoxContainer").popup_centered()
+		$MatchPopup/VBoxContainer.add_child(label)
+	$MatchPopup.popup_centered()
 
 
 func _on_Close_pressed() -> void:
-	match_button.get_node("Popup/VBoxContainer").hide()
+	$MatchPopup.hide()

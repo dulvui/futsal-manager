@@ -77,6 +77,7 @@ dragger_visibility = 1
 [node name="Content" type="MarginContainer" parent="Main/VBoxContainer/HSplitContainer"]
 custom_minimum_size = Vector2(900, 600)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Email" parent="Main/VBoxContainer/HSplitContainer/Content" instance=ExtResource("6")]
 layout_mode = 2
@@ -91,6 +92,7 @@ layout_mode = 2
 
 [node name="Buttons" type="VBoxContainer" parent="Main/VBoxContainer/HSplitContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Formation" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
 layout_mode = 2

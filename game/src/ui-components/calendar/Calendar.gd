@@ -3,7 +3,7 @@ extends Control
 const Day:PackedScene = preload("res://src/ui-components/calendar/day/Day.tscn")
 
 @onready
-var grid:GridContainer = $VBoxContainer/GridContainer
+var grid:GridContainer = $GridContainer
 
 # get current month and show in paginator
 # max back and forward is full current season
@@ -17,7 +17,8 @@ func _ready() -> void:
 func set_up() -> void:
 	# clean grid container
 	for child in grid.get_children():
-		child.queue_free()
+		if not child is Label:
+			child.queue_free()
 	
 	# start with monday: fill with transparent days
 	var monday_counter = 7
@@ -34,12 +35,8 @@ func set_up() -> void:
 		grid.add_child(calendar_day)
 		calendar_day.set_up(DataSaver.calendar[current_month][i], i, current_month)
 #
-	$VBoxContainer/Paginator/Page.text = CalendarUtil.MONTHS[current_month]
+	$Paginator/Page.text = CalendarUtil.MONTHS[current_month]
 	
-
-func _on_Close_pressed() -> void:
-	hide()
-
 
 func _on_Prev_pressed() -> void:
 	current_month -= 1
