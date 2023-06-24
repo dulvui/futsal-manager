@@ -18,6 +18,8 @@ func update_messages() -> void:
 	
 	for i in range(EmailUtil.messages.size()-1,-1,-1): # reverse list
 		var title_label = Label.new()
+		title_label.custom_minimum_size = Vector2(700, 0)
+		title_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		title_label.text = EmailUtil.messages[i]["title"]
 		$ScrollContainer/Mails.add_child(title_label)
 		

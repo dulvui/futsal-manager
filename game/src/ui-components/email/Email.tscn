@@ -20,6 +20,8 @@ anchor_bottom = 1.0
 
 [node name="Mails" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="MessageContainer" type="Control" parent="."]
