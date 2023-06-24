@@ -63,7 +63,7 @@ func message(content:Dictionary,type:int) -> void:
 			if team_name == DataSaver.team_name:
 				team_name = content["away"]
 			message["message"] = "The next match is against " + team_name + ".\nThe quotes are: "
-			message["title"] = tr("NEXT_MATCH")
+			message["title"] = tr("NEXT_MATCH") + " against " + team_name
 		MESSAGE_TYPES.WELCOME_MANAGER:
 			message["message"] = "The team " + DataSaver.team_name + " welcomes you as the new Manager!"
 			message["title"] = tr("WELCOME")
