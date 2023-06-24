@@ -11,11 +11,6 @@ var match_button:Button = $MarginContainer/VBoxContainer/Match
 @onready
 var month_day_label:Label = $MarginContainer/VBoxContainer/MonthDay
 
-# day button of calendar
-
-# on click emits signal, to show match or training popup in calendar
-# if something set, else do nothing
-
 func set_up(day, current_day, current_month) -> void:
 	month_day_label.text = str(current_day + 1)
 	var team_name
