@@ -35,9 +35,9 @@ func set_up(day, current_day, current_month) -> void:
 		
 	if current_day == DataSaver.date.day and DataSaver.date.month == current_month:
 		if color_rect.color != Color.DODGER_BLUE:
-			color_rect.color = Color.RED
+			color_rect.color = Color.LIGHT_GREEN
 		elif color_rect.color != Color.DEEP_SKY_BLUE:
-			color_rect.color = Color.DARK_RED
+			color_rect.color = Color.MEDIUM_SPRING_GREEN
 		else:
 			color_rect.color = Color.LIGHT_PINK
 			
