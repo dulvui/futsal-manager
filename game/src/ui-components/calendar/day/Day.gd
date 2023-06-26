@@ -2,6 +2,8 @@ extends Control
 
 signal click
 
+const MatchList:PackedScene = preload("res://src/ui-components/calendar/match-list/MatchList.tscn")
+
 @onready
 var color_rect:ColorRect = $ColorRect
 
@@ -40,20 +42,9 @@ func set_up(day, current_day, current_month) -> void:
 
 
 func _on_Match_pressed(matches) -> void:
-	print("matchchh")
-	for child in $MatchPopup/VBoxContainer.get_children():
-		child.queue_free()
-		
-	for matchz in matches:
-		var label = Label.new()
-		print(matchz)
-		label.text = matchz["home"] + " " + matchz["result"] + " " + matchz["away"]
-		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		
-		$MatchPopup/VBoxContainer.add_child(label)
-	$MatchPopup.popup_centered()
-
+	var match_list = MatchList.instantiate()
+	add_child(match_list)
+	match_list.show_matches(matches)
 
 func _on_Close_pressed() -> void:
 	$MatchPopup.hide()
