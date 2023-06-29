@@ -26,12 +26,13 @@ grow_vertical = 2
 
 [node name="NameSearch" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 160.0
-offset_top = 45.0
-offset_right = 374.0
-offset_bottom = 87.0
+anchor_left = 0.125
+anchor_top = 0.0625
+anchor_right = 0.292188
+anchor_bottom = 0.120833
 placeholder_text = "NAME"
 caret_blink = true
+metadata/_edit_use_anchors_ = true
 
 [node name="LeagueSelect" type="OptionButton" parent="."]
 visible = false
@@ -43,17 +44,19 @@ offset_bottom = 83.0
 
 [node name="TeamSelect" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 744.0
-offset_top = 48.0
-offset_right = 969.0
-offset_bottom = 82.0
+anchor_left = 0.58125
+anchor_top = 0.0666667
+anchor_right = 0.757031
+anchor_bottom = 0.113889
+metadata/_edit_use_anchors_ = true
 
 [node name="PositionSelect" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 392.0
-offset_top = 48.0
-offset_right = 528.0
-offset_bottom = 80.0
+anchor_left = 0.30625
+anchor_top = 0.0666667
+anchor_right = 0.4125
+anchor_bottom = 0.111111
+metadata/_edit_use_anchors_ = true
 
 [node name="FootSelect" type="OptionButton" parent="."]
 visible = false
@@ -65,24 +68,29 @@ offset_bottom = 88.0
 
 [node name="InfoSelect" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 552.0
-offset_top = 48.0
-offset_right = 720.0
-offset_bottom = 81.0
+anchor_left = 0.43125
+anchor_top = 0.0666667
+anchor_right = 0.5625
+anchor_bottom = 0.1125
+metadata/_edit_use_anchors_ = true
 
 [node name="Close" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1200.0
-offset_top = 48.0
-offset_right = 1235.0
-offset_bottom = 82.0
+anchor_left = 0.9375
+anchor_top = 0.0666667
+anchor_right = 0.964844
+anchor_bottom = 0.113889
 text = "X"
+metadata/_edit_use_anchors_ = true
 
 [node name="Table" parent="." instance=ExtResource("3")]
 layout_mode = 1
-offset_left = 4.0
-offset_top = 112.0
+anchors_preset = -1
+anchor_left = 0.003125
+anchor_top = 0.155556
+anchor_bottom = 0.944444
 offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
 
 [connection signal="text_changed" from="NameSearch" to="." method="_on_NameSearch_text_changed"]
 [connection signal="item_selected" from="TeamSelect" to="." method="_on_TeamSelect_item_selected"]

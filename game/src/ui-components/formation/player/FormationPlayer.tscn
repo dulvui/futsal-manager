@@ -8,11 +8,11 @@ font_size = 26
 
 [node name="Player" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 60.0
-offset_bottom = 60.0
+anchor_right = 0.046875
+anchor_bottom = 0.0833333
 theme = ExtResource("1")
 script = ExtResource("2")
+metadata/_edit_use_anchors_ = true
 
 [node name="Change" type="Button" parent="."]
 layout_mode = 0
