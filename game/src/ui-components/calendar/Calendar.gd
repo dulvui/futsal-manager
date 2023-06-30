@@ -30,10 +30,10 @@ func set_up() -> void:
 		
 	
 	
-	for i in range(0, DataSaver.calendar[current_month].size()):
+	for day in range(0, DataSaver.calendar[current_month].size()):
 		var calendar_day = Day.instantiate()
 		grid.add_child(calendar_day)
-		calendar_day.set_up(DataSaver.calendar[current_month][i], i, current_month)
+		calendar_day.set_up(DataSaver.calendar[current_month][day])
 #
 	$Paginator/Page.text = CalendarUtil.MONTHS[current_month]
 	

@@ -11,13 +11,17 @@ var color_rect:ColorRect = $ColorRect
 var match_button:Button = $MarginContainer/VBoxContainer/Match
 
 @onready
-var month_day_label:Label = $MarginContainer/VBoxContainer/MonthDay
+var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
 
-func set_up(day, current_day, current_month) -> void:
-	month_day_label.text = str(current_day + 1)
+@onready
+var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
+
+func set_up(date) -> void:
+#	print(date)
+	month_day_label.text = str(date.day + 1)
 	var team_name
-	if day["matches"].size() > 0:
-		for matchz in day["matches"]:
+	if date["matches"].size() > 0:
+		for matchz in date["matches"]:
 			if matchz != null:
 				if DataSaver.team_name == matchz["home"]:
 					team_name = matchz["away"]
@@ -25,12 +29,12 @@ func set_up(day, current_day, current_month) -> void:
 				elif DataSaver.team_name == matchz["away"]:
 					team_name = matchz["home"]
 					color_rect.color = Color.DEEP_SKY_BLUE
-		match_button.pressed.connect(_on_Match_pressed.bind(day["matches"]))
+		match_button.pressed.connect(_on_Match_pressed.bind(date["matches"]))
 		match_button.text = team_name
 	else:
 		match_button.hide()
 		
-	if current_day == DataSaver.date.day and DataSaver.date.month == current_month:
+	if date.day == DataSaver.date.day and DataSaver.date.month == date.month:
 		if color_rect.color != Color.DODGER_BLUE:
 			color_rect.color = Color.LIGHT_GREEN
 		elif color_rect.color != Color.DEEP_SKY_BLUE:
@@ -38,7 +42,9 @@ func set_up(day, current_day, current_month) -> void:
 		else:
 			color_rect.color = Color.LIGHT_PINK
 			
-	
+	# check if market is active
+	if CalendarUtil.is_market_active(date):
+		market_label.text = "Market"
 
 
 func _on_Match_pressed(matches) -> void:

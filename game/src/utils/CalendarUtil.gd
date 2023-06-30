@@ -7,12 +7,39 @@ const DAY_IN_SECONDS:int = 86400
 var date:Dictionary
 
 # season start at 1st of june
-const START_DAY = 0
-const START_MONTH = 5
+const START_DAY:int = 0
+const START_MONTH:int = 5
 
 # season end 30th of november
-const END_DAY = 29
-const END_MONTH = 10 
+const END_DAY:int = 29
+const END_MONTH:int = 10 
+
+
+# market dates
+const MARKET_PERIODS:Array = [
+	{
+		"period" : "winter",
+		"start" : {
+			"month" : 0,
+			"day" : 0,
+		},
+		"end" : {
+			"month" : 0,
+			"day" : 30,
+		},
+	},
+	{
+		"period" : "summer",
+		"start" : {
+			"month" : 5,
+			"day" : 0,
+		},
+		"end" : {
+			"month" : 7,
+			"day" : 30,
+		},
+	},
+]
 
 func _ready() -> void:
 	date = DataSaver.date
@@ -49,7 +76,10 @@ func create_calendar(next_season:bool = false) -> void:
 		var day:Dictionary = {
 			"matches" : [],
 			"trainings" : [],
-			"weekday" : DAYS[temp_date.weekday]
+			"weekday" : DAYS[temp_date.weekday],
+			"day" : temp_date.day,
+			"month" : temp_date.month,
+			"year" : temp_date.year,
 		}
 		calendar[temp_date.month].append(day)
 		
@@ -61,6 +91,8 @@ func next_day() -> void:
 	date = _get_next_day(date)
 	DataSaver.date = date
 	
+	var market = is_market_active()
+	print("market is " + str(market))
 	
 	# get email for next match
 	var next_match_month:int = date.month
@@ -113,3 +145,16 @@ func _get_next_day(_date:Dictionary) -> Dictionary:
 	next_day.weekday -= 1
 	
 	return next_day
+
+
+func is_market_active(_date:Dictionary={}) -> bool:
+	var check_date = date
+	if not _date.is_empty():
+		check_date = _date
+	
+	for market_period in MARKET_PERIODS:
+		if check_date.month >= market_period.start.month and check_date.day >= market_period.start.day \
+			and check_date.month <=  market_period.end.month and check_date.day <=  market_period.end.day:
+			return true
+	return false
+		
