@@ -28,7 +28,7 @@ func team_selected(league_id, selected_team) -> void:
 	MatchMaker.inizialize_matches()
 	print("matches initialized")
 	
-	EmailUtil.message({},EmailUtil.MESSAGE_TYPES.WELCOME_MANAGER)
+	EmailUtil.new_message(EmailUtil.MESSAGE_TYPES.WELCOME_MANAGER)
 	
 	DataSaver.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/Dashboard.tscn")

@@ -12,7 +12,9 @@ enum MESSAGE_TYPES {
 					CONTRACT_OFFER_MADE,
 					NEXT_MATCH,
 					NEXT_SEASON,
-					WELCOME_MANAGER
+					WELCOME_MANAGER,
+					MARKET_START,
+					MARKET_END,
 				}
 
 func _ready() -> void:
@@ -25,7 +27,7 @@ func count_unread_messages() -> int:
 			counter += 1
 	return counter
 
-func message(content:Dictionary,type:int) -> void:
+func new_message(type:int, content:Dictionary = {}) -> void:
 	print("new " + str(type) + " mail")
 	
 	var message:Dictionary = {
@@ -70,6 +72,12 @@ func message(content:Dictionary,type:int) -> void:
 		MESSAGE_TYPES.NEXT_SEASON:
 			message["message"] = "The new season begins."
 			message["title"] = "SEASON " + str(DataSaver.date.year) + " STARTS"
+		MESSAGE_TYPES.MARKET_START:
+			message["message"] = "The market begins today."
+			message["title"] = "MARKET STARTS"
+		MESSAGE_TYPES.MARKET_END:
+			message["message"] = "The market ends today."
+			message["title"] = "MARKET ENDS"
 	messages.append(message)
 	
 	if messages.size() > MAX_MESSAGES:

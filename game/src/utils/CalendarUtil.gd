@@ -91,9 +91,6 @@ func next_day() -> void:
 	date = _get_next_day(date)
 	DataSaver.date = date
 	
-	var market = is_market_active()
-	print("market is " + str(market))
-	
 	# get email for next match
 	var next_match_month:int = date.month
 	var next_match_day:int = date.day
@@ -110,8 +107,16 @@ func next_day() -> void:
 				next_match = matchz
 	
 	if next_match:
-		EmailUtil.message(next_match,EmailUtil.MESSAGE_TYPES.NEXT_MATCH)
+		EmailUtil.new_message(EmailUtil.MESSAGE_TYPES.NEXT_MATCH, next_match)
 
+	if is_market_active():
+		print("market is active")
+		
+	if is_market_start_today():
+		EmailUtil.new_message(EmailUtil.MESSAGE_TYPES.MARKET_START)
+		
+	if is_market_end_today():
+		EmailUtil.new_message(EmailUtil.MESSAGE_TYPES.MARKET_END)
 
 
 func get_dashborad_date() -> String:
@@ -155,6 +160,18 @@ func is_market_active(_date:Dictionary={}) -> bool:
 	for market_period in MARKET_PERIODS:
 		if check_date.month >= market_period.start.month and check_date.day >= market_period.start.day \
 			and check_date.month <=  market_period.end.month and check_date.day <=  market_period.end.day:
+			return true
+	return false
+	
+func is_market_start_today() -> bool:
+	for market_period in MARKET_PERIODS:
+		if date.month == market_period.start.month and date.day == market_period.start.day:
+			return true
+	return false
+	
+func is_market_end_today() -> bool:
+	for market_period in MARKET_PERIODS:
+		if date.month == market_period.end.month and date.day == market_period.end.day:
 			return true
 	return false
 		

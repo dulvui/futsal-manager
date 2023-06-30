@@ -238,7 +238,7 @@ func next_season() -> void:
 	CalendarUtil.create_calendar(true)
 	MatchMaker.inizialize_matches()
 	
-	EmailUtil.message({},EmailUtil.MESSAGE_TYPES.NEXT_SEASON)
+	EmailUtil.new_message(EmailUtil.MESSAGE_TYPES.NEXT_SEASON)
 	DataSaver.save_all_data()
 	
 	get_tree().change_scene_to_file("res://src/screens/dashboard/Dashboard.tscn")
