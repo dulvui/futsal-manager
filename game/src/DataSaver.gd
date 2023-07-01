@@ -10,8 +10,6 @@ var date:Dictionary
 # saves wich season this is, starting from 0
 var current_season:int
 
-var speed_factor:int = 0
-
 var leagues:Dictionary = {
 	"IT": [
 		{
@@ -45,6 +43,11 @@ var current_transfers:Array
 var messages:Array
 
 
+# global game states
+var speed_factor:int = 0
+var dashboard_active_content:int = 0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
@@ -71,8 +74,10 @@ func _ready() -> void:
 	
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
 	messages = config.get_value("mail","messages",[])
-	
+
+	# global game states
 	speed_factor = config.get_value("match","speed_factor",0)
+	dashboard_active_content = config.get_value("dashboard","active_content",0)
 	
 	
 	
@@ -112,6 +117,8 @@ func save_all_data() -> void:
 	config.set_value("mail","messages",EmailUtil.messages)
 	config.set_value("season","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)
+	config.set_value("dashboard","active_content",dashboard_active_content)
+
 	config.save("user://settings.cfg")
 	print("all data saved")
 
@@ -238,7 +245,7 @@ func next_season() -> void:
 	CalendarUtil.create_calendar(true)
 	MatchMaker.inizialize_matches()
 	
-	EmailUtil.new_message(EmailUtil.MESSAGE_TYPES.NEXT_SEASON)
+	EmailUtil.new_message(EmailUtil.MessageTypes.NEXT_SEASON)
 	DataSaver.save_all_data()
 	
 	get_tree().change_scene_to_file("res://src/screens/dashboard/Dashboard.tscn")

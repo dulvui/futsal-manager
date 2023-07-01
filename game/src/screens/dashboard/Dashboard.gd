@@ -2,12 +2,27 @@ extends Control
 
 @onready
 var team:Dictionary = DataSaver.get_selected_team()
-
 @onready
 var continue_button:Button = $Main/VBoxContainer/HSplitContainer/Buttons/Continue
-
 @onready
 var next_match_button:Button = $Main/VBoxContainer/HSplitContainer/Buttons/NextMatch
+
+# content views 
+@onready
+var email:Control = $Main/VBoxContainer/HSplitContainer/Content/Email
+@onready
+var table:Control = $Main/VBoxContainer/HSplitContainer/Content/Table
+@onready
+var calendar:Control = $Main/VBoxContainer/HSplitContainer/Content/Calendar
+
+enum ContentViews { EMAIL, CALENDAR, TABLE } 
+
+# full screen views
+@onready
+var formation:Control = $Formation
+@onready
+var all_players_list:Control = $AllPlayerList
+
 
 var match_ready:bool = false
 var next_season:bool = false
@@ -16,10 +31,9 @@ func _ready() -> void:
 	$Main/VBoxContainer/TopBar/ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	$Main/VBoxContainer/TopBar/TeamName.text = DataSaver.team_name
 	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
-#	$Buttons/Manager.text =  DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
 	
-	$AllPlayerList.set_up(true)
-	$Formation.set_up()
+	all_players_list.set_up(true)
+	formation.set_up()
 	
 	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
 		if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"][0]["result"].length() > 1:
@@ -32,6 +46,8 @@ func _ready() -> void:
 	if DataSaver.date.month == CalendarUtil.END_MONTH and DataSaver.date.day == CalendarUtil.END_DAY:
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
+
+	_show_active_view()
 		
 	
 
@@ -44,7 +60,7 @@ func _on_Menu_pressed() -> void:
 
 
 func _on_SearchPlayer_pressed() -> void:
-	$AllPlayerList.show()
+	all_players_list.show()
 
 
 func _on_Training_pressed() -> void:
@@ -52,19 +68,16 @@ func _on_Training_pressed() -> void:
 
 
 func _on_Formation_pressed() -> void:
-	$Formation.show()
+	formation.show()
 
 func _on_Email_pressed() -> void:
-	_hide_all()
-	$Main/VBoxContainer/HSplitContainer/Content/Email.show()
+	_show_active_view(ContentViews.EMAIL)
 
 func _on_Table_pressed() -> void:
-	_hide_all()
-	$Main/VBoxContainer/HSplitContainer/Content/Table.show()
+	_show_active_view(ContentViews.TABLE)
 	
 func _on_Calendar_pressed() -> void:
-	_hide_all()
-	$Main/VBoxContainer/HSplitContainer/Content/Calendar.show()
+	_show_active_view(ContentViews.CALENDAR)
 
 
 func _on_AllPlayerList_select_player(player) -> void:
@@ -95,13 +108,28 @@ func _on_ContractOffer_cancel() -> void:
 
 
 func _on_ContractOffer_confirm() -> void:
-	$Main/VBoxContainer/HSplitContainer/Content/Email.update_messages()
+	email.update_messages()
 	$ContractPopup.hide()
 	
 func _hide_all() -> void:
-	$Main/VBoxContainer/HSplitContainer/Content/Table.hide()
-	$Main/VBoxContainer/HSplitContainer/Content/Email.hide()
-	$Main/VBoxContainer/HSplitContainer/Content/Calendar.hide()
+	table.hide()
+	email.hide()
+	calendar.hide()
+
+func _show_active_view(active_view:int=-1) -> void:
+	_hide_all()
+	if active_view > -1:
+		DataSaver.dashboard_active_content = active_view
+
+	match DataSaver.dashboard_active_content:
+		ContentViews.EMAIL:
+			email.show()
+		ContentViews.TABLE:
+			table.show()
+		ContentViews.CALENDAR:
+			calendar.show()
+		_:
+			email.show()
 
 func _on_Continue_pressed() -> void:
 	_next_day()
@@ -138,8 +166,8 @@ func _next_day() -> void:
 
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
-	$Main/VBoxContainer/HSplitContainer/Content/Email.update_messages()
-	$Main/VBoxContainer/HSplitContainer/Content/Calendar.set_up()
+	email.update_messages()
+	calendar.set_up()
 	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
 	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
 		continue_button.text = "START_MATCH"

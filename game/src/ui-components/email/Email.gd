@@ -41,12 +41,12 @@ func show_message(message_text:Dictionary) -> void:
 	$MessageContainer.show()
 	
 	
-	if message_text["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER:
+	if message_text["type"] == EmailUtil.MessageTypes.CONTRACT_OFFER:
 		action_button.text = tr("OFFER_CONTRACT")
 		action_button.pressed.connect(show_offer_contract.bind(message_text["content"]))
 		message.text = message_text["message"]
 		action_button.show()
-	elif message_text["type"] == EmailUtil.MESSAGE_TYPES.CONTRACT_OFFER_MADE:
+	elif message_text["type"] == EmailUtil.MessageTypes.CONTRACT_OFFER_MADE:
 		message_text.text = "you made a conttract offer the player"
 	#transfer
 	else:

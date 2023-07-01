@@ -4,7 +4,7 @@ var messages:Array = []
 
 const MAX_MESSAGES:int = 30
 
-enum MESSAGE_TYPES {
+enum MessageTypes {
 					TRANSFER,
 					TRANSFER_OFFER,
 					CONTRACT_SIGNED,
@@ -40,7 +40,7 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 	}
 	
 	match type:
-		MESSAGE_TYPES.TRANSFER:
+		MessageTypes.TRANSFER:
 			message["title"] = "TRANSFER"
 			if content.has("success"):
 				if content["success"]:
@@ -50,32 +50,32 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 			else:
 				message["message"] = "You made an " + str(content["money"]) + " offer for " + content["player"]["name"] + " " + content["player"]["surname"]
 		# contract
-		MESSAGE_TYPES.CONTRACT_OFFER:
+		MessageTypes.CONTRACT_OFFER:
 			message["message"] = "You need to make an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"]
 			message["title"] = "CONTRACT OFFER"
 			message["content"] = content
-		MESSAGE_TYPES.CONTRACT_OFFER_MADE:
+		MessageTypes.CONTRACT_OFFER_MADE:
 			message["message"] = "You made an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"]
 			message["title"] = "CONTRACT OFFER MADE"
-		MESSAGE_TYPES.CONTRACT_SIGNED:
+		MessageTypes.CONTRACT_SIGNED:
 			message["message"] = "The player acceptet " + content["player"]["name"] + " " + content["player"]["surname"] + " the contract"
 			message["title"] = "CONTRACT_SIGNED"
-		MESSAGE_TYPES.NEXT_MATCH:
+		MessageTypes.NEXT_MATCH:
 			var team_name = content["home"]
 			if team_name == DataSaver.team_name:
 				team_name = content["away"]
 			message["message"] = "The next match is against " + team_name + ".\nThe quotes are: "
 			message["title"] = tr("NEXT_MATCH") + " against " + team_name
-		MESSAGE_TYPES.WELCOME_MANAGER:
+		MessageTypes.WELCOME_MANAGER:
 			message["message"] = "The team " + DataSaver.team_name + " welcomes you as the new Manager!"
 			message["title"] = tr("WELCOME")
-		MESSAGE_TYPES.NEXT_SEASON:
+		MessageTypes.NEXT_SEASON:
 			message["message"] = "The new season begins."
 			message["title"] = "SEASON " + str(DataSaver.date.year) + " STARTS"
-		MESSAGE_TYPES.MARKET_START:
+		MessageTypes.MARKET_START:
 			message["message"] = "The market begins today."
 			message["title"] = "MARKET STARTS"
-		MESSAGE_TYPES.MARKET_END:
+		MessageTypes.MARKET_END:
 			message["message"] = "The market ends today."
 			message["title"] = "MARKET ENDS"
 	messages.append(message)

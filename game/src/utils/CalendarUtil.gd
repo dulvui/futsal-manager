@@ -64,8 +64,6 @@ func create_calendar(next_season:bool = false) -> void:
 	var calendar:Array = []
 	var temp_date:Dictionary = date.duplicate(true)
 	
-
-	
 	# create months
 	for i in range(0,12):
 		calendar.append([])
@@ -107,16 +105,16 @@ func next_day() -> void:
 				next_match = matchz
 	
 	if next_match:
-		EmailUtil.new_message(EmailUtil.MESSAGE_TYPES.NEXT_MATCH, next_match)
+		EmailUtil.new_message(EmailUtil.MessageTypes.NEXT_MATCH, next_match)
 
 	if is_market_active():
 		print("market is active")
 		
 	if is_market_start_today():
-		EmailUtil.new_message(EmailUtil.MESSAGE_TYPES.MARKET_START)
+		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_START)
 		
 	if is_market_end_today():
-		EmailUtil.new_message(EmailUtil.MESSAGE_TYPES.MARKET_END)
+		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_END)
 
 
 func get_dashborad_date() -> String:
