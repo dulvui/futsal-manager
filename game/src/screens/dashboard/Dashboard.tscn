@@ -130,9 +130,13 @@ text = "SEARCH_PLAYER"
 layout_mode = 2
 text = "MENU"
 
+[node name="NextMatch" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
+layout_mode = 2
+text = "NEXT_MATCH"
+
 [node name="Continue" type="Button" parent="Main/VBoxContainer/HSplitContainer/Buttons"]
 layout_mode = 2
-text = "CONTINUE"
+text = "NEXT_DAY"
 
 [node name="PlayerOfferPopup" type="Popup" parent="."]
 
@@ -179,6 +183,7 @@ layout_mode = 1
 [connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Email" to="." method="_on_Email_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Menu" to="." method="_on_Menu_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/NextMatch" to="." method="_on_next_match_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HSplitContainer/Buttons/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="cancel" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_cancel"]
 [connection signal="confirm" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_confirm"]

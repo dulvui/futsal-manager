@@ -1,10 +1,13 @@
 extends Control
 
 @onready
-var team = DataSaver.get_selected_team()
+var team:Dictionary = DataSaver.get_selected_team()
 
 @onready
-var continue_button = $Main/VBoxContainer/HSplitContainer/Buttons/Continue
+var continue_button:Button = $Main/VBoxContainer/HSplitContainer/Buttons/Continue
+
+@onready
+var next_match_button:Button = $Main/VBoxContainer/HSplitContainer/Buttons/NextMatch
 
 var match_ready:bool = false
 var next_season:bool = false
@@ -50,34 +53,6 @@ func _on_Training_pressed() -> void:
 
 func _on_Formation_pressed() -> void:
 	$Formation.show()
-
-
-func _on_Continue_pressed() -> void:
-	if match_ready:
-		get_tree().change_scene_to_file("res://src/screens/match/Match.tscn")
-		return
-	
-	if next_season:
-		DataSaver.next_season()
-		return
-	
-	if DataSaver.date.month == CalendarUtil.END_MONTH and DataSaver.date.day == CalendarUtil.END_DAY:
-		next_season = true
-		continue_button.text = "NEXT_SEASON"
-		return
-		
-
-	CalendarUtil.next_day()
-	TransferUtil.update_day()
-	$Main/VBoxContainer/HSplitContainer/Content/Email.update_messages()
-	$Main/VBoxContainer/HSplitContainer/Content/Calendar.set_up()
-	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
-	# increases mobile performance not saving on every continue
-	#DataSaver.save_all_data()
-	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
-		continue_button.text = "START_MATCH"
-		match_ready = true
-
 
 func _on_Email_pressed() -> void:
 	_hide_all()
@@ -127,3 +102,46 @@ func _hide_all() -> void:
 	$Main/VBoxContainer/HSplitContainer/Content/Table.hide()
 	$Main/VBoxContainer/HSplitContainer/Content/Email.hide()
 	$Main/VBoxContainer/HSplitContainer/Content/Calendar.hide()
+
+func _on_Continue_pressed() -> void:
+	_next_day()
+
+func _on_next_match_pressed():
+	next_match_button.disabled = true
+	continue_button.disabled = true
+	
+	while not match_ready:
+		_next_day()
+		var timer = Timer.new()
+		add_child(timer)
+		timer.start(1)
+		await timer.timeout
+		
+	next_match_button.disabled = false
+	continue_button.disabled = false
+	
+
+func _next_day() -> void:
+	if match_ready:
+		get_tree().change_scene_to_file("res://src/screens/match/Match.tscn")
+		return
+	
+	if next_season:
+		DataSaver.next_season()
+		return
+	
+	if DataSaver.date.month == CalendarUtil.END_MONTH and DataSaver.date.day == CalendarUtil.END_DAY:
+		next_season = true
+		continue_button.text = "NEXT_SEASON"
+		return
+		
+
+	CalendarUtil.next_day()
+	TransferUtil.update_day()
+	$Main/VBoxContainer/HSplitContainer/Content/Email.update_messages()
+	$Main/VBoxContainer/HSplitContainer/Content/Calendar.set_up()
+	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
+	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
+		continue_button.text = "START_MATCH"
+		match_ready = true
+		next_match_button.disabled = true

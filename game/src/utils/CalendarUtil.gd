@@ -12,7 +12,7 @@ const START_MONTH:int = 5
 
 # season end 30th of november
 const END_DAY:int = 29
-const END_MONTH:int = 10 
+const END_MONTH:int = 10
 
 
 # market dates
