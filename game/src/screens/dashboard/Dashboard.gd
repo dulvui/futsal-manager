@@ -37,7 +37,7 @@ func _ready() -> void:
 	
 	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
 		if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"][0]["result"].length() > 1:
-			continue_button.text = "CONTINUE"
+			continue_button.text = "NEXT_DAY"
 			match_ready = false
 		else:
 			continue_button.text = "START_MATCH"
