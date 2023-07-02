@@ -20,3 +20,6 @@ game/android/
 *.apk
 *.aab
 *.keystore
+
+# VSCode/VSCodium
+game/.vscode/
