@@ -403,26 +403,21 @@ offset_bottom = -89.72
 
 [node name="Field" type="Control" parent="."]
 layout_mode = 1
-anchor_left = 0.5
-anchor_top = 0.189
-anchor_right = 0.957
-anchor_bottom = 0.456
-offset_left = -429.0
-offset_top = -140.08
-offset_right = -1013.96
-offset_bottom = -332.32
+anchor_left = 0.307
+anchor_top = 0.091
+anchor_right = 0.748
+anchor_bottom = 1.0
+offset_left = -181.96
+offset_top = -69.52
+offset_right = -746.44
+offset_bottom = -724.0
 
 [node name="TextureRect" type="TextureRect" parent="Field"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = 756.0
 offset_top = 64.0
 offset_right = 1916.0
 offset_bottom = 644.0
-grow_horizontal = 2
-grow_vertical = 2
 rotation = 1.5708
 texture = ExtResource("5")
 expand_mode = 1
