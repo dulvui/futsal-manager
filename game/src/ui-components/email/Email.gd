@@ -2,11 +2,9 @@ extends Control
 
 signal offer_contract
 
-@onready
-var action_button:Button = $MessageContainer/VBoxContainer/BottomBar/Action
+@onready var action_button:Button = $MessageContainer/VBoxContainer/BottomBar/Action
 
-@onready
-var message:RichTextLabel = $MessageContainer/VBoxContainer/Message
+@onready var message:RichTextLabel = $MessageContainer/VBoxContainer/Message
 
 func _ready() -> void:
 	update_messages()

@@ -2,20 +2,13 @@ extends Control
 
 const VisualAction:PackedScene = preload("res://src/match-simulator/visual-action/VisualAction.tscn")
 
-@onready
-var match_simulator:Node2D = $MatchSimulator
-@onready
-var stats:MarginContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Stats
-@onready
-var comments:RichTextLabel = $HUD/HSplitContainer/CentralContainer/MainBar/Log
-@onready
-var events:ScrollContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Events
-@onready
-var animation_player:AnimationPlayer = $AnimationPlayer
-@onready
-var time_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Time
-@onready
-var result_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Result
+@onready var match_simulator:Node2D = $MatchSimulator
+@onready var stats:MarginContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Stats
+@onready var comments:RichTextLabel = $HUD/HSplitContainer/CentralContainer/MainBar/Log
+@onready var events:ScrollContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Events
+@onready var animation_player:AnimationPlayer = $AnimationPlayer
+@onready var time_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Time
+@onready var result_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Result
 
 var last_active_view:Control
 

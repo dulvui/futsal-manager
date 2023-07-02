@@ -1,7 +1,6 @@
 extends ScrollContainer
 
-@onready
-var vbox:VBoxContainer = $VBoxContainer
+@onready var vbox:VBoxContainer = $VBoxContainer
 
 func append_text(text:String) -> void:
 	var label = Label.new()

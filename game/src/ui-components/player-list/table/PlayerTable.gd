@@ -8,11 +8,9 @@ const NameLabel = preload("res://src/ui-components/player-list/table/name-label/
 
 const SIZE = 10
 
-@onready
-var content_container = $VBoxContainer/Content
+@onready var content_container = $VBoxContainer/Content
 
-@onready
-var pages = $VBoxContainer/HBoxContainer/Pages
+@onready var pages = $VBoxContainer/HBoxContainer/Pages
 
 var current_page:int = 0
 var max_page:int = 0

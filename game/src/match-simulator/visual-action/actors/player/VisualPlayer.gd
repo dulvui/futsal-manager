@@ -7,8 +7,7 @@ var nr:int = 1
 
 var moved = false
 
-@onready
-var sprite = $Sprites
+@onready var sprite = $Sprites
 @export 
 var is_field_player = true
 

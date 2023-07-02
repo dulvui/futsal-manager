@@ -2,22 +2,24 @@ extends Control
 
 signal select_player
 
-const PlayerProfile = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
+const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
 
-var team_search = ""
-var foot_search = ""
+var team_search:String = ""
+var foot_search:String = ""
 
-var all_players = []
-var active_filters = {}
+var all_players:Array = []
+var active_filters:Dictionary = {}
 
-const FISICAL_TITLES = ["acc","agi","jum","pac","sta","str"]
+const FISICAL_TITLES:Array = ["acc","agi","jum","pac","sta","str"]
 
-const POSITIONS = ["G","D","WL","WR","P","U"]
-const INFO_TYPES = ["mental","physical","technical","goalkeeper"]
-const FOOTS = ["R","L","RL"]
+const POSITIONS:Array = ["G","D","WL","WR","P","U"]
+const INFO_TYPES:Array = ["mental","physical","technical","goalkeeper"]
+const FOOTS:Array = ["R","L","RL"]
+
+@onready var table = $VBoxContainer/Table
 
 
-func set_up(include_active_players, active_team = null) -> void:
+func set_up(include_active_players:bool, active_team = null) -> void:
 	
 	set_up_players(include_active_players, active_team)
 
@@ -63,7 +65,7 @@ func set_up_players(include_active_players, active_team = null) -> void:
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
 		
-	$VBoxContainer/Table.set_up(headers, all_players.duplicate(true))
+	$Table.set_up(headers, all_players.duplicate(true))
 	
 func remove_player(player_id) -> void:
 	active_filters["id"] = player_id
@@ -110,7 +112,7 @@ func _on_PositionSelect_item_selected(index) -> void:
 #	add_all_players(true)
 
 func _filter_table(exclusive = false) -> void:
-	$Table.filter(active_filters, exclusive)
+	$VBoxContainer/Table.filter(active_filters, exclusive)
 
 func _on_Close_pressed():
 	hide()

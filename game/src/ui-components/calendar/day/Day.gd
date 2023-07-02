@@ -4,17 +4,13 @@ signal click
 
 const MatchList:PackedScene = preload("res://src/ui-components/calendar/match-list/MatchList.tscn")
 
-@onready
-var color_rect:ColorRect = $ColorRect
+@onready var color_rect:ColorRect = $ColorRect
 
-@onready
-var match_button:Button = $MarginContainer/VBoxContainer/Match
+@onready var match_button:Button = $MarginContainer/VBoxContainer/Match
 
-@onready
-var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
+@onready var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
 
-@onready
-var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
+@onready var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
 
 func set_up(date) -> void:
 #	print(date)

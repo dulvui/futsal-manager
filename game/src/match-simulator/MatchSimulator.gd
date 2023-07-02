@@ -8,10 +8,8 @@ signal match_end
 # seconds for halftime
 const HALF_TIME:int = 1200
 
-@onready
-var action_util:Node = $ActionUtil
-@onready
-var timer:Timer = $Timer
+@onready var action_util:Node = $ActionUtil
+@onready var timer:Timer = $Timer
 
 var time:int = 0
 

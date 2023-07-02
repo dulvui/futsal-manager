@@ -2,8 +2,7 @@ extends Control
 
 const Day:PackedScene = preload("res://src/ui-components/calendar/day/Day.tscn")
 
-@onready
-var grid:GridContainer = $GridContainer
+@onready var grid:GridContainer = $GridContainer
 
 # get current month and show in paginator
 # max back and forward is full current season

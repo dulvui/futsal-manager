@@ -1,35 +1,25 @@
 extends Control
 
-@onready
-var team:Dictionary = DataSaver.get_selected_team()
+@onready var team:Dictionary = DataSaver.get_selected_team()
 
 # buttons
-@onready
-var continue_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Continue
-@onready
-var next_match_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/NextMatch
-@onready
-var email_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Email
+@onready var continue_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Continue
+@onready var next_match_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/NextMatch
+@onready var email_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Email
 
 # content views 
-@onready
-var email:Control = $Main/VBoxContainer/HBoxContainer/Content/Email
-@onready
-var table:Control = $Main/VBoxContainer/HBoxContainer/Content/Table
-@onready
-var calendar:Control = $Main/VBoxContainer/HBoxContainer/Content/Calendar
+@onready var email:Control = $Main/VBoxContainer/HBoxContainer/Content/Email
+@onready var table:Control = $Main/VBoxContainer/HBoxContainer/Content/Table
+@onready var calendar:Control = $Main/VBoxContainer/HBoxContainer/Content/Calendar
 
 # labels
-@onready
-var budget_label:Label = $Main/VBoxContainer/TopBar/Budget
+@onready var budget_label:Label = $Main/VBoxContainer/TopBar/Budget
 
 enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION } 
 
 # full screen views
-@onready
-var formation:Control = $Main/VBoxContainer/HBoxContainer/Content/Formation
-@onready
-var all_players_list:Control = $Main/VBoxContainer/HBoxContainer/Content/AllPlayerList
+@onready var formation:Control = $Main/VBoxContainer/HBoxContainer/Content/Formation
+@onready var all_players_list:Control = $Main/VBoxContainer/HBoxContainer/Content/AllPlayerList
 
 
 var match_ready:bool = false

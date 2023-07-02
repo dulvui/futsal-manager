@@ -6,15 +6,11 @@ const VisualPlayer:PackedScene = preload("res://src/match-simulator/visual-actio
 
 const RUN_DISTANCE:int = 300
 
-@onready
-var WIDTH:int = $Field.width
-@onready
-var HEIGHT:int = $Field.height
+@onready var WIDTH:int = $Field.width
+@onready var HEIGHT:int = $Field.height
 
-@onready
-var timer:Timer = $Timer
-@onready
-var ball:Node2D = $Ball
+@onready var timer:Timer = $Timer
+@onready var ball:Node2D = $Ball
 
 var home_team
 var away_team
@@ -36,8 +32,7 @@ var formations = {
 	"2-2" : ["DL","DR","AL","AR"]
 }
 
-@onready
-var positions = {
+@onready var positions = {
 	"DL" : {
 		"attack" : Vector2(WIDTH * 3 / 8, HEIGHT * 3 / 4),
 		"defense" : Vector2(WIDTH * 1 / 8, HEIGHT * 3 / 4)

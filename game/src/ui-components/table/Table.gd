@@ -1,7 +1,6 @@
 extends Control
 
-@onready
-var grid = $VBoxContainer/ScrollContainer/GridContainer
+@onready var grid = $VBoxContainer/ScrollContainer/GridContainer
 
 func _ready() -> void:
 	var pos:int = 1
