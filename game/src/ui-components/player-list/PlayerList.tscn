@@ -16,87 +16,51 @@ size_flags_vertical = 3
 theme = ExtResource("2")
 script = ExtResource("1")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[node name="NameSearch" type="LineEdit" parent="."]
-layout_mode = 0
-anchor_left = 0.125
-anchor_top = 0.0625
-anchor_right = 0.292188
-anchor_bottom = 0.120833
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="NameSearch" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
 placeholder_text = "NAME"
 caret_blink = true
-metadata/_edit_use_anchors_ = true
 
-[node name="LeagueSelect" type="OptionButton" parent="."]
+[node name="LeagueSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 visible = false
-layout_mode = 0
-offset_left = 703.0
-offset_top = 48.0
-offset_right = 771.0
-offset_bottom = 83.0
+layout_mode = 2
 
-[node name="TeamSelect" type="OptionButton" parent="."]
-layout_mode = 0
-anchor_left = 0.58125
-anchor_top = 0.0666667
-anchor_right = 0.757031
-anchor_bottom = 0.113889
-metadata/_edit_use_anchors_ = true
+[node name="TeamSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
 
-[node name="PositionSelect" type="OptionButton" parent="."]
-layout_mode = 0
-anchor_left = 0.30625
-anchor_top = 0.0666667
-anchor_right = 0.4125
-anchor_bottom = 0.111111
-metadata/_edit_use_anchors_ = true
+[node name="PositionSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
 
-[node name="FootSelect" type="OptionButton" parent="."]
+[node name="FootSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 visible = false
-layout_mode = 0
-offset_left = 794.0
-offset_top = 39.0
-offset_right = 853.0
-offset_bottom = 88.0
+layout_mode = 2
 
-[node name="InfoSelect" type="OptionButton" parent="."]
-layout_mode = 0
-anchor_left = 0.43125
-anchor_top = 0.0666667
-anchor_right = 0.5625
-anchor_bottom = 0.1125
+[node name="InfoSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Table" parent="VBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
+size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Close" type="Button" parent="."]
-layout_mode = 0
-anchor_left = 0.9375
-anchor_top = 0.0666667
-anchor_right = 0.964844
-anchor_bottom = 0.113889
-text = "X"
-metadata/_edit_use_anchors_ = true
-
-[node name="Table" parent="." instance=ExtResource("3")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.003125
-anchor_top = 0.155556
-anchor_bottom = 0.944444
-offset_bottom = 0.0
-metadata/_edit_use_anchors_ = true
-
-[connection signal="text_changed" from="NameSearch" to="." method="_on_NameSearch_text_changed"]
-[connection signal="item_selected" from="TeamSelect" to="." method="_on_TeamSelect_item_selected"]
-[connection signal="item_selected" from="PositionSelect" to="." method="_on_PositionSelect_item_selected"]
-[connection signal="item_selected" from="FootSelect" to="." method="_on_FootSelect_item_selected"]
-[connection signal="item_selected" from="InfoSelect" to="." method="_on_InfoSelect_item_selected"]
-[connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]
-[connection signal="info_player" from="Table" to="." method="_on_table_info_player"]
-[connection signal="select_player" from="Table" to="." method="_on_Table_select_player"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/NameSearch" to="." method="_on_NameSearch_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/TeamSelect" to="." method="_on_TeamSelect_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/PositionSelect" to="." method="_on_PositionSelect_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/FootSelect" to="." method="_on_FootSelect_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/InfoSelect" to="." method="_on_InfoSelect_item_selected"]
+[connection signal="info_player" from="VBoxContainer/Table" to="." method="_on_table_info_player"]
+[connection signal="select_player" from="VBoxContainer/Table" to="." method="_on_Table_select_player"]

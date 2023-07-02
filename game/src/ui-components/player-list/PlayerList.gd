@@ -22,23 +22,23 @@ func set_up(include_active_players, active_team = null) -> void:
 	set_up_players(include_active_players, active_team)
 
 			
-	$LeagueSelect.add_item("ITALIA")
+	$VBoxContainer/HBoxContainer/LeagueSelect.add_item("ITALIA")
 	
-	$TeamSelect.add_item("NO_TEAM")
+	$VBoxContainer/HBoxContainer/TeamSelect.add_item("NO_TEAM")
 	for team in DataSaver.get_teams():
 		if team ==null or team["name"] != DataSaver.team_name:
-			$TeamSelect.add_item(team["name"])
+			$VBoxContainer/HBoxContainer/TeamSelect.add_item(team["name"])
 			
-	$PositionSelect.add_item("NO_POS")
+	$VBoxContainer/HBoxContainer/PositionSelect.add_item("NO_POS")
 	for pos in POSITIONS:
-		$PositionSelect.add_item(pos)
+		$VBoxContainer/HBoxContainer/PositionSelect.add_item(pos)
 		
-	$FootSelect.add_item("NO_FOOT")
+	$VBoxContainer/HBoxContainer/FootSelect.add_item("NO_FOOT")
 	for foot in FOOTS:
-		$FootSelect.add_item(foot)
+		$VBoxContainer/HBoxContainer/FootSelect.add_item(foot)
 		
 	for info_type in INFO_TYPES:
-		$InfoSelect.add_item(info_type)
+		$VBoxContainer/HBoxContainer/InfoSelect.add_item(info_type)
 
 
 func set_up_players(include_active_players, active_team = null) -> void:
@@ -63,7 +63,7 @@ func set_up_players(include_active_players, active_team = null) -> void:
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
 		
-	$Table.set_up(headers, all_players.duplicate(true))
+	$VBoxContainer/Table.set_up(headers, all_players.duplicate(true))
 	
 func remove_player(player_id) -> void:
 	active_filters["id"] = player_id
@@ -129,11 +129,11 @@ func _on_InfoSelect_item_selected(index) -> void:
 	
 
 func _reset_options() -> void:
-	$LeagueSelect.selected = 0
-	$PositionSelect.selected = 0
-	$TeamSelect.selected = 0
-	$FootSelect.selected = 0
-	$InfoSelect.selected = 0
+	$VBoxContainer/HBoxContainer/LeagueSelect.selected = 0
+	$VBoxContainer/HBoxContainer/PositionSelect.selected = 0
+	$VBoxContainer/HBoxContainer/TeamSelect.selected = 0
+	$VBoxContainer/HBoxContainer/FootSelect.selected = 0
+	$VBoxContainer/HBoxContainer/InfoSelect.selected = 0
 
 
 func _on_table_info_player(player):

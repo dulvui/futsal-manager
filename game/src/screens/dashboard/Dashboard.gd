@@ -2,26 +2,34 @@ extends Control
 
 @onready
 var team:Dictionary = DataSaver.get_selected_team()
+
+# buttons
 @onready
-var continue_button:Button = $Main/VBoxContainer/HSplitContainer/Buttons/Continue
+var continue_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Continue
 @onready
-var next_match_button:Button = $Main/VBoxContainer/HSplitContainer/Buttons/NextMatch
+var next_match_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/NextMatch
+@onready
+var email_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Email
 
 # content views 
 @onready
-var email:Control = $Main/VBoxContainer/HSplitContainer/Content/Email
+var email:Control = $Main/VBoxContainer/HBoxContainer/Content/Email
 @onready
-var table:Control = $Main/VBoxContainer/HSplitContainer/Content/Table
+var table:Control = $Main/VBoxContainer/HBoxContainer/Content/Table
 @onready
-var calendar:Control = $Main/VBoxContainer/HSplitContainer/Content/Calendar
+var calendar:Control = $Main/VBoxContainer/HBoxContainer/Content/Calendar
 
-enum ContentViews { EMAIL, CALENDAR, TABLE } 
+# labels
+@onready
+var budget_label:Label = $Main/VBoxContainer/TopBar/Budget
+
+enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION } 
 
 # full screen views
 @onready
-var formation:Control = $Formation
+var formation:Control = $Main/VBoxContainer/HBoxContainer/Content/Formation
 @onready
-var all_players_list:Control = $AllPlayerList
+var all_players_list:Control = $Main/VBoxContainer/HBoxContainer/Content/AllPlayerList
 
 
 var match_ready:bool = false
@@ -52,23 +60,25 @@ func _ready() -> void:
 	
 
 func _process(_delta) -> void:
-	$Main/VBoxContainer/HSplitContainer/Buttons/Email/Counter.text = str(EmailUtil.count_unread_messages())
-	$Main/VBoxContainer/TopBar/Budget.text = str(team["budget"])
+	var email_count = EmailUtil.count_unread_messages()
+	if email_count > 0:
+		email_button.text = str(EmailUtil.count_unread_messages())  + " " + tr("EMAIL") 
+	else:
+		email_button.text = tr("EMAIL")
+	budget_label.text = str(team["budget"])
 
 func _on_Menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")
 
 
-func _on_SearchPlayer_pressed() -> void:
-	all_players_list.show()
-
-
 func _on_Training_pressed() -> void:
 	$TrainingPopup.popup_centered()
 
+func _on_SearchPlayer_pressed() -> void:
+	_show_active_view(ContentViews.ALL_PLAYERS)
 
 func _on_Formation_pressed() -> void:
-	formation.show()
+	_show_active_view(ContentViews.FORMATION)
 
 func _on_Email_pressed() -> void:
 	_show_active_view(ContentViews.EMAIL)
@@ -115,6 +125,8 @@ func _hide_all() -> void:
 	table.hide()
 	email.hide()
 	calendar.hide()
+	formation.hide()
+	all_players_list.hide()
 
 func _show_active_view(active_view:int=-1) -> void:
 	_hide_all()
@@ -128,6 +140,10 @@ func _show_active_view(active_view:int=-1) -> void:
 			table.show()
 		ContentViews.CALENDAR:
 			calendar.show()
+		ContentViews.FORMATION:
+			formation.show()
+		ContentViews.ALL_PLAYERS:
+			all_players_list.show()
 		_:
 			email.show()
 
