@@ -75,28 +75,33 @@ func _set_up_content() -> void:
 	_set_up_headers()
 	
 	content_container.columns = headers.size() + 2 # +2 for info and change button
-	for item in current_content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
-		for header in headers:
-			var label
-			if typeof(item[header]) == 3:
-				label = ColorNumber.instantiate()
-				label.set_up(item[header])
-			else:
-				label = NameLabel.instantiate()
-				label.set_text(item[header])
-			content_container.add_child(label)
+	if current_content.size() > 0:
+		for item in current_content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
+			for header in headers:
+				var label
+				if typeof(item[header]) == 3:
+					label = ColorNumber.instantiate()
+					label.set_up(item[header])
+				else:
+					label = NameLabel.instantiate()
+					label.set_text(item[header])
+				content_container.add_child(label)
+				
+			#info button
+			var button = Button.new()
+			button.text = "info"
+			button.button_down.connect(show_info.bind(item))
+			content_container.add_child(button)
 			
-		#info button
-		var button = Button.new()
-		button.text = "info"
-		button.button_down.connect(show_info.bind(item))
-		content_container.add_child(button)
-		
-		#change button
-		var button_change = Button.new()
-		button_change.text = "chose"
-		button_change.button_down.connect(change_player.bind(item))
-		content_container.add_child(button_change)
+			#change button
+			var button_change = Button.new()
+			button_change.text = "chose"
+			button_change.button_down.connect(change_player.bind(item))
+			content_container.add_child(button_change)
+	else :
+		var label = Label.new()
+		label.text = "NO_PLAYER_FOUND"
+		content_container.add_child(label)
 		
 	_update_pages()
 

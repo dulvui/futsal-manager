@@ -65,7 +65,7 @@ func set_up_players(include_active_players, active_team = null) -> void:
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
 		
-	$Table.set_up(headers, all_players.duplicate(true))
+	table.set_up(headers, all_players.duplicate(true))
 	
 func remove_player(player_id) -> void:
 	active_filters["id"] = player_id
@@ -101,7 +101,7 @@ func _on_PositionSelect_item_selected(index) -> void:
 			headers.append(attribute)
 		$InfoSelect.select(0)
 
-	$Table.set_up(headers)
+	table.set_up(headers)
 	_filter_table()
 #
 #func _on_FootSelect_item_selected(index):
@@ -112,7 +112,7 @@ func _on_PositionSelect_item_selected(index) -> void:
 #	add_all_players(true)
 
 func _filter_table(exclusive = false) -> void:
-	$VBoxContainer/Table.filter(active_filters, exclusive)
+	table.filter(active_filters, exclusive)
 
 func _on_Close_pressed():
 	hide()
@@ -127,7 +127,7 @@ func _on_InfoSelect_item_selected(index) -> void:
 	var headers = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
-	$Table.set_up(headers)
+	table.set_up(headers)
 	
 
 func _reset_options() -> void:
