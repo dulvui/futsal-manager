@@ -16,38 +16,40 @@ const POSITIONS:Array = ["G","D","WL","WR","P","U"]
 const INFO_TYPES:Array = ["mental","physical","technical","goalkeeper"]
 const FOOTS:Array = ["R","L","RL"]
 
-@onready var table = $VBoxContainer/Table
+@onready var table:Control = $VBoxContainer/Table
+
+# select filters
+@onready var info_select:OptionButton = $VBoxContainer/HBoxContainer/InfoSelect
+@onready var team_select:OptionButton = $VBoxContainer/HBoxContainer/TeamSelect
+@onready var league_select:OptionButton = $VBoxContainer/HBoxContainer/LeagueSelect
+@onready var pos_select:OptionButton = $VBoxContainer/HBoxContainer/PositionSelect
 
 
-func set_up(include_active_players:bool, active_team = null) -> void:
+func set_up(include_active_players:bool, active_team:Dictionary = {}) -> void:
 	
 	set_up_players(include_active_players, active_team)
 
 			
-	$VBoxContainer/HBoxContainer/LeagueSelect.add_item("ITALIA")
+	league_select.add_item("ITALIA")
 	
-	$VBoxContainer/HBoxContainer/TeamSelect.add_item("NO_TEAM")
+	team_select.add_item("NO_TEAM")
 	for team in DataSaver.get_teams():
 		if team ==null or team["name"] != DataSaver.team_name:
-			$VBoxContainer/HBoxContainer/TeamSelect.add_item(team["name"])
+			team_select.add_item(team["name"])
 			
-	$VBoxContainer/HBoxContainer/PositionSelect.add_item("NO_POS")
+	pos_select.add_item("NO_POS")
 	for pos in POSITIONS:
-		$VBoxContainer/HBoxContainer/PositionSelect.add_item(pos)
-		
-	$VBoxContainer/HBoxContainer/FootSelect.add_item("NO_FOOT")
-	for foot in FOOTS:
-		$VBoxContainer/HBoxContainer/FootSelect.add_item(foot)
+		pos_select.add_item(pos)
 		
 	for info_type in INFO_TYPES:
-		$VBoxContainer/HBoxContainer/InfoSelect.add_item(info_type)
+		info_select.add_item(info_type)
 
 
-func set_up_players(include_active_players, active_team = null) -> void:
+func set_up_players(include_active_players:bool, active_team:Dictionary = {}) -> void:
 	_reset_options()
 	
 	all_players = []
-	if active_team == null:
+	if active_team.is_empty():
 		for team in DataSaver.get_teams():
 			if include_active_players:
 				for player in team["players"]["active"]:
@@ -61,7 +63,7 @@ func set_up_players(include_active_players, active_team = null) -> void:
 		for player in active_team["players"]["subs"]:
 			all_players.append(player)
 	
-	var headers = ["surname"]
+	var headers:Array = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
 		
@@ -78,28 +80,28 @@ func _on_NameSearch_text_changed(text) -> void:
 
 func _on_TeamSelect_item_selected(index) -> void:
 	if index > 0:
-		active_filters["team"] = $TeamSelect.get_item_text(index)
+		active_filters["team"] = team_select.get_item_text(index)
 	else:
 		active_filters["team"] = ""
 	_filter_table()
 	
 
 
-func _on_PositionSelect_item_selected(index) -> void:
+func _on_PositionSelect_item_selected(index:int) -> void:
 	if index > 0:
 		active_filters["position"] = POSITIONS[index-1]
 	else:
 		active_filters["position"] = ""
 	
-	var headers = ["surname"]
+	var headers:Array = ["surname"]
 	if active_filters["position"] == "G":
 		for attribute in Constants.ATTRIBUTES["goalkeeper"]:
 			headers.append(attribute)
-		$InfoSelect.select(INFO_TYPES.size() - 1)
+		info_select.select(INFO_TYPES.size() - 1)
 	else:
 		for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 			headers.append(attribute)
-		$InfoSelect.select(0)
+		info_select.select(0)
 
 	table.set_up(headers)
 	_filter_table()
@@ -111,19 +113,19 @@ func _on_PositionSelect_item_selected(index) -> void:
 #		foot_search = ""
 #	add_all_players(true)
 
-func _filter_table(exclusive = false) -> void:
+func _filter_table(exclusive:bool = false) -> void:
 	table.filter(active_filters, exclusive)
 
 func _on_Close_pressed():
 	hide()
 
 
-func _on_Table_select_player(player) -> void:
+func _on_Table_select_player(player:Dictionary) -> void:
 	print("change in list")
 	emit_signal("select_player",player)
 
 
-func _on_InfoSelect_item_selected(index) -> void:
+func _on_InfoSelect_item_selected(index:int) -> void:
 	var headers = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
@@ -131,14 +133,13 @@ func _on_InfoSelect_item_selected(index) -> void:
 	
 
 func _reset_options() -> void:
-	$VBoxContainer/HBoxContainer/LeagueSelect.selected = 0
-	$VBoxContainer/HBoxContainer/PositionSelect.selected = 0
-	$VBoxContainer/HBoxContainer/TeamSelect.selected = 0
-	$VBoxContainer/HBoxContainer/FootSelect.selected = 0
-	$VBoxContainer/HBoxContainer/InfoSelect.selected = 0
+	league_select.selected = 0
+	pos_select.selected = 0
+	team_select.selected = 0
+	info_select.selected = 0
 
 
-func _on_table_info_player(player):
-	var player_profile = PlayerProfile.instantiate()
+func _on_table_info_player(player:Dictionary):
+	var player_profile:Control = PlayerProfile.instantiate()
 	add_child(player_profile)
 	player_profile.set_up_info(player)

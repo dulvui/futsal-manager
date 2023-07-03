@@ -45,10 +45,6 @@ layout_mode = 2
 [node name="PositionSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="FootSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-
 [node name="InfoSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
@@ -60,7 +56,6 @@ metadata/_edit_use_anchors_ = true
 [connection signal="text_changed" from="VBoxContainer/HBoxContainer/NameSearch" to="." method="_on_NameSearch_text_changed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/TeamSelect" to="." method="_on_TeamSelect_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/PositionSelect" to="." method="_on_PositionSelect_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/FootSelect" to="." method="_on_FootSelect_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/InfoSelect" to="." method="_on_InfoSelect_item_selected"]
 [connection signal="info_player" from="VBoxContainer/Table" to="." method="_on_table_info_player"]
 [connection signal="select_player" from="VBoxContainer/Table" to="." method="_on_Table_select_player"]
