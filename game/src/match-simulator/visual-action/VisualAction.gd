@@ -137,8 +137,6 @@ func _action() -> void:
 	
 	print(action)
 	
-
-	
 	# TODO
 	# iterate over players and move active players
 	# according to action
