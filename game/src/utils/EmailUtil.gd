@@ -80,7 +80,7 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 			message["message"] = "The market ends today."
 			message["title"] = "MARKET ENDS"
 		MessageTypes.MARKET_OFFER:
-			message["message"] = "Another temateam is interested in your player"
+			message["message"] = "Another team is interested in your player"
 			message["title"] = "MARKET OFFER"
 	messages.append(message)
 	

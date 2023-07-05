@@ -57,4 +57,4 @@ const ATTRIBUTES:Dictionary = {
 # simluations
 
 ## market
-const REQUEST_FACTOR: int = 5
+const REQUEST_FACTOR: int = 20
