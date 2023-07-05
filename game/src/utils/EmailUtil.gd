@@ -15,6 +15,7 @@ enum MessageTypes {
 					WELCOME_MANAGER,
 					MARKET_START,
 					MARKET_END,
+					MARKET_OFFER,
 				}
 
 func _ready() -> void:
@@ -78,6 +79,9 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 		MessageTypes.MARKET_END:
 			message["message"] = "The market ends today."
 			message["title"] = "MARKET ENDS"
+		MessageTypes.MARKET_OFFER:
+			message["message"] = "Another temateam is interested in your player"
+			message["title"] = "MARKET OFFER"
 	messages.append(message)
 	
 	if messages.size() > MAX_MESSAGES:

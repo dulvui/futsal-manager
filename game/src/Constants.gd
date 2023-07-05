@@ -53,3 +53,8 @@ const ATTRIBUTES:Dictionary = {
 					"shooting","long_shooting","penalty","finishing","dribbling","blocking"],
 }
 
+
+# simluations
+
+## market
+const REQUEST_FACTOR: int = 5
