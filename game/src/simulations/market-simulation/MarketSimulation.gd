@@ -2,8 +2,9 @@ extends Node
 
 
 func update():
-	_request_players()
 	_check_players()
+	if CalendarUtil.is_market_active():
+		_request_players()
 
 # checks if players should be sold 
 func _check_players() -> void:
@@ -27,7 +28,7 @@ func _request_players() -> void:
 		# can affect players mood, if he wants to leave and you don't let him go
 		# or viceversa, then he would start with bad mood at other team
 		# make sure no duplicate offers are made, and once a player is sold
-		# he can't be sold twice and no offers for sold players
+		# he can't be sold twice and no offers for sold playersg
 		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_OFFER)
 
 
