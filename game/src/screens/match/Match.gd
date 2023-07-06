@@ -179,7 +179,7 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 	_toggle_view_buttons()
 	
 	# Visual Action
-	var visual_action:Control = VisualAction.instantiate()
+	var visual_action:Node2D = VisualAction.instantiate()
 	visual_action.set_up(is_home, is_goal, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
 	$HUD/HSplitContainer/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
 	await visual_action.action_finished
