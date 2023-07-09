@@ -10,10 +10,11 @@ var current_month:int
 
 
 func _ready() -> void:
-	current_month = DataSaver.date.month
-	set_up()
+	set_up(true)
 
-func set_up() -> void:
+func set_up(use_global_month:bool=false) -> void:
+	if use_global_month:
+		current_month = DataSaver.date.month
 	# clean grid container
 	for child in grid.get_children():
 		if not child is Label:

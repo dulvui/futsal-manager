@@ -174,7 +174,7 @@ func _next_day() -> void:
 	TransferUtil.update_day()
 	MarketSimulation.update()
 	email.update_messages()
-	calendar.set_up()
+	calendar.set_up(true)
 	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
 	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
 		continue_button.text = "START_MATCH"
