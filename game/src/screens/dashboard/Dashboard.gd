@@ -55,7 +55,7 @@ func _process(_delta) -> void:
 		email_button.text = str(EmailUtil.count_unread_messages())  + " " + tr("EMAIL") 
 	else:
 		email_button.text = tr("EMAIL")
-	budget_label.text = str(team["budget"])
+	budget_label.text = str(team["budget"]) + "" + CurrencyUtil.get_sign()
 
 func _on_Menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/Menu.tscn")

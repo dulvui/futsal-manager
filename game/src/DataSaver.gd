@@ -2,8 +2,6 @@ extends Node
 
 var config:ConfigFile
 
-var language:String
-
 var calendar:Array
 var date:Dictionary
 
@@ -47,6 +45,10 @@ var messages:Array
 var speed_factor:int = 0
 var dashboard_active_content:int = 0
 
+# from settings screen
+var language:String
+var currency:int
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,7 +62,6 @@ func _ready() -> void:
 		"nationality" : "",
 		"birth_date" : "",
 	})
-	language = config.get_value("settings","language","ND")
 	
 	current_season = config.get_value("season","current_season",0)
 	
@@ -78,6 +79,10 @@ func _ready() -> void:
 	# global game states
 	speed_factor = config.get_value("match","speed_factor",0)
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
+	
+	# settings
+	language = config.get_value("settings","language","ND")
+	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	
 	
 	
@@ -118,6 +123,7 @@ func save_all_data() -> void:
 	config.set_value("mail","messages",EmailUtil.messages)
 	config.set_value("season","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)
+	config.set_value("settings","currency",currency)
 	config.set_value("dashboard","active_content",dashboard_active_content)
 
 	config.save("user://settings.cfg")

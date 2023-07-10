@@ -27,6 +27,7 @@ EmailUtil="*res://src/utils/EmailUtil.gd"
 ContractUtil="*res://src/utils/ContractUtil.gd"
 Constants="*res://src/Constants.gd"
 MarketSimulation="*res://src/simulations/market-simulation/MarketSimulation.gd"
+CurrencyUtil="*res://src/utils/CurrencyUtil.gd"
 
 [display]
 
