@@ -2,53 +2,61 @@ extends Control
 
 signal confirm
 
-var team
-var player
+var team:Dictionary
+var player:Dictionary
 
 var regex = RegEx.new()
-var oldtext = ""
+var oldtext:String = ""
 
-var total = 0
-var amount = 0
+var total:int = 0
+var amount:int = 0
 
-var exchange_players = []
-var selected_players = []
+var exchange_players:Array = []
+var selected_players:Array = []
+
+@onready var types:OptionButton = $VBoxContainer/Details/Types 
+@onready var amount_label:LineEdit = $VBoxContainer/Details/Money/Amount 
+@onready var total_label:Label = $VBoxContainer/Total
+@onready var info_label:Label = $VBoxContainer/Info
+@onready var exchange_players_button:OptionButton = $VBoxContainer/Details/ExchangePlayers
+@onready var selected_players_box:VBoxContainer = $VBoxContainer/ScrollContainer/SelectedPlayers
+
 
 func _ready() -> void:
 	regex.compile("^[0-9]*$")
-	$Details/Types.add_item("TRANSFER")
-	$Details/Types.add_item("LOAN")
+	types.add_item("TRANSFER")
+	types.add_item("LOAN")
 	
-	$Details/Money/Amount.text = str(amount)
+	amount_label.text = str(amount)
 	
 	team = DataSaver.get_selected_team()
 	for active_player in team["players"]["active"]:
-		$Details/ExchangePlayers.add_item(active_player["name"] + " " + str(active_player["price"]/1000) + "K")
+		exchange_players_button.add_item(active_player["name"] + " " + str(active_player["price"]/1000) + "K")
 		exchange_players.append(active_player)
 		
 	for sub_player in team["players"]["subs"]:
-		$Details/ExchangePlayers.add_item(sub_player["name"] + " " + str(sub_player["price"]/1000) + "K")
+		exchange_players_button.add_item(sub_player["name"] + " " + str(sub_player["price"]/1000) + "K")
 		exchange_players.append(sub_player)
 
 func _process(_delta) -> void:
-	$Total.text = str(total)
+	total_label.text = str(total)
 
 func set_player(new_player) -> void:
 	player = new_player
-	$Info.text = "The player " + player["name"] + " has a value of " + str(player["price"])
+	info_label.text = "The player " + player["name"] + " has a value of " + str(player["price"])
 
 
 func _on_More_pressed() -> void:
 	if  amount < team["budget"]:
 		amount += 1000
-		$Details/Money/Amount.text = str(amount)
+		amount_label.text = str(amount)
 		
 	_calc_total()
 
 func _on_Less_pressed() -> void:
 	if  amount > 0:
 		amount -= 1000
-		$Details/Money/Amount.text = str(amount)
+		amount_label.text = str(amount)
 		
 	_calc_total()
 
@@ -62,14 +70,14 @@ func _on_ExchangePlayers_item_selected(index) -> void:
 	var remove_button = Button.new()
 	remove_button.text = exchange_player["name"] + " " + str(exchange_player["price"]/1000) + "K"
 	remove_button.pressed.connect(remove_from_list.bind(exchange_player))
-	$ScrollContainer/SelectedPlayers.add_child(remove_button)
+	selected_players_box.add_child(remove_button)
 	
-	$Details/ExchangePlayers.remove_item(index)
+	exchange_players_button.remove_item(index)
 	
 	_calc_total()
 	
 func remove_from_list(player) -> void:
-	for child in $ScrollContainer/SelectedPlayers.get_children():
+	for child in selected_players_box.get_children():
 		child.queue_free()
 	selected_players.erase(player)
 	exchange_players.append(player)
@@ -80,9 +88,9 @@ func remove_from_list(player) -> void:
 		var remove_button = Button.new()
 		remove_button.text = selected_player["name"] + " " + str(selected_player["price"]/1000) + "K"
 		remove_button.pressed.connect(remove_from_list.bind(selected_player))
-		$ScrollContainer/SelectedPlayers.add_child(remove_button)
+		selected_players_box.add_child(remove_button)
 	
-	$Details/ExchangePlayers.add_item(player["name"])
+	exchange_players_button.add_item(player["name"])
 	_calc_total()
 	
 func _calc_total() -> void:
@@ -94,18 +102,18 @@ func _calc_total() -> void:
 
 func _on_Amount_text_changed(new_text) -> void:
 	if regex.search(new_text):
-		$Details/Money/Amount.text = new_text   
-		oldtext = $Details/Money/Amount.text
+		amount_label.text = new_text   
+		oldtext = amount_label.text
 	else:
-		$Details/Money/Amount.text = oldtext
+		amount_label.text = oldtext
 	
-	amount = int($Details/Money/Amount.text)
+	amount = int(amount_label.text)
 	if amount > team["budget"]:
 		amount = team["budget"]
-		$Details/Money/Amount.text = str(amount)
+		amount_label.text = str(amount)
 		
 	_calc_total()
-	$Details/Money/Amount.set_cursor_position($Details/Money/Amount.text.length())
+	amount_label.set_cursor_position(amount_label.text.length())
 
 
 func _on_Confirm_pressed() -> void:
