@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 extends Node
 
 # will be emitted on injury with player and injury details as parameter

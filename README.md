@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+SPDX-License-Identifier: CC0-1.0
+-->
+
 # futsal-manager
 A futsal manager game created with the Godot Engine.
 

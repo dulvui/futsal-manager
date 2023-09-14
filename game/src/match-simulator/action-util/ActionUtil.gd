@@ -1,7 +1,16 @@
+# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+
 # Action util that handles every action of the game.
 # First the player with the ball attacks and the corresponding player of
 # the other team reposonds with a defense action and accordign to individual
 # player attributes and team tactics a result gets calculated.
+
+# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
 extends Node
 

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 extends TabContainer
 
 const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")

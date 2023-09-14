@@ -1,9 +1,13 @@
+# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+# SPDX-License-Identifier: CC0-1.0
+
 name: Android upload
 
 on:
   push:
     paths:
-      - "version"
+      - "version-android"
       - ".github/workflows/upload-android.yml"
 
 env:
@@ -32,8 +36,8 @@ jobs:
 
       - name: Set version number and version code
         run: |
-          echo "VERSION_NAME=$(cat version | cut -f1 -d-)" >> $GITHUB_ENV
-          echo "VERSION_CODE=$(cat version | cut -f2 -d-)" >> $GITHUB_ENV
+          echo "VERSION_NAME=$(cat version-android | cut -f1 -d-)" >> $GITHUB_ENV
+          echo "VERSION_CODE=$(cat version-android | cut -f2 -d-)" >> $GITHUB_ENV
 
       - name: Create and config export_presets.cfg
         run: |

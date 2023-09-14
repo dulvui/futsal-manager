@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 extends Control
 
 const DetailNumber:PackedScene = preload("res://src/ui-components/color-number/ColorNumber.tscn")
