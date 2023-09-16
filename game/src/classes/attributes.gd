@@ -5,46 +5,49 @@
 class_name Attributes
 extends Resource
 
-#					"attributes": {
-#						"goalkeeper": {
-#							"reflexes": 9,
-#							"positioning": 13,
-#							"kicking": 12,
-#							"handling": 6,
-#							"diving": 14,
-#							"speed": 11
-#						},
-#						"mental": {
-#							"aggression": 4,
-#							"anticipation": 10,
-#							"decisions": 15,
-#							"concentration": 6,
-#							"teamwork": 5,
-#							"vision": 14,
-#							"work_rate": 11,
-#							"offensive_movement": 10,
-#							"marking": 6
-#						},
-#						"technical": {
-#							"crossing": -1,
-#							"passing": -1,
-#							"long_passing": -1,
-#							"tackling": -1,
-#							"heading": -1,
-#							"interception": -1,
-#							"shooting": -1,
-#							"long_shooting": -1,
-#							"penalty": -1,
-#							"finishing": -1,
-#							"dribbling": -1,
-#							"blocking": -1
-#						},
-#						"physical": {
-#							"pace": -1,
-#							"acceleration": -1,
-#							"stamina": -1,
-#							"strength": -1,
-#							"agility": -1,
-#							"jump": -1
-#						}
-#					}
+var goalkeeper:Goal
+var mental:Mental
+var tecnical:Tecnical
+var physical:Physical
+
+
+class Goal:
+	var reflexes: int
+	var positioning: int
+	var kicking: int
+	var handling: int
+	var diving: int
+	var speed: int
+
+class Mental:
+	var aggression:int
+	var anticipation:int
+	var decisions:int
+	var concentration:int
+	var teamwork:int
+	var vision:int
+	var work_rate:int
+	var offensive_movement:int
+	var marking:int
+	
+class Physical:
+	var pace:int
+	var acceleration:int
+	var stamina:int
+	var strength:int
+	var agility:int
+	var jump:int
+	
+class Tecnical:
+	var crossing:int
+	var passing:int
+	var long_passing:int
+	var tackling:int
+	var heading:int
+	var interception:int
+	var shooting:int
+	var long_shooting:int
+	var penalty:int
+	var finishing:int
+	var dribbling:int
+	var blocking:int

@@ -2,32 +2,22 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name History
+class_name Statistics
 extends Resource
 
-#[
-#						{
-#							"year": "",
-#							"teams": [
-#								{
-#									"name": "",
-#									"price": 0,
-#									"games_played": 0,
-#									"goals": 0,
-#									"assists": 0,
-#									"yellow_card": 0,
-#									"red_card": 0,
-#									"average_vote": 0.0
-#								}
-#							],
-#							"actual": {
-#								"price": 0,
-#								"games_played": 0,
-#								"goals": 0,
-#								"assists": 0,
-#								"yellow_card": 0,
-#								"red_card": 0,
-#								"average_vote": 0.0
-#							}
-#						}
-#					],
+var actual:Values
+var history:Array
+
+class Values:
+	var team_name:String
+	var price:int
+	var games_played:int
+	var goals:int
+	var assists:int
+	var yellow_card:int
+	var red_card:int
+	var average_vote:float
+	
+class History:
+	var year:int
+	var values:Values

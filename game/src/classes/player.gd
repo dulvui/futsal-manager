@@ -11,7 +11,7 @@ extends Resource
 
 enum Position {P, D, C, A}
 enum Foot {L, R}
-enum Form {Bad, Good, Exxelent}
+enum Form {Bad, Good, Excellent}
 
 var id:int
 var team:Team
@@ -31,6 +31,6 @@ var _potential_growth:int
 var _injury_potential:int
 var _loyality:int
 var contract:Contract
-var history:History
+var statistics:Statistics
 var attributes:Attributes
 
