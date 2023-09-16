@@ -5,5 +5,18 @@
 class_name Team
 extends Resource
 
+# replace with enum
+var formations:Array = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
+
 var id:int
 var name:String
+var stadium:Stadium
+var formation:int
+var prestige:int
+var budget:int
+var salary_budget:int
+
+class Stadium:
+	var name:String
+	var capacity:int
+	var year_built:int

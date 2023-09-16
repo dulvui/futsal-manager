@@ -16,7 +16,7 @@ enum Form {Bad, Good, Excellent}
 var id:int
 var team:Team
 var price:int
-# shirt nu,ber
+# shirt number
 var nr:int
 var name:String
 var surname:String
