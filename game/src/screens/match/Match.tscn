@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://d35g7n0y5crlg"]
 
-[ext_resource type="PackedScene" uid="uid://ck5f72rt3q5km" path="res://src/match-simulator/MatchSimulator.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ck5f72rt3q5km" path="res://src/match-simulator/match_simulator.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
 [ext_resource type="Script" path="res://src/screens/match/Match.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://bc6kfu3avld0" path="res://src/ui-components/match/statistics/MatchStats.tscn" id="4"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ck5f72rt3q5km"]
 
-[ext_resource type="Script" path="res://src/match-simulator/MatchSimulator.gd" id="1"]
+[ext_resource type="Script" path="res://src/match-simulator/match_simulator.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bdft8v1qtxr0v" path="res://src/match-simulator/action-util/ActionUtil.tscn" id="3"]
 
 [node name="MatchSimulator" type="Node2D"]
