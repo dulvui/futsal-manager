@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dklgg30x7f0gd"]
+
+[ext_resource type="Script" path="res://src/match-simulator/team/statistics/statistics.gd" id="1"]
+
+[node name="Statistics" type="Node"]
+script = ExtResource("1")

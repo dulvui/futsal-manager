@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7pubsjpgg6q8"]
+
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
+[ext_resource type="Script" path="res://src/screens/splash/splash_screen.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://caxdir30m2j4v" path="res://icon.png" id="3"]
+
+[node name="SplashScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
+script = ExtResource("2")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3")

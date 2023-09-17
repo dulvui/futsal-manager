@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmwiocyu2rdxq"]
+
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
+[ext_resource type="Script" path="res://src/ui-components/formation/player/formation_player.gd" id="2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y850m"]
+font_size = 26
+
+[node name="Player" type="Control"]
+layout_mode = 3
+anchor_right = 0.046875
+anchor_bottom = 0.0833333
+theme = ExtResource("1")
+script = ExtResource("2")
+metadata/_edit_use_anchors_ = true
+
+[node name="Change" type="Button" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Nr" type="Label" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 53.0
+offset_bottom = 39.0
+text = "10"
+label_settings = SubResource("LabelSettings_y850m")
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = -28.0
+offset_top = 32.0
+offset_right = 98.0
+offset_bottom = 69.0
+text = "Fischnaller"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Change" to="." method="_on_Change_pressed"]

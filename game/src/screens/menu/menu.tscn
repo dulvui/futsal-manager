@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4woicggddkls"]
+
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
+[ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://caxdir30m2j4v" path="res://icon.png" id="3"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
+script = ExtResource("2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.434
+anchor_top = 0.381
+anchor_right = 0.434
+anchor_bottom = 0.381
+offset_left = -512.52
+offset_top = -256.32
+offset_right = -0.519714
+offset_bottom = 255.68
+texture = ExtResource("3")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+anchor_left = 0.539844
+anchor_top = 0.578
+anchor_right = 0.539844
+anchor_bottom = 0.578
+offset_top = -146.16
+offset_right = 495.0
+offset_bottom = 198.84
+metadata/_edit_use_anchors_ = true
+
+[node name="Continue" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "CONTINUE"
+
+[node name="StartGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "START"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "SETTINGS"
+
+[connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_Settings_pressed"]

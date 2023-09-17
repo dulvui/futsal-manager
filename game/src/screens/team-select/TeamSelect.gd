@@ -4,7 +4,7 @@
 
 extends TabContainer
 
-const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profile/PlayerProfile.tscn")
+const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profile/player_profile.tscn")
 
 
 func _ready() -> void:
@@ -35,4 +35,4 @@ func team_selected(league_id, selected_team) -> void:
 	EmailUtil.new_message(EmailUtil.MessageTypes.WELCOME_MANAGER)
 	
 	DataSaver.save_all_data()
-	get_tree().change_scene_to_file("res://src/screens/dashboard/Dashboard.tscn")
+	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")

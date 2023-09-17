@@ -1,0 +1,230 @@
+# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+extends Control
+
+const VisualAction:PackedScene = preload("res://src/match-simulator/visual-action/visual_action.tscn")
+
+@onready var match_simulator:Node2D = $MatchSimulator
+@onready var stats:MarginContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Stats
+@onready var comments:RichTextLabel = $HUD/HSplitContainer/CentralContainer/MainBar/Log
+@onready var events:ScrollContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Events
+@onready var animation_player:AnimationPlayer = $AnimationPlayer
+@onready var time_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Time
+@onready var result_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Result
+
+var last_active_view:Control
+
+var home_team:Dictionary
+var away_team:Dictionary
+
+# to acces player data
+var home_team_real:Dictionary
+var away_team_real:Dictionary
+
+var home_goals:int = 0
+var away_goals:int = 0
+
+var match_started:bool = false
+var first_half:bool = true
+
+
+func _ready() -> void:
+	randomize()
+	var next_match:Dictionary = CalendarUtil.get_next_match()
+	
+	if next_match != null:
+		for team in DataSaver.get_teams():
+			if team["name"] == next_match["home"]:
+				home_team_real = team
+				home_team = team.duplicate(true)
+			elif team["name"] == next_match["away"]:
+				away_team_real = team
+				away_team = team.duplicate(true)
+	
+	$HUD/HSplitContainer/CentralContainer/TopBar/Labels/Home.text = next_match["home"]
+	$HUD/HSplitContainer/CentralContainer/TopBar/Labels/Away.text = next_match["away"]
+	
+	$Formation.set_up()
+	match_simulator.set_up(home_team,away_team)
+	
+	last_active_view = comments
+	
+
+func _process(delta:float) -> void:
+	stats.update_stats(match_simulator.action_util.home_stats.statistics, match_simulator.action_util.away_stats.statistics)
+	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
+	
+	$HUD/HSplitContainer/CentralContainer/TopBar/TimeBar.value = match_simulator.time
+	$HUD/HSplitContainer/CentralContainer/BottomBar/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
+	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(DataSaver.speed_factor + 1) + " X"
+
+
+func match_end() -> void:
+	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Faster.hide()
+	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Slower.hide()
+	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.hide()
+	$HUD/HSplitContainer/Buttons/Pause.hide()
+	$HUD/HSplitContainer/Buttons/Dashboard.show()
+	match_simulator.match_finished()
+	DataSaver.set_table_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
+	
+	
+	#simulate all games for now.
+	for matchday in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"]:
+		if matchday["home"] != home_team["name"]:
+			var random_home_goals = randi()%10
+			var random_away_goals = randi()%10
+			
+			matchday["result"] = str(random_home_goals) + ":" + str(random_away_goals)
+			print(matchday["home"] + " vs " + matchday["away"])
+			DataSaver.set_table_result(matchday["home"],random_home_goals,matchday["away"],random_away_goals)
+		else:
+			matchday["result"] = str(match_simulator.action_util.home_stats.statistics["goals"]) + ":" + str(match_simulator.action_util.away_stats.statistics["goals"])
+#	DataSaver.save_all_data()
+
+	#save players history PoC
+	for real_player in home_team_real["players"]["active"]:
+		for copy_player in home_team["players"]["active"]:
+			if real_player["nr"] == copy_player["nr"]:
+				real_player["history"][DataSaver.current_season]["actual"] = copy_player["history"][DataSaver.current_season]["actual"]
+					
+	for real_player in away_team_real["players"]["active"]:
+		for copy_player in away_team["players"]["active"]:
+			if real_player["nr"] == copy_player["nr"]:
+				real_player["history"][DataSaver.current_season]["actual"] = copy_player["history"][DataSaver.current_season]["actual"]
+
+func half_time() -> void:
+	$HUD/HSplitContainer/Buttons/Pause.text = tr("CONTINUE")
+
+
+func _on_Field_pressed() -> void:
+	_hide_views()
+	comments.show()
+	last_active_view = comments
+
+
+func _on_Stats_pressed() -> void:
+	_hide_views()
+	stats.show()
+	last_active_view = stats
+	
+
+func _on_Events_pressed() -> void:
+	_hide_views()
+	events.show()
+	last_active_view = events
+	
+func _hide_views() -> void:
+	comments.hide()
+	stats.hide()
+	events.hide()
+
+func _toggle_view_buttons() -> void:
+	$HUD/HSplitContainer/Buttons/Change.disabled = not $HUD/HSplitContainer/Buttons/Change.disabled 
+	$HUD/HSplitContainer/Buttons/Events.disabled = not $HUD/HSplitContainer/Buttons/Events.disabled
+	$HUD/HSplitContainer/Buttons/Stats.disabled = not $HUD/HSplitContainer/Buttons/Stats.disabled
+	$HUD/HSplitContainer/Buttons/Field.disabled = not $HUD/HSplitContainer/Buttons/Field.disabled
+	$HUD/HSplitContainer/Buttons/Formation.disabled = not $HUD/HSplitContainer/Buttons/Formation.disabled
+	$HUD/HSplitContainer/Buttons/Tactics.disabled = not $HUD/HSplitContainer/Buttons/Tactics.disabled
+	
+
+func _on_Dashboard_pressed() -> void:
+	DataSaver.save_all_data()
+	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+
+
+func _on_Faster_pressed() -> void:
+	if DataSaver.speed_factor < 3:
+		DataSaver.speed_factor += 1
+		match_simulator.faster()
+
+
+func _on_Slower_pressed() -> void:
+	if DataSaver.speed_factor > 0:
+		DataSaver.speed_factor -= 1
+		match_simulator.slower()
+
+
+func _on_Pause_pressed() -> void:
+	var paused:bool = match_simulator.pause_toggle()
+	
+	if paused:
+		$HUD/HSplitContainer/Buttons/Pause.text = tr("CONTINUE")
+	else:
+		$Formation.hide()
+		$HUD/HSplitContainer/Buttons/Pause.text = tr("PAUSE")
+
+
+func _on_Formation_pressed() -> void:
+	match_simulator.pause()
+	$HUD/HSplitContainer/Buttons/Pause.text = tr("CONTINUE")
+	$Formation.show()
+
+
+func _on_Formation_change() -> void:
+	match_simulator.change_players(home_team,away_team)
+
+
+func _on_SKIP_pressed() -> void:
+	match_end()
+
+
+func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
+	if not is_goal and randi() % Constants.VISUAL_ACTION_SHOTS_FACTOR > 0:
+		# no goal, but show some shoots
+		return
+	
+	# show visual action
+	$HUD/HSplitContainer/Buttons/Pause.disabled = true
+	match_simulator.pause()
+	_hide_views()
+	_toggle_view_buttons()
+	
+	# Visual Action
+	var visual_action:Node2D = VisualAction.instantiate()
+	visual_action.set_up(is_home, is_goal, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
+	$HUD/HSplitContainer/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
+	await visual_action.action_finished
+	
+	if is_goal:
+		if is_home:
+			home_goals += 1
+		else:
+			away_goals += 1
+		
+		$Goal.show()
+		animation_player.play("Goal")
+		await animation_player.animation_finished
+		$Goal.hide()
+		
+		result_label.text = "%d - %d"%[home_goals,away_goals]
+		
+		events.append_text("%s  %s - %s  %s" % [time_label.text, str(home_goals), str(away_goals), player["profile"]["name"]])
+
+	
+	visual_action.queue_free()
+	match_simulator.continue_match()
+	last_active_view.show()
+	$HUD/HSplitContainer/Buttons/Pause.disabled = false
+	_toggle_view_buttons()
+	
+
+func _on_StartTimer_timeout() -> void:
+	match_simulator.start_match()
+
+
+func _on_MatchSimulator_half_time() -> void:
+	half_time()
+
+
+func _on_MatchSimulator_match_end() -> void:
+	match_end()
+
+
+func _on_MatchSimulator_action_message(message:String) -> void:
+	if comments.get_line_count() > 12:
+		comments.remove_paragraph(0)
+	comments.newline()
+	comments.add_text(time_label.text + " " + message)

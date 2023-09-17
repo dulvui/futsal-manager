@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/ui-components/tranining/training.gd" id="1"]
+[ext_resource type="PackedScene" path="res://src/ui-components/tranining/training-day/training_day.tscn" id="2"]
+
+[node name="Training" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 208.0
+margin_top = 224.0
+margin_right = -112.0
+margin_bottom = -456.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Week" type="GridContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -712.0
+margin_top = -112.0
+margin_right = 758.0
+margin_bottom = 88.0
+custom_constants/hseparation = 210
+columns = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TrainingDay" parent="Week" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="TrainingDay2" parent="Week" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 210.0
+margin_top = 0.0
+margin_right = 210.0
+margin_bottom = 0.0
+
+[node name="TrainingDay3" parent="Week" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 420.0
+margin_top = 0.0
+margin_right = 420.0
+margin_bottom = 0.0
+
+[node name="TrainingDay4" parent="Week" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 630.0
+margin_top = 0.0
+margin_right = 630.0
+margin_bottom = 0.0
+
+[node name="TrainingDay5" parent="Week" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 840.0
+margin_top = 0.0
+margin_right = 840.0
+margin_bottom = 0.0
+
+[node name="TrainingDay6" parent="Week" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1050.0
+margin_top = 0.0
+margin_right = 1050.0
+margin_bottom = 0.0
+
+[node name="TrainingDay7" parent="Week" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1260.0
+margin_top = 0.0
+margin_right = 1260.0
+margin_bottom = 0.0

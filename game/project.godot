@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Futsal Manager"
-run/main_scene="res://src/screens/splash/SplashScreen.tscn"
+run/main_scene="res://src/screens/splash/splash_screen.tscn"
 config/features=PackedStringArray("4.1")
 boot_splash/bg_color=Color(1, 1, 1, 1)
 boot_splash/image="res://icon.png"
@@ -19,15 +19,15 @@ config/icon="res://icon.png"
 
 [autoload]
 
-DataSaver="*res://src/DataSaver.gd"
-CalendarUtil="*res://src/utils/CalendarUtil.gd"
-MatchMaker="*res://src/utils/MatchMaker.gd"
-TransferUtil="*res://src/utils/TransferUtil.gd"
-EmailUtil="*res://src/utils/EmailUtil.gd"
-ContractUtil="*res://src/utils/ContractUtil.gd"
-Constants="*res://src/Constants.gd"
-MarketSimulation="*res://src/simulations/market-simulation/MarketSimulation.gd"
-CurrencyUtil="*res://src/utils/CurrencyUtil.gd"
+DataSaver="*res://src/data_saver.gd"
+CalendarUtil="*res://src/utils/calendar_util.gd"
+MatchMaker="*res://src/utils/match_maker.gd"
+TransferUtil="*res://src/utils/transfer_util.gd"
+EmailUtil="*res://src/utils/email_util.gd"
+ContractUtil="*res://src/utils/contract_util.gd"
+Constants="*res://src/constants.gd"
+MarketSimulation="*res://src/simulations/market-simulation/market_simulation.gd"
+CurrencyUtil="*res://src/utils/currency_util.gd"
 
 [display]
 
