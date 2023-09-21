@@ -6,7 +6,7 @@ extends Control
 
 
 func _ready() -> void:
-	if DataSaver.team_name == null:
+	if Config.team_name == null:
 		$CenterContainer/VBoxContainer/Continue.hide()
 
 func _on_StartGame_pressed() -> void:

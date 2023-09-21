@@ -19,7 +19,7 @@ func _ready() -> void:
 		
 	$FormationSelect.selected = formations.find("2-2")
 
-func set_up(active_team:Dictionary = DataSaver.get_selected_team()) -> void:
+func set_up(active_team:Dictionary = Config.get_selected_team()) -> void:
 	team = active_team
 	_set_active_players()
 	$PlayerList.set_up(true, team)
@@ -30,7 +30,7 @@ func _on_FormationSelect_item_selected(index:int) -> void:
 	await animation_player.animation_finished
 	_set_active_players()
 	team["formation"] = formations[index]
-#	DataSaver.save_all_data()
+#	Config.save_all_data()
 	animation_player.play("Fade" + team["formation"] )
 
 func _set_active_players() -> void:

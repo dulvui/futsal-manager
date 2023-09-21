@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func set_up(use_global_month:bool=false) -> void:
 	if use_global_month:
-		current_month = DataSaver.date.month
+		current_month = Config.date.month
 	# clean grid container
 	for child in grid.get_children():
 		if not child is Label:
@@ -26,7 +26,7 @@ func set_up(use_global_month:bool=false) -> void:
 	
 	# start with monday: fill with transparent days
 	var monday_counter = 7
-	while DataSaver.calendar[current_month][monday_counter]["weekday"] != "MON":
+	while Config.calendar[current_month][monday_counter]["weekday"] != "MON":
 		var calendar_day = Day.instantiate()
 		calendar_day.modulate = Color(0,0,0,0)
 		grid.add_child(calendar_day)
@@ -34,10 +34,10 @@ func set_up(use_global_month:bool=false) -> void:
 		
 	
 	
-	for day in range(0, DataSaver.calendar[current_month].size()):
+	for day in range(0, Config.calendar[current_month].size()):
 		var calendar_day = Day.instantiate()
 		grid.add_child(calendar_day)
-		calendar_day.set_up(DataSaver.calendar[current_month][day])
+		calendar_day.set_up(Config.calendar[current_month][day])
 #
 	$Paginator/Page.text = CalendarUtil.MONTHS[current_month]
 	

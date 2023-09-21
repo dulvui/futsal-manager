@@ -8,10 +8,10 @@ const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profil
 
 
 func _ready() -> void:
-	DataSaver.init_teams()
+	Config.init_teams()
 	
-	for nation in DataSaver.leagues:
-		for league in DataSaver.leagues[nation]:
+	for nation in Config.leagues:
+		for league in Config.leagues[nation]:
 			var center_container:CenterContainer = CenterContainer.new()
 			center_container.name = league["name"]
 			var grid:GridContainer = GridContainer.new()
@@ -25,7 +25,7 @@ func _ready() -> void:
 			add_child(center_container)
 
 func team_selected(league_id, selected_team) -> void:
-	DataSaver.select_team(league_id,selected_team)
+	Config.select_team(league_id,selected_team)
 	print("team saved")
 	CalendarUtil.create_calendar()
 	print("calendar created")
@@ -34,5 +34,5 @@ func team_selected(league_id, selected_team) -> void:
 	
 	EmailUtil.new_message(EmailUtil.MessageTypes.WELCOME_MANAGER)
 	
-	DataSaver.save_all_data()
+	Config.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")

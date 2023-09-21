@@ -23,4 +23,4 @@ func convert_to():
 	pass
 	
 func get_sign():
-	return SIGNS[DataSaver.currency]
+	return SIGNS[Config.currency]

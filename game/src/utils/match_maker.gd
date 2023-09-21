@@ -9,7 +9,7 @@ var match_day:int = 0
 
 
 func inizialize_matches() -> void:
-	var teams:Array = DataSaver.get_teams(DataSaver.league_id).duplicate(true)
+	var teams:Array = Config.get_teams(Config.league_id).duplicate(true)
 	matches = []
 	match_day = 0
 	
@@ -60,27 +60,27 @@ func inizialize_matches() -> void:
 		matches.append(temp)
 	
 	#add to calendar
-	var day:int = DataSaver.date.day
-	var month:int = DataSaver.date.month
+	var day:int = Config.date.day
+	var month:int = Config.date.month
 	
 	# start with saturday
 	for i in 7:
-		if DataSaver.calendar[month][i]["weekday"] == "SAT":
+		if Config.calendar[month][i]["weekday"] == "SAT":
 			day = i
 			break
 	
 	for match_days in matches:
 		# check if next month
-		if day > DataSaver.calendar[month].size() - 1:
+		if day > Config.calendar[month].size() - 1:
 			month += 1
 			day = 0
 			# start also new month with saturday
 			for i in 7:
-				if DataSaver.calendar[month][i]["weekday"] == "SAT":
+				if Config.calendar[month][i]["weekday"] == "SAT":
 					day = i
 					break
 		# assign match days
-		DataSaver.calendar[month][day]["matches"] = match_days
+		Config.calendar[month][day]["matches"] = match_days
 		day += 7
 		
 func _shift_array(array:Array) -> void:

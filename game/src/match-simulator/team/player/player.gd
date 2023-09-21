@@ -74,7 +74,7 @@ func set_up(player) -> void:
 	attributes = player["attributes"]
 	stamina = attributes["physical"]["stamina"]
 	
-	history = player["history"][DataSaver.current_season]
+	history = player["history"][Config.current_season]
 
 func update() -> void:
 	stamina -= 0.01

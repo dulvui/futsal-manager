@@ -24,6 +24,6 @@ func _on_Continue_pressed() -> void:
 			"surname" :$GridContainer/SurName.text,
 			"nationality" : $GridContainer/Nat.get_item_text($GridContainer/Nat.selected)
 		}
-		DataSaver.reset()
-		DataSaver.save_manager(manager)
+		Config.reset()
+		Config.save_manager(manager)
 		get_tree().change_scene_to_file("res://src/screens/team-select/team_select.tscn")

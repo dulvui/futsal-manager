@@ -35,7 +35,7 @@ func _ready() -> void:
 	var next_match:Dictionary = CalendarUtil.get_next_match()
 	
 	if next_match != null:
-		for team in DataSaver.get_teams():
+		for team in Config.get_teams():
 			if team["name"] == next_match["home"]:
 				home_team_real = team
 				home_team = team.duplicate(true)
@@ -58,7 +58,7 @@ func _process(delta:float) -> void:
 	
 	$HUD/HSplitContainer/CentralContainer/TopBar/TimeBar.value = match_simulator.time
 	$HUD/HSplitContainer/CentralContainer/BottomBar/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
-	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(DataSaver.speed_factor + 1) + " X"
+	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(Config.speed_factor + 1) + " X"
 
 
 func match_end() -> void:
@@ -68,32 +68,32 @@ func match_end() -> void:
 	$HUD/HSplitContainer/Buttons/Pause.hide()
 	$HUD/HSplitContainer/Buttons/Dashboard.show()
 	match_simulator.match_finished()
-	DataSaver.set_table_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
+	Config.set_table_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
 	
 	
 	#simulate all games for now.
-	for matchday in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"]:
+	for matchday in Config.calendar[Config.date.month][Config.date.day]["matches"]:
 		if matchday["home"] != home_team["name"]:
 			var random_home_goals = randi()%10
 			var random_away_goals = randi()%10
 			
 			matchday["result"] = str(random_home_goals) + ":" + str(random_away_goals)
 			print(matchday["home"] + " vs " + matchday["away"])
-			DataSaver.set_table_result(matchday["home"],random_home_goals,matchday["away"],random_away_goals)
+			Config.set_table_result(matchday["home"],random_home_goals,matchday["away"],random_away_goals)
 		else:
 			matchday["result"] = str(match_simulator.action_util.home_stats.statistics["goals"]) + ":" + str(match_simulator.action_util.away_stats.statistics["goals"])
-#	DataSaver.save_all_data()
+#	Config.save_all_data()
 
 	#save players history PoC
 	for real_player in home_team_real["players"]["active"]:
 		for copy_player in home_team["players"]["active"]:
 			if real_player["nr"] == copy_player["nr"]:
-				real_player["history"][DataSaver.current_season]["actual"] = copy_player["history"][DataSaver.current_season]["actual"]
+				real_player["history"][Config.current_season]["actual"] = copy_player["history"][Config.current_season]["actual"]
 					
 	for real_player in away_team_real["players"]["active"]:
 		for copy_player in away_team["players"]["active"]:
 			if real_player["nr"] == copy_player["nr"]:
-				real_player["history"][DataSaver.current_season]["actual"] = copy_player["history"][DataSaver.current_season]["actual"]
+				real_player["history"][Config.current_season]["actual"] = copy_player["history"][Config.current_season]["actual"]
 
 func half_time() -> void:
 	$HUD/HSplitContainer/Buttons/Pause.text = tr("CONTINUE")
@@ -131,19 +131,19 @@ func _toggle_view_buttons() -> void:
 	
 
 func _on_Dashboard_pressed() -> void:
-	DataSaver.save_all_data()
+	Config.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
 func _on_Faster_pressed() -> void:
-	if DataSaver.speed_factor < 3:
-		DataSaver.speed_factor += 1
+	if Config.speed_factor < 3:
+		Config.speed_factor += 1
 		match_simulator.faster()
 
 
 func _on_Slower_pressed() -> void:
-	if DataSaver.speed_factor > 0:
-		DataSaver.speed_factor -= 1
+	if Config.speed_factor > 0:
+		Config.speed_factor -= 1
 		match_simulator.slower()
 
 

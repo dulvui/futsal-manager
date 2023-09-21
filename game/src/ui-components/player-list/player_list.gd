@@ -37,8 +37,8 @@ func set_up(include_active_players:bool, active_team:Dictionary = {}) -> void:
 	league_select.add_item("ITALIA")
 	
 	team_select.add_item("NO_TEAM")
-	for team in DataSaver.get_teams():
-		if team ==null or team["name"] != DataSaver.team_name:
+	for team in Config.get_teams():
+		if team ==null or team["name"] != Config.team_name:
 			team_select.add_item(team["name"])
 			
 	pos_select.add_item("NO_POS")
@@ -54,7 +54,7 @@ func set_up_players(include_active_players:bool, active_team:Dictionary = {}) ->
 	
 	all_players = []
 	if active_team.is_empty():
-		for team in DataSaver.get_teams():
+		for team in Config.get_teams():
 			if include_active_players:
 				for player in team["players"]["active"]:
 					all_players.append(player)

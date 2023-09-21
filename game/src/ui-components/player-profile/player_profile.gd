@@ -52,7 +52,7 @@ func set_up_info(_player:Dictionary) -> void:
 		$TabContainer/Info/Goalkeeper.add_child(value)
 		
 	#history
-	$TabContainer/History/Actual/Goals.text = str(player["history"][DataSaver.current_season]["actual"]["goals"])
+	$TabContainer/History/Actual/Goals.text = str(player["history"][Config.current_season]["actual"]["goals"])
 
 	show()
 

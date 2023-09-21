@@ -11,7 +11,7 @@ var current_transfers = []
 var transfers_active = true
 
 func _ready() -> void:
-	current_transfers = DataSaver.current_transfers
+	current_transfers = Config.current_transfers
 
 
 func update_day() -> void:
@@ -31,7 +31,7 @@ func update_day() -> void:
 						transfer["success"] = randi()%2 == 0
 		#				if transfer["success"]:
 						transfer["state"] = "SUCCESS"
-						DataSaver.make_transfer(transfer)
+						Config.make_transfer(transfer)
 						EmailUtil.new_message(EmailUtil.MessageTypes.CONTRACT_SIGNED, transfer)
 		_make_random_transfer_requests()
 

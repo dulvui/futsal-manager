@@ -11,16 +11,16 @@ func _ready() -> void:
 	
 	# transform table dictionary to array
 	var table_array:Array = []
-	for key in DataSaver.table:
+	for key in Config.table:
 		table_array.append({
 			"name" : key,
-			"points" : DataSaver.table[key]["points"],
-			"games_played": DataSaver.table[key]["games_played"],
-			"goals_made" : DataSaver.table[key]["goals_made"],
-			"goals_against" : DataSaver.table[key]["goals_against"],
-			"wins" : DataSaver.table[key]["wins"],
-			"draws" : DataSaver.table[key]["draws"],
-			"lost" : DataSaver.table[key]["lost"]
+			"points" : Config.table[key]["points"],
+			"games_played": Config.table[key]["games_played"],
+			"goals_made" : Config.table[key]["goals_made"],
+			"goals_against" : Config.table[key]["goals_against"],
+			"wins" : Config.table[key]["wins"],
+			"draws" : Config.table[key]["draws"],
+			"lost" : Config.table[key]["lost"]
 		})
 		
 	table_array.sort_custom(point_sorter)
@@ -79,7 +79,7 @@ func _ready() -> void:
 		label_settings.font_size = get_theme_default_font_size()
 		label_settings.font_color = Color.GOLD
 		
-		if team["name"] == DataSaver.team_name:
+		if team["name"] == Config.team_name:
 			pos_label.label_settings = label_settings
 			name_label.label_settings = label_settings
 			games_played_label.label_settings = label_settings

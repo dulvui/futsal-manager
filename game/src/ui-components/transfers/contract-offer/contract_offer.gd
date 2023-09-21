@@ -17,7 +17,7 @@ var transfer
 
 
 func _ready() -> void:
-	team = DataSaver.get_selected_team()
+	team = Config.get_selected_team()
 	
 func set_up(new_transfer) -> void:
 	transfer = new_transfer

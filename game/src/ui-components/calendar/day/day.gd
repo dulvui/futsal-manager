@@ -23,10 +23,10 @@ func set_up(date) -> void:
 	if date["matches"].size() > 0:
 		for matchz in date["matches"]:
 			if matchz != null:
-				if DataSaver.team_name == matchz["home"]:
+				if Config.team_name == matchz["home"]:
 					team_name = matchz["away"]
 					color_rect.color = Color.DODGER_BLUE
-				elif DataSaver.team_name == matchz["away"]:
+				elif Config.team_name == matchz["away"]:
 					team_name = matchz["home"]
 					color_rect.color = Color.DEEP_SKY_BLUE
 		match_button.pressed.connect(_on_Match_pressed.bind(date["matches"]))
@@ -34,7 +34,7 @@ func set_up(date) -> void:
 	else:
 		match_button.hide()
 		
-	if date.day == DataSaver.date.day and DataSaver.date.month == date.month:
+	if date.day == Config.date.day and Config.date.month == date.month:
 		if color_rect.color != Color.DODGER_BLUE:
 			color_rect.color = Color.LIGHT_GREEN
 		elif color_rect.color != Color.DEEP_SKY_BLUE:

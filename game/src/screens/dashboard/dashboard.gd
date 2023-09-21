@@ -4,7 +4,7 @@
 
 extends Control
 
-@onready var team:Dictionary = DataSaver.get_selected_team()
+@onready var team:Dictionary = Config.get_selected_team()
 
 # buttons
 @onready var continue_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Continue
@@ -30,22 +30,22 @@ var match_ready:bool = false
 var next_season:bool = false
 
 func _ready() -> void:
-	$Main/VBoxContainer/TopBar/ManagerName.text = DataSaver.manager["name"] + " " + DataSaver.manager["surname"]
-	$Main/VBoxContainer/TopBar/TeamName.text = DataSaver.team_name
+	$Main/VBoxContainer/TopBar/ManagerName.text = Config.manager["name"] + " " + Config.manager["surname"]
+	$Main/VBoxContainer/TopBar/TeamName.text = Config.team_name
 	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
 	
 	all_players_list.set_up(true)
 	formation.set_up()
 	
-	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
-		if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"][0]["result"].length() > 1:
+	if Config.calendar[Config.date.month][Config.date.day]["matches"].size() > 0:
+		if Config.calendar[Config.date.month][Config.date.day]["matches"][0]["result"].length() > 1:
 			continue_button.text = "NEXT_DAY"
 			match_ready = false
 		else:
 			continue_button.text = "START_MATCH"
 			match_ready = true
 			
-	if DataSaver.date.month == CalendarUtil.END_MONTH and DataSaver.date.day == CalendarUtil.END_DAY:
+	if Config.date.month == CalendarUtil.END_MONTH and Config.date.day == CalendarUtil.END_DAY:
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 
@@ -125,9 +125,9 @@ func _hide_all() -> void:
 func _show_active_view(active_view:int=-1) -> void:
 	_hide_all()
 	if active_view > -1:
-		DataSaver.dashboard_active_content = active_view
+		Config.dashboard_active_content = active_view
 
-	match DataSaver.dashboard_active_content:
+	match Config.dashboard_active_content:
 		ContentViews.EMAIL:
 			email.show()
 		ContentViews.TABLE:
@@ -165,10 +165,10 @@ func _next_day() -> void:
 		return
 	
 	if next_season:
-		DataSaver.next_season()
+		Config.next_season()
 		return
 	
-	if DataSaver.date.month == CalendarUtil.END_MONTH and DataSaver.date.day == CalendarUtil.END_DAY:
+	if Config.date.month == CalendarUtil.END_MONTH and Config.date.day == CalendarUtil.END_DAY:
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		return
@@ -180,7 +180,7 @@ func _next_day() -> void:
 	email.update_messages()
 	calendar.set_up(true)
 	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
-	if DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"].size() > 0:
+	if Config.calendar[Config.date.month][Config.date.day]["matches"].size() > 0:
 		continue_button.text = "START_MATCH"
 		match_ready = true
 		next_match_button.disabled = true

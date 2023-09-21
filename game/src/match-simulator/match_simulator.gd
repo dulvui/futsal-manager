@@ -21,7 +21,7 @@ var time:int = 0
 func set_up(home_team:Dictionary, away_team:Dictionary) -> void:
 	action_util.set_up(home_team,away_team)
 	
-	for speed in DataSaver.speed_factor:
+	for speed in Config.speed_factor:
 		faster()
 
 

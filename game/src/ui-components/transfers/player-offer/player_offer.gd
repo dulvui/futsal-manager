@@ -33,7 +33,7 @@ func _ready() -> void:
 	
 	amount_label.text = str(amount)
 	
-	team = DataSaver.get_selected_team()
+	team = Config.get_selected_team()
 	for active_player in team["players"]["active"]:
 		exchange_players_button.add_item(active_player["name"] + " " + str(active_player["price"]/1000) + "K")
 		exchange_players.append(active_player)

@@ -179,7 +179,7 @@ func make_transfer(transfer:Dictionary) -> void:
 	
 	#add player to team
 	for team in teams:
-		if team["name"] == DataSaver.team_name:
+		if team["name"] == Config.team_name:
 			team["players"]["subs"].append(transfer["player"])
 			team["budget"] -= transfer["money"]
 			for player in transfer["exchange_players"]:
@@ -257,7 +257,7 @@ func next_season() -> void:
 	MatchMaker.inizialize_matches()
 	
 	EmailUtil.new_message(EmailUtil.MessageTypes.NEXT_SEASON)
-	DataSaver.save_all_data()
+	Config.save_all_data()
 	
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 

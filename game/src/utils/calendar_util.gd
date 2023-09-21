@@ -46,7 +46,7 @@ const MARKET_PERIODS:Array = [
 ]
 
 func _ready() -> void:
-	date = DataSaver.date
+	date = Config.date
 	
 func initial_date() -> Dictionary:
 	date = Time.get_date_dict_from_system()
@@ -57,12 +57,12 @@ func initial_date() -> Dictionary:
 
 func create_calendar(next_season:bool = false) -> void:
 	if next_season:
-		DataSaver.date.year += 1
-		DataSaver.date.day = START_DAY
-		DataSaver.date.month = START_MONTH
+		Config.date.year += 1
+		Config.date.day = START_DAY
+		Config.date.month = START_MONTH
 		
-		DataSaver.date = _get_next_day(DataSaver.date)
-		date = DataSaver.date
+		Config.date = _get_next_day(Config.date)
+		date = Config.date
 
 	
 	var calendar:Array = []
@@ -87,25 +87,25 @@ func create_calendar(next_season:bool = false) -> void:
 		
 		temp_date = _get_next_day(temp_date)
 		
-	DataSaver.save_calendar(calendar)
+	Config.save_calendar(calendar)
 
 func next_day() -> void:
 	date = _get_next_day(date)
-	DataSaver.date = date
+	Config.date = date
 	
 	# get email for next match
 	var next_match_month:int = date.month
 	var next_match_day:int = date.day
 	
 	# if next match is the first of the next month
-	if date.day == DataSaver.calendar[date.month].size() - 1 and DataSaver.calendar[(date.month + 1) % 12][0]["matches"].size() > 0:
+	if date.day == Config.calendar[date.month].size() - 1 and Config.calendar[(date.month + 1) % 12][0]["matches"].size() > 0:
 		next_match_month = date.month + 1
 		next_match_day = 0
 	
 	var next_match:Dictionary
-	if next_match_day < DataSaver.calendar[next_match_month].size():
-		for matchz in DataSaver.calendar[next_match_month][next_match_day]["matches"]:
-			if matchz["home"] == DataSaver.team_name or matchz["away"] == DataSaver.team_name:
+	if next_match_day < Config.calendar[next_match_month].size():
+		for matchz in Config.calendar[next_match_month][next_match_day]["matches"]:
+			if matchz["home"] == Config.team_name or matchz["away"] == Config.team_name:
 				next_match = matchz
 	
 	if next_match:
@@ -125,8 +125,8 @@ func get_dashborad_date() -> String:
 	return DAYS[date.weekday] + " " + str(date.day + 1) + " " + MONTHS[date.month] + " " + str(date.year)
 
 func get_next_match() -> Dictionary:
-	for matchz in DataSaver.calendar[DataSaver.date.month][DataSaver.date.day]["matches"]:
-		if matchz["home"] == DataSaver.team_name or matchz["away"] == DataSaver.team_name:
+	for matchz in Config.calendar[Config.date.month][Config.date.day]["matches"]:
+		if matchz["home"] == Config.team_name or matchz["away"] == Config.team_name:
 			return matchz
 	return {}
 
