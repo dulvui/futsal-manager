@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Statistics
-extends Resource
 
 var actual:Values
 var history:Array

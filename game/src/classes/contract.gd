@@ -3,21 +3,17 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name  Contract
-extends Resource
 
-#					"contract": {
-#						"price": 0,
-#						"money/week": 0,
-#						"start_date": "13/06/2021",
-#						"end_date": "12/05/2025",
-#						"bonus": {
-#							"goal": 0,
-#							"clean_sheet": 0,
-#							"assist": 0,
-#							"league_title": 0,
-#							"nat_cup_title": 0,
-#							"inter_cup_title": 0
-#						},
-#						"buy_clause": 0,
-#						"is_on_loan": ""
-#					},
+var price:int
+var money_week:int
+# unixtimestamps
+var start_date:int
+var end_date:int
+var bonus_goal:int
+var bonus_clean_sheet:int
+var bonus_assist:int
+var bonus_league_title:int
+var bonus_nat_cup_title:int
+var bonus_inter_cup_title:int
+var buy_clause:int
+var is_on_loan:bool

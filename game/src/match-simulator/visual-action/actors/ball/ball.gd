@@ -12,4 +12,3 @@ func move(final_position:Vector2, time:float, is_global_position:bool = false) -
 	else:
 		tween.tween_property(self, "position", final_position, time)
 	tween.tween_property(self, "rotation", randf_range(-5,5), time)
-#	tween.parallel()
