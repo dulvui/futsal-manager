@@ -230,7 +230,7 @@ func init_teams() -> void:
 	for nation in leagues:
 		for league in leagues[nation]:
 			var file:FileAccess = FileAccess.open("res://assets/" + league["file"], FileAccess.READ)
-			league["teams"] = JSON.parse_string(file.get_as_text())
+			league["teams"] = JsonClassConverter.json_string_to_class(file.get_as_text(), Team.new())
 			file.close()
 
 func get_teams(_league_id:int = -1) -> Array:

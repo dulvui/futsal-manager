@@ -28,6 +28,7 @@ ContractUtil="*res://src/utils/contract_util.gd"
 Constants="*res://src/constants.gd"
 MarketSimulation="*res://src/simulations/market-simulation/market_simulation.gd"
 CurrencyUtil="*res://src/utils/currency_util.gd"
+JsonClassConverter="*res://src/utils/json_class_converter.gd"
 
 [display]
 
