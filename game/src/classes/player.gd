@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Player
+extends Resource
 
 enum Position {P, D, C, A}
 enum Foot {L, R}

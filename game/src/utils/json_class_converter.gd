@@ -5,6 +5,8 @@
 # https://github.com/fenix-hub/unirest-gdscript/blob/main/addons/unirest-gdscript/src/utils/operations.gd
 
 extends RefCounted
+class_name JsonClassConverter
+
 
 static func json_string_to_class(json_string: String, _class: Object) -> Object:
 	var json: JSON = JSON.new()

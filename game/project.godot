@@ -28,12 +28,12 @@ ContractUtil="*res://src/utils/contract_util.gd"
 Constants="*res://src/constants.gd"
 MarketSimulation="*res://src/simulations/market-simulation/market_simulation.gd"
 CurrencyUtil="*res://src/utils/currency_util.gd"
-JsonClassConverter="*res://src/utils/json_class_converter.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/initial_position_type=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/size/width=1920
