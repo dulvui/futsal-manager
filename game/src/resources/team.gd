@@ -15,7 +15,7 @@ var formation:int
 var prestige:int
 var budget:int
 var salary_budget:int
-var players:Dictionary
+var players:Array[Player]
 
 class Stadium:
 	var name:String

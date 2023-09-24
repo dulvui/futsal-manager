@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name  Contract
+extends Resource
 
 var price:int
 var money_week:int
