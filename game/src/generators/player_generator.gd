@@ -17,6 +17,7 @@ var team_id:int = 15  # last id of serie-a team is 14
 var player_id:int = 1
 
 # TODO replace with staic names files
+
 # create names
 #for _ in range(100):
 #	name_base = fake_it.name_male().replace("Dott. ", "").replace("Sig. ", "")
@@ -32,16 +33,17 @@ func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, positi
 	elif age < 18:
 		age_factor = 16
 
-	var factor = min(random.randint(6, age_factor), max(prestige, 6))
-
+	var factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	
+	var physical:Dictionary
 	if position == "G":
 		physical = {
-			"reflexes": min(factor + random.randint(-5, 5), 20),
-			"positioning": min(factor + random.randint(-5, 5), 20),
-			"kicking": min(factor + random.randint(-5, 5), 20),
-			"handling": min(factor + random.randint(-5, 5), 20),
-			"diving": min(factor + random.randint(-5, 5), 20),
-			"speed": min(factor + random.randint(-5, 5), 20),
+			"reflexes": min(factor + randi_range(-5, 5), 20),
+			"positioning": min(factor + randi_range(-5, 5), 20),
+			"kicking": min(factor + randi_range(-5, 5), 20),
+			"handling": min(factor + randi_range(-5, 5), 20),
+			"diving": min(factor + randi_range(-5, 5), 20),
+			"speed": min(factor + randi_range(-5, 5), 20),
 		}
 	else:
 		physical = {
@@ -57,23 +59,24 @@ func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, positi
 
 func get_physical(age, nationality, prestige, pos):
 
-	var age_factor = 20
+	var age_factor:int = 20
 	if age > 34:
 		age_factor = 54 - age
 	elif age < 18:
 		age_factor = 16
 
-	pace_factor = min(random.randint(9, age_factor), max(prestige, 9))
-	physical_factor = min(random.randint(6, age_factor), max(prestige, 6))
-
+	var pace_factor:int = min(randi_range(9, age_factor), max(prestige, 9))
+	var physical_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	
+	var physical:Dictionary
 	if pos != "G":
 		physical = {
-			"pace": min(pace_factor + random.randint(-5, 5), 20),
-			"acceleration": min(pace_factor + random.randint(-5, 5), 20),
-			"stamina": min(physical_factor + random.randint(-5, 5), 20),
-			"strength": min(physical_factor + random.randint(-5, 5), 20),
-			"agility": min(physical_factor + random.randint(-5, 5), 20),
-			"jump": min(physical_factor + random.randint(-5, 5), 20),
+			"pace": min(pace_factor + randi_range(-5, 5), 20),
+			"acceleration": min(pace_factor + randi_range(-5, 5), 20),
+			"stamina": min(physical_factor + randi_range(-5, 5), 20),
+			"strength": min(physical_factor + randi_range(-5, 5), 20),
+			"agility": min(physical_factor + randi_range(-5, 5), 20),
+			"jump": min(physical_factor + randi_range(-5, 5), 20),
 		}
 	else:
 		physical = {
@@ -89,35 +92,35 @@ func get_physical(age, nationality, prestige, pos):
 
 func get_technical(age, nationality, prestige, pos):
 
-	age_factor = 20
+	var age_factor:int = 20
 	if age > 34:
 		age_factor = 54 - age
 	elif age < 18:
 		age_factor = 16
 
 	# use also pos i calculation
-	pass_factor = min(random.randint(6, age_factor), max(prestige, 6))
-	shoot_factor = min(random.randint(6, age_factor), max(prestige, 6))
-	technique_factor = min(random.randint(6, age_factor), max(prestige, 6))
-	defense_factor = min(random.randint(6, age_factor), max(prestige, 6))
+	var pass_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	var shoot_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	var technique_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	var defense_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 
 	if pos != "G":
-		technical = {
-			"crossing": min(pass_factor + random.randint(-5, 5), 20),
-			"passing": min(pass_factor + random.randint(-5, 5), 20),
-			"long_passing": min(pass_factor + random.randint(-5, 5), 20),
-			"tackling": min(defense_factor + random.randint(-5, 5), 20),
-			"heading": min(shoot_factor + random.randint(-5, 5), 20),
-			"interception": min(defense_factor + random.randint(-5, 5), 20),
-			"shooting": min(shoot_factor + random.randint(-5, 5), 20),
-			"long_shooting": min(shoot_factor + random.randint(-5, 5), 20),
-			"penalty": min(technique_factor + random.randint(-5, 5), 20),
-			"finishing": min(shoot_factor + random.randint(-5, 5), 20),
-			"dribbling": min(shoot_factor + random.randint(-5, 5), 20),
-			"blocking": min(shoot_factor + random.randint(-5, 5), 20),
+		return {
+			"crossing": min(pass_factor + randi_range(-5, 5), 20),
+			"passing": min(pass_factor + randi_range(-5, 5), 20),
+			"long_passing": min(pass_factor + randi_range(-5, 5), 20),
+			"tackling": min(defense_factor + randi_range(-5, 5), 20),
+			"heading": min(shoot_factor + randi_range(-5, 5), 20),
+			"interception": min(defense_factor + randi_range(-5, 5), 20),
+			"shooting": min(shoot_factor + randi_range(-5, 5), 20),
+			"long_shooting": min(shoot_factor + randi_range(-5, 5), 20),
+			"penalty": min(technique_factor + randi_range(-5, 5), 20),
+			"finishing": min(shoot_factor + randi_range(-5, 5), 20),
+			"dribbling": min(shoot_factor + randi_range(-5, 5), 20),
+			"blocking": min(shoot_factor + randi_range(-5, 5), 20),
 		}
 	else:
-		technical = {
+		return {
 			"crossing": -1,
 			"passing": -1,
 			"long_passing": -1,
@@ -131,37 +134,35 @@ func get_technical(age, nationality, prestige, pos):
 			"dribbling": -1,
 			"blocking": -1,
 		}
-	return technical
 
 
 func get_mental(age, nationality, prestige, pos):
 
-	age_factor = 20
+	var age_factor:int = 20
 	if age > 34:
 		age_factor = 54 - age
 	elif age < 18:
 		age_factor = 16
 
-	offensive_factor = min(random.randint(6, age_factor), max(prestige, 6))
-	defensive_factor = min(random.randint(6, age_factor), max(prestige, 6))
+	var offensive_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	var defensive_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 
-	mental = {
-		"aggression": min(defensive_factor + random.randint(-5, 5), 20),
-		"anticipation": min(defensive_factor + random.randint(-5, 5), 20),
-		"decisions": min(offensive_factor + random.randint(-5, 5), 20),
-		"concentration": min(offensive_factor + random.randint(-5, 5), 20),
-		"teamwork": min(offensive_factor + random.randint(-5, 5), 20),
-		"vision": min(offensive_factor + random.randint(-5, 5), 20),
-		"work_rate": min(offensive_factor + random.randint(-5, 5), 20),
-		"offensive_movement": min(offensive_factor + random.randint(-5, 5), 20),
-		"marking": min(defensive_factor + random.randint(-5, 5), 20),
+	return {
+		"aggression": min(defensive_factor + randi_range(-5, 5), 20),
+		"anticipation": min(defensive_factor + randi_range(-5, 5), 20),
+		"decisions": min(offensive_factor + randi_range(-5, 5), 20),
+		"concentration": min(offensive_factor + randi_range(-5, 5), 20),
+		"teamwork": min(offensive_factor + randi_range(-5, 5), 20),
+		"vision": min(offensive_factor + randi_range(-5, 5), 20),
+		"work_rate": min(offensive_factor + randi_range(-5, 5), 20),
+		"offensive_movement": min(offensive_factor + randi_range(-5, 5), 20),
+		"marking": min(defensive_factor + randi_range(-5, 5), 20),
 	}
-	return mental
 
 
 func get_price(age, prestige, pos):
-	age_factor = min(abs(age - 30), 20)
-	pos_factor = 0
+	var age_factor:int = min(abs(age - 30), 20)
+	var pos_factor:int = 0
 	if pos == "G":
 		pos_factor = 5
 	elif pos == "D":
@@ -171,22 +172,22 @@ func get_price(age, prestige, pos):
 	else:
 		pos_factor = 20
 
-	total_factor = age_factor + pos_factor + prestige
+	var total_factor:int = age_factor + pos_factor + prestige
 
-	return random.randint(total_factor-20, total_factor) * 10000
+	return randi_range(total_factor-20, total_factor) * 10000
 
 
 func get_contract(prestige, position, age):
-	past = random.randint(1, 2)
-	future = random.randint(1, 3)
+	var past:int = randi_range(1, 2)
+	var future:int = randi_range(1, 3)
 
-	# price_factor = random.randint()
+	# price_factor = randi_range()
 
-	contract = {
+	var contract:Dictionary = {
 		"price": 0,
 		"money/week": 0,
-		"start_date": fake_it.date_time_between(start_date='-' + str(past) + 'y', end_date='-1y').strftime("%d/%m/%Y"),
-		"end_date": fake_it.date_time_between(start_date='+1y', end_date='+' + str(future) + 'y').strftime("%d/%m/%Y"),
+		"start_date": "2023",
+		"end_date": "2023",
 		"bonus": {
 			"goal": 0,
 			"clean_sheet": 0,
@@ -202,16 +203,16 @@ func get_contract(prestige, position, age):
 
 
 func get_history(prestige, position, age, contract, potential_growth):
-	past = random.randint(1, 2)
-	future = random.randint(1, 3)
+	var past:int = randi_range(1, 2)
+	var future:int = randi_range(1, 3)
 
-	# price_factor = random.randint()
+	# price_factor = randi_range()
 
 	# look at years in contract, so before he played in other club
 	# look at potential growth and stats of player and increase price over years
 	# save also price evolution
 
-	history = [
+	var history:Array = [
 		{
 			"year": "",
 			"teams": [
@@ -255,39 +256,40 @@ func create_player(nationality, position, nr, team):
 	#     surnames.append(name_base.split()[1])
 
 	# create players
-	# for _ in range(500):
-	birth_date = fake_it.date_time_between(start_date='-45y', end_date='-15y')
 
-	prestige = random.randint(1, 100)
+	# random date from 1970 to 2007
+	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(randi_range(0, 1167606000))
+
+	var prestige:int = randi_range(1, 100)
 	# to make just a few really good and a few really bad
 	if prestige < 30:
-		prestige = random.randint(1, 5)
+		prestige = randi_range(1, 5)
 	if prestige > 90:
-		prestige = random.randint(15, 20)
+		prestige = randi_range(15, 20)
 	else:
-		prestige = random.randint(5, 15)
+		prestige = randi_range(5, 15)
 
-	# position = positions[random.randint(0, len(positions)-1)]
+	# position = positions[randi_range(0, len(positions)-1)]
 
-	contract = get_contract(prestige, position, 2020-birth_date.year)
-	potential_growth = random.randint(1, 5)
+	var contract:Dictionary = get_contract(prestige, position, 2020-birth_date.year)
+	var potential_growth:int = randi_range(1, 5)
 
-	player = {
+	var player:Dictionary = {
 		"id": player_id,
 		"team": team,
 		"price": get_price(2020-birth_date.year, prestige, position),
-		"name": random.choice(names),
-		"surname": random.choice(surnames),
-		"birth_date": birth_date.strftime("%d/%m/%Y"),
+		"name": "random.choice(names)",
+		"surname": "random.choice(surnames)",
+		"birth_date": birth_date,
 		"nationality": nationality.split("_")[1],
-		"moral": random.randint(1, 4),  # 1 to 4, 1 low 4 good
+		"moral": randi_range(1, 4),  # 1 to 4, 1 low 4 good
 		"position": position,
-		"foot": foots[random.randint(0, len(foots)-1)],
+		"foot": foots[randi_range(0, len(foots)-1)],
 		"prestige": prestige,
-		"form": forms[random.randint(0, len(forms)-1)],
+		"form": forms[randi_range(0, len(forms)-1)],
 		"_potential_growth": potential_growth,
 		# _ hidden stats, not visible, just for calcs,
-		"_injury_potential":  random.randint(1, 20),
+		"_injury_potential":  randi_range(1, 20),
 		"_loyality": "",  # if player is loay, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
 		"history": get_history(prestige, position, 2020-birth_date.year, contract, potential_growth),
 		"contract": contract,
@@ -313,7 +315,7 @@ func create_player(nationality, position, nr, team):
 
 
 # create teams
-ita_serie_a = [
+var ita_serie_a:Array = [
 	{
 		"name": "Acqua&Sapone C5",
 		"prestige": 12,
@@ -535,7 +537,7 @@ ita_serie_a = [
 	},
 ]
 
-ita_serie_b = [
+var ita_serie_b:Array = [
 	{
 		"name": "Palermo B",
 		"prestige": 12,
@@ -748,7 +750,7 @@ ita_serie_b = [
 	},
 ]
 
-ita_serie_c = [
+var ita_serie_c:Array = [
 	{
 		"name": "Palermo C",
 		"prestige": 8,
@@ -963,60 +965,60 @@ ita_serie_c = [
 
 
 func assign_players_to_team(teams):
-	id = 1
+	var id:int = 1
 	# fill ita serie a teams with players
 	for team in teams:
 		
 		team["id"] = id
 		id += 1
 
-		nr = 1
+		var nr:int = 1
 		# G
-		g1 = create_player("it_IT", "G", nr, team["name"])
+		var g1 = create_player("it_IT", "G", nr, team["name"])
 		nr += 1
 		team["players"]["active"].append(g1)
-		for _ in range(0, random.randint(3, 5)):
-			g2 = create_player("it_IT", "G", nr, team["name"])
+		for i in randi_range(3, 5):
+			var g2 = create_player("it_IT", "G", nr, team["name"])
 			team["players"]["subs"].append(g2)
 			nr += 1
 		# D
-		d1 = create_player("it_IT", "D", nr, team["name"])
+		var d1 = create_player("it_IT", "D", nr, team["name"])
 		team["players"]["active"].append(d1)
 		nr += 1
-		for _ in range(0, random.randint(3, 5)):
-			d2 = create_player("it_IT", "D", nr, team["name"])
+		for i in randi_range(3, 5):
+			var d2 = create_player("it_IT", "D", nr, team["name"])
 			team["players"]["subs"].append(d2)
 			nr += 1
 		# WL
-		wl1 = create_player("it_IT", "WL", nr, team["name"])
+		var wl1 = create_player("it_IT", "WL", nr, team["name"])
 		team["players"]["active"].append(wl1)
 		nr += 1
-		for _ in range(0, random.randint(2, 4)):
-			wl2 = create_player("it_IT", "WL", nr, team["name"])
+		for i in randi_range(2, 4):
+			var wl2 = create_player("it_IT", "WL", nr, team["name"])
 			team["players"]["subs"].append(wl2)
 			nr += 1
 
 		# WR
-		wr1 = create_player("it_IT", "WR", nr, team["name"])
+		var wr1 = create_player("it_IT", "WR", nr, team["name"])
 		team["players"]["active"].append(wr1)
 		nr += 1
-		for _ in range(0, random.randint(2, 4)):
-			wl2 = create_player("it_IT", "WR", nr, team["name"])
+		for i in randi_range(2, 4):
+			var wl2 = create_player("it_IT", "WR", nr, team["name"])
 			team["players"]["subs"].append(wl2)
 			nr += 1
 		# P
-		p1 = create_player("it_IT", "P", nr, team["name"])
+		var p1 = create_player("it_IT", "P", nr, team["name"])
 		team["players"]["active"].append(p1)
 		nr += 1
 
-		for _ in range(0, random.randint(2, 4)):
-			p2 = create_player("it_IT", "P", nr, team["name"])
+		for i in randi_range(2, 4):
+			var p2 = create_player("it_IT", "P", nr, team["name"])
 			team["players"]["subs"].append(p2)
 			nr += 1
 
 		# U
-		for _ in range(0, random.randint(1, 2)):
-			u = create_player("it_IT", "U", nr, team["name"])
+		for i in randi_range(2, 4):
+			var u = create_player("it_IT", "U", nr, team["name"])
 			team["players"]["subs"].append(u)
 			nr += 1
 
