@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 @tool
-extends Node
+extends EditorScript
 
 # goal keeper, winger, pivot, defender, universal
 var positions = ["G", "D", "W", "P", "U"]
@@ -24,6 +24,8 @@ var player_id:int = 1
 #	names.append(name_base.split()[0])
 #	surnames.append(name_base.split()[1])
 
+func _run():
+	print("Hello from the Godot Editor!")
 
 func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, position:String):
 
