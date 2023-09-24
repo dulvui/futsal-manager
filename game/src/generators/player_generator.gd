@@ -666,10 +666,32 @@ var ita_serie_c:Array = [
 	},
 ]
 
+var test_league:Array = [
+	{
+		"name": "Palermo C",
+		"prestige": 8,
+		"budget": 9000000,
+		"salary_budget": 1000,
+		"players": {
+			"active": [],
+			"subs": []
+		},
+		"stadium": {
+			"name": "Estadio Central",
+					"capacity": 5000
+		},
+		"formation": "2-2"
+	}
+]
+
 func _run():
 	print("Generate players...")
-	var test = assign_players_to_team(ita_serie_a)
-	print(test)
+	var generated_teams:Array = assign_players_to_team(test_league)
+#	print(test)
+	print("Write to file...")
+	var file:FileAccess = FileAccess.open("user://test.json", FileAccess.WRITE)
+	for team in generated_teams:
+		file.store_string(JSON.stringify(team))
 	print("Done.")
 
 
