@@ -10,7 +10,7 @@ enum Foot {L, R}
 enum Form {Bad, Good, Excellent}
 
 var id:int
-var team:Team
+#var team:Team
 var price:int
 # shirt number
 var nr:int
@@ -23,9 +23,9 @@ var position:Position
 var foot:Foot
 var prestige:int
 var form:Form
-var _potential_growth:int
-var _injury_potential:int
-var _loyality:int
+var potential_growth:int
+var injury_potential:int
+var loyality:int
 var contract:Contract
 var statistics:Statistics
 var attributes:Attributes

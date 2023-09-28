@@ -666,92 +666,85 @@ var ita_serie_c:Array = [
 	},
 ]
 
-var test_league:Array = [
-	{
-		"name": "Palermo C",
-		"prestige": 8,
-		"budget": 9000000,
-		"salary_budget": 1000,
-		"players": {
-			"active": [],
-			"subs": []
-		},
-		"stadium": {
-			"name": "Estadio Central",
-					"capacity": 5000
-		},
-		"formation": "2-2"
-	}
-]
+var test_league:Array[Team] = []
 
 func _run():
+	var file_name:String = "res://test_team.tres" 
 	print("Generate players...")
-	var generated_teams:Array = assign_players_to_team(test_league)
+	var test_team:Team = Team.new()
+	test_team.name = "test"
+	test_team.budget = 1234
+	
+	test_league.append(test_team)
+	var generated_teams:Array[Team] = assign_players_to_team(test_league)
 #	print(test)
-	print("Write to file...")
-	var file:FileAccess = FileAccess.open("user://test.json", FileAccess.WRITE)
-	for team in generated_teams:
-		file.store_string(JSON.stringify(team))
+	print("Write to file...", generated_teams.size())
+	var write_team:Team = generated_teams[0]
+	print("Write team name ", write_team.name)
+	ResourceSaver.save(write_team, file_name, ResourceSaver.FLAG_BUNDLE_RESOURCES)
 	print("Done.")
+	
+	print("Reading from file...")
+	var read_team:Team = load(file_name)
+	print("Read team name ", read_team.name)
 
 
-
-func assign_players_to_team(teams):
+func assign_players_to_team(teams:Array[Team]):
 	var id:int = 1
 	# fill ita serie a teams with players
 	for team in teams:
 		
-		team["id"] = id
+		team.id = id
 		id += 1
 
 		var nr:int = 1
 		# G
-		var g1 = create_player("it_IT", "G", nr, team["name"])
+		var g1:Player = create_player("it_IT", "G", nr)
 		nr += 1
-		team["players"]["active"].append(g1)
+		team.players.append(g1)
 		for i in randi_range(3, 5):
-			var g2 = create_player("it_IT", "G", nr, team["name"])
-			team["players"]["subs"].append(g2)
+			var g2:Player = create_player("it_IT", "G", nr)
+			team.players.append(g2)
 			nr += 1
 		# D
-		var d1 = create_player("it_IT", "D", nr, team["name"])
-		team["players"]["active"].append(d1)
+		var d1:Player = create_player("it_IT", "D", nr)
+		team.players.append(d1)
 		nr += 1
 		for i in randi_range(3, 5):
-			var d2 = create_player("it_IT", "D", nr, team["name"])
-			team["players"]["subs"].append(d2)
+			var d2 = create_player("it_IT", "D", nr)
+			team.players.append(d2)
 			nr += 1
 		# WL
-		var wl1 = create_player("it_IT", "WL", nr, team["name"])
-		team["players"]["active"].append(wl1)
+		var wl1:Player = create_player("it_IT", "WL", nr)
+		team.players.append(wl1)
 		nr += 1
 		for i in randi_range(2, 4):
-			var wl2 = create_player("it_IT", "WL", nr, team["name"])
-			team["players"]["subs"].append(wl2)
+			var wl2 = create_player("it_IT", "WL", nr)
+			team.players.append(wl2)
 			nr += 1
 
 		# WR
-		var wr1 = create_player("it_IT", "WR", nr, team["name"])
-		team["players"]["active"].append(wr1)
+		var wr1:Player = create_player("it_IT", "WR", nr)
+		team.players.append(wr1)
 		nr += 1
 		for i in randi_range(2, 4):
-			var wl2 = create_player("it_IT", "WR", nr, team["name"])
-			team["players"]["subs"].append(wl2)
+			var wl2:Player = create_player("it_IT", "WR", nr)
+			team.players.append(wl2)
 			nr += 1
 		# P
-		var p1 = create_player("it_IT", "P", nr, team["name"])
-		team["players"]["active"].append(p1)
+		var p1:Player = create_player("it_IT", "P", nr)
+		team.players.append(p1)
 		nr += 1
 
 		for i in randi_range(2, 4):
-			var p2 = create_player("it_IT", "P", nr, team["name"])
-			team["players"]["subs"].append(p2)
+			var p2:Player = create_player("it_IT", "P", nr)
+			team.players.append(p2)
 			nr += 1
 
 		# U
 		for i in randi_range(2, 4):
-			var u = create_player("it_IT", "U", nr, team["name"])
-			team["players"]["subs"].append(u)
+			var u = create_player("it_IT", "U", nr)
+			team.players.append(u)
 			nr += 1
 
 	return teams
@@ -972,7 +965,7 @@ func get_history(prestige, position, age, contract, potential_growth):
 	return history
 
 
-func create_player(nationality, position, nr, team):
+func create_player(nationality:String, position:String, nr:int) -> Player:
 	# player = {}
 
 	# ITALY
@@ -989,6 +982,8 @@ func create_player(nationality, position, nr, team):
 	# create players
 
 	# random date from 1970 to 2007
+	var player = Player.new()
+	
 	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(randi_range(0, 1167606000))
 
 	var prestige:int = randi_range(1, 100)
@@ -1005,35 +1000,34 @@ func create_player(nationality, position, nr, team):
 	var contract:Dictionary = get_contract(prestige, position, 2020-birth_date.year)
 	var potential_growth:int = randi_range(1, 5)
 
-	var player:Dictionary = {
-		"id": player_id,
-		"team": team,
-		"price": get_price(2020-birth_date.year, prestige, position),
-		"name": "random.choice(names)",
-		"surname": "random.choice(surnames)",
-		"birth_date": birth_date,
-		"nationality": nationality.split("_")[1],
-		"moral": randi_range(1, 4),  # 1 to 4, 1 low 4 good
-		"position": position,
-		"foot": foots[randi_range(0, len(foots)-1)],
-		"prestige": prestige,
-		"form": forms[randi_range(0, len(forms)-1)],
-		"_potential_growth": potential_growth,
-		# _ hidden stats, not visible, just for calcs,
-		"_injury_potential":  randi_range(1, 20),
-		"_loyality": "",  # if player is loay, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
-		"history": get_history(prestige, position, 2020-birth_date.year, contract, potential_growth),
-		"contract": contract,
-		"nr": nr
-	}
+	player.id = player_id
+#	player.team = team
+	player.price = get_price(2020-birth_date.year, prestige, position)
+	player.name = "random.choice(names)"
+	player.surname = "random.choice(surnames)"
+#	player.birth_date = birth_date
+	player.nationality = nationality.split("_")[1]
+	player.moral = randi_range(1, 4)  # 1 to 4, 1 low 4 good
+#	player.position = position
+	player.foot = foots[randi_range(0, len(foots)-1)]
+	player.prestige = prestige
+	player.form = forms[randi_range(0, len(forms)-1)]
+	player.potential_growth
+	player.potential_growth = potential_growth
+	# _ hidden stats, not visible, just for calcs,
+	player.injury_potential = randi_range(1, 20)
+	player.loyality = ""  # if player is loay, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
+#	player.history = get_history(prestige, position, 2020-birth_date.year, contract, potential_growth)
+#	player.contract = contract
+	player.nr = nr
 
-	player["attributes"] = {
-		"goalkeeper": get_goalkeeper_attributes(
-			2020-birth_date.year, nationality, prestige, position),
-		"mental": get_mental(2020-birth_date.year, nationality, prestige, position),
-		"technical": get_technical(2020-birth_date.year, nationality, prestige, position),
-		"physical": get_physical(2020-birth_date.year, nationality, prestige, position),
-	}
+#	player["attributes"] = {
+#		"goalkeeper": get_goalkeeper_attributes(
+#			2020-birth_date.year, nationality, prestige, position),
+#		"mental": get_mental(2020-birth_date.year, nationality, prestige, position),
+#		"technical": get_technical(2020-birth_date.year, nationality, prestige, position),
+#		"physical": get_physical(2020-birth_date.year, nationality, prestige, position),
+#	}
 
 	player_id += 1
 

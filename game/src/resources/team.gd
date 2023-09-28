@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Team
 extends Resource
+class_name Team
 
 # replace with enum
 var formations:Array = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
@@ -21,3 +21,6 @@ class Stadium:
 	var name:String
 	var capacity:int
 	var year_built:int
+
+#func _init(p_name = "p_test") -> void:
+#	name = p_name
