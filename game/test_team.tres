@@ -1,33 +1,86 @@
-[gd_resource type="Resource" script_class="Team" load_steps=2 format=3 uid="uid://dkko4cs2o113g"]
+[gd_resource type="Resource" script_class="Team" load_steps=27 format=3 uid="uid://dkko4cs2o113g"]
 
-[sub_resource type="GDScript" id="GDScript_a3s3m"]
-script/source = "# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+[ext_resource type="Script" path="res://src/resources/player.gd" id="1_qo5na"]
+[ext_resource type="Script" path="res://src/resources/team.gd" id="1_xsh4x"]
 
-# SPDX-License-Identifier: AGPL-3.0-or-later
+[sub_resource type="Resource" id="Resource_d4fyl"]
+script = ExtResource("1_qo5na")
 
-extends Resource
-class_name Team
+[sub_resource type="Resource" id="Resource_ai1mf"]
+script = ExtResource("1_qo5na")
 
-# replace with enum
-var formations:Array = [\"2-2\",\"1-2-1\",\"1-1-2\",\"2-1-1\",\"1-3\",\"3-1\",\"4-0\"]
+[sub_resource type="Resource" id="Resource_eemgd"]
+script = ExtResource("1_qo5na")
 
-var id:int
-var name:String
-var stadium:Stadium
-var formation:int
-var prestige:int
-var budget:int
-var salary_budget:int
-var players:Array[Player]
+[sub_resource type="Resource" id="Resource_ybdue"]
+script = ExtResource("1_qo5na")
 
-class Stadium:
-	var name:String
-	var capacity:int
-	var year_built:int
+[sub_resource type="Resource" id="Resource_fy433"]
+script = ExtResource("1_qo5na")
 
-#func _init(p_name = \"p_test\") -> void:
-#	name = p_name
-"
+[sub_resource type="Resource" id="Resource_wxwgo"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_p0ge2"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_5v31g"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_c0m2n"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_xqat4"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_8147b"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_c4dy4"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_vfj26"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_ij0qt"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_mjih8"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_riacg"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_kmaha"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_7tmay"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_w1e1d"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_o6hyd"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_mkf12"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_iqf0f"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_5ao1g"]
+script = ExtResource("1_qo5na")
+
+[sub_resource type="Resource" id="Resource_oujig"]
+script = ExtResource("1_qo5na")
 
 [resource]
-script = SubResource("GDScript_a3s3m")
+script = ExtResource("1_xsh4x")
+id = 1
+name = "test"
+formation = 0
+prestige = 0
+budget = 1234
+salary_budget = 0
+players = Array[ExtResource("1_qo5na")]([SubResource("Resource_d4fyl"), SubResource("Resource_ai1mf"), SubResource("Resource_eemgd"), SubResource("Resource_ybdue"), SubResource("Resource_fy433"), SubResource("Resource_wxwgo"), SubResource("Resource_p0ge2"), SubResource("Resource_5v31g"), SubResource("Resource_c0m2n"), SubResource("Resource_xqat4"), SubResource("Resource_8147b"), SubResource("Resource_c4dy4"), SubResource("Resource_vfj26"), SubResource("Resource_ij0qt"), SubResource("Resource_mjih8"), SubResource("Resource_riacg"), SubResource("Resource_kmaha"), SubResource("Resource_7tmay"), SubResource("Resource_w1e1d"), SubResource("Resource_o6hyd"), SubResource("Resource_mkf12"), SubResource("Resource_iqf0f"), SubResource("Resource_5ao1g"), SubResource("Resource_oujig")])

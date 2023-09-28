@@ -677,11 +677,10 @@ func _run():
 	
 	test_league.append(test_team)
 	var generated_teams:Array[Team] = assign_players_to_team(test_league)
-#	print(test)
 	print("Write to file...", generated_teams.size())
 	var write_team:Team = generated_teams[0]
 	print("Write team name ", write_team.name)
-	ResourceSaver.save(write_team, file_name, ResourceSaver.FLAG_BUNDLE_RESOURCES)
+	ResourceSaver.save(write_team, file_name)
 	print("Done.")
 	
 	print("Reading from file...")
