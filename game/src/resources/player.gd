@@ -9,24 +9,24 @@ enum Position {P, D, C, A}
 enum Foot {L, R}
 enum Form {Bad, Good, Excellent}
 
-var id:int
+@export var id:int
 #var team:Team
-var price:int
+@export var price:int
 # shirt number
-var nr:int
-var name:String
-var surname:String
-var birth_date:String
-var nationality:String
-var moral = 4
-var position:Position
-var foot:Foot
-var prestige:int
-var form:Form
-var potential_growth:int
-var injury_potential:int
-var loyality:int
-var contract:Contract
-var statistics:Statistics
-var attributes:Attributes
+@export var nr:int
+@export var name:String
+@export var surname:String
+@export var birth_date:String
+@export var nationality:String
+@export var moral = 4
+@export var position:Position
+@export var foot:Foot
+@export var prestige:int
+@export var form:Form
+@export var potential_growth:int
+@export var injury_potential:int
+@export var loyality:int
+@export var contract:Contract
+@export var statistics:Statistics
+@export var attributes:Attributes
 
