@@ -10,17 +10,15 @@ var formations:Array = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
 
 @export var id:int
 @export var name:String
-@export var stadium:Stadium
 @export var formation:int
 @export var prestige:int
 @export var budget:int
 @export var salary_budget:int
 @export var players:Array[Player]
+@export var stadium:Stadium
 
-class Stadium extends Resource:
-	var name:String
-	var capacity:int
-	var year_built:int
-
-#func _init(p_name = "p_test") -> void:
-#	name = p_name
+func create_stadium(name:String, capacity:int, year_built:int) -> void:
+	stadium = Stadium.new()
+	stadium.name = name
+	stadium.capacity = capacity
+	stadium.year_built = year_built

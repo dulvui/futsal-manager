@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="League" load_steps=2 format=3 uid="uid://b1is60jrmm13e"]
-
-[ext_resource type="Script" path="res://src/resources/league.gd" id="1_tom0t"]
-
-[resource]
-script = ExtResource("1_tom0t")
-file_name = "serie_a.json"
