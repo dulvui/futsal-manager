@@ -104,8 +104,9 @@ func assign_players_to_team(team:Team):
 
 	return team
 
-func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, position:String):
-
+func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, position:String) -> Goalkeeper:
+	var attributes:Goalkeeper = Goalkeeper.new()
+	
 	var age_factor:int = 20
 	if age > 34:
 		age_factor = 54 - age
@@ -114,29 +115,25 @@ func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, positi
 
 	var factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	
-	var physical:Dictionary
 	if position == "G":
-		physical = {
-			"reflexes": min(factor + randi_range(-5, 5), 20),
-			"positioning": min(factor + randi_range(-5, 5), 20),
-			"kicking": min(factor + randi_range(-5, 5), 20),
-			"handling": min(factor + randi_range(-5, 5), 20),
-			"diving": min(factor + randi_range(-5, 5), 20),
-			"speed": min(factor + randi_range(-5, 5), 20),
-		}
+		attributes.reflexes = min(factor + randi_range(-5, 5), 20)
+		attributes.positioning = min(factor + randi_range(-5, 5), 20)
+		attributes.kicking = min(factor + randi_range(-5, 5), 20)
+		attributes.handling = min(factor + randi_range(-5, 5), 20)
+		attributes.diving = min(factor + randi_range(-5, 5), 20)
+		attributes.speed = min(factor + randi_range(-5, 5), 20)
 	else:
-		physical = {
-			"reflexes": -1,
-			"positioning": -1,
-			"kicking": -1,
-			"handling": -1,
-			"diving": -1,
-			"speed": -1,
-		}
-	return physical
+		attributes.reflexes = -1
+		attributes.positioning = -1
+		attributes.kicking = -1
+		attributes.handling = -1
+		attributes.diving = -1
+		attributes.speed = -1
+	return attributes
 
 
-func get_physical(age, nationality, prestige, pos):
+func get_physical(age, nationality, prestige, pos) -> Physical:
+	var attributes:Physical = Physical.new()
 
 	var age_factor:int = 20
 	if age > 34:
@@ -147,30 +144,26 @@ func get_physical(age, nationality, prestige, pos):
 	var pace_factor:int = min(randi_range(9, age_factor), max(prestige, 9))
 	var physical_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	
-	var physical:Dictionary
 	if pos != "G":
-		physical = {
-			"pace": min(pace_factor + randi_range(-5, 5), 20),
-			"acceleration": min(pace_factor + randi_range(-5, 5), 20),
-			"stamina": min(physical_factor + randi_range(-5, 5), 20),
-			"strength": min(physical_factor + randi_range(-5, 5), 20),
-			"agility": min(physical_factor + randi_range(-5, 5), 20),
-			"jump": min(physical_factor + randi_range(-5, 5), 20),
-		}
+		attributes.pace = min(pace_factor + randi_range(-5, 5), 20)
+		attributes.acceleration = min(pace_factor + randi_range(-5, 5), 20)
+		attributes.stamina = min(physical_factor + randi_range(-5, 5), 20)
+		attributes.strength = min(physical_factor + randi_range(-5, 5), 20)
+		attributes.agility = min(physical_factor + randi_range(-5, 5), 20)
+		attributes.jump = min(physical_factor + randi_range(-5, 5), 20)
 	else:
-		physical = {
-			"pace": -1,
-			"acceleration": -1,
-			"stamina": -1,
-			"strength": -1,
-			"agility": -1,
-			"jump": -1,
-		}
-	return physical
+		attributes.pace = -1
+		attributes.acceleration = -1
+		attributes.stamina = -1
+		attributes.strength = -1
+		attributes.agility = -1
+		attributes.jump = -1
+	return attributes
 
 
-func get_technical(age, nationality, prestige, pos):
-
+func get_technical(age, nationality, prestige, pos) -> Technical:
+	var attributes:Technical = Technical.new()
+	
 	var age_factor:int = 20
 	if age > 34:
 		age_factor = 54 - age
@@ -184,39 +177,37 @@ func get_technical(age, nationality, prestige, pos):
 	var defense_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 
 	if pos != "G":
-		return {
-			"crossing": min(pass_factor + randi_range(-5, 5), 20),
-			"passing": min(pass_factor + randi_range(-5, 5), 20),
-			"long_passing": min(pass_factor + randi_range(-5, 5), 20),
-			"tackling": min(defense_factor + randi_range(-5, 5), 20),
-			"heading": min(shoot_factor + randi_range(-5, 5), 20),
-			"interception": min(defense_factor + randi_range(-5, 5), 20),
-			"shooting": min(shoot_factor + randi_range(-5, 5), 20),
-			"long_shooting": min(shoot_factor + randi_range(-5, 5), 20),
-			"penalty": min(technique_factor + randi_range(-5, 5), 20),
-			"finishing": min(shoot_factor + randi_range(-5, 5), 20),
-			"dribbling": min(shoot_factor + randi_range(-5, 5), 20),
-			"blocking": min(shoot_factor + randi_range(-5, 5), 20),
-		}
+		attributes.crossing = min(pass_factor + randi_range(-5, 5), 20)
+		attributes.passing = min(pass_factor + randi_range(-5, 5), 20)
+		attributes.long_passing = min(pass_factor + randi_range(-5, 5), 20)
+		attributes.tackling = min(defense_factor + randi_range(-5, 5), 20)
+		attributes.heading = min(shoot_factor + randi_range(-5, 5), 20)
+		attributes.interception = min(defense_factor + randi_range(-5, 5), 20)
+		attributes.shooting = min(shoot_factor + randi_range(-5, 5), 20)
+		attributes.long_shooting = min(shoot_factor + randi_range(-5, 5), 20)
+		attributes.penalty = min(technique_factor + randi_range(-5, 5), 20)
+		attributes.finishing = min(shoot_factor + randi_range(-5, 5), 20)
+		attributes.dribbling = min(shoot_factor + randi_range(-5, 5), 20)
+		attributes.blocking = min(shoot_factor + randi_range(-5, 5), 20)
 	else:
-		return {
-			"crossing": -1,
-			"passing": -1,
-			"long_passing": -1,
-			"tackling": -1,
-			"heading": -1,
-			"interception": -1,
-			"shooting": -1,
-			"long_shooting": -1,
-			"penalty": -1,
-			"finishing": -1,
-			"dribbling": -1,
-			"blocking": -1,
-		}
+		attributes.crossing = -1
+		attributes.passing = -1
+		attributes.long_passing = -1
+		attributes.tackling = -1
+		attributes.heading = -1
+		attributes.interception = -1
+		attributes.shooting = -1
+		attributes.long_shooting = -1
+		attributes.penalty = -1
+		attributes.finishing = -1
+		attributes.dribbling = -1
+		attributes.blocking = -1
+	return attributes
 
 
-func get_mental(age, nationality, prestige, pos):
-
+func get_mental(age, nationality, prestige, pos) -> Mental:
+	var attribtues:Mental = Mental.new()
+	
 	var age_factor:int = 20
 	if age > 34:
 		age_factor = 54 - age
@@ -226,20 +217,20 @@ func get_mental(age, nationality, prestige, pos):
 	var offensive_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	var defensive_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 
-	return {
-		"aggression": min(defensive_factor + randi_range(-5, 5), 20),
-		"anticipation": min(defensive_factor + randi_range(-5, 5), 20),
-		"decisions": min(offensive_factor + randi_range(-5, 5), 20),
-		"concentration": min(offensive_factor + randi_range(-5, 5), 20),
-		"teamwork": min(offensive_factor + randi_range(-5, 5), 20),
-		"vision": min(offensive_factor + randi_range(-5, 5), 20),
-		"work_rate": min(offensive_factor + randi_range(-5, 5), 20),
-		"offensive_movement": min(offensive_factor + randi_range(-5, 5), 20),
-		"marking": min(defensive_factor + randi_range(-5, 5), 20),
-	}
+	attribtues.aggression = min(defensive_factor + randi_range(-5, 5), 20)
+	attribtues.anticipation = min(defensive_factor + randi_range(-5, 5), 20)
+	attribtues.decisions = min(offensive_factor + randi_range(-5, 5), 20)
+	attribtues.concentration = min(offensive_factor + randi_range(-5, 5), 20)
+	attribtues.teamwork = min(offensive_factor + randi_range(-5, 5), 20)
+	attribtues.vision = min(offensive_factor + randi_range(-5, 5), 20)
+	attribtues.work_rate = min(offensive_factor + randi_range(-5, 5), 20)
+	attribtues.offensive_movement = min(offensive_factor + randi_range(-5, 5), 20)
+	attribtues.marking = min(defensive_factor + randi_range(-5, 5), 20)
+	
+	return attribtues
 
 
-func get_price(age, prestige, pos):
+func get_price(age, prestige, pos) -> int:
 	var age_factor:int = min(abs(age - 30), 20)
 	var pos_factor:int = 0
 	if pos == "G":
@@ -375,14 +366,13 @@ func create_player(nationality:String, position:String, nr:int) -> Player:
 #	player.history = get_history(prestige, position, 2020-birth_date.year, contract, potential_growth)
 #	player.contract = contract
 	player.nr = nr
+	
+	player.attributes = Attributes.new()
+	player.attributes.goalkeeper =  get_goalkeeper_attributes(2020-birth_date.year, nationality, prestige, position)
+	player.attributes.mental = get_mental(2020-birth_date.year, nationality, prestige, position)
+	player.attributes.technical = get_technical(2020-birth_date.year, nationality, prestige, position)
+	player.attributes.physical = get_physical(2020-birth_date.year, nationality, prestige, position)
 
-#	player["attributes"] = {
-#		"goalkeeper": get_goalkeeper_attributes(
-#			2020-birth_date.year, nationality, prestige, position),
-#		"mental": get_mental(2020-birth_date.year, nationality, prestige, position),
-#		"technical": get_technical(2020-birth_date.year, nationality, prestige, position),
-#		"physical": get_physical(2020-birth_date.year, nationality, prestige, position),
-#	}
 
 	player_id += 1
 

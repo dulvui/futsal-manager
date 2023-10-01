@@ -7,5 +7,5 @@ extends Resource
 
 @export var goalkeeper:Goalkeeper
 @export var mental:Mental
-@export var tecnical:Tecnical
+@export var technical:Technical
 @export var physical:Physical
