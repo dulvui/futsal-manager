@@ -387,27 +387,3 @@ func create_player(nationality:String, position:String, nr:int) -> Player:
 	player_id += 1
 
 	return player
-	# print(ita_players)
-
-
-# ita_players = create_players("it_IT")
-# esp_players = create_players("es_ES")
-
-
-
-
-#ita_serie_a = assign_players_to_team(ita_serie_a)
-#with open('ita_serie_a.json', 'w') as outfile:
-#	json.dump(ita_serie_a, outfile)
-#print("Serie A done")
-#
-#ita_serie_b = assign_players_to_team(ita_serie_b)
-#with open('ita_serie_b.json', 'w') as outfile:
-#	json.dump(ita_serie_b, outfile)
-#print("Serie B done")
-#
-#ita_serie_c = assign_players_to_team(ita_serie_c)
-#with open('ita_serie_c.json', 'w') as outfile:
-#	json.dump(ita_serie_c, outfile)
-#print("Serie C done")
-
