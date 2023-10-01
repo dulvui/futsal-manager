@@ -351,7 +351,7 @@ func create_player(nationality:String, position:String, nr:int) -> Player:
 	player.price = get_price(2020-birth_date.year, prestige, position)
 	player.name = "random.choice(names)"
 	player.surname = "random.choice(surnames)"
-#	player.birth_date = birth_date
+	player.birth_date = birth_date
 	player.nationality = nationality.split("_")[1]
 	player.moral = randi_range(1, 4)  # 1 to 4, 1 low 4 good
 #	player.position = position

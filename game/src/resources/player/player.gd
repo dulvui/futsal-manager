@@ -16,7 +16,7 @@ enum Form {Bad, Good, Excellent}
 @export var nr:int
 @export var name:String
 @export var surname:String
-@export var birth_date:String
+@export var birth_date:Dictionary
 @export var nationality:String
 @export var moral = 4
 @export var position:Position
