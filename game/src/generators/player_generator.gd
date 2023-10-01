@@ -247,28 +247,26 @@ func get_price(age, prestige, pos) -> int:
 	return randi_range(total_factor-20, total_factor) * 10000
 
 
-func get_contract(prestige, position, age):
+func get_contract(prestige, position, age) -> Contract:
+	var contract:Contract = Contract.new()
+	
 	var past:int = randi_range(1, 2)
 	var future:int = randi_range(1, 3)
 
 	# price_factor = randi_range()
-
-	var contract:Dictionary = {
-		"price": 0,
-		"money/week": 0,
-		"start_date": "2023",
-		"end_date": "2023",
-		"bonus": {
-			"goal": 0,
-			"clean_sheet": 0,
-			"assist": 0,
-			"league_title": 0,
-			"nat_cup_title": 0,
-			"inter_cup_title": 0,
-		},
-		"buy_clause": 0,
-		"is_on_loan": ""  # if player is on loan, original team name is here
-	}
+	contract.price = 0
+	contract.money_week = 0
+	contract.start_date = Time.get_date_dict_from_system()
+	contract.end_date = Time.get_date_dict_from_system()
+	contract.bonus_goal = 0
+	contract.bonus_clean_sheet = 0
+	contract.bonus_assist = 0
+	contract.bonus_league_title = 0
+	contract.bonus_nat_cup_title = 0
+	contract.bonus_inter_cup_title = 0
+	contract.buy_clause = 0
+	contract.is_on_loan = false
+	
 	return contract
 
 
@@ -343,11 +341,9 @@ func create_player(nationality:String, position:String, nr:int) -> Player:
 
 	# position = positions[randi_range(0, len(positions)-1)]
 
-	var contract:Dictionary = get_contract(prestige, position, 2020-birth_date.year)
 	var potential_growth:int = randi_range(1, 5)
 
 	player.id = player_id
-#	player.team = team
 	player.price = get_price(2020-birth_date.year, prestige, position)
 	player.name = "random.choice(names)"
 	player.surname = "random.choice(surnames)"
@@ -360,11 +356,10 @@ func create_player(nationality:String, position:String, nr:int) -> Player:
 	player.form = forms[randi_range(0, len(forms)-1)]
 	player.potential_growth
 	player.potential_growth = potential_growth
-	# _ hidden stats, not visible, just for calcs,
 	player.injury_potential = randi_range(1, 20)
 	player.loyality = ""  # if player is loay, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
 #	player.history = get_history(prestige, position, 2020-birth_date.year, contract, potential_growth)
-#	player.contract = contract
+	player.contract = get_contract(prestige, position, 2020-birth_date.year)
 	player.nr = nr
 	
 	player.attributes = Attributes.new()

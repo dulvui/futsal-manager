@@ -8,8 +8,8 @@ extends Resource
 @export var price:int
 @export var money_week:int
 # unixtimestamps
-@export var start_date:int
-@export var end_date:int
+@export var start_date:Dictionary
+@export var end_date:Dictionary
 @export var bonus_goal:int
 @export var bonus_clean_sheet:int
 @export var bonus_assist:int
