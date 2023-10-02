@@ -107,12 +107,7 @@ func assign_players_to_team(team:Team):
 func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, position:String) -> Goalkeeper:
 	var attributes:Goalkeeper = Goalkeeper.new()
 	
-	var age_factor:int = 20
-	if age > 34:
-		age_factor = 54 - age
-	elif age < 18:
-		age_factor = 16
-
+	var age_factor:int = get_age_factor(age)
 	var factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	
 	if position == "G":
@@ -135,11 +130,7 @@ func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, positi
 func get_physical(age, nationality, prestige, pos) -> Physical:
 	var attributes:Physical = Physical.new()
 
-	var age_factor:int = 20
-	if age > 34:
-		age_factor = 54 - age
-	elif age < 18:
-		age_factor = 16
+	var age_factor:int = get_age_factor(age)
 
 	var pace_factor:int = min(randi_range(9, age_factor), max(prestige, 9))
 	var physical_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
@@ -164,11 +155,7 @@ func get_physical(age, nationality, prestige, pos) -> Physical:
 func get_technical(age, nationality, prestige, pos) -> Technical:
 	var attributes:Technical = Technical.new()
 	
-	var age_factor:int = 20
-	if age > 34:
-		age_factor = 54 - age
-	elif age < 18:
-		age_factor = 16
+	var age_factor:int = get_age_factor(age)
 
 	# use also pos i calculation
 	var pass_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
@@ -208,11 +195,7 @@ func get_technical(age, nationality, prestige, pos) -> Technical:
 func get_mental(age, nationality, prestige, pos) -> Mental:
 	var attribtues:Mental = Mental.new()
 	
-	var age_factor:int = 20
-	if age > 34:
-		age_factor = 54 - age
-	elif age < 18:
-		age_factor = 16
+	var age_factor:int = get_age_factor(age)
 
 	var offensive_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	var defensive_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
@@ -229,6 +212,13 @@ func get_mental(age, nationality, prestige, pos) -> Mental:
 	
 	return attribtues
 
+func get_age_factor(age:int ) -> int:
+	var age_factor:int = 20
+	if age > 34:
+		age_factor = 54 - age
+	elif age < 18:
+		age_factor = 16
+	return age_factor
 
 func get_price(age, prestige, pos) -> int:
 	var age_factor:int = min(abs(age - 30), 20)
