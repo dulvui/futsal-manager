@@ -265,62 +265,7 @@ func get_contract(prestige, position, age) -> Contract:
 	
 	return contract
 
-
-func get_history(prestige, position, age, contract, potential_growth):
-	var past:int = randi_range(1, 2)
-	var future:int = randi_range(1, 3)
-
-	# price_factor = randi_range()
-
-	# look at years in contract, so before he played in other club
-	# look at potential growth and stats of player and increase price over years
-	# save also price evolution
-
-	var history:Array = [
-		{
-			"year": "",
-			"teams": [
-				{
-					"name": "",
-					"price": 0,
-							"games_played": 0,
-					"goals": 0,
-					"assists": 0,
-					"yellow_card": 0,
-					"red_card": 0,
-					"average_vote": 0.0
-				}  # if player had transfer, another team gets added here
-			],
-			"actual": {  # make own for every competition like cups like in fm 13
-				"price": 0,
-				"games_played": 0,
-				"goals": 0,
-				"assists": 0,
-				"yellow_card": 0,
-				"red_card": 0,
-				"average_vote": 0.0
-			}
-		}
-	]
-	return history
-
-
 func create_player(nationality:String, position:String, nr:int) -> Player:
-	# player = {}
-
-	# ITALY
-
-	# names = []
-	# surnames = []
-
-	# # create names
-	# for _ in range(100):
-	#     name_base = fake_it.name_male().replace("Dott. ", "").replace("Sig. ", "")
-	#     names.append(name_base.split()[0])
-	#     surnames.append(name_base.split()[1])
-
-	# create players
-
 	# random date from 1970 to 2007
 	var player = Player.new()
 	
@@ -354,7 +299,6 @@ func create_player(nationality:String, position:String, nr:int) -> Player:
 	player.potential_growth = potential_growth
 	player.injury_potential = randi_range(1, 20)
 	player.loyality = ""  # if player is loay, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
-#	player.history = get_history(prestige, position, 2020-birth_date.year, contract, potential_growth)
 	player.contract = get_contract(prestige, position, 2020-birth_date.year)
 	player.nr = nr
 	
