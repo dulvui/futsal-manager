@@ -1,36 +1,355 @@
-[gd_resource type="Resource" script_class="League" load_steps=34 format=3 uid="uid://bxdbtep5exqu3"]
+[gd_resource type="Resource" script_class="League" load_steps=182 format=3 uid="uid://48ved6gqb8pp"]
 
-[ext_resource type="Script" path="res://src/resources/league.gd" id="1_kdyb8"]
-[ext_resource type="Script" path="res://src/resources/player/player.gd" id="2_8t8q8"]
-[ext_resource type="Script" path="res://src/resources/team/team.gd" id="3_iynbb"]
-[ext_resource type="Script" path="res://src/resources/team/stadium.gd" id="4_g3hxh"]
+[ext_resource type="Script" path="res://src/resources/league.gd" id="1_5an5x"]
+[ext_resource type="Script" path="res://src/resources/player/attributes/goalkeeper.gd" id="2_atc3m"]
+[ext_resource type="Script" path="res://src/resources/team/team.gd" id="2_kxn4r"]
+[ext_resource type="Script" path="res://src/resources/team/stadium.gd" id="3_jkpui"]
+[ext_resource type="Script" path="res://src/resources/player/attributes/mental.gd" id="3_t8ijr"]
+[ext_resource type="Script" path="res://src/resources/player/attributes/physical.gd" id="4_fxasf"]
+[ext_resource type="Script" path="res://src/resources/player/attributes/attributes.gd" id="5_egasv"]
+[ext_resource type="Script" path="res://src/resources/player/attributes/technical.gd" id="6_7i45n"]
+[ext_resource type="Script" path="res://src/resources/player/contract.gd" id="7_5kltb"]
+[ext_resource type="Script" path="res://src/resources/player/player.gd" id="7_ibdl8"]
+[ext_resource type="Script" path="res://src/resources/player/statistics.gd" id="9_bp3o3"]
 
-[sub_resource type="Resource" id="Resource_vni3y"]
-script = ExtResource("2_8t8q8")
+[sub_resource type="Resource" id="Resource_10c21"]
+script = ExtResource("2_atc3m")
+reflexes = 17
+positioning = 17
+kicking = 19
+handling = 17
+diving = 13
+speed = 17
+
+[sub_resource type="Resource" id="Resource_bps5u"]
+script = ExtResource("3_t8ijr")
+aggression = 9
+anticipation = 13
+decisions = 16
+concentration = 8
+teamwork = 16
+vision = 8
+work_rate = 11
+offensive_movement = 9
+marking = 12
+
+[sub_resource type="Resource" id="Resource_gaf4j"]
+script = ExtResource("4_fxasf")
+pace = -1
+acceleration = -1
+stamina = -1
+strength = -1
+agility = -1
+jump = -1
+
+[sub_resource type="Resource" id="Resource_npx0b"]
+script = ExtResource("6_7i45n")
+crossing = -1
+passing = -1
+long_passing = -1
+tackling = -1
+heading = -1
+interception = -1
+shooting = -1
+long_shooting = -1
+penalty = -1
+finishing = -1
+dribbling = -1
+blocking = -1
+
+[sub_resource type="Resource" id="Resource_y03k8"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_10c21")
+mental = SubResource("Resource_bps5u")
+technical = SubResource("Resource_npx0b")
+physical = SubResource("Resource_gaf4j")
+
+[sub_resource type="Resource" id="Resource_l647h"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_xjpqq"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_wnbur"]
+script = ExtResource("7_ibdl8")
 id = 1
-price = -10000
+price = 250000
 nr = 1
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 18,
+"hour": 10,
+"minute": 46,
+"month": 3,
+"second": 43,
+"weekday": 0,
+"year": 2001
+}
 nationality = "IT"
-moral = 2
+moral = 3
 position = 0
 foot = 0
-prestige = 6
+prestige = 14
 form = 0
-potential_growth = 1
-injury_potential = 19
+potential_growth = 4
+injury_potential = 3
 loyality = 0
+contract = SubResource("Resource_l647h")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_xjpqq")])
+attributes = SubResource("Resource_y03k8")
 
-[sub_resource type="Resource" id="Resource_pqjuq"]
-script = ExtResource("2_8t8q8")
+[sub_resource type="Resource" id="Resource_bk7cv"]
+script = ExtResource("2_atc3m")
+reflexes = 14
+positioning = 7
+kicking = 14
+handling = 6
+diving = 6
+speed = 10
+
+[sub_resource type="Resource" id="Resource_kn8ps"]
+script = ExtResource("3_t8ijr")
+aggression = 16
+anticipation = 11
+decisions = 9
+concentration = 13
+teamwork = 9
+vision = 8
+work_rate = 11
+offensive_movement = 10
+marking = 13
+
+[sub_resource type="Resource" id="Resource_47wyw"]
+script = ExtResource("4_fxasf")
+pace = -1
+acceleration = -1
+stamina = -1
+strength = -1
+agility = -1
+jump = -1
+
+[sub_resource type="Resource" id="Resource_anxp2"]
+script = ExtResource("6_7i45n")
+crossing = -1
+passing = -1
+long_passing = -1
+tackling = -1
+heading = -1
+interception = -1
+shooting = -1
+long_shooting = -1
+penalty = -1
+finishing = -1
+dribbling = -1
+blocking = -1
+
+[sub_resource type="Resource" id="Resource_2tglq"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_bk7cv")
+mental = SubResource("Resource_kn8ps")
+technical = SubResource("Resource_anxp2")
+physical = SubResource("Resource_47wyw")
+
+[sub_resource type="Resource" id="Resource_bv112"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_gois7"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_tcgah"]
+script = ExtResource("7_ibdl8")
 id = 2
-price = 100000
+price = 50000
 nr = 2
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 26,
+"hour": 3,
+"minute": 5,
+"month": 7,
+"second": 54,
+"weekday": 5,
+"year": 1991
+}
+nationality = "IT"
+moral = 3
+position = 0
+foot = 0
+prestige = 16
+form = 0
+potential_growth = 4
+injury_potential = 16
+loyality = 0
+contract = SubResource("Resource_bv112")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_gois7")])
+attributes = SubResource("Resource_2tglq")
+
+[sub_resource type="Resource" id="Resource_nnwdq"]
+script = ExtResource("2_atc3m")
+reflexes = 18
+positioning = 16
+kicking = 16
+handling = 15
+diving = 20
+speed = 17
+
+[sub_resource type="Resource" id="Resource_bwmws"]
+script = ExtResource("3_t8ijr")
+aggression = 14
+anticipation = 9
+decisions = 8
+concentration = 9
+teamwork = 13
+vision = 8
+work_rate = 12
+offensive_movement = 10
+marking = 14
+
+[sub_resource type="Resource" id="Resource_3k7q0"]
+script = ExtResource("4_fxasf")
+pace = -1
+acceleration = -1
+stamina = -1
+strength = -1
+agility = -1
+jump = -1
+
+[sub_resource type="Resource" id="Resource_fixp0"]
+script = ExtResource("6_7i45n")
+crossing = -1
+passing = -1
+long_passing = -1
+tackling = -1
+heading = -1
+interception = -1
+shooting = -1
+long_shooting = -1
+penalty = -1
+finishing = -1
+dribbling = -1
+blocking = -1
+
+[sub_resource type="Resource" id="Resource_62esg"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_nnwdq")
+mental = SubResource("Resource_bwmws")
+technical = SubResource("Resource_fixp0")
+physical = SubResource("Resource_3k7q0")
+
+[sub_resource type="Resource" id="Resource_huiav"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_0gjy3"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_rlbq0"]
+script = ExtResource("7_ibdl8")
+id = 3
+price = 200000
+nr = 3
+name = "random.choice(names)"
+surname = "random.choice(surnames)"
+birth_date = {
+"day": 1,
+"hour": 11,
+"minute": 19,
+"month": 9,
+"second": 57,
+"weekday": 2,
+"year": 1981
+}
 nationality = "IT"
 moral = 4
 position = 0
@@ -38,325 +357,1756 @@ foot = 0
 prestige = 15
 form = 0
 potential_growth = 2
-injury_potential = 5
+injury_potential = 2
 loyality = 0
+contract = SubResource("Resource_huiav")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_0gjy3")])
+attributes = SubResource("Resource_62esg")
 
-[sub_resource type="Resource" id="Resource_y4ah0"]
-script = ExtResource("2_8t8q8")
-id = 3
-price = 140000
-nr = 3
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 1
-position = 0
-foot = 0
-prestige = 19
-form = 0
-potential_growth = 4
-injury_potential = 4
-loyality = 0
+[sub_resource type="Resource" id="Resource_uab3q"]
+script = ExtResource("2_atc3m")
+reflexes = 7
+positioning = 4
+kicking = 3
+handling = 11
+diving = 4
+speed = 2
 
-[sub_resource type="Resource" id="Resource_8gfgk"]
-script = ExtResource("2_8t8q8")
+[sub_resource type="Resource" id="Resource_11613"]
+script = ExtResource("3_t8ijr")
+aggression = 5
+anticipation = 11
+decisions = 9
+concentration = 6
+teamwork = 10
+vision = 11
+work_rate = 1
+offensive_movement = 10
+marking = 11
+
+[sub_resource type="Resource" id="Resource_m5vn6"]
+script = ExtResource("4_fxasf")
+pace = -1
+acceleration = -1
+stamina = -1
+strength = -1
+agility = -1
+jump = -1
+
+[sub_resource type="Resource" id="Resource_x5ig7"]
+script = ExtResource("6_7i45n")
+crossing = -1
+passing = -1
+long_passing = -1
+tackling = -1
+heading = -1
+interception = -1
+shooting = -1
+long_shooting = -1
+penalty = -1
+finishing = -1
+dribbling = -1
+blocking = -1
+
+[sub_resource type="Resource" id="Resource_sjibh"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_uab3q")
+mental = SubResource("Resource_11613")
+technical = SubResource("Resource_x5ig7")
+physical = SubResource("Resource_m5vn6")
+
+[sub_resource type="Resource" id="Resource_7fx8s"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_18gk8"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_8rtle"]
+script = ExtResource("7_ibdl8")
 id = 4
-price = 90000
+price = 0
 nr = 4
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 3
-position = 0
-foot = 0
-prestige = 8
-form = 0
-potential_growth = 1
-injury_potential = 7
-loyality = 0
-
-[sub_resource type="Resource" id="Resource_w0yuw"]
-script = ExtResource("2_8t8q8")
-id = 5
-price = 150000
-nr = 5
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 8,
+"hour": 17,
+"minute": 43,
+"month": 2,
+"second": 8,
+"weekday": 2,
+"year": 1994
+}
 nationality = "IT"
 moral = 2
 position = 0
 foot = 0
-prestige = 13
+prestige = 6
 form = 0
-potential_growth = 2
-injury_potential = 8
+potential_growth = 4
+injury_potential = 17
 loyality = 0
+contract = SubResource("Resource_7fx8s")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_18gk8")])
+attributes = SubResource("Resource_sjibh")
 
-[sub_resource type="Resource" id="Resource_5xdbo"]
-script = ExtResource("2_8t8q8")
+[sub_resource type="Resource" id="Resource_a0h0j"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_cdt2q"]
+script = ExtResource("3_t8ijr")
+aggression = 13
+anticipation = 20
+decisions = 12
+concentration = 12
+teamwork = 14
+vision = 11
+work_rate = 16
+offensive_movement = 20
+marking = 17
+
+[sub_resource type="Resource" id="Resource_2ajxt"]
+script = ExtResource("4_fxasf")
+pace = 7
+acceleration = 7
+stamina = 18
+strength = 12
+agility = 15
+jump = 11
+
+[sub_resource type="Resource" id="Resource_ioxxn"]
+script = ExtResource("6_7i45n")
+crossing = 15
+passing = 18
+long_passing = 18
+tackling = 9
+heading = 12
+interception = 7
+shooting = 9
+long_shooting = 11
+penalty = 10
+finishing = 12
+dribbling = 11
+blocking = 5
+
+[sub_resource type="Resource" id="Resource_sfj6f"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_a0h0j")
+mental = SubResource("Resource_cdt2q")
+technical = SubResource("Resource_ioxxn")
+physical = SubResource("Resource_2ajxt")
+
+[sub_resource type="Resource" id="Resource_pkfu2"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_81iti"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_kdgpo"]
+script = ExtResource("7_ibdl8")
+id = 5
+price = 300000
+nr = 5
+name = "random.choice(names)"
+surname = "random.choice(surnames)"
+birth_date = {
+"day": 2,
+"hour": 5,
+"minute": 14,
+"month": 2,
+"second": 42,
+"weekday": 2,
+"year": 1999
+}
+nationality = "IT"
+moral = 3
+position = 0
+foot = 0
+prestige = 18
+form = 0
+potential_growth = 3
+injury_potential = 10
+loyality = 0
+contract = SubResource("Resource_pkfu2")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_81iti")])
+attributes = SubResource("Resource_sfj6f")
+
+[sub_resource type="Resource" id="Resource_3l3oy"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_xc68q"]
+script = ExtResource("3_t8ijr")
+aggression = 7
+anticipation = 14
+decisions = 13
+concentration = 6
+teamwork = 7
+vision = 9
+work_rate = 15
+offensive_movement = 15
+marking = 15
+
+[sub_resource type="Resource" id="Resource_5csyo"]
+script = ExtResource("4_fxasf")
+pace = 6
+acceleration = 8
+stamina = 14
+strength = 5
+agility = 7
+jump = 11
+
+[sub_resource type="Resource" id="Resource_qi4td"]
+script = ExtResource("6_7i45n")
+crossing = 11
+passing = 12
+long_passing = 12
+tackling = 5
+heading = 9
+interception = 11
+shooting = 14
+long_shooting = 13
+penalty = 10
+finishing = 10
+dribbling = 7
+blocking = 12
+
+[sub_resource type="Resource" id="Resource_ri65a"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_3l3oy")
+mental = SubResource("Resource_xc68q")
+technical = SubResource("Resource_qi4td")
+physical = SubResource("Resource_5csyo")
+
+[sub_resource type="Resource" id="Resource_sm8kv"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_rdufs"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_kyb7u"]
+script = ExtResource("7_ibdl8")
 id = 6
 price = 230000
 nr = 6
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 1
-position = 0
-foot = 0
-prestige = 12
-form = 0
-potential_growth = 1
-injury_potential = 17
-loyality = 0
-
-[sub_resource type="Resource" id="Resource_5vxhe"]
-script = ExtResource("2_8t8q8")
-id = 7
-price = 140000
-nr = 7
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 16,
+"hour": 0,
+"minute": 4,
+"month": 11,
+"second": 54,
+"weekday": 2,
+"year": 1982
+}
 nationality = "IT"
 moral = 3
 position = 0
 foot = 0
-prestige = 8
+prestige = 10
 form = 0
-potential_growth = 4
-injury_potential = 12
+potential_growth = 1
+injury_potential = 9
 loyality = 0
+contract = SubResource("Resource_sm8kv")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_rdufs")])
+attributes = SubResource("Resource_ri65a")
 
-[sub_resource type="Resource" id="Resource_kyg8l"]
-script = ExtResource("2_8t8q8")
+[sub_resource type="Resource" id="Resource_jcy84"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_bcpa1"]
+script = ExtResource("3_t8ijr")
+aggression = 10
+anticipation = 8
+decisions = 5
+concentration = 11
+teamwork = 5
+vision = 14
+work_rate = 14
+offensive_movement = 11
+marking = 13
+
+[sub_resource type="Resource" id="Resource_k1suf"]
+script = ExtResource("4_fxasf")
+pace = 9
+acceleration = 6
+stamina = 5
+strength = 10
+agility = 5
+jump = 7
+
+[sub_resource type="Resource" id="Resource_is0fa"]
+script = ExtResource("6_7i45n")
+crossing = 4
+passing = 12
+long_passing = 2
+tackling = 8
+heading = 8
+interception = 8
+shooting = 1
+long_shooting = 5
+penalty = 12
+finishing = 7
+dribbling = 9
+blocking = 11
+
+[sub_resource type="Resource" id="Resource_w271g"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_jcy84")
+mental = SubResource("Resource_bcpa1")
+technical = SubResource("Resource_is0fa")
+physical = SubResource("Resource_k1suf")
+
+[sub_resource type="Resource" id="Resource_3w4a5"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_jj5ev"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_bvd0p"]
+script = ExtResource("7_ibdl8")
+id = 7
+price = 210000
+nr = 7
+name = "random.choice(names)"
+surname = "random.choice(surnames)"
+birth_date = {
+"day": 16,
+"hour": 8,
+"minute": 6,
+"month": 2,
+"second": 39,
+"weekday": 3,
+"year": 1977
+}
+nationality = "IT"
+moral = 3
+position = 0
+foot = 0
+prestige = 9
+form = 0
+potential_growth = 3
+injury_potential = 17
+loyality = 0
+contract = SubResource("Resource_3w4a5")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_jj5ev")])
+attributes = SubResource("Resource_w271g")
+
+[sub_resource type="Resource" id="Resource_nqhsf"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_pfsku"]
+script = ExtResource("3_t8ijr")
+aggression = 10
+anticipation = 14
+decisions = 10
+concentration = 2
+teamwork = 6
+vision = 3
+work_rate = 1
+offensive_movement = 1
+marking = 13
+
+[sub_resource type="Resource" id="Resource_dj54h"]
+script = ExtResource("4_fxasf")
+pace = 14
+acceleration = 16
+stamina = 9
+strength = 10
+agility = 1
+jump = 5
+
+[sub_resource type="Resource" id="Resource_wov70"]
+script = ExtResource("6_7i45n")
+crossing = 12
+passing = 8
+long_passing = 5
+tackling = 11
+heading = 5
+interception = 11
+shooting = 4
+long_shooting = 4
+penalty = 10
+finishing = 12
+dribbling = 6
+blocking = 3
+
+[sub_resource type="Resource" id="Resource_tjybm"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_nqhsf")
+mental = SubResource("Resource_pfsku")
+technical = SubResource("Resource_wov70")
+physical = SubResource("Resource_dj54h")
+
+[sub_resource type="Resource" id="Resource_fcb3j"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_be2ec"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_jto3u"]
+script = ExtResource("7_ibdl8")
 id = 8
-price = 60000
+price = 310000
 nr = 8
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 28,
+"hour": 17,
+"minute": 50,
+"month": 5,
+"second": 15,
+"weekday": 6,
+"year": 1977
+}
+nationality = "IT"
+moral = 4
+position = 0
+foot = 0
+prestige = 11
+form = 0
+potential_growth = 4
+injury_potential = 19
+loyality = 0
+contract = SubResource("Resource_fcb3j")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_be2ec")])
+attributes = SubResource("Resource_tjybm")
+
+[sub_resource type="Resource" id="Resource_b7bit"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_1m5bk"]
+script = ExtResource("3_t8ijr")
+aggression = 6
+anticipation = 7
+decisions = 7
+concentration = 1
+teamwork = 2
+vision = 11
+work_rate = 7
+offensive_movement = 2
+marking = 1
+
+[sub_resource type="Resource" id="Resource_ehbsu"]
+script = ExtResource("4_fxasf")
+pace = 8
+acceleration = 4
+stamina = 9
+strength = 1
+agility = 7
+jump = 2
+
+[sub_resource type="Resource" id="Resource_q7uax"]
+script = ExtResource("6_7i45n")
+crossing = 9
+passing = 10
+long_passing = 10
+tackling = 2
+heading = 10
+interception = 3
+shooting = 5
+long_shooting = 5
+penalty = 10
+finishing = 1
+dribbling = 2
+blocking = 1
+
+[sub_resource type="Resource" id="Resource_dn8cp"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_b7bit")
+mental = SubResource("Resource_1m5bk")
+technical = SubResource("Resource_q7uax")
+physical = SubResource("Resource_ehbsu")
+
+[sub_resource type="Resource" id="Resource_yoes5"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_c8cok"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_odaox"]
+script = ExtResource("7_ibdl8")
+id = 9
+price = 70000
+nr = 9
+name = "random.choice(names)"
+surname = "random.choice(surnames)"
+birth_date = {
+"day": 16,
+"hour": 9,
+"minute": 52,
+"month": 6,
+"second": 23,
+"weekday": 1,
+"year": 1980
+}
+nationality = "IT"
+moral = 1
+position = 0
+foot = 0
+prestige = 6
+form = 0
+potential_growth = 5
+injury_potential = 6
+loyality = 0
+contract = SubResource("Resource_yoes5")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_c8cok")])
+attributes = SubResource("Resource_dn8cp")
+
+[sub_resource type="Resource" id="Resource_3uthn"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_073sl"]
+script = ExtResource("3_t8ijr")
+aggression = 5
+anticipation = 9
+decisions = 2
+concentration = 10
+teamwork = 12
+vision = 11
+work_rate = 11
+offensive_movement = 8
+marking = 10
+
+[sub_resource type="Resource" id="Resource_ffs0u"]
+script = ExtResource("4_fxasf")
+pace = 6
+acceleration = 15
+stamina = 8
+strength = 6
+agility = 7
+jump = 15
+
+[sub_resource type="Resource" id="Resource_wr4hg"]
+script = ExtResource("6_7i45n")
+crossing = 5
+passing = 3
+long_passing = 12
+tackling = 3
+heading = 14
+interception = 6
+shooting = 7
+long_shooting = 8
+penalty = 9
+finishing = 12
+dribbling = 7
+blocking = 12
+
+[sub_resource type="Resource" id="Resource_dmfd5"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_3uthn")
+mental = SubResource("Resource_073sl")
+technical = SubResource("Resource_wr4hg")
+physical = SubResource("Resource_ffs0u")
+
+[sub_resource type="Resource" id="Resource_i1676"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_d16iu"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_nxdwb"]
+script = ExtResource("7_ibdl8")
+id = 10
+price = 280000
+nr = 10
+name = "random.choice(names)"
+surname = "random.choice(surnames)"
+birth_date = {
+"day": 6,
+"hour": 9,
+"minute": 2,
+"month": 7,
+"second": 52,
+"weekday": 2,
+"year": 1999
+}
+nationality = "IT"
+moral = 1
+position = 0
+foot = 0
+prestige = 10
+form = 0
+potential_growth = 1
+injury_potential = 9
+loyality = 0
+contract = SubResource("Resource_i1676")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_d16iu")])
+attributes = SubResource("Resource_dmfd5")
+
+[sub_resource type="Resource" id="Resource_o0eeq"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_gbj0s"]
+script = ExtResource("3_t8ijr")
+aggression = 8
+anticipation = 5
+decisions = 3
+concentration = 7
+teamwork = 2
+vision = 3
+work_rate = 3
+offensive_movement = 9
+marking = 3
+
+[sub_resource type="Resource" id="Resource_5sgdr"]
+script = ExtResource("4_fxasf")
+pace = 8
+acceleration = 8
+stamina = 2
+strength = 7
+agility = 6
+jump = 9
+
+[sub_resource type="Resource" id="Resource_3b7qa"]
+script = ExtResource("6_7i45n")
+crossing = 1
+passing = 6
+long_passing = 3
+tackling = 10
+heading = 3
+interception = 4
+shooting = 10
+long_shooting = 4
+penalty = 2
+finishing = 2
+dribbling = 4
+blocking = 3
+
+[sub_resource type="Resource" id="Resource_k5rma"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_o0eeq")
+mental = SubResource("Resource_gbj0s")
+technical = SubResource("Resource_3b7qa")
+physical = SubResource("Resource_5sgdr")
+
+[sub_resource type="Resource" id="Resource_wgmqk"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_h12wv"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_e57pv"]
+script = ExtResource("7_ibdl8")
+id = 11
+price = 240000
+nr = 11
+name = "random.choice(names)"
+surname = "random.choice(surnames)"
+birth_date = {
+"day": 8,
+"hour": 20,
+"minute": 3,
+"month": 1,
+"second": 44,
+"weekday": 2,
+"year": 2002
+}
 nationality = "IT"
 moral = 2
 position = 0
 foot = 0
 prestige = 6
 form = 0
-potential_growth = 5
-injury_potential = 13
+potential_growth = 3
+injury_potential = 4
 loyality = 0
+contract = SubResource("Resource_wgmqk")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_h12wv")])
+attributes = SubResource("Resource_k5rma")
 
-[sub_resource type="Resource" id="Resource_a83jf"]
-script = ExtResource("2_8t8q8")
-id = 9
-price = 170000
-nr = 9
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 2
-position = 0
-foot = 0
-prestige = 14
-form = 0
-potential_growth = 5
-injury_potential = 11
-loyality = 0
+[sub_resource type="Resource" id="Resource_ixm3w"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
 
-[sub_resource type="Resource" id="Resource_shr36"]
-script = ExtResource("2_8t8q8")
-id = 10
-price = 280000
-nr = 10
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 1
-position = 0
-foot = 0
-prestige = 9
-form = 0
-potential_growth = 1
-injury_potential = 2
-loyality = 0
+[sub_resource type="Resource" id="Resource_3bjlf"]
+script = ExtResource("3_t8ijr")
+aggression = 10
+anticipation = 8
+decisions = 15
+concentration = 13
+teamwork = 14
+vision = 7
+work_rate = 7
+offensive_movement = 7
+marking = 9
 
-[sub_resource type="Resource" id="Resource_m402a"]
-script = ExtResource("2_8t8q8")
-id = 11
-price = 110000
-nr = 11
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 2
-position = 0
-foot = 0
-prestige = 14
-form = 0
-potential_growth = 1
-injury_potential = 13
-loyality = 0
+[sub_resource type="Resource" id="Resource_rfxwi"]
+script = ExtResource("4_fxasf")
+pace = 7
+acceleration = 11
+stamina = 10
+strength = 10
+agility = 7
+jump = 6
 
-[sub_resource type="Resource" id="Resource_4m1a1"]
-script = ExtResource("2_8t8q8")
+[sub_resource type="Resource" id="Resource_kj20p"]
+script = ExtResource("6_7i45n")
+crossing = 14
+passing = 14
+long_passing = 16
+tackling = 16
+heading = 9
+interception = 11
+shooting = 13
+long_shooting = 10
+penalty = 7
+finishing = 14
+dribbling = 13
+blocking = 12
+
+[sub_resource type="Resource" id="Resource_e446b"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_ixm3w")
+mental = SubResource("Resource_3bjlf")
+technical = SubResource("Resource_kj20p")
+physical = SubResource("Resource_rfxwi")
+
+[sub_resource type="Resource" id="Resource_fgwf2"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_5lglq"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_avnqs"]
+script = ExtResource("7_ibdl8")
 id = 12
-price = 170000
+price = 380000
 nr = 12
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 1,
+"hour": 20,
+"minute": 13,
+"month": 6,
+"second": 1,
+"weekday": 5,
+"year": 2001
+}
 nationality = "IT"
-moral = 3
+moral = 4
 position = 0
 foot = 0
 prestige = 12
 form = 0
-potential_growth = 4
-injury_potential = 6
+potential_growth = 5
+injury_potential = 12
 loyality = 0
+contract = SubResource("Resource_fgwf2")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_5lglq")])
+attributes = SubResource("Resource_e446b")
 
-[sub_resource type="Resource" id="Resource_0u5g2"]
-script = ExtResource("2_8t8q8")
+[sub_resource type="Resource" id="Resource_tvwlm"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_3yokr"]
+script = ExtResource("3_t8ijr")
+aggression = 9
+anticipation = 8
+decisions = 12
+concentration = 13
+teamwork = 10
+vision = 3
+work_rate = 8
+offensive_movement = 6
+marking = 14
+
+[sub_resource type="Resource" id="Resource_2rxi2"]
+script = ExtResource("4_fxasf")
+pace = 14
+acceleration = 8
+stamina = 8
+strength = 15
+agility = 12
+jump = 9
+
+[sub_resource type="Resource" id="Resource_ypxw4"]
+script = ExtResource("6_7i45n")
+crossing = 5
+passing = 12
+long_passing = 9
+tackling = 16
+heading = 14
+interception = 16
+shooting = 11
+long_shooting = 16
+penalty = 6
+finishing = 16
+dribbling = 12
+blocking = 14
+
+[sub_resource type="Resource" id="Resource_50vvx"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_tvwlm")
+mental = SubResource("Resource_3yokr")
+technical = SubResource("Resource_ypxw4")
+physical = SubResource("Resource_2rxi2")
+
+[sub_resource type="Resource" id="Resource_vx6wy"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_tqf4a"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_nnjfn"]
+script = ExtResource("7_ibdl8")
 id = 13
-price = 300000
+price = 200000
 nr = 13
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 24,
+"hour": 0,
+"minute": 47,
+"month": 1,
+"second": 28,
+"weekday": 2,
+"year": 1989
+}
 nationality = "IT"
 moral = 2
 position = 0
 foot = 0
-prestige = 8
+prestige = 11
 form = 0
-potential_growth = 5
-injury_potential = 11
+potential_growth = 2
+injury_potential = 18
 loyality = 0
+contract = SubResource("Resource_vx6wy")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_tqf4a")])
+attributes = SubResource("Resource_50vvx")
 
-[sub_resource type="Resource" id="Resource_kpmoe"]
-script = ExtResource("2_8t8q8")
+[sub_resource type="Resource" id="Resource_rupav"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_7jgub"]
+script = ExtResource("3_t8ijr")
+aggression = 4
+anticipation = 2
+decisions = 7
+concentration = 4
+teamwork = 6
+vision = 8
+work_rate = 2
+offensive_movement = 10
+marking = 8
+
+[sub_resource type="Resource" id="Resource_fvrjr"]
+script = ExtResource("4_fxasf")
+pace = 14
+acceleration = 7
+stamina = 6
+strength = 3
+agility = 5
+jump = 11
+
+[sub_resource type="Resource" id="Resource_j0ylc"]
+script = ExtResource("6_7i45n")
+crossing = 11
+passing = 6
+long_passing = 3
+tackling = 11
+heading = 11
+interception = 10
+shooting = 4
+long_shooting = 10
+penalty = 6
+finishing = 2
+dribbling = 7
+blocking = 3
+
+[sub_resource type="Resource" id="Resource_n0ft0"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_rupav")
+mental = SubResource("Resource_7jgub")
+technical = SubResource("Resource_j0ylc")
+physical = SubResource("Resource_fvrjr")
+
+[sub_resource type="Resource" id="Resource_5o5jt"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_jxsv8"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_6t2gt"]
+script = ExtResource("7_ibdl8")
 id = 14
-price = 190000
+price = 270000
 nr = 14
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 8,
+"hour": 14,
+"minute": 10,
+"month": 8,
+"second": 11,
+"weekday": 0,
+"year": 1982
+}
 nationality = "IT"
-moral = 4
+moral = 2
 position = 0
 foot = 0
-prestige = 10
+prestige = 6
 form = 0
-potential_growth = 1
-injury_potential = 2
+potential_growth = 3
+injury_potential = 8
 loyality = 0
+contract = SubResource("Resource_5o5jt")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_jxsv8")])
+attributes = SubResource("Resource_n0ft0")
 
-[sub_resource type="Resource" id="Resource_rkoyb"]
-script = ExtResource("2_8t8q8")
+[sub_resource type="Resource" id="Resource_6rgxp"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_uy85f"]
+script = ExtResource("3_t8ijr")
+aggression = 2
+anticipation = 7
+decisions = 3
+concentration = 8
+teamwork = 10
+vision = 7
+work_rate = 6
+offensive_movement = 3
+marking = 2
+
+[sub_resource type="Resource" id="Resource_eiwf2"]
+script = ExtResource("4_fxasf")
+pace = 6
+acceleration = 3
+stamina = 6
+strength = 7
+agility = 9
+jump = 8
+
+[sub_resource type="Resource" id="Resource_a1bxy"]
+script = ExtResource("6_7i45n")
+crossing = 10
+passing = 5
+long_passing = 6
+tackling = 4
+heading = 5
+interception = 6
+shooting = 3
+long_shooting = 6
+penalty = 4
+finishing = 11
+dribbling = 10
+blocking = 5
+
+[sub_resource type="Resource" id="Resource_mwm0w"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_6rgxp")
+mental = SubResource("Resource_uy85f")
+technical = SubResource("Resource_a1bxy")
+physical = SubResource("Resource_eiwf2")
+
+[sub_resource type="Resource" id="Resource_h856q"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_r6xnr"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_181oe"]
+script = ExtResource("7_ibdl8")
 id = 15
-price = 460000
+price = 360000
 nr = 15
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 28,
+"hour": 13,
+"minute": 32,
+"month": 4,
+"second": 3,
+"weekday": 0,
+"year": 1974
+}
 nationality = "IT"
-moral = 3
-position = 0
-foot = 0
-prestige = 12
-form = 0
-potential_growth = 4
-injury_potential = 16
-loyality = 0
-
-[sub_resource type="Resource" id="Resource_gr2kp"]
-script = ExtResource("2_8t8q8")
-id = 16
-price = 320000
-nr = 16
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 1
-position = 0
-foot = 0
-prestige = 8
-form = 0
-potential_growth = 4
-injury_potential = 3
-loyality = 0
-
-[sub_resource type="Resource" id="Resource_by3xm"]
-script = ExtResource("2_8t8q8")
-id = 17
-price = 360000
-nr = 17
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 4
+moral = 2
 position = 0
 foot = 0
 prestige = 7
 form = 0
-potential_growth = 2
-injury_potential = 12
+potential_growth = 1
+injury_potential = 9
 loyality = 0
+contract = SubResource("Resource_h856q")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_r6xnr")])
+attributes = SubResource("Resource_mwm0w")
 
-[sub_resource type="Resource" id="Resource_y0k1x"]
-script = ExtResource("2_8t8q8")
-id = 18
-price = 290000
-nr = 18
+[sub_resource type="Resource" id="Resource_twn3m"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_2p42r"]
+script = ExtResource("3_t8ijr")
+aggression = 12
+anticipation = 9
+decisions = 9
+concentration = 15
+teamwork = 14
+vision = 12
+work_rate = 15
+offensive_movement = 8
+marking = 16
+
+[sub_resource type="Resource" id="Resource_5ku1v"]
+script = ExtResource("4_fxasf")
+pace = 6
+acceleration = 13
+stamina = 14
+strength = 6
+agility = 7
+jump = 10
+
+[sub_resource type="Resource" id="Resource_t0ecd"]
+script = ExtResource("6_7i45n")
+crossing = 7
+passing = 12
+long_passing = 8
+tackling = 8
+heading = 6
+interception = 15
+shooting = 6
+long_shooting = 8
+penalty = 12
+finishing = 13
+dribbling = 4
+blocking = 6
+
+[sub_resource type="Resource" id="Resource_nsj2w"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_twn3m")
+mental = SubResource("Resource_2p42r")
+technical = SubResource("Resource_t0ecd")
+physical = SubResource("Resource_5ku1v")
+
+[sub_resource type="Resource" id="Resource_51gt6"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_r3828"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_re7kb"]
+script = ExtResource("7_ibdl8")
+id = 16
+price = 270000
+nr = 16
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 31,
+"hour": 19,
+"minute": 9,
+"month": 12,
+"second": 0,
+"weekday": 3,
+"year": 1986
+}
 nationality = "IT"
-moral = 2
+moral = 4
+position = 0
+foot = 0
+prestige = 11
+form = 0
+potential_growth = 2
+injury_potential = 10
+loyality = 0
+contract = SubResource("Resource_51gt6")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_r3828")])
+attributes = SubResource("Resource_nsj2w")
+
+[sub_resource type="Resource" id="Resource_n576f"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_sebe6"]
+script = ExtResource("3_t8ijr")
+aggression = 9
+anticipation = 9
+decisions = 12
+concentration = 10
+teamwork = 8
+vision = 7
+work_rate = 12
+offensive_movement = 8
+marking = 11
+
+[sub_resource type="Resource" id="Resource_bexww"]
+script = ExtResource("4_fxasf")
+pace = 13
+acceleration = 14
+stamina = 13
+strength = 11
+agility = 14
+jump = 13
+
+[sub_resource type="Resource" id="Resource_mbqxr"]
+script = ExtResource("6_7i45n")
+crossing = 11
+passing = 12
+long_passing = 12
+tackling = 4
+heading = 15
+interception = 13
+shooting = 13
+long_shooting = 12
+penalty = 5
+finishing = 10
+dribbling = 11
+blocking = 9
+
+[sub_resource type="Resource" id="Resource_wboc8"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_n576f")
+mental = SubResource("Resource_sebe6")
+technical = SubResource("Resource_mbqxr")
+physical = SubResource("Resource_bexww")
+
+[sub_resource type="Resource" id="Resource_vliox"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_6honb"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_xap5q"]
+script = ExtResource("7_ibdl8")
+id = 17
+price = 460000
+nr = 17
+name = "random.choice(names)"
+surname = "random.choice(surnames)"
+birth_date = {
+"day": 24,
+"hour": 17,
+"minute": 52,
+"month": 4,
+"second": 11,
+"weekday": 1,
+"year": 1978
+}
+nationality = "IT"
+moral = 4
 position = 0
 foot = 0
 prestige = 15
 form = 0
-potential_growth = 4
-injury_potential = 6
+potential_growth = 5
+injury_potential = 2
 loyality = 0
+contract = SubResource("Resource_vliox")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_6honb")])
+attributes = SubResource("Resource_wboc8")
 
-[sub_resource type="Resource" id="Resource_tohav"]
-script = ExtResource("2_8t8q8")
-id = 19
-price = 300000
-nr = 19
+[sub_resource type="Resource" id="Resource_7k7ih"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_p644b"]
+script = ExtResource("3_t8ijr")
+aggression = 10
+anticipation = 9
+decisions = 8
+concentration = 5
+teamwork = 12
+vision = 7
+work_rate = 12
+offensive_movement = 11
+marking = 14
+
+[sub_resource type="Resource" id="Resource_c2xqf"]
+script = ExtResource("4_fxasf")
+pace = 13
+acceleration = 14
+stamina = 15
+strength = 11
+agility = 11
+jump = 14
+
+[sub_resource type="Resource" id="Resource_lems4"]
+script = ExtResource("6_7i45n")
+crossing = 5
+passing = 3
+long_passing = 8
+tackling = 11
+heading = 8
+interception = 12
+shooting = 10
+long_shooting = 5
+penalty = 15
+finishing = 8
+dribbling = 15
+blocking = 11
+
+[sub_resource type="Resource" id="Resource_djv6v"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_7k7ih")
+mental = SubResource("Resource_p644b")
+technical = SubResource("Resource_lems4")
+physical = SubResource("Resource_c2xqf")
+
+[sub_resource type="Resource" id="Resource_c50ix"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_ig15r"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_kg3lp"]
+script = ExtResource("7_ibdl8")
+id = 18
+price = 330000
+nr = 18
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 6,
+"hour": 10,
+"minute": 14,
+"month": 11,
+"second": 49,
+"weekday": 4,
+"year": 1997
+}
 nationality = "IT"
 moral = 1
-position = 0
-foot = 0
-prestige = 13
-form = 0
-potential_growth = 3
-injury_potential = 12
-loyality = 0
-
-[sub_resource type="Resource" id="Resource_dsbs6"]
-script = ExtResource("2_8t8q8")
-id = 20
-price = 320000
-nr = 20
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 3
 position = 0
 foot = 0
 prestige = 10
@@ -364,71 +2114,233 @@ form = 0
 potential_growth = 5
 injury_potential = 18
 loyality = 0
+contract = SubResource("Resource_c50ix")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_ig15r")])
+attributes = SubResource("Resource_djv6v")
 
-[sub_resource type="Resource" id="Resource_txgf3"]
-script = ExtResource("2_8t8q8")
-id = 21
-price = 230000
-nr = 21
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 1
-position = 0
-foot = 0
-prestige = 6
-form = 0
-potential_growth = 4
-injury_potential = 19
-loyality = 0
+[sub_resource type="Resource" id="Resource_7blw7"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
 
-[sub_resource type="Resource" id="Resource_n677a"]
-script = ExtResource("2_8t8q8")
-id = 22
-price = 140000
-nr = 22
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 1
-position = 0
-foot = 0
-prestige = 8
-form = 0
-potential_growth = 5
-injury_potential = 15
-loyality = 0
+[sub_resource type="Resource" id="Resource_psoxv"]
+script = ExtResource("3_t8ijr")
+aggression = 3
+anticipation = 10
+decisions = 12
+concentration = 10
+teamwork = 12
+vision = 8
+work_rate = 3
+offensive_movement = 2
+marking = 3
 
-[sub_resource type="Resource" id="Resource_xmxyg"]
-script = ExtResource("2_8t8q8")
-id = 23
-price = 420000
-nr = 23
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 1
-position = 0
-foot = 0
-prestige = 10
-form = 0
-potential_growth = 2
-injury_potential = 19
-loyality = 0
+[sub_resource type="Resource" id="Resource_lthdt"]
+script = ExtResource("4_fxasf")
+pace = 3
+acceleration = 7
+stamina = 10
+strength = 7
+agility = 9
+jump = 8
 
-[sub_resource type="Resource" id="Resource_b3hci"]
-script = ExtResource("2_8t8q8")
-id = 24
+[sub_resource type="Resource" id="Resource_w02a6"]
+script = ExtResource("6_7i45n")
+crossing = 11
+passing = 8
+long_passing = 2
+tackling = 12
+heading = 10
+interception = 6
+shooting = 9
+long_shooting = 5
+penalty = 13
+finishing = 6
+dribbling = 6
+blocking = 4
+
+[sub_resource type="Resource" id="Resource_2xhqi"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_7blw7")
+mental = SubResource("Resource_psoxv")
+technical = SubResource("Resource_w02a6")
+physical = SubResource("Resource_lthdt")
+
+[sub_resource type="Resource" id="Resource_735t8"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_obr5g"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_g1keo"]
+script = ExtResource("7_ibdl8")
+id = 19
 price = 410000
-nr = 24
+nr = 19
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 7,
+"hour": 17,
+"minute": 51,
+"month": 3,
+"second": 25,
+"weekday": 4,
+"year": 1974
+}
 nationality = "IT"
-moral = 2
+moral = 1
+position = 0
+foot = 0
+prestige = 15
+form = 0
+potential_growth = 1
+injury_potential = 16
+loyality = 0
+contract = SubResource("Resource_735t8")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_obr5g")])
+attributes = SubResource("Resource_2xhqi")
+
+[sub_resource type="Resource" id="Resource_uw2c1"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_jraga"]
+script = ExtResource("3_t8ijr")
+aggression = 14
+anticipation = 16
+decisions = 8
+concentration = 4
+teamwork = 10
+vision = 2
+work_rate = 3
+offensive_movement = 12
+marking = 15
+
+[sub_resource type="Resource" id="Resource_4s5u6"]
+script = ExtResource("4_fxasf")
+pace = 10
+acceleration = 9
+stamina = 10
+strength = 18
+agility = 10
+jump = 10
+
+[sub_resource type="Resource" id="Resource_wxfge"]
+script = ExtResource("6_7i45n")
+crossing = 17
+passing = 12
+long_passing = 19
+tackling = 9
+heading = 3
+interception = 6
+shooting = 2
+long_shooting = 7
+penalty = 12
+finishing = 4
+dribbling = 9
+blocking = 11
+
+[sub_resource type="Resource" id="Resource_g73xr"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_uw2c1")
+mental = SubResource("Resource_jraga")
+technical = SubResource("Resource_wxfge")
+physical = SubResource("Resource_4s5u6")
+
+[sub_resource type="Resource" id="Resource_ay0h4"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_vgnr3"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_qcwf7"]
+script = ExtResource("7_ibdl8")
+id = 20
+price = 330000
+nr = 20
+name = "random.choice(names)"
+surname = "random.choice(surnames)"
+birth_date = {
+"day": 12,
+"hour": 12,
+"minute": 13,
+"month": 1,
+"second": 20,
+"weekday": 3,
+"year": 1994
+}
+nationality = "IT"
+moral = 1
 position = 0
 foot = 0
 prestige = 15
@@ -436,81 +2348,147 @@ form = 0
 potential_growth = 2
 injury_potential = 1
 loyality = 0
+contract = SubResource("Resource_ay0h4")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_vgnr3")])
+attributes = SubResource("Resource_g73xr")
 
-[sub_resource type="Resource" id="Resource_x7h2e"]
-script = ExtResource("2_8t8q8")
-id = 25
-price = 370000
-nr = 25
+[sub_resource type="Resource" id="Resource_1nqmo"]
+script = ExtResource("2_atc3m")
+reflexes = -1
+positioning = -1
+kicking = -1
+handling = -1
+diving = -1
+speed = -1
+
+[sub_resource type="Resource" id="Resource_wlssv"]
+script = ExtResource("3_t8ijr")
+aggression = 20
+anticipation = 20
+decisions = 12
+concentration = 8
+teamwork = 9
+vision = 12
+work_rate = 11
+offensive_movement = 8
+marking = 15
+
+[sub_resource type="Resource" id="Resource_dhbha"]
+script = ExtResource("4_fxasf")
+pace = 18
+acceleration = 17
+stamina = 19
+strength = 20
+agility = 20
+jump = 20
+
+[sub_resource type="Resource" id="Resource_6vs2q"]
+script = ExtResource("6_7i45n")
+crossing = 16
+passing = 20
+long_passing = 20
+tackling = 16
+heading = 14
+interception = 11
+shooting = 11
+long_shooting = 16
+penalty = 16
+finishing = 8
+dribbling = 10
+blocking = 9
+
+[sub_resource type="Resource" id="Resource_3ex57"]
+script = ExtResource("5_egasv")
+goalkeeper = SubResource("Resource_1nqmo")
+mental = SubResource("Resource_wlssv")
+technical = SubResource("Resource_6vs2q")
+physical = SubResource("Resource_dhbha")
+
+[sub_resource type="Resource" id="Resource_nhvgr"]
+script = ExtResource("7_5kltb")
+price = 0
+money_week = 0
+start_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+end_date = {
+"day": 8,
+"month": 10,
+"weekday": 0,
+"year": 2023
+}
+bonus_goal = 0
+bonus_clean_sheet = 0
+bonus_assist = 0
+bonus_league_title = 0
+bonus_nat_cup_title = 0
+bonus_inter_cup_title = 0
+buy_clause = 0
+is_on_loan = false
+
+[sub_resource type="Resource" id="Resource_mwrgb"]
+script = ExtResource("9_bp3o3")
+team_name = "Test"
+price = 1234
+games_played = 1234
+goals = 1234
+assists = 1234
+yellow_card = 1234
+red_card = 1234
+average_vote = 1234.5
+
+[sub_resource type="Resource" id="Resource_opmdu"]
+script = ExtResource("7_ibdl8")
+id = 21
+price = 330000
+nr = 21
 name = "random.choice(names)"
 surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 3
-position = 0
-foot = 0
-prestige = 15
-form = 0
-potential_growth = 4
-injury_potential = 13
-loyality = 0
-
-[sub_resource type="Resource" id="Resource_mhe4g"]
-script = ExtResource("2_8t8q8")
-id = 26
-price = 300000
-nr = 26
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
-nationality = "IT"
-moral = 2
-position = 0
-foot = 0
-prestige = 10
-form = 0
-potential_growth = 2
-injury_potential = 6
-loyality = 0
-
-[sub_resource type="Resource" id="Resource_y5ig2"]
-script = ExtResource("2_8t8q8")
-id = 27
-price = 440000
-nr = 27
-name = "random.choice(names)"
-surname = "random.choice(surnames)"
-birth_date = ""
+birth_date = {
+"day": 12,
+"hour": 17,
+"minute": 15,
+"month": 11,
+"second": 35,
+"weekday": 4,
+"year": 1998
+}
 nationality = "IT"
 moral = 1
 position = 0
 foot = 0
-prestige = 12
+prestige = 19
 form = 0
 potential_growth = 3
-injury_potential = 9
+injury_potential = 19
 loyality = 0
+contract = SubResource("Resource_nhvgr")
+statistics = Array[ExtResource("9_bp3o3")]([SubResource("Resource_mwrgb")])
+attributes = SubResource("Resource_3ex57")
 
-[sub_resource type="Resource" id="Resource_wgoq2"]
-script = ExtResource("4_g3hxh")
+[sub_resource type="Resource" id="Resource_v62r0"]
+script = ExtResource("3_jkpui")
 name = "Stadium"
 capacity = 1234
 year_built = 1990
 
-[sub_resource type="Resource" id="Resource_w3tpw"]
-script = ExtResource("3_iynbb")
+[sub_resource type="Resource" id="Resource_2ctls"]
+script = ExtResource("2_kxn4r")
 id = 1
 name = "test"
 formation = 0
 prestige = 0
 budget = 1234
 salary_budget = 0
-players = Array[ExtResource("2_8t8q8")]([SubResource("Resource_vni3y"), SubResource("Resource_pqjuq"), SubResource("Resource_y4ah0"), SubResource("Resource_8gfgk"), SubResource("Resource_w0yuw"), SubResource("Resource_5xdbo"), SubResource("Resource_5vxhe"), SubResource("Resource_kyg8l"), SubResource("Resource_a83jf"), SubResource("Resource_shr36"), SubResource("Resource_m402a"), SubResource("Resource_4m1a1"), SubResource("Resource_0u5g2"), SubResource("Resource_kpmoe"), SubResource("Resource_rkoyb"), SubResource("Resource_gr2kp"), SubResource("Resource_by3xm"), SubResource("Resource_y0k1x"), SubResource("Resource_tohav"), SubResource("Resource_dsbs6"), SubResource("Resource_txgf3"), SubResource("Resource_n677a"), SubResource("Resource_xmxyg"), SubResource("Resource_b3hci"), SubResource("Resource_x7h2e"), SubResource("Resource_mhe4g"), SubResource("Resource_y5ig2")])
-stadium = SubResource("Resource_wgoq2")
+players = Array[ExtResource("7_ibdl8")]([SubResource("Resource_wnbur"), SubResource("Resource_tcgah"), SubResource("Resource_rlbq0"), SubResource("Resource_8rtle"), SubResource("Resource_kdgpo"), SubResource("Resource_kyb7u"), SubResource("Resource_bvd0p"), SubResource("Resource_jto3u"), SubResource("Resource_odaox"), SubResource("Resource_nxdwb"), SubResource("Resource_e57pv"), SubResource("Resource_avnqs"), SubResource("Resource_nnjfn"), SubResource("Resource_6t2gt"), SubResource("Resource_181oe"), SubResource("Resource_re7kb"), SubResource("Resource_xap5q"), SubResource("Resource_kg3lp"), SubResource("Resource_g1keo"), SubResource("Resource_qcwf7"), SubResource("Resource_opmdu")])
+stadium = SubResource("Resource_v62r0")
 
 [resource]
-script = ExtResource("1_kdyb8")
+script = ExtResource("1_5an5x")
 country = "IT"
 id = 0
 name = "Test League"
-teams = Array[ExtResource("3_iynbb")]([SubResource("Resource_w3tpw")])
+teams = Array[ExtResource("2_kxn4r")]([SubResource("Resource_2ctls")])

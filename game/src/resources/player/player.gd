@@ -27,6 +27,6 @@ enum Form {Bad, Good, Excellent}
 @export var injury_potential:int
 @export var loyality:int
 @export var contract:Contract
-@export var statistics:Statistics
+@export var statistics:Array[Statistics]
 @export var attributes:Attributes
 

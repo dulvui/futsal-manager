@@ -9,7 +9,7 @@ var positions = ["G", "D", "W", "P", "U"]
 var foots = ["L", "R", "R", "R", "R"]  # 80% right foot
 var forms = ["INJURED", "RECOVER", "GOOD", "PERFECT"]
 # transfer_states = ["TRANSFER","LOAN","FREE_AGENT"]
-# nationalyty = ["BR","ES","ARG","IT","FR","IND","GER","POR"]
+
 var names:Array[String]
 var surnames:Array[String]
 
@@ -17,6 +17,12 @@ var team_id:int = 15  # last id of serie-a team is 14
 var player_id:int = 1
 
 var test_league:League
+
+var leagues:Dictionary = {
+	"it_IT" : {
+		
+	}
+}
 
 func _run():
 	var file_name:String = "res://test_league.tres" 
@@ -357,8 +363,19 @@ func create_player(nationality:String, position:String, nr:int) -> Player:
 	player.attributes.mental = get_mental(2020-birth_date.year, nationality, prestige, position)
 	player.attributes.technical = get_technical(2020-birth_date.year, nationality, prestige, position)
 	player.attributes.physical = get_physical(2020-birth_date.year, nationality, prestige, position)
-
-
+	
+	
+	var statistics:Statistics = Statistics.new()
+	statistics.team_name = "Test"
+	statistics.price = 1234
+	statistics.games_played = 1234
+	statistics.goals = 1234
+	statistics.assists = 1234
+	statistics.yellow_card = 1234
+	statistics.red_card = 1234
+	statistics.average_vote = 1234.5
+	player.statistics.append(statistics)
+	
 	player_id += 1
 
 	return player
