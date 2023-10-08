@@ -5,7 +5,7 @@
 class_name Player
 extends Resource
 
-enum Position {P, D, C, A}
+enum Position {G, D, WL, WR, P, U}
 enum Foot {L, R}
 enum Form {Bad, Good, Excellent}
 

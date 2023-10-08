@@ -5,7 +5,9 @@
 class_name League
 extends Resource
 
-@export var country:String
+enum Nations { IT }
+
+@export var nation:Nations
 @export var id:int = 0
 @export var name:String
 @export var teams:Array[Team]

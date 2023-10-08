@@ -4,11 +4,13 @@
 @tool
 extends EditorScript
 
-# goal keeper, winger, pivot, defender, universal
-var positions = ["G", "D", "W", "P", "U"]
+# make enum
 var foots = ["L", "R", "R", "R", "R"]  # 80% right foot
+# make enum
 var forms = ["INJURED", "RECOVER", "GOOD", "PERFECT"]
+# make enum
 # transfer_states = ["TRANSFER","LOAN","FREE_AGENT"]
+
 
 var names:Array[String]
 var surnames:Array[String]
@@ -19,7 +21,7 @@ var player_id:int = 1
 var test_league:League
 
 var leagues:Dictionary = {
-	"it_IT" : {
+		League.Nations.IT : {
 		
 	}
 }
@@ -35,7 +37,7 @@ func _run():
 	test_league = League.new()
 	test_league.id = 0
 	test_league.name = "Test League"
-	test_league.country = "IT"
+	test_league.nation = League.Nations.IT
 	
 	
 	test_league.add_team(test_team)
@@ -60,63 +62,63 @@ func assign_players_to_team(team:Team):
 
 	var nr:int = 1
 	# G
-	var g1:Player = create_player("it_IT", "G", nr)
+	var g1:Player = create_player(League.Nations.IT, Player.Position.G, nr)
 	nr += 1
 	team.players.append(g1)
 	for i in randi_range(3, 5):
-		var g2:Player = create_player("it_IT", "G", nr)
+		var g2:Player = create_player(League.Nations.IT, Player.Position.G, nr)
 		team.players.append(g2)
 		nr += 1
 	# D
-	var d1:Player = create_player("it_IT", "D", nr)
+	var d1:Player = create_player(League.Nations.IT, Player.Position.D, nr)
 	team.players.append(d1)
 	nr += 1
 	for i in randi_range(3, 5):
-		var d2 = create_player("it_IT", "D", nr)
+		var d2 = create_player(League.Nations.IT, Player.Position.D, nr)
 		team.players.append(d2)
 		nr += 1
 	# WL
-	var wl1:Player = create_player("it_IT", "WL", nr)
+	var wl1:Player = create_player(League.Nations.IT, Player.Position.WL, nr)
 	team.players.append(wl1)
 	nr += 1
 	for i in randi_range(2, 4):
-		var wl2 = create_player("it_IT", "WL", nr)
+		var wl2 = create_player(League.Nations.IT, Player.Position.WL, nr)
 		team.players.append(wl2)
 		nr += 1
 
 	# WR
-	var wr1:Player = create_player("it_IT", "WR", nr)
+	var wr1:Player = create_player(League.Nations.IT, Player.Position.WR, nr)
 	team.players.append(wr1)
 	nr += 1
 	for i in randi_range(2, 4):
-		var wl2:Player = create_player("it_IT", "WR", nr)
+		var wl2:Player = create_player(League.Nations.IT, Player.Position.WR, nr)
 		team.players.append(wl2)
 		nr += 1
 	# P
-	var p1:Player = create_player("it_IT", "P", nr)
+	var p1:Player = create_player(League.Nations.IT, Player.Position.P, nr)
 	team.players.append(p1)
 	nr += 1
 
 	for i in randi_range(2, 4):
-		var p2:Player = create_player("it_IT", "P", nr)
+		var p2:Player = create_player(League.Nations.IT, Player.Position.P, nr)
 		team.players.append(p2)
 		nr += 1
 
 	# U
 	for i in randi_range(2, 4):
-		var u = create_player("it_IT", "U", nr)
+		var u = create_player(League.Nations.IT, Player.Position.U, nr)
 		team.players.append(u)
 		nr += 1
 
 	return team
 
-func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, position:String) -> Goalkeeper:
+func get_goalkeeper_attributes(age:int, prestige:int, position:Player.Position) -> Goalkeeper:
 	var attributes:Goalkeeper = Goalkeeper.new()
 	
 	var age_factor:int = get_age_factor(age)
 	var factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	
-	if position == "G":
+	if position == Player.Position.G:
 		attributes.reflexes = min(factor + randi_range(-5, 5), 20)
 		attributes.positioning = min(factor + randi_range(-5, 5), 20)
 		attributes.kicking = min(factor + randi_range(-5, 5), 20)
@@ -133,7 +135,7 @@ func get_goalkeeper_attributes(age:int, nationality:String, prestige:int, positi
 	return attributes
 
 
-func get_physical(age, nationality, prestige, pos) -> Physical:
+func get_physical(age:int, prestige:int, position:Player.Position) -> Physical:
 	var attributes:Physical = Physical.new()
 
 	var age_factor:int = get_age_factor(age)
@@ -141,7 +143,7 @@ func get_physical(age, nationality, prestige, pos) -> Physical:
 	var pace_factor:int = min(randi_range(9, age_factor), max(prestige, 9))
 	var physical_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	
-	if pos != "G":
+	if position != Player.Position.G:
 		attributes.pace = min(pace_factor + randi_range(-5, 5), 20)
 		attributes.acceleration = min(pace_factor + randi_range(-5, 5), 20)
 		attributes.stamina = min(physical_factor + randi_range(-5, 5), 20)
@@ -158,7 +160,7 @@ func get_physical(age, nationality, prestige, pos) -> Physical:
 	return attributes
 
 
-func get_technical(age, nationality, prestige, pos) -> Technical:
+func get_technical(age:int, prestige:int, position:Player.Position) -> Technical:
 	var attributes:Technical = Technical.new()
 	
 	var age_factor:int = get_age_factor(age)
@@ -169,7 +171,7 @@ func get_technical(age, nationality, prestige, pos) -> Technical:
 	var technique_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	var defense_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 
-	if pos != "G":
+	if position != Player.Position.G:
 		attributes.crossing = min(pass_factor + randi_range(-5, 5), 20)
 		attributes.passing = min(pass_factor + randi_range(-5, 5), 20)
 		attributes.long_passing = min(pass_factor + randi_range(-5, 5), 20)
@@ -198,7 +200,8 @@ func get_technical(age, nationality, prestige, pos) -> Technical:
 	return attributes
 
 
-func get_mental(age, nationality, prestige, pos) -> Mental:
+func get_mental(age:int, prestige:int, position:Player.Position) -> Mental:
+	
 	var attribtues:Mental = Mental.new()
 	
 	var age_factor:int = get_age_factor(age)
@@ -226,14 +229,14 @@ func get_age_factor(age:int ) -> int:
 		age_factor = 16
 	return age_factor
 
-func get_price(age, prestige, pos) -> int:
+func get_price(age, prestige, position:Player.Position) -> int:
 	var age_factor:int = min(abs(age - 30), 20)
 	var pos_factor:int = 0
-	if pos == "G":
+	if position == Player.Position.G:
 		pos_factor = 5
-	elif pos == "D":
+	elif position == Player.Position.D:
 		pos_factor = 10
-	elif pos == "W":
+	elif position == Player.Position.WL or position == Player.Position.WR:
 		pos_factor = 15
 	else:
 		pos_factor = 20
@@ -265,7 +268,7 @@ func get_contract(prestige, position, age) -> Contract:
 	
 	return contract
 
-func create_player(nationality:String, position:String, nr:int) -> Player:
+func create_player(nationality:League.Nations, position:Player.Position, nr:int) -> Player:
 	# random date from 1970 to 2007
 	var player = Player.new()
 	
@@ -289,9 +292,9 @@ func create_player(nationality:String, position:String, nr:int) -> Player:
 	player.name = "random.choice(names)"
 	player.surname = "random.choice(surnames)"
 	player.birth_date = birth_date
-	player.nationality = nationality.split("_")[1]
+	player.nationality = str(nationality)
 	player.moral = randi_range(1, 4)  # 1 to 4, 1 low 4 good
-#	player.position = position
+	player.position = position
 	player.foot = foots[randi_range(0, len(foots)-1)]
 	player.prestige = prestige
 	player.form = forms[randi_range(0, len(forms)-1)]
@@ -303,10 +306,10 @@ func create_player(nationality:String, position:String, nr:int) -> Player:
 	player.nr = nr
 	
 	player.attributes = Attributes.new()
-	player.attributes.goalkeeper =  get_goalkeeper_attributes(2020-birth_date.year, nationality, prestige, position)
-	player.attributes.mental = get_mental(2020-birth_date.year, nationality, prestige, position)
-	player.attributes.technical = get_technical(2020-birth_date.year, nationality, prestige, position)
-	player.attributes.physical = get_physical(2020-birth_date.year, nationality, prestige, position)
+	player.attributes.goalkeeper =  get_goalkeeper_attributes(2020-birth_date.year, prestige, position)
+	player.attributes.mental = get_mental(2020-birth_date.year, prestige, position)
+	player.attributes.technical = get_technical(2020-birth_date.year, prestige, position)
+	player.attributes.physical = get_physical(2020-birth_date.year, prestige, position)
 	
 	
 	var statistics:Statistics = Statistics.new()
