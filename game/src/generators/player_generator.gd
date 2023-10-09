@@ -53,54 +53,16 @@ func assign_players_to_team(team:Team):
 	id += 1
 
 	var nr:int = 1
-	# G
-	var g1:Player = create_player(League.Nations.IT, Player.Position.G, nr)
-	nr += 1
-	team.players.append(g1)
-	for i in randi_range(3, 5):
-		var g2:Player = create_player(League.Nations.IT, Player.Position.G, nr)
-		team.players.append(g2)
-		nr += 1
-	# D
-	var d1:Player = create_player(League.Nations.IT, Player.Position.D, nr)
-	team.players.append(d1)
-	nr += 1
-	for i in randi_range(3, 5):
-		var d2 = create_player(League.Nations.IT, Player.Position.D, nr)
-		team.players.append(d2)
-		nr += 1
-	# WL
-	var wl1:Player = create_player(League.Nations.IT, Player.Position.WL, nr)
-	team.players.append(wl1)
-	nr += 1
-	for i in randi_range(2, 4):
-		var wl2 = create_player(League.Nations.IT, Player.Position.WL, nr)
-		team.players.append(wl2)
-		nr += 1
-
-	# WR
-	var wr1:Player = create_player(League.Nations.IT, Player.Position.WR, nr)
-	team.players.append(wr1)
-	nr += 1
-	for i in randi_range(2, 4):
-		var wl2:Player = create_player(League.Nations.IT, Player.Position.WR, nr)
-		team.players.append(wl2)
-		nr += 1
-	# P
-	var p1:Player = create_player(League.Nations.IT, Player.Position.P, nr)
-	team.players.append(p1)
-	nr += 1
-
-	for i in randi_range(2, 4):
-		var p2:Player = create_player(League.Nations.IT, Player.Position.P, nr)
-		team.players.append(p2)
-		nr += 1
-
-	# U
-	for i in randi_range(2, 4):
-		var u = create_player(League.Nations.IT, Player.Position.U, nr)
-		team.players.append(u)
-		nr += 1
+	for position in Player.Position.values():
+		
+		var amount = randi_range(2, 5)
+		if position == Player.Position.G:
+			amount = 3
+		
+		for i in range(amount):
+			var player:Player = create_player(League.Nations.IT, position, nr)
+			nr += 1
+			team.players.append(player)
 
 	return team
 
