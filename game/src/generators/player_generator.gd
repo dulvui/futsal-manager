@@ -4,14 +4,6 @@
 @tool
 extends EditorScript
 
-# make enum
-var foots = ["L", "R", "R", "R", "R"]  # 80% right foot
-# make enum
-var forms = ["INJURED", "RECOVER", "GOOD", "PERFECT"]
-# make enum
-# transfer_states = ["TRANSFER","LOAN","FREE_AGENT"]
-
-
 var names:Array[String]
 var surnames:Array[String]
 
@@ -245,6 +237,30 @@ func get_price(age, prestige, position:Player.Position) -> int:
 
 	return randi_range(total_factor-20, total_factor) * 10000
 
+func get_random_foot() -> Player.Foot:
+	if randi() % 5 == 0:
+		return Player.Foot.L
+	return Player.Foot.R
+	
+func get_random_form() -> Player.Form:
+	var factor:int =  randi() % 100
+	if factor < 5:
+		return Player.Form.Injured
+	elif factor < 15:
+		return Player.Form.Recover
+	elif factor < 60:
+		return Player.Form.Good
+	return Player.Form.Excellent
+		
+func get_random_morality() -> Player.Morality:
+	var factor:int =  randi() % 100
+	if factor < 5:
+		return Player.Morality.Horrible
+	elif factor < 15:
+		return Player.Morality.Bad
+	elif factor < 60:
+		return Player.Morality.Good
+	return Player.Morality.Excellent
 
 func get_contract(prestige, position, age) -> Contract:
 	var contract:Contract = Contract.new()
@@ -295,9 +311,10 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	player.nationality = str(nationality)
 	player.moral = randi_range(1, 4)  # 1 to 4, 1 low 4 good
 	player.position = position
-	player.foot = foots[randi_range(0, len(foots)-1)]
+	player.foot = get_random_foot()
+	player.morality = get_random_morality()
+	player.form = get_random_form()
 	player.prestige = prestige
-	player.form = forms[randi_range(0, len(forms)-1)]
 	player.potential_growth
 	player.potential_growth = potential_growth
 	player.injury_potential = randi_range(1, 20)
