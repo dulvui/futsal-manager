@@ -5,12 +5,9 @@
 extends Resource
 class_name Team
 
-# replace with enum
-var formations:Array = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
-
 @export var id:int
 @export var name:String
-@export var formation:int
+@export var line_up:LineUp
 @export var prestige:int
 @export var budget:int
 @export var salary_budget:int
