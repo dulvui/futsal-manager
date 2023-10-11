@@ -21,20 +21,21 @@ var leagues:Dictionary = {
 func _run():
 	var file_name:String = "res://test_league.tres" 
 	print("Generate players...")
-	var test_team:Team = Team.new()
-	test_team.name = "test"
-	test_team.budget = 1234
-	test_team.create_stadium("Stadium", 1234, 1990)
+
 	
 	test_league = League.new()
 	test_league.id = 0
 	test_league.name = "Test League"
 	test_league.nation = League.Nations.IT
 	
-	
-	test_league.add_team(test_team)
-	
-	assign_players_to_team(test_team)
+	for i in range(10):
+		var test_team:Team = Team.new()
+		test_team.name = "test " + str(i)
+		test_team.budget = 1234 + i
+		test_team.create_stadium("Stadium", 1234, 1990)
+		test_league.add_team(test_team)
+		
+		assign_players_to_team(test_team)
 	
 	print("Write to file...")
 	print("Write league ", test_league.name)
@@ -51,8 +52,10 @@ func assign_players_to_team(team:Team):
 	var id:int = 1
 	team.id = id
 	id += 1
-
 	var nr:int = 1
+	
+	team.line_up = LineUp.new()
+	
 	for position in Player.Position.values():
 		
 		var amount = randi_range(2, 5)
@@ -63,6 +66,12 @@ func assign_players_to_team(team:Team):
 			var player:Player = create_player(League.Nations.IT, position, nr)
 			nr += 1
 			team.players.append(player)
+		
+		# random lineup assingment
+		if position == Player.Position.G:
+			team.line_up.goalkeeper = team.players[-1]
+		elif team.line_up.players.size() < 4:
+			team.line_up.players.append(team.players[-1])
 
 	return team
 
