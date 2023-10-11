@@ -12,30 +12,10 @@ var date:Dictionary
 # saves wich season this is, starting from 0
 var current_season:int
 
-var leagues:Dictionary = {
-	"IT": [
-		{
-			"id" : 0,
-			"name" : "Serie A",
-			"file" : "ita_serie_a.json",
-			"teams" : []
-		},
-		{
-			"id" : 1,
-			"name" : "Serie B",
-			"file" : "ita_serie_b.json",
-			"teams" : []
-		},
-		{
-			"id" : 2,
-			"name" : "Serie C",
-			"file" : "ita_serie_c.json",
-			"teams" : []
-		},
-	]
-}
-var league_id:int
-var team_name:String
+var league:League
+var leagues:Array[League]
+
+var team:Team
 var manager:Dictionary
 
 var table:Dictionary
@@ -73,9 +53,9 @@ func _ready() -> void:
 	table = config.get_value("season","table",{})
 	current_transfers = config.get_value("season","current_transfers",[])
 	
-	team_name = config.get_value("team", "name", "")
-	league_id = config.get_value("league", "id", -1)
-	leagues = config.get_value("leagues", "data", leagues)
+	team = config.get_value("resources", "team", null)
+	leagues = config.get_value("resources", "leagues", init_leagues())
+	league = config.get_value("resources", "league", null)
 	
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
 	messages = config.get_value("mail","messages",[])
@@ -117,9 +97,9 @@ func set_lang(lang:String) -> void:
 
 func save_all_data() -> void:
 	config.set_value("manager","data",manager)
-	config.set_value("team","name", team_name)
-	config.set_value("league","id", league_id)
-	config.set_value("leagues","data",leagues)
+	config.set_value("resources","team", team)
+	config.set_value("resources","league", league)
+	config.set_value("resources","leagues",leagues)
 	config.set_value("current_date","date",CalendarUtil.date)
 	config.set_value("season","calendar",calendar)
 	config.set_value("season","table",table)
@@ -138,11 +118,11 @@ func save_manager(new_manager:Dictionary) -> void:
 	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
 	
-func select_team(_league_id:int, _team_name:String) -> void:
-	league_id = _league_id
-	team_name = _team_name
+func select_team(_league:League, _team:Team) -> void:
+	league = _league
+	team = _team
 	# init table
-	for team in get_teams(league_id):
+	for team in league.teams:
 		table[team["name"]] = {
 			"points" : 0,
 			"games_played": 0,
@@ -165,11 +145,9 @@ func save_calendar(new_calendar:Array) -> void:
 	config.save("user://settings.cfg")
 	
 func make_transfer(transfer:Dictionary) -> void:
-	var teams:Array = get_teams()
-	
-	for team in teams:
-		if team["name"] == transfer["player"]["team"]:
-			if team["players"]["active"].has(transfer["player"]):
+	for team in league.teams:
+		if team.name == transfer["player"]["team"]:
+			if team.formation.has(transfer["player"]):
 				team["players"]["active"].erase(transfer["player"])
 				team["players"]["active"].append(team["players"]["subs"].pop_front())
 			team["players"]["subs"].erase(transfer["player"])
@@ -178,7 +156,7 @@ func make_transfer(transfer:Dictionary) -> void:
 				team["players"]["subs"].append(player)
 	
 	#add player to team
-	for team in teams:
+	for team in league.teams:
 		if team["name"] == Config.team_name:
 			team["players"]["subs"].append(transfer["player"])
 			team["budget"] -= transfer["money"]
@@ -218,32 +196,13 @@ func save_table() -> void:
 	config.save("user://settings.cfg")
 	
 	
-func get_selected_team() -> Dictionary:
-	for team in get_teams(league_id):
-		if team["name"] == team_name:
-			return team
-	return {}
-
-
-func init_teams() -> void:
+func init_leagues() -> Array[League]:
 	# check if leagues not leoaded yet
-	for nation in leagues:
-		for league in leagues[nation]:
-			var file:FileAccess = FileAccess.open("res://assets/" + league["file"], FileAccess.READ)
-#			league["teams"] = JsonClassConverter.json_string_to_class(file.get_as_text(), Team.new())
-			league["teams"] = JSON.parse_string(file.get_as_text())
-			file.close()
-
-func get_teams(_league_id:int = -1) -> Array:
-	var all_teams:Array = []
-	for nation in leagues:
-		for league in leagues[nation]:
-			if _league_id == -1:
-				all_teams.append_array(league["teams"])
-			else:
-				if league["id"] == _league_id:
-					all_teams.append_array(league["teams"])
-	return all_teams
+	var all_leagues:Array[League] = []
+	var test_league = load("res://test_league.tres")
+	all_leagues.append(test_league)
+	
+	return all_leagues
 	
 func next_season() -> void:
 	current_season += 1

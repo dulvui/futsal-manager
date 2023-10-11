@@ -6,8 +6,8 @@ extends Control
 
 
 func _ready() -> void:
-	if Config.team_name == null:
-		$CenterContainer/VBoxContainer/Continue.hide()
+	if Config.team == null:
+		$VBoxContainer/Continue.hide()
 
 func _on_StartGame_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/create-manager/create_manager.tscn")
