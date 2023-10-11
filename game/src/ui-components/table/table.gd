@@ -79,7 +79,7 @@ func _ready() -> void:
 		label_settings.font_size = get_theme_default_font_size()
 		label_settings.font_color = Color.GOLD
 		
-		if team["name"] == Config.team_name:
+		if team.name == Config.team.name:
 			pos_label.label_settings = label_settings
 			name_label.label_settings = label_settings
 			games_played_label.label_settings = label_settings

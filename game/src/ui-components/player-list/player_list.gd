@@ -29,7 +29,7 @@ const FOOTS:Array = ["R","L","RL"]
 @onready var pos_select:OptionButton = $VBoxContainer/HBoxContainer/PositionSelect
 
 
-func set_up(include_active_players:bool, active_team:Dictionary = {}) -> void:
+func set_up(include_active_players:bool, active_team:Team = null) -> void:
 	
 	set_up_players(include_active_players, active_team)
 
@@ -37,9 +37,9 @@ func set_up(include_active_players:bool, active_team:Dictionary = {}) -> void:
 	league_select.add_item("ITALIA")
 	
 	team_select.add_item("NO_TEAM")
-	for team in Config.get_teams():
-		if team ==null or team["name"] != Config.team_name:
-			team_select.add_item(team["name"])
+	for team in Config.league.teams:
+		if team ==null or team.name != Config.team.name:
+			team_select.add_item(team.name)
 			
 	pos_select.add_item("NO_POS")
 	for pos in POSITIONS:
@@ -49,22 +49,19 @@ func set_up(include_active_players:bool, active_team:Dictionary = {}) -> void:
 		info_select.add_item(info_type)
 
 
-func set_up_players(include_active_players:bool, active_team:Dictionary = {}) -> void:
+func set_up_players(include_active_players:bool, active_team:Team = null) -> void:
 	_reset_options()
 	
 	all_players = []
-	if active_team.is_empty():
-		for team in Config.get_teams():
-			if include_active_players:
-				for player in team["players"]["active"]:
-					all_players.append(player)
-			for player in team["players"]["subs"]:
+	if active_team == null:
+		for team in Config.league.teams:
+			for player in team.players:
 				all_players.append(player)
 	else:
 		if include_active_players:
-			for player in active_team["players"]["active"]:
+			for player in active_team.line_up.players:
 				all_players.append(player)
-		for player in active_team["players"]["subs"]:
+		for player in active_team.players:
 			all_players.append(player)
 	
 	var headers:Array = ["surname"]

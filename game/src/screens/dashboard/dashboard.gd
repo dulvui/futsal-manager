@@ -4,7 +4,7 @@
 
 extends Control
 
-@onready var team:Dictionary = Config.get_selected_team()
+@onready var team:Team = Config.team
 
 # buttons
 @onready var continue_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Continue
@@ -31,7 +31,7 @@ var next_season:bool = false
 
 func _ready() -> void:
 	$Main/VBoxContainer/TopBar/ManagerName.text = Config.manager["name"] + " " + Config.manager["surname"]
-	$Main/VBoxContainer/TopBar/TeamName.text = Config.team_name
+	$Main/VBoxContainer/TopBar/TeamName.text = Config.team.name
 	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
 	
 	all_players_list.set_up(true)
@@ -84,8 +84,8 @@ func _on_Calendar_pressed() -> void:
 	_show_active_view(ContentViews.CALENDAR)
 
 
-func _on_AllPlayerList_select_player(player) -> void:
-	print("offer for " + player["surname"])
+func _on_AllPlayerList_select_player(player:Player) -> void:
+	print("offer for " + player.surname)
 	$PlayerOfferPopup/PlayerOffer.set_player(player)
 	$PlayerOfferPopup/PlayerOffer.show()
 	$PlayerOfferPopup.popup_centered()

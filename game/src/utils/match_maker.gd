@@ -9,14 +9,14 @@ var match_day:int = 0
 
 
 func inizialize_matches() -> void:
-	var teams:Array = Config.get_teams(Config.league_id).duplicate(true)
+	var teams:Array = Config.league.teams.duplicate(true)
 	matches = []
 	match_day = 0
 	
-	var random_teams:Array  = teams.duplicate(true)
+	var random_teams:Array[Team]  = teams.duplicate(true)
 	random_teams.shuffle()
 	
-	var last_team:Dictionary = random_teams.pop_front()
+	var last_team:Team = random_teams.pop_front()
 	
 	var home:bool = true
 	
@@ -84,7 +84,7 @@ func inizialize_matches() -> void:
 		day += 7
 		
 func _shift_array(array:Array) -> void:
-	var temp:Dictionary = array[0]
+	var temp:Team = array[0]
 	for i in range(array.size() - 1):
 		array[i] = array[i+1]
 	array[array.size() - 1] = temp

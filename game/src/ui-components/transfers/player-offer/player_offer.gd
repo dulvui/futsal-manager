@@ -6,8 +6,8 @@ extends Control
 
 signal confirm
 
-var team:Dictionary
-var player:Dictionary
+var team:Team
+var player:Player
 
 var regex = RegEx.new()
 var oldtext:String = ""
@@ -33,25 +33,21 @@ func _ready() -> void:
 	
 	amount_label.text = str(amount)
 	
-	team = Config.get_selected_team()
-	for active_player in team["players"]["active"]:
-		exchange_players_button.add_item(active_player["name"] + " " + str(active_player["price"]/1000) + "K")
-		exchange_players.append(active_player)
-		
-	for sub_player in team["players"]["subs"]:
-		exchange_players_button.add_item(sub_player["name"] + " " + str(sub_player["price"]/1000) + "K")
-		exchange_players.append(sub_player)
+	team = Config.team
+	for player in team.players:
+		exchange_players_button.add_item(player.name + " " + str(player.price / 1000) + "K")
+		exchange_players.append(player)
 
 func _process(_delta) -> void:
 	total_label.text = str(total)
 
 func set_player(new_player) -> void:
 	player = new_player
-	info_label.text = "The player " + player["name"] + " has a value of " + str(player["price"])
+	info_label.text = "The player " + player.name + " has a value of " + str(player.price)
 
 
 func _on_More_pressed() -> void:
-	if  amount < team["budget"]:
+	if  amount < team.budget:
 		amount += 1000
 		amount_label.text = str(amount)
 		
@@ -72,7 +68,7 @@ func _on_ExchangePlayers_item_selected(index) -> void:
 	selected_players.append(player)
 
 	var remove_button = Button.new()
-	remove_button.text = exchange_player["name"] + " " + str(exchange_player["price"]/1000) + "K"
+	remove_button.text = exchange_player.name + " " + str(exchange_player.price/1000) + "K"
 	remove_button.pressed.connect(remove_from_list.bind(exchange_player))
 	selected_players_box.add_child(remove_button)
 	
@@ -90,17 +86,17 @@ func remove_from_list(player) -> void:
 	# before only _player existed
 	for selected_player in selected_players:
 		var remove_button = Button.new()
-		remove_button.text = selected_player["name"] + " " + str(selected_player["price"]/1000) + "K"
+		remove_button.text = selected_player.name + " " + str(selected_player.price/1000) + "K"
 		remove_button.pressed.connect(remove_from_list.bind(selected_player))
 		selected_players_box.add_child(remove_button)
 	
-	exchange_players_button.add_item(player["name"])
+	exchange_players_button.add_item(player.name)
 	_calc_total()
 	
 func _calc_total() -> void:
 	total = amount
 	for selected_player in selected_players:
-		total += selected_player["price"] # use other calculated value be setimating importanc efor new tweam
+		total += selected_player.price # use other calculated value be setimating importanc efor new tweam
 	
 
 
@@ -112,8 +108,8 @@ func _on_Amount_text_changed(new_text) -> void:
 		amount_label.text = oldtext
 	
 	amount = int(amount_label.text)
-	if amount > team["budget"]:
-		amount = team["budget"]
+	if amount > team.budget:
+		amount = team.budget
 		amount_label.text = str(amount)
 		
 	_calc_total()

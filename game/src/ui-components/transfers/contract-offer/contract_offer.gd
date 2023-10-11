@@ -11,22 +11,22 @@ var income = 0
 var years = 1
 var buy_clause = 0
 
-var team
-var player
+var team:Team
+var player:Player
 var transfer
 
 
 func _ready() -> void:
-	team = Config.get_selected_team()
+	team = Config.team
 	
 func set_up(new_transfer) -> void:
 	transfer = new_transfer
 	player = new_transfer["player"]
 	
-	$Info.text = "The player " + player["name"] + " " +  player["surname"] + " had a contract..."
+	$Info.text = "The player " + player.name + " " +  player.surname + " had a contract..."
 
 func _on_IncomeMore_pressed() -> void:
-	if income  < team["salary_budget"]:
+	if income  < team.salary_budget:
 		income += 1000
 	$GridContainer/Income.text = str(income)
 

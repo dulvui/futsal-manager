@@ -38,7 +38,7 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 	var message:Dictionary = {
 		"title" : "TRANSFER",
 		"message" : "",
-		"sender" : "info@" + Config.team_name.to_lower().replace(" ", "") + ".com",
+		"sender" : "info@" + Config.team.name.to_lower().replace(" ", "") + ".com",
 		"date" : CalendarUtil.get_dashborad_date(),
 		"type" : type,
 		"read" : false
@@ -72,7 +72,7 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 			message["message"] = "The next match is against " + team_name + ".\nThe quotes are: "
 			message["title"] = tr("NEXT_MATCH") + " against " + team_name
 		MessageTypes.WELCOME_MANAGER:
-			message["message"] = "The team " + Config.team_name + " welcomes you as the new Manager!"
+			message["message"] = "The team " + Config.team.name + " welcomes you as the new Manager!"
 			message["title"] = tr("WELCOME")
 		MessageTypes.NEXT_SEASON:
 			message["message"] = "The new season begins."

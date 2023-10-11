@@ -23,10 +23,10 @@ func set_up(date) -> void:
 	if date["matches"].size() > 0:
 		for matchz in date["matches"]:
 			if matchz != null:
-				if Config.team_name == matchz["home"]:
+				if Config.team.name == matchz["home"]:
 					team_name = matchz["away"]
 					color_rect.color = Color.DODGER_BLUE
-				elif Config.team_name == matchz["away"]:
+				elif Config.team.name == matchz["away"]:
 					team_name = matchz["home"]
 					color_rect.color = Color.DEEP_SKY_BLUE
 		match_button.pressed.connect(_on_Match_pressed.bind(date["matches"]))
