@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdft8v1qtxr0v"]
 
 [ext_resource type="Script" path="res://src/match-simulator/action-util/action_util.gd" id="1"]
-[ext_resource type="PackedScene" path="res://src/match-simulator/team/team.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bnh7liy4jw7uk" path="res://src/match-simulator/team/team.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dklgg30x7f0gd" path="res://src/match-simulator/team/statistics/statistics.tscn" id="3"]
 
 [node name="ActionUtil" type="Node"]

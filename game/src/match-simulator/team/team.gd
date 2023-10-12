@@ -13,7 +13,7 @@ enum Passing {LONG, SHORT, DIRECT, NORMAL}
 enum Formations {TT=22,OTO=121,OOT=112,TOO=211,TO=31,OT=13}
 
 var players
-var goalkeeper
+var goalkeeper:Goalkeeper
 
 # trainer tactics settings
 var tactics = {
@@ -32,11 +32,11 @@ var has_ball = false
 # player that is attacking/defending
 var active_player
 
-func set_up(team) -> void: # TODO add tactics
+func set_up(team:Team) -> void: # TODO add tactics
 	players = []
-	var team_players = team["players"]["active"]
+	var team_players = team.line_up.players
 	goalkeeper = Goalkeeper.instantiate()
-	goalkeeper.set_up(team_players[0])
+	goalkeeper.set_up(team.line_up.goalkeeper)
 	
 	for i in team_players.size() - 1:
 		var player = Player.instantiate()

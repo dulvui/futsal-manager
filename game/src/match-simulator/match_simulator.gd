@@ -18,7 +18,7 @@ const HALF_TIME:int = 1200
 var time:int = 0
 
 
-func set_up(home_team:Dictionary, away_team:Dictionary) -> void:
+func set_up(home_team:Team, away_team:Team) -> void:
 	action_util.set_up(home_team,away_team)
 	
 	for speed in Config.speed_factor:

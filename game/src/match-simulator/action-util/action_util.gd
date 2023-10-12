@@ -56,7 +56,7 @@ var action_buffer:Array = []
 func _ready() -> void:
 	randomize()
 
-func set_up(_home_team:Dictionary, _away_team:Dictionary) -> void:
+func set_up(_home_team:Team, _away_team:Team) -> void:
 	home_team.set_up(_home_team)
 	away_team.set_up(_away_team)
 	
@@ -117,7 +117,7 @@ func update() -> void:
 	_log(attack, attack_success)
 	_action_buffer(attack, attack_success)
 	
-func change_players(_home_team:Dictionary,_away_team:Dictionary) -> void:
+func change_players(_home_team:Team,_away_team:Team) -> void:
 	# reset action buffer, becasue change happened and
 	# changed player is not visible in field anymore
 	action_buffer = []

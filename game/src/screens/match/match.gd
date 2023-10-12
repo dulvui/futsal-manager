@@ -16,12 +16,12 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 
 var last_active_view:Control
 
-var home_team:Dictionary
-var away_team:Dictionary
+var home_team:Team
+var away_team:Team
 
 # to acces player data
-var home_team_real:Dictionary
-var away_team_real:Dictionary
+var home_team_real:Team
+var away_team_real:Team
 
 var home_goals:int = 0
 var away_goals:int = 0
@@ -35,11 +35,11 @@ func _ready() -> void:
 	var next_match:Dictionary = CalendarUtil.get_next_match()
 	
 	if next_match != null:
-		for team in Config.get_teams():
-			if team["name"] == next_match["home"]:
+		for team in Config.league.teams:
+			if team.name == next_match["home"]:
 				home_team_real = team
 				home_team = team.duplicate(true)
-			elif team["name"] == next_match["away"]:
+			elif team.name == next_match["away"]:
 				away_team_real = team
 				away_team = team.duplicate(true)
 	
