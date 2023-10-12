@@ -30,7 +30,7 @@ func show_matches(matches:Array):
 		away_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		away_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		
-		if matchz["home"] == Config.get_selected_team()["name"] or matchz["away"] == Config.get_selected_team()["name"]:
+		if matchz["home"] == Config.team.name or matchz["away"] == Config.team.name:
 			home_label.label_settings = label_settings
 			result_label.label_settings = label_settings
 			away_label.label_settings = label_settings
