@@ -157,7 +157,7 @@ func make_transfer(transfer:Dictionary) -> void:
 	
 	#add player to team
 	for team in league.teams:
-		if team["name"] == Config.team_name:
+		if team["name"] == Config.team.name:
 			team["players"]["subs"].append(transfer["player"])
 			team["budget"] -= transfer["money"]
 			for player in transfer["exchange_players"]:

@@ -67,7 +67,7 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 			message["title"] = "CONTRACT_SIGNED"
 		MessageTypes.NEXT_MATCH:
 			var team_name = content["home"]
-			if team_name == Config.team_name:
+			if team_name == Config.team.name:
 				team_name = content["away"]
 			message["message"] = "The next match is against " + team_name + ".\nThe quotes are: "
 			message["title"] = tr("NEXT_MATCH") + " against " + team_name

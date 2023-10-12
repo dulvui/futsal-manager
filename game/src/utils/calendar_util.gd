@@ -105,7 +105,7 @@ func next_day() -> void:
 	var next_match:Dictionary
 	if next_match_day < Config.calendar[next_match_month].size():
 		for matchz in Config.calendar[next_match_month][next_match_day]["matches"]:
-			if matchz["home"] == Config.team_name or matchz["away"] == Config.team_name:
+			if matchz["home"] == Config.team.name or matchz["away"] == Config.team.name:
 				next_match = matchz
 	
 	if next_match:
@@ -126,7 +126,7 @@ func get_dashborad_date() -> String:
 
 func get_next_match() -> Dictionary:
 	for matchz in Config.calendar[Config.date.month][Config.date.day]["matches"]:
-		if matchz["home"] == Config.team_name or matchz["away"] == Config.team_name:
+		if matchz["home"] == Config.team.name or matchz["away"] == Config.team.name:
 			return matchz
 	return {}
 
