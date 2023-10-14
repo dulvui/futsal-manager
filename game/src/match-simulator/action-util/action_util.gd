@@ -38,8 +38,10 @@ enum Attack {PASS, CROSS, DRIBBLE, RUN, SHOOT}
 #enum Pass { SHORT_PASS, LONG_PASS, CROSS}
 #enum Shoot {SHOOT, LONG_SHOOT, HEADER}
 
-var home_team:Team
-var away_team:Team
+@onready
+var home_team:Node = $HomeTeam
+@onready
+var away_team:Node = $AwayTeam
 
 @onready 
 var home_stats:Node = $HomeStatistics
@@ -55,8 +57,8 @@ func _ready() -> void:
 	randomize()
 
 func set_up(_home_team:Team, _away_team:Team) -> void:
-	home_team = _home_team
-	away_team = _away_team
+	home_team.set_up(_home_team)
+	away_team.set_up(_away_team)
 	
 	current_state = State.KICK_OFF
 

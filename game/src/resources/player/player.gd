@@ -31,16 +31,6 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var statistics:Array[Statistics]
 @export var attributes:Attributes
 
-func get_goalkeeper_attributes() -> int:
-	var value = 0
-	value +=  attributes.goalkeeper.reflexes
-	value +=  attributes.goalkeeper.positioning
-	value +=  attributes.goalkeeper.kicking
-	value +=  attributes.goalkeeper.handling
-	value +=  attributes.goalkeeper.diving
-	value +=  attributes.goalkeeper.speed
-	return value
-
 
 func get_attack_attributes(player:Player, attack) -> int:
 	match attack:

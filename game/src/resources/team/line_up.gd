@@ -9,7 +9,7 @@ class_name LineUp
 enum Formations { F22, F121, F112, F211, F13, F31, F40 }
 
 @export var formation:Formations
-@export var goalkeeper:Player
+@export var goalkeeper:Goalkeeper
 @export var players:Array[Player]
 @export var subsitutions:Array[Player]
 
