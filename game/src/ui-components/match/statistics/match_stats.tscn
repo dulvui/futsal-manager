@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bc6kfu3avld0"]
 
-[ext_resource type="Script" path="res://src/ui-components/match/events/match_events.gd" id="1"]
+[ext_resource type="Script" path="res://src/ui-components/match/statistics/match_stats.gd" id="1_14np8"]
 
 [node name="Stats" type="MarginContainer"]
 offset_right = 1281.0
 offset_bottom = 444.0
-script = ExtResource("1")
+script = ExtResource("1_14np8")
 
 [node name="VBoxContainer" type="GridContainer" parent="."]
 layout_mode = 2
