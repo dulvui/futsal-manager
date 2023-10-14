@@ -31,3 +31,63 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var statistics:Array[Statistics]
 @export var attributes:Attributes
 
+func get_goalkeeper_attributes() -> int:
+	var value = 0
+	value +=  attributes.goalkeeper.reflexes
+	value +=  attributes.goalkeeper.positioning
+	value +=  attributes.goalkeeper.kicking
+	value +=  attributes.goalkeeper.handling
+	value +=  attributes.goalkeeper.diving
+	value +=  attributes.goalkeeper.speed
+	return value
+
+
+func get_attack_attributes(player:Player, attack) -> int:
+	match attack:
+		ActionUtil.Attack.SHOOT:
+			# check sector and pick long_shoot
+			return attributes.technical.shooting
+		ActionUtil.Attack.PASS:
+			return attributes.technical.passing * Constants.PASS_SUCCESS_FACTOR
+#		ActionUtil.Attack.CROSS:
+#			return attributes.technical.crossing
+		ActionUtil.Attack.DRIBBLE:
+			return attributes.technical.dribbling
+#		ActionUtil.Attack.HEADER:
+#			return attributes.technical.heading"]
+		ActionUtil.Attack.RUN:
+			var attacker_attributes =  attributes.physical.pace
+			attacker_attributes += attributes.attributes.physical.acceleration
+			return attacker_attributes
+	# should never happen
+	return -1
+
+
+func get_defense_attributes(attack:ActionUtil.Attack) -> int:
+	match attack:
+		ActionUtil.Attack.SHOOT:
+			# check sector and pick long_shoot
+			return attributes.technical.blocking
+		ActionUtil.Attack.PASS:
+			return attributes.technical.interception
+#		ActionUtil.Attack.CROSS:
+#			return attributes.technical.interception"]
+		ActionUtil.Attack.DRIBBLE:
+			return attributes.technical.tackling
+#		ActionUtil.Attack.HEADER:
+#			return attributes.technical.heading"]
+		# use player preferences/attirbutes and team tactics pressing or wait
+		ActionUtil.Attack.RUN:
+			var defender_attributes
+			if randi() % 2 == 0: 
+#					return Defense.RUN
+				defender_attributes = attributes.physical.pace
+				defender_attributes += attributes.physical.acceleration
+			else:
+#					return Defense.TACKLE
+				defender_attributes = attributes.technical.tackling
+				defender_attributes += attributes.physical.pace
+				
+			return defender_attributes
+	# should never happen
+	return -1

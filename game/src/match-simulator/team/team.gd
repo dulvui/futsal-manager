@@ -4,10 +4,6 @@
 
 extends Node2D
 
-const Player = preload("res://src/match-simulator/team/player/player.tscn")
-const Goalkeeper = preload("res://src/match-simulator/team/goalkeeper/goalkeeper.tscn")
-
-
 enum Mentality {ULTRA_OFFENSIVE, OFFENSIVE, NORMAL, DEFENSIVE, ULTRA_DEFENSIVE}
 enum Passing {LONG, SHORT, DIRECT, NORMAL}
 enum Formations {TT=22,OTO=121,OOT=112,TOO=211,TO=31,OT=13}
@@ -55,12 +51,4 @@ func change_active_player() -> void:
 	
 	active_player = other_players[(randi() % other_players.size())]
 
-func get_goalkeeper_attributes() -> int:
-	var attributes = 0
-	attributes +=  goalkeeper.attributes["goalkeeper"]["reflexes"]
-	attributes +=  goalkeeper.attributes["goalkeeper"]["positioning"]
-	attributes +=  goalkeeper.attributes["goalkeeper"]["kicking"]
-	attributes +=  goalkeeper.attributes["goalkeeper"]["handling"]
-	attributes +=  goalkeeper.attributes["goalkeeper"]["diving"]
-	attributes +=  goalkeeper.attributes["goalkeeper"]["speed"]
-	return attributes
+
