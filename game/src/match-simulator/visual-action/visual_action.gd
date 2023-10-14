@@ -90,7 +90,7 @@ func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer) -> void:
 func _player_setup() -> void:
 	#home
 	var home_index = 0
-	var goalkeeper_home = home_team.players.active.pop_front()
+	var goalkeeper_home = home_team.goalkeeper
 	$HomeGoalkeeper.set_up(goalkeeper_home["nr"], Color.LIGHT_BLUE, true, WIDTH, HEIGHT)
 	for player in home_team.players.active:
 		var visual_player = VisualPlayer.instantiate()

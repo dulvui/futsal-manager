@@ -19,10 +19,6 @@ var last_active_view:Control
 var home_team:Team
 var away_team:Team
 
-# to acces player data
-var home_team_real:Team
-var away_team_real:Team
-
 var home_goals:int = 0
 var away_goals:int = 0
 
@@ -37,10 +33,8 @@ func _ready() -> void:
 	if next_match != null:
 		for team in Config.league.teams:
 			if team.name == next_match["home"]:
-				home_team_real = team
 				home_team = team.duplicate(true)
 			elif team.name == next_match["away"]:
-				away_team_real = team
 				away_team = team.duplicate(true)
 	
 	$HUD/HSplitContainer/CentralContainer/TopBar/Labels/Home.text = next_match["home"]
@@ -85,15 +79,15 @@ func match_end() -> void:
 #	Config.save_all_data()
 
 	#save players history PoC
-	for real_player in home_team_real["players"]["active"]:
-		for copy_player in home_team["players"]["active"]:
-			if real_player["nr"] == copy_player["nr"]:
-				real_player["history"][Config.current_season]["actual"] = copy_player["history"][Config.current_season]["actual"]
-					
-	for real_player in away_team_real["players"]["active"]:
-		for copy_player in away_team["players"]["active"]:
-			if real_player["nr"] == copy_player["nr"]:
-				real_player["history"][Config.current_season]["actual"] = copy_player["history"][Config.current_season]["actual"]
+#	for real_player in home_team["players"]["active"]:
+#		for copy_player in home_team["players"]["active"]:
+#			if real_player["nr"] == copy_player["nr"]:
+#				real_player["history"][Config.current_season]["actual"] = copy_player["history"][Config.current_season]["actual"]
+#
+#	for real_player in away_team_real["players"]["active"]:
+#		for copy_player in away_team["players"]["active"]:
+#			if real_player["nr"] == copy_player["nr"]:
+#				real_player["history"][Config.current_season]["actual"] = copy_player["history"][Config.current_season]["actual"]
 
 func half_time() -> void:
 	$HUD/HSplitContainer/Buttons/Pause.text = tr("CONTINUE")

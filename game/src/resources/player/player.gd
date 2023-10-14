@@ -32,7 +32,7 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var attributes:Attributes
 
 
-func get_attack_attributes(player:Player, attack) -> int:
+func get_attack_attributes(attack:ActionUtil.Attack) -> int:
 	match attack:
 		ActionUtil.Attack.SHOOT:
 			# check sector and pick long_shoot
@@ -47,7 +47,7 @@ func get_attack_attributes(player:Player, attack) -> int:
 #			return attributes.technical.heading"]
 		ActionUtil.Attack.RUN:
 			var attacker_attributes =  attributes.physical.pace
-			attacker_attributes += attributes.attributes.physical.acceleration
+			attacker_attributes += attributes.physical.acceleration
 			return attacker_attributes
 	# should never happen
 	return -1
@@ -81,3 +81,13 @@ func get_defense_attributes(attack:ActionUtil.Attack) -> int:
 			return defender_attributes
 	# should never happen
 	return -1
+
+func get_goalkeeper_attributes() -> int:
+	var value = 0
+	value += attributes.goalkeeper.reflexes
+	value += attributes.goalkeeper.positioning
+	value += attributes.goalkeeper.kicking
+	value += attributes.goalkeeper.handling
+	value += attributes.goalkeeper.diving
+	value += attributes.goalkeeper.speed
+	return value

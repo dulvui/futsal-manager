@@ -11,13 +11,3 @@ class_name Goalkeeper
 @export var handling: int
 @export var diving: int
 @export var speed: int
-
-func get_attributes() -> int:
-	var value = 0
-	value += reflexes
-	value += positioning
-	value += kicking
-	value += handling
-	value += diving
-	value += speed
-	return value

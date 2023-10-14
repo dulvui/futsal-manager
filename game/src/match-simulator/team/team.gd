@@ -8,7 +8,7 @@ enum Mentality {ULTRA_OFFENSIVE, OFFENSIVE, NORMAL, DEFENSIVE, ULTRA_DEFENSIVE}
 enum Passing {LONG, SHORT, DIRECT, NORMAL}
 enum Formations {TT=22,OTO=121,OOT=112,TOO=211,TO=31,OT=13}
 
-var goalkeeper:Goalkeeper
+var goalkeeper:Player
 
 # trainer tactics settings
 var tactics = {

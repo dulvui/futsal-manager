@@ -174,18 +174,18 @@ func _attack() -> int:
 				return Attack.SHOOT
 
 func _log(attack:int, result:bool) -> void:
-	emit_signal("action_message",home_team.active_player.profile["name"] + " vs " + away_team.active_player.profile["name"] + " " + str(Attack.keys()[attack]) + " - " + str(result))
+	emit_signal("action_message",home_team.active_player.name + " vs " + away_team.active_player.name + " " + str(Attack.keys()[attack]) + " - " + str(result))
 
 func _action_buffer(attack:int, result:bool) -> void:
 	var attacking_player_nr:int
 	var defending_player_nr:int
 	
 	if home_team.has_ball:
-		attacking_player_nr = home_team.active_player["profile"]["number"]
-		defending_player_nr = away_team.active_player["profile"]["number"]
+		attacking_player_nr = home_team.active_player.nr
+		defending_player_nr = away_team.active_player.nr
 	else:
-		attacking_player_nr = away_team.active_player["profile"]["number"]
-		defending_player_nr = home_team.active_player["profile"]["number"]
+		attacking_player_nr = away_team.active_player.nr
+		defending_player_nr = home_team.active_player.nr
 	
 	action_buffer.append({
 		"action" : Attack.keys()[attack],
@@ -202,9 +202,9 @@ func _action_buffer(attack:int, result:bool) -> void:
 func _check_goal() -> bool:
 	var goalkeeper_attributes:int
 	if home_team.has_ball:
-		goalkeeper_attributes = away_team.get_goalkeeper_attributes()
+		goalkeeper_attributes = away_team.goalkeeper.get_goalkeeper_attributes()
 	else:
-		goalkeeper_attributes = home_team.get_goalkeeper_attributes()
+		goalkeeper_attributes = away_team.goalkeeper.get_goalkeeper_attributes()
 	
 	var random_goal:int = randi() % int(goalkeeper_attributes)
 	
