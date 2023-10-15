@@ -195,7 +195,7 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 		
 		result_label.text = "%d - %d"%[home_goals,away_goals]
 		
-		events.append_text("%s  %s - %s  %s" % [time_label.text, str(home_goals), str(away_goals), player["profile"]["name"]])
+		events.append_text("%s  %s - %s  %s" % [time_label.text, str(home_goals), str(away_goals), player.name])
 
 	
 	visual_action.queue_free()

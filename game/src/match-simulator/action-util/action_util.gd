@@ -324,10 +324,10 @@ func _increase_headers(on_target) -> void:
 		
 func _increase_goals() -> void:
 	if away_team.has_ball:
-		away_team.active_player["history"]["actual"]["goals"] += 1
+		away_team.active_player.statistics[0].goals += 1
 		away_stats.increase_goals()
 	else:
-		home_team.active_player["history"]["actual"]["goals"] += 1
+		home_team.active_player.statistics[0].goals += 1
 		home_stats.increase_goals()
 		
 func _increase_corners() -> void:
