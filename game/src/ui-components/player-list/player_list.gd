@@ -11,7 +11,6 @@ const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profil
 var team_search:String = ""
 var foot_search:String = ""
 
-var all_players:Array = []
 var active_filters:Dictionary = {}
 
 const FISICAL_TITLES:Array = ["acc","agi","jum","pac","sta","str"]
@@ -52,7 +51,7 @@ func set_up(include_active_players:bool, active_team:Team = null) -> void:
 func set_up_players(include_active_players:bool, active_team:Team = null) -> void:
 	_reset_options()
 	
-	all_players = []
+	var all_players:Array[Player] = []
 	if active_team == null:
 		for team in Config.league.teams:
 			for player in team.players:
@@ -64,11 +63,11 @@ func set_up_players(include_active_players:bool, active_team:Team = null) -> voi
 		for player in active_team.players:
 			all_players.append(player)
 	
-	var headers:Array = ["surname"]
+	var headers:Array[String] = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
 		
-	table.set_up(headers, all_players.duplicate(true))
+	table.set_up(headers,INFO_TYPES[0], all_players.duplicate(true))
 	
 func remove_player(player_id) -> void:
 	active_filters["id"] = player_id
@@ -94,7 +93,7 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 	else:
 		active_filters["position"] = ""
 	
-	var headers:Array = ["surname"]
+	var headers:Array[String] = ["surname"]
 	if active_filters["position"] == "G":
 		for attribute in Constants.ATTRIBUTES["goalkeeper"]:
 			headers.append(attribute)
@@ -104,7 +103,7 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 			headers.append(attribute)
 		info_select.select(0)
 
-	table.set_up(headers)
+	table.set_up(headers, INFO_TYPES[index])
 	_filter_table()
 #
 #func _on_FootSelect_item_selected(index):
@@ -127,10 +126,10 @@ func _on_Table_select_player(player:Dictionary) -> void:
 
 
 func _on_InfoSelect_item_selected(index:int) -> void:
-	var headers = ["surname"]
+	var headers:Array[String] = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
-	table.set_up(headers)
+	table.set_up(headers, INFO_TYPES[index])
 	
 
 func _reset_options() -> void:
