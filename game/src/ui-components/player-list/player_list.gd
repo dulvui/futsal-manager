@@ -137,6 +137,7 @@ func _reset_options() -> void:
 func _on_table_info_player(player:Player):
 	var player_profile:Control = PlayerProfile.instantiate()
 	add_child(player_profile)
+	player_profile.set_global_position(Vector2.ZERO)
 	player_profile.set_up_info(player)
 	
 
