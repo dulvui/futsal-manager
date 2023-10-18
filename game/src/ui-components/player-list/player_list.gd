@@ -120,11 +120,6 @@ func _on_Close_pressed():
 	hide()
 
 
-func _on_Table_select_player(player:Dictionary) -> void:
-	print("change in list")
-	emit_signal("select_player",player)
-
-
 func _on_InfoSelect_item_selected(index:int) -> void:
 	var headers:Array[String] = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
@@ -139,7 +134,12 @@ func _reset_options() -> void:
 	info_select.selected = 0
 
 
-func _on_table_info_player(player:Dictionary):
+func _on_table_info_player(player:Player):
 	var player_profile:Control = PlayerProfile.instantiate()
 	add_child(player_profile)
 	player_profile.set_up_info(player)
+	
+
+func _on_table_select_player(player):
+	print("change in list")
+	emit_signal("select_player",player)

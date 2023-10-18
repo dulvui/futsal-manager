@@ -4,8 +4,8 @@
 
 extends Control
 
-signal select_player
-signal info_player
+signal select_player(player:Player)
+signal info_player(player:Player)
 
 const ColorNumber = preload("res://src/ui-components/color-number/color_number.tscn")
 const NameLabel = preload("res://src/ui-components/player-list/table/name-label/name_label.tscn")
@@ -79,8 +79,7 @@ func _set_up_content() -> void:
 					label.set_up(item.attributes.get(info_type).get(header))
 				else:
 					label = NameLabel.instantiate()
-					var player_name:String = item.get(header) 
-					label.set_text(player_name)
+					label.set_text(item.get(header))
 				content_container.add_child(label)
 
 			#info button
@@ -128,11 +127,11 @@ func filter(filters: Dictionary, exlusive = false) -> void:
 	_set_up_content()
 	
 
-func show_info(player) -> void:
-	emit_signal("info_player", player)
+func show_info(player:Player) -> void:
+	info_player.emit(player)
 	
-func change_player(player) -> void:
-	emit_signal("select_player",player)
+func change_player(player:Player) -> void:
+	select_player.emit(player)
 	
 func _sort(value) -> void:
 	current_content.sort_custom(func(a, b): return a[value] < b[value])
