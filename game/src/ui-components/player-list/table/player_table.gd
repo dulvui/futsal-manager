@@ -73,12 +73,14 @@ func _set_up_content() -> void:
 		for item in current_content.slice(current_page * SIZE , (current_page * SIZE) + SIZE):
 			for header in headers:
 				var label
+				# check if number or string
 				if typeof(item.attributes.get(info_type).get(header)) == 2:
 					label = ColorNumber.instantiate()
 					label.set_up(item.attributes.get(info_type).get(header))
 				else:
 					label = NameLabel.instantiate()
-					label.set_text(item.attributes.get(info_type).get(header))
+					var player_name:String = item.get(header) 
+					label.set_text(player_name)
 				content_container.add_child(label)
 
 			#info button
