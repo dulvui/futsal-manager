@@ -8,6 +8,9 @@ const DetailNumber:PackedScene = preload("res://src/ui-components/color-number/c
 
 var player:Player
 
+@onready
+var info:Control = $TabContainer/Info
+
 func set_up_info(_player:Player) -> void:
 	player = _player
 	
@@ -23,10 +26,12 @@ func set_up_info(_player:Player) -> void:
 		for key in Constants.ATTRIBUTES[attribute]:
 			var label = Label.new()
 			label.text = tr(key.to_upper())
-			$TabContainer/Info/Mental.add_child(label)
+			var a = attribute.capitalize()
+			var node = info.get_node(attribute.capitalize())
+			info.get_node(attribute.capitalize()).add_child(label)
 			var value = DetailNumber.instantiate()
 			value.set_up(player.attributes.get(attribute).get(key))
-			$TabContainer/Info/Mental.add_child(value)
+			info.get_node(attribute.capitalize()).add_child(value)
 		
 	#history
 	$TabContainer/History/Actual/Goals.text = str(player.statistics[0].goals)

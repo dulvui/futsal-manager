@@ -63,7 +63,7 @@ text = "TECHNICAL"
 [node name="Title" type="Label" parent="TabContainer/Info/Technical"]
 layout_mode = 2
 
-[node name="Fisical" type="GridContainer" parent="TabContainer/Info"]
+[node name="Physical" type="GridContainer" parent="TabContainer/Info"]
 layout_mode = 0
 offset_left = 872.0
 offset_top = 15.0
@@ -71,11 +71,11 @@ offset_right = 961.0
 offset_bottom = 52.0
 columns = 2
 
-[node name="TitleLabel" type="Label" parent="TabContainer/Info/Fisical"]
+[node name="TitleLabel" type="Label" parent="TabContainer/Info/Physical"]
 layout_mode = 2
 text = "FISICAL"
 
-[node name="Title" type="Label" parent="TabContainer/Info/Fisical"]
+[node name="Title" type="Label" parent="TabContainer/Info/Physical"]
 layout_mode = 2
 
 [node name="Goalkeeper" type="GridContainer" parent="TabContainer/Info"]
