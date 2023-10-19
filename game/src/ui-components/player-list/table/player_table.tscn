@@ -14,57 +14,15 @@ grow_vertical = 2
 theme = ExtResource("1_sqlt6")
 script = ExtResource("2_mpmpm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
 
-[node name="Content" type="GridContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(920, 470)
+[node name="Content" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
-
-[node name="First" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "<<"
-
-[node name="Prev5" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "- 5"
-
-[node name="Prev" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "<"
-
-[node name="Pages" type="Label" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "1/12"
-
-[node name="Next" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = ">"
-
-[node name="Next5" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "+ 5"
-
-[node name="Last" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = ">>"
-
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/First" to="." method="_on_first_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Prev5" to="." method="_on_prev_5_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Prev" to="." method="_on_Prev_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Next" to="." method="_on_Next_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Next5" to="." method="_on_next_5_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Last" to="." method="_on_last_pressed"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
