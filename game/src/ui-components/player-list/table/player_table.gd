@@ -10,7 +10,8 @@ signal info_player(player:Player)
 const ColorNumber = preload("res://src/ui-components/color-number/color_number.tscn")
 const NameLabel = preload("res://src/ui-components/player-list/table/name-label/name_label.tscn")
 
-@onready var content_container = $ScrollContainer/Content
+@onready var header_container = $VBoxContainer/Header
+@onready var content_container = $VBoxContainer/ScrollContainer/Content
 
 var headers:Array[String]
 var players:Array[Player] # base content
@@ -36,17 +37,17 @@ func _set_up_headers() -> void:
 		var button = Button.new()
 		button.text = header.substr(0,3)
 		button.button_down.connect(_sort.bind(header))
-		content_container.add_child(button)
+		header_container.add_child(button)
 	
 	# info label
 	var label = Label.new()
 	label.text = "i"
-	content_container.add_child(label)
+	header_container.add_child(label)
 	
 	# change label
 	var lable_change = Label.new()
 	lable_change.text = "c"
-	content_container.add_child(lable_change)
+	header_container.add_child(lable_change)
 	
 func _set_up_content() -> void:
 	_set_up_headers()
