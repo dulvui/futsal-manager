@@ -3,7 +3,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 extends Control
+class_name ColorNumber
 
+# what number the label has 
+var key:String
 
 func set_up(value:int) -> void:
 	$Label.text = str(value)

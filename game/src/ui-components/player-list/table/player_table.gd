@@ -17,6 +17,8 @@ var headers:Array[String]
 var players:Array[Player] # base content
 var info_type:String
 
+var color_numbers:Array[ColorNumber]
+
 var sort_memory:Dictionary = {} # to save wich value is already sorted and how
 
 	
@@ -31,10 +33,15 @@ func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]
 	
 	_set_up_headers()
 	_set_up_content()
-	
 
+func update(headers:Array[String], _info_type:String) -> void:
+	info_type = _info_type
+	_update_content(headers)
 
 func _set_up_headers() -> void:
+	for header in header_container.get_children():
+		header.queue_free()
+	
 	# name header
 	var name_button:Button = Button.new()
 	name_button.text = headers[0]
@@ -68,17 +75,18 @@ func _set_up_content() -> void:
 	
 	if players.size() > 0:
 		for player in players:
-			for header in headers:
-				var label
-				
-				# check if number or string
-				if typeof(player.attributes.get(info_type).get(header)) == 2:
-					label = ColorNumber.instantiate()
-					label.set_up(player.attributes.get(info_type).get(header))
-				else:
-					label = NameLabel.instantiate()
-					label.set_text(player.get(header))
-				content_container.add_child(label)
+			
+			var name_label = NameLabel.instantiate()
+			name_label.set_text(player.surname)
+			content_container.add_child(name_label)
+			for key in Constants.ATTRIBUTES.keys():
+				for attribute in Constants.ATTRIBUTES[key]:
+					var label = ColorNumber.instantiate()
+					label.key = attribute
+					label.set_up(player.attributes.get(key).get(attribute))
+					content_container.add_child(label)
+					label.visible = attribute in headers
+					color_numbers.append(label)
 
 			#info button
 			var button = Button.new()
@@ -95,6 +103,11 @@ func _set_up_content() -> void:
 		var label = Label.new()
 		label.text = "NO_PLAYER_FOUND"
 		content_container.add_child(label)
+		
+func _update_content(headers:Array[String]) -> void:
+	content_container.columns = headers.size() + 2
+	for color_number in color_numbers:
+		color_number.visible = color_number.key in headers
 
 func filter(filters: Dictionary, exlusive = false) -> void:
 	if filters:

@@ -124,7 +124,7 @@ func _on_InfoSelect_item_selected(index:int) -> void:
 	var headers:Array[String] = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
-	table.set_up(headers, INFO_TYPES[index])
+	table.update(headers, INFO_TYPES[index])
 	
 
 func _reset_options() -> void:
