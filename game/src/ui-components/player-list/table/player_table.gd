@@ -28,6 +28,8 @@ func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]
 	for key in Constants.ATTRIBUTES.keys():
 		for attribute in Constants.ATTRIBUTES[key]:
 			sort_memory[key + "_" + attribute] = false
+	
+	_set_up_headers()
 	_set_up_content()
 	
 
@@ -61,7 +63,6 @@ func _set_up_headers() -> void:
 	header_container.add_child(label_change)
 	
 func _set_up_content() -> void:
-	_set_up_headers()
 	
 	content_container.columns = headers.size() + 2 # +2 for info and change button
 	

@@ -9,6 +9,9 @@ signal change
 @onready 
 var animation_player:AnimationPlayer = $AnimationPlayer
 
+@onready
+var player_list:Control = $PlayerList
+
 var formations:Array = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
 var player_to_replace:int
 var team:Team
@@ -22,7 +25,7 @@ func _ready() -> void:
 func set_up(active_team:Team = Config.team) -> void:
 	team = active_team
 	_set_active_players()
-	$PlayerList.set_up(true, team)
+	player_list.set_up(true, team)
 	# TODO play animation
 #	animation_player.play("Fade" + team["formation"])
 
@@ -35,45 +38,42 @@ func _on_FormationSelect_item_selected(index:int) -> void:
 	animation_player.play("Fade" + team["formation"] )
 
 func _set_active_players() -> void:
-#	$Field/G.set_player(team.line_up.goalkeeper)
-#	$Field/D.set_player(team.line_up.players[1])
-#	$Field/WL.set_player(team.line_up.players[2])
-#	$Field/WR.set_player(team.line_up.players[3])
-#	$Field/P.set_player(team.line_up.players[4])
+	$Field/G.set_player(team.line_up.goalkeeper)
+	$Field/D.set_player(team.line_up.players[0])
+	$Field/WL.set_player(team.line_up.players[1])
+	$Field/WR.set_player(team.line_up.players[2])
+	$Field/P.set_player(team.line_up.players[3])
 	pass
 
 func _on_D_change_player(_player) -> void:
-	player_to_replace = 1
-	$PlayerList.show()
+	player_to_replace = 0
+	player_list.show()
 
 func _on_WL_change_player(_player) -> void:
-	player_to_replace = 2
-	$PlayerList.show()
+	player_to_replace = 1
+	player_list.show()
 
 func _on_WR_change_player(_player) -> void:
-	player_to_replace = 3
-	$PlayerList.show()
+	player_to_replace = 2
+	player_list.show()
 
 func _on_P_change_player(_player) -> void:
-	player_to_replace = 4
-	$PlayerList.show()
+	player_to_replace = 3
+	player_list.show()
 	
 func _on_G_change_player(_player) -> void:
-	player_to_replace = 0
-	$PlayerList.show()
+	player_to_replace = -1
+	player_list.show()
 
 func _on_PlayerList_select_player(_player) -> void:
 	_change_player(_player)
 	_set_active_players()
-	$PlayerList.set_up_players(true, team)
-	$PlayerList.hide()
+	player_list.hide()
 	emit_signal("change")
 	
-func _change_player(player:Dictionary) -> void:
-#	team["players"]["subs"].append(team.line_up.players[player_to_replace])
-#	team.line_up.players[player_to_replace] = player
-#	for sub_index in team["players"]["subs"].size():
-#		if team["players"]["subs"][sub_index]["id"] == player["id"]:
-#			team["players"]["subs"].remove_at(sub_index)
-#			return
-	pass
+func _change_player(player:Player) -> void:
+	if player_to_replace >= 0:
+		team.line_up.players[player_to_replace] = player
+	else:
+		team.line_up.goalkeeper = player
+		

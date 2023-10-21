@@ -4,16 +4,14 @@
 
 extends Control
 
-signal change_player
+signal change_player(player:Player)
 
-var player:Dictionary
+var player:Player
 
-
-func set_player(new_player:Dictionary) -> void:
+func set_player(new_player:Player) -> void:
 	player = new_player
-	$Name.text = player["surname"]
-	$Nr.text = str(player["nr"])
-
+	$Name.text = player.surname
+	$Nr.text = str(player.nr)
 
 func _on_Change_pressed() -> void:
-	emit_signal("change_player",player)
+	change_player.emit(player)
