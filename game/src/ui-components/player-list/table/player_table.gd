@@ -17,6 +17,7 @@ var headers:Array[String]
 var players:Array[Player] # base content
 var info_type:String
 
+# TODO use content container direcltly to save memory
 var color_numbers:Array[ColorNumber]
 
 var sort_memory:Dictionary = {} # to save wich value is already sorted and how
@@ -34,9 +35,12 @@ func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]
 	_set_up_headers()
 	_set_up_content()
 
-func update(headers:Array[String], _info_type:String) -> void:
+func update(_headers:Array[String], _info_type:String) -> void:
 	info_type = _info_type
-	_update_content(headers)
+	headers = _headers
+	# todo replace with update
+	_set_up_headers()
+	_update_content()
 
 func _set_up_headers() -> void:
 	for header in header_container.get_children():
@@ -104,7 +108,7 @@ func _set_up_content() -> void:
 		label.text = "NO_PLAYER_FOUND"
 		content_container.add_child(label)
 		
-func _update_content(headers:Array[String]) -> void:
+func _update_content() -> void:
 	content_container.columns = headers.size() + 2
 	for color_number in color_numbers:
 		color_number.visible = color_number.key in headers
