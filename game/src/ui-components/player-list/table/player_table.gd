@@ -17,9 +17,6 @@ var headers:Array[String]
 var players:Array[Player] # base content
 var info_type:String
 
-# TODO use content container direcltly to save memory
-var color_numbers:Array[ColorNumber]
-
 var sort_memory:Dictionary = {} # to save wich value is already sorted and how
 
 	
@@ -85,12 +82,11 @@ func _set_up_content() -> void:
 			content_container.add_child(name_label)
 			for key in Constants.ATTRIBUTES.keys():
 				for attribute in Constants.ATTRIBUTES[key]:
-					var label = ColorNumber.instantiate()
+					var label:ColorNumber = ColorNumber.instantiate()
 					label.key = attribute
 					label.set_up(player.attributes.get(key).get(attribute))
 					content_container.add_child(label)
 					label.visible = attribute in headers
-					color_numbers.append(label)
 
 			#info button
 			var button = Button.new()
@@ -110,8 +106,9 @@ func _set_up_content() -> void:
 		
 func _update_content() -> void:
 	content_container.columns = headers.size() + 2
-	for color_number in color_numbers:
-		color_number.visible = color_number.key in headers
+	for color_number in content_container.get_children():
+		if color_number is ColorNumber:
+			color_number.visible = color_number.key in headers
 
 func filter(filters: Dictionary, exlusive = false) -> void:
 	if filters:
