@@ -33,21 +33,32 @@ func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]
 
 
 func _set_up_headers() -> void:
-	for header in headers:
-		var button = Button.new()
+	# name header
+	var name_button:Button = Button.new()
+	name_button.text = headers[0]
+	name_button.custom_minimum_size.x = 252
+	name_button.button_down.connect(_sort.bind(headers[0]))
+	header_container.add_child(name_button)
+	
+	# ohter headers
+	for header in headers.slice(1):
+		var button:Button = Button.new()
+		button.custom_minimum_size.x = 34
 		button.text = header.substr(0,3)
 		button.button_down.connect(_sort.bind(header))
 		header_container.add_child(button)
 	
 	# info label
-	var label = Label.new()
-	label.text = "i"
+	var label:Label = Label.new()
+	label.text = "info"
+	label.custom_minimum_size.x = 72
 	header_container.add_child(label)
 	
 	# change label
-	var lable_change = Label.new()
-	lable_change.text = "c"
-	header_container.add_child(lable_change)
+	var label_change:Label = Label.new()
+	label_change.text = "choose"
+	label_change.custom_minimum_size.x = 72
+	header_container.add_child(label_change)
 	
 func _set_up_content() -> void:
 	_set_up_headers()
@@ -58,6 +69,7 @@ func _set_up_content() -> void:
 		for player in players:
 			for header in headers:
 				var label
+				
 				# check if number or string
 				if typeof(player.attributes.get(info_type).get(header)) == 2:
 					label = ColorNumber.instantiate()

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/ui-components/player-list/table/name-label/name_label.gd" id="2"]
 
 [node name="NameLabel" type="Control"]
-custom_minimum_size = Vector2(253, 36)
+custom_minimum_size = Vector2(252, 36)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 253.0
@@ -17,6 +17,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.980392, 0.207843, 0.207843, 1)
