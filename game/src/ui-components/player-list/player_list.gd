@@ -66,8 +66,7 @@ func set_up_players(include_active_players:bool, active_team:Team = null) -> voi
 	var headers:Array[String] = ["surname"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
-		
-	table.set_up(headers,INFO_TYPES[0], all_players.duplicate(true))
+	table.set_up(headers,INFO_TYPES[0], all_players)
 	
 func remove_player(player_id) -> void:
 	active_filters["id"] = player_id

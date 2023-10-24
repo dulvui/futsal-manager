@@ -25,11 +25,36 @@ grow_vertical = 2
 [node name="Header" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Content" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="Players" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Footer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Next2" type="Button" parent="VBoxContainer/Footer"]
+layout_mode = 2
+text = "<<"
+
+[node name="Next" type="Button" parent="VBoxContainer/Footer"]
+layout_mode = 2
+text = "<"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/Footer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Prev" type="Button" parent="VBoxContainer/Footer"]
+layout_mode = 2
+text = ">"
+
+[node name="Prev2" type="Button" parent="VBoxContainer/Footer"]
+layout_mode = 2
+text = ">>"
+
+[connection signal="pressed" from="VBoxContainer/Footer/Next2" to="." method="_on_next_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Footer/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="VBoxContainer/Footer/Prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="VBoxContainer/Footer/Prev2" to="." method="_on_prev_2_pressed"]

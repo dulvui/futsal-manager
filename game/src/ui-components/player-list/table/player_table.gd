@@ -7,18 +7,20 @@ extends Control
 signal select_player(player:Player)
 signal info_player(player:Player)
 
-const ColorNumber = preload("res://src/ui-components/color-number/color_number.tscn")
-const NameLabel = preload("res://src/ui-components/player-list/table/name-label/name_label.tscn")
+const PlayerRow = preload("res://src/ui-components/player-list/player-row/player_row.tscn")
 
 @onready var header_container = $VBoxContainer/Header
-@onready var content_container = $VBoxContainer/ScrollContainer/Content
+@onready var players_container = $VBoxContainer/Players
 
 var headers:Array[String]
-var players:Array[Player] # base content
+var players:Array[Player]
+
 var info_type:String
 
 var sort_memory:Dictionary = {} # to save wich value is already sorted and how
 
+var page_size:int = 10
+var page:int = 0
 	
 func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]) -> void:
 	headers = _headers
@@ -71,42 +73,19 @@ func _set_up_headers() -> void:
 	header_container.add_child(label_change)
 	
 func _set_up_content() -> void:
-	
-	content_container.columns = headers.size() + 2 # +2 for info and change button
-	
 	if players.size() > 0:
-		for player in players:
-			
-			var name_label = NameLabel.instantiate()
-			name_label.set_text(player.surname)
-			content_container.add_child(name_label)
-			for key in Constants.ATTRIBUTES.keys():
-				for attribute in Constants.ATTRIBUTES[key]:
-					var label:ColorNumber = ColorNumber.instantiate()
-					label.key = attribute
-					label.set_up(player.attributes.get(key).get(attribute))
-					content_container.add_child(label)
-					label.visible = attribute in headers
-
-			#info button
-			var button = Button.new()
-			button.text = "info"
-			button.button_down.connect(show_info.bind(player))
-			content_container.add_child(button)
-
-			#change button
-			var button_change = Button.new()
-			button_change.text = "choose"
-			button_change.button_down.connect(change_player.bind(player))
-			content_container.add_child(button_change)
+		for player in players.slice(page * page_size, (page + 1) * page_size):
+			var player_row = PlayerRow.instantiate()
+			players_container.add_child(player_row)
+			player_row.set_up(player, headers)
 	else :
 		var label = Label.new()
 		label.text = "NO_PLAYER_FOUND"
-		content_container.add_child(label)
+		players_container.add_child(label)
 		
 func _update_content() -> void:
-	content_container.columns = headers.size() + 2
-	for color_number in content_container.get_children():
+	players_container.columns = headers.size() + 2
+	for color_number in players_container.get_children():
 		if color_number is ColorNumber:
 			color_number.visible = color_number.key in headers
 
@@ -144,3 +123,26 @@ func _sort(key:String, value:String) -> void:
 		players.reverse()
 	
 	_set_up_content()
+
+
+func _on_next_2_pressed():
+	page += 5
+	if page > players.size() / page_size:
+		page = 0
+
+
+func _on_next_pressed():
+	page += 1
+	if page > players.size() / page_size:
+		page = 0
+
+
+func _on_prev_pressed():
+	page -= 1
+	if page < 0:
+		page = players.size() / page_size
+
+func _on_prev_2_pressed():
+	page -= 5
+	if page < 0:
+		page = players.size() / page_size
