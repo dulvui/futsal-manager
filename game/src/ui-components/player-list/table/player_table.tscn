@@ -34,27 +34,29 @@ size_flags_vertical = 3
 layout_mode = 2
 alignment = 1
 
-[node name="Next2" type="Button" parent="VBoxContainer/Footer"]
-layout_mode = 2
-text = "<<"
-
-[node name="Next" type="Button" parent="VBoxContainer/Footer"]
+[node name="Prev" type="Button" parent="VBoxContainer/Footer"]
 layout_mode = 2
 text = "<"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/Footer"]
-custom_minimum_size = Vector2(70, 0)
-layout_mode = 2
-
-[node name="Prev" type="Button" parent="VBoxContainer/Footer"]
-layout_mode = 2
-text = ">"
-
 [node name="Prev2" type="Button" parent="VBoxContainer/Footer"]
+layout_mode = 2
+text = "<<"
+
+[node name="PageIndicator" type="Label" parent="VBoxContainer/Footer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "1 / 5"
+horizontal_alignment = 1
+
+[node name="Next2" type="Button" parent="VBoxContainer/Footer"]
 layout_mode = 2
 text = ">>"
 
-[connection signal="pressed" from="VBoxContainer/Footer/Next2" to="." method="_on_next_2_pressed"]
-[connection signal="pressed" from="VBoxContainer/Footer/Next" to="." method="_on_next_pressed"]
+[node name="Next" type="Button" parent="VBoxContainer/Footer"]
+layout_mode = 2
+text = ">"
+
 [connection signal="pressed" from="VBoxContainer/Footer/Prev" to="." method="_on_prev_pressed"]
 [connection signal="pressed" from="VBoxContainer/Footer/Prev2" to="." method="_on_prev_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Footer/Next2" to="." method="_on_next_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Footer/Next" to="." method="_on_next_pressed"]

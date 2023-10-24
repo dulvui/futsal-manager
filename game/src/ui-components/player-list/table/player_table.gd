@@ -11,6 +11,7 @@ const PlayerRow = preload("res://src/ui-components/player-list/player-row/player
 
 @onready var header_container = $VBoxContainer/Header
 @onready var players_container = $VBoxContainer/Players
+@onready var page_indicator = $VBoxContainer/Footer/PageIndicator
 
 var headers:Array[String]
 var players:Array[Player]
@@ -21,11 +22,17 @@ var sort_memory:Dictionary = {} # to save wich value is already sorted and how
 
 var page_size:int = 10
 var page:int = 0
+var page_max:int
+
 	
 func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]) -> void:
 	headers = _headers
 	info_type = _info_type
 	players = _players
+	
+	page_max = players.size() / page_size
+	
+	_update_page_indicator()
 	
 	for key in Constants.ATTRIBUTES.keys():
 		for attribute in Constants.ATTRIBUTES[key]:
@@ -39,7 +46,8 @@ func update(_headers:Array[String], _info_type:String) -> void:
 	headers = _headers
 	# todo replace with update
 	_set_up_headers()
-	_update_content()
+	_set_up_content()
+	_update_page_indicator()
 
 func _set_up_headers() -> void:
 	for header in header_container.get_children():
@@ -73,6 +81,9 @@ func _set_up_headers() -> void:
 	header_container.add_child(label_change)
 	
 func _set_up_content() -> void:
+	for child in players_container.get_children():
+		child.queue_free()
+	
 	if players.size() > 0:
 		for player in players.slice(page * page_size, (page + 1) * page_size):
 			var player_row = PlayerRow.instantiate()
@@ -85,11 +96,9 @@ func _set_up_content() -> void:
 		label.text = "NO_PLAYER_FOUND"
 		players_container.add_child(label)
 		
-func _update_content() -> void:
-	players_container.columns = headers.size() + 2
-	for color_number in players_container.get_children():
-		if color_number is ColorNumber:
-			color_number.visible = color_number.key in headers
+
+func _update_page_indicator() -> void:
+	page_indicator.text = "%d / %d"%[page + 1, page_max + 1]
 
 func filter(filters: Dictionary, exlusive = false) -> void:
 	if filters:
@@ -129,22 +138,30 @@ func _sort(key:String, value:String) -> void:
 
 func _on_next_2_pressed():
 	page += 5
-	if page > players.size() / page_size:
+	if page > page_max:
 		page = 0
+	_update_page_indicator()
+	_set_up_content()
 
 
 func _on_next_pressed():
 	page += 1
-	if page > players.size() / page_size:
+	if page > page_max:
 		page = 0
+	_update_page_indicator()
+	_set_up_content()
 
 
 func _on_prev_pressed():
 	page -= 1
 	if page < 0:
-		page = players.size() / page_size
+		page = page_max
+	_update_page_indicator()
+	_set_up_content()
 
 func _on_prev_2_pressed():
 	page -= 5
 	if page < 0:
-		page = players.size() / page_size
+		page = page_max
+	_update_page_indicator()
+	_set_up_content()
