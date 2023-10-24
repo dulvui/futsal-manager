@@ -77,6 +77,8 @@ func _set_up_content() -> void:
 		for player in players.slice(page * page_size, (page + 1) * page_size):
 			var player_row = PlayerRow.instantiate()
 			players_container.add_child(player_row)
+			player_row.select.connect(select.bind(player))
+			player_row.info.connect(info.bind(player))
 			player_row.set_up(player, headers)
 	else :
 		var label = Label.new()
@@ -108,10 +110,10 @@ func filter(filters: Dictionary, exlusive = false) -> void:
 						
 	
 
-func show_info(player:Player) -> void:
+func info(player:Player) -> void:
 	info_player.emit(player)
 	
-func change_player(player:Player) -> void:
+func select(player:Player) -> void:
 	select_player.emit(player)
 	
 func _sort(key:String, value:String) -> void:

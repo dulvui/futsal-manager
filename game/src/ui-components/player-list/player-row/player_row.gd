@@ -5,8 +5,8 @@
 extends Control
 class_name PlayerRow
 
-signal info(player:Player)
-signal select(player:Player)
+signal info()
+signal select()
 
 const ColorNumber = preload("res://src/ui-components/color-number/color_number.tscn")
 
@@ -14,13 +14,9 @@ const ColorNumber = preload("res://src/ui-components/color-number/color_number.t
 @onready var attributes:HBoxContainer = $Attributes
 
 
-var player:Player
-
-func set_up(_player:Player, active_headers:Array[String]) -> void:
+func set_up(player:Player, active_headers:Array[String]) -> void:
 	for child in attributes.get_children():
 		child.queue_free()
-	
-	player = _player
 	
 	name_label.set_text(player.surname)
 	for key in Constants.ATTRIBUTES.keys():
@@ -32,7 +28,7 @@ func set_up(_player:Player, active_headers:Array[String]) -> void:
 			attributes.add_child(color_number)
 
 func _on_select_pressed():
-	select.emit(player)
+	select.emit()
 
 func _on_info_pressed():
-	info.emit(player)
+	info.emit()
