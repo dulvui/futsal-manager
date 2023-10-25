@@ -14,7 +14,9 @@ const PlayerRow = preload("res://src/ui-components/player-list/player-row/player
 @onready var page_indicator = $VBoxContainer/Footer/PageIndicator
 
 var headers:Array[String]
+var all_players:Array[Player]
 var players:Array[Player]
+
 
 var info_type:String
 
@@ -29,6 +31,8 @@ func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]
 	headers = _headers
 	info_type = _info_type
 	players = _players
+	all_players = _players
+	
 	
 	page_max = players.size() / page_size
 	
@@ -102,21 +106,27 @@ func _update_page_indicator() -> void:
 
 func filter(filters: Dictionary, exlusive = false) -> void:
 	if filters:
-		var filtered_content = []
-		for player in players:
+		page = 0
+		players = []
+		for player in all_players:
 			var filter_counter = 0
 			# because value can be empty
 			var valid_filter_counter = 0
 			for key in filters.keys():
 				var value = filters[key]
 				if value:
-					pass
-					# TODO create player labels with player info, that can be hidden or shown
-#					if exlusive:
-#						player.visible = not str(value).to_upper() in str(player[key]).to_upper():
-#					else:
-#						player.visible = str(value).to_upper() in str(player[key]).to_upper():
-						
+					valid_filter_counter += 1
+					if exlusive:
+						if not str(value).to_upper() in str(player[key]).to_upper():
+							filter_counter += 1
+					else:
+						if str(value).to_upper() in str(player[key]).to_upper():
+							filter_counter += 1
+			if filter_counter == valid_filter_counter:
+				players.append(player)
+	else:
+		players = all_players
+	_set_up_content()		
 	
 
 func info(player:Player) -> void:
