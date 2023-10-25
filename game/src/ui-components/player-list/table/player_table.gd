@@ -125,12 +125,12 @@ func info(player:Player) -> void:
 func select(player:Player) -> void:
 	select_player.emit(player)
 	
-func _sort(key:String, value:String) -> void:
-	players.sort_custom(func(a, b): return a[key][value] < b[key][value])
+func _sort(key:String) -> void:
+	players.sort_custom(func(a:Player, b:Player): return a.attributes.get(info_type).get(key) < b.attributes.get(info_type).get(key))
 	
-	sort_memory[key][value] = not sort_memory[key][value]
+	sort_memory[info_type + "_" + key] = not sort_memory[info_type + "_" + key]
 	
-	if sort_memory[key][value]:
+	if sort_memory[info_type + "_" + key]:
 		players.reverse()
 	
 	_set_up_content()
