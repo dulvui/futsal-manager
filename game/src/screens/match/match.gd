@@ -8,7 +8,7 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 
 @onready var match_simulator:Node2D = $MatchSimulator
 @onready var stats:MarginContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Stats
-@onready var comments:RichTextLabel = $HUD/HSplitContainer/CentralContainer/MainBar/Log
+@onready var comments:VBoxContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Log
 @onready var events:ScrollContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Events
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var time_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Time
@@ -218,7 +218,8 @@ func _on_MatchSimulator_match_end() -> void:
 
 
 func _on_MatchSimulator_action_message(message:String) -> void:
-	if comments.get_line_count() > 12:
-		comments.remove_paragraph(0)
-	comments.newline()
-	comments.add_text(time_label.text + " " + message)
+	if comments.get_child_count() > 8:
+		comments.remove_child(comments.get_child(0))
+	var new_line:Label = Label.new()
+	new_line.text = time_label.text + " " + message
+	comments.add_child(new_line)

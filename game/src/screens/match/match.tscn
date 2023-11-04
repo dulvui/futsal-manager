@@ -122,10 +122,8 @@ show_percentage = false
 custom_minimum_size = Vector2(840, 460)
 layout_mode = 2
 
-[node name="Log" type="RichTextLabel" parent="HUD/HSplitContainer/CentralContainer/MainBar"]
+[node name="Log" type="VBoxContainer" parent="HUD/HSplitContainer/CentralContainer/MainBar"]
 layout_mode = 2
-fit_content = true
-scroll_following = true
 
 [node name="Stats" parent="HUD/HSplitContainer/CentralContainer/MainBar" instance=ExtResource("4")]
 visible = false
