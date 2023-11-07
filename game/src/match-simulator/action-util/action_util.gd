@@ -13,13 +13,16 @@ class_name ActionUtil
 
 
 signal possession_change
-# signals for visual actions
-# 2 param: boolean is_goal, is_home
-signal shot
-# TODO
-signal penalty
-signal freekick
-signal corner
+signal shot(player:Player, success:bool)
+signal pazz(player:Player, success:bool)
+signal foul(player:Player)
+signal penalty(player:Player)
+signal freekick(player:Player)
+signal corner(player:Player)
+signal red_card(player:Player)
+signal kick_in(player:Player)
+signal yellow_card(player:Player)
+
 signal action_message
 
 # in which sector of the field the player is situated
@@ -38,15 +41,14 @@ var home_team:Node = $HomeTeam
 @onready
 var away_team:Node = $AwayTeam
 
-@onready 
-var home_stats:Node = $HomeStatistics
-@onready 
-var away_stats:Node = $AwayStatistics
-
 var current_state:int
 
 const MAX_ACTION_BUFFER_SIZE:int = 5
 var action_buffer:Array = []
+
+var attacking_player:Player
+var defending_player:Player
+
 
 func _ready() -> void:
 	randomize()
@@ -85,7 +87,7 @@ func update() -> void:
 			# TODO emit ponalty/freekick signal for visual action
 			var card = _check_card()
 			print("Foul with " + card + " card.")
-			emit_signal("action_message","Foul with " + card + " card.")
+			action_message.emit("Foul with " + card + " card.")
 			_check_penalty_or_freekick()
 		else:
 			kick_in = _check_kick_in()
@@ -100,15 +102,15 @@ func update() -> void:
 	# increase stats
 	match attack:
 		Attack.PASS:
-			_increase_pass(attack_success)
+			pazz.emit(home_team.has_ball, attack_success)
 		Attack.SHOOT:
-			_increase_shots(attack_success)
+			shot.emit(home_team.has_ball, attack_success, null)
 
 
 	home_team.update_players()
 	away_team.update_players()
-	home_stats.update_possession(home_team.has_ball)
-	away_stats.update_possession(away_team.has_ball)
+#	home_stats.update_possession(home_team.has_ball)
+#	away_stats.update_possession(away_team.has_ball)
 	_log(attack, attack_success)
 	_action_buffer(attack, attack_success)
 	
@@ -169,7 +171,7 @@ func _attack() -> int:
 				return Attack.SHOOT
 
 func _log(attack:int, result:bool) -> void:
-	emit_signal("action_message",home_team.active_player.name + " vs " + away_team.active_player.name + " " + str(Attack.keys()[attack]) + " - " + str(result))
+	action_message.emit(home_team.active_player.name + " vs " + away_team.active_player.name + " " + str(Attack.keys()[attack]) + " - " + str(result))
 
 func _action_buffer(attack:int, result:bool) -> void:
 	var attacking_player_nr:int
@@ -212,12 +214,11 @@ func _check_goal() -> bool:
 	if random_goal > goalkeeper_attributes:
 		# goal
 		if home_team.has_ball:
-			emit_signal("shot",true, home_team.has_ball, home_team.active_player)
-			emit_signal("action_message","GOAL for " + home_team.name)
+			shot.emit(home_team.has_ball, true, home_team.active_player)
+			action_message.emit("GOAL for " + home_team.name)
 		else:
-			emit_signal("shot",true, home_team.has_ball, away_team.active_player)
-			emit_signal("action_message","GOAL for " + away_team.name)
-		_increase_goals()
+			shot.emit(home_team.has_ball, true, away_team.active_player)
+			action_message.emit("GOAL for " + away_team.name)
 		_change_possession()
 		return true
 	else:
@@ -233,14 +234,14 @@ func _check_corner() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.CORNER_AFTER_SAFE_FACTOR:
 		current_state = State.CORNER
-		_increase_corners()
+		corner.emit()
 		return true
 	return false
 	
 func _check_foul() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.FOUL_FACTOR:
-		_increase_fouls()
+		foul.emit(home_team.has_ball)
 		return true
 	return false
 	
@@ -248,23 +249,23 @@ func _check_penalty_or_freekick() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random > Constants.PENALTY_FACTOR:
 		current_state = State.FREE_KICK
-		_increase_free_kicks()
-		emit_signal("action_message","FREE_KICK")
+		freekick.emit()
+		action_message.emit("FREE_KICK")
 		return true
 	else:
 		current_state = State.PENALTY
-		emit_signal("action_message","PENALTY")
-		_increase_penalties()
+		action_message.emit("PENALTY")
+		penalty.emit()
 		return true
 
 	
 func _check_card() -> String:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random > Constants.RED_CARD_FACTOR:
-		_increase_red_cards()
+		red_card.emit()
 		return "red"
 	elif random > Constants.YELLOW_CARD_FACTOR:
-		_increase_yellow_cards()
+		yellow_card.emit()
 		return "yellow"
 	return "no-card"
 	
@@ -272,7 +273,7 @@ func _check_kick_in() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.KICK_IN_FACTOR:
 		current_state = State.KICK_IN
-		_increase_kick_ins()
+		kick_in.emit()
 		return true
 	return false
 
@@ -296,73 +297,3 @@ func _change_attacker() -> void:
 		away_team.change_active_player()
 	else:
 		home_team.change_active_player()
-
-
-# STATISTICS
-func _increase_pass(success:bool) -> void:
-	if away_team.has_ball:
-		away_stats.increase_pass(success)
-	else:
-		home_stats.increase_pass(success)
-		
-func _increase_shots(on_target:bool) -> void:
-	if away_team.has_ball:
-		away_stats.increase_shots(on_target)
-	else:
-		home_stats.increase_shots(on_target)
-
-func _increase_headers(on_target) -> void:
-	if away_team.has_ball:
-		away_stats.increase_headers(on_target)
-	else:
-		home_stats.increase_headers(on_target)
-		
-func _increase_goals() -> void:
-	if away_team.has_ball:
-		away_team.active_player.statistics[0].goals += 1
-		away_stats.increase_goals()
-	else:
-		home_team.active_player.statistics[0].goals += 1
-		home_stats.increase_goals()
-		
-func _increase_corners() -> void:
-	if away_team.has_ball:
-		away_stats.increase_corners()
-	else:
-		home_stats.increase_corners()
-		
-func _increase_kick_ins() -> void:
-	if away_team.has_ball:
-		away_stats.increase_kick_ins()
-	else:
-		home_stats.increase_kick_ins()
-
-func _increase_fouls() -> void:
-	if away_team.has_ball:
-		home_stats.increase_fouls()
-	else:
-		away_stats.increase_fouls()
-		
-func _increase_free_kicks() -> void:
-	if away_team.has_ball:
-		home_stats.increase_free_kicks()
-	else:
-		away_stats.increase_free_kicks()
-		
-func _increase_penalties() -> void:
-	if away_team.has_ball:
-		home_stats.increase_penalties()
-	else:
-		away_stats.increase_penalties()
-		
-func _increase_red_cards() -> void:
-	if away_team.has_ball:
-		home_stats.increase_red_cards()
-	else:
-		away_stats.increase_red_cards()
-		
-func _increase_yellow_cards() -> void:
-	if away_team.has_ball:
-		home_stats.increase_yellow_cards()
-	else:
-		away_stats.increase_yellow_cards()

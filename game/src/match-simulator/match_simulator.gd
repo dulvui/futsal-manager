@@ -2,12 +2,13 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node2D
+extends Node
 
 signal shot
 signal action_message
 signal half_time
 signal match_end
+signal update
 
 # seconds for halftime
 const HALF_TIME:int = 1200
@@ -16,6 +17,8 @@ const HALF_TIME:int = 1200
 @onready var timer:Timer = $Timer
 
 var time:int = 0
+
+var home_has_ball:bool
 
 
 func set_up(home_team:Team, away_team:Team) -> void:
@@ -36,6 +39,7 @@ func _on_Timer_timeout() -> void:
 		emit_signal("match_end")
 	else:
 		action_util.update()
+		update.emit()
 
 
 func pause_toggle() -> bool:
@@ -70,6 +74,8 @@ func start_match() -> void:
 	var coin:bool = randi() % 2 == 1
 	action_util.home_team.has_ball = coin
 	action_util.away_team.has_ball = not coin
+	
+	home_has_ball = coin
 
 
 func change_players(home_team:Dictionary,away_team:Dictionary) -> void:

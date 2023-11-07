@@ -58,7 +58,6 @@ theme = ExtResource("2")
 script = ExtResource("3")
 
 [node name="MatchSimulator" parent="." instance=ExtResource("1")]
-position = Vector2(568, 198)
 
 [node name="HUD" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -265,6 +264,7 @@ autostart = true
 [connection signal="half_time" from="MatchSimulator" to="." method="_on_MatchSimulator_half_time"]
 [connection signal="match_end" from="MatchSimulator" to="." method="_on_MatchSimulator_match_end"]
 [connection signal="shot" from="MatchSimulator" to="." method="_on_MatchSimulator_shot"]
+[connection signal="update" from="MatchSimulator" to="." method="_on_match_simulator_update"]
 [connection signal="pressed" from="HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Slower" to="." method="_on_Slower_pressed"]
 [connection signal="pressed" from="HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Faster" to="." method="_on_Faster_pressed"]
 [connection signal="pressed" from="HUD/HSplitContainer/Buttons/Field" to="." method="_on_Field_pressed"]
