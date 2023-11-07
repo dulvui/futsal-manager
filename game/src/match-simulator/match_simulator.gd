@@ -86,5 +86,43 @@ func _on_ActionUtil_action_message(message:String) -> void:
 	emit_signal("action_message", message)
 
 
-func _on_ActionUtil_shot(is_goal:bool, is_home:bool, player:Object) -> void:
-	emit_signal("shot", is_goal, is_home, player)
+func _on_action_util_shot(success:bool, player:Player):
+	emit_signal("shot", success, home_has_ball, player)
+
+
+func _on_action_util_corner(player:Player):
+	pass # Replace with function body.
+
+
+func _on_action_util_foul(player:Player):
+	pass # Replace with function body.
+
+
+func _on_action_util_freekick(player:Player):
+	pass # Replace with function body.
+
+
+func _on_action_util_kick_in(player:Player):
+	pass # Replace with function body.
+
+
+func _on_action_util_pazz(player, success):
+	pass # Replace with function body.
+
+
+func _on_action_util_penalty(player:Player):
+	pass # Replace with function body.
+
+
+func _on_action_util_possession_change():
+	home_has_ball = not home_has_ball
+
+
+func _on_action_util_red_card(player:Player):
+	pass # Replace with function body.
+
+
+func _on_action_util_yellow_card(player:Player):
+	pass # Replace with function body.
+
+

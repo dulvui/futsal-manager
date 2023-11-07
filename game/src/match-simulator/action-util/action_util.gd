@@ -102,9 +102,9 @@ func update() -> void:
 	# increase stats
 	match attack:
 		Attack.PASS:
-			pazz.emit(home_team.has_ball, attack_success)
+			pazz.emit(attack_success, attacking_player)
 		Attack.SHOOT:
-			shot.emit(home_team.has_ball, attack_success, null)
+			shot.emit(attack_success, attacking_player)
 
 
 	home_team.update_players()
@@ -129,12 +129,8 @@ func _get_result(attack:int) -> bool:
 	var defender_attributes:int = 0
 	
 	if current_state == State.NORMAL:
-		if home_team.has_ball:
-			attacker_attributes = home_team.active_player.get_attack_attributes(attack)
-			defender_attributes = away_team.active_player.get_defense_attributes(attack)
-		else:
-			attacker_attributes = away_team.active_player.get_attack_attributes(attack)
-			defender_attributes = home_team.active_player.get_defense_attributes(attack)
+			attacker_attributes = attacking_player.get_attack_attributes(attack)
+			defender_attributes = defending_player.get_defense_attributes(attack)
 	else:
 		return true
 	
@@ -174,23 +170,13 @@ func _log(attack:int, result:bool) -> void:
 	action_message.emit(home_team.active_player.name + " vs " + away_team.active_player.name + " " + str(Attack.keys()[attack]) + " - " + str(result))
 
 func _action_buffer(attack:int, result:bool) -> void:
-	var attacking_player_nr:int
-	var defending_player_nr:int
-	
-	if home_team.has_ball:
-		attacking_player_nr = home_team.active_player.nr
-		defending_player_nr = away_team.active_player.nr
-	else:
-		attacking_player_nr = away_team.active_player.nr
-		defending_player_nr = home_team.active_player.nr
-	
 	action_buffer.append({
 		"action" : Attack.keys()[attack],
 		"state" : State.keys()[current_state],
 		"is_home" : home_team.has_ball,
 		"success" : result,
-		"attacking_player_nr" : attacking_player_nr,
-		"defending_player_nr" : defending_player_nr,
+		"attacking_player_nr" : attacking_player.nr,
+		"defending_player_nr" : defending_player.nr,
 	})
 	
 	if action_buffer.size() > MAX_ACTION_BUFFER_SIZE:
@@ -201,7 +187,7 @@ func _check_goal() -> bool:
 	if home_team.has_ball:
 		goalkeeper_attributes = away_team.goalkeeper.get_goalkeeper_attributes()
 	else:
-		goalkeeper_attributes = away_team.goalkeeper.get_goalkeeper_attributes()
+		goalkeeper_attributes = home_team.goalkeeper.get_goalkeeper_attributes()
 	
 	var random_goal:int = randi() % int(goalkeeper_attributes)
 	
@@ -212,20 +198,15 @@ func _check_goal() -> bool:
 		goalkeeper_attributes *= Constants.GOAL_KEEPER_AWAY_FACTOR
 	
 	if random_goal > goalkeeper_attributes:
-		# goal
+		shot.emit(true, attacking_player)
 		if home_team.has_ball:
-			shot.emit(home_team.has_ball, true, home_team.active_player)
 			action_message.emit("GOAL for " + home_team.name)
 		else:
-			shot.emit(home_team.has_ball, true, away_team.active_player)
 			action_message.emit("GOAL for " + away_team.name)
 		_change_possession()
 		return true
 	else:
-		if home_team.has_ball:
-			emit_signal("shot",false, home_team.has_ball, home_team.active_player)
-		else:
-			emit_signal("shot",false, home_team.has_ball, away_team.active_player)
+		shot.emit(false, attacking_player)
 	return false
 	
 	
@@ -234,14 +215,14 @@ func _check_corner() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.CORNER_AFTER_SAFE_FACTOR:
 		current_state = State.CORNER
-		corner.emit()
+		corner.emit(attacking_player)
 		return true
 	return false
 	
 func _check_foul() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.FOUL_FACTOR:
-		foul.emit(home_team.has_ball)
+		foul.emit(defending_player)
 		return true
 	return false
 	
@@ -249,23 +230,23 @@ func _check_penalty_or_freekick() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random > Constants.PENALTY_FACTOR:
 		current_state = State.FREE_KICK
-		freekick.emit()
+		freekick.emit(defending_player)
 		action_message.emit("FREE_KICK")
 		return true
 	else:
 		current_state = State.PENALTY
 		action_message.emit("PENALTY")
-		penalty.emit()
+		penalty.emit(defending_player)
 		return true
 
 	
 func _check_card() -> String:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random > Constants.RED_CARD_FACTOR:
-		red_card.emit()
+		red_card.emit(defending_player)
 		return "red"
 	elif random > Constants.YELLOW_CARD_FACTOR:
-		yellow_card.emit()
+		yellow_card.emit(defending_player)
 		return "yellow"
 	return "no-card"
 	
@@ -273,7 +254,7 @@ func _check_kick_in() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.KICK_IN_FACTOR:
 		current_state = State.KICK_IN
-		kick_in.emit()
+		kick_in.emit(attacking_player)
 		return true
 	return false
 
@@ -283,17 +264,21 @@ func _change_possession() -> void:
 	away_team.has_ball = not away_team.has_ball
 	
 func _change_active_players() -> void:
-	home_team.change_active_player()
-	away_team.change_active_player()
+	if home_team.has_ball:
+		attacking_player = home_team.change_active_player()
+		defending_player = away_team.change_active_player()
+	else:
+		defending_player = home_team.change_active_player()
+		attacking_player = away_team.change_active_player()
 	
 func _change_defender() -> void:
 	if home_team.has_ball:
-		away_team.change_active_player()
+		defending_player = away_team.change_active_player()
 	else:
-		home_team.change_active_player()
+		defending_player = home_team.change_active_player()
 
 func _change_attacker() -> void:
 	if away_team.has_ball:
-		away_team.change_active_player()
+		attacking_player = away_team.change_active_player()
 	else:
-		home_team.change_active_player()
+		attacking_player = home_team.change_active_player()

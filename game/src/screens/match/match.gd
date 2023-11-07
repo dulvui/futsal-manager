@@ -6,7 +6,7 @@ extends Control
 
 const VisualAction:PackedScene = preload("res://src/match-simulator/visual-action/visual_action.tscn")
 
-@onready var match_simulator:Node2D = $MatchSimulator
+@onready var match_simulator:Node = $MatchSimulator
 @onready var stats:MarginContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Stats
 @onready var comments:VBoxContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Log
 @onready var events:ScrollContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Events
@@ -47,11 +47,11 @@ func _ready() -> void:
 
 
 func _on_match_simulator_update():
-	stats.update_stats(match_simulator.action_util.home_stats.statistics, match_simulator.action_util.away_stats.statistics)
+#	stats.update_stats(match_simulator.action_util.home_stats.statistics, match_simulator.action_util.away_stats.statistics)
 	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 	
 	$HUD/HSplitContainer/CentralContainer/TopBar/TimeBar.value = match_simulator.time
-	$HUD/HSplitContainer/CentralContainer/BottomBar/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
+#	$HUD/HSplitContainer/CentralContainer/BottomBar/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
 	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(Config.speed_factor + 1) + " X"
 
 
