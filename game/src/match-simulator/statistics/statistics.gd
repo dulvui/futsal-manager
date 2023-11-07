@@ -4,35 +4,9 @@
 
 extends Node
 
-var possession_counter = 0.0
-var time = 0.0
 
-var statistics = {
-	"goals" : 0,
-	"possession" : 50,
-	"shots" : 0,
-	"shots_on_target" : 0,
-	"passes" : 0,
-	"passes_success" : 0,
-	"kick_ins" : 0,
-	"free_kicks" : 0,
-	"penalties" : 0,
-	"penalty_kick" : 0, # after 6 fouls
-	"fouls" : 0,
-	"tackles" : 0,
-	"tackles_success" : 0,
-	"corners" : 0,
-	"headers" : 0,
-	"headers_on_target" : 0,
-	"yellow_cards" : 0,
-	"red_cards" : 0
-}
 
-func update_possession(has_ball) -> void:
-	time += 1.0
-	if has_ball:
-		possession_counter += 1.0
-	statistics.possession = (possession_counter / time) * 100
+
 
 func increase_pass(success) -> void:
 	statistics.passes += 1

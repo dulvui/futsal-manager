@@ -15,8 +15,11 @@ const HALF_TIME:int = 1200
 
 @onready var action_util:Node = $ActionUtil
 @onready var timer:Timer = $Timer
+var possession_counter = 0.0
+var time = 0.0
 
-var time:int = 0
+var home_stats:MatchStatistics = MatchStatistics.new()
+var away_stats:MatchStatistics = MatchStatistics.new()
 
 var home_has_ball:bool
 
@@ -40,7 +43,13 @@ func _on_Timer_timeout() -> void:
 	else:
 		action_util.update()
 		update.emit()
-
+	
+	# update posession stats
+	time += 1.0
+	if home_has_ball:
+		possession_counter += 1.0
+	home_stats.possession = (possession_counter / time) * 100
+	away_stats.possession = 100 - home_stats.possession
 
 func pause_toggle() -> bool:
 	timer.paused = not timer.paused
@@ -89,40 +98,67 @@ func _on_ActionUtil_action_message(message:String) -> void:
 func _on_action_util_shot(success:bool, player:Player):
 	emit_signal("shot", success, home_has_ball, player)
 
-
-func _on_action_util_corner(player:Player):
-	pass # Replace with function body.
-
-
-func _on_action_util_foul(player:Player):
-	pass # Replace with function body.
-
-
-func _on_action_util_freekick(player:Player):
-	pass # Replace with function body.
-
-
-func _on_action_util_kick_in(player:Player):
-	pass # Replace with function body.
-
-
-func _on_action_util_pazz(player, success):
-	pass # Replace with function body.
-
-
-func _on_action_util_penalty(player:Player):
-	pass # Replace with function body.
-
-
 func _on_action_util_possession_change():
 	home_has_ball = not home_has_ball
 
+# STATS
+
+func _on_action_util_corner(player:Player):
+	if home_has_ball:
+		home_stats.corners += 1
+	else:
+		away_stats.corners += 1
+
+
+func _on_action_util_foul(player:Player):
+	if not home_has_ball:
+		home_stats.fouls += 1
+	else:
+		away_stats.fouls += 1
+
+
+func _on_action_util_freekick(player:Player):
+	if home_has_ball:
+		home_stats.free_kicks += 1
+	else:
+		away_stats.free_kicks += 1
+
+
+func _on_action_util_kick_in(player:Player):
+	if home_has_ball:
+		home_stats.kick_ins += 1
+	else:
+		away_stats.kick_ins += 1
+
+
+func _on_action_util_pazz(player, success):
+	if home_has_ball:
+		home_stats.passes += 1
+	else:
+		away_stats.passes += 1
+
+
+func _on_action_util_penalty(player:Player):
+	if home_has_ball:
+		home_stats.penalties += 1
+	else:
+		away_stats.penalties += 1
+
 
 func _on_action_util_red_card(player:Player):
-	pass # Replace with function body.
+	if not home_has_ball:
+		home_stats.red_cards += 1
+	else:
+		away_stats.red_cards += 1
 
 
 func _on_action_util_yellow_card(player:Player):
-	pass # Replace with function body.
+	if not home_has_ball:
+		home_stats.yellow_cards += 1
+	else:
+		away_stats.yellow_cards += 1
+
+
+
 
 

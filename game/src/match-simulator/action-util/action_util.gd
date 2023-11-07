@@ -82,6 +82,13 @@ func update() -> void:
 					# TODO emit corner signal for visual action
 					corner = _check_corner()
 	else:
+		# increase stats
+		match attack:
+			Attack.PASS:
+				pazz.emit(false, attacking_player)
+			Attack.SHOOT:
+				shot.emit(false, attacking_player)
+		
 		foul = _check_foul()
 		if foul:
 			# TODO emit ponalty/freekick signal for visual action
@@ -91,7 +98,6 @@ func update() -> void:
 			_check_penalty_or_freekick()
 		else:
 			kick_in = _check_kick_in()
-#		emit_signal("possession_change")
 		_change_possession()
 		_change_attacker()
 	
@@ -99,12 +105,7 @@ func update() -> void:
 		current_state = State.NORMAL
 	
 	
-	# increase stats
-	match attack:
-		Attack.PASS:
-			pazz.emit(attack_success, attacking_player)
-		Attack.SHOOT:
-			shot.emit(attack_success, attacking_player)
+
 
 
 	home_team.update_players()
@@ -260,6 +261,7 @@ func _check_kick_in() -> bool:
 
 # PLAYER/POSSESSION CHANGE
 func _change_possession() -> void:
+	possession_change.emit()
 	home_team.has_ball = not home_team.has_ball
 	away_team.has_ball = not away_team.has_ball
 	

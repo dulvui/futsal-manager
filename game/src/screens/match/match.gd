@@ -47,11 +47,11 @@ func _ready() -> void:
 
 
 func _on_match_simulator_update():
-#	stats.update_stats(match_simulator.action_util.home_stats.statistics, match_simulator.action_util.away_stats.statistics)
+	stats.update_stats(match_simulator.home_stats, match_simulator.away_stats)
 	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 	
 	$HUD/HSplitContainer/CentralContainer/TopBar/TimeBar.value = match_simulator.time
-#	$HUD/HSplitContainer/CentralContainer/BottomBar/PossessBar.value = match_simulator.action_util.home_stats.statistics["possession"]
+	$HUD/HSplitContainer/CentralContainer/BottomBar/PossessBar.value = match_simulator.home_stats.possession
 	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(Config.speed_factor + 1) + " X"
 
 
