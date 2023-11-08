@@ -36,10 +36,10 @@ func _on_Timer_timeout() -> void:
 	
 	if time == HALF_TIME:
 		timer.paused = true
-		emit_signal("half_time")
+		half_time.emit()
 	elif time == HALF_TIME * 2:
 		timer.stop()
-		emit_signal("match_end")
+		match_end.emit()
 	else:
 		action_util.update()
 		update.emit()

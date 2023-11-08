@@ -62,7 +62,7 @@ func match_end() -> void:
 	$HUD/HSplitContainer/Buttons/Pause.hide()
 	$HUD/HSplitContainer/Buttons/Dashboard.show()
 	match_simulator.match_finished()
-	Config.set_table_result(home_team["name"],match_simulator.action_util.home_stats.statistics["goals"],away_team["name"],match_simulator.action_util.away_stats.statistics["goals"])
+	Config.set_table_result(home_team["name"],match_simulator.home_stats["goals"],away_team["name"],match_simulator.away_stats["goals"])
 	
 	
 	#simulate all games for now.
@@ -75,7 +75,7 @@ func match_end() -> void:
 			print(matchday["home"] + " vs " + matchday["away"])
 			Config.set_table_result(matchday["home"],random_home_goals,matchday["away"],random_away_goals)
 		else:
-			matchday["result"] = str(match_simulator.action_util.home_stats.statistics["goals"]) + ":" + str(match_simulator.action_util.away_stats.statistics["goals"])
+			matchday["result"] = str(match_simulator.home_stats["goals"]) + ":" + str(match_simulator.away_stats["goals"])
 #	Config.save_all_data()
 
 	#save players history PoC
