@@ -33,6 +33,8 @@ enum State {NORMAL, KICK_OFF, PENALTY, FREE_KICK, KICK_IN, CORNER}
 enum Defense {INTERCEPT, WAIT, TACKLE, RUN, BLOCK, HEADER}
 
 enum Attack {PASS, CROSS, DRIBBLE, RUN, SHOOT}
+
+enum Cards {NONE, YELLOW, RED}
 #enum Pass { SHORT_PASS, LONG_PASS, CROSS}
 #enum Shoot {SHOOT, LONG_SHOOT, HEADER}
 
@@ -61,8 +63,8 @@ func set_up(_home_team:Team, _away_team:Team) -> void:
 
 
 func update() -> void:
-	var attack:int = _attack()
-	var attack_success:bool = _get_result(attack)
+	var attack:int = _random_attack()
+	var attack_success:bool = _get_attack_result(attack)
 	
 	var foul:bool = false
 	var goal:bool = false
@@ -91,10 +93,9 @@ func update() -> void:
 		
 		foul = _check_foul()
 		if foul:
-			# TODO emit ponalty/freekick signal for visual action
-			var card = _check_card()
-			print("Foul with " + card + " card.")
-			action_message.emit("Foul with " + card + " card.")
+			var card:Cards = _check_card()
+			action_message.emit("Foul with " + Cards.get(card) + " card.")
+			
 			_check_penalty_or_freekick()
 		else:
 			kick_in = _check_kick_in()
@@ -103,15 +104,9 @@ func update() -> void:
 	
 	if not goal and not corner and not kick_in and not foul:
 		current_state = State.NORMAL
-	
-	
-
-
 
 	home_team.update_players()
 	away_team.update_players()
-#	home_stats.update_possession(home_team.has_ball)
-#	away_stats.update_possession(away_team.has_ball)
 	_log(attack, attack_success)
 	_action_buffer(attack, attack_success)
 	
@@ -123,9 +118,8 @@ func change_players(_home_team:Team,_away_team:Team) -> void:
 	away_team.set_up(_away_team)
 	
 # returns true if attack wins, false if defense wins
-func _get_result(attack:int) -> bool:
+func _get_attack_result(attack:int) -> bool:
 	# select attributes to use as value for random result calculation
-	
 	var attacker_attributes:int = 0
 	var defender_attributes:int = 0
 	
@@ -144,7 +138,7 @@ func _get_result(attack:int) -> bool:
 		result = true
 	return result
 	
-func _attack() -> int:
+func _random_attack() -> int:
 	# improve later watching current sector and player attributes
 	match current_state:
 		State.KICK_OFF, State.KICK_IN:
@@ -191,7 +185,6 @@ func _check_goal() -> bool:
 		goalkeeper_attributes = home_team.goalkeeper.get_goalkeeper_attributes()
 	
 	var random_goal:int = randi() % int(goalkeeper_attributes)
-	
 	goalkeeper_attributes *= Constants.GOAL_KEEPER_FACTOR[State.keys()[current_state]]
 	
 	#decrease more if away keeper has to save
@@ -227,29 +220,27 @@ func _check_foul() -> bool:
 		return true
 	return false
 	
-func _check_penalty_or_freekick() -> bool:
+func _check_penalty_or_freekick() -> void:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random > Constants.PENALTY_FACTOR:
 		current_state = State.FREE_KICK
 		freekick.emit(defending_player)
 		action_message.emit("FREE_KICK")
-		return true
 	else:
 		current_state = State.PENALTY
 		action_message.emit("PENALTY")
 		penalty.emit(defending_player)
-		return true
 
 	
-func _check_card() -> String:
+func _check_card() -> Cards:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random > Constants.RED_CARD_FACTOR:
 		red_card.emit(defending_player)
-		return "red"
+		return Cards.RED
 	elif random > Constants.YELLOW_CARD_FACTOR:
 		yellow_card.emit(defending_player)
-		return "yellow"
-	return "no-card"
+		return Cards.YELLOW
+	return Cards.NONE
 	
 func _check_kick_in() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
