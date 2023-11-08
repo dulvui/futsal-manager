@@ -15,8 +15,8 @@ const HALF_TIME:int = 1200
 
 @onready var action_util:Node = $ActionUtil
 @onready var timer:Timer = $Timer
-var possession_counter = 0.0
-var time = 0.0
+var possession_counter:float = 0.0
+var time:int = 0
 
 var home_stats:MatchStatistics = MatchStatistics.new()
 var away_stats:MatchStatistics = MatchStatistics.new()
@@ -40,12 +40,11 @@ func _on_Timer_timeout() -> void:
 	elif time == HALF_TIME * 2:
 		timer.stop()
 		match_end.emit()
-	else:
-		action_util.update()
-		update.emit()
+	
+	action_util.update()
+	update.emit()
 	
 	# update posession stats
-	time += 1.0
 	if home_has_ball:
 		possession_counter += 1.0
 	home_stats.possession = (possession_counter / time) * 100
