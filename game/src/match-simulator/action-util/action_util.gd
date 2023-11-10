@@ -91,7 +91,7 @@ func update() -> void:
 		
 		if _check_foul():
 			var card:Cards = _check_card()
-			action_message.emit("Foul with " + Cards.get(card) + " card.")
+			action_message.emit("Foul with " + Cards.keys()[card] + " card.")
 			
 			# check penalty or freekick
 			var random:int = randi() % Constants.MAX_FACTOR
