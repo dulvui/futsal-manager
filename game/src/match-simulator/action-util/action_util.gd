@@ -60,16 +60,15 @@ func set_up(_home_team:Team, _away_team:Team) -> void:
 	away_team.set_up(_away_team)
 	
 	current_state = State.KICK_OFF
+	
+	_change_active_players()
 
 
 func update() -> void:
+	current_state = State.NORMAL
+	
 	var attack:int = _random_attack()
 	var attack_success:bool = _get_attack_result(attack)
-	
-	var foul:bool = false
-	var goal:bool = false
-	var corner:bool = false
-	var kick_in:bool = false
 	
 	# change active players and possession
 	if attack_success:
@@ -79,10 +78,9 @@ func update() -> void:
 			Attack.RUN, Attack.DRIBBLE:
 				_change_defender()
 			Attack.SHOOT: # , Attack.HEADER
-				goal = _check_goal()
-				if not goal:
+				if not _check_goal():
 					# TODO emit corner signal for visual action
-					corner = _check_corner()
+					_check_corner()
 	else:
 		# increase stats
 		match attack:
@@ -91,19 +89,27 @@ func update() -> void:
 			Attack.SHOOT:
 				shot.emit(false, attacking_player)
 		
-		foul = _check_foul()
-		if foul:
+		if _check_foul():
 			var card:Cards = _check_card()
 			action_message.emit("Foul with " + Cards.get(card) + " card.")
 			
-			_check_penalty_or_freekick()
+			# check penalty or freekick
+			var random:int = randi() % Constants.MAX_FACTOR
+			if random > Constants.PENALTY_FACTOR:
+				action_message.emit("FREE_KICK")
+				current_state = State.FREE_KICK
+				freekick.emit()
+			else:
+				action_message.emit("PENALTY")
+				current_state = State.PENALTY
+				penalty.emit()
 		else:
-			kick_in = _check_kick_in()
+			# TODO emit kickin signal for visual action
+			if _check_kick_in():
+				current_state = State.KICK_IN
+				kick_in.emit()
 		_change_possession()
 		_change_attacker()
-	
-	if not goal and not corner and not kick_in and not foul:
-		current_state = State.NORMAL
 
 	home_team.update_players()
 	away_team.update_players()
@@ -208,8 +214,6 @@ func _check_goal() -> bool:
 func _check_corner() -> bool:
 	var random:int = randi() % Constants.MAX_FACTOR
 	if random < Constants.CORNER_AFTER_SAFE_FACTOR:
-		current_state = State.CORNER
-		corner.emit(attacking_player)
 		return true
 	return false
 	
@@ -219,17 +223,6 @@ func _check_foul() -> bool:
 		foul.emit(defending_player)
 		return true
 	return false
-	
-func _check_penalty_or_freekick() -> void:
-	var random:int = randi() % Constants.MAX_FACTOR
-	if random > Constants.PENALTY_FACTOR:
-		current_state = State.FREE_KICK
-		freekick.emit(defending_player)
-		action_message.emit("FREE_KICK")
-	else:
-		current_state = State.PENALTY
-		action_message.emit("PENALTY")
-		penalty.emit(defending_player)
 
 	
 func _check_card() -> Cards:
