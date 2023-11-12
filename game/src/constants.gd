@@ -30,6 +30,7 @@ const FOUL_FACTOR:int = 2
 # lower than PENALTY_FACTOR is free kick
 const PENALTY_FACTOR:int = 5
 
+const SHOOT_ON_TARGET_FACTOR:int = 70
 
 # rest is no card
 const YELLOW_CARD_FACTOR:int = 65

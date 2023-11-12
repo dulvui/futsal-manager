@@ -13,7 +13,7 @@ class_name ActionUtil
 
 
 signal possession_change
-signal shot(player:Player, success:bool)
+signal shot(player:Player, on_target:bool, goal:bool)
 signal pazz(player:Player, success:bool)
 signal foul(player:Player)
 signal penalty(player:Player)
@@ -78,16 +78,19 @@ func update() -> void:
 			Attack.RUN, Attack.DRIBBLE:
 				_change_defender()
 			Attack.SHOOT: # , Attack.HEADER
-				if not _check_goal():
+				if _check_goal():
+					shot.emit(attacking_player, true, true)
+				else:
 					# TODO emit corner signal for visual action
 					_check_corner()
 	else:
 		# increase stats
 		match attack:
 			Attack.PASS:
-				pazz.emit(false, attacking_player)
+				pazz.emit(attacking_player, false)
 			Attack.SHOOT:
-				shot.emit(false, attacking_player)
+				var random_on_target:int = randi() % Constants.MAX_FACTOR
+				shot.emit(attacking_player, random_on_target > Constants.SHOOT_ON_TARGET_FACTOR, false)
 		
 		if _check_foul():
 			var card:Cards = _check_card()
@@ -198,15 +201,8 @@ func _check_goal() -> bool:
 		goalkeeper_attributes *= Constants.GOAL_KEEPER_AWAY_FACTOR
 	
 	if random_goal > goalkeeper_attributes:
-		shot.emit(true, attacking_player)
-		if home_team.has_ball:
-			action_message.emit("GOAL for " + home_team.name)
-		else:
-			action_message.emit("GOAL for " + away_team.name)
 		_change_possession()
 		return true
-	else:
-		shot.emit(false, attacking_player)
 	return false
 	
 	
