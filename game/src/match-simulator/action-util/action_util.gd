@@ -98,16 +98,16 @@ func update() -> void:
 			if random > Constants.PENALTY_FACTOR:
 				action_message.emit("FREE_KICK")
 				current_state = State.FREE_KICK
-				freekick.emit()
+				freekick.emit(attacking_player)
 			else:
 				action_message.emit("PENALTY")
 				current_state = State.PENALTY
-				penalty.emit()
+				penalty.emit(attacking_player)
 		else:
 			# TODO emit kickin signal for visual action
 			if _check_kick_in():
 				current_state = State.KICK_IN
-				kick_in.emit()
+				kick_in.emit(attacking_player)
 		_change_possession()
 		_change_attacker()
 
