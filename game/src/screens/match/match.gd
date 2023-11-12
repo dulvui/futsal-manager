@@ -19,9 +19,6 @@ var last_active_view:Control
 var home_team:Team
 var away_team:Team
 
-var home_goals:int = 0
-var away_goals:int = 0
-
 var match_started:bool = false
 var first_half:bool = true
 
@@ -62,7 +59,7 @@ func match_end() -> void:
 	$HUD/HSplitContainer/Buttons/Pause.hide()
 	$HUD/HSplitContainer/Buttons/Dashboard.show()
 	match_simulator.match_finished()
-	Config.set_table_result(home_team["name"],match_simulator.home_stats["goals"],away_team["name"],match_simulator.away_stats["goals"])
+	Config.set_table_result(home_team.name,match_simulator.home_stats.goals,away_team.name,match_simulator.away_stats.goals)
 	
 	
 	#simulate all games for now.
@@ -183,19 +180,14 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 	await visual_action.action_finished
 	
 	if is_goal:
-		if is_home:
-			home_goals += 1
-		else:
-			away_goals += 1
-		
 		$Goal.show()
 		animation_player.play("Goal")
 		await animation_player.animation_finished
 		$Goal.hide()
 		
-		result_label.text = "%d - %d"%[home_goals,away_goals]
+		result_label.text = "%d - %d"%[match_simulator.home_stats.goals,match_simulator.away_stats.goals]
 		
-		events.append_text("%s  %s - %s  %s" % [time_label.text, str(home_goals), str(away_goals), player.name])
+		events.append_text("%s  %s - %s  %s" % [time_label.text, str(match_simulator.home_stats.goals), str(match_simulator.away_stats.goals), player.name])
 
 	
 	visual_action.queue_free()

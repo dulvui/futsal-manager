@@ -96,6 +96,17 @@ func _on_ActionUtil_action_message(message:String) -> void:
 
 func _on_action_util_shot(success:bool, player:Player):
 	emit_signal("shot", success, home_has_ball, player)
+	if home_has_ball:
+		home_stats.shots += 1
+		if success:
+			# TODO define logics for shot on target or not
+#			home_stats.shots_on_target += 1
+			home_stats.goals += 1
+	else:
+		away_stats.shots += 1
+		if success:
+#			away_stats.shots_on_target += 1
+			away_stats.goals += 1
 
 func _on_action_util_possession_change():
 	home_has_ball = not home_has_ball
