@@ -162,8 +162,8 @@ func _on_SKIP_pressed() -> void:
 	match_end()
 
 
-func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
-	if not is_goal and randi() % Constants.VISUAL_ACTION_SHOTS_FACTOR > 0:
+func _on_MatchSimulator_shot(player:Object, on_target:bool, goal:bool) -> void:
+	if not goal and randi() % Constants.VISUAL_ACTION_SHOTS_FACTOR > 0:
 		# no goal, but show some shoots
 		return
 	
@@ -175,11 +175,11 @@ func _on_MatchSimulator_shot(is_goal:bool, is_home:bool, player:Object) -> void:
 	
 	# Visual Action
 	var visual_action:Node2D = VisualAction.instantiate()
-	visual_action.set_up(is_home, is_goal, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
+	visual_action.set_up(match_simulator.home_has_ball, goal, on_target, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
 	$HUD/HSplitContainer/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
 	await visual_action.action_finished
 	
-	if is_goal:
+	if goal:
 		$Goal.show()
 		animation_player.play("Goal")
 		await animation_player.animation_finished

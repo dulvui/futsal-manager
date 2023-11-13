@@ -16,8 +16,8 @@ const RUN_DISTANCE:int = 300
 @onready var timer:Timer = $Timer
 @onready var ball:Node2D = $Ball
 
-var home_team
-var away_team
+var home_team:Team
+var away_team:Team
 
 var actions = []
 var home_visual_players = []
@@ -26,8 +26,9 @@ var away_visual_players = []
 var is_final_action:bool = false
 
 var is_home_goal:bool
-
 var is_goal:bool
+var on_tagret:bool
+
 
 var is_shooting:bool = false
 
@@ -76,9 +77,10 @@ func _physics_process(delta) -> void:
 	$Referee2/Sprites.look_at($Ball.global_position)
 
 		
-func set_up(home_goal, _is_goal, _home_team, _away_team, action_buffer) -> void:
+func set_up(home_goal:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array) -> void:
 	is_home_goal = home_goal
 	is_goal = _is_goal
+	on_tagret = _on_target
 	actions = action_buffer.duplicate(true)
 	home_team = _home_team.duplicate(true)
 	away_team = _away_team.duplicate(true)
@@ -196,7 +198,8 @@ func _action() -> void:
 		var shot_deviation = Vector2(0,randi_range(-50,50))
 		
 		if not is_goal:
-			shot_deviation = Vector2(0,randi_range(-250,250))
+			if not on_tagret:
+				shot_deviation = Vector2(0,randi_range(-250,250))
 			
 			# stop ball on goalkeeper position
 			if is_home_goal:

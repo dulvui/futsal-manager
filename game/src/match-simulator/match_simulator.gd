@@ -4,7 +4,9 @@
 
 extends Node
 
-signal shot
+signal shot(player:Player, on_target:bool, goal:bool)
+signal penalty(player:Player)
+
 signal action_message
 signal half_time
 signal match_end
@@ -95,7 +97,7 @@ func _on_ActionUtil_action_message(message:String) -> void:
 
 
 func _on_action_util_shot(player:Player, on_target:bool, success:bool):
-	emit_signal("shot", success, home_has_ball, player)
+	shot.emit(player,on_target , success)
 	if home_has_ball:
 		home_stats.shots += 1
 		if on_target:
