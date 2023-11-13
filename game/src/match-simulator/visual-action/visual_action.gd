@@ -16,6 +16,12 @@ const RUN_DISTANCE:int = 300
 @onready var timer:Timer = $Timer
 @onready var ball:Node2D = $Ball
 
+@onready var home_goalkeeper:Node2D = $HomeGoalkeeper
+@onready var away_goalkeeper:Node2D = $AwayGoalkeeper
+
+@onready var home_goal:Node2D = $HomeGoal
+@onready var away_goal:Node2D = $AwayGoal
+
 var home_team:Team
 var away_team:Team
 
@@ -65,16 +71,16 @@ func _ready() -> void:
 func _physics_process(delta) -> void:
 	# look at ball
 	if not is_shooting:
-		$HomeGoalkeeper.sprite.look_at($Ball.global_position)
-		$AwayGoalkeeper.sprite.look_at($Ball.global_position)
+		home_goalkeeper.sprite.look_at(ball.global_position)
+		away_goalkeeper.sprite.look_at(ball.global_position)
 	for player in home_visual_players:
-		player.sprite.look_at($Ball.global_position)
+		player.sprite.look_at(ball.global_position)
 	for player in away_visual_players:
-		player.sprite.look_at($Ball.global_position)
+		player.sprite.look_at(ball.global_position)
 		
 	# referee
-	$Referee/Sprites.look_at($Ball.global_position)
-	$Referee2/Sprites.look_at($Ball.global_position)
+	$Referee/Sprites.look_at(ball.global_position)
+	$Referee2/Sprites.look_at(ball.global_position)
 
 		
 func set_up(home_goal:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array) -> void:
@@ -93,7 +99,7 @@ func _player_setup() -> void:
 	#home
 	var home_index = 0
 	var goalkeeper_home = home_team.line_up.goalkeeper
-	$HomeGoalkeeper.set_up(goalkeeper_home.nr, Color.LIGHT_BLUE, true, WIDTH, HEIGHT)
+	home_goalkeeper.set_up(goalkeeper_home.nr, Color.LIGHT_BLUE, true, WIDTH, HEIGHT)
 	for player in home_team.line_up.players:
 		var visual_player = VisualPlayer.instantiate()
 		visual_player.set_up(player.nr, Color.BLUE, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
@@ -104,7 +110,7 @@ func _player_setup() -> void:
 	# away
 	var away_index = 0
 	var goalkeeper_away = away_team.line_up.goalkeeper
-	$AwayGoalkeeper.set_up(goalkeeper_away.nr, Color.LIGHT_CORAL, true, WIDTH, HEIGHT)
+	away_goalkeeper.set_up(goalkeeper_away.nr, Color.LIGHT_CORAL, true, WIDTH, HEIGHT)
 	for player in away_team.line_up.players:
 		var visual_player = VisualPlayer.instantiate()
 		visual_player.set_up(player.nr, Color.RED, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
@@ -209,15 +215,15 @@ func _action() -> void:
 		
 
 		if is_home_goal:
-			ball.move($AwayGoal.global_position + shot_deviation, timer.wait_time / 3, true)
+			ball.move(away_goal.global_position + shot_deviation, timer.wait_time / 3, true)
 			# goalkeeper save
 			if shot_deviation.y < 100 and shot_deviation.y > -100:
-				$AwayGoalkeeper.move($AwayGoal.position + shot_deviation, timer.wait_time / 3)
+				away_goalkeeper.move(away_goal.position + shot_deviation, timer.wait_time / 3)
 		else:
-			ball.move($HomeGoal.global_position + shot_deviation, timer.wait_time / 3, true)
+			ball.move(home_goal.global_position + shot_deviation, timer.wait_time / 3, true)
 			# goalkeeper save
 			if shot_deviation.y < 100 and shot_deviation.y > -100:
-				$HomeGoalkeeper.move($HomeGoal.position + shot_deviation, timer.wait_time / 3)
+				home_goalkeeper.move(home_goal.position + shot_deviation, timer.wait_time / 3)
 		
 
 func _get_player_by_nr(players, nr) -> Dictionary:
