@@ -146,20 +146,7 @@ func _get_player_position(index, is_home_team) -> Vector2:
 
 func _action() -> void:
 	var action = actions.pop_front()
-	
-	print(action)
-	
-	# TODO
-	# iterate over players and move active players
-	# according to action
-	# other players make random move
-	
-	# TODO
-	# corner
-	# foul
-	# free kick
-	# penalty
-		
+
 	if action:
 		var attack_nr = action["attacking_player_nr"]
 		var defense_nr = action["defending_player_nr"]
@@ -168,24 +155,11 @@ func _action() -> void:
 		if action["is_home"]:
 			for player in home_visual_players:
 				if player.nr == attack_nr:
-					if action["action"] == "RUN":
-						var desitionation = player.position +  Vector2(randi_range(-RUN_DISTANCE,RUN_DISTANCE),randi_range(-RUN_DISTANCE,RUN_DISTANCE))
-						desitionation = player.move(desitionation, timer.wait_time)
-						action["position"] = desitionation
-					else:
-						action["position"] = player.position
-					break
+					_player_action(player, action)
 		else:
 			for player in away_visual_players:
 				if player.nr == attack_nr:
-					if action["action"] == "RUN":
-						var desitionation = player.position +  Vector2(randi_range(-RUN_DISTANCE,RUN_DISTANCE),randi_range(-RUN_DISTANCE,RUN_DISTANCE))
-						desitionation = player.move(desitionation, timer.wait_time)
-						action["position"] = desitionation
-					else:
-						action["position"] = player.position
-					break
-			
+					_player_action(player, action)
 		
 		ball.move(action.position, timer.wait_time)
 		
@@ -197,7 +171,6 @@ func _action() -> void:
 		
 		get_tree().call_group("player", "random_movement", timer.wait_time)
 	else:
-		print("shoot")
 		is_final_action = true
 		is_shooting = true
 		
@@ -226,6 +199,14 @@ func _action() -> void:
 				home_goalkeeper.move(home_goal.position + shot_deviation, timer.wait_time / 3)
 		
 
+func _player_action(player:Node2D, action:Dictionary) -> void:
+	if action["action"] == "RUN":
+		var desitionation = player.position +  Vector2(randi_range(-RUN_DISTANCE,RUN_DISTANCE),randi_range(-RUN_DISTANCE,RUN_DISTANCE))
+		desitionation = player.move(desitionation, timer.wait_time)
+		action["position"] = desitionation
+	else:
+		action["position"] = player.position
+
 func _get_player_by_nr(players, nr) -> Dictionary:
 	for player in players:
 		if player["nr"] == nr:
@@ -240,6 +221,6 @@ func _on_Timer_timeout() -> void:
 	timer.start()
 	
 	if is_final_action:
-		emit_signal("action_finished")
+		action_finished.emit()
 	else:
 		_action()

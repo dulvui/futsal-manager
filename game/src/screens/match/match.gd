@@ -162,7 +162,7 @@ func _on_SKIP_pressed() -> void:
 	match_end()
 
 
-func _on_MatchSimulator_shot(player:Object, on_target:bool, goal:bool) -> void:
+func _on_match_simulator_shot(player:Object, on_target:bool, goal:bool, action_buffer:Array[Dictionary]) -> void:
 	if not goal and randi() % Constants.VISUAL_ACTION_SHOTS_FACTOR > 0:
 		# no goal, but show some shoots
 		return
@@ -175,7 +175,7 @@ func _on_MatchSimulator_shot(player:Object, on_target:bool, goal:bool) -> void:
 	
 	# Visual Action
 	var visual_action:Node2D = VisualAction.instantiate()
-	visual_action.set_up(match_simulator.home_has_ball, goal, on_target, home_team, away_team, $MatchSimulator/ActionUtil.action_buffer)
+	visual_action.set_up(match_simulator.home_has_ball, goal, on_target, home_team, away_team, action_buffer)
 	$HUD/HSplitContainer/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
 	await visual_action.action_finished
 	
@@ -195,24 +195,22 @@ func _on_MatchSimulator_shot(player:Object, on_target:bool, goal:bool) -> void:
 	last_active_view.show()
 	$HUD/HSplitContainer/Buttons/Pause.disabled = false
 	_toggle_view_buttons()
-	
 
 func _on_StartTimer_timeout() -> void:
 	match_simulator.start_match()
 
 
-func _on_MatchSimulator_half_time() -> void:
+func _on_match_simulator_half_time() -> void:
 	half_time()
 
 
-func _on_MatchSimulator_match_end() -> void:
+func _on_match_simulator_match_end() -> void:
 	match_end()
 
 
-func _on_MatchSimulator_action_message(message:String) -> void:
+func _on_match_simulator_action_message(message:String) -> void:
 	if comments.get_child_count() > 8:
 		comments.remove_child(comments.get_child(0))
 	var new_line:Label = Label.new()
 	new_line.text = time_label.text + " " + message
 	comments.add_child(new_line)
-

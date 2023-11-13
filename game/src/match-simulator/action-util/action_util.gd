@@ -46,7 +46,7 @@ var away_team:Node = $AwayTeam
 var current_state:int
 
 const MAX_ACTION_BUFFER_SIZE:int = 5
-var action_buffer:Array = []
+var action_buffer:Array[Dictionary] = []
 
 var attacking_player:Player
 var defending_player:Player

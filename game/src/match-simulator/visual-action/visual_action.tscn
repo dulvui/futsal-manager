@@ -30,6 +30,12 @@ position = Vector2(-16, 304)
 [node name="AwayGoal" type="Marker2D" parent="."]
 position = Vector2(1224, 304)
 
+[node name="HomePenalty" type="Marker2D" parent="."]
+position = Vector2(181.667, 301.667)
+
+[node name="AwayPenalty" type="Marker2D" parent="."]
+position = Vector2(1016.67, 300)
+
 [node name="HomeGoalkeeper" parent="." instance=ExtResource("4")]
 position = Vector2(64, 304)
 is_field_player = false
