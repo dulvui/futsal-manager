@@ -21,7 +21,24 @@ var leagues:Dictionary = {
 
 var names:Dictionary = {}
 
+# for birthdays range
+var date:Dictionary
+var max_timestamp:int
+var min_timestamp:int
+
 func _run():
+	# create date ranges
+	# starts from current year and substracts min/max years
+	# youngest player can be 15 and oldest 45
+	date = Time.get_date_dict_from_system()
+	var max_date = date.duplicate()
+	max_date.month = 1
+	max_date.day = 1
+	max_date.year -= 15 
+	max_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
+	max_date.year -= 30
+	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
+	
 	# TODO iterate over all nationalities
 	var names_file = FileAccess.open(NAMES_DIR + "it.json", FileAccess.READ)
 	names["it"] = JSON.parse_string(names_file.get_as_text())
@@ -273,10 +290,13 @@ func get_surname(nationality:League.Nations) -> String:
 	return names["it"]["last_names"][randi() % size]
 
 func create_player(nationality:League.Nations, position:Player.Position, nr:int) -> Player:
-	# random date from 1970 to 2007
-	var player = Player.new()
 	
-	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(randi_range(0, 1167606000))
+
+	
+	
+	var player = Player.new()
+	# random date from 1970 to 2007
+	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(randi_range(0, max_timestamp))
 
 	var prestige:int = randi_range(1, 100)
 	# to make just a few really good and a few really bad
@@ -292,7 +312,7 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	var potential_growth:int = randi_range(1, 5)
 
 	player.id = player_id
-	player.price = get_price(2020-birth_date.year, prestige, position)
+	player.price = get_price(date.year-birth_date.year, prestige, position)
 	player.name = get_name(nationality)
 	player.surname = get_surname(nationality)
 	player.birth_date = birth_date
@@ -307,14 +327,14 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	player.potential_growth = potential_growth
 	player.injury_potential = randi_range(1, 20)
 	player.loyality = ""  # if player is loay, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
-	player.contract = get_contract(prestige, position, 2020-birth_date.year)
+	player.contract = get_contract(prestige, position, date.year-birth_date.year)
 	player.nr = nr
 	
 	player.attributes = Attributes.new()
-	player.attributes.goalkeeper =  get_goalkeeper_attributes(2020-birth_date.year, prestige, position)
-	player.attributes.mental = get_mental(2020-birth_date.year, prestige, position)
-	player.attributes.technical = get_technical(2020-birth_date.year, prestige, position)
-	player.attributes.physical = get_physical(2020-birth_date.year, prestige, position)
+	player.attributes.goalkeeper =  get_goalkeeper_attributes(date.year-birth_date.year, prestige, position)
+	player.attributes.mental = get_mental(date.year-birth_date.year, prestige, position)
+	player.attributes.technical = get_technical(date.year-birth_date.year, prestige, position)
+	player.attributes.physical = get_physical(date.year-birth_date.year, prestige, position)
 	
 	
 	var statistics:Statistics = Statistics.new()
