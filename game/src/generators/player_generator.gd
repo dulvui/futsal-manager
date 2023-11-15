@@ -4,7 +4,8 @@
 @tool
 extends EditorScript
 
-var names:Array[String]
+const NAMES_DIR:String = "res://assets/names/"
+
 var surnames:Array[String]
 
 var team_id:int = 15  # last id of serie-a team is 14
@@ -18,7 +19,13 @@ var leagues:Dictionary = {
 	}
 }
 
+var names:Dictionary = {}
+
 func _run():
+	# TODO iterate over all nationalities
+	var names_file = FileAccess.open(NAMES_DIR + "it.json", FileAccess.READ)
+	names["it"] = JSON.parse_string(names_file.get_as_text())
+	
 	var file_name:String = "res://test_league.tres" 
 	print("Generate players...")
 
@@ -254,6 +261,16 @@ func get_contract(prestige, position, age) -> Contract:
 	contract.is_on_loan = false
 	
 	return contract
+	
+func get_name(nationality:League.Nations) -> String:
+	# TODO combine with other nations, but with low probability
+	var size:int = names["it"]["names"].size()
+	return names["it"]["names"][randi() % size]
+	
+func get_surname(nationality:League.Nations) -> String:
+	# TODO combine with other nations, but with low probability
+	var size:int = names["it"]["last_names"].size()
+	return names["it"]["last_names"][randi() % size]
 
 func create_player(nationality:League.Nations, position:Player.Position, nr:int) -> Player:
 	# random date from 1970 to 2007
@@ -276,8 +293,8 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 
 	player.id = player_id
 	player.price = get_price(2020-birth_date.year, prestige, position)
-	player.name = "random.choice(names)"
-	player.surname = "random.choice(surnames)"
+	player.name = get_name(nationality)
+	player.surname = get_surname(nationality)
 	player.birth_date = birth_date
 	player.nationality = str(nationality)
 	player.moral = randi_range(1, 4)  # 1 to 4, 1 low 4 good
