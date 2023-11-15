@@ -42,3 +42,10 @@ License: CC0-1.0
 Files: game/assets/font/manrope.thin.otf
 Copyright: 2020 EZduzziteh
 License: OFL-1.1
+
+# Person names and last names
+# https://en.wikipedia.org/w/index.php?title=Category:Italian_masculine_given_names
+# https://en.wiktionary.org/w/index.php?title=Category:Italian_surnames
+Files: game/assets/names/*
+Copyright: Wikipedia
+License: CC-BY-SA-4.0
