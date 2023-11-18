@@ -13,6 +13,8 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var time_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Time
 @onready var result_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Result
+@onready var formation:Control = $Formation
+@onready var pause_button:Button = $HUD/HSplitContainer/Buttons/Pause
 
 var last_active_view:Control
 
@@ -37,7 +39,7 @@ func _ready() -> void:
 	$HUD/HSplitContainer/CentralContainer/TopBar/Labels/Home.text = next_match["home"]
 	$HUD/HSplitContainer/CentralContainer/TopBar/Labels/Away.text = next_match["away"]
 	
-	$Formation.set_up()
+	formation.set_up()
 	match_simulator.set_up(home_team,away_team)
 	
 	last_active_view = comments
@@ -56,7 +58,7 @@ func match_end() -> void:
 	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Faster.hide()
 	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Slower.hide()
 	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.hide()
-	$HUD/HSplitContainer/Buttons/Pause.hide()
+	pause_button.hide()
 	$HUD/HSplitContainer/Buttons/Dashboard.show()
 	match_simulator.match_finished()
 	Config.set_table_result(home_team.name,match_simulator.home_stats.goals,away_team.name,match_simulator.away_stats.goals)
@@ -87,7 +89,7 @@ func match_end() -> void:
 #				real_player["history"][Config.current_season]["actual"] = copy_player["history"][Config.current_season]["actual"]
 
 func half_time() -> void:
-	$HUD/HSplitContainer/Buttons/Pause.text = tr("CONTINUE")
+	pause_button.text = tr("CONTINUE")
 
 
 func _on_Field_pressed() -> void:
@@ -142,16 +144,16 @@ func _on_Pause_pressed() -> void:
 	var paused:bool = match_simulator.pause_toggle()
 	
 	if paused:
-		$HUD/HSplitContainer/Buttons/Pause.text = tr("CONTINUE")
+		pause_button.text = tr("CONTINUE")
 	else:
-		$Formation.hide()
-		$HUD/HSplitContainer/Buttons/Pause.text = tr("PAUSE")
+		formation.hide()
+		pause_button.text = tr("PAUSE")
 
 
 func _on_Formation_pressed() -> void:
 	match_simulator.pause()
-	$HUD/HSplitContainer/Buttons/Pause.text = tr("CONTINUE")
-	$Formation.show()
+	pause_button.text = tr("CONTINUE")
+	formation.show()
 
 
 func _on_Formation_change() -> void:
@@ -168,7 +170,7 @@ func _on_match_simulator_shot(player:Object, on_target:bool, goal:bool, action_b
 		return
 	
 	# show visual action
-	$HUD/HSplitContainer/Buttons/Pause.disabled = true
+	pause_button.disabled = true
 	match_simulator.pause()
 	_hide_views()
 	_toggle_view_buttons()
@@ -193,7 +195,7 @@ func _on_match_simulator_shot(player:Object, on_target:bool, goal:bool, action_b
 	visual_action.queue_free()
 	match_simulator.continue_match()
 	last_active_view.show()
-	$HUD/HSplitContainer/Buttons/Pause.disabled = false
+	pause_button.disabled = false
 	_toggle_view_buttons()
 
 func _on_StartTimer_timeout() -> void:
