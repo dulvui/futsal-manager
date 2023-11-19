@@ -102,19 +102,6 @@ layout_mode = 2
 [node name="Buttons" type="VBoxContainer" parent="Main/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Formation" type="Button" parent="Main/VBoxContainer/HBoxContainer/Buttons"]
-layout_mode = 2
-text = "FORMATION"
-
-[node name="Training" type="Button" parent="Main/VBoxContainer/HBoxContainer/Buttons"]
-visible = false
-layout_mode = 2
-text = "TRAINING"
-
-[node name="Table" type="Button" parent="Main/VBoxContainer/HBoxContainer/Buttons"]
-layout_mode = 2
-text = "TABLE"
-
 [node name="Calendar" type="Button" parent="Main/VBoxContainer/HBoxContainer/Buttons"]
 layout_mode = 2
 text = "CALENDAR"
@@ -123,9 +110,22 @@ text = "CALENDAR"
 layout_mode = 2
 text = "EMAIL"
 
+[node name="Table" type="Button" parent="Main/VBoxContainer/HBoxContainer/Buttons"]
+layout_mode = 2
+text = "TABLE"
+
+[node name="Formation" type="Button" parent="Main/VBoxContainer/HBoxContainer/Buttons"]
+layout_mode = 2
+text = "FORMATION"
+
 [node name="SearchPlayer" type="Button" parent="Main/VBoxContainer/HBoxContainer/Buttons"]
 layout_mode = 2
 text = "SEARCH_PLAYER"
+
+[node name="Training" type="Button" parent="Main/VBoxContainer/HBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "TRAINING"
 
 [node name="Menu" type="Button" parent="Main/VBoxContainer/HBoxContainer/Buttons"]
 layout_mode = 2
@@ -171,12 +171,12 @@ grow_vertical = 2
 
 [connection signal="offer_contract" from="Main/VBoxContainer/HBoxContainer/Content/Email" to="." method="_on_Email_offer_contract"]
 [connection signal="select_player" from="Main/VBoxContainer/HBoxContainer/Content/AllPlayerList" to="." method="_on_AllPlayerList_select_player"]
-[connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Formation" to="." method="_on_Formation_pressed"]
-[connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Training" to="." method="_on_Training_pressed"]
-[connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Table" to="." method="_on_Table_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Calendar" to="." method="_on_Calendar_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Email" to="." method="_on_Email_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Table" to="." method="_on_Table_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Training" to="." method="_on_Training_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Menu" to="." method="_on_Menu_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/NextMatch" to="." method="_on_next_match_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Continue" to="." method="_on_Continue_pressed"]
