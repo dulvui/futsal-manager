@@ -4,6 +4,7 @@
 
 extends Node
 
+const LEAGUES_DIR:String = "res://data/generated/"
 
 # match fast forward speed factor
 const MATCH_SPEED_FACTOR:int = 4

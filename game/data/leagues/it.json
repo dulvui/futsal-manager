@@ -1,0 +1,34 @@
+
+[
+	{
+		"name" : "Serie A",
+		"teams" : [
+			"Roma",
+			"Milano",
+			"Napoli",
+			"Bari",
+			"Bolzano",
+			"Trento",
+			"Torino",
+			"Bologna",
+			"Verona",
+			"Firenze"
+		]
+	},
+	{
+		"name" : "Serie B",
+		"teams" : [
+			"Palermo",
+			"Latina",
+			"Pisa",
+			"Livorno",
+			"Rovereto",
+			"Reggio Calabria",
+			"Messina",
+			"Cagliari",
+			"Forlì",
+			"Catanzaro"
+		]
+	}
+]
+

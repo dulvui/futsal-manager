@@ -4,21 +4,15 @@
 @tool
 extends EditorScript
 
-const NAMES_DIR:String = "res://assets/names/"
-
-var surnames:Array[String]
+const NAMES_DIR:String = "res://data/player-names/"
+const LEAGUES_DIR:String = "res://data/leagues/"
 
 var team_id:int = 15  # last id of serie-a team is 14
 var player_id:int = 1
 
-var test_league:League
+var league:League
 
-var leagues:Dictionary = {
-		League.Nations.IT : {
-		
-	}
-}
-
+var leagues:Dictionary = {}
 var names:Dictionary = {}
 
 # for birthdays range
@@ -43,33 +37,39 @@ func _run():
 	var names_file = FileAccess.open(NAMES_DIR + "it.json", FileAccess.READ)
 	names["it"] = JSON.parse_string(names_file.get_as_text())
 	
-	var file_name:String = "res://test_league.tres" 
-	print("Generate players...")
+	# TODO iterate over all nationalities
+	var leagues_file = FileAccess.open(LEAGUES_DIR + "it.json", FileAccess.READ)
+	leagues["it"] = JSON.parse_string(leagues_file.get_as_text())
+	
 
-	
-	test_league = League.new()
-	test_league.id = 0
-	test_league.name = "Test League"
-	test_league.nation = League.Nations.IT
-	
-	for i in range(10):
-		var test_team:Team = Team.new()
-		test_team.name = "test " + str(i)
-		test_team.budget = 1234 + i
-		test_team.create_stadium("Stadium", 1234, 1990)
-		test_league.add_team(test_team)
+
+	for l in leagues["it"]:
+		var file_name:String = Constants.LEAGUES_DIR + l["name"].replace(" ", "-").to_lower() +".tres" 
+		print("Generate players for ", l["name"])
+		var league:League = League.new()
+		league.id = l["name"].md5_text()
+		league.name = l["name"]
+		# TODO change to fit other nations
+		league.nation = League.Nations.IT
+		print(league["teams"])
+		for t in l["teams"]:
+			print(t)
+			var team:Team = Team.new()
+			team.name = t
+			team.budget = 1234
+			team.create_stadium(t + "Stadium", 1234, 1990)
+			assign_players_to_team(team)
+			league.add_team(team)
 		
-		assign_players_to_team(test_team)
-	
-	print("Write to file...")
-	print("Write league ", test_league.name)
-	ResourceSaver.save(test_league, file_name)
-	print("Done.")
-	
-	print("Reading from file...")
-	var read_test_league:League = load(file_name)
-	print("Read team name ", read_test_league.name)
-	print("Read team teams size ", read_test_league.teams.size())
+		print("Write to file...")
+		print("Write league ", league.name)
+		ResourceSaver.save(league, file_name)
+		print("Done.")
+		
+		print("Reading from file...")
+		var read_league:League = load(file_name)
+		print("Read team name ", read_league.name)
+		print("Read team teams size ", read_league.teams.size())
 
 
 func assign_players_to_team(team:Team):
