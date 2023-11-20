@@ -211,7 +211,7 @@ func get_mental(age:int, prestige:int, position:Player.Position) -> Mental:
 func get_age_factor(age:int ) -> int:
 	var age_factor:int = 20
 	if age > 34:
-		age_factor = 54 - age
+		age_factor = max(54 - age, 16)
 	elif age < 18:
 		age_factor = 16
 	return age_factor
