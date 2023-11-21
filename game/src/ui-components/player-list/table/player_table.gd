@@ -126,7 +126,10 @@ func filter(filters: Dictionary, exlusive = false) -> void:
 				players.append(player)
 	else:
 		players = all_players
-	_set_up_content()		
+	_set_up_content()
+	page_max = players.size() / page_size
+	page = 0
+	_update_page_indicator()
 	
 
 func info(player:Player) -> void:

@@ -145,6 +145,7 @@ func save_calendar(new_calendar:Array) -> void:
 	config.save("user://settings.cfg")
 	
 func make_transfer(transfer:Dictionary) -> void:
+	# TODO change player.team
 	for team in league.teams:
 		if team.name == transfer["player"]["team"]:
 			if team.formation.has(transfer["player"]):

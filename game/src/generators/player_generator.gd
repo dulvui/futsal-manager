@@ -89,6 +89,7 @@ func assign_players_to_team(team:Team):
 		for i in range(amount):
 			var player:Player = create_player(League.Nations.IT, position, nr)
 			nr += 1
+			player.team = team.name
 			team.players.append(player)
 		
 		# random lineup assingment
