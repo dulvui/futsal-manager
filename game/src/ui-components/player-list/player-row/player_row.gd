@@ -11,6 +11,7 @@ signal select()
 const ColorNumber = preload("res://src/ui-components/color-number/color_number.tscn")
 
 @onready var name_label:Control = $NameLabel
+@onready var position_label:Control = $PositionLabel
 @onready var attributes:HBoxContainer = $Attributes
 
 
@@ -19,6 +20,7 @@ func set_up(player:Player, active_headers:Array[String]) -> void:
 		child.queue_free()
 	
 	name_label.set_text(player.surname)
+	position_label.set_text(Player.Position.keys()[player.position])
 	for key in Constants.ATTRIBUTES.keys():
 		for attribute in Constants.ATTRIBUTES[key]:
 			var color_number:ColorNumber = ColorNumber.instantiate()

@@ -38,6 +38,8 @@ func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]
 	
 	_update_page_indicator()
 	
+	sort_memory["surname"] = false
+	sort_memory["position"] = false
 	for key in Constants.ATTRIBUTES.keys():
 		for attribute in Constants.ATTRIBUTES[key]:
 			sort_memory[key + "_" + attribute] = false
@@ -61,15 +63,22 @@ func _set_up_headers() -> void:
 	var name_button:Button = Button.new()
 	name_button.text = headers[0]
 	name_button.custom_minimum_size.x = 252
-	name_button.button_down.connect(_sort.bind(headers[0]))
+	name_button.button_down.connect(_sort_info.bind(headers[0]))
 	header_container.add_child(name_button)
 	
+	# position header
+	var pos_button:Button = Button.new()
+	pos_button.text = headers[1].substr(0,3)
+	pos_button.custom_minimum_size.x = 34
+	pos_button.button_down.connect(_sort_info.bind(headers[0]))
+	header_container.add_child(pos_button)
+	
 	# ohter headers
-	for header in headers.slice(1):
+	for header in headers.slice(2):
 		var button:Button = Button.new()
 		button.custom_minimum_size.x = 34
 		button.text = header.substr(0,3)
-		button.button_down.connect(_sort.bind(header))
+		button.button_down.connect(_sort_attributes.bind(header))
 		header_container.add_child(button)
 	
 	# info label
@@ -138,12 +147,22 @@ func info(player:Player) -> void:
 func select(player:Player) -> void:
 	select_player.emit(player)
 	
-func _sort(key:String) -> void:
+func _sort_attributes(key:String) -> void:
 	players.sort_custom(func(a:Player, b:Player): return a.attributes.get(info_type).get(key) < b.attributes.get(info_type).get(key))
 	
 	sort_memory[info_type + "_" + key] = not sort_memory[info_type + "_" + key]
 	
 	if sort_memory[info_type + "_" + key]:
+		players.reverse()
+	
+	_set_up_content()
+	
+func _sort_info(key:String) -> void:
+	players.sort_custom(func(a:Player, b:Player): return a.get(key) < b.get(key))
+	
+	sort_memory[key] = not sort_memory[key]
+	
+	if sort_memory[key]:
 		players.reverse()
 	
 	_set_up_content()

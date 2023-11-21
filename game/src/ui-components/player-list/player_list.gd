@@ -63,7 +63,7 @@ func set_up_players(include_active_players:bool, active_team:Team = null) -> voi
 		for player in active_team.players:
 			all_players.append(player)
 	
-	var headers:Array[String] = ["surname"]
+	var headers:Array[String] = ["surname", "position"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
 	table.set_up(headers,INFO_TYPES[0], all_players)
@@ -92,7 +92,7 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 	else:
 		active_filters["position"] = ""
 	
-	var headers:Array[String] = ["surname"]
+	var headers:Array[String] = ["surname", "position"]
 	if active_filters["position"] == "G":
 		for attribute in Constants.ATTRIBUTES["goalkeeper"]:
 			headers.append(attribute)
@@ -120,7 +120,7 @@ func _on_Close_pressed():
 
 
 func _on_InfoSelect_item_selected(index:int) -> void:
-	var headers:Array[String] = ["surname"]
+	var headers:Array[String] = ["surname", "position"]
 	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
 	table.update(headers, INFO_TYPES[index])
