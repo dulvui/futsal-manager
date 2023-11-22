@@ -7,7 +7,6 @@ extends EditorScript
 const NAMES_DIR:String = "res://data/player-names/"
 const LEAGUES_DIR:String = "res://data/leagues/"
 
-var team_id:int = 15  # last id of serie-a team is 14
 var player_id:int = 1
 
 var league:League
@@ -40,7 +39,6 @@ func _run():
 	# TODO iterate over all nationalities
 	var leagues_file = FileAccess.open(LEAGUES_DIR + "it.json", FileAccess.READ)
 	leagues["it"] = JSON.parse_string(leagues_file.get_as_text())
-	
 
 
 	for l in leagues["it"]:
@@ -291,10 +289,6 @@ func get_surname(nationality:League.Nations) -> String:
 	return names["it"]["last_names"][randi() % size]
 
 func create_player(nationality:League.Nations, position:Player.Position, nr:int) -> Player:
-	
-
-	
-	
 	var player = Player.new()
 	# random date from 1970 to 2007
 	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(randi_range(0, max_timestamp))
@@ -307,8 +301,6 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 		prestige = randi_range(15, 20)
 	else:
 		prestige = randi_range(5, 15)
-
-	# position = positions[randi_range(0, len(positions)-1)]
 
 	var potential_growth:int = randi_range(1, 5)
 
@@ -327,7 +319,7 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	player.potential_growth
 	player.potential_growth = potential_growth
 	player.injury_potential = randi_range(1, 20)
-	player.loyality = ""  # if player is loay, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
+	player.loyality = ""  # if player is loayal, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
 	player.contract = get_contract(prestige, position, date.year-birth_date.year)
 	player.nr = nr
 	
@@ -337,7 +329,7 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	player.attributes.technical = get_technical(date.year-birth_date.year, prestige, position)
 	player.attributes.physical = get_physical(date.year-birth_date.year, prestige, position)
 	
-	
+	# TODO  create random history
 	var statistics:Statistics = Statistics.new()
 	statistics.team_name = "Test"
 	statistics.price = 1234
