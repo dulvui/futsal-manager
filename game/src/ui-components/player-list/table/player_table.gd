@@ -59,19 +59,19 @@ func _set_up_headers() -> void:
 	for header in header_container.get_children():
 		header.queue_free()
 	
-	# name header
-	var name_button:Button = Button.new()
-	name_button.text = headers[0]
-	name_button.custom_minimum_size.x = 252
-	name_button.button_down.connect(_sort_info.bind(headers[0]))
-	header_container.add_child(name_button)
-	
 	# position header
 	var pos_button:Button = Button.new()
-	pos_button.text = headers[1].substr(0,3)
+	pos_button.text = headers[0].substr(0,3)
 	pos_button.custom_minimum_size.x = 34
 	pos_button.button_down.connect(_sort_info.bind(headers[0]))
 	header_container.add_child(pos_button)
+	
+	# name header
+	var name_button:Button = Button.new()
+	name_button.text = headers[1]
+	name_button.custom_minimum_size.x = 252
+	name_button.button_down.connect(_sort_info.bind(headers[1]))
+	header_container.add_child(name_button)
 	
 	# ohter headers
 	for header in headers.slice(2):

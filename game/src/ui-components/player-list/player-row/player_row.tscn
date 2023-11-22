@@ -11,11 +11,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4bbf8")
 
-[node name="NameLabel" parent="." instance=ExtResource("2_1q6ka")]
+[node name="PositionLabel" parent="." instance=ExtResource("2_1q6ka")]
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 
-[node name="PositionLabel" parent="." instance=ExtResource("2_1q6ka")]
-custom_minimum_size = Vector2(64, 36)
+[node name="NameLabel" parent="." instance=ExtResource("2_1q6ka")]
 layout_mode = 2
 
 [node name="Attributes" type="HBoxContainer" parent="."]

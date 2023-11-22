@@ -11,16 +11,16 @@ func _ready() -> void:
 	
 	# transform table dictionary to array
 	var table_array:Array = []
-	for key in Config.table:
+	for team in Config.table:
 		table_array.append({
-			"name" : key,
-			"points" : Config.table[key]["points"],
-			"games_played": Config.table[key]["games_played"],
-			"goals_made" : Config.table[key]["goals_made"],
-			"goals_against" : Config.table[key]["goals_against"],
-			"wins" : Config.table[key]["wins"],
-			"draws" : Config.table[key]["draws"],
-			"lost" : Config.table[key]["lost"]
+			"name" : team,
+			"points" : Config.table[team]["points"],
+			"games_played": Config.table[team]["games_played"],
+			"goals_made" : Config.table[team]["goals_made"],
+			"goals_against" : Config.table[team]["goals_against"],
+			"wins" : Config.table[team]["wins"],
+			"draws" : Config.table[team]["draws"],
+			"lost" : Config.table[team]["lost"]
 		})
 		
 	table_array.sort_custom(point_sorter)
