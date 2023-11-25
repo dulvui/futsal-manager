@@ -104,20 +104,19 @@ func get_goalkeeper_attributes(age:int, prestige:int, position:Player.Position) 
 	var age_factor:int = get_age_factor(age)
 	var factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	
-	if position == Player.Position.G:
-		attributes.reflexes = min(factor + randi_range(-5, 5), 20)
-		attributes.positioning = min(factor + randi_range(-5, 5), 20)
-		attributes.kicking = min(factor + randi_range(-5, 5), 20)
-		attributes.handling = min(factor + randi_range(-5, 5), 20)
-		attributes.diving = min(factor + randi_range(-5, 5), 20)
-		attributes.speed = min(factor + randi_range(-5, 5), 20)
-	else:
-		attributes.reflexes = -1
-		attributes.positioning = -1
-		attributes.kicking = -1
-		attributes.handling = -1
-		attributes.diving = -1
-		attributes.speed = -1
+	# goalkeepers have max potential of 20 
+	var max:int = 20
+	
+	# non-goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
+	if position != Player.Position.G:
+		max = 10
+
+	attributes.reflexes = min(factor + randi_range(-5, 5), max)
+	attributes.positioning = min(factor + randi_range(-5, 5), max)
+	attributes.kicking = min(factor + randi_range(-5, 5), max)
+	attributes.handling = min(factor + randi_range(-5, 5), max)
+	attributes.diving = min(factor + randi_range(-5, 5), max)
+	attributes.speed = min(factor + randi_range(-5, 5), max)
 	return attributes
 
 
@@ -129,20 +128,20 @@ func get_physical(age:int, prestige:int, position:Player.Position) -> Physical:
 	var pace_factor:int = min(randi_range(9, age_factor), max(prestige, 9))
 	var physical_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	
-	if position != Player.Position.G:
-		attributes.pace = min(pace_factor + randi_range(-5, 5), 20)
-		attributes.acceleration = min(pace_factor + randi_range(-5, 5), 20)
-		attributes.stamina = min(physical_factor + randi_range(-5, 5), 20)
-		attributes.strength = min(physical_factor + randi_range(-5, 5), 20)
-		attributes.agility = min(physical_factor + randi_range(-5, 5), 20)
-		attributes.jump = min(physical_factor + randi_range(-5, 5), 20)
-	else:
-		attributes.pace = -1
-		attributes.acceleration = -1
-		attributes.stamina = -1
-		attributes.strength = -1
-		attributes.agility = -1
-		attributes.jump = -1
+	# non goalkeepers have max potential of 20 
+	var max:int = 20
+	
+	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
+	if position == Player.Position.G:
+		max = 15
+	
+	attributes.pace = min(pace_factor + randi_range(-5, 5), max)
+	attributes.acceleration = min(pace_factor + randi_range(-5, 5), max)
+	attributes.stamina = min(physical_factor + randi_range(-5, 5), max)
+	attributes.strength = min(physical_factor + randi_range(-5, 5), max)
+	attributes.agility = min(physical_factor + randi_range(-5, 5), max)
+	attributes.jump = min(physical_factor + randi_range(-5, 5), max)
+	
 	return attributes
 
 
@@ -157,32 +156,25 @@ func get_technical(age:int, prestige:int, position:Player.Position) -> Technical
 	var technique_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 	var defense_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
 
-	if position != Player.Position.G:
-		attributes.crossing = min(pass_factor + randi_range(-5, 5), 20)
-		attributes.passing = min(pass_factor + randi_range(-5, 5), 20)
-		attributes.long_passing = min(pass_factor + randi_range(-5, 5), 20)
-		attributes.tackling = min(defense_factor + randi_range(-5, 5), 20)
-		attributes.heading = min(shoot_factor + randi_range(-5, 5), 20)
-		attributes.interception = min(defense_factor + randi_range(-5, 5), 20)
-		attributes.shooting = min(shoot_factor + randi_range(-5, 5), 20)
-		attributes.long_shooting = min(shoot_factor + randi_range(-5, 5), 20)
-		attributes.penalty = min(technique_factor + randi_range(-5, 5), 20)
-		attributes.finishing = min(shoot_factor + randi_range(-5, 5), 20)
-		attributes.dribbling = min(shoot_factor + randi_range(-5, 5), 20)
-		attributes.blocking = min(shoot_factor + randi_range(-5, 5), 20)
-	else:
-		attributes.crossing = -1
-		attributes.passing = -1
-		attributes.long_passing = -1
-		attributes.tackling = -1
-		attributes.heading = -1
-		attributes.interception = -1
-		attributes.shooting = -1
-		attributes.long_shooting = -1
-		attributes.penalty = -1
-		attributes.finishing = -1
-		attributes.dribbling = -1
-		attributes.blocking = -1
+	
+	# non goalkeepers have max potential of 20 
+	var max:int = 20
+	
+	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
+	if position == Player.Position.G:
+		max = 15
+	attributes.crossing = min(pass_factor + randi_range(-5, 5), max)
+	attributes.passing = min(pass_factor + randi_range(-5, 5), max)
+	attributes.long_passing = min(pass_factor + randi_range(-5, 5), max)
+	attributes.tackling = min(defense_factor + randi_range(-5, 5), max)
+	attributes.heading = min(shoot_factor + randi_range(-5, 5), max)
+	attributes.interception = min(defense_factor + randi_range(-5, 5), max)
+	attributes.shooting = min(shoot_factor + randi_range(-5, 5), max)
+	attributes.long_shooting = min(shoot_factor + randi_range(-5, 5), max)
+	attributes.penalty = min(technique_factor + randi_range(-5, 5), max)
+	attributes.finishing = min(shoot_factor + randi_range(-5, 5), max)
+	attributes.dribbling = min(shoot_factor + randi_range(-5, 5), max)
+	attributes.blocking = min(shoot_factor + randi_range(-5, 5), max)
 	return attributes
 
 
@@ -302,8 +294,6 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	else:
 		prestige = randi_range(5, 15)
 
-	var potential_growth:int = randi_range(1, 5)
-
 	player.id = player_id
 	player.price = get_price(date.year-birth_date.year, prestige, position)
 	player.name = get_name(nationality)
@@ -316,9 +306,7 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	player.morality = get_random_morality()
 	player.form = get_random_form()
 	player.prestige = prestige
-	player.potential_growth
-	player.potential_growth = potential_growth
-	player.injury_potential = randi_range(1, 20)
+	player.injury_factor = randi_range(1, 20)
 	player.loyality = ""  # if player is loayal, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
 	player.contract = get_contract(prestige, position, date.year-birth_date.year)
 	player.nr = nr

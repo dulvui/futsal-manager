@@ -20,19 +20,18 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var surname:String
 @export var birth_date:Dictionary
 @export var nationality:String
-@export var moral = 4
 @export var position:Position
 @export var foot:Foot
-@export var prestige:int
-@export var morality:Morality
-@export var form:Form
-@export var potential_growth:int
-@export var injury_potential:int
 @export var loyality:int
 @export var contract:Contract
 @export var statistics:Array[Statistics]
 @export var attributes:Attributes
 
+@export var form:Form
+@export var prestige:int
+@export var morality:Morality
+@export var moral:int
+@export var injury_factor:int
 
 func get_attack_attributes(attack:ActionUtil.Attack) -> int:
 	match attack:
@@ -71,7 +70,7 @@ func get_defense_attributes(attack:ActionUtil.Attack) -> int:
 		# use player preferences/attirbutes and team tactics pressing or wait
 		ActionUtil.Attack.RUN:
 			var defender_attributes
-			if randi() % 2 == 0: 
+			if randi() % 2 == 0:
 #					return Defense.RUN
 				defender_attributes = attributes.physical.pace
 				defender_attributes += attributes.physical.acceleration
@@ -79,7 +78,7 @@ func get_defense_attributes(attack:ActionUtil.Attack) -> int:
 #					return Defense.TACKLE
 				defender_attributes = attributes.technical.tackling
 				defender_attributes += attributes.physical.pace
-				
+
 			return defender_attributes
 	# should never happen
 	return -1
