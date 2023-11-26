@@ -3,25 +3,25 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 extends Node
+class_name MarketSimulation
 
-
-func update():
+static func update():
 	_check_players()
 	if CalendarUtil.is_market_active():
 		_request_players()
 
 # checks if players should be sold
-func _check_players() -> void:
+static func _check_players() -> void:
 	pass
 
 
 # finds player that fits team on their needs
 # can be used as buy tip of osservatore for your team
-func find_player() -> void:
+static func find_player() -> void:
 	pass
 
 
-func _request_players() -> void:
+static func _request_players() -> void:
 	if randi_range(1, Constants.REQUEST_FACTOR) == Constants.REQUEST_FACTOR:
 		# pick random team, that needs a player
 		# depending on presitge of team, buy cheap or expensive player
@@ -37,24 +37,24 @@ func _request_players() -> void:
 
 
 # move make transfer method from Global to here
-func make_transfer() -> void:
+static func make_transfer() -> void:
 	pass
 
 
 # checks the contract of your team and returns the players that run out 
 # the next 6, 3, 1 months in and according json
-func check_contracts_your_team(players:Array) -> void:
+static func check_contracts_your_team(players:Array) -> void:
 	pass
 	
 # checks the contract of all other teams and decides depending on teams
 # settings and players age and abilities, if team makes new contract or even sells
 # the player. before the contract runs out 
-func check_contracts_other_teams() -> void:
+static func check_contracts_other_teams() -> void:
 	pass
 
 
 # validates if the team should keep or sell the player
 # or make run out the ccntract
-func valdiate_player(team, player) -> void:
+static func valdiate_player(team, player) -> void:
 	pass
 	

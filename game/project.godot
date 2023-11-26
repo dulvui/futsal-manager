@@ -24,9 +24,8 @@ CalendarUtil="*res://src/utils/calendar_util.gd"
 MatchMaker="*res://src/utils/match_maker.gd"
 TransferUtil="*res://src/utils/transfer_util.gd"
 EmailUtil="*res://src/utils/email_util.gd"
-ContractUtil="*res://src/utils/contract_util.gd"
 Constants="*res://src/constants.gd"
-MarketSimulation="*res://src/simulations/market/market_simulation.gd"
+ContractUtil="*res://src/utils/contract_util.gd"
 CurrencyUtil="*res://src/utils/currency_util.gd"
 
 [display]
