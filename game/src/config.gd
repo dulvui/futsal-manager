@@ -215,7 +215,7 @@ func next_season() -> void:
 	# set new goals for manager
 	# player contracts
 	
-	PlayerProgress.update_players()
+	PlayerProgress.players_progress_season()
 	
 	CalendarUtil.create_calendar(true)
 	MatchMaker.inizialize_matches()

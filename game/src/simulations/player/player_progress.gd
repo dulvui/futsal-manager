@@ -8,14 +8,14 @@ class_name PlayerProgress
 const NOISE = 20
 const AGE_PHYSICAL_DEGARDE = 30
 
-static func update_players() -> void:
+static func players_progress_season() -> void:
 	for league in Config.leagues:
 		for team in league.teams:
 			for player in team.players:
-				_season_progress(player)
+				_player_season_progress(player)
 				
 
-static func _season_progress(player:Player) -> void:
+static func _player_season_progress(player:Player) -> void:
 	# add random noise
 	var prestige_factor:int = player.prestige + randi_range(-NOISE, NOISE)
 	# age factor only affects fisical attributes neagtively
