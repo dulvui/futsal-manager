@@ -6,7 +6,7 @@ extends Node
 class_name PlayerProgress
 
 const NOISE = 20
-const AGE_DEGARDE = 20
+const AGE_PHYSICAL_DEGARDE = 30
 
 static func update_players() -> void:
 	for league in Config.leagues:
@@ -23,8 +23,8 @@ static func _season_progress(player:Player) -> void:
 	# dergade less and later 
 	var age:int = Config.date.year - player.birth_date.year
 	
-	# -1/+1 depending on player age
-	var age_factor:int = (player.prestige / 2) - (AGE_DEGARDE - age)
+	# -1/+1 depending on player age and prestige
+	var age_factor:int = AGE_PHYSICAL_DEGARDE - age + (player.prestige / 12)
 	if age_factor < 0:
 		age_factor = -1
 	else:
