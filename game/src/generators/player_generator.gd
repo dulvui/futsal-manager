@@ -285,7 +285,7 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	# random date from 1970 to 2007
 	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(randi_range(0, max_timestamp))
 
-	var prestige:int = randi_range(1, 100)
+	var prestige:int = randi_range(1, Constants.MAX_PRESTIGE)
 	# to make just a few really good and a few really bad
 	if prestige < 30:
 		prestige = randi_range(1, 5)

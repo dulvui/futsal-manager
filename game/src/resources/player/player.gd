@@ -28,7 +28,7 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var attributes:Attributes
 
 @export var form:Form
-@export var prestige:int
+@export var prestige:int # 1-100
 @export var morality:Morality
 @export var moral:int
 @export var injury_factor:int

@@ -59,6 +59,8 @@ const ATTRIBUTES:Dictionary = {
 					"shooting","long_shooting","penalty","finishing","dribbling","blocking"],
 }
 
+const MAX_PRESTIGE:int = 100
+
 
 # simluations
 

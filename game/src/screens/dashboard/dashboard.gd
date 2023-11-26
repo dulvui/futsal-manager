@@ -143,6 +143,8 @@ func _show_active_view(active_view:int=-1) -> void:
 
 func _on_Continue_pressed() -> void:
 	_next_day()
+	# remove comment to test player progress
+	# PlayerProgress.update_players()
 
 func _on_next_match_pressed():
 	next_match_button.disabled = true
@@ -172,7 +174,6 @@ func _next_day() -> void:
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		return
-		
 
 	CalendarUtil.next_day()
 	TransferUtil.update_day()

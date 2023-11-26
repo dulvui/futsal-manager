@@ -69,7 +69,6 @@ func _ready() -> void:
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	
 	
-	
 func reset() -> void:
 	manager =  {
 		"name" : "",
@@ -215,6 +214,8 @@ func next_season() -> void:
 	# financial stuff
 	# set new goals for manager
 	# player contracts
+	
+	PlayerProgress.update_players()
 	
 	CalendarUtil.create_calendar(true)
 	MatchMaker.inizialize_matches()
