@@ -6,6 +6,7 @@ extends Node
 class_name PlayerProgress
 
 const NOISE = 20
+const AGE_DEGARDE = 20
 
 static func update_players() -> void:
 	for league in Config.leagues:
@@ -20,7 +21,14 @@ static func _season_progress(player:Player) -> void:
 	# age factor only affects fisical attributes neagtively
 	# high prestige player has smaller age factor, that means his physical attributes
 	# dergade less and later 
-	var age_factor:int = Config.date.year - player.birth_date.year - player.prestige
+	var age:int = Config.date.year - player.birth_date.year
+	
+	# -1/+1 depending on player age
+	var age_factor:int = (player.prestige / 2) - (AGE_DEGARDE - age)
+	if age_factor < 0:
+		age_factor = -1
+	else:
+		age_factor = 1
 	
 	# check bounds prestige_factor
 	if prestige_factor < 1:
@@ -42,7 +50,7 @@ static func _season_progress(player:Player) -> void:
 	for attribute in player.attributes.physical.get_property_list():
 		if attribute.usage == 4102: # custoom properties 
 			var value:int = randi_range(1, Constants.MAX_PRESTIGE) + randi_range(1, prestige_factor) + prestige_factor
-			value /= 100
+			value /= 100 * age_factor
 			player.attributes.physical[attribute.name] = min(player.attributes.physical[attribute.name] + value, 20)
 	
 	# technical
@@ -56,5 +64,5 @@ static func _season_progress(player:Player) -> void:
 	for attribute in player.attributes.goalkeeper.get_property_list():
 		if attribute.usage == 4102: # custoom properties 
 			var value:int = randi_range(1, Constants.MAX_PRESTIGE) + randi_range(1, prestige_factor) + prestige_factor
-			value /= 100
+			value /= 100 * age_factor
 			player.attributes.goalkeeper[attribute.name] = min(player.attributes.goalkeeper[attribute.name] + value, 20)
