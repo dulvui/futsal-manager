@@ -61,8 +61,11 @@ const ATTRIBUTES:Dictionary = {
 
 const MAX_PRESTIGE:int = 100
 
-
 # simluations
 
 ## market
+
+# random team requests own players
+# 1/REQUEST_FACTOR = probability
 const REQUEST_FACTOR: int = 20
+

@@ -22,7 +22,7 @@ func find_player() -> void:
 
 
 func _request_players() -> void:
-	if randi()% 100 < Constants.REQUEST_FACTOR:
+	if randi_range(1, Constants.REQUEST_FACTOR) == Constants.REQUEST_FACTOR:
 		# pick random team, that needs a player
 		# depending on presitge of team, buy cheap or expensive player
 		# loans also possible
