@@ -28,14 +28,14 @@ jobs:
           working-directory: $WORKING_DIRECTORY
           create-export-preset-cfg: true
 
-      # - name: Upload to itch.io
-      #   uses: dulvui/itchio-butler-upload@v0.0.1
-      #   with:
-      #     working-directory: html5
-      #     api-key: ${{ secrets.ITCHIO_API_KEY }}
-      #     user: simondalvai
-      #     game: futsal-manager
-      #     channel: html5
+      - name: Upload to itch.io
+        uses: dulvui/itchio-butler-upload@v0.0.1
+        with:
+          working-directory: html5
+          api-key: ${{ secrets.ITCHIO_API_KEY }}
+          user: simondalvai
+          game: futsal-manager
+          channel: html5
 
 
 
