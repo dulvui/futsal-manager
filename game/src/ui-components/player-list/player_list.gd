@@ -28,11 +28,9 @@ const FOOTS:Array = ["R","L","RL"]
 @onready var pos_select:OptionButton = $VBoxContainer/HBoxContainer/PositionSelect
 
 
-func set_up(include_active_players:bool, active_team:Team = null) -> void:
+func set_up(include_lineup:bool, active_team:Team = null) -> void:
 	
-	set_up_players(include_active_players, active_team)
-
-			
+	set_up_players(include_lineup, active_team)
 	league_select.add_item("ITALIA")
 	
 	team_select.add_item("NO_TEAM")
@@ -48,7 +46,7 @@ func set_up(include_active_players:bool, active_team:Team = null) -> void:
 		info_select.add_item(info_type)
 
 
-func set_up_players(include_active_players:bool, active_team:Team = null) -> void:
+func set_up_players(include_lineup:bool, active_team:Team = null) -> void:
 	_reset_options()
 	
 	var all_players:Array[Player] = []
@@ -57,7 +55,7 @@ func set_up_players(include_active_players:bool, active_team:Team = null) -> voi
 			for player in team.players:
 				all_players.append(player)
 	else:
-		if include_active_players:
+		if include_lineup:
 			for player in active_team.line_up.players:
 				all_players.append(player)
 		for player in active_team.players:

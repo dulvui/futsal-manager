@@ -30,12 +30,12 @@ func set_up(active_team:Team = Config.team) -> void:
 #	animation_player.play("Fade" + team["formation"])
 
 func _on_FormationSelect_item_selected(index:int) -> void:
-	animation_player.play_backwards("Fade" + team["formation"] )
+#	animation_player.play_backwards("Fade" + team.line_up.formation )
 	await animation_player.animation_finished
 	_set_active_players()
 	team["formation"] = formations[index]
 #	Config.save_all_data()
-	animation_player.play("Fade" + team["formation"] )
+#	animation_player.play("Fade" + team["formation"] )
 
 func _set_active_players() -> void:
 	$Field/G.set_player(team.line_up.goalkeeper)
