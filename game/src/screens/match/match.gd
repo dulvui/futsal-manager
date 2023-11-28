@@ -75,18 +75,7 @@ func match_end() -> void:
 			Config.set_table_result(matchday["home"],random_home_goals,matchday["away"],random_away_goals)
 		else:
 			matchday["result"] = str(match_simulator.home_stats["goals"]) + ":" + str(match_simulator.away_stats["goals"])
-#	Config.save_all_data()
 
-	#save players history PoC
-#	for real_player in home_team["players"]["active"]:
-#		for copy_player in home_team["players"]["active"]:
-#			if real_player["nr"] == copy_player["nr"]:
-#				real_player["history"][Config.current_season]["actual"] = copy_player["history"][Config.current_season]["actual"]
-#
-#	for real_player in away_team_real["players"]["active"]:
-#		for copy_player in away_team["players"]["active"]:
-#			if real_player["nr"] == copy_player["nr"]:
-#				real_player["history"][Config.current_season]["actual"] = copy_player["history"][Config.current_season]["actual"]
 
 func half_time() -> void:
 	pause_button.text = tr("CONTINUE")
@@ -164,7 +153,7 @@ func _on_SKIP_pressed() -> void:
 	match_end()
 
 
-func _on_match_simulator_shot(player:Object, on_target:bool, goal:bool, action_buffer:Array[Dictionary]) -> void:
+func _on_match_simulator_shot(player:Player, on_target:bool, goal:bool, action_buffer:Array[Dictionary]) -> void:
 	if not goal and randi() % Constants.VISUAL_ACTION_SHOTS_FACTOR > 0:
 		# no goal, but show some shoots
 		return
@@ -189,7 +178,7 @@ func _on_match_simulator_shot(player:Object, on_target:bool, goal:bool, action_b
 		
 		result_label.text = "%d - %d"%[match_simulator.home_stats.goals,match_simulator.away_stats.goals]
 		
-		events.append_text("%s  %s - %s  %s" % [time_label.text, str(match_simulator.home_stats.goals), str(match_simulator.away_stats.goals), player.name])
+		events.append_text("%s  %s - %s  %s" % [time_label.text, str(match_simulator.home_stats.goals), str(match_simulator.away_stats.goals), player.surname])
 
 	
 	visual_action.queue_free()

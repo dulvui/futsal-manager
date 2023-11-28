@@ -97,19 +97,22 @@ func _on_ActionUtil_action_message(message:String) -> void:
 
 
 func _on_action_util_shot(player:Player, on_target:bool, success:bool):
-	shot.emit(player,on_target , success, action_util.action_buffer)
+	shot.emit(player, on_target , success, action_util.action_buffer)
 	if home_has_ball:
 		home_stats.shots += 1
 		if on_target:
 			home_stats.shots_on_target += 1
 		if success:
 			home_stats.goals += 1
+			player.statistics[-1].goals += 1
 	else:
 		away_stats.shots += 1
 		if on_target:
 			away_stats.shots_on_target += 1
 		if success:
 			away_stats.goals += 1
+			player.statistics[-1].goals += 1
+
 
 func _on_action_util_possession_change():
 	home_has_ball = not home_has_ball

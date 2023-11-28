@@ -325,13 +325,12 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	# TODO  create random history
 	var statistics:Statistics = Statistics.new()
 	statistics.team_name = "Test"
-	statistics.price = 1234
-	statistics.games_played = 1234
-	statistics.goals = 1234
-	statistics.assists = 1234
-	statistics.yellow_card = 1234
-	statistics.red_card = 1234
-	statistics.average_vote = 1234.5
+	statistics.games_played = 0
+	statistics.goals = 0
+	statistics.assists = 0
+	statistics.yellow_card = 0
+	statistics.red_card = 0
+	statistics.average_vote = 0
 	player.statistics.append(statistics)
 	
 	player_id += 1

@@ -162,6 +162,7 @@ func _action() -> void:
 		else:
 			for player in away_visual_players:
 				if player.nr == attack_nr:
+					attacking_player = player
 					_player_action(player, action)
 		
 		ball.move(action.position, timer.wait_time)

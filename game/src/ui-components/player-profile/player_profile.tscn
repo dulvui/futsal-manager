@@ -157,14 +157,6 @@ text = "NR"
 layout_mode = 2
 text = "Bronzolo"
 
-[node name="Hide" type="Button" parent="TabContainer/Info"]
-layout_mode = 0
-offset_left = 1232.0
-offset_top = -32.0
-offset_right = 1267.0
-offset_bottom = 2.0
-text = "X"
-
 [node name="History" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
@@ -185,4 +177,17 @@ text = "Viustel Hans"
 visible = false
 layout_mode = 2
 
-[connection signal="pressed" from="TabContainer/Info/Hide" to="." method="_on_Hide_pressed"]
+[node name="Hide" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.962
+anchor_top = 0.014
+anchor_right = 0.99
+anchor_bottom = 0.061
+offset_left = 0.639893
+offset_top = -0.0799999
+offset_right = -0.200073
+offset_bottom = 0.079998
+text = "X"
+
+[connection signal="pressed" from="Hide" to="." method="_on_Hide_pressed"]

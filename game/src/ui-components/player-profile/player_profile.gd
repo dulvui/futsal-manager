@@ -34,7 +34,7 @@ func set_up_info(_player:Player) -> void:
 			info.get_node(attribute.capitalize()).add_child(value)
 		
 	#history
-	$TabContainer/History/Actual/Goals.text = str(player.statistics[0].goals)
+	$TabContainer/History/Actual/Goals.text = str(player.statistics[-1].goals)
 
 	show()
 

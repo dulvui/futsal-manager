@@ -6,7 +6,6 @@ class_name Statistics
 extends Resource
 
 @export var team_name:String
-@export var price:int
 @export var games_played:int
 @export var goals:int
 @export var assists:int
