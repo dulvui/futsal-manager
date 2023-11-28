@@ -7,6 +7,10 @@ extends EditorScript
 const NAMES_DIR:String = "res://data/player-names/"
 const LEAGUES_DIR:String = "res://data/leagues/"
 
+# defines noise added to attribute factors
+# exmaple shoot factor = 10 => other attributes vary between 10 -/+ NOISE
+const NOISE:int = 3
+
 var player_id:int = 1
 
 var league:League
@@ -102,7 +106,7 @@ func get_goalkeeper_attributes(age:int, prestige:int, position:Player.Position) 
 	var attributes:Goalkeeper = Goalkeeper.new()
 	
 	var age_factor:int = get_age_factor(age)
-	var factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	var factor:int = min(randi_range(NOISE + 1, age_factor), max(prestige, NOISE + 1))
 	
 	# goalkeepers have max potential of 20 
 	var max:int = 20
@@ -111,12 +115,12 @@ func get_goalkeeper_attributes(age:int, prestige:int, position:Player.Position) 
 	if position != Player.Position.G:
 		max = 10
 
-	attributes.reflexes = min(factor + randi_range(-5, 5), max)
-	attributes.positioning = min(factor + randi_range(-5, 5), max)
-	attributes.kicking = min(factor + randi_range(-5, 5), max)
-	attributes.handling = min(factor + randi_range(-5, 5), max)
-	attributes.diving = min(factor + randi_range(-5, 5), max)
-	attributes.speed = min(factor + randi_range(-5, 5), max)
+	attributes.reflexes = min(factor + randi_range(-NOISE, NOISE), max)
+	attributes.positioning = min(factor + randi_range(-NOISE, NOISE), max)
+	attributes.kicking = min(factor + randi_range(-NOISE, NOISE), max)
+	attributes.handling = min(factor + randi_range(-NOISE, NOISE), max)
+	attributes.diving = min(factor + randi_range(-NOISE, NOISE), max)
+	attributes.speed = min(factor + randi_range(-NOISE, NOISE), max)
 	return attributes
 
 
@@ -126,7 +130,7 @@ func get_physical(age:int, prestige:int, position:Player.Position) -> Physical:
 	var age_factor:int = get_age_factor(age)
 
 	var pace_factor:int = min(randi_range(9, age_factor), max(prestige, 9))
-	var physical_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	var physical_factor:int = min(randi_range(NOISE + 1, age_factor), max(prestige, NOISE + 1))
 	
 	# non goalkeepers have max potential of 20 
 	var max:int = 20
@@ -135,12 +139,12 @@ func get_physical(age:int, prestige:int, position:Player.Position) -> Physical:
 	if position == Player.Position.G:
 		max = 15
 	
-	attributes.pace = min(pace_factor + randi_range(-5, 5), max)
-	attributes.acceleration = min(pace_factor + randi_range(-5, 5), max)
-	attributes.stamina = min(physical_factor + randi_range(-5, 5), max)
-	attributes.strength = min(physical_factor + randi_range(-5, 5), max)
-	attributes.agility = min(physical_factor + randi_range(-5, 5), max)
-	attributes.jump = min(physical_factor + randi_range(-5, 5), max)
+	attributes.pace = min(pace_factor + randi_range(-NOISE, NOISE), max)
+	attributes.acceleration = min(pace_factor + randi_range(-NOISE, NOISE), max)
+	attributes.stamina = min(physical_factor + randi_range(-NOISE, NOISE), max)
+	attributes.strength = min(physical_factor + randi_range(-NOISE, NOISE), max)
+	attributes.agility = min(physical_factor + randi_range(-NOISE, NOISE), max)
+	attributes.jump = min(physical_factor + randi_range(-NOISE, NOISE), max)
 	
 	return attributes
 
@@ -151,10 +155,10 @@ func get_technical(age:int, prestige:int, position:Player.Position) -> Technical
 	var age_factor:int = get_age_factor(age)
 
 	# use also pos i calculation
-	var pass_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
-	var shoot_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
-	var technique_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
-	var defense_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	var pass_factor:int = min(randi_range(NOISE + 1, age_factor), max(prestige, NOISE + 1))
+	var shoot_factor:int = min(randi_range(NOISE + 1, age_factor), max(prestige, NOISE + 1))
+	var technique_factor:int = min(randi_range(NOISE + 1, age_factor), max(prestige, NOISE + 1))
+	var defense_factor:int = min(randi_range(NOISE + 1, age_factor), max(prestige, NOISE + 1))
 
 	
 	# non goalkeepers have max potential of 20 
@@ -163,18 +167,18 @@ func get_technical(age:int, prestige:int, position:Player.Position) -> Technical
 	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position == Player.Position.G:
 		max = 15
-	attributes.crossing = min(pass_factor + randi_range(-5, 5), max)
-	attributes.passing = min(pass_factor + randi_range(-5, 5), max)
-	attributes.long_passing = min(pass_factor + randi_range(-5, 5), max)
-	attributes.tackling = min(defense_factor + randi_range(-5, 5), max)
-	attributes.heading = min(shoot_factor + randi_range(-5, 5), max)
-	attributes.interception = min(defense_factor + randi_range(-5, 5), max)
-	attributes.shooting = min(shoot_factor + randi_range(-5, 5), max)
-	attributes.long_shooting = min(shoot_factor + randi_range(-5, 5), max)
-	attributes.penalty = min(technique_factor + randi_range(-5, 5), max)
-	attributes.finishing = min(shoot_factor + randi_range(-5, 5), max)
-	attributes.dribbling = min(shoot_factor + randi_range(-5, 5), max)
-	attributes.blocking = min(shoot_factor + randi_range(-5, 5), max)
+	attributes.crossing = min(pass_factor + randi_range(-NOISE, NOISE), max)
+	attributes.passing = min(pass_factor + randi_range(-NOISE, NOISE), max)
+	attributes.long_passing = min(pass_factor + randi_range(-NOISE, NOISE), max)
+	attributes.tackling = min(defense_factor + randi_range(-NOISE, NOISE), max)
+	attributes.heading = min(shoot_factor + randi_range(-NOISE, NOISE), max)
+	attributes.interception = min(defense_factor + randi_range(-NOISE, NOISE), max)
+	attributes.shooting = min(shoot_factor + randi_range(-NOISE, NOISE), max)
+	attributes.long_shooting = min(shoot_factor + randi_range(-NOISE, NOISE), max)
+	attributes.penalty = min(technique_factor + randi_range(-NOISE, NOISE), max)
+	attributes.finishing = min(shoot_factor + randi_range(-NOISE, NOISE), max)
+	attributes.dribbling = min(shoot_factor + randi_range(-NOISE, NOISE), max)
+	attributes.blocking = min(shoot_factor + randi_range(-NOISE, NOISE), max)
 	return attributes
 
 
@@ -184,18 +188,19 @@ func get_mental(age:int, prestige:int, position:Player.Position) -> Mental:
 	
 	var age_factor:int = get_age_factor(age)
 
-	var offensive_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
-	var defensive_factor:int = min(randi_range(6, age_factor), max(prestige, 6))
+	var offensive_factor:int = min(randi_range(NOISE + 1, age_factor), max(prestige, NOISE + 1))
+	var defensive_factor:int = min(randi_range(NOISE + 1, age_factor), max(prestige, NOISE + 1))
 
-	attribtues.aggression = min(defensive_factor + randi_range(-5, 5), 20)
-	attribtues.anticipation = min(defensive_factor + randi_range(-5, 5), 20)
-	attribtues.decisions = min(offensive_factor + randi_range(-5, 5), 20)
-	attribtues.concentration = min(offensive_factor + randi_range(-5, 5), 20)
-	attribtues.teamwork = min(offensive_factor + randi_range(-5, 5), 20)
-	attribtues.vision = min(offensive_factor + randi_range(-5, 5), 20)
-	attribtues.work_rate = min(offensive_factor + randi_range(-5, 5), 20)
-	attribtues.offensive_movement = min(offensive_factor + randi_range(-5, 5), 20)
-	attribtues.marking = min(defensive_factor + randi_range(-5, 5), 20)
+	attribtues.aggression = min(defensive_factor + randi_range(-NOISE, NOISE), 20)
+	attribtues.anticipation = min(defensive_factor + randi_range(-NOISE, NOISE), 20)
+	attribtues.marking = min(defensive_factor + randi_range(-NOISE, NOISE), 20)
+	
+	attribtues.decisions = min(offensive_factor + randi_range(-NOISE, NOISE), 20)
+	attribtues.concentration = min(offensive_factor + randi_range(-NOISE, NOISE), 20)
+	attribtues.teamwork = min(offensive_factor + randi_range(-NOISE, NOISE), 20)
+	attribtues.vision = min(offensive_factor + randi_range(-NOISE, NOISE), 20)
+	attribtues.work_rate = min(offensive_factor + randi_range(-NOISE, NOISE), 20)
+	attribtues.offensive_movement = min(offensive_factor + randi_range(-NOISE, NOISE), 20)
 	
 	return attribtues
 
