@@ -45,7 +45,9 @@ func random_movement(time) -> void:
 			var final_position = _stay_inside_field(position - Vector2(randf_range(-50,50),randf_range(-50,50)))
 			var tween:Tween = create_tween()
 			tween.tween_property(self, "position", final_position, time)
-#			tween.start()
+
+func celebrate_goal() -> void:
+	random_movement(randf_range(0.5, 1.5))
 
 func _stay_inside_field(destination: Vector2) -> Vector2:
 			# player should not go outside the field

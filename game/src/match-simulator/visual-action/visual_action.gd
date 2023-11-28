@@ -38,6 +38,8 @@ var on_tagret:bool
 
 var is_shooting:bool = false
 
+var attacking_player:Node2D
+
 # position - formation mapping
 var formations = {
 	"2-2" : ["DL","DR","AL","AR"]
@@ -155,6 +157,7 @@ func _action() -> void:
 		if action["is_home"]:
 			for player in home_visual_players:
 				if player.nr == attack_nr:
+					attacking_player = player
 					_player_action(player, action)
 		else:
 			for player in away_visual_players:
@@ -174,19 +177,18 @@ func _action() -> void:
 		is_final_action = true
 		is_shooting = true
 		
+		# calculate shot deviation
 		var shot_deviation = Vector2(0,randi_range(-50,50))
-		
 		if not is_goal:
 			if not on_tagret:
 				shot_deviation = Vector2(0,randi_range(-250,250))
-			
 			# stop ball on goalkeeper position
 			if is_home_goal:
 				shot_deviation.x -= 90
 			else:
 				shot_deviation.x += 90
 		
-
+		# move ball
 		if is_home_goal:
 			ball.move(away_goal.global_position + shot_deviation, timer.wait_time / 3, true)
 			# goalkeeper save
@@ -198,6 +200,9 @@ func _action() -> void:
 			if shot_deviation.y < 100 and shot_deviation.y > -100:
 				home_goalkeeper.move(home_goal.position + shot_deviation, timer.wait_time / 3)
 		
+		# celebrateeeee
+		if is_goal:
+			attacking_player.celebrate_goal()
 
 func _player_action(player:Node2D, action:Dictionary) -> void:
 	if action["action"] == "RUN":
