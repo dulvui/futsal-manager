@@ -154,7 +154,7 @@ func _on_next_match_pressed():
 		_next_day()
 		var timer = Timer.new()
 		add_child(timer)
-		timer.start(1)
+		timer.start(Constants.DASHBOARD_DAY_DELAY)
 		await timer.timeout
 		
 	next_match_button.disabled = false

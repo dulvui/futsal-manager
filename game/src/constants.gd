@@ -12,6 +12,8 @@ const MATCH_SPEED_FACTOR:int = 4
 # factor if shot becomes a visual action
 const VISUAL_ACTION_SHOTS_FACTOR:int = 10
 
+const DASHBOARD_DAY_DELAY:float = 0.5
+
 # percentage of keeper saving shots
 const GOAL_KEEPER_FACTOR:Dictionary = {
 	"NORMAL" : 0.90,
@@ -37,14 +39,12 @@ const SHOOT_ON_TARGET_FACTOR:int = 70
 const YELLOW_CARD_FACTOR:int = 65
 const RED_CARD_FACTOR:int = 90
 
-
 # factor for defining attack (0 - 100)
 const ATTACK_FACTOR:int = 1000
 const RUN_FACTOR:int = 450
 const PASS_FACTOR:int = 900
 const DRIBBLE_FACTOR:int = 950
 const SHOOT_FACTOR:int = 1000
-
 
 # attack success factors
 # bigger number => more success
