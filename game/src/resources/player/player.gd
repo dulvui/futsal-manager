@@ -33,6 +33,9 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var moral:int
 @export var injury_factor:int
 
+func get_full_name() -> String:
+	return name + " " + surname
+
 func get_attack_attributes(attack:ActionUtil.Attack) -> int:
 	match attack:
 		ActionUtil.Attack.SHOOT:

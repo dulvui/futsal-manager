@@ -93,3 +93,27 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 	
 	
 
+func transfer_message(transfer:Transfer) -> void:
+	print("new transfer mail")
+	
+	var message:Dictionary = {
+		"title" : "TRANSFER",
+		"message" : "",
+		"sender" : "info@" + Config.team.name.to_lower().replace(" ", "") + ".com",
+		"date" : CalendarUtil.get_dashborad_date(),
+		"type" : MessageTypes.TRANSFER,
+		"read" : false
+	}
+
+	message["title"] = "TRANSFER"
+	if transfer.state == Transfer.State.SUCCESS:
+		message["message"] = "You bought for" + str(transfer.price) + " " + transfer.player.get_full_name()
+	elif transfer.state == Transfer.State.OFFER:
+		message["message"] = "You couldnt buy for" + str(transfer.price) + " " + transfer.player.get_full_name()
+	else:
+		message["message"] = "You made an " + str(transfer.price) + " offer for " + transfer.player.get_full_name()
+	
+	messages.append(message)
+	
+	if messages.size() > MAX_MESSAGES:
+		messages.pop_front()

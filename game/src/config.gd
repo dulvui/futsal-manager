@@ -142,31 +142,6 @@ func save_calendar(new_calendar:Array) -> void:
 	calendar = new_calendar
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
-	
-func make_transfer(transfer:Dictionary) -> void:
-	# TODO change player.team
-	for team in league.teams:
-		if team.name == transfer["player"]["team"]:
-			if team.formation.has(transfer["player"]):
-				team["players"]["active"].erase(transfer["player"])
-				team["players"]["active"].append(team["players"]["subs"].pop_front())
-			team["players"]["subs"].erase(transfer["player"])
-			team["budget"] += transfer["money"]
-			for player in transfer["exchange_players"]:
-				team["players"]["subs"].append(player)
-	
-	#add player to team
-	for team in league.teams:
-		if team["name"] == Config.team.name:
-			team["players"]["subs"].append(transfer["player"])
-			team["budget"] -= transfer["money"]
-			for player in transfer["exchange_players"]:
-				if team["players"]["active"].has(player):
-					team["players"]["active"].erase(player)
-					team["players"]["active"].append(team["players"]["subs"].pop_front())
-				team["players"]["subs"].erase(player)
-			#handle also special contracts with bonus on future sell etc.
-
 
 func set_table_result(home_name:String,home_goals:int,away_name:String,away_goals:int) -> void:
 #	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
