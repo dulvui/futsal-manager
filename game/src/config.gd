@@ -20,7 +20,7 @@ var manager:Dictionary
 
 var table:Dictionary
 
-var current_transfers:Array
+var current_transfers:Array[Transfer]
 
 var messages:Array
 
@@ -51,7 +51,7 @@ func _ready() -> void:
 	
 	calendar = config.get_value("season","calendar",[])
 	table = config.get_value("season","table",{})
-	current_transfers = config.get_value("season","current_transfers",[])
+	current_transfers = config.get_value("season","current_transfers",current_transfers)
 	
 	team = config.get_value("resources", "team", null)
 	leagues = config.get_value("resources", "leagues", init_leagues())

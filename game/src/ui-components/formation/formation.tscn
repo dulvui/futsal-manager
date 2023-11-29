@@ -514,4 +514,3 @@ layout_mode = 1
 [connection signal="change_player" from="Field/WL" to="." method="_on_WL_change_player"]
 [connection signal="change_player" from="Field/WR" to="." method="_on_WR_change_player"]
 [connection signal="change_player" from="Field/P" to="." method="_on_P_change_player"]
-[connection signal="select_player" from="PlayerList" to="." method="_on_PlayerList_select_player"]
