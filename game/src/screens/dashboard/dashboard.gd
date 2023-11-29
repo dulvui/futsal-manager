@@ -177,7 +177,6 @@ func _next_day() -> void:
 
 	CalendarUtil.next_day()
 	TransferUtil.update_day()
-	MarketSimulation.update()
 	email.update_messages()
 	calendar.set_up(true)
 	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()

@@ -88,7 +88,7 @@ func start_match() -> void:
 	home_has_ball = coin
 
 
-func change_players(home_team:Dictionary,away_team:Dictionary) -> void:
+func change_players(home_team:Team,away_team:Team) -> void:
 	action_util.change_players(home_team,away_team)
 
 
