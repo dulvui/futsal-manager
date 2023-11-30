@@ -13,7 +13,7 @@ func _ready() -> void:
 		center_container.name = league.name
 		var grid:GridContainer = GridContainer.new()
 		grid.columns = 2
-		for team in league["teams"]:
+		for team:Team in league["teams"]:
 			var team_button:Button = Button.new()
 			team_button.text = team["name"]
 			team_button.pressed.connect(team_selected.bind(league, team))

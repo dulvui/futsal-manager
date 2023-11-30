@@ -53,8 +53,8 @@ func _ready() -> void:
 		
 	
 
-func _process(_delta) -> void:
-	var email_count = EmailUtil.count_unread_messages()
+func _process(_delta:float) -> void:
+	var email_count:int = EmailUtil.count_unread_messages()
 	if email_count > 0:
 		email_button.text = str(EmailUtil.count_unread_messages())  + " " + tr("EMAIL") 
 	else:
@@ -100,7 +100,7 @@ func _on_PlayerOffer_confirm() -> void:
 	$PlayerOfferPopup.hide()
 
 
-func _on_Email_offer_contract(content) -> void:
+func _on_Email_offer_contract(content:Dictionary) -> void:
 	print("contract content")
 	print(content)
 	$ContractPopup/ContractOffer.set_up(content)
@@ -146,13 +146,13 @@ func _on_Continue_pressed() -> void:
 	# remove comment to test player progress
 	# PlayerProgress.update_players()
 
-func _on_next_match_pressed():
+func _on_next_match_pressed() -> void:
 	next_match_button.disabled = true
 	continue_button.disabled = true
 	
 	while not match_ready:
 		_next_day()
-		var timer = Timer.new()
+		var timer:Timer = Timer.new()
 		add_child(timer)
 		timer.start(Constants.DASHBOARD_DAY_DELAY)
 		await timer.timeout

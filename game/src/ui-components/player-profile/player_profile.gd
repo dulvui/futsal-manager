@@ -22,14 +22,12 @@ func set_up_info(_player:Player) -> void:
 	$TabContainer/Info/Info/Foot.text = str(player.foot)
 	$TabContainer/Info/Info/Nr.text = str(player.nr)
 
-	for attribute in Constants.ATTRIBUTES.keys():
-		for key in Constants.ATTRIBUTES[attribute]:
-			var label = Label.new()
+	for attribute:String in Constants.ATTRIBUTES.keys():
+		for key:String in Constants.ATTRIBUTES[attribute]:
+			var label:Label = Label.new()
 			label.text = tr(key.to_upper())
-			var a = attribute.capitalize()
-			var node = info.get_node(attribute.capitalize())
 			info.get_node(attribute.capitalize()).add_child(label)
-			var value = DetailNumber.instantiate()
+			var value:Control = DetailNumber.instantiate()
 			value.set_up(player.attributes.get(attribute).get(key))
 			info.get_node(attribute.capitalize()).add_child(value)
 		

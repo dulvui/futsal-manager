@@ -62,20 +62,20 @@ func set_up_players(include_lineup:bool, active_team:Team = null) -> void:
 			all_players.append(player)
 	
 	var headers:Array[String] = ["position", "surname"]
-	for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
+	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
 	table.set_up(headers,INFO_TYPES[0], all_players)
 	
-func remove_player(player_id) -> void:
+func remove_player(player_id:int) -> void:
 	active_filters["id"] = player_id
 	_filter_table(true)
 
-func _on_NameSearch_text_changed(text) -> void:
+func _on_NameSearch_text_changed(text:String) -> void:
 	active_filters["surname"] = text
 	_filter_table()
 
 
-func _on_TeamSelect_item_selected(index) -> void:
+func _on_TeamSelect_item_selected(index:int) -> void:
 	if index > 0:
 		active_filters["team"] = team_select.get_item_text(index)
 	else:
@@ -92,11 +92,11 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 	
 	var headers:Array[String] = ["position", "surname"]
 	if active_filters["position"] == "G":
-		for attribute in Constants.ATTRIBUTES["goalkeeper"]:
+		for attribute:int in Constants.ATTRIBUTES["goalkeeper"]:
 			headers.append(attribute)
 		info_select.select(INFO_TYPES.size() - 1)
 	else:
-		for attribute in Constants.ATTRIBUTES[INFO_TYPES[0]]:
+		for attribute:int in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 			headers.append(attribute)
 		info_select.select(0)
 
@@ -113,13 +113,13 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 func _filter_table(exclusive:bool = false) -> void:
 	table.filter(active_filters, exclusive)
 
-func _on_Close_pressed():
+func _on_Close_pressed() -> void:
 	hide()
 
 
 func _on_InfoSelect_item_selected(index:int) -> void:
 	var headers:Array[String] = ["position", "surname"]
-	for attribute in Constants.ATTRIBUTES[INFO_TYPES[index]]:
+	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
 	table.update(headers, INFO_TYPES[index])
 	
@@ -131,13 +131,13 @@ func _reset_options() -> void:
 	info_select.selected = 0
 
 
-func _on_table_info_player(player:Player):
+func _on_table_info_player(player:Player) -> void:
 	var player_profile:Control = PlayerProfile.instantiate()
 	add_child(player_profile)
 	player_profile.set_global_position(Vector2.ZERO)
 	player_profile.set_up_info(player)
 	
 
-func _on_table_select_player(player):
+func _on_table_select_player(player:Player) -> void:
 	print("change in list")
 	emit_signal("select_player",player)

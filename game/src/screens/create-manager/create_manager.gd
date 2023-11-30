@@ -19,7 +19,7 @@ func _on_Back_pressed() -> void:
 func _on_Continue_pressed() -> void:
 	print($GridContainer/Nat.get_item_text($GridContainer/Nat.selected))
 	if $GridContainer/Name.text.length() * $GridContainer/SurName.text.length() > 0:
-		var manager = {
+		var manager:Dictionary = {
 			"name" : $GridContainer/Name.text,
 			"surname" :$GridContainer/SurName.text,
 			"nationality" : $GridContainer/Nat.get_item_text($GridContainer/Nat.selected)

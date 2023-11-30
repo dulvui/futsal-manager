@@ -16,12 +16,12 @@ const MatchList:PackedScene = preload("res://src/ui-components/calendar/match-li
 
 @onready var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
 
-func set_up(date) -> void:
+func set_up(date:Dictionary) -> void:
 #	print(date)
 	month_day_label.text = str(date.day + 1)
-	var team_name
+	var team_name:String
 	if date["matches"].size() > 0:
-		for matchz in date["matches"]:
+		for matchz:Dictionary in date["matches"]:
 			if matchz != null:
 				if Config.team.name == matchz["home"]:
 					team_name = matchz["away"]
@@ -47,8 +47,8 @@ func set_up(date) -> void:
 		market_label.text = "Market"
 
 
-func _on_Match_pressed(matches) -> void:
-	var match_list = MatchList.instantiate()
+func _on_Match_pressed(matches:Array) -> void:
+	var match_list:Control = MatchList.instantiate()
 	add_child(match_list)
 	match_list.show_matches(matches)
 

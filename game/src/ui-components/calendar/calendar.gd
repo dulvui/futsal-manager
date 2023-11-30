@@ -25,9 +25,9 @@ func set_up(use_global_month:bool=false) -> void:
 			child.queue_free()
 	
 	# start with monday: fill with transparent days
-	var monday_counter = 7
+	var monday_counter:int = 7
 	while Config.calendar[current_month][monday_counter]["weekday"] != "MON":
-		var calendar_day = Day.instantiate()
+		var calendar_day: = Day.instantiate()
 		calendar_day.modulate = Color(0,0,0,0)
 		grid.add_child(calendar_day)
 		monday_counter -= 1
@@ -35,7 +35,7 @@ func set_up(use_global_month:bool=false) -> void:
 	
 	
 	for day in range(0, Config.calendar[current_month].size()):
-		var calendar_day = Day.instantiate()
+		var calendar_day:Control = Day.instantiate()
 		grid.add_child(calendar_day)
 		calendar_day.set_up(Config.calendar[current_month][day])
 #

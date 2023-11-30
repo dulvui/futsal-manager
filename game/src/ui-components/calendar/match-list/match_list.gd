@@ -6,18 +6,18 @@ extends Popup
 
 
 
-func show_matches(matches:Array):
+func show_matches(matches:Array) -> void:
 	var label_settings:LabelSettings = LabelSettings.new()
 	label_settings.font_size = get_theme_default_font_size()
 	label_settings.font_color = Color.GOLD
 	
-	for matchz in matches:
-		var home_label = Label.new()
+	for matchz:Dictionary in matches:
+		var home_label:Label = Label.new()
 		home_label.text = matchz["home"]
 		home_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		home_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		
-		var result_label = Label.new()
+		var result_label:Label = Label.new()
 		if matchz["result"] == ":":
 			result_label.text = "vs"
 		else:
@@ -25,7 +25,7 @@ func show_matches(matches:Array):
 		result_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		result_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		
-		var away_label = Label.new()
+		var away_label:Label = Label.new()
 		away_label.text = matchz["away"]
 		away_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		away_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT

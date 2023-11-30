@@ -56,7 +56,7 @@ func inizialize_matches() -> void:
 			current_match_dayz.append(matchzz)
 		temp_matches.append(current_match_dayz)
 		
-	for temp:Dictionary in temp_matches:
+	for temp:Array in temp_matches:
 		matches.append(temp)
 	
 	#add to calendar
@@ -69,7 +69,7 @@ func inizialize_matches() -> void:
 			day = i
 			break
 	
-	for match_days:Dictionary in matches:
+	for match_days:Array in matches:
 		# check if next month
 		if day > Config.calendar[month].size() - 1:
 			month += 1
