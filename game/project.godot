@@ -28,6 +28,12 @@ Constants="*res://src/constants.gd"
 ContractUtil="*res://src/utils/contract_util.gd"
 CurrencyUtil="*res://src/utils/currency_util.gd"
 
+[debug]
+
+gdscript/warnings/unused_variable=2
+gdscript/warnings/unreachable_code=2
+gdscript/warnings/untyped_declaration=2
+
 [display]
 
 window/size/viewport_width=1280
