@@ -50,7 +50,7 @@ func get_attack_attributes(attack:ActionUtil.Attack) -> int:
 #		ActionUtil.Attack.HEADER:
 #			return attributes.technical.heading"]
 		ActionUtil.Attack.RUN:
-			var attacker_attributes =  attributes.physical.pace
+			var attacker_attributes:int =  attributes.physical.pace
 			attacker_attributes += attributes.physical.acceleration
 			return attacker_attributes
 	# should never happen
@@ -72,7 +72,7 @@ func get_defense_attributes(attack:ActionUtil.Attack) -> int:
 #			return attributes.technical.heading"]
 		# use player preferences/attirbutes and team tactics pressing or wait
 		ActionUtil.Attack.RUN:
-			var defender_attributes
+			var defender_attributes:int
 			if randi() % 2 == 0:
 #					return Defense.RUN
 				defender_attributes = attributes.physical.pace
@@ -87,7 +87,7 @@ func get_defense_attributes(attack:ActionUtil.Attack) -> int:
 	return -1
 
 func get_goalkeeper_attributes() -> int:
-	var value = 0
+	var value:int = 0
 	value += attributes.goalkeeper.reflexes
 	value += attributes.goalkeeper.positioning
 	value += attributes.goalkeeper.kicking

@@ -19,8 +19,8 @@ const SIGNS:Array = [
 ]
 
 
-func convert_to():
-	pass
+func convert_to() -> int:
+	return 0
 	
-func get_sign():
+func get_sign() -> String:
 	return SIGNS[Config.currency]

@@ -104,7 +104,7 @@ func next_day() -> void:
 	
 	var next_match:Dictionary
 	if next_match_day < Config.calendar[next_match_month].size():
-		for matchz in Config.calendar[next_match_month][next_match_day]["matches"]:
+		for matchz:Dictionary in Config.calendar[next_match_month][next_match_day]["matches"]:
 			if matchz["home"] == Config.team.name or matchz["away"] == Config.team.name:
 				next_match = matchz
 	
@@ -125,7 +125,7 @@ func get_dashborad_date() -> String:
 	return DAYS[date.weekday] + " " + str(date.day + 1) + " " + MONTHS[date.month] + " " + str(date.year)
 
 func get_next_match() -> Dictionary:
-	for matchz in Config.calendar[Config.date.month][Config.date.day]["matches"]:
+	for matchz:Dictionary in Config.calendar[Config.date.month][Config.date.day]["matches"]:
 		if matchz["home"] == Config.team.name or matchz["away"] == Config.team.name:
 			return matchz
 	return {}
@@ -155,24 +155,24 @@ func _get_next_day(_date:Dictionary) -> Dictionary:
 
 
 func is_market_active(_date:Dictionary={}) -> bool:
-	var check_date = date
+	var check_date:Dictionary = date
 	if not _date.is_empty():
 		check_date = _date
 	
-	for market_period in MARKET_PERIODS:
+	for market_period:Dictionary in MARKET_PERIODS:
 		if check_date.month >= market_period.start.month and check_date.day >= market_period.start.day \
 			and check_date.month <=  market_period.end.month and check_date.day <=  market_period.end.day:
 			return true
 	return false
 	
 func is_market_start_today() -> bool:
-	for market_period in MARKET_PERIODS:
+	for market_period:Dictionary in MARKET_PERIODS:
 		if date.month == market_period.start.month and date.day == market_period.start.day:
 			return true
 	return false
 	
 func is_market_end_today() -> bool:
-	for market_period in MARKET_PERIODS:
+	for market_period:Dictionary in MARKET_PERIODS:
 		if date.month == market_period.end.month and date.day == market_period.end.day:
 			return true
 	return false

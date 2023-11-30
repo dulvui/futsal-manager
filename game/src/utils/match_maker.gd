@@ -49,14 +49,14 @@ func inizialize_matches() -> void:
 		
 	# ritorno
 	var temp_matches:Array = []
-	for match_dayz in matches:
+	for match_dayz:Array in matches:
 		var current_match_dayz:Array = []
-		for matchess in match_dayz:
+		for matchess:Dictionary in match_dayz:
 			var matchzz:Dictionary = {"home": matchess["away"],"away": matchess["home"], "result":":"}
 			current_match_dayz.append(matchzz)
 		temp_matches.append(current_match_dayz)
 		
-	for temp in temp_matches:
+	for temp:Dictionary in temp_matches:
 		matches.append(temp)
 	
 	#add to calendar
@@ -69,7 +69,7 @@ func inizialize_matches() -> void:
 			day = i
 			break
 	
-	for match_days in matches:
+	for match_days:Dictionary in matches:
 		# check if next month
 		if day > Config.calendar[month].size() - 1:
 			month += 1

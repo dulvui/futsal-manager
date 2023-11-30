@@ -176,7 +176,7 @@ func init_leagues() -> Array[League]:
 	var all_leagues:Array[League] = []
 	var dir:DirAccess = DirAccess.open(Constants.LEAGUES_DIR)
 	for file in dir.get_files():
-		var league = load(Constants.LEAGUES_DIR + file)
+		var league:League = load(Constants.LEAGUES_DIR + file)
 		all_leagues.append(league)
 	
 	return all_leagues
@@ -202,7 +202,7 @@ func next_season() -> void:
 
 
 # save on quit on mobile
-func _notification(what) -> void:
+func _notification(what:int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		save_all_data()
 		get_tree().quit() # default behavior

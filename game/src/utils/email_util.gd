@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func count_unread_messages() -> int:
 	var counter:int = 0
-	for message in messages:
+	for message:Dictionary in messages:
 		if not message["read"]:
 			counter += 1
 	return counter
@@ -66,7 +66,7 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 			message["message"] = "The player acceptet " + content["player"]["name"] + " " + content["player"]["surname"] + " the contract"
 			message["title"] = "CONTRACT_SIGNED"
 		MessageTypes.NEXT_MATCH:
-			var team_name = content["home"]
+			var team_name:String = content["home"]
 			if team_name == Config.team.name:
 				team_name = content["away"]
 			message["message"] = "The next match is against " + team_name + ".\nThe quotes are: "
