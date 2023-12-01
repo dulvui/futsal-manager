@@ -39,10 +39,10 @@ func set_up(include_lineup:bool, active_team:Team = null) -> void:
 			team_select.add_item(team.name)
 			
 	pos_select.add_item("NO_POS")
-	for pos in POSITIONS:
+	for pos:String in POSITIONS:
 		pos_select.add_item(pos)
 		
-	for info_type in INFO_TYPES:
+	for info_type:String in INFO_TYPES:
 		info_select.add_item(info_type)
 
 

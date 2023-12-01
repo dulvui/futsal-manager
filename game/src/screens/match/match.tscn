@@ -260,12 +260,6 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
-[connection signal="action_message" from="MatchSimulator" to="." method="_on_match_simulator_action_message"]
-[connection signal="half_time" from="MatchSimulator" to="." method="_on_match_simulator_half_time"]
-[connection signal="match_end" from="MatchSimulator" to="." method="_on_match_simulator_match_end"]
-[connection signal="penalty" from="MatchSimulator" to="." method="_on_match_simulator_penalty"]
-[connection signal="shot" from="MatchSimulator" to="." method="_on_match_simulator_shot"]
-[connection signal="update" from="MatchSimulator" to="." method="_on_match_simulator_update"]
 [connection signal="pressed" from="HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Slower" to="." method="_on_Slower_pressed"]
 [connection signal="pressed" from="HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Faster" to="." method="_on_Faster_pressed"]
 [connection signal="pressed" from="HUD/HSplitContainer/Buttons/Field" to="." method="_on_Field_pressed"]
@@ -275,5 +269,4 @@ autostart = true
 [connection signal="pressed" from="HUD/HSplitContainer/Buttons/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="HUD/HSplitContainer/Buttons/SKIP" to="." method="_on_SKIP_pressed"]
 [connection signal="pressed" from="HUD/HSplitContainer/Buttons/Dashboard" to="." method="_on_Dashboard_pressed"]
-[connection signal="change" from="Formation" to="." method="_on_Formation_change"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
