@@ -21,16 +21,16 @@ func set_up(player:Player, active_headers:Array[String]) -> void:
 	
 	name_label.set_text(player.surname)
 	position_label.set_text(Player.Position.keys()[player.position])
-	for key in Constants.ATTRIBUTES.keys():
-		for attribute in Constants.ATTRIBUTES[key]:
+	for key:String in Constants.ATTRIBUTES.keys():
+		for attribute:String in Constants.ATTRIBUTES[key]:
 			var color_number:ColorNumber = ColorNumber.instantiate()
 			color_number.key = attribute
 			color_number.set_up(player.attributes.get(key).get(attribute))
 			color_number.visible = attribute in active_headers
 			attributes.add_child(color_number)
 
-func _on_select_pressed():
+func _on_select_pressed() -> void:
 	select.emit()
 
-func _on_info_pressed():
+func _on_info_pressed() -> void:
 	info.emit()

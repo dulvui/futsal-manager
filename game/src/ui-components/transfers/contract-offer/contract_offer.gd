@@ -7,19 +7,19 @@ extends Control
 signal cancel
 signal confirm
 
-var income = 0
-var years = 1
-var buy_clause = 0
+var income:int = 0
+var years:int = 1
+var buy_clause:int = 0
 
 var team:Team
 var player:Player
-var transfer
+var transfer:Transfer
 
 
 func _ready() -> void:
 	team = Config.team
 	
-func set_up(new_transfer) -> void:
+func set_up(new_transfer:Transfer) -> void:
 	transfer = new_transfer
 	player = new_transfer["player"]
 	
@@ -63,7 +63,7 @@ func _on_BuyClauseMore_pressed() -> void:
 func _on_Confirm_pressed() -> void:
 	# add contract to pendng contracts 
 	
-	var def_contract = {
+	var def_contract:Dictionary = {
 		"player" : player,
 		"price" : 0,
 		"money/week" : income,
@@ -83,13 +83,12 @@ func _on_Confirm_pressed() -> void:
 		#send loan contracts with other signal or type
 		"is_on_loan" : false # if player is on loan, the other squad gets copy of contract with percentage of income
 	}
-	for transferz in TransferUtil.current_transfers:
+	for transferz:Transfer in TransferUtil.current_transfers:
 		if transfer == transferz:
 			transferz["contract"] = def_contract
 			transferz["days"] = 3
 			transferz["state"] = "CONTRACT_PENDING"
-			print("CAZOOOOOOOO")
-			EmailUtil.new_message(EmailUtil.MessageTypes.CONTRACT_OFFER_MADE, transfer)
+			#EmailUtil.new_message(EmailUtil.MessageTypes.CONTRACT_OFFER_MADE, transfer)
 	emit_signal("confirm")
 #	ContractUtil.current_contract_offers.append(def_contract)
 

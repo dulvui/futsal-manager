@@ -12,12 +12,12 @@ var animation_player:AnimationPlayer = $AnimationPlayer
 @onready
 var player_list:Control = $PlayerList
 
-var formations:Array = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
+var formations:Array[String] = ["2-2","1-2-1","1-1-2","2-1-1","1-3","3-1","4-0"]
 var player_to_replace:int
 var team:Team
 
 func _ready() -> void:
-	for formation in formations:
+	for formation:String in formations:
 		$FormationSelect.add_item(formation)
 		
 	$FormationSelect.selected = formations.find("2-2")
@@ -45,27 +45,27 @@ func _set_active_players() -> void:
 	$Field/P.set_player(team.line_up.players[3])
 	pass
 
-func _on_D_change_player(_player) -> void:
+func _on_D_change_player(_player:Player) -> void:
 	player_to_replace = 0
 	player_list.show()
 
-func _on_WL_change_player(_player) -> void:
+func _on_WL_change_player(_player:Player) -> void:
 	player_to_replace = 1
 	player_list.show()
 
-func _on_WR_change_player(_player) -> void:
+func _on_WR_change_player(_player:Player) -> void:
 	player_to_replace = 2
 	player_list.show()
 
-func _on_P_change_player(_player) -> void:
+func _on_P_change_player(_player:Player) -> void:
 	player_to_replace = 3
 	player_list.show()
 	
-func _on_G_change_player(_player) -> void:
+func _on_G_change_player(_player:Player) -> void:
 	player_to_replace = -1
 	player_list.show()
 
-func _on_PlayerList_select_player(_player) -> void:
+func _on_PlayerList_select_player(_player:Player) -> void:
 	_change_player(_player)
 	_set_active_players()
 	player_list.hide()

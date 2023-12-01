@@ -19,13 +19,13 @@ func update_messages() -> void:
 		child.queue_free()
 	
 	for i in range(EmailUtil.messages.size()-1,-1,-1): # reverse list
-		var title_label = Label.new()
+		var title_label:Label = Label.new()
 		title_label.custom_minimum_size = Vector2(700, 0)
 		title_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		title_label.text = EmailUtil.messages[i]["title"]
 		$ScrollContainer/Mails.add_child(title_label)
 		
-		var button = Button.new()
+		var button:Button = Button.new()
 		if EmailUtil.messages[i]["read"]:
 			button.text = "READ"
 		else:
@@ -57,12 +57,12 @@ func show_message(message_text:Dictionary) -> void:
 	update_messages()
 
 
-func show_offer_contract(content) -> void:
+func show_offer_contract(content:Dictionary) -> void:
 	emit_signal("offer_contract",content)
 
 func _on_Action_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_Close_pressed():
+func _on_Close_pressed() -> void:
 	$MessageContainer.hide()

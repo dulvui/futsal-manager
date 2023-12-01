@@ -96,7 +96,7 @@ func _on_ActionUtil_action_message(message:String) -> void:
 	emit_signal("action_message", message)
 
 
-func _on_action_util_shot(player:Player, on_target:bool, success:bool):
+func _on_action_util_shot(player:Player, on_target:bool, success:bool) -> void:
 	shot.emit(player, on_target , success, action_util.action_buffer)
 	if home_has_ball:
 		home_stats.shots += 1
@@ -114,61 +114,61 @@ func _on_action_util_shot(player:Player, on_target:bool, success:bool):
 			player.statistics[-1].goals += 1
 
 
-func _on_action_util_possession_change():
+func _on_action_util_possession_change() -> void:
 	home_has_ball = not home_has_ball
 
 # STATS
 
-func _on_action_util_corner(player:Player):
+func _on_action_util_corner(player:Player) -> void:
 	if home_has_ball:
 		home_stats.corners += 1
 	else:
 		away_stats.corners += 1
 
 
-func _on_action_util_foul(player:Player):
+func _on_action_util_foul(player:Player) -> void:
 	if not home_has_ball:
 		home_stats.fouls += 1
 	else:
 		away_stats.fouls += 1
 
 
-func _on_action_util_freekick(player:Player):
+func _on_action_util_freekick(player:Player) -> void:
 	if home_has_ball:
 		home_stats.free_kicks += 1
 	else:
 		away_stats.free_kicks += 1
 
 
-func _on_action_util_kick_in(player:Player):
+func _on_action_util_kick_in(player:Player) -> void:
 	if home_has_ball:
 		home_stats.kick_ins += 1
 	else:
 		away_stats.kick_ins += 1
 
 
-func _on_action_util_pazz(player, success):
+func _on_action_util_pazz(player:Player, success:bool) -> void:
 	if home_has_ball:
 		home_stats.passes += 1
 	else:
 		away_stats.passes += 1
 
 
-func _on_action_util_penalty(player:Player):
+func _on_action_util_penalty(player:Player) -> void:
 	if home_has_ball:
 		home_stats.penalties += 1
 	else:
 		away_stats.penalties += 1
 
 
-func _on_action_util_red_card(player:Player):
+func _on_action_util_red_card(player:Player) -> void:
 	if not home_has_ball:
 		home_stats.red_cards += 1
 	else:
 		away_stats.red_cards += 1
 
 
-func _on_action_util_yellow_card(player:Player):
+func _on_action_util_yellow_card(player:Player) -> void:
 	if not home_has_ball:
 		home_stats.yellow_cards += 1
 	else:

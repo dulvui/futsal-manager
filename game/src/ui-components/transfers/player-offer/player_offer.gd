@@ -9,7 +9,7 @@ signal confirm
 var team:Team
 var player:Player
 
-var regex = RegEx.new()
+var regex:RegEx = RegEx.new()
 var oldtext:String = ""
 
 var total:int = 0
@@ -38,10 +38,10 @@ func _ready() -> void:
 		exchange_players_button.add_item(player.name + " " + str(player.price / 1000) + "K")
 		exchange_players.append(player)
 
-func _process(_delta) -> void:
+func _process(_delta:float) -> void:
 	total_label.text = str(total)
 
-func set_player(new_player) -> void:
+func set_player(new_player:Player) -> void:
 	player = new_player
 	info_label.text = "The player " + player.name + " has a value of " + str(player.price)
 
@@ -61,13 +61,13 @@ func _on_Less_pressed() -> void:
 	_calc_total()
 
 
-func _on_ExchangePlayers_item_selected(index) -> void:
-	var exchange_player = exchange_players[index]
+func _on_ExchangePlayers_item_selected(index:int) -> void:
+	var exchange_player:Player = exchange_players[index]
 	exchange_players.remove_at(index)
 	
 	selected_players.append(player)
 
-	var remove_button = Button.new()
+	var remove_button:Button = Button.new()
 	remove_button.text = exchange_player.name + " " + str(exchange_player.price/1000) + "K"
 	remove_button.pressed.connect(remove_from_list.bind(exchange_player))
 	selected_players_box.add_child(remove_button)
@@ -76,7 +76,7 @@ func _on_ExchangePlayers_item_selected(index) -> void:
 	
 	_calc_total()
 	
-func remove_from_list(player) -> void:
+func remove_from_list(player:Player) -> void:
 	for child in selected_players_box.get_children():
 		child.queue_free()
 	selected_players.erase(player)
@@ -84,8 +84,8 @@ func remove_from_list(player) -> void:
 	
 	# might be broken after Godot 4 upgrade, check _player and selected player
 	# before only _player existed
-	for selected_player in selected_players:
-		var remove_button = Button.new()
+	for selected_player:Player in selected_players:
+		var remove_button:Button = Button.new()
 		remove_button.text = selected_player.name + " " + str(selected_player.price/1000) + "K"
 		remove_button.pressed.connect(remove_from_list.bind(selected_player))
 		selected_players_box.add_child(remove_button)
@@ -95,12 +95,12 @@ func remove_from_list(player) -> void:
 	
 func _calc_total() -> void:
 	total = amount
-	for selected_player in selected_players:
+	for selected_player:Player in selected_players:
 		total += selected_player.price # use other calculated value be setimating importanc efor new tweam
 	
 
 
-func _on_Amount_text_changed(new_text) -> void:
+func _on_Amount_text_changed(new_text:String) -> void:
 	if regex.search(new_text):
 		amount_label.text = new_text   
 		oldtext = amount_label.text
@@ -117,7 +117,8 @@ func _on_Amount_text_changed(new_text) -> void:
 
 
 func _on_Confirm_pressed() -> void:
-	var transfer = {
+	# TODO use transfer resource 
+	var transfer:Dictionary = {
 		"player" : player,
 		"money" : amount,
 		"exchange_players" : selected_players,

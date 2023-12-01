@@ -9,9 +9,9 @@ signal info_player(player:Player)
 
 const PlayerRow = preload("res://src/ui-components/player-list/player-row/player_row.tscn")
 
-@onready var header_container = $VBoxContainer/Header
-@onready var players_container = $VBoxContainer/Players
-@onready var page_indicator = $VBoxContainer/Footer/PageIndicator
+@onready var header_container:HBoxContainer = $VBoxContainer/Header
+@onready var players_container:VBoxContainer = $VBoxContainer/Players
+@onready var page_indicator:Label = $VBoxContainer/Footer/PageIndicator
 
 var headers:Array[String]
 var all_players:Array[Player]
@@ -40,8 +40,8 @@ func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]
 	
 	sort_memory["surname"] = false
 	sort_memory["position"] = false
-	for key in Constants.ATTRIBUTES.keys():
-		for attribute in Constants.ATTRIBUTES[key]:
+	for key:String in Constants.ATTRIBUTES.keys():
+		for attribute:String in Constants.ATTRIBUTES[key]:
 			sort_memory[key + "_" + attribute] = false
 	
 	_set_up_headers()
@@ -74,7 +74,7 @@ func _set_up_headers() -> void:
 	header_container.add_child(name_button)
 	
 	# ohter headers
-	for header in headers.slice(2):
+	for header:String in headers.slice(2):
 		var button:Button = Button.new()
 		button.custom_minimum_size.x = 34
 		button.text = header.substr(0,3)
@@ -98,14 +98,14 @@ func _set_up_content() -> void:
 		child.queue_free()
 	
 	if players.size() > 0:
-		for player in players.slice(page * page_size, (page + 1) * page_size):
-			var player_row = PlayerRow.instantiate()
+		for player:Player in players.slice(page * page_size, (page + 1) * page_size):
+			var player_row:PlayerRow = PlayerRow.instantiate()
 			players_container.add_child(player_row)
 			player_row.select.connect(select.bind(player))
 			player_row.info.connect(info.bind(player))
 			player_row.set_up(player, headers)
 	else :
-		var label = Label.new()
+		var label:Label = Label.new()
 		label.text = "NO_PLAYER_FOUND"
 		players_container.add_child(label)
 		
@@ -113,16 +113,16 @@ func _set_up_content() -> void:
 func _update_page_indicator() -> void:
 	page_indicator.text = "%d / %d"%[page + 1, page_max + 1]
 
-func filter(filters: Dictionary, exlusive = false) -> void:
+func filter(filters: Dictionary, exlusive:bool = false) -> void:
 	if filters:
 		page = 0
 		players = []
 		for player in all_players:
-			var filter_counter = 0
+			var filter_counter:int = 0
 			# because value can be empty
-			var valid_filter_counter = 0
-			for key in filters.keys():
-				var value = filters[key]
+			var valid_filter_counter:int = 0
+			for key:String in filters.keys():
+				var value:String = filters[key]
 				if value:
 					valid_filter_counter += 1
 					if exlusive:
@@ -148,7 +148,7 @@ func select(player:Player) -> void:
 	select_player.emit(player)
 	
 func _sort_attributes(key:String) -> void:
-	players.sort_custom(func(a:Player, b:Player): return a.attributes.get(info_type).get(key) < b.attributes.get(info_type).get(key))
+	players.sort_custom(func(a:Player, b:Player) -> bool: return a.attributes.get(info_type).get(key) < b.attributes.get(info_type).get(key))
 	
 	sort_memory[info_type + "_" + key] = not sort_memory[info_type + "_" + key]
 	
@@ -158,7 +158,7 @@ func _sort_attributes(key:String) -> void:
 	_set_up_content()
 	
 func _sort_info(key:String) -> void:
-	players.sort_custom(func(a:Player, b:Player): return a.get(key) < b.get(key))
+	players.sort_custom(func(a:Player, b:Player) -> bool: return a.get(key) < b.get(key))
 	
 	sort_memory[key] = not sort_memory[key]
 	
@@ -168,7 +168,7 @@ func _sort_info(key:String) -> void:
 	_set_up_content()
 
 
-func _on_next_2_pressed():
+func _on_next_2_pressed() -> void:
 	page += 5
 	if page > page_max:
 		page = 0
@@ -176,7 +176,7 @@ func _on_next_2_pressed():
 	_set_up_content()
 
 
-func _on_next_pressed():
+func _on_next_pressed() -> void:
 	page += 1
 	if page > page_max:
 		page = 0
@@ -184,14 +184,14 @@ func _on_next_pressed():
 	_set_up_content()
 
 
-func _on_prev_pressed():
+func _on_prev_pressed() -> void:
 	page -= 1
 	if page < 0:
 		page = page_max
 	_update_page_indicator()
 	_set_up_content()
 
-func _on_prev_2_pressed():
+func _on_prev_2_pressed() -> void:
 	page -= 5
 	if page < 0:
 		page = page_max

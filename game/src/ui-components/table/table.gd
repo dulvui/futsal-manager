@@ -4,14 +4,14 @@
 
 extends Control
 
-@onready var grid = $VBoxContainer/ScrollContainer/GridContainer
+@onready var grid:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
 
 func _ready() -> void:
 	var pos:int = 1
 	
 	# transform table dictionary to array
 	var table_array:Array = []
-	for team in Config.table:
+	for team:String in Config.table:
 		table_array.append({
 			"name" : team,
 			"points" : Config.table[team]["points"],
@@ -26,7 +26,7 @@ func _ready() -> void:
 	table_array.sort_custom(point_sorter)
 	
 	
-	for team in table_array:
+	for team:Dictionary in table_array:
 		var pos_label:Label = Label.new()
 		style_label(pos_label)
 		pos_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -90,7 +90,7 @@ func _ready() -> void:
 			goals_against_label.label_settings = label_settings
 			points_label.label_settings = label_settings
 			
-func style_label(label:Label):
+func style_label(label:Label) -> void:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label.custom_minimum_size = Vector2(60, 0)
 
