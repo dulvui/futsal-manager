@@ -48,7 +48,7 @@ func set_up(date:Dictionary) -> void:
 
 
 func _on_Match_pressed(matches:Array) -> void:
-	var match_list:Control = MatchList.instantiate()
+	var match_list:Popup = MatchList.instantiate()
 	add_child(match_list)
 	match_list.show_matches(matches)
 

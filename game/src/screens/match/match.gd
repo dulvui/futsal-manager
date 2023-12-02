@@ -45,7 +45,7 @@ func _ready() -> void:
 	last_active_view = comments
 
 
-func _on_match_simulator_update():
+func _on_match_simulator_update() -> void:
 	stats.update_stats(match_simulator.home_stats, match_simulator.away_stats)
 	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 	
@@ -65,10 +65,10 @@ func match_end() -> void:
 	
 	
 	#simulate all games for now.
-	for matchday in Config.calendar[Config.date.month][Config.date.day]["matches"]:
+	for matchday:Dictionary in Config.calendar[Config.date.month][Config.date.day]["matches"]:
 		if matchday["home"] != home_team["name"]:
-			var random_home_goals = randi()%10
-			var random_away_goals = randi()%10
+			var random_home_goals:int = randi()%10
+			var random_away_goals:int = randi()%10
 			
 			matchday["result"] = str(random_home_goals) + ":" + str(random_away_goals)
 			print(matchday["home"] + " vs " + matchday["away"])

@@ -11,7 +11,7 @@ enum Formations {TT=22,OTO=121,OOT=112,TOO=211,TO=31,OT=13}
 var goalkeeper:Player
 
 # trainer tactics settings
-var tactics = {
+var tactics:Dictionary = {
 	"formation" : Formations.TT,
 	"mentality" : Mentality.NORMAL,
 	"pressing" : false,
@@ -20,9 +20,9 @@ var tactics = {
 }
 
 # to calculate possession
-var possession_counter = 0.0
+var possession_counter:float = 0.0
 
-var has_ball = false
+var has_ball:bool = false
 
 var players:Array[Player]
 # player that is attacking/defending
@@ -30,7 +30,7 @@ var active_player:Player
 
 func set_up(team:Team) -> void: # TODO add tactics
 	players = []
-	var team_players = team.line_up.players
+	var team_players:Array[Player] = team.line_up.players
 	goalkeeper = team.line_up.goalkeeper
 #	goalkeeper.set_up(team.line_up.goalkeeper)
 	
@@ -44,7 +44,7 @@ func update_players() -> void:
 	pass
 
 func change_active_player() -> Player:
-	var other_players = players.duplicate()
+	var other_players:Array[Player] = players.duplicate()
 	other_players.remove_at(players.find(active_player))
 	
 	active_player = other_players[(randi() % other_players.size())]

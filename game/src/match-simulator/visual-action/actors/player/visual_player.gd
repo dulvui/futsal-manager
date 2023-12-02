@@ -5,23 +5,22 @@
 extends Node2D
 
 @export
-var color = Color.REBECCA_PURPLE
+var color:Color = Color.REBECCA_PURPLE
 @export 
 var nr:int = 1
 
-var moved = false
+var moved:bool = false
 
-@onready var sprite = $Sprites
-@export 
-var is_field_player = true
+@onready var sprite:Node2D = $Sprites
+@export var is_field_player:bool = true
 
-var field_width
-var field_height
-
+var field_width:int
+var field_height:int
 
 
-func set_up(_nr, _color, is_home_player, _field_width, _field_height, start_position = null) -> void:
-	if start_position:
+
+func set_up(_nr:int, _color:Color, is_home_player:bool, _field_width:int, _field_height:int, start_position:Vector2 = Vector2.ZERO) -> void:
+	if start_position != Vector2.ZERO:
 		position = start_position
 	nr = _nr
 	$ShirtNumber.text = str(nr)
@@ -29,7 +28,7 @@ func set_up(_nr, _color, is_home_player, _field_width, _field_height, start_posi
 	field_height = _field_height
 	field_width = _field_width
 	
-func move(destination, time) -> Vector2:
+func move(destination:Vector2, time:float) -> Vector2:
 	var tween:Tween = create_tween()
 	destination = _stay_inside_field(destination)
 	tween.tween_property(self, "position", destination, time)
@@ -37,12 +36,12 @@ func move(destination, time) -> Vector2:
 	moved = true
 	return destination
 	
-func random_movement(time) -> void:
+func random_movement(time:float) -> void:
 	if is_field_player:
 		if moved:
 			moved = false
 		else:
-			var final_position = _stay_inside_field(position - Vector2(randf_range(-50,50),randf_range(-50,50)))
+			var final_position:Vector2 = _stay_inside_field(position - Vector2(randf_range(-50,50),randf_range(-50,50)))
 			var tween:Tween = create_tween()
 			tween.tween_property(self, "position", final_position, time)
 
