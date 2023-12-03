@@ -9,7 +9,7 @@ signal injury
 
 # trains the players and increases therir stats depending on 
 # training plan, players can also injure during training 
-func train_players(players, plan) -> void:
+func train_players() -> void:
 	pass
 
 
