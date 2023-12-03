@@ -90,6 +90,7 @@ func match_end() -> void:
 
 func half_time() -> void:
 	pause_button.text = tr("CONTINUE")
+	first_half = false
 
 
 func _on_Field_pressed() -> void:
@@ -177,7 +178,7 @@ func _on_match_simulator_shot(player:Player, on_target:bool, goal:bool, action_b
 	
 	# Visual Action
 	var visual_action:Node2D = VisualAction.instantiate()
-	visual_action.set_up(match_simulator.home_has_ball, goal, on_target, home_team, away_team, action_buffer, home_color.color, away_color.color)
+	visual_action.set_up(first_half, match_simulator.home_has_ball, goal, on_target, home_team, away_team, action_buffer, home_color.color, away_color.color)
 	$HUD/HSplitContainer/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
 	await visual_action.action_finished
 	

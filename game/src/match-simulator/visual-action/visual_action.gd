@@ -88,7 +88,7 @@ func _physics_process(delta:float) -> void:
 	$Referee2/Sprites.look_at(ball.global_position)
 
 		
-func set_up(home_goal:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array[Dictionary], _home_color:Color, _away_color:Color) -> void:
+func set_up(_first_half:bool, home_goal:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array[Dictionary], _home_color:Color, _away_color:Color) -> void:
 	is_home_goal = home_goal
 	is_goal = _is_goal
 	on_tagret = _on_target
