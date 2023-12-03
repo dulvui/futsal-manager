@@ -13,7 +13,8 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var time_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Time
 @onready var result_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Result
-@onready var formation:Control = $Formation
+@onready var formation:Control = $FomationPopup/Formation
+@onready var formation_pop:Popup = $FomationPopup
 @onready var pause_button:Button = $HUD/HSplitContainer/Buttons/Pause
 
 var last_active_view:Control
@@ -135,14 +136,14 @@ func _on_Pause_pressed() -> void:
 	if paused:
 		pause_button.text = tr("CONTINUE")
 	else:
-		formation.hide()
+		formation_pop.hide()
 		pause_button.text = tr("PAUSE")
 
 
 func _on_Formation_pressed() -> void:
 	match_simulator.pause()
 	pause_button.text = tr("CONTINUE")
-	formation.show()
+	formation_pop.popup()
 
 
 func _on_Formation_change() -> void:

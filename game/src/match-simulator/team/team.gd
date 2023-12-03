@@ -30,12 +30,9 @@ var active_player:Player
 
 func set_up(team:Team) -> void: # TODO add tactics
 	players = []
-	var team_players:Array[Player] = team.line_up.players
 	goalkeeper = team.line_up.goalkeeper
-#	goalkeeper.set_up(team.line_up.goalkeeper)
 	
-	players.append_array(team_players)
-
+	players.append_array(team.line_up.players)
 	active_player = players[-1]
 	
 func update_players() -> void:
