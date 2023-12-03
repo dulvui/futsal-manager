@@ -103,6 +103,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "32sds"
 
+[node name="HomeColor" type="ColorRect" parent="HUD/HSplitContainer/CentralContainer/TopBar/Labels"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
 [node name="Home" type="Label" parent="HUD/HSplitContainer/CentralContainer/TopBar/Labels"]
 layout_mode = 2
 text = "Robledo"
@@ -114,6 +118,10 @@ text = "0:0"
 [node name="Away" type="Label" parent="HUD/HSplitContainer/CentralContainer/TopBar/Labels"]
 layout_mode = 2
 text = "Cisneros"
+
+[node name="AwayColor" type="ColorRect" parent="HUD/HSplitContainer/CentralContainer/TopBar/Labels"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
 
 [node name="TimeBar" type="ProgressBar" parent="HUD/HSplitContainer/CentralContainer/TopBar"]
 custom_minimum_size = Vector2(0, 32)

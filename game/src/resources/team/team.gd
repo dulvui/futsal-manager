@@ -13,6 +13,9 @@ class_name Team
 @export var salary_budget:int
 @export var players:Array[Player]
 @export var stadium:Stadium
+# shirt colors
+# 0: home color, 1: away, 2 third color
+@export var colors:Array[Color]
 
 func create_stadium(name:String, capacity:int, year_built:int) -> void:
 	stadium = Stadium.new()

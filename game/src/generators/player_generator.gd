@@ -45,7 +45,7 @@ func _run() -> void:
 	leagues["it"] = JSON.parse_string(leagues_file.get_as_text())
 
 
-	for l:League in leagues["it"]:
+	for l:Dictionary in leagues["it"]:
 		var file_name:String = Constants.LEAGUES_DIR + l["name"].replace(" ", "-").to_lower() +".tres" 
 		print("Generate players for ", l["name"])
 		var league:League = League.new()
@@ -59,6 +59,11 @@ func _run() -> void:
 			var team:Team = Team.new()
 			team.name = t
 			team.budget = 1234
+			team.colors = []
+			team.colors.append(Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)))
+			team.colors.append(team.colors[0].inverted())
+			team.colors.append(Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)))
+			
 			team.create_stadium(t + "Stadium", 1234, 1990)
 			assign_players_to_team(team)
 			league.add_team(team)

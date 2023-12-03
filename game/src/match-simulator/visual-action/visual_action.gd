@@ -35,6 +35,9 @@ var is_home_goal:bool
 var is_goal:bool
 var on_tagret:bool
 
+var home_color:Color
+var away_color:Color
+
 
 var is_shooting:bool = false
 
@@ -85,14 +88,15 @@ func _physics_process(delta:float) -> void:
 	$Referee2/Sprites.look_at(ball.global_position)
 
 		
-func set_up(home_goal:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array[Dictionary]) -> void:
+func set_up(home_goal:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array[Dictionary], _home_color:Color, _away_color:Color) -> void:
 	is_home_goal = home_goal
 	is_goal = _is_goal
 	on_tagret = _on_target
 	actions = action_buffer.duplicate(true)
 	home_team = _home_team.duplicate(true)
 	away_team = _away_team.duplicate(true)
-	
+	home_color = _home_color
+	away_color = _away_color
 	# reduce actons randomly
 	actions = actions.slice(randi() % actions.size() - 3, actions.size())
 	
@@ -104,7 +108,7 @@ func _player_setup() -> void:
 	home_goalkeeper.set_up(goalkeeper_home.nr, Color.LIGHT_BLUE, true, WIDTH, HEIGHT)
 	for player in home_team.line_up.players:
 		var visual_player:Node2D = VisualPlayer.instantiate()
-		visual_player.set_up(player.nr, Color.BLUE, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
+		visual_player.set_up(player.nr, home_color, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
 		$HomePlayers.add_child(visual_player)
 		home_visual_players.append(visual_player)
 		home_index += 1
@@ -115,7 +119,7 @@ func _player_setup() -> void:
 	away_goalkeeper.set_up(goalkeeper_away.nr, Color.LIGHT_CORAL, true, WIDTH, HEIGHT)
 	for player in away_team.line_up.players:
 		var visual_player:Node2D = VisualPlayer.instantiate()
-		visual_player.set_up(player.nr, Color.RED, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
+		visual_player.set_up(player.nr, away_color, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
 		$AwayPlayers.add_child(visual_player)
 		away_visual_players.append(visual_player)
 		away_index += 1

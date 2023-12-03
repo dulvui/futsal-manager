@@ -16,6 +16,9 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var formation:Control = $FomationPopup/Formation
 @onready var formation_pop:Popup = $FomationPopup
 @onready var pause_button:Button = $HUD/HSplitContainer/Buttons/Pause
+@onready var home_color:ColorRect = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/HomeColor
+@onready var away_color:ColorRect = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/AwayColor
+
 
 var last_active_view:Control
 
@@ -44,7 +47,14 @@ func _ready() -> void:
 	match_simulator.set_up(home_team,away_team)
 	
 	last_active_view = comments
-
+	
+	# set colors
+	home_color.color = home_team.colors[0]
+	if home_team.colors[0] != away_team.colors[1]:
+		away_color.color = away_team.colors[1]
+	else:
+		away_color.color = away_team.colors[2]
+	
 
 func _on_match_simulator_update() -> void:
 	stats.update_stats(match_simulator.home_stats, match_simulator.away_stats)
@@ -167,7 +177,7 @@ func _on_match_simulator_shot(player:Player, on_target:bool, goal:bool, action_b
 	
 	# Visual Action
 	var visual_action:Node2D = VisualAction.instantiate()
-	visual_action.set_up(match_simulator.home_has_ball, goal, on_target, home_team, away_team, action_buffer)
+	visual_action.set_up(match_simulator.home_has_ball, goal, on_target, home_team, away_team, action_buffer, home_color.color, away_color.color)
 	$HUD/HSplitContainer/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
 	await visual_action.action_finished
 	
