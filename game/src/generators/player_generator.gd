@@ -23,12 +23,12 @@ var date:Dictionary
 var max_timestamp:int
 var min_timestamp:int
 
-func _run():
+func _run() -> void:
 	# create date ranges
 	# starts from current year and substracts min/max years
 	# youngest player can be 15 and oldest 45
 	date = Time.get_date_dict_from_system()
-	var max_date = date.duplicate()
+	var max_date:Dictionary = date.duplicate()
 	max_date.month = 1
 	max_date.day = 1
 	max_date.year -= 15 
@@ -37,15 +37,15 @@ func _run():
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 	
 	# TODO iterate over all nationalities
-	var names_file = FileAccess.open(NAMES_DIR + "it.json", FileAccess.READ)
+	var names_file:FileAccess = FileAccess.open(NAMES_DIR + "it.json", FileAccess.READ)
 	names["it"] = JSON.parse_string(names_file.get_as_text())
 	
 	# TODO iterate over all nationalities
-	var leagues_file = FileAccess.open(LEAGUES_DIR + "it.json", FileAccess.READ)
+	var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + "it.json", FileAccess.READ)
 	leagues["it"] = JSON.parse_string(leagues_file.get_as_text())
 
 
-	for l in leagues["it"]:
+	for l:League in leagues["it"]:
 		var file_name:String = Constants.LEAGUES_DIR + l["name"].replace(" ", "-").to_lower() +".tres" 
 		print("Generate players for ", l["name"])
 		var league:League = League.new()
@@ -54,7 +54,7 @@ func _run():
 		# TODO change to fit other nations
 		league.nation = League.Nations.IT
 		print(league["teams"])
-		for t in l["teams"]:
+		for t:String in l["teams"]:
 			print(t)
 			var team:Team = Team.new()
 			team.name = t
@@ -74,7 +74,7 @@ func _run():
 		print("Read team teams size ", read_league.teams.size())
 
 
-func assign_players_to_team(team:Team):
+func assign_players_to_team(team:Team) -> Team:
 	var id:int = 1
 	team.id = id
 	id += 1
@@ -82,9 +82,9 @@ func assign_players_to_team(team:Team):
 	
 	team.line_up = LineUp.new()
 	
-	for position in Player.Position.values():
+	for position:int in Player.Position.values():
 		
-		var amount = randi_range(2, 5)
+		var amount:int = randi_range(2, 5)
 		if position == Player.Position.G:
 			amount = 3
 		
@@ -212,7 +212,7 @@ func get_age_factor(age:int ) -> int:
 		age_factor = 16
 	return age_factor
 
-func get_price(age, prestige, position:Player.Position) -> int:
+func get_price(age:int, prestige:int, position:Player.Position) -> int:
 	var age_factor:int = min(abs(age - 30), 20)
 	var pos_factor:int = 0
 	if position == Player.Position.G:
@@ -253,13 +253,9 @@ func get_random_morality() -> Player.Morality:
 		return Player.Morality.Good
 	return Player.Morality.Excellent
 
-func get_contract(prestige, position, age) -> Contract:
+func get_contract(prestige:int, position:int, age:int) -> Contract:
 	var contract:Contract = Contract.new()
 	
-	var past:int = randi_range(1, 2)
-	var future:int = randi_range(1, 3)
-
-	# price_factor = randi_range()
 	contract.price = 0
 	contract.money_week = 0
 	contract.start_date = Time.get_date_dict_from_system()
@@ -286,7 +282,7 @@ func get_surname(nationality:League.Nations) -> String:
 	return names["it"]["last_names"][randi() % size]
 
 func create_player(nationality:League.Nations, position:Player.Position, nr:int) -> Player:
-	var player = Player.new()
+	var player:Player = Player.new()
 	# random date from 1970 to 2007
 	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(randi_range(0, max_timestamp))
 
@@ -312,7 +308,7 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 	player.form = get_random_form()
 	player.prestige = prestige
 	player.injury_factor = randi_range(1, 20)
-	player.loyality = ""  # if player is loayal, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
+	player.loyality = randi_range(1, 20) # if player is loyal, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
 	player.contract = get_contract(prestige, position, date.year-birth_date.year)
 	player.nr = nr
 	
