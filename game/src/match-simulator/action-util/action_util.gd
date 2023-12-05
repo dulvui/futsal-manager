@@ -70,6 +70,8 @@ func update() -> void:
 	var attack:int = _random_attack()
 	var attack_success:bool = _get_attack_result(attack)
 	
+	_log(attack, attack_success)
+	_action_buffer(attack, attack_success)
 	# change active players and possession
 	if attack_success:
 		match attack:
@@ -116,8 +118,7 @@ func update() -> void:
 
 	home_team.update_players()
 	away_team.update_players()
-	_log(attack, attack_success)
-	_action_buffer(attack, attack_success)
+
 	
 func change_players(_home_team:Team,_away_team:Team) -> void:
 	# reset action buffer, becasue change happened and
@@ -179,8 +180,8 @@ func _action_buffer(attack:int, result:bool) -> void:
 		"state" : State.keys()[current_state],
 		"is_home" : home_team.has_ball,
 		"success" : result,
-		"attacking_player_nr" : attacking_player.nr,
-		"defending_player_nr" : defending_player.nr,
+		"attacking_player" : attacking_player,
+		"defending_player" : defending_player,
 	})
 	
 	if action_buffer.size() > MAX_ACTION_BUFFER_SIZE:

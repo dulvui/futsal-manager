@@ -105,10 +105,10 @@ func _player_setup() -> void:
 	#home
 	var home_index:int = 0
 	var goalkeeper_home:Player = home_team.line_up.goalkeeper
-	home_goalkeeper.set_up(goalkeeper_home.nr, Color.LIGHT_BLUE, true, WIDTH, HEIGHT)
+	home_goalkeeper.set_up(goalkeeper_home, Color.LIGHT_BLUE, true, WIDTH, HEIGHT)
 	for player in home_team.line_up.players:
 		var visual_player:Node2D = VisualPlayer.instantiate()
-		visual_player.set_up(player.nr, home_color, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
+		visual_player.set_up(player, home_color, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
 		$HomePlayers.add_child(visual_player)
 		home_visual_players.append(visual_player)
 		home_index += 1
@@ -116,10 +116,10 @@ func _player_setup() -> void:
 	# away
 	var away_index:int = 0
 	var goalkeeper_away:Player = away_team.line_up.goalkeeper
-	away_goalkeeper.set_up(goalkeeper_away.nr, Color.LIGHT_CORAL, true, WIDTH, HEIGHT)
+	away_goalkeeper.set_up(goalkeeper_away, Color.LIGHT_CORAL, true, WIDTH, HEIGHT)
 	for player in away_team.line_up.players:
 		var visual_player:Node2D = VisualPlayer.instantiate()
-		visual_player.set_up(player.nr, away_color, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
+		visual_player.set_up(player, away_color, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
 		$AwayPlayers.add_child(visual_player)
 		away_visual_players.append(visual_player)
 		away_index += 1
@@ -151,22 +151,22 @@ func _get_player_position(index:int, is_home_team:bool) -> Vector2:
 	return Vector2(x,y)
 
 func _action() -> void:
-
+	
 	if not actions.is_empty():
 		var action:Dictionary = actions.pop_front()
 		
-		var attack_nr:int = action["attacking_player_nr"]
+		var attack_nr:int = action["attacking_player"]["nr"]
 		#var defense_nr:int = action["defending_player_nr"]
 		
 		# find current player position
 		if action["is_home"]:
 			for player:Node2D in home_visual_players:
-				if player.nr == attack_nr:
+				if player.player.nr == attack_nr:
 					attacking_player = player
 					_player_action(player, action)
 		else:
 			for player:Node2D in away_visual_players:
-				if player.nr == attack_nr:
+				if player.player.nr == attack_nr:
 					attacking_player = player
 					_player_action(player, action)
 		

@@ -6,8 +6,6 @@ extends Node2D
 
 @export
 var color:Color = Color.REBECCA_PURPLE
-@export 
-var nr:int = 1
 
 var moved:bool = false
 
@@ -17,13 +15,14 @@ var moved:bool = false
 var field_width:int
 var field_height:int
 
+var player:Player
 
 
-func set_up(_nr:int, _color:Color, is_home_player:bool, _field_width:int, _field_height:int, start_position:Vector2 = Vector2.ZERO) -> void:
+func set_up(_player:Player, _color:Color, is_home_player:bool, _field_width:int, _field_height:int, start_position:Vector2 = Vector2.ZERO) -> void:
+	player = _player
 	if start_position != Vector2.ZERO:
 		position = start_position
-	nr = _nr
-	$ShirtNumber.text = str(nr)
+	$ShirtNumber.text = str(player.surname)
 	$Sprites/Body.self_modulate = _color
 	field_height = _field_height
 	field_width = _field_width
