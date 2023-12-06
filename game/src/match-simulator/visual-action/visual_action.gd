@@ -152,7 +152,7 @@ func _get_player_position(index:int, is_home_team:bool) -> Vector2:
 
 func _action() -> void:
 	
-	if not actions.is_empty():
+	if actions[0]["action"] != "SHOOT":
 		var action:Dictionary = actions.pop_front()
 		
 		var attack_nr:int = action["attacking_player"]["nr"]
