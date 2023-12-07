@@ -88,8 +88,7 @@ func _physics_process(delta:float) -> void:
 	$Referee2/Sprites.look_at(ball.global_position)
 
 		
-func set_up(_first_half:bool, home_goal:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array[Action], _home_color:Color, _away_color:Color) -> void:
-	is_home_goal = home_goal
+func set_up(_first_half:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array[Action], _home_color:Color, _away_color:Color) -> void:
 	is_goal = _is_goal
 	on_tagret = _on_target
 	actions = action_buffer.duplicate(true)
@@ -97,6 +96,9 @@ func set_up(_first_half:bool, home_goal:bool, _is_goal:bool,_on_target:bool, _ho
 	away_team = _away_team.duplicate(true)
 	home_color = _home_color
 	away_color = _away_color
+	# last action defines if home or away goal
+	is_home_goal = actions[-1].is_home
+	print("home goal " + str(is_home_goal))
 	# reduce actons randomly
 	actions = actions.slice(randi() % actions.size() - 3, actions.size())
 	
@@ -154,21 +156,17 @@ func _action() -> void:
 	
 	if not actions.is_empty():
 		var action:Action = actions.pop_front()
-		
-		var attack_nr:int = action["attacking_player"]["nr"]
-		#var defense_nr:int = action["defending_player_nr"]
-		
 		var next_ball_pos:Vector2
 		
 		# find current player position
 		if action.is_home:
 			for player:Node2D in home_visual_players:
-				if player.player.nr == attack_nr:
+				if player.player.nr ==  action.attacking_player.nr:
 					attacking_player = player
 					next_ball_pos = _player_action(player, action)
 		else:
 			for player:Node2D in away_visual_players:
-				if player.player.nr == attack_nr:
+				if player.player.nr == action.attacking_player.nr:
 					attacking_player = player
 					next_ball_pos = _player_action(player, action)
 		

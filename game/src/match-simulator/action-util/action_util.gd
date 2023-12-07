@@ -75,6 +75,7 @@ func update() -> void:
 			Action.Attack.SHOOT: # , Action.Attack.HEADER
 				if _check_goal():
 					shot.emit(attacking_player, true, true)
+					_change_possession()
 				else:
 					# TODO emit corner signal for visual action
 					_check_corner()
@@ -196,7 +197,6 @@ func _check_goal() -> bool:
 		goalkeeper_attributes *= Constants.GOAL_KEEPER_AWAY_FACTOR
 	
 	if random_goal > goalkeeper_attributes:
-		_change_possession()
 		return true
 	return false
 	
