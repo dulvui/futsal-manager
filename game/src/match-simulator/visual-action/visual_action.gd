@@ -25,7 +25,7 @@ const RUN_DISTANCE:int = 300
 var home_team:Team
 var away_team:Team
 
-var actions:Array[Dictionary] = []
+var actions:Array[Action] = []
 var home_visual_players:Array = []
 var away_visual_players:Array = []
 
@@ -88,7 +88,7 @@ func _physics_process(delta:float) -> void:
 	$Referee2/Sprites.look_at(ball.global_position)
 
 		
-func set_up(_first_half:bool, home_goal:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array[Dictionary], _home_color:Color, _away_color:Color) -> void:
+func set_up(_first_half:bool, home_goal:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _away_team:Team, action_buffer:Array[Action], _home_color:Color, _away_color:Color) -> void:
 	is_home_goal = home_goal
 	is_goal = _is_goal
 	on_tagret = _on_target
@@ -152,31 +152,33 @@ func _get_player_position(index:int, is_home_team:bool) -> Vector2:
 
 func _action() -> void:
 	
-	if actions[0]["action"] != "SHOOT":
-		var action:Dictionary = actions.pop_front()
+	if not actions.is_empty():
+		var action:Action = actions.pop_front()
 		
 		var attack_nr:int = action["attacking_player"]["nr"]
 		#var defense_nr:int = action["defending_player_nr"]
 		
+		var next_ball_pos:Vector2
+		
 		# find current player position
-		if action["is_home"]:
+		if action.is_home:
 			for player:Node2D in home_visual_players:
 				if player.player.nr == attack_nr:
 					attacking_player = player
-					_player_action(player, action)
+					next_ball_pos = _player_action(player, action)
 		else:
 			for player:Node2D in away_visual_players:
 				if player.player.nr == attack_nr:
 					attacking_player = player
-					_player_action(player, action)
+					next_ball_pos = _player_action(player, action)
 		
-		ball.move(action.position, timer.wait_time)
+		ball.move(next_ball_pos, timer.wait_time)
 		
 		# referee
-		if action.position.x < WIDTH / 2:
-			$Referee.follow_ball(action.position, timer.wait_time )
+		if next_ball_pos.x < WIDTH / 2:
+			$Referee.follow_ball(next_ball_pos, timer.wait_time )
 		else:
-			$Referee2.follow_ball(action.position, timer.wait_time)
+			$Referee2.follow_ball(next_ball_pos, timer.wait_time)
 		
 		get_tree().call_group("player", "random_movement", timer.wait_time)
 	else:
@@ -210,13 +212,14 @@ func _action() -> void:
 		if is_goal:
 			attacking_player.celebrate_goal()
 
-func _player_action(player:Node2D, action:Dictionary) -> void:
-	if action["action"] == "RUN":
+# returns next ball position
+func _player_action(player:Node2D, action:Action) -> Vector2:
+	if action.attack == Action.Attack.RUN:
 		var desitionation:Vector2 = player.position +  Vector2(randi_range(-RUN_DISTANCE,RUN_DISTANCE),randi_range(-RUN_DISTANCE,RUN_DISTANCE))
 		desitionation = player.move(desitionation, timer.wait_time)
-		action["position"] = desitionation
+		return desitionation
 	else:
-		action["position"] = player.position
+		return player.position
 
 func _get_player_by_nr(players:Array[Player], nr:int) -> Player:
 	for player:Player in players:

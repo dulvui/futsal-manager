@@ -36,20 +36,20 @@ enum Form {Injured, Recover, Good, Excellent}
 func get_full_name() -> String:
 	return name + " " + surname
 
-func get_attack_attributes(attack:ActionUtil.Attack) -> int:
+func get_attack_attributes(attack:Action.Attack) -> int:
 	match attack:
-		ActionUtil.Attack.SHOOT:
+		Action.Attack.SHOOT:
 			# check sector and pick long_shoot
 			return attributes.technical.shooting
-		ActionUtil.Attack.PASS:
+		Action.Attack.PASS:
 			return attributes.technical.passing * Constants.PASS_SUCCESS_FACTOR
-#		ActionUtil.Attack.CROSS:
+#		Action.Attack.CROSS:
 #			return attributes.technical.crossing
-		ActionUtil.Attack.DRIBBLE:
+		Action.Attack.DRIBBLE:
 			return attributes.technical.dribbling
-#		ActionUtil.Attack.HEADER:
+#		Action.Attack.HEADER:
 #			return attributes.technical.heading"]
-		ActionUtil.Attack.RUN:
+		Action.Attack.RUN:
 			var attacker_attributes:int =  attributes.physical.pace
 			attacker_attributes += attributes.physical.acceleration
 			return attacker_attributes
@@ -57,21 +57,21 @@ func get_attack_attributes(attack:ActionUtil.Attack) -> int:
 	return -1
 
 
-func get_defense_attributes(attack:ActionUtil.Attack) -> int:
+func get_defense_attributes(attack:Action.Attack) -> int:
 	match attack:
-		ActionUtil.Attack.SHOOT:
+		Action.Attack.SHOOT:
 			# check sector and pick long_shoot
 			return attributes.technical.blocking
-		ActionUtil.Attack.PASS:
+		Action.Attack.PASS:
 			return attributes.technical.interception
-#		ActionUtil.Attack.CROSS:
+#		Action.Attack.CROSS:
 #			return attributes.technical.interception"]
-		ActionUtil.Attack.DRIBBLE:
+		Action.Attack.DRIBBLE:
 			return attributes.technical.tackling
-#		ActionUtil.Attack.HEADER:
+#		Action.Attack.HEADER:
 #			return attributes.technical.heading"]
 		# use player preferences/attirbutes and team tactics pressing or wait
-		ActionUtil.Attack.RUN:
+		Action.Attack.RUN:
 			var defender_attributes:int
 			if randi() % 2 == 0:
 #					return Defense.RUN

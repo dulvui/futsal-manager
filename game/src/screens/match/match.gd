@@ -165,7 +165,7 @@ func _on_SKIP_pressed() -> void:
 	match_end()
 
 
-func _on_match_simulator_shot(player:Player, on_target:bool, goal:bool, action_buffer:Array[Dictionary]) -> void:
+func _on_match_simulator_shot(player:Player, on_target:bool, goal:bool, action_buffer:Array[Action]) -> void:
 	if not goal and randi() % Constants.VISUAL_ACTION_SHOTS_FACTOR > 0:
 		# no goal, but show some shoots
 		return

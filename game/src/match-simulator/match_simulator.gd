@@ -4,7 +4,7 @@
 
 extends Node
 
-signal shot(player:Player, on_target:bool, goal:bool, action_buffer:Array[Dictionary])
+signal shot(player:Player, on_target:bool, goal:bool, action_buffer:Array[Action])
 signal penalty(player:Player)
 
 signal action_message
