@@ -21,8 +21,6 @@ env:
   ANDROID_KEYSTORE_DEBUG_BASE64: ${{ secrets.ANDROID_KEYSTORE_DEBUG_BASE64 }}
   WORKING_DIRECTORY: game
 
-
-
 jobs:
   deploy:
     if: github.ref == 'refs/heads/prod'
@@ -38,12 +36,12 @@ jobs:
 
       - name: Create env vars
         run: |
-          echo "GODOT_ANDROID_KEYSTORE_DEBUG_PATH=debug.keystore" >> $GITHUB_ENV
-          echo "GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey" >> $GITHUB_ENV
-          echo "GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android" >> $GITHUB_ENV
-          echo "GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$GITHUB_WORKSPACE/release.keystore" >> $GITHUB_ENV
-          echo "GODOT_ANDROID_KEYSTORE_RELEASE_USER=${{ secrets.ANDROID_KEYSTORE_ALIAS }}" >> $GITHUB_ENV
-          echo "GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> $GITHUB_ENV
+          export GODOT_ANDROID_KEYSTORE_DEBUG_PATH=$GITHUB_WORKSPACE/debug.keystore
+          export GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey
+          export GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android
+          export GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$GITHUB_WORKSPACE/release.keystore
+          export GODOT_ANDROID_KEYSTORE_RELEASE_USER=${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          export GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
 
       - name: Create service-account.json
         run: echo $SERVICE_ACCOUNT_JSON > service-account.json
