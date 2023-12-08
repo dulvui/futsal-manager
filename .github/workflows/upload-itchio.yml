@@ -12,12 +12,13 @@ on:
       - "export_presets.html.example"
 
 env:
+  GODOT_VERSION: 4.2
   WORKING_DIRECTORY: game
 
 jobs:
   deploy:
     if: github.ref == 'refs/heads/prod'
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
