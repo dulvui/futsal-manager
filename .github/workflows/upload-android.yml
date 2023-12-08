@@ -68,7 +68,7 @@ jobs:
         with:
           serviceAccountJson: service-account.json
           packageName: com.simondalvai.futsalmanager
-          releaseFiles: $WORKING_DIRECTORY/FutsalManager.aab
+          releaseFiles: FutsalManager.aab
           track: "internal"
           status: completed
           changesNotSentForReview: true
