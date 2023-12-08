@@ -2,7 +2,6 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Resource
 class_name Action
 
 enum State {NORMAL, KICK_OFF, PENALTY, FREE_KICK, KICK_IN, CORNER}

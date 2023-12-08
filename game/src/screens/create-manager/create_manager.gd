@@ -11,7 +11,6 @@ func _ready() -> void:
 	$GridContainer/Nat.add_item("FR")
 	$GridContainer/Nat.add_item("BR")
 
-
 func _on_Back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
