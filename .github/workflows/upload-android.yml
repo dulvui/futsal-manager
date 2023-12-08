@@ -9,7 +9,7 @@ on:
     paths:
       - "version"
       - ".github/workflows/upload-android.yml"
-      - "export_presets.android.example"
+      - "game/export_presets.android.example"
 
 env:
   GODOT_VERSION: 4.2
