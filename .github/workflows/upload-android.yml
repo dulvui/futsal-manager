@@ -67,7 +67,7 @@ jobs:
           keystore-password: ${{ env.ANDROID_KEYSTORE_PASSWORD }}
 
       - name: debug
-        run: ls -la game
+        run: ls -la game/.godot
 
       - name: Publish to Play Store
         uses: r0adkll/upload-google-play@v1
