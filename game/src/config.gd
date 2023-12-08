@@ -53,9 +53,9 @@ func _ready() -> void:
 	table = config.get_value("season","table",{})
 	current_transfers = config.get_value("season","current_transfers",current_transfers)
 	
-	team = config.get_value("resources", "team", null)
+	team = config.get_value("resources", "team", Team.new())
 	leagues = config.get_value("resources", "leagues", init_leagues())
-	league = config.get_value("resources", "league", null)
+	league = config.get_value("resources", "league", League.new())
 	
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
 	messages = config.get_value("mail","messages",[])
