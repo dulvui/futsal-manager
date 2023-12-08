@@ -73,7 +73,6 @@ jobs:
           releaseFiles: FutsalManager.aab
           track: "internal"
           status: completed
-          changesNotSentForReview: true
 
       # GITHUB RELEASES
       - name: Bundle aab to apk
