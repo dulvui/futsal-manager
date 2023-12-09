@@ -63,7 +63,7 @@ jobs:
         with:
           working-directory: $WORKING_DIRECTORY
           godot-version: ${{ env.GODOT_VERSION }}
-          keystore-path: ${{ env.RUNNER_TEMP }}/release.keystore
+          keystore-path: $RUNNER_TEMP/release.keystore
           keystore-user: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
           keystore-password: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
 
