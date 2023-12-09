@@ -27,7 +27,7 @@ env:
 jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
