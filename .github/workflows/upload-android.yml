@@ -22,10 +22,6 @@ env:
   SERVICE_ACCOUNT_JSON: ${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}
   WORKING_DIRECTORY: game
 
-  GODOT_ANDROID_KEYSTORE_RELEASE_PATH: $GITHUB_WORKSPACE/release.keystore
-  GODOT_ANDROID_KEYSTORE_RELEASE_USER: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
-  GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-
 jobs:
   deploy:
     if: github.ref == 'refs/heads/prod'
@@ -64,6 +60,10 @@ jobs:
 
       - name: Godot Android export
         uses: dulvui/godot-android-export@v4.0.0
+        env:
+          GODOT_ANDROID_KEYSTORE_RELEASE_PATH: $GITHUB_WORKSPACE/release.keystore
+          GODOT_ANDROID_KEYSTORE_RELEASE_USER: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
+          GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
         with:
           working-directory: $WORKING_DIRECTORY
           godot-version: ${{ env.GODOT_VERSION }}
