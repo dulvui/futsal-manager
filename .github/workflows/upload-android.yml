@@ -59,11 +59,11 @@ jobs:
       #     sed -i "s|ANDROID_KEYSTORE_PASSWORD|$ANDROID_KEYSTORE_PASSWORD|g" $WORKING_DIRECTORY/.godot/export_credentials.cfg
 
       - name: Godot Android export
-        uses: dulvui/godot-android-export@v4.0.0
+        uses: dulvui/godot-android-export@v4
         with:
           working-directory: $WORKING_DIRECTORY
           godot-version: ${{ env.GODOT_VERSION }}
-          keystore-path: $GITHUB_WORKSPACE/release.keystore
+          keystore-path: ${{ env.GITHUB_WORKSPACE }}/release.keystore
           keystore-user: ${{ secrets.ANDROID_KEYSTORE_ALIAS }}
           keystore-password: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
 
