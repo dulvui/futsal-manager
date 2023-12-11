@@ -38,7 +38,7 @@ var away_team:Node = $AwayTeam
 
 var current_state:int
 
-const MAX_ACTION_BUFFER_SIZE:int = 5
+const MAX_ACTION_BUFFER_SIZE:int = 8 
 var action_buffer:Array[Action] = []
 
 var attacking_player:Player

@@ -72,6 +72,9 @@ const POSITION_RANGE = 40
 func _ready() -> void:
 	randomize()
 	_player_setup()
+	
+	# first action to move ball in corect position
+	_action(true)
 
 func _physics_process(delta:float) -> void:
 	# look at ball
@@ -100,8 +103,8 @@ func set_up(_first_half:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _a
 	is_home_goal = actions[-1].is_home
 	print("home goal " + str(is_home_goal))
 	# reduce actons randomly
-	actions = actions.slice(randi() % actions.size() - 2, actions.size())
-
+	actions = actions.slice(randi_range(3, actions.size()), actions.size())
+	
 
 func _player_setup() -> void:
 	#home
@@ -152,7 +155,7 @@ func _get_player_position(index:int, is_home_team:bool) -> Vector2:
 	
 	return Vector2(x,y)
 
-func _action() -> void:
+func _action(on_set_up:bool=false) -> void:
 	
 	if not actions.is_empty():
 		var action:Action = actions.pop_front()
@@ -169,8 +172,11 @@ func _action() -> void:
 				if player.player.nr == action.attacking_player.nr:
 					attacking_player = player
 					next_ball_pos = _player_action(player, action)
-		
-		ball.move(next_ball_pos, timer.wait_time)
+		if on_set_up:
+			ball.position = next_ball_pos
+			return
+		else:
+			ball.move(next_ball_pos, timer.wait_time)
 		
 		# referee
 		if next_ball_pos.x < WIDTH / 2:
@@ -207,8 +213,8 @@ func _action() -> void:
 				home_goalkeeper.move(home_goal.position + shot_deviation, timer.wait_time / 3)
 		
 		# celebrateeeee
-		if is_goal:
-			attacking_player.celebrate_goal()
+		#if is_goal:
+			#attacking_player.celebrate_goal()
 
 # returns next ball position
 func _player_action(player:Node2D, action:Action) -> Vector2:
