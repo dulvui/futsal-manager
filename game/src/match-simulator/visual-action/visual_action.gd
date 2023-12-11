@@ -103,7 +103,7 @@ func set_up(_first_half:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _a
 	is_home_goal = actions[-1].is_home
 	print("home goal " + str(is_home_goal))
 	# reduce actons randomly
-	actions = actions.slice(randi_range(3, actions.size()), actions.size())
+	actions = actions.slice(randi_range(0, 3), actions.size())
 	
 
 func _player_setup() -> void:
