@@ -15,7 +15,7 @@ var active_filters:Dictionary = {}
 
 const FISICAL_TITLES:Array = ["acc","agi","jum","pac","sta","str"]
 
-const POSITIONS:Array = ["G","D","WL","WR","P","U"]
+const POSITIONS:Array = ["G","D","W","U","P"]
 const INFO_TYPES:Array = ["mental","physical","technical","goalkeeper"]
 const FOOTS:Array = ["R","L","RL"]
 

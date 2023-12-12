@@ -49,8 +49,8 @@ const RED_CARD_FACTOR:int = 90
 
 # factor for defining attack (0 - 100)
 const ATTACK_FACTOR:int = 1000
-const RUN_FACTOR:int = 450
-const PASS_FACTOR:int = 900
+const PASS_FACTOR:int = 450
+const RUN_FACTOR:int = 700
 const DRIBBLE_FACTOR:int = 950
 const SHOOT_FACTOR:int = 1000
 

@@ -224,7 +224,7 @@ func get_price(age:int, prestige:int, position:Player.Position) -> int:
 		pos_factor = 5
 	elif position == Player.Position.D:
 		pos_factor = 10
-	elif position == Player.Position.WL or position == Player.Position.WR:
+	elif position == Player.Position.W:
 		pos_factor = 15
 	else:
 		pos_factor = 20

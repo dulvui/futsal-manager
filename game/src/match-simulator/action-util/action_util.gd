@@ -155,15 +155,23 @@ func _random_attack() -> int:
 			else:
 				return Action.Attack.PASS
 		_:
-			var random_attack_factor:int = randi() % Constants.ATTACK_FACTOR
-			if random_attack_factor < Constants.RUN_FACTOR:
+			var random_attack_factor:int = _get_attack_factor()
+			if random_attack_factor < Constants.PASS_FACTOR:
 				return Action.Attack.RUN
-			elif random_attack_factor < Constants.PASS_FACTOR:
+			elif random_attack_factor < Constants.RUN_FACTOR:
 				return Action.Attack.PASS
 			elif random_attack_factor < Constants.DRIBBLE_FACTOR:
 				return Action.Attack.DRIBBLE
 			else:
 				return Action.Attack.SHOOT
+				
+func _get_attack_factor() -> int:
+	# max factor is 1000 and shoot factor is 950
+	# remove positions size, and player position again
+	# so shooting factor is harder to get for lower positions like defenders
+	var factor:int = randi() % (Constants.ATTACK_FACTOR - Player.Position.size() * 10)
+	factor += attacking_player.position * 10
+	return factor
 
 func _log(attack:int, result:bool) -> void:
 	action_message.emit(home_team.active_player.name + " vs " + away_team.active_player.name + " " + str(Action.Attack.keys()[attack]) + " - " + str(result))
