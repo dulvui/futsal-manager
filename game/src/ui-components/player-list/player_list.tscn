@@ -32,8 +32,12 @@ alignment = 1
 
 [node name="NameSearch" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "NAME"
 caret_blink = true
+
+[node name="InfoSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
 
 [node name="LeagueSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -44,17 +48,14 @@ layout_mode = 2
 [node name="PositionSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="InfoSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
 [node name="Table" parent="VBoxContainer" instance=ExtResource("3_ntteq")]
 layout_mode = 2
 size_flags_vertical = 3
 
 [connection signal="text_changed" from="VBoxContainer/HBoxContainer/NameSearch" to="." method="_on_NameSearch_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/InfoSelect" to="." method="_on_InfoSelect_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/LeagueSelect" to="." method="_on_league_select_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/TeamSelect" to="." method="_on_TeamSelect_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/PositionSelect" to="." method="_on_PositionSelect_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/InfoSelect" to="." method="_on_InfoSelect_item_selected"]
 [connection signal="info_player" from="VBoxContainer/Table" to="." method="_on_table_info_player"]
 [connection signal="select_player" from="VBoxContainer/Table" to="." method="_on_table_select_player"]
