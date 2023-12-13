@@ -6,13 +6,12 @@ extends Control
 class_name PlayerRow
 
 signal info()
-signal select()
 
 const ColorNumber = preload("res://src/ui-components/color-number/color_number.tscn")
 
-@onready var name_label:Control = $NameLabel
-@onready var position_label:Control = $PositionLabel
-@onready var attributes:HBoxContainer = $Attributes
+@onready var name_label:Control = $HBoxContainer/NameLabel
+@onready var position_label:Control = $HBoxContainer/PositionLabel
+@onready var attributes:HBoxContainer = $HBoxContainer/Attributes
 
 
 func set_up(player:Player, active_headers:Array[String]) -> void:
@@ -29,8 +28,5 @@ func set_up(player:Player, active_headers:Array[String]) -> void:
 			color_number.visible = attribute in active_headers
 			attributes.add_child(color_number)
 
-func _on_select_pressed() -> void:
-	select.emit()
-
-func _on_info_pressed() -> void:
+func _on_button_button_down() -> void:
 	info.emit()

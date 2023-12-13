@@ -76,22 +76,12 @@ func _set_up_headers() -> void:
 	# ohter headers
 	for header:String in headers.slice(2):
 		var button:Button = Button.new()
-		button.custom_minimum_size.x = 34
-		button.text = header.substr(0,3)
+		button.text = tr(header)
+		button.text_overrun_behavior = TextServer.OVERRUN_TRIM_CHAR
+		button.tooltip_text = tr(header)
 		button.button_down.connect(_sort_attributes.bind(header))
 		header_container.add_child(button)
-	
-	# info label
-	var label:Label = Label.new()
-	label.text = "info"
-	label.custom_minimum_size.x = 72
-	header_container.add_child(label)
-	
-	# change label
-	var label_change:Label = Label.new()
-	label_change.text = "choose"
-	label_change.custom_minimum_size.x = 72
-	header_container.add_child(label_change)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
 func _set_up_content() -> void:
 	for child in players_container.get_children():
@@ -101,7 +91,7 @@ func _set_up_content() -> void:
 		for player:Player in players.slice(page * page_size, (page + 1) * page_size):
 			var player_row:PlayerRow = PlayerRow.instantiate()
 			players_container.add_child(player_row)
-			player_row.select.connect(select.bind(player))
+			#player_row.select.connect(select.bind(player))
 			player_row.info.connect(info.bind(player))
 			player_row.set_up(player, headers)
 	else :
