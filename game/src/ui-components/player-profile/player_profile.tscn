@@ -31,66 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Info" type="Control" parent="TabContainer"]
-layout_mode = 2
-
-[node name="Mental" type="GridContainer" parent="TabContainer/Info"]
-layout_mode = 0
-offset_left = 377.0
-offset_top = 10.0
-offset_right = 479.0
-offset_bottom = 47.0
-columns = 2
-
-[node name="TitleLabel" type="Label" parent="TabContainer/Info/Mental"]
-layout_mode = 2
-text = "MENTAL"
-
-[node name="Title" type="Label" parent="TabContainer/Info/Mental"]
-layout_mode = 2
-
-[node name="Technical" type="GridContainer" parent="TabContainer/Info"]
-layout_mode = 0
-offset_left = 576.0
-offset_top = 15.0
-offset_right = 711.0
-offset_bottom = 52.0
-columns = 2
-
-[node name="TitleLabel" type="Label" parent="TabContainer/Info/Technical"]
-layout_mode = 2
-text = "TECHNICAL"
-
-[node name="Title" type="Label" parent="TabContainer/Info/Technical"]
-layout_mode = 2
-
-[node name="Physical" type="GridContainer" parent="TabContainer/Info"]
-layout_mode = 0
-offset_left = 872.0
-offset_top = 15.0
-offset_right = 961.0
-offset_bottom = 52.0
-columns = 2
-
-[node name="TitleLabel" type="Label" parent="TabContainer/Info/Physical"]
-layout_mode = 2
-text = "FISICAL"
-
-[node name="Title" type="Label" parent="TabContainer/Info/Physical"]
-layout_mode = 2
-
-[node name="Goalkeeper" type="GridContainer" parent="TabContainer/Info"]
-layout_mode = 0
-offset_left = 872.0
-offset_top = 334.0
-offset_right = 1026.0
-offset_bottom = 371.0
-columns = 2
-
-[node name="TitleLabel" type="Label" parent="TabContainer/Info/Goalkeeper"]
-layout_mode = 2
-text = "GOALKEEPER"
-
-[node name="Title" type="Label" parent="TabContainer/Info/Goalkeeper"]
+visible = false
 layout_mode = 2
 
 [node name="Info" type="GridContainer" parent="TabContainer/Info"]
@@ -157,6 +98,35 @@ text = "NR"
 layout_mode = 2
 text = "Bronzolo"
 
+[node name="Attributes" type="HBoxContainer" parent="TabContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Goalkeeper" type="GridContainer" parent="TabContainer/Attributes"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2
+
+[node name="Physical" type="GridContainer" parent="TabContainer/Attributes"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2
+
+[node name="Mental" type="GridContainer" parent="TabContainer/Attributes"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2
+
+[node name="Technical" type="GridContainer" parent="TabContainer/Attributes"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2
+
 [node name="History" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
@@ -177,17 +147,27 @@ text = "Viustel Hans"
 visible = false
 layout_mode = 2
 
-[node name="Hide" type="Button" parent="."]
+[node name="Buttons" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.962
-anchor_top = 0.014
-anchor_right = 0.99
-anchor_bottom = 0.061
-offset_left = 0.639893
-offset_top = -0.0799999
-offset_right = -0.200073
-offset_bottom = 0.079998
-text = "X"
+anchor_left = 0.388938
+anchor_top = 0.894445
+anchor_right = 0.600062
+anchor_bottom = 0.950445
+offset_left = 0.159973
+offset_top = -6.10352e-05
+offset_right = -36.08
+offset_bottom = -0.320068
+theme_override_constants/separation = 40
+metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="Hide" to="." method="_on_Hide_pressed"]
+[node name="Select" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "SELECT"
+
+[node name="Hide" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "CLOSE"
+
+[connection signal="pressed" from="Buttons/Select" to="." method="_on_select_pressed"]
+[connection signal="pressed" from="Buttons/Hide" to="." method="_on_Hide_pressed"]

@@ -6,8 +6,6 @@ extends Control
 
 signal select_player
 
-const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profile/player_profile.tscn")
-
 var team_search:String = ""
 var foot_search:String = ""
 
@@ -26,6 +24,8 @@ const FOOTS:Array = ["R","L","RL"]
 @onready var team_select:OptionButton = $VBoxContainer/HBoxContainer/TeamSelect
 @onready var league_select:OptionButton = $VBoxContainer/HBoxContainer/LeagueSelect
 @onready var pos_select:OptionButton = $VBoxContainer/HBoxContainer/PositionSelect
+
+@onready var player_profile:Control = $PlayerProfile
 
 
 func set_up(include_lineup:bool, active_team:Team = null) -> void:
@@ -147,12 +147,9 @@ func _reset_options() -> void:
 
 
 func _on_table_info_player(player:Player) -> void:
-	var player_profile:Control = PlayerProfile.instantiate()
-	add_child(player_profile)
-	player_profile.set_global_position(Vector2.ZERO)
+	player_profile.show()
 	player_profile.set_up_info(player)
-	
 
-func _on_table_select_player(player:Player) -> void:
-	print("change in list")
-	emit_signal("select_player",player)
+
+func _on_player_profile_select(player: Player) -> void:
+	select_player.emit(player)

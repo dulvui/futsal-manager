@@ -4,7 +4,6 @@
 
 extends Control
 
-signal select_player(player:Player)
 signal info_player(player:Player)
 
 const PlayerRow = preload("res://src/ui-components/player-list/player-row/player_row.tscn")
@@ -133,9 +132,6 @@ func filter(filters: Dictionary, exlusive:bool = false) -> void:
 
 func info(player:Player) -> void:
 	info_player.emit(player)
-	
-func select(player:Player) -> void:
-	select_player.emit(player)
 	
 func _sort_attributes(key:String) -> void:
 	players.sort_custom(func(a:Player, b:Player) -> bool: return a.attributes.get(info_type).get(key) < b.attributes.get(info_type).get(key))

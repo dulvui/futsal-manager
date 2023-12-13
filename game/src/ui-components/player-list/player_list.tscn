@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dq4dr3oe20mb8"]
+[gd_scene load_steps=5 format=3 uid="uid://dq4dr3oe20mb8"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1_1y8i0"]
 [ext_resource type="Script" path="res://src/ui-components/player-list/player_list.gd" id="2_7b5jy"]
 [ext_resource type="PackedScene" uid="uid://bmsr4wbngmfmw" path="res://src/ui-components/player-list/table/player_table.tscn" id="3_ntteq"]
+[ext_resource type="PackedScene" uid="uid://dtvkd1ks3xiqc" path="res://src/ui-components/player-profile/player_profile.tscn" id="3_vatq4"]
 
 [node name="PlayerList" type="Control"]
 layout_mode = 3
@@ -52,10 +53,14 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="PlayerProfile" parent="." instance=ExtResource("3_vatq4")]
+visible = false
+layout_mode = 1
+
 [connection signal="text_changed" from="VBoxContainer/HBoxContainer/NameSearch" to="." method="_on_NameSearch_text_changed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/InfoSelect" to="." method="_on_InfoSelect_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/LeagueSelect" to="." method="_on_league_select_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/TeamSelect" to="." method="_on_TeamSelect_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/PositionSelect" to="." method="_on_PositionSelect_item_selected"]
 [connection signal="info_player" from="VBoxContainer/Table" to="." method="_on_table_info_player"]
-[connection signal="select_player" from="VBoxContainer/Table" to="." method="_on_table_select_player"]
+[connection signal="select" from="PlayerProfile" to="." method="_on_player_profile_select"]
