@@ -9,6 +9,7 @@ signal info()
 
 const ColorNumber = preload("res://src/ui-components/color-number/color_number.tscn")
 
+@onready var button:Button = $Button
 @onready var name_label:Control = $HBoxContainer/NameLabel
 @onready var position_label:Control = $HBoxContainer/PositionLabel
 @onready var attributes:HBoxContainer = $HBoxContainer/Attributes
@@ -17,6 +18,8 @@ const ColorNumber = preload("res://src/ui-components/color-number/color_number.t
 func set_up(player:Player, active_headers:Array[String]) -> void:
 	for child in attributes.get_children():
 		child.queue_free()
+		
+	button.tooltip_text = tr("Click for info of") + " " + player.surname
 	
 	name_label.set_text(player.surname)
 	position_label.set_text(Player.Position.keys()[player.position])
