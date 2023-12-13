@@ -17,6 +17,8 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var name:String
 # team name for easier filtering etc...
 @export var team:String
+# league name for easier filtering etc...
+@export var league:String
 @export var surname:String
 @export var birth_date:Dictionary
 @export var nationality:String

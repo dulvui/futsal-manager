@@ -65,7 +65,7 @@ func _run() -> void:
 			team.colors.append(Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)))
 			
 			team.create_stadium(t + "Stadium", 1234, 1990)
-			assign_players_to_team(team)
+			assign_players_to_team(team, league)
 			league.add_team(team)
 		
 		print("Write to file...")
@@ -79,7 +79,7 @@ func _run() -> void:
 		print("Read team teams size ", read_league.teams.size())
 
 
-func assign_players_to_team(team:Team) -> Team:
+func assign_players_to_team(team:Team, league:League) -> Team:
 	var id:int = 1
 	team.id = id
 	id += 1
@@ -97,6 +97,7 @@ func assign_players_to_team(team:Team) -> Team:
 			var player:Player = create_player(League.Nations.IT, position, nr)
 			nr += 1
 			player.team = team.name
+			player.league = league.name
 			team.players.append(player)
 		
 		# random lineup assingment

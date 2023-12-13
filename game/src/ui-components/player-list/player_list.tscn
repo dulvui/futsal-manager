@@ -36,7 +36,6 @@ placeholder_text = "NAME"
 caret_blink = true
 
 [node name="LeagueSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="TeamSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
@@ -54,6 +53,7 @@ size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
 [connection signal="text_changed" from="VBoxContainer/HBoxContainer/NameSearch" to="." method="_on_NameSearch_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/LeagueSelect" to="." method="_on_league_select_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/TeamSelect" to="." method="_on_TeamSelect_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/PositionSelect" to="." method="_on_PositionSelect_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/InfoSelect" to="." method="_on_InfoSelect_item_selected"]

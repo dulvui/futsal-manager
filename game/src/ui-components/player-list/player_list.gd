@@ -31,7 +31,6 @@ const FOOTS:Array = ["R","L","RL"]
 func set_up(include_lineup:bool, active_team:Team = null) -> void:
 	
 	set_up_players(include_lineup, active_team)
-	league_select.add_item("ITALIA")
 	
 	team_select.add_item("NO_TEAM")
 	for team in Config.league.teams:
@@ -41,7 +40,14 @@ func set_up(include_lineup:bool, active_team:Team = null) -> void:
 	pos_select.add_item("NO_POS")
 	for pos:String in POSITIONS:
 		pos_select.add_item(pos)
-		
+	
+	if active_team == null:
+		league_select.add_item("ALL_LEAGUES")
+		for league:League in Config.leagues:
+			league_select.add_item(league.name)
+	else:
+		league_select.hide()
+	
 	for info_type:String in INFO_TYPES:
 		info_select.add_item(info_type)
 
@@ -51,9 +57,10 @@ func set_up_players(include_lineup:bool, active_team:Team = null) -> void:
 	
 	var all_players:Array[Player] = []
 	if active_team == null:
-		for team in Config.league.teams:
-			for player in team.players:
-				all_players.append(player)
+		for league:League in Config.leagues:
+			for team in league.teams:
+				for player in team.players:
+					all_players.append(player)
 	else:
 		if include_lineup:
 			for player in active_team.line_up.players:
@@ -81,7 +88,15 @@ func _on_TeamSelect_item_selected(index:int) -> void:
 	else:
 		active_filters["team"] = ""
 	_filter_table()
-	
+
+
+
+func _on_league_select_item_selected(index:int) -> void:
+	if index > 0:
+		active_filters["league"] = league_select.get_item_text(index)
+	else:
+		active_filters["league"] = ""
+	_filter_table()
 
 
 func _on_PositionSelect_item_selected(index:int) -> void:
