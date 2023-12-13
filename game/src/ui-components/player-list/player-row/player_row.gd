@@ -7,7 +7,9 @@ class_name PlayerRow
 
 signal info()
 
-const ColorNumber = preload("res://src/ui-components/color-number/color_number.tscn")
+const ColorNumber:PackedScene = preload("res://src/ui-components/color-number/color_number.tscn")
+
+
 
 @onready var button:Button = $Button
 @onready var name_label:Control = $HBoxContainer/NameLabel
@@ -33,3 +35,12 @@ func set_up(player:Player, active_headers:Array[String]) -> void:
 
 func _on_button_button_down() -> void:
 	info.emit()
+
+
+
+func _on_button_mouse_entered() -> void:
+	button.self_modulate = Constants.COLOR_FOCUS
+
+
+func _on_button_mouse_exited() -> void:
+	button.self_modulate = Constants.COLOR_NORMAL
