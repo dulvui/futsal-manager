@@ -31,7 +31,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Info" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="Info" type="GridContainer" parent="TabContainer/Info"]
@@ -99,6 +98,7 @@ layout_mode = 2
 text = "Bronzolo"
 
 [node name="Attributes" type="HBoxContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1

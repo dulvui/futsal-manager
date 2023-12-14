@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://bp0lflrwwki6x" path="res://src/ui-components/player-list/table/name-label/name_label.tscn" id="2_1q6ka"]
 
 [node name="PlayerRow" type="Control"]
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 0.053
 offset_bottom = -0.160004
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 3
 script = ExtResource("1_4bbf8")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

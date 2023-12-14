@@ -36,9 +36,9 @@ func _ready() -> void:
 	if next_match != null:
 		for team in Config.league.teams:
 			if team.name == next_match["home"]:
-				home_team = team.duplicate(true)
+				home_team = team
 			elif team.name == next_match["away"]:
-				away_team = team.duplicate(true)
+				away_team = team
 	
 	$HUD/HSplitContainer/CentralContainer/TopBar/Labels/Home.text = next_match["home"]
 	$HUD/HSplitContainer/CentralContainer/TopBar/Labels/Away.text = next_match["away"]
