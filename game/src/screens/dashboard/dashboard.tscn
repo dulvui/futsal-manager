@@ -170,6 +170,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [connection signal="offer_contract" from="Main/VBoxContainer/HBoxContainer/Content/Email" to="." method="_on_Email_offer_contract"]
+[connection signal="select_player" from="Main/VBoxContainer/HBoxContainer/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
 [connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Calendar" to="." method="_on_Calendar_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Email" to="." method="_on_Email_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/Buttons/Table" to="." method="_on_Table_pressed"]

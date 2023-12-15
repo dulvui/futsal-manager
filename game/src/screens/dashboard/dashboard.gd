@@ -84,7 +84,7 @@ func _on_Calendar_pressed() -> void:
 	_show_active_view(ContentViews.CALENDAR)
 
 
-func _on_AllPlayerList_select_player(player:Player) -> void:
+func _on_all_player_list_select_player(player:Player) -> void:
 	print("offer for " + player.surname)
 	$PlayerOfferPopup/PlayerOffer.set_player(player)
 	$PlayerOfferPopup/PlayerOffer.show()
@@ -184,3 +184,5 @@ func _next_day() -> void:
 		continue_button.text = "START_MATCH"
 		match_ready = true
 		next_match_button.disabled = true
+
+

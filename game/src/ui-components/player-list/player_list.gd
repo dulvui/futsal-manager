@@ -4,7 +4,7 @@
 
 extends Control
 
-signal select_player
+signal select_player(player:Player)
 
 var team_search:String = ""
 var foot_search:String = ""
