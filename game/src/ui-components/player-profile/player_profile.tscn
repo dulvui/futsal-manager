@@ -87,7 +87,6 @@ text = "TEAM"
 
 [node name="Team" type="Label" parent="TabContainer/Info/Info"]
 layout_mode = 2
-text = "Bronzolo"
 
 [node name="NrLabel" type="Label" parent="TabContainer/Info/Info"]
 layout_mode = 2

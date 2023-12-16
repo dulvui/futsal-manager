@@ -17,11 +17,11 @@ var player:Player
 func set_up_info(_player:Player) -> void:
 	player = _player
 	
-	$TabContainer/Info/Info/Name.text = player.surname + " " + player.name
+	$TabContainer/Info/Info/Name.text = player.name + " " + player.surname
 	$TabContainer/Info/Info/Position.text = str(player.position)
 	$TabContainer/Info/Info/Age.text = str(player.birth_date.day) + "/" + str(player.birth_date.month) + "/" + str(player.birth_date.year)
 	$TabContainer/Info/Info/Nationality.text = player.nationality
-#	$TabContainer/Info/Info/Team.text = str(player.team_name)
+	$TabContainer/Info/Info/Team.text = str(player.team)
 	$TabContainer/Info/Info/Foot.text = str(player.foot)
 	$TabContainer/Info/Info/Nr.text = str(player.nr)
 	
@@ -48,7 +48,7 @@ func set_up_info(_player:Player) -> void:
 			attributes.get_node(attribute.capitalize()).add_child(value)
 		
 	#history
-	$TabContainer/History/Actual/Goals.text = str(player.statistics[-1].goals)
+	$TabContainer/History/Actual/Goals.text = str(player.statistics[0].goals)
 
 	show()
 
