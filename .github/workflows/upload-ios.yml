@@ -13,7 +13,7 @@ on:
       - "export_presets.ios.example"
 
 env:
-  GODOT_VERSION: 4.2
+  GODOT_VERSION: 4.2.1
   PROJECT_NAME: FutsalManager
   WORKING_DIRECTORY: game
   IOS_APPSTORE_TEAM_ID: ${{ secrets.IOS_APPSTORE_TEAM_ID }}

@@ -12,7 +12,7 @@ on:
       - "export_presets.html.example"
 
 env:
-  GODOT_VERSION: 4.2
+  GODOT_VERSION: 4.2.1
   WORKING_DIRECTORY: game
 
 jobs:
