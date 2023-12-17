@@ -73,6 +73,7 @@ jobs:
         uses: dulvui/godot-ios-upload@v4.0.0
         with:
           working-directory: $WORKING_DIRECTORY
+          godot-version: $GODOT_VERSION
           project-name: $PROJECT_NAME
           provision-profile-path: ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
           apple-id-username: ${{ secrets.APPLE_ID_USERNAME }}
