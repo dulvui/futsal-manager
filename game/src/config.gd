@@ -174,9 +174,9 @@ func save_table() -> void:
 func init_leagues() -> Array[League]:
 	# check if leagues not leoaded yet
 	var all_leagues:Array[League] = []
-	for file in Constants.LEAGUES_FILES:
-		var league:League = load(Constants.LEAGUES_DIR + file)
-		all_leagues.append(league)
+	#for file in Constants.LEAGUES_FILES:
+		#var league:League = load(Constants.LEAGUES_DIR + file)
+		#all_leagues.append(league)
 	
 	return all_leagues
 	
