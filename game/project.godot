@@ -73,6 +73,7 @@ translations=PackedStringArray("res://assets/i18n/FutsalManagerI18N - Sheet1.de.
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
