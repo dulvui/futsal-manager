@@ -71,8 +71,8 @@ func _ready() -> void:
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
 	
 	# settings
-	#language = config.get_value("settings","language","ND")
-	#currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
+	language = config.get_value("settings","language","ND")
+	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	
 	
 func reset() -> void:
