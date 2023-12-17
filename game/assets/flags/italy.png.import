@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/italy.png-e0d35d8d5e0fb1d2b837982a541c3090.ct
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

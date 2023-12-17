@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/spain.png-c7a373489b90865206675b9bc008aba0.ct
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
