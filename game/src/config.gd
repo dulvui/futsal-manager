@@ -62,15 +62,15 @@ func _ready() -> void:
 	team = config.get_value("resources", "team", Team.new())
 	leagues = config.get_value("resources", "leagues", init_leagues())
 	league = config.get_value("resources", "league", League.new())
-	#
-	#date = config.get_value("current_date","date", CalendarUtil.initial_date())
-	#messages = config.get_value("mail","messages",[])
-#
-	## global game states
-	#speed_factor = config.get_value("match","speed_factor",0)
-	#dashboard_active_content = config.get_value("dashboard","active_content",0)
-	#
-	## settings
+	
+	date = config.get_value("current_date","date", CalendarUtil.initial_date())
+	messages = config.get_value("mail","messages",[])
+
+	# global game states
+	speed_factor = config.get_value("match","speed_factor",0)
+	dashboard_active_content = config.get_value("dashboard","active_content",0)
+	
+	# settings
 	#language = config.get_value("settings","language","ND")
 	#currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	
