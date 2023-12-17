@@ -37,9 +37,11 @@ var currency:int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
-	#config = ConfigFile.new()
-	#config.load("user://settings.cfg")
-##	if err == OK: # if not, something went wrong with the file loading
+	config = ConfigFile.new()
+	var err:int = config.load("user://settings.cfg")
+	# if not, something went wrong with the file loading
+	if err == OK:
+		print("error loading user://settings.cfg")
 	#manager = config.get_value("manager", "data", {
 		#"name" : "",
 		#"surname" : "",
@@ -95,21 +97,21 @@ func set_lang(lang:String) -> void:
 	config.save("user://settings.cfg")
 
 func save_all_data() -> void:
-	#config.set_value("manager","data",manager)
-	#config.set_value("resources","team", team)
-	#config.set_value("resources","league", league)
-	#config.set_value("resources","leagues",leagues)
-	#config.set_value("current_date","date",CalendarUtil.date)
-	#config.set_value("season","calendar",calendar)
-	#config.set_value("season","table",table)
-	#config.set_value("season","current_transfers",TransferUtil.current_transfers)
-	#config.set_value("mail","messages",EmailUtil.messages)
-	#config.set_value("season","current_season",current_season)
-	#config.set_value("match","speed_factor",speed_factor)
-	#config.set_value("settings","currency",currency)
-	#config.set_value("dashboard","active_content",dashboard_active_content)
+	config.set_value("manager","data",manager)
+	config.set_value("resources","team", team)
+	config.set_value("resources","league", league)
+	config.set_value("resources","leagues",leagues)
+	config.set_value("current_date","date",CalendarUtil.date)
+	config.set_value("season","calendar",calendar)
+	config.set_value("season","table",table)
+	config.set_value("season","current_transfers",TransferUtil.current_transfers)
+	config.set_value("mail","messages",EmailUtil.messages)
+	config.set_value("season","current_season",current_season)
+	config.set_value("match","speed_factor",speed_factor)
+	config.set_value("settings","currency",currency)
+	config.set_value("dashboard","active_content",dashboard_active_content)
 #
-	#config.save("user://settings.cfg")
+	config.save("user://settings.cfg")
 	print("all data saved")
 
 func save_manager(new_manager:Dictionary) -> void:
