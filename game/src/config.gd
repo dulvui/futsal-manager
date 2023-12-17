@@ -49,16 +49,16 @@ func _ready() -> void:
 		"nationality" : "",
 		"birth_date" : "",
 	})
-	#
-	#current_season = config.get_value("season","current_season",0)
-	#
-	#calendar = config.get_value("season","calendar",[])
-	#table = config.get_value("season","table",{})
-	#if config.has_section_key("season","current_transfers"):
-		#current_transfers = config.get_value("season","current_transfers")
-	#else:
-		#current_transfers = []
-	#
+	
+	current_season = config.get_value("season","current_season",0)
+	
+	calendar = config.get_value("season","calendar",[])
+	table = config.get_value("season","table",{})
+	if config.has_section_key("season","current_transfers"):
+		current_transfers = config.get_value("season","current_transfers")
+	else:
+		current_transfers = []
+	
 	team = config.get_value("resources", "team", Team.new())
 	leagues = config.get_value("resources", "leagues", init_leagues())
 	league = config.get_value("resources", "league", League.new())
