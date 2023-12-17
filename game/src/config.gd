@@ -43,12 +43,12 @@ func _ready() -> void:
 	if err != OK:
 		print("error loading user://settings.cfg")
 		
-	#manager = config.get_value("manager", "data", {
-		#"name" : "",
-		#"surname" : "",
-		#"nationality" : "",
-		#"birth_date" : "",
-	#})
+	manager = config.get_value("manager", "data", {
+		"name" : "",
+		"surname" : "",
+		"nationality" : "",
+		"birth_date" : "",
+	})
 	#
 	#current_season = config.get_value("season","current_season",0)
 	#
