@@ -42,33 +42,33 @@ func _ready() -> void:
 	# if not, something went wrong with the file loading
 	if err == OK:
 		print("error loading user://settings.cfg")
-	#manager = config.get_value("manager", "data", {
-		#"name" : "",
-		#"surname" : "",
-		#"nationality" : "",
-		#"birth_date" : "",
-	#})
-	#
-	#current_season = config.get_value("season","current_season",0)
-	#
-	#calendar = config.get_value("season","calendar",[])
-	#table = config.get_value("season","table",{})
-	#current_transfers = config.get_value("season","current_transfers",current_transfers)
-	#
-	#team = config.get_value("resources", "team", Team.new())
-	#leagues = config.get_value("resources", "leagues", init_leagues())
-	#league = config.get_value("resources", "league", League.new())
-	#
-	#date = config.get_value("current_date","date", CalendarUtil.initial_date())
-	#messages = config.get_value("mail","messages",[])
-#
-	## global game states
-	#speed_factor = config.get_value("match","speed_factor",0)
-	#dashboard_active_content = config.get_value("dashboard","active_content",0)
-	#
-	## settings
-	#language = config.get_value("settings","language","ND")
-	#currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
+	manager = config.get_value("manager", "data", {
+		"name" : "",
+		"surname" : "",
+		"nationality" : "",
+		"birth_date" : "",
+	})
+	
+	current_season = config.get_value("season","current_season",0)
+	
+	calendar = config.get_value("season","calendar",[])
+	table = config.get_value("season","table",{})
+	current_transfers = config.get_value("season","current_transfers",current_transfers)
+	
+	team = config.get_value("resources", "team", Team.new())
+	leagues = config.get_value("resources", "leagues", init_leagues())
+	league = config.get_value("resources", "league", League.new())
+	
+	date = config.get_value("current_date","date", CalendarUtil.initial_date())
+	messages = config.get_value("mail","messages",[])
+
+	# global game states
+	speed_factor = config.get_value("match","speed_factor",0)
+	dashboard_active_content = config.get_value("dashboard","active_content",0)
+	
+	# settings
+	language = config.get_value("settings","language","ND")
+	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	
 	
 func reset() -> void:
@@ -176,9 +176,9 @@ func save_table() -> void:
 func init_leagues() -> Array[League]:
 	# check if leagues not leoaded yet
 	var all_leagues:Array[League] = []
-	#for file in Constants.LEAGUES_FILES:
-		#var league:League = load(Constants.LEAGUES_DIR + file)
-		#all_leagues.append(league)
+	for file in Constants.LEAGUES_FILES:
+		var league:League = ResourceLoader.load(Constants.LEAGUES_DIR + file)
+		all_leagues.append(league)
 	
 	return all_leagues
 	
