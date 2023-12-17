@@ -72,7 +72,6 @@ translations=PackedStringArray("res://assets/i18n/FutsalManagerI18N - Sheet1.de.
 
 [rendering]
 
-renderer/rendering_method="mobile"
 textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
 vram_compression/import_etc=true
