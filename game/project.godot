@@ -46,6 +46,11 @@ window/size/height=1080
 window/size/test_width=1280
 window/size/test_height=720
 
+[filesystem]
+
+import/blender/enabled=false
+import/fbx/enabled=false
+
 [gui]
 
 theme/custom="res://theme.tres"
@@ -72,5 +77,5 @@ translations=PackedStringArray("res://assets/i18n/FutsalManagerI18N - Sheet1.de.
 
 [rendering]
 
-renderer/rendering_method.mobile="forward_plus"
+renderer/rendering_method="mobile"
 environment/default_environment="res://default_env.tres"
