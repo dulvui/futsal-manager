@@ -42,6 +42,7 @@ func _ready() -> void:
 	# if not, something went wrong with the file loading
 	if err != OK:
 		print("error loading user://settings.cfg")
+		
 	manager = config.get_value("manager", "data", {
 		"name" : "",
 		"surname" : "",
@@ -58,9 +59,9 @@ func _ready() -> void:
 	else:
 		current_transfers = []
 	
-	team = config.get_value("resources", "team", Team.new())
-	leagues = config.get_value("resources", "leagues", init_leagues())
-	league = config.get_value("resources", "league", League.new())
+	#team = config.get_value("resources", "team", Team.new())
+	#leagues = config.get_value("resources", "leagues", init_leagues())
+	#league = config.get_value("resources", "league", League.new())
 	
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
 	messages = config.get_value("mail","messages",[])
@@ -114,7 +115,7 @@ func save_all_data() -> void:
 	config.set_value("settings","currency",currency)
 	config.set_value("dashboard","active_content",dashboard_active_content)
 #
-	#config.save("user://settings.cfg")
+	config.save("user://settings.cfg")
 	print("all data saved")
 
 func save_manager(new_manager:Dictionary) -> void:
