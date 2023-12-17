@@ -65,8 +65,6 @@ jobs:
           cp game/export_presets.ios.example game/export_presets.cfg
           sed -i -e "s|VERSION_CODE|$VERSION|g" $WORKING_DIRECTORY/export_presets.cfg
           sed -i -e "s|VERSION_NAME|$VERSION|g" $WORKING_DIRECTORY/export_presets.cfg
-          sed -i -e "s|IOS_SHORT_VERSION|$VERSION|g" $WORKING_DIRECTORY/export_presets.cfg
-          sed -i -e "s|IOS_VERSION|$VERSION|g" $WORKING_DIRECTORY/export_presets.cfg
           sed -i -e "s|IOS_APPSTORE_TEAM_ID|$IOS_APPSTORE_TEAM_ID|g" $WORKING_DIRECTORY/export_presets.cfg
 
       - name: Export and upload to Testflight
