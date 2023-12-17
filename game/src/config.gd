@@ -114,7 +114,7 @@ func save_all_data() -> void:
 	config.set_value("settings","currency",currency)
 	config.set_value("dashboard","active_content",dashboard_active_content)
 #
-	config.save("user://settings.cfg")
+	#config.save("user://settings.cfg")
 	print("all data saved")
 
 func save_manager(new_manager:Dictionary) -> void:
