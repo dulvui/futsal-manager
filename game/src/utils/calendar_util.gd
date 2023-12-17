@@ -140,18 +140,18 @@ func _get_next_day(_date:Dictionary) -> Dictionary:
 	# increment date by one day
 	var unix_time:int = Time.get_unix_time_from_datetime_dict(_date)
 	unix_time += DAY_IN_SECONDS
-	var next_day:Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
+	var _next_day:Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
 	
-	next_day.erase("hour")
-	next_day.erase("minute")
-	next_day.erase("second")
+	_next_day.erase("hour")
+	_next_day.erase("minute")
+	_next_day.erase("second")
 	
 	# make date array friendly by starting from 0
-	next_day.month -= 1
-	next_day.day -= 1
-	next_day.weekday -= 1
+	_next_day.month -= 1
+	_next_day.day -= 1
+	_next_day.weekday -= 1
 	
-	return next_day
+	return _next_day
 
 
 func is_market_active(_date:Dictionary={}) -> bool:

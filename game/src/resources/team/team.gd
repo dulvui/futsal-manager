@@ -17,8 +17,8 @@ class_name Team
 # 0: home color, 1: away, 2 third color
 @export var colors:Array[Color]
 
-func create_stadium(name:String, capacity:int, year_built:int) -> void:
+func create_stadium(_name:String, capacity:int, year_built:int) -> void:
 	stadium = Stadium.new()
-	stadium.name = name
+	stadium.name = _name
 	stadium.capacity = capacity
 	stadium.year_built = year_built

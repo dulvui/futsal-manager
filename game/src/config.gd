@@ -40,7 +40,7 @@ func _ready() -> void:
 	config = ConfigFile.new()
 	var err:int = config.load("user://settings.cfg")
 	# if not, something went wrong with the file loading
-	if err == OK:
+	if err != OK:
 		print("error loading user://settings.cfg")
 	manager = config.get_value("manager", "data", {
 		"name" : "",
@@ -53,10 +53,13 @@ func _ready() -> void:
 	
 	calendar = config.get_value("season","calendar",[])
 	table = config.get_value("season","table",{})
-	#current_transfers = config.get_value("season","current_transfers",[Transfer])
+	if config.has_section_key("season","current_transfers"):
+		current_transfers = config.get_value("season","current_transfers")
+	else:
+		current_transfers = []
 	
 	team = config.get_value("resources", "team", Team.new())
-	#leagues = config.get_value("resources", "leagues", init_leagues())
+	leagues = config.get_value("resources", "leagues", init_leagues())
 	league = config.get_value("resources", "league", League.new())
 	
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
@@ -123,8 +126,8 @@ func select_team(_league:League, _team:Team) -> void:
 	league = _league
 	team = _team
 	# init table
-	for team in league.teams:
-		table[team["name"]] = {
+	for league_team in league.teams:
+		table[league_team["name"]] = {
 			"points" : 0,
 			"games_played": 0,
 			"goals_made" : 0,
@@ -177,8 +180,8 @@ func init_leagues() -> Array[League]:
 	# check if leagues not leoaded yet
 	var all_leagues:Array[League] = []
 	for file in Constants.LEAGUES_FILES:
-		var league:League = ResourceLoader.load(Constants.LEAGUES_DIR + file)
-		all_leagues.append(league)
+		var league_from_file:League = ResourceLoader.load(Constants.LEAGUES_DIR + file)
+		all_leagues.append(league_from_file)
 	
 	return all_leagues
 	
