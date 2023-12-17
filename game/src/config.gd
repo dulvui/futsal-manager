@@ -59,11 +59,11 @@ func _ready() -> void:
 	else:
 		current_transfers = []
 	
-	#team = config.get_value("resources", "team", Team.new())
-	#leagues = config.get_value("resources", "leagues", init_leagues())
-	#league = config.get_value("resources", "league", League.new())
+	team = config.get_value("resources", "team", Team.new())
+	leagues = config.get_value("resources", "leagues", init_leagues())
+	league = config.get_value("resources", "league", League.new())
 	
-	date = config.get_value("current_date","date", CalendarUtil.initial_date())
+	#date = config.get_value("current_date","date", CalendarUtil.initial_date())
 	messages = config.get_value("mail","messages",[])
 
 	# global game states
