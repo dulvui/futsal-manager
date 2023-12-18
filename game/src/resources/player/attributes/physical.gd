@@ -11,3 +11,18 @@ class_name Physical
 @export var strength:int
 @export var agility:int
 @export var jump:int
+
+func _init(
+	p_pace:int = 0,
+	p_acceleration:int = 0,
+	p_stamina:int = 0,
+	p_strength:int = 0,
+	p_agility:int = 0,
+	p_jump:int = 0,
+) -> void:
+	pace = p_pace
+	acceleration = p_acceleration
+	stamina = p_stamina
+	strength = p_strength
+	agility = p_agility
+	jump = p_jump

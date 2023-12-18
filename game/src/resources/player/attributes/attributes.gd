@@ -9,3 +9,14 @@ extends Resource
 @export var mental:Mental
 @export var technical:Technical
 @export var physical:Physical
+
+func _init(
+	p_goalkeeper:Goalkeeper = Goalkeeper.new(),
+	p_mental:Mental = Mental.new(),
+	p_technical:Technical = Technical.new(),
+	p_physical:Physical = Physical.new(),
+) -> void:
+	goalkeeper = p_goalkeeper
+	mental = p_mental
+	technical = p_technical
+	physical = p_physical

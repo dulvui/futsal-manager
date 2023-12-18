@@ -12,28 +12,68 @@ enum Form {Injured, Recover, Good, Excellent}
 
 @export var id:int
 @export var price:int
-# shirt number
-@export var nr:int
-@export var name:String
-# team name for easier filtering etc...
-@export var team:String
-# league name for easier filtering etc...
-@export var league:String
-@export var surname:String
-@export var birth_date:Dictionary
-@export var nationality:String
-@export var position:Position
-@export var foot:Foot
+@export var nr:int # shirt number
 @export var loyality:int
-@export var contract:Contract
-@export var statistics:Array[Statistics]
-@export var attributes:Attributes
-
-@export var form:Form
 @export var prestige:int # 1-100
-@export var morality:Morality
 @export var moral:int
 @export var injury_factor:int
+@export var name:String
+@export var team:String # team name for easier filtering etc...
+@export var league:String # league name for easier filtering etc...
+@export var surname:String
+@export var nationality:String
+@export var birth_date:Dictionary
+@export var form:Form
+@export var morality:Morality
+@export var statistics:Array[Statistics]
+@export var foot:Foot
+@export var position:Position
+@export var contract:Contract
+@export var attributes:Attributes
+
+func _init(
+	p_id:int = 0,
+	p_price:int = 0,
+	p_nr:int = 0,
+	p_loyality:int = 0,
+	p_prestige:int = 0,
+	p_moral:int = 0,
+	p_injury_factor:int = 0,
+	p_name:String = "",
+	p_team:String = "",
+	p_league:String = "",
+	p_surname:String = "",
+	p_nationality:String = "",
+	p_birth_date:Dictionary = {},
+	p_form:Form = Form.Good,
+	p_morality:Morality = Morality.Good,
+	p_statistics:Array[Statistics] = [],
+	p_foot:Foot = Foot.R,
+	p_position:Position = Position.G,
+	p_contract:Contract = Contract.new(),
+	p_attributes:Attributes = Attributes.new(),
+) -> void:
+	id = p_id
+	price = p_price
+	nr = p_nr
+	loyality = p_loyality
+	prestige = p_prestige
+	moral = p_moral
+	injury_factor = p_injury_factor
+	name = p_name
+	team = p_team
+	league = p_league
+	surname = p_surname
+	nationality = p_nationality
+	birth_date = p_birth_date
+	form = p_form
+	morality = p_morality
+	statistics = p_statistics
+	foot = p_foot
+	position = p_position
+	contract = p_contract
+	attributes = p_attributes
+
 
 func get_full_name() -> String:
 	return name + " " + surname

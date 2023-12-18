@@ -21,6 +21,23 @@ enum State {
 @export var contract:Contract
 @export var delay_days:int
 
+func _init(
+	p_player:Player = Player.new(),
+	p_state:State = State.OFFER,
+	p_buy_team:Team = Team.new(),
+	p_sell_team:Team = Team.new(),
+	p_contract:Contract = Contract.new(),
+	p_price:int = 0,
+	p_delay_days:int = 0,
+) -> void:
+	player = p_player
+	state = p_state
+	buy_team = p_buy_team
+	sell_team = p_sell_team
+	contract = p_contract
+	price = p_price
+	delay_days = p_delay_days
+
 func update() -> bool:
 	# wait for user to make offer/contract
 	if state == State.OFFER or state == State.CONTRACT:

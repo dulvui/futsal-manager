@@ -11,7 +11,16 @@ enum Formations { F22, F121, F112, F211, F13, F31, F40 }
 @export var formation:Formations
 @export var goalkeeper:Player
 @export var players:Array[Player]
-@export var subsitutions:Array[Player]
+@export var substitutions:Array[Player]
 
-
+func _init(
+	p_formation:Formations = Formations.F22,
+	p_goalkeeper:Player = Player.new(),
+	p_players:Array[Player] = [],
+	p_substitutions:Array[Player] = [],
+) -> void:
+	formation = p_formation
+	goalkeeper = p_goalkeeper
+	players = p_players
+	substitutions = p_substitutions
 

@@ -12,5 +12,16 @@ enum Nations { IT }
 @export var name:String
 @export var teams:Array[Team]
 
+func _init(
+		_nation:Nations = Nations.IT,
+		_id:int = 0,
+		_name:String = "",
+		_teams:Array[Team] = []
+	) -> void:
+	nation = _nation
+	id = _id
+	name = _name
+	teams = _teams
+
 func add_team(team:Team) -> void:
 	teams.append(team)
