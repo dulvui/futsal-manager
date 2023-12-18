@@ -26,7 +26,7 @@ env:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/prod'
     runs-on: macos-latest
     steps:
       - name: Checkout source code
