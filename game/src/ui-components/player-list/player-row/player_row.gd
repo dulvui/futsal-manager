@@ -9,13 +9,10 @@ signal info()
 
 const ColorNumber:PackedScene = preload("res://src/ui-components/color-number/color_number.tscn")
 
-
-
 @onready var button:Button = $Button
 @onready var name_label:Control = $HBoxContainer/NameLabel
 @onready var position_label:Control = $HBoxContainer/PositionLabel
 @onready var attributes:HBoxContainer = $HBoxContainer/Attributes
-
 
 func set_up(player:Player, active_headers:Array[String]) -> void:
 	for child in attributes.get_children():

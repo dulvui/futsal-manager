@@ -6,12 +6,19 @@ extends Control
 
 signal change_player(player:Player)
 
+@onready var name_label:Label = $VBoxContainer/Name
+@onready var nr_label:Label = $VBoxContainer/Nr
+
+
 var player:Player
 
-func set_player(new_player:Player) -> void:
-	player = new_player
-	$Name.text = player.surname
-	$Nr.text = str(player.nr)
+func _ready() -> void:
+	nr_label.text = str(player.nr)
+	name_label.text = player.surname
+
+func set_player(_player:Player) -> void:
+	player = _player
+
 
 func _on_Change_pressed() -> void:
 	change_player.emit(player)
