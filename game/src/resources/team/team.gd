@@ -34,6 +34,7 @@ func _init(
 	prestige = p_prestige
 	budget = p_budget
 	salary_budget = p_salary_budget
+	players = p_players
 	stadium = p_stadium
 	colors = p_colors
 
