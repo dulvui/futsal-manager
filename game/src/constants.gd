@@ -76,7 +76,3 @@ const MAX_PRESTIGE:int = 100
 # random team requests own players
 # 1/REQUEST_FACTOR = probability
 const REQUEST_FACTOR: int = 20
-
-# player row button colors
-const COLOR_FOCUS:Color = Color(1,1,1,0.2)
-const COLOR_NORMAL:Color = Color(1,1,1,0)

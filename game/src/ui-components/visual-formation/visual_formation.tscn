@@ -6,50 +6,56 @@
 [ext_resource type="PackedScene" uid="uid://dq4dr3oe20mb8" path="res://src/ui-components/player-list/player_list.tscn" id="4"]
 
 [node name="Formation" type="Control"]
-custom_minimum_size = Vector2(600, 600)
 layout_mode = 3
-anchor_right = 0.469
-anchor_bottom = 0.833
-offset_right = -600.32
-offset_bottom = -599.76
-size_flags_horizontal = 4
-size_flags_vertical = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("2")
 script = ExtResource("1")
-metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="PlayerList" parent="HBoxContainer" instance=ExtResource("4")]
+layout_mode = 2
+
+[node name="LineUp" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/LineUp"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="PrevFormation" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="PrevFormation" type="Button" parent="HBoxContainer/LineUp/HBoxContainer"]
 layout_mode = 2
 text = "<"
 
-[node name="FormationSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="FormationSelect" type="OptionButton" parent="HBoxContainer/LineUp/HBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="NextFormation" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="NextFormation" type="Button" parent="HBoxContainer/LineUp/HBoxContainer"]
 layout_mode = 2
 text = ">"
 
-[node name="Field" type="Control" parent="VBoxContainer"]
+[node name="Field" type="Control" parent="HBoxContainer/LineUp"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Field"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LineUp/Field"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,7 +65,7 @@ grow_vertical = 2
 texture = ExtResource("3_1l72w")
 stretch_mode = 5
 
-[node name="Players" type="VBoxContainer" parent="VBoxContainer/Field"]
+[node name="Players" type="VBoxContainer" parent="HBoxContainer/LineUp/Field"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,43 +74,27 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Attack" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
+[node name="Attack" type="HBoxContainer" parent="HBoxContainer/LineUp/Field/Players"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Center" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
+[node name="Center" type="HBoxContainer" parent="HBoxContainer/LineUp/Field/Players"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Defense" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
+[node name="Defense" type="HBoxContainer" parent="HBoxContainer/LineUp/Field/Players"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Goalkeeper" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
+[node name="Goalkeeper" type="HBoxContainer" parent="HBoxContainer/LineUp/Field/Players"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="TacticInfoPopUp" type="Popup" parent="."]
-
-[node name="Panel" type="Panel" parent="TacticInfoPopUp"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="TacticInfo" type="Label" parent="TacticInfoPopUp"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = "text"
-
-[node name="PlayerList" parent="." instance=ExtResource("4")]
-visible = false
-layout_mode = 1
-
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/PrevFormation" to="." method="_on_prev_formation_pressed"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/FormationSelect" to="." method="_on_formation_select_item_selected"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/NextFormation" to="." method="_on_next_formation_pressed"]
+[connection signal="select_player" from="HBoxContainer/PlayerList" to="." method="_on_player_list_select_player"]
+[connection signal="pressed" from="HBoxContainer/LineUp/HBoxContainer/PrevFormation" to="." method="_on_prev_formation_pressed"]
+[connection signal="item_selected" from="HBoxContainer/LineUp/HBoxContainer/FormationSelect" to="." method="_on_formation_select_item_selected"]
+[connection signal="pressed" from="HBoxContainer/LineUp/HBoxContainer/NextFormation" to="." method="_on_next_formation_pressed"]

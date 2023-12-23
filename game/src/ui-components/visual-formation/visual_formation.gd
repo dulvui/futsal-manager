@@ -8,13 +8,13 @@ signal change
 
 const FormationPlayer:PackedScene = preload("res://src/ui-components/visual-formation/player/formation_player.tscn")
 
-@onready var player_list:Control = $PlayerList
-@onready var formation_select:OptionButton = $VBoxContainer/HBoxContainer/FormationSelect
-@onready var players:VBoxContainer = $VBoxContainer/Field/Players
-@onready var goalkeeper:HBoxContainer = $VBoxContainer/Field/Players/Goalkeeper
-@onready var defense:HBoxContainer = $VBoxContainer/Field/Players/Defense
-@onready var center:HBoxContainer = $VBoxContainer/Field/Players/Center
-@onready var attack:HBoxContainer = $VBoxContainer/Field/Players/Attack
+@onready var player_list:Control = $HBoxContainer/PlayerList
+@onready var formation_select:OptionButton = $HBoxContainer/LineUp/HBoxContainer/FormationSelect
+@onready var players:VBoxContainer = $HBoxContainer/LineUp/Field/Players
+@onready var goalkeeper:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Goalkeeper
+@onready var defense:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Defense
+@onready var center:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Center
+@onready var attack:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Attack
 
 
 var player_to_replace:int
@@ -41,12 +41,14 @@ func _set_players() -> void:
 	if team.line_up.formation.goalkeeper > 0:
 		var formation_goal_keeper:Control = FormationPlayer.instantiate()
 		formation_goal_keeper.set_player(team.line_up.goalkeeper)
+		formation_goal_keeper.change_player.connect(_on_change_player.bind(-1))
 		goalkeeper.add_child(formation_goal_keeper)
 	
 	# add defenders
 	for i:int in team.line_up.formation.defense:
 		var formation_player:Control = FormationPlayer.instantiate()
 		formation_player.set_player(team.line_up.players[i])
+		formation_player.change_player.connect(_on_change_player.bind(i - 1))
 		defense.add_child(formation_player)
 		
 	# add center
@@ -54,6 +56,7 @@ func _set_players() -> void:
 	for i:int in team.line_up.formation.center:
 		var formation_player:Control = FormationPlayer.instantiate()
 		formation_player.set_player(team.line_up.players[i + d])
+		formation_player.change_player.connect(_on_change_player.bind(i - 1))
 		center.add_child(formation_player)
 		
 	# add attack
@@ -64,38 +67,14 @@ func _set_players() -> void:
 		attack.add_child(formation_player)
 
 
-func _on_D_change_player(_player:Player) -> void:
-	player_to_replace = 0
-	player_list.show()
-
-func _on_WL_change_player(_player:Player) -> void:
-	player_to_replace = 1
-	player_list.show()
-
-func _on_WR_change_player(_player:Player) -> void:
-	player_to_replace = 2
-	player_list.show()
-
-func _on_P_change_player(_player:Player) -> void:
-	player_to_replace = 3
-	player_list.show()
-	
-func _on_G_change_player(_player:Player) -> void:
-	player_to_replace = -1
-	player_list.show()
-
-func _on_PlayerList_select_player(_player:Player) -> void:
-	_change_player(_player)
-	_set_players()
-	player_list.hide()
-	emit_signal("change")
+func _on_change_player(index:int) -> void:
+	player_to_replace = index
 	
 func _change_player(player:Player) -> void:
-	if player_to_replace >= 0:
+	if player_to_replace >= -1:
 		team.line_up.players[player_to_replace] = player
 	else:
 		team.line_up.goalkeeper = player
-
 
 func _on_prev_formation_pressed() -> void:
 	if formation_select.selected > 0:
@@ -117,3 +96,9 @@ func _on_formation_select_item_selected(index: int) -> void:
 func _update_formation() -> void:
 	team.line_up.formation = Formation.new(formation_select.selected)
 	_set_players()
+
+
+func _on_player_list_select_player(player: Player) -> void:
+	_change_player(player)
+	_set_players()
+	change.emit()

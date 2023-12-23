@@ -7,6 +7,10 @@ class_name PlayerRow
 
 signal info()
 
+# player row button colors
+const COLOR_FOCUS:Color = Color(1,1,1,0.2)
+const COLOR_NORMAL:Color = Color(1,1,1,0)
+
 const ColorNumber:PackedScene = preload("res://src/ui-components/color-number/color_number.tscn")
 
 @onready var button:Button = $Button
@@ -33,11 +37,8 @@ func set_up(player:Player, active_headers:Array[String]) -> void:
 func _on_button_button_down() -> void:
 	info.emit()
 
-
-
 func _on_button_mouse_entered() -> void:
-	button.self_modulate = Constants.COLOR_FOCUS
-
+	button.self_modulate = COLOR_FOCUS
 
 func _on_button_mouse_exited() -> void:
-	button.self_modulate = Constants.COLOR_NORMAL
+	button.self_modulate = COLOR_NORMAL

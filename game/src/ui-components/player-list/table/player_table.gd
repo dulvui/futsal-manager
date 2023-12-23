@@ -24,14 +24,20 @@ var sort_memory:Dictionary = {} # to save wich value is already sorted and how
 var page_size:int = 10
 var page:int = 0
 var page_max:int
+var show_lineup:bool
 
 	
-func set_up(_headers:Array[String], _info_type:String, _players:Array[Player]=[]) -> void:
+func set_up(
+	_headers:Array[String],
+	_info_type:String,
+	_players:Array[Player],
+	_show_lineup:bool = false
+) -> void:
 	headers = _headers
 	info_type = _info_type
 	players = _players
 	all_players = _players
-	
+	show_lineup = _show_lineup
 	
 	page_max = players.size() / page_size
 	

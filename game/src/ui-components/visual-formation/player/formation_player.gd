@@ -4,7 +4,7 @@
 
 extends Control
 
-signal change_player(player:Player)
+signal change_player
 
 @onready var name_label:Label = $VBoxContainer/Name
 @onready var nr_label:Label = $VBoxContainer/Nr
@@ -19,6 +19,5 @@ func _ready() -> void:
 func set_player(_player:Player) -> void:
 	player = _player
 
-
 func _on_Change_pressed() -> void:
-	change_player.emit(player)
+	change_player.emit()

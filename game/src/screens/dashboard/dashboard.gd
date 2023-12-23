@@ -7,32 +7,32 @@ extends Control
 @onready var team:Team = Config.team
 
 # buttons
-@onready var continue_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Continue
-@onready var next_match_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/NextMatch
-@onready var email_button:Button = $Main/VBoxContainer/HBoxContainer/Buttons/Email
+@onready var continue_button:Button = $MainContainer/VBoxContainer/MainView/Buttons/Continue
+@onready var next_match_button:Button = $MainContainer/VBoxContainer/MainView/Buttons/NextMatch
+@onready var email_button:Button = $MainContainer/VBoxContainer/MainView/Buttons/Email
 
 # content views 
-@onready var email:Control = $Main/VBoxContainer/HBoxContainer/Content/Email
-@onready var table:Control = $Main/VBoxContainer/HBoxContainer/Content/Table
-@onready var calendar:Control = $Main/VBoxContainer/HBoxContainer/Content/Calendar
+@onready var email:Control = $MainContainer/VBoxContainer/MainView/Content/Email
+@onready var table:Control = $MainContainer/VBoxContainer/MainView/Content/Table
+@onready var calendar:Control = $MainContainer/VBoxContainer/MainView/Content/Calendar
 
 # labels
-@onready var budget_label:Label = $Main/VBoxContainer/TopBar/Budget
+@onready var budget_label:Label = $MainContainer/VBoxContainer/TopBar/Budget
 
 enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION } 
 
 # full screen views
-@onready var formation:Control = $Main/VBoxContainer/HBoxContainer/Content/Formation
-@onready var all_players_list:Control = $Main/VBoxContainer/HBoxContainer/Content/AllPlayerList
+@onready var formation:Control = $MainContainer/VBoxContainer/MainView/Content/Formation
+@onready var all_players_list:Control = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 
 
 var match_ready:bool = false
 var next_season:bool = false
 
 func _ready() -> void:
-	$Main/VBoxContainer/TopBar/ManagerName.text = Config.manager["name"] + " " + Config.manager["surname"]
-	$Main/VBoxContainer/TopBar/TeamName.text = Config.team.name
-	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
+	$MainContainer/VBoxContainer/TopBar/ManagerName.text = Config.manager["name"] + " " + Config.manager["surname"]
+	$MainContainer/VBoxContainer/TopBar/TeamName.text = Config.team.name
+	$MainContainer/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
 	
 	all_players_list.set_up(true)
 	formation.set_up()
@@ -179,7 +179,7 @@ func _next_day() -> void:
 	TransferUtil.update_day()
 	email.update_messages()
 	calendar.set_up(true)
-	$Main/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
+	$MainContainer/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
 	if Config.calendar[Config.date.month][Config.date.day]["matches"].size() > 0:
 		continue_button.text = "START_MATCH"
 		match_ready = true
