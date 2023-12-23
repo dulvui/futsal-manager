@@ -62,13 +62,13 @@ func _on_match_simulator_update() -> void:
 	
 	$Main/Content/CentralContainer/TopBar/TimeBar.value = match_simulator.time
 	$Main/Content/CentralContainer/BottomBar/PossessBar.value = match_simulator.home_stats.possession
-	$Main/Content/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(Config.speed_factor + 1) + " X"
+	$Main/Content/Buttons/Speed/SpeedFactor.text = str(Config.speed_factor + 1) + " X"
 
 
 func match_end() -> void:
-	$Main/Content/CentralContainer/BottomBar/HBoxContainer/Faster.hide()
-	$Main/Content/CentralContainer/BottomBar/HBoxContainer/Slower.hide()
-	$Main/Content/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.hide()
+	$Main/Content/Buttons/Speed/Faster.hide()
+	$Main/Content/Buttons/Speed/Slower.hide()
+	$Main/Content/Buttons/Speed/SpeedFactor.hide()
 	pause_button.hide()
 	$Main/Content/Buttons/Dashboard.show()
 	match_simulator.match_finished()

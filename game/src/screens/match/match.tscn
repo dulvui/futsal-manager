@@ -166,23 +166,6 @@ grow_vertical = 2
 text = "POSSESSION"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Main/Content/CentralContainer/BottomBar"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Slower" type="Button" parent="Main/Content/CentralContainer/BottomBar/HBoxContainer"]
-layout_mode = 2
-text = "-1"
-
-[node name="SpeedFactor" type="Label" parent="Main/Content/CentralContainer/BottomBar/HBoxContainer"]
-layout_mode = 2
-text = "X2"
-
-[node name="Faster" type="Button" parent="Main/Content/CentralContainer/BottomBar/HBoxContainer"]
-layout_mode = 2
-text = "+1"
-
 [node name="Buttons" type="HBoxContainer" parent="Main/Content"]
 layout_mode = 2
 alignment = 1
@@ -207,6 +190,23 @@ text = "CHANGE"
 [node name="Tactics" type="Button" parent="Main/Content/Buttons"]
 layout_mode = 2
 text = "TACTICS"
+
+[node name="Speed" type="HBoxContainer" parent="Main/Content/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Slower" type="Button" parent="Main/Content/Buttons/Speed"]
+layout_mode = 2
+text = "-1"
+
+[node name="SpeedFactor" type="Label" parent="Main/Content/Buttons/Speed"]
+layout_mode = 2
+text = "X2"
+
+[node name="Faster" type="Button" parent="Main/Content/Buttons/Speed"]
+layout_mode = 2
+text = "+1"
 
 [node name="Formation" type="Button" parent="Main/Content/Buttons"]
 layout_mode = 2
@@ -277,11 +277,11 @@ autostart = true
 [connection signal="shot" from="MatchSimulator" to="." method="_on_match_simulator_shot"]
 [connection signal="update" from="MatchSimulator" to="." method="_on_match_simulator_update"]
 [connection signal="change" from="FomationPopup/Formation" to="." method="_on_Formation_change"]
-[connection signal="pressed" from="Main/Content/CentralContainer/BottomBar/HBoxContainer/Slower" to="." method="_on_Slower_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/BottomBar/HBoxContainer/Faster" to="." method="_on_Faster_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Field" to="." method="_on_Field_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Stats" to="." method="_on_Stats_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Events" to="." method="_on_Events_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Speed/Slower" to="." method="_on_Slower_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Speed/Faster" to="." method="_on_Faster_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Pause" to="." method="_on_Pause_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/SKIP" to="." method="_on_SKIP_pressed"]
