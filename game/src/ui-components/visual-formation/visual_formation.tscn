@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://i4nnwgwck615"]
 
-[ext_resource type="Script" path="res://src/ui-components/formation/formation.gd" id="1"]
+[ext_resource type="Script" path="res://src/ui-components/visual-formation/visual_formation.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://n0wgfgg75cab" path="res://assets/field-half.png" id="3_1l72w"]
 [ext_resource type="PackedScene" uid="uid://dq4dr3oe20mb8" path="res://src/ui-components/player-list/player_list.tscn" id="4"]
@@ -12,6 +12,8 @@ anchor_right = 0.469
 anchor_bottom = 0.833
 offset_right = -600.32
 offset_bottom = -599.76
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("2")
 script = ExtResource("1")
 metadata/_edit_use_anchors_ = true
@@ -23,6 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="FormationSelect" type="OptionButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
@@ -41,15 +44,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_1l72w")
+stretch_mode = 5
 
-[node name="Players" type="GridContainer" parent="VBoxContainer/Field"]
+[node name="Players" type="VBoxContainer" parent="VBoxContainer/Field"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 5
+alignment = 1
+
+[node name="Attack" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
+layout_mode = 2
+size_flags_vertical = 2
+alignment = 1
+
+[node name="Center" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
+layout_mode = 2
+size_flags_vertical = 2
+alignment = 1
+
+[node name="Defense" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
+layout_mode = 2
+size_flags_vertical = 2
+alignment = 1
+
+[node name="Goalkeeper" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
+layout_mode = 2
+size_flags_vertical = 2
+alignment = 1
 
 [node name="TacticInfoPopUp" type="Popup" parent="."]
 

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/screens/dashboard/dashboard.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://c51vyn54bk7q4" path="res://src/ui-components/calendar/calendar.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://dq4dr3oe20mb8" path="res://src/ui-components/player-list/player_list.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui-components/formation/formation.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui-components/visual-formation/visual_formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dcv0qm4k1wi4q" path="res://src/ui-components/email/email.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui-components/table/table.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://cbijtmv151qg7" path="res://src/ui-components/transfers/player-offer/player_offer.tscn" id="8"]

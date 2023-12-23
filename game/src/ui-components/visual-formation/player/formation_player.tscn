@@ -1,27 +1,26 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmwiocyu2rdxq"]
 
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
-[ext_resource type="Script" path="res://src/ui-components/formation/player/formation_player.gd" id="2"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1_cn0l1"]
+[ext_resource type="Script" path="res://src/ui-components/visual-formation/player/formation_player.gd" id="2_315wa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_y850m"]
 font_size = 26
 
 [node name="FormationPlayer" type="Control"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 3
-anchor_right = 0.046875
-anchor_bottom = 0.0833333
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("1")
-script = ExtResource("2")
+anchor_right = 0.062
+anchor_bottom = 0.111
+offset_right = -19.36
+offset_bottom = -19.92
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme = ExtResource("1_cn0l1")
+script = ExtResource("2_315wa")
 metadata/_edit_use_anchors_ = true
 
-[node name="Change" type="Button" parent="."]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,5 +38,13 @@ layout_mode = 2
 text = "10"
 label_settings = SubResource("LabelSettings_y850m")
 horizontal_alignment = 1
+
+[node name="Change" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="Change" to="." method="_on_Change_pressed"]
