@@ -32,8 +32,8 @@ func set_up(active_team:Team = Config.team) -> void:
 	_set_players()
 
 func _on_FormationSelect_item_selected(index:int) -> void:
-	_set_players()
 	team.line_up.formation = Formation.new(formation_select.selected)
+	_set_players()
 
 func _set_players() -> void:
 	# clean field
