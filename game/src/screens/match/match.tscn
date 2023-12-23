@@ -144,9 +144,6 @@ layout_mode = 2
 [node name="Events" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("6")]
 layout_mode = 2
 
-[node name="VisualActionContainer" type="Control" parent="Main/Content/CentralContainer/MainBar"]
-layout_mode = 2
-
 [node name="BottomBar" type="VBoxContainer" parent="Main/Content/CentralContainer"]
 custom_minimum_size = Vector2(780, 0)
 layout_mode = 2
@@ -242,6 +239,14 @@ text = "SKIP"
 visible = false
 layout_mode = 2
 text = "DASHBOARD"
+
+[node name="VisualActionContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Goal" type="Label" parent="."]
 visible = false

@@ -18,7 +18,7 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var pause_button:Button = $Main/Content/Buttons/Pause
 @onready var home_color:ColorRect = $Main/Content/CentralContainer/TopBar/Labels/HomeColor
 @onready var away_color:ColorRect = $Main/Content/CentralContainer/TopBar/Labels/AwayColor
-
+@onready var visual_action_container:Control = $VisualActionContainer
 
 var last_active_view:Control
 
@@ -179,7 +179,7 @@ func _on_match_simulator_shot(player:Player, on_target:bool, goal:bool, action_b
 	# Visual Action
 	var visual_action:Node2D = VisualAction.instantiate()
 	visual_action.set_up(first_half, goal, on_target, home_team, away_team, action_buffer, home_color.color, away_color.color)
-	$Main/Content/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
+	visual_action_container.add_child(visual_action)
 	await visual_action.action_finished
 	
 	if goal:
