@@ -7,17 +7,17 @@ extends Control
 const VisualAction:PackedScene = preload("res://src/match-simulator/visual-action/visual_action.tscn")
 
 @onready var match_simulator:Node = $MatchSimulator
-@onready var stats:MarginContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Stats
-@onready var comments:VBoxContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Log
-@onready var events:ScrollContainer = $HUD/HSplitContainer/CentralContainer/MainBar/Events
+@onready var stats:MarginContainer = $Main/Content/CentralContainer/MainBar/Stats
+@onready var comments:VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
+@onready var events:ScrollContainer = $Main/Content/CentralContainer/MainBar/Events
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
-@onready var time_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Time
-@onready var result_label:Label = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/Result
+@onready var time_label:Label = $Main/Content/CentralContainer/TopBar/Labels/Time
+@onready var result_label:Label = $Main/Content/CentralContainer/TopBar/Labels/Result
 @onready var formation:Control = $FomationPopup/Formation
 @onready var formation_pop:Popup = $FomationPopup
-@onready var pause_button:Button = $HUD/HSplitContainer/Buttons/Pause
-@onready var home_color:ColorRect = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/HomeColor
-@onready var away_color:ColorRect = $HUD/HSplitContainer/CentralContainer/TopBar/Labels/AwayColor
+@onready var pause_button:Button = $Main/Content/Buttons/Pause
+@onready var home_color:ColorRect = $Main/Content/CentralContainer/TopBar/Labels/HomeColor
+@onready var away_color:ColorRect = $Main/Content/CentralContainer/TopBar/Labels/AwayColor
 
 
 var last_active_view:Control
@@ -40,8 +40,8 @@ func _ready() -> void:
 			elif team.name == next_match["away"]:
 				away_team = team
 	
-	$HUD/HSplitContainer/CentralContainer/TopBar/Labels/Home.text = next_match["home"]
-	$HUD/HSplitContainer/CentralContainer/TopBar/Labels/Away.text = next_match["away"]
+	$Main/Content/CentralContainer/TopBar/Labels/Home.text = next_match["home"]
+	$Main/Content/CentralContainer/TopBar/Labels/Away.text = next_match["away"]
 	
 	formation.set_up()
 	match_simulator.set_up(home_team,away_team)
@@ -60,17 +60,17 @@ func _on_match_simulator_update() -> void:
 	stats.update_stats(match_simulator.home_stats, match_simulator.away_stats)
 	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 	
-	$HUD/HSplitContainer/CentralContainer/TopBar/TimeBar.value = match_simulator.time
-	$HUD/HSplitContainer/CentralContainer/BottomBar/PossessBar.value = match_simulator.home_stats.possession
-	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(Config.speed_factor + 1) + " X"
+	$Main/Content/CentralContainer/TopBar/TimeBar.value = match_simulator.time
+	$Main/Content/CentralContainer/BottomBar/PossessBar.value = match_simulator.home_stats.possession
+	$Main/Content/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.text = str(Config.speed_factor + 1) + " X"
 
 
 func match_end() -> void:
-	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Faster.hide()
-	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/Slower.hide()
-	$HUD/HSplitContainer/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.hide()
+	$Main/Content/CentralContainer/BottomBar/HBoxContainer/Faster.hide()
+	$Main/Content/CentralContainer/BottomBar/HBoxContainer/Slower.hide()
+	$Main/Content/CentralContainer/BottomBar/HBoxContainer/SpeedFactor.hide()
 	pause_button.hide()
-	$HUD/HSplitContainer/Buttons/Dashboard.show()
+	$Main/Content/Buttons/Dashboard.show()
 	match_simulator.match_finished()
 	Config.set_table_result(home_team.name,match_simulator.home_stats.goals,away_team.name,match_simulator.away_stats.goals)
 	
@@ -116,12 +116,12 @@ func _hide_views() -> void:
 	events.hide()
 
 func _toggle_view_buttons() -> void:
-	$HUD/HSplitContainer/Buttons/Change.disabled = not $HUD/HSplitContainer/Buttons/Change.disabled 
-	$HUD/HSplitContainer/Buttons/Events.disabled = not $HUD/HSplitContainer/Buttons/Events.disabled
-	$HUD/HSplitContainer/Buttons/Stats.disabled = not $HUD/HSplitContainer/Buttons/Stats.disabled
-	$HUD/HSplitContainer/Buttons/Field.disabled = not $HUD/HSplitContainer/Buttons/Field.disabled
-	$HUD/HSplitContainer/Buttons/Formation.disabled = not $HUD/HSplitContainer/Buttons/Formation.disabled
-	$HUD/HSplitContainer/Buttons/Tactics.disabled = not $HUD/HSplitContainer/Buttons/Tactics.disabled
+	$Main/Content/Buttons/Change.disabled = not $Main/Content/Buttons/Change.disabled 
+	$Main/Content/Buttons/Events.disabled = not $Main/Content/Buttons/Events.disabled
+	$Main/Content/Buttons/Stats.disabled = not $Main/Content/Buttons/Stats.disabled
+	$Main/Content/Buttons/Field.disabled = not $Main/Content/Buttons/Field.disabled
+	$Main/Content/Buttons/Formation.disabled = not $Main/Content/Buttons/Formation.disabled
+	$Main/Content/Buttons/Tactics.disabled = not $Main/Content/Buttons/Tactics.disabled
 	
 
 func _on_Dashboard_pressed() -> void:
@@ -179,7 +179,7 @@ func _on_match_simulator_shot(player:Player, on_target:bool, goal:bool, action_b
 	# Visual Action
 	var visual_action:Node2D = VisualAction.instantiate()
 	visual_action.set_up(first_half, goal, on_target, home_team, away_team, action_buffer, home_color.color, away_color.color)
-	$HUD/HSplitContainer/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
+	$Main/Content/CentralContainer/MainBar/VisualActionContainer.add_child(visual_action)
 	await visual_action.action_finished
 	
 	if goal:
