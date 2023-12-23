@@ -9,7 +9,7 @@ signal change
 const FormationPlayer:PackedScene = preload("res://src/ui-components/visual-formation/player/formation_player.tscn")
 
 @onready var player_list:Control = $PlayerList
-@onready var formation_select:OptionButton = $VBoxContainer/FormationSelect
+@onready var formation_select:OptionButton = $VBoxContainer/HBoxContainer/FormationSelect
 @onready var players:VBoxContainer = $VBoxContainer/Field/Players
 @onready var goalkeeper:HBoxContainer = $VBoxContainer/Field/Players/Goalkeeper
 @onready var defense:HBoxContainer = $VBoxContainer/Field/Players/Defense
@@ -29,10 +29,6 @@ func set_up(active_team:Team = Config.team) -> void:
 		formation_select.add_item(formation)
 	formation_select.selected = team.line_up.formation.variation
 	
-	_set_players()
-
-func _on_FormationSelect_item_selected(index:int) -> void:
-	team.line_up.formation = Formation.new(formation_select.selected)
 	_set_players()
 
 func _set_players() -> void:
@@ -99,4 +95,25 @@ func _change_player(player:Player) -> void:
 		team.line_up.players[player_to_replace] = player
 	else:
 		team.line_up.goalkeeper = player
-		
+
+
+func _on_prev_formation_pressed() -> void:
+	if formation_select.selected > 0:
+		formation_select.selected -= 1
+	else:
+		formation_select.selected = formation_select.item_count - 1
+	_update_formation()
+
+func _on_next_formation_pressed() -> void:
+	if formation_select.selected < formation_select.item_count - 1:
+		formation_select.selected += 1
+	else:
+		formation_select.selected = 0
+	_update_formation()
+
+func _on_formation_select_item_selected(index: int) -> void:
+	_update_formation()
+
+func _update_formation() -> void:
+	team.line_up.formation = Formation.new(formation_select.selected)
+	_set_players()

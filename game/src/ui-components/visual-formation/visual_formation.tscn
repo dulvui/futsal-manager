@@ -27,10 +27,23 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="FormationSelect" type="OptionButton" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PrevFormation" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "<"
+
+[node name="FormationSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 4
+
+[node name="NextFormation" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ">"
 
 [node name="Field" type="Control" parent="VBoxContainer"]
 layout_mode = 2
@@ -92,4 +105,6 @@ text = "text"
 visible = false
 layout_mode = 1
 
-[connection signal="item_selected" from="VBoxContainer/FormationSelect" to="." method="_on_FormationSelect_item_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PrevFormation" to="." method="_on_prev_formation_pressed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/FormationSelect" to="." method="_on_formation_select_item_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/NextFormation" to="." method="_on_next_formation_pressed"]
