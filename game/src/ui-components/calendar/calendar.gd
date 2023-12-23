@@ -6,7 +6,7 @@ extends Control
 
 const Day:PackedScene = preload("res://src/ui-components/calendar/day/day.tscn")
 
-@onready var grid:GridContainer = $GridContainer
+@onready var grid:GridContainer = $Content/GridContainer
 
 # get current month and show in paginator
 # max back and forward is full current season
@@ -39,7 +39,7 @@ func set_up(use_global_month:bool=false) -> void:
 		grid.add_child(calendar_day)
 		calendar_day.set_up(Config.calendar[current_month][day])
 #
-	$Paginator/Page.text = CalendarUtil.MONTHS[current_month]
+	$Content/Paginator/Page.text = CalendarUtil.MONTHS[current_month]
 	
 
 func _on_Prev_pressed() -> void:

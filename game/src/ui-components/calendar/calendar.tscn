@@ -21,31 +21,38 @@ layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="GridContainer" type="GridContainer" parent="."]
-custom_minimum_size = Vector2(900, 520)
-layout_mode = 2
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.722
-offset_bottom = 0.159973
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 7
 
-[node name="Monday" type="Label" parent="GridContainer"]
+[node name="Monday" type="Label" parent="Content/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "MONDAY"
 label_settings = SubResource("LabelSettings_owelh")
 horizontal_alignment = 1
 
-[node name="Tuesday" type="Label" parent="GridContainer"]
+[node name="Tuesday" type="Label" parent="Content/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "TUESDAY"
 label_settings = SubResource("LabelSettings_owelh")
 horizontal_alignment = 1
 
-[node name="Wednesday" type="Label" parent="GridContainer"]
+[node name="Wednesday" type="Label" parent="Content/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "WEDNESDAY
@@ -53,71 +60,64 @@ text = "WEDNESDAY
 label_settings = SubResource("LabelSettings_owelh")
 horizontal_alignment = 1
 
-[node name="Thursday" type="Label" parent="GridContainer"]
+[node name="Thursday" type="Label" parent="Content/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "THURSDAY"
 label_settings = SubResource("LabelSettings_owelh")
 horizontal_alignment = 1
 
-[node name="Friday" type="Label" parent="GridContainer"]
+[node name="Friday" type="Label" parent="Content/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "FRIDAY"
 label_settings = SubResource("LabelSettings_owelh")
 horizontal_alignment = 1
 
-[node name="Saturday" type="Label" parent="GridContainer"]
+[node name="Saturday" type="Label" parent="Content/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "SATURDAY"
 label_settings = SubResource("LabelSettings_owelh")
 horizontal_alignment = 1
 
-[node name="Sunday" type="Label" parent="GridContainer"]
+[node name="Sunday" type="Label" parent="Content/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "SUNDAY"
 label_settings = SubResource("LabelSettings_owelh")
 horizontal_alignment = 1
 
-[node name="Paginator" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.871222
-anchor_right = 1.0
-anchor_bottom = 0.922222
-offset_left = 1.0
-offset_top = -0.280029
-offset_right = -1.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Paginator" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_constants/separation = 30
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Prev" type="Button" parent="Paginator"]
+[node name="Prev" type="Button" parent="Content/Paginator"]
 layout_mode = 2
 text = "<"
 
-[node name="Page" type="Label" parent="Paginator"]
+[node name="Page" type="Label" parent="Content/Paginator"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "wewe"
 horizontal_alignment = 1
 
-[node name="Next" type="Button" parent="Paginator"]
+[node name="Next" type="Button" parent="Content/Paginator"]
 layout_mode = 2
 text = ">"
 
-[node name="TrainingPopUp" type="Popup" parent="Paginator"]
+[node name="TrainingPopUp" type="Popup" parent="Content/Paginator"]
 
-[node name="Panel" type="Panel" parent="Paginator/TrainingPopUp"]
+[node name="Panel" type="Panel" parent="Content/Paginator/TrainingPopUp"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Paginator/TrainingPopUp"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/Paginator/TrainingPopUp"]
 
-[connection signal="pressed" from="Paginator/Prev" to="." method="_on_Prev_pressed"]
-[connection signal="pressed" from="Paginator/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="Content/Paginator/Prev" to="." method="_on_Prev_pressed"]
+[connection signal="pressed" from="Content/Paginator/Next" to="." method="_on_Next_pressed"]

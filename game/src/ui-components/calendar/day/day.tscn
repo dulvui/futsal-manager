@@ -7,7 +7,7 @@
 font_size = 14
 
 [node name="Day" type="Control"]
-custom_minimum_size = Vector2(90, 80)
+custom_minimum_size = Vector2(90, 60)
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("2")
