@@ -57,22 +57,22 @@ alignment = 1
 
 [node name="Attack" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="Center" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="Defense" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="Goalkeeper" type="HBoxContainer" parent="VBoxContainer/Field/Players"]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="TacticInfoPopUp" type="Popup" parent="."]
