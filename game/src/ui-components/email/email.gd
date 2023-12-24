@@ -12,6 +12,7 @@ signal offer_contract
 
 func _ready() -> void:
 	update_messages()
+	show_message(EmailUtil.messages[-1])
 
 func update_messages() -> void:
 	for child in mails.get_children():
@@ -31,6 +32,7 @@ func update_messages() -> void:
 		title_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		title_label.text = EmailUtil.messages[i]["title"]
 		mails.add_child(title_label)
+		
 
 
 func show_message(message_text:Dictionary) -> void:
