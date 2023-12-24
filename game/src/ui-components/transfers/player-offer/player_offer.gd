@@ -117,17 +117,15 @@ func _on_Amount_text_changed(new_text:String) -> void:
 
 
 func _on_Confirm_pressed() -> void:
-	# TODO use transfer resource 
-	var transfer:Dictionary = {
-		"player" : player,
-		"money" : amount,
-		"exchange_players" : selected_players,
-		"days" : (randi()%5)+1,
-		"contract" : {},
-		"state" : "TEAM_PENDING" #0 is offer, 1 is contract pending, 2 is contract result
-	}
+	var transfer:Transfer = Transfer.new()
+	transfer.player = player
+	transfer.price = amount
+	transfer.exchange_players = selected_players
+	transfer.delay_days = (randi()%5)+1
+	transfer.state = Transfer.State.OFFER
+	
 	TransferUtil.make_offer(transfer)
-	emit_signal("confirm")
+	confirm.emit()
 
 
 func _on_Cancel_pressed() -> void:

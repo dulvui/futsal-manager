@@ -29,7 +29,7 @@ func team_selected(league:League, team:Team) -> void:
 	MatchMaker.inizialize_matches()
 	print("matches initialized")
 	
-	EmailUtil.new_message(EmailUtil.MessageTypes.WELCOME_MANAGER)
+	EmailUtil.welcome_manager()
 	
 	Config.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")

@@ -24,8 +24,8 @@ func update_day() -> void:
 func make_transfer(transfer:Transfer) -> void:
 	pass
 
-func make_offer(transfer:Dictionary) -> void:
-	EmailUtil.new_message(EmailUtil.MessageTypes.TRANSFER, transfer)
+func make_offer(transfer:Transfer) -> void:
+	EmailUtil.new_transfer(transfer)
 	current_transfers.append(transfer)
 	
 

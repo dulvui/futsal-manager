@@ -20,24 +20,27 @@ enum Type {
 }
 
 @export var type:Type
-@export var title:String
-@export var message:String
+@export var subject:String
+@export var text:String
 @export var sender:String
-@export var date:Dictionary
+@export var date:String
 @export var read:bool
 
 func _init(
 	p_type:Type = Type.NEXT_MATCH,
-	p_title:String = "",
-	p_message:String = "",
+	p_subject:String = "",
+	p_text:String = "",
 	p_sender:String = "",
-	p_date:Dictionary = {},
+	p_date:String = "",
 	p_read:bool = false,
 	) -> void:
 	type = p_type
-	title = p_title
-	message = p_message
+	subject = p_subject
+	text = p_text
 	sender = p_sender
 	date = p_date
 	read = p_read
 
+
+func set_up(sender: String, title:String, type:Type) -> void:
+	pass
