@@ -6,7 +6,7 @@ extends Control
 
 
 func _ready() -> void:
-	if Config.team == null:
+	if Config.team.name == "":
 		$VBoxContainer/Continue.hide()
 
 func _on_StartGame_pressed() -> void:
