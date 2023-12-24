@@ -109,7 +109,7 @@ func next_day() -> void:
 				next_match = matchz
 	
 	if next_match:
-		EmailUtil.new_message(EmailUtil.MessageTypes.NEXT_MATCH, next_match)
+		EmailUtil.next_match(next_match)
 
 	if is_market_active():
 		print("market is active")

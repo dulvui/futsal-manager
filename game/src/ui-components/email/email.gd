@@ -34,9 +34,9 @@ func update_messages() -> void:
 
 
 func show_message(message:EmailMessage) -> void:
-	if message:
-		message_container.show_message(message)
-		update_messages()
+	message_container.show_message(message)
+	message.read = true
+	update_messages()
 
 func show_offer_contract(content:Dictionary) -> void:
 	emit_signal("offer_contract",content)

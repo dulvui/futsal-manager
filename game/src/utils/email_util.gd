@@ -30,7 +30,18 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 	
 	if messages.size() > MAX_MESSAGES:
 		messages.pop_front()
-		
+
+func next_match(next_match:Dictionary) -> void:
+	var team_name:String = next_match["home"]
+	if team_name == Config.team.name:
+		team_name = next_match["away"]
+	
+	var message:EmailMessage = EmailMessage.new()
+	message.subject = tr("NEXT_MATCH") + " against " + team_name
+	message.text = "The next match is against " + team_name + ".\nThe quotes are: "
+	messages.append(message)
+
+
 func new_transfer(transfer:Transfer) -> void:
 	print("new transfer mail")
 	var message:EmailMessage = EmailMessage.new()
