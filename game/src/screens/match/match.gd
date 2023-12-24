@@ -11,13 +11,13 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var comments:VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
 @onready var events:ScrollContainer = $Main/Content/CentralContainer/MainBar/Events
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
-@onready var time_label:Label = $Main/Content/CentralContainer/TopBar/Labels/Time
-@onready var result_label:Label = $Main/Content/CentralContainer/TopBar/Labels/Result
+@onready var time_label:Label = $Main/Content/CentralContainer/TopBar/Time
+@onready var result_label:Label = $Main/Content/CentralContainer/TopBar/gResult
 @onready var formation:Control = $FomationPopup/Formation
 @onready var formation_pop:Popup = $FomationPopup
 @onready var pause_button:Button = $Main/Content/Buttons/Pause
-@onready var home_color:ColorRect = $Main/Content/CentralContainer/TopBar/Labels/HomeColor
-@onready var away_color:ColorRect = $Main/Content/CentralContainer/TopBar/Labels/AwayColor
+@onready var home_color:ColorRect = $Main/Content/CentralContainer/TopBar/HomeColor
+@onready var away_color:ColorRect = $Main/Content/CentralContainer/TopBar/AwayColor
 @onready var visual_action_container:Control = $VisualActionContainer
 
 var last_active_view:Control
@@ -40,8 +40,8 @@ func _ready() -> void:
 			elif team.name == next_match["away"]:
 				away_team = team
 	
-	$Main/Content/CentralContainer/TopBar/Labels/Home.text = next_match["home"]
-	$Main/Content/CentralContainer/TopBar/Labels/Away.text = next_match["away"]
+	$Main/Content/CentralContainer/TopBar/Home.text = next_match["home"]
+	$Main/Content/CentralContainer/TopBar/Away.text = next_match["away"]
 	
 	formation.set_up()
 	match_simulator.set_up(home_team,away_team)
