@@ -39,12 +39,16 @@ func next_match(next_match:Dictionary) -> void:
 	var message:EmailMessage = EmailMessage.new()
 	message.subject = tr("NEXT_MATCH") + " against " + team_name
 	message.text = "The next match is against " + team_name + ".\nThe quotes are: "
+	message.sender = "info@" + Config.team.name.to_lower() + ".com"
+	message.date = CalendarUtil.get_dashborad_date()
 	messages.append(message)
 
 
 func new_transfer(transfer:Transfer) -> void:
 	print("new transfer mail")
 	var message:EmailMessage = EmailMessage.new()
+	message.sender = "info@" + Config.team.name.to_lower() + ".com"
+	message.date = CalendarUtil.get_dashborad_date()
 	messages.append(message)
 	
 	if messages.size() > MAX_MESSAGES:
