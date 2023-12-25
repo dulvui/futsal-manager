@@ -54,6 +54,8 @@ func welcome_manager() -> void:
 	var message:EmailMessage = EmailMessage.new()
 	message.subject = tr("WELCOME")
 	message.text = "The team " + Config.team.name + " welcomes you as the new Manager!"
+	message.sender = "info@" + Config.team.name.to_lower() + ".com"
+	message.date = CalendarUtil.get_dashborad_date()
 	messages.append(message)
 
 	#match type:
