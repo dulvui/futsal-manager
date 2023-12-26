@@ -21,6 +21,10 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var visual_action_container:Control = $VisualActionContainer
 @onready var speed_factor_label:Label = $Main/Content/Buttons/Speed/SpeedFactor
 
+@onready var home_possession:Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Home
+@onready var away_possession:Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Away
+
+
 var last_active_view:Control
 
 var home_team:Team
@@ -65,6 +69,9 @@ func _on_match_simulator_update() -> void:
 	
 	$Main/Content/CentralContainer/TopBar/TimeBar.value = match_simulator.time
 	$Main/Content/CentralContainer/BottomBar/PossessBar.value = match_simulator.home_stats.possession
+
+	home_possession.text = str(match_simulator.home_stats.possession) + " %"
+	away_possession.text = str(match_simulator.away_stats.possession) + " %"
 
 
 func match_end() -> void:

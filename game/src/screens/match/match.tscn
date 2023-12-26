@@ -152,14 +152,31 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar"]
+[node name="Labels" type="HBoxContainer" parent="Main/Content/CentralContainer/BottomBar/PossessBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="Home" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "56%"
+horizontal_alignment = 1
+
+[node name="Posession" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "POSSESSION"
+horizontal_alignment = 1
+
+[node name="Away" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "44%"
 horizontal_alignment = 1
 
 [node name="Buttons" type="HBoxContainer" parent="Main/Content"]
