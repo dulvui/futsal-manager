@@ -19,6 +19,7 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var home_color:ColorRect = $Main/Content/CentralContainer/TopBar/HomeColor
 @onready var away_color:ColorRect = $Main/Content/CentralContainer/TopBar/AwayColor
 @onready var visual_action_container:Control = $VisualActionContainer
+@onready var speed_factor_label:Label = $Main/Content/Buttons/Speed/SpeedFactor
 
 var last_active_view:Control
 
@@ -54,6 +55,8 @@ func _ready() -> void:
 		away_color.color = away_team.colors[1]
 	else:
 		away_color.color = away_team.colors[2]
+		
+	speed_factor_label.text = str(Config.speed_factor + 1) + " X"
 	
 
 func _on_match_simulator_update() -> void:
@@ -62,13 +65,12 @@ func _on_match_simulator_update() -> void:
 	
 	$Main/Content/CentralContainer/TopBar/TimeBar.value = match_simulator.time
 	$Main/Content/CentralContainer/BottomBar/PossessBar.value = match_simulator.home_stats.possession
-	$Main/Content/Buttons/Speed/SpeedFactor.text = str(Config.speed_factor + 1) + " X"
 
 
 func match_end() -> void:
 	$Main/Content/Buttons/Speed/Faster.hide()
 	$Main/Content/Buttons/Speed/Slower.hide()
-	$Main/Content/Buttons/Speed/SpeedFactor.hide()
+	speed_factor_label.hide()
 	pause_button.hide()
 	$Main/Content/Buttons/Dashboard.show()
 	match_simulator.match_finished()
@@ -133,12 +135,14 @@ func _on_Faster_pressed() -> void:
 	if Config.speed_factor < 3:
 		Config.speed_factor += 1
 		match_simulator.faster()
+	speed_factor_label.text = str(Config.speed_factor + 1) + " X"
 
 
 func _on_Slower_pressed() -> void:
 	if Config.speed_factor > 0:
 		Config.speed_factor -= 1
 		match_simulator.slower()
+	speed_factor_label.text = str(Config.speed_factor + 1) + " X"
 
 
 func _on_Pause_pressed() -> void:
