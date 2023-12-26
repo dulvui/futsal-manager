@@ -44,4 +44,5 @@ func _request_players() -> void:
 		# or viceversa, then he would start with bad mood at other team
 		# make sure no duplicate offers are made, and once a player is sold
 		# he can't be sold twice and no offers for sold playersg
-		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_OFFER)
+		#EmailUtil.transfer_message()
+		print("TODO create random player requests")

@@ -137,7 +137,7 @@ func _get_player_position(index:int, is_home_team:bool) -> Vector2:
 	# for MVP only use 2-2 fomration
 	
 	var action_type:String = "defense"
-	if (is_home_team and is_home_goal) or (not is_home_team and not is_home_goal):
+	if (actions[0].is_home and is_home_team) or (!actions[0].is_home and !is_home_team):
 		action_type = "attack"
 	
 	var field_position:String = formations["2-2"][index]
@@ -161,7 +161,7 @@ func _action(on_set_up:bool=false) -> void:
 		var action:Action = actions.pop_front()
 		var next_ball_pos:Vector2
 		
-		# find current player position
+		# move attacking player
 		if action.is_home:
 			for player:Node2D in home_visual_players:
 				if player.player.nr ==  action.attacking_player.nr:
@@ -178,13 +178,15 @@ func _action(on_set_up:bool=false) -> void:
 		else:
 			ball.move(next_ball_pos, timer.wait_time)
 		
-		# referee
+		# move all players
+		get_tree().call_group("player", "random_movement", timer.wait_time, action.is_home)
+		
+		# move referees
 		if next_ball_pos.x < WIDTH / 2:
 			$Referee.follow_ball(next_ball_pos, timer.wait_time )
 		else:
 			$Referee2.follow_ball(next_ball_pos, timer.wait_time)
-		
-		get_tree().call_group("player", "random_movement", timer.wait_time)
+
 	else:
 		is_final_action = true
 		is_shooting = true
