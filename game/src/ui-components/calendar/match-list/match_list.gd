@@ -5,7 +5,6 @@
 extends Popup
 
 
-
 func show_matches(matches:Array) -> void:
 	var label_settings:LabelSettings = LabelSettings.new()
 	label_settings.font_size = get_theme_default_font_size()

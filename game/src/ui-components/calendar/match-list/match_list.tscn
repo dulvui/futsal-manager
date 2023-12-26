@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/ui-components/calendar/match-list/match_list.gd" id="1_xo3bj"]
 
 [node name="MatchPopup" type="Popup"]
-size = Vector2i(600, 200)
+initial_position = 1
 visible = true
 script = ExtResource("1_xo3bj")
 
@@ -26,7 +26,3 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/h_separation = 40
 columns = 3
-
-[node name="Close" type="Button" parent="."]
-visible = false
-text = "X"
