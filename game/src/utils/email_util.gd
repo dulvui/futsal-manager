@@ -6,7 +6,7 @@ extends Node
 
 var messages:Array = []
 
-const MAX_MESSAGES:int = 30
+const MAX_MESSAGES:int = 50
 
 func _ready() -> void:
 	messages = Config.messages
@@ -22,14 +22,16 @@ func count_unread_messages() -> int:
 		if not message["read"]:
 			counter += 1
 	return counter
+	
+func _add_message(message:EmailMessage) -> void:
+	messages.append(message)
+	if messages.size() > MAX_MESSAGES:
+		messages.pop_front()
 
 func new_message(type:int, content:Dictionary = {}) -> void:
 	print("new " + str(type) + " mail")
 	var message:EmailMessage = EmailMessage.new()
-	messages.append(message)
-	
-	if messages.size() > MAX_MESSAGES:
-		messages.pop_front()
+	_add_message(message)
 
 func next_match(next_match:Dictionary) -> void:
 	var team_name:String = next_match["home"]
@@ -41,18 +43,41 @@ func next_match(next_match:Dictionary) -> void:
 	message.text = "The next match is against " + team_name + ".\nThe quotes are: "
 	message.sender = "info@" + Config.team.name.to_lower() + ".com"
 	message.date = CalendarUtil.get_dashborad_date()
-	messages.append(message)
+	_add_message(message)
 
 
-func new_transfer(transfer:Transfer) -> void:
+func transfer_message(transfer:Transfer) -> void:
 	print("new transfer mail")
 	var message:EmailMessage = EmailMessage.new()
-	message.sender = "info@" + Config.team.name.to_lower() + ".com"
 	message.date = CalendarUtil.get_dashborad_date()
-	messages.append(message)
 	
-	if messages.size() > MAX_MESSAGES:
-		messages.pop_front()
+	if transfer.buy_team.name == Config.team.name:
+		message.sender = "info@" + transfer.sell_team.name.to_lower() + ".com"
+	else:
+		message.sender = "info@" + transfer.buy_team.name.to_lower() + ".com"
+	
+	match transfer.type:
+		Transfer.State.OFFER:
+			message.subject = "TRANSFER"
+			message.text = "You made an " + str(transfer.price) + " offer for " + transfer.player.get_full_name()
+		Transfer.State.SUCCESS:
+			message.subject = "TRANSFER"
+			message.text = "You bought for" + str(transfer.price) + " " + transfer.player.get_full_name()
+		Transfer.State.OFFER_DECLINED:
+			message.text = "The team " + transfer.sell_team.name + " definitly declined your offer for " + transfer.player.get_full_name()
+			message.subject = "OFFER_DECLINED"
+		Transfer.State.CONTRACT_PENDING:
+			message.text = "You made an contract offer for " + transfer.player.get_full_name()
+			message.subject = "CONTRACT OFFER MADE"
+		Transfer.State.SUCCESS:
+			message.text = "The player " + transfer.player.get_full_name() + " acceptet the contract"
+			message.subject = "CONTRACT_SIGNED"
+		Transfer.State.CONTRACT_DECLINED:
+			message.text = "The player " + transfer.player.get_full_name() + " acceptet the contract"
+			message.subject = "CONTRACT_DECLINED"
+	
+	_add_message(message)
+
 		
 func welcome_manager() -> void:
 	var message:EmailMessage = EmailMessage.new()
@@ -60,38 +85,9 @@ func welcome_manager() -> void:
 	message.text = "The team " + Config.team.name + " welcomes you as the new Manager!"
 	message.sender = "info@" + Config.team.name.to_lower() + ".com"
 	message.date = CalendarUtil.get_dashborad_date()
-	messages.append(message)
+	_add_message(message)
 
-	#match type:
-		#Type.TRANSFER:
-			#title = "TRANSFER"
-			#if content.has("success"):
-				#if content["success"]:
-					#message["message"] = "You bought for" + str(content["money"]) + " " + content["player"]["name"] + " " + content["player"]["surname"]
-				#else:
-					#message["message"] = "You couldnt buy for" + str(content["money"]) + " " + content["player"]["name"] + " " + content["player"]["surname"]
-			#else:
-				#message["message"] = "You made an " + str(content["money"]) + " offer for " + content["player"]["name"] + " " + content["player"]["surname"]
-		## contract
-		#Type.CONTRACT_OFFER:
-			#message["message"] = "You need to make an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"]
-			#message["title"] = "CONTRACT OFFER"
-			#message["content"] = content
-		#Type.CONTRACT_OFFER_MADE:
-			#message["message"] = "You made an contract offer for " + content["player"]["name"] + " " + content["player"]["surname"]
-			#message["title"] = "CONTRACT OFFER MADE"
-		#Type.CONTRACT_SIGNED:
-			#message["message"] = "The player acceptet " + content["player"]["name"] + " " + content["player"]["surname"] + " the contract"
-			#message["title"] = "CONTRACT_SIGNED"
-		#Type.NEXT_MATCH:
-			#var team_name:String = content["home"]
-			#if team_name == Config.team.name:
-				#team_name = content["away"]
-			#message["message"] = "The next match is against " + team_name + ".\nThe quotes are: "
-			#message["title"] = tr("NEXT_MATCH") + " against " + team_name
-		#Type.WELCOME_MANAGER:
-			#message["message"] = "The team " + Config.team.name + " welcomes you as the new Manager!"
-			#message["title"] = tr("WELCOME")
+
 		#Type.NEXT_SEASON:
 			#message["message"] = "The new season begins."
 			#message["title"] = "SEASON " + str(Config.date.year) + " STARTS"
@@ -104,18 +100,3 @@ func welcome_manager() -> void:
 		#Type.MARKET_OFFER:
 			#message["message"] = "Another team is interested in your player"
 			#message["title"] = "MARKET OFFER"
-
-func transfer_message(transfer:Transfer) -> void:
-	print("new transfer mail")
-	
-	var message:EmailMessage = EmailMessage.new()
-
-	message["title"] = "TRANSFER"
-	if transfer.state == Transfer.State.SUCCESS:
-		message["message"] = "You bought for" + str(transfer.price) + " " + transfer.player.get_full_name()
-	elif transfer.state == Transfer.State.OFFER:
-		message["message"] = "You couldnt buy for" + str(transfer.price) + " " + transfer.player.get_full_name()
-	else:
-		message["message"] = "You made an " + str(transfer.price) + " offer for " + transfer.player.get_full_name()
-
-

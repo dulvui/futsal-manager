@@ -19,6 +19,9 @@ func update_day() -> void:
 		# do transfers
 		for transfer in current_transfers:
 			if transfer.update():
+				# TODO once other teams can make trades between themselfes, only send email
+				# for transfers affectiing own team
+				# otehrwhise send a news id if important, or simply add to market history
 				EmailUtil.transfer_message(transfer)
 	
 func make_transfer(transfer:Transfer) -> void:

@@ -8,9 +8,11 @@ extends Resource
 enum State {
 	OFFER,
 	OFFER_PENDING,
+	OFFER_DECLINED,
 	CONTRACT,
 	CONTRACT_PENDING,
 	SUCCESS,
+	CONTRACT_DECLINED,
 }
 
 @export var player:Player
@@ -60,15 +62,24 @@ func accept_offer() -> void:
 func _update_state() -> void:
 	match state:
 		State.OFFER_PENDING:
+			# TODO use real values like prestige etc...
 			var success:bool = randi()%2 == 0
 			if success:
 				state = State.CONTRACT
 			else:
-				state = State.OFFER
+				var fail:bool = randi()%2 == 0
+				if fail:
+					state = State.OFFER_DECLINED
+				else:
+					state = State.OFFER
 		State.CONTRACT_PENDING:
 			var success:bool = randi()%2 == 0
 			if success:
 				state = State.SUCCESS
 			else:
-				state = State.CONTRACT
+				var fail:bool = randi()%2 == 0
+				if fail:
+					state = State.CONTRACT_DECLINED
+				else:
+					state = State.CONTRACT
 			
