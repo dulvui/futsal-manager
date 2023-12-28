@@ -22,7 +22,7 @@ var team:Team
 
 func set_up(active_team:Team = Config.team) -> void:
 	team = active_team
-	player_list.set_up(true, team)
+	player_list.set_up(true, false, team)
 	
 	# set up fomation options
 	for formation:String in Formation.Variations:

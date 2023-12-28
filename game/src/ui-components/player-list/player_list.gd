@@ -27,9 +27,10 @@ const FOOTS:Array = ["R","L","RL"]
 
 @onready var player_profile:Control = $PlayerProfile
 
+var show_profile:bool
 
-func set_up(include_lineup:bool, active_team:Team = null) -> void:
-	
+func set_up(include_lineup:bool,_show_profile:bool, active_team:Team = null) -> void:
+	show_profile = _show_profile
 	set_up_players(include_lineup, active_team)
 	
 	team_select.add_item("NO_TEAM")
@@ -147,8 +148,11 @@ func _reset_options() -> void:
 
 
 func _on_table_info_player(player:Player) -> void:
-	player_profile.show()
-	player_profile.set_up_info(player)
+	if show_profile:
+		player_profile.show()
+		player_profile.set_up_info(player)
+	else:
+		select_player.emit(player)
 
 
 func _on_player_profile_select(player: Player) -> void:

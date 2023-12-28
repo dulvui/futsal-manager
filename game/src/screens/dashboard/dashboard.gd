@@ -34,7 +34,7 @@ func _ready() -> void:
 	$MainContainer/VBoxContainer/TopBar/TeamName.text = Config.team.name
 	$MainContainer/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
 	
-	all_players_list.set_up(true)
+	all_players_list.set_up(true, false)
 	formation.set_up()
 	
 	if Config.calendar[Config.date.month][Config.date.day]["matches"].size() > 0:
