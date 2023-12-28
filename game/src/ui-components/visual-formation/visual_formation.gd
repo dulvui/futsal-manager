@@ -44,27 +44,30 @@ func _set_players() -> void:
 		formation_goal_keeper.change_player.connect(_on_change_player.bind(-1))
 		goalkeeper.add_child(formation_goal_keeper)
 	
+	var pos_count:int = 0
 	# add defenders
 	for i:int in team.line_up.formation.defense:
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(team.line_up.players[i])
-		formation_player.change_player.connect(_on_change_player.bind(i - 1))
+		formation_player.set_player(team.line_up.players[pos_count])
+		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		defense.add_child(formation_player)
+		pos_count += 1
 		
 	# add center
-	var d:int = team.line_up.formation.defense
 	for i:int in team.line_up.formation.center:
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(team.line_up.players[i + d])
-		formation_player.change_player.connect(_on_change_player.bind(i - 1))
+		formation_player.set_player(team.line_up.players[pos_count])
+		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		center.add_child(formation_player)
+		pos_count += 1
 		
 	# add attack
-	var c:int = team.line_up.formation.center
 	for i:int in team.line_up.formation.attack:
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(team.line_up.players[i + c])
+		formation_player.set_player(team.line_up.players[pos_count])
+		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		attack.add_child(formation_player)
+		pos_count += 1
 
 
 func _on_change_player(index:int) -> void:
