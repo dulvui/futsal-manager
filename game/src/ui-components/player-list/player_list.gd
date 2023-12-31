@@ -67,7 +67,8 @@ func set_up_players(include_lineup:bool, active_team:Team = null) -> void:
 			for player in active_team.line_up.players:
 				all_players.append(player)
 		for player in active_team.players:
-			all_players.append(player)
+			if not player in active_team.line_up.players or not player == active_team.line_up.goalkeeper:
+				all_players.append(player)
 	
 	var headers:Array[String] = ["position", "surname"]
 	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[0]]:
