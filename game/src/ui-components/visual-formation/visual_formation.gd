@@ -70,15 +70,6 @@ func _set_players() -> void:
 		pos_count += 1
 
 
-func _on_change_player(index:int) -> void:
-	player_to_replace = index
-	
-func _change_player(player:Player) -> void:
-	if player_to_replace >= -1:
-		team.line_up.players[player_to_replace] = player
-	else:
-		team.line_up.goalkeeper = player
-
 func _on_prev_formation_pressed() -> void:
 	if formation_select.selected > 0:
 		formation_select.selected -= 1
@@ -101,7 +92,17 @@ func _update_formation() -> void:
 	_set_players()
 
 
+func _on_change_player(index:int) -> void:
+	player_to_replace = index
+	
+func _change_player(player:Player) -> void:
+	if player_to_replace >= -1:
+		team.line_up.players[player_to_replace] = player
+	else:
+		team.line_up.goalkeeper = player
+
 func _on_player_list_select_player(player: Player) -> void:
 	_change_player(player)
 	_set_players()
+	player_list.set_up(true, false, team)
 	change.emit()
