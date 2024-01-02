@@ -89,7 +89,7 @@ func assign_players_to_team(team:Team, league:League) -> Team:
 		if position == Player.Position.G:
 			amount = 3
 		
-		for i in range(amount):
+		for i in amount:
 			var player:Player = create_player(League.Nations.IT, position, nr)
 			nr += 1
 			player.team = team.name
@@ -98,7 +98,7 @@ func assign_players_to_team(team:Team, league:League) -> Team:
 		
 			# random lineup assingment
 			if position == Player.Position.G:
-				team.lineup_player_ids[0] = player.id
+				team.lineup_player_ids.insert(0, player.id)
 			elif team.lineup_player_ids.size() < 5:
 				team.lineup_player_ids.append(player.id)
 			elif team.lineup_sub_ids.size() < 12:
