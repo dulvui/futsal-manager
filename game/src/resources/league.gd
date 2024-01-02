@@ -8,13 +8,13 @@ extends Resource
 enum Nations { IT }
 
 @export var nation:Nations
-@export var id:int = 0
+@export var id:String
 @export var name:String
 @export var teams:Array[Team]
 
 func _init(
 		_nation:Nations = Nations.IT,
-		_id:int = 0,
+		_id:String = "",
 		_name:String = "",
 		_teams:Array[Team] = []
 	) -> void:

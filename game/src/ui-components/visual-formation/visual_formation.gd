@@ -27,7 +27,7 @@ func set_up(active_team:Team = Config.team) -> void:
 	# set up fomation options
 	for formation:String in Formation.Variations:
 		formation_select.add_item(formation)
-	formation_select.selected = team.line_up.formation.variation
+	formation_select.selected = team.formation.variation
 	
 	_set_players()
 
@@ -38,33 +38,33 @@ func _set_players() -> void:
 			player.queue_free()
 			
 	# add golakeeper
-	if team.line_up.formation.goalkeeper > 0:
+	if team.formation.goalkeeper > 0:
 		var formation_goal_keeper:Control = FormationPlayer.instantiate()
-		formation_goal_keeper.set_player(team.line_up.goalkeeper)
-		formation_goal_keeper.change_player.connect(_on_change_player.bind(-1))
+		formation_goal_keeper.set_player(team.get_goalkeeper())
+		formation_goal_keeper.change_player.connect(_on_change_player.bind(0))
 		goalkeeper.add_child(formation_goal_keeper)
 	
-	var pos_count:int = 0
+	var pos_count:int = 1
 	# add defenders
-	for i:int in team.line_up.formation.defense:
+	for i:int in team.formation.defense:
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(team.line_up.players[pos_count])
+		formation_player.set_player(team.get_lineup_player(pos_count))
 		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		defense.add_child(formation_player)
 		pos_count += 1
 		
 	# add center
-	for i:int in team.line_up.formation.center:
+	for i:int in team.formation.center:
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(team.line_up.players[pos_count])
+		formation_player.set_player(team.get_lineup_player(pos_count))
 		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		center.add_child(formation_player)
 		pos_count += 1
 		
 	# add attack
-	for i:int in team.line_up.formation.attack:
+	for i:int in team.formation.attack:
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(team.line_up.players[pos_count])
+		formation_player.set_player(team.get_lineup_player(pos_count))
 		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		attack.add_child(formation_player)
 		pos_count += 1
@@ -88,7 +88,7 @@ func _on_formation_select_item_selected(index: int) -> void:
 	_update_formation()
 
 func _update_formation() -> void:
-	team.line_up.formation = Formation.new(formation_select.selected)
+	team.formation = Formation.new(formation_select.selected)
 	_set_players()
 
 
@@ -96,10 +96,7 @@ func _on_change_player(index:int) -> void:
 	player_to_replace = index
 	
 func _change_player(player:Player) -> void:
-	if player_to_replace >= -1:
-		team.line_up.players[player_to_replace] = player
-	else:
-		team.line_up.goalkeeper = player
+	team.lineup_player_ids[player_to_replace] = player.id
 
 func _on_player_list_select_player(player: Player) -> void:
 	_change_player(player)

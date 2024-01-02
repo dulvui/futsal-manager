@@ -109,9 +109,9 @@ func set_up(_first_half:bool, _is_goal:bool,_on_target:bool, _home_team:Team, _a
 func _player_setup() -> void:
 	#home
 	var home_index:int = 0
-	var goalkeeper_home:Player = home_team.line_up.goalkeeper
+	var goalkeeper_home:Player = home_team.get_goalkeeper()
 	home_goalkeeper.set_up(goalkeeper_home, Color.LIGHT_BLUE, true, WIDTH, HEIGHT)
-	for player in home_team.line_up.players:
+	for player in home_team.get_lineup_players():
 		var visual_player:Node2D = VisualPlayer.instantiate()
 		visual_player.set_up(player, home_color, true, WIDTH, HEIGHT, _get_player_position(home_index, true))
 		$HomePlayers.add_child(visual_player)
@@ -120,9 +120,9 @@ func _player_setup() -> void:
 	
 	# away
 	var away_index:int = 0
-	var goalkeeper_away:Player = away_team.line_up.goalkeeper
+	var goalkeeper_away:Player = away_team.get_goalkeeper()
 	away_goalkeeper.set_up(goalkeeper_away, Color.LIGHT_CORAL, true, WIDTH, HEIGHT)
-	for player in away_team.line_up.players:
+	for player in away_team.get_lineup_players():
 		var visual_player:Node2D = VisualPlayer.instantiate()
 		visual_player.set_up(player, away_color, false, WIDTH, HEIGHT, _get_player_position(away_index, false))
 		$AwayPlayers.add_child(visual_player)

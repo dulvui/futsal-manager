@@ -49,8 +49,8 @@ func _run() -> void:
 		var file_name:String = Constants.LEAGUES_DIR + l["name"].replace(" ", "-").to_lower() +".tres" 
 		print("Generate players for ", l["name"])
 		var league:League = League.new()
-		league.id = l["name"].md5_text()
 		league.name = l["name"]
+		league.id = l["name"].md5_text()
 		# TODO change to fit other nations
 		league.nation = League.Nations.IT
 		print(league["teams"])
@@ -58,7 +58,8 @@ func _run() -> void:
 			print(t)
 			var team:Team = Team.new()
 			team.name = t
-			team.budget = 1234
+			team.id = team.name.md5_text()
+			team.budget = randi_range(500000, 100000000)
 			team.colors = []
 			team.colors.append(Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1)))
 			team.colors.append(team.colors[0].inverted())
@@ -80,12 +81,7 @@ func _run() -> void:
 
 
 func assign_players_to_team(team:Team, league:League) -> Team:
-	var id:int = 1
-	team.id = id
-	id += 1
 	var nr:int = 1
-	
-	team.line_up = LineUp.new()
 	
 	for position:int in Player.Position.values():
 		
@@ -100,11 +96,13 @@ func assign_players_to_team(team:Team, league:League) -> Team:
 			player.league = league.name
 			team.players.append(player)
 		
-		# random lineup assingment
-		if position == Player.Position.G:
-			team.line_up.goalkeeper = team.players[-1]
-		elif team.line_up.players.size() < 4:
-			team.line_up.players.append(team.players[-1])
+			# random lineup assingment
+			if position == Player.Position.G:
+				team.lineup_player_ids[0] = player.id
+			elif team.lineup_player_ids.size() < 5:
+				team.lineup_player_ids.append(player.id)
+			elif team.lineup_sub_ids.size() < 12:
+				team.lineup_sub_ids.append(player.id)
 
 	return team
 
