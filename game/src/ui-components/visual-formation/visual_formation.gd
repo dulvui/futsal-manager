@@ -20,8 +20,8 @@ const FormationPlayer:PackedScene = preload("res://src/ui-components/visual-form
 @onready var attack:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Attack
 
 
-var player_to_replace:int
-var sub_to_replace:int
+var lineup_player:int = -1
+var list_player:Player = null
 
 var team:Team
 
@@ -45,20 +45,20 @@ func _set_players() -> void:
 	# clean subs
 	for sub:Control in subs.get_children():
 		sub.queue_free()
-			
+	
+	var pos_count:int = 0
 	# add golakeeper
 	if team.formation.goalkeeper > 0:
 		var formation_goal_keeper:Control = FormationPlayer.instantiate()
 		formation_goal_keeper.set_player(team.get_goalkeeper(), team)
-		formation_goal_keeper.change_player.connect(_on_change_player.bind(0))
+		formation_goal_keeper.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		goalkeeper.add_child(formation_goal_keeper)
 	
-	var pos_count:int = 1
 	# add defenders
 	for i:int in team.formation.defense:
 		var formation_player:Control = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(_on_change_player.bind(pos_count))
+		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		defense.add_child(formation_player)
 		pos_count += 1
 		
@@ -66,7 +66,7 @@ func _set_players() -> void:
 	for i:int in team.formation.center:
 		var formation_player:Control = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(_on_change_player.bind(pos_count))
+		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		center.add_child(formation_player)
 		pos_count += 1
 		
@@ -74,18 +74,17 @@ func _set_players() -> void:
 	for i:int in team.formation.attack:
 		var formation_player:Control = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(_on_change_player.bind(pos_count))
+		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		attack.add_child(formation_player)
 		pos_count += 1
 		
 	# add subs
-	var sub_count:int = 0
 	for player in team.get_sub_players():
 		var formation_player:Control = FormationPlayer.instantiate()
 		formation_player.set_player(player, team)
-		formation_player.change_player.connect(_on_change_sub.bind(sub_count))
+		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		subs.add_child(formation_player)
-		sub_count += 1
+		pos_count += 1
 
 func _on_prev_formation_pressed() -> void:
 	if formation_select.selected > 0:
@@ -108,25 +107,30 @@ func _update_formation() -> void:
 	team.formation = Formation.new(formation_select.selected)
 	_set_players()
 
-
-func _on_change_player(index:int) -> void:
-	player_to_replace = index
-	sub_to_replace = -1
+func _on_line_up_select_player(index:int) -> void:
+	lineup_player = index
+	if list_player:
+		_change_player()
 	
-func _on_change_sub(index:int) -> void:
-	sub_to_replace = index
-	player_to_replace = -1
+func _on_player_list_select_player(player: Player) -> void:
+	list_player = player
+	if lineup_player >= 0:
+		_change_player()
 	
-func _change_player(player:Player) -> void:
-	if player_to_replace > 0:
-		team.lineup_player_ids[player_to_replace] = player.id
-	elif sub_to_replace > 0:
-		team.lineup_sub_ids[sub_to_replace] = player.id
+func _change_player() -> void:
+	if lineup_player >= 0:
+		if lineup_player < 5:
+			team.lineup_player_ids[lineup_player] = list_player.id
+		else:
+			team.lineup_sub_ids[lineup_player] = list_player.id
 	else:
 		print("error in substitution")
-
-func _on_player_list_select_player(player: Player) -> void:
-	_change_player(player)
+		return
+		
 	_set_players()
 	player_list.set_up(true, false, team)
 	change.emit()
+	
+	lineup_player = -1
+	list_player = null
+
