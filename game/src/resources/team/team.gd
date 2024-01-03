@@ -7,8 +7,8 @@ class_name Team
 
 @export var id:String
 @export var name:String
+# 0 to 4 active, 5 to x subs
 @export var lineup_player_ids:Array[int]
-@export var lineup_sub_ids:Array[int]
 @export var formation:Formation
 @export var prestige:int
 @export var budget:int
@@ -28,7 +28,6 @@ func _init(
 	p_players:Array[Player] = [],
 	p_formation:Formation = Formation.new(),
 	p_lineup_player_ids:Array[int] = [],
-	p_lineup_sub_ids:Array[int] = [],
 	p_stadium:Stadium = Stadium.new(),
 	p_colors:Array[Color] = [Color(0, 0, 0), Color(0, 0, 0), Color(0, 0, 0)],
 ) -> void:
@@ -42,7 +41,6 @@ func _init(
 	colors = p_colors
 	formation = p_formation
 	lineup_player_ids = p_lineup_player_ids
-	lineup_sub_ids = p_lineup_sub_ids
 
 func create_stadium(_name:String, capacity:int, year_built:int) -> void:
 	stadium = Stadium.new()
@@ -59,11 +57,18 @@ func get_goalkeeper() -> Player:
 func get_lineup_players(include_goalkeeper:bool=false) -> Array[Player]:
 	var lineup:Array[Player] = []
 	for player in players:
-		if player.id in lineup_player_ids:
+		if player.id in lineup_player_ids.slice(0, 5):
 			lineup.append(player)
 	if not include_goalkeeper:
 		lineup.pop_front()
 	return lineup
+	
+func get_sub_players() -> Array[Player]:
+	var sub:Array[Player] = []
+	for player in players:
+		if player.id in lineup_player_ids.slice(5, Constants.LINEUP_PLAYERS_AMOUNT):
+			sub.append(player)
+	return sub
 
 func get_lineup_player(index:int) -> Player:
 	for player in players:
@@ -71,15 +76,10 @@ func get_lineup_player(index:int) -> Player:
 			return player
 	return null
 	
-func get_sub_players() -> Array[Player]:
-	var sub:Array[Player] = []
-	for player in players:
-		if player.id in lineup_sub_ids:
-			sub.append(player)
-	return sub
-	
 func is_lineup_player(player:Player) -> bool:
-	return player.id in lineup_player_ids
+	var index:int = lineup_player_ids.find(player.id)
+	return index >= 0 and index <= 4 
 	
 func is_sub_player(player:Player) -> bool:
-	return player.id in lineup_sub_ids
+	var index:int = lineup_player_ids.find(player.id)
+	return index > 4 and index < Constants.LINEUP_PLAYERS_AMOUNT

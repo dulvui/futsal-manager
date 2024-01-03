@@ -76,3 +76,5 @@ const MAX_PRESTIGE:int = 100
 # random team requests own players
 # 1/REQUEST_FACTOR = probability
 const REQUEST_FACTOR: int = 20
+
+const LINEUP_PLAYERS_AMOUNT = 12

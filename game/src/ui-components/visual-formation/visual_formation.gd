@@ -20,7 +20,7 @@ const FormationPlayer:PackedScene = preload("res://src/ui-components/visual-form
 @onready var attack:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Attack
 
 
-var lineup_player:int = -1
+var lineup_players:Array[int] = []
 var list_player:Player = null
 
 var team:Team
@@ -53,6 +53,7 @@ func _set_players() -> void:
 		formation_goal_keeper.set_player(team.get_goalkeeper(), team)
 		formation_goal_keeper.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		goalkeeper.add_child(formation_goal_keeper)
+		pos_count += 1
 	
 	# add defenders
 	for i:int in team.formation.defense:
@@ -108,21 +109,24 @@ func _update_formation() -> void:
 	_set_players()
 
 func _on_line_up_select_player(index:int) -> void:
-	lineup_player = index
-	if list_player:
+	lineup_players.append(index)
+	if list_player or lineup_players.size() == 2:
 		_change_player()
 	
 func _on_player_list_select_player(player: Player) -> void:
 	list_player = player
-	if lineup_player >= 0:
+	if lineup_players.size() > 0:
 		_change_player()
 	
 func _change_player() -> void:
-	if lineup_player >= 0:
-		if lineup_player < 5:
-			team.lineup_player_ids[lineup_player] = list_player.id
-		else:
-			team.lineup_sub_ids[lineup_player] = list_player.id
+	# switch betwenn list and lineup
+	if lineup_players.size() == 1:
+		team.lineup_player_ids[lineup_players[0]] = list_player.id
+	# switch betwenn lineup and lineup
+	elif lineup_players.size() == 2:
+		var temp_id:int = team.lineup_player_ids[lineup_players[0]]
+		team.lineup_player_ids[lineup_players[0]] = team.lineup_player_ids[lineup_players[1]]
+		team.lineup_player_ids[lineup_players[1]] = temp_id
 	else:
 		print("error in substitution")
 		return
@@ -131,6 +135,6 @@ func _change_player() -> void:
 	player_list.set_up(true, false, team)
 	change.emit()
 	
-	lineup_player = -1
+	lineup_players.clear()
 	list_player = null
 

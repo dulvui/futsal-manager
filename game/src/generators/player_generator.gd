@@ -97,12 +97,10 @@ func assign_players_to_team(team:Team, league:League) -> Team:
 			team.players.append(player)
 		
 			# random lineup assingment
-			if position == Player.Position.G:
-				team.lineup_player_ids.insert(0, player.id)
-			elif team.lineup_player_ids.size() < 5:
+			if position == Player.Position.G and team.lineup_player_ids.is_empty():
 				team.lineup_player_ids.append(player.id)
-			elif team.lineup_sub_ids.size() < 12:
-				team.lineup_sub_ids.append(player.id)
+			elif position != Player.Position.G and team.lineup_player_ids.size() < Constants.LINEUP_PLAYERS_AMOUNT:
+				team.lineup_player_ids.append(player.id)
 
 	return team
 
