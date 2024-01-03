@@ -9,8 +9,11 @@ signal change
 const FormationPlayer:PackedScene = preload("res://src/ui-components/visual-formation/player/formation_player.tscn")
 
 @onready var player_list:Control = $HBoxContainer/PlayerList
-@onready var formation_select:OptionButton = $HBoxContainer/LineUp/HBoxContainer/FormationSelect
 @onready var players:VBoxContainer = $HBoxContainer/LineUp/Field/Players
+@onready var subs:VBoxContainer = $HBoxContainer/Subs/List
+
+@onready var formation_select:OptionButton = $HBoxContainer/LineUp/HBoxContainer/FormationSelect
+
 @onready var goalkeeper:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Goalkeeper
 @onready var defense:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Defense
 @onready var center:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Center
@@ -18,6 +21,8 @@ const FormationPlayer:PackedScene = preload("res://src/ui-components/visual-form
 
 
 var player_to_replace:int
+var sub_to_replace:int
+
 var team:Team
 
 func set_up(active_team:Team = Config.team) -> void:
@@ -36,6 +41,10 @@ func _set_players() -> void:
 	for players:HBoxContainer in players.get_children():
 		for player:Control in players.get_children():
 			player.queue_free()
+			
+	# clean subs
+	for sub:Control in subs.get_children():
+		sub.queue_free()
 			
 	# add golakeeper
 	if team.formation.goalkeeper > 0:
@@ -68,7 +77,15 @@ func _set_players() -> void:
 		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		attack.add_child(formation_player)
 		pos_count += 1
-
+		
+	# add subs
+	var sub_count:int = 0
+	for player in team.get_sub_players():
+		var formation_player:Control = FormationPlayer.instantiate()
+		formation_player.set_player(player)
+		formation_player.change_player.connect(_on_change_sub.bind(sub_count))
+		subs.add_child(formation_player)
+		sub_count += 1
 
 func _on_prev_formation_pressed() -> void:
 	if formation_select.selected > 0:
@@ -94,9 +111,19 @@ func _update_formation() -> void:
 
 func _on_change_player(index:int) -> void:
 	player_to_replace = index
+	sub_to_replace = -1
+	
+func _on_change_sub(index:int) -> void:
+	sub_to_replace = index
+	player_to_replace = -1
 	
 func _change_player(player:Player) -> void:
-	team.lineup_player_ids[player_to_replace] = player.id
+	if player_to_replace > 0:
+		team.lineup_player_ids[player_to_replace] = player.id
+	elif sub_to_replace > 0:
+		team.lineup_sub_ids[sub_to_replace] = player.id
+	else:
+		print("error in substitution")
 
 func _on_player_list_select_player(player: Player) -> void:
 	_change_player(player)

@@ -29,9 +29,9 @@ const FOOTS:Array = ["R","L","RL"]
 
 var show_profile:bool
 
-func set_up(include_lineup:bool,_show_profile:bool, active_team:Team = null) -> void:
+func set_up(show_lineup:bool,_show_profile:bool, active_team:Team = null) -> void:
 	show_profile = _show_profile
-	set_up_players(include_lineup, active_team)
+	set_up_players(show_lineup, active_team)
 	
 	team_select.add_item("NO_TEAM")
 	for team in Config.league.teams:
@@ -53,7 +53,7 @@ func set_up(include_lineup:bool,_show_profile:bool, active_team:Team = null) -> 
 		info_select.add_item(info_type)
 
 
-func set_up_players(include_lineup:bool, active_team:Team = null) -> void:
+func set_up_players(show_lineup:bool, active_team:Team = null) -> void:
 	_reset_options()
 	
 	var all_players:Array[Player] = []
@@ -69,7 +69,7 @@ func set_up_players(include_lineup:bool, active_team:Team = null) -> void:
 	var headers:Array[String] = ["position", "surname"]
 	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
-	table.set_up(headers,INFO_TYPES[0], all_players)
+	table.set_up(headers,INFO_TYPES[0], all_players, active_team)
 	
 func remove_player(player_id:int) -> void:
 	active_filters["id"] = player_id

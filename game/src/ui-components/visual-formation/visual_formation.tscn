@@ -94,6 +94,14 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
+[node name="Subs" type="ScrollContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="List" type="VBoxContainer" parent="HBoxContainer/Subs"]
+layout_mode = 2
+alignment = 1
+
 [connection signal="select_player" from="HBoxContainer/PlayerList" to="." method="_on_player_list_select_player"]
 [connection signal="pressed" from="HBoxContainer/LineUp/HBoxContainer/PrevFormation" to="." method="_on_prev_formation_pressed"]
 [connection signal="item_selected" from="HBoxContainer/LineUp/HBoxContainer/FormationSelect" to="." method="_on_formation_select_item_selected"]

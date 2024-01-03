@@ -4,7 +4,13 @@
 
 extends Control
 
-func set_text(name:String, in_line_up:bool = false) -> void:
-	if in_line_up:
-		$ColorRect.color = Color.FIREBRICK
+func set_text(name:String) -> void:
 	$Label.text = str(name)
+	
+func set_sub(is_true:bool) -> void:
+	if is_true:
+		$ColorRect.color = Color.SKY_BLUE
+	
+func set_line_up(is_true:bool) -> void:
+	if is_true:
+		$ColorRect.color = Color.PALE_GREEN

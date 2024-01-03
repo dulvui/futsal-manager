@@ -24,20 +24,20 @@ var sort_memory:Dictionary = {} # to save wich value is already sorted and how
 const page_size:int = 9
 var page:int = 0
 var page_max:int
-var show_lineup:bool
+var team:Team
 
 	
 func set_up(
-	_headers:Array[String],
-	_info_type:String,
-	_players:Array[Player],
-	_show_lineup:bool = false
+	p_headers:Array[String],
+	p_info_type:String,
+	p_players:Array[Player],
+	p_team:Team = null
 ) -> void:
-	headers = _headers
-	info_type = _info_type
-	players = _players
-	all_players = _players
-	show_lineup = _show_lineup
+	headers = p_headers
+	info_type = p_info_type
+	players = p_players
+	all_players = p_players
+	team = p_team
 	
 	page_max = players.size() / page_size
 	
@@ -98,7 +98,7 @@ func _set_up_content() -> void:
 			players_container.add_child(player_row)
 			#player_row.select.connect(select.bind(player))
 			player_row.info.connect(info.bind(player))
-			player_row.set_up(player, headers)
+			player_row.set_up(player, headers, team)
 	else :
 		var label:Label = Label.new()
 		label.text = "NO_PLAYER_FOUND"
