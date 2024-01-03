@@ -49,7 +49,7 @@ func _set_players() -> void:
 	# add golakeeper
 	if team.formation.goalkeeper > 0:
 		var formation_goal_keeper:Control = FormationPlayer.instantiate()
-		formation_goal_keeper.set_player(team.get_goalkeeper())
+		formation_goal_keeper.set_player(team.get_goalkeeper(), team)
 		formation_goal_keeper.change_player.connect(_on_change_player.bind(0))
 		goalkeeper.add_child(formation_goal_keeper)
 	
@@ -57,7 +57,7 @@ func _set_players() -> void:
 	# add defenders
 	for i:int in team.formation.defense:
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(team.get_lineup_player(pos_count))
+		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		defense.add_child(formation_player)
 		pos_count += 1
@@ -65,7 +65,7 @@ func _set_players() -> void:
 	# add center
 	for i:int in team.formation.center:
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(team.get_lineup_player(pos_count))
+		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		center.add_child(formation_player)
 		pos_count += 1
@@ -73,7 +73,7 @@ func _set_players() -> void:
 	# add attack
 	for i:int in team.formation.attack:
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(team.get_lineup_player(pos_count))
+		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_change_player.bind(pos_count))
 		attack.add_child(formation_player)
 		pos_count += 1
@@ -82,7 +82,7 @@ func _set_players() -> void:
 	var sub_count:int = 0
 	for player in team.get_sub_players():
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(player)
+		formation_player.set_player(player, team)
 		formation_player.change_player.connect(_on_change_sub.bind(sub_count))
 		subs.add_child(formation_player)
 		sub_count += 1
