@@ -36,11 +36,14 @@ func set_up(show_lineup:bool,_show_profile:bool, active_team:Team = null) -> voi
 	show_profile = _show_profile
 	set_up_players(show_lineup, active_team)
 	
-	team_select.add_item("NO_TEAM")
-	for team in Config.league.teams:
-		if team ==null or team.name != Config.team.name:
-			team_select.add_item(team.name)
-			
+	if not active_team:
+		team_select.add_item("NO_TEAM")
+		for team in Config.league.teams:
+			if team ==null or team.name != Config.team.name:
+				team_select.add_item(team.name)
+	else:
+		team_select.hide()
+	
 	pos_select.add_item("NO_POS")
 	for pos:String in POSITIONS:
 		pos_select.add_item(pos)
@@ -70,7 +73,7 @@ func set_up_players(show_lineup:bool, active_team:Team = null) -> void:
 			all_players.append(player)
 	
 	var headers:Array[String] = ["position", "surname"]
-	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[0]]:
+	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
 		headers.append(attribute)
 	table.set_up(headers,INFO_TYPES[active_info_type], all_players, active_team)
 	
@@ -112,7 +115,7 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 			headers.append(attribute)
 		info_select.select(INFO_TYPES.size() - 1)
 	else:
-		for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[0]]:
+		for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
 			headers.append(attribute)
 		info_select.select(0)
 
@@ -146,6 +149,7 @@ func _reset_options() -> void:
 	pos_select.selected = 0
 	team_select.selected = 0
 	info_select.selected = 0
+	active_info_type = 0
 
 
 func _on_table_info_player(player:Player) -> void:
