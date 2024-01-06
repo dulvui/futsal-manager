@@ -19,6 +19,8 @@ const FOOTS:Array = ["R","L","RL"]
 
 @onready var table:Control = $VBoxContainer/Table
 
+var all_players:Array[Player] = []
+
 # select filters
 @onready var info_select:OptionButton = $VBoxContainer/HBoxContainer/InfoSelect
 @onready var team_select:OptionButton = $VBoxContainer/HBoxContainer/TeamSelect
@@ -56,7 +58,7 @@ func set_up(show_lineup:bool,_show_profile:bool, active_team:Team = null) -> voi
 func set_up_players(show_lineup:bool, active_team:Team = null) -> void:
 	_reset_options()
 	
-	var all_players:Array[Player] = []
+	all_players = []
 	if active_team == null:
 		for league:League in Config.leagues:
 			for team in league.teams:
@@ -105,15 +107,15 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 	
 	var headers:Array[String] = ["position", "surname"]
 	if active_filters["position"] == "G":
-		for attribute:int in Constants.ATTRIBUTES["goalkeeper"]:
+		for attribute:String in Constants.ATTRIBUTES["goalkeeper"]:
 			headers.append(attribute)
 		info_select.select(INFO_TYPES.size() - 1)
 	else:
-		for attribute:int in Constants.ATTRIBUTES[INFO_TYPES[0]]:
+		for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 			headers.append(attribute)
 		info_select.select(0)
 
-	table.set_up(headers, INFO_TYPES[index])
+	table.set_up(headers, INFO_TYPES[index], all_players)
 	_filter_table()
 #
 #func _on_FootSelect_item_selected(index):
