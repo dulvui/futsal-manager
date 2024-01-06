@@ -10,6 +10,7 @@ var team_search:String = ""
 var foot_search:String = ""
 
 var active_filters:Dictionary = {}
+var active_info_type:int = 0
 
 const FISICAL_TITLES:Array = ["acc","agi","jum","pac","sta","str"]
 
@@ -71,7 +72,7 @@ func set_up_players(show_lineup:bool, active_team:Team = null) -> void:
 	var headers:Array[String] = ["position", "surname"]
 	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[0]]:
 		headers.append(attribute)
-	table.set_up(headers,INFO_TYPES[0], all_players, active_team)
+	table.set_up(headers,INFO_TYPES[active_info_type], all_players, active_team)
 	
 func remove_player(player_id:int) -> void:
 	active_filters["id"] = player_id
@@ -115,7 +116,7 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 			headers.append(attribute)
 		info_select.select(0)
 
-	table.set_up(headers, INFO_TYPES[index], all_players)
+	table.set_up(headers, INFO_TYPES[active_info_type], all_players)
 	_filter_table()
 #
 #func _on_FootSelect_item_selected(index):
@@ -136,7 +137,8 @@ func _on_InfoSelect_item_selected(index:int) -> void:
 	var headers:Array[String] = ["position", "surname"]
 	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
-	table.update(headers, INFO_TYPES[index])
+	active_info_type = index
+	table.update(headers, INFO_TYPES[active_info_type])
 	
 
 func _reset_options() -> void:
