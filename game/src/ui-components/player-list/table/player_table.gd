@@ -117,7 +117,7 @@ func filter(filters: Dictionary, exlusive:bool = false) -> void:
 			# because value can be empty
 			var valid_filter_counter:int = 0
 			for key:String in filters.keys():
-				var value:String = filters[key]
+				var value:String = str(filters[key])
 				if value:
 					valid_filter_counter += 1
 					if exlusive:

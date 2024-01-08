@@ -14,7 +14,6 @@ var active_info_type:int = 0
 
 const FISICAL_TITLES:Array = ["acc","agi","jum","pac","sta","str"]
 
-const POSITIONS:Array = ["G","D","W","U","P"]
 const INFO_TYPES:Array = ["mental","physical","technical","goalkeeper"]
 const FOOTS:Array = ["R","L","RL"]
 
@@ -45,7 +44,7 @@ func set_up(show_lineup:bool,_show_profile:bool, active_team:Team = null) -> voi
 		team_select.hide()
 	
 	pos_select.add_item("NO_POS")
-	for pos:String in POSITIONS:
+	for pos:String in Player.Position.keys():
 		pos_select.add_item(pos)
 	
 	if active_team == null:
@@ -105,7 +104,7 @@ func _on_league_select_item_selected(index:int) -> void:
 
 func _on_PositionSelect_item_selected(index:int) -> void:
 	if index > 0:
-		active_filters["position"] = POSITIONS[index-1]
+		active_filters["position"] = Player.Position.values()[index-1]
 	else:
 		active_filters["position"] = ""
 	
