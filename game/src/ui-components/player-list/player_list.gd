@@ -110,14 +110,9 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 		active_filters["position"] = ""
 	
 	var headers:Array[String] = ["position", "surname"]
-	if active_filters["position"] == "G":
-		for attribute:String in Constants.ATTRIBUTES["goalkeeper"]:
-			headers.append(attribute)
-		info_select.select(INFO_TYPES.size() - 1)
-	else:
-		for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
-			headers.append(attribute)
-		info_select.select(0)
+	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
+		headers.append(attribute)
+	info_select.select(0)
 
 	table.set_up(headers, INFO_TYPES[active_info_type], all_players)
 	_filter_table()
