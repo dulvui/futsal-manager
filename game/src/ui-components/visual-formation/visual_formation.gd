@@ -80,9 +80,9 @@ func _set_players() -> void:
 		pos_count += 1
 		
 	# add subs
-	for player in team.get_sub_players():
+	for i:int in team.get_sub_players().size():
 		var formation_player:Control = FormationPlayer.instantiate()
-		formation_player.set_player(player, team)
+		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		subs.add_child(formation_player)
 		pos_count += 1
