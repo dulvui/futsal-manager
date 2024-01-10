@@ -132,7 +132,7 @@ func _change_player() -> void:
 		return
 		
 	_set_players()
-	player_list.set_up(true, false, team)
+	player_list.set_up_players(true,  team)
 	change.emit()
 	
 	lineup_players.clear()
