@@ -163,7 +163,7 @@ func _sort_info(key:String) -> void:
 func _on_next_2_pressed() -> void:
 	page += 5
 	if page > page_max:
-		page = 0
+		page = page_max
 	_update_page_indicator()
 	_set_up_content()
 
@@ -186,6 +186,6 @@ func _on_prev_pressed() -> void:
 func _on_prev_2_pressed() -> void:
 	page -= 5
 	if page < 0:
-		page = page_max
+		page = 0
 	_update_page_indicator()
 	_set_up_content()
