@@ -31,6 +31,7 @@ layout_mode = 2
 
 [node name="LineUp" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/LineUp"]

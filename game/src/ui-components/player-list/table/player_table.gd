@@ -21,7 +21,7 @@ var info_type:String
 
 var sort_memory:Dictionary = {} # to save wich value is already sorted and how
 
-const page_size:int = 9
+const page_size:int = 16
 var page:int = 0
 var page_max:int
 var team:Team
