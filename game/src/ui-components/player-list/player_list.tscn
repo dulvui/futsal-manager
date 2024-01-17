@@ -54,6 +54,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="PlayerProfile" parent="." instance=ExtResource("3_vatq4")]
+visible = false
 layout_mode = 1
 
 [connection signal="text_changed" from="VBoxContainer/HBoxContainer/NameSearch" to="." method="_on_NameSearch_text_changed"]

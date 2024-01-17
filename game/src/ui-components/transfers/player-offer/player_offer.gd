@@ -15,8 +15,8 @@ var oldtext:String = ""
 var total:int = 0
 var amount:int = 0
 
-var exchange_players:Array = []
-var selected_players:Array = []
+var exchange_players:Array[Player] = []
+var selected_players:Array[Player] = []
 
 @onready var types:OptionButton = $VBoxContainer/Details/Types 
 @onready var amount_label:LineEdit = $VBoxContainer/Details/Money/Amount 
