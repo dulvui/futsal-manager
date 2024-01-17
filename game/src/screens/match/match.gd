@@ -200,11 +200,8 @@ func _on_match_simulator_shot(player:Player, on_target:bool, goal:bool, action_b
 		animation_player.play("Goal")
 		await animation_player.animation_finished
 		$Goal.hide()
-		
 		result_label.text = "%d - %d"%[match_simulator.home_stats.goals,match_simulator.away_stats.goals]
-		
 		events.append_text("%s  %s - %s  %s" % [time_label.text, str(match_simulator.home_stats.goals), str(match_simulator.away_stats.goals), player.surname])
-
 	
 	visual_action.queue_free()
 	match_simulator.continue_match()
@@ -222,7 +219,6 @@ func _on_match_simulator_half_time() -> void:
 
 func _on_match_simulator_match_end() -> void:
 	match_end()
-
 
 func _on_match_simulator_action_message(message:String) -> void:
 	if comments.get_child_count() > 18:

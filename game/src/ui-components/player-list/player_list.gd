@@ -31,8 +31,8 @@ var all_players:Array[Player] = []
 
 var show_profile:bool
 
-func set_up(show_lineup:bool,_show_profile:bool, active_team:Team = null) -> void:
-	show_profile = _show_profile
+func set_up(show_lineup:bool,p_show_profile:bool, active_team:Team = null) -> void:
+	show_profile = p_show_profile
 	set_up_players(show_lineup, active_team)
 	
 	if not active_team:
