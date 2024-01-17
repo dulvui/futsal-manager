@@ -10,11 +10,10 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var stats:MarginContainer = $Main/Content/CentralContainer/MainBar/Stats
 @onready var comments:VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
 @onready var events:ScrollContainer = $Main/Content/CentralContainer/MainBar/Events
+@onready var formation:Control = $Main/Content/CentralContainer/MainBar/Formation
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var time_label:Label = $Main/Content/CentralContainer/TopBar/Time
 @onready var result_label:Label = $Main/Content/CentralContainer/TopBar/Result
-@onready var formation:Control = $FomationPopup/Formation
-@onready var formation_pop:Popup = $FomationPopup
 @onready var pause_button:Button = $Main/Content/Buttons/Pause
 @onready var home_color:ColorRect = $Main/Content/CentralContainer/TopBar/HomeColor
 @onready var away_color:ColorRect = $Main/Content/CentralContainer/TopBar/AwayColor
@@ -118,11 +117,22 @@ func _on_Events_pressed() -> void:
 	_hide_views()
 	events.show()
 	last_active_view = events
+
+func _on_Formation_pressed() -> void:
+	_hide_views()
+	formation.show()
+	match_simulator.pause()
+	pause_button.text = tr("CONTINUE")
+
+
+func _on_Formation_change() -> void:
+	match_simulator.change_players(home_team,away_team)
 	
 func _hide_views() -> void:
 	comments.hide()
 	stats.hide()
 	events.hide()
+	formation.hide()
 
 func _toggle_view_buttons() -> void:
 	$Main/Content/Buttons/Change.disabled = not $Main/Content/Buttons/Change.disabled 
@@ -158,18 +168,10 @@ func _on_Pause_pressed() -> void:
 	if paused:
 		pause_button.text = tr("CONTINUE")
 	else:
-		formation_pop.hide()
 		pause_button.text = tr("PAUSE")
+		_hide_views()
+		last_active_view.show()
 
-
-func _on_Formation_pressed() -> void:
-	match_simulator.pause()
-	pause_button.text = tr("CONTINUE")
-	formation_pop.popup()
-
-
-func _on_Formation_change() -> void:
-	match_simulator.change_players(home_team,away_team)
 
 
 func _on_SKIP_pressed() -> void:
@@ -223,7 +225,7 @@ func _on_match_simulator_match_end() -> void:
 
 
 func _on_match_simulator_action_message(message:String) -> void:
-	if comments.get_child_count() > 8:
+	if comments.get_child_count() > 18:
 		comments.remove_child(comments.get_child(0))
 	var new_line:Label = Label.new()
 	new_line.text = time_label.text + " " + message

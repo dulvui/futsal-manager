@@ -59,12 +59,6 @@ script = ExtResource("3")
 
 [node name="MatchSimulator" parent="." instance=ExtResource("1")]
 
-[node name="FomationPopup" type="Popup" parent="."]
-initial_position = 1
-size = Vector2i(800, 800)
-
-[node name="Formation" parent="FomationPopup" instance=ExtResource("5")]
-
 [node name="Main" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -138,6 +132,11 @@ visible = false
 layout_mode = 2
 
 [node name="Events" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("6")]
+visible = false
+layout_mode = 2
+
+[node name="Formation" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("5")]
+visible = false
 layout_mode = 2
 
 [node name="BottomBar" type="VBoxContainer" parent="Main/Content/CentralContainer"]
@@ -264,11 +263,18 @@ mouse_filter = 2
 
 [node name="Goal" type="Label" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 566.0
-offset_top = 259.0
-offset_right = 806.0
-offset_bottom = 379.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.5
+offset_top = -57.5
+offset_right = 114.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(120, 60)
 text = "GOAL"
 label_settings = SubResource("LabelSettings_3ady1")
@@ -289,7 +295,7 @@ autostart = true
 [connection signal="penalty" from="MatchSimulator" to="." method="_on_match_simulator_penalty"]
 [connection signal="shot" from="MatchSimulator" to="." method="_on_match_simulator_shot"]
 [connection signal="update" from="MatchSimulator" to="." method="_on_match_simulator_update"]
-[connection signal="change" from="FomationPopup/Formation" to="." method="_on_Formation_change"]
+[connection signal="change" from="Main/Content/CentralContainer/MainBar/Formation" to="." method="_on_Formation_change"]
 [connection signal="pressed" from="Main/Content/Buttons/Field" to="." method="_on_Field_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Stats" to="." method="_on_Stats_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Events" to="." method="_on_Events_pressed"]
