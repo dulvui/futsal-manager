@@ -36,8 +36,8 @@ gdscript/warnings/untyped_declaration=2
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/initial_position_type=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
