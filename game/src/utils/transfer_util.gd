@@ -6,18 +6,13 @@ extends Node
 
 signal transfer_mail
 
-var current_transfers:Array[Transfer] = []
-
-func _ready() -> void:
-	current_transfers = Config.current_transfers
-
 func update_day() -> void:
 	#check with calendar if treansfer market is open, then send start/stop mail
 	if CalendarUtil.is_market_active():
 		_request_players()
 
 		# do transfers
-		for transfer in current_transfers:
+		for transfer in Config.current_transfers:
 			if transfer.update():
 				# TODO once other teams can make trades between themselfes, only send email
 				# for transfers affectiing own team
@@ -29,7 +24,7 @@ func make_transfer(transfer:Transfer) -> void:
 
 func make_offer(transfer:Transfer) -> void:
 	EmailUtil.transfer_message(transfer)
-	current_transfers.append(transfer)
+	Config.current_transfers.append(transfer)
 	
 
 func _request_players() -> void:

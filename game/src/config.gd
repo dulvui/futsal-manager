@@ -87,7 +87,7 @@ func reset() -> void:
 	calendar = []
 	table = {}
 	current_transfers = []
-	TransferUtil.current_transfers = []
+	Config.current_transfers = []
 	messages = []
 	EmailUtil.messages = []
 	
@@ -108,7 +108,7 @@ func save_all_data() -> void:
 	config.set_value("current_date","date",CalendarUtil.date)
 	config.set_value("season","calendar",calendar)
 	config.set_value("season","table",table)
-	config.set_value("season","current_transfers",TransferUtil.current_transfers)
+	config.set_value("season","current_transfers",Config.current_transfers)
 	config.set_value("mail","messages",EmailUtil.messages)
 	config.set_value("season","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)

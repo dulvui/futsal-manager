@@ -7,7 +7,6 @@ extends Resource
 
 enum State {
 	OFFER,
-	OFFER_PENDING,
 	OFFER_DECLINED,
 	CONTRACT,
 	CONTRACT_PENDING,
@@ -46,7 +45,7 @@ func _init(
 
 func update() -> bool:
 	# wait for user to make offer/contract
-	if state == State.OFFER or state == State.CONTRACT:
+	if state == State.CONTRACT:
 		return false
 	# reduce delay
 	delay_days -= 1
@@ -61,7 +60,7 @@ func accept_offer() -> void:
 
 func _update_state() -> void:
 	match state:
-		State.OFFER_PENDING:
+		State.OFFER:
 			# TODO use real values like prestige etc...
 			var success:bool = randi()%2 == 0
 			if success:
