@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dcv0qm4k1wi4q" path="res://src/ui-components/email/email.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui-components/table/table.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://cbijtmv151qg7" path="res://src/ui-components/transfers/player-offer/player_offer.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://src/ui-components/transfers/contract-offer/contract_offer.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://ccipqeqmthtfr" path="res://src/ui-components/transfers/contract-offer/contract_offer.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://src/ui-components/tranining/training.tscn" id="10"]
 
 [node name="Dashboard" type="Control"]
@@ -148,11 +148,9 @@ layout_mode = 1
 offset_left = 0.0
 offset_right = 0.0
 
-[node name="ContractPopup" type="Popup" parent="."]
-
-[node name="ContractOffer" parent="ContractPopup" instance=ExtResource("9")]
-layout_mode = 3
-anchors_preset = 15
+[node name="ContractOffer" parent="." instance=ExtResource("9")]
+visible = false
+layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -175,5 +173,5 @@ grow_vertical = 2
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Training" to="." method="_on_Training_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/NextMatch" to="." method="_on_next_match_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="cancel" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_cancel"]
-[connection signal="confirm" from="ContractPopup/ContractOffer" to="." method="_on_ContractOffer_confirm"]
+[connection signal="cancel" from="ContractOffer" to="." method="_on_ContractOffer_cancel"]
+[connection signal="confirm" from="ContractOffer" to="." method="_on_ContractOffer_confirm"]

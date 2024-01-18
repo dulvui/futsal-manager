@@ -18,6 +18,10 @@ extends Control
 
 # labels
 @onready var budget_label:Label = $MainContainer/VBoxContainer/TopBar/Budget
+@onready var date_label:Label = $MainContainer/VBoxContainer/TopBar/Date
+@onready var manager_label:Label = $MainContainer/VBoxContainer/TopBar/ManagerName
+@onready var team_label:Label = $MainContainer/VBoxContainer/TopBar/TeamName
+
 
 enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION } 
 
@@ -25,15 +29,17 @@ enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION }
 @onready var formation:Control = $MainContainer/VBoxContainer/MainView/Content/Formation
 @onready var all_players_list:Control = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 
-@onready var offer:Control = $PlayerOffer
+@onready var player_offer:Control = $PlayerOffer
+@onready var contract_offer:Control = $ContractOffer
+
 
 var match_ready:bool = false
 var next_season:bool = false
 
 func _ready() -> void:
-	$MainContainer/VBoxContainer/TopBar/ManagerName.text = Config.manager["name"] + " " + Config.manager["surname"]
-	$MainContainer/VBoxContainer/TopBar/TeamName.text = Config.team.name
-	$MainContainer/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
+	manager_label.text = Config.manager["name"] + " " + Config.manager["surname"]
+	team_label.text = Config.team.name
+	date_label.text = CalendarUtil.get_dashborad_date()
 	
 	all_players_list.set_up(false, true)
 	formation.set_up()
@@ -87,33 +93,33 @@ func _on_Calendar_pressed() -> void:
 
 func _on_all_player_list_select_player(player:Player) -> void:
 	print("offer for " + player.surname)
-	offer.set_player(player)
-	offer.show()
+	player_offer.set_player(player)
+	player_offer.show()
 
 
 func _on_PlayerOffer_hide() -> void:
-	offer.hide()
+	player_offer.hide()
 
 
 func _on_PlayerOffer_confirm() -> void:
 	$Email.update_messages()
-	offer.hide()
+	player_offer.hide()
 
 
 func _on_Email_offer_contract(content:Dictionary) -> void:
 	print("contract content")
 	print(content)
-	$ContractPopup/ContractOffer.set_up(content)
-	$ContractPopup.popup_centered()
+	contract_offer.set_up(content)
+	contract_offer.show()
 
 
 func _on_ContractOffer_cancel() -> void:
-	$ContractPopup.hide()
+	contract_offer.hide()
 
 
 func _on_ContractOffer_confirm() -> void:
 	email.update_messages()
-	$ContractPopup.hide()
+	contract_offer.hide()
 	
 func _hide_all() -> void:
 	table.hide()
@@ -179,7 +185,7 @@ func _next_day() -> void:
 	TransferUtil.update_day()
 	email.update_messages()
 	calendar.set_up(true)
-	$MainContainer/VBoxContainer/TopBar/Date.text = CalendarUtil.get_dashborad_date()
+	date_label.text = CalendarUtil.get_dashborad_date()
 	if Config.calendar[Config.date.month][Config.date.day]["matches"].size() > 0:
 		continue_button.text = "START_MATCH"
 		match_ready = true
