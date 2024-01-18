@@ -25,6 +25,7 @@ enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION }
 @onready var formation:Control = $MainContainer/VBoxContainer/MainView/Content/Formation
 @onready var all_players_list:Control = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 
+@onready var offer:Control = $PlayerOffer
 
 var match_ready:bool = false
 var next_season:bool = false
@@ -86,18 +87,17 @@ func _on_Calendar_pressed() -> void:
 
 func _on_all_player_list_select_player(player:Player) -> void:
 	print("offer for " + player.surname)
-	$PlayerOfferPopup/PlayerOffer.set_player(player)
-	$PlayerOfferPopup/PlayerOffer.show()
-	$PlayerOfferPopup.popup_centered()
+	offer.set_player(player)
+	offer.show()
 
 
 func _on_PlayerOffer_hide() -> void:
-	$PlayerOfferPopup.hide()
+	offer.hide()
 
 
 func _on_PlayerOffer_confirm() -> void:
 	$Email.update_messages()
-	$PlayerOfferPopup.hide()
+	offer.hide()
 
 
 func _on_Email_offer_contract(content:Dictionary) -> void:

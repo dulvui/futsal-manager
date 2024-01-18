@@ -56,7 +56,7 @@ func transfer_message(transfer:Transfer) -> void:
 	else:
 		message.sender = "info@" + transfer.buy_team.name.to_lower() + ".com"
 	
-	match transfer.type:
+	match transfer.state:
 		Transfer.State.OFFER:
 			message.subject = "TRANSFER"
 			message.text = "You made an " + str(transfer.price) + " offer for " + transfer.player.get_full_name()

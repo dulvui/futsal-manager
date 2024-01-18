@@ -28,7 +28,7 @@ func make_transfer(transfer:Transfer) -> void:
 	pass
 
 func make_offer(transfer:Transfer) -> void:
-	EmailUtil.new_transfer(transfer)
+	EmailUtil.transfer_message(transfer)
 	current_transfers.append(transfer)
 	
 

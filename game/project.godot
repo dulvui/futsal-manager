@@ -14,7 +14,6 @@ config/name="Futsal Manager"
 run/main_scene="res://src/screens/splash/splash_screen.tscn"
 config/features=PackedStringArray("4.2")
 boot_splash/bg_color=Color(1, 1, 1, 1)
-boot_splash/image="res://icon.png"
 config/icon="res://icon.png"
 
 [autoload]
@@ -38,7 +37,6 @@ gdscript/warnings/untyped_declaration=2
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/initial_position_type=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/size/width=1920

@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
+extends PanelContainer
 
 signal confirm
 
@@ -44,7 +44,14 @@ func _process(_delta:float) -> void:
 func set_player(new_player:Player) -> void:
 	player = new_player
 	info_label.text = "The player " + player.name + " has a value of " + str(player.price)
-
+	
+	if player.price <= Config.team.budget:
+		amount = player.price
+	else:
+		amount = Config.team.budget
+	
+	total = amount
+	amount_label.text = str(amount)
 
 func _on_More_pressed() -> void:
 	if  amount < team.budget:
@@ -97,7 +104,6 @@ func _calc_total() -> void:
 	total = amount
 	for selected_player:Player in selected_players:
 		total += selected_player.price # use other calculated value be setimating importanc efor new tweam
-	
 
 
 func _on_Amount_text_changed(new_text:String) -> void:
@@ -123,10 +129,10 @@ func _on_Confirm_pressed() -> void:
 	transfer.exchange_players = selected_players
 	transfer.delay_days = (randi()%5)+1
 	transfer.state = Transfer.State.OFFER
+	hide()
 	
 	TransferUtil.make_offer(transfer)
 	confirm.emit()
-
 
 func _on_Cancel_pressed() -> void:
 	hide()

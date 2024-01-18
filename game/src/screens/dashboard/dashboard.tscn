@@ -142,17 +142,9 @@ text = "NEXT_MATCH"
 layout_mode = 2
 text = "NEXT_DAY"
 
-[node name="PlayerOfferPopup" type="Popup" parent="."]
-size = Vector2i(600, 400)
-
-[node name="Panel" type="Panel" parent="PlayerOfferPopup"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PlayerOffer" parent="PlayerOfferPopup" instance=ExtResource("8")]
+[node name="PlayerOffer" parent="." instance=ExtResource("8")]
+visible = false
+layout_mode = 1
 offset_left = 0.0
 offset_right = 0.0
 
