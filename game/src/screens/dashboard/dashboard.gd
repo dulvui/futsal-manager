@@ -71,10 +71,6 @@ func _process(_delta:float) -> void:
 func _on_Menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
-
-func _on_Training_pressed() -> void:
-	$TrainingPopup.popup_centered()
-
 func _on_SearchPlayer_pressed() -> void:
 	_show_active_view(ContentViews.ALL_PLAYERS)
 
@@ -102,7 +98,7 @@ func _on_PlayerOffer_hide() -> void:
 
 
 func _on_PlayerOffer_confirm() -> void:
-	$Email.update_messages()
+	email.update_messages()
 	player_offer.hide()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8mhb22bae1my"]
+[gd_scene load_steps=10 format=3 uid="uid://c8mhb22bae1my"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/dashboard/dashboard.gd" id="2"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui-components/table/table.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://cbijtmv151qg7" path="res://src/ui-components/transfers/player-offer/player_offer.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://ccipqeqmthtfr" path="res://src/ui-components/transfers/contract-offer/contract_offer.tscn" id="9"]
-[ext_resource type="PackedScene" path="res://src/ui-components/tranining/training.tscn" id="10"]
 
 [node name="Dashboard" type="Control"]
 layout_mode = 3
@@ -129,11 +128,6 @@ text = "FORMATION"
 layout_mode = 2
 text = "SEARCH_PLAYER"
 
-[node name="Training" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
-visible = false
-layout_mode = 2
-text = "TRAINING"
-
 [node name="NextMatch" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
 layout_mode = 2
 text = "NEXT_MATCH"
@@ -154,14 +148,6 @@ layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TrainingPopup" type="Popup" parent="."]
-
-[node name="Training" parent="TrainingPopup" instance=ExtResource("10")]
-layout_mode = 3
-anchors_preset = 15
-grow_horizontal = 2
-grow_vertical = 2
-
 [connection signal="offer_contract" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_Email_offer_contract"]
 [connection signal="select_player" from="MainContainer/VBoxContainer/MainView/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Menu" to="." method="_on_Menu_pressed"]
@@ -170,7 +156,6 @@ grow_vertical = 2
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Table" to="." method="_on_Table_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
-[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Training" to="." method="_on_Training_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/NextMatch" to="." method="_on_next_match_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="cancel" from="ContractOffer" to="." method="_on_ContractOffer_cancel"]
