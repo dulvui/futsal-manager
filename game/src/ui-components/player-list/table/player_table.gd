@@ -11,6 +11,8 @@ const PlayerRow = preload("res://src/ui-components/player-list/player-row/player
 @onready var header_container:HBoxContainer = $VBoxContainer/Header
 @onready var players_container:VBoxContainer = $VBoxContainer/Players
 @onready var page_indicator:Label = $VBoxContainer/Footer/PageIndicator
+@onready var footer:HBoxContainer = $VBoxContainer/Footer
+
 
 var headers:Array[String]
 var all_players:Array[Player]
@@ -106,7 +108,10 @@ func _set_up_content() -> void:
 		
 
 func _update_page_indicator() -> void:
-	page_indicator.text = "%d / %d"%[page + 1, page_max + 1]
+	if all_players.size() <= page_size:
+		footer.hide()
+	else:
+		page_indicator.text = "%d / %d"%[page + 1, page_max + 1]
 
 func filter(filters: Dictionary, exlusive:bool = false) -> void:
 	if filters:
