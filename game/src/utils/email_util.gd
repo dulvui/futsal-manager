@@ -4,9 +4,11 @@
 
 extends Node
 
-var messages:Array = []
+signal refresh_inbox
 
+var messages:Array = []
 const MAX_MESSAGES:int = 50
+
 
 func _ready() -> void:
 	messages = Config.messages
@@ -27,6 +29,7 @@ func _add_message(message:EmailMessage) -> void:
 	messages.append(message)
 	if messages.size() > MAX_MESSAGES:
 		messages.pop_front()
+	refresh_inbox.emit()
 
 func new_message(type:int, content:Dictionary = {}) -> void:
 	print("new " + str(type) + " mail")

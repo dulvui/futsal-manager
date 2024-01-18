@@ -12,6 +12,8 @@ signal offer_contract
 func _ready() -> void:
 	update_messages()
 	show_message(EmailUtil.latest())
+	
+	EmailUtil.refresh_inbox.connect(update_messages)
 
 func update_messages() -> void:
 	for child in mails.get_children():
