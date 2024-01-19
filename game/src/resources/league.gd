@@ -25,3 +25,9 @@ func _init(
 
 func add_team(team:Team) -> void:
 	teams.append(team)
+	
+func get_team_by_name(name:String) -> Team:
+	for team:Team in teams:
+		if team.name == name:
+			return team
+	return null

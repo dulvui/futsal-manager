@@ -18,9 +18,6 @@ func update_day() -> void:
 				# for transfers affectiing own team
 				# otehrwhise send a news id if important, or simply add to market history
 				EmailUtil.transfer_message(transfer)
-	
-func make_transfer(transfer:Transfer) -> void:
-	pass
 
 func make_offer(transfer:Transfer) -> void:
 	EmailUtil.transfer_message(transfer)
