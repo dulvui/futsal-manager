@@ -11,7 +11,7 @@ signal info()
 const COLOR_FOCUS:Color = Color(1,1,1,0.2)
 const COLOR_NORMAL:Color = Color(1,1,1,0)
 
-const ColorNumber:PackedScene = preload("res://src/ui-components/color-number/color_number.tscn")
+const color_number:PackedScene = preload("res://src/ui-components/color-number/color_number.tscn")
 
 @onready var button:Button = $Button
 @onready var name_label:Control = $HBoxContainer/NameLabel
@@ -28,15 +28,15 @@ func set_up(player:Player, active_headers:Array[String], team:Team=null) -> void
 	position_label.set_text(Player.Position.keys()[player.position])
 	for key:String in Constants.ATTRIBUTES.keys():
 		for attribute:String in Constants.ATTRIBUTES[key]:
-			var color_number:ColorNumber = ColorNumber.instantiate()
-			color_number.key = attribute
-			color_number.set_up(player.attributes.get(key).get(attribute))
-			color_number.visible = attribute in active_headers
-			attributes.add_child(color_number)
+			var number:ColorNumber = color_number.instantiate()
+			number.key = attribute
+			number.set_up(player.attributes.get(key).get(attribute))
+			number.visible = attribute in active_headers
+			attributes.add_child(number)
 			
 			# change color if in line up or sub
 			if team and (team.is_lineup_player(player) or team.is_sub_player(player)):
-				button.disabled
+				button.disabled = true
 				button.hide()
 				name_label.set_line_up(team.is_lineup_player(player))
 				name_label.set_sub(team.is_sub_player(player))

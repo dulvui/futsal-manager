@@ -6,7 +6,7 @@ extends Control
 
 signal info_player(player:Player)
 
-const PlayerRow = preload("res://src/ui-components/player-list/player-row/player_row.tscn")
+const player_row = preload("res://src/ui-components/player-list/player-row/player_row.tscn")
 
 @onready var header_container:HBoxContainer = $VBoxContainer/Header
 @onready var players_container:VBoxContainer = $VBoxContainer/Players
@@ -96,11 +96,11 @@ func _set_up_content() -> void:
 	
 	if players.size() > 0:
 		for player:Player in players.slice(page * page_size, (page + 1) * page_size):
-			var player_row:PlayerRow = PlayerRow.instantiate()
-			players_container.add_child(player_row)
+			var row:PlayerRow = player_row.instantiate()
+			players_container.add_child(row)
 			#player_row.select.connect(select.bind(player))
-			player_row.info.connect(info.bind(player))
-			player_row.set_up(player, headers, team)
+			row.info.connect(info.bind(player))
+			row.set_up(player, headers, team)
 	else :
 		var label:Label = Label.new()
 		label.text = "NO_PLAYER_FOUND"

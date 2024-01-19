@@ -41,6 +41,3 @@ func _init(
 	date = p_date
 	read = p_read
 
-
-func set_up(sender: String, title:String, type:Type) -> void:
-	pass

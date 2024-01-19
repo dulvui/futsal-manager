@@ -36,10 +36,10 @@ func new_message(type:int, content:Dictionary = {}) -> void:
 	var message:EmailMessage = EmailMessage.new()
 	_add_message(message)
 
-func next_match(next_match:Dictionary) -> void:
-	var team_name:String = next_match["home"]
+func next_match(p_match:Dictionary) -> void:
+	var team_name:String = p_match["home"]
 	if team_name == Config.team.name:
-		team_name = next_match["away"]
+		team_name = p_match["away"]
 	
 	var message:EmailMessage = EmailMessage.new()
 	message.subject = tr("NEXT_MATCH") + " against " + team_name

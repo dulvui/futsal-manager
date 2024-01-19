@@ -34,9 +34,9 @@ func _ready() -> void:
 	amount_label.text = str(amount)
 	
 	team = Config.team
-	for player in team.players:
-		exchange_players_button.add_item(player.name + " " + str(player.price / 1000) + "K")
-		exchange_players.append(player)
+	for t_player:Player in team.players:
+		exchange_players_button.add_item(t_player.name + " " + str(t_player.price / 1000) + "K")
+		exchange_players.append(t_player)
 
 func _process(_delta:float) -> void:
 	total_label.text = str(total)
@@ -83,11 +83,11 @@ func _on_ExchangePlayers_item_selected(index:int) -> void:
 	
 	_calc_total()
 	
-func remove_from_list(player:Player) -> void:
+func remove_from_list(p_player:Player) -> void:
 	for child in selected_players_box.get_children():
 		child.queue_free()
-	selected_players.erase(player)
-	exchange_players.append(player)
+	selected_players.erase(p_player)
+	exchange_players.append(p_player)
 	
 	# might be broken after Godot 4 upgrade, check _player and selected player
 	# before only _player existed

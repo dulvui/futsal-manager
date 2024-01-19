@@ -205,9 +205,9 @@ func next_season() -> void:
 	
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
-func get_team_by_name(name:String) -> Team:
-	for league:League in leagues:
-		var found_team:Team = league.get_team_by_name(name)
+func get_team_by_name(p_name:String) -> Team:
+	for l_league:League in leagues:
+		var found_team:Team = l_league.get_team_by_name(p_name)
 		if found_team:
 			return found_team
 	return null

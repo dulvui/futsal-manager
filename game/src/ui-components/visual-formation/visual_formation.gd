@@ -38,8 +38,8 @@ func set_up(active_team:Team = Config.team) -> void:
 
 func _set_players() -> void:
 	# clean field
-	for players:HBoxContainer in players.get_children():
-		for player:Control in players.get_children():
+	for hbox:HBoxContainer in players.get_children():
+		for player:Control in hbox.get_children():
 			player.queue_free()
 			
 	# clean subs
