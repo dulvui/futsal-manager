@@ -30,7 +30,11 @@ CurrencyUtil="*res://src/utils/currency_util.gd"
 [debug]
 
 gdscript/warnings/unused_variable=2
+gdscript/warnings/shadowed_variable=2
+gdscript/warnings/shadowed_variable_base_class=2
+gdscript/warnings/shadowed_global_identifier=2
 gdscript/warnings/unreachable_code=2
+gdscript/warnings/unreachable_pattern=2
 gdscript/warnings/untyped_declaration=2
 
 [display]
