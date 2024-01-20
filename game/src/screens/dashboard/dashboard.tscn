@@ -113,13 +113,13 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Calendar" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
-layout_mode = 2
-text = "CALENDAR"
-
 [node name="Email" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
 layout_mode = 2
 text = "EMAIL"
+
+[node name="Calendar" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
+layout_mode = 2
+text = "CALENDAR"
 
 [node name="Table" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
 layout_mode = 2
@@ -161,8 +161,8 @@ grow_vertical = 2
 [connection signal="email_action" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_email_email_action"]
 [connection signal="select_player" from="MainContainer/VBoxContainer/MainView/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Menu" to="." method="_on_Menu_pressed"]
-[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Calendar" to="." method="_on_Calendar_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Email" to="." method="_on_Email_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Calendar" to="." method="_on_Calendar_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Table" to="." method="_on_Table_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Formation" to="." method="_on_Formation_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]

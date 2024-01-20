@@ -23,41 +23,41 @@ func set_up(p_transfer:Transfer) -> void:
 	transfer = p_transfer
 	player = transfer.player
 	
-	$Info.text = "Offer a contract to " + player.get_full_name()
+	$VBoxContainer/Info.text = "Offer a contract to " + player.get_full_name()
 
 func _on_IncomeMore_pressed() -> void:
 	if income  < team.salary_budget:
 		income += 1000
-	$GridContainer/Income.text = str(income)
+	$GridContainer/VBoxContainer/GridContainer/Income.text = str(income)
 
 func _on_IncomeLess_pressed() -> void:
 	if income > 1000:
 		income -= 1000
-		$GridContainer/Income.text = str(income)
+		$GridContainer/VBoxContainer/GridContainer/Income.text = str(income)
 
 
 func _on_YearsLess_pressed() -> void:
 	if years > 1:
 		years -= 1
-		$GridContainer/Years.text = str(years)
+		$GridContainer/VBoxContainer/GridContainer/Years.text = str(years)
 
 
 func _on_YearsMore_pressed() -> void:
 	if years < 4:
 		years += 1
-		$GridContainer/Years.text = str(years)
+		$GridContainer/VBoxContainer/GridContainer/Years.text = str(years)
 
 
 func _on_BuyClauseLess_pressed() -> void:
 	if buy_clause > 1000:
 		buy_clause -= 1000
-		$GridContainer/BuyClause.text = str(buy_clause)
+		$GridContainer/VBoxContainer/GridContainer/BuyClause.text = str(buy_clause)
 
 
 func _on_BuyClauseMore_pressed() -> void:
 	if buy_clause < 999999999:
 		buy_clause += 1000
-		$GridContainer/BuyClause.text = str(buy_clause)
+		$GridContainer/VBoxContainer/GridContainer/BuyClause.text = str(buy_clause)
 
 
 func _on_Confirm_pressed() -> void:

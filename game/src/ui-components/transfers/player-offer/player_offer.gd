@@ -131,10 +131,11 @@ func _on_Confirm_pressed() -> void:
 	transfer.state = Transfer.State.OFFER
 	transfer.buy_team = Config.team
 	transfer.sell_team = Config.get_team_by_name(player.team)
-	hide()
 	
 	TransferUtil.make_offer(transfer)
 	confirm.emit()
+	
+	hide()
 
 func _on_Cancel_pressed() -> void:
 	hide()

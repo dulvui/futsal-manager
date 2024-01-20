@@ -210,6 +210,14 @@ func get_team_by_name(p_name:String) -> Team:
 		var found_team:Team = l_league.get_team_by_name(p_name)
 		if found_team:
 			return found_team
+	print("ERROR: team not found with name: " + p_name)
+	return null
+
+func get_transfer_by_rid(rid:RID) -> Transfer:
+	for transfer:Transfer in current_transfers:
+		if transfer.get_rid() == rid:
+			return transfer
+	print("ERROR: transfer not found with uuid: " + str(rid.get_id()))
 	return null
 
 # save on quit on mobile

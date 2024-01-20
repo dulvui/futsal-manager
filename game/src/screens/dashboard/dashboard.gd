@@ -51,6 +51,7 @@ func _ready() -> void:
 		else:
 			continue_button.text = "START_MATCH"
 			match_ready = true
+			next_match_button.hide()
 			
 	if Config.date.month == CalendarUtil.END_MONTH and Config.date.day == CalendarUtil.END_DAY:
 		next_season = true
@@ -63,7 +64,7 @@ func _ready() -> void:
 func _process(_delta:float) -> void:
 	var email_count:int = EmailUtil.count_unread_messages()
 	if email_count > 0:
-		email_button.text = str(EmailUtil.count_unread_messages())  + " " + tr("EMAIL") 
+		email_button.text = "[" + str(EmailUtil.count_unread_messages())  + "] " + tr("EMAIL") 
 	else:
 		email_button.text = tr("EMAIL")
 	budget_label.text = str(team["budget"]) + "" + CurrencyUtil.get_sign()
@@ -168,7 +169,7 @@ func _next_day() -> void:
 
 func _on_email_email_action(message: EmailMessage) -> void:
 	if message.type == EmailMessage.Type.CONTRACT_OFFER:
-		contract_offer.set_up()
+		contract_offer.set_up(Config.get_transfer_by_rid(message.resource_rid))
 		contract_offer.show()
 	else:
 		print("ERROR: Email action with no type. Text: " + message.text)

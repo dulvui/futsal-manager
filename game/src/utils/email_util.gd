@@ -7,7 +7,7 @@ extends Node
 signal refresh_inbox
 
 var messages:Array = []
-const MAX_MESSAGES:int = 50
+# const MAX_MESSAGES:int = 50
 
 
 func _ready() -> void:
@@ -27,8 +27,8 @@ func count_unread_messages() -> int:
 	
 func _add_message(message:EmailMessage) -> void:
 	messages.append(message)
-	if messages.size() > MAX_MESSAGES:
-		messages.pop_front()
+	# if messages.size() > MAX_MESSAGES:
+	# 	messages.pop_front()
 	refresh_inbox.emit()
 
 func new_message(type:int) -> void:
@@ -53,6 +53,9 @@ func transfer_message(transfer:Transfer) -> void:
 	print("new transfer mail")
 	var message:EmailMessage = EmailMessage.new()
 	message.date = CalendarUtil.get_dashborad_date()
+
+	# assign rid of transfer, so it can be used for toher purposes
+	message.resource_rid = transfer.get_rid()
 	
 	if transfer.buy_team.name == Config.team.name:
 		message.sender = "info@" + transfer.sell_team.name.to_lower() + ".com"
