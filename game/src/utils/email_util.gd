@@ -31,7 +31,7 @@ func _add_message(message:EmailMessage) -> void:
 		messages.pop_front()
 	refresh_inbox.emit()
 
-func new_message(type:int, content:Dictionary = {}) -> void:
+func new_message(type:int) -> void:
 	print("new " + str(type) + " mail")
 	var message:EmailMessage = EmailMessage.new()
 	_add_message(message)
@@ -61,10 +61,10 @@ func transfer_message(transfer:Transfer) -> void:
 	
 	match transfer.state:
 		Transfer.State.OFFER:
-			message.subject = "TRANSFER"
+			message.subject = "OFFER: " + transfer.player.get_full_name()
 			message.text = "You made an " + str(transfer.price) + " offer for " + transfer.player.get_full_name()
 		Transfer.State.SUCCESS:
-			message.subject = "TRANSFER"
+			message.subject = "TRANSFER SUCCESS: " + transfer.player.get_full_name()
 			message.text = "You bought for" + str(transfer.price) + " " + transfer.player.get_full_name()
 		Transfer.State.OFFER_DECLINED:
 			message.subject = "OFFER_DECLINED"
