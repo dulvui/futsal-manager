@@ -9,10 +9,10 @@ signal confirm
 
 const max_buy_clause:int = 999999999
 
-@onready var income_label:Label = $GridContainer/VBoxContainer/GridContainer/Income 
+@onready var income_label:Label = $VBoxContainer/GridContainer/Income
 @onready var info_label:Label = $VBoxContainer/Info
-@onready var years_label:Label = $GridContainer/VBoxContainer/GridContainer/Years
-@onready var buy_clause_label:Label = $GridContainer/VBoxContainer/GridContainer/BuyClause
+@onready var years_label:Label = $VBoxContainer/GridContainer/Years
+@onready var buy_clause_label:Label = $VBoxContainer/GridContainer/BuyClause
 
 var income:int = 0
 var years:int = 1
