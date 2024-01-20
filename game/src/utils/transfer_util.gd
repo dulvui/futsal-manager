@@ -18,6 +18,9 @@ func update_day() -> void:
 				# for transfers affectiing own team
 				# otehrwhise send a news id if important, or simply add to market history
 				EmailUtil.transfer_message(transfer)
+				
+				if transfer.state == Transfer.State.SUCCESS:
+					make_transfer(transfer)
 	else:
 		print("TODO cancel all remaining transfers and send market clossed email")
 
@@ -40,3 +43,10 @@ func _request_players() -> void:
 		# he can't be sold twice and no offers for sold playersg
 		#EmailUtil.transfer_message()
 		print("TODO create random player requests")
+
+
+func make_transfer(transfer:Transfer) -> void:
+	var player:Player = transfer.player
+	transfer.sell_team.remove_player(player)
+	player.team = transfer.buy_team.name
+	transfer.buy_team.players.append(player)

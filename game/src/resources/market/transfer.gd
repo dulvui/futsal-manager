@@ -50,7 +50,8 @@ func update() -> bool:
 	# reduce delay
 	delay_days -= 1
 	if delay_days == 0:
-		delay_days = randi_range(3, 7)
+		#delay_days = randi_range(3, 7)
+		delay_days = 1
 		_update_state()
 		return true
 	return false
@@ -63,6 +64,7 @@ func _update_state() -> void:
 		State.OFFER:
 			# TODO use real values like prestige etc...
 			var success:bool = randi()%2 == 0
+			#var success:bool = true
 			if success:
 				state = State.CONTRACT
 			else:
@@ -73,6 +75,7 @@ func _update_state() -> void:
 					state = State.OFFER
 		State.CONTRACT_PENDING:
 			var success:bool = randi()%2 == 0
+			#var success:bool = true
 			if success:
 				state = State.SUCCESS
 			else:

@@ -83,3 +83,12 @@ func is_lineup_player(player:Player) -> bool:
 func is_sub_player(player:Player) -> bool:
 	var index:int = lineup_player_ids.find(player.id)
 	return index > 4 and index < Constants.LINEUP_PLAYERS_AMOUNT
+	
+func remove_player(p_player:Player) -> void:
+	players.erase(p_player)
+	for l_id:int in lineup_player_ids:
+		if l_id == p_player.id:
+			# TODO choose player for same position
+			lineup_player_ids.erase(l_id)
+			lineup_player_ids.append(players[-1].id)
+			break
