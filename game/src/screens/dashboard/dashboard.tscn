@@ -108,6 +108,11 @@ alignment = 1
 layout_mode = 2
 text = "MENU"
 
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/VBoxContainer/MainView/Buttons"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Calendar" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
 layout_mode = 2
 text = "CALENDAR"
@@ -127,6 +132,11 @@ text = "FORMATION"
 [node name="SearchPlayer" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
 layout_mode = 2
 text = "SEARCH_PLAYER"
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/VBoxContainer/MainView/Buttons"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="NextMatch" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
 layout_mode = 2

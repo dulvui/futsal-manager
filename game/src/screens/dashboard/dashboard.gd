@@ -56,6 +56,9 @@ func _ready() -> void:
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 
+	if match_ready:
+		next_match_button.hide()
+	
 	_show_active_view()
 		
 	
@@ -160,6 +163,7 @@ func _on_next_match_pressed() -> void:
 		await timer.timeout
 		
 	next_match_button.disabled = false
+	next_match_button.hide()
 	continue_button.disabled = false
 	
 
