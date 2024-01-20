@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcv0qm4k1wi4q"]
+[gd_scene load_steps=5 format=3 uid="uid://dcv0qm4k1wi4q"]
 
 [ext_resource type="Script" path="res://src/ui-components/email/email.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://dfs434t5wtt6x" path="res://src/ui-components/email/list/message_list.tscn" id="3_5tb6d"]
 [ext_resource type="PackedScene" uid="uid://c3l6aqkrmtjg2" path="res://src/ui-components/email/message/message.tscn" id="3_diog3"]
 
 [node name="Email" type="Control"]
@@ -22,18 +23,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="SplitContainer"]
+[node name="MessageList" parent="SplitContainer" instance=ExtResource("3_5tb6d")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Mails" type="GridContainer" parent="SplitContainer/ScrollContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 50
-theme_override_constants/v_separation = 10
-columns = 2
 
 [node name="Message" parent="SplitContainer" instance=ExtResource("3_diog3")]
 layout_mode = 2
 
+[connection signal="show_message" from="SplitContainer/MessageList" to="." method="_on_message_list_show_message"]
 [connection signal="email_action" from="SplitContainer/Message" to="." method="_on_message_email_action"]

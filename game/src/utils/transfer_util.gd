@@ -31,8 +31,9 @@ func make_offer(transfer:Transfer) -> void:
 
 func _request_players() -> void:
 	if randi_range(1, Constants.REQUEST_FACTOR) == Constants.REQUEST_FACTOR:
+		# TODO
 		# pick random team, that needs a player
-		# depending on presitge of team, buy cheap or expensive player
+		# depending on presige of team, buy cheap or expensive player
 		# loans also possible
 		# once market offer made, request preocess starts
 		# decline, accept, counter offer

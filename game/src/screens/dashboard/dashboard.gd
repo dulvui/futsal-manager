@@ -165,8 +165,6 @@ func _next_day() -> void:
 		next_match_button.hide()
 
 
-
-
 func _on_email_email_action(message: EmailMessage) -> void:
 	if message.type == EmailMessage.Type.CONTRACT_OFFER:
 		contract_offer.set_up(Config.get_transfer_by_rid(message.resource_rid))
