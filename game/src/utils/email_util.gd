@@ -69,6 +69,10 @@ func transfer_message(transfer:Transfer) -> void:
 		Transfer.State.OFFER_DECLINED:
 			message.subject = "OFFER_DECLINED"
 			message.text = "The team " + transfer.sell_team.name + " definitly declined your offer for " + transfer.player.get_full_name()
+		Transfer.State.CONTRACT:
+			message.subject = "OFFER_ACCEPTED"
+			message.text = "The team " + transfer.sell_team.name + " agreed to your offer for " + transfer.player.get_full_name()
+			message.text += "\nNow you need to find an agreement with the player. Offer him a contract."
 		Transfer.State.CONTRACT_PENDING:
 			message.subject = "CONTRACT OFFER MADE"
 			message.text = "You made an contract offer for " + transfer.player.get_full_name()
@@ -78,7 +82,11 @@ func transfer_message(transfer:Transfer) -> void:
 		Transfer.State.CONTRACT_DECLINED:
 			message.subject = "CONTRACT_DECLINED"
 			message.text = "The player " + transfer.player.get_full_name() + " acceptet the contract"
-	
+		_:
+			message.subject = "ERROR"
+			message.text = "Error in code " + transfer.player.get_full_name()
+
+
 	_add_message(message)
 
 		
