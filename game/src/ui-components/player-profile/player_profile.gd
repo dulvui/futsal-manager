@@ -52,9 +52,9 @@ func set_up_info(_player:Player) -> void:
 
 	show()
 
-func _on_Hide_pressed() -> void:
-	hide()
-
-
 func _on_select_pressed() -> void:
 	select.emit(player)
+
+func _on_close_pressed() -> void:
+	hide()
+

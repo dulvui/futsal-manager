@@ -160,13 +160,13 @@ offset_bottom = -0.320068
 theme_override_constants/separation = 40
 metadata/_edit_use_anchors_ = true
 
+[node name="Close" type="Button" parent="Buttons"]
+layout_mode = 2
+text = "CLOSE"
+
 [node name="Select" type="Button" parent="Buttons"]
 layout_mode = 2
 text = "SELECT"
 
-[node name="Hide" type="Button" parent="Buttons"]
-layout_mode = 2
-text = "CLOSE"
-
+[connection signal="pressed" from="Buttons/Close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="Buttons/Select" to="." method="_on_select_pressed"]
-[connection signal="pressed" from="Buttons/Hide" to="." method="_on_Hide_pressed"]
