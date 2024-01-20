@@ -14,6 +14,8 @@ enum State {
 	CONTRACT_DECLINED,
 }
 
+const DEBUG:bool = false
+
 @export var player:Player
 @export var state:State
 @export var buy_team:Team
@@ -50,8 +52,9 @@ func update() -> bool:
 	# reduce delay
 	delay_days -= 1
 	if delay_days == 0:
-		#delay_days = randi_range(3, 7)
-		delay_days = 1
+		delay_days = randi_range(1, 7)
+		if DEBUG:
+			delay_days = 1
 		_update_state()
 		return true
 	return false
@@ -64,7 +67,8 @@ func _update_state() -> void:
 		State.OFFER:
 			# TODO use real values like prestige etc...
 			var success:bool = randi()%2 == 0
-			#var success:bool = true
+			if DEBUG:
+				success = true
 			if success:
 				state = State.CONTRACT
 			else:
@@ -75,7 +79,8 @@ func _update_state() -> void:
 					state = State.OFFER
 		State.CONTRACT_PENDING:
 			var success:bool = randi()%2 == 0
-			#var success:bool = true
+			if DEBUG:
+				success = true
 			if success:
 				state = State.SUCCESS
 			else:
