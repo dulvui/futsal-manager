@@ -37,7 +37,7 @@ var match_ready:bool = false
 var next_season:bool = false
 
 func _ready() -> void:
-	manager_label.text = Config.manager["name"] + " " + Config.manager["surname"]
+	manager_label.text = Config.manager.get_full_name()
 	team_label.text = Config.team.name
 	date_label.text = CalendarUtil.get_dashborad_date()
 	

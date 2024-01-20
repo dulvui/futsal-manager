@@ -16,7 +16,7 @@ var league:League
 var leagues:Array[League]
 
 var team:Team
-var manager:Dictionary
+var manager:Manager
 
 var table:Dictionary
 
@@ -43,12 +43,7 @@ func _ready() -> void:
 	if err != OK:
 		print("error loading user://settings.cfg")
 		
-	manager = config.get_value("manager", "data", {
-		"name" : "",
-		"surname" : "",
-		"nationality" : "",
-		"birth_date" : "",
-	})
+	manager = config.get_value("manager", "data", Manager.new())
 	
 	current_season = config.get_value("season","current_season",0)
 	
@@ -76,13 +71,7 @@ func _ready() -> void:
 	
 	
 func reset() -> void:
-	manager =  {
-		"name" : "",
-		"surname" : "",
-		"nationality" : "",
-		"birth_date" : "",
-	}
-	
+	manager =  Manager.new()
 	current_season = 0
 	calendar = []
 	table = {}
@@ -118,8 +107,8 @@ func save_all_data() -> void:
 	config.save("user://settings.cfg")
 	print("all data saved")
 
-func save_manager(new_manager:Dictionary) -> void:
-	manager = new_manager
+func save_manager(p_manager:Manager) -> void:
+	manager = p_manager
 	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
 	

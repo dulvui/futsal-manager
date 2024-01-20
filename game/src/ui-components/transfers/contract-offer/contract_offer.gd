@@ -7,6 +7,13 @@ extends Control
 signal cancel
 signal confirm
 
+const max_buy_clause:int = 999999999
+
+@onready var income_label:Label = $GridContainer/VBoxContainer/GridContainer/Income 
+@onready var info_label:Label = $VBoxContainer/Info
+@onready var years_label:Label = $GridContainer/VBoxContainer/GridContainer/Years
+@onready var buy_clause_label:Label = $GridContainer/VBoxContainer/GridContainer/BuyClause
+
 var income:int = 0
 var years:int = 1
 var buy_clause:int = 0
@@ -23,41 +30,41 @@ func set_up(p_transfer:Transfer) -> void:
 	transfer = p_transfer
 	player = transfer.player
 	
-	$VBoxContainer/Info.text = "Offer a contract to " + player.get_full_name()
+	info_label.text = "Offer a contract to " + player.get_full_name()
 
 func _on_IncomeMore_pressed() -> void:
 	if income  < team.salary_budget:
 		income += 1000
-	$GridContainer/VBoxContainer/GridContainer/Income.text = str(income)
+	income_label.text = str(income)
 
 func _on_IncomeLess_pressed() -> void:
 	if income > 1000:
 		income -= 1000
-		$GridContainer/VBoxContainer/GridContainer/Income.text = str(income)
+		income_label.text = str(income)
 
 
 func _on_YearsLess_pressed() -> void:
 	if years > 1:
 		years -= 1
-		$GridContainer/VBoxContainer/GridContainer/Years.text = str(years)
+		years_label.text = str(years)
 
 
 func _on_YearsMore_pressed() -> void:
 	if years < 4:
 		years += 1
-		$GridContainer/VBoxContainer/GridContainer/Years.text = str(years)
+		years_label.text = str(years)
 
 
 func _on_BuyClauseLess_pressed() -> void:
 	if buy_clause > 1000:
 		buy_clause -= 1000
-		$GridContainer/VBoxContainer/GridContainer/BuyClause.text = str(buy_clause)
+		buy_clause_label.text = str(buy_clause)
 
 
 func _on_BuyClauseMore_pressed() -> void:
-	if buy_clause < 999999999:
+	if buy_clause < max_buy_clause:
 		buy_clause += 1000
-		$GridContainer/VBoxContainer/GridContainer/BuyClause.text = str(buy_clause)
+		buy_clause_label.text = str(buy_clause)
 
 
 func _on_Confirm_pressed() -> void:
