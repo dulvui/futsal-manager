@@ -158,7 +158,7 @@ layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
 
-[connection signal="offer_contract" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_Email_offer_contract"]
+[connection signal="email_action" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_email_email_action"]
 [connection signal="select_player" from="MainContainer/VBoxContainer/MainView/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Menu" to="." method="_on_Menu_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Calendar" to="." method="_on_Calendar_pressed"]

@@ -19,11 +19,11 @@ var transfer:Transfer
 func _ready() -> void:
 	team = Config.team
 	
-func set_up(new_transfer:Transfer) -> void:
-	transfer = new_transfer
-	player = new_transfer["player"]
+func set_up(p_transfer:Transfer) -> void:
+	transfer = p_transfer
+	player = transfer.player
 	
-	$Info.text = "The player " + player.name + " " +  player.surname + " had a contract..."
+	$Info.text = "Offer a contract to " + player.get_full_name()
 
 func _on_IncomeMore_pressed() -> void:
 	if income  < team.salary_budget:
@@ -62,35 +62,15 @@ func _on_BuyClauseMore_pressed() -> void:
 
 func _on_Confirm_pressed() -> void:
 	# add contract to pendng contracts 
-	
-	var def_contract:Dictionary = {
-		"player" : player,
-		"price" : 0,
-		"money/week" : income,
-		"start_date" : "01/01/2020", #today
-		"end_date" : "01/01/2021", #next season end in x years
-		"bonus" : {
-			"goal" : 0,
-			"clean_sheet" : 0,
-			"assist" : 0,
-			"league_title" : 0,
-			"nat_cup_title" : 0,
-			"inter_cup_title" : 0,
-		},
-		"buy_clause" : buy_clause,
-		"days" : (randi()%5)+1,
-		#different ui for loan and noarmal contract
-		#send loan contracts with other signal or type
-		"is_on_loan" : false # if player is on loan, the other squad gets copy of contract with percentage of income
-	}
-	for transferz:Transfer in TransferUtil.current_transfers:
-		if transfer == transferz:
-			transferz["contract"] = def_contract
-			transferz["days"] = 3
-			transferz["state"] = "CONTRACT_PENDING"
-			#EmailUtil.new_message(EmailUtil.MessageTypes.CONTRACT_OFFER_MADE, transfer)
+
+	var contract:Contract = Contract.new()
+	contract.buy_clause = buy_clause
+	contract.income = income
+
+	transfer.contract = contract
+	transfer.state = Transfer.State.CONTRACT_PENDING
+	EmailUtil.transfer_message(transfer)
 	emit_signal("confirm")
-#	ContractUtil.current_contract_offers.append(def_contract)
 
 
 func _on_Cancel_pressed() -> void:

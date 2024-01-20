@@ -66,34 +66,15 @@ text = "29.12.2022"
 [node name="Message" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Messi wants to join your club
-
-
-sdad
-
-
-sad
-
-asd
-
-
-
-asd
-
-as
-d
-
-
-
-sadasd
-
-
-"
+text = "Rodrygo wants to join your club"
 
 [node name="BottomBar" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 2
 
 [node name="Action" type="Button" parent="VBoxContainer/BottomBar"]
+visible = false
 layout_mode = 2
 text = "ACTION"
+
+[connection signal="pressed" from="VBoxContainer/BottomBar/Action" to="." method="_on_action_pressed"]

@@ -56,9 +56,6 @@ func _ready() -> void:
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 
-	if match_ready:
-		next_match_button.hide()
-	
 	_show_active_view()
 		
 	
@@ -94,31 +91,6 @@ func _on_all_player_list_select_player(player:Player) -> void:
 	print("offer for " + player.surname)
 	player_offer.set_player(player)
 	player_offer.show()
-
-
-func _on_PlayerOffer_hide() -> void:
-	player_offer.hide()
-
-
-func _on_PlayerOffer_confirm() -> void:
-	email.update_messages()
-	player_offer.hide()
-
-
-func _on_Email_offer_contract(content:Dictionary) -> void:
-	print("contract content")
-	print(content)
-	contract_offer.set_up(content)
-	contract_offer.show()
-
-
-func _on_ContractOffer_cancel() -> void:
-	contract_offer.hide()
-
-
-func _on_ContractOffer_confirm() -> void:
-	email.update_messages()
-	contract_offer.hide()
 	
 func _hide_all() -> void:
 	table.hide()
@@ -163,7 +135,6 @@ func _on_next_match_pressed() -> void:
 		await timer.timeout
 		
 	next_match_button.disabled = false
-	next_match_button.hide()
 	continue_button.disabled = false
 	
 
@@ -190,5 +161,31 @@ func _next_day() -> void:
 		continue_button.text = "START_MATCH"
 		match_ready = true
 		next_match_button.disabled = true
+		next_match_button.hide()
 
 
+
+
+func _on_email_email_action(message: EmailMessage) -> void:
+	if message.type == EmailMessage.Type.CONTRACT_OFFER:
+		contract_offer.set_up()
+		contract_offer.show()
+	else:
+		print("ERROR: Email action with no type. Text: " + message.text)
+
+
+func _on_PlayerOffer_hide() -> void:
+	player_offer.hide()
+
+
+func _on_PlayerOffer_confirm() -> void:
+	email.update_messages()
+	player_offer.hide()
+
+
+func _on_ContractOffer_cancel() -> void:
+	contract_offer.hide()
+
+
+func _on_ContractOffer_confirm() -> void:
+	contract_offer.hide()

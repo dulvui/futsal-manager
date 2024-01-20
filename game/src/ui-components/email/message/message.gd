@@ -4,13 +4,29 @@
 
 extends Control
 
+signal email_action(message:EmailMessage)
+
 @onready var subject:Label = $VBoxContainer/TopBar/SubjectText
 @onready var sender:Label = $VBoxContainer/Details/Sender
 @onready var date:Label = $VBoxContainer/Details/Date
 @onready var text:RichTextLabel = $VBoxContainer/Message
+@onready var action_button:Button = $VBoxContainer/BottomBar/Action
 
-func show_message(message:EmailMessage) -> void:
+var message:EmailMessage
+
+func show_message(p_message:EmailMessage) -> void:
+	message = p_message
 	subject.text = message.subject
 	sender.text = message.sender
 	date.text = message.date
 	text.text = message.text
+
+	if message.type == EmailMessage.Type.CONTRACT_OFFER:
+		action_button.show()
+		action_button.text = "OFFER_CONTARCT"
+	else:
+		action_button.hide()
+
+
+func _on_action_pressed() -> void:
+	email_action.emit(message)

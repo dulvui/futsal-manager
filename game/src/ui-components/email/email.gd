@@ -4,7 +4,7 @@
 
 extends Control
 
-signal offer_contract
+signal email_action(message:EmailMessage)
 
 @onready var mails:GridContainer = $SplitContainer/ScrollContainer/Mails
 @onready var message_container:Control = $SplitContainer/Message
@@ -43,5 +43,5 @@ func show_message(message:EmailMessage) -> void:
 func show_offer_contract(content:Dictionary) -> void:
 	emit_signal("offer_contract",content)
 
-func _on_Action_pressed() -> void:
-	pass # Replace with function body.
+func _on_message_email_action(message:EmailMessage) -> void:
+	email_action.emit(message)

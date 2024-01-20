@@ -73,9 +73,11 @@ func transfer_message(transfer:Transfer) -> void:
 			message.subject = "OFFER_ACCEPTED"
 			message.text = "The team " + transfer.sell_team.name + " agreed to your offer for " + transfer.player.get_full_name()
 			message.text += "\nNow you need to find an agreement with the player. Offer him a contract."
+			message.type = EmailMessage.Type.CONTRACT_OFFER
 		Transfer.State.CONTRACT_PENDING:
 			message.subject = "CONTRACT OFFER MADE"
 			message.text = "You made an contract offer for " + transfer.player.get_full_name()
+			message.text = "The income is " + str(transfer.contract.income)
 		Transfer.State.SUCCESS:
 			message.subject = "CONTRACT_SIGNED"
 			message.text = "The player " + transfer.player.get_full_name() + " acceptet the contract"

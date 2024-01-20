@@ -35,3 +35,5 @@ columns = 2
 
 [node name="Message" parent="SplitContainer" instance=ExtResource("3_diog3")]
 layout_mode = 2
+
+[connection signal="email_action" from="SplitContainer/Message" to="." method="_on_message_email_action"]

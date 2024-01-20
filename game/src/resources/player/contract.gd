@@ -5,8 +5,8 @@
 class_name Contract
 extends Resource
 
-@export var price:int
-@export var money_week:int
+@export var income:int
+@export var income_week:int
 @export var bonus_goal:int
 @export var bonus_clean_sheet:int
 @export var bonus_assist:int
@@ -19,8 +19,8 @@ extends Resource
 @export var is_on_loan:bool
 
 func _init(
-	p_price:int = 0,
-	p_money_week:int = 0,
+	p_income:int = 0,
+	p_income_week:int = 0,
 	p_bonus_goal:int = 0,
 	p_bonus_clean_sheet:int = 0,
 	p_bonus_assist:int = 0,
@@ -32,8 +32,8 @@ func _init(
 	p_end_date:Dictionary = {},
 	p_is_on_loan:bool = false,
 ) -> void:
-	price = p_price
-	money_week = p_money_week
+	income = p_income
+	income_week = p_income_week
 	start_date = p_start_date
 	end_date = p_end_date
 	bonus_goal = p_bonus_goal
