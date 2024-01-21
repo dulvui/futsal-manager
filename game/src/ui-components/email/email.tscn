@@ -30,8 +30,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Separator" type="ColorRect" parent="Container/HBoxContainer"]
-custom_minimum_size = Vector2(2, 0)
+[node name="VSeparator" type="VSeparator" parent="Container/HBoxContainer"]
 layout_mode = 2
 
 [node name="Message" parent="Container/HBoxContainer" instance=ExtResource("3_diog3")]

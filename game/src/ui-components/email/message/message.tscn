@@ -39,6 +39,9 @@ text = "SUBJECT"
 layout_mode = 2
 text = "Messi"
 
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="Details" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -58,6 +61,9 @@ size_flags_horizontal = 3
 [node name="Date" type="Label" parent="MarginContainer/VBoxContainer/Details"]
 layout_mode = 2
 text = "29.12.2022"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="Message" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

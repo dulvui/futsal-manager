@@ -19,6 +19,9 @@ func update() -> void:
 		list.add_child(row)
 		row.click.connect(_on_row_click.bind(EmailUtil.messages[i]))
 		row.set_up(EmailUtil.messages[i])
+		
+		if i > 0:
+			list.add_child(HSeparator.new())
 
 func _on_row_click(message:EmailMessage) -> void:
 	show_message.emit(message)
