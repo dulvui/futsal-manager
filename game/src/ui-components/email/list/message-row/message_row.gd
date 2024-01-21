@@ -25,8 +25,14 @@ func set_up(message:EmailMessage) -> void:
 	date_label.set_text(message.date)
 	
 	if not message.read:
+		var bold:LabelSettings = LabelSettings.new()
+		bold.font_size = get_theme_default_font_size()
+		bold.outline_size = 2
 		# make bold
-		subject_label.text += "***"
+		subject_label.label_settings = bold
+		sender_label.label_settings = bold
+		date_label.label_settings = bold
+		
 		
 
 func _on_button_button_down() -> void:

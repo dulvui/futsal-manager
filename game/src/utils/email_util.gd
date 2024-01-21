@@ -50,7 +50,6 @@ func next_match(p_match:Dictionary) -> void:
 
 
 func transfer_message(transfer:Transfer) -> void:
-	print("new transfer mail")
 	var message:EmailMessage = EmailMessage.new()
 	message.date = CalendarUtil.get_dashborad_date()
 
