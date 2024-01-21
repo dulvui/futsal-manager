@@ -1,8 +1,8 @@
 # SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
-@tool
-extends EditorScript
+extends Node
+class_name Generator
 
 const NAMES_DIR:String = "res://data/player-names/"
 const LEAGUES_DIR:String = "res://data/leagues/"
@@ -13,7 +13,7 @@ const NOISE:int = 3
 
 var player_id:int = 1
 
-var leagues:Dictionary = {}
+var leagues_data:Dictionary = {}
 var names:Dictionary = {}
 
 # for birthdays range
@@ -21,7 +21,8 @@ var date:Dictionary
 var max_timestamp:int
 var min_timestamp:int
 
-func _run() -> void:
+func generate() -> Leagues:
+	var leagues:Leagues = Leagues.new()
 	# create date ranges
 	# starts from current year and substracts min/max years
 	# youngest player can be 15 and oldest 45
@@ -40,11 +41,10 @@ func _run() -> void:
 	
 	# TODO iterate over all nationalities
 	var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + "it.json", FileAccess.READ)
-	leagues["it"] = JSON.parse_string(leagues_file.get_as_text())
+	leagues_data["it"] = JSON.parse_string(leagues_file.get_as_text())
 
 
-	for l:Dictionary in leagues["it"]:
-		var file_name:String = Constants.LEAGUES_DIR + l["name"].replace(" ", "-").to_lower() +".tres" 
+	for l:Dictionary in leagues_data["it"]:
 		print("Generate players for ", l["name"])
 		var league:League = League.new()
 		league.name = l["name"]
@@ -66,16 +66,10 @@ func _run() -> void:
 			team.create_stadium(t + "Stadium", 1234, 1990)
 			assign_players_to_team(team, league)
 			league.add_team(team)
-		
-		print("Write to file...")
-		print("Write league ", league.name)
-		ResourceSaver.save(league, file_name)
-		print("Done.")
-		
-		print("Reading from file...")
-		var read_league:League = load(file_name)
-		print("Read team name ", read_league.name)
-		print("Read team teams size ", read_league.teams.size())
+			
+		leagues.add_league(league)
+	
+	return leagues
 
 
 func assign_players_to_team(p_team:Team, p_league:League) -> Team:
@@ -270,7 +264,7 @@ func get_contract(prestige:int, position:int, age:int) -> Contract:
 	
 	return contract
 	
-func get_name(nationality:League.Nations) -> String:
+func get_player_name(nationality:League.Nations) -> String:
 	# TODO combine with other nations, but with low probability
 	var size:int = names["it"]["names"].size()
 	return names["it"]["names"][randi() % size]
@@ -296,7 +290,7 @@ func create_player(nationality:League.Nations, position:Player.Position, nr:int)
 
 	player.id = player_id
 	player.price = get_price(date.year-birth_date.year, prestige, position)
-	player.name = get_name(nationality)
+	player.name = get_player_name(nationality)
 	player.surname = get_surname(nationality)
 	player.birth_date = birth_date
 	player.nationality = str(nationality)

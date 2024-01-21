@@ -47,17 +47,6 @@ func _load_config() -> void:
 	# settings
 	language = config.get_value("settings","language","ND")
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
-	
-func _load_resources() -> void:
-	leagues = ResourceLoader.load("user://leagues.tres")
-	inbox = ResourceLoader.load("user://inbox.tres")
-	team = ResourceLoader.load("user://team.tres")
-	manager = ResourceLoader.load("user://manager.tres")
-	transfers = ResourceLoader.load("user://transfers.tres")
-	
-	if not leagues:
-		leagues = initial_leagues()
-
 
 func save_config() -> void:
 	config.set_value("current_date","date",CalendarUtil.date)
@@ -69,6 +58,17 @@ func save_config() -> void:
 #
 	config.save("user://settings.cfg")
 	print("all data saved")
+
+func _load_resources() -> void:
+	leagues = ResourceLoader.load("user://leagues.tres")
+	inbox = ResourceLoader.load("user://inbox.tres")
+	team = ResourceLoader.load("user://team.tres")
+	manager = ResourceLoader.load("user://manager.tres")
+	transfers = ResourceLoader.load("user://transfers.tres")
+	
+	if not leagues:
+		var generator:Generator = Generator.new()
+		leagues = generator.generate()
 
 
 func save_resources() -> void:
@@ -93,6 +93,9 @@ func reset() -> void:
 	manager =  Manager.new()
 	inbox = Inbox.new()
 	transfers = Transfers.new()
+	
+	var generator:Generator = Generator.new()
+	leagues = generator.generate()
 
 func set_lang(lang:String) -> void:
 	TranslationServer.set_locale(lang)
@@ -125,8 +128,9 @@ func initial_leagues() -> Leagues:
 	# check if leagues not leoaded yet
 	var init_leagues:Leagues = Leagues.new()
 	for file in Constants.LEAGUES_FILES:
-		var league_from_file:League = ResourceLoader.load(Constants.LEAGUES_DIR + file)
-		init_leagues.list.append(league_from_file)
+		var league:League = ResourceLoader.load(Constants.LEAGUES_DIR + file)
+		league.resource_local_to_scene = true
+		init_leagues.list.append(league.duplicate(true))
 	
 	return init_leagues
 	

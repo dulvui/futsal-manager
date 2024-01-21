@@ -7,8 +7,8 @@ extends Resource
 
 enum Nations { IT }
 
-@export var nation:Nations
 @export var table:Table
+@export var nation:Nations
 @export var name:String
 @export var teams:Array[Team]
 
