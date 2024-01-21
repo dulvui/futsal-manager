@@ -28,7 +28,6 @@ var inbox:Inbox
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	randomize()
 	_load_config()
 	_load_resources()
 
@@ -68,7 +67,7 @@ func _load_resources() -> void:
 	
 	if not leagues:
 		var generator:Generator = Generator.new()
-		leagues = generator.generate()
+		leagues = generator.generate(1293291083)
 
 
 func save_resources() -> void:
@@ -95,7 +94,7 @@ func reset() -> void:
 	transfers = Transfers.new()
 	
 	var generator:Generator = Generator.new()
-	leagues = generator.generate()
+	leagues = generator.generate(1293291083)
 
 func set_lang(lang:String) -> void:
 	TranslationServer.set_locale(lang)
