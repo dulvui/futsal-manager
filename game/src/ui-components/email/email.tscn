@@ -15,7 +15,7 @@ grow_vertical = 2
 theme = ExtResource("2")
 script = ExtResource("1")
 
-[node name="SplitContainer" type="HSplitContainer" parent="."]
+[node name="Container" type="SplitContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,11 +23,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MessageList" parent="SplitContainer" instance=ExtResource("3_5tb6d")]
+[node name="MessageList" parent="Container" instance=ExtResource("3_5tb6d")]
 layout_mode = 2
 
-[node name="Message" parent="SplitContainer" instance=ExtResource("3_diog3")]
+[node name="HBoxContainer" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Separator" type="ColorRect" parent="Container/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
 
-[connection signal="show_message" from="SplitContainer/MessageList" to="." method="_on_message_list_show_message"]
-[connection signal="email_action" from="SplitContainer/Message" to="." method="_on_message_email_action"]
+[node name="Message" parent="Container/HBoxContainer" instance=ExtResource("3_diog3")]
+layout_mode = 2
+
+[connection signal="show_message" from="Container/MessageList" to="." method="_on_message_list_show_message"]
+[connection signal="email_action" from="Container/HBoxContainer/Message" to="." method="_on_message_email_action"]

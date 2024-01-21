@@ -6,8 +6,8 @@ extends Control
 
 signal email_action(message:EmailMessage)
 
-@onready var message_list:Control = $SplitContainer/MessageList
-@onready var message_container:Control = $SplitContainer/Message
+@onready var message_list:Control = $Container/MessageList
+@onready var message_container:Control = $Container/HBoxContainer/Message
 
 func _ready() -> void:
 	update_messages()
