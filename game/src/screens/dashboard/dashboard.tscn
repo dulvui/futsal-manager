@@ -69,6 +69,9 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "24/08/2002"
 
+[node name="HSeparator" type="HSeparator" parent="MainContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="MainView" type="VBoxContainer" parent="MainContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -97,6 +100,9 @@ layout_mode = 2
 
 [node name="AllPlayerList" parent="MainContainer/VBoxContainer/MainView/Content" instance=ExtResource("4")]
 visible = false
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer/VBoxContainer/MainView"]
 layout_mode = 2
 
 [node name="Buttons" type="HBoxContainer" parent="MainContainer/VBoxContainer/MainView"]
