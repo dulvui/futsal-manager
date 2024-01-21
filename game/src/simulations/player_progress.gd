@@ -9,8 +9,8 @@ const NOISE = 20
 const AGE_PHYSICAL_DEGARDE = 30
 
 static func players_progress_season() -> void:
-	for league in Config.leagues:
-		for team in league.teams:
+	for league:League in Config.leagues.list:
+		for team:Team in league.teams:
 			for player in team.players:
 				_player_season_progress(player)
 				

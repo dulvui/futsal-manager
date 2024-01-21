@@ -12,7 +12,7 @@ func update_day() -> void:
 		_request_players()
 
 		# do transfers
-		for transfer in Config.current_transfers:
+		for transfer:Transfer in Config.transfers.list:
 			if transfer.update():
 				# TODO once other teams can make trades between themselfes, only send email
 				# for transfers affectiing own team
@@ -26,8 +26,15 @@ func update_day() -> void:
 
 func make_offer(transfer:Transfer) -> void:
 	EmailUtil.transfer_message(transfer)
-	Config.current_transfers.append(transfer)
-	
+	Config.transfers.list.append(transfer)
+
+# TODO move to trasnfer util
+func get_transfer_by_rid(rid:RID) -> Transfer:
+	for transfer:Transfer in Config.transfers.list:
+		if transfer.get_rid() == rid:
+			return transfer
+	print("ERROR: transfer not found with uuid: " + str(rid.get_id()))
+	return null
 
 func _request_players() -> void:
 	if randi_range(1, Constants.REQUEST_FACTOR) == Constants.REQUEST_FACTOR:

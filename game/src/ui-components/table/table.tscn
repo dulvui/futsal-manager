@@ -22,7 +22,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
 alignment = 1
+
+[node name="Leagues" type="OptionButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="Labels" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -32,54 +37,51 @@ alignment = 1
 [node name="Pos" type="Label" parent="VBoxContainer/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "POS"
+text = "#"
 
 [node name="Club" type="Label" parent="VBoxContainer/Labels"]
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
 text = "CLUB"
 
-[node name="GP" type="Label" parent="VBoxContainer/Labels"]
+[node name="Played" type="Label" parent="VBoxContainer/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "GP"
+text = "PLAYED"
 horizontal_alignment = 1
 
-[node name="W" type="Label" parent="VBoxContainer/Labels"]
+[node name="Win" type="Label" parent="VBoxContainer/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "W"
+text = "WIN"
 horizontal_alignment = 1
 
-[node name="D" type="Label" parent="VBoxContainer/Labels"]
+[node name="Draw" type="Label" parent="VBoxContainer/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "D"
+text = "DRAW"
 horizontal_alignment = 1
 
-[node name="L" type="Label" parent="VBoxContainer/Labels"]
+[node name="Loose" type="Label" parent="VBoxContainer/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "L"
+text = "LOOSE"
 horizontal_alignment = 1
 
-[node name="GM" type="Label" parent="VBoxContainer/Labels"]
+[node name="Goals" type="Label" parent="VBoxContainer/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "GM"
+text = "GOALS"
 horizontal_alignment = 1
 
-[node name="GA" type="Label" parent="VBoxContainer/Labels"]
+[node name="Points" type="Label" parent="VBoxContainer/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "GA"
+text = "Points"
 horizontal_alignment = 1
 
-[node name="Pts" type="Label" parent="VBoxContainer/Labels"]
-custom_minimum_size = Vector2(60, 0)
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
-text = "PTS"
-horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2

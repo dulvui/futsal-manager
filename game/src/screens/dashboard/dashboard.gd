@@ -70,6 +70,7 @@ func _process(_delta:float) -> void:
 	budget_label.text = str(team["budget"]) + "" + CurrencyUtil.get_sign()
 
 func _on_Menu_pressed() -> void:
+	Config.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
 func _on_SearchPlayer_pressed() -> void:
@@ -167,7 +168,7 @@ func _next_day() -> void:
 
 func _on_email_email_action(message: EmailMessage) -> void:
 	if message.type == EmailMessage.Type.CONTRACT_OFFER:
-		contract_offer.set_up(Config.get_transfer_by_rid(message.resource_rid))
+		contract_offer.set_up(TransferUtil.get_transfer_by_rid(message.resource_rid))
 		contract_offer.show()
 	else:
 		print("ERROR: Email action with no type. Text: " + message.text)

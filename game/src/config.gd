@@ -6,99 +6,62 @@ extends Node
 
 var config:ConfigFile
 
+# CONFIG
 var calendar:Array
 var date:Dictionary
-
 # saves wich season this is, starting from 0
 var current_season:int
-
-var league:League
-var leagues:Array[League]
-
-var team:Team
-var manager:Manager
-
-var table:Dictionary
-
-var current_transfers:Array[Transfer]
-
-var messages:Array
-
-
 # global game states
 var speed_factor:int = 0
 var dashboard_active_content:int = 0
-
 # from settings screen
 var language:String
 var currency:int
+
+# RESOURCES
+var leagues:Leagues
+var team:Team
+var manager:Manager
+var transfers:Transfers
+var inbox:Inbox
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
+	_load_config()
+	_load_resources()
+
+func _load_config() -> void:
 	config = ConfigFile.new()
 	var err:int = config.load("user://settings.cfg")
 	# if not, something went wrong with the file loading
 	if err != OK:
 		print("error loading user://settings.cfg")
-		
-	manager = config.get_value("manager", "data", Manager.new())
-	
 	current_season = config.get_value("season","current_season",0)
-	
 	calendar = config.get_value("season","calendar",[])
-	table = config.get_value("season","table",{})
-	if config.has_section_key("season","current_transfers"):
-		current_transfers = config.get_value("season","current_transfers")
-	else:
-		current_transfers = []
-	
-	team = config.get_value("resources", "team", Team.new())
-	leagues = config.get_value("resources", "leagues", init_leagues())
-	league = config.get_value("resources", "league", League.new())
-	
 	date = config.get_value("current_date","date", CalendarUtil.initial_date())
-	messages = config.get_value("mail","messages",[])
-
 	# global game states
 	speed_factor = config.get_value("match","speed_factor",0)
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
-	
 	# settings
 	language = config.get_value("settings","language","ND")
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	
+func _load_resources() -> void:
+	leagues = ResourceLoader.load("user://leagues.tres")
+	inbox = ResourceLoader.load("user://inbox.tres")
+	team = ResourceLoader.load("user://team.tres")
+	manager = ResourceLoader.load("user://manager.tres")
+	transfers = ResourceLoader.load("user://transfers.tres")
 	
-func reset() -> void:
-	manager =  Manager.new()
-	current_season = 0
-	calendar = []
-	table = {}
-	current_transfers = []
-	Config.current_transfers = []
-	messages = []
-	EmailUtil.messages = []
-	
-	date = CalendarUtil.initial_date()
-	
+	if not leagues:
+		leagues = initial_leagues()
 
-func set_lang(lang:String) -> void:
-	TranslationServer.set_locale(lang)
-	language = lang
-	config.set_value("settings","language", language)
-	config.save("user://settings.cfg")
 
-func save_all_data() -> void:
-	config.set_value("manager","data",manager)
-	config.set_value("resources","team", team)
-	config.set_value("resources","league", league)
-	config.set_value("resources","leagues",leagues)
+func save_config() -> void:
 	config.set_value("current_date","date",CalendarUtil.date)
 	config.set_value("season","calendar",calendar)
-	config.set_value("season","table",table)
-	config.set_value("season","current_transfers",Config.current_transfers)
-	config.set_value("mail","messages",EmailUtil.messages)
 	config.set_value("season","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)
 	config.set_value("settings","currency",currency)
@@ -107,26 +70,45 @@ func save_all_data() -> void:
 	config.save("user://settings.cfg")
 	print("all data saved")
 
+
+func save_resources() -> void:
+	ResourceSaver.save(leagues, "user://leagues.tres")
+	ResourceSaver.save(inbox, "user://inbox.tres")
+	ResourceSaver.save(team, "user://team.tres")
+	ResourceSaver.save(manager, "user://manager.tres")
+	ResourceSaver.save(transfers, "user://transfers.tres")
+
+
+func save_all_data() -> void:
+	save_resources()
+	save_config()
+
+	
+func reset() -> void:
+	# CONFIG
+	date = CalendarUtil.initial_date()
+	current_season = 0
+	calendar = []
+	# RESOURCES
+	manager =  Manager.new()
+	inbox = Inbox.new()
+	transfers = Transfers.new()
+
+func set_lang(lang:String) -> void:
+	TranslationServer.set_locale(lang)
+	language = lang
+	config.set_value("settings","language", language)
+	config.save("user://settings.cfg")
+
+
 func save_manager(p_manager:Manager) -> void:
 	manager = p_manager
 	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
 	
-func select_team(_league:League, _team:Team) -> void:
-	league = _league
-	team = _team
-	# init table
-	for league_team in league.teams:
-		table[league_team["name"]] = {
-			"points" : 0,
-			"games_played": 0,
-			"goals_made" : 0,
-			"goals_against" : 0,
-			"wins" : 0,
-			"draws" : 0,
-			"lost" : 0
-		}
-	save_all_data()
+func select_team(p_league:League, p_team:Team) -> void:
+	#active_league_rid = p_league.get_rid()
+	team = p_team
 	
 func save_date() -> void:
 	config.set_value("current_date","date",CalendarUtil.date)
@@ -137,43 +119,16 @@ func save_calendar(new_calendar:Array) -> void:
 	calendar = new_calendar
 	config.set_value("season","calendar",calendar)
 	config.save("user://settings.cfg")
-
-func set_table_result(home_name:String,home_goals:int,away_name:String,away_goals:int) -> void:
-#	print("%s %d : %d %s"%[home_name,home_goals,away_name,away_goals])
-	table[home_name]["goals_made"] += home_goals
-	table[home_name]["goals_against"] += away_goals
-	table[away_name]["goals_made"] += away_goals
-	table[away_name]["goals_against"] += home_goals
-	
-	if home_goals > away_goals:
-		table[home_name]["wins"] += 1
-		table[home_name]["points"] += 3
-		table[away_name]["lost"] += 1
-	elif  home_goals == away_goals:
-		table[home_name]["draws"] += 1
-		table[home_name]["points"] += 1
-		table[away_name]["draws"] += 1
-		table[away_name]["points"] += 1
-	else:
-		table[away_name]["wins"] += 1
-		table[away_name]["points"] += 3
-		table[home_name]["lost"] += 1
-	table[home_name]["games_played"] += 1
-	table[away_name]["games_played"] += 1
-
-func save_table() -> void:
-	config.set_value("season","table",table)
-	config.save("user://settings.cfg")
 	
 	
-func init_leagues() -> Array[League]:
+func initial_leagues() -> Leagues:
 	# check if leagues not leoaded yet
-	var all_leagues:Array[League] = []
+	var init_leagues:Leagues = Leagues.new()
 	for file in Constants.LEAGUES_FILES:
 		var league_from_file:League = ResourceLoader.load(Constants.LEAGUES_DIR + file)
-		all_leagues.append(league_from_file)
+		init_leagues.list.append(league_from_file)
 	
-	return all_leagues
+	return init_leagues
 	
 func next_season() -> void:
 	current_season += 1
@@ -193,21 +148,6 @@ func next_season() -> void:
 	Config.save_all_data()
 	
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
-
-func get_team_by_name(p_name:String) -> Team:
-	for l_league:League in leagues:
-		var found_team:Team = l_league.get_team_by_name(p_name)
-		if found_team:
-			return found_team
-	print("ERROR: team not found with name: " + p_name)
-	return null
-
-func get_transfer_by_rid(rid:RID) -> Transfer:
-	for transfer:Transfer in current_transfers:
-		if transfer.get_rid() == rid:
-			return transfer
-	print("ERROR: transfer not found with uuid: " + str(rid.get_id()))
-	return null
 
 # save on quit on mobile
 func _notification(what:int) -> void:

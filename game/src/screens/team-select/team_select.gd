@@ -8,7 +8,7 @@ const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profil
 
 
 func _ready() -> void:
-	for league in Config.leagues:
+	for league:League in Config.leagues.list:
 		var center_container:CenterContainer = CenterContainer.new()
 		center_container.name = league.name
 		var grid:GridContainer = GridContainer.new()
@@ -28,7 +28,6 @@ func team_selected(league:League, team:Team) -> void:
 	print("calendar created")
 	MatchMaker.inizialize_matches()
 	print("matches initialized")
-	
 	EmailUtil.welcome_manager()
 	
 	Config.save_all_data()

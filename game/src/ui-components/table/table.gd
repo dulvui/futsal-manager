@@ -5,28 +5,18 @@
 extends Control
 
 @onready var grid:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
+@onready var leagues:OptionButton = $VBoxContainer/Leagues
 
 func _ready() -> void:
+	for league:League in Config.leagues.list:
+		leagues.add_item(league.name)
+	
 	var pos:int = 1
 	
 	# transform table dictionary to array
-	var table_array:Array = []
-	for team:String in Config.table:
-		table_array.append({
-			"name" : team,
-			"points" : Config.table[team]["points"],
-			"games_played": Config.table[team]["games_played"],
-			"goals_made" : Config.table[team]["goals_made"],
-			"goals_against" : Config.table[team]["goals_against"],
-			"wins" : Config.table[team]["wins"],
-			"draws" : Config.table[team]["draws"],
-			"lost" : Config.table[team]["lost"]
-		})
-		
-	table_array.sort_custom(point_sorter)
+	var table_array:Array = Config.leagues.get_active().table.to_sorted_array()
 	
-	
-	for team:Dictionary in table_array:
+	for team:TableValues in table_array:
 		var pos_label:Label = Label.new()
 		style_label(pos_label)
 		pos_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -37,49 +27,49 @@ func _ready() -> void:
 		var name_label:Label = Label.new()
 		name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		name_label.custom_minimum_size = Vector2(310, 0)
-		name_label.text = team["name"]
+		name_label.text = team.team_name
 		grid.add_child(name_label)
 		
 		var games_played_label:Label = Label.new()
 		style_label(games_played_label)
-		games_played_label.text = str(team["wins"] + team["draws"] + team["lost"])
+		games_played_label.text = str(team.wins + team.draws + team.lost)
 		grid.add_child(games_played_label)
 
 		var wins_label:Label = Label.new()
 		style_label(wins_label)
-		wins_label.text = str(team["wins"])
+		wins_label.text = str(team.wins)
 		grid.add_child(wins_label)
 		
 		var draws_label:Label = Label.new()
 		style_label(draws_label)
-		draws_label.text = str(team["draws"])
+		draws_label.text = str(team.draws)
 		grid.add_child(draws_label)
 		
 		var lost_label:Label = Label.new()
 		style_label(lost_label)
-		lost_label.text = str(team["lost"])
+		lost_label.text = str(team.lost)
 		grid.add_child(lost_label)
 		
 		var goals_made_label:Label = Label.new()
 		style_label(goals_made_label)
-		goals_made_label.text = str(team["goals_made"])
+		goals_made_label.text = str(team.goals_made)
 		grid.add_child(goals_made_label)
 		
 		var goals_against_label:Label = Label.new()
 		style_label(goals_against_label)
-		goals_against_label.text = str(team["goals_against"])
+		goals_against_label.text = str(team.goals_against)
 		grid.add_child(goals_against_label)
 		
 		var points_label:Label = Label.new()
 		style_label(points_label)
-		points_label.text = str(team["points"])
+		points_label.text = str(team.points)
 		grid.add_child(points_label)
 		
 		var label_settings:LabelSettings = LabelSettings.new()
 		label_settings.font_size = get_theme_default_font_size()
 		label_settings.font_color = Color.GOLD
 		
-		if team.name == Config.team.name:
+		if team.team_name == Config.team.name:
 			pos_label.label_settings = label_settings
 			name_label.label_settings = label_settings
 			games_played_label.label_settings = label_settings
@@ -93,13 +83,6 @@ func _ready() -> void:
 func style_label(label:Label) -> void:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label.custom_minimum_size = Vector2(60, 0)
-
-func point_sorter(a:Dictionary, b:Dictionary) -> bool:
-	if a["points"] > b["points"]:
-		return true
-	elif a["points"] == b["points"] and a["goals_made"] - a["goals_against"] > b["goals_made"] - b["goals_against"]:
-		return true
-	return false
 
 
 func _on_Close_pressed() -> void:

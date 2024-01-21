@@ -14,11 +14,11 @@ func update() -> void:
 	for child in list.get_children():
 		child.queue_free()
 	
-	for i in range(EmailUtil.messages.size()-1,-1,-1): # reverse list
+	for i in range(Config.inbox.list.size()-1,-1,-1): # reverse list
 		var row:MessageRow = message_row.instantiate()
 		list.add_child(row)
-		row.click.connect(_on_row_click.bind(EmailUtil.messages[i]))
-		row.set_up(EmailUtil.messages[i])
+		row.click.connect(_on_row_click.bind(Config.inbox.list[i]))
+		row.set_up(Config.inbox.list[i])
 		
 		if i > 0:
 			list.add_child(HSeparator.new())

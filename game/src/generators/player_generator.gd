@@ -48,7 +48,6 @@ func _run() -> void:
 		print("Generate players for ", l["name"])
 		var league:League = League.new()
 		league.name = l["name"]
-		league.id = l["name"].md5_text()
 		# TODO change to fit other nations
 		league.nation = League.Nations.IT
 		print(league["teams"])

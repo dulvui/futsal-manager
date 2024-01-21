@@ -37,7 +37,7 @@ func set_up(show_lineup:bool,p_show_profile:bool, active_team:Team = null) -> vo
 	
 	if not active_team:
 		team_select.add_item("NO_TEAM")
-		for team in Config.league.teams:
+		for team:Team in Config.leagues.get_active().teams:
 			if team ==null or team.name != Config.team.name:
 				team_select.add_item(team.name)
 	else:
@@ -49,7 +49,7 @@ func set_up(show_lineup:bool,p_show_profile:bool, active_team:Team = null) -> vo
 	
 	if active_team == null:
 		league_select.add_item("ALL_LEAGUES")
-		for league:League in Config.leagues:
+		for league:League in Config.leagues.list:
 			league_select.add_item(league.name)
 	else:
 		league_select.hide()
@@ -63,7 +63,7 @@ func set_up_players(show_lineup:bool, active_team:Team = null) -> void:
 	
 	all_players = []
 	if active_team == null:
-		for league:League in Config.leagues:
+		for league:League in Config.leagues.list:
 			for team in league.teams:
 				for player in team.players:
 					all_players.append(player)

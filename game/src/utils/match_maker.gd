@@ -9,7 +9,7 @@ var match_day:int = 0
 
 
 func inizialize_matches() -> void:
-	var teams:Array = Config.league.teams.duplicate(true)
+	var teams:Array = Config.leagues.get_active().teams.duplicate(true)
 	matches = []
 	match_day = 0
 	

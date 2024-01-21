@@ -38,7 +38,7 @@ func _ready() -> void:
 	var next_match:Dictionary = CalendarUtil.get_next_match()
 	
 	if next_match != null:
-		for team in Config.league.teams:
+		for team:Team in Config.leagues.get_active().teams:
 			if team.name == next_match["home"]:
 				home_team = team
 			elif team.name == next_match["away"]:
@@ -80,7 +80,7 @@ func match_end() -> void:
 	pause_button.hide()
 	$Main/Content/Buttons/Dashboard.show()
 	match_simulator.match_finished()
-	Config.set_table_result(home_team.name,match_simulator.home_stats.goals,away_team.name,match_simulator.away_stats.goals)
+	Config.leagues.get_active().table.add_result(home_team.name,match_simulator.home_stats.goals,away_team.name,match_simulator.away_stats.goals)
 	
 	
 	#simulate all games for now.
@@ -91,10 +91,11 @@ func match_end() -> void:
 			
 			matchday["result"] = str(random_home_goals) + ":" + str(random_away_goals)
 			print(matchday["home"] + " vs " + matchday["away"])
-			Config.set_table_result(matchday["home"],random_home_goals,matchday["away"],random_away_goals)
+			Config.leagues.get_active().table.add_result(matchday["home"],random_home_goals,matchday["away"],random_away_goals)
 		else:
 			matchday["result"] = str(match_simulator.home_stats["goals"]) + ":" + str(match_simulator.away_stats["goals"])
-
+	
+	Config.save_all_data()
 
 func half_time() -> void:
 	pause_button.text = tr("CONTINUE")
@@ -144,7 +145,6 @@ func _toggle_view_buttons() -> void:
 	
 
 func _on_Dashboard_pressed() -> void:
-	Config.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
