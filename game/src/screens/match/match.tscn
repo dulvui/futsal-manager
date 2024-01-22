@@ -200,6 +200,7 @@ layout_mode = 2
 text = "CHANGE"
 
 [node name="Tactics" type="Button" parent="Main/Content/Buttons"]
+visible = false
 layout_mode = 2
 text = "TACTICS"
 
@@ -244,6 +245,7 @@ layout_mode = 2
 text = "PAUSE"
 
 [node name="SKIP" type="Button" parent="Main/Content/Buttons"]
+visible = false
 layout_mode = 2
 text = "SKIP"
 
