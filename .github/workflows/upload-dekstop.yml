@@ -66,7 +66,7 @@ jobs:
         run: godot --headless --path ${{ env.WORKING_DIR }}/ --export-release 'Windows Desktop' ../${{ env.PROJECT_NAME }}.exe
 
       - name: Create zip file
-        run: ${{ env.PROJECT_NAME }}-Windows.zip ${{ env.PROJECT_NAME }}.exe ${{ env.PROJECT_NAME }}.console.exe ${{ env.PROJECT_NAME }}.pck
+        run: zip ${{ env.PROJECT_NAME }}-Windows.zip ${{ env.PROJECT_NAME }}.exe ${{ env.PROJECT_NAME }}.console.exe ${{ env.PROJECT_NAME }}.pck
 
       - name: Upload binaries to Github release
         uses: svenstaro/upload-release-action@v2
