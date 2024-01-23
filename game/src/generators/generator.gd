@@ -23,9 +23,9 @@ var min_timestamp:int
 
 var rng:RandomNumberGenerator
 
-func generate(random_seed:int) -> Leagues:
+func generate(random_seed:String) -> Leagues:
 	rng = RandomNumberGenerator.new()
-	rng.seed = random_seed
+	rng.seed = hash(random_seed)
 	
 	var leagues:Leagues = Leagues.new()
 	# create date ranges

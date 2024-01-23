@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://qppc6sbc1cn0"]
+
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1_fm71v"]
+[ext_resource type="Script" path="res://src/screens/start/start.gd" id="2_s6fer"]
+
+[node name="Start" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fm71v")
+script = ExtResource("2_s6fer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -490.5
+offset_top = -264.5
+offset_right = 490.5
+offset_bottom = 264.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Manager" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Manager"]
+layout_mode = 2
+text = "MANAGER"
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/Manager"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+columns = 2
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/Manager/GridContainer"]
+layout_mode = 2
+text = "NAME"
+
+[node name="Name" type="LineEdit" parent="VBoxContainer/Manager/GridContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SurNameLabel" type="Label" parent="VBoxContainer/Manager/GridContainer"]
+layout_mode = 2
+text = "SURNAME"
+
+[node name="SurName" type="LineEdit" parent="VBoxContainer/Manager/GridContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NatLabel" type="Label" parent="VBoxContainer/Manager/GridContainer"]
+layout_mode = 2
+text = "NATIONALITY"
+
+[node name="Nat" type="OptionButton" parent="VBoxContainer/Manager/GridContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Seed" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="GenerationSeedLabel" type="Label" parent="VBoxContainer/Seed"]
+layout_mode = 2
+text = "GENERATION SEED"
+
+[node name="GenerationSeedDescription" type="Label" parent="VBoxContainer/Seed"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+text = "This seed is used to generate all start values of the game, like player names, attributes or team budgets. The same seed will reproduce the exact same start values on any other device it's used, so you can reuse and share this seed.
+You can find it later in the settings of the game."
+autowrap_mode = 2
+
+[node name="GridContainer" type="HBoxContainer" parent="VBoxContainer/Seed"]
+layout_mode = 2
+
+[node name="GenearateSeedButton" type="Button" parent="VBoxContainer/Seed/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "GENERATE"
+
+[node name="GeneratedSeedLineEdit" type="LineEdit" parent="VBoxContainer/Seed/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Back" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "CANCEL"
+metadata/_edit_use_anchors_ = true
+
+[node name="Continue" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "CONTINUE"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="VBoxContainer/Seed/GridContainer/GenearateSeedButton" to="." method="_on_genearate_seed_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Buttons/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="VBoxContainer/Buttons/Continue" to="." method="_on_Continue_pressed"]

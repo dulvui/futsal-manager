@@ -7,10 +7,13 @@
 
 extends Control
 
-@onready var nationality:OptionButton = $VBoxContainer/GridContainer/Nat
-@onready var m_name:LineEdit = $VBoxContainer/GridContainer/Name
-@onready var m_surname:LineEdit = $VBoxContainer/GridContainer/SurName 
+@onready var nationality:OptionButton = $VBoxContainer/Manager/GridContainer/Nat
+@onready var m_name:LineEdit = $VBoxContainer/Manager/GridContainer/Name
+@onready var m_surname:LineEdit = $VBoxContainer/Manager/GridContainer/SurName 
 
+@onready var generate_seed:LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
+
+var generation_seed:String = Constants.DEFAULT_SEED
 
 func _ready() -> void:
 	# TODO add all possible nationalities
@@ -18,6 +21,8 @@ func _ready() -> void:
 	nationality.add_item("DE")
 	nationality.add_item("FR")
 	nationality.add_item("BR")
+	
+	generate_seed.text = generation_seed
 
 func _on_Back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
@@ -25,11 +30,17 @@ func _on_Back_pressed() -> void:
 
 func _on_Continue_pressed() -> void:
 	print(nationality.get_item_text(nationality.selected))
-	if m_name.text.length() * m_surname.text.length() > 0:
+	if m_name.text.length() * m_surname.text.length() * generation_seed.length() > 0:
 		var manager:Manager =  Manager.new()
 		manager.name = m_name.text
 		manager.surname = m_surname.text
 		manager.nationality = nationality.get_item_text(nationality.selected)
 		Config.reset()
+		Config.generate_leagues(generation_seed)
 		Config.save_manager(manager)
 		get_tree().change_scene_to_file("res://src/screens/team-select/team_select.tscn")
+
+
+func _on_genearate_seed_button_pressed() -> void:
+	generation_seed = str(randi()) + "-" + str(randi()) + "-" + str(randi())
+	generate_seed.text = generation_seed

@@ -7,6 +7,7 @@ extends Node
 var config:ConfigFile
 
 # CONFIG
+var generation_seed:String
 var calendar:Array
 var date:Dictionary
 # saves wich season this is, starting from 0
@@ -46,6 +47,7 @@ func _load_config() -> void:
 	# settings
 	language = config.get_value("settings","language","ND")
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
+	generation_seed = config.get_value("settings", "generation_seed", Constants.DEFAULT_SEED)
 
 func save_config() -> void:
 	config.set_value("current_date","date",CalendarUtil.date)
@@ -53,6 +55,7 @@ func save_config() -> void:
 	config.set_value("season","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)
 	config.set_value("settings","currency",currency)
+	config.set_value("settings","generation_seed",generation_seed)
 	config.set_value("dashboard","active_content",dashboard_active_content)
 #
 	config.save("user://settings.cfg")
@@ -64,10 +67,6 @@ func _load_resources() -> void:
 	team = ResourceLoader.load("user://team.tres")
 	manager = ResourceLoader.load("user://manager.tres")
 	transfers = ResourceLoader.load("user://transfers.tres")
-	
-	if not leagues:
-		var generator:Generator = Generator.new()
-		leagues = generator.generate(1293291083)
 
 
 func save_resources() -> void:
@@ -77,11 +76,14 @@ func save_resources() -> void:
 	ResourceSaver.save(manager, "user://manager.tres")
 	ResourceSaver.save(transfers, "user://transfers.tres")
 
+func generate_leagues(p_generation_seed:String) -> void:
+	generation_seed = p_generation_seed
+	var generator:Generator = Generator.new()
+	leagues = generator.generate(generation_seed)
 
 func save_all_data() -> void:
 	save_resources()
 	save_config()
-
 	
 func reset() -> void:
 	# CONFIG
@@ -92,9 +94,6 @@ func reset() -> void:
 	manager =  Manager.new()
 	inbox = Inbox.new()
 	transfers = Transfers.new()
-	
-	var generator:Generator = Generator.new()
-	leagues = generator.generate(1293291083)
 
 func set_lang(lang:String) -> void:
 	TranslationServer.set_locale(lang)

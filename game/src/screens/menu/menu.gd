@@ -10,7 +10,7 @@ func _ready() -> void:
 		$VBoxContainer/Continue.hide()
 
 func _on_StartGame_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/create-manager/create_manager.tscn")
+	get_tree().change_scene_to_file("res://src/screens/start/start.tscn")
 
 
 func _on_Settings_pressed() -> void:

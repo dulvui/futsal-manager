@@ -4,6 +4,8 @@
 
 extends Node
 
+const DEFAULT_SEED:String = "SuchDefaultSeed"
+
 const LEAGUES_DIR:String = "res://data/generated/"
 
 # static files path, because on Android dir.get_files() on res:// doesn't work
