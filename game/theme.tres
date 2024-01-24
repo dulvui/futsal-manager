@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://pt1hrfiuwfpg"]
 
-[ext_resource type="StyleBox" path="res://button-pressed.tres" id="2"]
+[ext_resource type="StyleBox" uid="uid://chg0wkddlahe7" path="res://button-pressed.tres" id="2"]
 [ext_resource type="StyleBox" path="res://button-normal.tres" id="3"]
 
 [sub_resource type="StyleBoxFlat" id="1"]

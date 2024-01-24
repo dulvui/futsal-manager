@@ -31,20 +31,21 @@ anchor_right = 0.434
 anchor_bottom = 0.381
 offset_left = -512.52
 offset_top = -256.32
-offset_right = -0.519714
+offset_right = -0.519653
 offset_bottom = 255.68
 texture = ExtResource("3")
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.540104
 anchor_top = 0.456
 anchor_right = 0.540104
 anchor_bottom = 0.456
 offset_top = -94.48
 offset_right = 495.0
-offset_bottom = 95.52
+offset_bottom = 95.5201
 grow_vertical = 2
 
 [node name="Continue" type="Button" parent="VBoxContainer"]
