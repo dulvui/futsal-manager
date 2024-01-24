@@ -40,8 +40,8 @@ gdscript/warnings/untyped_declaration=2
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_height"
+window/size/transparent=true
+window/stretch/mode="viewport"
 window/size/width=1920
 window/size/height=1080
 window/size/test_width=1280
@@ -78,6 +78,5 @@ translations=PackedStringArray("res://assets/i18n/FutsalManagerI18N - Sheet1.de.
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
+renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
-environment/default_environment="res://default_env.tres"
