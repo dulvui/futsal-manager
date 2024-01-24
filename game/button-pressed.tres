@@ -1,8 +1,6 @@
-[gd_resource type="StyleBoxFlat" format=2]
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://chg0wkddlahe7"]
 
 [resource]
 content_margin_left = 10.0
 content_margin_right = 10.0
-bg_color = Color( 0.870588, 0.435294, 0.47451, 1 )
-shadow_size = 5
-shadow_offset = Vector2( 0, 3 )
+bg_color = Color(0.772549, 0.0862745, 0.117647, 1)
