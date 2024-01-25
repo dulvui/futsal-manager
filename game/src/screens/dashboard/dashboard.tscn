@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8mhb22bae1my"]
+[gd_scene load_steps=11 format=3 uid="uid://c8mhb22bae1my"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/dashboard/dashboard.gd" id="2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dcv0qm4k1wi4q" path="res://src/ui-components/email/email.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui-components/table/table.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://cbijtmv151qg7" path="res://src/ui-components/transfers/player-offer/player_offer.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://dual4o5whtk85" path="res://src/ui-components/info/info.tscn" id="8_bk8g0"]
 [ext_resource type="PackedScene" uid="uid://ccipqeqmthtfr" path="res://src/ui-components/transfers/contract-offer/contract_offer.tscn" id="9"]
 
 [node name="Dashboard" type="Control"]
@@ -102,6 +103,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="Info" parent="MainContainer/VBoxContainer/MainView/Content" instance=ExtResource("8_bk8g0")]
+visible = false
+layout_mode = 2
+
 [node name="HSeparator" type="HSeparator" parent="MainContainer/VBoxContainer/MainView"]
 layout_mode = 2
 
@@ -122,6 +127,10 @@ size_flags_horizontal = 3
 [node name="Email" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
 layout_mode = 2
 text = "EMAIL"
+
+[node name="Info" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
+layout_mode = 2
+text = "INFO"
 
 [node name="Calendar" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
 layout_mode = 2
@@ -167,6 +176,7 @@ grow_vertical = 2
 [connection signal="email_action" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_email_email_action"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Menu" to="." method="_on_Menu_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Email" to="." method="_on_Email_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Info" to="." method="_on_info_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Calendar" to="." method="_on_Calendar_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Table" to="." method="_on_Table_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Formation" to="." method="_on_Formation_pressed"]

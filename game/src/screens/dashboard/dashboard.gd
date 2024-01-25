@@ -15,6 +15,7 @@ extends Control
 @onready var email:Control = $MainContainer/VBoxContainer/MainView/Content/Email
 @onready var table:Control = $MainContainer/VBoxContainer/MainView/Content/Table
 @onready var calendar:Control = $MainContainer/VBoxContainer/MainView/Content/Calendar
+@onready var info:Control = $MainContainer/VBoxContainer/MainView/Content/Info
 
 # labels
 @onready var budget_label:Label = $MainContainer/VBoxContainer/TopBar/Budget
@@ -23,7 +24,7 @@ extends Control
 @onready var team_label:Label = $MainContainer/VBoxContainer/TopBar/TeamName
 
 
-enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION } 
+enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO } 
 
 # full screen views
 @onready var formation:Control = $MainContainer/VBoxContainer/MainView/Content/Formation
@@ -76,6 +77,9 @@ func _on_Menu_pressed() -> void:
 func _on_SearchPlayer_pressed() -> void:
 	_show_active_view(ContentViews.ALL_PLAYERS)
 
+func _on_info_pressed() -> void:
+	_show_active_view(ContentViews.INFO)
+
 func _on_Formation_pressed() -> void:
 	_show_active_view(ContentViews.FORMATION)
 
@@ -100,6 +104,7 @@ func _hide_all() -> void:
 	calendar.hide()
 	formation.hide()
 	all_players_list.hide()
+	info.hide()
 
 func _show_active_view(active_view:int=-1) -> void:
 	_hide_all()
@@ -117,6 +122,8 @@ func _show_active_view(active_view:int=-1) -> void:
 			formation.show()
 		ContentViews.ALL_PLAYERS:
 			all_players_list.show()
+		ContentViews.INFO:
+			info.show()
 		_:
 			email.show()
 
@@ -189,3 +196,4 @@ func _on_ContractOffer_cancel() -> void:
 
 func _on_ContractOffer_confirm() -> void:
 	contract_offer.hide()
+
