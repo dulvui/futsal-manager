@@ -173,7 +173,6 @@ func _on_Pause_pressed() -> void:
 		last_active_view.show()
 
 
-
 func _on_SKIP_pressed() -> void:
 	match_end()
 

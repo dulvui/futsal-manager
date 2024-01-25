@@ -11,7 +11,8 @@ extends Control
 @onready var m_name:LineEdit = $VBoxContainer/Manager/GridContainer/Name
 @onready var m_surname:LineEdit = $VBoxContainer/Manager/GridContainer/SurName 
 
-@onready var generate_seed:LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
+@onready var seed_container:VBoxContainer = $VBoxContainer/Seed
+@onready var seed_edit:LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
 
 var generation_seed:String = Constants.DEFAULT_SEED
 
@@ -22,7 +23,7 @@ func _ready() -> void:
 	nationality.add_item("FR")
 	nationality.add_item("BR")
 	
-	generate_seed.text = generation_seed
+	seed_edit.text = generation_seed
 
 func _on_Back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
@@ -43,4 +44,12 @@ func _on_Continue_pressed() -> void:
 
 func _on_genearate_seed_button_pressed() -> void:
 	generation_seed = str(randi()) + "-" + str(randi()) + "-" + str(randi())
-	generate_seed.text = generation_seed
+	seed_edit.text = generation_seed
+
+
+func _on_advanced_pressed() -> void:
+	seed_container.visible = not seed_container.visible
+	
+	if not seed_container.visible:
+		generation_seed = Constants.DEFAULT_SEED
+		seed_edit.text = generation_seed

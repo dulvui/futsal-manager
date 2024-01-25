@@ -29,9 +29,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -490.5
-offset_top = -264.5
+offset_top = -401.5
 offset_right = 490.5
-offset_bottom = 264.5
+offset_bottom = 401.5
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -78,7 +78,13 @@ layout_mode = 2
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
+[node name="Advanced" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "ADVANCED"
+
 [node name="Seed" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="GenerationSeedLabel" type="Label" parent="VBoxContainer/Seed"]
@@ -107,6 +113,11 @@ size_flags_horizontal = 3
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -121,6 +132,7 @@ layout_mode = 2
 text = "CONTINUE"
 metadata/_edit_use_anchors_ = true
 
+[connection signal="pressed" from="VBoxContainer/Advanced" to="." method="_on_advanced_pressed"]
 [connection signal="pressed" from="VBoxContainer/Seed/GridContainer/GenearateSeedButton" to="." method="_on_genearate_seed_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Continue" to="." method="_on_Continue_pressed"]
