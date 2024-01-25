@@ -31,9 +31,9 @@ var all_players:Array[Player] = []
 
 var show_profile:bool
 
-func set_up(show_lineup:bool,p_show_profile:bool, active_team:Team = null) -> void:
+func set_up(only_lineup:bool,p_show_profile:bool, active_team:Team = null) -> void:
 	show_profile = p_show_profile
-	set_up_players(show_lineup, active_team)
+	set_up_players(only_lineup, active_team)
 	
 	if not active_team:
 		team_select.add_item("NO_TEAM")
@@ -58,7 +58,7 @@ func set_up(show_lineup:bool,p_show_profile:bool, active_team:Team = null) -> vo
 		info_select.add_item(info_type)
 
 
-func set_up_players(show_lineup:bool, active_team:Team = null) -> void:
+func set_up_players(only_lineup:bool, active_team:Team = null) -> void:
 	_reset_options()
 	
 	all_players = []
@@ -68,8 +68,11 @@ func set_up_players(show_lineup:bool, active_team:Team = null) -> void:
 				for player in team.players:
 					all_players.append(player)
 	else:
-		for player in active_team.players:
-			all_players.append(player)
+		if only_lineup:
+			all_players.append_array(active_team.get_lineup_players())
+			all_players.append_array(active_team.get_sub_players())
+		else:
+			all_players.append_array(active_team.players)
 	
 	var headers:Array[String] = ["position", "surname"]
 	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
@@ -115,13 +118,7 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 
 	table.set_up(headers, INFO_TYPES[active_info_type], all_players)
 	_filter_table()
-#
-#func _on_FootSelect_item_selected(index):
-#	if index > 0:
-#		foot_search = FOOTS[index-1]
-#	else:
-#		foot_search = ""
-#	add_all_players(true)
+
 
 func _filter_table(exclusive:bool = false) -> void:
 	table.filter(active_filters, exclusive)

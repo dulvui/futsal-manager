@@ -24,10 +24,12 @@ var lineup_players:Array[int] = []
 var list_player:Player = null
 
 var team:Team
+var only_lineup:bool
 
-func set_up(active_team:Team = Config.team) -> void:
-	team = active_team
-	player_list.set_up(true, false, team)
+func set_up(p_only_lineup:bool) -> void:
+	only_lineup = p_only_lineup
+	team = Config.team
+	player_list.set_up(only_lineup, false, team)
 	
 	# set up fomation options
 	for formation:String in Formation.Variations:
@@ -132,7 +134,7 @@ func _change_player() -> void:
 		return
 		
 	_set_players()
-	player_list.set_up_players(true,  team)
+	player_list.set_up_players(only_lineup,  team)
 	change.emit()
 	
 	lineup_players.clear()

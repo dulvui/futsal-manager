@@ -47,7 +47,7 @@ func _ready() -> void:
 	$Main/Content/CentralContainer/TopBar/Home.text = next_match["home"]
 	$Main/Content/CentralContainer/TopBar/Away.text = next_match["away"]
 	
-	formation.set_up()
+	formation.set_up(true)
 	match_simulator.set_up(home_team,away_team)
 	
 	last_active_view = comments

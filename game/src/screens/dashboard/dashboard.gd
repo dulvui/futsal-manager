@@ -42,7 +42,7 @@ func _ready() -> void:
 	date_label.text = CalendarUtil.get_dashborad_date()
 	
 	all_players_list.set_up(false, true)
-	formation.set_up()
+	formation.set_up(false)
 	
 	if Config.calendar[Config.date.month][Config.date.day]["matches"].size() > 0:
 		if Config.calendar[Config.date.month][Config.date.day]["matches"][0]["result"].length() > 1:
