@@ -10,6 +10,8 @@ var config:ConfigFile
 var generation_seed:String
 var calendar:Array
 var date:Dictionary
+var start_date:Dictionary
+
 # saves wich season this is, starting from 0
 var current_season:int
 # global game states
@@ -39,8 +41,9 @@ func _load_config() -> void:
 	if err != OK:
 		print("error loading user://settings.cfg")
 	current_season = config.get_value("season","current_season",0)
-	calendar = config.get_value("season","calendar",[])
-	date = config.get_value("current_date","date", CalendarUtil.initial_date())
+	calendar = config.get_value("dates","calendar",[])
+	start_date = config.get_value("dates","start_date", CalendarUtil.initial_date())
+	date = config.get_value("dates","date", CalendarUtil.initial_date())
 	# global game states
 	speed_factor = config.get_value("match","speed_factor",0)
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
@@ -50,9 +53,10 @@ func _load_config() -> void:
 	generation_seed = config.get_value("settings", "generation_seed", Constants.DEFAULT_SEED)
 
 func save_config() -> void:
-	config.set_value("current_date","date",CalendarUtil.date)
-	config.set_value("season","calendar",calendar)
-	config.set_value("season","current_season",current_season)
+	config.set_value("dates","date",CalendarUtil.date)
+	config.set_value("dates","start_date",start_date)
+	config.set_value("dates","calendar",calendar)
+	config.set_value("dates","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)
 	config.set_value("settings","currency",currency)
 	config.set_value("settings","generation_seed",generation_seed)

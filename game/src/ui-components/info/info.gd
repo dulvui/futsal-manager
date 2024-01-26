@@ -4,7 +4,10 @@
 
 extends Control
 
-@onready var generation_seed:Label = $VBoxContainer/HBoxContainer/GenerationSeed
+@onready var generation_seed:Label = $VBoxContainer/GenerationSeed/GenerationSeed
+@onready var start_date:Label = $VBoxContainer/GenerationSeed/GenerationSeed
+
 
 func _ready() -> void:
 	generation_seed.text = Config.generation_seed
+	start_date.text = CalendarUtil.format_date(Config.start_date)

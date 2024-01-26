@@ -121,8 +121,9 @@ func next_day() -> void:
 		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_END)
 
 
-func get_dashborad_date() -> String:
-	return DAYS[date.weekday] + " " + str(date.day + 1) + " " + MONTHS[date.month] + " " + str(date.year)
+func format_date(p_date:Dictionary=date) -> String:
+	return DAYS[p_date.weekday] + " " + str(p_date.day + 1) + " " + MONTHS[p_date.month] + " " + str(p_date.year)
+
 
 func get_next_match() -> Dictionary:
 	for matchz:Dictionary in Config.calendar[Config.date.month][Config.date.day]["matches"]:

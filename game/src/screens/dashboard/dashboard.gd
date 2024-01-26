@@ -40,7 +40,7 @@ var next_season:bool = false
 func _ready() -> void:
 	manager_label.text = Config.manager.get_full_name()
 	team_label.text = Config.team.name
-	date_label.text = CalendarUtil.get_dashborad_date()
+	date_label.text = CalendarUtil.format_date()
 	
 	all_players_list.set_up(false, true)
 	formation.set_up(false)
@@ -165,7 +165,7 @@ func _next_day() -> void:
 	TransferUtil.update_day()
 	email.update_messages()
 	calendar.set_up(true)
-	date_label.text = CalendarUtil.get_dashborad_date()
+	date_label.text = CalendarUtil.format_date()
 	if Config.calendar[Config.date.month][Config.date.day]["matches"].size() > 0:
 		continue_button.text = "START_MATCH"
 		match_ready = true
