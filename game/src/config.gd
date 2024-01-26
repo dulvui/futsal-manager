@@ -66,11 +66,16 @@ func save_config() -> void:
 	print("all data saved")
 
 func _load_resources() -> void:
-	leagues = ResourceLoader.load("user://leagues.res")
-	inbox = ResourceLoader.load("user://inbox.res")
-	team = ResourceLoader.load("user://team.res")
-	manager = ResourceLoader.load("user://manager.res")
-	transfers = ResourceLoader.load("user://transfers.res")
+	if ResourceLoader.exists("user://leagues.res"):
+		leagues = ResourceLoader.load("user://leagues.res")
+	if ResourceLoader.exists("user://inbox.res"):
+		inbox = ResourceLoader.load("user://inbox.res")
+	if ResourceLoader.exists("user://team.res"):
+		team = ResourceLoader.load("user://team.res")
+	if ResourceLoader.exists("user://manager.res"):
+		manager = ResourceLoader.load("user://manager.res")
+	if ResourceLoader.exists("user://transfers.res"):
+		transfers = ResourceLoader.load("user://transfers.res")
 
 
 func save_resources() -> void:
