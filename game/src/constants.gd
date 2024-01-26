@@ -6,16 +6,6 @@ extends Node
 
 const DEFAULT_SEED:String = "SuchDefaultSeed"
 
-const LEAGUES_DIR:String = "res://data/generated/"
-
-# static files path, because on Android dir.get_files() on res:// doesn't work
-# https://github.com/godotengine/godot/issues/39474#issuecomment-643111534
-const LEAGUES_FILES:Array[String] = [
-	"serie-a.tres",
-	"serie-b.tres",
-]
-
-
 # match fast forward speed factor
 const MATCH_SPEED_FACTOR:int = 4
 

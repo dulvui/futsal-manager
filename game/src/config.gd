@@ -66,19 +66,19 @@ func save_config() -> void:
 	print("all data saved")
 
 func _load_resources() -> void:
-	leagues = ResourceLoader.load("user://leagues.tres")
-	inbox = ResourceLoader.load("user://inbox.tres")
-	team = ResourceLoader.load("user://team.tres")
-	manager = ResourceLoader.load("user://manager.tres")
-	transfers = ResourceLoader.load("user://transfers.tres")
+	leagues = ResourceLoader.load("user://leagues.res")
+	inbox = ResourceLoader.load("user://inbox.res")
+	team = ResourceLoader.load("user://team.res")
+	manager = ResourceLoader.load("user://manager.res")
+	transfers = ResourceLoader.load("user://transfers.res")
 
 
 func save_resources() -> void:
-	ResourceSaver.save(leagues, "user://leagues.tres")
-	ResourceSaver.save(inbox, "user://inbox.tres")
-	ResourceSaver.save(team, "user://team.tres")
-	ResourceSaver.save(manager, "user://manager.tres")
-	ResourceSaver.save(transfers, "user://transfers.tres")
+	ResourceSaver.save(leagues, "user://leagues.res")
+	ResourceSaver.save(inbox, "user://inbox.res")
+	ResourceSaver.save(team, "user://team.res")
+	ResourceSaver.save(manager, "user://manager.res")
+	ResourceSaver.save(transfers, "user://transfers.res")
 
 func generate_leagues(p_generation_seed:String) -> void:
 	generation_seed = p_generation_seed
