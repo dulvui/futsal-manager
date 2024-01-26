@@ -126,16 +126,6 @@ func save_calendar(new_calendar:Array) -> void:
 	config.save("user://settings.cfg")
 	
 	
-func initial_leagues() -> Leagues:
-	# check if leagues not leoaded yet
-	var init_leagues:Leagues = Leagues.new()
-	for file in Constants.LEAGUES_FILES:
-		var league:League = ResourceLoader.load(Constants.LEAGUES_DIR + file)
-		league.resource_local_to_scene = true
-		init_leagues.list.append(league.duplicate(true))
-	
-	return init_leagues
-	
 func next_season() -> void:
 	current_season += 1
 		
