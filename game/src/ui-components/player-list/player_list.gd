@@ -86,9 +86,12 @@ func remove_player(player_id:int) -> void:
 	_filter_table(true)
 
 func _on_NameSearch_text_changed(text:String) -> void:
-	active_filters["surname"] = text
-	_filter_table()
-
+	if text.length() > 2:
+		active_filters["surname"] = text
+		_filter_table()
+	elif "surname" in active_filters and active_filters["surname"].length() > 0:
+		active_filters["surname"] = ""
+		_filter_table()
 
 func _on_TeamSelect_item_selected(index:int) -> void:
 	if index > 0:

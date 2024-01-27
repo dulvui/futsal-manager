@@ -40,39 +40,43 @@ func generate(random_seed:String) -> Leagues:
 	max_date.year -= 30
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 	
-	# TODO iterate over all nationalities
-	var names_file:FileAccess = FileAccess.open(NAMES_DIR + "it.json", FileAccess.READ)
-	names["it"] = JSON.parse_string(names_file.get_as_text())
-	
-	# TODO iterate over all nationalities
-	var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + "it.json", FileAccess.READ)
-	leagues_data["it"] = JSON.parse_string(leagues_file.get_as_text())
+	for nation:String in League.Nations.keys():
+		nation = nation.to_lower()
+		
+		#TODO create name json for other nations
+		#var names_file:FileAccess = FileAccess.open(NAMES_DIR + nation + ".json", FileAccess.READ)
+		var names_file:FileAccess = FileAccess.open(NAMES_DIR + "it.json", FileAccess.READ)	
+		names["it"] = JSON.parse_string(names_file.get_as_text())
+		
+		# TODO iterate over all nationalities
+		var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + nation + ".json", FileAccess.READ)
+		leagues_data[nation] = JSON.parse_string(leagues_file.get_as_text())
 
 
-	for l:Dictionary in leagues_data["it"]:
-		print("Generate players for ", l["name"])
-		var league:League = League.new()
-		league.name = l["name"]
-		# TODO change to fit other nations
-		league.nation = League.Nations.IT
-		print(league["teams"])
-		for t:String in l["teams"]:
-			print(t)
-			var team:Team = Team.new()
-			team.name = t
-			team.id = team.name.md5_text()
-			team.budget = rng.randi_range(500000, 100000000)
-			team.salary_budget = rng.randi_range(500000, 100000000)
-			team.colors = []
-			team.colors.append(Color(rng.randf_range(0, 1), rng.randf_range(0, 1), rng.randf_range(0, 1)))
-			team.colors.append(team.colors[0].inverted())
-			team.colors.append(Color(rng.randf_range(0, 1), rng.randf_range(0, 1), rng.randf_range(0, 1)))
-			
-			team.create_stadium(t + "Stadium", 1234, 1990)
-			assign_players_to_team(team, league)
-			league.add_team(team)
-			
-		leagues.add_league(league)
+		for l:Dictionary in leagues_data[nation]:
+			print("Generate players for ", l["name"])
+			var league:League = League.new()
+			league.name = l["name"]
+			# TODO change to fit other nations
+			league.nation = League.Nations.IT
+			print(league["teams"])
+			for t:String in l["teams"]:
+				print(t)
+				var team:Team = Team.new()
+				team.name = t
+				team.id = team.name.md5_text()
+				team.budget = rng.randi_range(500000, 100000000)
+				team.salary_budget = rng.randi_range(500000, 100000000)
+				team.colors = []
+				team.colors.append(Color(rng.randf_range(0, 1), rng.randf_range(0, 1), rng.randf_range(0, 1)))
+				team.colors.append(team.colors[0].inverted())
+				team.colors.append(Color(rng.randf_range(0, 1), rng.randf_range(0, 1), rng.randf_range(0, 1)))
+				
+				team.create_stadium(t + "Stadium", 1234, 1990)
+				assign_players_to_team(team, league)
+				league.add_team(team)
+				
+			leagues.add_league(league)
 	
 	return leagues
 

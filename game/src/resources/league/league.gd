@@ -5,7 +5,7 @@
 class_name League
 extends Resource
 
-enum Nations { IT }
+enum Nations { IT, ES, RO }
 
 @export var table:Table
 @export var nation:Nations
