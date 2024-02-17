@@ -5,15 +5,14 @@
 class_name League
 extends Resource
 
-enum Nations { IT, ES, RO }
 
 @export var table:Table
-@export var nation:Nations
+@export var nation:Constants.Nations
 @export var name:String
 @export var teams:Array[Team]
 
 func _init(
-		p_nation:Nations = Nations.IT,
+		p_nation:Constants.Nations = Constants.Nations.ITALY,
 		p_table:Table = Table.new(),
 		p_name:String = "",
 		p_teams:Array[Team] = []

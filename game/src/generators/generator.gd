@@ -40,8 +40,7 @@ func generate(random_seed:String) -> Leagues:
 	max_date.year -= 30
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 	
-	for nation:String in League.Nations.keys():
-		nation = nation.to_lower()
+	for nation:String in Constants.Nations:
 		
 		#TODO create name json for other nations
 		#var names_file:FileAccess = FileAccess.open(NAMES_DIR + nation + ".json", FileAccess.READ)
@@ -49,7 +48,7 @@ func generate(random_seed:String) -> Leagues:
 		names["it"] = JSON.parse_string(names_file.get_as_text())
 		
 		# TODO iterate over all nationalities
-		var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + nation + ".json", FileAccess.READ)
+		var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + nation.to_lower() + ".json", FileAccess.READ)
 		leagues_data[nation] = JSON.parse_string(leagues_file.get_as_text())
 
 
@@ -58,7 +57,7 @@ func generate(random_seed:String) -> Leagues:
 			var league:League = League.new()
 			league.name = l["name"]
 			# TODO change to fit other nations
-			league.nation = League.Nations.IT
+			league.nation = Constants.Nations.get(nation)
 			print(league["teams"])
 			for t:String in l["teams"]:
 				print(t)
@@ -91,7 +90,7 @@ func assign_players_to_team(p_team:Team, p_league:League) -> Team:
 			amount = 3
 		
 		for i in amount:
-			var player:Player = create_player(League.Nations.IT, position, nr)
+			var player:Player = create_player(Constants.Nations.ITALY, position, nr)
 			nr += 1
 			player.team = p_team.name
 			player.league = p_league.name
@@ -273,17 +272,17 @@ func get_contract(prestige:int, position:int, age:int) -> Contract:
 	
 	return contract
 	
-func get_player_name(nationality:League.Nations) -> String:
+func get_player_name(nationality:Constants.Nations) -> String:
 	# TODO combine with other nations, but with low probability
 	var size:int = names["it"]["names"].size()
 	return names["it"]["names"][rng.randi() % size]
 	
-func get_surname(nationality:League.Nations) -> String:
+func get_surname(nationality:Constants.Nations) -> String:
 	# TODO combine with other nations, but with low probability
 	var size:int = names["it"]["last_names"].size()
 	return names["it"]["last_names"][rng.randi() % size]
 
-func create_player(nationality:League.Nations, position:Player.Position, nr:int) -> Player:
+func create_player(nationality:Constants.Nations, position:Player.Position, nr:int) -> Player:
 	var player:Player = Player.new()
 	# rng.random date from 1970 to 2007
 	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(rng.randi_range(0, max_timestamp))

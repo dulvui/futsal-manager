@@ -4,6 +4,8 @@
 
 extends Node
 
+enum Nations { ITALY, SPAIN, ROMANIA }
+
 const DEFAULT_SEED:String = "SuchDefaultSeed"
 
 # match fast forward speed factor

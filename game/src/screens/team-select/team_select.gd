@@ -2,24 +2,36 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends TabContainer
+extends Control
 
-const PlayerProfile:PackedScene = preload("res://src/ui-components/player-profile/player_profile.tscn")
+@onready var nations_container:HBoxContainer = $VBoxContainer/NationSelect
+@onready var team_list:VBoxContainer = $VBoxContainer/HSplitContainer/ScrollContainer/TeamList
 
 
 func _ready() -> void:
-	for league:League in Config.leagues.list:
-		var center_container:CenterContainer = CenterContainer.new()
-		center_container.name = league.name
-		var grid:GridContainer = GridContainer.new()
-		grid.columns = 2
-		for team:Team in league["teams"]:
+	for nation:String in Constants.Nations:
+		var button:Button = Button.new()
+		button.text = nation
+		nations_container.add_child(button)
+		button.pressed.connect(_on_nation_select.bind(nation))
+	
+	set_teams()
+
+
+func set_teams(nation:Constants.Nations = 0) -> void:
+	for child:Node in team_list.get_children():
+		child.queue_free()
+	
+	for league:League in Config.leagues.get_leagues_by_nation(nation):
+		for team:Team in league.teams:
 			var team_button:Button = Button.new()
-			team_button.text = team["name"]
+			team_button.text = team.name
 			team_button.pressed.connect(team_selected.bind(league, team))
-			grid.add_child(team_button)
-		center_container.add_child(grid)
-		add_child(center_container)
+			team_list.add_child(team_button)
+
+func _on_nation_select(nation:String) -> void:
+	print(nation)
+	set_teams(Constants.Nations.get(nation))
 
 func team_selected(league:League, team:Team) -> void:
 	Config.select_team(league,team)

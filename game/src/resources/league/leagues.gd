@@ -25,6 +25,13 @@ func get_league_by_rid(rid:RID) -> League:
 			return league
 	return null
 	
+func get_leagues_by_nation(nation:Constants.Nations = 0) -> Array[League]:
+	var leagues_by_nation:Array[League] = []
+	for league:League in list:
+		if league.nation == nation:
+			leagues_by_nation.append(league)
+	return leagues_by_nation
+	
 func get_team_by_name(p_name:String) -> Team:
 	for league:League in list:
 		var found_team:Team = league.get_team_by_name(p_name)
