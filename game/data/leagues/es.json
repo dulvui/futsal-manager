@@ -1,7 +1,7 @@
 
 [
 	{
-		"name" : "Serie A",
+		"name" : "Liga",
 		"teams" : [
 			"Roma",
 			"Milano",
@@ -16,7 +16,7 @@
 		]
 	},
 	{
-		"name" : "Serie B",
+		"name" : "Liga 2",
 		"teams" : [
 			"Palermo",
 			"Latina",
@@ -31,7 +31,7 @@
 		]
 	},
 	{
-		"name" : "Serie C1",
+		"name" : "Liga 3",
 		"teams" : [
 			"Piacenza",
 			"Latina",
@@ -46,7 +46,7 @@
 		]
 	},
 	{
-		"name" : "Serie C2",
+		"name" : "Liga 4",
 		"teams" : [
 			"Palermo",
 			"Asti",
@@ -61,7 +61,7 @@
 		]
 	},
 	{
-		"name" : "Serie D",
+		"name" : "Liga 5",
 		"teams" : [
 			"Palermo",
 			"Asti",
@@ -76,7 +76,7 @@
 		]
 	},
 	{
-		"name" : "Serie E",
+		"name" : "Liga 6",
 		"teams" : [
 			"Palermo",
 			"Asti",
