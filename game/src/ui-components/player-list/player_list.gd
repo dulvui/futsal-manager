@@ -31,14 +31,14 @@ var all_players:Array[Player] = []
 @onready var player_profile:Control = $PlayerProfile
 
 var show_profile:bool
-var show_colors:bool
+var lineup_colors:bool
 var active_team:Team
 
 
 
-func set_up(only_lineup:bool,p_show_profile:bool, p_active_team:Team = null, p_show_colors:bool=true) -> void:
+func set_up(only_lineup:bool,p_show_profile:bool, p_active_team:Team = null, p_lineup_colors:bool=true) -> void:
 	show_profile = p_show_profile
-	show_colors = p_show_colors
+	lineup_colors = p_lineup_colors
 	active_team = p_active_team
 	
 	set_up_players(only_lineup, active_team)
@@ -88,7 +88,7 @@ func set_up_players(only_lineup:bool, p_active_team:Team = null) -> void:
 	var headers:Array[String] = ["position", "surname"]
 	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
 		headers.append(attribute)
-	table.set_up(headers,INFO_TYPES[active_info_type], all_players, active_team, show_colors)
+	table.set_up(headers,INFO_TYPES[active_info_type], all_players, active_team, lineup_colors)
 	
 func remove_player(player_id:int) -> void:
 	active_filters["id"] = player_id
@@ -130,7 +130,7 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 		headers.append(attribute)
 	info_select.select(0)
 
-	table.set_up(headers, INFO_TYPES[active_info_type], all_players, active_team, show_colors)
+	table.set_up(headers, INFO_TYPES[active_info_type], all_players, active_team, lineup_colors)
 	_filter_table()
 
 

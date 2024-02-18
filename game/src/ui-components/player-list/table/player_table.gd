@@ -28,7 +28,7 @@ const page_size:int = 16
 var page:int = 0
 var page_max:int
 var team:Team
-var show_colors:bool
+var lineup_colors:bool
 
 	
 func set_up(
@@ -36,14 +36,14 @@ func set_up(
 	p_info_type:String,
 	p_players:Array[Player],
 	p_team:Team = null,
-	p_show_colors:bool = false
+	p_lineup_colors:bool = false
 ) -> void:
 	headers = p_headers
 	info_type = p_info_type
 	players = p_players
 	all_players = p_players
 	team = p_team
-	show_colors = p_show_colors
+	lineup_colors = p_lineup_colors
 	
 	page_max = players.size() / page_size
 	
@@ -104,7 +104,7 @@ func _set_up_content() -> void:
 			players_container.add_child(row)
 			#player_row.select.connect(select.bind(player))
 			row.info.connect(info.bind(player))
-			row.set_up(player, headers, team, show_colors)
+			row.set_up(player, headers, team, lineup_colors)
 	else :
 		var label:Label = Label.new()
 		label.text = "NO_PLAYER_FOUND"
