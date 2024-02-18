@@ -18,10 +18,8 @@ var generation_seed:String = Constants.DEFAULT_SEED
 
 func _ready() -> void:
 	# TODO add all possible nationalities
-	nationality.add_item("IT")
-	nationality.add_item("DE")
-	nationality.add_item("FR")
-	nationality.add_item("BR")
+	for nation:String in Constants.Nations:
+		nationality.add_item(nation)
 	
 	seed_edit.text = generation_seed
 
@@ -30,7 +28,6 @@ func _on_Back_pressed() -> void:
 
 
 func _on_Continue_pressed() -> void:
-	print(nationality.get_item_text(nationality.selected))
 	if m_name.text.length() * m_surname.text.length() * generation_seed.length() > 0:
 		var manager:Manager =  Manager.new()
 		manager.name = m_name.text

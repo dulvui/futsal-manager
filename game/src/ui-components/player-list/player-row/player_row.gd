@@ -18,7 +18,7 @@ const color_number:PackedScene = preload("res://src/ui-components/color-number/c
 @onready var position_label:Control = $HBoxContainer/PositionLabel
 @onready var attributes:HBoxContainer = $HBoxContainer/Attributes
 
-func set_up(player:Player, active_headers:Array[String], team:Team=null) -> void:
+func set_up(player:Player, active_headers:Array[String], team:Team=null, show_colors:bool = true) -> void:
 	for child in attributes.get_children():
 		child.queue_free()
 		
@@ -35,7 +35,7 @@ func set_up(player:Player, active_headers:Array[String], team:Team=null) -> void
 			attributes.add_child(number)
 			
 			# change color if in line up or sub
-			if team and (team.is_lineup_player(player) or team.is_sub_player(player)):
+			if show_colors and team and (team.is_lineup_player(player) or team.is_sub_player(player)):
 				button.disabled = true
 				button.hide()
 				name_label.set_line_up(team.is_lineup_player(player))

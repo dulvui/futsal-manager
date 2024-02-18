@@ -10,4 +10,4 @@ class_name TeamProfile
 
 func set_team(team:Team) -> void:
 	name_label.text = team.name
-	player_list.set_up(false, true, team)
+	player_list.set_up(false, true, team, false)

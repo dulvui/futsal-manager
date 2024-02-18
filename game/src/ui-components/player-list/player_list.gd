@@ -18,7 +18,7 @@ const FISICAL_TITLES:Array = ["acc","agi","jum","pac","sta","str"]
 const INFO_TYPES:Array = ["mental","physical","technical","goalkeeper"]
 const FOOTS:Array = ["R","L","RL"]
 
-@onready var table:Control = $VBoxContainer/Table
+@onready var table:PlayerTable = $VBoxContainer/Table
 
 var all_players:Array[Player] = []
 
@@ -31,9 +31,16 @@ var all_players:Array[Player] = []
 @onready var player_profile:Control = $PlayerProfile
 
 var show_profile:bool
+var show_colors:bool
+var active_team:Team
 
-func set_up(only_lineup:bool,p_show_profile:bool, active_team:Team = null) -> void:
+
+
+func set_up(only_lineup:bool,p_show_profile:bool, p_active_team:Team = null, p_show_colors:bool=true) -> void:
 	show_profile = p_show_profile
+	show_colors = p_show_colors
+	active_team = p_active_team
+	
 	set_up_players(only_lineup, active_team)
 	
 	if not active_team:
@@ -59,16 +66,17 @@ func set_up(only_lineup:bool,p_show_profile:bool, active_team:Team = null) -> vo
 		info_select.add_item(info_type)
 
 
-func set_up_players(only_lineup:bool, active_team:Team = null) -> void:
+func set_up_players(only_lineup:bool, p_active_team:Team = null) -> void:
 	_reset_options()
 	
 	all_players = []
-	if active_team == null:
+	if p_active_team == null:
 		for league:League in Config.leagues.list:
 			for team in league.teams:
 				for player in team.players:
 					all_players.append(player)
 	else:
+		active_team = p_active_team
 		if only_lineup:
 			all_players.append_array(active_team.get_lineup_players())
 			all_players.append_array(active_team.get_sub_players())
@@ -80,7 +88,7 @@ func set_up_players(only_lineup:bool, active_team:Team = null) -> void:
 	var headers:Array[String] = ["position", "surname"]
 	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
 		headers.append(attribute)
-	table.set_up(headers,INFO_TYPES[active_info_type], all_players, active_team)
+	table.set_up(headers,INFO_TYPES[active_info_type], all_players, active_team, show_colors)
 	
 func remove_player(player_id:int) -> void:
 	active_filters["id"] = player_id
@@ -122,7 +130,7 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 		headers.append(attribute)
 	info_select.select(0)
 
-	table.set_up(headers, INFO_TYPES[active_info_type], all_players)
+	table.set_up(headers, INFO_TYPES[active_info_type], all_players, active_team, show_colors)
 	_filter_table()
 
 
