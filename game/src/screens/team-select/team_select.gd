@@ -22,6 +22,8 @@ func _ready() -> void:
 	set_teams()
 	var first_league:League = Config.leagues.get_leagues_by_nation(0)[0]
 	show_team(first_league, first_league.teams[0])
+	
+	team_profile.set_up(active_team)
 
 func show_team(league:League, team:Team) -> void:
 	active_league = league

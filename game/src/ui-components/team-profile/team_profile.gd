@@ -8,6 +8,10 @@ class_name TeamProfile
 @onready var name_label:Label = $VBoxContainer/HBoxContainer/TeamInfo/Name
 @onready var player_list:PlayerList = $VBoxContainer/HBoxContainer/PlayerList
 
-func set_team(team:Team) -> void:
+func set_up(team:Team) -> void:
 	name_label.text = team.name
 	player_list.set_up(false, true, team, false)
+
+func set_team(team:Team) -> void:
+	name_label.text = team.name
+	player_list.set_up_players(false, team)
