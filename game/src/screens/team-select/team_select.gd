@@ -3,10 +3,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 extends Control
+class_name TeamSelect
 
-@onready var nations_container:HBoxContainer = $VBoxContainer/NationSelect
-@onready var team_list:VBoxContainer = $VBoxContainer/HSplitContainer/ScrollContainer/TeamList
-@onready var team_profile:TeamProfile = $VBoxContainer/HSplitContainer/TeamProfile
+@onready var nations_container:HBoxContainer = $MarginContainer/VBoxContainer/NationSelect
+@onready var team_list:VBoxContainer = $MarginContainer/VBoxContainer/HSplitContainer/ScrollContainer/TeamList
+@onready var team_profile:TeamProfile = $MarginContainer/VBoxContainer/HSplitContainer/TeamProfile
 
 var active_league:League
 var active_team:Team
