@@ -42,3 +42,13 @@ size_flags_vertical = 3
 
 [node name="TeamProfile" parent="VBoxContainer/HSplitContainer" instance=ExtResource("3_sndt3")]
 layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SelectTeam" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "SELECT"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SelectTeam" to="." method="_on_select_team_pressed"]
