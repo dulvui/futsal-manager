@@ -6,6 +6,7 @@ extends Control
 
 @onready var nations_container:HBoxContainer = $VBoxContainer/NationSelect
 @onready var team_list:VBoxContainer = $VBoxContainer/HSplitContainer/ScrollContainer/TeamList
+@onready var team_profile:TeamProfile = $VBoxContainer/HSplitContainer/TeamProfile
 
 var active_league:League
 var active_team:Team
@@ -18,11 +19,13 @@ func _ready() -> void:
 		button.pressed.connect(_on_nation_select.bind(nation))
 	
 	set_teams()
+	var first_league:League = Config.leagues.get_leagues_by_nation(0)[0]
+	show_team(first_league, first_league.teams[0])
 
 func show_team(league:League, team:Team) -> void:
 	active_league = league
 	active_team = team
-	pass
+	team_profile.set_team(active_team)
 
 func set_teams(nation:Constants.Nations = 0) -> void:
 	for child:Node in team_list.get_children():

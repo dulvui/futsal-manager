@@ -27,6 +27,10 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="TeamInfo" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/TeamInfo"]
 layout_mode = 2
 
 [node name="PlayerList" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_4288b")]

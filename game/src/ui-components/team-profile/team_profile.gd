@@ -3,10 +3,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 extends Control
+class_name TeamProfile
 
-func _ready() -> void:
-	pass
+@onready var name_label:Label = $VBoxContainer/HBoxContainer/TeamInfo/Name
+@onready var player_list:PlayerList = $VBoxContainer/HBoxContainer/PlayerList
 
-
-func _process(delta: float) -> void:
-	pass
+func set_team(team:Team) -> void:
+	name_label.text = team.name
+	player_list.set_up(false, true, team)
