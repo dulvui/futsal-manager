@@ -66,6 +66,7 @@ func generate(random_seed:String) -> Leagues:
 				team.id = team.name.md5_text()
 				team.budget = rng.randi_range(500000, 100000000)
 				team.salary_budget = rng.randi_range(500000, 100000000)
+				team.prestige = rng.randi_range(1, 20)
 				team.colors = []
 				team.colors.append(Color(rng.randf_range(0, 1), rng.randf_range(0, 1), rng.randf_range(0, 1)))
 				team.colors.append(team.colors[0].inverted())

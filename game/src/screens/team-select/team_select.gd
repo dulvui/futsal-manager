@@ -40,7 +40,8 @@ func set_teams(nation:Constants.Nations = 0) -> void:
 		team_list.add_child(league_label)
 		for team:Team in league.teams:
 			var team_button:Button = Button.new()
-			team_button.text = team.name
+			team_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			team_button.text = team.get_prestige_stars() + "  " + team.name
 			team_button.pressed.connect(show_team.bind(league, team))
 			team_list.add_child(team_button)
 

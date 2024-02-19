@@ -99,3 +99,7 @@ func remove_player(p_player:Player) -> void:
 			lineup_player_ids.erase(l_id)
 			lineup_player_ids.append(players[-1].id)
 			break
+			
+func get_prestige_stars() -> String:
+	# creates right padding ex: "***  "
+	return "*".repeat(max(1,prestige / 4)) + "  ".repeat( 5 - max(1,prestige / 4))

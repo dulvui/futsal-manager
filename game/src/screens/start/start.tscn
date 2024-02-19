@@ -104,7 +104,7 @@ layout_mode = 2
 [node name="GenearateSeedButton" type="Button" parent="VBoxContainer/Seed/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "GENERATE"
+text = "RANDOM SEED"
 
 [node name="GeneratedSeedLineEdit" type="LineEdit" parent="VBoxContainer/Seed/GridContainer"]
 layout_mode = 2
