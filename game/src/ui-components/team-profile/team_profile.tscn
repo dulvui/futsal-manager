@@ -33,5 +33,29 @@ layout_mode = 2
 [node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/TeamInfo"]
 layout_mode = 2
 
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer/TeamInfo"]
+layout_mode = 2
+
+[node name="Budget" type="Label" parent="VBoxContainer/HBoxContainer/TeamInfo"]
+layout_mode = 2
+
+[node name="SalaryBudget" type="Label" parent="VBoxContainer/HBoxContainer/TeamInfo"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/HBoxContainer/TeamInfo"]
+layout_mode = 2
+
+[node name="StadiumName" type="Label" parent="VBoxContainer/HBoxContainer/TeamInfo"]
+layout_mode = 2
+
+[node name="StadiumCapacity" type="Label" parent="VBoxContainer/HBoxContainer/TeamInfo"]
+layout_mode = 2
+
+[node name="StadiumYearBuilt" type="Label" parent="VBoxContainer/HBoxContainer/TeamInfo"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
 [node name="PlayerList" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_4288b")]
 layout_mode = 2

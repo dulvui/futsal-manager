@@ -29,28 +29,37 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Main" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Main"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="TeamList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HSplitContainer/ScrollContainer"]
+[node name="TeamList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Main/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TeamProfile" parent="MarginContainer/VBoxContainer/HSplitContainer" instance=ExtResource("3_sndt3")]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/Main"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="TeamProfile" parent="MarginContainer/VBoxContainer/Main" instance=ExtResource("3_sndt3")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="SelectTeam" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SelectTeam" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "SELECT"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SelectTeam" to="." method="_on_select_team_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/SelectTeam" to="." method="_on_select_team_pressed"]

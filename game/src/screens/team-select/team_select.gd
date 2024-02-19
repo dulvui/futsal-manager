@@ -6,8 +6,8 @@ extends Control
 class_name TeamSelect
 
 @onready var nations_container:HBoxContainer = $MarginContainer/VBoxContainer/NationSelect
-@onready var team_list:VBoxContainer = $MarginContainer/VBoxContainer/HSplitContainer/ScrollContainer/TeamList
-@onready var team_profile:TeamProfile = $MarginContainer/VBoxContainer/HSplitContainer/TeamProfile
+@onready var team_list:VBoxContainer = $MarginContainer/VBoxContainer/Main/ScrollContainer/TeamList
+@onready var team_profile:TeamProfile = $MarginContainer/VBoxContainer/Main/TeamProfile
 
 var active_league:League
 var active_team:Team
