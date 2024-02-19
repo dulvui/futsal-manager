@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bp0lflrwwki6x"]
 
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/ui-components/player-list/table/name-label/name_label.gd" id="2"]
 
 [node name="NameLabel" type="Control"]

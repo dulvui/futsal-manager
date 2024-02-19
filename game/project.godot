@@ -25,6 +25,7 @@ TransferUtil="*res://src/utils/transfer_util.gd"
 EmailUtil="*res://src/utils/email_util.gd"
 Constants="*res://src/constants.gd"
 CurrencyUtil="*res://src/utils/currency_util.gd"
+UiUtil="*res://src/utils/ui_util.gd"
 
 [debug]
 
@@ -55,7 +56,7 @@ import/fbx/enabled=false
 
 [gui]
 
-theme/custom="res://theme.tres"
+theme/custom="res://theme/theme.tres"
 
 [internationalization]
 

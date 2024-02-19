@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmsr4wbngmfmw"]
 
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="1_sqlt6"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="1_sqlt6"]
 [ext_resource type="Script" path="res://src/ui-components/player-list/table/player_table.gd" id="2_mpmpm"]
 
 [node name="PlayerTable" type="Control"]

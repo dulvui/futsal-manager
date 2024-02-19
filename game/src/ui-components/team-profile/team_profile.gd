@@ -7,12 +7,12 @@ class_name TeamProfile
 
 @onready var player_list:PlayerList = $VBoxContainer/HBoxContainer/PlayerList
 @onready var name_label:Label = $VBoxContainer/HBoxContainer/TeamInfo/Name
+@onready var prestige_label:Label = $VBoxContainer/HBoxContainer/TeamInfo/PresitgeStars
 @onready var budget_label:Label = $VBoxContainer/HBoxContainer/TeamInfo/Budget
 @onready var salary_budget_label:Label = $VBoxContainer/HBoxContainer/TeamInfo/SalaryBudget
 @onready var stadium_name_label:Label = $VBoxContainer/HBoxContainer/TeamInfo/StadiumName
 @onready var stadium_capacity_label:Label = $VBoxContainer/HBoxContainer/TeamInfo/StadiumCapacity
 @onready var stadium_year_label:Label = $VBoxContainer/HBoxContainer/TeamInfo/StadiumYearBuilt
-
 
 func set_up(team:Team) -> void:
 	player_list.set_up(false, true, team, false)
@@ -24,6 +24,7 @@ func set_team(team:Team) -> void:
 
 func _set_labels(team:Team) -> void:
 	name_label.text = team.name
+	prestige_label.text = tr("PRESTIGE") + " " + team.get_prestige_stars()
 	budget_label.text = tr("BUDGET") + " " + CurrencyUtil.get_sign(team.budget)
 	salary_budget_label.text =tr("SALARY_BUDGET") + " " + CurrencyUtil.get_sign(team.salary_budget)
 	stadium_name_label.text = team.stadium.name

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7bh7ukttbkvu"]
 
 [ext_resource type="Script" path="res://src/ui-components/table/table.gd" id="1"]
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme.tres" id="2"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="2"]
 
 [node name="Table" type="Control"]
 layout_mode = 3
