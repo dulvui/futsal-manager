@@ -101,5 +101,9 @@ func remove_player(p_player:Player) -> void:
 			break
 			
 func get_prestige_stars() -> String:
+	var relation:int = Constants.MAX_PRESTIGE / 4
+	var star_factor:int = Constants.MAX_PRESTIGE / relation
+	var stars:int = max(1,prestige / star_factor)
+	var spaces:int = 5 - stars 
 	# creates right padding ex: "***  "
-	return "*".repeat(max(1,prestige / 4)) + "  ".repeat( 5 - max(1,prestige / 4))
+	return "*".repeat(stars) + "  ".repeat(spaces)

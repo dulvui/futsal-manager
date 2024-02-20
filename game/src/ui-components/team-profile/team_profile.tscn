@@ -38,6 +38,9 @@ label_settings = ExtResource("2_e0wm0")
 [node name="PresitgeStars" type="Label" parent="VBoxContainer/HBoxContainer/TeamInfo"]
 layout_mode = 2
 
+[node name="Presitge" type="Label" parent="VBoxContainer/HBoxContainer/TeamInfo"]
+layout_mode = 2
+
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer/TeamInfo"]
 layout_mode = 2
 

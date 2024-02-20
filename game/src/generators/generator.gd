@@ -50,8 +50,8 @@ func generate(random_seed:String) -> Leagues:
 		# TODO iterate over all nationalities
 		var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + nation.to_lower() + ".json", FileAccess.READ)
 		leagues_data[nation] = JSON.parse_string(leagues_file.get_as_text())
-
-
+		 # used for prestige calculation, so that high leagues have better prestige
+		var league_index:int = 0
 		for l:Dictionary in leagues_data[nation]:
 			print("Generate players for ", l["name"])
 			var league:League = League.new()
@@ -66,7 +66,7 @@ func generate(random_seed:String) -> Leagues:
 				team.id = team.name.md5_text()
 				team.budget = rng.randi_range(500000, 100000000)
 				team.salary_budget = rng.randi_range(500000, 100000000)
-				team.prestige = rng.randi_range(1, 20)
+				team.prestige = rng.randi_range((Constants.MAX_PRESTIGE / 2) - league_index, Constants.MAX_PRESTIGE - league_index)
 				team.colors = []
 				team.colors.append(Color(rng.randf_range(0, 1), rng.randf_range(0, 1), rng.randf_range(0, 1)))
 				team.colors.append(team.colors[0].inverted())
@@ -77,6 +77,7 @@ func generate(random_seed:String) -> Leagues:
 				league.add_team(team)
 				
 			leagues.add_league(league)
+			league_index += 1
 	
 	return leagues
 
@@ -91,7 +92,7 @@ func assign_players_to_team(p_team:Team, p_league:League) -> Team:
 			amount = 3
 		
 		for i in amount:
-			var player:Player = create_player(Constants.Nations.ITALY, position, nr)
+			var player:Player = create_player(Constants.Nations.ITALY, position, nr, p_team)
 			nr += 1
 			player.team = p_team.name
 			player.league = p_league.name
@@ -283,19 +284,19 @@ func get_surname(nationality:Constants.Nations) -> String:
 	var size:int = names["it"]["last_names"].size()
 	return names["it"]["last_names"][rng.randi() % size]
 
-func create_player(nationality:Constants.Nations, position:Player.Position, nr:int) -> Player:
+func create_player(nationality:Constants.Nations, position:Player.Position, nr:int, p_team:Team) -> Player:
 	var player:Player = Player.new()
 	# rng.random date from 1970 to 2007
 	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(rng.randi_range(0, max_timestamp))
-
-	var prestige:int = rng.randi_range(1, Constants.MAX_PRESTIGE)
+	
+	var prestige:int = get_player_prestige(p_team.prestige)
 	# to make just a few really good and a few really bad
 	if prestige < 30:
-		prestige = rng.randi_range(1, 5)
+		prestige = rng.randi_range(1, 8)
 	if prestige > 90:
-		prestige = rng.randi_range(15, 20)
+		prestige = rng.randi_range(16, 20)
 	else:
-		prestige = rng.randi_range(5, 15)
+		prestige = rng.randi_range(8, 16)
 
 	player.id = player_id
 	player.price = get_price(date.year-birth_date.year, prestige, position)
@@ -334,3 +335,8 @@ func create_player(nationality:Constants.Nations, position:Player.Position, nr:i
 	player_id += 1
 
 	return player
+
+func get_player_prestige(team_prestige:int) -> int:
+	# player presitge is teams prestige +- 20
+	var min_prestige:int = mini(maxi(1, team_prestige + rng.randi_range(-10, 10)), 100)
+	return rng.randi_range(min_prestige, 100)
