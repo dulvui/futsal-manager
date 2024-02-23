@@ -28,11 +28,14 @@ var manager:Manager
 var transfers:Transfers
 var inbox:Inbox
 
+var rng:RandomNumberGenerator
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_load_config()
 	_load_resources()
+	rng = RandomNumberGenerator.new()
+	set_seed()
 
 func _load_config() -> void:
 	config = ConfigFile.new()
@@ -87,8 +90,9 @@ func save_resources() -> void:
 
 func generate_leagues(p_generation_seed:String) -> void:
 	generation_seed = p_generation_seed
+	set_seed(generation_seed)
 	var generator:Generator = Generator.new()
-	leagues = generator.generate(generation_seed)
+	leagues = generator.generate()
 
 func save_all_data() -> void:
 	save_resources()
@@ -103,6 +107,10 @@ func reset() -> void:
 	manager =  Manager.new()
 	inbox = Inbox.new()
 	transfers = Transfers.new()
+
+func set_seed(p_generation_seed:String=generation_seed) -> void:
+	generation_seed = p_generation_seed
+	rng.seed = hash(generation_seed)
 
 func set_lang(lang:String) -> void:
 	TranslationServer.set_locale(lang)
