@@ -23,7 +23,7 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var home_possession:Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Home
 @onready var away_possession:Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Away
 
-
+const max_comments:int = 16
 var last_active_view:Control
 
 var home_team:Team
@@ -220,7 +220,7 @@ func _on_match_simulator_match_end() -> void:
 	match_end()
 
 func _on_match_simulator_action_message(message:String) -> void:
-	if comments.get_child_count() > 18:
+	if comments.get_child_count() > max_comments:
 		comments.remove_child(comments.get_child(0))
 	var new_line:Label = Label.new()
 	new_line.text = time_label.text + " " + message
