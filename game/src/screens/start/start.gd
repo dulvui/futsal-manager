@@ -7,9 +7,9 @@
 
 extends Control
 
-@onready var nationality:OptionButton = $VBoxContainer/Manager/GridContainer/Nat
-@onready var m_name:LineEdit = $VBoxContainer/Manager/GridContainer/Name
-@onready var m_surname:LineEdit = $VBoxContainer/Manager/GridContainer/SurName 
+@onready var nationality:OptionButton = $VBoxContainer/Manager/Container/Nat
+@onready var m_name:LineEdit = $VBoxContainer/Manager/Container/Name
+@onready var m_surname:LineEdit = $VBoxContainer/Manager/Container/SurName 
 
 @onready var seed_container:VBoxContainer = $VBoxContainer/Seed
 @onready var seed_edit:LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit

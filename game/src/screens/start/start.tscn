@@ -39,52 +39,98 @@ alignment = 1
 [node name="Manager" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Manager"]
+[node name="ManagerLabel" type="Label" parent="VBoxContainer/Manager"]
 layout_mode = 2
 text = "MANAGER"
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/Manager"]
+[node name="Container" type="GridContainer" parent="VBoxContainer/Manager"]
 layout_mode = 2
 theme_override_constants/h_separation = 30
 columns = 2
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/Manager/GridContainer"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/Manager/Container"]
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 text = "NAME"
 
-[node name="Name" type="LineEdit" parent="VBoxContainer/Manager/GridContainer"]
+[node name="Name" type="LineEdit" parent="VBoxContainer/Manager/Container"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SurNameLabel" type="Label" parent="VBoxContainer/Manager/GridContainer"]
+[node name="SurNameLabel" type="Label" parent="VBoxContainer/Manager/Container"]
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 text = "SURNAME"
 
-[node name="SurName" type="LineEdit" parent="VBoxContainer/Manager/GridContainer"]
+[node name="SurName" type="LineEdit" parent="VBoxContainer/Manager/Container"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="NatLabel" type="Label" parent="VBoxContainer/Manager/GridContainer"]
+[node name="NatLabel" type="Label" parent="VBoxContainer/Manager/Container"]
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 text = "NATIONALITY"
 
-[node name="Nat" type="OptionButton" parent="VBoxContainer/Manager/GridContainer"]
+[node name="Nat" type="OptionButton" parent="VBoxContainer/Manager/Container"]
 layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Settings" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SettingsLabel" type="Label" parent="VBoxContainer/Settings"]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="Container" type="GridContainer" parent="VBoxContainer/Settings"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+columns = 2
+
+[node name="GenderLabel" type="Label" parent="VBoxContainer/Settings/Container"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "GENDER"
+
+[node name="Gender" type="OptionButton" parent="VBoxContainer/Settings/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 0
+popup/item_0/text = "FEMALE"
+popup/item_0/id = 0
+popup/item_1/text = "MALE"
+popup/item_1/id = 1
+popup/item_2/text = "MIXED"
+popup/item_2/id = 2
+
+[node name="PlayersAmountLabel" type="Label" parent="VBoxContainer/Settings/Container"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "PLAYERS_AMOUNT"
+
+[node name="PlayersAmount" type="OptionButton" parent="VBoxContainer/Settings/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 1
+popup/item_0/text = "1.000 - FAST"
+popup/item_0/id = 0
+popup/item_1/text = "5.000 - MEDIUM"
+popup/item_1/id = 1
+popup/item_2/text = "10.000 - SLOW"
+popup/item_2/id = 2
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Advanced" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "ADVANCED"
-
 [node name="Seed" type="VBoxContainer" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 
 [node name="GenerationSeedLabel" type="Label" parent="VBoxContainer/Seed"]
@@ -132,7 +178,6 @@ layout_mode = 2
 text = "CONTINUE"
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="VBoxContainer/Advanced" to="." method="_on_advanced_pressed"]
 [connection signal="pressed" from="VBoxContainer/Seed/GridContainer/GenearateSeedButton" to="." method="_on_genearate_seed_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Continue" to="." method="_on_Continue_pressed"]
