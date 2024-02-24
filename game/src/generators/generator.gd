@@ -37,12 +37,9 @@ func generate() -> Leagues:
 	
 	for nation:String in Constants.Nations:
 		
-		#TODO create name json for other nations
-		#var names_file:FileAccess = FileAccess.open(NAMES_DIR + nation + ".json", FileAccess.READ)
-		var names_file:FileAccess = FileAccess.open(NAMES_DIR + "it.json", FileAccess.READ)	
-		names["it"] = JSON.parse_string(names_file.get_as_text())
+		var names_file:FileAccess = FileAccess.open(NAMES_DIR + nation.to_lower()  + ".json", FileAccess.READ)
+		names[nation.to_lower()] = JSON.parse_string(names_file.get_as_text())
 		
-		# TODO iterate over all nationalities
 		var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + nation.to_lower() + ".json", FileAccess.READ)
 		leagues_data[nation] = JSON.parse_string(leagues_file.get_as_text())
 		 # used for prestige calculation, so that high leagues have better prestige
@@ -51,7 +48,6 @@ func generate() -> Leagues:
 			print("Generate players for ", l["name"])
 			var league:League = League.new()
 			league.name = l["name"]
-			# TODO change to fit other nations
 			league.nation = Constants.Nations.get(nation)
 			print(league["teams"])
 			for t:String in l["teams"]:
@@ -87,7 +83,7 @@ func assign_players_to_team(p_team:Team, p_league:League) -> Team:
 			amount = 3
 		
 		for i in amount:
-			var player:Player = create_player(Constants.Nations.ITALY, position, nr, p_team)
+			var player:Player = create_player(p_league.nation, position, nr, p_team)
 			nr += 1
 			player.team = p_team.name
 			player.league = p_league.name
@@ -271,13 +267,15 @@ func get_contract(prestige:int, position:int, age:int) -> Contract:
 	
 func get_player_name(nationality:Constants.Nations) -> String:
 	# TODO combine with other nations, but with low probability
-	var size:int = names["it"]["names"].size()
-	return names["it"]["names"][Config.rng.randi() % size]
+	var nation_string:String = Constants.Nations.keys()[nationality].to_lower()
+	var size:int = names[nation_string]["first_names_male"].size()
+	return names[nation_string]["first_names_male"][Config.rng.randi() % size]
 	
 func get_surname(nationality:Constants.Nations) -> String:
 	# TODO combine with other nations, but with low probability
-	var size:int = names["it"]["last_names"].size()
-	return names["it"]["last_names"][Config.rng.randi() % size]
+	var nation_string:String = Constants.Nations.keys()[nationality].to_lower()
+	var size:int = names[nation_string]["last_names"].size()
+	return names[nation_string]["last_names"][Config.rng.randi() % size]
 
 func create_player(nationality:Constants.Nations, position:Player.Position, nr:int, p_team:Team) -> Player:
 	var player:Player = Player.new()
