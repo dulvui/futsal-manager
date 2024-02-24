@@ -22,8 +22,6 @@ func _ready() -> void:
 	set_teams()
 	var first_league:League = Config.leagues.get_leagues_by_nation(0)[0]
 	show_team(first_league, first_league.teams[0])
-	
-	team_profile.set_up(active_team)
 
 func show_team(league:League, team:Team) -> void:
 	active_league = league
@@ -49,6 +47,9 @@ func set_teams(nation:Constants.Nations = 0) -> void:
 func _on_nation_select(nation:String) -> void:
 	print(nation)
 	set_teams(Constants.Nations.get(nation))
+	var first_league:League = Config.leagues.get_leagues_by_nation(Constants.Nations.get(nation))[0]
+	show_team(first_league, first_league.teams[0])
+	team_profile.set_up(active_team)
 
 
 func _on_select_team_pressed() -> void:
