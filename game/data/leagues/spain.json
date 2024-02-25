@@ -5,89 +5,44 @@
 		"teams" : [
 			"Barcelona",
 			"Madrid",
-			"Napoli",
-			"Bari",
-			"Bolzano",
-			"Trento",
-			"Torino",
-			"Bologna",
-			"Verona",
-			"Firenze"
+			"Valencia",
+			"Seville",
+			"Bilbao",
+			"Málaga",
+			"Asturias",
+			"Alicante",
+			"Las Palmas",
+			"Zaragoza"
 		]
 	},
 	{
 		"name" : "Liga 2",
 		"teams" : [
-			"Palermo",
-			"Latina",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
+			"Murcia",
+			"Santa Cruz de Tenerife",
+			"Granada",
+			"Palma de Mallorca",
+			"Vigo",
+			"Cartagena",
+			"Cádiz",
+			"San Sebastián",
+			"A Coruña",
+			"Valladolid"
 		]
 	},
 	{
 		"name" : "Liga 3",
 		"teams" : [
-			"Piacenza",
-			"Latina",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
-		]
-	},
-	{
-		"name" : "Liga 4",
-		"teams" : [
-			"Palermo",
-			"Asti",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
-		]
-	},
-	{
-		"name" : "Liga 5",
-		"teams" : [
-			"Palermo",
-			"Asti",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
-		]
-	},
-	{
-		"name" : "Liga 6",
-		"teams" : [
-			"Palermo",
-			"Asti",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
+			"Tarragona",
+			"Córdoba",
+			"Pamplona",
+			"Castellón de la Plana",
+			"Bay of Santander",
+			"Alzira-Xàtiva",
+			"Vitoria-Gasteiz",
+			"Algeciras-La Línea",
+			"Huelva",
+			"Almería"
 		]
 	}
 ]

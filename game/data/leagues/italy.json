@@ -1,8 +1,7 @@
-
 [
 	{
-		"name" : "Serie A",
-		"teams" : [
+		"name": "Serie A",
+		"teams": [
 			"Roma",
 			"Milano",
 			"Napoli",
@@ -16,8 +15,8 @@
 		]
 	},
 	{
-		"name" : "Serie B",
-		"teams" : [
+		"name": "Serie B",
+		"teams": [
 			"Palermo",
 			"Latina",
 			"Pisa",
@@ -31,64 +30,33 @@
 		]
 	},
 	{
-		"name" : "Serie C1",
-		"teams" : [
-			"Piacenza",
-			"Latina",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
+		"name": "Serie C1",
+		"teams": [
+			"Laives",
+			"Brunico",
+			"Salerno",
+			"Monza",
+			"Foggia",
+			"Siracusa",
+			"Ferrara",
+			"Pescara",
+			"Andria",
+			"Lecce"
 		]
 	},
 	{
-		"name" : "Serie C2",
-		"teams" : [
-			"Palermo",
-			"Asti",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
-		]
-	},
-	{
-		"name" : "Serie D",
-		"teams" : [
-			"Palermo",
-			"Asti",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
-		]
-	},
-	{
-		"name" : "Serie E",
-		"teams" : [
-			"Palermo",
-			"Asti",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
+		"name": "Serie C2",
+		"teams": [
+			"Udine",
+			"Sassari",
+			"Cesena",
+			"Venezia",
+			"Bergamo",
+			"Ancona",
+			"Ravenna",
+			"Cesenatico",
+			"Novara",
+			"Arezzo"
 		]
 	}
 ]
-

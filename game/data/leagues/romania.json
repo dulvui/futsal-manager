@@ -3,91 +3,46 @@
 	{
 		"name" : "Campionat A",
 		"teams" : [
-			"Roma",
-			"Milano",
-			"Napoli",
-			"Bari",
-			"Bolzano",
-			"Trento",
-			"Torino",
-			"Bologna",
-			"Verona",
-			"Firenze"
+			"United Galati",
+			"Bucharest",
+			"Cluj-Napoca",
+			"Iași",
+			"Constanța",
+			"Timișoara",
+			"Brașov",
+			"Craiova",
+			"Oradea",
+			"Ploiești"
 		]
 	},
 	{
 		"name" : "Campionat B",
 		"teams" : [
-			"Palermo",
-			"Latina",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
+			"Brăila",
+			"Arad",
+			"Pitești",
+			"Bacău",
+			"Sibiu",
+			"Târgu Mureș",
+			"Baia Mare",
+			"Buzău",
+			"Râmnicu Vâlcea",
+			"Satu Mare"
 		]
 	},
 	{
-		"name" : "Campionat C1",
+		"name" : "Campionat C",
 		"teams" : [
-			"Piacenza",
-			"Latina",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
-		]
-	},
-	{
-		"name" : "Campionat C2",
-		"teams" : [
-			"Palermo",
-			"Asti",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
-		]
-	},
-	{
-		"name" : "Campionat D",
-		"teams" : [
-			"Palermo",
-			"Asti",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
-		]
-	},
-	{
-		"name" : "Campionat E",
-		"teams" : [
-			"Palermo",
-			"Asti",
-			"Pisa",
-			"Livorno",
-			"Rovereto",
-			"Reggio Calabria",
-			"Messina",
-			"Cagliari",
-			"Forlì",
-			"Catanzaro"
+			"Botoșani",
+			"Suceava",
+			"Drobeta-Turnu Severin",
+			"Piatra Neamț",
+			"Bistrița",
+			"Târgu Jiu",
+			"Târgoviște",
+			"Focșani",
+			"Tulcea",
+			"Alba Iulia"
 		]
 	}
 ]
