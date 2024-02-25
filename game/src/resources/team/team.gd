@@ -61,13 +61,11 @@ func get_non_lineup_players() -> Array[Player]:
 			non_lineup.append(player)
 	return non_lineup
 
-func get_lineup_players(include_goalkeeper:bool=false) -> Array[Player]:
+func get_lineup_players() -> Array[Player]:
 	var lineup:Array[Player] = []
 	for player in players:
 		if player.id in lineup_player_ids.slice(0, 5):
 			lineup.append(player)
-	if not include_goalkeeper:
-		lineup.pop_front()
 	return lineup
 	
 func get_sub_players() -> Array[Player]:
