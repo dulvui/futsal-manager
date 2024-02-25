@@ -58,6 +58,7 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+text = "Hans"
 
 [node name="SurNameLabel" type="Label" parent="VBoxContainer/Manager/Container"]
 custom_minimum_size = Vector2(240, 0)
@@ -69,6 +70,7 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+text = "Viustel"
 
 [node name="NatLabel" type="Label" parent="VBoxContainer/Manager/Container"]
 custom_minimum_size = Vector2(240, 0)

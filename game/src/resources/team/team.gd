@@ -61,12 +61,21 @@ func get_non_lineup_players() -> Array[Player]:
 			non_lineup.append(player)
 	return non_lineup
 
+# get lineup players with goalkepper
 func get_lineup_players() -> Array[Player]:
 	var lineup:Array[Player] = []
 	for player in players:
 		if player.id in lineup_player_ids.slice(0, 5):
 			lineup.append(player)
 	return lineup
+
+# get lineup players without goalkepper
+func get_field_players() -> Array[Player]:
+	var field_players:Array[Player] = []
+	for player in players:
+		if player.id in lineup_player_ids.slice(1, 5):
+			field_players.append(player)
+	return field_players
 	
 func get_sub_players() -> Array[Player]:
 	var sub:Array[Player] = []

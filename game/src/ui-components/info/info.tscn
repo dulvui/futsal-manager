@@ -26,22 +26,36 @@ horizontal_alignment = 1
 
 [node name="GenerationSeed" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 40
 
 [node name="GenerationSeedLabel" type="Label" parent="VBoxContainer/GenerationSeed"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "SEED"
 
-[node name="GenerationSeed" type="Label" parent="VBoxContainer/GenerationSeed"]
+[node name="GenerationSeed" type="LineEdit" parent="VBoxContainer/GenerationSeed"]
 layout_mode = 2
+theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
 text = "palpalpalpa"
+editable = false
+expand_to_text_length = true
+flat = true
+
+[node name="CopySeed" type="Button" parent="VBoxContainer/GenerationSeed"]
+layout_mode = 2
+text = "COPY"
 
 [node name="StartDate" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 40
 
 [node name="StartDateLabel" type="Label" parent="VBoxContainer/StartDate"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "SEED"
+text = "START_DATE"
 
-[node name="StartDateSeed" type="Label" parent="VBoxContainer/StartDate"]
+[node name="StartDate" type="Label" parent="VBoxContainer/StartDate"]
 layout_mode = 2
-text = "palpalpalpa"
+text = "24.06.2024"
+
+[connection signal="pressed" from="VBoxContainer/GenerationSeed/CopySeed" to="." method="_on_copy_seed_pressed"]

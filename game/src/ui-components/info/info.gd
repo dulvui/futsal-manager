@@ -4,10 +4,14 @@
 
 extends Control
 
-@onready var generation_seed:Label = $VBoxContainer/GenerationSeed/GenerationSeed
-@onready var start_date:Label = $VBoxContainer/GenerationSeed/GenerationSeed
+@onready var generation_seed:LineEdit = $VBoxContainer/GenerationSeed/GenerationSeed
+@onready var start_date:Label = $VBoxContainer/StartDate/StartDate
 
 
 func _ready() -> void:
 	generation_seed.text = Config.generation_seed
 	start_date.text = CalendarUtil.format_date(Config.start_date)
+
+
+func _on_copy_seed_pressed() -> void:
+	DisplayServer.clipboard_set(Config.generation_seed)
