@@ -45,12 +45,12 @@ func generate() -> Leagues:
 		 # used for prestige calculation, so that high leagues have better prestige
 		var league_index:int = 0
 		for l:Dictionary in leagues_data[nation]:
-			print("Generate players for ", l["name"])
+			print("Generate players for ", l.name)
 			var league:League = League.new()
-			league.name = l["name"]
+			league.name = l.name
 			league.nation = Constants.Nations.get(nation)
-			print(league["teams"])
-			for t:String in l["teams"]:
+			print(league.teams)
+			for t:String in l.teams:
 				print(t)
 				var team:Team = Team.new()
 				team.name = t
@@ -268,8 +268,24 @@ func get_contract(prestige:int, position:int, age:int) -> Contract:
 func get_player_name(nationality:Constants.Nations) -> String:
 	# TODO combine with other nations, but with low probability
 	var nation_string:String = Constants.Nations.keys()[nationality].to_lower()
-	var size:int = names[nation_string]["first_names_male"].size()
-	return names[nation_string]["first_names_male"][Config.rng.randi() % size]
+	
+	if Config.generation_gender == Constants.Gender.MALE:
+		var size:int = names[nation_string]["first_names_male"].size()
+		return names[nation_string]["first_names_male"][Config.rng.randi() % size]
+	elif Config.generation_gender == Constants.Gender.FEMALE:
+		var size:int = names[nation_string]["first_names_female"].size()
+		return names[nation_string]["first_names_female"][Config.rng.randi() % size]
+	else:
+		var size_female:int = names[nation_string]["first_names_female"].size()
+		var size_male:int = names[nation_string]["first_names_male"].size()
+		var female_names:Array =  names[nation_string]["first_names_female"]
+		var male_names:Array =  names[nation_string]["first_names_male"]
+		
+		var mixed_names:Array
+		mixed_names.append_array(female_names)
+		mixed_names.append_array(male_names)
+		
+		return mixed_names[Config.rng.randi() % (size_female + size_male)]
 	
 func get_surname(nationality:Constants.Nations) -> String:
 	# TODO combine with other nations, but with low probability

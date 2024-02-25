@@ -101,14 +101,7 @@ text = "GENDER"
 [node name="Gender" type="OptionButton" parent="VBoxContainer/Settings/Container"]
 layout_mode = 2
 size_flags_horizontal = 3
-item_count = 3
 selected = 0
-popup/item_0/text = "FEMALE"
-popup/item_0/id = 0
-popup/item_1/text = "MALE"
-popup/item_1/id = 1
-popup/item_2/text = "MIXED"
-popup/item_2/id = 2
 
 [node name="PlayersAmountLabel" type="Label" parent="VBoxContainer/Settings/Container"]
 custom_minimum_size = Vector2(240, 0)
@@ -150,7 +143,12 @@ layout_mode = 2
 [node name="GenearateSeedButton" type="Button" parent="VBoxContainer/Seed/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "RANDOM SEED"
+text = "RANDOM"
+
+[node name="DefaultSeedButton" type="Button" parent="VBoxContainer/Seed/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "DEFAULT"
 
 [node name="GeneratedSeedLineEdit" type="LineEdit" parent="VBoxContainer/Seed/GridContainer"]
 layout_mode = 2
@@ -179,5 +177,6 @@ text = "CONTINUE"
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="VBoxContainer/Seed/GridContainer/GenearateSeedButton" to="." method="_on_genearate_seed_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Seed/GridContainer/DefaultSeedButton" to="." method="_on_default_seed_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Continue" to="." method="_on_Continue_pressed"]

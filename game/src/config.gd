@@ -6,8 +6,12 @@ extends Node
 
 var config:ConfigFile
 
-# CONFIG
+# generator
 var generation_seed:String
+var generation_gender:Constants.Gender
+var rng:RandomNumberGenerator
+
+# date
 var calendar:Array
 var date:Dictionary
 var start_date:Dictionary
@@ -28,7 +32,6 @@ var manager:Manager
 var transfers:Transfers
 var inbox:Inbox
 
-var rng:RandomNumberGenerator
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,7 +56,8 @@ func _load_config() -> void:
 	# settings
 	language = config.get_value("settings","language","ND")
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
-	generation_seed = config.get_value("settings", "generation_seed", Constants.DEFAULT_SEED)
+	generation_seed = config.get_value("generation", "seed", Constants.DEFAULT_SEED)
+	generation_gender = config.get_value("generation", "gender", 0)
 
 func save_config() -> void:
 	config.set_value("dates","date",CalendarUtil.date)
@@ -62,8 +66,9 @@ func save_config() -> void:
 	config.set_value("dates","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)
 	config.set_value("settings","currency",currency)
-	config.set_value("settings","generation_seed",generation_seed)
 	config.set_value("dashboard","active_content",dashboard_active_content)
+	config.set_value("generation","seed",generation_seed)
+	config.set_value("generation","gender",generation_gender)
 #
 	config.save("user://settings.cfg")
 	print("all data saved")
@@ -88,9 +93,10 @@ func save_resources() -> void:
 	ResourceSaver.save(manager, "user://manager.res")
 	ResourceSaver.save(transfers, "user://transfers.res")
 
-func generate_leagues(p_generation_seed:String) -> void:
+func generate_leagues(p_generation_seed:String, p_generation_gender:Constants.Gender) -> void:
 	generation_seed = p_generation_seed
 	set_seed(generation_seed)
+	generation_gender = p_generation_gender
 	var generator:Generator = Generator.new()
 	leagues = generator.generate()
 

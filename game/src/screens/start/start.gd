@@ -11,15 +11,18 @@ extends Control
 @onready var m_name:LineEdit = $VBoxContainer/Manager/Container/Name
 @onready var m_surname:LineEdit = $VBoxContainer/Manager/Container/SurName 
 
-@onready var seed_container:VBoxContainer = $VBoxContainer/Seed
+@onready var gender_option:OptionButton = $VBoxContainer/Settings/Container/Gender
+
 @onready var seed_edit:LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
 
 var generation_seed:String = Constants.DEFAULT_SEED
 
 func _ready() -> void:
-	# TODO add all possible nationalities
 	for nation:String in Constants.Nations:
 		nationality.add_item(nation)
+		
+	for gender:String in Constants.Gender:
+		gender_option.add_item(gender)
 	
 	seed_edit.text = generation_seed
 
@@ -34,7 +37,7 @@ func _on_Continue_pressed() -> void:
 		manager.surname = m_surname.text
 		manager.nationality = nationality.get_item_text(nationality.selected)
 		Config.reset()
-		Config.generate_leagues(generation_seed)
+		Config.generate_leagues(generation_seed, gender_option.selected)
 		Config.save_manager(manager)
 		get_tree().change_scene_to_file("res://src/screens/team-select/team_select.tscn")
 
@@ -44,9 +47,6 @@ func _on_genearate_seed_button_pressed() -> void:
 	seed_edit.text = generation_seed
 
 
-func _on_advanced_pressed() -> void:
-	seed_container.visible = not seed_container.visible
-	
-	if not seed_container.visible:
-		generation_seed = Constants.DEFAULT_SEED
-		seed_edit.text = generation_seed
+func _on_default_seed_button_pressed() -> void:
+	generation_seed = Constants.DEFAULT_SEED
+	seed_edit.text = generation_seed

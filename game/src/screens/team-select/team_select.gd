@@ -45,7 +45,6 @@ func set_teams(nation:Constants.Nations = 0) -> void:
 			team_list.add_child(team_button)
 
 func _on_nation_select(nation:String) -> void:
-	print(nation)
 	set_teams(Constants.Nations.get(nation))
 	var first_league:League = Config.leagues.get_leagues_by_nation(Constants.Nations.get(nation))[0]
 	show_team(first_league, first_league.teams[0])
@@ -63,3 +62,7 @@ func _on_select_team_pressed() -> void:
 	
 	Config.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+
+
+func _on_back_pressed() -> void:
+	get_tree().change_scene_to_file("res://src/screens/start/start.tscn")

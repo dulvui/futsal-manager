@@ -5,6 +5,7 @@
 extends Node
 
 enum Nations { ITALY, SPAIN, ROMANIA }
+enum Gender { MALE, FEMALE, MIXED }
 
 const DEFAULT_SEED:String = "SuchDefaultSeed"
 
