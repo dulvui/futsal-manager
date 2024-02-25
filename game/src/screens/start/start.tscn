@@ -103,23 +103,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
 
-[node name="PlayersAmountLabel" type="Label" parent="VBoxContainer/Settings/Container"]
-custom_minimum_size = Vector2(240, 0)
-layout_mode = 2
-text = "PLAYERS_AMOUNT"
-
-[node name="PlayersAmount" type="OptionButton" parent="VBoxContainer/Settings/Container"]
-layout_mode = 2
-size_flags_horizontal = 3
-item_count = 3
-selected = 1
-popup/item_0/text = "1.000 - FAST"
-popup/item_0/id = 0
-popup/item_1/text = "5.000 - MEDIUM"
-popup/item_1/id = 1
-popup/item_2/text = "10.000 - SLOW"
-popup/item_2/id = 2
-
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
