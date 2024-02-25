@@ -43,7 +43,7 @@ func _on_Continue_pressed() -> void:
 
 
 func _on_genearate_seed_button_pressed() -> void:
-	generation_seed = str(randi()) + "-" + str(randi()) + "-" + str(randi())
+	generation_seed = str(randi_range(100000, 999999)) + "-" + str(randi_range(100000, 999999)) + "-" + str(randi_range(100000, 999999))
 	seed_edit.text = generation_seed
 
 
