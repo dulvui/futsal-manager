@@ -5,18 +5,18 @@
 extends Node
 
 const MONTHS:Array = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OKT","NOV","DEC"]
-const DAYS:Array = ["MON","TUE","WE","THU","FRI","SAT","SUN"]
+const DAYS:Array = ["SUN","MON","TUE","WE","THU","FRI","SAT"]
 const DAY_IN_SECONDS:int = 86400
 
 var date:Dictionary
 
 # season start at 1st of june
-const START_DAY:int = 0
-const START_MONTH:int = 5
+const START_DAY:int = 1
+const START_MONTH:int = 6
 
 # season end 30th of november
-const END_DAY:int = 29
-const END_MONTH:int = 10
+const END_DAY:int = 30
+const END_MONTH:int = 11
 
 
 # market dates
@@ -24,23 +24,23 @@ const MARKET_PERIODS:Array = [
 	{
 		"period" : "winter",
 		"start" : {
-			"month" : 0,
-			"day" : 0,
+			"month" : 1,
+			"day" : 1,
 		},
 		"end" : {
-			"month" : 0,
-			"day" : 30,
+			"month" : 1,
+			"day" : 31,
 		},
 	},
 	{
 		"period" : "summer",
 		"start" : {
-			"month" : 5,
-			"day" : 0,
+			"month" : 6,
+			"day" : 1,
 		},
 		"end" : {
-			"month" : 7,
-			"day" : 30,
+			"month" : 8,
+			"day" : 31,
 		},
 	},
 ]
@@ -67,6 +67,9 @@ func create_calendar(next_season:bool = false) -> void:
 	
 	var calendar:Array = []
 	var temp_date:Dictionary = date.duplicate(true)
+	temp_date.month = 1
+	temp_date.day = 1
+	temp_date.weekday = 1 # TODO fixweekday
 	
 	# create months
 	for i in range(0,12):
@@ -79,14 +82,14 @@ func create_calendar(next_season:bool = false) -> void:
 			"matches" : [],
 			"trainings" : [],
 			"weekday" : DAYS[temp_date.weekday],
-			"day" : temp_date.day,
-			"month" : temp_date.month,
-			"year" : temp_date.year,
+			"day" : temp_date.day - 1,
+			"month" : temp_date.month - 1,
+			"year" : temp_date.year - 1,
 		}
-		calendar[temp_date.month].append(day)
+		calendar[temp_date.month - 1].append(day)
 		
 		temp_date = _get_next_day(temp_date)
-		
+
 	Config.save_calendar(calendar)
 
 func next_day() -> void:
@@ -98,8 +101,8 @@ func next_day() -> void:
 	var next_match_day:int = date.day
 	
 	# if next match is the first of the next month
-	if date.day == Config.calendar[date.month].size() - 1 and Config.calendar[(date.month + 1) % 12][0]["matches"].size() > 0:
-		next_match_month = date.month + 1
+	if date.day == Config.calendar[date.month - 1].size() - 1 and Config.calendar[(date.month) % 12][0]["matches"].size() > 0:
+		next_match_month = date.month
 		next_match_day = 0
 	
 	var next_match:Dictionary
@@ -133,11 +136,6 @@ func get_next_match() -> Dictionary:
 
 
 func _get_next_day(_date:Dictionary) -> Dictionary:
-	# add 1, because will substract 1 in next steps
-	_date.month += 1
-	_date.day += 1
-	_date.weekday += 1
-	
 	# increment date by one day
 	var unix_time:int = Time.get_unix_time_from_datetime_dict(_date)
 	unix_time += DAY_IN_SECONDS
@@ -146,11 +144,6 @@ func _get_next_day(_date:Dictionary) -> Dictionary:
 	_next_day.erase("hour")
 	_next_day.erase("minute")
 	_next_day.erase("second")
-	
-	# make date array friendly by starting from 0
-	_next_day.month -= 1
-	_next_day.day -= 1
-	_next_day.weekday -= 1
 	
 	return _next_day
 
