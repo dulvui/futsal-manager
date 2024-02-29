@@ -82,9 +82,10 @@ func set_up_players(only_lineup:bool, p_active_team:Team = null, p_reset_options
 			all_players.append_array(active_team.get_lineup_players())
 			all_players.append_array(active_team.get_sub_players())
 		else:
-			all_players.append_array(active_team.get_lineup_players())
-			all_players.append_array(active_team.get_sub_players())
-			all_players.append_array(active_team.get_non_lineup_players())
+			all_players.append_array(active_team.players)
+			#all_players.append_array(active_team.get_lineup_players())
+			#all_players.append_array(active_team.get_sub_players())
+			#all_players.append_array(active_team.get_non_lineup_players())
 	
 	var headers:Array[String] = ["position", "surname"]
 	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
