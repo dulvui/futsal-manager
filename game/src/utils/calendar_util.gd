@@ -66,10 +66,9 @@ func create_calendar(next_season:bool = false) -> void:
 
 	
 	var calendar:Array = []
-	var temp_date:Dictionary = date.duplicate(true)
-	temp_date.month = 1
-	temp_date.day = 1
-	temp_date.weekday = 1 # TODO fixweekday
+	# start date in fomrat YYYY-MM-DDTHH:MM:SS
+	var firstJanuary:String = str(date.year) + "-01-01T00:00:00"
+	var temp_date:Dictionary = Time.get_datetime_dict_from_datetime_string(firstJanuary, true)
 	
 	# create months
 	for i in range(0,12):
