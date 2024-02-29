@@ -43,7 +43,7 @@ func set_up(date:Dictionary) -> void:
 			color_rect.color = Color.LIGHT_PINK
 			
 	# check if market is active
-	if CalendarUtil.is_market_active(date):
+	if date.market:
 		market_label.text = "Market"
 
 

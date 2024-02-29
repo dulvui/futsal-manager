@@ -80,6 +80,7 @@ func create_calendar(next_season:bool = false) -> void:
 		var day:Dictionary = {
 			"matches" : [],
 			"trainings" : [],
+			"market": is_market_active(temp_date),
 			"weekday" : DAYS[temp_date.weekday],
 			"day" : temp_date.day - 1,
 			"month" : temp_date.month - 1,
