@@ -54,7 +54,7 @@ func _ready() -> void:
 			match_ready = true
 			next_match_button.hide()
 			
-	if Config.date.month == CalendarUtil.END_MONTH and Config.date.day == CalendarUtil.END_DAY:
+	if CalendarUtil.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 

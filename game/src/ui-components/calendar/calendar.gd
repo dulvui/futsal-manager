@@ -39,7 +39,7 @@ func set_up(use_global_month:bool=false) -> void:
 		grid.add_child(calendar_day)
 		calendar_day.set_up(Config.calendar[current_month][day])
 
-	page_label.text = CalendarUtil.MONTHS[current_month]
+	page_label.text = CalendarUtil.months[current_month]
 	
 
 func _on_Prev_pressed() -> void:
