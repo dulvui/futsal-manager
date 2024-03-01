@@ -7,6 +7,7 @@ extends Control
 const Day:PackedScene = preload("res://src/ui-components/calendar/day/day.tscn")
 
 @onready var grid:GridContainer = $Content/GridContainer
+@onready var page_label:Label = $Content/Paginator/Page
 
 # get current month and show in paginator
 # max back and forward is full current season
@@ -24,22 +25,21 @@ func set_up(use_global_month:bool=false) -> void:
 		if not child is Label:
 			child.queue_free()
 	
-	# start with monday: fill with transparent days
+	# to start with monday, fill other days with transparent days
 	var monday_counter:int = 7
 	while Config.calendar[current_month][monday_counter]["weekday"] != "MON":
 		var calendar_day: = Day.instantiate()
 		calendar_day.modulate = Color(0,0,0,0)
 		grid.add_child(calendar_day)
 		monday_counter -= 1
-		
 	
-	
+	# add days
 	for day in range(0, Config.calendar[current_month].size()):
 		var calendar_day:Control = Day.instantiate()
 		grid.add_child(calendar_day)
 		calendar_day.set_up(Config.calendar[current_month][day])
-#
-	$Content/Paginator/Page.text = CalendarUtil.MONTHS[current_month]
+
+	page_label.text = CalendarUtil.MONTHS[current_month]
 	
 
 func _on_Prev_pressed() -> void:
