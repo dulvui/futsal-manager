@@ -20,7 +20,7 @@ func set_up(team:Team) -> void:
 	_set_labels(team)
 
 func set_team(team:Team) -> void:
-	player_list.set_up_players(false, team, false)
+	player_list.set_up_players(false, team, true)
 	_set_labels(team)
 
 func _set_labels(team:Team) -> void:

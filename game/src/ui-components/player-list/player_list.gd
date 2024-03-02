@@ -91,7 +91,9 @@ func set_up_players(only_lineup:bool, p_active_team:Team = null, p_reset_options
 	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
 		headers.append(attribute)
 	table.set_up(headers,INFO_TYPES[active_info_type], all_players, active_team, lineup_colors)
-	_filter_table()
+	
+	# filter after setup causes grafical glitch 
+	#_filter_table()
 
 func remove_player(player_id:int) -> void:
 	active_filters["id"] = player_id
