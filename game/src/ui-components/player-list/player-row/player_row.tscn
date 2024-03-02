@@ -24,6 +24,7 @@ grow_vertical = 2
 [node name="PositionLabel" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(62, 34)
 layout_mode = 2
+text = "P"
 horizontal_alignment = 1
 
 [node name="NameLabel" parent="HBoxContainer" instance=ExtResource("2_1q6ka")]

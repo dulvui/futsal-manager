@@ -25,7 +25,10 @@ color = Color(0.980392, 0.207843, 0.207843, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-offset_right = 252.0
-offset_bottom = 37.0
-text = "dsd"
+anchors_preset = -1
+anchor_right = 0.996
+anchor_bottom = 1.028
+offset_right = 0.0119934
+offset_bottom = -0.00799942
+text = "Player Name"
 text_overrun_behavior = 3
