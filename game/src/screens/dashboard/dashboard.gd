@@ -156,7 +156,7 @@ func _next_day() -> void:
 		Config.next_season()
 		return
 	
-	if Config.date.month == CalendarUtil.END_MONTH and Config.date.day == CalendarUtil.END_DAY:
+	if Config.date.month == CalendarUtil.season_end_month and Config.date.day == CalendarUtil.season_end_day:
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		return
