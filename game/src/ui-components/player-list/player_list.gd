@@ -45,9 +45,10 @@ func set_up(only_lineup:bool,p_show_profile:bool, p_active_team:Team = null, p_l
 	
 	if not active_team:
 		team_select.add_item("NO_TEAM")
-		for team:Team in Config.leagues.get_active().teams:
-			if team ==null or team.name != Config.team.name:
-				team_select.add_item(team.name)
+		for league:League in Config.leagues.list:
+			for team:Team in league.teams:
+				if team ==null or team.name != Config.team.name:
+					team_select.add_item(team.name)
 	else:
 		team_select.hide()
 	
@@ -121,6 +122,18 @@ func _on_league_select_item_selected(index:int) -> void:
 		active_filters["league"] = league_select.get_item_text(index)
 	else:
 		active_filters["league"] = ""
+		
+	# clean team selector
+	team_select.clear()
+	team_select.add_item("NO_TEAM")
+	
+	# adjust team picker accoring to selected league
+	for league:League in Config.leagues.list:
+		if active_filters["league"] == "" or active_filters["league"] == league.name:
+			for team:Team in league.teams:
+				if team ==null or team.name != Config.team.name:
+					team_select.add_item(team.name)
+		
 	_filter_table()
 
 

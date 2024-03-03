@@ -51,7 +51,6 @@ layout_mode = 2
 
 [node name="Table" parent="VBoxContainer" instance=ExtResource("3_ntteq")]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="PlayerProfile" parent="." instance=ExtResource("3_vatq4")]
 visible = false
