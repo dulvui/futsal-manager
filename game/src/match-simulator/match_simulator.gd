@@ -120,56 +120,57 @@ func _on_action_util_shot(player:Player, on_target:bool, success:bool) -> void:
 
 # STATS
 
-func _on_action_util_corner(player:Player) -> void:
+func _on_action_util_corner(_player:Player) -> void:
 	if action_util.home_team.has_ball:
 		home_stats.corners += 1
 	else:
 		away_stats.corners += 1
 
 
-func _on_action_util_foul(player:Player) -> void:
+func _on_action_util_foul(_player:Player) -> void:
 	if not action_util.home_team.has_ball:
 		home_stats.fouls += 1
 	else:
 		away_stats.fouls += 1
 
 
-func _on_action_util_freekick(player:Player) -> void:
+func _on_action_util_freekick(_player:Player) -> void:
 	if action_util.home_team.has_ball:
 		home_stats.free_kicks += 1
 	else:
 		away_stats.free_kicks += 1
 
 
-func _on_action_util_kick_in(player:Player) -> void:
+func _on_action_util_kick_in(_player:Player) -> void:
 	if action_util.home_team.has_ball:
 		home_stats.kick_ins += 1
 	else:
 		away_stats.kick_ins += 1
 
 
-func _on_action_util_pazz(player:Player, success:bool) -> void:
-	if action_util.home_team.has_ball:
-		home_stats.passes += 1
-	else:
-		away_stats.passes += 1
+func _on_action_util_pazz(_player:Player, success:bool) -> void:
+	if success:
+		if action_util.home_team.has_ball:
+			home_stats.passes += 1
+		else:
+			away_stats.passes += 1
 
 
-func _on_action_util_penalty(player:Player) -> void:
+func _on_action_util_penalty(_player:Player) -> void:
 	if action_util.home_team.has_ball:
 		home_stats.penalties += 1
 	else:
 		away_stats.penalties += 1
 
 
-func _on_action_util_red_card(player:Player) -> void:
+func _on_action_util_red_card(_player:Player) -> void:
 	if not action_util.home_team.has_ball:
 		home_stats.red_cards += 1
 	else:
 		away_stats.red_cards += 1
 
 
-func _on_action_util_yellow_card(player:Player) -> void:
+func _on_action_util_yellow_card(_player:Player) -> void:
 	if not action_util.home_team.has_ball:
 		home_stats.yellow_cards += 1
 	else:

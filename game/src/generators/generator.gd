@@ -177,7 +177,7 @@ func get_technical(age:int, prestige:int, position:Player.Position) -> Technical
 	return attributes
 
 
-func get_mental(age:int, prestige:int, position:Player.Position) -> Mental:
+func get_mental(age:int, prestige:int) -> Mental:
 	
 	var attribtues:Mental = Mental.new()
 	
@@ -251,7 +251,7 @@ func get_random_morality() -> Player.Morality:
 func get_contract(prestige:int, position:int, age:int) -> Contract:
 	var contract:Contract = Contract.new()
 	
-	contract.income = 0
+	contract.income = prestige * age * position # TODO use correct logic 
 	contract.start_date = Time.get_date_dict_from_system()
 	contract.end_date = Time.get_date_dict_from_system()
 	contract.bonus_goal = 0
@@ -281,7 +281,7 @@ func get_player_name(nationality:Constants.Nations) -> String:
 		var female_names:Array =  names[nation_string]["first_names_female"]
 		var male_names:Array =  names[nation_string]["first_names_male"]
 		
-		var mixed_names:Array
+		var mixed_names:Array = []
 		mixed_names.append_array(female_names)
 		mixed_names.append_array(male_names)
 		
@@ -326,7 +326,7 @@ func create_player(nationality:Constants.Nations, position:Player.Position, nr:i
 	
 	player.attributes = Attributes.new()
 	player.attributes.goalkeeper =  get_goalkeeper_attributes(date.year-birth_date.year, prestige, position)
-	player.attributes.mental = get_mental(date.year-birth_date.year, prestige, position)
+	player.attributes.mental = get_mental(date.year-birth_date.year, prestige)
 	player.attributes.technical = get_technical(date.year-birth_date.year, prestige, position)
 	player.attributes.physical = get_physical(date.year-birth_date.year, prestige, position)
 	

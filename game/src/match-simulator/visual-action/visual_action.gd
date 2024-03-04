@@ -76,7 +76,7 @@ func _ready() -> void:
 	# first action to move ball in corect position
 	_action(true)
 
-func _physics_process(delta:float) -> void:
+func _physics_process(_delta:float) -> void:
 	# look at ball
 	if not is_shooting:
 		home_goalkeeper.sprite.look_at(ball.global_position)

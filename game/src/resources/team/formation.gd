@@ -43,7 +43,7 @@ func set_variation(_variation:Variations) -> void:
 	string_values.remove_at(0) # remove F
 	
 	# extract int values
-	var int_values:Array[int]
+	var int_values:Array[int] = []
 	for value in string_values:
 		var int_value:int = int(value)
 		int_values.append(int_value)

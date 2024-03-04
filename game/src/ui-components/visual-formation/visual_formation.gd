@@ -103,7 +103,7 @@ func _on_next_formation_pressed() -> void:
 		formation_select.selected = 0
 	_update_formation()
 
-func _on_formation_select_item_selected(index: int) -> void:
+func _on_formation_select_item_selected(_index: int) -> void:
 	_update_formation()
 
 func _update_formation() -> void:

@@ -7,7 +7,7 @@ class_name PlayerList
 
 signal select_player(player:Player)
 
-const info_types:Array = ["all", "mental","physical","technical","goalkeeper"]
+const info_types:Array = ["mental","physical","technical","goalkeeper"]
 
 @onready var table:PlayerTable = $VBoxContainer/Table
 @onready var player_profile:Control = $PlayerProfile
@@ -78,7 +78,7 @@ func set_up_players(only_lineup:bool, p_active_team:Team = null, p_reset_options
 			#all_players.append_array(active_team.get_lineup_players())
 			#all_players.append_array(active_team.get_sub_players())
 			#all_players.append_array(active_team.get_non_lineup_players())
-	
+	position
 	var headers:Array[String] = ["position", "surname"]
 	for attribute:String in Constants.ATTRIBUTES[info_types[active_info_type]]:
 		headers.append(attribute)
