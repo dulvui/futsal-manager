@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c51vyn54bk7q4"]
 
-[ext_resource type="Script" path="res://src/ui-components/calendar/calendar.gd" id="1"]
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="2"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="1_sa54n"]
+[ext_resource type="Script" path="res://src/ui-components/visual-calendar/visual_calendar.gd" id="2_7vx37"]
 
 [node name="Calendar" type="Control"]
 layout_mode = 3
@@ -10,8 +10,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2")
-script = ExtResource("1")
+theme = ExtResource("1_sa54n")
+script = ExtResource("2_7vx37")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0

@@ -6,7 +6,7 @@ extends Control
 
 signal click
 
-const MatchList:PackedScene = preload("res://src/ui-components/calendar/match-list/match_list.tscn")
+const MatchList:PackedScene = preload("res://src/ui-components/visual-calendar/match-list/match_list.tscn")
 
 @onready var color_rect:ColorRect = $ColorRect
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dv6e6h4lw1bqy"]
 
-[ext_resource type="Script" path="res://src/ui-components/calendar/match-list/match_list.gd" id="1_xo3bj"]
+[ext_resource type="Script" path="res://src/ui-components/visual-calendar/match-list/match_list.gd" id="1_xo3bj"]
 
 [node name="MatchPopup" type="Popup"]
 initial_position = 1

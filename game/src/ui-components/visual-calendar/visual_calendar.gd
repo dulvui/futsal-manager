@@ -4,7 +4,7 @@
 
 extends Control
 
-const Day:PackedScene = preload("res://src/ui-components/calendar/day/day.tscn")
+const Day:PackedScene = preload("res://src/ui-components/visual-calendar/day/day.tscn")
 
 @onready var grid:GridContainer = $Content/GridContainer
 @onready var page_label:Label = $Content/Paginator/Page
