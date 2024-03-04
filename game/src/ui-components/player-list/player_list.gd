@@ -7,34 +7,25 @@ class_name PlayerList
 
 signal select_player(player:Player)
 
-var team_search:String = ""
-var foot_search:String = ""
-
-var active_filters:Dictionary = {}
-var active_info_type:int = 0
-
-const FISICAL_TITLES:Array = ["acc","agi","jum","pac","sta","str"]
-
-const INFO_TYPES:Array = ["mental","physical","technical","goalkeeper"]
-const FOOTS:Array = ["R","L","RL"]
+const info_types:Array = ["all", "mental","physical","technical","goalkeeper"]
 
 @onready var table:PlayerTable = $VBoxContainer/Table
-
-var all_players:Array[Player] = []
-
+@onready var player_profile:Control = $PlayerProfile
 # select filters
 @onready var info_select:OptionButton = $VBoxContainer/HBoxContainer/InfoSelect
 @onready var team_select:OptionButton = $VBoxContainer/HBoxContainer/TeamSelect
 @onready var league_select:OptionButton = $VBoxContainer/HBoxContainer/LeagueSelect
 @onready var pos_select:OptionButton = $VBoxContainer/HBoxContainer/PositionSelect
 
-@onready var player_profile:Control = $PlayerProfile
+var active_filters:Dictionary = {}
+var active_info_type:int = 0
+var team_search:String = ""
+
+var all_players:Array[Player] = []
 
 var show_profile:bool
 var lineup_colors:bool
 var active_team:Team
-
-
 
 func set_up(only_lineup:bool,p_show_profile:bool, p_active_team:Team = null, p_lineup_colors:bool=true) -> void:
 	show_profile = p_show_profile
@@ -63,7 +54,7 @@ func set_up(only_lineup:bool,p_show_profile:bool, p_active_team:Team = null, p_l
 	else:
 		league_select.hide()
 	
-	for info_type:String in INFO_TYPES:
+	for info_type:String in info_types:
 		info_select.add_item(info_type)
 
 
@@ -89,9 +80,9 @@ func set_up_players(only_lineup:bool, p_active_team:Team = null, p_reset_options
 			#all_players.append_array(active_team.get_non_lineup_players())
 	
 	var headers:Array[String] = ["position", "surname"]
-	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
+	for attribute:String in Constants.ATTRIBUTES[info_types[active_info_type]]:
 		headers.append(attribute)
-	table.set_up(headers,INFO_TYPES[active_info_type], all_players, active_team, lineup_colors)
+	table.set_up(headers,info_types[active_info_type], all_players, active_team, lineup_colors)
 	
 	# filter after setup causes grafical glitch 
 	#_filter_table()
@@ -144,11 +135,11 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 		active_filters["position"] = ""
 	
 	var headers:Array[String] = ["position", "surname"]
-	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[active_info_type]]:
+	for attribute:String in Constants.ATTRIBUTES[info_types[active_info_type]]:
 		headers.append(attribute)
 	info_select.select(0)
 
-	table.set_up(headers, INFO_TYPES[active_info_type], all_players, active_team, lineup_colors)
+	table.set_up(headers, info_types[active_info_type], all_players, active_team, lineup_colors)
 	_filter_table()
 
 
@@ -161,10 +152,10 @@ func _on_Close_pressed() -> void:
 
 func _on_InfoSelect_item_selected(index:int) -> void:
 	var headers:Array[String] = ["position", "surname"]
-	for attribute:String in Constants.ATTRIBUTES[INFO_TYPES[index]]:
+	for attribute:String in Constants.ATTRIBUTES[info_types[index]]:
 		headers.append(attribute)
 	active_info_type = index
-	table.update(headers, INFO_TYPES[active_info_type])
+	table.update(headers, info_types[active_info_type])
 	
 
 func _reset_options() -> void:
