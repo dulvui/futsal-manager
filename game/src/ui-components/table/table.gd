@@ -10,11 +10,18 @@ extends Control
 func _ready() -> void:
 	for league:League in Config.leagues.list:
 		leagues.add_item(league.name)
+		
+	set_up()
+
+func set_up(league:League = Config.leagues.get_active()) -> void:
+	# clear grid
+	for child:Node in grid.get_children():
+		child.queue_free()
 	
 	var pos:int = 1
 	
 	# transform table dictionary to array
-	var table_array:Array = Config.leagues.get_active().table.to_sorted_array()
+	var table_array:Array = league.table.to_sorted_array()
 	
 	for team:TableValues in table_array:
 		var pos_label:Label = Label.new()
@@ -87,3 +94,7 @@ func style_label(label:Label) -> void:
 
 func _on_Close_pressed() -> void:
 	hide()
+
+
+func _on_leagues_item_selected(index: int) -> void:
+	set_up(Config.leagues.list[index])
