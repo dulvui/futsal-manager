@@ -16,12 +16,14 @@ func _init(
 		p_nation:Constants.Nations = Constants.Nations.ITALY,
 		p_table:Table = Table.new(),
 		p_name:String = "",
-		p_teams:Array[Team] = []
+		p_teams:Array[Team] = [],
+		p_calendar:Calendar = Calendar.new()
 	) -> void:
 	nation = p_nation
 	table = p_table
 	name = p_name
 	teams = p_teams
+	calendar = p_calendar
 
 func add_team(team:Team) -> void:
 	teams.append(team)

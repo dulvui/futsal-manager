@@ -15,6 +15,7 @@ var current_month:int
 
 
 func _ready() -> void:
+	current_month = Config.calendar().date.month - 1
 	set_up()
 
 func set_up() -> void:
@@ -25,17 +26,17 @@ func set_up() -> void:
 	
 	# to start with monday, fill other days with transparent days
 	var monday_counter:int = 7
-	while Config.calendar().month().days[monday_counter].weekday != "MON":
+	while Config.calendar().month(current_month).days[monday_counter].weekday != "MON":
 		var calendar_day: = VisualDay.instantiate()
 		calendar_day.modulate = Color(0,0,0,0)
 		grid.add_child(calendar_day)
 		monday_counter -= 1
 	
 	# add days
-	for day:int in range(0, Config.calendar().month().days.size()):
+	for day:Day in Config.calendar().month(current_month).days:
 		var calendar_day:Control = VisualDay.instantiate()
 		grid.add_child(calendar_day)
-		calendar_day.set_up(Config.calendar().month().days)
+		calendar_day.set_up(day)
 
 	page_label.text = Config.calendar().month_strings[current_month]
 	

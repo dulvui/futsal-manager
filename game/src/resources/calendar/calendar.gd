@@ -46,9 +46,9 @@ const market_periods:Array = [
 
 
 func _init(
-		p_date:Dictionary = {},
+		p_date:Dictionary = initial_date(),
 		p_months:Array[Month] = [],
-		p_start_date:Dictionary = {},
+		p_start_date:Dictionary = initial_date(),
 	) -> void:
 	date = p_date
 	months = p_months
@@ -68,7 +68,6 @@ func initialize(next_season:bool = false) -> void:
 		
 		date = _get_next_day(date)
 	
-	var calendar:Array = []
 	# start date in fomrat YYYY-MM-DDTHH:MM:SS
 	var firstJanuary:String = str(date.year) + "-01-01T00:00:00"
 	var temp_date:Dictionary = Time.get_datetime_dict_from_datetime_string(firstJanuary, true)
@@ -91,8 +90,6 @@ func initialize(next_season:bool = false) -> void:
 		months[temp_date.month - 1].days.append(new_day)
 		
 		temp_date = _get_next_day(temp_date)
-
-	Config.save_calendar(calendar)
 
 func next_day() -> void:
 	date = _get_next_day()
@@ -169,7 +166,7 @@ func is_season_finished() -> bool:
 	return date.month == season_end_month and date.day == season_end_day
 
 func format_date(p_date:Dictionary=date) -> String:
-	return day_strings[p_date.weekday] + " " + str(p_date.day + 1) + " " + month_strings[p_date.month] + " " + str(p_date.year)
+	return day_strings[p_date.weekday] + " " + str(p_date.day) + " " + month_strings[p_date.month] + " " + str(p_date.year)
 
 func get_next_match() -> Match:
 	for matchz:Match in day().matches:

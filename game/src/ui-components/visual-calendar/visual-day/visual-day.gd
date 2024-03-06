@@ -16,25 +16,25 @@ const MatchList:PackedScene = preload("res://src/ui-components/visual-calendar/m
 
 @onready var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
 
-func set_up(date:Dictionary) -> void:
+func set_up(date:Day) -> void:
 #	print(date)
-	month_day_label.text = str(date.day + 1)
+	month_day_label.text = str(date.day)
 	var team_name:String
-	if date["matches"].size() > 0:
-		for matchz:Dictionary in date["matches"]:
+	if date.matches.size() > 0:
+		for matchz:Match in date.matches:
 			if matchz != null:
-				if Config.team.name == matchz["home"]:
-					team_name = matchz["away"]
+				if Config.team.name == matchz.home.name:
+					team_name = matchz.away.name
 					color_rect.color = Color.DODGER_BLUE
-				elif Config.team.name == matchz["away"]:
-					team_name = matchz["home"]
+				elif Config.team.name ==  matchz.away.name:
+					team_name = matchz.home.name
 					color_rect.color = Color.DEEP_SKY_BLUE
-		match_button.pressed.connect(_on_Match_pressed.bind(date["matches"]))
+		match_button.pressed.connect(_on_Match_pressed.bind(date.matches))
 		match_button.text = team_name
 	else:
 		match_button.hide()
 		
-	if date.day == Config.date.day and Config.date.month == date.month:
+	if date.day == Config.calendar().day().day and Config.calendar().day().month == date.month:
 		if color_rect.color != Color.DODGER_BLUE:
 			color_rect.color = Color.LIGHT_GREEN
 		elif color_rect.color != Color.DEEP_SKY_BLUE:
@@ -47,7 +47,7 @@ func set_up(date:Dictionary) -> void:
 		market_label.text = "Market"
 
 
-func _on_Match_pressed(matches:Array) -> void:
+func _on_Match_pressed(matches:Array[Match]) -> void:
 	var match_list:Popup = MatchList.instantiate()
 	add_child(match_list)
 	match_list.show_matches(matches)

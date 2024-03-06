@@ -45,8 +45,8 @@ func _ready() -> void:
 	all_players_list.set_up(false, true)
 	formation.set_up(false)
 	
-	if Config.calendar[Config.date.month][Config.date.day]["matches"].size() > 0:
-		if Config.calendar[Config.date.month][Config.date.day]["matches"][0]["result"].length() > 1:
+	if Config.calendar().day().matches.size() > 0:
+		if Config.calendar().day().matches[0].home_goals == -1:
 			continue_button.text = "NEXT_DAY"
 			match_ready = false
 		else:
@@ -156,7 +156,7 @@ func _next_day() -> void:
 		Config.next_season()
 		return
 	
-	if Config.date.month == Config.calendar().calendar.season_end_month and Config.date.day == Config.calendar().season_end_day:
+	if Config.calendar().is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		return
