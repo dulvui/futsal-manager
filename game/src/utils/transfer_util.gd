@@ -8,7 +8,7 @@ signal transfer_mail
 
 func update_day() -> void:
 	#check with calendar if treansfer market is open, then send start/stop mail
-	if CalendarUtil.is_market_active():
+	if Config.calendar().is_market_active():
 		_request_players()
 
 		# do transfers

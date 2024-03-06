@@ -56,8 +56,8 @@ func _on_nation_select(nation:String) -> void:
 func _on_select_team_pressed() -> void:
 	Config.select_team(active_league,active_team)
 	print("team saved")
-	CalendarUtil.create_calendar()
-	print("calendar created")
+	Config.leagues.initialize_calendars()
+	print("calendars created")
 	MatchMaker.inizialize_matches()
 	print("matches initialized")
 	EmailUtil.welcome_manager()

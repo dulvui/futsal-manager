@@ -19,7 +19,6 @@ config/icon="res://icon.png"
 [autoload]
 
 Config="*res://src/config.gd"
-CalendarUtil="*res://src/utils/calendar_util.gd"
 MatchMaker="*res://src/utils/match_maker.gd"
 TransferUtil="*res://src/utils/transfer_util.gd"
 EmailUtil="*res://src/utils/email_util.gd"

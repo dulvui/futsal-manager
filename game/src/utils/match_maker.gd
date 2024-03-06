@@ -59,29 +59,29 @@ func inizialize_matches() -> void:
 	for temp:Array in temp_matches:
 		matches.append(temp)
 	
-	#add to calendar
-	var day:int = Config.date.day
-	var month:int = Config.date.month
+	# TODO add to calendar
+	#var day:int = Config.date.day
+	#var month:int = Config.date.month
 	
 	# start with saturday
-	for i in 7:
-		if Config.calendar[month][i]["weekday"] == "SAT":
-			day = i
-			break
-	
-	for match_days:Array in matches:
-		# check if next month
-		if day > Config.calendar[month].size() - 1:
-			month += 1
-			day = 0
-			# start also new month with saturday
-			for i in 7:
-				if Config.calendar[month][i]["weekday"] == "SAT":
-					day = i
-					break
-		# assign match days
-		Config.calendar[month][day]["matches"] = match_days
-		day += 7
+	#for i in 7:
+		#if Config.calendar[month][i]["weekday"] == "SAT":
+			#day = i
+			#break
+	#
+	#for match_days:Array in matches:
+		## check if next month
+		#if day > Config.calendar[month].size() - 1:
+			#month += 1
+			#day = 0
+			## start also new month with saturday
+			#for i in 7:
+				#if Config.calendar[month][i]["weekday"] == "SAT":
+					#day = i
+					#break
+		## assign match days
+		#Config.calendar[month][day]["matches"] = match_days
+		#day += 7
 		
 func _shift_array(array:Array) -> void:
 	var temp:Team = array[0]

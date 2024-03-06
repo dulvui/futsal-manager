@@ -5,24 +5,21 @@
 class_name Match
 extends Resource
 
-@export var matches:Array
-@export var market:bool
-@export var weekday:String
-@export var day:int
-@export var month:int
-@export var year:int
-#@export var trainings:Array
+@export var home:Team
+@export var away:Team
+@export var home_goals:int
+@export var away_goals:int
 
 func _init(
-		p_nationality:String = "",
-		p_name:String = "",
-		p_surname:String = "",
-		p_prestige:int = 10
+	p_home:Team = Team.new(),
+	p_away:Team = Team.new(),
+	p_home_goals:int = -1,
+	p_away_goals:int = -1,
 	) -> void:
-	nationality = p_nationality
-	name = p_name
-	surname = p_surname
-	prestige = p_prestige
+	home = p_home
+	away = p_away
+	home_goals = p_home_goals
+	away_goals = p_away_goals
 
-func get_full_name() -> String:
-	return name + " " + surname
+func get_result() -> String:
+	return str(home_goals) + " : " + str(away_goals)

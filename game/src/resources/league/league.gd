@@ -7,6 +7,7 @@ extends Resource
 
 
 @export var table:Table
+@export var calendar:Calendar
 @export var nation:Constants.Nations
 @export var name:String
 @export var teams:Array[Team]

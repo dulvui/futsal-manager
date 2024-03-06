@@ -4,7 +4,7 @@
 
 extends Control
 
-const VisualDay:PackedScene = preload("res://src/ui-components/visual-calendar/day/day.tscn")
+const VisualDay:PackedScene = preload("res://src/ui-components/visual-calendar/visual-day/visual-day.tscn")
 
 @onready var grid:GridContainer = $Content/GridContainer
 @onready var page_label:Label = $Content/Paginator/Page
@@ -15,11 +15,9 @@ var current_month:int
 
 
 func _ready() -> void:
-	set_up(true)
+	set_up()
 
-func set_up(use_global_month:bool=false) -> void:
-	if use_global_month:
-		current_month = Config.date.month
+func set_up() -> void:
 	# clean grid container
 	for child in grid.get_children():
 		if not child is Label:
@@ -27,19 +25,19 @@ func set_up(use_global_month:bool=false) -> void:
 	
 	# to start with monday, fill other days with transparent days
 	var monday_counter:int = 7
-	while Config.calendar[current_month][monday_counter]["weekday"] != "MON":
+	while Config.calendar().month().days[monday_counter].weekday != "MON":
 		var calendar_day: = VisualDay.instantiate()
 		calendar_day.modulate = Color(0,0,0,0)
 		grid.add_child(calendar_day)
 		monday_counter -= 1
 	
 	# add days
-	for day in range(0, Config.calendar[current_month].size()):
+	for day:int in range(0, Config.calendar().month().days.size()):
 		var calendar_day:Control = VisualDay.instantiate()
 		grid.add_child(calendar_day)
-		calendar_day.set_up(Config.calendar[current_month][day])
+		calendar_day.set_up(Config.calendar().month().days)
 
-	page_label.text = CalendarUtil.months[current_month]
+	page_label.text = Config.calendar().month_strings[current_month]
 	
 
 func _on_Prev_pressed() -> void:

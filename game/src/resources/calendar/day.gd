@@ -14,12 +14,12 @@ extends Resource
 #@export var trainings:Array
 
 func _init(
-	p_matches:Array[Match],
-	p_market:bool,
-	p_weekday:String,
-	p_day:int,
-	p_month:int,
-	p_year:int,
+	p_matches:Array[Match] = [],
+	p_market:bool = false,
+	p_weekday:String = "MON",
+	p_day:int = 1,
+	p_month:int = 1,
+	p_year:int = 1970,
 	) -> void:
 	matches = p_matches
 	market = p_market

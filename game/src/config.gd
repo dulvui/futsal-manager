@@ -11,10 +11,7 @@ var generation_seed:String
 var generation_gender:Constants.Gender
 var rng:RandomNumberGenerator
 
-# date
-var calendar:Array
-var date:Dictionary
-var start_date:Dictionary
+
 
 # saves wich season this is, starting from 0
 var current_season:int
@@ -32,7 +29,6 @@ var manager:Manager
 var transfers:Transfers
 var inbox:Inbox
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_load_config()
@@ -47,9 +43,6 @@ func _load_config() -> void:
 	if err != OK:
 		print("error loading user://settings.cfg")
 	current_season = config.get_value("season","current_season",0)
-	calendar = config.get_value("dates","calendar",[])
-	start_date = config.get_value("dates","start_date", CalendarUtil.initial_date())
-	date = config.get_value("dates","date", CalendarUtil.initial_date())
 	# global game states
 	speed_factor = config.get_value("match","speed_factor",0)
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
@@ -60,9 +53,6 @@ func _load_config() -> void:
 	generation_gender = config.get_value("generation", "gender", 0)
 
 func save_config() -> void:
-	config.set_value("dates","date",CalendarUtil.date)
-	config.set_value("dates","start_date",start_date)
-	config.set_value("dates","calendar",calendar)
 	config.set_value("dates","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)
 	config.set_value("settings","currency",currency)
@@ -85,13 +75,13 @@ func _load_resources() -> void:
 	if ResourceLoader.exists("user://transfers.res"):
 		transfers = ResourceLoader.load("user://transfers.res")
 
-
 func save_resources() -> void:
 	ResourceSaver.save(leagues, "user://leagues.res")
 	ResourceSaver.save(inbox, "user://inbox.res")
 	ResourceSaver.save(team, "user://team.res")
 	ResourceSaver.save(manager, "user://manager.res")
 	ResourceSaver.save(transfers, "user://transfers.res")
+	
 
 func generate_leagues(p_generation_seed:String, p_generation_gender:Constants.Gender) -> void:
 	generation_seed = p_generation_seed
@@ -106,13 +96,12 @@ func save_all_data() -> void:
 	
 func reset() -> void:
 	# CONFIG
-	date = CalendarUtil.initial_date()
 	current_season = 0
-	calendar = []
 	# RESOURCES
 	manager =  Manager.new()
 	inbox = Inbox.new()
 	transfers = Transfers.new()
+	leagues = Leagues.new()
 
 func set_seed(p_generation_seed:String=generation_seed) -> void:
 	generation_seed = p_generation_seed
@@ -134,17 +123,6 @@ func select_team(p_league:League, p_team:Team) -> void:
 	leagues.active = p_league.get_rid()
 	team = p_team
 	
-func save_date() -> void:
-	config.set_value("current_date","date",CalendarUtil.date)
-	config.set_value("season","calendar",calendar)
-	config.save("user://settings.cfg")
-
-func save_calendar(new_calendar:Array) -> void:
-	calendar = new_calendar
-	config.set_value("season","calendar",calendar)
-	config.save("user://settings.cfg")
-	
-	
 func next_season() -> void:
 	current_season += 1
 		
@@ -156,13 +134,19 @@ func next_season() -> void:
 	
 	PlayerProgress.players_progress_season()
 	
-	CalendarUtil.create_calendar(true)
+	for league:League in Config.leagues.list:
+		league.calendar.initialize(true)
+	
 	MatchMaker.inizialize_matches()
 	
 	EmailUtil.new_message(EmailUtil.MessageTypes.NEXT_SEASON)
 	Config.save_all_data()
 	
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+
+# shortcut to active leagues calendar 
+func calendar() -> Calendar:
+	return Config.leagues.get_active().calendar
 
 # save on quit on mobile
 func _notification(what:int) -> void:

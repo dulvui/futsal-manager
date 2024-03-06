@@ -40,7 +40,7 @@ var next_season:bool = false
 func _ready() -> void:
 	manager_label.text = Config.manager.get_full_name()
 	team_label.text = Config.team.name
-	date_label.text = CalendarUtil.format_date()
+	date_label.text = Config.calendar().format_date()
 	
 	all_players_list.set_up(false, true)
 	formation.set_up(false)
@@ -54,7 +54,7 @@ func _ready() -> void:
 			match_ready = true
 			next_match_button.hide()
 			
-	if CalendarUtil.is_season_finished():
+	if Config.leagues.get_active().calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 
@@ -156,17 +156,19 @@ func _next_day() -> void:
 		Config.next_season()
 		return
 	
-	if Config.date.month == CalendarUtil.season_end_month and Config.date.day == CalendarUtil.season_end_day:
+	if Config.date.month == Config.calendar().calendar.season_end_month and Config.date.day == Config.calendar().season_end_day:
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		return
 
-	CalendarUtil.next_day()
+	for league:League in Config.leagues.list:
+		league.calendar.next_day()
+	
 	TransferUtil.update_day()
 	email.update_messages()
 	calendar.set_up(true)
-	date_label.text = CalendarUtil.format_date()
-	if Config.calendar[Config.date.month][Config.date.day]["matches"].size() > 0:
+	date_label.text = Config.calendar().format_date()
+	if Config.calendar().is_match_day():
 		continue_button.text = "START_MATCH"
 		match_ready = true
 		next_match_button.disabled = true

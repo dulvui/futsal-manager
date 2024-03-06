@@ -39,5 +39,8 @@ func get_team_by_name(p_name:String) -> Team:
 			return found_team
 	print("ERROR: team not found with name: " + p_name)
 	return null
-	
+
+func initialize_calendars() -> void:
+	for league:League in list:
+		league.calendar.initialize()
 

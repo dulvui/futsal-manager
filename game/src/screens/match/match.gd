@@ -35,7 +35,7 @@ var first_half:bool = true
 
 func _ready() -> void:
 	randomize()
-	var next_match:Dictionary = CalendarUtil.get_next_match()
+	var next_match:Dictionary = Config.calendar().get_next_match()
 	
 	if next_match != null:
 		for team:Team in Config.leagues.get_active().teams:
