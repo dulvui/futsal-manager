@@ -22,13 +22,12 @@ func set_up(date:Day) -> void:
 	var team_name:String
 	if date.matches.size() > 0:
 		for matchz:Match in date.matches:
-			if matchz != null:
-				if Config.team.name == matchz.home.name:
-					team_name = matchz.away.name
-					color_rect.color = Color.DODGER_BLUE
-				elif Config.team.name ==  matchz.away.name:
-					team_name = matchz.home.name
-					color_rect.color = Color.DEEP_SKY_BLUE
+			if Config.team.name == matchz.home.name:
+				team_name = matchz.away.name
+				color_rect.color = Color.DODGER_BLUE
+			elif Config.team.name ==  matchz.away.name:
+				team_name = matchz.home.name
+				color_rect.color = Color.DEEP_SKY_BLUE
 		match_button.pressed.connect(_on_Match_pressed.bind(date.matches))
 		match_button.text = team_name
 	else:

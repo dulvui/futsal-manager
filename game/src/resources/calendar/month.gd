@@ -5,8 +5,8 @@
 class_name Month
 extends Resource
 
-var days:Array[Day]
-var name:String
+@export var days:Array[Day]
+@export var name:String
 
 func _init(
 	p_name:String = "",

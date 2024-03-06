@@ -98,13 +98,13 @@ func next_day() -> void:
 	var next_match_day:int = date.day
 	
 	# if next match is the first of the next month
-	if date.day == months[date.month - 1].size() - 1 and months[(date.month - 1) % 11].days[0].matches.size() > 0:
+	if date.day == months[date.month - 1].days.size() - 1 and months[(date.month - 1) % 11].days[0].matches.size() > 0:
 		next_match_month = date.month
 		next_match_day = 0
 	
 	# get next match, if it exists on next day
 	var next_match:Match
-	if next_match_day < months[next_match_month].size():
+	if next_match_day < months[next_match_month].days[next_match_day].matches.size():
 		for matchz:Match in months[next_match_month - 1].days[next_match_day].matches:
 			if matchz.home.name == Config.team.name or matchz.away.name == Config.team.name:
 				next_match = matchz

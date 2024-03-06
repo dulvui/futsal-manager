@@ -166,7 +166,7 @@ func _next_day() -> void:
 	
 	TransferUtil.update_day()
 	email.update_messages()
-	calendar.set_up(true)
+	calendar.set_up()
 	date_label.text = Config.calendar().format_date()
 	if Config.calendar().is_match_day():
 		continue_button.text = "START_MATCH"
