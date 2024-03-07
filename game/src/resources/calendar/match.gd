@@ -22,4 +22,6 @@ func _init(
 	away_goals = p_away_goals
 
 func get_result() -> String:
+	if home_goals == -1 and away_goals == -1:
+		return ""
 	return str(home_goals) + " : " + str(away_goals)

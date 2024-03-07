@@ -4,13 +4,13 @@
 
 extends Node
 
-var matches:Array[Match] = []
+var match_days:Array[Array]
 var match_day:int = 0
 
 
 func inizialize_matches(league:League = Config.leagues.get_active()) -> void:
 	var teams:Array = league.teams.duplicate(true)
-	matches = []
+	match_days = []
 	match_day = 0
 	
 	var random_teams:Array[Team]  = teams.duplicate(true)
@@ -42,45 +42,46 @@ func inizialize_matches(league:League = Config.leagues.get_active()) -> void:
 			else:
 				matchTwo = Match.new(copy[away_index], copy[home_index])
 			current_match_day.append(matchTwo)
-		matches.append(current_match_day)
+		
+		match_days.append(current_match_day)
 		_shift_array(random_teams)
 		home = not home
 
 		
 	# ritorno
-	var temp_matches:Array[Match] = []
-	for match_dayz:Array[Match] in matches:
+	var temp_match_days:Array[Array] = []
+	for match_dayz:Array[Match] in match_days:
 		var current_match_dayz:Array = []
-		for matchess:Match in match_dayz:
-			var matchzz:Dictionary = {"home": matchess["away"],"away": matchess["home"], "result":":"}
+		for match_dayss:Match in match_dayz:
+			var matchzz:Match = Match.new(match_dayss.away, match_dayss.home)
 			current_match_dayz.append(matchzz)
-		temp_matches.append(current_match_dayz)
+		temp_match_days.append(current_match_dayz)
 		
-	for temp:Array in temp_matches:
-		matches.append(temp)
+	for temp:Array in temp_match_days:
+		match_days.append(temp)
 	
-	# TODO add to calendar
-	var day:int = Config.calendar()
-	var month:int = Config.date.month
+	# add to calendar
+	var day:int = Config.calendar().day().day
+	var month:int = Config.calendar().day().month
 	
-	# start with saturday
-	for i in 7:
-		if Config.calendar()[month][i]["weekday"] == "SAT":
+	# start with saturday of next week
+	for i in range(8, 1, -1):
+		if Config.calendar().day(month,i).weekday == "SAT":
 			day = i
 			break
 	
-	for match_days:Array in matches:
+	for matches:Array[Match] in match_days:
 		# check if next month
-		if day > Config.calendar[month].size() - 1:
+		if day > Config.calendar().month().days.size() - 1:
 			month += 1
 			day = 0
 			# start also new month with saturday
 			for i in 7:
-				if Config.calendar[month][i]["weekday"] == "SAT":
+				if Config.calendar().day(month,i).weekday == "SAT":
 					day = i
 					break
 		# assign match days
-		Config.calendar[month][day]["matches"] = match_days
+		Config.calendar().day(month,day).matches.append_array(matches)
 		day += 7
 		
 func _shift_array(array:Array) -> void:

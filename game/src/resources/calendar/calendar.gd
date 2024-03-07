@@ -122,8 +122,8 @@ func next_day() -> void:
 	if does_market_end_today():
 		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_END)
 
-func day(p_month:int = date.month - 1, p_day:int = date.day - 1) -> Day:
-	return months[p_month].days[p_day]
+func day(p_month:int = date.month, p_day:int = date.day) -> Day:
+	return months[p_month - 1].days[p_day - 1]
 	
 func month(p_month:int = date.month - 1) -> Month:
 	return months[p_month]
@@ -170,6 +170,6 @@ func format_date(p_date:Dictionary=date) -> String:
 
 func get_next_match() -> Match:
 	for matchz:Match in day().matches:
-		if matchz["home"] == Config.team.name or matchz["away"] == Config.team.name:
+		if matchz.home.name == Config.team.name or matchz.away.name == Config.team.name:
 			return matchz
 	return null
