@@ -4,12 +4,12 @@
 
 extends Node
 
-var matches:Array = []
+var matches:Array[Match] = []
 var match_day:int = 0
 
 
-func inizialize_matches() -> void:
-	var teams:Array = Config.leagues.get_active().teams.duplicate(true)
+func inizialize_matches(league:League = Config.leagues.get_active()) -> void:
+	var teams:Array = league.teams.duplicate(true)
 	matches = []
 	match_day = 0
 	
@@ -22,11 +22,11 @@ func inizialize_matches() -> void:
 	
 	for i in random_teams.size():
 		var current_match_day:Array = []
-		var matchOne:Dictionary
+		var matchOne:Match
 		if home:
-			matchOne = {"home": last_team["name"],"away": random_teams[0]["name"], "result":":"}
+			matchOne = Match.new(last_team,random_teams[0])
 		else:
-			matchOne = {"home": random_teams[0]["name"],"away": last_team["name"], "result":":"}
+			matchOne = Match.new(random_teams[0], last_team)
 		current_match_day.append(matchOne)
 		
 		var copy:Array = random_teams.duplicate(true)
@@ -36,11 +36,11 @@ func inizialize_matches() -> void:
 			var home_index:int = j
 			var away_index:int = - j - 1
 			
-			var matchTwo:Dictionary
+			var matchTwo:Match
 			if home:
-				matchTwo = {"home": copy[home_index]["name"],"away":copy[away_index]["name"], "result":":"}
+				matchTwo = Match.new(copy[home_index], copy[away_index])
 			else:
-				matchTwo = {"home": copy[away_index]["name"],"away":copy[home_index]["name"], "result":":"}
+				matchTwo = Match.new(copy[away_index], copy[home_index])
 			current_match_day.append(matchTwo)
 		matches.append(current_match_day)
 		_shift_array(random_teams)
@@ -48,10 +48,10 @@ func inizialize_matches() -> void:
 
 		
 	# ritorno
-	var temp_matches:Array = []
-	for match_dayz:Array in matches:
+	var temp_matches:Array[Match] = []
+	for match_dayz:Array[Match] in matches:
 		var current_match_dayz:Array = []
-		for matchess:Dictionary in match_dayz:
+		for matchess:Match in match_dayz:
 			var matchzz:Dictionary = {"home": matchess["away"],"away": matchess["home"], "result":":"}
 			current_match_dayz.append(matchzz)
 		temp_matches.append(current_match_dayz)
@@ -60,28 +60,28 @@ func inizialize_matches() -> void:
 		matches.append(temp)
 	
 	# TODO add to calendar
-	#var day:int = Config.date.day
-	#var month:int = Config.date.month
+	var day:int = Config.calendar()
+	var month:int = Config.date.month
 	
 	# start with saturday
-	#for i in 7:
-		#if Config.calendar[month][i]["weekday"] == "SAT":
-			#day = i
-			#break
-	#
-	#for match_days:Array in matches:
-		## check if next month
-		#if day > Config.calendar[month].size() - 1:
-			#month += 1
-			#day = 0
-			## start also new month with saturday
-			#for i in 7:
-				#if Config.calendar[month][i]["weekday"] == "SAT":
-					#day = i
-					#break
-		## assign match days
-		#Config.calendar[month][day]["matches"] = match_days
-		#day += 7
+	for i in 7:
+		if Config.calendar()[month][i]["weekday"] == "SAT":
+			day = i
+			break
+	
+	for match_days:Array in matches:
+		# check if next month
+		if day > Config.calendar[month].size() - 1:
+			month += 1
+			day = 0
+			# start also new month with saturday
+			for i in 7:
+				if Config.calendar[month][i]["weekday"] == "SAT":
+					day = i
+					break
+		# assign match days
+		Config.calendar[month][day]["matches"] = match_days
+		day += 7
 		
 func _shift_array(array:Array) -> void:
 	var temp:Team = array[0]
