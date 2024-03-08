@@ -46,7 +46,7 @@ func _ready() -> void:
 	formation.set_up(false)
 	
 	if Config.calendar().day().matches.size() > 0:
-		if Config.calendar().day().matches[0].home_goals == -1:
+		if Config.calendar().day().matches[0].home_goals != -1:
 			continue_button.text = "NEXT_DAY"
 			match_ready = false
 		else:
