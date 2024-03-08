@@ -105,14 +105,14 @@ func _on_action_util_shot(player:Player, on_target:bool, success:bool) -> void:
 			home_stats.shots_on_target += 1
 		if success:
 			home_stats.goals += 1
-			player.statistics[0].goals += 1
+			player.statistics[Config.current_season].goals += 1
 	else:
 		away_stats.shots += 1
 		if on_target:
 			away_stats.shots_on_target += 1
 		if success:
 			away_stats.goals += 1
-			player.statistics[0].goals += 1
+			player.statistics[Config.current_season].goals += 1
 
 
 #func _on_action_util_possession_change() -> void:
