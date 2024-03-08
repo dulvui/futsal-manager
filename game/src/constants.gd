@@ -10,7 +10,7 @@ enum Gender { MALE, FEMALE, MIXED }
 const DEFAULT_SEED:String = "SuchDefaultSeed"
 
 # match fast forward speed factor
-const MATCH_SPEED_FACTOR:int = 4
+const MATCH_SPEED_FACTOR:int = 8
 
 # factor if shot becomes a visual action
 const VISUAL_ACTION_SHOTS_FACTOR:int = 10
