@@ -152,7 +152,7 @@ func _on_Dashboard_pressed() -> void:
 
 
 func _on_Faster_pressed() -> void:
-	if Config.speed_factor < 3:
+	if Config.speed_factor < Constants.MATCH_SPEED_FACTOR:
 		Config.speed_factor += 1
 		match_simulator.faster()
 	speed_factor_label.text = str(Config.speed_factor + 1) + " X"
