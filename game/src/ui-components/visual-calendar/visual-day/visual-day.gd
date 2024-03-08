@@ -9,11 +9,8 @@ signal click
 const MatchList:PackedScene = preload("res://src/ui-components/visual-calendar/match-list/match_list.tscn")
 
 @onready var color_rect:ColorRect = $ColorRect
-
 @onready var match_button:Button = $MarginContainer/VBoxContainer/Match
-
 @onready var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
-
 @onready var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
 
 func set_up(date:Day) -> void:
@@ -50,6 +47,3 @@ func _on_Match_pressed(matches:Array[Match]) -> void:
 	var match_list:Popup = MatchList.instantiate()
 	add_child(match_list)
 	match_list.show_matches(matches)
-
-func _on_Close_pressed() -> void:
-	$MatchPopup.hide()
