@@ -26,6 +26,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Home"
+text_overrun_behavior = 3
 
 [node name="Result" type="Label" parent="HBoxContainer"]
 layout_mode = 2
@@ -36,3 +37,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Away"
 horizontal_alignment = 2
+text_overrun_behavior = 3
