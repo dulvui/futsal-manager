@@ -6,7 +6,7 @@ class_name Leagues
 extends Resource
 
 @export var list:Array[League]
-@export var active:RID
+@export var active_name:String
 
 func _init(
 		p_list:Array[League] = [],
@@ -17,11 +17,18 @@ func add_league(league:League) -> void:
 	list.append(league)
 	
 func get_active() -> League:
-	return get_league_by_rid(active)
+	return get_league_by_name(active_name)
 	
-func get_league_by_rid(rid:RID) -> League:
+func get_others() -> Array[League]:
+	var other_leagues:Array[League] = []
 	for league:League in list:
-		if league.get_rid() == rid:
+		if league.name != active_name:
+			other_leagues.append(league)
+	return other_leagues
+	
+func get_league_by_name(league_name:String) -> League:
+	for league:League in list:
+		if league.name == league_name:
 			return league
 	return null
 	
@@ -43,4 +50,5 @@ func get_team_by_name(p_name:String) -> Team:
 func initialize_calendars() -> void:
 	for league:League in list:
 		league.calendar.initialize()
+		
 

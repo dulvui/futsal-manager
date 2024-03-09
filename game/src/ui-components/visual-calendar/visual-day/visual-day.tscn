@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/ui-components/visual-calendar/visual-day/visual-day.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="2"]
 
-[node name="Day" type="Control"]
+[node name="VisualDay" type="Control"]
 custom_minimum_size = Vector2(90, 60)
 layout_mode = 3
 anchor_right = 0.047
@@ -64,3 +64,5 @@ text = "Match day"
 alignment = 0
 text_overrun_behavior = 3
 clip_text = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Match" to="." method="_on_match_pressed"]

@@ -2,27 +2,32 @@
 
 [ext_resource type="Script" path="res://src/ui-components/visual-calendar/match-list/match_list.gd" id="1_xo3bj"]
 
-[node name="MatchPopup" type="Popup"]
-initial_position = 1
-visible = true
-script = ExtResource("1_xo3bj")
-
-[node name="Panel" type="Panel" parent="."]
+[node name="MatchList" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xo3bj")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Matches" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 40
-columns = 3

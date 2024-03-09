@@ -91,13 +91,10 @@ func match_end() -> void:
 				var random_home_goals:int = randi()%10
 				var random_away_goals:int = randi()%10
 				
-				matchz.home_goals = random_home_goals
-				matchz.away_goals = random_away_goals
+				matchz.set_result(random_home_goals, random_away_goals)
 				league.table.add_result(matchz.home.name,random_home_goals,matchz.away.name,random_away_goals)
 			else:
-				matchz.home_goals = match_simulator.home_stats["goals"]
-				matchz.away_goals = match_simulator.away_stats["goals"]
-	
+				matchz.set_result(match_simulator.home_stats["goals"],  match_simulator.away_stats["goals"])
 	Config.save_all_data()
 
 func half_time() -> void:

@@ -120,7 +120,7 @@ func save_manager(p_manager:Manager) -> void:
 	config.save("user://settings.cfg")
 	
 func select_team(p_league:League, p_team:Team) -> void:
-	leagues.active = p_league.get_rid()
+	leagues.active_name = p_league.name
 	team = p_team
 	
 func next_season() -> void:

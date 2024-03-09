@@ -7,6 +7,7 @@ extends Resource
 
 @export var home:Team
 @export var away:Team
+@export var over:bool
 @export var home_goals:int
 @export var away_goals:int
 
@@ -20,6 +21,11 @@ func _init(
 	away = p_away
 	home_goals = p_home_goals
 	away_goals = p_away_goals
+
+func set_result(p_home_goals:int, p_away_goals:int) -> void:
+	home_goals = p_home_goals
+	away_goals = p_away_goals
+	over = true
 
 func get_result() -> String:
 	if home_goals == -1 and away_goals == -1:

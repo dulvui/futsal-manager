@@ -2,41 +2,37 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Popup
+extends Control
 
+const match_row_scene:PackedScene = preload("res://src/ui-components/visual-calendar/match-list/match-list-row/match_list_row.tscn")
 
-func show_matches(matches:Array) -> void:
-	var label_settings:LabelSettings = LabelSettings.new()
-	label_settings.font_size = get_theme_default_font_size()
-	label_settings.font_color = Color.GOLD
+@onready var matches_list:VBoxContainer = $ScrollContainer/Matches
+
+func set_up(day:Day) -> void:
+	for child:Node in matches_list.get_children():
+		child.queue_free()
 	
-	for matchz:Match in matches:
-		var home_label:Label = Label.new()
-		home_label.text = matchz.home.name
-		home_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		home_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		
-		var result_label:Label = Label.new()
-		if matchz.get_result():
-			result_label.text = matchz.get_result()
-		else:
-			result_label.text = "vs"
-		result_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		result_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		
-		var away_label:Label = Label.new()
-		away_label.text = matchz.away.name
-		away_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		away_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		
-		if matchz.home.name == Config.team.name or matchz.away.name == Config.team.name:
-			home_label.label_settings = label_settings
-			result_label.label_settings = label_settings
-			away_label.label_settings = label_settings
-			
-		
-		$MarginContainer/GridContainer.add_child(home_label)
-		$MarginContainer/GridContainer.add_child(result_label)
-		$MarginContainer/GridContainer.add_child(away_label)
-		
-	popup_centered()
+	# add active league games
+	var active_league_label:Label = Label.new()
+	active_league_label.text = Config.leagues.get_active().name
+	UiUtil.bold(active_league_label)
+	matches_list.add_child(active_league_label)
+	for matchz:Match in day.matches:
+		var match_row:MatchListRow = match_row_scene.instantiate()
+		matches_list.add_child(match_row)
+		match_row.set_up(matchz)
+	
+	matches_list.add_child(HSeparator.new())
+	
+	# add other leagues matches
+	for league:League in Config.leagues.get_others():
+		var league_label:Label = Label.new()
+		league_label.text = league.name
+		UiUtil.bold(league_label)
+		matches_list.add_child(league_label)
+		for matchz:Match in league.calendar.day(day.month, day.day).matches:
+			var match_row:MatchListRow = match_row_scene.instantiate()
+			matches_list.add_child(match_row)
+			match_row.set_up(matchz)
+
+		matches_list.add_child(HSeparator.new())
