@@ -30,6 +30,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -10.5
+offset_bottom = 10.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
@@ -58,11 +60,20 @@ layout_mode = 2
 text = "31"
 horizontal_alignment = 2
 
-[node name="Match" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Match" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Match day"
 alignment = 0
 text_overrun_behavior = 3
 clip_text = true
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Match" to="." method="_on_match_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

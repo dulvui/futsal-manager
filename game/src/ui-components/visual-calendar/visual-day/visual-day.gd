@@ -8,7 +8,9 @@ class_name VisualDay
 signal show_match_list
 
 @onready var color_rect:ColorRect = $ColorRect
-@onready var match_button:Button = $MarginContainer/VBoxContainer/Match
+@onready var button:Button = $MarginContainer/Button
+
+@onready var match_label:Label = $MarginContainer/VBoxContainer/Match
 @onready var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
 @onready var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
 
@@ -26,9 +28,9 @@ func set_up(p_date:Day = Day.new()) -> void:
 			elif Config.team.name ==  matchz.away.name:
 				team_name = matchz.home.name
 				color_rect.color = Color.DEEP_SKY_BLUE
-		match_button.text = team_name
+		match_label.text = team_name
 	else:
-		match_button.hide()
+		match_label.hide()
 		
 	if date.day == Config.calendar().day().day and Config.calendar().day().month == date.month:
 		if color_rect.color != Color.DODGER_BLUE:
@@ -42,7 +44,5 @@ func set_up(p_date:Day = Day.new()) -> void:
 	if date.market:
 		market_label.text = "Market"
 
-
-
-func _on_match_pressed() -> void:
+func _on_button_pressed() -> void:
 	show_match_list.emit()
