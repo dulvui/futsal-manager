@@ -10,8 +10,6 @@ signal show_match_list
 @onready var background:ColorRect = $Background
 @onready var color_active:ColorRect = $ColorActive
 
-@onready var button:Button = $MarginContainer/Button
-
 @onready var match_label:Label = $MarginContainer/VBoxContainer/Match
 @onready var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
 @onready var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
