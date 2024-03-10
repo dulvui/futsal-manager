@@ -63,3 +63,8 @@ func _on_Next_pressed() -> void:
 	if current_month > 11:
 		current_month = 11
 	set_up()
+
+
+func _on_today_pressed() -> void:
+	current_month = Config.calendar().date.month - 1
+	set_up()
