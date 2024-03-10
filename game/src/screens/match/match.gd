@@ -32,20 +32,20 @@ var away_team:Team
 var match_started:bool = false
 var first_half:bool = true
 
+var matchz:Match
 
 func _ready() -> void:
 	randomize()
-	var next_match:Match = Config.calendar().get_next_match()
+	matchz = Config.calendar().get_next_match()
 	
-	if next_match != null:
-		for team:Team in Config.leagues.get_active().teams:
-			if team.name == next_match.home.name:
-				home_team = team
-			elif team.name == next_match.away.name:
-				away_team = team
+	for team:Team in Config.leagues.get_active().teams:
+		if team.name == matchz.home.name:
+			home_team = team
+		elif team.name == matchz.away.name:
+			away_team = team
 	
-	$Main/Content/CentralContainer/TopBar/Home.text = next_match.home.name
-	$Main/Content/CentralContainer/TopBar/Away.text = next_match.away.name
+	$Main/Content/CentralContainer/TopBar/Home.text = matchz.home.name
+	$Main/Content/CentralContainer/TopBar/Away.text = matchz.away.name
 	
 	formation.set_up(true)
 	match_simulator.set_up(home_team,away_team)
@@ -83,18 +83,8 @@ func match_end() -> void:
 	Config.leagues.get_active().table.add_result(home_team.name,match_simulator.home_stats.goals,away_team.name,match_simulator.away_stats.goals)
 	
 	
-	#simulate all games for now.
-	for league:League in Config.leagues.list:
-		var calendar:Calendar = league.calendar
-		for matchz:Match in calendar.day().matches:
-			if matchz.home.name != home_team.name:
-				var random_home_goals:int = randi()%10
-				var random_away_goals:int = randi()%10
-				
-				matchz.set_result(random_home_goals, random_away_goals)
-				league.table.add_result(matchz.home.name,random_home_goals,matchz.away.name,random_away_goals)
-			else:
-				matchz.set_result(match_simulator.home_stats["goals"],  match_simulator.away_stats["goals"])
+	#assign result
+	matchz.set_result(match_simulator.home_stats["goals"],  match_simulator.away_stats["goals"])
 	Config.save_all_data()
 
 func half_time() -> void:

@@ -67,7 +67,7 @@ func inizialize_matches() -> void:
 		
 		# start with saturday of next week
 		for i in range(8, 1, -1):
-			if league.calendar.day(month,i).weekday == "SAT":
+			if league.calendar.day(month,i).weekday == "FRI":
 				day = i
 				break
 		
@@ -78,12 +78,20 @@ func inizialize_matches() -> void:
 				day = 0
 				# start also new month with saturday
 				for i in 7:
-					if league.calendar.day(month,i).weekday == "SAT":
+					if league.calendar.day(month,i).weekday == "FRI":
 						day = i
 						break
-			# assign match days
+			# assign match friday
 			league.calendar.day(month,day).matches.append_array(matches)
 			day += 7
+			## assign match saturday
+			#day += 1
+			#league.calendar.day(month,day).matches.append_array(matches.slice(2, 6)) 
+			## assign match sunday
+			#day += 1
+			#league.calendar.day(month,day).matches.append_array(matches.slice(2, 6)) 
+			#
+			#day += 5
 		
 func _shift_array(array:Array) -> void:
 	var temp:Team = array[0]

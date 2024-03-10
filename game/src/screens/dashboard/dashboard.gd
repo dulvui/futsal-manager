@@ -45,14 +45,14 @@ func _ready() -> void:
 	all_players_list.set_up(false, true)
 	formation.set_up(false)
 	
-	if Config.calendar().day().matches.size() > 0:
-		if Config.calendar().day().matches[0].over:
-			continue_button.text = "NEXT_DAY"
-			match_ready = false
-		else:
-			continue_button.text = "START_MATCH"
-			match_ready = true
-			next_match_button.hide()
+	if Config.calendar().is_match_day():
+		continue_button.text = "START_MATCH"
+		match_ready = true
+		next_match_button.hide()
+	else:
+		continue_button.text = "NEXT_DAY"
+		match_ready = false
+
 			
 	if Config.leagues.get_active().calendar.is_season_finished():
 		next_season = true
@@ -151,23 +151,37 @@ func _next_day() -> void:
 	if match_ready:
 		get_tree().change_scene_to_file("res://src/screens/match/match.tscn")
 		return
+		
+	#simulate all other matches 
+	for league:League in Config.leagues.list:
+		var league_calendar:Calendar = league.calendar
+		for matchz:Match in league_calendar.day().matches:
+			if matchz.home.name != Config.team.name:
+				var random_home_goals:int = randi()%10
+				var random_away_goals:int = randi()%10
+				matchz.set_result(random_home_goals, random_away_goals)
+				league.table.add_result(matchz.home.name,random_home_goals,matchz.away.name,random_away_goals)
+
+	# next day in calendar
+	for league:League in Config.leagues.list:
+		league.calendar.next_day()
 	
+	# next season check
 	if next_season:
 		Config.next_season()
 		return
-	
 	if Config.calendar().is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		return
-
-	for league:League in Config.leagues.list:
-		league.calendar.next_day()
 	
+	# general setup
 	TransferUtil.update_day()
 	email.update_messages()
 	calendar.set_up()
 	date_label.text = Config.calendar().format_date()
+	
+	# config buttons
 	if Config.calendar().is_match_day():
 		continue_button.text = "START_MATCH"
 		match_ready = true

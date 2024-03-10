@@ -139,7 +139,8 @@ func _get_next_day(_date:Dictionary=date) -> Dictionary:
 	return _next_day
 
 func is_match_day() -> bool:
-	return get_next_match() != null
+	var next_match:Match = get_next_match()
+	return next_match != null and not next_match.over
 
 func is_market_active(p_date:Dictionary=date) -> bool:
 	for market_period:Dictionary in market_periods:
