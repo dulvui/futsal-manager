@@ -151,16 +151,7 @@ func _next_day() -> void:
 	if match_ready:
 		get_tree().change_scene_to_file("res://src/screens/match/match.tscn")
 		return
-		
-	#simulate all other matches 
-	for league:League in Config.leagues.list:
-		var league_calendar:Calendar = league.calendar
-		for matchz:Match in league_calendar.day().matches:
-			if matchz.home.name != Config.team.name:
-				var random_home_goals:int = randi()%10
-				var random_away_goals:int = randi()%10
-				matchz.set_result(random_home_goals, random_away_goals)
-				league.table.add_result(matchz.home.name,random_home_goals,matchz.away.name,random_away_goals)
+	
 
 	# next day in calendar
 	for league:League in Config.leagues.list:
@@ -187,6 +178,10 @@ func _next_day() -> void:
 		match_ready = true
 		next_match_button.disabled = true
 		next_match_button.hide()
+	else:
+		#simulate all other matches
+		Config.leagues.random_results()
+
 
 
 func _on_email_email_action(message: EmailMessage) -> void:
