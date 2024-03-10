@@ -30,4 +30,4 @@ func _init(
 
 
 func to_format_string() -> String:
-	return weekday + " " + str(day) + " " + Constants.month_strings[month] + " " + str(year)
+	return weekday + " " + str(day) + " " + Constants.month_strings[month - 1] + " " + str(year)

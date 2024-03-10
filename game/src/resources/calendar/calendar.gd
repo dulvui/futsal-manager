@@ -165,7 +165,7 @@ func is_season_finished() -> bool:
 	return date.month == season_end_month and date.day == season_end_day
 
 func format_date(p_date:Dictionary=date) -> String:
-	return Constants.day_strings[p_date.weekday] + " " + str(p_date.day) + " " + Constants.month_strings[p_date.month] + " " + str(p_date.year)
+	return Constants.day_strings[p_date.weekday] + " " + str(p_date.day) + " " + Constants.month_strings[p_date.month - 1] + " " + str(p_date.year)
 
 func get_next_match() -> Match:
 	for matchz:Match in day().matches:
