@@ -48,8 +48,9 @@ func inizialize_matches() -> void:
 			_shift_array(random_teams)
 			home = not home
 
-			
-		# ritorno
+		############
+		# RITORNO
+		############
 		var temp_match_days:Array[Array] = []
 		for match_dayz:Array[Match] in match_days:
 			var current_match_dayz:Array = []
@@ -61,7 +62,9 @@ func inizialize_matches() -> void:
 		for temp:Array in temp_match_days:
 			match_days.append(temp)
 		
+		############
 		# add to calendar
+		############
 		var day:int = league.calendar.day().day
 		var month:int = league.calendar.day().month
 		
@@ -73,7 +76,7 @@ func inizialize_matches() -> void:
 		
 		for matches:Array[Match] in match_days:
 			# check if next month
-			if day > league.calendar.month().days.size() - 1:
+			if day > league.calendar.month(month).days.size() - 1:
 				month += 1
 				day = 0
 				# start also new month with saturday
@@ -82,16 +85,34 @@ func inizialize_matches() -> void:
 						day = i
 						break
 			# assign match friday
-			league.calendar.day(month,day).matches.append_array(matches)
-			day += 7
+			league.calendar.day(month,day).matches.append_array(matches.slice(0, matches.size() / 4))
 			## assign match saturday
-			#day += 1
-			#league.calendar.day(month,day).matches.append_array(matches.slice(2, 6)) 
+			day += 1
+			# check if next month
+			if day > league.calendar.month(month).days.size() - 1:
+				month += 1
+				day = 0
+				# start also new month with saturday
+				for i in 7:
+					if league.calendar.day(month,i).weekday == "SAT":
+						day = i
+						break
+			league.calendar.day(month,day).matches.append_array(matches.slice(matches.size() / 4, matches.size() / 2)) 
 			## assign match sunday
-			#day += 1
-			#league.calendar.day(month,day).matches.append_array(matches.slice(2, 6)) 
-			#
-			#day += 5
+			day += 1
+			# check if next month
+			if day > league.calendar.month(month).days.size() - 1:
+				month += 1
+				day = 0
+				# start also new month with saturday
+				for i in 7:
+					if league.calendar.day(month,i).weekday == "SUN":
+						day = i
+						break
+			league.calendar.day(month,day).matches.append_array(matches.slice(matches.size() / 2, matches.size())) 
+			# restart from friday
+			day += 5
+
 		
 func _shift_array(array:Array) -> void:
 	var temp:Team = array[0]

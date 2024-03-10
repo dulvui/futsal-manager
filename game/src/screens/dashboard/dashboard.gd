@@ -14,7 +14,7 @@ extends Control
 # content views 
 @onready var email:Control = $MainContainer/VBoxContainer/MainView/Content/Email
 @onready var table:Control = $MainContainer/VBoxContainer/MainView/Content/Table
-@onready var calendar:Control = $MainContainer/VBoxContainer/MainView/Content/Calendar
+@onready var visual_calendar:Control = $MainContainer/VBoxContainer/MainView/Content/Calendar
 @onready var info:Control = $MainContainer/VBoxContainer/MainView/Content/Info
 
 # labels
@@ -101,7 +101,7 @@ func _on_all_player_list_select_player(player:Player) -> void:
 func _hide_all() -> void:
 	table.hide()
 	email.hide()
-	calendar.hide()
+	visual_calendar.hide()
 	formation.hide()
 	all_players_list.hide()
 	info.hide()
@@ -117,7 +117,7 @@ func _show_active_view(active_view:int=-1) -> void:
 		ContentViews.TABLE:
 			table.show()
 		ContentViews.CALENDAR:
-			calendar.show()
+			visual_calendar.show()
 		ContentViews.FORMATION:
 			formation.show()
 		ContentViews.ALL_PLAYERS:
@@ -169,7 +169,6 @@ func _next_day() -> void:
 	# general setup
 	TransferUtil.update_day()
 	email.update_messages()
-	calendar.set_up()
 	date_label.text = Config.calendar().format_date()
 	
 	# config buttons
@@ -181,6 +180,9 @@ func _next_day() -> void:
 	else:
 		#simulate all other matches
 		Config.leagues.random_results()
+		
+	visual_calendar.set_up()
+
 
 
 
