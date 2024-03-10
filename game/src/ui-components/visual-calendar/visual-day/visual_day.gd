@@ -7,7 +7,9 @@ class_name VisualDay
 
 signal show_match_list
 
-@onready var color_rect:ColorRect = $ColorRect
+@onready var background:ColorRect = $Background
+@onready var color_active:ColorRect = $ColorActive
+
 @onready var button:Button = $MarginContainer/Button
 
 @onready var match_label:Label = $MarginContainer/VBoxContainer/Match
@@ -24,25 +26,36 @@ func set_up(p_date:Day = Day.new()) -> void:
 		for matchz:Match in date.matches:
 			if Config.team.name == matchz.home.name:
 				team_name = matchz.away.name
-				color_rect.color = Color.DODGER_BLUE
+				background.color = Color.DODGER_BLUE
 			elif Config.team.name ==  matchz.away.name:
 				team_name = matchz.home.name
-				color_rect.color = Color.DEEP_SKY_BLUE
+				background.color = Color.DEEP_SKY_BLUE
 		match_label.text = team_name
 	else:
 		match_label.hide()
 		
 	if date.day == Config.calendar().day().day and Config.calendar().day().month == date.month:
-		if color_rect.color != Color.DODGER_BLUE:
-			color_rect.color = Color.LIGHT_GREEN
-		elif color_rect.color != Color.DEEP_SKY_BLUE:
-			color_rect.color = Color.MEDIUM_SPRING_GREEN
+		if background.color != Color.DODGER_BLUE:
+			background.color = Color.LIGHT_GREEN
+		elif background.color != Color.DEEP_SKY_BLUE:
+			background.color = Color.MEDIUM_SPRING_GREEN
 		else:
-			color_rect.color = Color.LIGHT_PINK
+			background.color = Color.LIGHT_PINK
 			
 	# check if market is active
 	if date.market:
 		market_label.text = "Market"
+		
+func unselect() -> void:
+	color_active.color = Color(0,0,0,0)
+	UiUtil.remove_bold(month_day_label)
+	
+func select() -> void:
+	color_active.color = Color(0,0,0,0.3)
+	UiUtil.bold(month_day_label)
 
 func _on_button_pressed() -> void:
 	show_match_list.emit()
+	# unselect other days
+	get_tree().call_group("visual-day", "unselect")
+	select()

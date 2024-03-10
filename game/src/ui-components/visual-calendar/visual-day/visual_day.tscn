@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="1_njb33"]
 [ext_resource type="Script" path="res://src/ui-components/visual-calendar/visual-day/visual_day.gd" id="2_ub0fh"]
 
-[node name="VisualDay" type="Control"]
+[node name="VisualDay" type="Control" groups=["visual-day"]]
 custom_minimum_size = Vector2(90, 60)
 layout_mode = 3
 anchor_right = 0.047
@@ -16,7 +16,7 @@ theme = ExtResource("1_njb33")
 script = ExtResource("2_ub0fh")
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +24,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.609659, 0.733236, 0.946432, 1)
+
+[node name="ColorActive" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

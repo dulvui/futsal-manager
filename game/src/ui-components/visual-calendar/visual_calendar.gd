@@ -37,11 +37,16 @@ func set_up_days() -> void:
 		monday_counter -= 1
 	
 	# add days
+	var day_select:bool = true # to select first day of month
 	for day:Day in Config.calendar().month(current_month).days:
 		var calendar_day:VisualDay = visual_day.instantiate()
 		days.add_child(calendar_day)
 		calendar_day.set_up(day)
 		calendar_day.show_match_list.connect(_on_calendar_day_pressed.bind(day))
+		
+		if day_select:
+			calendar_day.select()
+			day_select = false
 
 	page_label.text = Constants.month_strings[current_month]
 	
