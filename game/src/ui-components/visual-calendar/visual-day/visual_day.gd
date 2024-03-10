@@ -10,6 +10,8 @@ signal show_match_list
 @onready var background:ColorRect = $Background
 @onready var color_active:ColorRect = $ColorActive
 
+@onready var button:Button = $Button
+
 @onready var match_label:Label = $MarginContainer/VBoxContainer/Match
 @onready var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
 @onready var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
@@ -18,6 +20,9 @@ var date:Day
 
 func set_up(p_date:Day = Day.new()) -> void:
 	date = p_date
+	# activate button
+	button.show()
+	
 	month_day_label.text = str(date.day)
 	var team_name:String
 	if date.matches.size() > 0:
