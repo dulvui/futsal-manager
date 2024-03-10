@@ -6,9 +6,13 @@ extends Control
 
 const match_row_scene:PackedScene = preload("res://src/ui-components/visual-calendar/match-list/match-list-row/match_list_row.tscn")
 
-@onready var matches_list:VBoxContainer = $ScrollContainer/Matches
+@onready var matches_list:VBoxContainer = $VBoxContainer/ScrollContainer/Matches
+@onready var date_label:Label = $VBoxContainer/Date
+
 
 func set_up(day:Day) -> void:
+	date_label.text = day.to_format_string()
+	
 	for child:Node in matches_list.get_children():
 		child.queue_free()
 	

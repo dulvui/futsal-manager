@@ -27,3 +27,7 @@ func _init(
 	day = p_day
 	month = p_month
 	year = p_year
+
+
+func to_format_string() -> String:
+	return weekday + " " + str(day) + " " + Constants.month_strings[month] + " " + str(year)

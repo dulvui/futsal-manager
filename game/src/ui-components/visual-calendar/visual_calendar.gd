@@ -4,7 +4,7 @@
 
 extends Control
 
-const visual_day:PackedScene = preload("res://src/ui-components/visual-calendar/visual-day/visual-day.tscn")
+const visual_day:PackedScene = preload("res://src/ui-components/visual-calendar/visual-day/visual_day.tscn")
 
 @onready var match_list:Control = $HSplitContainer/MatchList
 @onready var days:GridContainer = $HSplitContainer/Calendar/Days
@@ -43,7 +43,7 @@ func set_up_days() -> void:
 		calendar_day.set_up(day)
 		calendar_day.show_match_list.connect(_on_calendar_day_pressed.bind(day))
 
-	page_label.text = Config.calendar().month_strings[current_month]
+	page_label.text = Constants.month_strings[current_month]
 	
 func _on_calendar_day_pressed(day:Day) -> void:
 	match_list.set_up(day)

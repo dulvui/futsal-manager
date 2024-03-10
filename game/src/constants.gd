@@ -73,3 +73,6 @@ const MAX_PRESTIGE:int = 20
 const REQUEST_FACTOR: int = 20
 
 const LINEUP_PLAYERS_AMOUNT = 12
+
+const month_strings:Array = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OKT","NOV","DEC"]
+const day_strings:Array = ["SUN","MON","TUE","WE","THU","FRI","SAT"]

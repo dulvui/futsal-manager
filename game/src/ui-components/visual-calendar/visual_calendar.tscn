@@ -28,7 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Calendar" type="VBoxContainer" parent="HSplitContainer"]
-custom_minimum_size = Vector2(1100, 0)
+custom_minimum_size = Vector2(1300, 0)
 layout_mode = 2
 alignment = 1
 

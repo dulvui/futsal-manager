@@ -5,8 +5,6 @@
 class_name Calendar
 extends Resource
 
-const month_strings:Array = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OKT","NOV","DEC"]
-const day_strings:Array = ["SUN","MON","TUE","WE","THU","FRI","SAT"]
 const day_in_seconds:int = 86400
 # season start at 1st of june
 const season_start_day:int = 1
@@ -73,7 +71,7 @@ func initialize(next_season:bool = false) -> void:
 	var temp_date:Dictionary = Time.get_datetime_dict_from_datetime_string(firstJanuary, true)
 	
 	# create months
-	for month_string:String in month_strings:
+	for month_string:String in Constants.month_strings:
 		var new_month:Month = Month.new()
 		new_month.name = month_string
 		months.append(new_month)
@@ -82,7 +80,7 @@ func initialize(next_season:bool = false) -> void:
 	while temp_date.year == date.year:
 		var new_day:Day = Day.new()
 		new_day.market = is_market_active(temp_date)
-		new_day.weekday =  day_strings[temp_date.weekday]
+		new_day.weekday =  Constants.day_strings[temp_date.weekday]
 		new_day.day =  temp_date.day
 		new_day.month =  temp_date.month
 		new_day.year =  temp_date.year
@@ -166,7 +164,7 @@ func is_season_finished() -> bool:
 	return date.month == season_end_month and date.day == season_end_day
 
 func format_date(p_date:Dictionary=date) -> String:
-	return day_strings[p_date.weekday] + " " + str(p_date.day) + " " + month_strings[p_date.month] + " " + str(p_date.year)
+	return Constants.day_strings[p_date.weekday] + " " + str(p_date.day) + " " + Constants.month_strings[p_date.month] + " " + str(p_date.year)
 
 func get_next_match() -> Match:
 	for matchz:Match in day().matches:

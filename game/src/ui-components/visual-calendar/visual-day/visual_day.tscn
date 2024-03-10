@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1dale6j23rs1"]
 
-[ext_resource type="Script" path="res://src/ui-components/visual-calendar/visual-day/visual-day.gd" id="1"]
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="2"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="1_njb33"]
+[ext_resource type="Script" path="res://src/ui-components/visual-calendar/visual-day/visual_day.gd" id="2_ub0fh"]
 
 [node name="VisualDay" type="Control"]
 custom_minimum_size = Vector2(90, 60)
@@ -12,8 +12,8 @@ offset_right = -90.24
 offset_bottom = -60.48
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2")
-script = ExtResource("1")
+theme = ExtResource("1_njb33")
+script = ExtResource("2_ub0fh")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
