@@ -17,26 +17,28 @@ func set_up(day:Day) -> void:
 		child.queue_free()
 	
 	# add active league games
-	var active_league_label:Label = Label.new()
-	active_league_label.text = Config.leagues.get_active().name
-	UiUtil.bold(active_league_label)
-	matches_list.add_child(active_league_label)
-	for matchz:Match in day.matches:
-		var match_row:MatchListRow = match_row_scene.instantiate()
-		matches_list.add_child(match_row)
-		match_row.set_up(matchz)
-	
-	matches_list.add_child(HSeparator.new())
-	
-	# add other leagues matches
-	for league:League in Config.leagues.get_others():
-		var league_label:Label = Label.new()
-		league_label.text = league.name
-		UiUtil.bold(league_label)
-		matches_list.add_child(league_label)
-		for matchz:Match in league.calendar.day(day.month, day.day).matches:
+	if day.matches.size() > 0:
+		var active_league_label:Label = Label.new()
+		active_league_label.text = Config.leagues.get_active().name
+		UiUtil.bold(active_league_label)
+		matches_list.add_child(active_league_label)
+		for matchz:Match in day.matches:
 			var match_row:MatchListRow = match_row_scene.instantiate()
 			matches_list.add_child(match_row)
 			match_row.set_up(matchz)
-
+		
 		matches_list.add_child(HSeparator.new())
+	
+	# add other leagues matches
+	for league:League in Config.leagues.get_others():
+		if league.calendar.day(day.month, day.day).matches.size() > 0:
+			var league_label:Label = Label.new()
+			league_label.text = league.name
+			UiUtil.bold(league_label)
+			matches_list.add_child(league_label)
+			for matchz:Match in league.calendar.day(day.month, day.day).matches:
+				var match_row:MatchListRow = match_row_scene.instantiate()
+				matches_list.add_child(match_row)
+				match_row.set_up(matchz)
+
+			matches_list.add_child(HSeparator.new())
