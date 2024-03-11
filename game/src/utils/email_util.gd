@@ -50,7 +50,7 @@ func transfer_message(transfer:Transfer) -> void:
 	message.date = Config.calendar().format_date()
 
 	# assign rid of transfer, so it can be used for toher purposes
-	message.resource_rid = transfer.get_rid()
+	message.foreign_id = transfer.id
 	
 	if transfer.buy_team.name == Config.team.name:
 		message.sender = "info@" + transfer.sell_team.name.to_lower() + ".com"

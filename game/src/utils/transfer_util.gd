@@ -29,11 +29,11 @@ func make_offer(transfer:Transfer) -> void:
 	Config.transfers.list.append(transfer)
 
 # TODO move to trasnfer util
-func get_transfer_by_rid(rid:RID) -> Transfer:
+func get_transfer_id(id:int) -> Transfer:
 	for transfer:Transfer in Config.transfers.list:
-		if transfer.get_rid() == rid:
+		if transfer.id == id:
 			return transfer
-	print("ERROR: transfer not found with uuid: " + str(rid.get_id()))
+	print("ERROR: transfer not found with id: " + str(id))
 	return null
 
 func _request_players() -> void:

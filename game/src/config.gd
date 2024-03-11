@@ -28,6 +28,8 @@ var team:Team
 var manager:Manager
 var transfers:Transfers
 var inbox:Inbox
+# saves current id for resources
+var id_by_type:Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,6 +45,7 @@ func _load_config() -> void:
 	if err != OK:
 		print("error loading user://settings.cfg")
 	current_season = config.get_value("season","current_season",0)
+	id_by_type = config.get_value("settings","id_by_type", {})
 	# global game states
 	speed_factor = config.get_value("match","speed_factor",0)
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
@@ -59,28 +62,29 @@ func save_config() -> void:
 	config.set_value("dashboard","active_content",dashboard_active_content)
 	config.set_value("generation","seed",generation_seed)
 	config.set_value("generation","gender",generation_gender)
+	config.set_value("settings","id_by_type", id_by_type)
 #
 	config.save("user://settings.cfg")
 	print("all data saved")
 
 func _load_resources() -> void:
-	if ResourceLoader.exists("user://leagues.res"):
-		leagues = ResourceLoader.load("user://leagues.res")
-	if ResourceLoader.exists("user://inbox.res"):
-		inbox = ResourceLoader.load("user://inbox.res")
-	if ResourceLoader.exists("user://team.res"):
-		team = ResourceLoader.load("user://team.res")
-	if ResourceLoader.exists("user://manager.res"):
-		manager = ResourceLoader.load("user://manager.res")
-	if ResourceLoader.exists("user://transfers.res"):
-		transfers = ResourceLoader.load("user://transfers.res")
+	if ResourceLoader.exists("user://leagues.tres"):
+		leagues = ResourceLoader.load("user://leagues.tres")
+	if ResourceLoader.exists("user://inbox.tres"):
+		inbox = ResourceLoader.load("user://inbox.tres")
+	if ResourceLoader.exists("user://team.tres"):
+		team = ResourceLoader.load("user://team.tres")
+	if ResourceLoader.exists("user://manager.tres"):
+		manager = ResourceLoader.load("user://manager.tres")
+	if ResourceLoader.exists("user://transfers.tres"):
+		transfers = ResourceLoader.load("user://transfers.tres")
 
 func save_resources() -> void:
-	ResourceSaver.save(leagues, "user://leagues.res")
-	ResourceSaver.save(inbox, "user://inbox.res")
-	ResourceSaver.save(team, "user://team.res")
-	ResourceSaver.save(manager, "user://manager.res")
-	ResourceSaver.save(transfers, "user://transfers.res")
+	ResourceSaver.save(leagues, "user://leagues.tres")
+	ResourceSaver.save(inbox, "user://inbox.tres")
+	ResourceSaver.save(team, "user://team.tres")
+	ResourceSaver.save(manager, "user://manager.tres")
+	ResourceSaver.save(transfers, "user://transfers.tres")
 	
 
 func generate_leagues(p_generation_seed:String, p_generation_gender:Constants.Gender) -> void:

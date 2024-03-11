@@ -25,7 +25,7 @@ enum Type {
 @export var sender:String
 @export var date:String
 @export var read:bool
-@export var resource_rid:RID # used to connect email to resource like a transfer
+@export var foreign_id:int # used to connect email to resource like a transfer
 
 func _init(
 	p_type:Type = Type.NEXT_MATCH,

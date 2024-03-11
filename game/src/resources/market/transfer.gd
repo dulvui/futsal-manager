@@ -24,6 +24,7 @@ const DEBUG:bool = false
 @export var contract:Contract
 @export var delay_days:int
 @export var exchange_players:Array[Player]
+@export var id:int
 
 
 func _init(
@@ -44,6 +45,8 @@ func _init(
 	price = p_price
 	delay_days = p_delay_days
 	exchange_players = p_exchange_players
+	
+	id = IdUtil.next_id(IdUtil.Types.TRANSFER)
 
 func update() -> bool:
 	# wait for user to make offer/contract
