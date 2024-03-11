@@ -5,6 +5,7 @@
 class_name Contract
 extends Resource
 
+@export var id:int
 @export var income:int
 @export var income_week:int
 @export var bonus_goal:int
@@ -19,6 +20,7 @@ extends Resource
 @export var is_on_loan:bool
 
 func _init(
+	p_id:int = IdUtil.next_id(IdUtil.Types.CONTRACT),
 	p_income:int = 0,
 	p_income_week:int = 0,
 	p_bonus_goal:int = 0,
@@ -32,6 +34,7 @@ func _init(
 	p_end_date:Dictionary = {},
 	p_is_on_loan:bool = false,
 ) -> void:
+	id = p_id
 	income = p_income
 	income_week = p_income_week
 	start_date = p_start_date

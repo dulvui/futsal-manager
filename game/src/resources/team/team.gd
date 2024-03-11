@@ -5,7 +5,7 @@
 extends Resource
 class_name Team
 
-@export var id:String
+@export var id:int
 @export var name:String
 # 0 to 4 active, 5 to x subs
 @export var lineup_player_ids:Array[int]
@@ -20,8 +20,8 @@ class_name Team
 @export var colors:Array[Color]
 
 func _init(
+	p_id:int = IdUtil.next_id(IdUtil.Types.TEAM),
 	p_name:String = "",
-	p_id:String = "",
 	p_prestige:int = 0,
 	p_budget:int = 0,
 	p_salary_budget:int = 0,

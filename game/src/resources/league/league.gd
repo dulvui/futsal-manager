@@ -5,6 +5,7 @@
 class_name League
 extends Resource
 
+@export var id:int
 @export var table:Table
 @export var calendar:Calendar
 @export var nation:Constants.Nations
@@ -12,12 +13,14 @@ extends Resource
 @export var teams:Array[Team]
 
 func _init(
+		p_id:int = IdUtil.next_id(IdUtil.Types.LEAGUE),
 		p_nation:Constants.Nations = Constants.Nations.ITALY,
 		p_table:Table = Table.new(),
 		p_name:String = "",
 		p_teams:Array[Team] = [],
-		p_calendar:Calendar = Calendar.new()
+		p_calendar:Calendar = Calendar.new(),
 	) -> void:
+	id = p_id
 	nation = p_nation
 	table = p_table
 	name = p_name

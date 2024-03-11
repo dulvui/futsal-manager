@@ -11,8 +11,6 @@ var generation_seed:String
 var generation_gender:Constants.Gender
 var rng:RandomNumberGenerator
 
-
-
 # saves wich season this is, starting from 0
 var current_season:int
 # global game states
@@ -100,6 +98,7 @@ func save_all_data() -> void:
 	
 func reset() -> void:
 	# CONFIG
+	id_by_type = {}
 	current_season = 0
 	# RESOURCES
 	manager =  Manager.new()

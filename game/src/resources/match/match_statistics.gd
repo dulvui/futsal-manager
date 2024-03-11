@@ -2,6 +2,9 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+
+# TODO add and save to match??
+# maybe also with key events? goals etc
 class_name MatchStatistics
 extends Resource
 

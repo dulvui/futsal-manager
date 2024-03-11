@@ -11,8 +11,6 @@ const LEAGUES_DIR:String = "res://data/leagues/"
 # exmaple shoot factor = 10 => other attributes vary between 10 -/+ NOISE
 const NOISE:int = 3
 
-var player_id:int = 1
-
 var leagues_data:Dictionary = {}
 var names:Dictionary = {}
 
@@ -54,7 +52,6 @@ func generate() -> Leagues:
 				print(t)
 				var team:Team = Team.new()
 				team.name = t
-				team.id = team.name.md5_text()
 				team.budget = Config.rng.randi_range(500000, 100000000)
 				team.salary_budget = Config.rng.randi_range(500000, 100000000)
 				team.prestige = Config.rng.randi_range((Constants.MAX_PRESTIGE / 2) - league_index, Constants.MAX_PRESTIGE - league_index)
@@ -307,7 +304,6 @@ func create_player(nationality:Constants.Nations, position:Player.Position, nr:i
 	else:
 		prestige = Config.rng.randi_range(8, 16)
 
-	player.id = player_id
 	player.price = get_price(date.year-birth_date.year, prestige, position)
 	player.name = get_player_name(nationality)
 	player.surname = get_surname(nationality)
@@ -341,8 +337,6 @@ func create_player(nationality:Constants.Nations, position:Player.Position, nr:i
 	statistics.average_vote = 0
 	player.statistics.append(statistics)
 	
-	player_id += 1
-
 	return player
 
 func get_player_prestige(team_prestige:int) -> int:

@@ -32,7 +32,7 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var attributes:Attributes
 
 func _init(
-	p_id:int = 0,
+	p_id:int = IdUtil.next_id(IdUtil.Types.PLAYER),
 	p_price:int = 0,
 	p_nr:int = 0,
 	p_loyality:int = 0,
