@@ -245,9 +245,7 @@ func get_random_morality() -> Player.Morality:
 		return Player.Morality.Good
 	return Player.Morality.Excellent
 
-func get_contract(prestige:int, position:int, age:int) -> Contract:
-	var contract:Contract = Contract.new()
-	
+func get_contract(prestige:int, position:int, age:int, contract:Contract) -> Contract:
 	contract.income = prestige * age * position # TODO use correct logic 
 	contract.start_date = Time.get_date_dict_from_system()
 	contract.end_date = Time.get_date_dict_from_system()
@@ -259,7 +257,6 @@ func get_contract(prestige:int, position:int, age:int) -> Contract:
 	contract.bonus_inter_cup_title = 0
 	contract.buy_clause = 0
 	contract.is_on_loan = false
-	
 	return contract
 	
 func get_player_name(nationality:Constants.Nations) -> String:
@@ -317,7 +314,7 @@ func create_player(nationality:Constants.Nations, position:Player.Position, nr:i
 	player.prestige = prestige
 	player.injury_factor = Config.rng.randi_range(1, 20)
 	player.loyality = Config.rng.randi_range(1, 20) # if player is loyal, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
-	player.contract = get_contract(prestige, position, date.year-birth_date.year)
+	player.contract = get_contract(prestige, position, date.year-birth_date.year, player.contract)
 	player.nr = nr
 	
 	player.attributes = Attributes.new()
