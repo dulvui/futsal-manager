@@ -14,12 +14,13 @@ func _init(
 
 func add_team(team:Team) -> void:
 	var values:TableValues = TableValues.new()
+	values.team_id = team.id
 	values.team_name = team.name
 	teams.append(values)
 	
-func add_result(home_name:String,home_goals:int,away_name:String,away_goals:int) -> void:
-	var home:TableValues = _find_by_name(home_name)
-	var away:TableValues = _find_by_name(away_name)
+func add_result(home_id:int,home_goals:int,away_id:int,away_goals:int) -> void:
+	var home:TableValues = _find_by_id(home_id)
+	var away:TableValues = _find_by_id(away_id)
 	
 	home.goals_made += home_goals
 	home.goals_against += away_goals
@@ -56,9 +57,9 @@ func _point_sorter(a:TableValues, b:TableValues) -> bool:
 		return true
 	return false
 
-func _find_by_name(team_name:String) -> TableValues:
+func _find_by_id(team_id:int) -> TableValues:
 	for value:TableValues in teams:
-		if value.team_name == team_name:
+		if value.team_id == team_id:
 			return value
-	print("ERROR while searching team in table")
+	print("ERROR while searching team in table with id: " + str(team_id))
 	return null

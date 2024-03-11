@@ -5,6 +5,7 @@
 class_name TableValues
 extends Resource
 
+@export var team_id:int
 @export var team_name:String
 @export var points:int
 @export var games_played:int
@@ -15,6 +16,7 @@ extends Resource
 @export var lost:int
 	
 func _init(
+		p_team_id:int = 0,
 		p_team_name:String = "",
 		p_points:int = 0,
 		p_games_played:int = 0,
@@ -24,6 +26,7 @@ func _init(
 		p_draws:int = 0,
 		p_lost:int = 0,
 	) -> void:
+		team_id = p_team_id
 		team_name = p_team_name
 		points = p_points
 		games_played = p_games_played

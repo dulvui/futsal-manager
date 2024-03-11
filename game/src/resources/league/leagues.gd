@@ -6,7 +6,7 @@ class_name Leagues
 extends Resource
 
 @export var list:Array[League]
-@export var active_name:String
+@export var active_id:int
 
 func _init(
 		p_list:Array[League] = [],
@@ -17,18 +17,18 @@ func add_league(league:League) -> void:
 	list.append(league)
 	
 func get_active() -> League:
-	return get_league_by_name(active_name)
+	return get_league_by_id(active_id)
 	
 func get_others() -> Array[League]:
 	var other_leagues:Array[League] = []
 	for league:League in list:
-		if league.name != active_name:
+		if league.id != active_id:
 			other_leagues.append(league)
 	return other_leagues
 	
-func get_league_by_name(league_name:String) -> League:
+func get_league_by_id(league_id:int) -> League:
 	for league:League in list:
-		if league.name == league_name:
+		if league.id == league_id:
 			return league
 	return null
 	
@@ -39,12 +39,12 @@ func get_leagues_by_nation(nation:Constants.Nations = 0) -> Array[League]:
 			leagues_by_nation.append(league)
 	return leagues_by_nation
 	
-func get_team_by_name(p_name:String) -> Team:
+func get_team_by_id(team_id:int) -> Team:
 	for league:League in list:
-		var found_team:Team = league.get_team_by_name(p_name)
+		var found_team:Team = league.get_team_by_id(team_id)
 		if found_team:
 			return found_team
-	print("ERROR: team not found with name: " + p_name)
+	print("ERROR: team not found with id: " + str(team_id))
 	return null
 
 func initialize_calendars() -> void:
@@ -59,5 +59,5 @@ func random_results() -> void:
 				var random_home_goals:int = randi()%10
 				var random_away_goals:int = randi()%10
 				matchz.set_result(random_home_goals, random_away_goals)
-				league.table.add_result(matchz.home.name,random_home_goals,matchz.away.name,random_away_goals)
+				league.table.add_result(matchz.home.id,random_home_goals,matchz.away.id,random_away_goals)
 

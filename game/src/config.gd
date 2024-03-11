@@ -123,7 +123,7 @@ func save_manager(p_manager:Manager) -> void:
 	config.save("user://settings.cfg")
 	
 func select_team(p_league:League, p_team:Team) -> void:
-	leagues.active_name = p_league.name
+	leagues.active_id = p_league.id
 	team = p_team
 	
 func next_season() -> void:

@@ -80,7 +80,7 @@ func match_end() -> void:
 	pause_button.hide()
 	$Main/Content/Buttons/Dashboard.show()
 	match_simulator.match_finished()
-	Config.leagues.get_active().table.add_result(home_team.name,match_simulator.home_stats.goals,away_team.name,match_simulator.away_stats.goals)
+	Config.leagues.get_active().table.add_result(home_team.id,match_simulator.home_stats.goals,away_team.id,match_simulator.away_stats.goals)
 	
 	
 	#assign result

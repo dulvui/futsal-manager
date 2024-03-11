@@ -130,6 +130,7 @@ func _on_Confirm_pressed() -> void:
 	transfer.delay_days = (randi()%5)+1
 	transfer.state = Transfer.State.OFFER
 	transfer.buy_team = Config.team
+	# TODO fix me
 	transfer.sell_team = Config.get_team_by_name(player.team)
 	
 	TransferUtil.make_offer(transfer)

@@ -31,8 +31,8 @@ func add_team(team:Team) -> void:
 	teams.append(team)
 	table.add_team(team) 
 	
-func get_team_by_name(p_name:String) -> Team:
+func get_team_by_id(team_id:int) -> Team:
 	for team:Team in teams:
-		if team.name == p_name:
+		if team.id == team_id:
 			return team
 	return null
