@@ -6,15 +6,16 @@
 [node name="VisualDay" type="Control" groups=["visual-day"]]
 custom_minimum_size = Vector2(90, 60)
 layout_mode = 3
-anchor_right = 0.047
-anchor_bottom = 0.056
-offset_right = -90.24
-offset_bottom = -60.48
+anchor_right = 0.081
+anchor_bottom = 0.102
+offset_right = -0.520004
+offset_bottom = -0.160004
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_njb33")
 script = ExtResource("2_ub0fh")
-metadata/_edit_use_anchors_ = true
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -39,8 +40,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -10.5
-offset_bottom = 10.5
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
@@ -57,6 +57,7 @@ layout_mode = 2
 
 [node name="Market" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+text = "MARKET"
 horizontal_alignment = 2
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
@@ -69,8 +70,13 @@ layout_mode = 2
 text = "31"
 horizontal_alignment = 2
 
+[node name="Matches" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "3 MATCHES"
+
 [node name="Match" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+text = "ROMA"
 
 [node name="Button" type="Button" parent="."]
 visible = false

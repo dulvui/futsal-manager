@@ -7,12 +7,19 @@ class_name VisualDay
 
 signal show_match_list
 
+const match_day_color:Color = Color.LIGHT_BLUE
+const home_match_day_color:Color = Color.DODGER_BLUE
+const away_match_day_color:Color = Color.DEEP_SKY_BLUE
+
+
 @onready var background:ColorRect = $Background
 @onready var color_active:ColorRect = $ColorActive
 
 @onready var button:Button = $Button
 
 @onready var match_label:Label = $MarginContainer/VBoxContainer/Match
+@onready var matches_label:Label = $MarginContainer/VBoxContainer/Matches
+
 @onready var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
 @onready var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
 
@@ -26,28 +33,31 @@ func set_up(p_date:Day = Day.new()) -> void:
 	month_day_label.text = str(date.day)
 	var team_name:String
 	if date.matches.size() > 0:
+		background.color = match_day_color
 		for matchz:Match in date.matches:
 			if Config.team.name == matchz.home.name:
 				team_name = matchz.away.name
-				background.color = Color.DODGER_BLUE
+				background.color = home_match_day_color
 			elif Config.team.name ==  matchz.away.name:
 				team_name = matchz.home.name
-				background.color = Color.DEEP_SKY_BLUE
+				background.color = away_match_day_color
 		match_label.text = team_name
+		matches_label.text = str(date.matches.size())
 	else:
 		match_label.hide()
+		matches_label.hide()
 		
 	if date.day == Config.calendar().day().day and Config.calendar().day().month == date.month:
-		if background.color != Color.DODGER_BLUE:
+		if background.color != home_match_day_color:
 			background.color = Color.LIGHT_GREEN
-		elif background.color != Color.DEEP_SKY_BLUE:
+		elif background.color != away_match_day_color:
 			background.color = Color.MEDIUM_SPRING_GREEN
 		else:
 			background.color = Color.LIGHT_PINK
 			
 	# check if market is active
 	if date.market:
-		market_label.text = "Market"
+		market_label.text = tr("MARKET")
 		
 func unselect() -> void:
 	color_active.color = Color(0,0,0,0)
