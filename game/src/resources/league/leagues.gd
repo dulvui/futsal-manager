@@ -51,6 +51,12 @@ func initialize_calendars() -> void:
 	for league:League in list:
 		league.calendar.initialize()
 		
+func is_match_day(day:Day = Config.calendar().day()) -> bool:
+	for league:League in list:
+		if league.calendar.day(day.month, day.day).matches.size() > 0:
+			return true
+	return false
+		
 func random_results() -> void:
 	for league:League in list:
 		var league_calendar:Calendar = league.calendar
