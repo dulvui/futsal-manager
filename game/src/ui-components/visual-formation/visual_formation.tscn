@@ -31,10 +31,10 @@ layout_mode = 2
 
 [node name="LineUp" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 4
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/LineUp"]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
@@ -53,8 +53,8 @@ layout_mode = 2
 text = ">"
 
 [node name="Field" type="Control" parent="HBoxContainer/LineUp"]
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LineUp/Field"]
 layout_mode = 1
