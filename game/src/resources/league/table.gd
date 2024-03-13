@@ -49,9 +49,9 @@ func to_sorted_array() -> Array:
 	return sorted
 	
 func _point_sorter(a:TableValues, b:TableValues) -> bool:
-	if a.points == 0 and b.points == 0:
+	if a.games_played == 0 and b.games_played == 0:
 		return a.team_name < b.team_name
-	if a.points > b.points:
+	elif a.points > b.points:
 		return true
 	elif a.points == b.points and a.goals_made - a.goals_against > b.goals_made - b.goals_against:
 		return true
