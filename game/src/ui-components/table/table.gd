@@ -5,12 +5,10 @@
 extends Control
 
 @onready var grid:GridContainer = $VBoxContainer/ScrollContainer/GridContainer
-@onready var leagues:OptionButton = $VBoxContainer/Leagues
+@onready var leagues:SwitchOptionButton = $VBoxContainer/Leagues
 
 func _ready() -> void:
-	for league:League in Config.leagues.list:
-		leagues.add_item(league.name)
-		
+	leagues.set_up(Config.leagues.list.map(func(league:League) -> String: return league.name))
 	set_up()
 
 func set_up(league:League = Config.leagues.get_active()) -> void:
@@ -90,11 +88,6 @@ func set_up(league:League = Config.leagues.get_active()) -> void:
 func style_label(label:Label) -> void:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label.custom_minimum_size = Vector2(60, 0)
-
-
-func _on_Close_pressed() -> void:
-	hide()
-
 
 func _on_leagues_item_selected(index: int) -> void:
 	set_up(Config.leagues.list[index])

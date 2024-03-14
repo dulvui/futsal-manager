@@ -26,7 +26,7 @@ layout_mode = 2
 text = "<"
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 
 [node name="Next" type="Button" parent="HBoxContainer"]

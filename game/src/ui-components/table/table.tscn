@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7bh7ukttbkvu"]
+[gd_scene load_steps=4 format=3 uid="uid://c7bh7ukttbkvu"]
 
 [ext_resource type="Script" path="res://src/ui-components/table/table.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui-components/swtich-option-button/switch_option_button.tscn" id="3_p68f4"]
 
 [node name="Table" type="Control"]
 layout_mode = 3
@@ -25,9 +26,8 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Leagues" type="OptionButton" parent="VBoxContainer"]
+[node name="Leagues" parent="VBoxContainer" instance=ExtResource("3_p68f4")]
 layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="Labels" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

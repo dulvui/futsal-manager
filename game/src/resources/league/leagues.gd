@@ -66,4 +66,3 @@ func random_results() -> void:
 				var random_away_goals:int = randi()%10
 				matchz.set_result(random_home_goals, random_away_goals)
 				league.table.add_result(matchz.home.id,random_home_goals,matchz.away.id,random_away_goals)
-

@@ -95,6 +95,4 @@ alignment = 1
 layout_mode = 2
 
 [connection signal="item_selected" from="HBoxContainer/LineUp/FormationSelect" to="." method="_on_formation_button_item_selected"]
-[connection signal="next" from="HBoxContainer/LineUp/FormationSelect" to="." method="_on_formation_button_next"]
-[connection signal="prev" from="HBoxContainer/LineUp/FormationSelect" to="." method="_on_formation_button_prev"]
 [connection signal="select_player" from="HBoxContainer/PlayerList" to="." method="_on_player_list_select_player"]

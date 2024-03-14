@@ -57,7 +57,7 @@ func _ready() -> void:
 	if Config.leagues.get_active().calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
-
+		
 	_show_active_view()
 		
 	

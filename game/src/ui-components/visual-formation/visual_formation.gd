@@ -124,9 +124,3 @@ func _change_player() -> void:
 func _on_formation_button_item_selected(index: int) -> void:
 	_update_formation(index)
 
-func _on_formation_button_next(index: int) -> void:
-	_update_formation(index)
-
-func _on_formation_button_prev(index: int) -> void:
-	_update_formation(index)
-
