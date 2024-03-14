@@ -10,6 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6xdk8")
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -18,19 +19,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Prev" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "<"
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Next" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 text = ">"
 
 [connection signal="pressed" from="HBoxContainer/Prev" to="." method="_on_prev_pressed"]
