@@ -23,10 +23,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Leagues" parent="VBoxContainer" instance=ExtResource("3_p68f4")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="Labels" type="HBoxContainer" parent="VBoxContainer"]

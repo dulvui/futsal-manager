@@ -3,14 +3,13 @@
 [ext_resource type="Script" path="res://src/ui-components/swtich-option-button/switch_option_button.gd" id="1_6xdk8"]
 
 [node name="SwitchOptionsButton" type="Control"]
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchor_right = 0.104
+anchor_bottom = 0.037
+offset_right = -79.68
+offset_bottom = 0.0400009
 script = ExtResource("1_6xdk8")
-metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -26,7 +25,6 @@ layout_mode = 2
 text = "<"
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
-custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 
 [node name="Next" type="Button" parent="HBoxContainer"]
