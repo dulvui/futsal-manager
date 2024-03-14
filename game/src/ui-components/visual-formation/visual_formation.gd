@@ -12,7 +12,7 @@ const FormationPlayer:PackedScene = preload("res://src/ui-components/visual-form
 @onready var players:VBoxContainer = $HBoxContainer/LineUp/Field/Players
 @onready var subs:VBoxContainer = $HBoxContainer/Subs/List
 
-@onready var formation_select:OptionButton = $HBoxContainer/LineUp/HBoxContainer/FormationSelect
+@onready var formation_select:SwitchOptionButton = $HBoxContainer/LineUp/FormationSelect
 
 @onready var goalkeeper:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Goalkeeper
 @onready var defense:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Defense
@@ -32,9 +32,7 @@ func set_up(p_only_lineup:bool) -> void:
 	player_list.set_up(only_lineup, false, team)
 	
 	# set up fomation options
-	for formation:String in Formation.Variations:
-		formation_select.add_item(formation)
-	formation_select.selected = team.formation.variation
+	formation_select.set_up(Formation.Variations.keys(), team.formation.variation)
 	
 	_set_players()
 
@@ -89,25 +87,8 @@ func _set_players() -> void:
 		subs.add_child(formation_player)
 		pos_count += 1
 
-func _on_prev_formation_pressed() -> void:
-	if formation_select.selected > 0:
-		formation_select.selected -= 1
-	else:
-		formation_select.selected = formation_select.item_count - 1
-	_update_formation()
-
-func _on_next_formation_pressed() -> void:
-	if formation_select.selected < formation_select.item_count - 1:
-		formation_select.selected += 1
-	else:
-		formation_select.selected = 0
-	_update_formation()
-
-func _on_formation_select_item_selected(_index: int) -> void:
-	_update_formation()
-
-func _update_formation() -> void:
-	team.formation = Formation.new(formation_select.selected)
+func _update_formation(index:int) -> void:
+	team.formation = Formation.new(index)
 	_set_players()
 
 func _on_line_up_select_player(index:int) -> void:
@@ -139,4 +120,13 @@ func _change_player() -> void:
 	
 	lineup_players.clear()
 	list_player = null
+
+func _on_formation_button_item_selected(index: int) -> void:
+	_update_formation(index)
+
+func _on_formation_button_next(index: int) -> void:
+	_update_formation(index)
+
+func _on_formation_button_prev(index: int) -> void:
+	_update_formation(index)
 

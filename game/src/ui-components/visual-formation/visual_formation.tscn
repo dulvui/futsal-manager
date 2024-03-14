@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://i4nnwgwck615"]
+[gd_scene load_steps=6 format=3 uid="uid://i4nnwgwck615"]
 
 [ext_resource type="Script" path="res://src/ui-components/visual-formation/visual_formation.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://n0wgfgg75cab" path="res://assets/field-half.png" id="3_1l72w"]
 [ext_resource type="PackedScene" uid="uid://dq4dr3oe20mb8" path="res://src/ui-components/player-list/player_list.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui-components/swtich-option-button/switch_option_button.tscn" id="4_bi7d8"]
 
 [node name="Formation" type="Control"]
 layout_mode = 3
@@ -26,31 +27,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="PlayerList" parent="HBoxContainer" instance=ExtResource("4")]
-layout_mode = 2
-
 [node name="LineUp" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/LineUp"]
-custom_minimum_size = Vector2(30, 0)
+[node name="FormationSelect" parent="HBoxContainer/LineUp" instance=ExtResource("4_bi7d8")]
 layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
 
-[node name="PrevFormation" type="Button" parent="HBoxContainer/LineUp/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/LineUp"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-text = "<"
-
-[node name="FormationSelect" type="OptionButton" parent="HBoxContainer/LineUp/HBoxContainer"]
-custom_minimum_size = Vector2(200, 40)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="NextFormation" type="Button" parent="HBoxContainer/LineUp/HBoxContainer"]
-layout_mode = 2
-text = ">"
 
 [node name="Field" type="Control" parent="HBoxContainer/LineUp"]
 custom_minimum_size = Vector2(0, 400)
@@ -103,7 +91,10 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
+[node name="PlayerList" parent="HBoxContainer" instance=ExtResource("4")]
+layout_mode = 2
+
+[connection signal="item_selected" from="HBoxContainer/LineUp/FormationSelect" to="." method="_on_formation_button_item_selected"]
+[connection signal="next" from="HBoxContainer/LineUp/FormationSelect" to="." method="_on_formation_button_next"]
+[connection signal="prev" from="HBoxContainer/LineUp/FormationSelect" to="." method="_on_formation_button_prev"]
 [connection signal="select_player" from="HBoxContainer/PlayerList" to="." method="_on_player_list_select_player"]
-[connection signal="pressed" from="HBoxContainer/LineUp/HBoxContainer/PrevFormation" to="." method="_on_prev_formation_pressed"]
-[connection signal="item_selected" from="HBoxContainer/LineUp/HBoxContainer/FormationSelect" to="." method="_on_formation_select_item_selected"]
-[connection signal="pressed" from="HBoxContainer/LineUp/HBoxContainer/NextFormation" to="." method="_on_next_formation_pressed"]
