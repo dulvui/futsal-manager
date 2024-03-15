@@ -9,12 +9,14 @@ extends Resource
 @export var table:Table
 @export var calendar:Calendar
 @export var nation:Constants.Nations
+@export var pyramid_level:int
 @export var name:String
 @export var teams:Array[Team]
 
 func _init(
 		p_id:int = IdUtil.next_id(IdUtil.Types.LEAGUE),
 		p_nation:Constants.Nations = Constants.Nations.ITALY,
+		p_pyramid_level:int = 1,
 		p_table:Table = Table.new(),
 		p_name:String = "",
 		p_teams:Array[Team] = [],
@@ -22,6 +24,7 @@ func _init(
 	) -> void:
 	id = p_id
 	nation = p_nation
+	pyramid_level = p_pyramid_level
 	table = p_table
 	name = p_name
 	teams = p_teams
