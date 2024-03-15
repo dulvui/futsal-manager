@@ -137,3 +137,6 @@ func get_goalkeeper_attributes() -> int:
 	value += attributes.goalkeeper.diving
 	value += attributes.goalkeeper.speed
 	return value
+	
+func get_attributes_average() -> int:
+	

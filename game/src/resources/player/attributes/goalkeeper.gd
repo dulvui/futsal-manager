@@ -11,3 +11,28 @@ class_name Goalkeeper
 @export var handling: int
 @export var diving: int
 @export var speed: int
+
+func _init(
+	p_reflexes:int = 0,
+	p_positioning:int = 0,
+	p_kicking:int = 0,
+	p_handling:int = 0,
+	p_diving:int = 0,
+	p_speed:int = 0,
+) -> void:
+	reflexes = p_reflexes
+	positioning = p_positioning
+	kicking = p_kicking
+	handling = p_handling
+	diving = p_diving
+	speed = p_speed
+
+func average() -> int:
+	return ((
+		reflexes +
+		positioning +
+		kicking +
+		handling +
+		diving +
+		speed
+	) / 6)

@@ -35,3 +35,16 @@ func _init(
 	work_rate = p_work_rate
 	offensive_movement = p_offensive_movement
 	marking = p_marking
+
+func average() -> int:
+	return ((
+		aggression +
+		anticipation +
+		decisions +
+		concentration +
+		teamwork +
+		vision +
+		work_rate +
+		offensive_movement +
+		marking
+	) / 9)

@@ -26,3 +26,13 @@ func _init(
 	strength = p_strength
 	agility = p_agility
 	jump = p_jump
+	
+func average() -> int:
+	return ((
+		pace +
+		acceleration +
+		stamina +
+		strength +
+		agility +
+		jump
+	) / 6)

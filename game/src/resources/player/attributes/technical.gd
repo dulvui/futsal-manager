@@ -44,3 +44,19 @@ func _init(
 	finishing = p_finishing
 	dribbling = p_dribbling
 	blocking = p_blocking
+
+func average() -> int:
+	return ((
+		crossing +
+		passing +
+		long_passing +
+		tackling +
+		heading +
+		interception +
+		shooting +
+		long_shooting +
+		penalty +
+		finishing +
+		dribbling +
+		blocking
+	) / 12)
