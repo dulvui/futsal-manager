@@ -51,6 +51,8 @@ func set_up(
 	
 	sort_memory["surname"] = false
 	sort_memory["position"] = false
+	sort_memory["attributes_average"] = false
+	
 	for key:String in Constants.ATTRIBUTES.keys():
 		for attribute:String in Constants.ATTRIBUTES[key]:
 			sort_memory[key + "_" + attribute] = false
@@ -84,8 +86,15 @@ func _set_up_headers() -> void:
 	name_button.button_down.connect(_sort_info.bind(headers[1]))
 	header_container.add_child(name_button)
 	
+	# average attribues header
+	var attributes_average_button:Button = Button.new()
+	attributes_average_button.text = headers[2].substr(0,3)
+	attributes_average_button.custom_minimum_size.x = 34
+	attributes_average_button.button_down.connect(_sort_attribues_average)
+	header_container.add_child(attributes_average_button)
+	
 	# ohter headers
-	for header:String in headers.slice(2):
+	for header:String in headers.slice(3):
 		var button:Button = Button.new()
 		button.text = tr(header)
 		button.text_overrun_behavior = TextServer.OVERRUN_TRIM_CHAR
@@ -157,7 +166,17 @@ func _sort_attributes(key:String) -> void:
 		players.reverse()
 	
 	_set_up_content()
+
+func _sort_attribues_average() -> void:
+	players.sort_custom(func(a:Player, b:Player) -> bool: return a.get_attributes_average() < b.get_attributes_average())
 	
+	sort_memory["attributes_average"] = not sort_memory["attributes_average"]
+	
+	if sort_memory["attributes_average"]:
+		players.reverse()
+	
+	_set_up_content()
+
 func _sort_info(key:String) -> void:
 	players.sort_custom(func(a:Player, b:Player) -> bool: return a.get(key) < b.get(key))
 	

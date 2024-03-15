@@ -129,14 +129,9 @@ func get_defense_attributes(attack:Action.Attack) -> int:
 	return -1
 
 func get_goalkeeper_attributes() -> int:
-	var value:int = 0
-	value += attributes.goalkeeper.reflexes
-	value += attributes.goalkeeper.positioning
-	value += attributes.goalkeeper.kicking
-	value += attributes.goalkeeper.handling
-	value += attributes.goalkeeper.diving
-	value += attributes.goalkeeper.speed
-	return value
-	
+	return attributes.goalkeeper.sum()
+
 func get_attributes_average() -> int:
-	
+	if position == Position.G:
+		return attributes.goal_keeper_average()
+	return attributes.field_player_average()

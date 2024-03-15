@@ -8,6 +8,7 @@ class_name PlayerList
 signal select_player(player:Player)
 
 const info_types:Array = ["mental","physical","technical","goalkeeper"]
+var base_headers:Array[String] = ["position", "surname", "attributes_average"]
 
 @onready var table:PlayerTable = $VBoxContainer/Table
 @onready var player_profile:Control = $PlayerProfile
@@ -78,8 +79,7 @@ func set_up_players(only_lineup:bool, p_active_team:Team = null, p_reset_options
 			#all_players.append_array(active_team.get_lineup_players())
 			#all_players.append_array(active_team.get_sub_players())
 			#all_players.append_array(active_team.get_non_lineup_players())
-	position
-	var headers:Array[String] = ["position", "surname"]
+	var headers:Array[String] = base_headers.duplicate()
 	for attribute:String in Constants.ATTRIBUTES[info_types[active_info_type]]:
 		headers.append(attribute)
 	table.set_up(headers,info_types[active_info_type], all_players, active_team, lineup_colors)
@@ -134,7 +134,7 @@ func _on_PositionSelect_item_selected(index:int) -> void:
 	else:
 		active_filters["position"] = ""
 	
-	var headers:Array[String] = ["position", "surname"]
+	var headers:Array[String] = base_headers.duplicate()
 	for attribute:String in Constants.ATTRIBUTES[info_types[active_info_type]]:
 		headers.append(attribute)
 	info_select.select(0)
@@ -151,7 +151,7 @@ func _on_Close_pressed() -> void:
 
 
 func _on_InfoSelect_item_selected(index:int) -> void:
-	var headers:Array[String] = ["position", "surname"]
+	var headers:Array[String] = base_headers.duplicate()
 	for attribute:String in Constants.ATTRIBUTES[info_types[index]]:
 		headers.append(attribute)
 	active_info_type = index

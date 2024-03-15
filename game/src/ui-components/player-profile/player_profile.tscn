@@ -96,6 +96,14 @@ text = "NR"
 layout_mode = 2
 text = "Bronzolo"
 
+[node name="AttributesAverageLabel" type="Label" parent="TabContainer/Info/Info"]
+layout_mode = 2
+text = "ATTRIBUTES_AVERGE"
+
+[node name="AttributesAverage" type="Label" parent="TabContainer/Info/Info"]
+layout_mode = 2
+text = "Bronzolo"
+
 [node name="Attributes" type="HBoxContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2

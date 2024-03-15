@@ -27,12 +27,15 @@ func _init(
 	diving = p_diving
 	speed = p_speed
 
+func sum() -> int:
+	var value:int = 0
+	value += reflexes
+	value += positioning
+	value += kicking
+	value += handling
+	value += diving
+	value += speed
+	return value
+
 func average() -> int:
-	return ((
-		reflexes +
-		positioning +
-		kicking +
-		handling +
-		diving +
-		speed
-	) / 6)
+	return sum() / 6

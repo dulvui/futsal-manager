@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0df8jqv2q5bg"]
+[gd_scene load_steps=4 format=3 uid="uid://b0df8jqv2q5bg"]
 
 [ext_resource type="Script" path="res://src/ui-components/player-list/player-row/player_row.gd" id="1_4bbf8"]
 [ext_resource type="PackedScene" uid="uid://bp0lflrwwki6x" path="res://src/ui-components/player-list/table/name-label/name_label.tscn" id="2_1q6ka"]
+[ext_resource type="PackedScene" uid="uid://b3y6tq2i5pg3b" path="res://src/ui-components/color-number/color_number.tscn" id="3_kea3u"]
 
 [node name="PlayerRow" type="Control"]
 custom_minimum_size = Vector2(0, 36)
@@ -29,6 +30,11 @@ horizontal_alignment = 1
 
 [node name="NameLabel" parent="HBoxContainer" instance=ExtResource("2_1q6ka")]
 layout_mode = 2
+
+[node name="AttributesAverage" parent="HBoxContainer" instance=ExtResource("3_kea3u")]
+custom_minimum_size = Vector2(70, 40)
+layout_mode = 2
+size_flags_horizontal = 1
 
 [node name="Attributes" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2

@@ -21,10 +21,12 @@ func _init(
 	technical = p_technical
 	physical = p_physical
 	
-func average() -> int:
-	return (
-		goalkeeper.average() +
+func field_player_average() -> int:
+	return ((
 		mental.average() +
 		technical.average() +
 		physical.average()
-	)
+	) / 4)
+	
+func goal_keeper_average() -> int:
+	return goalkeeper.average()

@@ -16,6 +16,7 @@ const color_number:PackedScene = preload("res://src/ui-components/color-number/c
 @onready var button:Button = $Button
 @onready var name_label:Control = $HBoxContainer/NameLabel
 @onready var position_label:Control = $HBoxContainer/PositionLabel
+@onready var attributes_average:ColorNumber = $HBoxContainer/AttributesAverage
 @onready var attributes:HBoxContainer = $HBoxContainer/Attributes
 
 func set_up(player:Player, active_headers:Array[String], team:Team=null, lineup_colors:bool = true) -> void:
@@ -24,8 +25,11 @@ func set_up(player:Player, active_headers:Array[String], team:Team=null, lineup_
 		
 	button.tooltip_text = tr("Click for info of") + " " + player.surname
 	
-	name_label.set_text(player.surname)
 	position_label.set_text(Player.Position.keys()[player.position])
+	name_label.set_text(player.surname)
+	
+	attributes_average.set_up(player.get_attributes_average())
+	
 	for key:String in Constants.ATTRIBUTES.keys():
 		for attribute:String in Constants.ATTRIBUTES[key]:
 			var number:ColorNumber = color_number.instantiate()

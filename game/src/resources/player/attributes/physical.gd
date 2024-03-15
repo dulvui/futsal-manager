@@ -28,11 +28,11 @@ func _init(
 	jump = p_jump
 	
 func average() -> int:
-	return ((
-		pace +
-		acceleration +
-		stamina +
-		strength +
-		agility +
-		jump
-	) / 6)
+	var value:int = 0
+	value += pace
+	value += acceleration
+	value += stamina
+	value += strength
+	value += agility
+	value += jump
+	return value / 6

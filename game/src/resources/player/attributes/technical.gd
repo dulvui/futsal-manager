@@ -46,17 +46,17 @@ func _init(
 	blocking = p_blocking
 
 func average() -> int:
-	return ((
-		crossing +
-		passing +
-		long_passing +
-		tackling +
-		heading +
-		interception +
-		shooting +
-		long_shooting +
-		penalty +
-		finishing +
-		dribbling +
-		blocking
-	) / 12)
+	var value:int = 0
+	value += crossing
+	value += passing
+	value += long_passing
+	value += tackling
+	value += heading
+	value += interception
+	value += shooting
+	value += long_shooting
+	value += penalty
+	value += finishing
+	value += dribbling
+	value += blocking
+	return value / 12

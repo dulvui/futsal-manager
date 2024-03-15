@@ -37,14 +37,14 @@ func _init(
 	marking = p_marking
 
 func average() -> int:
-	return ((
-		aggression +
-		anticipation +
-		decisions +
-		concentration +
-		teamwork +
-		vision +
-		work_rate +
-		offensive_movement +
-		marking
-	) / 9)
+	var value:int = 0
+	value += aggression
+	value += anticipation
+	value += decisions
+	value += concentration
+	value += teamwork
+	value += vision
+	value += work_rate
+	value += offensive_movement
+	value += marking
+	return value / 9
