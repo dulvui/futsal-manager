@@ -20,7 +20,7 @@ func set_up_info(_player:Player) -> void:
 	$TabContainer/Info/Info/Name.text = player.name + " " + player.surname
 	$TabContainer/Info/Info/Position.text = str(player.position)
 	$TabContainer/Info/Info/Age.text = str(player.birth_date.day) + "/" + str(player.birth_date.month) + "/" + str(player.birth_date.year)
-	$TabContainer/Info/Info/Nationality.text = player.nationality
+	$TabContainer/Info/Info/Nationality.text = tr(Constants.Nations.keys()[player.nation])
 	$TabContainer/Info/Info/Team.text = str(player.team)
 	$TabContainer/Info/Info/Foot.text = str(player.foot)
 	$TabContainer/Info/Info/Nr.text = str(player.nr)

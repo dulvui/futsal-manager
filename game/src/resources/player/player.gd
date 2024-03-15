@@ -21,7 +21,7 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var team:String # team name for easier filtering etc...
 @export var league:String # league name for easier filtering etc...
 @export var surname:String
-@export var nationality:String
+@export var nation:Constants.Nations
 @export var birth_date:Dictionary
 @export var form:Form
 @export var morality:Morality
@@ -43,7 +43,7 @@ func _init(
 	p_team:String = "",
 	p_league:String = "",
 	p_surname:String = "",
-	p_nationality:String = "",
+	p_nation:Constants.Nations = 0,
 	p_birth_date:Dictionary = {},
 	p_form:Form = Form.Good,
 	p_morality:Morality = Morality.Good,
@@ -64,7 +64,7 @@ func _init(
 	team = p_team
 	league = p_league
 	surname = p_surname
-	nationality = p_nationality
+	nation = p_nation
 	birth_date = p_birth_date
 	form = p_form
 	morality = p_morality
