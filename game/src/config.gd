@@ -8,6 +8,7 @@ var config:ConfigFile
 
 # generator
 var generation_seed:String
+var generation_state:int
 var generation_gender:Constants.Gender
 var rng:RandomNumberGenerator
 
@@ -34,6 +35,7 @@ func _ready() -> void:
 	_load_config()
 	_load_resources()
 	rng = RandomNumberGenerator.new()
+	rng.state = generation_state
 	set_seed()
 
 func _load_config() -> void:
@@ -51,6 +53,7 @@ func _load_config() -> void:
 	language = config.get_value("settings","language","ND")
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	generation_seed = config.get_value("generation", "seed", Constants.DEFAULT_SEED)
+	generation_state = config.get_value("generation", "state", 0)
 	generation_gender = config.get_value("generation", "gender", 0)
 
 func save_config() -> void:
@@ -59,6 +62,7 @@ func save_config() -> void:
 	config.set_value("settings","currency",currency)
 	config.set_value("dashboard","active_content",dashboard_active_content)
 	config.set_value("generation","seed",generation_seed)
+	config.set_value("generation","state", generation_state)
 	config.set_value("generation","gender",generation_gender)
 	config.set_value("settings","id_by_type", id_by_type)
 #
@@ -100,6 +104,8 @@ func reset() -> void:
 	# CONFIG
 	id_by_type = {}
 	current_season = 0
+	generation_state = 0
+	rng.state = generation_state
 	# RESOURCES
 	manager =  Manager.new()
 	inbox = Inbox.new()
