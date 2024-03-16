@@ -8,7 +8,7 @@ const NAMES_DIR:String = "res://data/player-names/"
 const LEAGUES_DIR:String = "res://data/leagues/"
 
 # defines noise added to attribute factors
-const NOISE:int = 2
+const NOISE:int = 4
 
 var leagues_data:Dictionary = {}
 var names:Dictionary = {}
