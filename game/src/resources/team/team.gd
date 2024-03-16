@@ -10,7 +10,6 @@ class_name Team
 # 0 to 4 active, 5 to x subs
 @export var lineup_player_ids:Array[int]
 @export var formation:Formation
-@export var prestige:int
 @export var budget:int
 @export var salary_budget:int
 @export var players:Array[Player]
@@ -22,7 +21,6 @@ class_name Team
 func _init(
 	p_id:int = IdUtil.next_id(IdUtil.Types.TEAM),
 	p_name:String = "",
-	p_prestige:int = 0,
 	p_budget:int = 0,
 	p_salary_budget:int = 0,
 	p_players:Array[Player] = [],
@@ -33,7 +31,6 @@ func _init(
 ) -> void:
 	id = p_id
 	name = p_name
-	prestige = p_prestige
 	budget = p_budget
 	salary_budget = p_salary_budget
 	players = p_players
@@ -106,11 +103,17 @@ func remove_player(p_player:Player) -> void:
 			lineup_player_ids.erase(l_id)
 			lineup_player_ids.append(players[-1].id)
 			break
-			
+
+func get_prestige() -> int:
+	var value:int = 0
+	for player:Player in players:
+		value += player.get_attributes_average()
+	return value / players.size()
+
 func get_prestige_stars() -> String:
 	var relation:int = Constants.MAX_PRESTIGE / 4
 	var star_factor:int = Constants.MAX_PRESTIGE / relation
-	var stars:int = max(1,prestige / star_factor)
+	var stars:int = max(1,get_prestige() / star_factor)
 	var spaces:int = 5 - stars 
 	# creates right padding ex: "***  "
 	return "*".repeat(stars) + "  ".repeat(spaces)
