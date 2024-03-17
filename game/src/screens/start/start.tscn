@@ -103,7 +103,6 @@ text = "GENDER"
 [node name="Gender" type="OptionButton" parent="VBoxContainer/Settings/Container"]
 layout_mode = 2
 size_flags_horizontal = 3
-selected = 0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2

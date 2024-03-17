@@ -91,8 +91,8 @@ func save_resources() -> void:
 
 func generate_leagues(p_generation_seed:String, p_generation_gender:Constants.Gender) -> void:
 	generation_seed = p_generation_seed
-	set_seed(generation_seed)
 	generation_gender = p_generation_gender
+	set_seed(generation_seed)
 	var generator:Generator = Generator.new()
 	leagues = generator.generate()
 
@@ -114,7 +114,7 @@ func reset() -> void:
 
 func set_seed(p_generation_seed:String=generation_seed) -> void:
 	generation_seed = p_generation_seed
-	rng.seed = hash(generation_seed)
+	rng.seed = hash(generation_seed) + generation_gender
 
 func set_lang(lang:String) -> void:
 	TranslationServer.set_locale(lang)
