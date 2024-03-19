@@ -25,6 +25,7 @@ func set_up_info(_player:Player) -> void:
 	$TabContainer/Info/Info/Foot.text = str(player.foot)
 	$TabContainer/Info/Info/Nr.text = str(player.nr)
 	$TabContainer/Info/Info/AttributesAverage.text = str(player.get_attributes_average())
+	$TabContainer/Info/Info/Prestige.text = str(player.prestige)
 	
 	
 	# attributes

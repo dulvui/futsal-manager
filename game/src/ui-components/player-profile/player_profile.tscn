@@ -104,6 +104,14 @@ text = "ATTRIBUTES_AVERGE"
 layout_mode = 2
 text = "Bronzolo"
 
+[node name="PrestigeLabel" type="Label" parent="TabContainer/Info/Info"]
+layout_mode = 2
+text = "PRESTIGE"
+
+[node name="Prestige" type="Label" parent="TabContainer/Info/Info"]
+layout_mode = 2
+text = "Bronzolo"
+
 [node name="Attributes" type="HBoxContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2

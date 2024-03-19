@@ -8,7 +8,7 @@ const NAMES_DIR:String = "res://data/player-names/"
 const LEAGUES_DIR:String = "res://data/leagues/"
 
 # defines noise added to attribute factors
-const NOISE:int = 4
+const NOISE:int = 3
 
 var leagues_data:Dictionary = {}
 var names:Dictionary = {}
@@ -17,6 +17,7 @@ var names:Dictionary = {}
 var date:Dictionary
 var max_timestamp:int
 var min_timestamp:int
+
 
 func generate() -> Leagues:
 	var leagues:Leagues = Leagues.new()
@@ -106,11 +107,11 @@ func get_goalkeeper_attributes(age:int, prestige:int, position:Player.Position) 
 	var factor:int = in_bounds(prestige + age_factor)
 	
 	# goalkeepers have max potential of 20 
-	var max_potential:int = Constants.MAX_PRESTIGE
+	var max_potential:int = factor + abs_noise()
 	
 	# non-goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position != Player.Position.G:
-		max_potential = Constants.MAX_PRESTIGE / 2
+		max_potential /= 2
 
 	attributes.reflexes = in_bounds(factor + noise(), max_potential)
 	attributes.positioning = in_bounds(factor + noise(), max_potential)
@@ -129,12 +130,12 @@ func get_physical(age:int, prestige:int, position:Player.Position) -> Physical:
 	var pace_factor:int = in_bounds(prestige + age_factor + noise())
 	var physical_factor:int = in_bounds(prestige + age_factor + noise())
 	
-	# non goalkeepers have max potential of 20 
-	var max_potential:int = Constants.MAX_PRESTIGE
+	# non goalkeepers have max potential
+	var max_potential:int = prestige + noise()
 	
 	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position == Player.Position.G:
-		max_potential = Constants.MAX_PRESTIGE / 2
+		max_potential /=  2
 	
 	attributes.pace = in_bounds(pace_factor + noise(), max_potential)
 	attributes.acceleration = in_bounds(pace_factor + noise(), max_potential)
@@ -158,12 +159,13 @@ func get_technical(age:int, prestige:int, position:Player.Position) -> Technical
 	var defense_factor:int = in_bounds(prestige + age_factor + noise())
 
 	
-	# non goalkeepers have max potential of 20 
-	var max_potential:int = 20
+	# non goalkeepers have max potential
+	var max_potential:int = prestige + noise()
 	
 	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position == Player.Position.G:
-		max_potential = 15
+		max_potential /=  2
+	
 	attributes.crossing = in_bounds(pass_factor + noise(), max_potential)
 	attributes.passing = in_bounds(pass_factor + noise(), max_potential)
 	attributes.long_passing = in_bounds(pass_factor + noise(), max_potential)
@@ -187,17 +189,19 @@ func get_mental(age:int, prestige:int) -> Mental:
 
 	var offensive_factor:int = in_bounds(prestige + age_factor + noise())
 	var defensive_factor:int = in_bounds(prestige + age_factor + noise())
-
-	attribtues.aggression = in_bounds(defensive_factor + noise())
-	attribtues.anticipation = in_bounds(defensive_factor + noise())
-	attribtues.marking = in_bounds(defensive_factor + noise())
 	
-	attribtues.decisions = in_bounds(offensive_factor + noise())
-	attribtues.concentration = in_bounds(offensive_factor + noise())
-	attribtues.teamwork = in_bounds(offensive_factor + noise())
-	attribtues.vision = in_bounds(offensive_factor + noise())
-	attribtues.work_rate = in_bounds(offensive_factor + noise())
-	attribtues.offensive_movement = in_bounds(offensive_factor + noise())
+	var max_potential:int = prestige + noise()
+
+	attribtues.aggression = in_bounds(defensive_factor + noise(), max_potential)
+	attribtues.anticipation = in_bounds(defensive_factor + noise(), max_potential)
+	attribtues.marking = in_bounds(defensive_factor + noise(), max_potential)
+	
+	attribtues.decisions = in_bounds(offensive_factor + noise(), max_potential)
+	attribtues.concentration = in_bounds(offensive_factor + noise(), max_potential)
+	attribtues.teamwork = in_bounds(offensive_factor + noise(), max_potential)
+	attribtues.vision = in_bounds(offensive_factor + noise(), max_potential)
+	attribtues.work_rate = in_bounds(offensive_factor + noise(), max_potential)
+	attribtues.offensive_movement = in_bounds(offensive_factor + noise(), max_potential)
 	
 	return attribtues
 
@@ -356,7 +360,10 @@ func get_random_nationality(nationality:Constants.Nations) -> Constants.Nations:
 
 func noise(fator:int = NOISE) -> int:
 	return Config.rng.randi_range(-fator, fator)
-
+	
+func abs_noise(fator:int = NOISE) -> int:
+	return Config.rng.randi_range(0, fator)
+	
 # returns value between 1 and 20
 func in_bounds(value:int, max_bound:int = Constants.MAX_PRESTIGE) -> int:
 	return maxi(mini(value, max_bound), 1)
