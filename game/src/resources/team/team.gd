@@ -14,6 +14,7 @@ class_name Team
 @export var salary_budget:int
 @export var players:Array[Player]
 @export var stadium:Stadium
+@export var board_requests:BoardRequests
 # shirt colors
 # 0: home color, 1: away, 2 third color
 @export var colors:Array[Color]
@@ -27,6 +28,7 @@ func _init(
 	p_formation:Formation = Formation.new(),
 	p_lineup_player_ids:Array[int] = [],
 	p_stadium:Stadium = Stadium.new(),
+	p_board_requests:BoardRequests = BoardRequests.new(),
 	p_colors:Array[Color] = [Color(0, 0, 0), Color(0, 0, 0), Color(0, 0, 0)],
 ) -> void:
 	id = p_id
@@ -37,6 +39,7 @@ func _init(
 	stadium = p_stadium
 	colors = p_colors
 	formation = p_formation
+	board_requests = p_board_requests
 	lineup_player_ids = p_lineup_player_ids
 
 func create_stadium(_name:String, capacity:int, year_built:int) -> void:
