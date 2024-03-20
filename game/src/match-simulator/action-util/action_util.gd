@@ -31,12 +31,10 @@ enum Cards {NONE, YELLOW, RED}
 #enum Pass { SHORT_PASS, LONG_PASS, CROSS}
 #enum Shoot {SHOOT, LONG_SHOOT, HEADER}
 
-@onready
-var home_team:Node = $HomeTeam
-@onready
-var away_team:Node = $AwayTeam
+@onready var home_team:Node = $HomeTeam
+@onready var away_team:Node = $AwayTeam
 
-var current_state:int
+var current_state:Action.State
 
 const MAX_ACTION_BUFFER_SIZE:int = 8 
 var action_buffer:Array[Action] = []
