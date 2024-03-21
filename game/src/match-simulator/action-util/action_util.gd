@@ -108,9 +108,6 @@ func update() -> void:
 		_change_possession()
 		_change_attacker()
 
-	home_team.update_players()
-	away_team.update_players()
-
 	
 func change_players(_home_team:Team,_away_team:Team) -> void:
 	# reset action buffer, becasue change happened and
