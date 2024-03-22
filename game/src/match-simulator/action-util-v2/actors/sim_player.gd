@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 extends Node
-class_name Ball
+class_name SimPlayer
 
 var pos:Vector2
+var start_pos:Vector2
