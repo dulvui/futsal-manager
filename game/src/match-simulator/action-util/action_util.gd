@@ -28,8 +28,6 @@ signal action_message
 
 
 enum Cards {NONE, YELLOW, RED}
-#enum Pass { SHORT_PASS, LONG_PASS, CROSS}
-#enum Shoot {SHOOT, LONG_SHOOT, HEADER}
 
 @onready var home_team:Node = $HomeTeam
 @onready var away_team:Node = $AwayTeam
@@ -41,7 +39,6 @@ var action_buffer:Array[Action] = []
 
 var attacking_player:Player
 var defending_player:Player
-
 
 func _ready() -> void:
 	randomize()
