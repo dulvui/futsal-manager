@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy88ey2b4wb5q"]
+
+[ext_resource type="Script" path="res://src/match-simulator-v2/action-util-v2/action_util_v2.gd" id="1_leqxd"]
+
+[node name="ActionUtilV2" type="Node"]
+script = ExtResource("1_leqxd")

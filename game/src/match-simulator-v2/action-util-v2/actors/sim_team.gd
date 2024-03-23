@@ -3,7 +3,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 extends Node
-class_name SimPlayer
+class_name SimTeam
 
-var pos:Vector2
-var start_pos:Vector2
+var goalkeeper:SimGoalkeepr
+var players:Array[SimPlayer]
+
+var has_ball:bool

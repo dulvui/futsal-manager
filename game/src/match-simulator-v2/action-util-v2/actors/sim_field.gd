@@ -6,3 +6,8 @@ extends Node
 class_name SimField
 
 var size:Vector2
+
+var center:Vector2
+
+var hoam_goal:Vector2
+var away_goal:Vector2

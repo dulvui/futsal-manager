@@ -15,14 +15,16 @@ signal update
 # seconds for halftime
 const HALF_TIME:int = 1200
 
+@onready var action_util:Node = $ActionUtil
 @onready var timer:Timer = $Timer
-@onready var action_util:Node = $ActionUtilV2
-
 var possession_counter:float = 0.0
 var time:int = 0
 
 var home_stats:MatchStatistics = MatchStatistics.new()
 var away_stats:MatchStatistics = MatchStatistics.new()
+
+#var home_has_ball:bool
+
 
 func set_up(home_team:Team, away_team:Team) -> void:
 	action_util.set_up(home_team,away_team)
@@ -74,6 +76,7 @@ func faster() -> void:
 func slower() -> void:
 	timer.wait_time *= Constants.MATCH_SPEED_FACTOR
 
+
 func start_match() -> void:
 	timer.start()
 	
@@ -95,6 +98,7 @@ func _on_ActionUtil_action_message(message:String) -> void:
 
 func _on_action_util_shot(player:Player, on_target:bool, success:bool) -> void:
 	shot.emit(player, on_target , success, action_util.action_buffer)
+	print("match_sim home_has ball " + str(action_util.home_team.has_ball))
 	if action_util.home_team.has_ball:
 		home_stats.shots += 1
 		if on_target:
