@@ -6,7 +6,7 @@ extends Control
 
 const VisualAction:PackedScene = preload("res://src/match-simulator/visual-action/visual_action.tscn")
 
-@onready var match_simulator:Control = $Main/Content/CentralContainer/MainBar/MatchSimulator
+@onready var match_simulator:Node = $MatchSimulator
 @onready var stats:MarginContainer = $Main/Content/CentralContainer/MainBar/Stats
 @onready var comments:VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
 @onready var events:ScrollContainer = $Main/Content/CentralContainer/MainBar/Events
@@ -17,6 +17,7 @@ const VisualAction:PackedScene = preload("res://src/match-simulator/visual-actio
 @onready var pause_button:Button = $Main/Content/Buttons/Pause
 @onready var home_color:ColorRect = $Main/Content/CentralContainer/TopBar/HomeColor
 @onready var away_color:ColorRect = $Main/Content/CentralContainer/TopBar/AwayColor
+@onready var visual_action_container:Control = $VisualActionContainer
 @onready var speed_factor_label:Label = $Main/Content/Buttons/Speed/SpeedFactor
 
 @onready var home_possession:Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Home
@@ -95,9 +96,8 @@ func half_time() -> void:
 
 func _on_Field_pressed() -> void:
 	_hide_views()
-	#comments.show()
-	match_simulator.show()
-	last_active_view = match_simulator
+	comments.show()
+	last_active_view = comments
 
 
 func _on_Stats_pressed() -> void:
@@ -126,7 +126,6 @@ func _hide_views() -> void:
 	stats.hide()
 	events.hide()
 	formation.hide()
-	match_simulator.hide()
 
 func _toggle_view_buttons() -> void:
 	$Main/Content/Buttons/Change.disabled = not $Main/Content/Buttons/Change.disabled 
@@ -168,6 +167,38 @@ func _on_Pause_pressed() -> void:
 
 func _on_SKIP_pressed() -> void:
 	match_end()
+
+
+func _on_match_simulator_shot(player:Player, on_target:bool, goal:bool, action_buffer:Array[Action]) -> void:
+	if not goal and randi() % Constants.VISUAL_ACTION_SHOTS_FACTOR > 0:
+		# no goal, but show some shoots
+		return
+	
+	# show visual action
+	pause_button.disabled = true
+	match_simulator.pause()
+	_hide_views()
+	_toggle_view_buttons()
+	
+	# Visual Action
+	var visual_action:Node2D = VisualAction.instantiate()
+	visual_action.set_up(first_half, goal, on_target, home_team, away_team, action_buffer, home_color.color, away_color.color)
+	visual_action_container.add_child(visual_action)
+	await visual_action.action_finished
+	
+	if goal:
+		$Goal.show()
+		animation_player.play("Goal")
+		await animation_player.animation_finished
+		$Goal.hide()
+		result_label.text = "%d - %d"%[match_simulator.home_stats.goals,match_simulator.away_stats.goals]
+		events.append_text("%s  %s - %s  %s" % [time_label.text, str(match_simulator.home_stats.goals), str(match_simulator.away_stats.goals), player.surname])
+	
+	visual_action.queue_free()
+	match_simulator.continue_match()
+	last_active_view.show()
+	pause_button.disabled = false
+	_toggle_view_buttons()
 
 func _on_StartTimer_timeout() -> void:
 	match_simulator.start_match()

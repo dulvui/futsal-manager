@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://src/match-simulator-v2/match_simulator_v2.gd" id="1_tnm3q"]
 [ext_resource type="PackedScene" uid="uid://dy88ey2b4wb5q" path="res://src/match-simulator-v2/action-util-v2/action_util_v2.tscn" id="2_qij5y"]
 
-[node name="MatchSimulator" type="Node"]
+[node name="MatchSimulator" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_tnm3q")
 
 [node name="Timer" type="Timer" parent="."]

@@ -1,0 +1,304 @@
+[gd_scene load_steps=11 format=3 uid="uid://0u70bm8qumdr"]
+
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="1_pd8lp"]
+[ext_resource type="Script" path="res://src/screens/match/match.gd" id="2_jgc3e"]
+[ext_resource type="PackedScene" uid="uid://bc6kfu3avld0" path="res://src/ui-components/match/statistics/match_stats.tscn" id="4_uvtp1"]
+[ext_resource type="PackedScene" uid="uid://5agy8ull675s" path="res://src/ui-components/match/events/match_events.tscn" id="5_s3ja7"]
+[ext_resource type="PackedScene" uid="uid://bubq3rsb3hm6e" path="res://src/match-simulator-v2/match_simulator_v2.tscn" id="6_gwalm"]
+[ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui-components/visual-formation/visual_formation.tscn" id="6_ioovc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ady1"]
+font_size = 84
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Goal"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Goal:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8fa8s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Goal:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7wx2m"]
+_data = {
+"Goal": SubResource("1"),
+"RESET": SubResource("Animation_8fa8s")
+}
+
+[node name="Match" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pd8lp")
+script = ExtResource("2_jgc3e")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Content" type="VBoxContainer" parent="Main"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="CentralContainer" type="VBoxContainer" parent="Main/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TopBar" type="HBoxContainer" parent="Main/Content/CentralContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Time" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+layout_mode = 2
+text = "00:00"
+
+[node name="TimeBar" type="ProgressBar" parent="Main/Content/CentralContainer/TopBar"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2400.0
+step = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="HomeColor" type="ColorRect" parent="Main/Content/CentralContainer/TopBar"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="Home" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+layout_mode = 2
+text = "Robledo"
+
+[node name="Result" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+layout_mode = 2
+text = "0:0"
+
+[node name="Away" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+layout_mode = 2
+text = "Cisneros"
+
+[node name="AwayColor" type="ColorRect" parent="Main/Content/CentralContainer/TopBar"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+
+[node name="MainBar" type="MarginContainer" parent="Main/Content/CentralContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MatchSimulator" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("6_gwalm")]
+layout_mode = 2
+
+[node name="Log" type="VBoxContainer" parent="Main/Content/CentralContainer/MainBar"]
+visible = false
+layout_mode = 2
+
+[node name="Stats" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("4_uvtp1")]
+visible = false
+layout_mode = 2
+
+[node name="Events" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("5_s3ja7")]
+visible = false
+layout_mode = 2
+
+[node name="Formation" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("6_ioovc")]
+visible = false
+layout_mode = 2
+
+[node name="BottomBar" type="VBoxContainer" parent="Main/Content/CentralContainer"]
+custom_minimum_size = Vector2(780, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PossessBar" type="ProgressBar" parent="Main/Content/CentralContainer/BottomBar"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Labels" type="HBoxContainer" parent="Main/Content/CentralContainer/BottomBar/PossessBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Home" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "56%"
+horizontal_alignment = 1
+
+[node name="Posession" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "POSSESSION"
+horizontal_alignment = 1
+
+[node name="Away" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "44%"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Main/Content"]
+layout_mode = 2
+alignment = 1
+
+[node name="Field" type="Button" parent="Main/Content/Buttons"]
+layout_mode = 2
+text = "FIELD"
+
+[node name="Stats" type="Button" parent="Main/Content/Buttons"]
+layout_mode = 2
+text = "STATS"
+
+[node name="Events" type="Button" parent="Main/Content/Buttons"]
+layout_mode = 2
+text = "EVENTS"
+
+[node name="Change" type="Button" parent="Main/Content/Buttons"]
+visible = false
+layout_mode = 2
+text = "CHANGE"
+
+[node name="Tactics" type="Button" parent="Main/Content/Buttons"]
+visible = false
+layout_mode = 2
+text = "TACTICS"
+
+[node name="Speed" type="HBoxContainer" parent="Main/Content/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Slower" type="Button" parent="Main/Content/Buttons/Speed"]
+layout_mode = 2
+text = "-1"
+
+[node name="SpeedFactor" type="Label" parent="Main/Content/Buttons/Speed"]
+layout_mode = 2
+text = "X2"
+
+[node name="Faster" type="Button" parent="Main/Content/Buttons/Speed"]
+layout_mode = 2
+text = "+1"
+
+[node name="Formation" type="Button" parent="Main/Content/Buttons"]
+layout_mode = 2
+text = "FORMATION"
+
+[node name="Table" type="Button" parent="Main/Content/Buttons"]
+visible = false
+layout_mode = 2
+text = "TABLE"
+
+[node name="Matches" type="Button" parent="Main/Content/Buttons"]
+visible = false
+layout_mode = 2
+text = "MATCHES"
+
+[node name="Votes" type="Button" parent="Main/Content/Buttons"]
+visible = false
+layout_mode = 2
+text = "VOTES"
+
+[node name="Pause" type="Button" parent="Main/Content/Buttons"]
+layout_mode = 2
+text = "PAUSE"
+
+[node name="SKIP" type="Button" parent="Main/Content/Buttons"]
+layout_mode = 2
+text = "SKIP"
+
+[node name="Dashboard" type="Button" parent="Main/Content/Buttons"]
+visible = false
+layout_mode = 2
+text = "DASHBOARD"
+
+[node name="Goal" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.5
+offset_top = -57.5
+offset_right = 114.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(120, 60)
+text = "GOAL"
+label_settings = SubResource("LabelSettings_3ady1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7wx2m")
+}
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="change" from="Main/Content/CentralContainer/MainBar/Formation" to="." method="_on_Formation_change"]
+[connection signal="pressed" from="Main/Content/Buttons/Field" to="." method="_on_Field_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Stats" to="." method="_on_Stats_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Events" to="." method="_on_Events_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Speed/Slower" to="." method="_on_Slower_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Speed/Faster" to="." method="_on_Faster_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Formation" to="." method="_on_Formation_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/SKIP" to="." method="_on_SKIP_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Dashboard" to="." method="_on_Dashboard_pressed"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]

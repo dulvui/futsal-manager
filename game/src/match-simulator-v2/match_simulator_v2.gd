@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node
+extends Control
 
 signal shot(player:Player, on_target:bool, goal:bool, action_buffer:Array[Action])
 signal penalty(player:Player)
@@ -24,13 +24,6 @@ var home_stats:MatchStatistics = MatchStatistics.new()
 var away_stats:MatchStatistics = MatchStatistics.new()
 
 #var home_has_ball:bool
-
-func _ready() -> void:
-	set_up(Config.team, Config.team)
-	
-	start_match()
-
-
 func set_up(home_team:Team, away_team:Team) -> void:
 	action_util.set_up(home_team,away_team)
 	
