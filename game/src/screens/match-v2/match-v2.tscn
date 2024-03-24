@@ -132,6 +132,8 @@ size_flags_vertical = 3
 
 [node name="MatchSimulator" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("6_gwalm")]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Log" type="VBoxContainer" parent="Main/Content/CentralContainer/MainBar"]
 visible = false

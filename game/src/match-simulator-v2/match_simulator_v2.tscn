@@ -4,12 +4,28 @@
 [ext_resource type="PackedScene" uid="uid://dy88ey2b4wb5q" path="res://src/match-simulator-v2/action-util-v2/action_util_v2.tscn" id="2_qij5y"]
 
 [node name="MatchSimulator" type="Control"]
+custom_minimum_size = Vector2(1200, 600)
 layout_mode = 3
-anchors_preset = 0
+anchor_right = 0.625
+anchor_bottom = 0.556481
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_tnm3q")
+metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="ActionUtilV2" parent="." instance=ExtResource("2_qij5y")]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(1200, 600)
+size_2d_override = Vector2i(1200, 600)
+
+[node name="ActionUtilV2" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_qij5y")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

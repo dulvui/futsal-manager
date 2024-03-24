@@ -7,12 +7,11 @@ class_name SimTeam
 
 var res_team:Team
 
-@onready var goalkeeper:SimGoalkeepr = $SimGoalkeeper
+@onready var goalkeeper:SimGoalkeeper = $SimGoalkeeper
 @onready var player1:SimPlayer = $SimPlayer1
 @onready var player2:SimPlayer = $SimPlayer2
 @onready var player3:SimPlayer = $SimPlayer3
 @onready var player4:SimPlayer = $SimPlayer4
-
 
 var has_ball:bool
 var field_size:Vector2

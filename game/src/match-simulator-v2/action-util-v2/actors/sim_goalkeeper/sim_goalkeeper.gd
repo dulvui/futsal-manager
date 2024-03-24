@@ -3,9 +3,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 extends Node
-class_name SimGoalkeepr
+class_name SimGoalkeeper
+
+@onready var sprites:Node2D = $Sprites
 
 var pos:Vector2
 
-func update(_p_ball:SimBall) -> void:
-	pass
+func update(ball:SimBall) -> void:
+	sprites.look_at(ball.pos)
