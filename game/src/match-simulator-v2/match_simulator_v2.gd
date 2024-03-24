@@ -15,7 +15,7 @@ signal update
 # seconds for halftime
 const HALF_TIME:int = 1200
 
-@onready var action_util:Node = $ActionUtil
+@onready var action_util:Node = $ActionUtilV2
 @onready var timer:Timer = $Timer
 var possession_counter:float = 0.0
 var time:int = 0
@@ -24,6 +24,11 @@ var home_stats:MatchStatistics = MatchStatistics.new()
 var away_stats:MatchStatistics = MatchStatistics.new()
 
 #var home_has_ball:bool
+
+func _ready() -> void:
+	set_up(Config.team, Config.team)
+	
+	start_match()
 
 
 func set_up(home_team:Team, away_team:Team) -> void:

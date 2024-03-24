@@ -6,17 +6,23 @@ extends Node
 class_name SimPlayer
 
 enum Movement { STAND, WALK, RUN, SPRINT }
-enum Act { WAIT, MOVE, PASS, CROSS, SHOOT, DRIBBLE }
+
+enum Attack { IDLE, PASS, CROSS, SHOOT, DRIBBLE }
+enum AttackNoBall { IDLE, STAY_BACK, CUT_INSIDE, SUPPORT_PLAYER }
+
+enum Defend { WAIT, MOVE, PASS, CROSS, SHOOT, DRIBBLE }
+
+@onready var sprites:Node2D = $Sprites
 
 # resources
 var player_res:Player
+var ball:SimBall
 # positions
 var start_pos:Vector2
 var pos:Vector2
-var ball_pos:Vector2
 # physics
 var direction:Vector2
-var speed:int
+var speed:float
 # fisical attributes
 var stamina:float
 var interception_radius:int #TODO reduce radius with low stamina
@@ -24,22 +30,27 @@ var interception_radius:int #TODO reduce radius with low stamina
 var move_state:Movement
 var has_ball:bool
 
-func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball_pos:Vector2) -> void:
+
+
+func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	player_res = p_player_res
 	start_pos = p_start_pos
-	ball_pos = p_ball_pos
+	ball = p_ball
 
-func update(p_ball_pos:Vector2) -> void:
-	ball_pos = p_ball_pos
+func update(p_ball:SimBall) -> void:
+	ball = p_ball
 	stamina -= 0.01 # TODO depeneding on Movement, subtract more or less
+	sprites.look_at(ball.pos)
+	decide()
+	move()
 
-func intercepts(from:Vector2, to:Vector2) -> bool:
-	if Geometry2D.is_point_in_circle(from.lerp(to, Constants.lerp_weight), pos, interception_radius):
+func intercepts() -> bool:
+	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		return true
 	return false
 	
-func move(to:Vector2) -> void:
-	pos = pos.lerp(to, Constants.lerp_weight)
+func move() -> void:
+	pos += direction * speed
 
-func decide() -> Act:
-	return Act.WAIT
+func decide() -> void:
+	pass

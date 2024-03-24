@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://catldeyhmiboq"]
+
+[ext_resource type="Script" path="res://src/match-simulator-v2/action-util-v2/actors/sim_field/sim_field.gd" id="1_5id45"]
+[ext_resource type="Texture2D" uid="uid://cctv8141lfp0o" path="res://assets/field.png" id="2_slsko"]
+
+[node name="SimField" type="Node2D"]
+script = ExtResource("1_5id45")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_slsko")
+centered = false

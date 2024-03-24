@@ -5,12 +5,18 @@
 extends Node
 class_name SimField
 
-var size:Vector2
+@onready var sprite:Sprite2D = $Sprite
 
+var size:Vector2
 var center:Vector2
 
 var hoam_goal:Vector2
 var away_goal:Vector2
+
+func set_up() -> void:
+	size = sprite.texture.get_size()
+	center = Vector2(size.x / 2, size.y / 2)
+
 
 func is_in_field(pos:Vector2) -> bool:
 	return size.x <= pos.x and pos.x >= 0 and size.y <= pos.y and pos.y >= 0

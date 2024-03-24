@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://fnppcuq101ww"]
 
-[ext_resource type="PackedScene" path="res://src/match-simulator/visual-action/actors/field/field.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://do3i72srjb43b" path="res://src/match-simulator/visual-action/actors/field/field.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bc3lvys0807o4" path="res://src/match-simulator/visual-action/actors/ball/ball.tscn" id="2"]
 [ext_resource type="Script" path="res://src/match-simulator/visual-action/visual_action.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://bl168omsaktr0" path="res://src/match-simulator/visual-action/actors/player/visual_player.tscn" id="4"]
@@ -11,6 +11,7 @@ position = Vector2(402, 191)
 script = ExtResource("3")
 
 [node name="Field" parent="." instance=ExtResource("1")]
+scale = Vector2(1, 1)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

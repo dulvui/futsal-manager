@@ -16,7 +16,7 @@ signal update
 const HALF_TIME:int = 1200
 
 @onready var timer:Timer = $Timer
-@onready var action_util:Node = $ActionUtilV2
+@onready var action_util:Node = $ActionUtil
 
 var possession_counter:float = 0.0
 var time:int = 0

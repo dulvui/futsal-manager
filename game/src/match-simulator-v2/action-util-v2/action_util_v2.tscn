@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy88ey2b4wb5q"]
+[gd_scene load_steps=5 format=3 uid="uid://dy88ey2b4wb5q"]
 
 [ext_resource type="Script" path="res://src/match-simulator-v2/action-util-v2/action_util_v2.gd" id="1_leqxd"]
+[ext_resource type="PackedScene" uid="uid://catldeyhmiboq" path="res://src/match-simulator-v2/action-util-v2/actors/sim_field/sim_field.tscn" id="2_wijt4"]
+[ext_resource type="PackedScene" uid="uid://c8ygw31bsregf" path="res://src/match-simulator-v2/action-util-v2/actors/sim_ball/sim_ball.tscn" id="3_b1osp"]
+[ext_resource type="PackedScene" uid="uid://r501mqa7ix6a" path="res://src/match-simulator-v2/action-util-v2/actors/sim_team/sim_team.tscn" id="4_op64g"]
 
-[node name="ActionUtilV2" type="Node"]
+[node name="ActionUtilV2" type="Node2D"]
 script = ExtResource("1_leqxd")
+
+[node name="SimField" parent="." instance=ExtResource("2_wijt4")]
+
+[node name="SimBall" parent="." instance=ExtResource("3_b1osp")]
+
+[node name="HomeTeam" parent="." instance=ExtResource("4_op64g")]
+position = Vector2(62, 301)
+
+[node name="AwayTeam" parent="." instance=ExtResource("4_op64g")]
+position = Vector2(755, 281)

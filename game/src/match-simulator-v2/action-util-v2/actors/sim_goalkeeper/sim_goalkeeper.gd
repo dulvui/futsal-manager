@@ -6,3 +6,6 @@ extends Node
 class_name SimGoalkeepr
 
 var pos:Vector2
+
+func update(_p_ball:SimBall) -> void:
+	pass

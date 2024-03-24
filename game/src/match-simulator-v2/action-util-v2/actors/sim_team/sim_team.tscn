@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://r501mqa7ix6a"]
+
+[ext_resource type="Script" path="res://src/match-simulator-v2/action-util-v2/actors/sim_team/sim_team.gd" id="1_dji3p"]
+[ext_resource type="PackedScene" uid="uid://dennvmn0p76jh" path="res://src/match-simulator-v2/action-util-v2/actors/sim_goalkeeper/sim_goalkeeper.tscn" id="2_oa77v"]
+[ext_resource type="PackedScene" uid="uid://cuvjsrgrqmy4a" path="res://src/match-simulator-v2/action-util-v2/actors/sim_player/sim_player.tscn" id="3_6jqjk"]
+
+[node name="SimTeam" type="Node2D"]
+script = ExtResource("1_dji3p")
+
+[node name="SimGoalkeeper" parent="." instance=ExtResource("2_oa77v")]
+
+[node name="SimPlayer1" parent="." instance=ExtResource("3_6jqjk")]
+position = Vector2(125, -110)
+
+[node name="SimPlayer2" parent="." instance=ExtResource("3_6jqjk")]
+position = Vector2(126, 104)
+
+[node name="SimPlayer3" parent="." instance=ExtResource("3_6jqjk")]
+position = Vector2(333, -114)
+
+[node name="SimPlayer4" parent="." instance=ExtResource("3_6jqjk")]
+position = Vector2(342, 104)
