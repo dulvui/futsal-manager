@@ -79,13 +79,6 @@ func slower() -> void:
 
 func start_match() -> void:
 	timer.start()
-	
-	# coin toss for ball
-	var coin:bool = randi() % 2 == 1
-	action_util.home_team.has_ball = coin
-	action_util.away_team.has_ball = not coin
-	
-	action_util.home_team.has_ball
 
 
 func change_players(home_team:Team,away_team:Team) -> void:

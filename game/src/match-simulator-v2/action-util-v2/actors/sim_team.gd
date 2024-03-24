@@ -9,3 +9,10 @@ var goalkeeper:SimGoalkeepr
 var players:Array[SimPlayer]
 
 var has_ball:bool
+
+func set_up() -> void:
+	pass
+
+func update(ball_pos:Vector2) -> void:
+	for player in players:
+		player.update(ball_pos)

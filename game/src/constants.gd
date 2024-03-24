@@ -76,3 +76,7 @@ const LINEUP_PLAYERS_AMOUNT = 12
 
 const month_strings:Array = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OKT","NOV","DEC"]
 const day_strings:Array = ["SUN","MON","TUE","WE","THU","FRI","SAT"]
+
+
+# MATCH SIM v2
+const lerp_weight:float = 0.1

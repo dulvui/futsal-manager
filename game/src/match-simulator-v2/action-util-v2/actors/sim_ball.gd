@@ -5,12 +5,14 @@
 extends Node
 class_name SimBall
 
-signal goal
-signal out_of_field
-signal kick
-signal passs
-
-
 var pos:Vector2
 
+func update() -> void:
+	pass
+
+func move(to:Vector2) -> void:
+	pos = pos.lerp(to, Constants.lerp_weight)
+	
+func move_curved(to:Vector2) -> void:
+	pos = pos.slerp(to, Constants.lerp_weight)
 
