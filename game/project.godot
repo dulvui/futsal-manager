@@ -68,14 +68,6 @@ theme/custom="res://theme/theme.tres"
 
 locale/translations=PackedStringArray("res://assets/i18n/FutsalManagerI18N - Sheet1.de.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.en.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.it.translation")
 
-[layer_names]
-
-2d_physics/layer_1="ball"
-2d_physics/layer_2="world"
-2d_physics/layer_3="lines"
-2d_physics/layer_4="player"
-2d_physics/layer_5="field-spots"
-
 [locale]
 
 translations=PackedStringArray("res://assets/i18n/FutsalManagerI18N - Sheet1.de.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.en.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.it.translation")
