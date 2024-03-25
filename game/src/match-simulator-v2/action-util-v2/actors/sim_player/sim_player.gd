@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node
+extends Node2D
 class_name SimPlayer
 
 enum Movement { STAND, WALK, RUN, SPRINT }
@@ -11,8 +11,6 @@ enum Attack { IDLE, PASS, CROSS, SHOOT, DRIBBLE }
 enum AttackNoBall { IDLE, STAY_BACK, CUT_INSIDE, SUPPORT_PLAYER }
 
 enum Defend { WAIT, MOVE, PASS, CROSS, SHOOT, DRIBBLE }
-
-@onready var sprites:Node2D = $Sprites
 
 # resources
 var player_res:Player
@@ -36,13 +34,16 @@ func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	player_res = p_player_res
 	start_pos = p_start_pos
 	ball = p_ball
-
-func update(p_ball:SimBall) -> void:
-	ball = p_ball
+	
+	pos = start_pos
+	
+	global_position = pos
+	
+func update() -> void:
 	stamina -= 0.01 # TODO depeneding on Movement, subtract more or less
-	sprites.look_at(ball.pos)
+	look_at(ball.pos)
 	decide()
-	move()
+	#move()
 
 func intercepts() -> bool:
 	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
@@ -51,6 +52,7 @@ func intercepts() -> bool:
 	
 func move() -> void:
 	pos += direction * speed
+	global_position = pos
 
 func decide() -> void:
 	pass

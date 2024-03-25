@@ -16,11 +16,13 @@ func set_up(p_home_team:Team, p_away_team:Team) -> void:
 	# TODO add coin toss
 	home_team.has_ball = true
 	away_team.has_ball = false
-	home_team.set_up(p_home_team, field.size)
-	away_team.set_up(p_away_team, field.size)
+	home_team.set_up(p_home_team, field.size, ball)
+	away_team.set_up(p_away_team, field.size, ball)
+	
+	ball.kick(home_team.players[3].pos, 10)
 	
 
 func update() -> void:
 	ball.update()
-	home_team.update(ball)
-	away_team.update(ball)
+	home_team.update()
+	away_team.update()

@@ -2,14 +2,12 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node
+extends Node2D
 class_name SimBall
 
 enum State { IDLE, MOVING }
 
 const deceleration = 0.1
-
-@onready var sprite:Sprite2D = $Sprite
 
 var state:State
 
@@ -19,7 +17,7 @@ var direction:Vector2
 
 func set_up(field_center:Vector2) -> void:
 	pos = field_center
-	sprite.position = pos
+	global_position = pos
 	
 
 func update() -> void:
@@ -31,7 +29,7 @@ func update() -> void:
 
 func move() -> void:
 	pos += direction * speed
-	sprite.position = pos
+	global_position = pos
 
 func is_moving() -> bool:
 	return state == State.MOVING

@@ -49,7 +49,7 @@ func _ready() -> void:
 	formation.set_up(true)
 	match_simulator.set_up(home_team,away_team)
 	
-	last_active_view = comments
+	last_active_view = match_simulator
 	
 	# set colors
 	home_color.color = home_team.colors[0]
@@ -157,7 +157,6 @@ func _on_Slower_pressed() -> void:
 
 func _on_Pause_pressed() -> void:
 	var paused:bool = match_simulator.pause_toggle()
-	
 	if paused:
 		pause_button.text = tr("CONTINUE")
 	else:

@@ -7,7 +7,12 @@ class_name SimGoalkeeper
 
 @onready var sprites:Node2D = $Sprites
 
+var ball:SimBall
+
 var pos:Vector2
 
-func update(ball:SimBall) -> void:
+func set_up(p_ball:SimBall) -> void:
+	ball = p_ball
+
+func update() -> void:
 	sprites.look_at(ball.pos)

@@ -13,7 +13,7 @@ signal match_end
 signal update
 
 # seconds for halftime
-const HALF_TIME:int = 1200
+const HALF_TIME:int = 12000
 
 @onready var action_util:Node = $SubViewportContainer/SubViewport/ActionUtilV2
 @onready var timer:Timer = $Timer
