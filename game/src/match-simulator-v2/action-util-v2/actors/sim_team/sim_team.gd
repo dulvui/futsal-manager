@@ -12,6 +12,7 @@ var res_team:Team
 @onready var goalkeeper:SimGoalkeeper = $SimGoalkeeper
 var players:Array[SimPlayer]
 
+var ball:SimBall
 var has_ball:bool
 var field_size:Vector2
 
@@ -19,6 +20,7 @@ var field_size:Vector2
 func set_up(p_res_team:Team, p_field_size:Vector2, p_ball:SimBall) -> void:
 	res_team = p_res_team
 	field_size = p_field_size
+	ball = p_ball
 	
 	goalkeeper.set_up(p_ball)
 	
@@ -27,8 +29,11 @@ func set_up(p_res_team:Team, p_field_size:Vector2, p_ball:SimBall) -> void:
 		add_child(sim_player)
 		sim_player.set_up(player, Vector2(randi_range(0, field_size.x), randi_range(0, field_size.y)), p_ball)
 		players.append(sim_player)
+		
+		sim_player.short_pass.connect(pass_to_random_player)
 	
-	
+func pass_to_random_player() -> void:
+	ball.kick(players.pick_random().pos, 10)
 
 func update() -> void:
 	goalkeeper.update()

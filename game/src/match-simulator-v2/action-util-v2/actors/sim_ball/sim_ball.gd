@@ -7,7 +7,7 @@ class_name SimBall
 
 enum State { IDLE, MOVING }
 
-const deceleration = 0.1
+const deceleration = 0.01
 
 var state:State
 

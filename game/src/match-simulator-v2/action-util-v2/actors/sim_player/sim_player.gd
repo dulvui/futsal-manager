@@ -5,6 +5,8 @@
 extends Node2D
 class_name SimPlayer
 
+signal short_pass
+
 enum Movement { STAND, WALK, RUN, SPRINT }
 
 enum Attack { IDLE, PASS, CROSS, SHOOT, DRIBBLE }
@@ -37,6 +39,8 @@ func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	
 	pos = start_pos
 	
+	interception_radius = 20
+	
 	global_position = pos
 	
 func update() -> void:
@@ -44,6 +48,9 @@ func update() -> void:
 	look_at(ball.pos)
 	decide()
 	#move()
+	
+	if intercepts():
+		short_pass.emit()
 
 func intercepts() -> bool:
 	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
