@@ -16,6 +16,10 @@ var away_goal:Vector2
 func set_up() -> void:
 	size = sprite.texture.get_size()
 	center = Vector2(size.x / 2, size.y / 2)
+	
+	hoam_goal = Vector2(0, size.y / 2)
+	away_goal = Vector2(size.x, size.y / 2)
+	
 
 
 func is_in_field(pos:Vector2) -> bool:

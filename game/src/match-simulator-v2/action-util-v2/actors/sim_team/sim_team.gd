@@ -13,13 +13,13 @@ var res_team:Team
 var players:Array[SimPlayer]
 
 var ball:SimBall
+var field:SimField
 var has_ball:bool
-var field_size:Vector2
 
 
-func set_up(p_res_team:Team, p_field_size:Vector2, p_ball:SimBall) -> void:
+func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall) -> void:
 	res_team = p_res_team
-	field_size = p_field_size
+	field = p_field
 	ball = p_ball
 	
 	goalkeeper.set_up(p_ball)
@@ -27,13 +27,18 @@ func set_up(p_res_team:Team, p_field_size:Vector2, p_ball:SimBall) -> void:
 	for player:Player in res_team.get_field_players():
 		var sim_player:SimPlayer = sim_player_scene.instantiate()
 		add_child(sim_player)
-		sim_player.set_up(player, Vector2(randi_range(0, field_size.x), randi_range(0, field_size.y)), p_ball)
+		sim_player.set_up(player, Vector2(randi_range(0, field.size.x), randi_range(0, field.size.y)), p_ball)
 		players.append(sim_player)
 		
 		sim_player.short_pass.connect(pass_to_random_player)
 	
 func pass_to_random_player() -> void:
-	ball.kick(players.pick_random().pos, 10)
+	var r_pos:Vector2 = players.pick_random().pos
+	print(r_pos)
+	ball.kick(r_pos, 10)
+	
+func shoot() -> void:
+	ball.kick(field.away_goal, 10)
 
 func update() -> void:
 	goalkeeper.update()

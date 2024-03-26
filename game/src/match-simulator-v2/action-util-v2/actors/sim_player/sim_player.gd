@@ -6,6 +6,8 @@ extends Node2D
 class_name SimPlayer
 
 signal short_pass
+signal shoot
+
 
 enum Movement { STAND, WALK, RUN, SPRINT }
 
@@ -50,7 +52,11 @@ func update() -> void:
 	#move()
 	
 	if intercepts():
-		short_pass.emit()
+		if randf() < 0.6:
+			short_pass.emit()
+		else:
+			print("shoot")
+			shoot.emit()
 
 func intercepts() -> bool:
 	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
