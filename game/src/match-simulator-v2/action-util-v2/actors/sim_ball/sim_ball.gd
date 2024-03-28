@@ -33,6 +33,10 @@ func move() -> void:
 
 func is_moving() -> bool:
 	return state == State.MOVING
+	
+func stop() -> void:
+	state = State.IDLE
+	speed = 0
 
 func kick(p_destination:Vector2, force:float) -> void:
 	speed = force

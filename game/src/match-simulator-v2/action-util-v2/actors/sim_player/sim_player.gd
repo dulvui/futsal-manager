@@ -8,7 +8,6 @@ class_name SimPlayer
 signal short_pass
 signal shoot
 
-
 enum Movement { STAND, WALK, RUN, SPRINT }
 
 enum Attack { IDLE, PASS, CROSS, SHOOT, DRIBBLE }
@@ -32,8 +31,6 @@ var interception_radius:int #TODO reduce radius with low stamina
 var move_state:Movement
 var has_ball:bool
 
-
-
 func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	player_res = p_player_res
 	start_pos = p_start_pos
@@ -41,7 +38,9 @@ func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	
 	pos = start_pos
 	
+	# inital test values
 	interception_radius = 20
+	speed = 5
 	
 	global_position = pos
 	
@@ -49,14 +48,16 @@ func update() -> void:
 	stamina -= 0.01 # TODO depeneding on Movement, subtract more or less
 	look_at(ball.pos)
 	decide()
-	#move()
 	
 	if intercepts():
-		if randf() < 0.6:
-			short_pass.emit()
-		else:
-			print("shoot")
-			shoot.emit()
+		#if randf() < 0.6:
+			#short_pass.emit()
+		#else:
+			#shoot.emit()
+		has_ball = true
+		direction = pos.direction_to(Vector2.ZERO)
+		ball.stop()
+	move()
 
 func intercepts() -> bool:
 	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
@@ -66,6 +67,9 @@ func intercepts() -> bool:
 func move() -> void:
 	pos += direction * speed
 	global_position = pos
+	
+	if has_ball:
+		ball.kick(direction, speed + 0.2)
 
 func decide() -> void:
 	pass

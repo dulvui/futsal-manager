@@ -31,6 +31,7 @@ func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall) -> void:
 		players.append(sim_player)
 		
 		sim_player.short_pass.connect(pass_to_random_player)
+		
 	
 func pass_to_random_player() -> void:
 	var r_pos:Vector2 = players.pick_random().pos
