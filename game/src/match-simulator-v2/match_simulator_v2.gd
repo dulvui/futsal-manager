@@ -4,22 +4,22 @@
 
 extends Control
 
-signal shot(player:Player, on_target:bool, goal:bool, action_buffer:Array[Action])
-signal penalty(player:Player)
-
 signal action_message
 signal half_time
 signal match_end
 signal update
 
-# seconds for halftime
-const HALF_TIME:int = 12000
-
 @onready var action_util:Node = $SubViewportContainer/SubViewport/ActionUtilV2
-@onready var timer:Timer = $Timer
-var possession_counter:float = 0.0
-var time:int = 0
 
+# seconds for halftime
+const half_time_seconds:int = 12000
+# time control
+const ticks_per_second:int = 4
+var ticks:int = 0
+var time:int = 0
+var timer:Timer
+# stats
+var possession_counter:float = 0.0
 var home_stats:MatchStatistics = MatchStatistics.new()
 var away_stats:MatchStatistics = MatchStatistics.new()
 
@@ -29,21 +29,33 @@ func set_up(home_team:Team, away_team:Team) -> void:
 	
 	for speed in Config.speed_factor:
 		faster()
-
-
-func _on_Timer_timeout() -> void:
-	time += 1
 	
-	if time == HALF_TIME:
+	# intialize timer
+	timer = Timer.new()
+	timer.wait_time = 1.0 / ticks_per_second
+	print(timer.wait_time)
+	add_child(timer)
+	timer.timeout.connect(_on_timer_timeout)
+	timer.start()
+
+
+func _on_timer_timeout() -> void:
+	action_util.update()
+	ticks += 1
+	if ticks == ticks_per_second:
+		ticks = 0
+		time += 1
+		_update()
+
+func _update() -> void:
+	update.emit()
+	# check half/end time
+	if time == half_time_seconds:
 		timer.paused = true
 		half_time.emit()
-	elif time == HALF_TIME * 2:
+	elif time == half_time_seconds * 2:
 		timer.stop()
 		match_end.emit()
-	
-	action_util.update()
-	update.emit()
-	
 	# update posession stats
 	if action_util.home_team.has_ball:
 		possession_counter += 1.0
@@ -88,7 +100,6 @@ func _on_ActionUtil_action_message(message:String) -> void:
 
 
 func _on_action_util_shot(player:Player, on_target:bool, success:bool) -> void:
-	shot.emit(player, on_target , success, action_util.action_buffer)
 	print("match_sim home_has ball " + str(action_util.home_team.has_ball))
 	if action_util.home_team.has_ball:
 		home_stats.shots += 1
