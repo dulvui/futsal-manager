@@ -13,7 +13,7 @@ signal update
 
 # seconds for halftime
 const half_time_seconds:int = 12000
-# time control
+# time splitting
 const ticks_per_second:int = 4
 var ticks:int = 0
 var time:int = 0

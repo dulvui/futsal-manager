@@ -28,11 +28,15 @@ func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall, left_half:bool, c
 		goalkeeper.set_up(res_team.get_goalkeeper(), field.goal_right, p_ball)
 	goalkeeper.set_color(color)
 	
+	var pos_index: int = 0
 	for player:Player in res_team.get_field_players():
 		var sim_player:SimPlayer = sim_player_scene.instantiate()
 		add_child(sim_player)
-		# TODO use correct field position
-		sim_player.set_up(player, Vector2(randi_range(0, field.size.x), randi_range(0, field.size.y)), p_ball)
+		
+		var start_pos:Vector2 = res_team.formation.get_field_pos(field.size, pos_index, left_half)
+		pos_index += 1
+		
+		sim_player.set_up(player, start_pos, p_ball)
 		sim_player.set_color(color)
 		players.append(sim_player)
 		# player signals
