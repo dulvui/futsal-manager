@@ -5,7 +5,7 @@
 extends Node2D
 class_name SimBall
 
-enum State { IDLE, MOVING }
+enum State { IDLE, PASS, CROSS, SHOOT, DRIBBLE, RUN }
 
 const deceleration = 0.01
 
@@ -35,17 +35,14 @@ func move() -> void:
 	pos += direction * speed
 
 func is_moving() -> bool:
-	return state == State.MOVING
+	return speed > 0
 	
 func stop() -> void:
 	state = State.IDLE
 	speed = 0
 
-func kick(p_destination:Vector2, force:float) -> void:
-	speed = force
+func kick(p_destination:Vector2, force:float, type:State) -> void:
+	speed = force + 0.2 # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
-	state = State.MOVING
+	state = type
 	
-func control() -> void:
-	speed = 0
-	state = State.IDLE

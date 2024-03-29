@@ -31,18 +31,14 @@ func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall) -> void:
 		# TODO use correct field position
 		sim_player.set_up(player, Vector2(randi_range(0, field.size.x), randi_range(0, field.size.y)), p_ball)
 		players.append(sim_player)
-		
+		# player signals
 		sim_player.short_pass.connect(pass_to_random_player)
 		
 	
 func pass_to_random_player() -> void:
 	var r_pos:Vector2 = players.pick_random().pos
-	print(r_pos)
 	ball.kick(r_pos, 10)
 	
-func shoot() -> void:
-	ball.kick(field.away_goal, 10)
-
 func update() -> void:
 	goalkeeper.update()
 	for player:SimPlayer in players:

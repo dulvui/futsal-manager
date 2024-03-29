@@ -6,7 +6,6 @@ extends Node2D
 class_name SimPlayerBase
 
 signal short_pass
-signal shoot
 
 # resources
 var player_res:Player
