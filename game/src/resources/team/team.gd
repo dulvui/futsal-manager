@@ -107,6 +107,17 @@ func remove_player(p_player:Player) -> void:
 			lineup_player_ids.append(players[-1].id)
 			break
 
+func get_home_color() -> Color:
+	return colors[0]
+	
+func get_away_color(versus_color:Color) -> Color:
+	if colors[1] != versus_color:
+		return colors[1]
+	if colors[2] != versus_color:
+		return colors[2]
+	return colors[0]
+
+
 func get_prestige() -> int:
 	var value:int = 0
 	for player:Player in players:

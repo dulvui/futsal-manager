@@ -53,13 +53,8 @@ func _ready() -> void:
 	last_active_view = comments
 	
 	# set colors
-	home_color.color = home_team.colors[0]
-	if home_team.colors[0] != away_team.colors[1]:
-		away_color.color = away_team.colors[1]
-	else:
-		away_color.color = away_team.colors[2]
-		
-	speed_factor_label.text = str(Config.speed_factor + 1) + " X"
+	home_color.color = home_team.get_home_color()
+	away_color.color = away_team.get_away_color(home_color.color)
 	
 
 func _on_match_simulator_update() -> void:

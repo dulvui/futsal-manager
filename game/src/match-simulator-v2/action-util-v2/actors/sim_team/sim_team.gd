@@ -17,7 +17,7 @@ var field:SimField
 var has_ball:bool
 
 
-func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall, left_half:bool) -> void:
+func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall, left_half:bool, color:Color) -> void:
 	res_team = p_res_team
 	field = p_field
 	ball = p_ball
@@ -26,14 +26,14 @@ func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall, left_half:bool) -
 		goalkeeper.set_up(res_team.get_goalkeeper(), field.goal_left, p_ball)
 	else:
 		goalkeeper.set_up(res_team.get_goalkeeper(), field.goal_right, p_ball)
-	goalkeeper.set_color(p_res_team.colors[0])
+	goalkeeper.set_color(color)
 	
 	for player:Player in res_team.get_field_players():
 		var sim_player:SimPlayer = sim_player_scene.instantiate()
 		add_child(sim_player)
 		# TODO use correct field position
 		sim_player.set_up(player, Vector2(randi_range(0, field.size.x), randi_range(0, field.size.y)), p_ball)
-		sim_player.set_color(p_res_team.colors[0])
+		sim_player.set_color(color)
 		players.append(sim_player)
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player)
