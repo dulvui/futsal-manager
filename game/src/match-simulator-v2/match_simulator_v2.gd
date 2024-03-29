@@ -33,7 +33,6 @@ func set_up(home_team:Team, away_team:Team) -> void:
 	# intialize timer
 	timer = Timer.new()
 	timer.wait_time = 1.0 / ticks_per_second
-	print(timer.wait_time)
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()

@@ -75,6 +75,5 @@ func get_field_pos(field_size:Vector2, index:int, left_side:bool) -> Vector2:
 	# invert, if right side
 	if not left_side:
 		pos = field_size - pos
-		
-	print(pos)
+	
 	return pos
