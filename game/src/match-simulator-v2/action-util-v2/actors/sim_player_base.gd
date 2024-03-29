@@ -43,7 +43,6 @@ func set_up(
 	speed = 5
 	
 	global_position = pos
-
 	# disables _physics_process, if simulation
 	set_physics_process(not p_is_simulation)
 	
@@ -51,6 +50,10 @@ func intercepts() -> bool:
 	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		return true
 	return false
+	
+func set_pos(p_pos:Vector2) -> void:
+	pos = p_pos
+	global_position = pos
 	
 func move() -> void:
 	pos += direction * speed

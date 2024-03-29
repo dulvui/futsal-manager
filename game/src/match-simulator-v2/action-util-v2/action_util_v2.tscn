@@ -11,6 +11,7 @@ script = ExtResource("1_leqxd")
 [node name="SimField" parent="." instance=ExtResource("2_wijt4")]
 
 [node name="SimBall" parent="." instance=ExtResource("3_b1osp")]
+position = Vector2(598, 301)
 
 [node name="HomeTeam" parent="." instance=ExtResource("4_op64g")]
 position = Vector2(62, 301)

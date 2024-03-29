@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://r501mqa7ix6a"]
 
 [ext_resource type="Script" path="res://src/match-simulator-v2/action-util-v2/actors/sim_team/sim_team.gd" id="1_dji3p"]
-[ext_resource type="PackedScene" uid="uid://dennvmn0p76jh" path="res://src/match-simulator-v2/action-util-v2/actors/sim_goalkeeper/sim_goalkeeper.tscn" id="2_oa77v"]
+[ext_resource type="PackedScene" uid="uid://dennvmn0p76jh" path="res://src/match-simulator-v2/action-util-v2/actors/sim_goalkeeper/sim_goalkeeper.tscn" id="2_xcex5"]
 
 [node name="SimTeam" type="Node2D"]
 script = ExtResource("1_dji3p")
 
-[node name="SimGoalkeeper" parent="." instance=ExtResource("2_oa77v")]
+[node name="SimGoalkeeper" parent="." instance=ExtResource("2_xcex5")]

@@ -18,12 +18,7 @@ func update() -> void:
 	move()
 	
 	if intercepts():
-		#if randf() < 0.6:
-			#short_pass.emit()
-		#else:
-			#shoot.emit()
 		has_ball = true
-		direction = pos.direction_to(Vector2.ZERO)
 		ball.stop()
 	
 func move() -> void:

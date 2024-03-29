@@ -16,11 +16,18 @@ var ball:SimBall
 var field:SimField
 var has_ball:bool
 
-
-func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall, left_half:bool, color:Color) -> void:
+func set_up(
+	p_res_team:Team,
+	p_field:SimField,
+	p_ball:SimBall,
+	left_half:bool,
+	color:Color,
+	p_has_ball:bool,
+	) -> void:
 	res_team = p_res_team
 	field = p_field
 	ball = p_ball
+	has_ball = p_has_ball
 	
 	if left_half:
 		goalkeeper.set_up(res_team.get_goalkeeper(), field.goal_left, p_ball)
@@ -41,7 +48,11 @@ func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall, left_half:bool, c
 		players.append(sim_player)
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player)
-		
+	
+	# move attacker to kickoff and pass to random player
+	if has_ball:
+		players[-1].set_pos(field.center)
+		ball.kick(players[0].pos, 10, SimBall.State.PASS)
 	
 func pass_to_random_player() -> void:
 	var r_pos:Vector2 = players.pick_random().pos
