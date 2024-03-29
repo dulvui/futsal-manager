@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuvjsrgrqmy4a"]
+[gd_scene load_steps=4 format=3 uid="uid://b383v1pm1y4w"]
 
 [ext_resource type="Script" path="res://src/match-simulator-v2/action-util-v2/actors/sim_player/sim_player.gd" id="1_0tayf"]
 [ext_resource type="Texture2D" uid="uid://b5ocixr2ach6x" path="res://assets/body.png" id="2_dct8p"]

@@ -28,6 +28,7 @@ func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall) -> void:
 	for player:Player in res_team.get_field_players():
 		var sim_player:SimPlayer = sim_player_scene.instantiate()
 		add_child(sim_player)
+		# TODO use correct field position
 		sim_player.set_up(player, Vector2(randi_range(0, field.size.x), randi_range(0, field.size.y)), p_ball)
 		players.append(sim_player)
 		
