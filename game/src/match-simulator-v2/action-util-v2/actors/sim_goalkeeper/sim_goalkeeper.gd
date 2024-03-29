@@ -11,7 +11,6 @@ func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	super.set_up(p_player_res, p_start_pos, p_ball)
 
 func update() -> void:
-	super.update()
 	decide()
 	
 func decide() -> void:

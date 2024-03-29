@@ -18,10 +18,11 @@ var direction:Vector2
 func _physics_process(delta: float) -> void:
 	global_position = global_position.lerp(pos, delta * speed)
 
-func set_up(field_center:Vector2) -> void:
+func set_up(field_center:Vector2, p_is_simulation:bool = false) -> void:
 	pos = field_center
-	global_position = pos
 	
+	# disables _physics_process, if simulation
+	set_physics_process(not p_is_simulation)
 
 func update() -> void:
 	if speed > 0:
@@ -32,7 +33,6 @@ func update() -> void:
 
 func move() -> void:
 	pos += direction * speed
-	#global_position = pos
 
 func is_moving() -> bool:
 	return state == State.MOVING

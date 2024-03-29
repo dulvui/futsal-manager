@@ -19,8 +19,11 @@ func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	super.set_up(p_player_res, p_start_pos, p_ball)
 	
 func update() -> void:
-	super.update()
+	# TODO depeneding on Movement, subtract more or less
+	stamina -= 0.01
+	
 	decide()
+	move()
 	
 	if intercepts():
 		#if randf() < 0.6:
@@ -30,7 +33,6 @@ func update() -> void:
 		has_ball = true
 		direction = pos.direction_to(Vector2.ZERO)
 		ball.stop()
-	move()
 	
 func move() -> void:
 	super.move()

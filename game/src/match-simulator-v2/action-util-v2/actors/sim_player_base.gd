@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	global_position = global_position.lerp(pos, delta * speed)
 	look_at(ball.global_position)
 
-func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
+func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall, p_is_simulation:bool = false) -> void:
 	player_res = p_player_res
 	start_pos = p_start_pos
 	ball = p_ball
@@ -39,10 +39,10 @@ func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	speed = 5
 	
 	global_position = pos
-	
-func update() -> void:
-	stamina -= 0.01 # TODO depeneding on Movement, subtract more or less
 
+	# disables _physics_process, if simulation
+	set_physics_process(not p_is_simulation)
+	
 func intercepts() -> bool:
 	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		return true
