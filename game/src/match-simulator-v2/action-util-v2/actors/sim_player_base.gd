@@ -26,7 +26,12 @@ func _physics_process(delta: float) -> void:
 	global_position = global_position.lerp(pos, delta * speed)
 	look_at(ball.global_position)
 
-func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall, p_is_simulation:bool = false) -> void:
+func set_up(
+	p_player_res:Player,
+	p_start_pos:Vector2,
+	p_ball:SimBall,
+	p_is_simulation:bool = false,
+) -> void:
 	player_res = p_player_res
 	start_pos = p_start_pos
 	ball = p_ball

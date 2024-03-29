@@ -5,7 +5,10 @@
 extends SimPlayerBase
 class_name SimGoalkeeper
 
-@onready var sprites:Node2D = $Sprites
+@onready var body:Sprite2D = $Sprites/Body
+
+func set_color(p_color:Color) -> void:
+	body.modulate = p_color
 
 func update() -> void:
 	decide()

@@ -5,6 +5,11 @@
 extends SimPlayerBase
 class_name SimPlayer
 
+@onready var body:Sprite2D = $Sprites/Body
+
+func set_color(p_color:Color) -> void:
+	body.modulate = p_color
+
 func update() -> void:
 	# TODO depeneding on Movement, subtract more or less
 	stamina -= 0.01

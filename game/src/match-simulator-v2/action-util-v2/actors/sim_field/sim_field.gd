@@ -10,15 +10,15 @@ class_name SimField
 var size:Vector2
 var center:Vector2
 
-var hoam_goal:Vector2
-var away_goal:Vector2
+var goal_left:Vector2
+var goal_right:Vector2
 
 func set_up() -> void:
 	size = sprite.texture.get_size()
 	center = Vector2(size.x / 2, size.y / 2)
 	
-	hoam_goal = Vector2(0, size.y / 2)
-	away_goal = Vector2(size.x, size.y / 2)
+	goal_left = Vector2(0, size.y / 2)
+	goal_right = Vector2(size.x, size.y / 2)
 	
 
 
