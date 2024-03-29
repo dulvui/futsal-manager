@@ -22,7 +22,8 @@ func set_up(p_res_team:Team, p_field:SimField, p_ball:SimBall) -> void:
 	field = p_field
 	ball = p_ball
 	
-	goalkeeper.set_up(p_ball)
+	# TODO choose betwen left/right goal
+	goalkeeper.set_up(res_team.get_goalkeeper(), field.hoam_goal, p_ball)
 	
 	for player:Player in res_team.get_field_players():
 		var sim_player:SimPlayer = sim_player_scene.instantiate()

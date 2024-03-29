@@ -31,6 +31,10 @@ var interception_radius:int #TODO reduce radius with low stamina
 var move_state:Movement
 var has_ball:bool
 
+func _physics_process(delta: float) -> void:
+	global_position = global_position.lerp(pos, delta * speed)
+	look_at(ball.global_position)
+
 func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	player_res = p_player_res
 	start_pos = p_start_pos
@@ -46,7 +50,6 @@ func set_up(p_player_res:Player, p_start_pos:Vector2, p_ball:SimBall) -> void:
 	
 func update() -> void:
 	stamina -= 0.01 # TODO depeneding on Movement, subtract more or less
-	look_at(ball.pos)
 	decide()
 	
 	if intercepts():
@@ -66,7 +69,6 @@ func intercepts() -> bool:
 	
 func move() -> void:
 	pos += direction * speed
-	global_position = pos
 	
 	if has_ball:
 		ball.kick(direction, speed + 0.2)
