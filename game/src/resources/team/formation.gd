@@ -21,25 +21,35 @@ enum Variations {
 	#F0113
 }
 
-@export var variation:int
+@export var variation_defense:int
+@export var variation_offense:int
 
 @export var goalkeeper:int
 @export var defense:int
 @export var center:int
 @export var attack:int
 
-# TODO extends with tactical information, like offensive/defense etc.
+@export var tactic_defense:TacticDefense
+@export var tactic_offense:TacticOffense
 
 func _init(
-	p_variation:Variations = Variations.F1202
+	p_variation_defense:Variations = Variations.F1202,
+	p_variation_offense:Variations = Variations.F1121,
+	p_tactic_defense:TacticDefense = TacticDefense.new(),
+	p_tactic_offense:TacticOffense = TacticOffense.new(),
 ) -> void:
-	variation = p_variation
-	set_variation(variation)
+	variation_defense = p_variation_defense
+	variation_offense = p_variation_offense
+	set_variation(variation_offense)
 
-func set_variation(_variation:Variations) -> void:
-	variation = _variation
+	tactic_defense = p_tactic_defense
+	tactic_offense = p_tactic_offense
+
+# TODO also add defense
+func set_variation(p_variation_offense:Variations) -> void:
+	variation_offense = p_variation_offense
 	
-	var string_values:PackedStringArray = Variations.keys()[variation].split()
+	var string_values:PackedStringArray = Variations.keys()[variation_offense].split()
 	string_values.remove_at(0) # remove F
 	
 	# extract int values
