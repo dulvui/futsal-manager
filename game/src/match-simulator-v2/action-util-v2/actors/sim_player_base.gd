@@ -10,6 +10,8 @@ signal short_pass
 # resources
 var player_res:Player
 var ball:SimBall
+var field:SimField
+var left_half:bool
 # positions
 var start_pos:Vector2
 var pos:Vector2
@@ -30,13 +32,17 @@ func set_up(
 	p_player_res:Player,
 	p_start_pos:Vector2,
 	p_ball:SimBall,
+	p_field:SimField,
+	p_left_half:bool,
 	p_is_simulation:bool = false,
 ) -> void:
 	player_res = p_player_res
 	start_pos = p_start_pos
 	ball = p_ball
-	
+	field = p_field
 	pos = start_pos
+	
+	left_half = p_left_half
 	
 	# inital test values
 	interception_radius = 20
@@ -50,7 +56,7 @@ func intercepts() -> bool:
 	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		return true
 	return false
-	
+
 func set_pos(p_pos:Vector2) -> void:
 	pos = p_pos
 	global_position = pos
@@ -58,3 +64,12 @@ func set_pos(p_pos:Vector2) -> void:
 func move() -> void:
 	pos += direction * speed
 
+func distance_to_own_goal() -> float:
+	if left_half:
+		return pos.distance_squared_to(field.goal_left)
+	return pos.distance_squared_to(field.goal_right)
+	
+func distance_to_goal() -> float:
+	if left_half:
+		return pos.distance_squared_to(field.goal_right)
+	return pos.distance_squared_to(field.goal_left)

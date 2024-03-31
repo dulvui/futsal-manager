@@ -29,3 +29,4 @@ func move() -> void:
 
 func decide() -> void:
 	pass
+
