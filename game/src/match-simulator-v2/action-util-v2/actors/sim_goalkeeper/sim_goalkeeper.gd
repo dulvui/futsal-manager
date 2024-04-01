@@ -10,8 +10,6 @@ class_name SimGoalkeeper
 func set_color(p_color:Color) -> void:
 	body.modulate = p_color
 
-func update() -> void:
-	decide()
-	
-func decide() -> void:
+func act() -> void:
 	pass
+	

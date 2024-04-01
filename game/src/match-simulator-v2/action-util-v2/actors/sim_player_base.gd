@@ -32,17 +32,12 @@ func set_up(
 	p_player_res:Player,
 	p_start_pos:Vector2,
 	p_ball:SimBall,
-	p_field:SimField,
-	p_left_half:bool,
 	p_is_simulation:bool = false,
 ) -> void:
 	player_res = p_player_res
 	start_pos = p_start_pos
 	ball = p_ball
-	field = p_field
 	pos = start_pos
-	
-	left_half = p_left_half
 	
 	# inital test values
 	interception_radius = 20
@@ -51,6 +46,9 @@ func set_up(
 	global_position = pos
 	# disables _physics_process, if simulation
 	set_physics_process(not p_is_simulation)
+	
+func update() -> void:
+	pass
 	
 func intercepts() -> bool:
 	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
@@ -63,13 +61,3 @@ func set_pos(p_pos:Vector2) -> void:
 	
 func move() -> void:
 	pos += direction * speed
-
-func distance_to_own_goal() -> float:
-	if left_half:
-		return pos.distance_squared_to(field.goal_left)
-	return pos.distance_squared_to(field.goal_right)
-	
-func distance_to_goal() -> float:
-	if left_half:
-		return pos.distance_squared_to(field.goal_right)
-	return pos.distance_squared_to(field.goal_left)
