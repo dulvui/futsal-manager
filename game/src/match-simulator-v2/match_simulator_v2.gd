@@ -51,6 +51,7 @@ func _update() -> void:
 	if time == half_time_seconds:
 		timer.paused = true
 		half_time.emit()
+		action_util.half_time()
 	elif time == half_time_seconds * 2:
 		timer.stop()
 		match_end.emit()

@@ -11,15 +11,25 @@ var size:Vector2
 var center:Vector2
 
 var goal_left:Vector2
+var goal_left_post_upper:Vector2
+var goal_left_post_lower:Vector2
+
 var goal_right:Vector2
+var goal_right_post_upper:Vector2
+var goal_right_post_lower:Vector2
+
 
 func set_up() -> void:
 	size = sprite.texture.get_size()
 	center = Vector2(size.x / 2, size.y / 2)
 	
 	goal_left = Vector2(0, size.y / 2)
-	goal_right = Vector2(size.x, size.y / 2)
+	goal_left_post_upper = goal_left + Vector2(0, 150)
+	goal_left_post_lower = goal_left + Vector2(0, -150)
 	
+	goal_right = Vector2(size.x, size.y / 2)
+	goal_right_post_upper = goal_right + Vector2(0, 150)
+	goal_right_post_lower = goal_right + Vector2(0, -150)
 
 
 func is_in_field(pos:Vector2) -> bool:

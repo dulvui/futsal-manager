@@ -9,6 +9,8 @@ extends Node2D
 @onready var home_team:SimTeam = $HomeTeam
 @onready var away_team:SimTeam = $AwayTeam
 
+var home_plays_left:bool
+
 
 func set_up(p_home_team:Team, p_away_team:Team) -> void:
 	field.set_up()
@@ -17,8 +19,11 @@ func set_up(p_home_team:Team, p_away_team:Team) -> void:
 	var home_color:Color = p_home_team.get_home_color()
 	var away_color:Color = p_away_team.get_away_color(home_color)
 	# TODO add coin toss
-	home_team.set_up(p_home_team, field, ball, true, home_color, true)
-	away_team.set_up(p_away_team, field, ball, false, away_color, false)
+	#home_plays_left = randi_range(0, 1) == 0
+	home_plays_left = true
+	
+	home_team.set_up(p_home_team, field, ball, home_plays_left, home_color, true)
+	away_team.set_up(p_away_team, field, ball, not home_plays_left, away_color, false)
 	
 func update() -> void:
 	ball.update()
@@ -30,12 +35,20 @@ func update() -> void:
 	home_team.act()
 	away_team.act()
 	
+func half_time() -> void:
+	home_plays_left = not home_plays_left
+	# TODO create switch side method for teams
+	#home_team.set_up(p_home_team, field, ball, home_plays_left, home_color, false)
+	#away_team.set_up(p_away_team, field, ball, not home_plays_left, away_color, true)
+
 func calc_distances() -> void:
 	for player in home_team.players:
 		calc_distance_to_goal(player, home_team.left_half)
 		calc_distance_to_own_goal(player, home_team.left_half)
 		calc_player_to_active_player_distance(player, home_team.active_player)
 		calc_player_to_ball_distance(player)
+	
+	calc_free_shoot_trajectory()
 
 func calc_distance_to_goal(player:SimPlayer, left_half:bool) -> void:
 	if left_half:
@@ -55,3 +68,22 @@ func calc_player_to_ball_distance(player:SimPlayer) -> void:
 
 func calc_distance_to(from:Vector2, to:Vector2) -> float:
 	return from.distance_squared_to(to)
+	
+func calc_free_shoot_trajectory() -> void:
+	if home_team.has_ball:
+		home_team.active_player.players_in_shoot_trajectory = 0
+		home_team.active_player.empty_net = false
+		
+		var polygon:PackedVector2Array = PackedVector2Array()
+		polygon.append(ball.pos)
+		#polygon.append(home_team.active_player.pos)
+		polygon.append(field.goal_right_post_lower)
+		polygon.append(field.goal_right_post_upper)
+		
+		if Geometry2D.is_point_in_polygon(away_team.goalkeeper.pos, polygon):
+			home_team.active_player.empty_net = true
+		
+		for player:SimPlayer in away_team.players:
+			if Geometry2D.is_point_in_polygon(player.pos, polygon):
+				print(player.pos)
+				home_team.active_player.players_in_shoot_trajectory += 1
