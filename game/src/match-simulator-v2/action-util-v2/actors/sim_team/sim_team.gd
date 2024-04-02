@@ -61,7 +61,7 @@ func set_up(
 
 func pass_to_random_player() -> void:
 	var r_pos:Vector2 = players.pick_random().pos
-	ball.kick(r_pos, 10, SimBall.State.PASS)
+	ball.kick(r_pos, 20, SimBall.State.PASS)
 	
 func update() -> void:
 	# update values
