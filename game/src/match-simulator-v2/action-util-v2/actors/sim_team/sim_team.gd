@@ -57,9 +57,7 @@ func set_up(
 		active_player = players[-1]
 		active_player.set_pos(field.center + Vector2(0, -50))
 		
-		players[-2].set_pos(field.center + Vector2(0, 50))
-		
-		ball.kick(players[0].pos, 10, SimBall.State.PASS)
+		players[-2].set_pos(field.center + Vector2(0, 20))
 
 func pass_to_random_player() -> void:
 	var r_pos:Vector2 = players.pick_random().pos

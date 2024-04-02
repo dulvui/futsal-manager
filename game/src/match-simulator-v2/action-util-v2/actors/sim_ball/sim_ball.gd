@@ -38,7 +38,8 @@ func update() -> void:
 		speed = 0
 
 func move() -> void:
-	pos += direction * speed
+	if is_moving():
+		pos += direction * speed
 
 func is_moving() -> bool:
 	return speed > 0

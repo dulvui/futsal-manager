@@ -40,8 +40,8 @@ func set_up(
 	pos = start_pos
 	
 	# inital test values
-	interception_radius = 20
-	speed = 5
+	interception_radius = 25
+	speed = 15
 	
 	global_position = pos
 	# disables _physics_process, if simulation
@@ -51,7 +51,7 @@ func update() -> void:
 	pass
 	
 func intercepts() -> bool:
-	if ball.is_moving() and Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
+	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		return true
 	return false
 

@@ -22,16 +22,19 @@ func set_color(p_color:Color) -> void:
 func act() -> void:
 	move()
 	
-func move() -> void:
-	super.move()
-	stamina -= 0.01
-	
-	if has_ball:
-		ball.kick(direction, speed, SimBall.State.RUN)
-		
 	if intercepts():
 		has_ball = true
 		ball.stop()
+	
+	if has_ball:
+		short_pass.emit()
+		has_ball = false
+		#ball.kick(direction, speed, SimBall.State.RUN)
+	
+func move() -> void:
+	super.move()
+	stamina -= 0.01
+
 
 
 
