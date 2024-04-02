@@ -31,6 +31,21 @@ func set_up() -> void:
 	goal_right_post_upper = goal_right + Vector2(0, 150)
 	goal_right_post_lower = goal_right + Vector2(0, -150)
 
+func get_post_upper(is_home:bool, home_plays_left:bool) -> Vector2:
+	if is_home and home_plays_left:
+		return goal_right_post_upper
+	if not is_home and not home_plays_left:
+		return goal_right_post_upper
+	return goal_left_post_upper
+	
+func get_post_lower(is_home:bool, home_plays_left:bool) -> Vector2:
+	if is_home and home_plays_left:
+		return goal_right_post_lower
+	if not is_home and not home_plays_left:
+		return goal_right_post_upper
+	return goal_left_post_lower
+
+
 
 func is_in_field(pos:Vector2) -> bool:
 	return size.x <= pos.x and pos.x >= 0 and size.y <= pos.y and pos.y >= 0

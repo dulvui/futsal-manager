@@ -14,9 +14,6 @@ var distance_to_active_player:float
 var distance_to_ball:float
 var distance_to_enemy:float
 
-var players_in_shoot_trajectory:int
-var empty_net:bool
-
 
 func set_color(p_color:Color) -> void:
 	body.modulate = p_color

@@ -15,11 +15,17 @@ var pos:Vector2
 var speed:float
 var direction:Vector2
 
+var trajectory_polygon:PackedVector2Array
+var players_in_shoot_trajectory:int
+var empty_net:bool
+
 func _physics_process(delta: float) -> void:
 	global_position = global_position.lerp(pos, delta * speed)
 
 func set_up(field_center:Vector2, p_is_simulation:bool = false) -> void:
 	pos = field_center
+	
+	trajectory_polygon = PackedVector2Array()
 	
 	# disables _physics_process, if simulation
 	set_physics_process(not p_is_simulation)
