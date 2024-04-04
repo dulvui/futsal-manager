@@ -14,27 +14,28 @@ var distance_to_active_player:float
 var distance_to_ball:float
 var distance_to_enemy:float
 
-
 func set_color(p_color:Color) -> void:
 	body.modulate = p_color
-	
 
 func act() -> void:
-	move()
-	
 	if intercepts():
 		has_ball = true
 		ball.stop()
 	
 	if has_ball:
-		
 		if _should_shoot():
+			has_ball = false
 			shoot.emit()
-			has_ball = false
+			print("shoot")
 		elif _should_pass():
-			short_pass.emit()
 			has_ball = false
-		#ball.kick(direction, speed, SimBall.State.RUN)
+			short_pass.emit()
+			print("pass")
+		else:
+			direction = _next_direction()
+			print("dribble")
+
+	move()
 	
 func move() -> void:
 	super.move()
@@ -42,6 +43,7 @@ func move() -> void:
 
 func _should_shoot() -> bool:
 	if ball.empty_net:
+		print("empty net")
 		return true
 	if  ball.players_in_shoot_trajectory <= 2:
 		return Config.match_rng.randi_range(1, 100) < 20
@@ -49,6 +51,9 @@ func _should_shoot() -> bool:
 	
 	
 func _should_pass() -> bool:
+	if distance_to_enemy < 50:
+		return Config.match_rng.randi_range(1, 100) < 60
 	return false
 
-
+func _next_direction() -> Vector2:
+	return Vector2.ZERO

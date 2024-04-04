@@ -45,7 +45,15 @@ func get_post_lower(is_home:bool, home_plays_left:bool) -> Vector2:
 		return goal_right_post_upper
 	return goal_left_post_lower
 
-
+func get_goalkeeper_pos(plays_left:bool) -> Vector2:
+	var pos:Vector2
+	if plays_left:
+		pos = goal_left
+	else:
+		pos = goal_right
+	# move some pixels away from goal line
+	pos.x = abs(pos.x - 60)
+	return pos
 
 func is_in_field(pos:Vector2) -> bool:
 	return size.x <= pos.x and pos.x >= 0 and size.y <= pos.y and pos.y >= 0

@@ -7,6 +7,7 @@ class_name SimPlayerBase
 
 signal short_pass
 signal shoot
+signal dribble
 
 # resources
 var player_res:Player
@@ -43,7 +44,7 @@ func set_up(
 	# inital test values
 	interception_radius = 25
 	speed = 15
-	
+
 	global_position = pos
 	# disables _physics_process, if simulation
 	set_physics_process(not p_is_simulation)
