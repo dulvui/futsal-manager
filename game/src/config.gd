@@ -11,6 +11,7 @@ var generation_seed:String
 var generation_state:int
 var generation_gender:Constants.Gender
 var rng:RandomNumberGenerator
+var match_rng:RandomNumberGenerator
 
 # saves wich season this is, starting from 0
 var current_season:int
@@ -34,6 +35,7 @@ var id_by_type:Dictionary
 func _ready() -> void:
 	_load_config()
 	_load_resources()
+	match_rng = RandomNumberGenerator.new()
 	rng = RandomNumberGenerator.new()
 	rng.state = generation_state
 	set_seed()

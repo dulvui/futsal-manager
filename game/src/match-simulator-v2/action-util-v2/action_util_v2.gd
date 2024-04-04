@@ -11,15 +11,12 @@ extends Node2D
 
 var home_plays_left:bool
 
-var rng:RandomNumberGenerator
-
-
 func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	field.set_up()
 	ball.set_up(field.center)
 	
-	rng = RandomNumberGenerator.new()
-	rng.seed = hash(match_seed)
+	Config.match_rng.seed = hash(match_seed)
+	Config.match_rng.state = 0
 		# set colors
 	var home_color:Color = p_home_team.get_home_color()
 	var away_color:Color = p_away_team.get_away_color(home_color)

@@ -27,14 +27,28 @@ func act() -> void:
 		ball.stop()
 	
 	if has_ball:
-		short_pass.emit()
-		has_ball = false
+		
+		if _should_shoot():
+			shoot.emit()
+			has_ball = false
+		elif _should_pass():
+			short_pass.emit()
+			has_ball = false
 		#ball.kick(direction, speed, SimBall.State.RUN)
 	
 func move() -> void:
 	super.move()
 	stamina -= 0.01
 
-
+func _should_shoot() -> bool:
+	if ball.empty_net:
+		return true
+	if  ball.players_in_shoot_trajectory <= 2:
+		return Config.match_rng.randi_range(1, 100) < 20
+	return false
+	
+	
+func _should_pass() -> bool:
+	return false
 
 
