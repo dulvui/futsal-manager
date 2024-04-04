@@ -89,8 +89,7 @@ func calc_free_shoot_trajectory() -> void:
 		goalkeeper = home_team.goalkeeper
 		players = home_team.players
 	
-	if Geometry2D.is_point_in_polygon(goalkeeper.pos, ball.trajectory_polygon):
-		ball.empty_net = true
+	ball.empty_net = not Geometry2D.is_point_in_polygon(goalkeeper.pos, ball.trajectory_polygon)
 	
 	for player:SimPlayer in players:
 		if Geometry2D.is_point_in_polygon(player.pos, ball.trajectory_polygon):
