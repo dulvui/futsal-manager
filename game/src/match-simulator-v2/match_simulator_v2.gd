@@ -24,8 +24,8 @@ var home_stats:MatchStatistics = MatchStatistics.new()
 var away_stats:MatchStatistics = MatchStatistics.new()
 
 #var home_has_ball:bool
-func set_up(home_team:Team, away_team:Team) -> void:
-	action_util.set_up(home_team,away_team)
+func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
+	action_util.set_up(home_team,away_team, match_seed)
 	
 	for speed in Config.speed_factor:
 		faster()

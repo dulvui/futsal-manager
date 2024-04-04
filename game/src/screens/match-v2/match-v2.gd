@@ -33,8 +33,8 @@ var first_half:bool = true
 
 var matchz:Match
 
+
 func _ready() -> void:
-	randomize()
 	matchz = Config.calendar().get_next_match()
 	
 	for team:Team in Config.leagues.get_active().teams:
@@ -47,7 +47,7 @@ func _ready() -> void:
 	$Main/Content/CentralContainer/TopBar/Away.text = matchz.away.name
 	
 	formation.set_up(true)
-	match_simulator.set_up(home_team,away_team)
+	match_simulator.set_up(home_team,away_team, matchz.id)
 	
 	last_active_view = match_simulator
 	

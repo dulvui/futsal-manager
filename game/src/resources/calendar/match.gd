@@ -5,6 +5,7 @@
 class_name Match
 extends Resource
 
+@export var id:int
 @export var home:Team
 @export var away:Team
 @export var over:bool
@@ -21,6 +22,7 @@ func _init(
 	away = p_away
 	home_goals = p_home_goals
 	away_goals = p_away_goals
+	id = IdUtil.next_id(IdUtil.Types.MATCH)
 
 func set_result(p_home_goals:int, p_away_goals:int) -> void:
 	home_goals = p_home_goals

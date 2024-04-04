@@ -11,10 +11,15 @@ extends Node2D
 
 var home_plays_left:bool
 
+var rng:RandomNumberGenerator
 
-func set_up(p_home_team:Team, p_away_team:Team) -> void:
+
+func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	field.set_up()
 	ball.set_up(field.center)
+	
+	rng = RandomNumberGenerator.new()
+	rng.seed = hash(match_seed)
 		# set colors
 	var home_color:Color = p_home_team.get_home_color()
 	var away_color:Color = p_away_team.get_away_color(home_color)
@@ -66,7 +71,7 @@ func calc_player_to_ball_distance(player:SimPlayer) -> void:
 	player.distance_to_ball = calc_distance_to(player.pos, ball.pos)
 
 func calc_distance_to(from:Vector2, to:Vector2) -> float:
-	return from.distance_squared_to(to)
+	return from.distance_to(to)
 	
 func calc_free_shoot_trajectory() -> void:
 	ball.players_in_shoot_trajectory = 0
@@ -86,7 +91,7 @@ func calc_free_shoot_trajectory() -> void:
 	else:
 		goalkeeper = home_team.goalkeeper
 		players = home_team.players
-				
+	
 	if Geometry2D.is_point_in_polygon(goalkeeper.pos, ball.trajectory_polygon):
 		ball.empty_net = true
 	
