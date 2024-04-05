@@ -50,7 +50,7 @@ func set_up(
 		players.append(sim_player)
 		
 		# player signals
-		sim_player.short_pass.connect(pass_to_random_player)
+		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		sim_player.shoot.connect(shoot_on_goal)
 		sim_player.dribble.connect(pass_to_random_player)
 		
@@ -62,10 +62,12 @@ func set_up(
 		
 		players[-2].set_pos(field.center + Vector2(0, 20))
 
-func pass_to_random_player() -> void:
-	var r_pos:Vector2 = players.pick_random().pos
+func pass_to_random_player(passing_player:SimPlayer) -> void:
+	var r_pos:Vector2 = players.filter(
+		func(player:SimPlayer) -> bool: return player.player_res.id != passing_player.player_res.id
+	).pick_random().pos
 	ball.kick(r_pos, 20, SimBall.State.PASS)
-	
+
 func shoot_on_goal() -> void:
 	var r_pos:Vector2
 	if left_half:

@@ -54,7 +54,8 @@ func update() -> void:
 	
 func intercepts() -> bool:
 	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
-		return true
+		# TODO use player block attributes
+		return Config.match_rng.randi_range(0, 100) < 70
 	return false
 
 func set_pos(p_pos:Vector2) -> void:

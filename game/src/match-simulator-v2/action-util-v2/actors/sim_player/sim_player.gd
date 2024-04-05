@@ -33,6 +33,7 @@ func act() -> void:
 			print("pass")
 		else:
 			direction = _next_direction()
+			speed = 10
 			print("dribble")
 
 	move()
@@ -46,7 +47,7 @@ func _should_shoot() -> bool:
 		print("empty net")
 		return true
 	if  ball.players_in_shoot_trajectory <= 2:
-		return Config.match_rng.randi_range(1, 100) < 20
+		return Config.match_rng.randi_range(1, 100) < 2
 	return false
 	
 	
