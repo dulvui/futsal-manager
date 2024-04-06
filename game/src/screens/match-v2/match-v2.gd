@@ -6,7 +6,7 @@ extends Control
 
 const VisualAction:PackedScene = preload("res://src/match-simulator/visual-action/visual_action.tscn")
 
-@onready var match_simulator:Control = $Main/Content/CentralContainer/MainBar/MatchSimulator
+@onready var match_simulator:MatchSimulator = $Main/Content/CentralContainer/MainBar/MatchSimulator
 @onready var stats:MarginContainer = $Main/Content/CentralContainer/MainBar/Stats
 @onready var comments:VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
 @onready var events:ScrollContainer = $Main/Content/CentralContainer/MainBar/Events
