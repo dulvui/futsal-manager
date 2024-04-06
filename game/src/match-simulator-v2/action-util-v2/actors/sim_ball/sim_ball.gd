@@ -5,10 +5,9 @@
 extends Node2D
 class_name SimBall
 
-signal corner(pos:Vector2)
-signal kick_in(pos:Vector2)
-signal goal_kick(pos:Vector2)
-signal goal(pos:Vector2)
+signal corner
+signal kick_in
+signal goal
 
 enum State { IDLE, PASS, CROSS, SHOOT, DRIBBLE, RUN, CORNER, KICK_IN, KICK_OFF }
 
@@ -39,6 +38,7 @@ func set_pos(p_pos:Vector2) -> void:
 	pos = p_pos
 	if not is_simulation:
 		global_position = pos
+	stop()
 
 func update() -> void:
 	if speed > 0:
@@ -88,20 +88,27 @@ func check_field_bounds(field:SimField) -> void:
 	# kick in
 	if pos.y < 0:
 		set_kick_in_pos(Vector2(pos.x, 0))
-		kick_in.emit(pos)
+		kick_in.emit()
 		print("kick_in")
 		return
 	if pos.y > field.size.y:
 		set_kick_in_pos(Vector2(pos.x, field.size.y))
-		kick_in.emit(pos)
+		kick_in.emit()
 		print("kick_in")
 		return
 	
 	if pos.x < 0 or pos.x > field.size.x:
+		# TODO check if post was hit => reflect
+		if field.is_goal(pos):
+			kick_off(field.center)
+			goal.emit()
+			print("goal")
+			return
 		# corner
-		var corner_pos:Vector2 = field.get_corner_pos(pos)
-		set_corner_pos(corner_pos)
-		corner.emit(corner_pos)
-		print("corner")
-		return
-	# TODO goal + check if post was hit => reflect
+		else:
+			var corner_pos:Vector2 = field.get_corner_pos(pos)
+			set_corner_pos(corner_pos)
+			corner.emit()
+			print("corner")
+			return
+	

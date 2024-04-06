@@ -10,6 +10,7 @@ class_name SimField
 var size:Vector2
 var center:Vector2
 
+const goal_size:int = 300
 var goal_left:Vector2
 var goal_left_post_upper:Vector2
 var goal_left_post_lower:Vector2
@@ -29,14 +30,14 @@ func set_up() -> void:
 	center = Vector2(size.x / 2, size.y / 2)
 	
 	goal_left = Vector2(0, size.y / 2)
-	goal_left_post_upper = goal_left + Vector2(0, 150)
-	goal_left_post_lower = goal_left + Vector2(0, -150)
+	goal_left_post_upper = goal_left + Vector2(0, goal_size / 2)
+	goal_left_post_lower = goal_left + Vector2(0, -goal_size / 2)
 	goal_left_corner_upper = Vector2(0, 0)
 	goal_left_corner_lower = Vector2(0, size.y)
 	
 	goal_right = Vector2(size.x, size.y / 2)
-	goal_right_post_upper = goal_right + Vector2(0, 150)
-	goal_right_post_lower = goal_right + Vector2(0, -150)
+	goal_right_post_upper = goal_right + Vector2(0, goal_size / 2)
+	goal_right_post_lower = goal_right + Vector2(0, -goal_size / 2)
 	goal_right_corner_upper = Vector2(size.x, 0)
 	goal_right_corner_lower = Vector2(size.x, size.y)
 
@@ -65,6 +66,13 @@ func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
 		corner_pos.y = size.y # bottom
 
 	return corner_pos
+	
+func is_goal(ball_pos:Vector2) -> bool:
+	if ball_pos.y < goal_left.y + goal_size / 2:
+		return true
+	if ball_pos.y > goal_left.y - goal_size / 2:
+		return true
+	return false
 
 func get_goalkeeper_pos(plays_left:bool) -> Vector2:
 	var pos:Vector2

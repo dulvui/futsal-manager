@@ -18,3 +18,7 @@ position = Vector2(62, 301)
 
 [node name="AwayTeam" parent="." instance=ExtResource("4_op64g")]
 position = Vector2(755, 281)
+
+[connection signal="corner" from="SimBall" to="." method="_on_sim_ball_corner"]
+[connection signal="goal" from="SimBall" to="." method="_on_sim_ball_goal"]
+[connection signal="kick_in" from="SimBall" to="." method="_on_sim_ball_kick_in"]

@@ -77,6 +77,7 @@ func calc_free_shoot_trajectory() -> void:
 	ball.empty_net = false
 	ball.trajectory_polygon.clear()
 	
+	# TODO only add ball pos 
 	ball.trajectory_polygon.append(ball.pos)
 	ball.trajectory_polygon.append(field.get_post_lower(home_team.has_ball, home_plays_left))
 	ball.trajectory_polygon.append(field.get_post_upper(home_team.has_ball, home_plays_left))
@@ -99,7 +100,23 @@ func calc_free_shoot_trajectory() -> void:
 
 
 func _on_sim_ball_corner() -> void:
-	var corner_pos:Vector2 = field.get_corner(ball.pos)
-	ball.set_pos(corner_pos)
+	if home_team.has_ball:
+		home_team.players.pick_random().set_pos(ball.pos)
+	else:
+		away_team.players.pick_random().set_pos(ball.pos)
 
+
+
+func _on_sim_ball_kick_in() -> void:
+	if home_team.has_ball:
+		home_team.players.pick_random().set_pos(ball.pos)
+	else:
+		away_team.players.pick_random().set_pos(ball.pos)
+
+
+func _on_sim_ball_goal() -> void:
+	if home_team.has_ball:
+		home_team.players.pick_random().set_pos(ball.pos)
+	else:
+		away_team.players.pick_random().set_pos(ball.pos)
 
