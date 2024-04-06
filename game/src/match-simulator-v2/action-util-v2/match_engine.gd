@@ -3,6 +3,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 extends Node2D
+class_name MatchEngine
+
+signal home_goal
+signal away_goal
 
 @onready var field:SimField = $SimField
 @onready var ball:SimBall = $SimBall
@@ -117,6 +121,9 @@ func _on_sim_ball_kick_in() -> void:
 func _on_sim_ball_goal() -> void:
 	if home_team.has_ball:
 		home_team.players.pick_random().set_pos(ball.pos)
+		home_goal.emit()
 	else:
 		away_team.players.pick_random().set_pos(ball.pos)
+		away_goal.emit()
+	
 

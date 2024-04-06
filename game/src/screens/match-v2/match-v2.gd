@@ -67,6 +67,8 @@ func _on_match_simulator_update() -> void:
 
 	home_possession.text = str(match_simulator.home_stats.possession) + " %"
 	away_possession.text = str(match_simulator.away_stats.possession) + " %"
+	
+	result_label.text = "%d - %d"%[match_simulator.home_stats.goals,match_simulator.away_stats.goals]
 
 
 func match_end() -> void:
