@@ -24,7 +24,8 @@ var speed:float
 var stamina:float
 var interception_radius:int #TODO reduce radius with low stamina
 
-var has_ball:bool
+# ticks player has ball, 0 means no ball
+var has_ball:int
 
 func _physics_process(delta: float) -> void:
 	global_position = global_position.lerp(pos, delta * speed)
@@ -44,6 +45,7 @@ func set_up(
 	# inital test values
 	interception_radius = 25
 	speed = 15
+	has_ball = 0
 
 	global_position = pos
 	# disables _physics_process, if simulation
@@ -55,7 +57,8 @@ func update() -> void:
 func intercepts() -> bool:
 	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		# TODO use player block attributes
-		return Config.match_rng.randi_range(0, 100) < 70
+		return Config.match_rng.randi_range(0, 100) < 90
+		#return true
 	return false
 
 func set_pos(p_pos:Vector2) -> void:

@@ -5,11 +5,17 @@
 extends Node2D
 class_name SimBall
 
-enum State { IDLE, PASS, CROSS, SHOOT, DRIBBLE, RUN }
+signal corner(pos:Vector2)
+signal kick_in(pos:Vector2)
+signal goal_kick(pos:Vector2)
+signal goal(pos:Vector2)
+
+enum State { IDLE, PASS, CROSS, SHOOT, DRIBBLE, RUN, CORNER, KICK_IN, KICK_OFF }
 
 const deceleration = 0.01
 
 var state:State
+var is_simulation:bool
 
 var pos:Vector2
 var speed:float
@@ -24,11 +30,15 @@ func _physics_process(delta: float) -> void:
 
 func set_up(field_center:Vector2, p_is_simulation:bool = false) -> void:
 	pos = field_center
-	
 	trajectory_polygon = PackedVector2Array()
-	
 	# disables _physics_process, if simulation
-	set_physics_process(not p_is_simulation)
+	is_simulation = p_is_simulation
+	set_physics_process(not is_simulation)
+	
+func set_pos(p_pos:Vector2) -> void:
+	pos = p_pos
+	if not is_simulation:
+		global_position = pos
 
 func update() -> void:
 	if speed > 0:
@@ -38,8 +48,7 @@ func update() -> void:
 		speed = 0
 
 func move() -> void:
-	if is_moving():
-		pos += direction * speed
+	pos += direction * speed
 
 func is_moving() -> bool:
 	return speed > 0
@@ -47,9 +56,52 @@ func is_moving() -> bool:
 func stop() -> void:
 	state = State.IDLE
 	speed = 0
+	print("stop")
 
 func kick(p_destination:Vector2, force:float, type:State) -> void:
 	speed = force + 0.2 # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
 	state = type
 	
+	print(p_destination)
+
+func set_corner_pos(p_pos:Vector2) -> void:
+	state = State.CORNER
+	set_pos(p_pos)
+	
+func set_kick_in_pos(p_pos:Vector2) -> void:
+	state = State.KICK_IN
+	set_pos(p_pos)
+	
+func kick_off(p_pos:Vector2) -> void:
+	state = State.KICK_OFF
+	set_pos(p_pos)
+
+
+func is_in_field(field:SimField) -> bool:
+	return field.size.x <= pos.x and pos.x >= 0 and field.size.y <= pos.y and pos.y >= 0
+
+func check_field_bounds(field:SimField) -> void:
+	if is_in_field(field):
+		return
+	
+	# kick in
+	if pos.y < 0:
+		set_kick_in_pos(Vector2(pos.x, 0))
+		kick_in.emit(pos)
+		print("kick_in")
+		return
+	if pos.y > field.size.y:
+		set_kick_in_pos(Vector2(pos.x, field.size.y))
+		kick_in.emit(pos)
+		print("kick_in")
+		return
+	
+	if pos.x < 0 or pos.x > field.size.x:
+		# corner
+		var corner_pos:Vector2 = field.get_corner_pos(pos)
+		set_corner_pos(corner_pos)
+		corner.emit(corner_pos)
+		print("corner")
+		return
+	# TODO goal + check if post was hit => reflect

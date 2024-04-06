@@ -29,6 +29,8 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	
 func update() -> void:
 	ball.update()
+	ball.check_field_bounds(field)
+	
 	home_team.update()
 	away_team.update()
 	
@@ -94,3 +96,10 @@ func calc_free_shoot_trajectory() -> void:
 	for player:SimPlayer in players:
 		if Geometry2D.is_point_in_polygon(player.pos, ball.trajectory_polygon):
 			ball.players_in_shoot_trajectory += 1
+
+
+func _on_sim_ball_corner() -> void:
+	var corner_pos:Vector2 = field.get_corner(ball.pos)
+	ball.set_pos(corner_pos)
+
+

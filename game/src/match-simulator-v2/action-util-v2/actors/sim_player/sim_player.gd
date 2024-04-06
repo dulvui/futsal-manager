@@ -18,11 +18,11 @@ func set_color(p_color:Color) -> void:
 	body.modulate = p_color
 
 func act() -> void:
-	if intercepts():
-		has_ball = true
+	if intercepts() and has_ball == 0:
+		has_ball = 1
 		ball.stop()
 	
-	if has_ball:
+	if has_ball > 1: # if player has ball not just received
 		if _should_shoot():
 			has_ball = false
 			shoot.emit()
@@ -35,6 +35,9 @@ func act() -> void:
 			direction = _next_direction()
 			speed = 10
 			print("dribble")
+			
+	if has_ball > 0:
+		has_ball += 1
 
 	move()
 	
