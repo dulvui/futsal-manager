@@ -78,7 +78,7 @@ func kick_off(p_pos:Vector2) -> void:
 
 
 func is_in_field(field:SimField) -> bool:
-	return field.size.x <= pos.x and pos.x >= 0 and field.size.y <= pos.y and pos.y >= 0
+	return Geometry2D.is_point_in_polygon(pos, field.polygon)
 
 func check_field_bounds(field:SimField) -> void:
 	if is_in_field(field):

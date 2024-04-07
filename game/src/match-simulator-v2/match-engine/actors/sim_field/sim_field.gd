@@ -14,6 +14,7 @@ const goal_size:int = 300
 var goal_left:Vector2
 var goal_right:Vector2
 
+var polygon:PackedVector2Array
 
 func set_up() -> void:
 	size = sprite.texture.get_size()
@@ -21,6 +22,13 @@ func set_up() -> void:
 	
 	goal_left = Vector2(0, size.y / 2)
 	goal_right = Vector2(size.x, size.y / 2)
+	
+	polygon = PackedVector2Array()
+	polygon.append(Vector2(0,0))
+	polygon.append(Vector2(0,size.y))
+	polygon.append(Vector2(size.x,0))
+	polygon.append(size)
+	
 
 
 func get_goal_posts(left:bool) -> Array[Vector2]:
