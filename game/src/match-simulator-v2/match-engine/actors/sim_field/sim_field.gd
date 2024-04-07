@@ -46,9 +46,7 @@ func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
 	return corner_pos
 	
 func is_goal(ball_pos:Vector2) -> bool:
-	if ball_pos.y < goal_left.y + goal_size / 2:
-		return true
-	if ball_pos.y > goal_left.y - goal_size / 2:
+	if ball_pos.y < goal_left.y + goal_size / 2 and ball_pos.y > goal_left.y - goal_size / 2:
 		return true
 	return false
 

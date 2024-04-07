@@ -99,14 +99,20 @@ func update() -> void:
 	goalkeeper.update()
 	for player:SimPlayer in players:
 		player.update()
-	# sort
-	#  TODO use other array, becuase players index = position in field
-	#players.sort_custom(_sort_distance_to_ball)
+		# set active _player
+		if player.has_ball > 0:
+			active_player = player
+
 
 func act() -> void:
 	goalkeeper.act()
 	for player:SimPlayer in players:
 		player.act()
 
-#func _sort_distance_to_ball(a:SimPlayer, b:SimPlayer) -> bool:
-	#return a.distance_to_goal < b.distance_to_goal
+func _sort_distance_to_ball(a:SimPlayer, b:SimPlayer) -> bool:
+	return a.distance_to_ball < b.distance_to_ball
+
+
+func nearest_player_to_ball() -> SimPlayer:
+	players.sort_custom(_sort_distance_to_ball)
+	return players[0]

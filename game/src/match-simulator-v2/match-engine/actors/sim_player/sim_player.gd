@@ -64,3 +64,4 @@ func _should_pass() -> bool:
 
 func _next_direction() -> Vector2:
 	return Vector2.ZERO
+

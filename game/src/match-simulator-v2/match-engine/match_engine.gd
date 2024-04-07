@@ -115,19 +115,21 @@ func left_is_active_goal() -> bool:
 func _on_sim_ball_corner() -> void:
 	if home_team.has_ball:
 		away_possess()
-		away_team.players.pick_random().set_pos(ball.pos)
+		# TODO use corner shooter defined in tactics
+		away_team.nearest_player_to_ball().set_pos(ball.pos)
 	else:
 		home_possess()
-		home_team.players.pick_random().set_pos(ball.pos)
+		# TODO use corner shooter defined in tactics
+		home_team.nearest_player_to_ball().set_pos(ball.pos)
 
 
 func _on_sim_ball_kick_in() -> void:
 	if home_team.has_ball:
 		away_possess()
-		away_team.players.pick_random().set_pos(ball.pos)
+		away_team.nearest_player_to_ball().set_pos(ball.pos)
 	else:
 		home_possess()
-		home_team.players.pick_random().set_pos(ball.pos)
+		home_team.nearest_player_to_ball().set_pos(ball.pos)
 
 
 func _on_sim_ball_goal() -> void:
@@ -155,5 +157,5 @@ func home_possess() -> void:
 	away_team.has_ball = false
 	
 func away_possess() -> void:
-	home_team.has_ball = true
-	away_team.has_ball = false
+	away_team.has_ball = true
+	home_team.has_ball = false
