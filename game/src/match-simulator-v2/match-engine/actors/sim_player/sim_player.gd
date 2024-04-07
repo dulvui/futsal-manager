@@ -5,6 +5,8 @@
 extends SimPlayerBase
 class_name SimPlayer
 
+signal interception
+
 @onready var body:Sprite2D = $Sprites/Body
 
 # distances, calculated by actiopn util
@@ -21,6 +23,7 @@ func act() -> void:
 	if intercepts() and has_ball == 0:
 		has_ball = 1
 		ball.stop()
+		interception.emit()
 	
 	if has_ball > 1: # if player has ball not just received
 		if _should_shoot():

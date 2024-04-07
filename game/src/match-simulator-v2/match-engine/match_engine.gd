@@ -114,25 +114,46 @@ func left_is_active_goal() -> bool:
 
 func _on_sim_ball_corner() -> void:
 	if home_team.has_ball:
-		home_team.players.pick_random().set_pos(ball.pos)
-	else:
+		away_possess()
 		away_team.players.pick_random().set_pos(ball.pos)
-
+	else:
+		home_possess()
+		home_team.players.pick_random().set_pos(ball.pos)
 
 
 func _on_sim_ball_kick_in() -> void:
 	if home_team.has_ball:
-		home_team.players.pick_random().set_pos(ball.pos)
-	else:
+		away_possess()
 		away_team.players.pick_random().set_pos(ball.pos)
+	else:
+		home_possess()
+		home_team.players.pick_random().set_pos(ball.pos)
 
 
 func _on_sim_ball_goal() -> void:
 	if home_team.has_ball:
-		home_team.players.pick_random().set_pos(ball.pos)
 		home_goal.emit()
+		away_possess()
 	else:
-		away_team.players.pick_random().set_pos(ball.pos)
 		away_goal.emit()
+		home_possess()
+	# reset formation
+	home_team.kick_off_formation()
+	away_team.kick_off_formation()
 	
 
+
+func _on_home_team_possess() -> void:
+	home_possess()
+
+func _on_away_team_possess() -> void:
+	away_possess()
+
+
+func home_possess() -> void:
+	home_team.has_ball = true
+	away_team.has_ball = false
+	
+func away_possess() -> void:
+	home_team.has_ball = true
+	away_team.has_ball = false

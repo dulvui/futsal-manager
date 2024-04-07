@@ -5,6 +5,8 @@
 extends Node
 class_name SimTeam
 
+signal possess
+
 const sim_player_scene:PackedScene = preload("res://src/match-simulator-v2/match-engine/actors/sim_player/sim_player.tscn")
 
 var res_team:Team
@@ -51,6 +53,7 @@ func set_up(
 		
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
+		sim_player.interception.connect(interception)
 		sim_player.shoot.connect(shoot_on_goal)
 		sim_player.dribble.connect(pass_to_random_player)
 		
@@ -61,6 +64,20 @@ func set_up(
 		active_player.set_pos(field.center + Vector2(0, -50))
 		
 		players[-2].set_pos(field.center + Vector2(0, 20))
+
+func kick_off_formation() -> void:
+	for player:SimPlayer in players:
+		player.kick_off_pos()
+	
+	# move 2 attackers to kickoff and pass to random player
+	if has_ball:
+		active_player = players[-1]
+		active_player.set_pos(field.center + Vector2(0, -50))
+		
+		players[-2].set_pos(field.center + Vector2(0, 20))
+
+func interception() -> void:
+	possess.emit()
 
 func pass_to_random_player(passing_player:SimPlayer) -> void:
 	var r_pos:Vector2 = players.filter(

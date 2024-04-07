@@ -22,3 +22,5 @@ position = Vector2(755, 281)
 [connection signal="corner" from="SimBall" to="." method="_on_sim_ball_corner"]
 [connection signal="goal" from="SimBall" to="." method="_on_sim_ball_goal"]
 [connection signal="kick_in" from="SimBall" to="." method="_on_sim_ball_kick_in"]
+[connection signal="possess" from="HomeTeam" to="." method="_on_home_team_possess"]
+[connection signal="possess" from="AwayTeam" to="." method="_on_away_team_possess"]

@@ -67,3 +67,8 @@ func set_pos(p_pos:Vector2) -> void:
 	
 func move() -> void:
 	pos += direction * speed
+	
+func kick_off_pos() -> void:
+	set_pos(start_pos)
+	speed = 0
+	has_ball = 0
