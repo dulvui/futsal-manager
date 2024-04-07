@@ -5,7 +5,7 @@
 extends Node
 class_name SimTeam
 
-const sim_player_scene:PackedScene = preload("res://src/match-simulator-v2/action-util-v2/actors/sim_player/sim_player.tscn")
+const sim_player_scene:PackedScene = preload("res://src/match-simulator-v2/match-engine/actors/sim_player/sim_player.tscn")
 
 var res_team:Team
 

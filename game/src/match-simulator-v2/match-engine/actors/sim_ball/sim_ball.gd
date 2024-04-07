@@ -27,9 +27,11 @@ var empty_net:bool
 func _physics_process(delta: float) -> void:
 	global_position = global_position.lerp(pos, delta * speed)
 
-func set_up(field_center:Vector2, p_is_simulation:bool = false) -> void:
-	pos = field_center
+func set_up(field:SimField, p_is_simulation:bool = false) -> void:
+	pos = field.center
 	trajectory_polygon = PackedVector2Array()
+	
+	
 	# disables _physics_process, if simulation
 	is_simulation = p_is_simulation
 	set_physics_process(not is_simulation)

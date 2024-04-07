@@ -17,7 +17,7 @@ var home_plays_left:bool
 
 func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	field.set_up()
-	ball.set_up(field.center)
+	ball.set_up(field)
 	
 	Config.match_rng.seed = hash(match_seed)
 	Config.match_rng.state = 0
@@ -81,10 +81,9 @@ func calc_free_shoot_trajectory() -> void:
 	ball.empty_net = false
 	ball.trajectory_polygon.clear()
 	
-	# TODO only add ball pos 
+	ball.trajectory_polygon.clear()
+	ball.trajectory_polygon.append_array(field.get_goal_posts(left_is_active_goal()))
 	ball.trajectory_polygon.append(ball.pos)
-	ball.trajectory_polygon.append(field.get_post_lower(home_team.has_ball, home_plays_left))
-	ball.trajectory_polygon.append(field.get_post_upper(home_team.has_ball, home_plays_left))
 	
 	var goalkeeper:SimGoalkeeper
 	var players:Array[SimPlayer]
@@ -102,6 +101,16 @@ func calc_free_shoot_trajectory() -> void:
 		if Geometry2D.is_point_in_polygon(player.pos, ball.trajectory_polygon):
 			ball.players_in_shoot_trajectory += 1
 
+func left_is_active_goal() -> bool:
+	if home_plays_left and home_team.has_ball:
+		return false
+	elif home_plays_left and away_team.has_ball:
+		return true
+	elif not home_plays_left and home_team.has_ball:
+		return false
+	#if not home_plays_left and away_team.has_ball:
+		#return true
+	return true
 
 func _on_sim_ball_corner() -> void:
 	if home_team.has_ball:

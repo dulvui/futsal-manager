@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dy88ey2b4wb5q"]
+
+[ext_resource type="Script" path="res://src/match-simulator-v2/match-engine/match_engine.gd" id="1_yag7d"]
+[ext_resource type="PackedScene" uid="uid://catldeyhmiboq" path="res://src/match-simulator-v2/match-engine/actors/sim_field/sim_field.tscn" id="2_hr5y6"]
+[ext_resource type="PackedScene" uid="uid://c8ygw31bsregf" path="res://src/match-simulator-v2/match-engine/actors/sim_ball/sim_ball.tscn" id="3_mfop3"]
+[ext_resource type="PackedScene" uid="uid://r501mqa7ix6a" path="res://src/match-simulator-v2/match-engine/actors/sim_team/sim_team.tscn" id="4_pyy55"]
+
+[node name="MatchEngine" type="Node2D"]
+script = ExtResource("1_yag7d")
+
+[node name="SimField" parent="." instance=ExtResource("2_hr5y6")]
+
+[node name="SimBall" parent="." instance=ExtResource("3_mfop3")]
+position = Vector2(598, 301)
+
+[node name="HomeTeam" parent="." instance=ExtResource("4_pyy55")]
+position = Vector2(62, 301)
+
+[node name="AwayTeam" parent="." instance=ExtResource("4_pyy55")]
+position = Vector2(755, 281)
+
+[connection signal="corner" from="SimBall" to="." method="_on_sim_ball_corner"]
+[connection signal="goal" from="SimBall" to="." method="_on_sim_ball_goal"]
+[connection signal="kick_in" from="SimBall" to="." method="_on_sim_ball_kick_in"]

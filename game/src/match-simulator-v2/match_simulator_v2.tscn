@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bubq3rsb3hm6e"]
 
 [ext_resource type="Script" path="res://src/match-simulator-v2/match_simulator_v2.gd" id="1_tnm3q"]
-[ext_resource type="PackedScene" uid="uid://dy88ey2b4wb5q" path="res://src/match-simulator-v2/action-util-v2/match_engine.tscn" id="2_fwvgu"]
+[ext_resource type="PackedScene" uid="uid://dy88ey2b4wb5q" path="res://src/match-simulator-v2/match-engine/match_engine.tscn" id="2_fwvgu"]
 
 [node name="MatchSimulator" type="Control"]
 custom_minimum_size = Vector2(1200, 600)
