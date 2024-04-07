@@ -29,15 +29,12 @@ func act() -> void:
 		if _should_shoot():
 			has_ball = false
 			shoot.emit()
-			print("shoot")
 		elif _should_pass():
 			has_ball = false
 			short_pass.emit()
-			print("pass")
 		else:
 			direction = _next_direction()
 			speed = 10
-			print("dribble")
 			
 	if has_ball > 0:
 		has_ball += 1
@@ -50,7 +47,6 @@ func move() -> void:
 
 func _should_shoot() -> bool:
 	if ball.empty_net:
-		print("empty net")
 		return true
 	if  ball.players_in_shoot_trajectory <= 2:
 		return Config.match_rng.randi_range(1, 100) < 2

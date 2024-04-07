@@ -58,14 +58,11 @@ func is_moving() -> bool:
 func stop() -> void:
 	state = State.IDLE
 	speed = 0
-	print("stop")
 
 func kick(p_destination:Vector2, force:float, type:State) -> void:
 	speed = force + 0.2 # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
 	state = type
-	
-	print(p_destination)
 
 func set_corner_pos(p_pos:Vector2) -> void:
 	state = State.CORNER
@@ -91,12 +88,10 @@ func check_field_bounds(field:SimField) -> void:
 	if pos.y < 0:
 		set_kick_in_pos(Vector2(pos.x, 0))
 		kick_in.emit()
-		print("kick_in")
 		return
 	if pos.y > field.size.y:
 		set_kick_in_pos(Vector2(pos.x, field.size.y))
 		kick_in.emit()
-		print("kick_in")
 		return
 	
 	if pos.x < 0 or pos.x > field.size.x:
@@ -104,13 +99,11 @@ func check_field_bounds(field:SimField) -> void:
 		if field.is_goal(pos):
 			kick_off(field.center)
 			goal.emit()
-			print("goal")
 			return
 		# corner
 		else:
 			var corner_pos:Vector2 = field.get_corner_pos(pos)
 			set_corner_pos(corner_pos)
 			corner.emit()
-			print("corner")
 			return
 	
