@@ -44,13 +44,13 @@ func set_pos(p_pos:Vector2) -> void:
 
 func update() -> void:
 	if speed > 0:
-		speed -= deceleration
 		move()
 	else:
 		speed = 0
 
 func move() -> void:
 	pos += direction * speed
+	speed -= deceleration
 
 func is_moving() -> bool:
 	return speed > 0

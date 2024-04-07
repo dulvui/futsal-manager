@@ -33,13 +33,15 @@ func act() -> void:
 			has_ball = false
 			short_pass.emit()
 		else:
-			direction = _next_direction()
-			speed = 10
+			# TODO use pos from tactics
+			_next_direction()
 			
 	if has_ball > 0:
 		has_ball += 1
-
-	move()
+		stop()
+	else:
+		# TODO use pos from tactics
+		_next_direction()
 	
 func move() -> void:
 	super.move()
@@ -58,6 +60,7 @@ func _should_pass() -> bool:
 		return Config.match_rng.randi_range(1, 100) < 60
 	return false
 
-func _next_direction() -> Vector2:
-	return Vector2.ZERO
+func _next_direction() -> void:
+	direction = pos.direction_to(Vector2(randi_range(0, 1200), randi_range(0, 600)))
+	speed = 2
 

@@ -9,6 +9,8 @@ signal short_pass
 signal shoot
 signal dribble
 
+const deceleration = 0.01
+
 # resources
 var player_res:Player
 var ball:SimBall
@@ -52,7 +54,10 @@ func set_up(
 	set_physics_process(not p_is_simulation)
 	
 func update() -> void:
-	pass
+	if speed > 0:
+		move()
+	else:
+		speed = 0
 	
 func intercepts() -> bool:
 	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
@@ -67,8 +72,12 @@ func set_pos(p_pos:Vector2) -> void:
 	
 func move() -> void:
 	pos += direction * speed
+	speed -= deceleration
 	
 func kick_off_pos() -> void:
 	set_pos(start_pos)
 	speed = 0
 	has_ball = 0
+
+func stop() -> void:
+	speed = 0
