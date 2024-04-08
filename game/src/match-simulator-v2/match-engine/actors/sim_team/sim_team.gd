@@ -55,15 +55,16 @@ func set_up(
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		sim_player.interception.connect(interception)
 		sim_player.shoot.connect(shoot_on_goal)
-		sim_player.dribble.connect(pass_to_random_player)
+		#sim_player.dribble.connect(pass_to_random_player)
 		
 	
 	# move 2 attackers to kickoff and pass to random player
 	if has_ball:
 		active_player = players[-1]
-		active_player.set_pos(field.center + Vector2(0, -50))
+		active_player.set_pos(field.center + Vector2(0, -10))
+		active_player.state = SimPlayer.State.BALL
 		
-		players[-2].set_pos(field.center + Vector2(0, 20))
+		players[-2].set_pos(field.center + Vector2(0, 80))
 
 func update() -> void:
 	# update values
@@ -71,7 +72,7 @@ func update() -> void:
 	for player:SimPlayer in players:
 		player.update()
 		# set active _player
-		if player.has_ball > 0:
+		if player.state == SimPlayer.State.BALL:
 			active_player = player
 
 
@@ -82,7 +83,7 @@ func act() -> void:
 
 func kick_off_formation() -> void:
 	for player:SimPlayer in players:
-		player.kick_off_pos()
+		player.set_pos(player.start_pos)
 	
 	# move 2 attackers to kickoff and pass to random player
 	if has_ball:
@@ -93,19 +94,16 @@ func kick_off_formation() -> void:
 
 func interception() -> void:
 	possess.emit()
-	free_players() 
 
-func free_players() -> void:
-	for player:SimPlayer in players:
-		if not has_ball or player.state != SimPlayer.State.RECEIVE:
-			player.set_free()
 
 func pass_to_random_player(passing_player:SimPlayer) -> void:
 	var random_player:SimPlayer = players.filter(
 		func(player:SimPlayer) -> bool: return player.player_res.id != passing_player.player_res.id
 	).pick_random()
-	ball.kick(random_player.pos, 2)
+	ball.kick(random_player.pos, 6)
 	random_player.state = SimPlayer.State.RECEIVE
+	random_player.stop()
+	
 
 func shoot_on_goal() -> void:
 	var r_pos:Vector2
@@ -114,7 +112,7 @@ func shoot_on_goal() -> void:
 	else:
 		r_pos = field.goal_left
 	r_pos += Vector2(0, Config.match_rng.randi_range(field.goal_size, field.goal_size))
-	ball.kick(r_pos, 6)
+	ball.kick(r_pos, 12)
 
 
 func _sort_distance_to_ball(a:SimPlayer, b:SimPlayer) -> bool:

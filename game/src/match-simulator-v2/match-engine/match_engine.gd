@@ -123,7 +123,7 @@ func _on_sim_ball_corner() -> void:
 		nearest_player = home_team.nearest_player_to_ball()
 	
 	nearest_player.set_pos(ball.pos)
-	nearest_player.state = SimPlayer.State.PASS
+	nearest_player.state = SimPlayer.State.BALL
 
 
 func _on_sim_ball_kick_in() -> void:
@@ -136,7 +136,7 @@ func _on_sim_ball_kick_in() -> void:
 		nearest_player = home_team.nearest_player_to_ball()
 	
 	nearest_player.set_pos(ball.pos)
-	nearest_player.state = SimPlayer.State.PASS
+	nearest_player.state = SimPlayer.State.BALL
 
 func _on_sim_ball_goal() -> void:
 	if home_team.has_ball:
@@ -148,11 +148,11 @@ func _on_sim_ball_goal() -> void:
 	# reset formation
 	home_team.kick_off_formation()
 	away_team.kick_off_formation()
-	
 
 
 func _on_home_team_possess() -> void:
 	home_possess()
+
 
 func _on_away_team_possess() -> void:
 	away_possess()
@@ -161,9 +161,7 @@ func _on_away_team_possess() -> void:
 func home_possess() -> void:
 	home_team.has_ball = true
 	away_team.has_ball = false
-	away_team.free_players()
-	
+
 func away_possess() -> void:
 	away_team.has_ball = true
 	home_team.has_ball = false
-	home_team.free_players()
