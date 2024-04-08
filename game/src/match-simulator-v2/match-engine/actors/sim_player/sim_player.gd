@@ -20,6 +20,7 @@ enum State {
 	BALL,
 	RECEIVE,
 	PASS,
+	FORCE_PASS,
 	SHOOT,
 }
 
@@ -86,8 +87,12 @@ func update() -> void:
 			state = State.BALL
 			ball.stop()
 			interception.emit()
-
-	if state == State.BALL: # if player has ball not just received
+			
+	elif state == State.FORCE_PASS:
+		state = State.PASS
+		short_pass.emit()
+	
+	elif state == State.BALL: # if player has ball not just received
 		if _should_pass():
 			state = State.PASS
 			short_pass.emit()
@@ -147,13 +152,11 @@ func _should_shoot() -> bool:
 	if ball.empty_net:
 		return true
 	if  ball.players_in_shoot_trajectory <= 2:
-		return Config.match_rng.randi_range(1, 100) < 2
+		return Config.match_rng.randi_range(1, 100) < 90
 	return false
 	
 	
 func _should_pass() -> bool:
-	if state == State.BALL:
-		return true
 	if distance_to_enemy < 50:
 		return Config.match_rng.randi_range(1, 100) < 60
 	return false
@@ -162,6 +165,7 @@ func _should_pass() -> bool:
 func _next_direction() -> void:
 	if destination == Vector2.INF:
 		set_destination(bound_field(pos + Vector2(randi_range(-150, 150),randi_range(-150, 150))))
+
 
 func bound_field(p_pos:Vector2) -> Vector2:
 	p_pos.x = maxi(mini(p_pos.x, 1200), 1)

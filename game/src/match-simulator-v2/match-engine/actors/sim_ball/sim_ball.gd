@@ -9,7 +9,7 @@ signal corner
 signal kick_in
 signal goal
 
-const deceleration = 0.001
+const deceleration = 0.01
 
 var is_simulation:bool
 
