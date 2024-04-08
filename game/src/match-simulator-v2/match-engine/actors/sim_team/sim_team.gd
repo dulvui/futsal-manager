@@ -65,6 +65,8 @@ func set_up(
 		active_player.state = SimPlayer.State.BALL
 		
 		players[-2].set_pos(field.center + Vector2(0, 80))
+	else:
+		press()
 
 func update() -> void:
 	# update values
@@ -95,6 +97,9 @@ func kick_off_formation() -> void:
 func interception() -> void:
 	possess.emit()
 
+func press() -> void:
+	for player:SimPlayer in players:
+		player.state = SimPlayer.State.PRESS
 
 func pass_to_random_player(passing_player:SimPlayer) -> void:
 	var random_player:SimPlayer = players.filter(

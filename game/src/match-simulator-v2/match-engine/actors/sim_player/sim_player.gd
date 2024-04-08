@@ -81,10 +81,11 @@ func set_up(
 
 
 func update() -> void:
-	if state == State.RECEIVE and intercepts():
-		state = State.BALL
-		ball.stop()
-		interception.emit()
+	if state == State.RECEIVE or state == State.PRESS:
+		if intercepts():
+			state = State.BALL
+			ball.stop()
+			interception.emit()
 
 	if state == State.BALL: # if player has ball not just received
 		if _should_pass():
@@ -160,5 +161,10 @@ func _should_pass() -> bool:
 
 func _next_direction() -> void:
 	if destination == Vector2.INF:
-		set_destination(Vector2(randi_range(1, 1199), randi_range(1, 599)))
+		set_destination(bound_field(pos + Vector2(randi_range(-150, 150),randi_range(-150, 150))))
 
+func bound_field(p_pos:Vector2) -> Vector2:
+	p_pos.x = maxi(mini(p_pos.x, 1200), 1)
+	p_pos.y = maxi(mini(p_pos.y, 600), 1)
+	return p_pos
+	
