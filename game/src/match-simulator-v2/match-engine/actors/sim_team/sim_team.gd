@@ -65,35 +65,6 @@ func set_up(
 		
 		players[-2].set_pos(field.center + Vector2(0, 20))
 
-func kick_off_formation() -> void:
-	for player:SimPlayer in players:
-		player.kick_off_pos()
-	
-	# move 2 attackers to kickoff and pass to random player
-	if has_ball:
-		active_player = players[-1]
-		active_player.set_pos(field.center + Vector2(0, -50))
-		
-		players[-2].set_pos(field.center + Vector2(0, 20))
-
-func interception() -> void:
-	possess.emit()
-
-func pass_to_random_player(passing_player:SimPlayer) -> void:
-	var r_pos:Vector2 = players.filter(
-		func(player:SimPlayer) -> bool: return player.player_res.id != passing_player.player_res.id
-	).pick_random().pos
-	ball.kick(r_pos, 20, SimBall.State.PASS)
-
-func shoot_on_goal() -> void:
-	var r_pos:Vector2
-	if left_half:
-		r_pos = field.goal_right
-	else:
-		r_pos = field.goal_left
-	r_pos += Vector2(0, Config.match_rng.randi_range(field.goal_size, field.goal_size))
-	ball.kick(r_pos, 60, SimBall.State.SHOOT)
-	
 func update() -> void:
 	# update values
 	goalkeeper.update()
@@ -108,6 +79,43 @@ func act() -> void:
 	goalkeeper.act()
 	for player:SimPlayer in players:
 		player.act()
+
+func kick_off_formation() -> void:
+	for player:SimPlayer in players:
+		player.kick_off_pos()
+	
+	# move 2 attackers to kickoff and pass to random player
+	if has_ball:
+		active_player = players[-1]
+		active_player.set_pos(field.center + Vector2(0, -50))
+		
+		players[-2].set_pos(field.center + Vector2(0, 20))
+
+func interception() -> void:
+	possess.emit()
+	free_players() 
+
+func free_players() -> void:
+	for player:SimPlayer in players:
+		if not has_ball or player.state != SimPlayer.State.RECEIVE:
+			player.set_free()
+
+func pass_to_random_player(passing_player:SimPlayer) -> void:
+	var random_player:SimPlayer = players.filter(
+		func(player:SimPlayer) -> bool: return player.player_res.id != passing_player.player_res.id
+	).pick_random()
+	ball.kick(random_player.pos, 2)
+	random_player.state = SimPlayer.State.RECEIVE
+
+func shoot_on_goal() -> void:
+	var r_pos:Vector2
+	if left_half:
+		r_pos = field.goal_right
+	else:
+		r_pos = field.goal_left
+	r_pos += Vector2(0, Config.match_rng.randi_range(field.goal_size, field.goal_size))
+	ball.kick(r_pos, 6)
+
 
 func _sort_distance_to_ball(a:SimPlayer, b:SimPlayer) -> bool:
 	return a.distance_to_ball < b.distance_to_ball

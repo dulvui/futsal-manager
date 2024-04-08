@@ -9,11 +9,8 @@ signal corner
 signal kick_in
 signal goal
 
-enum State { IDLE, PASS, CROSS, SHOOT, DRIBBLE, RUN, CORNER, KICK_IN, KICK_OFF }
-
 const deceleration = 0.01
 
-var state:State
 var is_simulation:bool
 
 var pos:Vector2
@@ -56,26 +53,11 @@ func is_moving() -> bool:
 	return speed > 0
 	
 func stop() -> void:
-	state = State.IDLE
 	speed = 0
 
-func kick(p_destination:Vector2, force:float, type:State) -> void:
+func kick(p_destination:Vector2, force:float) -> void:
 	speed = force + 0.2 # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
-	state = type
-
-func set_corner_pos(p_pos:Vector2) -> void:
-	state = State.CORNER
-	set_pos(p_pos)
-	
-func set_kick_in_pos(p_pos:Vector2) -> void:
-	state = State.KICK_IN
-	set_pos(p_pos)
-	
-func kick_off(p_pos:Vector2) -> void:
-	state = State.KICK_OFF
-	set_pos(p_pos)
-
 
 func is_in_field(field:SimField) -> bool:
 	return Geometry2D.is_point_in_polygon(pos, field.polygon)
@@ -86,24 +68,24 @@ func check_field_bounds(field:SimField) -> void:
 	
 	# kick in
 	if pos.y < 0:
-		set_kick_in_pos(Vector2(pos.x, 0))
+		set_pos(Vector2(pos.x, 0))
 		kick_in.emit()
 		return
 	if pos.y > field.size.y:
-		set_kick_in_pos(Vector2(pos.x, field.size.y))
+		set_pos(Vector2(pos.x, field.size.y))
 		kick_in.emit()
 		return
 	
 	if pos.x < 0 or pos.x > field.size.x:
 		# TODO check if post was hit => reflect
 		if field.is_goal(pos):
-			kick_off(field.center)
+			set_pos(field.center)
 			goal.emit()
 			return
 		# corner
 		else:
 			var corner_pos:Vector2 = field.get_corner_pos(pos)
-			set_corner_pos(corner_pos)
+			set_pos(corner_pos)
 			corner.emit()
 			return
 	

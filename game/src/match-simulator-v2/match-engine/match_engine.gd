@@ -113,24 +113,30 @@ func left_is_active_goal() -> bool:
 	return true
 
 func _on_sim_ball_corner() -> void:
+	# TODO use corner shooter defined in tactics
+	var nearest_player:SimPlayer
 	if home_team.has_ball:
 		away_possess()
-		# TODO use corner shooter defined in tactics
-		away_team.nearest_player_to_ball().corner(ball.pos)
+		nearest_player = away_team.nearest_player_to_ball()
 	else:
 		home_possess()
-		# TODO use corner shooter defined in tactics
-		home_team.nearest_player_to_ball().corner(ball.pos)
+		nearest_player = home_team.nearest_player_to_ball()
+	
+	nearest_player.set_pos(ball.pos)
+	nearest_player.state = SimPlayer.State.PASS
 
 
 func _on_sim_ball_kick_in() -> void:
+	var nearest_player:SimPlayer
 	if home_team.has_ball:
 		away_possess()
-		away_team.nearest_player_to_ball().kick_in(ball.pos)
+		nearest_player = away_team.nearest_player_to_ball()
 	else:
 		home_possess()
-		home_team.nearest_player_to_ball().kick_in(ball.pos)
-
+		nearest_player = home_team.nearest_player_to_ball()
+	
+	nearest_player.set_pos(ball.pos)
+	nearest_player.state = SimPlayer.State.PASS
 
 func _on_sim_ball_goal() -> void:
 	if home_team.has_ball:
@@ -155,7 +161,9 @@ func _on_away_team_possess() -> void:
 func home_possess() -> void:
 	home_team.has_ball = true
 	away_team.has_ball = false
+	away_team.free_players()
 	
 func away_possess() -> void:
 	away_team.has_ball = true
 	home_team.has_ball = false
+	home_team.free_players()
