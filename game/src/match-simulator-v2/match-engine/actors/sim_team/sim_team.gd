@@ -91,7 +91,7 @@ func shoot_on_goal() -> void:
 		r_pos = field.goal_right
 	else:
 		r_pos = field.goal_left
-	r_pos += Vector2(0, Config.match_rng.randi_range(-100, 100))
+	r_pos += Vector2(0, Config.match_rng.randi_range(field.goal_size, field.goal_size))
 	ball.kick(r_pos, 60, SimBall.State.SHOOT)
 	
 func update() -> void:

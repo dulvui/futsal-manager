@@ -19,8 +19,9 @@ var left_half:bool
 # positions
 var start_pos:Vector2
 var pos:Vector2
-# physics
+# movements
 var direction:Vector2
+var destination:Vector2
 var speed:float
 # fisical attributes
 var stamina:float
@@ -45,6 +46,7 @@ func set_up(
 	pos = start_pos
 	
 	# inital test values
+	destination = Vector2.INF
 	interception_radius = 25
 	speed = 15
 	has_ball = 0
@@ -69,10 +71,21 @@ func intercepts() -> bool:
 func set_pos(p_pos:Vector2) -> void:
 	pos = p_pos
 	global_position = pos
+	destination = Vector2.INF
+	
+func set_destination(p_destination:Vector2) -> void:
+	destination = p_destination
+	direction = pos.direction_to(destination)
+	# TODO use speed of attributes
+	speed = 2
 	
 func move() -> void:
 	pos += direction * speed
 	speed -= deceleration
+	
+	if pos.distance_to(destination) < 1:
+		destination = Vector2.INF
+		stop()
 	
 func kick_off_pos() -> void:
 	set_pos(start_pos)

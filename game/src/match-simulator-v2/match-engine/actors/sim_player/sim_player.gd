@@ -20,28 +20,28 @@ func set_color(p_color:Color) -> void:
 	body.modulate = p_color
 
 func act() -> void:
-	if intercepts() and has_ball == 0:
+	if has_ball == 0 and intercepts():
 		has_ball = 1
 		ball.stop()
 		interception.emit()
 	
-	if has_ball > 1: # if player has ball not just received
+	if has_ball >= 1: # if player has ball not just received
 		if _should_shoot():
-			has_ball = false
+			has_ball = 0
 			shoot.emit()
 		elif _should_pass():
-			has_ball = false
+			has_ball = 0
 			short_pass.emit()
 		else:
 			# TODO use pos from tactics
 			_next_direction()
-			
+	
+	# count seconds player has ball
 	if has_ball > 0:
 		has_ball += 1
-		stop()
-	else:
-		# TODO use pos from tactics
-		_next_direction()
+	
+	# TODO use pos from tactics
+	_next_direction()
 	
 func move() -> void:
 	super.move()
@@ -61,6 +61,6 @@ func _should_pass() -> bool:
 	return false
 
 func _next_direction() -> void:
-	direction = pos.direction_to(Vector2(randi_range(0, 1200), randi_range(0, 600)))
-	speed = 2
+	if destination == Vector2.INF:
+		set_destination(Vector2(randi_range(1, 1200), randi_range(1, 600)))
 
