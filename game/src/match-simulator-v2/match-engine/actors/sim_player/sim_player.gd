@@ -7,7 +7,9 @@ class_name SimPlayer
 
 signal interception
 
+
 @onready var body:Sprite2D = $Sprites/Body
+
 
 # distances, calculated by actiopn util
 var distance_to_goal:float
@@ -26,12 +28,13 @@ func act() -> void:
 		interception.emit()
 	
 	if has_ball >= 1: # if player has ball not just received
-		if _should_shoot():
+		if _should_pass():
+			has_ball = 0
+			state = State.FREE
+			short_pass.emit()
+		elif _should_shoot():
 			has_ball = 0
 			shoot.emit()
-		elif _should_pass():
-			has_ball = 0
-			short_pass.emit()
 		else:
 			# TODO use pos from tactics
 			_next_direction()
@@ -56,6 +59,8 @@ func _should_shoot() -> bool:
 	
 	
 func _should_pass() -> bool:
+	if state in [State.CORNER, State.KICK_IN, State.KICK_OFF]:
+		return true
 	if distance_to_enemy < 50:
 		return Config.match_rng.randi_range(1, 100) < 60
 	return false

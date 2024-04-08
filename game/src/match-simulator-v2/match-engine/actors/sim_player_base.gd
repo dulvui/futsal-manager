@@ -9,7 +9,11 @@ signal short_pass
 signal shoot
 signal dribble
 
+enum State {FREE, KICK_OFF, KICK_IN, CORNER}
+
 const deceleration = 0.01
+
+var state:State
 
 # resources
 var player_res:Player
@@ -50,6 +54,7 @@ func set_up(
 	interception_radius = 25
 	speed = 15
 	has_ball = 0
+	state = State.FREE
 
 	global_position = pos
 	# disables _physics_process, if simulation
@@ -58,19 +63,20 @@ func set_up(
 func update() -> void:
 	if speed > 0:
 		move()
-	else:
-		speed = 0
 	
 func intercepts() -> bool:
 	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		# TODO use player block attributes
-		return Config.match_rng.randi_range(0, 100) < 60
 		#return true
+		return Config.match_rng.randi_range(0, 100) < 60
 	return false
 
 func set_pos(p_pos:Vector2) -> void:
 	pos = p_pos
 	global_position = pos
+	# reset values
+	speed = 0
+	has_ball = 0
 	destination = Vector2.INF
 	
 func set_destination(p_destination:Vector2) -> void:
@@ -89,8 +95,16 @@ func move() -> void:
 	
 func kick_off_pos() -> void:
 	set_pos(start_pos)
-	speed = 0
-	has_ball = 0
+	state = State.KICK_OFF
+
+	
+func kick_in(p_pos:Vector2) -> void:
+	set_pos(p_pos)
+	state = State.KICK_IN
+	
+func corner(p_pos:Vector2) -> void:
+	set_pos(p_pos)
+	state = State.CORNER
 
 func stop() -> void:
 	speed = 0

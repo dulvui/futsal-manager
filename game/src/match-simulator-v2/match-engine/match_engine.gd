@@ -116,20 +116,20 @@ func _on_sim_ball_corner() -> void:
 	if home_team.has_ball:
 		away_possess()
 		# TODO use corner shooter defined in tactics
-		away_team.nearest_player_to_ball().set_pos(ball.pos)
+		away_team.nearest_player_to_ball().corner(ball.pos)
 	else:
 		home_possess()
 		# TODO use corner shooter defined in tactics
-		home_team.nearest_player_to_ball().set_pos(ball.pos)
+		home_team.nearest_player_to_ball().corner(ball.pos)
 
 
 func _on_sim_ball_kick_in() -> void:
 	if home_team.has_ball:
 		away_possess()
-		away_team.nearest_player_to_ball().set_pos(ball.pos)
+		away_team.nearest_player_to_ball().kick_in(ball.pos)
 	else:
 		home_possess()
-		home_team.nearest_player_to_ball().set_pos(ball.pos)
+		home_team.nearest_player_to_ball().kick_in(ball.pos)
 
 
 func _on_sim_ball_goal() -> void:
