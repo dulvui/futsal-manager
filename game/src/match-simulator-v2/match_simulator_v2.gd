@@ -75,13 +75,8 @@ func match_finished() -> void:
 	timer.stop()
 
 
-func faster() -> void:
-	timer.wait_time /= 2
-
-
-func slower() -> void:
-	timer.wait_time *= 2
-
+func set_time() -> void:
+	timer.wait_time = 1.0 / (Constants.ticks_per_second * Config.speed_factor)
 
 func start_match() -> void:
 	timer.start()
