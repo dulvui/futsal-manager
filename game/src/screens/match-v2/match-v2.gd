@@ -55,7 +55,7 @@ func _ready() -> void:
 	home_color.color = home_team.get_home_color()
 	away_color.color = away_team.get_away_color(home_color.color)
 		
-	speed_factor_label.text = str(Config.speed_factor + 1) + " X"
+	speed_factor_label.text = str(Config.speed_factor) + " X"
 	
 
 func _on_match_simulator_update() -> void:
@@ -141,17 +141,17 @@ func _on_Dashboard_pressed() -> void:
 
 
 func _on_Faster_pressed() -> void:
-	if Config.speed_factor < Constants.MATCH_SPEED_FACTOR:
+	if Config.speed_factor < 4:
 		Config.speed_factor += 1
 		match_simulator.faster()
-	speed_factor_label.text = str(Config.speed_factor + 1) + " X"
+	speed_factor_label.text = str(Config.speed_factor) + " X"
 
 
 func _on_Slower_pressed() -> void:
-	if Config.speed_factor > 0:
+	if Config.speed_factor > 1:
 		Config.speed_factor -= 1
 		match_simulator.slower()
-	speed_factor_label.text = str(Config.speed_factor + 1) + " X"
+	speed_factor_label.text = str(Config.speed_factor) + " X"
 
 
 func _on_Pause_pressed() -> void:

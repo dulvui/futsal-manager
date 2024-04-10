@@ -30,13 +30,10 @@ func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
 	
 	# intialize timer
 	timer = Timer.new()
-	timer.wait_time = 1.0 / ticks_per_second
+	timer.wait_time = 1.0 / (ticks_per_second * Config.speed_factor)
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
-	
-	for speed in Config.speed_factor:
-		faster()
 
 func _on_timer_timeout() -> void:
 	match_engine.update()
@@ -80,11 +77,11 @@ func match_finished() -> void:
 
 
 func faster() -> void:
-	timer.wait_time /= Constants.MATCH_SPEED_FACTOR
+	timer.wait_time /= 2
 
 
 func slower() -> void:
-	timer.wait_time *= Constants.MATCH_SPEED_FACTOR
+	timer.wait_time *= 2
 
 
 func start_match() -> void:

@@ -16,7 +16,7 @@ var match_rng:RandomNumberGenerator
 # saves wich season this is, starting from 0
 var current_season:int
 # global game states
-var speed_factor:int = 0
+var speed_factor:int = 1
 var dashboard_active_content:int = 0
 # from settings screen
 var language:String
@@ -49,7 +49,7 @@ func _load_config() -> void:
 	current_season = config.get_value("season","current_season",0)
 	id_by_type = config.get_value("settings","id_by_type", {})
 	# global game states
-	speed_factor = config.get_value("match","speed_factor",0)
+	speed_factor = config.get_value("match","speed_factor",1)
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
 	# settings
 	language = config.get_value("settings","language","ND")
