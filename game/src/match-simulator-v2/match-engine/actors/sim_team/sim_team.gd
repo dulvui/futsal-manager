@@ -102,9 +102,11 @@ func press() -> void:
 		player.state = SimPlayer.State.PRESS
 
 func pass_to_random_player(passing_player:SimPlayer) -> void:
-	var random_player:SimPlayer = players.filter(
+	var non_active:Array[SimPlayer] = players.filter(
 		func(player:SimPlayer) -> bool: return player.player_res.id != passing_player.player_res.id
-	).pick_random()
+	)
+	var random_player:SimPlayer = non_active[Config.match_rng.randi_range(0 , non_active.size() - 1)]
+	
 	ball.kick(random_player.pos, 35)
 	random_player.state = SimPlayer.State.RECEIVE
 	random_player.stop()

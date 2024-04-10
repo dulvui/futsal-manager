@@ -164,7 +164,13 @@ func _should_pass() -> bool:
 
 func _next_direction() -> void:
 	if destination == Vector2.INF:
-		set_destination(bound_field(pos + Vector2(randi_range(-150, 150),randi_range(-150, 150))))
+		set_destination(
+			bound_field(
+				pos + Vector2(Config.match_rng.randi_range(-150, 150),
+				Config.match_rng.randi_range(-150, 150)
+				)
+			)
+		)
 
 
 func bound_field(p_pos:Vector2) -> Vector2:
