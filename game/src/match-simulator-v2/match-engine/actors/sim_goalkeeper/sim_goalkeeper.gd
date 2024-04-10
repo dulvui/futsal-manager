@@ -20,7 +20,7 @@ var destination:Vector2
 var speed:float
 
 func _physics_process(delta: float) -> void:
-	global_position = global_position.lerp(pos, delta * speed)
+	global_position = global_position.lerp(pos, delta * Config.speed_factor * Constants.ticks_per_second)
 	look_at(ball.global_position)
 
 func set_up(

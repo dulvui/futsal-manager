@@ -22,7 +22,8 @@ var players_in_shoot_trajectory:int
 var empty_net:bool
 
 func _physics_process(delta: float) -> void:
-	global_position = global_position.lerp(pos, delta * speed)
+	global_position = global_position.lerp(pos, delta * Config.speed_factor * Constants.ticks_per_second)
+
 
 func set_up(field:SimField, p_is_simulation:bool = false) -> void:
 	pos = field.center

@@ -9,6 +9,9 @@ enum Gender { MALE, FEMALE, MIXED }
 
 const DEFAULT_SEED:String = "SuchDefaultSeed"
 
+# match engine
+const ticks_per_second:int = 4
+
 # factor if shot becomes a visual action
 const VISUAL_ACTION_SHOTS_FACTOR:int = 10
 

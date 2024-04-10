@@ -55,7 +55,7 @@ var distance_to_enemy:float
 
 
 func _physics_process(delta: float) -> void:
-	global_position = global_position.lerp(pos, delta * speed)
+	global_position = global_position.lerp(pos, delta * Config.speed_factor * Constants.ticks_per_second)
 	look_at(ball.global_position)
 
 
@@ -137,7 +137,7 @@ func set_destination(p_destination:Vector2) -> void:
 	destination = p_destination
 	direction = pos.direction_to(destination)
 	# TODO use speed of attributes
-	speed = 4
+	speed = Config.match_rng.randi_range(10, 20)
 
 
 func stop() -> void:

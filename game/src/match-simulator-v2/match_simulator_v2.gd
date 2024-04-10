@@ -14,8 +14,7 @@ signal update
 
 # seconds for halftime
 const half_time_seconds:int = 60 * 20
-# time splitting
-const ticks_per_second:int = 2
+
 var ticks:int = 0
 var time:int = 0
 var timer:Timer
@@ -30,7 +29,7 @@ func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
 	
 	# intialize timer
 	timer = Timer.new()
-	timer.wait_time = 1.0 / (ticks_per_second * Config.speed_factor)
+	timer.wait_time = 1.0 / (Constants.ticks_per_second * Config.speed_factor)
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
@@ -38,12 +37,12 @@ func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
 func _on_timer_timeout() -> void:
 	match_engine.update()
 	ticks += 1
-	if ticks == ticks_per_second:
+	if ticks == Constants.ticks_per_second:
 		ticks = 0
 		time += 1
-		_update()
+		_update_time()
 
-func _update() -> void:
+func _update_time() -> void:
 	update.emit()
 	# check half/end time
 	if time == half_time_seconds:

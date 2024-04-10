@@ -105,7 +105,7 @@ func pass_to_random_player(passing_player:SimPlayer) -> void:
 	var random_player:SimPlayer = players.filter(
 		func(player:SimPlayer) -> bool: return player.player_res.id != passing_player.player_res.id
 	).pick_random()
-	ball.kick(random_player.pos, 6)
+	ball.kick(random_player.pos, 35)
 	random_player.state = SimPlayer.State.RECEIVE
 	random_player.stop()
 	
@@ -117,7 +117,7 @@ func shoot_on_goal() -> void:
 	else:
 		r_pos = field.goal_left
 	r_pos += Vector2(0, Config.match_rng.randi_range(field.goal_size, field.goal_size))
-	ball.kick(r_pos, 12)
+	ball.kick(r_pos, 100)
 
 
 func _sort_distance_to_ball(a:SimPlayer, b:SimPlayer) -> bool:
