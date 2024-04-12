@@ -59,7 +59,8 @@ texture_normal = ExtResource("3")
 layout_mode = 2
 texture_normal = ExtResource("6_sayvf")
 
-[connection signal="pressed" from="HBoxContainer/Portuguese" to="." method="_on_Portuguese_pressed"]
-[connection signal="pressed" from="HBoxContainer/Italian" to="." method="_on_Italian_pressed"]
-[connection signal="pressed" from="HBoxContainer/Spanish" to="." method="_on_Spanish_pressed"]
-[connection signal="pressed" from="HBoxContainer/German" to="." method="_on_German_pressed"]
+[connection signal="pressed" from="HBoxContainer/English" to="." method="_on_english_pressed"]
+[connection signal="pressed" from="HBoxContainer/Portuguese" to="." method="_on_portuguese_pressed"]
+[connection signal="pressed" from="HBoxContainer/Italian" to="." method="_on_italian_pressed"]
+[connection signal="pressed" from="HBoxContainer/Spanish" to="." method="_on_spanish_pressed"]
+[connection signal="pressed" from="HBoxContainer/German" to="." method="_on_german_pressed"]
