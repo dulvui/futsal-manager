@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://5oxrekj30gb1"]
+[gd_scene load_steps=6 format=3 uid="uid://5oxrekj30gb1"]
 
 [ext_resource type="Texture2D" uid="uid://3do6v0mqyp8x" path="res://assets/flags/italy.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://00354b2lyni3" path="res://assets/flags/spain.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://dmt5mivw06ki0" path="res://assets/flags/united-kingdom.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://bgupmt8asi7fi" path="res://assets/flags/portugal.png" id="5"]
 [ext_resource type="Script" path="res://src/screens/language-pick/language_picker.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://bgodv33es1ehh" path="res://assets/flags/germany.png" id="6_sayvf"]
@@ -39,9 +38,9 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="English" type="TextureButton" parent="HBoxContainer"]
+[node name="English" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("4")
+text = "EN"
 
 [node name="Portuguese" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2
