@@ -51,8 +51,8 @@ jobs:
           unzip Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
           mv templates/* ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
           rm -f Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
-          godot --headless --editor --quit-after 10
 
+      # godot --headless --editor --quit-after 10
       ####################
       # WINDOWS
       ####################
@@ -85,7 +85,7 @@ jobs:
         run: cp ${{ env.WORKING_DIR }}/export_presets.linux.example ${{ env.WORKING_DIR }}/export_presets.cfg
 
       - name: Export Godot 4
-        run: godot --headless --path ${{ env.WORKING_DIR }}/ --export-release 'Linux/X11' ../${{ env.PROJECT_NAME }}-Linux.x86_64
+        run: godot --path ${{ env.WORKING_DIR }}/ --export-release 'Linux/X11' ../${{ env.PROJECT_NAME }}-Linux.x86_64
 
       - name: Upload binaries to Github release
         uses: svenstaro/upload-release-action@v2
