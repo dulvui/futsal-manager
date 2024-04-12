@@ -53,6 +53,7 @@ jobs:
           rm -f Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
 
       - name: Open project once to import assets in editor mode
+        continue-on-error: true # timeout will exit with code 124
         run:  timeout 25 godot --headless --path ${{ env.WORKING_DIR }} -e
          
       ####################
