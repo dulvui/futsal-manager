@@ -51,6 +51,7 @@ jobs:
           unzip Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
           mv templates/* ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
           rm -f Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
+          timeout 25 godot --headless --path ${{ env.WORKING_DIR }} -e
 
       # godot --headless --editor --quit-after 10
       ####################
