@@ -62,7 +62,7 @@ jobs:
       - name: Prepare export_presets.cfg for Windows
         run: cp ${{ env.WORKING_DIR }}/export_presets.windows.example ${{ env.WORKING_DIR }}/export_presets.cfg
 
-      - name: Export Godot 4
+      - name: Export Godot 4 Windows
         run: godot --headless --path ${{ env.WORKING_DIR }}/ --export-release 'Windows Desktop' ../${{ env.PROJECT_NAME }}.exe
 
       - name: Create zip file
@@ -84,8 +84,8 @@ jobs:
       - name: Prepare export_presets.cfg for Linux
         run: cp ${{ env.WORKING_DIR }}/export_presets.linux.example ${{ env.WORKING_DIR }}/export_presets.cfg
 
-      - name: Export Godot 4
-        run: godot --path ${{ env.WORKING_DIR }}/ --export-release 'Linux/X11' ../${{ env.PROJECT_NAME }}-Linux.x86_64
+      - name: Export Godot 4 Linux
+        run: godot --headless --path ${{ env.WORKING_DIR }}/ --export-release 'Linux/X11' ../${{ env.PROJECT_NAME }}-Linux.x86_64
 
       - name: Upload binaries to Github release
         uses: svenstaro/upload-release-action@v2
