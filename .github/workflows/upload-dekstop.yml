@@ -52,8 +52,10 @@ jobs:
           mv templates/* ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
           rm -f Godot_v${{ env.GODOT_VERSION }}-stable_linux.x86_64.zip Godot_v${{ env.GODOT_VERSION }}-stable_export_templates.tpz
 
+      # TODO replace wit --import once available
+      # https://github.com/godotengine/godot/pull/90431
       - name: Open project once to import assets in editor mode
-        continue-on-error: true # timeout will exit with code 124
+        continue-on-error: true # timeout will exit with code 124 OR use || true to always exit with 0
         run:  timeout 25 godot --headless --path ${{ env.WORKING_DIR }} -e
          
       ####################
