@@ -41,7 +41,8 @@ func _on_Continue_pressed() -> void:
 		Config.reset()
 		
 		# start date in fomrat YYYY-MM-DDTHH:MM:SS
-		var start_date_str:String = start_year_spinbox.get_line_edit().text + "-01-01T00:00:00"
+		var start_year:String = start_year_spinbox.get_line_edit().text
+		var start_date_str:String = "%s-%02d-%02dT00:00:00"%[start_year, Constants.season_start_month, Constants.season_start_day]
 		Config.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
 		
 		Config.generate_leagues(generation_seed, gender_option.selected)
