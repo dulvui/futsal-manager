@@ -15,7 +15,7 @@ const visual_day:PackedScene = preload("res://src/ui-components/visual-calendar/
 var current_month:int
 
 func _ready() -> void:
-	current_month = Config.calendar().date.month - 1
+	current_month = Config.calendar().date.month
 	set_up()
 	
 func set_up() -> void:
@@ -47,24 +47,24 @@ func set_up_days() -> void:
 		if day == Config.calendar().day():
 			calendar_day.select()
 
-	page_label.text = Constants.month_strings[current_month]
+	page_label.text = Constants.month_strings[current_month - 1]
 	
 func _on_calendar_day_pressed(day:Day) -> void:
 	match_list.set_up(day)
 
 func _on_Prev_pressed() -> void:
 	current_month -= 1
-	if current_month < 0:
-		current_month = 0
+	if current_month < 1:
+		current_month = 1
 	set_up()
 	
 func _on_Next_pressed() -> void:
 	current_month += 1
-	if current_month > 11:
-		current_month = 11
+	if current_month > 12:
+		current_month = 12
 	set_up()
 
 
 func _on_today_pressed() -> void:
-	current_month = Config.calendar().date.month - 1
+	current_month = Config.calendar().date.month
 	set_up()
