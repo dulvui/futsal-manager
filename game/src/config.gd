@@ -13,6 +13,7 @@ var generation_gender:Constants.Gender
 var rng:RandomNumberGenerator
 var match_rng:RandomNumberGenerator
 
+var start_date:Dictionary
 # saves wich season this is, starting from 0
 var current_season:int
 # global game states
@@ -53,6 +54,7 @@ func _load_config() -> void:
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
 	# settings
 	language = config.get_value("settings","language","ND")
+	start_date = config.get_value("settings","start_year",Time.get_date_dict_from_system())
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	generation_seed = config.get_value("generation", "seed", Constants.DEFAULT_SEED)
 	generation_state = config.get_value("generation", "state", 0)
@@ -62,6 +64,7 @@ func save_config() -> void:
 	config.set_value("dates","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)
 	config.set_value("settings","currency",currency)
+	config.set_value("settings","start_date",start_date)
 	config.set_value("dashboard","active_content",dashboard_active_content)
 	config.set_value("generation","seed",generation_seed)
 	config.set_value("generation","state", generation_state)
@@ -105,6 +108,7 @@ func save_all_data() -> void:
 func reset() -> void:
 	# CONFIG
 	id_by_type = {}
+	start_date = Time.get_date_dict_from_system()
 	current_season = 0
 	generation_state = 0
 	rng.state = generation_state

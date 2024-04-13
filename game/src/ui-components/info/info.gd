@@ -10,7 +10,7 @@ extends Control
 
 func _ready() -> void:
 	generation_seed.text = Config.generation_seed
-	start_date.text = Config.calendar().format_date(Config.calendar().start_date)
+	start_date.text = Config.calendar().format_date(Config.start_date)
 
 
 func _on_copy_seed_pressed() -> void:

@@ -24,11 +24,11 @@ func generate() -> Leagues:
 	# create date ranges
 	# starts from current year and substracts min/max years
 	# youngest player can be 15 and oldest 45
-	date = Time.get_date_dict_from_system()
+	date = Config.start_date
 	var max_date:Dictionary = date.duplicate()
 	max_date.month = 1
 	max_date.day = 1
-	max_date.year -= 15 
+	max_date.year -= 15
 	max_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 	max_date.year -= 30
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)

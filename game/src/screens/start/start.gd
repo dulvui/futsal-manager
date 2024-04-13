@@ -12,6 +12,7 @@ extends Control
 @onready var m_surname:LineEdit = $VBoxContainer/Manager/Container/SurName 
 
 @onready var gender_option:OptionButton = $VBoxContainer/Settings/Container/Gender
+@onready var start_year_spinbox:SpinBox = $VBoxContainer/Settings/Container/StartYear
 
 @onready var seed_edit:LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 		gender_option.add_item(gender)
 	
 	seed_edit.text = generation_seed
+	start_year_spinbox.get_line_edit().text = str(Config.start_date.year)
 
 func _on_Back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
@@ -37,6 +39,11 @@ func _on_Continue_pressed() -> void:
 		manager.surname = m_surname.text
 		manager.nationality = nationality.get_item_text(nationality.selected)
 		Config.reset()
+		
+		# start date in fomrat YYYY-MM-DDTHH:MM:SS
+		var start_date_str:String = start_year_spinbox.get_line_edit().text + "-01-01T00:00:00"
+		Config.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
+		
 		Config.generate_leagues(generation_seed, gender_option.selected)
 		Config.save_manager(manager)
 		get_tree().change_scene_to_file("res://src/screens/team-select/team_select.tscn")

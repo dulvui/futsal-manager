@@ -84,6 +84,7 @@ func inizialize_matches() -> void:
 					if league.calendar.day(month,i).weekday == "FRI":
 						day = i
 						break
+			
 			# assign match friday
 			league.calendar.day(month,day).matches.append_array(matches.slice(0, matches.size() / 4))
 			## assign match saturday

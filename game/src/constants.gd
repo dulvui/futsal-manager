@@ -80,3 +80,7 @@ const day_strings:Array = ["SUN","MON","TUE","WE","THU","FRI","SAT"]
 
 # MATCH SIM v2
 const lerp_weight:float = 0.1
+
+# season start at 1st of june
+const season_start_day:int = 1
+const season_start_month:int = 6

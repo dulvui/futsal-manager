@@ -104,6 +104,18 @@ text = "GENDER"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="StartYearLabel" type="Label" parent="VBoxContainer/Settings/Container"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "START_YEAR"
+
+[node name="StartYear" type="SpinBox" parent="VBoxContainer/Settings/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1970.0
+max_value = 2100.0
+value = 2024.0
+
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 

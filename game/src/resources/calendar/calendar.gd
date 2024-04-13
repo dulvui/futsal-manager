@@ -6,9 +6,7 @@ class_name Calendar
 extends Resource
 
 const day_in_seconds:int = 86400
-# season start at 1st of june
-const season_start_day:int = 1
-const season_start_month:int = 6
+
 # season end 30th of november
 const season_end_day:int = 30
 const season_end_month:int = 11
@@ -39,36 +37,30 @@ const market_periods:Array = [
 ]
 
 @export var date:Dictionary
-@export var start_date:Dictionary
 @export var months:Array[Month]
 
 
 func _init(
-		p_date:Dictionary = initial_date(),
+		p_date:Dictionary = {},
 		p_months:Array[Month] = [],
-		p_start_date:Dictionary = initial_date(),
 	) -> void:
 	date = p_date
 	months = p_months
-	start_date = p_start_date
 
-func initial_date() -> Dictionary:
-	date = Time.get_date_dict_from_system()
-	date.day = season_start_day
-	date.month = season_start_month
-	return date
 
 func initialize(next_season:bool = false) -> void:
 	if next_season:
 		date.year += 1
-		date.day = season_start_day
-		date.month = season_start_month
+		date.day = Constants.season_start_day
+		date.month = Constants.season_start_month
 		
 		date = _get_next_day(date)
+	else:
+		date = Config.start_date
 	
 	# start date in fomrat YYYY-MM-DDTHH:MM:SS
-	var firstJanuary:String = str(date.year) + "-01-01T00:00:00"
-	var temp_date:Dictionary = Time.get_datetime_dict_from_datetime_string(firstJanuary, true)
+	var first_january:String = str(date.year) + "-01-01T00:00:00"
+	var temp_date:Dictionary = Time.get_datetime_dict_from_datetime_string(first_january, true)
 	
 	# create months
 	for month_string:String in Constants.month_strings:
@@ -123,8 +115,8 @@ func next_day() -> void:
 func day(p_month:int = date.month, p_day:int = date.day) -> Day:
 	return months[p_month - 1].days[p_day - 1]
 	
-func month(p_month:int = date.month - 1) -> Month:
-	return months[p_month]
+func month(p_month:int = date.month) -> Month:
+	return months[p_month - 1]
 
 func _get_next_day(_date:Dictionary=date) -> Dictionary:
 	# increment date by one day
