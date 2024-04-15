@@ -163,8 +163,9 @@ func next_season() -> void:
 func calendar() -> Calendar:
 	return Config.leagues.get_active().calendar
 
+# disable save, too heavy on close, breaks game
 # save on quit on mobile
-func _notification(what:int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_all_data()
-		get_tree().quit() # default behavior
+#func _notification(what:int) -> void:
+	#if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		#save_all_data()
+		#get_tree().quit() # default behavior
