@@ -33,13 +33,13 @@ enum Variations {
 @export var tactic_offense:TacticOffense
 
 func _init(
-	p_variation_defense:Variations = Variations.F1202,
 	p_variation_offense:Variations = Variations.F1121,
+	p_variation_defense:Variations = Variations.F1202,
 	p_tactic_defense:TacticDefense = TacticDefense.new(),
 	p_tactic_offense:TacticOffense = TacticOffense.new(),
 ) -> void:
-	variation_defense = p_variation_defense
 	variation_offense = p_variation_offense
+	variation_defense = p_variation_defense
 	set_variation(variation_offense)
 
 	tactic_defense = p_tactic_defense
