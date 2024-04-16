@@ -28,6 +28,7 @@ func set_up(
 	p_left_half:bool,
 	color:Color,
 	p_has_ball:bool,
+	p_simulation:bool = false,
 	) -> void:
 	res_team = p_res_team
 	field = p_field
@@ -35,7 +36,7 @@ func set_up(
 	has_ball = p_has_ball
 	left_half = p_left_half
 	
-	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball)
+	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball, p_simulation)
 	goalkeeper.set_color(color)
 	
 	var pos_index: int = 0
@@ -47,7 +48,7 @@ func set_up(
 		pos_index += 1
 		
 		# setup
-		sim_player.set_up(player, start_pos, p_ball)
+		sim_player.set_up(player, start_pos, p_ball, p_simulation)
 		sim_player.set_color(color)
 		players.append(sim_player)
 		

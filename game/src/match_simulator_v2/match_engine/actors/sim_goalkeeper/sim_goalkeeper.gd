@@ -19,10 +19,12 @@ var direction:Vector2
 var destination:Vector2
 var speed:float
 
+func _ready() -> void:
+	set_process(false)
+
 func _process(delta: float) -> void:
-	if ball:
-		global_position = global_position.lerp(pos, delta * Config.speed_factor * Constants.ticks_per_second)
-		look_at(ball.global_position)
+	global_position = global_position.lerp(pos, delta * Config.speed_factor * Constants.ticks_per_second)
+	look_at(ball.global_position)
 
 func set_up(
 	p_player_res:Player,

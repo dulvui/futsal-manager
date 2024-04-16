@@ -22,9 +22,9 @@ var possession_counter:float
 var home_stats:MatchStatistics
 var away_stats:MatchStatistics
 
-func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
+func set_up(p_home_team:Team, p_away_team:Team, match_seed:int, p_simulation:bool = false) -> void:
 	field.set_up()
-	ball.set_up(field)
+	ball.set_up(field, p_simulation)
 	
 	ticks = 0
 	possession_counter = 0.0
@@ -40,8 +40,8 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	#home_plays_left = randi_range(0, 1) == 0
 	home_plays_left = true
 	
-	home_team.set_up(p_home_team, field, ball, home_plays_left, home_color, true)
-	away_team.set_up(p_away_team, field, ball, not home_plays_left, away_color, false)
+	home_team.set_up(p_home_team, field, ball, home_plays_left, home_color, true, p_simulation)
+	away_team.set_up(p_away_team, field, ball, not home_plays_left, away_color, false, p_simulation)
 	
 func update() -> void:
 	ball.update()
@@ -63,7 +63,7 @@ func update() -> void:
 	away_stats.possession = 100 - home_stats.possession
 
 func simulate(matchz:Match) -> Match:
-	set_up(matchz.home, matchz.away, matchz.id)
+	set_up(matchz.home, matchz.away, matchz.id, true)
 	
 	# first half
 	for i:int in Constants.half_time_seconds * Constants.ticks_per_second:
