@@ -19,7 +19,7 @@ var direction:Vector2
 var destination:Vector2
 var speed:float
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	global_position = global_position.lerp(pos, delta * Config.speed_factor * Constants.ticks_per_second)
 	look_at(ball.global_position)
 
@@ -35,8 +35,8 @@ func set_up(
 	pos = start_pos
 	
 	global_position = pos
-	# disables _physics_process, if simulation
-	set_physics_process(not p_is_simulation)
+	# disables _process, if simulation
+	set_process(not p_is_simulation)
 
 func set_color(p_color:Color) -> void:
 	body.modulate = p_color

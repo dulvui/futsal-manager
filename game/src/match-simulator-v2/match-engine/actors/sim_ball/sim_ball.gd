@@ -21,7 +21,7 @@ var trajectory_polygon:PackedVector2Array
 var players_in_shoot_trajectory:int
 var empty_net:bool
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	global_position = global_position.lerp(pos, delta * Config.speed_factor * Constants.ticks_per_second)
 
 
@@ -32,7 +32,7 @@ func set_up(field:SimField, p_is_simulation:bool = false) -> void:
 	
 	# disables _physics_process, if simulation
 	is_simulation = p_is_simulation
-	set_physics_process(not is_simulation)
+	_process(not is_simulation)
 	
 func set_pos(p_pos:Vector2) -> void:
 	pos = p_pos

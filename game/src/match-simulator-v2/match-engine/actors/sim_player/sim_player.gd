@@ -54,7 +54,7 @@ var distance_to_ball:float
 var distance_to_enemy:float
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	global_position = global_position.lerp(pos, delta * Config.speed_factor * Constants.ticks_per_second)
 	look_at(ball.global_position)
 
@@ -77,8 +77,8 @@ func set_up(
 	state = State.START_POS
 
 	global_position = pos
-	# disables _physics_process, if simulation
-	set_physics_process(not p_is_simulation)
+	# disables _process, if simulation
+	_process(not p_is_simulation)
 
 
 func update() -> void:
