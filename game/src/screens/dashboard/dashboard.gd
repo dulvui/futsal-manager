@@ -4,6 +4,8 @@
 
 extends Control
 
+enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO } 
+
 @onready var team:Team = Config.team
 
 # buttons
@@ -23,16 +25,16 @@ extends Control
 @onready var manager_label:Label = $MainContainer/VBoxContainer/TopBar/ManagerName
 @onready var team_label:Label = $MainContainer/VBoxContainer/TopBar/TeamName
 
-
-enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO } 
-
 # full screen views
 @onready var formation:Control = $MainContainer/VBoxContainer/MainView/Content/Formation
 @onready var all_players_list:Control = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 
+# pop ups
 @onready var player_offer:Control = $PlayerOffer
 @onready var contract_offer:Control = $ContractOffer
 
+# match engine
+@onready var match_engine:MatchEngine = $MatchEngine
 
 var match_ready:bool = false
 var next_season:bool = false
@@ -179,7 +181,7 @@ func _next_day() -> void:
 		next_match_button.hide()
 	else:
 		#simulate all other matches
-		Config.leagues.random_results()
+		Config.leagues.random_results(match_engine)
 		
 	visual_calendar.set_up()
 

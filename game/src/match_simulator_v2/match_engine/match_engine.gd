@@ -15,9 +15,21 @@ signal away_goal
 
 var home_plays_left:bool
 
+var ticks:int
+
+# stats
+var possession_counter:float
+var home_stats:MatchStatistics
+var away_stats:MatchStatistics
+
 func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	field.set_up()
 	ball.set_up(field)
+	
+	ticks = 0
+	possession_counter = 0.0
+	home_stats = MatchStatistics.new()
+	away_stats = MatchStatistics.new()
 	
 	Config.match_rng.seed = hash(match_seed)
 	Config.match_rng.state = 0
@@ -43,6 +55,28 @@ func update() -> void:
 	home_team.act()
 	away_team.act()
 	
+	# update posession stats
+	ticks += 1
+	if home_team.has_ball:
+		possession_counter += 1.0
+	home_stats.possession = (possession_counter / ticks) * 100
+	away_stats.possession = 100 - home_stats.possession
+
+func simulate(matchz:Match) -> Match:
+	set_up(matchz.home, matchz.away, matchz.id)
+	
+	# first half
+	for i:int in Constants.half_time_seconds * Constants.ticks_per_second:
+		update()
+	half_time()
+	# second half
+	for i:int in Constants.half_time_seconds * Constants.ticks_per_second:
+		update()
+		
+	matchz.home_goals = home_stats.goals
+	matchz.away_goals = away_stats.goals
+	return matchz
+
 func half_time() -> void:
 	home_plays_left = not home_plays_left
 	# TODO create switch side method for teams
@@ -140,9 +174,11 @@ func _on_sim_ball_kick_in() -> void:
 
 func _on_sim_ball_goal() -> void:
 	if home_team.has_ball:
+		home_stats.goals += 1
 		home_goal.emit()
 		away_possess()
 	else:
+		away_stats.goals += 1
 		away_goal.emit()
 		home_possess()
 	# reset formation

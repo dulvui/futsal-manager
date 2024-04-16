@@ -12,16 +12,9 @@ signal update
 
 @onready var match_engine:Node = $SubViewportContainer/SubViewport/MatchEngine
 
-# seconds for halftime
-const half_time_seconds:int = 60 * 20
-
 var ticks:int = 0
 var time:int = 0
 var timer:Timer
-# stats
-var possession_counter:float = 0.0
-var home_stats:MatchStatistics = MatchStatistics.new()
-var away_stats:MatchStatistics = MatchStatistics.new()
 
 #var home_has_ball:bool
 func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
@@ -45,18 +38,14 @@ func _on_timer_timeout() -> void:
 func _update_time() -> void:
 	update.emit()
 	# check half/end time
-	if time == half_time_seconds:
+	if time == Constants.half_time_seconds:
 		timer.paused = true
 		half_time.emit()
 		match_engine.half_time()
-	elif time == half_time_seconds * 2:
+	elif time == Constants.half_time_seconds * 2:
 		timer.stop()
 		match_end.emit()
-	# update posession stats
-	if match_engine.home_team.has_ball:
-		possession_counter += 1.0
-	home_stats.possession = (possession_counter / time) * 100
-	away_stats.possession = 100 - home_stats.possession
+
 
 func pause_toggle() -> bool:
 	timer.paused = not timer.paused
@@ -90,7 +79,9 @@ func _on_ActionUtil_action_message(message:String) -> void:
 	emit_signal("action_message", message)
 
 func _on_match_engine_away_goal() -> void:
-	away_stats.goals += 1
+	# TODO show goal animation
+	pass
 
 func _on_match_engine_home_goal() -> void:
-	home_stats.goals += 1
+	# TODO show goal animation
+	pass
