@@ -1,0 +1,119 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbijtmv151qg7"]
+
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="1"]
+[ext_resource type="Script" path="res://src/ui_components/transfers/player_offer/player_offer.gd" id="2"]
+
+[node name="PlayerOffer" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1")
+script = ExtResource("2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Info" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Ricardinho del Levante vale 5M.
+Il tuo osservatore ritiene che sia dia aquistare senza pensarci due volte."
+
+[node name="Details" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="TypeLabel" type="Label" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TYPE"
+
+[node name="Types" type="OptionButton" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoneyLabel" type="Label" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MONEY"
+
+[node name="Money" type="HBoxContainer" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Less" type="Button" parent="VBoxContainer/Details/Money"]
+layout_mode = 2
+text = "-"
+
+[node name="Amount" type="LineEdit" parent="VBoxContainer/Details/Money"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "15000"
+
+[node name="More" type="Button" parent="VBoxContainer/Details/Money"]
+layout_mode = 2
+text = "+"
+
+[node name="DateLabel" type="Label" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DATE"
+
+[node name="Date" type="OptionButton" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExchangePlayersLabel" type="Label" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PLAYERS"
+
+[node name="ExchangePlayers" type="OptionButton" parent="VBoxContainer/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExchangePlayersLabel2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PLAYER_LIST"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(60, 200)
+layout_mode = 2
+
+[node name="SelectedPlayers" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Total" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "150000"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "CANCEL"
+
+[node name="Confirm" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "CONFIRM"
+
+[connection signal="pressed" from="VBoxContainer/Details/Money/Less" to="." method="_on_Less_pressed"]
+[connection signal="text_changed" from="VBoxContainer/Details/Money/Amount" to="." method="_on_Amount_text_changed"]
+[connection signal="pressed" from="VBoxContainer/Details/Money/More" to="." method="_on_More_pressed"]
+[connection signal="item_selected" from="VBoxContainer/Details/ExchangePlayers" to="." method="_on_ExchangePlayers_item_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Confirm" to="." method="_on_Confirm_pressed"]

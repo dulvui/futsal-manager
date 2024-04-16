@@ -47,7 +47,7 @@ func _on_Continue_pressed() -> void:
 		
 		Config.generate_leagues(generation_seed, gender_option.selected)
 		Config.save_manager(manager)
-		get_tree().change_scene_to_file("res://src/screens/team-select/team_select.tscn")
+		get_tree().change_scene_to_file("res://src/screens/team_select/team_select.tscn")
 
 
 func _on_genearate_seed_button_pressed() -> void:

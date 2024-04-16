@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgegex34p1k36"]
+
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme/theme.tres" id="1"]
+[ext_resource type="Script" path="res://src/screens/team_select/team_select.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cdrmqgiuv6wf3" path="res://src/ui_components/team_profile/team_profile.tscn" id="3_sndt3"]
+
+[node name="TeamSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1")
+script = ExtResource("2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="NationSelect" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Main" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/Main"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="TeamList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Main/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/Main"]
+layout_mode = 2
+
+[node name="TeamProfile" parent="MarginContainer/VBoxContainer/Main" instance=ExtResource("3_sndt3")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "BACK"
+
+[node name="SelectTeam2" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "SELECT"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/SelectTeam2" to="." method="_on_select_team_pressed"]

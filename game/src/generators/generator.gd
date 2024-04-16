@@ -4,7 +4,7 @@
 extends Node
 class_name Generator
 
-const NAMES_DIR:String = "res://data/player-names/"
+const NAMES_DIR:String = "res://data/player_names/"
 const LEAGUES_DIR:String = "res://data/leagues/"
 
 # defines noise added to attribute factors

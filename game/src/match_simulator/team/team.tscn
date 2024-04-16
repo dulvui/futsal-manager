@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnh7liy4jw7uk"]
+
+[ext_resource type="Script" path="res://src/match_simulator/team/team.gd" id="1"]
+
+[node name="Team" type="Node"]
+script = ExtResource("1")

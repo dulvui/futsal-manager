@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://bubq3rsb3hm6e"]
+
+[ext_resource type="Script" path="res://src/match_simulator_v2/match_simulator_v2.gd" id="1_tnm3q"]
+[ext_resource type="PackedScene" uid="uid://dy88ey2b4wb5q" path="res://src/match_simulator_v2/match_engine/match_engine.tscn" id="2_fwvgu"]
+
+[node name="MatchSimulator" type="Control"]
+custom_minimum_size = Vector2(1200, 600)
+layout_mode = 3
+anchor_right = 0.625
+anchor_bottom = 0.556481
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tnm3q")
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1200, 600)
+size_2d_override = Vector2i(1200, 600)
+render_target_update_mode = 4
+
+[node name="MatchEngine" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_fwvgu")]
+
+[connection signal="away_goal" from="SubViewportContainer/SubViewport/MatchEngine" to="." method="_on_match_engine_away_goal"]
+[connection signal="home_goal" from="SubViewportContainer/SubViewport/MatchEngine" to="." method="_on_match_engine_home_goal"]
