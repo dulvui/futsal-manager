@@ -151,7 +151,7 @@ func _on_next_match_pressed() -> void:
 
 func _next_day() -> void:
 	if match_ready:
-		get_tree().change_scene_to_file("res://src/screens/match_v2/match_v2.tscn")
+		get_tree().change_scene_to_file("res://src/screens/match/match.tscn")
 		return
 	
 

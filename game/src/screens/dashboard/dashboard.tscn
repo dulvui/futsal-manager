@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cbijtmv151qg7" path="res://src/ui_components/transfers/player_offer/player_offer.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://dual4o5whtk85" path="res://src/ui_components/info/info.tscn" id="8_bk8g0"]
 [ext_resource type="PackedScene" uid="uid://ccipqeqmthtfr" path="res://src/ui_components/transfers/contract_offer/contract_offer.tscn" id="9"]
-[ext_resource type="PackedScene" uid="uid://dy88ey2b4wb5q" path="res://src/match_simulator_v2/match_engine/match_engine.tscn" id="11_xeau7"]
+[ext_resource type="PackedScene" uid="uid://dy88ey2b4wb5q" path="res://src/match_simulator/match_engine/match_engine.tscn" id="11_xeau7"]
 
 [node name="Dashboard" type="Control"]
 layout_mode = 3

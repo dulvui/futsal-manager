@@ -7,7 +7,7 @@ class_name SimTeam
 
 signal possess
 
-const sim_player_scene:PackedScene = preload("res://src/match_simulator_v2/match_engine/actors/sim_player/sim_player.tscn")
+const sim_player_scene:PackedScene = preload("res://src/match_simulator/match_engine/actors/sim_player/sim_player.tscn")
 
 var res_team:Team
 

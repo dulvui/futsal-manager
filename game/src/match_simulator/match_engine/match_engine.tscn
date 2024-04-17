@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dy88ey2b4wb5q"]
 
-[ext_resource type="Script" path="res://src/match_simulator_v2/match_engine/match_engine.gd" id="1_yag7d"]
-[ext_resource type="PackedScene" uid="uid://catldeyhmiboq" path="res://src/match_simulator_v2/match_engine/actors/sim_field/sim_field.tscn" id="2_hr5y6"]
-[ext_resource type="PackedScene" uid="uid://c8ygw31bsregf" path="res://src/match_simulator_v2/match_engine/actors/sim_ball/sim_ball.tscn" id="3_mfop3"]
-[ext_resource type="PackedScene" uid="uid://r501mqa7ix6a" path="res://src/match_simulator_v2/match_engine/actors/sim_team/sim_team.tscn" id="4_pyy55"]
+[ext_resource type="Script" path="res://src/match_simulator/match_engine/match_engine.gd" id="1_yag7d"]
+[ext_resource type="PackedScene" uid="uid://catldeyhmiboq" path="res://src/match_simulator/visuals/visual_actors/visual_field/visual_field.tscn" id="2_hr5y6"]
+[ext_resource type="PackedScene" uid="uid://c8ygw31bsregf" path="res://src/match_simulator/visuals/visual_actors/visual_ball/visual_ball.tscn" id="3_mfop3"]
+[ext_resource type="PackedScene" uid="uid://r501mqa7ix6a" path="res://src/match_simulator/visuals/visual_actors/visual_team/visual_team.tscn" id="4_pyy55"]
 
 [node name="MatchEngine" type="Node2D"]
 script = ExtResource("1_yag7d")

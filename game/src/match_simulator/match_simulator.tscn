@@ -1,24 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck5f72rt3q5km"]
+[gd_scene load_steps=3 format=3 uid="uid://bubq3rsb3hm6e"]
 
-[ext_resource type="Script" path="res://src/match_simulator/match_simulator.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://bdft8v1qtxr0v" path="res://src/match_simulator/action_util/action_util.tscn" id="3"]
+[ext_resource type="Script" path="res://src/match_simulator/match_simulator.gd" id="1_tnm3q"]
+[ext_resource type="PackedScene" uid="uid://dy88ey2b4wb5q" path="res://src/match_simulator/visuals/match_engine.tscn" id="2_fwvgu"]
 
-[node name="MatchSimulator" type="Node"]
-script = ExtResource("1")
+[node name="MatchSimulator" type="Control"]
+custom_minimum_size = Vector2(1200, 600)
+layout_mode = 3
+anchor_right = 0.625
+anchor_bottom = 0.556481
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tnm3q")
+metadata/_edit_use_anchors_ = true
 
-[node name="ActionUtil" parent="." instance=ExtResource("3")]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Timer" type="Timer" parent="."]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1200, 600)
+size_2d_override = Vector2i(1200, 600)
+render_target_update_mode = 4
 
-[connection signal="action_message" from="ActionUtil" to="." method="_on_ActionUtil_action_message"]
-[connection signal="corner" from="ActionUtil" to="." method="_on_action_util_corner"]
-[connection signal="foul" from="ActionUtil" to="." method="_on_action_util_foul"]
-[connection signal="freekick" from="ActionUtil" to="." method="_on_action_util_freekick"]
-[connection signal="kick_in" from="ActionUtil" to="." method="_on_action_util_kick_in"]
-[connection signal="pazz" from="ActionUtil" to="." method="_on_action_util_pazz"]
-[connection signal="penalty" from="ActionUtil" to="." method="_on_action_util_penalty"]
-[connection signal="possession_change" from="ActionUtil" to="." method="_on_action_util_possession_change"]
-[connection signal="red_card" from="ActionUtil" to="." method="_on_action_util_red_card"]
-[connection signal="shot" from="ActionUtil" to="." method="_on_action_util_shot"]
-[connection signal="yellow_card" from="ActionUtil" to="." method="_on_action_util_yellow_card"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="MatchEngine" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_fwvgu")]
+
+[connection signal="away_goal" from="SubViewportContainer/SubViewport/MatchEngine" to="." method="_on_match_engine_away_goal"]
+[connection signal="home_goal" from="SubViewportContainer/SubViewport/MatchEngine" to="." method="_on_match_engine_home_goal"]
