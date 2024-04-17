@@ -27,7 +27,6 @@ func set_up(
 	p_field:SimField,
 	p_ball:SimBall,
 	p_left_half:bool,
-	color:Color,
 	p_has_ball:bool,
 	) -> void:
 	res_team = p_res_team
@@ -38,7 +37,6 @@ func set_up(
 	
 	goalkeeper = sim_goalkeeper_scene.instantiate()
 	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball)
-	goalkeeper.set_color(color)
 	add_child(goalkeeper)
 	
 	var pos_index: int = 0
@@ -50,7 +48,6 @@ func set_up(
 		
 		# setup
 		sim_player.set_up(player, start_pos, p_ball)
-		sim_player.set_color(color)
 		players.append(sim_player)
 		
 		# player signals

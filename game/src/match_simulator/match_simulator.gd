@@ -10,7 +10,7 @@ signal half_time
 signal match_end
 signal update
 
-@onready var match_engine:Node = $SubViewportContainer/SubViewport/MatchEngine
+@onready var visual_match:Node2D = $SubViewportContainer/SubViewport/VisualMatch
 
 var ticks:int = 0
 var time:int = 0
@@ -18,7 +18,7 @@ var timer:Timer
 
 #var home_has_ball:bool
 func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
-	match_engine.set_up(home_team,away_team, match_seed)
+	visual_match.set_up(home_team,away_team, match_seed)
 	
 	# intialize timer
 	timer = Timer.new()
@@ -28,7 +28,7 @@ func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
 	timer.start()
 
 func _on_timer_timeout() -> void:
-	match_engine.update()
+	visual_match.update()
 	ticks += 1
 	if ticks == Constants.ticks_per_second:
 		ticks = 0
@@ -41,7 +41,7 @@ func _update_time() -> void:
 	if time == Constants.half_time_seconds:
 		timer.paused = true
 		half_time.emit()
-		match_engine.half_time()
+		visual_match.half_time()
 	elif time == Constants.half_time_seconds * 2:
 		timer.stop()
 		match_end.emit()
@@ -72,7 +72,7 @@ func start_match() -> void:
 
 
 func change_players(home_team:Team,away_team:Team) -> void:
-	match_engine.change_players(home_team,away_team)
+	visual_match.change_players(home_team,away_team)
 
 
 func _on_ActionUtil_action_message(message:String) -> void:

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+# SPDX-License-Identifier: AGPL-3.0-or-late
+
 extends Control
 
 var bold_label_settings:LabelSettings = load("res://theme/bold_label_settings.tres")

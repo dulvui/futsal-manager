@@ -23,7 +23,6 @@ theme = ExtResource("1")
 script = ExtResource("2")
 
 [node name="MatchEngine" parent="." instance=ExtResource("11_xeau7")]
-visible = false
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1

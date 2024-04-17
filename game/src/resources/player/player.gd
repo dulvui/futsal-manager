@@ -43,7 +43,7 @@ func _init(
 	p_team:String = "",
 	p_league:String = "",
 	p_surname:String = "",
-	p_nation:Constants.Nations = Constants.Nations.get(0),
+	p_nation:Constants.Nations = Constants.Nations.ITALY,
 	p_birth_date:Dictionary = {},
 	p_form:Form = Form.Good,
 	p_morality:Morality = Morality.Good,

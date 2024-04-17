@@ -33,15 +33,13 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	
 	Config.match_rng.seed = hash(match_seed)
 	Config.match_rng.state = 0
-		# set colors
-	var home_color:Color = p_home_team.get_home_color()
-	var away_color:Color = p_away_team.get_away_color(home_color)
+
 	# TODO add coin toss
 	#home_plays_left = randi_range(0, 1) == 0
 	home_plays_left = true
 	
-	home_team.set_up(p_home_team, field, ball, home_plays_left, home_color, true, p_simulation)
-	away_team.set_up(p_away_team, field, ball, not home_plays_left, away_color, false, p_simulation)
+	home_team.set_up(p_home_team, field, ball, home_plays_left, true)
+	away_team.set_up(p_away_team, field, ball, not home_plays_left, false)
 	
 func update() -> void:
 	ball.update()
@@ -63,7 +61,7 @@ func update() -> void:
 	away_stats.possession = 100 - home_stats.possession
 
 func simulate(matchz:Match) -> Match:
-	set_up(matchz.home, matchz.away, matchz.id, true)
+	set_up(matchz.home, matchz.away, matchz.id)
 	
 	# first half
 	for i:int in Constants.half_time_seconds * Constants.ticks_per_second:
@@ -188,7 +186,6 @@ func _on_sim_ball_goal() -> void:
 
 func _on_home_team_possess() -> void:
 	home_possess()
-
 
 func _on_away_team_possess() -> void:
 	away_possess()

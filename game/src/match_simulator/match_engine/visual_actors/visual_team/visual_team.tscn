@@ -16,5 +16,3 @@ script = ExtResource("1_e5wh8")
 [node name="VisualPlayer3" parent="." instance=ExtResource("3_ycu0j")]
 
 [node name="VisualPlayer4" parent="." instance=ExtResource("3_ycu0j")]
-
-[node name="VisualPlayer5" parent="." instance=ExtResource("3_ycu0j")]

@@ -18,7 +18,7 @@ enum Types {
 
 func _init(
 	p_target:int = 0,
-	p_type:Types = Types.get(0),
+	p_type:Types = Types.POSITION,
 ) -> void:
 	target = p_target
 	type = p_type

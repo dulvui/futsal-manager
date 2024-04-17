@@ -57,16 +57,16 @@ func _ready() -> void:
 
 
 func _on_match_simulator_update() -> void:
-	stats.update_stats(match_simulator.match_engine.home_stats, match_simulator.match_engine.away_stats)
+	stats.update_stats(match_simulator.visual_match.match_engine.home_stats, match_simulator.visual_match.match_engine.away_stats)
 	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
 
 	$Main/Content/CentralContainer/TopBar/TimeBar.value = match_simulator.time
-	$Main/Content/CentralContainer/BottomBar/PossessBar.value = match_simulator.match_engine.home_stats.possession
+	$Main/Content/CentralContainer/BottomBar/PossessBar.value = match_simulator.visual_match.match_engine.home_stats.possession
 
-	home_possession.text = str(match_simulator.match_engine.home_stats.possession) + " %"
-	away_possession.text = str(match_simulator.match_engine.away_stats.possession) + " %"
+	home_possession.text = str(match_simulator.visual_match.match_engine.home_stats.possession) + " %"
+	away_possession.text = str(match_simulator.visual_match.match_engine.away_stats.possession) + " %"
 
-	result_label.text = "%d - %d"%[match_simulator.match_engine.home_stats.goals,match_simulator.match_engine.away_stats.goals]
+	result_label.text = "%d - %d"%[match_simulator.visual_match.match_engine.home_stats.goals,match_simulator.visual_match.match_engine.away_stats.goals]
 
 
 func match_end() -> void:
@@ -76,11 +76,11 @@ func match_end() -> void:
 	pause_button.hide()
 	$Main/Content/Buttons/Dashboard.show()
 	match_simulator.match_finished()
-	Config.leagues.get_active().table.add_result(home_team.id,match_simulator.match_engine.home_stats.goals,away_team.id,match_simulator.match_engine.away_stats.goals)
+	Config.leagues.get_active().table.add_result(home_team.id,match_simulator.visual_match.match_engine.home_stats.goals,away_team.id,match_simulator.visual_match.match_engine.away_stats.goals)
 
 
 	#assign result
-	matchz.set_result(match_simulator.match_engine.home_stats.goals,  match_simulator.match_engine.away_stats.goals)
+	matchz.set_result(match_simulator.visual_match.match_engine.home_stats.goals,  match_simulator.visual_match.match_engine.away_stats.goals)
 	# calc other matches
 	#Config.leagues.random_results()
 	Config.save_all_data()
