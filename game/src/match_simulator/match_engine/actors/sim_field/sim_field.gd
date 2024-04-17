@@ -5,8 +5,6 @@
 extends Node
 class_name SimField
 
-@onready var sprite:Sprite2D = $Sprite
-
 var size:Vector2
 var center:Vector2
 
@@ -17,7 +15,9 @@ var goal_right:Vector2
 var polygon:PackedVector2Array
 
 func set_up() -> void:
-	size = sprite.texture.get_size()
+	#size = sprite.texture.get_size()
+	size = Vector2(1200, 600)
+	
 	center = Vector2(size.x / 2, size.y / 2)
 	
 	goal_left = Vector2(0, size.y / 2)

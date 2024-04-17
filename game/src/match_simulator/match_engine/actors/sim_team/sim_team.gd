@@ -8,10 +8,11 @@ class_name SimTeam
 signal possess
 
 const sim_player_scene:PackedScene = preload("res://src/match_simulator/match_engine/actors/sim_player/sim_player.tscn")
+const sim_goalkeeper_scene:PackedScene = preload("res://src/match_simulator/match_engine/actors/sim_goalkeeper/sim_goalkeeper.tscn")
 
 var res_team:Team
 
-@onready var goalkeeper:SimGoalkeeper = $SimGoalkeeper
+var goalkeeper:SimGoalkeeper
 var players:Array[SimPlayer]
 
 var active_player:SimPlayer
@@ -28,7 +29,6 @@ func set_up(
 	p_left_half:bool,
 	color:Color,
 	p_has_ball:bool,
-	p_simulation:bool = false,
 	) -> void:
 	res_team = p_res_team
 	field = p_field
@@ -36,19 +36,20 @@ func set_up(
 	has_ball = p_has_ball
 	left_half = p_left_half
 	
-	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball, p_simulation)
+	goalkeeper = sim_goalkeeper_scene.instantiate()
+	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball)
 	goalkeeper.set_color(color)
+	add_child(goalkeeper)
 	
 	var pos_index: int = 0
 	for player:Player in res_team.get_field_players():
 		var sim_player:SimPlayer = sim_player_scene.instantiate()
-		add_child(sim_player)
 		
 		var start_pos:Vector2 = res_team.formation.get_field_pos(field.size, pos_index, left_half)
 		pos_index += 1
 		
 		# setup
-		sim_player.set_up(player, start_pos, p_ball, p_simulation)
+		sim_player.set_up(player, start_pos, p_ball)
 		sim_player.set_color(color)
 		players.append(sim_player)
 		
@@ -57,7 +58,8 @@ func set_up(
 		sim_player.interception.connect(interception)
 		sim_player.shoot.connect(shoot_on_goal)
 		#sim_player.dribble.connect(pass_to_random_player)
-		
+
+		add_child(sim_player)
 	
 	# move 2 attackers to kickoff and pass to random player
 	if has_ball:

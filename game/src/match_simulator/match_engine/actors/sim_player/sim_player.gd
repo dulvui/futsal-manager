@@ -1,8 +1,7 @@
 # SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
-
-extends Node2D
+extends Node
 class_name SimPlayer
 
 signal interception
@@ -24,8 +23,6 @@ enum State {
 	SHOOT,
 }
 
-@onready var body:Sprite2D = $Sprites/Body
-
 const deceleration = 0.01
 
 var state:State
@@ -41,7 +38,7 @@ var pos:Vector2
 # movements
 var direction:Vector2
 var destination:Vector2
-var speed:float
+var speed:int
 # fisical attributes
 var stamina:float
 var interception_radius:int #TODO reduce radius with low stamina
@@ -53,18 +50,10 @@ var distance_to_active_player:float
 var distance_to_ball:float
 var distance_to_enemy:float
 
-func _ready() -> void:
-	set_process(false)
-
-func _process(delta: float) -> void:
-	global_position = global_position.lerp(pos, delta * Config.speed_factor * Constants.ticks_per_second)
-	look_at(ball.global_position)
-
 func set_up(
 	p_player_res:Player,
 	p_start_pos:Vector2,
 	p_ball:SimBall,
-	p_is_simulation:bool = false,
 ) -> void:
 	player_res = p_player_res
 	start_pos = p_start_pos
@@ -76,10 +65,6 @@ func set_up(
 	interception_radius = 25
 	speed = 15
 	state = State.START_POS
-
-	global_position = pos
-	# disables _process, if simulation
-	set_process(not p_is_simulation)
 
 
 func update() -> void:
@@ -128,7 +113,6 @@ func intercepts() -> bool:
 
 func set_pos(p_pos:Vector2) -> void:
 	pos = p_pos
-	global_position = pos
 	# reset values
 	speed = 0
 	destination = Vector2.INF
@@ -143,11 +127,6 @@ func set_destination(p_destination:Vector2) -> void:
 
 func stop() -> void:
 	speed = 0
-
-
-func set_color(p_color:Color) -> void:
-	body.modulate = p_color
-
 
 func _should_shoot() -> bool:
 	if ball.empty_net:

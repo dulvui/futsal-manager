@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node2D
+extends Node
 class_name MatchEngine
 
 signal home_goal
@@ -22,9 +22,9 @@ var possession_counter:float
 var home_stats:MatchStatistics
 var away_stats:MatchStatistics
 
-func set_up(p_home_team:Team, p_away_team:Team, match_seed:int, p_simulation:bool = false) -> void:
+func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	field.set_up()
-	ball.set_up(field, p_simulation)
+	ball.set_up(field)
 	
 	ticks = 0
 	possession_counter = 0.0
