@@ -2,13 +2,9 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node
 class_name SimTeam
 
 signal possess
-
-const sim_player_scene:PackedScene = preload("res://src/match_simulator/match_engine/actors/sim_player/sim_player.tscn")
-const sim_goalkeeper_scene:PackedScene = preload("res://src/match_simulator/match_engine/actors/sim_goalkeeper/sim_goalkeeper.tscn")
 
 var res_team:Team
 
@@ -35,13 +31,12 @@ func set_up(
 	has_ball = p_has_ball
 	left_half = p_left_half
 	
-	goalkeeper = sim_goalkeeper_scene.instantiate()
+	goalkeeper = SimGoalkeeper.new()
 	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball)
-	add_child(goalkeeper)
 	
 	var pos_index: int = 0
 	for player:Player in res_team.get_field_players():
-		var sim_player:SimPlayer = sim_player_scene.instantiate()
+		var sim_player:SimPlayer = SimPlayer.new()
 		
 		var start_pos:Vector2 = res_team.formation.get_field_pos(field.size, pos_index, left_half)
 		pos_index += 1
@@ -56,7 +51,6 @@ func set_up(
 		sim_player.shoot.connect(shoot_on_goal)
 		#sim_player.dribble.connect(pass_to_random_player)
 
-		add_child(sim_player)
 	
 	# move 2 attackers to kickoff and pass to random player
 	if has_ball:
@@ -118,7 +112,7 @@ func shoot_on_goal() -> void:
 		r_pos = field.goal_right
 	else:
 		r_pos = field.goal_left
-	r_pos += Vector2(0, Config.match_rng.randi_range(field.goal_size, field.goal_size))
+	r_pos += Vector2(0, Config.match_rng.randi_range(-field.goal_size * 1.5, field.goal_size * 1.5))
 	ball.kick(r_pos, 100)
 
 

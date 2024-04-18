@@ -2,7 +2,6 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node
 class_name SimField
 
 var size:Vector2
@@ -65,5 +64,5 @@ func get_goalkeeper_pos(plays_left:bool) -> Vector2:
 	else:
 		pos = goal_right
 	# move some pixels away from goal line
-	pos.x = abs(pos.x - 60)
+	pos.x = abs(pos.x - 5)
 	return pos

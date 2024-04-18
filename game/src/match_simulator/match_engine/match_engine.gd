@@ -2,16 +2,19 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node
 class_name MatchEngine
 
 signal home_goal
 signal away_goal
 
-@onready var field:SimField = $SimField
-@onready var ball:SimBall = $SimBall
-@onready var home_team:SimTeam = $HomeTeam
-@onready var away_team:SimTeam = $AwayTeam
+#@onready var field:SimField = $SimField
+#@onready var ball:SimBall = $SimBall
+#@onready var home_team:SimTeam = $HomeTeam
+#@onready var away_team:SimTeam = $AwayTeam
+var field:SimField
+var ball:SimBall
+var home_team:SimTeam
+var away_team:SimTeam
 
 var home_plays_left:bool
 
@@ -23,6 +26,13 @@ var home_stats:MatchStatistics
 var away_stats:MatchStatistics
 
 func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
+	field = SimField.new()
+	ball = SimBall.new()
+	ball.corner.connect(_on_sim_ball_corner)
+	ball.kick_in.connect(_on_sim_ball_kick_in)
+	ball.goal.connect(_on_sim_ball_goal)
+	
+	
 	field.set_up()
 	ball.set_up(field)
 	
@@ -31,15 +41,20 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	home_stats = MatchStatistics.new()
 	away_stats = MatchStatistics.new()
 	
-	Config.match_rng.seed = hash(match_seed)
 	Config.match_rng.state = 0
+	Config.match_rng.seed = hash(match_seed)
 
 	# TODO add coin toss
 	#home_plays_left = randi_range(0, 1) == 0
 	home_plays_left = true
 	
+	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, true)
+	home_team.possess.connect(_on_home_team_possess)
+	
+	away_team = SimTeam.new()
 	away_team.set_up(p_away_team, field, ball, not home_plays_left, false)
+	away_team.possess.connect(_on_away_team_possess)
 	
 func update() -> void:
 	ball.update()
@@ -128,7 +143,7 @@ func calc_free_shoot_trajectory() -> void:
 		players = home_team.players
 	
 	ball.empty_net = not Geometry2D.is_point_in_polygon(goalkeeper.pos, ball.trajectory_polygon)
-	
+		
 	for player:SimPlayer in players:
 		if Geometry2D.is_point_in_polygon(player.pos, ball.trajectory_polygon):
 			ball.players_in_shoot_trajectory += 1

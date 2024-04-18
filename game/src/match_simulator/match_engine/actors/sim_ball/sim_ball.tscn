@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8ygw31bsregf"]
-
-[ext_resource type="Script" path="res://src/match_simulator/match_engine/actors/sim_ball/sim_ball.gd" id="1_h561e"]
-
-[node name="SimBall" type="Node"]
-script = ExtResource("1_h561e")

@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
-extends Node
+
 class_name SimPlayer
 
 signal interception
@@ -131,8 +131,8 @@ func stop() -> void:
 func _should_shoot() -> bool:
 	if ball.empty_net:
 		return true
-	if  ball.players_in_shoot_trajectory <= 2:
-		return Config.match_rng.randi_range(1, 100) < 90
+	if  ball.players_in_shoot_trajectory < 2:
+		return Config.match_rng.randi_range(1, 100) > 95
 	return false
 	
 	

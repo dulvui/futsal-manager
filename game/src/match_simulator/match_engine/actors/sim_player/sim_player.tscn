@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b383v1pm1y4w"]
-
-[ext_resource type="Script" path="res://src/match_simulator/match_engine/actors/sim_player/sim_player.gd" id="1_1ub58"]
-
-[node name="SimPlayer" type="Node"]
-script = ExtResource("1_1ub58")

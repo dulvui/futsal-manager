@@ -57,12 +57,13 @@ func is_match_day(day:Day = Config.calendar().day()) -> bool:
 			return true
 	return false
 		
-func random_results(match_engine:MatchEngine) -> void:
+func random_results() -> void:
+	var match_engine:MatchEngine = MatchEngine.new()
 	for league:League in list:
 		var league_calendar:Calendar = league.calendar
 		for matchz:Match in league_calendar.day().matches:
 			if matchz.home.id != Config.team.id and matchz.away.id != Config.team.id:
 				var result_match:Match = match_engine.simulate(matchz)
-				print("simmmmm")
+				print(result_match.get_result())
 				matchz.set_result(result_match.home_goals, result_match.away_goals)
 				league.table.add_result(matchz.home.id,result_match.home_goals,matchz.away.id,result_match.away_goals)

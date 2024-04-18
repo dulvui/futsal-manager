@@ -1,14 +1,12 @@
 # SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
-extends Node
+
 class_name SimBall
 
 signal corner
 signal kick_in
 signal goal
-
-
 
 const deceleration = 0.01
 

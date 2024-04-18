@@ -6,6 +6,7 @@ extends Control
 
 enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO } 
 
+
 @onready var team:Team = Config.team
 
 # buttons
@@ -34,7 +35,7 @@ enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO }
 @onready var contract_offer:Control = $ContractOffer
 
 # match engine
-@onready var match_engine:MatchEngine = $MatchEngine
+#@onready var match_engine:MatchEngine = $MatchEngine
 
 var match_ready:bool = false
 var next_season:bool = false
@@ -181,7 +182,7 @@ func _next_day() -> void:
 		next_match_button.hide()
 	else:
 		#simulate all other matches
-		Config.leagues.random_results(match_engine)
+		Config.leagues.random_results()
 		
 	visual_calendar.set_up()
 

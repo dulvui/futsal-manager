@@ -82,7 +82,7 @@ func match_end() -> void:
 	#assign result
 	matchz.set_result(match_simulator.visual_match.match_engine.home_stats.goals,  match_simulator.visual_match.match_engine.away_stats.goals)
 	# calc other matches
-	#Config.leagues.random_results()
+	Config.leagues.random_results()
 	Config.save_all_data()
 
 func half_time() -> void:

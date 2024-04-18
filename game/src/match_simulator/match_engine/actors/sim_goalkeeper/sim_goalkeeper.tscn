@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dennvmn0p76jh"]
-
-[ext_resource type="Script" path="res://src/match_simulator/match_engine/actors/sim_goalkeeper/sim_goalkeeper.gd" id="1_imncd"]
-
-[node name="SimGoalkeeper" type="Node"]
-script = ExtResource("1_imncd")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://catldeyhmiboq"]
-
-[ext_resource type="Script" path="res://src/match_simulator/match_engine/actors/sim_field/sim_field.gd" id="1_fnoxc"]
-
-[node name="SimField" type="Node"]
-script = ExtResource("1_fnoxc")
