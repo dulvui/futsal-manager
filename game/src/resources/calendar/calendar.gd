@@ -84,28 +84,9 @@ func initialize(next_season:bool = false) -> void:
 func next_day() -> void:
 	date = _get_next_day()
 	
-	var next_match_month:int = date.month
-	var next_match_day:int = date.day
-	
-	# if next match is the first of the next month
-	if date.day == months[date.month - 1].days.size() - 1 and months[(date.month - 1) % 11].days[0].matches.size() > 0:
-		next_match_month = date.month
-		next_match_day = 0
-	
-	# get next match, if it exists on next day
-	var next_match:Match
-	if next_match_day < months[next_match_month].days[next_match_day].matches.size():
-		for matchz:Match in months[next_match_month - 1].days[next_match_day].matches:
-			if matchz.home.name == Config.team.name or matchz.away.name == Config.team.name:
-				next_match = matchz
-	
-	# get email for next match
-	if next_match:
-		EmailUtil.next_match(next_match)
+	if is_match_day():
+		EmailUtil.next_match(get_next_match())
 
-	if is_market_active():
-		print("market is active")
-		
 	if does_market_start_today():
 		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_START)
 		

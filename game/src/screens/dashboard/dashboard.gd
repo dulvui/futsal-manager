@@ -6,7 +6,6 @@ extends Control
 
 enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO } 
 
-
 @onready var team:Team = Config.team
 
 # buttons
@@ -56,14 +55,12 @@ func _ready() -> void:
 		continue_button.text = "NEXT_DAY"
 		match_ready = false
 
-			
 	if Config.leagues.get_active().calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		
 	_show_active_view()
-		
-	
+
 
 func _process(_delta:float) -> void:
 	var email_count:int = EmailUtil.count_unread_messages()
@@ -154,7 +151,6 @@ func _next_day() -> void:
 	if match_ready:
 		get_tree().change_scene_to_file("res://src/screens/match/match.tscn")
 		return
-	
 
 	# next day in calendar
 	for league:League in Config.leagues.list:
@@ -185,8 +181,6 @@ func _next_day() -> void:
 		Config.leagues.random_results()
 		
 	visual_calendar.set_up()
-
-
 
 
 func _on_email_email_action(message: EmailMessage) -> void:
