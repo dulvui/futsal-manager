@@ -4,11 +4,11 @@
 
 extends Node2D
 
-var match_engine:MatchEngine
 @onready var home_team:VisualTeam = $VisualTeamHome
 @onready var away_team:VisualTeam = $VisualTeamAway
 @onready var ball:VisualBall = $VisualBall
 
+var match_engine:MatchEngine
 
 func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	match_engine = MatchEngine.new()
