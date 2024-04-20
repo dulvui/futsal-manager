@@ -149,6 +149,7 @@ func _should_pass() -> bool:
 
 func _next_direction() -> void:
 	if destination == Vector2.INF:
+		# random destination
 		set_destination(
 			bound_field(
 				pos + Vector2(Config.match_rng.randi_range(-150, 150),
