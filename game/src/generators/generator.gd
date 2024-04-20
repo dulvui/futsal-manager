@@ -45,13 +45,11 @@ func generate() -> Leagues:
 		 # used for prestige calculation, so that high leagues have better prestige
 		var pyramid_level:int = 1
 		for l:Dictionary in leagues_data[nation]:
-			print("Generate players for ", l.name)
 			var league:League = League.new()
 			league.name = l.name
 			league.pyramid_level = pyramid_level
 			league.nation = Constants.Nations.get(nation)
 			for t:String in l.teams:
-				print(t)
 				var team:Team = Team.new()
 				team.name = t
 				team.budget = Config.rng.randi_range(500000, 100000000)
@@ -349,7 +347,6 @@ func get_player_prestige(team_prestige:int) -> int:
 func get_team_prestige(pyramid_level:int) -> int:
 	var minp:int = Constants.MAX_PRESTIGE - pyramid_level * ((Config.rng.randi() % 5) + 1)
 	var maxp:int = Constants.MAX_PRESTIGE - ((pyramid_level - 1) * 3)
-	print("level: " + str(pyramid_level) + ": " +str(minp) + " to " + str(maxp) )
 	return in_bounds(randi_range(minp, maxp))
 
 func get_random_nationality(nationality:Constants.Nations) -> Constants.Nations:
