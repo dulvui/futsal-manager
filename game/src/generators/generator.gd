@@ -107,7 +107,7 @@ func get_goalkeeper_attributes(age:int, prestige:int, position:Player.Position) 
 	var factor:int = in_bounds(prestige + age_factor)
 	
 	# goalkeepers have max potential of 20 
-	var max_potential:int = factor + abs_noise()
+	var max_potential:int = in_bounds(factor + noise())
 	
 	# non-goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position != Player.Position.G:
@@ -131,7 +131,7 @@ func get_physical(age:int, prestige:int, position:Player.Position) -> Physical:
 	var physical_factor:int = in_bounds(prestige + age_factor + noise())
 	
 	# non goalkeepers have max potential
-	var max_potential:int = prestige + noise()
+	var max_potential:int = in_bounds(prestige + noise())
 	
 	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position == Player.Position.G:
@@ -160,7 +160,7 @@ func get_technical(age:int, prestige:int, position:Player.Position) -> Technical
 
 	
 	# non goalkeepers have max potential
-	var max_potential:int = prestige + noise()
+	var max_potential:int = in_bounds(prestige + noise())
 	
 	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position == Player.Position.G:
@@ -190,7 +190,7 @@ func get_mental(age:int, prestige:int) -> Mental:
 	var offensive_factor:int = in_bounds(prestige + age_factor + noise())
 	var defensive_factor:int = in_bounds(prestige + age_factor + noise())
 	
-	var max_potential:int = prestige + noise()
+	var max_potential:int = in_bounds(prestige + noise())
 
 	attribtues.aggression = in_bounds(defensive_factor + noise(), max_potential)
 	attribtues.anticipation = in_bounds(defensive_factor + noise(), max_potential)

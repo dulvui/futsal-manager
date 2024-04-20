@@ -113,7 +113,7 @@ text = "START_YEAR"
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1970.0
-max_value = 2100.0
+max_value = 3000.0
 value = 2024.0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
