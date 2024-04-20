@@ -51,11 +51,17 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, true)
 	home_team.possess.connect(_on_home_team_possess)
+	home_team.pass_to_player.connect(func() -> void: home_stats.passes += 1)
+	home_team.pass_success.connect(func() -> void: home_stats.passes_success += 1)
+	
 	
 	away_team = SimTeam.new()
 	away_team.set_up(p_away_team, field, ball, not home_plays_left, false)
 	away_team.possess.connect(_on_away_team_possess)
-	
+	away_team.pass_to_player.connect(func() -> void: away_stats.passes += 1)
+	away_team.pass_success.connect(func() -> void: away_stats.passes_success += 1)
+
+
 func update() -> void:
 	ball.update()
 	ball.check_field_bounds(field)

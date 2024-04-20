@@ -5,6 +5,8 @@
 class_name SimTeam
 
 signal possess
+signal pass_to_player
+signal pass_success
 
 var res_team:Team
 
@@ -47,6 +49,7 @@ func set_up(
 		
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
+		sim_player.pass_received.connect(func() -> void: pass_success.emit())
 		sim_player.interception.connect(interception)
 		sim_player.shoot.connect(shoot_on_goal)
 		#sim_player.dribble.connect(pass_to_random_player)
@@ -104,6 +107,8 @@ func pass_to_random_player(passing_player:SimPlayer) -> void:
 	ball.kick(random_player.pos, 35)
 	random_player.state = SimPlayer.State.RECEIVE
 	random_player.stop()
+	
+	pass_to_player.emit()
 	
 
 func shoot_on_goal() -> void:

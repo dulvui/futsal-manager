@@ -8,6 +8,7 @@ signal interception
 signal short_pass
 signal shoot
 signal dribble
+signal pass_received
 
 enum State {
 	# generic
@@ -70,9 +71,13 @@ func set_up(
 func update() -> void:
 	if state == State.RECEIVE or state == State.PRESS:
 		if intercepts():
+			if state == State.RECEIVE:
+				pass_received.emit()
+			
 			state = State.BALL
 			ball.stop()
 			interception.emit()
+
 			
 	elif state == State.FORCE_PASS:
 		state = State.PASS

@@ -27,6 +27,7 @@ func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
 
+
 func _on_timer_timeout() -> void:
 	visual_match.update()
 	ticks += 1
@@ -34,6 +35,7 @@ func _on_timer_timeout() -> void:
 		ticks = 0
 		time += 1
 		_update_time()
+
 
 func _update_time() -> void:
 	update.emit()
@@ -67,6 +69,7 @@ func match_finished() -> void:
 func set_time() -> void:
 	timer.wait_time = 1.0 / (Constants.ticks_per_second * Config.speed_factor)
 
+
 func start_match() -> void:
 	timer.start()
 
@@ -75,12 +78,10 @@ func change_players(home_team:Team,away_team:Team) -> void:
 	visual_match.change_players(home_team,away_team)
 
 
-func _on_ActionUtil_action_message(message:String) -> void:
-	emit_signal("action_message", message)
-
 func _on_match_engine_away_goal() -> void:
 	# TODO show goal animation
 	pass
+
 
 func _on_match_engine_home_goal() -> void:
 	# TODO show goal animation
