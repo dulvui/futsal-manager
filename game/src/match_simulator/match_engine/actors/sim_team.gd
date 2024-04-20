@@ -5,8 +5,6 @@
 class_name SimTeam
 
 signal possess
-signal pass_to_player
-signal pass_success
 
 var res_team:Team
 
@@ -20,6 +18,8 @@ var field:SimField
 var has_ball:bool
 var left_half:bool
 
+var stats:MatchStatistics
+
 func set_up(
 	p_res_team:Team,
 	p_field:SimField,
@@ -32,6 +32,8 @@ func set_up(
 	ball = p_ball
 	has_ball = p_has_ball
 	left_half = p_left_half
+	
+	stats = MatchStatistics.new()
 	
 	goalkeeper = SimGoalkeeper.new()
 	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball)
@@ -49,7 +51,7 @@ func set_up(
 		
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
-		sim_player.pass_received.connect(func() -> void: pass_success.emit())
+		sim_player.pass_received.connect(func() -> void: stats.passes_success += 1)
 		sim_player.interception.connect(interception)
 		sim_player.shoot.connect(shoot_on_goal)
 		#sim_player.dribble.connect(pass_to_random_player)
@@ -108,7 +110,7 @@ func pass_to_random_player(passing_player:SimPlayer) -> void:
 	random_player.state = SimPlayer.State.RECEIVE
 	random_player.stop()
 	
-	pass_to_player.emit()
+	stats.passes += 1
 	
 
 func shoot_on_goal() -> void:
@@ -119,6 +121,11 @@ func shoot_on_goal() -> void:
 		r_pos = field.goal_left
 	r_pos += Vector2(0, Config.match_rng.randi_range(-field.goal_size * 1.5, field.goal_size * 1.5))
 	ball.kick(r_pos, 100)
+	
+	stats.shots += 1
+	
+	if field.is_goal(r_pos):
+		stats.shots_on_target += 1
 
 
 func _sort_distance_to_ball(a:SimPlayer, b:SimPlayer) -> bool:

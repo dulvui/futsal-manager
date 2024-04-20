@@ -22,8 +22,6 @@ var ticks:int
 
 # stats
 var possession_counter:float
-var home_stats:MatchStatistics
-var away_stats:MatchStatistics
 
 func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	field = SimField.new()
@@ -38,8 +36,6 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	
 	ticks = 0
 	possession_counter = 0.0
-	home_stats = MatchStatistics.new()
-	away_stats = MatchStatistics.new()
 	
 	Config.match_rng.state = 0
 	Config.match_rng.seed = hash(match_seed)
@@ -51,15 +47,11 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, true)
 	home_team.possess.connect(_on_home_team_possess)
-	home_team.pass_to_player.connect(func() -> void: home_stats.passes += 1)
-	home_team.pass_success.connect(func() -> void: home_stats.passes_success += 1)
 	
 	
 	away_team = SimTeam.new()
 	away_team.set_up(p_away_team, field, ball, not home_plays_left, false)
 	away_team.possess.connect(_on_away_team_possess)
-	away_team.pass_to_player.connect(func() -> void: away_stats.passes += 1)
-	away_team.pass_success.connect(func() -> void: away_stats.passes_success += 1)
 
 
 func update() -> void:
@@ -78,8 +70,8 @@ func update() -> void:
 	ticks += 1
 	if home_team.has_ball:
 		possession_counter += 1.0
-	home_stats.possession = (possession_counter / ticks) * 100
-	away_stats.possession = 100 - home_stats.possession
+	home_team.stats.possession = (possession_counter / ticks) * 100
+	away_team.stats.possession = 100 - home_team.stats.possession
 
 func simulate(matchz:Match) -> Match:
 	set_up(matchz.home, matchz.away, matchz.id)
@@ -92,8 +84,8 @@ func simulate(matchz:Match) -> Match:
 	for i:int in Constants.half_time_seconds * Constants.ticks_per_second:
 		update()
 		
-	matchz.home_goals = home_stats.goals
-	matchz.away_goals = away_stats.goals
+	matchz.home_goals = home_team.stats.goals
+	matchz.away_goals = away_team.stats.goals
 	return matchz
 
 func half_time() -> void:
@@ -171,10 +163,12 @@ func _on_sim_ball_corner() -> void:
 	if home_team.has_ball:
 		away_possess()
 		nearest_player = away_team.nearest_player_to_ball()
+		away_team.stats.corners += 1
 	else:
 		home_possess()
 		nearest_player = home_team.nearest_player_to_ball()
-	
+		home_team.stats.corners += 1
+
 	nearest_player.set_pos(ball.pos)
 	nearest_player.state = SimPlayer.State.FORCE_PASS
 
@@ -183,9 +177,11 @@ func _on_sim_ball_kick_in() -> void:
 	var nearest_player:SimPlayer
 	if home_team.has_ball:
 		away_possess()
+		away_team.stats.kick_ins += 1
 		nearest_player = away_team.nearest_player_to_ball()
 	else:
 		home_possess()
+		home_team.stats.kick_ins += 1
 		nearest_player = home_team.nearest_player_to_ball()
 	
 	nearest_player.set_pos(ball.pos)
@@ -193,11 +189,11 @@ func _on_sim_ball_kick_in() -> void:
 
 func _on_sim_ball_goal() -> void:
 	if home_team.has_ball:
-		home_stats.goals += 1
+		home_team.stats.goals += 1
 		home_goal.emit()
 		away_possess()
 	else:
-		away_stats.goals += 1
+		away_team.stats.goals += 1
 		away_goal.emit()
 		home_possess()
 	# reset formation
