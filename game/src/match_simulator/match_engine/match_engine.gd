@@ -41,8 +41,7 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	Config.match_rng.seed = hash(match_seed)
 
 	# TODO add coin toss
-	#home_plays_left = randi_range(0, 1) == 0
-	home_plays_left = true
+	home_plays_left = Config.match_rng.randi_range(0, 1) == 0
 	
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, true)
