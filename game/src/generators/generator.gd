@@ -82,7 +82,7 @@ func assign_players_to_team(p_team:Team, p_league:League, prestige:int) -> Team:
 			amount = 3
 		
 		for i in amount:
-			var random_nation:Constants.Nations = get_random_nationality(p_league.nation)
+			var random_nation:Constants.Nations = get_random_nationality(p_league.nation, prestige, p_league.pyramid_level)
 			var player:Player = create_player(random_nation, position, nr, prestige)
 			nr += 1
 			player.team = p_team.name
@@ -96,6 +96,7 @@ func assign_players_to_team(p_team:Team, p_league:League, prestige:int) -> Team:
 				p_team.lineup_player_ids.append(player.id)
 
 	return p_team
+
 
 func get_goalkeeper_attributes(age:int, prestige:int, position:Player.Position) -> Goalkeeper:
 	var attributes:Goalkeeper = Goalkeeper.new()
@@ -203,18 +204,21 @@ func get_mental(age:int, prestige:int) -> Mental:
 	
 	return attribtues
 
+
 func get_physical_age_factor(age:int) -> int:
 	# for  24 +- noise <  age factor is negativ
 	if age < 24 + noise():
 		return Config.rng.randi_range(-5, 3)
 	return Config.rng.randi_range(1, 7)
-	
+
+
 func get_age_factor(age:int) -> int:
 	# for  34 +- noise < age < 18 +- noise age factor is negativ
 	if age > 34 + noise() or age < 18 + noise():
 		return Config.rng.randi_range(-5, 1)
 	# else age factor is positive
 	return Config.rng.randi_range(-1, 5)
+
 
 func get_price(age:int, prestige:int, position:Player.Position) -> int:
 	var age_factor:int = min(abs(age - 30), 20)
@@ -232,11 +236,13 @@ func get_price(age:int, prestige:int, position:Player.Position) -> int:
 
 	return Config.rng.randi_range(total_factor-20, total_factor) * 10000
 
+
 func get_random_foot() -> Player.Foot:
 	if Config.rng.randi() % 5 == 0:
 		return Player.Foot.L
 	return Player.Foot.R
-	
+
+
 func get_random_form() -> Player.Form:
 	var factor:int =  Config.rng.randi() % 100
 	if factor < 5:
@@ -246,7 +252,8 @@ func get_random_form() -> Player.Form:
 	elif factor < 60:
 		return Player.Form.Good
 	return Player.Form.Excellent
-		
+
+
 func get_random_morality() -> Player.Morality:
 	var factor:int =  Config.rng.randi() % 100
 	if factor < 5:
@@ -256,6 +263,7 @@ func get_random_morality() -> Player.Morality:
 	elif factor < 60:
 		return Player.Morality.Good
 	return Player.Morality.Excellent
+
 
 func get_contract(prestige:int, position:int, age:int, contract:Contract) -> Contract:
 	contract.income = prestige * age * position # TODO use correct logic 
@@ -270,7 +278,8 @@ func get_contract(prestige:int, position:int, age:int, contract:Contract) -> Con
 	contract.buy_clause = 0
 	contract.is_on_loan = false
 	return contract
-	
+
+
 func get_player_name(nationality:Constants.Nations) -> String:
 	var nation_string:String = Constants.Nations.keys()[nationality].to_lower()
 	
@@ -291,12 +300,14 @@ func get_player_name(nationality:Constants.Nations) -> String:
 		mixed_names.append_array(male_names)
 		
 		return mixed_names[Config.rng.randi() % (size_female + size_male)]
-	
+
+
 func get_surname(nationality:Constants.Nations) -> String:
 	# TODO combine with other nations, but with low probability
 	var nation_string:String = Constants.Nations.keys()[nationality].to_lower()
 	var size:int = names[nation_string]["last_names"].size()
 	return names[nation_string]["last_names"][Config.rng.randi() % size]
+
 
 func create_player(nationality:Constants.Nations, position:Player.Position, nr:int, p_prestige:int) -> Player:
 	var player:Player = Player.new()
@@ -340,27 +351,34 @@ func create_player(nationality:Constants.Nations, position:Player.Position, nr:i
 	
 	return player
 
+
 func get_player_prestige(team_prestige:int) -> int:
 	# player presitge is teams prestige +- 5
 	return in_bounds(team_prestige + noise())
-	
+
+
 func get_team_prestige(pyramid_level:int) -> int:
 	var minp:int = Constants.MAX_PRESTIGE - pyramid_level * ((Config.rng.randi() % 5) + 1)
 	var maxp:int = Constants.MAX_PRESTIGE - ((pyramid_level - 1) * 3)
 	return in_bounds(randi_range(minp, maxp))
 
-func get_random_nationality(nationality:Constants.Nations) -> Constants.Nations:
-	# 90% given nation, 10% random nation
-	if Config.rng.randi_range(1, 100) > 90:
+
+func get_random_nationality(nationality:Constants.Nations, prestige:int, pyramid_level:int) -> Constants.Nations:
+	# (100 - prestige)% given nation, prestige% random nation
+	# with prestige, lower division teams have less players from other nations
+	if Config.rng.randi_range(1, 100) > 100 - (prestige * 2 / pyramid_level):
 		return nationality
 	return Constants.Nations.values()[Config.rng.randi_range(0, Constants.Nations.values().size() - 1)]
 
+
 func noise(fator:int = NOISE) -> int:
 	return Config.rng.randi_range(-fator, fator)
-	
+
+
 func abs_noise(fator:int = NOISE) -> int:
 	return Config.rng.randi_range(0, fator)
-	
+
+
 # returns value between 1 and 20
 func in_bounds(value:int, max_bound:int = Constants.MAX_PRESTIGE) -> int:
 	return maxi(mini(value, max_bound), 1)
