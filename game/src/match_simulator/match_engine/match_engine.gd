@@ -4,13 +4,6 @@
 
 class_name MatchEngine
 
-signal home_goal
-signal away_goal
-
-#@onready var field:SimField = $SimField
-#@onready var ball:SimBall = $SimBall
-#@onready var home_team:SimTeam = $HomeTeam
-#@onready var away_team:SimTeam = $AwayTeam
 var field:SimField
 var ball:SimBall
 var home_team:SimTeam
@@ -40,13 +33,11 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	Config.match_rng.state = 0
 	Config.match_rng.seed = hash(match_seed)
 
-	# TODO add coin toss
 	home_plays_left = Config.match_rng.randi_range(0, 1) == 0
 	
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, true)
 	home_team.possess.connect(_on_home_team_possess)
-	
 	
 	away_team = SimTeam.new()
 	away_team.set_up(p_away_team, field, ball, not home_plays_left, false)
@@ -72,6 +63,7 @@ func update() -> void:
 	home_team.stats.possession = (possession_counter / ticks) * 100
 	away_team.stats.possession = 100 - home_team.stats.possession
 
+
 func simulate(matchz:Match) -> Match:
 	set_up(matchz.home, matchz.away, matchz.id)
 	
@@ -87,11 +79,13 @@ func simulate(matchz:Match) -> Match:
 	matchz.away_goals = away_team.stats.goals
 	return matchz
 
+
 func half_time() -> void:
 	home_plays_left = not home_plays_left
 	# TODO create switch side method for teams
 	#home_team.set_up(p_home_team, field, ball, home_plays_left, home_color, false)
 	#away_team.set_up(p_away_team, field, ball, not home_plays_left, away_color, true)
+
 
 func calc_distances() -> void:
 	for player in home_team.players + away_team.players:
@@ -101,25 +95,31 @@ func calc_distances() -> void:
 		calc_player_to_ball_distance(player)
 	calc_free_shoot_trajectory()
 
+
 func calc_distance_to_goal(player:SimPlayer, left_half:bool) -> void:
 	if left_half:
 		player.distance_to_goal = calc_distance_to(player.pos, field.goal_right)
 	player.distance_to_goal = calc_distance_to(player.pos, field.goal_left)
+
 
 func calc_distance_to_own_goal(player:SimPlayer, left_half:bool) -> void:
 	if left_half:
 		player.distance_to_own_goal = calc_distance_to(player.pos, field.goal_left)
 	player.distance_to_own_goal = calc_distance_to(player.pos, field.goal_right)
 
+
 func calc_player_to_active_player_distance(player:SimPlayer, active_player:SimPlayer) -> void:
 	player.distance_to_active_player = calc_distance_to(player.pos, active_player.pos)
-	
+
+
 func calc_player_to_ball_distance(player:SimPlayer) -> void:
 	player.distance_to_ball = calc_distance_to(player.pos, ball.pos)
 
+
 func calc_distance_to(from:Vector2, to:Vector2) -> float:
 	return from.distance_to(to)
-	
+
+
 func calc_free_shoot_trajectory() -> void:
 	ball.players_in_shoot_trajectory = 0
 	ball.empty_net = false
@@ -145,6 +145,7 @@ func calc_free_shoot_trajectory() -> void:
 		if Geometry2D.is_point_in_polygon(player.pos, ball.trajectory_polygon):
 			ball.players_in_shoot_trajectory += 1
 
+
 func left_is_active_goal() -> bool:
 	if home_plays_left and home_team.has_ball:
 		return false
@@ -155,6 +156,7 @@ func left_is_active_goal() -> bool:
 	#if not home_plays_left and away_team.has_ball:
 		#return true
 	return true
+
 
 func _on_sim_ball_corner() -> void:
 	# TODO use corner shooter defined in tactics
@@ -186,14 +188,13 @@ func _on_sim_ball_kick_in() -> void:
 	nearest_player.set_pos(ball.pos)
 	nearest_player.state = SimPlayer.State.FORCE_PASS
 
+
 func _on_sim_ball_goal() -> void:
 	if home_team.has_ball:
 		home_team.stats.goals += 1
-		home_goal.emit()
 		away_possess()
 	else:
 		away_team.stats.goals += 1
-		away_goal.emit()
 		home_possess()
 	# reset formation
 	home_team.kick_off_formation()
@@ -203,6 +204,7 @@ func _on_sim_ball_goal() -> void:
 func _on_home_team_possess() -> void:
 	home_possess()
 
+
 func _on_away_team_possess() -> void:
 	away_possess()
 
@@ -211,6 +213,7 @@ func home_possess() -> void:
 	home_team.has_ball = true
 	away_team.has_ball = false
 	away_team.press()
+
 
 func away_possess() -> void:
 	away_team.has_ball = true
