@@ -38,34 +38,20 @@ func set_up(
 	goalkeeper = SimGoalkeeper.new()
 	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball)
 	
-	var pos_index: int = 0
 	for player:Player in res_team.get_field_players():
 		var sim_player:SimPlayer = SimPlayer.new()
-		
-		var start_pos:Vector2 = res_team.formation.get_field_pos(field.size, pos_index, left_half)
-		pos_index += 1
-		
 		# setup
-		sim_player.set_up(player, start_pos, p_ball)
+		sim_player.set_up(player, p_ball)
 		players.append(sim_player)
-		
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		sim_player.pass_received.connect(func() -> void: stats.passes_success += 1)
 		sim_player.interception.connect(interception)
 		sim_player.shoot.connect(shoot_on_goal)
 		#sim_player.dribble.connect(pass_to_random_player)
-
 	
-	# move 2 attackers to kickoff and pass to random player
-	if has_ball:
-		active_player = players[-1]
-		active_player.set_pos(field.center + Vector2(0, -10))
-		active_player.state = SimPlayer.State.BALL
-		
-		players[-2].set_pos(field.center + Vector2(0, 80))
-	else:
-		press()
+	set_kick_off_formation()
+
 
 func update() -> void:
 	# update values
@@ -82,9 +68,17 @@ func act() -> void:
 	for player:SimPlayer in players:
 		player.act()
 
-func kick_off_formation() -> void:
+
+func set_kick_off_formation(change_field_size:bool = false) -> void:
+	if change_field_size:
+		left_half = not left_half
+	
+	var pos_index: int = 0
 	for player:SimPlayer in players:
-		player.set_pos(player.start_pos)
+		var start_pos:Vector2 = res_team.formation.get_field_pos(field.size, pos_index, left_half)
+		pos_index += 1
+		player.start_pos = start_pos
+		player.set_pos(start_pos)
 	
 	# move 2 attackers to kickoff and pass to random player
 	if has_ball:
@@ -92,13 +86,18 @@ func kick_off_formation() -> void:
 		active_player.set_pos(field.center + Vector2(0, -50))
 		
 		players[-2].set_pos(field.center + Vector2(0, 20))
+	else:
+		press()
+
 
 func interception() -> void:
 	possess.emit()
 
+
 func press() -> void:
 	for player:SimPlayer in players:
 		player.state = SimPlayer.State.PRESS
+
 
 func pass_to_random_player(passing_player:SimPlayer) -> void:
 	var non_active:Array[SimPlayer] = players.filter(
@@ -111,7 +110,7 @@ func pass_to_random_player(passing_player:SimPlayer) -> void:
 	random_player.stop()
 	
 	stats.passes += 1
-	
+
 
 func shoot_on_goal() -> void:
 	var r_pos:Vector2

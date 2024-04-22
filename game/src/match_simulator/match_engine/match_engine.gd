@@ -23,7 +23,6 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	ball.kick_in.connect(_on_sim_ball_kick_in)
 	ball.goal.connect(_on_sim_ball_goal)
 	
-	
 	field.set_up()
 	ball.set_up(field)
 	
@@ -34,13 +33,14 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	Config.match_rng.seed = hash(match_seed)
 
 	home_plays_left = Config.match_rng.randi_range(0, 1) == 0
+	var home_has_ball:bool = Config.match_rng.randi_range(0, 1) == 0
 	
 	home_team = SimTeam.new()
-	home_team.set_up(p_home_team, field, ball, home_plays_left, true)
+	home_team.set_up(p_home_team, field, ball, home_plays_left, home_has_ball)
 	home_team.possess.connect(_on_home_team_possess)
 	
 	away_team = SimTeam.new()
-	away_team.set_up(p_away_team, field, ball, not home_plays_left, false)
+	away_team.set_up(p_away_team, field, ball, not home_plays_left, not home_has_ball)
 	away_team.possess.connect(_on_away_team_possess)
 
 
@@ -82,9 +82,9 @@ func simulate(matchz:Match) -> Match:
 
 func half_time() -> void:
 	home_plays_left = not home_plays_left
-	# TODO create switch side method for teams
-	#home_team.set_up(p_home_team, field, ball, home_plays_left, home_color, false)
-	#away_team.set_up(p_away_team, field, ball, not home_plays_left, away_color, true)
+	home_team.set_kick_off_formation(true)
+	away_team.set_kick_off_formation(true)
+	ball.set_pos(field.center)
 
 
 func calc_distances() -> void:
@@ -153,8 +153,6 @@ func left_is_active_goal() -> bool:
 		return true
 	elif not home_plays_left and home_team.has_ball:
 		return false
-	#if not home_plays_left and away_team.has_ball:
-		#return true
 	return true
 
 
@@ -197,8 +195,9 @@ func _on_sim_ball_goal() -> void:
 		away_team.stats.goals += 1
 		home_possess()
 	# reset formation
-	home_team.kick_off_formation()
-	away_team.kick_off_formation()
+	home_team.set_kick_off_formation()
+	away_team.set_kick_off_formation()
+	ball.set_pos(field.center)
 
 
 func _on_home_team_possess() -> void:

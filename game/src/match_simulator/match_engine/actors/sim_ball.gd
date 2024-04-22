@@ -66,7 +66,6 @@ func check_field_bounds(field:SimField) -> void:
 	if pos.x < 0 or pos.x > field.size.x:
 		# TODO check if post was hit => reflect
 		if field.is_goal(pos):
-			set_pos(field.center)
 			goal.emit()
 			return
 		# corner

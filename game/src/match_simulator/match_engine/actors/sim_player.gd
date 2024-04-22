@@ -53,13 +53,10 @@ var distance_to_enemy:float
 
 func set_up(
 	p_player_res:Player,
-	p_start_pos:Vector2,
 	p_ball:SimBall,
 ) -> void:
 	player_res = p_player_res
-	start_pos = p_start_pos
 	ball = p_ball
-	pos = start_pos
 	
 	# inital test values
 	destination = Vector2.INF
@@ -78,11 +75,10 @@ func update() -> void:
 			ball.stop()
 			interception.emit()
 
-			
 	elif state == State.FORCE_PASS:
 		state = State.PASS
 		short_pass.emit()
-	
+
 	elif state == State.BALL: # if player has ball not just received
 		if _should_pass():
 			state = State.PASS
@@ -90,11 +86,15 @@ func update() -> void:
 		elif _should_shoot():
 			state = State.SHOOT
 			shoot.emit()
-	
+
 	if state != State.RECEIVE:
 		# TODO use pos from tactics
 		_next_direction()
 
+
+func kick_off(p_pos:Vector2) -> void:
+	start_pos = p_pos
+	set_pos()
 
 func act() -> void:
 	# move
@@ -116,7 +116,7 @@ func intercepts() -> bool:
 	return false
 
 
-func set_pos(p_pos:Vector2) -> void:
+func set_pos(p_pos:Vector2 = pos) -> void:
 	pos = p_pos
 	# reset values
 	speed = 0
@@ -132,6 +132,7 @@ func set_destination(p_destination:Vector2) -> void:
 
 func stop() -> void:
 	speed = 0
+
 
 func _should_shoot() -> bool:
 	if ball.empty_net:
