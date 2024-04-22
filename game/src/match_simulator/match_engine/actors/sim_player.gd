@@ -11,19 +11,19 @@ signal dribble
 signal pass_received
 
 enum State {
-	# generic
-	START_POS,
-	WAIT,
 	# defense
 	PRESS,
 	MARK_ZONE,
 	MARK_MAN,
-	# attack
+	# attack with ball
 	BALL,
-	RECEIVE,
 	PASS,
 	FORCE_PASS,
 	SHOOT,
+	# attack without ball
+	RECEIVE,
+	SUPPORT,
+	STAY_BACK,
 }
 
 const deceleration = 0.01
@@ -64,10 +64,14 @@ func set_up(
 	destination = Vector2.INF
 	interception_radius = 25
 	speed = 15
-	state = State.START_POS
 
 
 func update() -> void:
+	# random direction
+	# will be overwritten by next steps, if needed
+	if state != State.RECEIVE:
+		_next_random_direction()
+	
 	match state:
 		# DEFENSE
 		State.PRESS:
@@ -75,25 +79,22 @@ func update() -> void:
 			# if arrived, try to tackle
 			# success => change possess
 			# fail => possible foul
-			if intercepts():
-				# TODO tackle
-				pass
-			pass
+			if is_touching_ball():
+				interception.emit()
 		State.MARK_MAN:
 			# TODO move to closest player and set marked flag
 			# to prevent double marking
-			pass
+			_next_defensive_direction()
 		State.MARK_ZONE:
 			# TODO move to tactical position
 			# usually diamond
-			pass
+			_next_defensive_direction()
 		# ATTACK
 		State.RECEIVE:
-			if intercepts():
+			if is_touching_ball():
 				pass_received.emit()
 				state = State.BALL
 				ball.stop()
-				interception.emit()
 		State.FORCE_PASS:
 			state = State.PASS
 			short_pass.emit()
@@ -104,10 +105,6 @@ func update() -> void:
 			elif _should_shoot():
 				state = State.SHOOT
 				shoot.emit()
-
-	if state != State.RECEIVE:
-		# TODO use pos from tactics
-		_next_direction()
 
 
 func kick_off(p_pos:Vector2) -> void:
@@ -126,7 +123,7 @@ func act() -> void:
 		stop()
 
 
-func intercepts() -> bool:
+func is_touching_ball() -> bool:
 	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		# best case 59 + 20 * 2 = 99
 		# worst case 59 + 1 * 2 = 62
@@ -166,7 +163,7 @@ func _should_pass() -> bool:
 	return false
 
 
-func _next_direction() -> void:
+func _next_random_direction() -> void:
 	if destination == Vector2.INF:
 		# random destination
 		set_destination(
@@ -176,6 +173,13 @@ func _next_direction() -> void:
 				)
 			)
 		)
+		
+func _next_defensive_direction() -> void:
+	pass
+	# TODO get next defensive direction from team,
+	# depending on tactic 
+	#if destination == Vector2.INF:
+		#set_destination(bound_field()))
 
 
 func bound_field(p_pos:Vector2) -> Vector2:

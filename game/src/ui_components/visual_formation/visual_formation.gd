@@ -32,7 +32,7 @@ func set_up(p_only_lineup:bool) -> void:
 	player_list.set_up(only_lineup, false, team)
 	
 	# set up fomation options
-	formation_select.set_up(Formation.Variations.keys(), team.formation.variation_offense)
+	formation_select.set_up(Formation.Variations.keys(), team.formation.variation)
 	
 	_set_players()
 
