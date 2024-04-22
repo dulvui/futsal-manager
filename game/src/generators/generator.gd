@@ -367,8 +367,8 @@ func get_random_nationality(nationality:Constants.Nations, prestige:int, pyramid
 	# (100 - prestige)% given nation, prestige% random nation
 	# with prestige, lower division teams have less players from other nations
 	if Config.rng.randi_range(1, 100) > 100 - (prestige * 2 / pyramid_level):
-		return nationality
-	return Constants.Nations.values()[Config.rng.randi_range(0, Constants.Nations.values().size() - 1)]
+		return Constants.Nations.values()[Config.rng.randi_range(0, Constants.Nations.values().size() - 1)]
+	return nationality
 
 
 func noise(fator:int = NOISE) -> int:
