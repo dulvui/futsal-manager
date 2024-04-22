@@ -16,6 +16,8 @@ enum State {
 	WAIT,
 	# defense
 	PRESS,
+	MARK_ZONE,
+	MARK_MAN,
 	# attack
 	BALL,
 	RECEIVE,
@@ -66,26 +68,42 @@ func set_up(
 
 
 func update() -> void:
-	if state == State.RECEIVE or state == State.PRESS:
-		if intercepts():
-			if state == State.RECEIVE:
+	match state:
+		# DEFENSE
+		State.PRESS:
+			# TODO move to player with ball
+			# if arrived, try to tackle
+			# success => change possess
+			# fail => possible foul
+			if intercepts():
+				# TODO tackle
+				pass
+			pass
+		State.MARK_MAN:
+			# TODO move to closest player and set marked flag
+			# to prevent double marking
+			pass
+		State.MARK_ZONE:
+			# TODO move to tactical position
+			# usually diamond
+			pass
+		# ATTACK
+		State.RECEIVE:
+			if intercepts():
 				pass_received.emit()
-			
-			state = State.BALL
-			ball.stop()
-			interception.emit()
-
-	elif state == State.FORCE_PASS:
-		state = State.PASS
-		short_pass.emit()
-
-	elif state == State.BALL: # if player has ball not just received
-		if _should_pass():
+				state = State.BALL
+				ball.stop()
+				interception.emit()
+		State.FORCE_PASS:
 			state = State.PASS
 			short_pass.emit()
-		elif _should_shoot():
-			state = State.SHOOT
-			shoot.emit()
+		State.BALL: # if player has ball not just received
+			if _should_pass():
+				state = State.PASS
+				short_pass.emit()
+			elif _should_shoot():
+				state = State.SHOOT
+				shoot.emit()
 
 	if state != State.RECEIVE:
 		# TODO use pos from tactics
@@ -110,9 +128,9 @@ func act() -> void:
 
 func intercepts() -> bool:
 	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
-		# TODO use player block attributes
-		#return true
-		return Config.match_rng.randi_range(0, 100) < 95
+		# best case 59 + 20 * 2 = 99
+		# worst case 59 + 1 * 2 = 62
+		return Config.match_rng.randi_range(0, 100) < 59 + player_res.attributes.technical.interception * 2
 	return false
 
 
