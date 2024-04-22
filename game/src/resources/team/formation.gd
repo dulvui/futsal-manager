@@ -58,7 +58,7 @@ func set_variation(p_variation:Variations) -> void:
 	center = int_values[2]
 	attack = int_values[3]
 	
-func get_field_pos(field_size:Vector2, index:int, left_side:bool) -> Vector2:
+func get_start_pos(field_size:Vector2, index:int, left_side:bool) -> Vector2:
 	var pos:Vector2 = Vector2.ZERO
 	
 	if index < defense:

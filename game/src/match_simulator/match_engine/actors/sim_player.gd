@@ -81,6 +81,7 @@ func update() -> void:
 			# fail => possible foul
 			if is_touching_ball():
 				interception.emit()
+				state = State.BALL
 		State.MARK_MAN:
 			# TODO move to closest player and set marked flag
 			# to prevent double marking

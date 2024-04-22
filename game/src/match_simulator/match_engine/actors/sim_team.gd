@@ -75,7 +75,7 @@ func set_kick_off_formation(change_field_size:bool = false) -> void:
 	
 	var pos_index: int = 0
 	for player:SimPlayer in players:
-		var start_pos:Vector2 = res_team.formation.get_field_pos(field.size, pos_index, left_half)
+		var start_pos:Vector2 = res_team.formation.get_start_pos(field.size, pos_index, left_half)
 		pos_index += 1
 		player.start_pos = start_pos
 		player.set_pos(start_pos)
