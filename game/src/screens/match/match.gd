@@ -62,6 +62,7 @@ func _ready() -> void:
 	home_stats = match_simulator.visual_match.match_engine.home_team.stats
 	away_stats = match_simulator.visual_match.match_engine.away_team.stats
 
+
 func _on_match_simulator_update() -> void:
 	stats.update_stats(home_stats, away_stats)
 	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
@@ -71,7 +72,6 @@ func _on_match_simulator_update() -> void:
 
 	home_possession.text = str(home_stats.possession) + " %"
 	away_possession.text = str(away_stats.possession) + " %"
-
 	result_label.text = "%d - %d"%[home_stats.goals,away_stats.goals]
 
 
@@ -84,12 +84,12 @@ func match_end() -> void:
 	match_simulator.match_finished()
 	Config.leagues.get_active().table.add_result(home_team.id,home_stats.goals,away_team.id,away_stats.goals)
 
-
 	#assign result
 	matchz.set_result(home_stats.goals,  away_stats.goals)
 	# calc other matches
 	Config.leagues.random_results()
 	Config.save_all_data()
+
 
 func half_time() -> void:
 	pause_button.text = tr("CONTINUE")
@@ -114,6 +114,7 @@ func _on_Events_pressed() -> void:
 	events.show()
 	last_active_view = events
 
+
 func _on_Formation_pressed() -> void:
 	_hide_views()
 	formation.show()
@@ -124,12 +125,14 @@ func _on_Formation_pressed() -> void:
 func _on_Formation_change() -> void:
 	match_simulator.change_players(home_team,away_team)
 
+
 func _hide_views() -> void:
 	comments.hide()
 	stats.hide()
 	events.hide()
 	formation.hide()
 	match_simulator.hide()
+
 
 func _toggle_view_buttons() -> void:
 	$Main/Content/Buttons/Change.disabled = not $Main/Content/Buttons/Change.disabled
@@ -171,6 +174,7 @@ func _on_Pause_pressed() -> void:
 func _on_SKIP_pressed() -> void:
 	match_end()
 
+
 func _on_StartTimer_timeout() -> void:
 	match_simulator.start_match()
 
@@ -181,6 +185,7 @@ func _on_match_simulator_half_time() -> void:
 
 func _on_match_simulator_match_end() -> void:
 	match_end()
+
 
 func _on_match_simulator_action_message(message:String) -> void:
 	if comments.get_child_count() > max_comments:
