@@ -49,7 +49,6 @@ var interception_radius:int #TODO reduce radius with low stamina
 # distances, calculated by actiopn util
 var distance_to_goal:float
 var distance_to_own_goal:float
-var distance_to_active_player:float
 var distance_to_ball:float
 var distance_to_enemy:float
 

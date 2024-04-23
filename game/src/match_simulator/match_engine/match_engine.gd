@@ -65,6 +65,7 @@ func update() -> void:
 
 
 func simulate(matchz:Match) -> Match:
+	var start_time:int = Time.get_ticks_msec()
 	set_up(matchz.home, matchz.away, matchz.id)
 	
 	# first half
@@ -77,6 +78,10 @@ func simulate(matchz:Match) -> Match:
 		
 	matchz.home_goals = home_team.stats.goals
 	matchz.away_goals = away_team.stats.goals
+	
+	var end_time:int = Time.get_ticks_msec()
+	print("benchmark: " + str(end_time - start_time))
+	
 	return matchz
 
 
@@ -91,7 +96,6 @@ func calc_distances() -> void:
 	for player in home_team.players + away_team.players:
 		calc_distance_to_goal(player, home_team.left_half)
 		calc_distance_to_own_goal(player, home_team.left_half)
-		calc_player_to_active_player_distance(player, home_team.active_player)
 		calc_player_to_ball_distance(player)
 	calc_free_shoot_trajectory()
 
@@ -106,10 +110,6 @@ func calc_distance_to_own_goal(player:SimPlayer, left_half:bool) -> void:
 	if left_half:
 		player.distance_to_own_goal = calc_distance_to(player.pos, field.goal_left)
 	player.distance_to_own_goal = calc_distance_to(player.pos, field.goal_right)
-
-
-func calc_player_to_active_player_distance(player:SimPlayer, active_player:SimPlayer) -> void:
-	player.distance_to_active_player = calc_distance_to(player.pos, active_player.pos)
 
 
 func calc_player_to_ball_distance(player:SimPlayer) -> void:

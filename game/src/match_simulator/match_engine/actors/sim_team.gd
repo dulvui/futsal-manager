@@ -83,9 +83,10 @@ func set_kick_off_formation(change_field_size:bool = false) -> void:
 	# move 2 attackers to kickoff and pass to random player
 	if has_ball:
 		active_player = players[-1]
-		active_player.set_pos(field.center + Vector2(0, -50))
+		active_player.set_pos(field.center + Vector2(0, 0))
+		active_player.state = SimPlayer.State.BALL
 		
-		players[-2].set_pos(field.center + Vector2(0, 20))
+		players[-2].set_pos(field.center + Vector2(0, 100))
 	else:
 		press()
 
