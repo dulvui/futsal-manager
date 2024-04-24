@@ -27,7 +27,7 @@ func set_up(
 	ball = p_ball
 	pos = start_pos
 	
-func act() -> void:
+func move() -> void:
 	pass
 	
 

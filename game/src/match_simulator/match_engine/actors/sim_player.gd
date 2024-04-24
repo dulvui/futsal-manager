@@ -73,22 +73,15 @@ func update() -> void:
 	
 	match state:
 		# DEFENSE
-		State.PRESS:
+		State.MARK_MAN, State.PRESS, State.MARK_ZONE:
 			# TODO move to player with ball
+			
 			# if arrived, try to tackle
 			# success => change possess
 			# fail => possible foul
 			if is_touching_ball():
 				interception.emit()
 				state = State.BALL
-		State.MARK_MAN:
-			# TODO move to closest player and set marked flag
-			# to prevent double marking
-			_next_defensive_direction()
-		State.MARK_ZONE:
-			# TODO move to tactical position
-			# usually diamond
-			_next_defensive_direction()
 		# ATTACK
 		State.RECEIVE:
 			if is_touching_ball():
@@ -111,8 +104,7 @@ func kick_off(p_pos:Vector2) -> void:
 	start_pos = p_pos
 	set_pos()
 
-func act() -> void:
-	# move
+func move() -> void:
 	if speed > 0:
 		pos += direction * speed
 		speed -= deceleration
@@ -139,10 +131,13 @@ func set_pos(p_pos:Vector2 = pos) -> void:
 
 
 func set_destination(p_destination:Vector2) -> void:
-	destination = p_destination
-	direction = pos.direction_to(destination)
-	# TODO use speed of attributes
-	speed = Config.match_rng.randi_range(10, 20)
+	p_destination = bound_field(p_destination)
+	
+	if pos.distance_to(p_destination) > 20:
+		destination = p_destination
+		direction = pos.direction_to(destination)
+		# TODO use speed of attributes
+		speed = Config.match_rng.randi_range(10, 20)
 
 
 func stop() -> void:
@@ -173,13 +168,6 @@ func _next_random_direction() -> void:
 				)
 			)
 		)
-		
-func _next_defensive_direction() -> void:
-	pass
-	# TODO get next defensive direction from team,
-	# depending on tactic 
-	#if destination == Vector2.INF:
-		#set_destination(bound_field()))
 
 
 func bound_field(p_pos:Vector2) -> Vector2:

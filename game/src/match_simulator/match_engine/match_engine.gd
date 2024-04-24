@@ -51,10 +51,16 @@ func update() -> void:
 	home_team.update()
 	away_team.update()
 	
+	# tactics
+	if home_team.has_ball:
+		away_team.defend(home_team.players)
+	else:
+		home_team.defend(away_team.players)
+	
 	calc_distances()
 	
-	home_team.act()
-	away_team.act()
+	home_team.move()
+	away_team.move()
 	
 	# update posession stats
 	ticks += 1

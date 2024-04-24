@@ -20,6 +20,10 @@ var left_half:bool
 
 var stats:MatchStatistics
 
+# callables
+var sort_x_left:Callable
+var sort_x_right:Callable
+
 func set_up(
 	p_res_team:Team,
 	p_field:SimField,
@@ -38,6 +42,9 @@ func set_up(
 	goalkeeper = SimGoalkeeper.new()
 	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball)
 	
+	sort_x_left = func(a:SimPlayer, b:SimPlayer) -> bool: return a.pos.x < b.pos.x
+	sort_x_right = func(a:SimPlayer, b:SimPlayer) -> bool: return a.pos.x > b.pos.x
+	
 	for player:Player in res_team.get_field_players():
 		var sim_player:SimPlayer = SimPlayer.new()
 		# setup
@@ -54,7 +61,7 @@ func set_up(
 
 
 func update() -> void:
-	# update values
+	# update states
 	goalkeeper.update()
 	for player:SimPlayer in players:
 		player.update()
@@ -63,10 +70,34 @@ func update() -> void:
 			active_player = player
 
 
-func act() -> void:
-	goalkeeper.act()
+func move() -> void:
+	goalkeeper.move()
 	for player:SimPlayer in players:
-		player.act()
+		player.move()
+
+
+func defend(other_players:Array[SimPlayer]) -> void:
+	# TODO defend, depending on tactic
+	# curently simply mark player, depending on x-axis
+	
+	# first sort players on x-axis
+	if left_half:
+		other_players.sort_custom(sort_x_left)
+		players.sort_custom(sort_x_left)
+	else:
+		other_players.sort_custom(sort_x_right)
+		players.sort_custom(sort_x_right)
+	
+	# assign destinations
+	for i in players.size():
+		# y towards goal, to block goal
+		var factor:int = Config.match_rng.randi_range(30, 60)
+		var deviation:Vector2 = Vector2(-factor, factor)
+		if other_players[i].pos.y > field.center.y:
+			deviation.y -= factor * 2
+		
+		players[i].set_destination(other_players[i].pos + deviation)
+		players[i].state = SimPlayer.State.MARK_MAN
 
 
 func set_kick_off_formation(change_field_size:bool = false) -> void:
@@ -135,3 +166,4 @@ func _sort_distance_to_ball(a:SimPlayer, b:SimPlayer) -> bool:
 func nearest_player_to_ball() -> SimPlayer:
 	players.sort_custom(_sort_distance_to_ball)
 	return players[0]
+
