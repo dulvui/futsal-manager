@@ -53,8 +53,10 @@ func update() -> void:
 	
 	# tactics
 	if home_team.has_ball:
+		home_team.attack()
 		away_team.defend(home_team.players)
 	else:
+		away_team.attack()
 		home_team.defend(away_team.players)
 	
 	calc_distances()

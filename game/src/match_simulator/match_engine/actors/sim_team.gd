@@ -100,6 +100,10 @@ func defend(other_players:Array[SimPlayer]) -> void:
 		players[i].state = SimPlayer.State.MARK_MAN
 
 
+func attack() -> void:
+	pass
+
+
 func set_kick_off_formation(change_field_size:bool = false) -> void:
 	if change_field_size:
 		left_half = not left_half
