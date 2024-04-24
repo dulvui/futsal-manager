@@ -219,10 +219,8 @@ func _on_away_team_possess() -> void:
 func home_possess() -> void:
 	home_team.has_ball = true
 	away_team.has_ball = false
-	away_team.press()
 
 
 func away_possess() -> void:
 	away_team.has_ball = true
 	home_team.has_ball = false
-	home_team.press()

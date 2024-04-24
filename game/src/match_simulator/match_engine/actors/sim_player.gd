@@ -12,9 +12,7 @@ signal pass_received
 
 enum State {
 	# defense
-	PRESS,
-	MARK_ZONE,
-	MARK_MAN,
+	DEFEND,
 	# attack with ball
 	BALL,
 	PASS,
@@ -68,14 +66,13 @@ func set_up(
 func update() -> void:
 	# random direction
 	# will be overwritten by next steps, if needed
-	if state != State.RECEIVE:
+	if state != State.RECEIVE and state != State.DEFEND:
 		_next_random_direction()
 	
 	match state:
 		# DEFENSE
-		State.MARK_MAN, State.PRESS, State.MARK_ZONE:
+		State.DEFEND:
 			# TODO move to player with ball
-			
 			# if arrived, try to tackle
 			# success => change possess
 			# fail => possible foul

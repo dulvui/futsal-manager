@@ -96,8 +96,8 @@ func defend(other_players:Array[SimPlayer]) -> void:
 		if other_players[i].pos.y > field.center.y:
 			deviation.y -= factor * 2
 		
+		players[i].state = SimPlayer.State.DEFEND
 		players[i].set_destination(other_players[i].pos + deviation)
-		players[i].state = SimPlayer.State.MARK_MAN
 
 
 func attack() -> void:
@@ -122,17 +122,10 @@ func set_kick_off_formation(change_field_size:bool = false) -> void:
 		active_player.state = SimPlayer.State.BALL
 		
 		players[-2].set_pos(field.center + Vector2(0, 100))
-	else:
-		press()
 
 
 func interception() -> void:
 	possess.emit()
-
-
-func press() -> void:
-	for player:SimPlayer in players:
-		player.state = SimPlayer.State.PRESS
 
 
 func pass_to_random_player(passing_player:SimPlayer) -> void:
