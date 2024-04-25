@@ -38,10 +38,12 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, home_has_ball)
 	home_team.possess.connect(_on_home_team_possess)
-	
+	home_team.shot.connect(func() -> void: away_team.goalkeeper.save_shot())
+
 	away_team = SimTeam.new()
 	away_team.set_up(p_away_team, field, ball, not home_plays_left, not home_has_ball)
 	away_team.possess.connect(_on_away_team_possess)
+	away_team.shot.connect(func() -> void: home_team.goalkeeper.save_shot())
 
 
 func update() -> void:
@@ -165,7 +167,8 @@ func left_is_active_goal() -> bool:
 
 
 func _on_sim_ball_corner() -> void:
-	# TODO use corner shooter defined in tactics
+	# TODO create signal for corner left/right
+	# for goalkeeper kick ins
 	var nearest_player:SimPlayer
 	if home_team.has_ball:
 		away_possess()

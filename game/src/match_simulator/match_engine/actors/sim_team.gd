@@ -5,6 +5,7 @@
 class_name SimTeam
 
 signal possess
+signal shot
 
 var res_team:Team
 
@@ -101,6 +102,7 @@ func defend(other_players:Array[SimPlayer]) -> void:
 
 
 func attack() -> void:
+	# TODO define attacks
 	pass
 
 
@@ -151,6 +153,7 @@ func shoot_on_goal() -> void:
 	ball.kick(r_pos, 100)
 	
 	stats.shots += 1
+	shot.emit()
 	
 	if field.is_goal(r_pos):
 		stats.shots_on_target += 1
