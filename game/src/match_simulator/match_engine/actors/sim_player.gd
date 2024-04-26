@@ -20,8 +20,6 @@ enum State {
 	SHOOT,
 	# attack without ball
 	RECEIVE,
-	SUPPORT,
-	STAY_BACK,
 }
 
 const deceleration = 0.01

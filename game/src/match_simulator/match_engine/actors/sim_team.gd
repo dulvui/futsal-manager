@@ -92,7 +92,7 @@ func defend(other_players:Array[SimPlayer]) -> void:
 		players.sort_custom(sort_x_right)
 	
 	# assign destinations
-	for i in players.size():
+	for i:int in players.size():
 		# y towards goal, to block goal
 		var factor:int = Config.match_rng.randi_range(30, 60)
 		var deviation:Vector2 = Vector2(-factor, factor)
@@ -104,8 +104,20 @@ func defend(other_players:Array[SimPlayer]) -> void:
 
 
 func attack() -> void:
-	# TODO define attacks
-	pass
+	# TODO use default formation moved on x-axis for now
+	for player:SimPlayer in players:
+		# y towards goal, to block goal
+		var factor:int = Config.match_rng.randi_range(30, 60)
+		var deviation:Vector2 = Vector2(-factor, factor)
+		
+		# move to other half
+		if left_half:
+			deviation += Vector2(400, 0)
+		else:
+			deviation += Vector2(-400, 0) 
+
+
+		player.set_destination(player.start_pos + deviation)
 
 
 func set_kick_off_formation(change_field_size:bool = false) -> void:
