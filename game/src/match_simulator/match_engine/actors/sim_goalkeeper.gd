@@ -73,7 +73,6 @@ func move() -> void:
 		stop()
 
 func save_shot() -> void:
-	print("save shot")
 	state = State.SAVE_SHOT
 	
 func kick_in() -> void:

@@ -42,6 +42,8 @@ func set_up(
 	
 	goalkeeper = SimGoalkeeper.new()
 	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball)
+	goalkeeper.short_pass.connect(pass_to_random_player)
+	
 	
 	sort_x_left = func(a:SimPlayer, b:SimPlayer) -> bool: return a.pos.x < b.pos.x
 	sort_x_right = func(a:SimPlayer, b:SimPlayer) -> bool: return a.pos.x > b.pos.x
@@ -130,11 +132,16 @@ func interception() -> void:
 	possess.emit()
 
 
-func pass_to_random_player(passing_player:SimPlayer) -> void:
-	var non_active:Array[SimPlayer] = players.filter(
-		func(player:SimPlayer) -> bool: return player.player_res.id != passing_player.player_res.id
-	)
-	var random_player:SimPlayer = non_active[Config.match_rng.randi_range(0 , non_active.size() - 1)]
+func pass_to_random_player(passing_player:SimPlayer = null) -> void:
+	var random_player:SimPlayer
+	if passing_player:
+		var non_active:Array[SimPlayer] = players.filter(
+			func(player:SimPlayer) -> bool: return player.player_res.id != passing_player.player_res.id
+		)
+		random_player = non_active[Config.match_rng.randi_range(0 , non_active.size() - 1)]
+	else:
+		# goalkeeper pass
+		random_player = players[Config.match_rng.randi_range(0 , players.size() - 1)]
 	
 	ball.kick(random_player.pos, 35)
 	random_player.state = SimPlayer.State.RECEIVE
