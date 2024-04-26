@@ -50,7 +50,10 @@ func update() -> void:
 	match state:
 		State.FOLLOW_BALL:
 			speed = 5
-			pos.y = goal_bounds_y(ball.pos.y)
+			if (left_half and ball.pos.x < 600) or (not left_half and ball.pos.x > 600): 
+				pos.y = goal_bounds_y(ball.pos.y)
+			else:
+				pos.y = 300
 		State.SAVE_SHOT:
 			speed = player_res.attributes.goalkeeper.reflexes
 			pos.y = goal_bounds_y(ball.pos.y)
