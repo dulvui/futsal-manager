@@ -90,7 +90,7 @@ func simulate(matchz:Match) -> Match:
 	matchz.away_goals = away_team.stats.goals
 	
 	var end_time:int = Time.get_ticks_msec()
-	print("benchmark: " + str(end_time - start_time))
+	print("benchmark: " + str(end_time - start_time) + " result: " + str(matchz.home_goals) + ":" + str(matchz.away_goals))
 	
 	return matchz
 
