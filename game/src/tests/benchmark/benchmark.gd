@@ -3,17 +3,28 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 @tool
-extends Node
+extends EditorScript
+class_name Benchmark
+
+const match_count:int = 100
 
 var matches:Array[Match]
 var match_engine:MatchEngine
+var generator:Generator
 
-func _ready() -> void:
+
+func _run() -> void:
+	generator = Generator.new()
 	match_engine = MatchEngine.new()
 	matches = []
-	create_matches(100)
+	var leagues:Leagues = generator.generate()
+	create_matches(leagues)
+	print("Start benchmark with %d matches..."%match_count)
+	benchmark()
+	print("Benchmark done.")
+	
 
-func create_matches(_amount:int) -> void:
+func create_matches(_leagus:Leagues) -> void:
 	pass
 
 func benchmark() -> void:
