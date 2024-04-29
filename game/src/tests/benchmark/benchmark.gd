@@ -6,9 +6,6 @@
 extends EditorScript
 class_name Benchmark
 
-const match_count:int = 100
-
-var matches:Array[Match]
 var match_engine:MatchEngine
 var generator:Generator
 
@@ -16,18 +13,22 @@ var generator:Generator
 func _run() -> void:
 	generator = Generator.new()
 	match_engine = MatchEngine.new()
-	matches = []
 	var leagues:Leagues = generator.generate()
-	create_matches(leagues)
-	print("Start benchmark with %d matches..."%match_count)
-	benchmark()
+	print("Start benchmark...")
+	MatchMaker.inizialize_matches(leagues)
+	
+	while true:
+		# next day in calendar
+		for league:League in leagues.list:
+			league.calendar.next_day()
+			print("next day")
+			if league.calendar.is_match_day():
+				return
+		
+	
+	for matchz:Match in leagues.damatches:
+		var result_match:Match = match_engine.simulate(matchz)
+		matchz.set_result(result_match.home_goals, result_match.away_goals)
 	print("Benchmark done.")
 	
 
-func create_matches(_leagus:Leagues) -> void:
-	pass
-
-func benchmark() -> void:
-	for matchz:Match in matches:
-		var result_match:Match = match_engine.simulate(matchz)
-		matchz.set_result(result_match.home_goals, result_match.away_goals)

@@ -58,7 +58,7 @@ func _on_select_team_pressed() -> void:
 	print("team saved")
 	Config.leagues.initialize_calendars()
 	print("calendars created")
-	MatchMaker.inizialize_matches()
+	MatchMaker.inizialize_matches(Config.leagues)
 	print("matches initialized")
 	EmailUtil.welcome_manager()
 	

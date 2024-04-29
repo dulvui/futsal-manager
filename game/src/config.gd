@@ -152,7 +152,7 @@ func next_season() -> void:
 	for league:League in Config.leagues.list:
 		league.calendar.initialize(true)
 	
-	MatchMaker.inizialize_matches()
+	MatchMaker.inizialize_matches(leagues)
 	
 	EmailUtil.new_message(EmailUtil.MessageTypes.NEXT_SEASON)
 	Config.save_all_data()
