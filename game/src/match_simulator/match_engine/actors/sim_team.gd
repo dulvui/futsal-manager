@@ -5,7 +5,6 @@
 class_name SimTeam
 
 signal possess
-signal shot
 
 var res_team:Team
 
@@ -41,6 +40,8 @@ func set_up(
 	goalkeeper = SimGoalkeeper.new()
 	goalkeeper.set_up(res_team.get_goalkeeper(), field.get_goalkeeper_pos(left_half), p_ball)
 	goalkeeper.short_pass.connect(pass_to_random_player)
+	goalkeeper.interception.connect(interception)
+	
 	
 	
 	sort_x_left = func(a:SimPlayer, b:SimPlayer) -> bool: return a.pos.x < b.pos.x
@@ -61,13 +62,6 @@ func set_up(
 	set_kick_off_formation()
 
 
-func update() -> void:
-	# update states
-	goalkeeper.update()
-	#for player:SimPlayer in players:
-		#player.update()
-
-
 func move() -> void:
 	goalkeeper.move()
 	for player:SimPlayer in players:
@@ -75,9 +69,13 @@ func move() -> void:
 
 
 func defend(other_players:Array[SimPlayer]) -> void:
-	# TODO defend, depending on tactic
-	# curently simply mark player, depending on x-axis
+	# defend
+	goalkeeper.defend()
+	for player:SimPlayer in players:
+		player.defend()
 	
+	
+	# assign positions
 	# first sort players on x-axis
 	if left_half:
 		other_players.sort_custom(sort_x_left)
@@ -94,11 +92,10 @@ func defend(other_players:Array[SimPlayer]) -> void:
 		if other_players[i].pos.y > field.center.y:
 			deviation.y -= factor * 2
 		players[i].set_destination(other_players[i].pos + deviation)
-		# actually defend
-		players[i].defend()
 
 
 func attack() -> void:
+	goalkeeper.attack()
 	# use default formation moved on x-axis for now
 	for player:SimPlayer in players:
 		player.attack()
@@ -168,7 +165,7 @@ func shoot_on_goal() -> void:
 	ball.shoot(r_pos, 100)
 	
 	stats.shots += 1
-	shot.emit()
+	
 	# TODO this doesnt work
 	#if field.is_goal(r_pos):
 		#stats.shots_on_target += 1

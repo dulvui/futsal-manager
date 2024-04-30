@@ -38,22 +38,17 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, home_has_ball)
 	home_team.possess.connect(_on_home_team_possess)
-	home_team.shot.connect(func() -> void: away_team.goalkeeper.save_shot())
 
 	away_team = SimTeam.new()
 	away_team.set_up(p_away_team, field, ball, not home_plays_left, not home_has_ball)
 	away_team.possess.connect(_on_away_team_possess)
-	away_team.shot.connect(func() -> void: home_team.goalkeeper.save_shot())
 
 
 func update() -> void:
 	ball.update()
 	ball.check_field_bounds(field)
 	
-	home_team.update()
-	away_team.update()
-	
-	# tactics
+	# defend/attack
 	if home_team.has_ball:
 		home_team.attack()
 		away_team.defend(home_team.players)
@@ -180,12 +175,12 @@ func _on_sim_ball_goal_line_out() -> void:
 	# goalkeeper ball
 	elif ball.pos.x < 600:
 		# left
-		set_goalkeeper_ball(home_plays_left)
 		ball.set_pos(30, 300)
+		set_goalkeeper_ball(home_plays_left)
 	else:
 		# right
+		ball.set_pos(1170, 300)
 		set_goalkeeper_ball(not home_plays_left)
-		ball.set_pos(1270, 300)
 
 func set_corner(home:bool) -> void:
 	var nearest_player:SimPlayer
@@ -198,14 +193,14 @@ func set_corner(home:bool) -> void:
 		nearest_player = away_team.nearest_player_to_ball()
 		away_team.stats.corners += 1
 	nearest_player.set_pos(ball.pos)
-	nearest_player.state = SimPlayer.State.FORCE_PASS
+	nearest_player.short_pass.emit()
 
 
 func set_goalkeeper_ball(home:bool) -> void:
 	var goalkeeper:SimGoalkeeper
 	if home:
-		goalkeeper = home_team.goalkeeper
 		home_possess()
+		goalkeeper = home_team.goalkeeper
 	else:
 		away_possess()
 		goalkeeper = away_team.goalkeeper
@@ -224,7 +219,7 @@ func _on_sim_ball_touch_line_out() -> void:
 		nearest_player = home_team.nearest_player_to_ball()
 	
 	nearest_player.set_pos(ball.pos)
-	nearest_player.state = SimPlayer.State.FORCE_PASS
+	nearest_player.short_pass.emit()
 
 
 func _on_sim_ball_goal() -> void:

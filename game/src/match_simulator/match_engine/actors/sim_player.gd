@@ -13,10 +13,8 @@ signal pass_received
 enum State {
 	# attack with ball
 	BALL,
-	PASS,
-	FORCE_PASS,
-	SHOOT,
 	# attack without ball
+	NO_BALL,
 	RECEIVE,
 }
 
@@ -55,57 +53,33 @@ func set_up(
 	
 	# inital test values
 	destination = Vector2.INF
-	interception_radius = 25
+	interception_radius = 10
 	speed = 15
 
 
 func defend() -> void:
-	match ball.state:
-		# DEFENSE
-		SimBall.State.PASS, SimBall.State.SHOOT:
-			# TODO move to player with ball
-			# if arrived, try to tackle
-			# success => change possess
-			# fail => possible foul
-			if is_touching_ball():
-				interception.emit()
-				state = State.BALL
-				ball.stop()
-		# ATTACK
-		SimBall.State.PASS:
-			if is_touching_ball():
-				pass_received.emit()
-				state = State.BALL
-				ball.stop()
-		State.FORCE_PASS:
-			state = State.PASS
-			short_pass.emit()
-		State.BALL: # if player has ball not just received
-			if _should_pass():
-				state = State.PASS
-				short_pass.emit()
-			elif _should_shoot():
-				state = State.SHOOT
-				shoot.emit()
+	if is_touching_ball():
+		interception.emit()
+		state = State.BALL
+		ball.stop()
+	else:
+		state = State.NO_BALL
 
 
 func attack() -> void:
 	match state:
-		SimBall.State.PASS:
+		State.RECEIVE:
 			if is_touching_ball():
 				pass_received.emit()
 				state = State.BALL
 				ball.stop()
-		State.FORCE_PASS:
-			state = State.PASS
-			short_pass.emit()
-		State.BALL: # if player has ball not just received
+		State.BALL:
 			if _should_pass():
-				state = State.PASS
 				short_pass.emit()
+				state = State.NO_BALL
 			elif _should_shoot():
-				state = State.SHOOT
 				shoot.emit()
+				state = State.NO_BALL
 
 
 func kick_off(p_pos:Vector2) -> void:
@@ -114,7 +88,7 @@ func kick_off(p_pos:Vector2) -> void:
 
 
 func move() -> void:
-	if speed > 0:
+	if state != State.RECEIVE and speed > 0:
 		pos += direction * speed
 		speed -= deceleration
 		stamina -= 0.01
