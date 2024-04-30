@@ -32,9 +32,9 @@ func set_up(
 	ball = p_ball
 	pos = start_pos
 	
-	# worst case 1
-	# best case  11
-	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 1
+	# worst case 10
+	# best case  20
+	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 10
 
 	left_half = pos.x < 600
 
@@ -43,14 +43,17 @@ func defend() -> void:
 	match ball.state:
 		SimBall.State.PASS, SimBall.State.STOP, SimBall.State.DRIBBLE:
 			speed = 5
-			follow_ball()
+			if is_touching_ball():
+				ball.stop()
+				interception.emit()
 		SimBall.State.SHOOT:
 			speed = player_res.attributes.goalkeeper.reflexes
-	
+			if block_shot():
+				ball.stop()
+				interception.emit()
+
 	follow_ball()
-	if is_touching_ball():
-		ball.stop()
-		interception.emit()
+
 
 
 func attack() -> void:
@@ -80,11 +83,16 @@ func stop() -> void:
 
 
 func is_touching_ball() -> bool:
-	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
+	return Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius)
+
+
+func block_shot() -> bool:
+	if is_touching_ball():
 		# best case 59 + 20 * 2 = 99
 		# worst case 59 + 1 * 2 = 62
 		return Config.match_rng.randi_range(0, 100) < 59 + player_res.attributes.goalkeeper.handling * 2
 	return false
+
 
 
 func goal_bounds_y(p_y:float) -> float:
