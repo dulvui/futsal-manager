@@ -6,15 +6,6 @@ class_name SimGoalkeeper
 
 signal short_pass
 
-enum State {
-	FOLLOW_BALL,
-	# defense
-	SAVE_SHOT,
-	# attack with ball
-	PASS,
-}
-
-var state:State
 # resources
 var player_res:Player
 var ball:SimBall
@@ -40,36 +31,29 @@ func set_up(
 	ball = p_ball
 	pos = start_pos
 	
-	state = State.FOLLOW_BALL
 	# worst case 11
 	# best case  30
 	interception_radius = player_res.attributes.goalkeeper.positioning + 20
 
+	left_half = pos.x < 600
+
 
 func update() -> void:
-	match state:
-		State.FOLLOW_BALL:
+	match ball.state:
+		SimBall.State.PASS, SimBall.State.STOP, SimBall.State.DRIBBLE:
 			speed = 5
+			# only follow if in own half
 			if (left_half and ball.pos.x < 600) or (not left_half and ball.pos.x > 600): 
 				pos.y = goal_bounds_y(ball.pos.y)
 			else:
 				pos.y = 300
-			
-			if is_touching_ball():
-				state = State.PASS
-				ball.stop()
-				print("golakeeper kickin")
-		State.SAVE_SHOT:
+		SimBall.State.SHOOT:
 			speed = player_res.attributes.goalkeeper.reflexes
 			pos.y = goal_bounds_y(ball.pos.y)
 			if is_touching_ball():
-				state = State.PASS
 				ball.stop()
-				print("golakeeper save")
-		State.PASS:
-			short_pass.emit()
-			state = State.FOLLOW_BALL
-	
+
+
 func move() -> void:
 	if speed > 0:
 		pos += direction * speed
@@ -78,15 +62,11 @@ func move() -> void:
 		destination = Vector2.INF
 		stop()
 
-func save_shot() -> void:
-	state = State.SAVE_SHOT
-	
-func kick_in() -> void:
-	state = State.PASS
 
 func stop() -> void:
 	speed = 0
-	
+
+
 func is_touching_ball() -> bool:
 	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		# best case 59 + 20 * 2 = 99
@@ -94,6 +74,13 @@ func is_touching_ball() -> bool:
 		return Config.match_rng.randi_range(0, 100) < 59 + player_res.attributes.goalkeeper.handling * 2
 	return false
 
+
 func goal_bounds_y(p_y:float) -> float:
 	p_y = maxi(mini(p_y, 350), 250)
 	return p_y
+
+func set_pos(p_pos:Vector2 = pos) -> void:
+	pos = p_pos
+	# reset values
+	speed = 0
+	destination = Vector2.INF

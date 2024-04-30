@@ -91,7 +91,7 @@ func simulate(matchz:Match) -> Match:
 	
 	var end_time:int = Time.get_ticks_msec()
 	print("benchmark: " + str(end_time - start_time) + " result: " + str(matchz.home_goals) + ":" + str(matchz.away_goals))
-	
+	print("shots: h%d - a%d"%[home_team.stats.shots, away_team.stats.shots])
 	return matchz
 
 
@@ -173,14 +173,18 @@ func _on_sim_ball_goal_line_out() -> void:
 	# check if corner kick
 	if (home_team.has_ball and home_plays_left and ball.pos.x < 600) \
 		or (home_team.has_ball and not home_plays_left and ball.pos.x > 600):
-		set_corner(false)
+		set_corner(true)
 	elif (away_team.has_ball and home_plays_left and ball.pos.x > 600) \
 		or (home_team.has_ball and not home_plays_left and ball.pos.x < 600):
-		set_corner(true)
+		set_corner(false)
 	# goalkeeper ball
 	elif ball.pos.x < 600:
+		# left
+		set_goalkeeper_ball(home_plays_left)
 		ball.set_pos(30, 300)
 	else:
+		# right
+		set_goalkeeper_ball(not home_plays_left)
 		ball.set_pos(1270, 300)
 
 func set_corner(home:bool) -> void:
@@ -195,6 +199,17 @@ func set_corner(home:bool) -> void:
 		away_team.stats.corners += 1
 	nearest_player.set_pos(ball.pos)
 	nearest_player.state = SimPlayer.State.FORCE_PASS
+
+
+func set_goalkeeper_ball(home:bool) -> void:
+	var goalkeeper:SimGoalkeeper
+	if home:
+		goalkeeper = home_team.goalkeeper
+		home_possess()
+	else:
+		away_possess()
+		goalkeeper = away_team.goalkeeper
+	goalkeeper.set_pos(ball.pos)
 
 
 func _on_sim_ball_touch_line_out() -> void:

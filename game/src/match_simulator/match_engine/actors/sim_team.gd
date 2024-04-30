@@ -12,8 +12,6 @@ var res_team:Team
 var goalkeeper:SimGoalkeeper
 var players:Array[SimPlayer]
 
-var active_player:SimPlayer
-
 var ball:SimBall
 var field:SimField
 var has_ball:bool
@@ -66,11 +64,8 @@ func set_up(
 func update() -> void:
 	# update states
 	goalkeeper.update()
-	for player:SimPlayer in players:
-		player.update()
-		# set active _player
-		if player.state == SimPlayer.State.BALL:
-			active_player = player
+	#for player:SimPlayer in players:
+		#player.update()
 
 
 func move() -> void:
@@ -98,14 +93,16 @@ func defend(other_players:Array[SimPlayer]) -> void:
 		var deviation:Vector2 = Vector2(-factor, factor)
 		if other_players[i].pos.y > field.center.y:
 			deviation.y -= factor * 2
-		
-		players[i].state = SimPlayer.State.DEFEND
 		players[i].set_destination(other_players[i].pos + deviation)
+		# actually defend
+		players[i].defend()
 
 
 func attack() -> void:
 	# use default formation moved on x-axis for now
 	for player:SimPlayer in players:
+		player.attack()
+		
 		# y towards goal, to block goal
 		var factor:int = Config.match_rng.randi_range(30, 60)
 		var deviation:Vector2 = Vector2(-factor, factor)
@@ -119,9 +116,10 @@ func attack() -> void:
 		player.set_destination(player.start_pos + deviation)
 
 
-func set_kick_off_formation(change_field_size:bool = false) -> void:
-	if change_field_size:
+func set_kick_off_formation(change_field_side:bool = false) -> void:
+	if change_field_side:
 		left_half = not left_half
+		goalkeeper.left_half = not goalkeeper.left_half
 	
 	var pos_index: int = 0
 	for player:SimPlayer in players:
@@ -132,9 +130,8 @@ func set_kick_off_formation(change_field_size:bool = false) -> void:
 	
 	# move 2 attackers to kickoff and pass to random player
 	if has_ball:
-		active_player = players[-1]
-		active_player.set_pos(field.center + Vector2(0, 0))
-		active_player.state = SimPlayer.State.BALL
+		players[-1].set_pos(field.center + Vector2(0, 0))
+		players[-1].state = SimPlayer.State.BALL
 		
 		players[-2].set_pos(field.center + Vector2(0, 100))
 
@@ -154,7 +151,7 @@ func pass_to_random_player(passing_player:SimPlayer = null) -> void:
 		# goalkeeper pass
 		random_player = players[Config.match_rng.randi_range(0 , players.size() - 1)]
 	
-	ball.kick(random_player.pos, 35)
+	ball.short_pass(random_player.pos, 35)
 	random_player.state = SimPlayer.State.RECEIVE
 	random_player.stop()
 	
@@ -168,13 +165,13 @@ func shoot_on_goal() -> void:
 	else:
 		r_pos = field.goal_left
 	r_pos += Vector2(0, Config.match_rng.randi_range(-field.goal_size * 1.5, field.goal_size * 1.5))
-	ball.kick(r_pos, 100)
+	ball.shoot(r_pos, 100)
 	
 	stats.shots += 1
 	shot.emit()
-	
-	if field.is_goal(r_pos):
-		stats.shots_on_target += 1
+	# TODO this doesnt work
+	#if field.is_goal(r_pos):
+		#stats.shots_on_target += 1
 
 
 func _sort_distance_to_ball(a:SimPlayer, b:SimPlayer) -> bool:

@@ -7,11 +7,14 @@ class_name SimField
 var size:Vector2
 var center:Vector2
 
-const goal_size:int = 200
+const goal_size:int = 150
 var goal_left:Vector2
 var goal_right:Vector2
 
 var polygon:PackedVector2Array
+
+var upper_goal_post:int
+var lower_goal_post:int
 
 
 func set_up() -> void:
@@ -22,6 +25,8 @@ func set_up() -> void:
 	
 	goal_left = Vector2(0, size.y / 2)
 	goal_right = Vector2(size.x, size.y / 2)
+	lower_goal_post = (size.y / 2) - (goal_size / 2)
+	upper_goal_post = (size.y / 2) + (goal_size / 2)
 	
 	polygon = PackedVector2Array()
 	polygon.append(Vector2(0,0))
@@ -56,9 +61,7 @@ func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
 
 
 func is_goal(ball_pos:Vector2) -> bool:
-	if ball_pos.y < goal_left.y + (goal_size / 2) and ball_pos.y > goal_left.y - (goal_size / 2):
-		return true
-	return false
+	return ball_pos.y > lower_goal_post and ball_pos.y < upper_goal_post
 
 
 func get_goalkeeper_pos(plays_left:bool) -> Vector2:

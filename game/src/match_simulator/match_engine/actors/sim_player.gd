@@ -11,8 +11,6 @@ signal dribble
 signal pass_received
 
 enum State {
-	# defense
-	DEFEND,
 	# attack with ball
 	BALL,
 	PASS,
@@ -61,15 +59,10 @@ func set_up(
 	speed = 15
 
 
-func update() -> void:
-	# random direction
-	# will be overwritten by next steps, if needed
-	if state != State.RECEIVE and state != State.DEFEND:
-		_next_random_direction()
-	
-	match state:
+func defend() -> void:
+	match ball.state:
 		# DEFENSE
-		State.DEFEND:
+		SimBall.State.PASS, SimBall.State.SHOOT:
 			# TODO move to player with ball
 			# if arrived, try to tackle
 			# success => change possess
@@ -79,7 +72,26 @@ func update() -> void:
 				state = State.BALL
 				ball.stop()
 		# ATTACK
-		State.RECEIVE:
+		SimBall.State.PASS:
+			if is_touching_ball():
+				pass_received.emit()
+				state = State.BALL
+				ball.stop()
+		State.FORCE_PASS:
+			state = State.PASS
+			short_pass.emit()
+		State.BALL: # if player has ball not just received
+			if _should_pass():
+				state = State.PASS
+				short_pass.emit()
+			elif _should_shoot():
+				state = State.SHOOT
+				shoot.emit()
+
+
+func attack() -> void:
+	match state:
+		SimBall.State.PASS:
 			if is_touching_ball():
 				pass_received.emit()
 				state = State.BALL
@@ -99,6 +111,7 @@ func update() -> void:
 func kick_off(p_pos:Vector2) -> void:
 	start_pos = p_pos
 	set_pos()
+
 
 func move() -> void:
 	if speed > 0:
