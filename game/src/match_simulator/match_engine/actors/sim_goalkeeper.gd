@@ -43,7 +43,7 @@ func set_up(
 	state = State.FOLLOW_BALL
 	# worst case 11
 	# best case  30
-	interception_radius = player_res.attributes.goalkeeper.positioning + 10
+	interception_radius = player_res.attributes.goalkeeper.positioning + 20
 
 
 func update() -> void:
@@ -54,12 +54,18 @@ func update() -> void:
 				pos.y = goal_bounds_y(ball.pos.y)
 			else:
 				pos.y = 300
+			
+			if is_touching_ball():
+				state = State.PASS
+				ball.stop()
+				print("golakeeper kickin")
 		State.SAVE_SHOT:
 			speed = player_res.attributes.goalkeeper.reflexes
 			pos.y = goal_bounds_y(ball.pos.y)
 			if is_touching_ball():
 				state = State.PASS
 				ball.stop()
+				print("golakeeper save")
 		State.PASS:
 			short_pass.emit()
 			state = State.FOLLOW_BALL

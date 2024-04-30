@@ -13,6 +13,7 @@ var goal_right:Vector2
 
 var polygon:PackedVector2Array
 
+
 func set_up() -> void:
 	#size = sprite.texture.get_size()
 	size = Vector2(1200, 600)
@@ -39,7 +40,8 @@ func get_goal_posts(left:bool) -> Array[Vector2]:
 		posts.append(goal_right + Vector2(0, goal_size / 2))
 		posts.append(goal_right + Vector2(0, -goal_size / 2))
 	return posts
-	
+
+
 func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
 	# start from top/left
 	var corner_pos:Vector2 = Vector2(0, 0)
@@ -51,11 +53,13 @@ func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
 		corner_pos.y = size.y # bottom
 
 	return corner_pos
-	
+
+
 func is_goal(ball_pos:Vector2) -> bool:
 	if ball_pos.y < goal_left.y + (goal_size / 2) and ball_pos.y > goal_left.y - (goal_size / 2):
 		return true
 	return false
+
 
 func get_goalkeeper_pos(plays_left:bool) -> Vector2:
 	var pos:Vector2

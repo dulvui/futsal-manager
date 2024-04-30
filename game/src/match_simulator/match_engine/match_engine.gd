@@ -19,8 +19,8 @@ var possession_counter:float
 func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	field = SimField.new()
 	ball = SimBall.new()
-	ball.corner.connect(_on_sim_ball_corner)
-	ball.kick_in.connect(_on_sim_ball_kick_in)
+	ball.goal_line_out.connect(_on_sim_ball_goal_line_out)
+	ball.touch_line_out.connect(_on_sim_ball_touch_line_out)
 	ball.goal.connect(_on_sim_ball_goal)
 	
 	field.set_up()
@@ -99,7 +99,7 @@ func half_time() -> void:
 	home_plays_left = not home_plays_left
 	home_team.set_kick_off_formation(true)
 	away_team.set_kick_off_formation(true)
-	ball.set_pos(field.center)
+	ball.set_pos(field.center.x, field.center.y)
 
 
 func calc_distances() -> void:
@@ -166,24 +166,38 @@ func left_is_active_goal() -> bool:
 	return true
 
 
-func _on_sim_ball_corner() -> void:
+func _on_sim_ball_goal_line_out() -> void:
 	# TODO create signal for corner left/right
 	# for goalkeeper kick ins
-	var nearest_player:SimPlayer
-	if home_team.has_ball:
-		away_possess()
-		nearest_player = away_team.nearest_player_to_ball()
-		away_team.stats.corners += 1
+	
+	# check if corner kick
+	if (home_team.has_ball and home_plays_left and ball.pos.x < 600) \
+		or (home_team.has_ball and not home_plays_left and ball.pos.x > 600):
+		set_corner(false)
+	elif (away_team.has_ball and home_plays_left and ball.pos.x > 600) \
+		or (home_team.has_ball and not home_plays_left and ball.pos.x < 600):
+		set_corner(true)
+	# goalkeeper ball
+	elif ball.pos.x < 600:
+		ball.set_pos(30, 300)
 	else:
+		ball.set_pos(1270, 300)
+
+func set_corner(home:bool) -> void:
+	var nearest_player:SimPlayer
+	if home:
 		home_possess()
 		nearest_player = home_team.nearest_player_to_ball()
 		home_team.stats.corners += 1
-
+	else:
+		away_possess()
+		nearest_player = away_team.nearest_player_to_ball()
+		away_team.stats.corners += 1
 	nearest_player.set_pos(ball.pos)
 	nearest_player.state = SimPlayer.State.FORCE_PASS
 
 
-func _on_sim_ball_kick_in() -> void:
+func _on_sim_ball_touch_line_out() -> void:
 	var nearest_player:SimPlayer
 	if home_team.has_ball:
 		away_possess()
@@ -208,7 +222,7 @@ func _on_sim_ball_goal() -> void:
 	# reset formation
 	home_team.set_kick_off_formation()
 	away_team.set_kick_off_formation()
-	ball.set_pos(field.center)
+	ball.set_pos(field.center.x, field.center.y)
 
 
 func _on_home_team_possess() -> void:

@@ -77,6 +77,7 @@ func update() -> void:
 			if is_touching_ball():
 				interception.emit()
 				state = State.BALL
+				ball.stop()
 		# ATTACK
 		State.RECEIVE:
 			if is_touching_ball():
@@ -114,7 +115,7 @@ func is_touching_ball() -> bool:
 	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
 		# best case 59 + 20 * 2 = 99
 		# worst case 59 + 1 * 2 = 62
-		return Config.match_rng.randi_range(0, 100) < 59 + player_res.attributes.technical.interception * 2
+		return Config.match_rng.randi_range(1, 100) < 59 + player_res.attributes.technical.interception * 2
 	return false
 
 
@@ -143,7 +144,7 @@ func _should_shoot() -> bool:
 	if ball.empty_net:
 		return true
 	if  ball.players_in_shoot_trajectory < 2:
-		return Config.match_rng.randi_range(1, 100) > 95
+		return Config.match_rng.randi_range(1, 100) > 99
 	return false
 	
 	

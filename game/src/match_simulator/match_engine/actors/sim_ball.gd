@@ -4,8 +4,8 @@
 
 class_name SimBall
 
-signal corner
-signal kick_in
+signal goal_line_out
+signal touch_line_out
 signal goal
 
 const deceleration = 0.01
@@ -22,8 +22,9 @@ func set_up(field:SimField) -> void:
 	pos = field.center
 	trajectory_polygon = PackedVector2Array()
 	
-func set_pos(p_pos:Vector2) -> void:
-	pos = p_pos
+func set_pos(x:float, y:float) -> void:
+	pos.x = x
+	pos.y = y
 	stop()
 
 func update() -> void:
@@ -55,12 +56,12 @@ func check_field_bounds(field:SimField) -> void:
 	
 	# kick in
 	if pos.y < 0:
-		set_pos(Vector2(pos.x, 0))
-		kick_in.emit()
+		set_pos(pos.x, 0)
+		touch_line_out.emit()
 		return
 	if pos.y > field.size.y:
-		set_pos(Vector2(pos.x, field.size.y))
-		kick_in.emit()
+		set_pos(pos.x, field.size.y)
+		touch_line_out.emit()
 		return
 	
 	if pos.x < 0 or pos.x > field.size.x:
@@ -71,7 +72,7 @@ func check_field_bounds(field:SimField) -> void:
 		# corner
 		else:
 			var corner_pos:Vector2 = field.get_corner_pos(pos)
-			set_pos(corner_pos)
-			corner.emit()
+			set_pos(corner_pos.x, corner_pos.y)
+			goal_line_out.emit()
 			return
 	
