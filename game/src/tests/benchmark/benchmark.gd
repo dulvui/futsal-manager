@@ -2,15 +2,14 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-@tool
-extends EditorScript
+extends Node
 class_name Benchmark
 
 var match_engine:MatchEngine
 var generator:Generator
 
 
-func _run() -> void:
+func _ready() -> void:
 	generator = Generator.new()
 	match_engine = MatchEngine.new()
 	var leagues:Leagues = generator.generate()
