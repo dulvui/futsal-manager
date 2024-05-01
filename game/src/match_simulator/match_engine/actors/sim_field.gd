@@ -11,8 +11,16 @@ const goal_size:int = 150
 var goal_left:Vector2
 var goal_right:Vector2
 
+# y coordinates of goal posts
 var upper_goal_post:int
 var lower_goal_post:int
+
+# x,y coordinates of all goal posts
+var upper_goal_post_left:Vector2
+var upper_goal_post_right:Vector2
+
+var lower_goal_post_left:Vector2
+var lower_goal_post_right:Vector2
 
 
 func set_up() -> void:
@@ -25,17 +33,12 @@ func set_up() -> void:
 	goal_right = Vector2(size.x, size.y / 2)
 	lower_goal_post = (size.y / 2) - (goal_size / 2)
 	upper_goal_post = (size.y / 2) + (goal_size / 2)
-
-
-func get_goal_posts(left:bool) -> Array[Vector2]:
-	var posts:Array[Vector2] = []
-	if left:
-		posts.append(goal_left + Vector2(0, goal_size / 2))
-		posts.append(goal_left + Vector2(0, -goal_size / 2))
-	else:
-		posts.append(goal_right + Vector2(0, goal_size / 2))
-		posts.append(goal_right + Vector2(0, -goal_size / 2))
-	return posts
+	
+	lower_goal_post_left = Vector2(0, lower_goal_post)
+	upper_goal_post_left = Vector2(0, upper_goal_post)
+	
+	upper_goal_post_right = Vector2(size.x, upper_goal_post)
+	upper_goal_post_right = Vector2(size.x, upper_goal_post)
 
 
 func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:

@@ -18,14 +18,15 @@ var pos:Vector2
 var speed:float
 var direction:Vector2
 
-var trajectory_polygon:PackedVector2Array
 var players_in_shoot_trajectory:int
 var empty_net:bool
 
+var field:SimField
 
-func set_up(field:SimField) -> void:
+func set_up(p_field:SimField) -> void:
+	field = p_field
+	
 	pos = field.center
-	trajectory_polygon = PackedVector2Array()
 	state = State.STOP
 
 
@@ -36,6 +37,8 @@ func set_pos(x:float, y:float) -> void:
 
 
 func update() -> void:
+	check_field_bounds()
+	
 	if speed > 0:
 		move()
 	else:
@@ -68,7 +71,7 @@ func shoot(p_destination:Vector2, force:float) -> void:
 	state = State.SHOOT
 
 
-func check_field_bounds(field:SimField) -> void:
+func check_field_bounds() -> void:
 	# kick in
 	if pos.y < 0:
 		set_pos(pos.x, 0)

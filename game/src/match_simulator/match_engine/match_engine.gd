@@ -13,6 +13,12 @@ var home_plays_left:bool
 
 var ticks:int
 
+# for trajectory calculations 
+var lower_post:Vector2
+var upper_post:Vector2
+var players:Array[SimPlayer]
+var goalkeeper:SimGoalkeeper
+
 # stats
 var possession_counter:float
 
@@ -45,7 +51,6 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 
 
 func update() -> void:
-	ball.check_field_bounds(field)
 	ball.update()
 	
 	# defend/attack
@@ -127,15 +132,6 @@ func calc_distance_to(from:Vector2, to:Vector2) -> float:
 
 func calc_free_shoot_trajectory() -> void:
 	ball.players_in_shoot_trajectory = 0
-	ball.empty_net = false
-	ball.trajectory_polygon.clear()
-	
-	ball.trajectory_polygon.clear()
-	ball.trajectory_polygon.append_array(field.get_goal_posts(left_is_active_goal()))
-	ball.trajectory_polygon.append(ball.pos)
-	
-	var goalkeeper:SimGoalkeeper
-	var players:Array[SimPlayer]
 	
 	if home_team.has_ball:
 		goalkeeper = away_team.goalkeeper
@@ -144,10 +140,17 @@ func calc_free_shoot_trajectory() -> void:
 		goalkeeper = home_team.goalkeeper
 		players = home_team.players
 	
-	ball.empty_net = not Geometry2D.is_point_in_polygon(goalkeeper.pos, ball.trajectory_polygon)
-		
+	if left_is_active_goal():
+		lower_post = field.lower_goal_post_left
+		upper_post = field.upper_goal_post_left
+	else:
+		lower_post = field.lower_goal_post_right
+		upper_post = field.upper_goal_post_right
+	
+	ball.empty_net = not Geometry2D.point_is_inside_triangle(goalkeeper.pos, ball.pos, lower_post, upper_post)
+	
 	for player:SimPlayer in players:
-		if Geometry2D.is_point_in_polygon(player.pos, ball.trajectory_polygon):
+		if Geometry2D.point_is_inside_triangle(player.pos, ball.pos, lower_post, upper_post):
 			ball.players_in_shoot_trajectory += 1
 
 
@@ -157,8 +160,8 @@ func left_is_active_goal() -> bool:
 	elif home_plays_left and away_team.has_ball:
 		return true
 	elif not home_plays_left and home_team.has_ball:
-		return false
-	return true
+		return true
+	return false
 
 
 func _on_sim_ball_goal_line_out() -> void:
@@ -182,6 +185,7 @@ func _on_sim_ball_goal_line_out() -> void:
 		ball.set_pos(1170, 300)
 		set_goalkeeper_ball(not home_plays_left)
 
+
 func set_corner(home:bool) -> void:
 	var nearest_player:SimPlayer
 	if home:
@@ -197,7 +201,6 @@ func set_corner(home:bool) -> void:
 
 
 func set_goalkeeper_ball(home:bool) -> void:
-	var goalkeeper:SimGoalkeeper
 	if home:
 		home_possess()
 		goalkeeper = home_team.goalkeeper

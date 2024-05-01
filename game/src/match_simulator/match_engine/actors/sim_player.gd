@@ -44,6 +44,7 @@ var distance_to_own_goal:float
 var distance_to_ball:float
 var distance_to_enemy:float
 
+
 func set_up(
 	p_player_res:Player,
 	p_ball:SimBall,
