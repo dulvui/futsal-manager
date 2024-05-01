@@ -18,5 +18,5 @@ func set_up(p_sim_goal_player:SimGoalkeeper, p_visual_ball:VisualBall, team_colo
 	sim_goal_player = p_sim_goal_player
 	visual_ball = p_visual_ball
 	global_position = sim_goal_player.pos
-	body.modulate = team_color
+	body.modulate = team_color.darkened(0.5)
 	

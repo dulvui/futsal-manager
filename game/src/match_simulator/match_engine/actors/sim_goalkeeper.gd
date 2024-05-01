@@ -37,8 +37,7 @@ func set_up(
 	start_pos = field.get_goalkeeper_pos(left_half)
 	pos = start_pos
 	
-	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 20
-
+	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 60
 
 
 func defend() -> void:
