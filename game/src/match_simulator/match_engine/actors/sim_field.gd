@@ -51,26 +51,26 @@ func set_up() -> void:
 	
 	
 	# penalty area
-	var penalty_area_size:int = size.x / 8
+	var penalty_area_size:int = size.x / 7
 	
 	penalty_area_left_x = penalty_area_size
 	penalty_area_right_x = size.x - penalty_area_size
 	
-	penalty_area_y_lower = lower_goal_post_left.y - penalty_area_size / 3
-	penalty_area_y_upper = upper_goal_post_left.y + penalty_area_size / 3
+	penalty_area_y_lower = lower_goal_post_left.y - penalty_area_size / 2
+	penalty_area_y_upper = upper_goal_post_left.y + penalty_area_size / 2
 	
 	penalty_area_left = PackedVector2Array()
 	penalty_area_right = PackedVector2Array()
 	
 	penalty_area_left.append(Vector2(0, penalty_area_y_lower))
-	penalty_area_left.append(Vector2(0, penalty_area_y_upper))
 	penalty_area_left.append(Vector2(penalty_area_size, penalty_area_y_lower))
 	penalty_area_left.append(Vector2(penalty_area_size, penalty_area_y_upper))
+	penalty_area_left.append(Vector2(0, penalty_area_y_upper))
 	
 	penalty_area_right.append(Vector2(size.x, penalty_area_y_lower))
-	penalty_area_right.append(Vector2(size.x, penalty_area_y_upper))
 	penalty_area_right.append(Vector2(size.x - penalty_area_size, penalty_area_y_lower))
 	penalty_area_right.append(Vector2(size.x - penalty_area_size, penalty_area_y_upper))
+	penalty_area_right.append(Vector2(size.x, penalty_area_y_upper))
 
 
 func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:

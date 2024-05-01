@@ -10,7 +10,7 @@ signal half_time
 signal match_end
 signal update
 
-@onready var visual_match:Node2D = $SubViewportContainer/SubViewport/VisualMatch
+@onready var visual_match:VisualMatch = $SubViewportContainer/SubViewport/VisualMatch
 
 var ticks:int = 0
 var time:int = 0
