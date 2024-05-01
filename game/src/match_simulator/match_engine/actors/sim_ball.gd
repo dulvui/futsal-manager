@@ -68,14 +68,7 @@ func shoot(p_destination:Vector2, force:float) -> void:
 	state = State.SHOOT
 
 
-func is_in_field(field:SimField) -> bool:
-	return Geometry2D.is_point_in_polygon(pos, field.polygon)
-
-
 func check_field_bounds(field:SimField) -> void:
-	if is_in_field(field):
-		return
-	
 	# kick in
 	if pos.y < 0:
 		set_pos(pos.x, 0)

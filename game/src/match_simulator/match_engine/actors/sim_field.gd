@@ -11,8 +11,6 @@ const goal_size:int = 150
 var goal_left:Vector2
 var goal_right:Vector2
 
-var polygon:PackedVector2Array
-
 var upper_goal_post:int
 var lower_goal_post:int
 
@@ -27,13 +25,6 @@ func set_up() -> void:
 	goal_right = Vector2(size.x, size.y / 2)
 	lower_goal_post = (size.y / 2) - (goal_size / 2)
 	upper_goal_post = (size.y / 2) + (goal_size / 2)
-	
-	polygon = PackedVector2Array()
-	polygon.append(Vector2(0,0))
-	polygon.append(Vector2(0,size.y))
-	polygon.append(Vector2(size.x,0))
-	polygon.append(size)
-	
 
 
 func get_goal_posts(left:bool) -> Array[Vector2]:

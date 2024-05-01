@@ -60,6 +60,8 @@ func attack() -> void:
 	if is_touching_ball():
 		ball.stop()
 		short_pass.emit()
+		
+	follow_ball()
 
 
 func follow_ball() -> void:
