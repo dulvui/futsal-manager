@@ -24,19 +24,23 @@ var interception_radius:int #TODO reduce radius with low stamina
 
 func set_up(
 	p_player_res:Player,
-	p_start_pos:Vector2,
 	p_ball:SimBall,
+	p_field:SimField,
+	p_left_half:bool,
 ) -> void:
 	player_res = p_player_res
-	start_pos = p_start_pos
 	ball = p_ball
+	field = p_field
+	
+	left_half = p_left_half
+	
+	start_pos = field.get_goalkeeper_pos(left_half)
 	pos = start_pos
 	
 	# worst case 10
 	# best case  20
 	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 10
 
-	left_half = pos.x < 600
 
 
 func defend() -> void:
@@ -66,10 +70,38 @@ func attack() -> void:
 
 func follow_ball() -> void:
 	# only follow if in own half
-	if (left_half and ball.pos.x < 600) or (not left_half and ball.pos.x > 600): 
-		pos.y = goal_bounds_y(ball.pos.y)
+	if left_half:
+		if ball.pos.x < 600:
+			pos = ball.pos
+			set_penalty_area_bounds()
+		else:
+			pos.y = 300
+			pos.x = 30
 	else:
-		pos.y = 300
+		if ball.pos.x > 600:
+			pos = ball.pos
+			set_penalty_area_bounds()
+		else:
+			pos.y = 300
+			pos.x = 1170
+
+
+func set_penalty_area_bounds() -> void:
+	if pos.y > field.penalty_area_y_upper + 10:
+		pos.y = field.penalty_area_y_upper + 10
+	elif pos.y < field.penalty_area_y_lower - 10:
+		pos.y = field.penalty_area_y_lower - 10
+	
+	if left_half:
+		if pos.x > field.penalty_area_left_x + 10:
+			pos.x = field.penalty_area_left_x + 10
+		elif pos.x < -10:
+			pos.x = -10
+	else:
+		if pos.x < field.penalty_area_right_x - 10:
+				pos.x = field.penalty_area_right_x - 10
+		elif pos.x > field.size.x + 10:
+			pos.x = field.size.x + 10
 
 func move() -> void:
 	if speed > 0:
@@ -85,7 +117,7 @@ func stop() -> void:
 
 
 func is_touching_ball() -> bool:
-	return Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius)
+	return ball.is_touching(pos, interception_radius)
 
 
 func block_shot() -> bool:
@@ -95,11 +127,6 @@ func block_shot() -> bool:
 		return Config.match_rng.randi_range(0, 100) < 59 + player_res.attributes.goalkeeper.handling * 2
 	return false
 
-
-
-func goal_bounds_y(p_y:float) -> float:
-	p_y = maxi(mini(p_y, 350), 250)
-	return p_y
 
 func set_pos(p_pos:Vector2 = pos) -> void:
 	pos = p_pos

@@ -100,11 +100,11 @@ func move() -> void:
 
 
 func is_touching_ball() -> bool:
-	if Geometry2D.is_point_in_circle(ball.pos, pos, interception_radius):
-		# best case 59 + 20 * 2 = 99
-		# worst case 59 + 1 * 2 = 62
-		return Config.match_rng.randi_range(1, 100) < 59 + player_res.attributes.technical.interception * 2
-	return false
+	return ball.is_touching(pos, interception_radius)
+
+
+func is_intercepting_ball() -> bool:
+	return Config.match_rng.randi_range(1, 100) < 59 + player_res.attributes.technical.interception * 2
 
 
 func set_pos(p_pos:Vector2 = pos) -> void:

@@ -15,6 +15,9 @@ const deceleration = 0.01
 var state:State
 
 var pos:Vector2
+# to save last position and be bale to get segment between ticks, for itnerceptions
+var last_pos:Vector2
+
 var speed:float
 var direction:Vector2
 
@@ -27,6 +30,7 @@ func set_up(p_field:SimField) -> void:
 	field = p_field
 	
 	pos = field.center
+	last_pos = pos
 	state = State.STOP
 
 
@@ -46,6 +50,7 @@ func update() -> void:
 
 
 func move() -> void:
+	last_pos = pos
 	pos += direction * speed
 	speed -= deceleration
 
@@ -57,6 +62,7 @@ func is_moving() -> bool:
 func stop() -> void:
 	speed = 0
 	state = State.STOP
+	last_pos = pos
 
 
 func short_pass(p_destination:Vector2, force:float) -> void:
@@ -93,4 +99,9 @@ func check_field_bounds() -> void:
 			set_pos(corner_pos.x, corner_pos.y)
 			goal_line_out.emit()
 			return
+
+func is_touching(p_pos:Vector2, p_radius:int) -> bool:
+	if pos == last_pos:
+		return Geometry2D.is_point_in_circle(pos, p_pos, p_radius)
+	return Geometry2D.segment_intersects_circle(last_pos, pos, p_pos, p_radius) > 0
 	

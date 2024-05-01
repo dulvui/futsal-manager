@@ -22,6 +22,14 @@ var upper_goal_post_right:Vector2
 var lower_goal_post_left:Vector2
 var lower_goal_post_right:Vector2
 
+var penalty_area_left_x:int
+var penalty_area_right_x:int
+var penalty_area_y_upper:int
+var penalty_area_y_lower:int
+
+var penalty_area_left:PackedVector2Array
+var penalty_area_right:PackedVector2Array
+
 
 func set_up() -> void:
 	#size = sprite.texture.get_size()
@@ -29,16 +37,40 @@ func set_up() -> void:
 	
 	center = Vector2(size.x / 2, size.y / 2)
 	
+	# goal 
 	goal_left = Vector2(0, size.y / 2)
 	goal_right = Vector2(size.x, size.y / 2)
+	
 	lower_goal_post = (size.y / 2) - (goal_size / 2)
 	upper_goal_post = (size.y / 2) + (goal_size / 2)
 	
 	lower_goal_post_left = Vector2(0, lower_goal_post)
 	upper_goal_post_left = Vector2(0, upper_goal_post)
+	upper_goal_post_right = Vector2(size.x, upper_goal_post)
+	upper_goal_post_right = Vector2(size.x, upper_goal_post)
 	
-	upper_goal_post_right = Vector2(size.x, upper_goal_post)
-	upper_goal_post_right = Vector2(size.x, upper_goal_post)
+	
+	# penalty area
+	var penalty_area_size:int = size.x / 8
+	
+	penalty_area_left_x = penalty_area_size
+	penalty_area_right_x = size.x - penalty_area_size
+	
+	penalty_area_y_lower = lower_goal_post_left.y - penalty_area_size / 3
+	penalty_area_y_upper = upper_goal_post_left.y + penalty_area_size / 3
+	
+	penalty_area_left = PackedVector2Array()
+	penalty_area_right = PackedVector2Array()
+	
+	penalty_area_left.append(Vector2(0, penalty_area_y_lower))
+	penalty_area_left.append(Vector2(0, penalty_area_y_upper))
+	penalty_area_left.append(Vector2(penalty_area_size, penalty_area_y_lower))
+	penalty_area_left.append(Vector2(penalty_area_size, penalty_area_y_upper))
+	
+	penalty_area_right.append(Vector2(size.x, penalty_area_y_lower))
+	penalty_area_right.append(Vector2(size.x, penalty_area_y_upper))
+	penalty_area_right.append(Vector2(size.x - penalty_area_size, penalty_area_y_lower))
+	penalty_area_right.append(Vector2(size.x - penalty_area_size, penalty_area_y_upper))
 
 
 func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
