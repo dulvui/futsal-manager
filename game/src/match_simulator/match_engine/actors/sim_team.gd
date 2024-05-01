@@ -42,8 +42,6 @@ func set_up(
 	goalkeeper.short_pass.connect(pass_to_random_player)
 	goalkeeper.interception.connect(interception)
 	
-	
-	
 	sort_x_left = func(a:SimPlayer, b:SimPlayer) -> bool: return a.pos.x < b.pos.x
 	sort_x_right = func(a:SimPlayer, b:SimPlayer) -> bool: return a.pos.x > b.pos.x
 	
@@ -73,7 +71,6 @@ func defend(other_players:Array[SimPlayer]) -> void:
 	goalkeeper.defend()
 	for player:SimPlayer in players:
 		player.defend()
-	
 	
 	# assign positions
 	# first sort players on x-axis
