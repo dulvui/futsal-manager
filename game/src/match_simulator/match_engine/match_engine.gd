@@ -19,6 +19,8 @@ var upper_post:Vector2
 var players:Array[SimPlayer]
 var goalkeeper:SimGoalkeeper
 
+var nearest_player:SimPlayer
+
 # stats
 var possession_counter:float
 
@@ -187,7 +189,6 @@ func _on_sim_ball_goal_line_out() -> void:
 
 
 func set_corner(home:bool) -> void:
-	var nearest_player:SimPlayer
 	if home:
 		home_possess()
 		nearest_player = home_team.nearest_player_to_ball()
@@ -211,7 +212,6 @@ func set_goalkeeper_ball(home:bool) -> void:
 
 
 func _on_sim_ball_touch_line_out() -> void:
-	var nearest_player:SimPlayer
 	if home_team.has_ball:
 		away_possess()
 		away_team.stats.kick_ins += 1
