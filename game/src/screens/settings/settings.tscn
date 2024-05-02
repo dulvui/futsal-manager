@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://4aoa7li1cfbc"]
+
+[ext_resource type="PackedScene" uid="uid://5oxrekj30gb1" path="res://src/screens/language_pick/language_picker.tscn" id="1_165am"]
+[ext_resource type="Script" path="res://src/screens/settings/settings.gd" id="1_m7cla"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m7cla")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -564.5
+offset_top = -247.5
+offset_right = 564.5
+offset_bottom = 247.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="LanguagePicker" parent="VBoxContainer" instance=ExtResource("1_165am")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Theme" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Theme"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "THEME"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Theme"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 2
+selected = 0
+popup/item_0/text = "DARK"
+popup/item_0/id = 0
+popup/item_1/text = "LIGHT"
+popup/item_1/id = 1
+
+[node name="Resolution" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RESOLUTION"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 2
+selected = 0
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1080x720"
+popup/item_1/id = 1
