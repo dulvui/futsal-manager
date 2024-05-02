@@ -41,6 +41,7 @@ func _ready() -> void:
 	rng.state = generation_state
 	set_seed()
 
+
 func _load_config() -> void:
 	config = ConfigFile.new()
 	var err:int = config.load("user://settings.cfg")
@@ -60,6 +61,7 @@ func _load_config() -> void:
 	generation_state = config.get_value("generation", "state", 0)
 	generation_gender = config.get_value("generation", "gender", 0)
 
+
 func save_config() -> void:
 	config.set_value("dates","current_season",current_season)
 	config.set_value("match","speed_factor",speed_factor)
@@ -74,6 +76,7 @@ func save_config() -> void:
 	config.save("user://settings.cfg")
 	print("all data saved")
 
+
 func _load_resources() -> void:
 	if ResourceLoader.exists("user://leagues.tres"):
 		leagues = ResourceLoader.load("user://leagues.tres")
@@ -86,13 +89,14 @@ func _load_resources() -> void:
 	if ResourceLoader.exists("user://transfers.tres"):
 		transfers = ResourceLoader.load("user://transfers.tres")
 
+
 func save_resources() -> void:
 	ResourceSaver.save(leagues, "user://leagues.tres")
 	ResourceSaver.save(inbox, "user://inbox.tres")
 	ResourceSaver.save(team, "user://team.tres")
 	ResourceSaver.save(manager, "user://manager.tres")
 	ResourceSaver.save(transfers, "user://transfers.tres")
-	
+
 
 func generate_leagues(p_generation_seed:String, p_generation_gender:Constants.Gender) -> void:
 	generation_seed = p_generation_seed
@@ -101,10 +105,12 @@ func generate_leagues(p_generation_seed:String, p_generation_gender:Constants.Ge
 	var generator:Generator = Generator.new()
 	leagues = generator.generate()
 
+
 func save_all_data() -> void:
 	save_resources()
 	save_config()
-	
+
+
 func reset() -> void:
 	# CONFIG
 	id_by_type = {}
@@ -118,9 +124,11 @@ func reset() -> void:
 	transfers = Transfers.new()
 	leagues = Leagues.new()
 
+
 func set_seed(p_generation_seed:String=generation_seed) -> void:
 	generation_seed = p_generation_seed
 	rng.seed = hash(generation_seed) + generation_gender
+
 
 func set_lang(lang:String) -> void:
 	TranslationServer.set_locale(lang)
@@ -133,11 +141,13 @@ func save_manager(p_manager:Manager) -> void:
 	manager = p_manager
 	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
-	
+
+
 func select_team(p_league:League, p_team:Team) -> void:
 	leagues.active_id = p_league.id
 	team = p_team
-	
+
+
 func next_season() -> void:
 	current_season += 1
 		
@@ -158,6 +168,7 @@ func next_season() -> void:
 	Config.save_all_data()
 	
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+
 
 # shortcut to active leagues calendar 
 func calendar() -> Calendar:

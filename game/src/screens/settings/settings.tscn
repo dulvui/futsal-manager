@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://4aoa7li1cfbc"]
 
-[ext_resource type="PackedScene" uid="uid://5oxrekj30gb1" path="res://src/screens/language_pick/language_picker.tscn" id="1_165am"]
+[ext_resource type="PackedScene" uid="uid://5oxrekj30gb1" path="res://src/screens/start_language/start_language.tscn" id="1_165am"]
 [ext_resource type="Script" path="res://src/screens/settings/settings.gd" id="1_m7cla"]
 
 [node name="Settings" type="Control"]

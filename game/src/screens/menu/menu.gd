@@ -14,7 +14,7 @@ func _on_StartGame_pressed() -> void:
 
 
 func _on_Settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/language_pick/language_picker.tscn")
+	get_tree().change_scene_to_file("res://src/screens/settings/settings.tscn")
 
 
 func _on_Continue_pressed() -> void:
