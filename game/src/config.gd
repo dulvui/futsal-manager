@@ -19,9 +19,11 @@ var current_season:int
 # global game states
 var speed_factor:int = 1
 var dashboard_active_content:int = 0
+
 # from settings screen
 var language:String
 var currency:int
+var theme:String
 
 # RESOURCES
 var leagues:Leagues
@@ -55,6 +57,7 @@ func _load_config() -> void:
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
 	# settings
 	language = config.get_value("settings","language","ND")
+	theme = config.get_value("settings","theme",ThemeUtil.default)
 	start_date = config.get_value("settings","start_year",Time.get_date_dict_from_system())
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	generation_seed = config.get_value("generation", "seed", Constants.DEFAULT_SEED)
@@ -67,6 +70,7 @@ func save_config() -> void:
 	config.set_value("match","speed_factor",speed_factor)
 	config.set_value("settings","currency",currency)
 	config.set_value("settings","start_date",start_date)
+	config.set_value("settings","theme", theme)
 	config.set_value("dashboard","active_content",dashboard_active_content)
 	config.set_value("generation","seed",generation_seed)
 	config.set_value("generation","state", generation_state)

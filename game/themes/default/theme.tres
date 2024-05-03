@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://pt1hrfiuwfpg"]
 
-[ext_resource type="StyleBox" uid="uid://chg0wkddlahe7" path="res://theme/button-pressed.tres" id="2"]
-[ext_resource type="StyleBox" path="res://theme/button-normal.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://chg0wkddlahe7" path="res://themes/default/button-pressed.tres" id="1_t6bqk"]
+[ext_resource type="StyleBox" path="res://themes/default/button-normal.tres" id="2_s5ox7"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(0.0588235, 0.215686, 0.290196, 1)
@@ -17,11 +17,11 @@ Button/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
 Button/colors/font_color_pressed = Color(1, 1, 1, 1)
 Button/constants/hseparation = 2
 Button/font_sizes/font_size = 24
-Button/styles/disabled = ExtResource("2")
-Button/styles/focus = ExtResource("2")
-Button/styles/hover = ExtResource("2")
-Button/styles/normal = ExtResource("3")
-Button/styles/pressed = ExtResource("2")
+Button/styles/disabled = ExtResource("1_t6bqk")
+Button/styles/focus = ExtResource("1_t6bqk")
+Button/styles/hover = ExtResource("1_t6bqk")
+Button/styles/normal = ExtResource("2_s5ox7")
+Button/styles/pressed = ExtResource("1_t6bqk")
 MarginContainer/constants/margin_bottom = 40
 MarginContainer/constants/margin_left = 40
 MarginContainer/constants/margin_right = 40

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/ui_components/team_profile/team_profile.gd" id="1_2kt4b"]
 [ext_resource type="PackedScene" uid="uid://dq4dr3oe20mb8" path="res://src/ui_components/player_list/player_list.tscn" id="2_4288b"]
-[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme/bold_label_settings.tres" id="2_e0wm0"]
+[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://themes/default/bold_label_settings.tres" id="2_e0wm0"]
 
 [node name="TeamProfile" type="Control"]
 layout_mode = 3

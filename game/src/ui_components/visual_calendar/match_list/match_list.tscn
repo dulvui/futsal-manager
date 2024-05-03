@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dv6e6h4lw1bqy"]
 
 [ext_resource type="Script" path="res://src/ui_components/visual_calendar/match_list/match_list.gd" id="1_xo3bj"]
-[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme/bold_label_settings.tres" id="2_cd5vk"]
+[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://themes/default/bold_label_settings.tres" id="2_cd5vk"]
 
 [node name="MatchList" type="Control"]
 layout_mode = 3

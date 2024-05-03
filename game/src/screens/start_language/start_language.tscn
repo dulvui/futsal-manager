@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://5oxrekj30gb1"]
+
+[ext_resource type="PackedScene" uid="uid://djrvl8pvkr7aa" path="res://src/screens/settings/language_picker/language_picker.tscn" id="2_pkp0m"]
+[ext_resource type="Script" path="res://src/screens/start_language/start_language.gd" id="6"]
+
+[node name="StartLanguage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LanguagePicker" parent="." instance=ExtResource("2_pkp0m")]
+layout_mode = 1
+
+[connection signal="language_change" from="LanguagePicker" to="." method="_on_language_picker_language_change"]
