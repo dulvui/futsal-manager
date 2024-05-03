@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://4aoa7li1cfbc"]
 
-[ext_resource type="PackedScene" uid="uid://5oxrekj30gb1" path="res://src/screens/start_language/start_language.tscn" id="1_165am"]
 [ext_resource type="Script" path="res://src/screens/settings/settings.gd" id="1_m7cla"]
+[ext_resource type="PackedScene" uid="uid://djrvl8pvkr7aa" path="res://src/screens/settings/language_picker/language_picker.tscn" id="2_c3le7"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -35,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="LanguagePicker" parent="VBoxContainer" instance=ExtResource("1_165am")]
+[node name="LanguagePicker" parent="VBoxContainer" instance=ExtResource("2_c3le7")]
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -69,4 +69,12 @@ popup/item_0/id = 0
 popup/item_1/text = "1080x720"
 popup/item_1/id = 1
 
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Menu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "MENU"
+
 [connection signal="item_selected" from="VBoxContainer/Theme/ThemeOptionButton" to="." method="_on_theme_option_button_item_selected"]
+[connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]

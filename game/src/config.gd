@@ -56,7 +56,7 @@ func _load_config() -> void:
 	speed_factor = config.get_value("match","speed_factor",1)
 	dashboard_active_content = config.get_value("dashboard","active_content",0)
 	# settings
-	language = config.get_value("settings","language","ND")
+	language = config.get_value("settings","language","")
 	theme_index = config.get_value("settings","theme_index",0)
 	start_date = config.get_value("settings","start_year",Time.get_date_dict_from_system())
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)

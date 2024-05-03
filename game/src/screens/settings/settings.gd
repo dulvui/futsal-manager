@@ -13,8 +13,14 @@ func _ready() -> void:
 	
 	for theme_name:String in ThemeUtil.get_theme_names():
 		theme_options.add_item(theme_name)
+	
+	theme_options.selected = Config.theme_index
 
 
 func _on_theme_option_button_item_selected(index: int) -> void:
 	theme = ThemeUtil.set_active_theme(index)
 	Config.save_config()
+
+
+func _on_menu_pressed() -> void:
+	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
