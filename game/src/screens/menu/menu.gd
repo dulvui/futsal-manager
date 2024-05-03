@@ -6,6 +6,8 @@ extends Control
 
 
 func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+	
 	if not Config.team:
 		$VBoxContainer/Continue.hide()
 

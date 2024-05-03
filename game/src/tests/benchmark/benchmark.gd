@@ -10,6 +10,8 @@ var generator:Generator
 
 
 func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+	
 	generator = Generator.new()
 	match_engine = MatchEngine.new()
 	var leagues:Leagues = generator.generate()
@@ -23,7 +25,6 @@ func _ready() -> void:
 			print("next day")
 			if league.calendar.is_match_day():
 				return
-		
 	
 	for matchz:Match in leagues.damatches:
 		var result_match:Match = match_engine.simulate(matchz)

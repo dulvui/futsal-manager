@@ -40,6 +40,8 @@ var match_ready:bool = false
 var next_season:bool = false
 
 func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+	
 	manager_label.text = Config.manager.get_full_name()
 	team_label.text = Config.team.name
 	date_label.text = Config.calendar().format_date()
@@ -70,25 +72,32 @@ func _process(_delta:float) -> void:
 		email_button.text = tr("EMAIL")
 	budget_label.text = str(team["budget"]) + "" + CurrencyUtil.get_sign()
 
+
 func _on_Menu_pressed() -> void:
 	Config.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
+
 func _on_SearchPlayer_pressed() -> void:
 	_show_active_view(ContentViews.ALL_PLAYERS)
+
 
 func _on_info_pressed() -> void:
 	_show_active_view(ContentViews.INFO)
 
+
 func _on_Formation_pressed() -> void:
 	_show_active_view(ContentViews.FORMATION)
+
 
 func _on_Email_pressed() -> void:
 	_show_active_view(ContentViews.EMAIL)
 
+
 func _on_Table_pressed() -> void:
 	_show_active_view(ContentViews.TABLE)
-	
+
+
 func _on_Calendar_pressed() -> void:
 	_show_active_view(ContentViews.CALENDAR)
 
@@ -97,7 +106,8 @@ func _on_all_player_list_select_player(player:Player) -> void:
 	print("offer for " + player.surname)
 	player_offer.set_player(player)
 	player_offer.show()
-	
+
+
 func _hide_all() -> void:
 	table.hide()
 	email.hide()
@@ -106,11 +116,12 @@ func _hide_all() -> void:
 	all_players_list.hide()
 	info.hide()
 
+
 func _show_active_view(active_view:int=-1) -> void:
 	_hide_all()
 	if active_view > -1:
 		Config.dashboard_active_content = active_view
-
+	
 	match Config.dashboard_active_content:
 		ContentViews.EMAIL:
 			email.show()
@@ -127,10 +138,12 @@ func _show_active_view(active_view:int=-1) -> void:
 		_:
 			email.show()
 
+
 func _on_Continue_pressed() -> void:
 	_next_day()
 	# remove comment to test player progress
 	# PlayerProgress.update_players()
+
 
 func _on_next_match_pressed() -> void:
 	next_match_button.disabled = true
@@ -145,7 +158,7 @@ func _on_next_match_pressed() -> void:
 		
 	next_match_button.disabled = false
 	continue_button.disabled = false
-	
+
 
 func _next_day() -> void:
 	if match_ready:

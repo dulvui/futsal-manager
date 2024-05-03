@@ -19,6 +19,8 @@ extends Control
 var generation_seed:String = Constants.DEFAULT_SEED
 
 func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+	
 	for nation:String in Constants.Nations:
 		nationality.add_item(nation)
 		

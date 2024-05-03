@@ -5,18 +5,16 @@
 extends Control
 class_name Settings
 
-enum Themes { DARK , LIGHT }
-
 @onready var theme_options:OptionButton = $VBoxContainer/Theme/ThemeOptionButton
 
 
 func _ready() -> void:
-	for themes:String in Themes.keys():
-		theme_options.add_item(themes)
+	theme = ThemeUtil.get_active_theme()
 	
+	for theme_name:String in ThemeUtil.get_theme_names():
+		theme_options.add_item(theme_name)
 
 
-func _on_theme_option_button_item_selected(_index: int) -> void:
-	#Config.themes = Themes.get(index)
-	pass
-	
+func _on_theme_option_button_item_selected(index: int) -> void:
+	theme = ThemeUtil.set_active_theme(index)
+	Config.save_config()

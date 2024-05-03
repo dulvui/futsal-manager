@@ -13,6 +13,8 @@ var active_league:League
 var active_team:Team
 
 func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+	
 	for nation:String in Constants.Nations:
 		var button:Button = Button.new()
 		button.text = nation
@@ -25,10 +27,12 @@ func _ready() -> void:
 	active_team = first_league.teams[0]
 	team_profile.set_up(active_team)
 
+
 func show_team(league:League, team:Team) -> void:
 	active_league = league
 	active_team = team
 	team_profile.set_team(active_team)
+
 
 func set_teams(nation:Constants.Nations = 0) -> void:
 	for child:Node in team_list.get_children():
@@ -46,11 +50,11 @@ func set_teams(nation:Constants.Nations = 0) -> void:
 			team_button.pressed.connect(show_team.bind(league, team))
 			team_list.add_child(team_button)
 
+
 func _on_nation_select(nation:String) -> void:
 	set_teams(Constants.Nations.get(nation))
 	var first_league:League = Config.leagues.get_leagues_by_nation(Constants.Nations.get(nation))[0]
 	show_team(first_league, first_league.teams[0])
-	
 
 
 func _on_select_team_pressed() -> void:

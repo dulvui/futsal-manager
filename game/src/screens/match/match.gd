@@ -36,6 +36,8 @@ var away_stats:MatchStatistics
 
 
 func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+	
 	matchz = Config.calendar().get_next_match()
 
 	for team:Team in Config.leagues.get_active().teams:
