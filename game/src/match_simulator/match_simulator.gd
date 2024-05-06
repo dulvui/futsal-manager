@@ -11,6 +11,7 @@ signal match_end
 signal update
 
 @onready var visual_match:VisualMatch = $SubViewportContainer/SubViewport/VisualMatch
+@onready var sub_viewport:SubViewport = $SubViewportContainer/SubViewport
 
 var ticks:int = 0
 var time:int = 0
@@ -19,6 +20,9 @@ var timer:Timer
 #var home_has_ball:bool
 func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
 	visual_match.set_up(home_team,away_team, match_seed)
+	
+	# adjust sub viewport to field size + borders
+	sub_viewport.size = visual_match.field.full_size
 	
 	# intialize timer
 	timer = Timer.new()

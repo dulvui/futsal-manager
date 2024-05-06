@@ -4,10 +4,17 @@
 
 class_name SimField
 
-var size:Vector2
+const goal_size:int = 150
+const border_size:int = 100
+const width:int = 1200
+const height:int = 600
+
+
+var upper_left:Vector2
+var lower_right:Vector2
+var full_size:Vector2 # with borders
 var center:Vector2
 
-const goal_size:int = 150
 var goal_left:Vector2
 var goal_right:Vector2
 
@@ -33,7 +40,7 @@ var penalty_area_right:PackedVector2Array
 
 func set_up() -> void:
 	#size = sprite.texture.get_size()
-	size = Vector2(1200, 600)
+	lo = Vector2(1200, 600)
 	
 	center = Vector2(size.x / 2, size.y / 2)
 	

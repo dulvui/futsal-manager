@@ -97,8 +97,8 @@ func set_penalty_area_bounds() -> void:
 	else:
 		if pos.x < field.penalty_area_right_x - 10:
 				pos.x = field.penalty_area_right_x - 10
-		elif pos.x > field.size.x + 10:
-			pos.x = field.size.x + 10
+		elif pos.x > field.size.x + field.border_size + 10:
+			pos.x = field.size.x + field.border_size + 10
 
 func move() -> void:
 	if speed > 0:

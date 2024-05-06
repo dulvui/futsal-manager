@@ -79,16 +79,16 @@ func shoot(p_destination:Vector2, force:float) -> void:
 
 func check_field_bounds() -> void:
 	# kick in
-	if pos.y < 0:
+	if pos.y < field.border_size:
 		set_pos(pos.x, 0)
 		touch_line_out.emit()
 		return
-	if pos.y > field.size.y:
-		set_pos(pos.x, field.size.y)
+	if pos.y > field.size.y + field.border_size:
+		set_pos(pos.x, field.size.y + field.border_size)
 		touch_line_out.emit()
 		return
 	
-	if pos.x < 0 or pos.x > field.size.x:
+	if pos.x < field.border_size or pos.x > field.size.x + field.border_size:
 		# TODO check if post was hit => reflect
 		if field.is_goal(pos):
 			goal.emit()
