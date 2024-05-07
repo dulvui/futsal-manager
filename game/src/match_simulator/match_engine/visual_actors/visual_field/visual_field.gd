@@ -27,10 +27,18 @@ func set_up(p_field:SimField) -> void:
 	
 	# outer lines
 	var outer_line:Line2D = Line2D.new()
-	outer_line.add_point(Vector2(border_size, border_size))
-	outer_line.add_point(Vector2(border_size,  field.size.y + border_size))
-	outer_line.add_point(Vector2(field.size.x + border_size,  field.size.y + border_size))
-	outer_line.add_point(Vector2(field.size.x + border_size,  + border_size))
-	outer_line.add_point(Vector2(border_size,  border_size))
+	outer_line.add_point(Vector2(field.line_left, field.line_top))
+	outer_line.add_point(Vector2(field.line_right,  field.line_top))
+	outer_line.add_point(Vector2(field.line_right,  field.line_bottom))
+	outer_line.add_point(Vector2(field.line_left,  field.line_bottom))
+	outer_line.add_point(Vector2(field.line_left, field.line_top))
 	add_child(outer_line)
+	
+	# middle line
+	var middle_line:Line2D = Line2D.new()
+	middle_line.add_point(Vector2(field.center.x, field.line_top))
+	middle_line.add_point(Vector2(field.center.x,  field.line_bottom))
+	add_child(middle_line)
+	
+	# center circle
 	

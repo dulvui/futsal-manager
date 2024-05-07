@@ -73,21 +73,21 @@ func follow_ball() -> void:
 			set_penalty_area_bounds()
 		else:
 			pos.y = 300
-			pos.x = 30
+			pos.x = field.line_left + 30
 	else:
 		if ball.pos.x > 600:
 			pos = ball.pos
 			set_penalty_area_bounds()
 		else:
 			pos.y = 300
-			pos.x = 1170
+			pos.x = field.line_right - 30
 
 
 func set_penalty_area_bounds() -> void:
-	if pos.y > field.penalty_area_y_upper + 10:
-		pos.y = field.penalty_area_y_upper + 10
-	elif pos.y < field.penalty_area_y_lower - 10:
-		pos.y = field.penalty_area_y_lower - 10
+	if pos.y > field.penalty_area_y_top + 10:
+		pos.y = field.penalty_area_y_top + 10
+	elif pos.y < field.penalty_area_y_bottom - 10:
+		pos.y = field.penalty_area_y_bottom - 10
 	
 	if left_half:
 		if pos.x > field.penalty_area_left_x + 10:

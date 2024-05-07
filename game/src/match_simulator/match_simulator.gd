@@ -22,7 +22,7 @@ func set_up(home_team:Team, away_team:Team, match_seed:int) -> void:
 	visual_match.set_up(home_team,away_team, match_seed)
 	
 	# adjust sub viewport to field size + borders
-	sub_viewport.size = visual_match.field.full_size
+	sub_viewport.size = visual_match.visual_field.field.size
 	
 	# intialize timer
 	timer = Timer.new()

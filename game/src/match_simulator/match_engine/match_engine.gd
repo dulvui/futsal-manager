@@ -14,8 +14,8 @@ var home_plays_left:bool
 var ticks:int
 
 # for trajectory calculations 
-var lower_post:Vector2
-var upper_post:Vector2
+var post_bottom:Vector2
+var post_top:Vector2
 var players:Array[SimPlayer]
 var goalkeeper:SimGoalkeeper
 
@@ -144,16 +144,16 @@ func calc_free_shoot_trajectory() -> void:
 		players = home_team.players
 	
 	if left_is_active_goal():
-		lower_post = field.lower_goal_post_left
-		upper_post = field.upper_goal_post_left
+		post_bottom = field.goal_post_bottom_left
+		post_top = field.goal_post_top_left
 	else:
-		lower_post = field.lower_goal_post_right
-		upper_post = field.upper_goal_post_right
+		post_bottom = field.goal_post_bottom_right
+		post_top = field.goal_post_bottom_left
 	
-	ball.empty_net = not Geometry2D.point_is_inside_triangle(goalkeeper.pos, ball.pos, lower_post, upper_post)
+	ball.empty_net = not Geometry2D.point_is_inside_triangle(goalkeeper.pos, ball.pos, post_bottom, post_top)
 	
 	for player:SimPlayer in players:
-		if Geometry2D.point_is_inside_triangle(player.pos, ball.pos, lower_post, upper_post):
+		if Geometry2D.point_is_inside_triangle(player.pos, ball.pos, post_bottom, post_top):
 			ball.players_in_shoot_trajectory += 1
 
 
