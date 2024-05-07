@@ -1,22 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkfkjsv3f5y8p"]
+[gd_scene load_steps=2 format=3 uid="uid://bkfkjsv3f5y8p"]
 
 [ext_resource type="Script" path="res://src/match_simulator/match_engine/visual_actors/visual_field/visual_field.gd" id="1_3jyh0"]
-[ext_resource type="Texture2D" uid="uid://cctv8141lfp0o" path="res://assets/field.png" id="2_uowaa"]
 
 [node name="VisualField" type="Node2D"]
 script = ExtResource("1_3jyh0")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_uowaa")
-centered = false
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -51.0
-offset_top = -57.0
-offset_right = 1994.0
-offset_bottom = 1141.0
-color = Color(0.912293, 0.519689, 0.19604, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
@@ -36,3 +23,5 @@ energy = 0.2
 visible = false
 position = Vector2(16, 1074)
 energy = 0.2
+
+[node name="Line2D" type="Line2D" parent="."]
