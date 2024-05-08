@@ -68,18 +68,18 @@ func attack() -> void:
 func follow_ball() -> void:
 	# only follow if in own half
 	if left_half:
-		if ball.pos.x < 600:
+		if ball.pos.x < field.size.x / 2:
 			pos = ball.pos
 			set_penalty_area_bounds()
 		else:
-			pos.y = 300
+			pos.y = field.size.y / 2
 			pos.x = field.line_left + 30
 	else:
-		if ball.pos.x > 600:
+		if ball.pos.x > field.size.x / 2:
 			pos = ball.pos
 			set_penalty_area_bounds()
 		else:
-			pos.y = 300
+			pos.y = field.size.y / 2
 			pos.x = field.line_right - 30
 
 
