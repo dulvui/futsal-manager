@@ -5,23 +5,4 @@
 [node name="VisualField" type="Node2D"]
 script = ExtResource("1_3jyh0")
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
-position = Vector2(1918, 0)
-energy = 0.2
-
-[node name="DirectionalLight2D2" type="DirectionalLight2D" parent="."]
-visible = false
-energy = 0.2
-
-[node name="DirectionalLight2D3" type="DirectionalLight2D" parent="."]
-visible = false
-position = Vector2(1915, 1068)
-energy = 0.2
-
-[node name="DirectionalLight2D4" type="DirectionalLight2D" parent="."]
-visible = false
-position = Vector2(16, 1074)
-energy = 0.2
-
 [node name="Line2D" type="Line2D" parent="."]

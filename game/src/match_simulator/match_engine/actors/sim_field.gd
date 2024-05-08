@@ -9,7 +9,7 @@ const border_size:int = 100
 const width:int = 1200
 const height:int = 600
 
-# TODO use Rect2
+# don't use Rect2, to keep simple and human-readable names for coordinates 
 var size:Vector2 # with borders
 var center:Vector2
 var line_top:int
