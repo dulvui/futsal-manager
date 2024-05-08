@@ -58,10 +58,10 @@ func set_up() -> void:
 	goal_post_bottom = (size.y / 2) - (goal_size / 2)
 	goal_post_top = (size.y / 2) + (goal_size / 2)
 	
-	goal_post_bottom_left = Vector2(line_left, goal_post_bottom)
 	goal_post_top_left = Vector2(line_left, goal_post_top)
+	goal_post_bottom_left = Vector2(line_left, goal_post_bottom)
 	goal_post_top_right = Vector2(line_right, goal_post_top)
-	goal_post_top_right = Vector2(line_right, goal_post_top)
+	goal_post_bottom_right = Vector2(line_right, goal_post_bottom)
 	
 	
 	# penalty area
