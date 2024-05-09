@@ -20,10 +20,11 @@ func _draw() -> void:
 	
 	# outer lines
 	draw_line(Vector2(field.line_left, field.line_top), Vector2(field.line_right,  field.line_top), Color.WHITE, 10)
+	draw_line(Vector2(field.line_right,  field.line_top), Vector2(field.line_right,  field.line_bottom), Color.WHITE, 10)
+	draw_line(Vector2(field.line_right,  field.line_bottom), Vector2(field.line_left,  field.line_bottom), Color.WHITE, 10)
 	draw_line(Vector2(field.line_left, field.line_top), Vector2(field.line_left,  field.line_bottom), Color.WHITE, 10)
-	draw_line(Vector2(field.line_left, field.line_top), Vector2(field.line_right,  field.line_top), Color.WHITE, 10)
-	draw_line(Vector2(field.line_left, field.line_top), Vector2(field.line_right,  field.line_top), Color.WHITE, 10)
 	
+	# goals
 	draw_dashed_line(field.goal_post_top_left, field.goal_post_bottom_left, Color.FIREBRICK, 10, 10)
 	draw_dashed_line(field.goal_post_top_right, field.goal_post_bottom_right, Color.FIREBRICK, 10, 10)
 	
