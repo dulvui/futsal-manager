@@ -65,31 +65,19 @@ func set_up() -> void:
 	
 	
 	# penalty area
-	var penalty_area_size:int = size.x / 7
-	
-	penalty_area_left_x = line_left + penalty_area_size
-	penalty_area_right_x = line_right - penalty_area_size
-	
-	penalty_area_y_bottom = goal_post_bottom_left.y - penalty_area_size / 2
-	penalty_area_y_top = goal_post_top_left.y + penalty_area_size / 2
-	
 	penalty_area_left = PackedVector2Array()
 	penalty_area_right = PackedVector2Array()
-	
-	#penalty_area_left.append(Vector2(line_left, penalty_area_y_bottom))
-	#penalty_area_left.append(Vector2(line_left + penalty_area_size, penalty_area_y_bottom))
-	#penalty_area_left.append(Vector2(line_left + penalty_area_size, penalty_area_y_top))
-	#penalty_area_left.append(Vector2(line_left, penalty_area_y_top))
-	#
-	#penalty_area_right.append(Vector2(line_right, penalty_area_y_bottom))
-	#penalty_area_right.append(Vector2(line_right - penalty_area_size, penalty_area_y_bottom))
-	#penalty_area_right.append(Vector2(line_right - penalty_area_size, penalty_area_y_top))
-	#penalty_area_right.append(Vector2(line_right, penalty_area_y_top))
 	
 	# create upper circle for penalty area
 	var radius:int = 120
 	var points:int = 10
 	var curve:Curve2D = Curve2D.new()
+	
+	penalty_area_left_x = line_left + radius
+	penalty_area_right_x = line_right - radius
+	
+	penalty_area_y_bottom = goal_post_bottom_left.y - radius
+	penalty_area_y_top = goal_post_top_left.y + radius
 	
 	# left
 	var start_point:Vector2 = Vector2(goal_post_top_left)
