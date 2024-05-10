@@ -4,10 +4,16 @@
 
 class_name SimField
 
-const goal_size:int = 150
-const border_size:int = 120
-const width:int = 1200
-const height:int = 600
+const pixel_factor:int = 28
+
+# in meters * pixel_factor
+const goal_size:int = 3 * pixel_factor
+const border_size:int = 2 * pixel_factor
+const width:int = 42 * pixel_factor
+const height:int = 25 * pixel_factor
+const panalty_area_radius:int = 5 * pixel_factor
+const center_circle_radius:int = 3 * pixel_factor
+const line_width:float = 0.30 * pixel_factor # in cm
 
 # don't use Rect2, to keep simple and human-readable names for coordinates 
 var size:Vector2 # with borders
@@ -69,30 +75,28 @@ func set_up() -> void:
 	penalty_area_right = PackedVector2Array()
 	
 	# create upper circle for penalty area
-	var radius:int = 120
-	var points:int = 10
+	var points:int = 12
 	var curve:Curve2D = Curve2D.new()
 	
-	penalty_area_left_x = line_left + radius
-	penalty_area_right_x = line_right - radius
+	penalty_area_left_x = line_left + panalty_area_radius
+	penalty_area_right_x = line_right - panalty_area_radius
 	
-	penalty_area_y_bottom = goal_post_bottom_left.y - radius
-	penalty_area_y_top = goal_post_top_left.y + radius
+	penalty_area_y_bottom = goal_post_bottom_left.y - panalty_area_radius
+	penalty_area_y_top = goal_post_top_left.y + panalty_area_radius
 	
 	# left
 	var start_point:Vector2 = Vector2(goal_post_top_left)
-	var end_point:Vector2 = Vector2(goal_post_top_left + Vector2(radius, 0))
+	var end_point:Vector2 = Vector2(goal_post_top_left + Vector2(panalty_area_radius, 0))
 	
-	curve.add_point(start_point)
 	for i:int in points:
-		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
+		curve.add_point(start_point + Vector2(0, -panalty_area_radius).rotated((i / float(points)) * PI / 2))
 	curve.add_point(end_point)
 	
 	start_point = Vector2(goal_post_bottom_left)
-	end_point = Vector2(goal_post_bottom_left + Vector2(0, radius))
+	end_point = Vector2(goal_post_bottom_left + Vector2(0, panalty_area_radius))
 	
 	for i:int in range(points, points + points):
-		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
+		curve.add_point(start_point + Vector2(0, -panalty_area_radius).rotated((i / float(points)) * PI / 2))
 	curve.add_point(end_point)
 	
 	penalty_area_left.append_array(curve.get_baked_points())
@@ -102,23 +106,23 @@ func set_up() -> void:
 	curve.add_point(end_point)
 	
 	for i:int in range(points * 2,  points * 3):
-		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
-	curve.add_point(Vector2(goal_post_bottom_left - Vector2(radius, 0)))
+		curve.add_point(start_point + Vector2(0, -panalty_area_radius).rotated((i / float(points)) * PI / 2))
+	curve.add_point(Vector2(goal_post_bottom_left - Vector2(panalty_area_radius, 0)))
 	
 	start_point = Vector2(goal_post_top_left)
-	end_point = Vector2(goal_post_top_left - Vector2(0, radius))
+	end_point = Vector2(goal_post_top_left - Vector2(0, panalty_area_radius))
 	
-	curve.add_point(Vector2(goal_post_top_left - Vector2(radius, 0)))
+	curve.add_point(Vector2(goal_post_top_left - Vector2(panalty_area_radius, 0)))
 	for i:int in range(points * 3,  points * 4):
-		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
+		curve.add_point(start_point + Vector2(0, -panalty_area_radius).rotated((i / float(points)) * PI / 2))
 	curve.add_point(end_point)
 	
 	penalty_area_right.append_array(curve.get_baked_points())
 	
 	# move to opposite site
 	for i in penalty_area_right.size():
-		penalty_area_right[i] += Vector2(size.x - radius * 2, 0)
-	
+		penalty_area_right[i] += Vector2(width, 0)
+
 
 func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
 	# start from top/left
