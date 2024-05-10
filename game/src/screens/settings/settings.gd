@@ -6,6 +6,7 @@ extends Control
 class_name Settings
 
 @onready var theme_options:OptionButton = $VBoxContainer/Theme/ThemeOptionButton
+@onready var version_label:Label = $VBoxContainer/Version/Version
 
 
 func _ready() -> void:
@@ -15,7 +16,8 @@ func _ready() -> void:
 		theme_options.add_item(theme_name)
 	
 	theme_options.selected = Config.theme_index
-
+	
+	version_label.text = Config.version
 
 func _on_theme_option_button_item_selected(index: int) -> void:
 	theme = ThemeUtil.set_active_theme(index)

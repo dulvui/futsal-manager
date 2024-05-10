@@ -4,7 +4,10 @@
 
 extends Node
 
+const version:String = "10052024"
+
 var config:ConfigFile
+
 
 # generator
 var generation_seed:String
@@ -36,6 +39,8 @@ var id_by_type:Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print("version " + Config.version)
+	
 	_load_config()
 	_load_resources()
 	match_rng = RandomNumberGenerator.new()
