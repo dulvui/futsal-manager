@@ -13,7 +13,7 @@ const width:int = 42 * pixel_factor
 const height:int = 25 * pixel_factor
 const panalty_area_radius:int = 5 * pixel_factor
 const center_circle_radius:int = 3 * pixel_factor
-const line_width:float = 0.30 * pixel_factor # in cm
+const line_width:float = 0.10 * pixel_factor # in cm
 
 # don't use Rect2, to keep simple and human-readable names for coordinates 
 var size:Vector2 # with borders

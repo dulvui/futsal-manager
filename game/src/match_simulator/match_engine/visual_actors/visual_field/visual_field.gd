@@ -24,8 +24,8 @@ func _draw() -> void:
 	draw_line(Vector2(field.line_left, field.line_top), Vector2(field.line_left,  field.line_bottom), Color.WHITE, field.line_width)
 	
 	# goals
-	draw_dashed_line(field.goal_post_top_left, field.goal_post_bottom_left, Color.FIREBRICK, field.line_width, field.line_width)
-	draw_dashed_line(field.goal_post_top_right, field.goal_post_bottom_right, Color.FIREBRICK, field.line_width, field.line_width)
+	draw_dashed_line(field.goal_post_top_left, field.goal_post_bottom_left, Color.FIREBRICK, field.line_width * 1.5, field.line_width * 1.5)
+	draw_dashed_line(field.goal_post_top_right, field.goal_post_bottom_right, Color.FIREBRICK, field.line_width * 1.5, field.line_width * 1.5)
 	
 
 
