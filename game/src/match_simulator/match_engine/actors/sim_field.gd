@@ -99,12 +99,16 @@ func set_up() -> void:
 	
 	# right
 	curve.clear_points()
+	curve.add_point(end_point)
+	
 	for i:int in range(points * 2,  points * 3):
 		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
+	curve.add_point(Vector2(goal_post_bottom_left - Vector2(radius, 0)))
 	
 	start_point = Vector2(goal_post_top_left)
 	end_point = Vector2(goal_post_top_left - Vector2(0, radius))
 	
+	curve.add_point(Vector2(goal_post_top_left - Vector2(radius, 0)))
 	for i:int in range(points * 3,  points * 4):
 		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
 	curve.add_point(end_point)
