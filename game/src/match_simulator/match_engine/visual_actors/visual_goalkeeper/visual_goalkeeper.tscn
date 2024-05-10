@@ -16,3 +16,23 @@ texture = ExtResource("2_7ynx4")
 [node name="Head" type="Sprite2D" parent="Sprites"]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_osan7")
+
+[node name="Info" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -72.0
+offset_top = -76.0
+offset_right = 72.0
+offset_bottom = -36.0
+
+[node name="Label" type="Label" parent="Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Name
+"
+horizontal_alignment = 1
+text_overrun_behavior = 3
