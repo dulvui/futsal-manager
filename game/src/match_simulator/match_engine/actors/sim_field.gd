@@ -55,8 +55,8 @@ func set_up() -> void:
 	goal_left = Vector2(line_left, size.y / 2)
 	goal_right = Vector2(line_right, size.y / 2)
 	
-	goal_post_bottom = (size.y / 2) - (goal_size / 2)
-	goal_post_top = (size.y / 2) + (goal_size / 2)
+	goal_post_bottom = (size.y / 2) + (goal_size / 2)
+	goal_post_top = (size.y / 2) - (goal_size / 2)
 	
 	goal_post_top_left = Vector2(line_left, goal_post_top)
 	goal_post_bottom_left = Vector2(line_left, goal_post_bottom)
@@ -76,16 +76,42 @@ func set_up() -> void:
 	penalty_area_left = PackedVector2Array()
 	penalty_area_right = PackedVector2Array()
 	
-	penalty_area_left.append(Vector2(line_left, penalty_area_y_bottom))
-	penalty_area_left.append(Vector2(line_left + penalty_area_size, penalty_area_y_bottom))
-	penalty_area_left.append(Vector2(line_left + penalty_area_size, penalty_area_y_top))
-	penalty_area_left.append(Vector2(line_left, penalty_area_y_top))
+	#penalty_area_left.append(Vector2(line_left, penalty_area_y_bottom))
+	#penalty_area_left.append(Vector2(line_left + penalty_area_size, penalty_area_y_bottom))
+	#penalty_area_left.append(Vector2(line_left + penalty_area_size, penalty_area_y_top))
+	#penalty_area_left.append(Vector2(line_left, penalty_area_y_top))
+	#
+	#penalty_area_right.append(Vector2(line_right, penalty_area_y_bottom))
+	#penalty_area_right.append(Vector2(line_right - penalty_area_size, penalty_area_y_bottom))
+	#penalty_area_right.append(Vector2(line_right - penalty_area_size, penalty_area_y_top))
+	#penalty_area_right.append(Vector2(line_right, penalty_area_y_top))
 	
-	penalty_area_right.append(Vector2(line_right, penalty_area_y_bottom))
-	penalty_area_right.append(Vector2(line_right - penalty_area_size, penalty_area_y_bottom))
-	penalty_area_right.append(Vector2(line_right - penalty_area_size, penalty_area_y_top))
-	penalty_area_right.append(Vector2(line_right, penalty_area_y_top))
-
+	# create upper circle for penalty area
+	var radius:int = 120
+	var points:int = 10
+	
+	var start_point:Vector2 = Vector2(goal_post_top_left)
+	var end_point:Vector2 = Vector2(goal_post_top_left + Vector2(radius, 0))
+	
+	# left
+	var curve:Curve2D = Curve2D.new()
+	curve.add_point(start_point)
+	for i:int in points:
+		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
+	curve.add_point(end_point)
+	#penalty_area_left.append_array(curve.get_baked_points())
+	
+	start_point = Vector2(goal_post_bottom_left)
+	end_point = Vector2(goal_post_bottom_left + Vector2(0, radius))
+	
+	#var curve_bottom:Curve2D = Curve2D.new()
+	for i:int in range(points, points + points):
+		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
+	curve.add_point(end_point)
+	
+	penalty_area_left.append_array(curve.get_baked_points())
+	
+	
 
 func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
 	# start from top/left
