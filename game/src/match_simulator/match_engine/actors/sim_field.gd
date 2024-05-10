@@ -5,7 +5,7 @@
 class_name SimField
 
 const goal_size:int = 150
-const border_size:int = 100
+const border_size:int = 120
 const width:int = 1200
 const height:int = 600
 
@@ -89,28 +89,43 @@ func set_up() -> void:
 	# create upper circle for penalty area
 	var radius:int = 120
 	var points:int = 10
+	var curve:Curve2D = Curve2D.new()
 	
+	# left
 	var start_point:Vector2 = Vector2(goal_post_top_left)
 	var end_point:Vector2 = Vector2(goal_post_top_left + Vector2(radius, 0))
 	
-	# left
-	var curve:Curve2D = Curve2D.new()
 	curve.add_point(start_point)
 	for i:int in points:
 		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
 	curve.add_point(end_point)
-	#penalty_area_left.append_array(curve.get_baked_points())
 	
 	start_point = Vector2(goal_post_bottom_left)
 	end_point = Vector2(goal_post_bottom_left + Vector2(0, radius))
 	
-	#var curve_bottom:Curve2D = Curve2D.new()
 	for i:int in range(points, points + points):
 		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
 	curve.add_point(end_point)
 	
 	penalty_area_left.append_array(curve.get_baked_points())
 	
+	# right
+	curve.clear_points()
+	for i:int in range(points * 2,  points * 3):
+		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
+	
+	start_point = Vector2(goal_post_top_left)
+	end_point = Vector2(goal_post_top_left - Vector2(0, radius))
+	
+	for i:int in range(points * 3,  points * 4):
+		curve.add_point(start_point + Vector2(0, -radius).rotated((i / float(points)) * PI / 2))
+	curve.add_point(end_point)
+	
+	penalty_area_right.append_array(curve.get_baked_points())
+	
+	# move to opposite site
+	for i in penalty_area_right.size():
+		penalty_area_right[i] += Vector2(size.x - radius * 2, 0)
 	
 
 func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
