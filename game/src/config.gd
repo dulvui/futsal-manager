@@ -8,7 +8,6 @@ const version:String = "10052024"
 
 var config:ConfigFile
 
-
 # generator
 var generation_seed:String
 var generation_state:int
