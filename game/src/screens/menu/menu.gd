@@ -4,20 +4,24 @@
 
 extends Control
 
+@onready var load_game:Button = $VBoxContainer/LoadGame
+@onready var continue_game: Button = $VBoxContainer/ContinueGame
+
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
-	if not Config.team:
-		$VBoxContainer/Continue.hide()
+	load_game.visible = Config.active_save_state != ""
+	continue_game.visible = Config.active_save_state != ""
 
-func _on_StartGame_pressed() -> void:
+
+func _on_new_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/start/start.tscn")
 
 
-func _on_Settings_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/settings/settings.tscn")
-
-
-func _on_Continue_pressed() -> void:
+func _on_continue_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+
+
+func _on_settings_pressed() -> void:
+	get_tree().change_scene_to_file("res://src/screens/settings/settings.tscn")

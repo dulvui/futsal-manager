@@ -46,15 +46,20 @@ modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
+[node name="ContinueGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "CONTINUE"
+
+[node name="NewGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "START NEW"
+
 [node name="LoadGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = "LOAD GAME"
-
-[node name="StartGame" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "START NEW"
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -72,6 +77,7 @@ size_flags_horizontal = 4
 text = "simondalvai.org"
 uri = "https://simondalvai.org"
 
+[connection signal="pressed" from="VBoxContainer/ContinueGame" to="." method="_on_continue_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/LoadGame" to="." method="_on_Continue_pressed"]
-[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_StartGame_pressed"]
-[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]

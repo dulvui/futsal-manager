@@ -26,7 +26,7 @@ const GOAL_KEEPER_FACTOR:Dictionary = {
 	"FREE_KICK": 0.85,
 	"PENALTY" : 0.6
 }
-# percentage of how weaker away keaper is
+# percentage of how weaker away goalkeeper is
 const GOAL_KEEPER_AWAY_FACTOR = 0.85
 
 # 0 - 100
