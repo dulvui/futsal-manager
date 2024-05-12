@@ -66,6 +66,7 @@ func _on_select_team_pressed() -> void:
 	print("matches initialized")
 	EmailUtil.welcome_manager()
 	
+	Config.make_save_state_dir()
 	Config.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 

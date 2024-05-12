@@ -20,8 +20,13 @@ func _on_new_game_pressed() -> void:
 
 
 func _on_continue_game_pressed() -> void:
+	Config.load_save_config()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
 func _on_settings_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/settings/settings.tscn")
+
+
+func _on_load_game_pressed() -> void:
+	pass # Replace with function body.

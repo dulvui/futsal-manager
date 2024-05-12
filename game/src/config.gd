@@ -13,6 +13,9 @@ var config:ConfigFile
 
 var save_states:Array
 var active_save_state:String
+# for temporary save state, on creating new save state
+# becomes active_save_state, once setup is completed
+var temp_save_state:String
 
 var language:String
 var currency:int
@@ -51,7 +54,6 @@ var settings_versions:Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("version " + Config.version)
-	
 	
 	_load_config()
 	_load_resources()
@@ -93,16 +95,7 @@ func load_save_config() -> void:
 func new_save_state() -> void:
 	var state_id:String = str(int(Time.get_unix_time_from_system()))
 	print("state id: ",state_id)
-	
-	save_states.append(state_id)
-	active_save_state = state_id
-	
-	# create sub directory
-	var user_dir:DirAccess = DirAccess.open("user://")
-	var err:int = user_dir.make_dir(state_id)
-	if err != OK:
-		print("error while creating save state dir")
-	
+	temp_save_state = state_id
 	load_save_config()
 
 
@@ -110,6 +103,16 @@ func get_save_config_path(path:String = "") -> String:
 	if active_save_state != "":
 		return "user://" + active_save_state + "/" + path
 	return ""
+
+
+func make_save_state_dir() -> void:
+	# create save state directory, if not exist yet
+	var user_dir:DirAccess = DirAccess.open("user://")
+	if not user_dir.dir_exists(temp_save_state):
+		active_save_state = temp_save_state
+		var err:int = user_dir.make_dir(active_save_state)
+		if err != OK:
+			print("error while creating save state dir")
 
 
 func _set_up_rngs() -> void:
@@ -208,12 +211,6 @@ func set_lang(lang:String) -> void:
 	TranslationServer.set_locale(lang)
 	language = lang
 	config.set_value("settings","language", language)
-	config.save("user://settings.cfg")
-
-
-func save_manager(p_manager:Manager) -> void:
-	manager = p_manager
-	config.set_value("manager","data",manager)
 	config.save("user://settings.cfg")
 
 

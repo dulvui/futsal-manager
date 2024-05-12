@@ -50,7 +50,7 @@ func _on_Continue_pressed() -> void:
 		Config.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
 		
 		Config.generate_leagues(generation_seed, gender_option.selected)
-		Config.save_manager(manager)
+		Config.manager = manager
 		get_tree().change_scene_to_file("res://src/screens/team_select/team_select.tscn")
 
 
