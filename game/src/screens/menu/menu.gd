@@ -11,16 +11,16 @@ extends Control
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
-	load_game.visible = Config.active_save_state != ""
-	continue_game.visible = Config.active_save_state != ""
+	load_game.visible = Config.save_states and Config.save_states.list.size() > 0
+	continue_game.visible = Config.save_states and Config.save_states.list.size() > 0
 
 
 func _on_new_game_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/start/start.tscn")
+	get_tree().change_scene_to_file("res://src/screens/start_game/start_game.tscn")
 
 
 func _on_continue_game_pressed() -> void:
-	Config.load_save_config()
+	Config.load_save_state()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 

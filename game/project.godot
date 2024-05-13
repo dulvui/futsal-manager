@@ -27,7 +27,6 @@ CurrencyUtil="*res://src/utils/currency_util.gd"
 UiUtil="*res://src/utils/ui_util.gd"
 IdUtil="*res://src/utils/id_util.gd"
 ThemeUtil="*res://src/utils/theme_util.gd"
-SaveStateUtil="*res://src/utils/save_state_util.gd"
 
 [debug]
 

@@ -21,7 +21,7 @@ var generation_seed:String = Constants.DEFAULT_SEED
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
-	Config.new_save_state()
+	Config.save_states.new_temp_state()
 	
 	for nation:String in Constants.Nations:
 		nationality.add_item(nation)
@@ -31,6 +31,7 @@ func _ready() -> void:
 	
 	seed_edit.text = generation_seed
 	start_year_spinbox.get_line_edit().text = str(Config.start_date.year)
+
 
 func _on_Back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
@@ -42,7 +43,6 @@ func _on_Continue_pressed() -> void:
 		manager.name = m_name.text
 		manager.surname = m_surname.text
 		manager.nationality = nationality.get_item_text(nationality.selected)
-		Config.reset()
 		
 		# start date in fomrat YYYY-MM-DDTHH:MM:SS
 		var start_year:String = start_year_spinbox.get_line_edit().text
