@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj3ts0dee4m6"]
+
+[ext_resource type="Script" path="res://src/screens/save_states/save_state/save_state.gd" id="1_yugvl"]
+
+[node name="SaveState" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yugvl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.478
+anchor_top = 0.484
+anchor_right = 0.528
+anchor_bottom = 0.516
+offset_left = -0.76001
+offset_top = 0.279968
+offset_right = -10.76
+offset_bottom = -0.280029
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Delete" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "DELETE"
+
+[node name="Details" type="GridContainer" parent="HBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="TeamLabel" type="Label" parent="HBoxContainer/Details"]
+layout_mode = 2
+text = "GAME DATE"
+
+[node name="Team" type="Label" parent="HBoxContainer/Details"]
+layout_mode = 2
+text = "Bolzano"
+
+[node name="ManagerLabel" type="Label" parent="HBoxContainer/Details"]
+layout_mode = 2
+text = "MANAGER"
+
+[node name="LastSaveDate" type="Label" parent="HBoxContainer/Details"]
+layout_mode = 2
+text = "Simon Dalvai"
+
+[node name="PlacementLabel" type="Label" parent="HBoxContainer/Details"]
+layout_mode = 2
+text = "PLACEMENT
+"
+
+[node name="Placement" type="Label" parent="HBoxContainer/Details"]
+layout_mode = 2
+text = "Serie A - 3."
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Dates2" type="GridContainer" parent="HBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="GameDateLabel" type="Label" parent="HBoxContainer/Dates2"]
+layout_mode = 2
+text = "GAME DATE"
+
+[node name="GameDate" type="Label" parent="HBoxContainer/Dates2"]
+layout_mode = 2
+text = "12.08.2025"
+
+[node name="LastSaveDateLabel" type="Label" parent="HBoxContainer/Dates2"]
+layout_mode = 2
+text = "LAST SAVE"
+
+[node name="LastSaveDate" type="Label" parent="HBoxContainer/Dates2"]
+layout_mode = 2
+text = "03.04.2024"
+
+[node name="CreateDateLabel" type="Label" parent="HBoxContainer/Dates2"]
+layout_mode = 2
+text = "CREATED"
+
+[node name="CreateDate" type="Label" parent="HBoxContainer/Dates2"]
+layout_mode = 2
+text = "01.01.2024"
+
+[node name="Load" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "LOAD"

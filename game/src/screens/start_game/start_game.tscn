@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://qppc6sbc1cn0"]
 
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_fm71v"]
-[ext_resource type="Script" path="res://src/screens/start/start.gd" id="2_s6fer"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_382rw"]
+[ext_resource type="Script" path="res://src/screens/start_game/start_game.gd" id="2_416pw"]
 
 [node name="Start" type="Control"]
 layout_mode = 3
@@ -10,8 +10,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_fm71v")
-script = ExtResource("2_s6fer")
+theme = ExtResource("1_382rw")
+script = ExtResource("2_416pw")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
