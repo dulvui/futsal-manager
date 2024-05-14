@@ -11,12 +11,11 @@ extends Control
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
-	print(Config.save_states and Config.save_states.list.size() > 0)
 	load_game.visible = Config.save_states and Config.save_states.list.size() > 0
 	continue_game.visible = Config.save_states and Config.save_states.list.size() > 0
 	
 	# always reset temp state in menu
-	Config.save_states.temp_state = null
+	Config.save_states.reset_temp()
 
 
 func _on_new_game_pressed() -> void:

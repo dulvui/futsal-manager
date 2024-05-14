@@ -27,6 +27,10 @@ func new_temp_state() -> void:
 	temp_state.id = temp_id
 
 
+func reset_temp() -> void:
+	temp_state = null
+
+
 func get_active() -> SaveState:
 	# use temp, if exists
 	if temp_state:
