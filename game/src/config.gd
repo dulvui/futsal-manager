@@ -51,9 +51,7 @@ func _ready() -> void:
 	print("version " + Config.version)
 	
 	_load_config()
-	_load_resources()
 	load_save_state()
-	_set_up_rngs()
 
 	Config.set_lang(language)
 
@@ -67,18 +65,29 @@ func _load_config() -> void:
 	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
 	theme_index = config.get_value("settings","theme_index",0)
 	language = config.get_value("settings","language","")
+	
+	# save states
+	if ResourceLoader.exists("user://save_states.tres"):
+		print("loading user://save_states.tres")
+		save_states = ResourceLoader.load("user://save_states.tres")
+	else:
+		save_states = SaveStates.new()
 
 
 func load_save_state() -> void:
 	var save_sate:SaveState = save_states.get_active()
-	start_date = save_sate.start_date
-	id_by_type = save_sate.id_by_type
-	current_season = save_sate.current_season
-	speed_factor = save_sate.speed_factor
-	dashboard_active_content = save_sate.dashboard_active_content
-	generation_seed = save_sate.generation_seed
-	generation_state = save_sate.generation_state
-	generation_gender = save_sate.generation_gender
+	if save_sate:
+		start_date = save_sate.start_date
+		id_by_type = save_sate.id_by_type
+		current_season = save_sate.current_season
+		speed_factor = save_sate.speed_factor
+		dashboard_active_content = save_sate.dashboard_active_content
+		generation_seed = save_sate.generation_seed
+		generation_state = save_sate.generation_state
+		generation_gender = save_sate.generation_gender
+		
+		_load_resources()
+		_set_up_rngs()
 
 
 func save_active_state() -> void:
@@ -112,12 +121,6 @@ func save_config() -> void:
 
 
 func _load_resources() -> void:
-	if ResourceLoader.exists("user://save_states.tres"):
-		print("loading user://save_states.tres")
-		save_states = ResourceLoader.load("user://save_states.tres")
-	else:
-		save_states = SaveStates.new()
-	
 	if ResourceLoader.exists(save_states.get_active_path("leagues.tres")):
 		print("loading user://leagues.tres")
 		leagues = ResourceLoader.load(save_states.get_active_path("leagues.tres"))

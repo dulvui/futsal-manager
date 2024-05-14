@@ -22,6 +22,7 @@ func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
 	Config.save_states.new_temp_state()
+	Config.load_save_state()
 	
 	for nation:String in Constants.Nations:
 		nationality.add_item(nation)

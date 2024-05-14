@@ -11,6 +11,7 @@ extends Control
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
+	print(Config.save_states and Config.save_states.list.size() > 0)
 	load_game.visible = Config.save_states and Config.save_states.list.size() > 0
 	continue_game.visible = Config.save_states and Config.save_states.list.size() > 0
 
@@ -29,4 +30,4 @@ func _on_settings_pressed() -> void:
 
 
 func _on_load_game_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://src/screens/save_states_screen/save_states_screen.tscn")

@@ -5,11 +5,11 @@
 class_name SaveStates
 extends Resource
 
-@export var list:Array[SaveState]
-@export var active_id:String
+@export var list: Array[SaveState]
+@export var active_id: String
 # for temporary save state, when creating new save state
 # becomes active_save_state, once setup is completed
-@export var temp_id:String
+@export var temp_state: SaveState
 
 
 func _init(
@@ -21,19 +21,21 @@ func _init(
 
 
 func new_temp_state() -> void:
-	temp_id = str(int(Time.get_unix_time_from_system()))
+	var temp_id: String = str(int(Time.get_unix_time_from_system()))
 	print("temp_id: ",temp_id)
+	temp_state = SaveState.new()
+	temp_state.id = temp_id
 
 
 func get_active() -> SaveState:
 	for state:SaveState in list:
 		if state.id == active_id:
 			return state
-	var state:SaveState = SaveState.new()
-	state.id = active_id
-	list.append(state) 
-	temp_id = ""
-	return state
+	
+	# not found, use temp temp
+	if temp_state:
+		return temp_state
+	return null
 
 
 func get_active_path(relative_path:String = "") -> String:
@@ -43,10 +45,12 @@ func get_active_path(relative_path:String = "") -> String:
 
 
 func make_temp_active() -> void:
+	list.append(temp_state)
+	active_id = temp_state.id
+	
 	# create save state directory, if not exist yet
 	var user_dir:DirAccess = DirAccess.open("user://")
-	if not user_dir.dir_exists(temp_id):
-		active_id = temp_id
+	if not user_dir.dir_exists(active_id):
 		var err:int = user_dir.make_dir(active_id)
 		if err != OK:
 			print("error while creating save state dir")
