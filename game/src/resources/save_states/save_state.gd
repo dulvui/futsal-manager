@@ -18,16 +18,16 @@ extends Resource
 
 
 func _init(
-		p_id:String,
-		p_config_version:String,
-		p_start_date:Dictionary,
-		p_generation_seed:String,
-		p_generation_state:int,
-		p_generation_gender:Constants.Gender,
-		p_current_season:int,
-		p_speed_factor:int,
-		p_dashboard_active_content:int,
-		p_id_by_type:Dictionary,
+		p_generation_seed:String = "SuchDefaultSeed",
+		p_generation_state:int = 0,
+		p_generation_gender:Constants.Gender = 0,
+		p_current_season:int = 1,
+		p_speed_factor:int = 1,
+		p_dashboard_active_content:int = 0,
+		p_id:String = str(int(Time.get_unix_time_from_system())),
+		p_id_by_type:Dictionary = {},
+		p_config_version:String = Config.config_version,
+		p_start_date:Dictionary = Time.get_datetime_dict_from_system(),
 	) -> void:
 	id = p_id
 	config_version = p_config_version

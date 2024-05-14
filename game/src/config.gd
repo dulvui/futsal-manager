@@ -5,6 +5,7 @@
 extends Node
 
 const version:String = "1"
+const config_version:String = "1"
 
 # config
 var config:ConfigFile
@@ -50,8 +51,8 @@ func _ready() -> void:
 	print("version " + Config.version)
 	
 	_load_config()
-	load_save_state()
 	_load_resources()
+	load_save_state()
 	_set_up_rngs()
 
 	Config.set_lang(language)
@@ -120,19 +121,23 @@ func _load_resources() -> void:
 	if ResourceLoader.exists(save_states.get_active_path("leagues.tres")):
 		print("loading user://leagues.tres")
 		leagues = ResourceLoader.load(save_states.get_active_path("leagues.tres"))
-	if ResourceLoader.exists(save_states.get_active_path("inbox.tres")):
-		print("loading user://inbox.tres")
-		inbox = ResourceLoader.load(save_states.get_active_path("inbox.tres"))
 	if ResourceLoader.exists(save_states.get_active_path("team.tres")):
 		print("loading user://team.tres")
 		team = ResourceLoader.load(save_states.get_active_path("team.tres"))
 	if ResourceLoader.exists(save_states.get_active_path("manager.tres")):
 		print("loading user://manager.tres")
 		manager = ResourceLoader.load(save_states.get_active_path("manager.tres"))
+	
+	if ResourceLoader.exists(save_states.get_active_path("inbox.tres")):
+		print("loading user://inbox.tres")
+		inbox = ResourceLoader.load(save_states.get_active_path("inbox.tres"))
+	else:
+		inbox = Inbox.new()
 	if ResourceLoader.exists(save_states.get_active_path("transfers.tres")):
 		print("loading user://transfers.tres")
 		transfers = ResourceLoader.load(save_states.get_active_path("transfers.tres"))
-
+	else:
+		transfers = Transfers.new()
 
 func save_resources() -> void:
 	ResourceSaver.save(leagues, save_states.get_active_path("leagues.tres"))
@@ -154,20 +159,6 @@ func save_all_data() -> void:
 	save_active_state()
 	save_resources()
 	save_config()
-
-
-func reset() -> void:
-	# CONFIG
-	id_by_type = {}
-	start_date = Time.get_date_dict_from_system()
-	current_season = 0
-	generation_state = 0
-	rng.state = generation_state
-	# RESOURCES
-	manager =  Manager.new()
-	inbox = Inbox.new()
-	transfers = Transfers.new()
-	leagues = Leagues.new()
 
 
 func set_seed(p_generation_seed:String=generation_seed) -> void:

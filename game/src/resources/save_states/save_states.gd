@@ -29,7 +29,11 @@ func get_active() -> SaveState:
 	for state:SaveState in list:
 		if state.id == active_id:
 			return state
-	return null
+	var state:SaveState = SaveState.new()
+	state.id = active_id
+	list.append(state) 
+	temp_id = ""
+	return state
 
 
 func get_active_path(relative_path:String = "") -> String:
