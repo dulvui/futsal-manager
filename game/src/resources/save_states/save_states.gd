@@ -28,13 +28,14 @@ func new_temp_state() -> void:
 
 
 func get_active() -> SaveState:
+	# use temp, if exists
+	if temp_state:
+		return temp_state
+	
 	for state:SaveState in list:
 		if state.id == active_id:
 			return state
-	
-	# not found, use temp temp
-	if temp_state:
-		return temp_state
+
 	return null
 
 
@@ -50,6 +51,7 @@ func make_temp_active() -> void:
 	# make active
 	list.append(temp_state)
 	active_id = temp_state.id
+	
 	# create save state directory, if not exist yet
 	var user_dir:DirAccess = DirAccess.open("user://")
 	if not user_dir.dir_exists(active_id):

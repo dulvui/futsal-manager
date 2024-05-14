@@ -17,9 +17,6 @@ var theme_index:int
 # save states
 var save_states:SaveStates
 
-# for temporary save state, on creating new save state
-# becomes active_save_state, once setup is completed
-var temp_save_state:String
 # vars
 var start_date:Dictionary
 # generator config
