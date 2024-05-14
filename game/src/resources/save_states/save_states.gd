@@ -45,9 +45,11 @@ func get_active_path(relative_path:String = "") -> String:
 
 
 func make_temp_active() -> void:
+	# assign values
+	temp_state.team_name = Config.team.name
+	# make active
 	list.append(temp_state)
 	active_id = temp_state.id
-	
 	# create save state directory, if not exist yet
 	var user_dir:DirAccess = DirAccess.open("user://")
 	if not user_dir.dir_exists(active_id):

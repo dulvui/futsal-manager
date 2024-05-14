@@ -16,18 +16,21 @@ extends Resource
 @export var dashboard_active_content:int
 @export var id_by_type:Dictionary
 
+@export var team_name:String
+
 
 func _init(
-		p_generation_seed:String = "SuchDefaultSeed",
-		p_generation_state:int = 0,
-		p_generation_gender:Constants.Gender = 0,
-		p_current_season:int = 1,
-		p_speed_factor:int = 1,
-		p_dashboard_active_content:int = 0,
-		p_id:String = str(int(Time.get_unix_time_from_system())),
-		p_id_by_type:Dictionary = {},
-		p_config_version:String = Config.config_version,
-		p_start_date:Dictionary = Time.get_datetime_dict_from_system(),
+		p_generation_seed: String = "SuchDefaultSeed",
+		p_generation_state: int = 0,
+		p_generation_gender: Constants.Gender = 0,
+		p_current_season: int = 1,
+		p_speed_factor: int = 1,
+		p_dashboard_active_content: int = 0,
+		p_id: String = str(int(Time.get_unix_time_from_system())),
+		p_id_by_type: Dictionary = {},
+		p_config_version: String = Config.config_version,
+		p_start_date: Dictionary = Time.get_datetime_dict_from_system(),
+		p_team_name: String = "",
 	) -> void:
 	id = p_id
 	config_version = p_config_version
@@ -39,3 +42,4 @@ func _init(
 	speed_factor = p_speed_factor
 	dashboard_active_content = p_dashboard_active_content
 	id_by_type = p_id_by_type
+	team_name = p_team_name

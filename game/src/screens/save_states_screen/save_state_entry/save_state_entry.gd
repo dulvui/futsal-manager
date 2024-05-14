@@ -13,6 +13,7 @@ var save_state:SaveState
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	create_date.text = str(save_state.start_date)
+	team.text = save_state.team_name
 
 
 func set_up(p_save_state: SaveState) -> void:
