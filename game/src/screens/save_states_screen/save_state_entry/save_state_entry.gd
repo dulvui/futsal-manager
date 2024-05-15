@@ -12,7 +12,7 @@ var save_state:SaveState
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	create_date.text = str(save_state.start_date)
+	create_date.text = Constants.day_strings[save_state.start_date.weekday] + " " + str(save_state.start_date.day) + " " + Constants.month_strings[save_state.start_date.month - 1] + " " + str(save_state.start_date.year)
 	team.text = save_state.team_name
 
 

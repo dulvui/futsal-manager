@@ -10,6 +10,7 @@ var label_settings:LabelSettings = load("res://themes/label_settings.tres")
 
 func bold(label:Label) -> void:
 	label.label_settings = bold_label_settings
-	
+
+
 func remove_bold(label:Label) -> void:
 	label.label_settings = label_settings
