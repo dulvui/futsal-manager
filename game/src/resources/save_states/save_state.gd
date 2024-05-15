@@ -45,7 +45,7 @@ func _init(
 	team_name = p_team_name
 
 
-func ceate_dir() -> void:
+func create_dir() -> void:
 	# create save state directory, if not exist yet
 	var user_dir:DirAccess = DirAccess.open("user://")
 	if user_dir and not user_dir.dir_exists(id):

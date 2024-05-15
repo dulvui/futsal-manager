@@ -98,6 +98,10 @@ func save_active_state() -> void:
 	save_sate.generation_state = generation_state
 	save_sate.generation_gender = generation_gender
 	
+	save_resources()
+
+
+func save_save_states() -> void:
 	ResourceSaver.save(save_states, "user://save_states.tres")
 
 
@@ -158,6 +162,7 @@ func generate_leagues(p_generation_seed:String, p_generation_gender:Constants.Ge
 func save_all_data() -> void:
 	save_active_state()
 	save_resources()
+	save_save_states()
 	save_config()
 
 
