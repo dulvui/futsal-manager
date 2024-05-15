@@ -27,4 +27,6 @@ func _on_load_pressed() -> void:
 
 
 func _on_delete_pressed() -> void:
-	pass # Replace with function body.
+	Config.save_states.delete(save_state)
+	get_tree().change_scene_to_file("res://src/screens/save_states_screen/save_states_screen.tscn")
+	

@@ -43,3 +43,29 @@ func _init(
 	dashboard_active_content = p_dashboard_active_content
 	id_by_type = p_id_by_type
 	team_name = p_team_name
+
+
+func ceate_dir() -> void:
+	# create save state directory, if not exist yet
+	var user_dir:DirAccess = DirAccess.open("user://")
+	if user_dir and not user_dir.dir_exists(id):
+		var err:int = user_dir.make_dir(id)
+		if err != OK:
+			print("error while creating save state dir")
+
+
+func delete_dir() -> void:
+	var user_dir: DirAccess = DirAccess.open("user://")
+	if user_dir:
+		var err: int = user_dir.change_dir(id)
+		if err == OK:
+			# remove all files
+			var file_name: String = user_dir.get_next()
+			while file_name != "":
+					OS.move_to_trash(ProjectSettings.globalize_path("user://" + id + "/" + file_name))
+					file_name = user_dir.get_next()
+		# delete folder
+		user_dir.change_dir("..")
+		OS.move_to_trash(ProjectSettings.globalize_path("user://" + id))
+		
+

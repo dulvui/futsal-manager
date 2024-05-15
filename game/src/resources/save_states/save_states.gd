@@ -55,10 +55,15 @@ func make_temp_active() -> void:
 	# make active
 	list.append(temp_state)
 	active_id = temp_state.id
+	temp_state.create_dir()
+
+
+func delete(p_state: SaveState) -> int:
+	for state:SaveState in list:
+		if state.id == p_state.id:
+			state.delete_dir()
+			list.erase(state)
+			return OK
+	return ERR_FILE_NOT_FOUND
 	
-	# create save state directory, if not exist yet
-	var user_dir:DirAccess = DirAccess.open("user://")
-	if not user_dir.dir_exists(active_id):
-		var err:int = user_dir.make_dir(active_id)
-		if err != OK:
-			print("error while creating save state dir")
+
