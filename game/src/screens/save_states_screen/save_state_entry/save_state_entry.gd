@@ -7,6 +7,7 @@ class_name SaveStateEntry
 
 @onready var team: Label = $HBoxContainer/Details/Team
 @onready var create_date: Label = $HBoxContainer/Dates2/CreateDate
+@onready var delete_dialog: Window = $DeleteDialog
 
 var save_state:SaveState
 
@@ -27,8 +28,11 @@ func _on_load_pressed() -> void:
 
 
 func _on_delete_pressed() -> void:
+	delete_dialog.popup()
+
+
+func _on_delete_dialog_confirmed() -> void:
 	Config.save_states.delete(save_state)
 	Config.save_config()
 	Config.save_save_states()
 	get_tree().change_scene_to_file("res://src/screens/save_states_screen/save_states_screen.tscn")
-	
