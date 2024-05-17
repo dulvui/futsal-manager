@@ -14,7 +14,8 @@ extends Resource
 @export var wins:int
 @export var draws:int
 @export var lost:int
-	
+
+
 func _init(
 		p_team_id:int = 0,
 		p_team_name:String = "",

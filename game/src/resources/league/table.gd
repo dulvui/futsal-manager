@@ -5,22 +5,24 @@
 class_name Table
 extends Resource
 	
-@export var teams:Array[TableValues]
+@export var teams: Array[TableValues]
 
 func _init(
-		p_teams:Array[TableValues] = [],
+		p_teams: Array[TableValues] = [],
 	) -> void:
 	teams = p_teams
 
-func add_team(team:Team) -> void:
-	var values:TableValues = TableValues.new()
+
+func add_team(team: Team) -> void:
+	var values: TableValues = TableValues.new()
 	values.team_id = team.id
 	values.team_name = team.name
 	teams.append(values)
-	
-func add_result(home_id:int,home_goals:int,away_id:int,away_goals:int) -> void:
-	var home:TableValues = _find_by_id(home_id)
-	var away:TableValues = _find_by_id(away_id)
+
+
+func add_result(home_id: int,home_goals: int,away_id: int,away_goals: int) -> void:
+	var home: TableValues = _find_by_id(home_id)
+	var away: TableValues = _find_by_id(away_id)
 	
 	home.goals_made += home_goals
 	home.goals_against += away_goals
@@ -42,13 +44,23 @@ func add_result(home_id:int,home_goals:int,away_id:int,away_goals:int) -> void:
 		home.lost += 1
 	home.games_played += 1
 	away.games_played += 1
-	
+
+
+func get_position(team_id :int = Config.team.id) -> int:
+	var position: int = 0
+	var list: Array[TableValues] = to_sorted_array()
+	while list[position].team_id != team_id:
+		position += 1
+	return position + 1
+
+
 func to_sorted_array() -> Array:
-	var sorted:Array = teams.duplicate()
+	var sorted: Array = teams.duplicate()
 	sorted.sort_custom(_point_sorter)
 	return sorted
-	
-func _point_sorter(a:TableValues, b:TableValues) -> bool:
+
+
+func _point_sorter(a: TableValues, b: TableValues) -> bool:
 	if a.games_played == 0 and b.games_played == 0:
 		return a.team_name < b.team_name
 	elif a.points > b.points:
@@ -57,9 +69,12 @@ func _point_sorter(a:TableValues, b:TableValues) -> bool:
 		return true
 	return false
 
-func _find_by_id(team_id:int) -> TableValues:
-	for value:TableValues in teams:
+
+func _find_by_id(team_id: int) -> TableValues:
+	for value: TableValues in teams:
 		if value.team_id == team_id:
 			return value
 	print("ERROR while searching team in table with id: " + str(team_id))
 	return null
+
+

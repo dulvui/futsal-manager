@@ -5,20 +5,31 @@
 extends Control
 class_name SaveStateEntry
 
+@onready var delete_dialog: ConfirmationDialog = $DeleteDialog
+
 @onready var team: Label = $HBoxContainer/Details/Team
-@onready var create_date: Label = $HBoxContainer/Dates2/CreateDate
-@onready var delete_dialog: Window = $DeleteDialog
+@onready var create_date: Label = $HBoxContainer/Dates/CreateDate
+@onready var manager: Label = $HBoxContainer/Details/Manager
+@onready var placement: Label = $HBoxContainer/Details/Placement
+@onready var game_date: Label = $HBoxContainer/Dates/GameDate
+@onready var last_save_date: Label = $HBoxContainer/Dates/LastSaveDate
 
 var save_state:SaveState
 
+
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	create_date.text = Constants.day_strings[save_state.start_date.weekday] + " " + str(save_state.start_date.day) + " " + Constants.month_strings[save_state.start_date.month - 1] + " " + str(save_state.start_date.year)
-	team.text = save_state.team_name
+	team.text = save_state.meta_team_name
+	manager.text = save_state.meta_manager_name
+	placement.text = save_state.meta_team_position
+	create_date.text = Config.calendar().format_date(save_state.meta_create_date)
+	game_date.text = Config.calendar().format_date(save_state.meta_game_date)
+	last_save_date.text  = Config.calendar().format_date(save_state.meta_last_save)
 
 
 func set_up(p_save_state: SaveState) -> void:
 	save_state = p_save_state
+
 
 func _on_load_pressed() -> void:
 	print("load save state with id ", save_state.id)

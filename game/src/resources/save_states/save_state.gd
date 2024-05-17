@@ -5,18 +5,23 @@
 class_name SaveState
 extends Resource
 
-@export var id:String
-@export var config_version:String
-@export var start_date:Dictionary
-@export var generation_seed:String
-@export var generation_state:int
-@export var generation_gender:Constants.Gender
-@export var current_season:int
-@export var speed_factor:int
-@export var dashboard_active_content:int
-@export var id_by_type:Dictionary
-
-@export var team_name:String
+@export var id: String
+@export var config_version: String
+@export var start_date: Dictionary
+@export var generation_seed: String
+@export var generation_state: int
+@export var generation_gender: Constants.Gender
+@export var current_season: int
+@export var speed_factor: int
+@export var dashboard_active_content: int
+@export var id_by_type: Dictionary
+# metadata, only used for state entry
+@export var meta_team_name: String
+@export var meta_manager_name: String
+@export var meta_team_position: String
+@export var meta_last_save: Dictionary
+@export var meta_game_date: Dictionary
+@export var meta_create_date: Dictionary
 
 
 func _init(
@@ -30,7 +35,11 @@ func _init(
 		p_id_by_type: Dictionary = {},
 		p_config_version: String = Config.config_version,
 		p_start_date: Dictionary = Time.get_datetime_dict_from_system(),
-		p_team_name: String = "",
+		p_meta_team_name: String = "",
+		p_meta_manager_name: String = "",
+		p_meta_team_position: String = "",
+		p_meta_last_save: Dictionary = {},
+		p_meta_game_date: Dictionary = {},
 	) -> void:
 	id = p_id
 	config_version = p_config_version
@@ -42,7 +51,11 @@ func _init(
 	speed_factor = p_speed_factor
 	dashboard_active_content = p_dashboard_active_content
 	id_by_type = p_id_by_type
-	team_name = p_team_name
+	meta_team_name = p_meta_team_name
+	meta_manager_name = p_meta_manager_name
+	meta_team_position = p_meta_team_position
+	meta_last_save = p_meta_last_save
+	meta_game_date = p_meta_game_date
 
 
 func create_dir() -> void:
@@ -52,6 +65,11 @@ func create_dir() -> void:
 		var err:int = user_dir.make_dir(id)
 		if err != OK:
 			print("error while creating save state dir")
+	
+	# save static metadata
+	meta_team_name = Config.team.name
+	meta_manager_name = Config.manager.get_full_name()
+	meta_create_date = Time.get_datetime_dict_from_system()
 
 
 func delete_dir() -> void:
@@ -67,5 +85,10 @@ func delete_dir() -> void:
 		# delete folder
 		user_dir.change_dir("..")
 		OS.move_to_trash(ProjectSettings.globalize_path("user://" + id))
-		
+
+
+func save_metadata() -> void:
+	meta_team_position = str(Config.leagues.get_active().table.get_position()) + ". " + Config.leagues.get_active().name
+	meta_last_save = Time.get_datetime_dict_from_system()
+	meta_game_date = Config.calendar().date
 

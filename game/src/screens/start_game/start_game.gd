@@ -34,11 +34,22 @@ func _ready() -> void:
 	start_year_spinbox.get_line_edit().text = str(Config.start_date.year)
 
 
-func _on_Back_pressed() -> void:
+func _on_genearate_seed_button_pressed() -> void:
+	generation_seed = str(randi_range(100000, 999999)) + "-" + str(randi_range(100000, 999999)) + "-" + str(randi_range(100000, 999999))
+	seed_edit.text = generation_seed
+
+
+func _on_default_seed_button_pressed() -> void:
+	generation_seed = Constants.DEFAULT_SEED
+	seed_edit.text = generation_seed
+
+
+
+func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
 
-func _on_Continue_pressed() -> void:
+func _on_continue_pressed() -> void:
 	if m_name.text.length() * m_surname.text.length() * generation_seed.length() > 0:
 		var manager:Manager =  Manager.new()
 		manager.name = m_name.text
@@ -54,12 +65,3 @@ func _on_Continue_pressed() -> void:
 		Config.manager = manager
 		get_tree().change_scene_to_file("res://src/screens/team_select/team_select.tscn")
 
-
-func _on_genearate_seed_button_pressed() -> void:
-	generation_seed = str(randi_range(100000, 999999)) + "-" + str(randi_range(100000, 999999)) + "-" + str(randi_range(100000, 999999))
-	seed_edit.text = generation_seed
-
-
-func _on_default_seed_button_pressed() -> void:
-	generation_seed = Constants.DEFAULT_SEED
-	seed_edit.text = generation_seed

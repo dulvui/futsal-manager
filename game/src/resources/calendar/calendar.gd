@@ -81,6 +81,7 @@ func initialize(next_season:bool = false) -> void:
 		
 		temp_date = _get_next_day(temp_date)
 
+
 func next_day() -> void:
 	date = _get_next_day()
 	
@@ -93,11 +94,14 @@ func next_day() -> void:
 	if does_market_end_today():
 		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_END)
 
+
 func day(p_month:int = date.month, p_day:int = date.day) -> Day:
 	return months[p_month - 1].days[p_day - 1]
-	
+
+
 func month(p_month:int = date.month) -> Month:
 	return months[p_month - 1]
+
 
 func _get_next_day(_date:Dictionary=date) -> Dictionary:
 	# increment date by one day
@@ -111,9 +115,11 @@ func _get_next_day(_date:Dictionary=date) -> Dictionary:
 	
 	return _next_day
 
+
 func is_match_day() -> bool:
 	var next_match:Match = get_next_match()
 	return next_match != null and not next_match.over
+
 
 func is_market_active(p_date:Dictionary=date) -> bool:
 	for market_period:Dictionary in market_periods:
@@ -121,7 +127,8 @@ func is_market_active(p_date:Dictionary=date) -> bool:
 			and p_date.month <=  market_period.end.month and p_date.day <=  market_period.end.day:
 			return true
 	return false
-	
+
+
 func does_market_start_today() -> bool:
 	for market_period:Dictionary in market_periods:
 		if date.month == market_period.start.month and date.day == market_period.start.day:
@@ -133,12 +140,15 @@ func does_market_end_today() -> bool:
 		if date.month == market_period.end.month and date.day == market_period.end.day:
 			return true
 	return false
-	
+
+
 func is_season_finished() -> bool:
 	return date.month == season_end_month and date.day == season_end_day
 
+
 func format_date(p_date:Dictionary=date) -> String:
 	return Constants.day_strings[p_date.weekday] + " " + str(p_date.day) + " " + Constants.month_strings[p_date.month - 1] + " " + str(p_date.year)
+
 
 func get_next_match() -> Match:
 	for matchz:Match in day().matches:

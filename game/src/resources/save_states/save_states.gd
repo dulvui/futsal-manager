@@ -50,8 +50,9 @@ func get_active_path(relative_path:String = "") -> String:
 
 
 func make_temp_active() -> void:
-	# assign values
-	temp_state.team_name = Config.team.name
+	# assign metadata
+	temp_state.save_metadata()
+	
 	# make active
 	list.append(temp_state)
 	active_id = temp_state.id

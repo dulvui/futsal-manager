@@ -98,6 +98,7 @@ func save_active_state() -> void:
 	save_sate.generation_state = generation_state
 	save_sate.generation_gender = generation_gender
 	
+	save_sate.save_metadata()
 	save_resources()
 
 
@@ -142,6 +143,7 @@ func _load_resources() -> void:
 		transfers = ResourceLoader.load(save_states.get_active_path("transfers.tres"))
 	else:
 		transfers = Transfers.new()
+
 
 func save_resources() -> void:
 	ResourceSaver.save(leagues, save_states.get_active_path("leagues.tres"))
