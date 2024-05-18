@@ -22,7 +22,7 @@ var players:Array[Player]
 
 var info_type:String
 
-var sort_memory:Dictionary = {} # to save wich value is already sorted and how
+var sort_memory: Dictionary = {} # to save wich value is already sorted and how
 
 const page_size:int = 16
 var page:int = 0

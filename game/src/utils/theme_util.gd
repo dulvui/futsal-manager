@@ -4,7 +4,7 @@
 
 extends Node
 
-const themes:Dictionary = {
+const themes: Dictionary = {
 	"DARK" : "res://themes/default/theme.tres",
 	"LIGHT" : "res://themes/light/theme_light.tres",
 }

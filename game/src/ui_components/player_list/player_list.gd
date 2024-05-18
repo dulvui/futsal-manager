@@ -18,7 +18,7 @@ var base_headers:Array[String] = ["position", "surname", "attributes_average"]
 @onready var league_select:OptionButton = $VBoxContainer/HBoxContainer/LeagueSelect
 @onready var pos_select:OptionButton = $VBoxContainer/HBoxContainer/PositionSelect
 
-var active_filters:Dictionary = {}
+var active_filters: Dictionary = {}
 var active_info_type:int = 0
 var team_search:String = ""
 

@@ -18,7 +18,7 @@ var theme_index:int
 var save_states:SaveStates
 
 # vars
-var start_date:Dictionary
+var start_date: Dictionary
 # generator config
 var generation_seed:String
 var generation_state:int
@@ -29,7 +29,7 @@ var current_season:int
 var speed_factor:int
 var dashboard_active_content:int
 # saves current id for resources
-var id_by_type:Dictionary
+var id_by_type: Dictionary
 
 # rng's
 var rng:RandomNumberGenerator

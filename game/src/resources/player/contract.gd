@@ -15,8 +15,8 @@ extends Resource
 @export var bonus_nat_cup_title:int
 @export var bonus_inter_cup_title:int
 @export var buy_clause:int
-@export var start_date:Dictionary # unixtimestamp
-@export var end_date:Dictionary
+@export var start_date: Dictionary # unixtimestamp
+@export var end_date: Dictionary
 @export var is_on_loan:bool
 
 func _init(
@@ -30,8 +30,8 @@ func _init(
 	p_bonus_nat_cup_title:int = 0,
 	p_bonus_inter_cup_title:int = 0,
 	p_buy_clause:int = 0,
-	p_start_date:Dictionary = {}, # unixtimestamp
-	p_end_date:Dictionary = {},
+	p_start_date: Dictionary = {}, # unixtimestamp
+	p_end_date: Dictionary = {},
 	p_is_on_loan:bool = false,
 ) -> void:
 	id = p_id

@@ -36,12 +36,12 @@ const market_periods:Array = [
 	},
 ]
 
-@export var date:Dictionary
+@export var date: Dictionary
 @export var months:Array[Month]
 
 
 func _init(
-		p_date:Dictionary = {},
+		p_date: Dictionary = {},
 		p_months:Array[Month] = [],
 	) -> void:
 	date = p_date
@@ -60,7 +60,7 @@ func initialize(next_season:bool = false) -> void:
 	
 	# start date in fomrat YYYY-MM-DDTHH:MM:SS
 	var first_january:String = str(date.year) + "-01-01T00:00:00"
-	var temp_date:Dictionary = Time.get_datetime_dict_from_datetime_string(first_january, true)
+	var temp_date: Dictionary = Time.get_datetime_dict_from_datetime_string(first_january, true)
 	
 	# create months
 	for month_string:String in Constants.month_strings:
@@ -103,11 +103,11 @@ func month(p_month:int = date.month) -> Month:
 	return months[p_month - 1]
 
 
-func _get_next_day(_date:Dictionary=date) -> Dictionary:
+func _get_next_day(_date: Dictionary=date) -> Dictionary:
 	# increment date by one day
 	var unix_time:int = Time.get_unix_time_from_datetime_dict(_date)
 	unix_time += day_in_seconds
-	var _next_day:Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
+	var _next_day: Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
 	
 	_next_day.erase("hour")
 	_next_day.erase("minute")
@@ -121,8 +121,8 @@ func is_match_day() -> bool:
 	return next_match != null and not next_match.over
 
 
-func is_market_active(p_date:Dictionary=date) -> bool:
-	for market_period:Dictionary in market_periods:
+func is_market_active(p_date: Dictionary=date) -> bool:
+	for market_period: Dictionary in market_periods:
 		if p_date.month >= market_period.start.month and p_date.day >= market_period.start.day \
 			and p_date.month <=  market_period.end.month and p_date.day <=  market_period.end.day:
 			return true
@@ -130,13 +130,13 @@ func is_market_active(p_date:Dictionary=date) -> bool:
 
 
 func does_market_start_today() -> bool:
-	for market_period:Dictionary in market_periods:
+	for market_period: Dictionary in market_periods:
 		if date.month == market_period.start.month and date.day == market_period.start.day:
 			return true
 	return false
 	
 func does_market_end_today() -> bool:
-	for market_period:Dictionary in market_periods:
+	for market_period: Dictionary in market_periods:
 		if date.month == market_period.end.month and date.day == market_period.end.day:
 			return true
 	return false
@@ -146,7 +146,7 @@ func is_season_finished() -> bool:
 	return date.month == season_end_month and date.day == season_end_day
 
 
-func format_date(p_date:Dictionary=date) -> String:
+func format_date(p_date: Dictionary=date) -> String:
 	return Constants.day_strings[p_date.weekday] + " " + str(p_date.day) + " " + Constants.month_strings[p_date.month - 1] + " " + str(p_date.year)
 
 

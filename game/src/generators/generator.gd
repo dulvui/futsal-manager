@@ -10,11 +10,11 @@ const LEAGUES_DIR:String = "res://data/leagues/"
 # defines noise added to attribute factors
 const NOISE:int = 3
 
-var leagues_data:Dictionary = {}
-var names:Dictionary = {}
+var leagues_data: Dictionary = {}
+var names: Dictionary = {}
 
 # for birthdays range
-var date:Dictionary
+var date: Dictionary
 var max_timestamp:int
 var min_timestamp:int
 
@@ -25,7 +25,7 @@ func generate() -> Leagues:
 	# starts from current year and substracts min/max years
 	# youngest player can be 15 and oldest 45
 	date = Config.start_date
-	var max_date:Dictionary = date.duplicate()
+	var max_date: Dictionary = date.duplicate()
 	max_date.month = 1
 	max_date.day = 1
 	max_date.year -= 15
@@ -44,7 +44,7 @@ func generate() -> Leagues:
 		leagues_data[nation] = JSON.parse_string(leagues_file.get_as_text())
 		 # used for prestige calculation, so that high leagues have better prestige
 		var pyramid_level:int = 1
-		for l:Dictionary in leagues_data[nation]:
+		for l: Dictionary in leagues_data[nation]:
 			var league:League = League.new()
 			league.name = l.name
 			league.pyramid_level = pyramid_level
@@ -312,7 +312,7 @@ func get_surname(nationality:Constants.Nations) -> String:
 func create_player(nationality:Constants.Nations, position:Player.Position, nr:int, p_prestige:int) -> Player:
 	var player:Player = Player.new()
 	# Config.rng.random date from 1970 to 2007
-	var birth_date:Dictionary = Time.get_datetime_dict_from_unix_time(Config.rng.randi_range(0, max_timestamp))
+	var birth_date: Dictionary = Time.get_datetime_dict_from_unix_time(Config.rng.randi_range(0, max_timestamp))
 	
 	var prestige:int = get_player_prestige(p_prestige)
 

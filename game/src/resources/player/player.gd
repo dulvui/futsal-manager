@@ -22,7 +22,7 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var league:String # league name for easier filtering etc...
 @export var surname:String
 @export var nation:Constants.Nations
-@export var birth_date:Dictionary
+@export var birth_date: Dictionary
 @export var form:Form
 @export var morality:Morality
 @export var statistics:Array[Statistics]
@@ -44,7 +44,7 @@ func _init(
 	p_league:String = "",
 	p_surname:String = "",
 	p_nation:Constants.Nations = Constants.Nations.ITALY,
-	p_birth_date:Dictionary = {},
+	p_birth_date: Dictionary = {},
 	p_form:Form = Form.Good,
 	p_morality:Morality = Morality.Good,
 	p_statistics:Array[Statistics] = [],

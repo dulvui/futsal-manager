@@ -18,7 +18,7 @@ func _ready() -> void:
 func update_messages() -> void:
 	message_list.update()
 
-func show_offer_contract(content:Dictionary) -> void:
+func show_offer_contract(content: Dictionary) -> void:
 	emit_signal("offer_contract",content)
 
 func _on_message_email_action(message:EmailMessage) -> void:
