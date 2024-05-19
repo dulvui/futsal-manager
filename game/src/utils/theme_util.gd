@@ -25,4 +25,4 @@ func get_active_theme() -> Theme:
 
 
 func get_theme_names() -> Array:
-	return themes.keys()
+	return THEMES.keys()
