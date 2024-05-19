@@ -6,20 +6,20 @@ class_name Day
 extends Resource
 
 @export var matches:Array[Match]
-@export var market:bool
+@export var market: bool
 @export var weekday:String
-@export var day:int
-@export var month:int
-@export var year:int
+@export var day: int
+@export var month: int
+@export var year: int
 #@export var trainings:Array
 
 func _init(
 	p_matches:Array[Match] = [],
-	p_market:bool = false,
+	p_market: bool = false,
 	p_weekday:String = "MON",
-	p_day:int = 1,
-	p_month:int = 1,
-	p_year:int = 1970,
+	p_day: int = 1,
+	p_month: int = 1,
+	p_year: int = 1970,
 	) -> void:
 	matches = p_matches
 	market = p_market
@@ -30,4 +30,4 @@ func _init(
 
 
 func to_format_string() -> String:
-	return weekday + " " + str(day) + " " + Constants.month_strings[month - 1] + " " + str(year)
+	return weekday + " " + str(day) + " " + Const.MONTH_STRINGS[month - 1] + " " + str(year)

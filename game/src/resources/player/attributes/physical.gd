@@ -5,20 +5,20 @@
 extends Resource
 class_name Physical
 
-@export var pace:int
-@export var acceleration:int
-@export var stamina:int
-@export var strength:int
-@export var agility:int
-@export var jump:int
+@export var pace: int
+@export var acceleration: int
+@export var stamina: int
+@export var strength: int
+@export var agility: int
+@export var jump: int
 
 func _init(
-	p_pace:int = 0,
-	p_acceleration:int = 0,
-	p_stamina:int = 0,
-	p_strength:int = 0,
-	p_agility:int = 0,
-	p_jump:int = 0,
+	p_pace: int = 0,
+	p_acceleration: int = 0,
+	p_stamina: int = 0,
+	p_strength: int = 0,
+	p_agility: int = 0,
+	p_jump: int = 0,
 ) -> void:
 	pace = p_pace
 	acceleration = p_acceleration
@@ -28,7 +28,7 @@ func _init(
 	jump = p_jump
 	
 func average() -> int:
-	var value:int = 0
+	var value: int = 0
 	value += pace
 	value += acceleration
 	value += stamina

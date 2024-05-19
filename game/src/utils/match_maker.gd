@@ -5,7 +5,7 @@
 extends Node
 
 var match_days:Array[Array]
-var match_day:int = 0
+var match_day: int = 0
 
 
 func inizialize_matches(leagues:Leagues) -> void:
@@ -17,9 +17,9 @@ func inizialize_matches(leagues:Leagues) -> void:
 		var random_teams:Array[Team]  = teams.duplicate(true)
 		random_teams.shuffle()
 		
-		var last_team:Team = random_teams.pop_front()
+		var last_team: Team = random_teams.pop_front()
 		
-		var home:bool = true
+		var home: bool = true
 		
 		for i in random_teams.size():
 			var current_match_day:Array = []
@@ -34,8 +34,8 @@ func inizialize_matches(leagues:Leagues) -> void:
 			copy.remove_at(0)
 			
 			for j in range(0,(teams.size()/2) - 1):
-				var home_index:int = j
-				var away_index:int = - j - 1
+				var home_index: int = j
+				var away_index: int = - j - 1
 				
 				var matchTwo:Match
 				if home:
@@ -65,8 +65,8 @@ func inizialize_matches(leagues:Leagues) -> void:
 		############
 		# add to calendar
 		############
-		var day:int = league.calendar.day().day
-		var month:int = league.calendar.day().month
+		var day: int = league.calendar.day().day
+		var month: int = league.calendar.day().month
 		
 		# start with saturday of next week
 		for i in range(8, 1, -1):
@@ -116,7 +116,7 @@ func inizialize_matches(leagues:Leagues) -> void:
 
 		
 func _shift_array(array:Array) -> void:
-	var temp:Team = array[0]
+	var temp: Team = array[0]
 	for i in range(array.size() - 1):
 		array[i] = array[i+1]
 	array[array.size() - 1] = temp

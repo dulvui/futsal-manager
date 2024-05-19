@@ -11,7 +11,7 @@ signal interception
 var player_res:Player
 var ball:SimBall
 var field:SimField
-var left_half:bool
+var left_half: bool
 # positions
 var start_pos:Vector2
 var pos:Vector2
@@ -20,13 +20,13 @@ var direction:Vector2
 var destination:Vector2
 var speed:float
 
-var interception_radius:int #TODO reduce radius with low stamina
+var interception_radius: int #TODO reduce radius with low stamina
 
 func set_up(
 	p_player_res:Player,
 	p_ball:SimBall,
 	p_field:SimField,
-	p_left_half:bool,
+	p_left_half: bool,
 ) -> void:
 	player_res = p_player_res
 	ball = p_ball
@@ -97,8 +97,8 @@ func set_penalty_area_bounds() -> void:
 	else:
 		if pos.x < field.penalty_area_right_x - 10:
 				pos.x = field.penalty_area_right_x - 10
-		elif pos.x > field.size.x + field.border_size + 10:
-			pos.x = field.size.x + field.border_size + 10
+		elif pos.x > field.size.x + field.BORDER_SIZE + 10:
+			pos.x = field.size.x + field.BORDER_SIZE + 10
 
 func move() -> void:
 	if speed > 0:

@@ -7,13 +7,13 @@ class_name VisualPlayer
 
 @onready var body:Sprite2D = $Sprites/Body
 @onready var sprites:Node2D = $Sprites
-@onready var label:Label = $Info/Label
+@onready var label: Label = $Info/Label
 
 var sim_player:SimPlayer
 var visual_ball:VisualBall
 
 func _process(delta: float) -> void:
-	global_position = global_position.lerp(sim_player.pos, delta * Config.speed_factor * Constants.ticks_per_second)
+	global_position = global_position.lerp(sim_player.pos, delta * Config.speed_factor * Const.TICKS_PER_SECOND)
 	sprites.look_at(visual_ball.global_position)
 
 func set_up(p_sim_player:SimPlayer, p_visual_ball:VisualBall, team_color:Color) -> void:

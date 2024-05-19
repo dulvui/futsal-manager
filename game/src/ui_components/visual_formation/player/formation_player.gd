@@ -6,8 +6,8 @@ extends Control
 
 signal change_player
 
-@onready var name_label:Label = $VBoxContainer/Name
-@onready var nr_label:Label = $VBoxContainer/Nr
+@onready var name_label: Label = $VBoxContainer/Name
+@onready var nr_label: Label = $VBoxContainer/Nr
 @onready var state_color:ColorRect = $ColorRect
 
 var color:Color
@@ -20,7 +20,7 @@ func _ready() -> void:
 	name_label.text = player.surname
 	state_color.color = color
 
-func set_player(_player:Player, team:Team=null) -> void:
+func set_player(_player:Player, team: Team=null) -> void:
 	player = _player
 	
 	if team:

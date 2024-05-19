@@ -6,9 +6,9 @@ extends Control
 
 signal change
 
-const FormationPlayer:PackedScene = preload("res://src/ui_components/visual_formation/player/formation_player.tscn")
+const FormationPlayer: PackedScene = preload("res://src/ui_components/visual_formation/player/formation_player.tscn")
 
-@onready var player_list:Control = $HBoxContainer/PlayerList
+@onready var player_list: Control = $HBoxContainer/PlayerList
 @onready var players:VBoxContainer = $HBoxContainer/LineUp/Field/Players
 @onready var subs:VBoxContainer = $HBoxContainer/Subs/List
 
@@ -23,10 +23,10 @@ const FormationPlayer:PackedScene = preload("res://src/ui_components/visual_form
 var lineup_players:Array[int] = []
 var list_player:Player = null
 
-var team:Team
-var only_lineup:bool
+var team: Team
+var only_lineup: bool
 
-func set_up(p_only_lineup:bool) -> void:
+func set_up(p_only_lineup: bool) -> void:
 	only_lineup = p_only_lineup
 	team = Config.team
 	player_list.set_up(only_lineup, false, team)
@@ -39,59 +39,59 @@ func set_up(p_only_lineup:bool) -> void:
 func _set_players() -> void:
 	# clean field
 	for hbox:HBoxContainer in players.get_children():
-		for player:Control in hbox.get_children():
+		for player: Control in hbox.get_children():
 			player.queue_free()
 			
 	# clean subs
-	for sub:Control in subs.get_children():
+	for sub: Control in subs.get_children():
 		sub.queue_free()
 	
-	var pos_count:int = 0
+	var pos_count: int = 0
 	# add golakeeper
 	if team.formation.goalkeeper > 0:
-		var formation_goal_keeper:Control = FormationPlayer.instantiate()
+		var formation_goal_keeper: Control = FormationPlayer.instantiate()
 		formation_goal_keeper.set_player(team.get_goalkeeper(), team)
 		formation_goal_keeper.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		goalkeeper.add_child(formation_goal_keeper)
 		pos_count += 1
 	
 	# add defenders
-	for i:int in team.formation.defense:
-		var formation_player:Control = FormationPlayer.instantiate()
+	for i: int in team.formation.defense:
+		var formation_player: Control = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		defense.add_child(formation_player)
 		pos_count += 1
 		
 	# add center
-	for i:int in team.formation.center:
-		var formation_player:Control = FormationPlayer.instantiate()
+	for i: int in team.formation.center:
+		var formation_player: Control = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		center.add_child(formation_player)
 		pos_count += 1
 		
 	# add attack
-	for i:int in team.formation.attack:
-		var formation_player:Control = FormationPlayer.instantiate()
+	for i: int in team.formation.attack:
+		var formation_player: Control = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		attack.add_child(formation_player)
 		pos_count += 1
 		
 	# add subs
-	for i:int in team.get_sub_players().size():
-		var formation_player:Control = FormationPlayer.instantiate()
+	for i: int in team.get_sub_players().size():
+		var formation_player: Control = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		subs.add_child(formation_player)
 		pos_count += 1
 
-func _update_formation(index:int) -> void:
+func _update_formation(index: int) -> void:
 	team.formation = Formation.new(index)
 	_set_players()
 
-func _on_line_up_select_player(index:int) -> void:
+func _on_line_up_select_player(index: int) -> void:
 	lineup_players.append(index)
 	if list_player or lineup_players.size() == 2:
 		_change_player()
@@ -107,7 +107,7 @@ func _change_player() -> void:
 		team.lineup_player_ids[lineup_players[0]] = list_player.id
 	# switch betwenn lineup and lineup
 	elif lineup_players.size() == 2:
-		var temp_id:int = team.lineup_player_ids[lineup_players[0]]
+		var temp_id: int = team.lineup_player_ids[lineup_players[0]]
 		team.lineup_player_ids[lineup_players[0]] = team.lineup_player_ids[lineup_players[1]]
 		team.lineup_player_ids[lineup_players[1]] = temp_id
 	else:

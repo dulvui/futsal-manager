@@ -5,18 +5,18 @@
 class_name League
 extends Resource
 
-@export var id:int
+@export var id: int
 @export var table:Table
 @export var calendar:Calendar
-@export var nation:Constants.Nations
-@export var pyramid_level:int
+@export var nation:Const.Nations
+@export var pyramid_level: int
 @export var name:String
 @export var teams:Array[Team]
 
 func _init(
-		p_id:int = IdUtil.next_id(IdUtil.Types.LEAGUE),
-		p_nation:Constants.Nations = Constants.Nations.ITALY,
-		p_pyramid_level:int = 1,
+		p_id: int = IdUtil.next_id(IdUtil.Types.LEAGUE),
+		p_nation:Const.Nations = Const.Nations.ITALY,
+		p_pyramid_level: int = 1,
 		p_table:Table = Table.new(),
 		p_name:String = "",
 		p_teams:Array[Team] = [],
@@ -30,12 +30,12 @@ func _init(
 	teams = p_teams
 	calendar = p_calendar
 
-func add_team(team:Team) -> void:
+func add_team(team: Team) -> void:
 	teams.append(team)
 	table.add_team(team) 
 	
-func get_team_by_id(team_id:int) -> Team:
-	for team:Team in teams:
+func get_team_by_id(team_id: int) -> Team:
+	for team: Team in teams:
 		if team.id == team_id:
 			return team
 	return null

@@ -10,18 +10,18 @@ enum Foot {L, R}
 enum Morality {Horrible, Bad, Good, Excellent}
 enum Form {Injured, Recover, Good, Excellent}
 
-@export var id:int
-@export var price:int
-@export var nr:int # shirt number
-@export var loyality:int
-@export var prestige:int # 1-100
-@export var moral:int
-@export var injury_factor:int
+@export var id: int
+@export var price: int
+@export var nr: int # shirt number
+@export var loyality: int
+@export var prestige: int # 1-100
+@export var moral: int
+@export var injury_factor: int
 @export var name:String
 @export var team:String # team name for easier filtering etc...
 @export var league:String # league name for easier filtering etc...
 @export var surname:String
-@export var nation:Constants.Nations
+@export var nation:Const.Nations
 @export var birth_date: Dictionary
 @export var form:Form
 @export var morality:Morality
@@ -32,18 +32,18 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var attributes:Attributes
 
 func _init(
-	p_id:int = IdUtil.next_id(IdUtil.Types.PLAYER),
-	p_price:int = 0,
-	p_nr:int = 0,
-	p_loyality:int = 0,
-	p_prestige:int = 0,
-	p_moral:int = 0,
-	p_injury_factor:int = 0,
+	p_id: int = IdUtil.next_id(IdUtil.Types.PLAYER),
+	p_price: int = 0,
+	p_nr: int = 0,
+	p_loyality: int = 0,
+	p_prestige: int = 0,
+	p_moral: int = 0,
+	p_injury_factor: int = 0,
 	p_name:String = "",
 	p_team:String = "",
 	p_league:String = "",
 	p_surname:String = "",
-	p_nation:Constants.Nations = Constants.Nations.ITALY,
+	p_nation:Const.Nations = Const.Nations.ITALY,
 	p_birth_date: Dictionary = {},
 	p_form:Form = Form.Good,
 	p_morality:Morality = Morality.Good,
@@ -84,7 +84,7 @@ func get_attack_attributes(attack:Action.Attack) -> int:
 			# check sector and pick long_shoot
 			return attributes.technical.shooting
 		Action.Attack.PASS:
-			return attributes.technical.passing * Constants.PASS_SUCCESS_FACTOR
+			return attributes.technical.passing * Const.PASS_SUCCESS_FACTOR
 #		Action.Attack.CROSS:
 #			return attributes.technical.crossing
 		Action.Attack.DRIBBLE:
@@ -92,7 +92,7 @@ func get_attack_attributes(attack:Action.Attack) -> int:
 #		Action.Attack.HEADER:
 #			return attributes.technical.heading"]
 		Action.Attack.RUN:
-			var attacker_attributes:int =  attributes.physical.pace
+			var attacker_attributes: int =  attributes.physical.pace
 			attacker_attributes += attributes.physical.acceleration
 			return attacker_attributes
 	# should never happen
@@ -114,7 +114,7 @@ func get_defense_attributes(attack:Action.Attack) -> int:
 #			return attributes.technical.heading"]
 		# use player preferences/attirbutes and team tactics pressing or wait
 		Action.Attack.RUN:
-			var defender_attributes:int
+			var defender_attributes: int
 			if randi() % 2 == 0:
 #					return Defense.RUN
 				defender_attributes = attributes.physical.pace

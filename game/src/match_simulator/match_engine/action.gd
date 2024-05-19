@@ -12,9 +12,9 @@ enum Attack {PASS, CROSS, DRIBBLE, RUN, SHOOT}
 # so better decisions can be made depeneding on the sector a player is
 enum Sector {ATTACK, CENTER, DEFENSE}
 
-var attack:int
-var state:int
-var is_home:bool
-var success:bool
+var attack: int
+var state: int
+var is_home: bool
+var success: bool
 var attacking_player:Player
 var defending_player:Player

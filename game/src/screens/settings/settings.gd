@@ -5,7 +5,7 @@
 extends Control
 class_name Settings
 
-const resolutions: Dictionary = {
+const RESOLUTIONS: Dictionary = {
 	"3840x2160":Vector2i(3840,2160),
 	"2560x1440":Vector2i(2560,1080),
 	"1920x1080":Vector2i(1920,1080),
@@ -21,7 +21,7 @@ const resolutions: Dictionary = {
 @onready var theme_options:OptionButton = $VBoxContainer/Theme/ThemeOptionButton
 @onready var resolution_options:OptionButton = $VBoxContainer/Resolution/ResolutionOptionButton
 
-@onready var version_label:Label = $VBoxContainer/Version/VersionLabel
+@onready var version_label: Label = $VBoxContainer/Version/VersionLabel
 
 
 
@@ -33,11 +33,11 @@ func _ready() -> void:
 	theme_options.selected = Config.theme_index
 	
 	# resolutions
-	for resolution:String in resolutions.keys():
+	for resolution:String in RESOLUTIONS.keys():
 		resolution_options.add_item(resolution)
 	resolution_options.selected = 0
 	
-	version_label.text = Config.version
+	version_label.text = Config.VERSION
 
 func _on_theme_option_button_item_selected(index: int) -> void:
 	theme = ThemeUtil.set_active_theme(index)
@@ -48,7 +48,7 @@ func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
 
-func _on_resolution_option_button_item_selected(index:int) -> void:
-	size = resolutions[resolutions.keys()[index]]
+func _on_resolution_option_button_item_selected(index: int) -> void:
+	size = RESOLUTIONS[RESOLUTIONS.keys()[index]]
 	
 

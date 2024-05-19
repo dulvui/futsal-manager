@@ -6,7 +6,7 @@ extends Control
 
 signal show_message(message:EmailMessage)
 
-const message_row = preload("res://src/ui_components/email/list/message_row/message_row.tscn")
+const MessageRowScene: PackedScene = preload("res://src/ui_components/email/list/message_row/message_row.tscn")
 
 @onready var list:VBoxContainer = $ScrollContainer/List
 
@@ -15,7 +15,7 @@ func update() -> void:
 		child.queue_free()
 	
 	for i in range(Config.inbox.list.size()-1,-1,-1): # reverse list
-		var row:MessageRow = message_row.instantiate()
+		var row:MessageRow = MessageRowScene.instantiate()
 		list.add_child(row)
 		row.click.connect(_on_row_click.bind(Config.inbox.list[i]))
 		row.set_up(Config.inbox.list[i])

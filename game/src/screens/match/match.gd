@@ -4,35 +4,37 @@
 
 extends Control
 
-@onready var match_simulator:MatchSimulator = $Main/Content/CentralContainer/MainBar/MatchSimulator
-@onready var stats:MarginContainer = $Main/Content/CentralContainer/MainBar/Stats
-@onready var comments:VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
-@onready var events:ScrollContainer = $Main/Content/CentralContainer/MainBar/Events
-@onready var formation:Control = $Main/Content/CentralContainer/MainBar/Formation
-@onready var animation_player:AnimationPlayer = $AnimationPlayer
-@onready var time_label:Label = $Main/Content/CentralContainer/TopBar/Time
-@onready var result_label:Label = $Main/Content/CentralContainer/TopBar/Result
-@onready var pause_button:Button = $Main/Content/Buttons/Pause
-@onready var home_color:ColorRect = $Main/Content/CentralContainer/TopBar/HomeColor
-@onready var away_color:ColorRect = $Main/Content/CentralContainer/TopBar/AwayColor
-@onready var speed_factor_label:Label = $Main/Content/Buttons/Speed/SpeedFactor
+const MAX_SPEED_FACTOR: int = 20
+const MAX_COMMENTS: int = 16
 
-@onready var home_possession:Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Home
-@onready var away_possession:Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Away
+@onready var match_simulator: MatchSimulator = $Main/Content/CentralContainer/MainBar/MatchSimulator
+@onready var stats: MarginContainer = $Main/Content/CentralContainer/MainBar/Stats
+@onready var comments: VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
+@onready var events: ScrollContainer = $Main/Content/CentralContainer/MainBar/Events
+@onready var formation: Control = $Main/Content/CentralContainer/MainBar/Formation
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var time_label: Label = $Main/Content/CentralContainer/TopBar/Time
+@onready var result_label: Label = $Main/Content/CentralContainer/TopBar/Result
+@onready var pause_button: Button = $Main/Content/Buttons/Pause
+@onready var home_color: ColorRect = $Main/Content/CentralContainer/TopBar/HomeColor
+@onready var away_color: ColorRect = $Main/Content/CentralContainer/TopBar/AwayColor
+@onready var speed_factor_label: Label = $Main/Content/Buttons/Speed/SpeedFactor
 
-const max_comments:int = 16
-var last_active_view:Control
+@onready var home_possession: Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Home
+@onready var away_possession: Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Away
 
-var home_team:Team
-var away_team:Team
+var last_active_view: Control
 
-var match_started:bool = false
-var first_half:bool = true
+var home_team: Team
+var away_team: Team
 
-var matchz:Match
+var match_started: bool = false
+var first_half: bool = true
 
-var home_stats:MatchStatistics
-var away_stats:MatchStatistics
+var matchz: Match
+
+var home_stats: MatchStatistics
+var away_stats: MatchStatistics
 
 
 func _ready() -> void:
@@ -40,7 +42,7 @@ func _ready() -> void:
 	
 	matchz = Config.calendar().get_next_match()
 
-	for team:Team in Config.leagues.get_active().teams:
+	for team: Team in Config.leagues.get_active().teams:
 		if team.name == matchz.home.name:
 			home_team = team
 		elif team.name == matchz.away.name:
@@ -150,7 +152,7 @@ func _on_Dashboard_pressed() -> void:
 
 
 func _on_Faster_pressed() -> void:
-	if Config.speed_factor < Constants.max_speed_factor:
+	if Config.speed_factor < MAX_SPEED_FACTOR:
 		Config.speed_factor += 1
 		match_simulator.set_time()
 	speed_factor_label.text = str(Config.speed_factor) + " X"
@@ -164,7 +166,7 @@ func _on_Slower_pressed() -> void:
 
 
 func _on_Pause_pressed() -> void:
-	var paused:bool = match_simulator.pause_toggle()
+	var paused: bool = match_simulator.pause_toggle()
 	if paused:
 		pause_button.text = tr("CONTINUE")
 	else:
@@ -190,8 +192,8 @@ func _on_match_simulator_match_end() -> void:
 
 
 func _on_match_simulator_action_message(message:String) -> void:
-	if comments.get_child_count() > max_comments:
+	if comments.get_child_count() > MAX_COMMENTS:
 		comments.remove_child(comments.get_child(0))
-	var new_line:Label = Label.new()
+	var new_line: Label = Label.new()
 	new_line.text = time_label.text + " " + message
 	comments.add_child(new_line)

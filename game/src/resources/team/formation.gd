@@ -21,12 +21,12 @@ enum Variations {
 	#F0113
 }
 
-@export var variation:int
+@export var variation: int
 
-@export var goalkeeper:int
-@export var defense:int
-@export var center:int
-@export var attack:int
+@export var goalkeeper: int
+@export var defense: int
+@export var center: int
+@export var attack: int
 
 @export var tactic_defense:TacticDefense
 @export var tactic_offense:TacticOffense
@@ -50,7 +50,7 @@ func set_variation(p_variation:Variations) -> void:
 	# extract int values
 	var int_values:Array[int] = []
 	for value in string_values:
-		var int_value:int = int(value)
+		var int_value: int = int(value)
 		int_values.append(int_value)
 	
 	goalkeeper = int_values[0]
@@ -58,7 +58,7 @@ func set_variation(p_variation:Variations) -> void:
 	center = int_values[2]
 	attack = int_values[3]
 	
-func get_start_pos(field_size:Vector2, index:int, left_side:bool) -> Vector2:
+func get_start_pos(field_size:Vector2, index: int, left_side: bool) -> Vector2:
 	var pos:Vector2 = Vector2.ZERO
 	
 	if index < defense:

@@ -4,7 +4,7 @@
 
 extends Node
 
-const themes: Dictionary = {
+const THEMES: Dictionary = {
 	"DARK" : "res://themes/default/theme.tres",
 	"LIGHT" : "res://themes/light/theme_light.tres",
 }
@@ -15,9 +15,9 @@ func _ready() -> void:
 	set_active_theme(Config.theme_index)
 
 
-func set_active_theme(index:int) -> Theme:
+func set_active_theme(index: int) -> Theme:
 	Config.theme_index = index
-	active_theme = ResourceLoader.load(themes.values()[Config.theme_index], "Theme")
+	active_theme = ResourceLoader.load(THEMES.values()[Config.theme_index], "Theme")
 	return active_theme
 
 func get_active_theme() -> Theme:

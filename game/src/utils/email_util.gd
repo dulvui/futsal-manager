@@ -6,7 +6,7 @@ extends Node
 
 signal refresh_inbox
 
-# const MAX_MESSAGES:int = 50
+# const MAX_MESSAGES: int = 50
 
 func latest() -> EmailMessage:
 	if Config.inbox.list.size() == 0:
@@ -14,7 +14,7 @@ func latest() -> EmailMessage:
 	return Config.inbox.list[-1]
 
 func count_unread_messages() -> int:
-	var counter:int = 0
+	var counter: int = 0
 	for message:EmailMessage in Config.inbox.list:
 		if not message["read"]:
 			counter += 1
@@ -26,7 +26,7 @@ func _add_message(message:EmailMessage) -> void:
 	# 	Config.inbox.list.pop_front()
 	refresh_inbox.emit()
 
-func new_message(type:int) -> void:
+func new_message(type: int) -> void:
 	print("new " + str(type) + " mail")
 	var message:EmailMessage = EmailMessage.new()
 	_add_message(message)

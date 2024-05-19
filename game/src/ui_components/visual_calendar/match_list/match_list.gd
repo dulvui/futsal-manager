@@ -4,10 +4,10 @@
 
 extends Control
 
-const match_row_scene:PackedScene = preload("res://src/ui_components/visual_calendar/match_list/match_list_row/match_list_row.tscn")
+const MatchRowScene: PackedScene = preload("res://src/ui_components/visual_calendar/match_list/match_list_row/match_list_row.tscn")
 
 @onready var matches_list:VBoxContainer = $VBoxContainer/ScrollContainer/Matches
-@onready var date_label:Label = $VBoxContainer/Date
+@onready var date_label: Label = $VBoxContainer/Date
 
 
 func set_up(day:Day) -> void:
@@ -18,12 +18,12 @@ func set_up(day:Day) -> void:
 	
 	# add active league games
 	if day.matches.size() > 0:
-		var active_league_label:Label = Label.new()
+		var active_league_label: Label = Label.new()
 		active_league_label.text = Config.leagues.get_active().name
 		UiUtil.bold(active_league_label)
 		matches_list.add_child(active_league_label)
 		for matchz:Match in day.matches:
-			var match_row:MatchListRow = match_row_scene.instantiate()
+			var match_row:MatchListRow = MatchRowScene.instantiate()
 			matches_list.add_child(match_row)
 			match_row.set_up(matchz)
 		
@@ -32,12 +32,12 @@ func set_up(day:Day) -> void:
 	# add other leagues matches
 	for league:League in Config.leagues.get_others():
 		if league.calendar.day(day.month, day.day).matches.size() > 0:
-			var league_label:Label = Label.new()
+			var league_label: Label = Label.new()
 			league_label.text = league.name
 			UiUtil.bold(league_label)
 			matches_list.add_child(league_label)
 			for matchz:Match in league.calendar.day(day.month, day.day).matches:
-				var match_row:MatchListRow = match_row_scene.instantiate()
+				var match_row:MatchListRow = MatchRowScene.instantiate()
 				matches_list.add_child(match_row)
 				match_row.set_up(matchz)
 

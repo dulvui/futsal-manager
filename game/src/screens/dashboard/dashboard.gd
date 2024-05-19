@@ -6,7 +6,9 @@ extends Control
 
 enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO } 
 
-@onready var team:Team = Config.team
+const DASHBOARD_DAY_DELAY:float = 0.5
+
+@onready var team: Team = Config.team
 
 # buttons
 @onready var continue_button:Button = $MainContainer/VBoxContainer/MainView/Buttons/Continue
@@ -14,30 +16,30 @@ enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO }
 @onready var email_button:Button = $MainContainer/VBoxContainer/MainView/Buttons/Email
 
 # content views 
-@onready var email:Control = $MainContainer/VBoxContainer/MainView/Content/Email
-@onready var table:Control = $MainContainer/VBoxContainer/MainView/Content/Table
-@onready var visual_calendar:Control = $MainContainer/VBoxContainer/MainView/Content/Calendar
-@onready var info:Control = $MainContainer/VBoxContainer/MainView/Content/Info
+@onready var email: Control = $MainContainer/VBoxContainer/MainView/Content/Email
+@onready var table: Control = $MainContainer/VBoxContainer/MainView/Content/Table
+@onready var visual_calendar: Control = $MainContainer/VBoxContainer/MainView/Content/Calendar
+@onready var info: Control = $MainContainer/VBoxContainer/MainView/Content/Info
 
 # labels
-@onready var budget_label:Label = $MainContainer/VBoxContainer/TopBar/Budget
-@onready var date_label:Label = $MainContainer/VBoxContainer/TopBar/Date
-@onready var manager_label:Label = $MainContainer/VBoxContainer/TopBar/ManagerName
-@onready var team_label:Label = $MainContainer/VBoxContainer/TopBar/TeamName
+@onready var budget_label: Label = $MainContainer/VBoxContainer/TopBar/Budget
+@onready var date_label: Label = $MainContainer/VBoxContainer/TopBar/Date
+@onready var manager_label: Label = $MainContainer/VBoxContainer/TopBar/ManagerName
+@onready var team_label: Label = $MainContainer/VBoxContainer/TopBar/TeamName
 
 # full screen views
-@onready var formation:Control = $MainContainer/VBoxContainer/MainView/Content/Formation
-@onready var all_players_list:Control = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
+@onready var formation: Control = $MainContainer/VBoxContainer/MainView/Content/Formation
+@onready var all_players_list: Control = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 
 # pop ups
-@onready var player_offer:Control = $PlayerOffer
-@onready var contract_offer:Control = $ContractOffer
+@onready var player_offer: Control = $PlayerOffer
+@onready var contract_offer: Control = $ContractOffer
 
 # match engine
 #@onready var match_engine:MatchEngine = $MatchEngine
 
-var match_ready:bool = false
-var next_season:bool = false
+var match_ready: bool = false
+var next_season: bool = false
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
@@ -65,7 +67,7 @@ func _ready() -> void:
 
 
 func _process(_delta:float) -> void:
-	var email_count:int = EmailUtil.count_unread_messages()
+	var email_count: int = EmailUtil.count_unread_messages()
 	if email_count > 0:
 		email_button.text = "[" + str(EmailUtil.count_unread_messages())  + "] " + tr("EMAIL") 
 	else:
@@ -117,7 +119,7 @@ func _hide_all() -> void:
 	info.hide()
 
 
-func _show_active_view(active_view:int=-1) -> void:
+func _show_active_view(active_view: int=-1) -> void:
 	_hide_all()
 	if active_view > -1:
 		Config.dashboard_active_content = active_view
@@ -153,7 +155,7 @@ func _on_next_match_pressed() -> void:
 		_next_day()
 		var timer:Timer = Timer.new()
 		add_child(timer)
-		timer.start(Constants.DASHBOARD_DAY_DELAY)
+		timer.start(DASHBOARD_DAY_DELAY)
 		await timer.timeout
 		
 	next_match_button.disabled = false

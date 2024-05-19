@@ -5,7 +5,7 @@
 extends Control
 
 @onready var generation_seed:LineEdit = $VBoxContainer/GenerationSeed/GenerationSeed
-@onready var start_date:Label = $VBoxContainer/StartDate/StartDate
+@onready var start_date: Label = $VBoxContainer/StartDate/StartDate
 
 
 func _ready() -> void:

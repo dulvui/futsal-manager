@@ -5,18 +5,18 @@
 class_name Manager
 extends Resource
 
-@export var id:int
+@export var id: int
 @export var nationality:String
 @export var name:String
 @export var surname:String
-@export var prestige:int # 1-20
+@export var prestige: int # 1-20
 
 func _init(
-		p_id:int = IdUtil.next_id(IdUtil.Types.MANAGER),
+		p_id: int = IdUtil.next_id(IdUtil.Types.MANAGER),
 		p_nationality:String = "",
 		p_name:String = "",
 		p_surname:String = "",
-		p_prestige:int = 10
+		p_prestige: int = 10
 	) -> void:
 	id = p_id
 	nationality = p_nationality

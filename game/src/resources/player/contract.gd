@@ -5,34 +5,34 @@
 class_name Contract
 extends Resource
 
-@export var id:int
-@export var income:int
-@export var income_week:int
-@export var bonus_goal:int
-@export var bonus_clean_sheet:int
-@export var bonus_assist:int
-@export var bonus_league_title:int
-@export var bonus_nat_cup_title:int
-@export var bonus_inter_cup_title:int
-@export var buy_clause:int
+@export var id: int
+@export var income: int
+@export var income_week: int
+@export var bonus_goal: int
+@export var bonus_clean_sheet: int
+@export var bonus_assist: int
+@export var bonus_league_title: int
+@export var bonus_nat_cup_title: int
+@export var bonus_inter_cup_title: int
+@export var buy_clause: int
 @export var start_date: Dictionary # unixtimestamp
 @export var end_date: Dictionary
-@export var is_on_loan:bool
+@export var is_on_loan: bool
 
 func _init(
-	p_id:int = IdUtil.next_id(IdUtil.Types.CONTRACT),
-	p_income:int = 0,
-	p_income_week:int = 0,
-	p_bonus_goal:int = 0,
-	p_bonus_clean_sheet:int = 0,
-	p_bonus_assist:int = 0,
-	p_bonus_league_title:int = 0,
-	p_bonus_nat_cup_title:int = 0,
-	p_bonus_inter_cup_title:int = 0,
-	p_buy_clause:int = 0,
+	p_id: int = IdUtil.next_id(IdUtil.Types.CONTRACT),
+	p_income: int = 0,
+	p_income_week: int = 0,
+	p_bonus_goal: int = 0,
+	p_bonus_clean_sheet: int = 0,
+	p_bonus_assist: int = 0,
+	p_bonus_league_title: int = 0,
+	p_bonus_nat_cup_title: int = 0,
+	p_bonus_inter_cup_title: int = 0,
+	p_buy_clause: int = 0,
 	p_start_date: Dictionary = {}, # unixtimestamp
 	p_end_date: Dictionary = {},
-	p_is_on_loan:bool = false,
+	p_is_on_loan: bool = false,
 ) -> void:
 	id = p_id
 	income = p_income

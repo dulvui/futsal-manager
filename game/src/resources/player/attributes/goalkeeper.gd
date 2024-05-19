@@ -13,12 +13,12 @@ class_name Goalkeeper
 @export var speed: int
 
 func _init(
-	p_reflexes:int = 0,
-	p_positioning:int = 0,
-	p_kicking:int = 0,
-	p_handling:int = 0,
-	p_diving:int = 0,
-	p_speed:int = 0,
+	p_reflexes: int = 0,
+	p_positioning: int = 0,
+	p_kicking: int = 0,
+	p_handling: int = 0,
+	p_diving: int = 0,
+	p_speed: int = 0,
 ) -> void:
 	reflexes = p_reflexes
 	positioning = p_positioning
@@ -28,7 +28,7 @@ func _init(
 	speed = p_speed
 
 func sum() -> int:
-	var value:int = 0
+	var value: int = 0
 	value += reflexes
 	value += positioning
 	value += kicking

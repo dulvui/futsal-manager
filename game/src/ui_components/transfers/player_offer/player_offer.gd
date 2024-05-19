@@ -6,22 +6,22 @@ extends PanelContainer
 
 signal confirm
 
-var team:Team
+var team: Team
 var player:Player
 
 var regex:RegEx = RegEx.new()
 var oldtext:String = ""
 
-var total:int = 0
-var amount:int = 0
+var total: int = 0
+var amount: int = 0
 
 var exchange_players:Array[Player] = []
 var selected_players:Array[Player] = []
 
 @onready var types:OptionButton = $VBoxContainer/Details/Types 
 @onready var amount_label:LineEdit = $VBoxContainer/Details/Money/Amount 
-@onready var total_label:Label = $VBoxContainer/Total
-@onready var info_label:Label = $VBoxContainer/Info
+@onready var total_label: Label = $VBoxContainer/Total
+@onready var info_label: Label = $VBoxContainer/Info
 @onready var exchange_players_button:OptionButton = $VBoxContainer/Details/ExchangePlayers
 @onready var selected_players_box:VBoxContainer = $VBoxContainer/ScrollContainer/SelectedPlayers
 
@@ -68,7 +68,7 @@ func _on_Less_pressed() -> void:
 	_calc_total()
 
 
-func _on_ExchangePlayers_item_selected(index:int) -> void:
+func _on_ExchangePlayers_item_selected(index: int) -> void:
 	var exchange_player:Player = exchange_players[index]
 	exchange_players.remove_at(index)
 	

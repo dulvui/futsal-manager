@@ -7,18 +7,18 @@ extends Control
 signal cancel
 signal confirm
 
-const max_buy_clause:int = 999999999
+const MAX_BUY_CLAUSE: int = 999999999
 
-@onready var income_label:Label = $VBoxContainer/GridContainer/Income
-@onready var info_label:Label = $VBoxContainer/Info
-@onready var years_label:Label = $VBoxContainer/GridContainer/Years
-@onready var buy_clause_label:Label = $VBoxContainer/GridContainer/BuyClause
+@onready var income_label: Label = $VBoxContainer/GridContainer/Income
+@onready var info_label: Label = $VBoxContainer/Info
+@onready var years_label: Label = $VBoxContainer/GridContainer/Years
+@onready var buy_clause_label: Label = $VBoxContainer/GridContainer/BuyClause
 
-var income:int = 0
-var years:int = 1
-var buy_clause:int = 0
+var income: int = 0
+var years: int = 1
+var buy_clause: int = 0
 
-var team:Team
+var team: Team
 var player:Player
 var transfer:Transfer
 
@@ -62,7 +62,7 @@ func _on_BuyClauseLess_pressed() -> void:
 
 
 func _on_BuyClauseMore_pressed() -> void:
-	if buy_clause < max_buy_clause:
+	if buy_clause < MAX_BUY_CLAUSE:
 		buy_clause += 1000
 		buy_clause_label.text = str(buy_clause)
 

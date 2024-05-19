@@ -10,7 +10,7 @@ extends Resource
 @export var start_date: Dictionary
 @export var generation_seed: String
 @export var generation_state: int
-@export var generation_gender: Constants.Gender
+@export var generation_gender: Const.Gender
 @export var current_season: int
 @export var speed_factor: int
 @export var dashboard_active_content: int
@@ -27,7 +27,7 @@ extends Resource
 func _init(
 		p_generation_seed: String = "SuchDefaultSeed",
 		p_generation_state: int = 0,
-		p_generation_gender: Constants.Gender = 0,
+		p_generation_gender: Const.Gender = 0,
 		p_current_season: int = 1,
 		p_speed_factor: int = 1,
 		p_dashboard_active_content: int = 0,
@@ -62,7 +62,7 @@ func create_dir() -> void:
 	# create save state directory, if not exist yet
 	var user_dir:DirAccess = DirAccess.open("user://")
 	if user_dir and not user_dir.dir_exists(id):
-		var err:int = user_dir.make_dir(id)
+		var err: int = user_dir.make_dir(id)
 		if err != OK:
 			print("error while creating save state dir")
 	

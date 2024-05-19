@@ -6,7 +6,7 @@ class_name Leagues
 extends Resource
 
 @export var list:Array[League]
-@export var active_id:int
+@export var active_id: int
 
 
 func _init(
@@ -31,14 +31,14 @@ func get_others() -> Array[League]:
 	return other_leagues
 
 
-func get_league_by_id(league_id:int) -> League:
+func get_league_by_id(league_id: int) -> League:
 	for league:League in list:
 		if league.id == league_id:
 			return league
 	return null
 
 
-func get_leagues_by_nation(nation:Constants.Nations = Constants.Nations.get(0)) -> Array[League]:
+func get_leagues_by_nation(nation:Const.Nations = Const.Nations.get(0)) -> Array[League]:
 	var leagues_by_nation:Array[League] = []
 	for league:League in list:
 		if league.nation == nation:
@@ -46,9 +46,9 @@ func get_leagues_by_nation(nation:Constants.Nations = Constants.Nations.get(0)) 
 	return leagues_by_nation
 
 
-func get_team_by_id(team_id:int) -> Team:
+func get_team_by_id(team_id: int) -> Team:
 	for league:League in list:
-		var found_team:Team = league.get_team_by_id(team_id)
+		var found_team: Team = league.get_team_by_id(team_id)
 		if found_team:
 			return found_team
 	print("ERROR: team not found with id: " + str(team_id))

@@ -7,15 +7,15 @@ class_name TeamSelect
 
 @onready var nations_container:HBoxContainer = $MarginContainer/VBoxContainer/NationSelect
 @onready var team_list:VBoxContainer = $MarginContainer/VBoxContainer/Main/ScrollContainer/TeamList
-@onready var team_profile:TeamProfile = $MarginContainer/VBoxContainer/Main/TeamProfile
+@onready var team_profile: TeamProfile = $MarginContainer/VBoxContainer/Main/TeamProfile
 
 var active_league:League
-var active_team:Team
+var active_team: Team
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
-	for nation:String in Constants.Nations:
+	for nation:String in Const.Nations:
 		var button:Button = Button.new()
 		button.text = nation
 		nations_container.add_child(button)
@@ -28,22 +28,22 @@ func _ready() -> void:
 	team_profile.set_up(active_team)
 
 
-func show_team(league:League, team:Team) -> void:
+func show_team(league:League, team: Team) -> void:
 	active_league = league
 	active_team = team
 	team_profile.set_team(active_team)
 
 
-func set_teams(nation:Constants.Nations = 0) -> void:
+func set_teams(nation:Const.Nations = 0) -> void:
 	for child:Node in team_list.get_children():
 		child.queue_free()
 	
 	for league:League in Config.leagues.get_leagues_by_nation(nation):
-		var league_label:Label = Label.new()
+		var league_label: Label = Label.new()
 		league_label.text = league.name
 		team_list.add_child(league_label)
 		UiUtil.bold(league_label)
-		for team:Team in league.teams:
+		for team: Team in league.teams:
 			var team_button:Button = Button.new()
 			team_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 			team_button.text = team.get_prestige_stars() + "  " + team.name
@@ -52,8 +52,8 @@ func set_teams(nation:Constants.Nations = 0) -> void:
 
 
 func _on_nation_select(nation:String) -> void:
-	set_teams(Constants.Nations.get(nation))
-	var first_league:League = Config.leagues.get_leagues_by_nation(Constants.Nations.get(nation))[0]
+	set_teams(Const.Nations.get(nation))
+	var first_league:League = Config.leagues.get_leagues_by_nation(Const.Nations.get(nation))[0]
 	show_team(first_league, first_league.teams[0])
 
 

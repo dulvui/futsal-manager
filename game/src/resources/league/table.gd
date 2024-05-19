@@ -46,7 +46,7 @@ func add_result(home_id: int,home_goals: int,away_id: int,away_goals: int) -> vo
 	away.games_played += 1
 
 
-func get_position(team_id :int = Config.team.id) -> int:
+func get_position(team_id : int = Config.team.id) -> int:
 	var position: int = 0
 	var list: Array[TableValues] = to_sorted_array()
 	while list[position].team_id != team_id:

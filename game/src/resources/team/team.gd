@@ -87,7 +87,7 @@ func get_field_players() -> Array[Player]:
 func get_sub_players() -> Array[Player]:
 	var sub: Array[Player] = []
 	for player in players:
-		if player.id in lineup_player_ids.slice(5, Constants.LINEUP_PLAYERS_AMOUNT):
+		if player.id in lineup_player_ids.slice(5, Const.LINEUP_PLAYERS_AMOUNT):
 			sub.append(player)
 	return sub
 
@@ -106,7 +106,7 @@ func is_lineup_player(player: Player) -> bool:
 
 func is_sub_player(player: Player) -> bool:
 	var index: int = lineup_player_ids.find(player.id)
-	return index > 4 and index < Constants.LINEUP_PLAYERS_AMOUNT
+	return index > 4 and index < Const.LINEUP_PLAYERS_AMOUNT
 
 
 func remove_player(p_player: Player) -> void:
@@ -139,8 +139,8 @@ func get_prestige() -> int:
 
 
 func get_prestige_stars() -> String:
-	var relation: int = Constants.MAX_PRESTIGE / 4
-	var star_factor: int = Constants.MAX_PRESTIGE / relation
+	var relation: int = Const.MAX_PRESTIGE / 4
+	var star_factor: int = Const.MAX_PRESTIGE / relation
 	var stars: int = max(1,get_prestige() / star_factor)
 	var spaces: int = 5 - stars 
 	# creates right padding ex: "***  "

@@ -5,13 +5,13 @@
 class_name Calendar
 extends Resource
 
-const day_in_seconds:int = 86400
+const DAY_IN_SECONDS: int = 86400
 
 # season end 30th of november
-const season_end_day:int = 30
-const season_end_month:int = 11
+const SEASON_END_DAY: int = 30
+const SEASON_END_MONTH: int = 11
 # market dates
-const market_periods:Array = [
+const MARKET_PERIODS:Array = [
 	{
 		"period" : "winter",
 		"start" : {
@@ -48,11 +48,11 @@ func _init(
 	months = p_months
 
 
-func initialize(next_season:bool = false) -> void:
+func initialize(next_season: bool = false) -> void:
 	if next_season:
 		date.year += 1
-		date.day = Constants.season_start_day
-		date.month = Constants.season_start_month
+		date.day = Const.SEASON_START_DAY
+		date.month = Const.SEASON_START_MONTH
 		
 		date = _get_next_day(date)
 	else:
@@ -63,7 +63,7 @@ func initialize(next_season:bool = false) -> void:
 	var temp_date: Dictionary = Time.get_datetime_dict_from_datetime_string(first_january, true)
 	
 	# create months
-	for month_string:String in Constants.month_strings:
+	for month_string:String in Const.MONTH_STRINGS:
 		var new_month:Month = Month.new()
 		new_month.name = month_string
 		months.append(new_month)
@@ -72,7 +72,7 @@ func initialize(next_season:bool = false) -> void:
 	while temp_date.year == date.year:
 		var new_day:Day = Day.new()
 		new_day.market = is_market_active(temp_date)
-		new_day.weekday =  Constants.day_strings[temp_date.weekday]
+		new_day.weekday =  Const.DAY_STRINGS[temp_date.weekday]
 		new_day.day =  temp_date.day
 		new_day.month =  temp_date.month
 		new_day.year =  temp_date.year
@@ -95,18 +95,18 @@ func next_day() -> void:
 		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_END)
 
 
-func day(p_month:int = date.month, p_day:int = date.day) -> Day:
+func day(p_month: int = date.month, p_day: int = date.day) -> Day:
 	return months[p_month - 1].days[p_day - 1]
 
 
-func month(p_month:int = date.month) -> Month:
+func month(p_month: int = date.month) -> Month:
 	return months[p_month - 1]
 
 
 func _get_next_day(_date: Dictionary=date) -> Dictionary:
 	# increment date by one day
-	var unix_time:int = Time.get_unix_time_from_datetime_dict(_date)
-	unix_time += day_in_seconds
+	var unix_time: int = Time.get_unix_time_from_datetime_dict(_date)
+	unix_time += DAY_IN_SECONDS
 	var _next_day: Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
 	
 	_next_day.erase("hour")
@@ -122,7 +122,7 @@ func is_match_day() -> bool:
 
 
 func is_market_active(p_date: Dictionary=date) -> bool:
-	for market_period: Dictionary in market_periods:
+	for market_period: Dictionary in MARKET_PERIODS:
 		if p_date.month >= market_period.start.month and p_date.day >= market_period.start.day \
 			and p_date.month <=  market_period.end.month and p_date.day <=  market_period.end.day:
 			return true
@@ -130,24 +130,24 @@ func is_market_active(p_date: Dictionary=date) -> bool:
 
 
 func does_market_start_today() -> bool:
-	for market_period: Dictionary in market_periods:
+	for market_period: Dictionary in MARKET_PERIODS:
 		if date.month == market_period.start.month and date.day == market_period.start.day:
 			return true
 	return false
 	
 func does_market_end_today() -> bool:
-	for market_period: Dictionary in market_periods:
+	for market_period: Dictionary in MARKET_PERIODS:
 		if date.month == market_period.end.month and date.day == market_period.end.day:
 			return true
 	return false
 
 
 func is_season_finished() -> bool:
-	return date.month == season_end_month and date.day == season_end_day
+	return date.month == SEASON_END_MONTH and date.day == SEASON_END_DAY
 
 
 func format_date(p_date: Dictionary=date) -> String:
-	return Constants.day_strings[p_date.weekday] + " " + str(p_date.day) + " " + Constants.month_strings[p_date.month - 1] + " " + str(p_date.year)
+	return Const.DAY_STRINGS[p_date.weekday] + " " + str(p_date.day) + " " + Const.MONTH_STRINGS[p_date.month - 1] + " " + str(p_date.year)
 
 
 func get_next_match() -> Match:

@@ -4,15 +4,15 @@
 
 extends Node
 
-const version:String = "1"
-const config_version:String = "1"
+const VERSION:String = "1"
+const CONFIG_VERSION:String = "1"
 
 # config
 var config:ConfigFile
 
 var language:String
-var currency:int
-var theme_index:int
+var currency: int
+var theme_index: int
 
 # save states
 var save_states:SaveStates
@@ -21,13 +21,13 @@ var save_states:SaveStates
 var start_date: Dictionary
 # generator config
 var generation_seed:String
-var generation_state:int
-var generation_gender:Constants.Gender
+var generation_state: int
+var generation_gender:Const.Gender
 # saves which season this is, starting from 0
-var current_season:int
+var current_season: int
 # global game states
-var speed_factor:int
-var dashboard_active_content:int
+var speed_factor: int
+var dashboard_active_content: int
 # saves current id for resources
 var id_by_type: Dictionary
 
@@ -37,7 +37,7 @@ var match_rng:RandomNumberGenerator
 
 # resources
 var leagues:Leagues
-var team:Team
+var team: Team
 var manager:Manager
 var transfers:Transfers
 var inbox:Inbox
@@ -45,7 +45,7 @@ var inbox:Inbox
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("version " + Config.version)
+	print("version " + Config.VERSION)
 	
 	_load_config()
 	load_save_state()
@@ -55,7 +55,7 @@ func _ready() -> void:
 
 func _load_config() -> void:
 	config = ConfigFile.new()
-	var err:int = config.load("user://settings.cfg")
+	var err: int = config.load("user://settings.cfg")
 	# if not, something went wrong with the file loading
 	if err != OK:
 		print("error loading user://settings.cfg")
@@ -153,7 +153,7 @@ func save_resources() -> void:
 	ResourceSaver.save(transfers, save_states.get_active_path("transfers.tres"))
 
 
-func generate_leagues(p_generation_seed:String, p_generation_gender:Constants.Gender) -> void:
+func generate_leagues(p_generation_seed:String, p_generation_gender:Const.Gender) -> void:
 	generation_seed = p_generation_seed
 	generation_gender = p_generation_gender
 	set_seed(generation_seed)
@@ -180,7 +180,7 @@ func set_lang(lang:String) -> void:
 	config.save("user://settings.cfg")
 
 
-func select_team(p_league:League, p_team:Team) -> void:
+func select_team(p_league:League, p_team: Team) -> void:
 	leagues.active_id = p_league.id
 	team = p_team
 
@@ -214,7 +214,7 @@ func calendar() -> Calendar:
 
 # disable save, too heavy on close, breaks game
 # save on quit on mobile
-#func _notification(what:int) -> void:
+#func _notification(what: int) -> void:
 	#if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		#save_all_data()
 		#get_tree().quit() # default behavior

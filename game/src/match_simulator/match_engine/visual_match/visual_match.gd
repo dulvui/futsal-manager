@@ -13,7 +13,7 @@ class_name  VisualMatch
 var match_engine:MatchEngine
 
 
-func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
+func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	match_engine = MatchEngine.new()
 	match_engine.set_up(p_home_team,p_away_team, match_seed)
 	ball.set_up(match_engine.ball)
@@ -35,5 +35,5 @@ func half_time() -> void:
 	match_engine.half_time()
 
 
-func change_players(p_home_team:Team, p_away_team:Team) -> void:
+func change_players(p_home_team: Team, p_away_team: Team) -> void:
 	match_engine.chage_players(p_home_team, p_away_team)

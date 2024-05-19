@@ -7,11 +7,11 @@ class_name PlayerTable
 
 signal info_player(player:Player)
 
-const player_row = preload("res://src/ui_components/player_list/player_row/player_row.tscn")
+const PlayerRowScene: PackedScene = preload("res://src/ui_components/player_list/player_row/player_row.tscn")
 
 @onready var header_container:HBoxContainer = $VBoxContainer/Header
 @onready var players_container:VBoxContainer = $VBoxContainer/Players
-@onready var page_indicator:Label = $VBoxContainer/Footer/PageIndicator
+@onready var page_indicator: Label = $VBoxContainer/Footer/PageIndicator
 @onready var footer:HBoxContainer = $VBoxContainer/Footer
 
 
@@ -24,19 +24,19 @@ var info_type:String
 
 var sort_memory: Dictionary = {} # to save wich value is already sorted and how
 
-const page_size:int = 16
-var page:int = 0
-var page_max:int
-var team:Team
-var lineup_colors:bool
+const PAGE_SIZE: int = 16
+var page: int = 0
+var page_max: int
+var team: Team
+var lineup_colors: bool
 
 	
 func set_up(
 	p_headers:Array[String],
 	p_info_type:String,
 	p_players:Array[Player],
-	p_team:Team = null,
-	p_lineup_colors:bool = false
+	p_team: Team = null,
+	p_lineup_colors: bool = false
 ) -> void:
 	headers = p_headers
 	info_type = p_info_type
@@ -45,7 +45,7 @@ func set_up(
 	team = p_team
 	lineup_colors = p_lineup_colors
 	
-	page_max = players.size() / page_size
+	page_max = players.size() / PAGE_SIZE
 	
 	_update_page_indicator()
 	
@@ -53,8 +53,8 @@ func set_up(
 	sort_memory["position"] = false
 	sort_memory["attributes_average"] = false
 	
-	for key:String in Constants.ATTRIBUTES.keys():
-		for attribute:String in Constants.ATTRIBUTES[key]:
+	for key:String in Const.ATTRIBUTES.keys():
+		for attribute:String in Const.ATTRIBUTES[key]:
 			sort_memory[key + "_" + attribute] = false
 	
 	_set_up_headers()
@@ -108,32 +108,32 @@ func _set_up_content() -> void:
 		child.queue_free()
 	
 	if players.size() > 0:
-		for player:Player in players.slice(page * page_size, (page + 1) * page_size):
-			var row:PlayerRow = player_row.instantiate()
+		for player:Player in players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE):
+			var row:PlayerRow = PlayerRowScene.instantiate()
 			players_container.add_child(row)
 			#player_row.select.connect(select.bind(player))
 			row.info.connect(info.bind(player))
 			row.set_up(player, headers, team, lineup_colors)
 	else :
-		var label:Label = Label.new()
+		var label: Label = Label.new()
 		label.text = "NO_PLAYER_FOUND"
 		players_container.add_child(label)
 		
 
 func _update_page_indicator() -> void:
-	if all_players.size() <= page_size:
+	if all_players.size() <= PAGE_SIZE:
 		footer.hide()
 	else:
 		page_indicator.text = "%d / %d"%[page + 1, page_max + 1]
 
-func filter(filters: Dictionary, exlusive:bool = false) -> void:
+func filter(filters: Dictionary, exlusive: bool = false) -> void:
 	if filters:
 		page = 0
 		players = []
 		for player in all_players:
-			var filter_counter:int = 0
+			var filter_counter: int = 0
 			# because value can be empty
-			var valid_filter_counter:int = 0
+			var valid_filter_counter: int = 0
 			for key:String in filters.keys():
 				var value:String = str(filters[key])
 				if value:
@@ -149,7 +149,7 @@ func filter(filters: Dictionary, exlusive:bool = false) -> void:
 	else:
 		players = all_players
 	_set_up_content()
-	page_max = players.size() / page_size
+	page_max = players.size() / PAGE_SIZE
 	page = 0
 	_update_page_indicator()
 	

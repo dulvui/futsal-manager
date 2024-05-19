@@ -22,7 +22,7 @@ func _init(
 	physical = p_physical
 	
 func field_player_average() -> int:
-	var value:int = 0
+	var value: int = 0
 	value += mental.average()
 	value += technical.average()
 	value += physical.average()

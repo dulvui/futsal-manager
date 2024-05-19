@@ -7,10 +7,10 @@ extends Control
 func set_text(p_name:String) -> void:
 	$Label.text = str(p_name)
 	
-func set_sub(is_true:bool) -> void:
+func set_sub(is_true: bool) -> void:
 	if is_true:
 		$ColorRect.color = Color.SKY_BLUE
 	
-func set_line_up(is_true:bool) -> void:
+func set_line_up(is_true: bool) -> void:
 	if is_true:
 		$ColorRect.color = Color.PALE_GREEN

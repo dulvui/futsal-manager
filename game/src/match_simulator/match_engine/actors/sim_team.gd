@@ -6,15 +6,15 @@ class_name SimTeam
 
 signal possess
 
-var res_team:Team
+var res_team: Team
 
 var goalkeeper:SimGoalkeeper
 var players:Array[SimPlayer]
 
 var ball:SimBall
 var field:SimField
-var has_ball:bool
-var left_half:bool
+var has_ball: bool
+var left_half: bool
 
 var stats:MatchStatistics
 
@@ -23,11 +23,11 @@ var sort_x_left:Callable
 var sort_x_right:Callable
 
 func set_up(
-	p_res_team:Team,
+	p_res_team: Team,
 	p_field:SimField,
 	p_ball:SimBall,
-	p_left_half:bool,
-	p_has_ball:bool,
+	p_left_half: bool,
+	p_has_ball: bool,
 	) -> void:
 	res_team = p_res_team
 	field = p_field
@@ -82,9 +82,9 @@ func defend(other_players:Array[SimPlayer]) -> void:
 		players.sort_custom(sort_x_right)
 	
 	# assign destinations
-	for i:int in players.size():
+	for i: int in players.size():
 		# y towards goal, to block goal
-		var factor:int = Config.match_rng.randi_range(30, 60)
+		var factor: int = Config.match_rng.randi_range(30, 60)
 		var deviation:Vector2 = Vector2(-factor, factor)
 		if other_players[i].pos.y > field.center.y:
 			deviation.y -= factor * 2
@@ -98,7 +98,7 @@ func attack() -> void:
 		player.attack()
 		
 		# y towards goal, to block goal
-		var factor:int = Config.match_rng.randi_range(30, 60)
+		var factor: int = Config.match_rng.randi_range(30, 60)
 		var deviation:Vector2 = Vector2(-factor, factor)
 		
 		# move to other half
@@ -110,7 +110,7 @@ func attack() -> void:
 		player.set_destination(player.start_pos + deviation)
 
 
-func set_kick_off_formation(change_field_side:bool = false) -> void:
+func set_kick_off_formation(change_field_side: bool = false) -> void:
 	if change_field_side:
 		left_half = not left_half
 		goalkeeper.left_half = not goalkeeper.left_half
@@ -158,7 +158,7 @@ func shoot_on_goal() -> void:
 		r_pos = field.goal_right
 	else:
 		r_pos = field.goal_left
-	r_pos += Vector2(0, Config.match_rng.randi_range(-field.goal_size * 1.5, field.goal_size * 1.5))
+	r_pos += Vector2(0, Config.match_rng.randi_range(-field.GOAL_SIZE * 1.5, field.GOAL_SIZE * 1.5))
 	ball.shoot(r_pos, 100)
 	
 	stats.shots += 1

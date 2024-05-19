@@ -8,10 +8,10 @@ class_name ColorNumber
 # what number the label has 
 var key:String
 
-func set_up(value:int) -> void:
+func set_up(value: int) -> void:
 	$Label.text = str(value)
 	
-	var label_settings:LabelSettings = LabelSettings.new()
+	var label_settings: LabelSettings = LabelSettings.new()
 	
 	if value < 11 :
 		label_settings.font_color = Color.RED

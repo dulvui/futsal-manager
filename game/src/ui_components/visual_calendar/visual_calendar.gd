@@ -4,15 +4,15 @@
 
 extends Control
 
-const visual_day:PackedScene = preload("res://src/ui_components/visual_calendar/visual_day/visual_day.tscn")
+const VisualDayScene: PackedScene = preload("res://src/ui_components/visual_calendar/visual_day/visual_day.tscn")
 
-@onready var match_list:Control = $HSplitContainer/MatchList
-@onready var days:GridContainer = $HSplitContainer/Calendar/Days
-@onready var page_label:Label = $HSplitContainer/Calendar/Paginator/Page
+@onready var match_list: Control = $HSplitContainer/MatchList
+@onready var days: GridContainer = $HSplitContainer/Calendar/Days
+@onready var page_label: Label = $HSplitContainer/Calendar/Paginator/Page
 
 # get current month and show in paginator
 # max back and forward is full current season
-var current_month:int
+var current_month: int
 
 func _ready() -> void:
 	current_month = Config.calendar().date.month
@@ -29,16 +29,16 @@ func set_up_days() -> void:
 			child.queue_free()
 	
 	# to start with monday, fill other days with transparent days
-	var monday_counter:int = 7
+	var monday_counter: int = 7
 	while Config.calendar().month(current_month).days[monday_counter].weekday != "MON":
-		var calendar_day:VisualDay = visual_day.instantiate()
+		var calendar_day:VisualDay = VisualDayScene.instantiate()
 		days.add_child(calendar_day)
 		calendar_day.modulate = Color(0,0,0,0)
 		monday_counter -= 1
 	
 	# add days
 	for day:Day in Config.calendar().month(current_month).days:
-		var calendar_day:VisualDay = visual_day.instantiate()
+		var calendar_day:VisualDay = VisualDayScene.instantiate()
 		days.add_child(calendar_day)
 		calendar_day.set_up(day)
 		calendar_day.show_match_list.connect(_on_calendar_day_pressed.bind(day))
@@ -47,7 +47,7 @@ func set_up_days() -> void:
 		if day == Config.calendar().day():
 			calendar_day.select()
 
-	page_label.text = Constants.month_strings[current_month - 1]
+	page_label.text = Const.MONTH_STRINGS[current_month - 1]
 	
 func _on_calendar_day_pressed(day:Day) -> void:
 	match_list.set_up(day)

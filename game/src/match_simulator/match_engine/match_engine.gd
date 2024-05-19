@@ -9,9 +9,9 @@ var ball:SimBall
 var home_team:SimTeam
 var away_team:SimTeam
 
-var home_plays_left:bool
+var home_plays_left: bool
 
-var ticks:int
+var ticks: int
 
 # for trajectory calculations 
 var post_bottom:Vector2
@@ -25,7 +25,7 @@ var nearest_player:SimPlayer
 var possession_counter:float
 
 
-func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
+func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	field = SimField.new()
 	ball = SimBall.new()
 	ball.goal_line_out.connect(_on_sim_ball_goal_line_out)
@@ -42,7 +42,7 @@ func set_up(p_home_team:Team, p_away_team:Team, match_seed:int) -> void:
 	Config.match_rng.seed = hash(match_seed)
 
 	home_plays_left = Config.match_rng.randi_range(0, 1) == 0
-	var home_has_ball:bool = Config.match_rng.randi_range(0, 1) == 0
+	var home_has_ball: bool = Config.match_rng.randi_range(0, 1) == 0
 	
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, home_has_ball)
@@ -78,21 +78,21 @@ func update() -> void:
 
 
 func simulate(matchz:Match) -> Match:
-	var start_time:int = Time.get_ticks_msec()
+	var start_time: int = Time.get_ticks_msec()
 	set_up(matchz.home, matchz.away, matchz.id)
 	
 	# first half
-	for i:int in Constants.half_time_seconds * Constants.ticks_per_second:
+	for i: int in Const.HALF_TIME_SECONDS * Const.TICKS_PER_SECOND:
 		update()
 	half_time()
 	# second half
-	for i:int in Constants.half_time_seconds * Constants.ticks_per_second:
+	for i: int in Const.HALF_TIME_SECONDS * Const.TICKS_PER_SECOND:
 		update()
 		
 	matchz.home_goals = home_team.stats.goals
 	matchz.away_goals = away_team.stats.goals
 	
-	var end_time:int = Time.get_ticks_msec()
+	var end_time: int = Time.get_ticks_msec()
 	print("benchmark: " + str(end_time - start_time) + " result: " + str(matchz.home_goals) + ":" + str(matchz.away_goals))
 	print("shots: h%d - a%d"%[home_team.stats.shots, away_team.stats.shots])
 	return matchz
@@ -113,13 +113,13 @@ func calc_distances() -> void:
 	calc_free_shoot_trajectory()
 
 
-func calc_distance_to_goal(player:SimPlayer, left_half:bool) -> void:
+func calc_distance_to_goal(player:SimPlayer, left_half: bool) -> void:
 	if left_half:
 		player.distance_to_goal = calc_distance_to(player.pos, field.goal_right)
 	player.distance_to_goal = calc_distance_to(player.pos, field.goal_left)
 
 
-func calc_distance_to_own_goal(player:SimPlayer, left_half:bool) -> void:
+func calc_distance_to_own_goal(player:SimPlayer, left_half: bool) -> void:
 	if left_half:
 		player.distance_to_own_goal = calc_distance_to(player.pos, field.goal_left)
 	player.distance_to_own_goal = calc_distance_to(player.pos, field.goal_right)
@@ -189,7 +189,7 @@ func _on_sim_ball_goal_line_out() -> void:
 		set_goalkeeper_ball(not home_plays_left)
 
 
-func set_corner(home:bool) -> void:
+func set_corner(home: bool) -> void:
 	if home:
 		home_possess()
 		nearest_player = home_team.nearest_player_to_ball()
@@ -202,7 +202,7 @@ func set_corner(home:bool) -> void:
 	nearest_player.short_pass.emit()
 
 
-func set_goalkeeper_ball(home:bool) -> void:
+func set_goalkeeper_ball(home: bool) -> void:
 	if home:
 		home_possess()
 		goalkeeper = home_team.goalkeeper

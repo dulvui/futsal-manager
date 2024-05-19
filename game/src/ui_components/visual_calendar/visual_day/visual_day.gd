@@ -7,8 +7,8 @@ class_name VisualDay
 
 signal show_match_list
 
-const home_match_day_color:Color = Color.DODGER_BLUE
-const away_match_day_color:Color = Color.DEEP_SKY_BLUE
+const HOME_MATCH_DAY_COLOR:Color = Color.DODGER_BLUE
+const AWAY_MATCH_DAY_COLOR:Color = Color.DEEP_SKY_BLUE
 
 
 @onready var background:ColorRect = $Background
@@ -16,9 +16,9 @@ const away_match_day_color:Color = Color.DEEP_SKY_BLUE
 
 @onready var button:Button = $Button
 
-@onready var match_label:Label = $MarginContainer/VBoxContainer/Match
-@onready var month_day_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
-@onready var market_label:Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
+@onready var match_label: Label = $MarginContainer/VBoxContainer/Match
+@onready var month_day_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
+@onready var market_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
 
 @onready var ball_texture:TextureRect = $MarginContainer/VBoxContainer/Ball
 
@@ -37,18 +37,18 @@ func set_up(p_date:Day = Day.new()) -> void:
 		for matchz:Match in date.matches:
 			if Config.team.name == matchz.home.name:
 				team_name = matchz.away.name
-				background.color = home_match_day_color
+				background.color = HOME_MATCH_DAY_COLOR
 			elif Config.team.name ==  matchz.away.name:
 				team_name = matchz.home.name
-				background.color = away_match_day_color
+				background.color = AWAY_MATCH_DAY_COLOR
 		match_label.text = team_name
 	else:
 		match_label.hide()
 		
 	if date.day == Config.calendar().day().day and Config.calendar().day().month == date.month:
-		if background.color != home_match_day_color:
+		if background.color != HOME_MATCH_DAY_COLOR:
 			background.color = Color.LIGHT_GREEN
-		elif background.color != away_match_day_color:
+		elif background.color != AWAY_MATCH_DAY_COLOR:
 			background.color = Color.MEDIUM_SPRING_GREEN
 		else:
 			background.color = Color.LIGHT_PINK

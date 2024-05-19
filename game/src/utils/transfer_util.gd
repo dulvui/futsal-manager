@@ -6,6 +6,8 @@ extends Node
 
 signal transfer_mail
 
+const REQUEST_FACTOR: int = 20
+
 func update_day() -> void:
 	#check with calendar if treansfer market is open, then send start/stop mail
 	if Config.calendar().is_market_active():
@@ -29,7 +31,7 @@ func make_offer(transfer:Transfer) -> void:
 	Config.transfers.list.append(transfer)
 
 # TODO move to trasnfer util
-func get_transfer_id(id:int) -> Transfer:
+func get_transfer_id(id: int) -> Transfer:
 	for transfer:Transfer in Config.transfers.list:
 		if transfer.id == id:
 			return transfer
@@ -37,7 +39,7 @@ func get_transfer_id(id:int) -> Transfer:
 	return null
 
 func _request_players() -> void:
-	if randi_range(1, Constants.REQUEST_FACTOR) == Constants.REQUEST_FACTOR:
+	if randi_range(1, REQUEST_FACTOR) == REQUEST_FACTOR:
 		# TODO
 		# pick random team, that needs a player
 		# depending on presige of team, buy cheap or expensive player

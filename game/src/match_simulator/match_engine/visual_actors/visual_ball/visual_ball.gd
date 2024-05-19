@@ -8,7 +8,7 @@ class_name  VisualBall
 var sim_ball:SimBall
 
 func _process(delta: float) -> void:
-	global_position = global_position.lerp(sim_ball.pos, delta * Config.speed_factor * Constants.ticks_per_second)
+	global_position = global_position.lerp(sim_ball.pos, delta * Config.speed_factor * Const.TICKS_PER_SECOND)
 
 func set_up(p_sim_ball:SimBall) -> void:
 	sim_ball = p_sim_ball
