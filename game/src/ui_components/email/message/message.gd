@@ -10,7 +10,7 @@ signal email_action(message:EmailMessage)
 @onready var sender: Label = $MarginContainer/VBoxContainer/Details/Sender
 @onready var date: Label = $MarginContainer/VBoxContainer/Details/Date
 @onready var text:RichTextLabel = $MarginContainer/VBoxContainer/Message
-@onready var action_button:Button = $MarginContainer/VBoxContainer/BottomBar/Action
+@onready var action_button: Button = $MarginContainer/VBoxContainer/BottomBar/Action
 
 var message:EmailMessage
 

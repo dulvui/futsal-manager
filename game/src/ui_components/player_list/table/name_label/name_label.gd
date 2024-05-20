@@ -4,7 +4,7 @@
 
 extends Control
 
-func set_text(p_name:String) -> void:
+func set_text(p_name: String) -> void:
 	$Label.text = str(p_name)
 	
 func set_sub(is_true: bool) -> void:

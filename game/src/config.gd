@@ -4,23 +4,23 @@
 
 extends Node
 
-const VERSION:String = "1"
-const CONFIG_VERSION:String = "1"
+const VERSION: String = "1"
+const CONFIG_VERSION: String = "1"
 
 # config
 var config:ConfigFile
 
-var language:String
+var language: String
 var currency: int
 var theme_index: int
 
 # save states
-var save_states:SaveStates
+var save_states: SaveStates
 
 # vars
 var start_date: Dictionary
 # generator config
-var generation_seed:String
+var generation_seed: String
 var generation_state: int
 var generation_gender:Const.Gender
 # saves which season this is, starting from 0
@@ -72,7 +72,7 @@ func _load_config() -> void:
 
 
 func load_save_state() -> void:
-	var save_sate:SaveState = save_states.get_active()
+	var save_sate: SaveState = save_states.get_active()
 	if save_sate:
 		start_date = save_sate.start_date
 		id_by_type = save_sate.id_by_type
@@ -88,7 +88,7 @@ func load_save_state() -> void:
 
 
 func save_active_state() -> void:
-	var save_sate:SaveState = save_states.get_active()
+	var save_sate: SaveState = save_states.get_active()
 	save_sate.start_date = start_date
 	save_sate.id_by_type = id_by_type
 	save_sate.current_season = current_season
@@ -153,7 +153,7 @@ func save_resources() -> void:
 	ResourceSaver.save(transfers, save_states.get_active_path("transfers.tres"))
 
 
-func generate_leagues(p_generation_seed:String, p_generation_gender:Const.Gender) -> void:
+func generate_leagues(p_generation_seed: String, p_generation_gender:Const.Gender) -> void:
 	generation_seed = p_generation_seed
 	generation_gender = p_generation_gender
 	set_seed(generation_seed)
@@ -168,12 +168,12 @@ func save_all_data() -> void:
 	save_config()
 
 
-func set_seed(p_generation_seed:String=generation_seed) -> void:
+func set_seed(p_generation_seed: String=generation_seed) -> void:
 	generation_seed = p_generation_seed
 	rng.seed = hash(generation_seed) + generation_gender
 
 
-func set_lang(lang:String) -> void:
+func set_lang(lang: String) -> void:
 	TranslationServer.set_locale(lang)
 	language = lang
 	config.set_value("settings","language", language)

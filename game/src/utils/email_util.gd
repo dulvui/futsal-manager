@@ -32,7 +32,7 @@ func new_message(type: int) -> void:
 	_add_message(message)
 
 func next_match(p_match:Match) -> void:
-	var team_name:String = p_match.home.name
+	var team_name: String = p_match.home.name
 	if team_name == Config.team.name:
 		team_name = p_match.away.name
 

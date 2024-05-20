@@ -5,13 +5,13 @@
 extends Control
 class_name PlayerList
 
-signal select_player(player:Player)
+signal select_player(player: Player)
 
-const INFO_TYPES:Array = ["mental","physical","technical","goalkeeper"]
+const INFO_TYPES: Array = ["mental","physical","technical","goalkeeper"]
 
-var base_headers:Array[String] = ["position", "surname", "attributes_average"]
+var base_headers: Array[String] = ["position", "surname", "attributes_average"]
 
-@onready var table:PlayerTable = $VBoxContainer/Table
+@onready var table: PlayerTable = $VBoxContainer/Table
 @onready var player_profile: Control = $PlayerProfile
 # select filters
 @onready var info_select:OptionButton = $VBoxContainer/HBoxContainer/InfoSelect
@@ -21,9 +21,9 @@ var base_headers:Array[String] = ["position", "surname", "attributes_average"]
 
 var active_filters: Dictionary = {}
 var active_info_type: int = 0
-var team_search:String = ""
+var team_search: String = ""
 
-var all_players:Array[Player] = []
+var all_players: Array[Player] = []
 
 var show_profile: bool
 var lineup_colors: bool
@@ -46,7 +46,7 @@ func set_up(only_lineup: bool,p_show_profile: bool, p_active_team: Team = null, 
 		team_select.hide()
 	
 	pos_select.add_item("NO_POS")
-	for pos:String in Player.Position.keys():
+	for pos: String in Player.Position.keys():
 		pos_select.add_item(pos)
 	
 	if active_team == null:
@@ -56,7 +56,7 @@ func set_up(only_lineup: bool,p_show_profile: bool, p_active_team: Team = null, 
 	else:
 		league_select.hide()
 	
-	for info_type:String in INFO_TYPES:
+	for info_type: String in INFO_TYPES:
 		info_select.add_item(info_type)
 
 
@@ -80,8 +80,8 @@ func set_up_players(only_lineup: bool, p_active_team: Team = null, p_reset_optio
 			#all_players.append_array(active_team.get_lineup_players())
 			#all_players.append_array(active_team.get_sub_players())
 			#all_players.append_array(active_team.get_non_lineup_players())
-	var headers:Array[String] = base_headers.duplicate()
-	for attribute:String in Const.ATTRIBUTES[INFO_TYPES[active_info_type]]:
+	var headers: Array[String] = base_headers.duplicate()
+	for attribute: String in Const.ATTRIBUTES[INFO_TYPES[active_info_type]]:
 		headers.append(attribute)
 	table.set_up(headers,INFO_TYPES[active_info_type], all_players, active_team, lineup_colors)
 	
@@ -92,7 +92,7 @@ func remove_player(player_id: int) -> void:
 	active_filters["id"] = player_id
 	_filter_table(true)
 
-func _on_NameSearch_text_changed(text:String) -> void:
+func _on_NameSearch_text_changed(text: String) -> void:
 	if text.length() > 2:
 		active_filters["surname"] = text
 		_filter_table()
@@ -135,8 +135,8 @@ func _on_PositionSelect_item_selected(index: int) -> void:
 	else:
 		active_filters["position"] = ""
 	
-	var headers:Array[String] = base_headers.duplicate()
-	for attribute:String in Const.ATTRIBUTES[INFO_TYPES[active_info_type]]:
+	var headers: Array[String] = base_headers.duplicate()
+	for attribute: String in Const.ATTRIBUTES[INFO_TYPES[active_info_type]]:
 		headers.append(attribute)
 	info_select.select(0)
 
@@ -152,8 +152,8 @@ func _on_Close_pressed() -> void:
 
 
 func _on_InfoSelect_item_selected(index: int) -> void:
-	var headers:Array[String] = base_headers.duplicate()
-	for attribute:String in Const.ATTRIBUTES[INFO_TYPES[index]]:
+	var headers: Array[String] = base_headers.duplicate()
+	for attribute: String in Const.ATTRIBUTES[INFO_TYPES[index]]:
 		headers.append(attribute)
 	active_info_type = index
 	table.update(headers, INFO_TYPES[active_info_type])
@@ -167,7 +167,7 @@ func _reset_options() -> void:
 	active_info_type = 0
 
 
-func _on_table_info_player(player:Player) -> void:
+func _on_table_info_player(player: Player) -> void:
 	if show_profile:
 		player_profile.show()
 		player_profile.set_up_info(player)

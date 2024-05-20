@@ -4,7 +4,7 @@
 
 extends Control
 
-@onready var load_game:Button = $VBoxContainer/LoadGame
+@onready var load_game: Button = $VBoxContainer/LoadGame
 @onready var continue_game: Button = $VBoxContainer/ContinueGame
 
 

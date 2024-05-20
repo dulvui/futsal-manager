@@ -6,7 +6,7 @@ extends Control
 
 const MatchRowScene: PackedScene = preload("res://src/ui_components/visual_calendar/match_list/match_list_row/match_list_row.tscn")
 
-@onready var matches_list:VBoxContainer = $VBoxContainer/ScrollContainer/Matches
+@onready var matches_list: VBoxContainer = $VBoxContainer/ScrollContainer/Matches
 @onready var date_label: Label = $VBoxContainer/Date
 
 

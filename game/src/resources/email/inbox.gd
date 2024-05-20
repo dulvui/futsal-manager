@@ -5,10 +5,10 @@
 class_name Inbox
 extends Resource
 
-@export var list:Array[EmailMessage]
+@export var list: Array[EmailMessage]
 
 func _init(
-	p_list:Array[EmailMessage] = [],
+	p_list: Array[EmailMessage] = [],
 	) -> void:
 	list = p_list
 

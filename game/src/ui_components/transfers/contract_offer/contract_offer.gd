@@ -19,7 +19,7 @@ var years: int = 1
 var buy_clause: int = 0
 
 var team: Team
-var player:Player
+var player: Player
 var transfer:Transfer
 
 

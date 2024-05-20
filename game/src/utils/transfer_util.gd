@@ -56,7 +56,7 @@ func _request_players() -> void:
 
 
 func make_transfer(transfer:Transfer) -> void:
-	var player:Player = transfer.player
+	var player: Player = transfer.player
 	transfer.sell_team.remove_player(player)
 	player.team = transfer.buy_team.name
 	transfer.buy_team.players.append(player)

@@ -5,18 +5,18 @@
 class_name Day
 extends Resource
 
-@export var matches:Array[Match]
+@export var matches: Array[Match]
 @export var market: bool
-@export var weekday:String
+@export var weekday: String
 @export var day: int
 @export var month: int
 @export var year: int
-#@export var trainings:Array
+#@export var trainings: Array
 
 func _init(
-	p_matches:Array[Match] = [],
+	p_matches: Array[Match] = [],
 	p_market: bool = false,
-	p_weekday:String = "MON",
+	p_weekday: String = "MON",
 	p_day: int = 1,
 	p_month: int = 1,
 	p_year: int = 1970,

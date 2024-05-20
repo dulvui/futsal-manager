@@ -11,7 +11,7 @@ signal click()
 const COLOR_FOCUS:Color = Color(1,1,1,0.2)
 const COLOR_NORMAL:Color = Color(1,1,1,0)
 
-@onready var button:Button = $Button
+@onready var button: Button = $Button
 @onready var subject_label: Label = $HBoxContainer/Subject
 @onready var sender_label: Label = $HBoxContainer/Sender
 @onready var date_label: Label = $HBoxContainer/Date

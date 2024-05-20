@@ -8,7 +8,7 @@ signal short_pass
 signal interception
 
 # resources
-var player_res:Player
+var player_res: Player
 var ball:SimBall
 var field:SimField
 var left_half: bool
@@ -23,7 +23,7 @@ var speed:float
 var interception_radius: int #TODO reduce radius with low stamina
 
 func set_up(
-	p_player_res:Player,
+	p_player_res: Player,
 	p_ball:SimBall,
 	p_field:SimField,
 	p_left_half: bool,

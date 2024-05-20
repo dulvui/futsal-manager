@@ -13,8 +13,8 @@ extends Resource
 
 
 func _init(
-		p_list:Array[SaveState] = [],
-		p_active_id:String = "",
+		p_list: Array[SaveState] = [],
+		p_active_id: String = "",
 	) -> void:
 	list = p_list
 	active_id = p_active_id
@@ -36,14 +36,14 @@ func get_active() -> SaveState:
 	if temp_state:
 		return temp_state
 	
-	for state:SaveState in list:
+	for state: SaveState in list:
 		if state.id == active_id:
 			return state
 
 	return null
 
 
-func get_active_path(relative_path:String = "") -> String:
+func get_active_path(relative_path: String = "") -> String:
 	if get_active():
 		return "user://" + get_active().id + "/" + relative_path
 	return ""
@@ -60,7 +60,7 @@ func make_temp_active() -> void:
 
 
 func delete(p_state: SaveState) -> int:
-	for state:SaveState in list:
+	for state: SaveState in list:
 		if state.id == p_state.id:
 			state.delete_dir()
 			list.erase(state)

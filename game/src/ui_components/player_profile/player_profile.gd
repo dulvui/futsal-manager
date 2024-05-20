@@ -4,17 +4,17 @@
 
 extends Control
 
-signal select(player:Player)
+signal select(player: Player)
 
 const DetailNumber: PackedScene = preload("res://src/ui_components/color_number/color_number.tscn")
 
-var player:Player
+var player: Player
 
 @onready var info: Control = $TabContainer/Info
 @onready var attributes: Control = $TabContainer/Attributes
 
 
-func set_up_info(_player:Player) -> void:
+func set_up_info(_player: Player) -> void:
 	player = _player
 	
 	$TabContainer/Info/Info/Name.text = player.name + " " + player.surname
@@ -29,7 +29,7 @@ func set_up_info(_player:Player) -> void:
 	
 	
 	# attributes
-	for attribute:String in Const.ATTRIBUTES.keys():
+	for attribute: String in Const.ATTRIBUTES.keys():
 		# first remove existing values
 		for child:Node in attributes.get_node(attribute.capitalize()).get_children():
 			child.queue_free()
@@ -40,7 +40,7 @@ func set_up_info(_player:Player) -> void:
 		attributes.get_node(attribute.capitalize()).add_child(label_title)
 		attributes.get_node(attribute.capitalize()).add_child(Label.new())
 		
-		for key:String in Const.ATTRIBUTES[attribute]:
+		for key: String in Const.ATTRIBUTES[attribute]:
 			var label: Label = Label.new()
 			label.text = tr(key.to_upper())
 			label.tooltip_text = tr(key.to_upper())

@@ -4,17 +4,17 @@
 
 extends Node
 
-var match_days:Array[Array]
+var match_days: Array[Array]
 var match_day: int = 0
 
 
 func inizialize_matches(leagues:Leagues) -> void:
 	for league:League in leagues.list:
-		var teams:Array = league.teams.duplicate(true)
+		var teams: Array = league.teams.duplicate(true)
 		match_days = []
 		match_day = 0
 		
-		var random_teams:Array[Team]  = teams.duplicate(true)
+		var random_teams: Array[Team]  = teams.duplicate(true)
 		random_teams.shuffle()
 		
 		var last_team: Team = random_teams.pop_front()
@@ -22,7 +22,7 @@ func inizialize_matches(leagues:Leagues) -> void:
 		var home: bool = true
 		
 		for i in random_teams.size():
-			var current_match_day:Array = []
+			var current_match_day: Array = []
 			var matchOne:Match
 			if home:
 				matchOne = Match.new(last_team,random_teams[0])
@@ -30,7 +30,7 @@ func inizialize_matches(leagues:Leagues) -> void:
 				matchOne = Match.new(random_teams[0], last_team)
 			current_match_day.append(matchOne)
 			
-			var copy:Array = random_teams.duplicate(true)
+			var copy: Array = random_teams.duplicate(true)
 			copy.remove_at(0)
 			
 			for j in range(0,(teams.size()/2) - 1):
@@ -51,15 +51,15 @@ func inizialize_matches(leagues:Leagues) -> void:
 		############
 		# RITORNO
 		############
-		var temp_match_days:Array[Array] = []
-		for match_dayz:Array[Match] in match_days:
-			var current_match_dayz:Array = []
+		var temp_match_days: Array[Array] = []
+		for match_dayz: Array[Match] in match_days:
+			var current_match_dayz: Array = []
 			for match_dayss:Match in match_dayz:
 				var matchzz:Match = Match.new(match_dayss.away, match_dayss.home)
 				current_match_dayz.append(matchzz)
 			temp_match_days.append(current_match_dayz)
 			
-		for temp:Array in temp_match_days:
+		for temp: Array in temp_match_days:
 			match_days.append(temp)
 		
 		############
@@ -74,7 +74,7 @@ func inizialize_matches(leagues:Leagues) -> void:
 				day = i
 				break
 		
-		for matches:Array[Match] in match_days:
+		for matches: Array[Match] in match_days:
 			# check if next month
 			if day > league.calendar.month(month).days.size() - 1:
 				month += 1
@@ -115,7 +115,7 @@ func inizialize_matches(leagues:Leagues) -> void:
 			day += 5
 
 		
-func _shift_array(array:Array) -> void:
+func _shift_array(array: Array) -> void:
 	var temp: Team = array[0]
 	for i in range(array.size() - 1):
 		array[i] = array[i+1]

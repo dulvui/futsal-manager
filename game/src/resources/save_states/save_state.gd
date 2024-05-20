@@ -60,7 +60,7 @@ func _init(
 
 func create_dir() -> void:
 	# create save state directory, if not exist yet
-	var user_dir:DirAccess = DirAccess.open("user://")
+	var user_dir: DirAccess = DirAccess.open("user://")
 	if user_dir and not user_dir.dir_exists(id):
 		var err: int = user_dir.make_dir(id)
 		if err != OK:

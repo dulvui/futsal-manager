@@ -13,13 +13,13 @@ const COLOR_NORMAL:Color = Color(1,1,1,0)
 
 const color_number: PackedScene = preload("res://src/ui_components/color_number/color_number.tscn")
 
-@onready var button:Button = $Button
+@onready var button: Button = $Button
 @onready var name_label: Control = $HBoxContainer/NameLabel
 @onready var position_label: Control = $HBoxContainer/PositionLabel
 @onready var attributes_average:ColorNumber = $HBoxContainer/AttributesAverage
-@onready var attributes:HBoxContainer = $HBoxContainer/Attributes
+@onready var attributes: HBoxContainer = $HBoxContainer/Attributes
 
-func set_up(player:Player, active_headers:Array[String], team: Team=null, lineup_colors: bool = true) -> void:
+func set_up(player: Player, active_headers: Array[String], team: Team=null, lineup_colors: bool = true) -> void:
 	for child in attributes.get_children():
 		child.queue_free()
 		
@@ -30,8 +30,8 @@ func set_up(player:Player, active_headers:Array[String], team: Team=null, lineup
 	
 	attributes_average.set_up(player.get_attributes_average())
 	
-	for key:String in Const.ATTRIBUTES.keys():
-		for attribute:String in Const.ATTRIBUTES[key]:
+	for key: String in Const.ATTRIBUTES.keys():
+		for attribute: String in Const.ATTRIBUTES[key]:
 			var number:ColorNumber = color_number.instantiate()
 			number.key = attribute
 			number.set_up(player.attributes.get(key).get(attribute))

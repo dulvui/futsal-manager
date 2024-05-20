@@ -5,7 +5,7 @@
 class_name Statistics
 extends Resource
 
-@export var team_name:String
+@export var team_name: String
 @export var games_played: int
 @export var goals: int
 @export var assists: int
@@ -14,7 +14,7 @@ extends Resource
 @export var average_vote:float
 
 func _init(
-	p_team_name:String = "", 
+	p_team_name: String = "", 
 	p_games_played: int = 0, 
 	p_goals: int = 0, 
 	p_assists: int = 0, 

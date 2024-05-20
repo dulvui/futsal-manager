@@ -4,8 +4,8 @@
 extends Node
 class_name Generator
 
-const NAMES_DIR:String = "res://data/player_names/"
-const LEAGUES_DIR:String = "res://data/leagues/"
+const NAMES_DIR: String = "res://data/player_names/"
+const LEAGUES_DIR: String = "res://data/leagues/"
 
 # defines noise added to attribute factors
 const NOISE: int = 3
@@ -34,12 +34,12 @@ func generate() -> Leagues:
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 	
 	# initalize names
-	for nation:String in Const.Nations:
+	for nation: String in Const.Nations:
 		var names_file:FileAccess = FileAccess.open(NAMES_DIR + nation.to_lower()  + ".json", FileAccess.READ)
 		names[nation.to_lower()] = JSON.parse_string(names_file.get_as_text())
 
 	# create leagues. teams and players
-	for nation:String in Const.Nations:
+	for nation: String in Const.Nations:
 		var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + nation.to_lower() + ".json", FileAccess.READ)
 		leagues_data[nation] = JSON.parse_string(leagues_file.get_as_text())
 		 # used for prestige calculation, so that high leagues have better prestige
@@ -49,7 +49,7 @@ func generate() -> Leagues:
 			league.name = l.name
 			league.pyramid_level = pyramid_level
 			league.nation = Const.Nations.get(nation)
-			for t:String in l.teams:
+			for t: String in l.teams:
 				var team: Team = Team.new()
 				team.name = t
 				team.budget = Config.rng.randi_range(500000, 100000000)
@@ -83,7 +83,7 @@ func assign_players_to_team(p_team: Team, p_league:League, prestige: int) -> Tea
 		
 		for i in amount:
 			var random_nation:Const.Nations = get_random_nationality(p_league.nation, prestige, p_league.pyramid_level)
-			var player:Player = create_player(random_nation, position, nr, prestige)
+			var player: Player = create_player(random_nation, position, nr, prestige)
 			nr += 1
 			player.team = p_team.name
 			player.league = p_league.name
@@ -98,7 +98,7 @@ func assign_players_to_team(p_team: Team, p_league:League, prestige: int) -> Tea
 	return p_team
 
 
-func get_goalkeeper_attributes(age: int, prestige: int, position:Player.Position) -> Goalkeeper:
+func get_goalkeeper_attributes(age: int, prestige: int, position: Player.Position) -> Goalkeeper:
 	var attributes:Goalkeeper = Goalkeeper.new()
 	
 	var age_factor: int = get_age_factor(age)
@@ -121,7 +121,7 @@ func get_goalkeeper_attributes(age: int, prestige: int, position:Player.Position
 	return attributes
 
 
-func get_physical(age: int, prestige: int, position:Player.Position) -> Physical:
+func get_physical(age: int, prestige: int, position: Player.Position) -> Physical:
 	var attributes:Physical = Physical.new()
 
 	var age_factor: int = get_physical_age_factor(age)
@@ -146,7 +146,7 @@ func get_physical(age: int, prestige: int, position:Player.Position) -> Physical
 	return attributes
 
 
-func get_technical(age: int, prestige: int, position:Player.Position) -> Technical:
+func get_technical(age: int, prestige: int, position: Player.Position) -> Technical:
 	var attributes:Technical = Technical.new()
 	
 	var age_factor: int = get_age_factor(age)
@@ -220,7 +220,7 @@ func get_age_factor(age: int) -> int:
 	return Config.rng.randi_range(-1, 5)
 
 
-func get_price(age: int, prestige: int, position:Player.Position) -> int:
+func get_price(age: int, prestige: int, position: Player.Position) -> int:
 	var age_factor: int = min(abs(age - 30), 20)
 	var pos_factor: int = 0
 	if position == Player.Position.G:
@@ -281,7 +281,7 @@ func get_contract(prestige: int, position: int, age: int, contract:Contract) -> 
 
 
 func get_player_name(nationality:Const.Nations) -> String:
-	var nation_string:String = Const.Nations.keys()[nationality].to_lower()
+	var nation_string: String = Const.Nations.keys()[nationality].to_lower()
 	
 	if Config.generation_gender == Const.Gender.MALE:
 		var size: int = names[nation_string]["first_names_male"].size()
@@ -292,10 +292,10 @@ func get_player_name(nationality:Const.Nations) -> String:
 	else:
 		var size_female: int = names[nation_string]["first_names_female"].size()
 		var size_male: int = names[nation_string]["first_names_male"].size()
-		var female_names:Array =  names[nation_string]["first_names_female"]
-		var male_names:Array =  names[nation_string]["first_names_male"]
+		var female_names: Array =  names[nation_string]["first_names_female"]
+		var male_names: Array =  names[nation_string]["first_names_male"]
 		
-		var mixed_names:Array = []
+		var mixed_names: Array = []
 		mixed_names.append_array(female_names)
 		mixed_names.append_array(male_names)
 		
@@ -304,13 +304,13 @@ func get_player_name(nationality:Const.Nations) -> String:
 
 func get_surname(nationality:Const.Nations) -> String:
 	# TODO combine with other nations, but with low probability
-	var nation_string:String = Const.Nations.keys()[nationality].to_lower()
+	var nation_string: String = Const.Nations.keys()[nationality].to_lower()
 	var size: int = names[nation_string]["last_names"].size()
 	return names[nation_string]["last_names"][Config.rng.randi() % size]
 
 
-func create_player(nationality:Const.Nations, position:Player.Position, nr: int, p_prestige: int) -> Player:
-	var player:Player = Player.new()
+func create_player(nationality:Const.Nations, position: Player.Position, nr: int, p_prestige: int) -> Player:
+	var player: Player = Player.new()
 	# Config.rng.random date from 1970 to 2007
 	var birth_date: Dictionary = Time.get_datetime_dict_from_unix_time(Config.rng.randi_range(0, max_timestamp))
 	

@@ -5,22 +5,22 @@
 extends Control
 class_name PlayerTable
 
-signal info_player(player:Player)
+signal info_player(player: Player)
 
 const PlayerRowScene: PackedScene = preload("res://src/ui_components/player_list/player_row/player_row.tscn")
 
-@onready var header_container:HBoxContainer = $VBoxContainer/Header
-@onready var players_container:VBoxContainer = $VBoxContainer/Players
+@onready var header_container: HBoxContainer = $VBoxContainer/Header
+@onready var players_container: VBoxContainer = $VBoxContainer/Players
 @onready var page_indicator: Label = $VBoxContainer/Footer/PageIndicator
-@onready var footer:HBoxContainer = $VBoxContainer/Footer
+@onready var footer: HBoxContainer = $VBoxContainer/Footer
 
 
-var headers:Array[String]
-var all_players:Array[Player]
-var players:Array[Player]
+var headers: Array[String]
+var all_players: Array[Player]
+var players: Array[Player]
 
 
-var info_type:String
+var info_type: String
 
 var sort_memory: Dictionary = {} # to save wich value is already sorted and how
 
@@ -32,9 +32,9 @@ var lineup_colors: bool
 
 	
 func set_up(
-	p_headers:Array[String],
-	p_info_type:String,
-	p_players:Array[Player],
+	p_headers: Array[String],
+	p_info_type: String,
+	p_players: Array[Player],
 	p_team: Team = null,
 	p_lineup_colors: bool = false
 ) -> void:
@@ -53,14 +53,14 @@ func set_up(
 	sort_memory["position"] = false
 	sort_memory["attributes_average"] = false
 	
-	for key:String in Const.ATTRIBUTES.keys():
-		for attribute:String in Const.ATTRIBUTES[key]:
+	for key: String in Const.ATTRIBUTES.keys():
+		for attribute: String in Const.ATTRIBUTES[key]:
 			sort_memory[key + "_" + attribute] = false
 	
 	_set_up_headers()
 	_set_up_content()
 
-func update(_headers:Array[String], _info_type:String) -> void:
+func update(_headers: Array[String], _info_type: String) -> void:
 	info_type = _info_type
 	headers = _headers
 	# todo replace with update
@@ -73,29 +73,29 @@ func _set_up_headers() -> void:
 		header.queue_free()
 	
 	# position header
-	var pos_button:Button = Button.new()
+	var pos_button: Button = Button.new()
 	pos_button.text = headers[0].substr(0,3)
 	pos_button.custom_minimum_size.x = 34
 	pos_button.button_down.connect(_sort_info.bind(headers[0]))
 	header_container.add_child(pos_button)
 	
 	# name header
-	var name_button:Button = Button.new()
+	var name_button: Button = Button.new()
 	name_button.text = headers[1]
 	name_button.custom_minimum_size.x = 252
 	name_button.button_down.connect(_sort_info.bind(headers[1]))
 	header_container.add_child(name_button)
 	
 	# average attribues header
-	var attributes_average_button:Button = Button.new()
+	var attributes_average_button: Button = Button.new()
 	attributes_average_button.text = headers[2].substr(0,3)
 	attributes_average_button.custom_minimum_size.x = 34
 	attributes_average_button.button_down.connect(_sort_attribues_average)
 	header_container.add_child(attributes_average_button)
 	
 	# ohter headers
-	for header:String in headers.slice(3):
-		var button:Button = Button.new()
+	for header: String in headers.slice(3):
+		var button: Button = Button.new()
 		button.text = tr(header)
 		button.text_overrun_behavior = TextServer.OVERRUN_TRIM_CHAR
 		button.tooltip_text = tr(header)
@@ -108,8 +108,8 @@ func _set_up_content() -> void:
 		child.queue_free()
 	
 	if players.size() > 0:
-		for player:Player in players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE):
-			var row:PlayerRow = PlayerRowScene.instantiate()
+		for player: Player in players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE):
+			var row: PlayerRow = PlayerRowScene.instantiate()
 			players_container.add_child(row)
 			#player_row.select.connect(select.bind(player))
 			row.info.connect(info.bind(player))
@@ -134,8 +134,8 @@ func filter(filters: Dictionary, exlusive: bool = false) -> void:
 			var filter_counter: int = 0
 			# because value can be empty
 			var valid_filter_counter: int = 0
-			for key:String in filters.keys():
-				var value:String = str(filters[key])
+			for key: String in filters.keys():
+				var value: String = str(filters[key])
 				if value:
 					valid_filter_counter += 1
 					if exlusive:
@@ -154,11 +154,11 @@ func filter(filters: Dictionary, exlusive: bool = false) -> void:
 	_update_page_indicator()
 	
 
-func info(player:Player) -> void:
+func info(player: Player) -> void:
 	info_player.emit(player)
 	
-func _sort_attributes(key:String) -> void:
-	players.sort_custom(func(a:Player, b:Player) -> bool: return a.attributes.get(info_type).get(key) < b.attributes.get(info_type).get(key))
+func _sort_attributes(key: String) -> void:
+	players.sort_custom(func(a: Player, b: Player) -> bool: return a.attributes.get(info_type).get(key) < b.attributes.get(info_type).get(key))
 	
 	sort_memory[info_type + "_" + key] = not sort_memory[info_type + "_" + key]
 	
@@ -168,7 +168,7 @@ func _sort_attributes(key:String) -> void:
 	_set_up_content()
 
 func _sort_attribues_average() -> void:
-	players.sort_custom(func(a:Player, b:Player) -> bool: return a.get_attributes_average() < b.get_attributes_average())
+	players.sort_custom(func(a: Player, b: Player) -> bool: return a.get_attributes_average() < b.get_attributes_average())
 	
 	sort_memory["attributes_average"] = not sort_memory["attributes_average"]
 	
@@ -177,8 +177,8 @@ func _sort_attribues_average() -> void:
 	
 	_set_up_content()
 
-func _sort_info(key:String) -> void:
-	players.sort_custom(func(a:Player, b:Player) -> bool: return a.get(key) < b.get(key))
+func _sort_info(key: String) -> void:
+	players.sort_custom(func(a: Player, b: Player) -> bool: return a.get(key) < b.get(key))
 	
 	sort_memory[key] = not sort_memory[key]
 	

@@ -5,9 +5,9 @@
 class_name Transfers
 extends Resource
 
-@export var list:Array[Transfer]
+@export var list: Array[Transfer]
 
 func _init(
-	p_list:Array[Transfer] = [],
+	p_list: Array[Transfer] = [],
 ) -> void:
 	list = p_list

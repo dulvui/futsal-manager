@@ -16,7 +16,7 @@ var ticks: int
 # for trajectory calculations 
 var post_bottom:Vector2
 var post_top:Vector2
-var players:Array[SimPlayer]
+var players: Array[SimPlayer]
 var goalkeeper:SimGoalkeeper
 
 var nearest_player:SimPlayer

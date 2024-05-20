@@ -9,19 +9,19 @@ signal change
 const FormationPlayer: PackedScene = preload("res://src/ui_components/visual_formation/player/formation_player.tscn")
 
 @onready var player_list: Control = $HBoxContainer/PlayerList
-@onready var players:VBoxContainer = $HBoxContainer/LineUp/Field/Players
-@onready var subs:VBoxContainer = $HBoxContainer/Subs/List
+@onready var players: VBoxContainer = $HBoxContainer/LineUp/Field/Players
+@onready var subs: VBoxContainer = $HBoxContainer/Subs/List
 
 @onready var formation_select:SwitchOptionButton = $HBoxContainer/LineUp/FormationSelect
 
-@onready var goalkeeper:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Goalkeeper
-@onready var defense:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Defense
-@onready var center:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Center
-@onready var attack:HBoxContainer = $HBoxContainer/LineUp/Field/Players/Attack
+@onready var goalkeeper: HBoxContainer = $HBoxContainer/LineUp/Field/Players/Goalkeeper
+@onready var defense: HBoxContainer = $HBoxContainer/LineUp/Field/Players/Defense
+@onready var center: HBoxContainer = $HBoxContainer/LineUp/Field/Players/Center
+@onready var attack: HBoxContainer = $HBoxContainer/LineUp/Field/Players/Attack
 
 
-var lineup_players:Array[int] = []
-var list_player:Player = null
+var lineup_players: Array[int] = []
+var list_player: Player = null
 
 var team: Team
 var only_lineup: bool
@@ -38,7 +38,7 @@ func set_up(p_only_lineup: bool) -> void:
 
 func _set_players() -> void:
 	# clean field
-	for hbox:HBoxContainer in players.get_children():
+	for hbox: HBoxContainer in players.get_children():
 		for player: Control in hbox.get_children():
 			player.queue_free()
 			

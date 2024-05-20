@@ -16,5 +16,5 @@ var attack: int
 var state: int
 var is_home: bool
 var success: bool
-var attacking_player:Player
-var defending_player:Player
+var attacking_player: Player
+var defending_player: Player

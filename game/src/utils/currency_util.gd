@@ -11,7 +11,7 @@ enum Currencies {
 	BITCOIN
 }
 
-const SIGNS:Array = [
+const SIGNS: Array = [
 	"€",
 	"$",
 	"£",

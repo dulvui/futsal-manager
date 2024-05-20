@@ -7,23 +7,23 @@ extends PanelContainer
 signal confirm
 
 var team: Team
-var player:Player
+var player: Player
 
 var regex:RegEx = RegEx.new()
-var oldtext:String = ""
+var oldtext: String = ""
 
 var total: int = 0
 var amount: int = 0
 
-var exchange_players:Array[Player] = []
-var selected_players:Array[Player] = []
+var exchange_players: Array[Player] = []
+var selected_players: Array[Player] = []
 
 @onready var types:OptionButton = $VBoxContainer/Details/Types 
 @onready var amount_label:LineEdit = $VBoxContainer/Details/Money/Amount 
 @onready var total_label: Label = $VBoxContainer/Total
 @onready var info_label: Label = $VBoxContainer/Info
 @onready var exchange_players_button:OptionButton = $VBoxContainer/Details/ExchangePlayers
-@onready var selected_players_box:VBoxContainer = $VBoxContainer/ScrollContainer/SelectedPlayers
+@onready var selected_players_box: VBoxContainer = $VBoxContainer/ScrollContainer/SelectedPlayers
 
 
 func _ready() -> void:
@@ -34,14 +34,14 @@ func _ready() -> void:
 	amount_label.text = str(amount)
 	
 	team = Config.team
-	for t_player:Player in team.players:
+	for t_player: Player in team.players:
 		exchange_players_button.add_item(t_player.name + " " + str(t_player.price / 1000) + "K")
 		exchange_players.append(t_player)
 
 func _process(_delta:float) -> void:
 	total_label.text = str(total)
 
-func set_player(new_player:Player) -> void:
+func set_player(new_player: Player) -> void:
 	player = new_player
 	info_label.text = "The player " + player.name + " has a value of " + str(player.price)
 	
@@ -69,12 +69,12 @@ func _on_Less_pressed() -> void:
 
 
 func _on_ExchangePlayers_item_selected(index: int) -> void:
-	var exchange_player:Player = exchange_players[index]
+	var exchange_player: Player = exchange_players[index]
 	exchange_players.remove_at(index)
 	
 	selected_players.append(player)
 
-	var remove_button:Button = Button.new()
+	var remove_button: Button = Button.new()
 	remove_button.text = exchange_player.name + " " + str(exchange_player.price/1000) + "K"
 	remove_button.pressed.connect(remove_from_list.bind(exchange_player))
 	selected_players_box.add_child(remove_button)
@@ -83,7 +83,7 @@ func _on_ExchangePlayers_item_selected(index: int) -> void:
 	
 	_calc_total()
 	
-func remove_from_list(p_player:Player) -> void:
+func remove_from_list(p_player: Player) -> void:
 	for child in selected_players_box.get_children():
 		child.queue_free()
 	selected_players.erase(p_player)
@@ -91,8 +91,8 @@ func remove_from_list(p_player:Player) -> void:
 	
 	# might be broken after Godot 4 upgrade, check _player and selected player
 	# before only _player existed
-	for selected_player:Player in selected_players:
-		var remove_button:Button = Button.new()
+	for selected_player: Player in selected_players:
+		var remove_button: Button = Button.new()
 		remove_button.text = selected_player.name + " " + str(selected_player.price/1000) + "K"
 		remove_button.pressed.connect(remove_from_list.bind(selected_player))
 		selected_players_box.add_child(remove_button)
@@ -102,11 +102,11 @@ func remove_from_list(p_player:Player) -> void:
 	
 func _calc_total() -> void:
 	total = amount
-	for selected_player:Player in selected_players:
+	for selected_player: Player in selected_players:
 		total += selected_player.price # use other calculated value be setimating importanc efor new tweam
 
 
-func _on_Amount_text_changed(new_text:String) -> void:
+func _on_Amount_text_changed(new_text: String) -> void:
 	if regex.search(new_text):
 		amount_label.text = new_text   
 		oldtext = amount_label.text

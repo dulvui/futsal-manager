@@ -14,7 +14,7 @@ class_name SaveStateEntry
 @onready var game_date: Label = $HBoxContainer/Dates/GameDate
 @onready var last_save_date: Label = $HBoxContainer/Dates/LastSaveDate
 
-var save_state:SaveState
+var save_state: SaveState
 
 
 func _ready() -> void:

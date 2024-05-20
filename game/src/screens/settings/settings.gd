@@ -28,12 +28,12 @@ const RESOLUTIONS: Dictionary = {
 func _ready() -> void:
 	# theme
 	theme = ThemeUtil.get_active_theme()
-	for theme_name:String in ThemeUtil.get_theme_names():
+	for theme_name: String in ThemeUtil.get_theme_names():
 		theme_options.add_item(theme_name)
 	theme_options.selected = Config.theme_index
 	
 	# resolutions
-	for resolution:String in RESOLUTIONS.keys():
+	for resolution: String in RESOLUTIONS.keys():
 		resolution_options.add_item(resolution)
 	resolution_options.selected = 0
 	

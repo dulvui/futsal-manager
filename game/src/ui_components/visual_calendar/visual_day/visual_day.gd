@@ -14,7 +14,7 @@ const AWAY_MATCH_DAY_COLOR:Color = Color.DEEP_SKY_BLUE
 @onready var background:ColorRect = $Background
 @onready var color_active:ColorRect = $ColorActive
 
-@onready var button:Button = $Button
+@onready var button: Button = $Button
 
 @onready var match_label: Label = $MarginContainer/VBoxContainer/Match
 @onready var month_day_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
@@ -32,7 +32,7 @@ func set_up(p_date:Day = Day.new()) -> void:
 	ball_texture.visible = Config.leagues.is_match_day(date)
 	
 	month_day_label.text = str(date.day)
-	var team_name:String
+	var team_name: String
 	if date.matches.size() > 0:
 		for matchz:Match in date.matches:
 			if Config.team.name == matchz.home.name:

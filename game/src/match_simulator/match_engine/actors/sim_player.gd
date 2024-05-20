@@ -23,7 +23,7 @@ const DECELERATION = 0.01
 var state:State
 
 # resources
-var player_res:Player
+var player_res: Player
 var ball:SimBall
 var field:SimField
 var left_half: bool
@@ -46,7 +46,7 @@ var distance_to_enemy:float
 
 
 func set_up(
-	p_player_res:Player,
+	p_player_res: Player,
 	p_ball:SimBall,
 ) -> void:
 	player_res = p_player_res

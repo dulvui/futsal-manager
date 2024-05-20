@@ -16,7 +16,7 @@ static func players_progress_season() -> void:
 				_player_season_progress(player)
 
 
-static func _player_season_progress(player:Player) -> void:
+static func _player_season_progress(player: Player) -> void:
 	# add random noise
 	var prestige_factor: int = player.prestige + Config.rng.randi_range(-NOISE, NOISE)
 	# age factor only affects fisical attributes neagtively

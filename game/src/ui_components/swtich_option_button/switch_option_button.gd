@@ -9,8 +9,8 @@ signal item_selected(index: int)
 
 @onready var option_button:OptionButton = $HBoxContainer/OptionButton
 
-func set_up(items:Array, selected: int = 0) -> void:
-	for item:String in items:
+func set_up(items: Array, selected: int = 0) -> void:
+	for item: String in items:
 		option_button.add_item(item)
 	option_button.selected = selected
 

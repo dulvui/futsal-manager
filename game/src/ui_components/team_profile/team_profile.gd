@@ -5,7 +5,7 @@
 extends Control
 class_name TeamProfile
 
-@onready var player_list:PlayerList = $VBoxContainer/HBoxContainer/PlayerList
+@onready var player_list: PlayerList = $VBoxContainer/HBoxContainer/PlayerList
 @onready var name_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/Name
 @onready var prestige_stars_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/PresitgeStars
 @onready var prestige_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/Presitge

@@ -11,7 +11,7 @@ const DAY_IN_SECONDS: int = 86400
 const SEASON_END_DAY: int = 30
 const SEASON_END_MONTH: int = 11
 # market dates
-const MARKET_PERIODS:Array = [
+const MARKET_PERIODS: Array = [
 	{
 		"period" : "winter",
 		"start" : {
@@ -37,12 +37,12 @@ const MARKET_PERIODS:Array = [
 ]
 
 @export var date: Dictionary
-@export var months:Array[Month]
+@export var months: Array[Month]
 
 
 func _init(
 		p_date: Dictionary = {},
-		p_months:Array[Month] = [],
+		p_months: Array[Month] = [],
 	) -> void:
 	date = p_date
 	months = p_months
@@ -59,11 +59,11 @@ func initialize(next_season: bool = false) -> void:
 		date = Config.start_date
 	
 	# start date in fomrat YYYY-MM-DDTHH:MM:SS
-	var first_january:String = str(date.year) + "-01-01T00:00:00"
+	var first_january: String = str(date.year) + "-01-01T00:00:00"
 	var temp_date: Dictionary = Time.get_datetime_dict_from_datetime_string(first_january, true)
 	
 	# create months
-	for month_string:String in Const.MONTH_STRINGS:
+	for month_string: String in Const.MONTH_STRINGS:
 		var new_month:Month = Month.new()
 		new_month.name = month_string
 		months.append(new_month)

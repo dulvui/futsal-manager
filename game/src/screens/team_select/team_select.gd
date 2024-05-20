@@ -5,8 +5,8 @@
 extends Control
 class_name TeamSelect
 
-@onready var nations_container:HBoxContainer = $MarginContainer/VBoxContainer/NationSelect
-@onready var team_list:VBoxContainer = $MarginContainer/VBoxContainer/Main/ScrollContainer/TeamList
+@onready var nations_container: HBoxContainer = $MarginContainer/VBoxContainer/NationSelect
+@onready var team_list: VBoxContainer = $MarginContainer/VBoxContainer/Main/ScrollContainer/TeamList
 @onready var team_profile: TeamProfile = $MarginContainer/VBoxContainer/Main/TeamProfile
 
 var active_league:League
@@ -15,8 +15,8 @@ var active_team: Team
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
-	for nation:String in Const.Nations:
-		var button:Button = Button.new()
+	for nation: String in Const.Nations:
+		var button: Button = Button.new()
 		button.text = nation
 		nations_container.add_child(button)
 		button.pressed.connect(_on_nation_select.bind(nation))
@@ -44,14 +44,14 @@ func set_teams(nation:Const.Nations = 0) -> void:
 		team_list.add_child(league_label)
 		UiUtil.bold(league_label)
 		for team: Team in league.teams:
-			var team_button:Button = Button.new()
+			var team_button: Button = Button.new()
 			team_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 			team_button.text = team.get_prestige_stars() + "  " + team.name
 			team_button.pressed.connect(show_team.bind(league, team))
 			team_list.add_child(team_button)
 
 
-func _on_nation_select(nation:String) -> void:
+func _on_nation_select(nation: String) -> void:
 	set_teams(Const.Nations.get(nation))
 	var first_league:League = Config.leagues.get_leagues_by_nation(Const.Nations.get(nation))[0]
 	show_team(first_league, first_league.teams[0])

@@ -8,7 +8,7 @@ signal show_message(message:EmailMessage)
 
 const MessageRowScene: PackedScene = preload("res://src/ui_components/email/list/message_row/message_row.tscn")
 
-@onready var list:VBoxContainer = $ScrollContainer/List
+@onready var list: VBoxContainer = $ScrollContainer/List
 
 func update() -> void:
 	for child in list.get_children():

@@ -191,7 +191,7 @@ func _on_match_simulator_match_end() -> void:
 	match_end()
 
 
-func _on_match_simulator_action_message(message:String) -> void:
+func _on_match_simulator_action_message(message: String) -> void:
 	if comments.get_child_count() > MAX_COMMENTS:
 		comments.remove_child(comments.get_child(0))
 	var new_line: Label = Label.new()

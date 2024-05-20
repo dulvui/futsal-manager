@@ -17,15 +17,15 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var prestige: int # 1-100
 @export var moral: int
 @export var injury_factor: int
-@export var name:String
-@export var team:String # team name for easier filtering etc...
-@export var league:String # league name for easier filtering etc...
-@export var surname:String
+@export var name: String
+@export var team: String # team name for easier filtering etc...
+@export var league: String # league name for easier filtering etc...
+@export var surname: String
 @export var nation:Const.Nations
 @export var birth_date: Dictionary
 @export var form:Form
 @export var morality:Morality
-@export var statistics:Array[Statistics]
+@export var statistics: Array[Statistics]
 @export var foot:Foot
 @export var position:Position
 @export var contract:Contract
@@ -39,15 +39,15 @@ func _init(
 	p_prestige: int = 0,
 	p_moral: int = 0,
 	p_injury_factor: int = 0,
-	p_name:String = "",
-	p_team:String = "",
-	p_league:String = "",
-	p_surname:String = "",
+	p_name: String = "",
+	p_team: String = "",
+	p_league: String = "",
+	p_surname: String = "",
 	p_nation:Const.Nations = Const.Nations.ITALY,
 	p_birth_date: Dictionary = {},
 	p_form:Form = Form.Good,
 	p_morality:Morality = Morality.Good,
-	p_statistics:Array[Statistics] = [],
+	p_statistics: Array[Statistics] = [],
 	p_foot:Foot = Foot.R,
 	p_position:Position = Position.G,
 	p_contract:Contract = Contract.new(),

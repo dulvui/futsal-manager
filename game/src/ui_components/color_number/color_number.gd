@@ -6,7 +6,7 @@ extends Control
 class_name ColorNumber
 
 # what number the label has 
-var key:String
+var key: String
 
 func set_up(value: int) -> void:
 	$Label.text = str(value)

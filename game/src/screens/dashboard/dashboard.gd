@@ -11,9 +11,9 @@ const DASHBOARD_DAY_DELAY:float = 0.5
 @onready var team: Team = Config.team
 
 # buttons
-@onready var continue_button:Button = $MainContainer/VBoxContainer/MainView/Buttons/Continue
-@onready var next_match_button:Button = $MainContainer/VBoxContainer/MainView/Buttons/NextMatch
-@onready var email_button:Button = $MainContainer/VBoxContainer/MainView/Buttons/Email
+@onready var continue_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/Continue
+@onready var next_match_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/NextMatch
+@onready var email_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/Email
 
 # content views 
 @onready var email: Control = $MainContainer/VBoxContainer/MainView/Content/Email
@@ -104,7 +104,7 @@ func _on_Calendar_pressed() -> void:
 	_show_active_view(ContentViews.CALENDAR)
 
 
-func _on_all_player_list_select_player(player:Player) -> void:
+func _on_all_player_list_select_player(player: Player) -> void:
 	print("offer for " + player.surname)
 	player_offer.set_player(player)
 	player_offer.show()

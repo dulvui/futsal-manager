@@ -5,12 +5,12 @@
 class_name Leagues
 extends Resource
 
-@export var list:Array[League]
+@export var list: Array[League]
 @export var active_id: int
 
 
 func _init(
-		p_list:Array[League] = [],
+		p_list: Array[League] = [],
 	) -> void:
 	list = p_list
 
@@ -24,7 +24,7 @@ func get_active() -> League:
 
 
 func get_others() -> Array[League]:
-	var other_leagues:Array[League] = []
+	var other_leagues: Array[League] = []
 	for league:League in list:
 		if league.id != active_id:
 			other_leagues.append(league)
@@ -39,7 +39,7 @@ func get_league_by_id(league_id: int) -> League:
 
 
 func get_leagues_by_nation(nation:Const.Nations = Const.Nations.get(0)) -> Array[League]:
-	var leagues_by_nation:Array[League] = []
+	var leagues_by_nation: Array[League] = []
 	for league:League in list:
 		if league.nation == nation:
 			leagues_by_nation.append(league)

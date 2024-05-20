@@ -9,7 +9,7 @@ signal possess
 var res_team: Team
 
 var goalkeeper:SimGoalkeeper
-var players:Array[SimPlayer]
+var players: Array[SimPlayer]
 
 var ball:SimBall
 var field:SimField
@@ -45,7 +45,7 @@ func set_up(
 	sort_x_left = func(a:SimPlayer, b:SimPlayer) -> bool: return a.pos.x < b.pos.x
 	sort_x_right = func(a:SimPlayer, b:SimPlayer) -> bool: return a.pos.x > b.pos.x
 	
-	for player:Player in res_team.get_field_players():
+	for player: Player in res_team.get_field_players():
 		var sim_player:SimPlayer = SimPlayer.new()
 		# setup
 		sim_player.set_up(player, p_ball)
@@ -66,7 +66,7 @@ func move() -> void:
 		player.move()
 
 
-func defend(other_players:Array[SimPlayer]) -> void:
+func defend(other_players: Array[SimPlayer]) -> void:
 	# defend
 	goalkeeper.defend()
 	for player:SimPlayer in players:
@@ -137,7 +137,7 @@ func interception() -> void:
 func pass_to_random_player(passing_player:SimPlayer = null) -> void:
 	var random_player:SimPlayer
 	if passing_player:
-		var non_active:Array[SimPlayer] = players.filter(
+		var non_active: Array[SimPlayer] = players.filter(
 			func(player:SimPlayer) -> bool: return player.player_res.id != passing_player.player_res.id
 		)
 		random_player = non_active[Config.match_rng.randi_range(0 , non_active.size() - 1)]
