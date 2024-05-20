@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj3ts0dee4m6"]
+[gd_scene load_steps=3 format=3 uid="uid://dj3ts0dee4m6"]
 
 [ext_resource type="Script" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.gd" id="1_yugvl"]
+[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://themes/bold_label_settings.tres" id="2_6u1l3"]
 
 [node name="SaveState" type="Control"]
-custom_minimum_size = Vector2(0, 120)
+custom_minimum_size = Vector2(0, 130)
 layout_mode = 3
-anchor_right = 0.499479
-anchor_bottom = 0.103704
+anchor_right = 0.499
+anchor_bottom = 0.12
+offset_right = 0.919983
+offset_bottom = 0.399994
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -31,6 +34,8 @@ text = "DELETE"
 [node name="Details" type="GridContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="TeamLabel" type="Label" parent="HBoxContainer/Details"]
@@ -40,6 +45,7 @@ text = "TEAM"
 [node name="Team" type="Label" parent="HBoxContainer/Details"]
 layout_mode = 2
 text = "Bolzano"
+label_settings = ExtResource("2_6u1l3")
 
 [node name="ManagerLabel" type="Label" parent="HBoxContainer/Details"]
 layout_mode = 2
@@ -48,6 +54,7 @@ text = "MANAGER"
 [node name="Manager" type="Label" parent="HBoxContainer/Details"]
 layout_mode = 2
 text = "Simon Dalvai"
+label_settings = ExtResource("2_6u1l3")
 
 [node name="PlacementLabel" type="Label" parent="HBoxContainer/Details"]
 layout_mode = 2
@@ -57,6 +64,7 @@ text = "PLACEMENT
 [node name="Placement" type="Label" parent="HBoxContainer/Details"]
 layout_mode = 2
 text = "Serie A - 3."
+label_settings = ExtResource("2_6u1l3")
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
@@ -64,6 +72,8 @@ layout_mode = 2
 [node name="Dates" type="GridContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="GameDateLabel" type="Label" parent="HBoxContainer/Dates"]
@@ -73,6 +83,7 @@ text = "GAME DATE"
 [node name="GameDate" type="Label" parent="HBoxContainer/Dates"]
 layout_mode = 2
 text = "12.08.2025"
+label_settings = ExtResource("2_6u1l3")
 
 [node name="LastSaveDateLabel" type="Label" parent="HBoxContainer/Dates"]
 layout_mode = 2
@@ -81,6 +92,7 @@ text = "LAST SAVE"
 [node name="LastSaveDate" type="Label" parent="HBoxContainer/Dates"]
 layout_mode = 2
 text = "03.04.2024"
+label_settings = ExtResource("2_6u1l3")
 
 [node name="CreateDateLabel" type="Label" parent="HBoxContainer/Dates"]
 layout_mode = 2
@@ -89,6 +101,7 @@ text = "CREATED"
 [node name="CreateDate" type="Label" parent="HBoxContainer/Dates"]
 layout_mode = 2
 text = "01.01.2024"
+label_settings = ExtResource("2_6u1l3")
 
 [node name="Load" type="Button" parent="HBoxContainer"]
 layout_mode = 2
