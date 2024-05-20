@@ -99,7 +99,12 @@ func save_active_state() -> void:
 	save_sate.generation_gender = generation_gender
 	
 	save_sate.save_metadata()
-	save_resources()
+	
+	ResourceSaver.save(leagues, save_states.get_active_path("leagues.tres"))
+	ResourceSaver.save(inbox, save_states.get_active_path("inbox.tres"))
+	ResourceSaver.save(team, save_states.get_active_path("team.tres"))
+	ResourceSaver.save(manager, save_states.get_active_path("manager.tres"))
+	ResourceSaver.save(transfers, save_states.get_active_path("transfers.tres"))
 
 
 func save_save_states() -> void:
@@ -145,14 +150,6 @@ func _load_resources() -> void:
 		transfers = Transfers.new()
 
 
-func save_resources() -> void:
-	ResourceSaver.save(leagues, save_states.get_active_path("leagues.tres"))
-	ResourceSaver.save(inbox, save_states.get_active_path("inbox.tres"))
-	ResourceSaver.save(team, save_states.get_active_path("team.tres"))
-	ResourceSaver.save(manager, save_states.get_active_path("manager.tres"))
-	ResourceSaver.save(transfers, save_states.get_active_path("transfers.tres"))
-
-
 func generate_leagues(p_generation_seed: String, p_generation_gender:Const.Gender) -> void:
 	generation_seed = p_generation_seed
 	generation_gender = p_generation_gender
@@ -163,7 +160,6 @@ func generate_leagues(p_generation_seed: String, p_generation_gender:Const.Gende
 
 func save_all_data() -> void:
 	save_active_state()
-	save_resources()
 	save_save_states()
 	save_config()
 
