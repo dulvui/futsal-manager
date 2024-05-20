@@ -20,9 +20,14 @@ func set_active_theme(index: int) -> Theme:
 	active_theme = ResourceLoader.load(THEMES.values()[Config.theme_index], "Theme")
 	return active_theme
 
+
 func get_active_theme() -> Theme:
 	return active_theme
 
 
 func get_theme_names() -> Array:
 	return THEMES.keys()
+
+
+func reset_to_default() -> Theme:
+	return set_active_theme(0)

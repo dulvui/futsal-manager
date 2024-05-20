@@ -50,5 +50,10 @@ func _on_menu_pressed() -> void:
 
 func _on_resolution_option_button_item_selected(index: int) -> void:
 	size = RESOLUTIONS[RESOLUTIONS.keys()[index]]
-	
 
+
+func _on_defaults_pressed() -> void:
+	# theme
+	theme = ThemeUtil.reset_to_default()
+	# save
+	Config.save_config()

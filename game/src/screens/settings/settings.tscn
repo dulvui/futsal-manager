@@ -62,7 +62,6 @@ text = "RESOLUTION"
 [node name="ResolutionOptionButton" type="OptionButton" parent="VBoxContainer/Resolution"]
 layout_mode = 2
 size_flags_horizontal = 3
-selected = 0
 
 [node name="Version" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -79,10 +78,18 @@ size_flags_horizontal = 3
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Menu" type="Button" parent="VBoxContainer"]
+[node name="Defaults" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "DEFAULTS"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Menu2" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "MENU"
 
 [connection signal="item_selected" from="VBoxContainer/Theme/ThemeOptionButton" to="." method="_on_theme_option_button_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/Resolution/ResolutionOptionButton" to="." method="_on_resolution_option_button_item_selected"]
-[connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Defaults" to="." method="_on_defaults_pressed"]
+[connection signal="pressed" from="VBoxContainer/Menu2" to="." method="_on_menu_pressed"]
