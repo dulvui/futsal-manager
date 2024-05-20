@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4woicggddkls"]
+[gd_scene load_steps=5 format=3 uid="uid://b4woicggddkls"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://caxdir30m2j4v" path="res://icon.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://dj3ts0dee4m6" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn" id="4_5irse"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -22,62 +23,73 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -467.0
-offset_right = 256.0
-offset_bottom = 291.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-texture = ExtResource("3")
+theme_override_constants/separation = 120
+alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SaveState" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_5irse")]
+layout_mode = 2
+hide_buttons = true
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 
-[node name="ContinueGame" type="Button" parent="VBoxContainer"]
+[node name="ContinueGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = "CONTINUE"
 
-[node name="NewGame" type="Button" parent="VBoxContainer"]
+[node name="NewGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = "START NEW"
 
-[node name="LoadGame" type="Button" parent="VBoxContainer"]
+[node name="LoadGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = "LOAD GAME"
 
-[node name="Settings" type="Button" parent="VBoxContainer"]
+[node name="Settings" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 42
 text = "SETTINGS"
 
-[node name="VSplitContainer2" type="VSplitContainer" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 
-[node name="LinkButton" type="LinkButton" parent="VBoxContainer"]
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "simondalvai.org"
 uri = "https://simondalvai.org"
 
-[connection signal="pressed" from="VBoxContainer/ContinueGame" to="." method="_on_continue_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ContinueGame" to="." method="_on_continue_game_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

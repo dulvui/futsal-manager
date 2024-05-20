@@ -2,10 +2,14 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name Menu
 extends Control
 
-@onready var load_game: Button = $VBoxContainer/LoadGame
-@onready var continue_game: Button = $VBoxContainer/ContinueGame
+
+@onready var save_state: SaveStateEntry = $MarginContainer/HBoxContainer/VBoxContainer/SaveState
+
+@onready var load_game: Button = $MarginContainer/HBoxContainer/VBoxContainer/LoadGame
+@onready var continue_game: Button = $MarginContainer/HBoxContainer/VBoxContainer/ContinueGame
 
 
 func _ready() -> void:
@@ -13,6 +17,8 @@ func _ready() -> void:
 	
 	load_game.visible = Config.save_states and Config.save_states.list.size() > 0
 	continue_game.visible = Config.save_states and Config.save_states.list.size() > 0
+	
+	save_state.set_up(Config.save_states.get_active())
 	
 	# always reset temp state in menu
 	Config.save_states.reset_temp()

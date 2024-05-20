@@ -5,6 +5,8 @@
 class_name SaveStateEntry
 extends Control
 
+@export var hide_buttons: bool = false
+
 @onready var delete_dialog: ConfirmationDialog = $DeleteDialog
 
 @onready var team: Label = $HBoxContainer/Details/Team
@@ -13,11 +15,19 @@ extends Control
 @onready var placement: Label = $HBoxContainer/Details/Placement
 @onready var game_date: Label = $HBoxContainer/Dates/GameDate
 @onready var last_save_date: Label = $HBoxContainer/Dates/LastSaveDate
+@onready var delete_button: Button = $HBoxContainer/Delete
+@onready var load_button: Button = $HBoxContainer/Load
 
 var save_state: SaveState
 
 
-func _ready() -> void:
+func set_up(p_save_state: SaveState) -> void:
+	save_state = p_save_state
+	
+	if save_state == null:
+		hide()
+		return
+	
 	theme = ThemeUtil.get_active_theme()
 	team.text = save_state.meta_team_name
 	manager.text = save_state.meta_manager_name
@@ -25,10 +35,9 @@ func _ready() -> void:
 	create_date.text = Config.calendar().format_date(save_state.meta_create_date)
 	game_date.text = Config.calendar().format_date(save_state.meta_game_date)
 	last_save_date.text  = Config.calendar().format_date(save_state.meta_last_save)
-
-
-func set_up(p_save_state: SaveState) -> void:
-	save_state = p_save_state
+	
+	delete_button.visible = not hide_buttons
+	load_button.visible = not hide_buttons
 
 
 func _on_load_pressed() -> void:

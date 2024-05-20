@@ -14,8 +14,8 @@ func _ready() -> void:
 	
 	for save_state: SaveState in Config.save_states.list:
 		var entry: SaveStateEntry = SaveStateEntryScene.instantiate()
-		entry.set_up(save_state)
 		entry_list.add_child(entry)
+		entry.set_up(save_state)
 
 
 func _on_menu_pressed() -> void:
