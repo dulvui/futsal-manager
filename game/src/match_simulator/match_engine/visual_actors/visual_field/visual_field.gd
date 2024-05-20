@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-late
 
-extends Node2D
 class_name VisualField
+extends Node2D
 
 @onready var lines:Node2D = $Lines
 

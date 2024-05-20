@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
 class_name PlayerTable
+extends Control
 
 signal info_player(player: Player)
 
@@ -158,7 +158,8 @@ func info(player: Player) -> void:
 	info_player.emit(player)
 	
 func _sort_attributes(key: String) -> void:
-	players.sort_custom(func(a: Player, b: Player) -> bool: return a.attributes.get(info_type).get(key) < b.attributes.get(info_type).get(key))
+	players.sort_custom(func(a: Player, b: Player) -> bool:
+		return (a.attributes.get(info_type) as Resource).get(key) < (b.attributes.get(info_type)  as Resource).get(key))
 	
 	sort_memory[info_type + "_" + key] = not sort_memory[info_type + "_" + key]
 	

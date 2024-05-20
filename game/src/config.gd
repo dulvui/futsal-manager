@@ -39,7 +39,7 @@ var match_rng:RandomNumberGenerator
 var leagues:Leagues
 var team: Team
 var manager:Manager
-var transfers:Transfers
+var transfers: Transfers
 var inbox:Inbox
 
 
@@ -201,7 +201,6 @@ func next_season() -> void:
 	
 	MatchMaker.inizialize_matches(leagues)
 	
-	EmailUtil.new_message(EmailUtil.MessageTypes.NEXT_SEASON)
 	Config.save_all_data()
 	
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")

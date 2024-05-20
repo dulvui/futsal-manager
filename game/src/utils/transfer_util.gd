@@ -14,7 +14,7 @@ func update_day() -> void:
 		_request_players()
 
 		# do transfers
-		for transfer:Transfer in Config.transfers.list:
+		for transfer: Transfer in Config.transfers.list:
 			if transfer.update():
 				# TODO once other teams can make trades between themselfes, only send email
 				# for transfers affectiing own team
@@ -26,13 +26,13 @@ func update_day() -> void:
 	else:
 		print("TODO cancel all remaining transfers and send market clossed email")
 
-func make_offer(transfer:Transfer) -> void:
+func make_offer(transfer: Transfer) -> void:
 	EmailUtil.transfer_message(transfer)
 	Config.transfers.list.append(transfer)
 
 # TODO move to trasnfer util
 func get_transfer_id(id: int) -> Transfer:
-	for transfer:Transfer in Config.transfers.list:
+	for transfer: Transfer in Config.transfers.list:
 		if transfer.id == id:
 			return transfer
 	print("ERROR: transfer not found with id: " + str(id))
@@ -55,7 +55,7 @@ func _request_players() -> void:
 		print("TODO create random player requests")
 
 
-func make_transfer(transfer:Transfer) -> void:
+func make_transfer(transfer: Transfer) -> void:
 	var player: Player = transfer.player
 	transfer.sell_team.remove_player(player)
 	player.team = transfer.buy_team.name

@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name PlayerProfile
 extends Control
 
 signal select(player: Player)
@@ -13,20 +14,30 @@ var player: Player
 @onready var info: Control = $TabContainer/Info
 @onready var attributes: Control = $TabContainer/Attributes
 
+@onready var player_name: Label = $TabContainer/Info/Info/Name
+@onready var pos: Label = $TabContainer/Info/Info/Position
+@onready var age: Label = $TabContainer/Info/Info/Age
+@onready var foot: Label = $TabContainer/Info/Info/Foot
+@onready var nationality: Label = $TabContainer/Info/Info/Nationality
+@onready var team: Label = $TabContainer/Info/Info/Team
+@onready var nr: Label = $TabContainer/Info/Info/Nr
+@onready var attributes_average: Label = $TabContainer/Info/Info/AttributesAverage
+@onready var prestige: Label = $TabContainer/Info/Info/Prestige
+@onready var goals: Label = $TabContainer/History/Actual/Goals
+
 
 func set_up_info(_player: Player) -> void:
 	player = _player
 	
-	$TabContainer/Info/Info/Name.text = player.name + " " + player.surname
-	$TabContainer/Info/Info/Position.text = str(player.position)
-	$TabContainer/Info/Info/Age.text = str(player.birth_date.day) + "/" + str(player.birth_date.month) + "/" + str(player.birth_date.year)
-	$TabContainer/Info/Info/Nationality.text = tr(Const.Nations.keys()[player.nation])
-	$TabContainer/Info/Info/Team.text = str(player.team)
-	$TabContainer/Info/Info/Foot.text = str(player.foot)
-	$TabContainer/Info/Info/Nr.text = str(player.nr)
-	$TabContainer/Info/Info/AttributesAverage.text = str(player.get_attributes_average())
-	$TabContainer/Info/Info/Prestige.text = str(player.prestige)
-	
+	player_name.text = player.name + " " + player.surname
+	pos.text = str(player.position)
+	age.text = str(player.birth_date.day) + "/" + str(player.birth_date.month) + "/" + str(player.birth_date.year)
+	foot.text = tr(Const.Nations.keys()[player.nation])
+	nationality.text = str(player.team)
+	team.text = str(player.foot)
+	nr.text = str(player.nr)
+	attributes_average.text = str(player.get_attributes_average())
+	prestige.text = str(player.prestige)
 	
 	# attributes
 	for attribute: String in Const.ATTRIBUTES.keys():
@@ -46,12 +57,12 @@ func set_up_info(_player: Player) -> void:
 			label.tooltip_text = tr(key.to_upper())
 			#label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 			attributes.get_node(attribute.capitalize()).add_child(label)
-			var value: Control = DetailNumber.instantiate()
-			value.set_up(player.attributes.get(attribute).get(key))
+			var value: ColorNumber = DetailNumber.instantiate()
+			value.set_up((player.attributes.get(attribute) as Resource).get(key))
 			attributes.get_node(attribute.capitalize()).add_child(value)
 		
 	#history
-	$TabContainer/History/Actual/Goals.text = str(player.statistics[Config.current_season].goals)
+	goals.text = str(player.statistics[Config.current_season].goals)
 
 	show()
 

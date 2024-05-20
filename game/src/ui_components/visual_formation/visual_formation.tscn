@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dq4dr3oe20mb8" path="res://src/ui_components/player_list/player_list.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui_components/swtich_option_button/switch_option_button.tscn" id="4_bi7d8"]
 
-[node name="Formation" type="Control"]
+[node name="VisualFormation" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

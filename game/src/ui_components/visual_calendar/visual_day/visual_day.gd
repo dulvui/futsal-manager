@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
 class_name VisualDay
+extends Control
 
 signal show_match_list
 

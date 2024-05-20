@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
 class_name MatchListRow
+extends Control
 
 @onready var home: Label = $HBoxContainer/Home
 @onready var away: Label = $HBoxContainer/Away

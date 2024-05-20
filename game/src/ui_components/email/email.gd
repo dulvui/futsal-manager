@@ -2,12 +2,13 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name VisualEmail
 extends Control
 
 signal email_action(message:EmailMessage)
 
-@onready var message_list: Control = $Container/MessageList
-@onready var message_container: Control = $Container/HBoxContainer/Message
+@onready var message_list: VisualEmailMessageList = $Container/MessageList
+@onready var message_container: VisualEmailMessage = $Container/HBoxContainer/Message
 
 func _ready() -> void:
 	update_messages()

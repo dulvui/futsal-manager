@@ -22,7 +22,7 @@ const DEBUG: bool = false
 @export var buy_team: Team
 @export var sell_team: Team
 @export var price: int
-@export var contract:Contract
+@export var contract: Contract
 @export var delay_days: int
 @export var exchange_players: Array[Player]
 
@@ -33,7 +33,7 @@ func _init(
 	p_state:State = State.OFFER,
 	p_buy_team: Team = Team.new(),
 	p_sell_team: Team = Team.new(),
-	p_contract:Contract = Contract.new(),
+	p_contract: Contract = Contract.new(),
 	p_price: int = 0,
 	p_delay_days: int = 0,
 	p_exchange_players: Array[Player] = [],

@@ -19,17 +19,19 @@ enum Form {Injured, Recover, Good, Excellent}
 @export var injury_factor: int
 @export var name: String
 @export var team: String # team name for easier filtering etc...
+@export var team_id: int # team name for easier filtering etc...
 @export var league: String # league name for easier filtering etc...
 @export var surname: String
-@export var nation:Const.Nations
+@export var nation: Const.Nations
 @export var birth_date: Dictionary
 @export var form:Form
 @export var morality:Morality
 @export var statistics: Array[Statistics]
 @export var foot:Foot
 @export var position:Position
-@export var contract:Contract
+@export var contract: Contract
 @export var attributes:Attributes
+
 
 func _init(
 	p_id: int = IdUtil.next_id(IdUtil.Types.PLAYER),
@@ -41,16 +43,17 @@ func _init(
 	p_injury_factor: int = 0,
 	p_name: String = "",
 	p_team: String = "",
+	p_team_id: int = 0,
 	p_league: String = "",
 	p_surname: String = "",
-	p_nation:Const.Nations = Const.Nations.ITALY,
+	p_nation: Const.Nations = Const.Nations.ITALY,
 	p_birth_date: Dictionary = {},
 	p_form:Form = Form.Good,
 	p_morality:Morality = Morality.Good,
 	p_statistics: Array[Statistics] = [],
 	p_foot:Foot = Foot.R,
 	p_position:Position = Position.G,
-	p_contract:Contract = Contract.new(),
+	p_contract: Contract = Contract.new(),
 	p_attributes:Attributes = Attributes.new(),
 ) -> void:
 	id = p_id
@@ -62,6 +65,7 @@ func _init(
 	injury_factor = p_injury_factor
 	name = p_name
 	team = p_team
+	team_id = p_team_id
 	league = p_league
 	surname = p_surname
 	nation = p_nation
@@ -78,13 +82,14 @@ func _init(
 func get_full_name() -> String:
 	return name + " " + surname
 
+
 func get_attack_attributes(attack:Action.Attack) -> int:
 	match attack:
 		Action.Attack.SHOOT:
 			# check sector and pick long_shoot
 			return attributes.technical.shooting
 		Action.Attack.PASS:
-			return attributes.technical.passing * Const.PASS_SUCCESS_FACTOR
+			return attributes.technical.passing
 #		Action.Attack.CROSS:
 #			return attributes.technical.crossing
 		Action.Attack.DRIBBLE:
@@ -128,8 +133,10 @@ func get_defense_attributes(attack:Action.Attack) -> int:
 	# should never happen
 	return -1
 
+
 func get_goalkeeper_attributes() -> int:
 	return attributes.goalkeeper.sum()
+
 
 func get_attributes_average() -> int:
 	if position == Position.G:

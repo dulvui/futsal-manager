@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
 class_name TeamSelect
+extends Control
 
 @onready var nations_container: HBoxContainer = $MarginContainer/VBoxContainer/NationSelect
 @onready var team_list: VBoxContainer = $MarginContainer/VBoxContainer/Main/ScrollContainer/TeamList
@@ -34,7 +34,7 @@ func show_team(league:League, team: Team) -> void:
 	team_profile.set_team(active_team)
 
 
-func set_teams(nation:Const.Nations = 0) -> void:
+func set_teams(nation: Const.Nations = 0) -> void:
 	for child:Node in team_list.get_children():
 		child.queue_free()
 	

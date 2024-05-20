@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-late
 
-extends Node2D
 class_name VisualTeam
+extends Node2D
 
 @onready var goalkeeper:VisualGoalkeeper = $VisualGoalkeeper
 @onready var player1:VisualPlayer = $VisualPlayer1

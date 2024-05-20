@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
 class_name Settings
+extends Control
 
 const RESOLUTIONS: Dictionary = {
 	"3840x2160":Vector2i(3840,2160),

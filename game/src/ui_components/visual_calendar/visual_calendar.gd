@@ -2,11 +2,12 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name VisualCalendar
 extends Control
 
 const VisualDayScene: PackedScene = preload("res://src/ui_components/visual_calendar/visual_day/visual_day.tscn")
 
-@onready var match_list: Control = $HSplitContainer/MatchList
+@onready var match_list: VisualMatchList = $HSplitContainer/MatchList
 @onready var days: GridContainer = $HSplitContainer/Calendar/Days
 @onready var page_label: Label = $HSplitContainer/Calendar/Paginator/Page
 

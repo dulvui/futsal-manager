@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name VisualTable
 extends Control
 
 @onready var grid: GridContainer = $VBoxContainer/ScrollContainer/GridContainer

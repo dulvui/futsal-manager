@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Statistics
 extends Resource
+class_name Statistics
 
 @export var team_name: String
 @export var games_played: int

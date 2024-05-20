@@ -2,10 +2,10 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
 class_name TeamProfile
+extends Control
 
-@onready var player_list: PlayerList = $VBoxContainer/HBoxContainer/PlayerList
+@onready var player_list: VisualPlayerList = $VBoxContainer/HBoxContainer/PlayerList
 @onready var name_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/Name
 @onready var prestige_stars_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/PresitgeStars
 @onready var prestige_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/Presitge

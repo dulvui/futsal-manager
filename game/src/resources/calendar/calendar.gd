@@ -64,7 +64,7 @@ func initialize(next_season: bool = false) -> void:
 	
 	# create months
 	for month_string: String in Const.MONTH_STRINGS:
-		var new_month:Month = Month.new()
+		var new_month: Month = Month.new()
 		new_month.name = month_string
 		months.append(new_month)
 	
@@ -87,12 +87,6 @@ func next_day() -> void:
 	
 	if is_match_day():
 		EmailUtil.next_match(get_next_match())
-
-	if does_market_start_today():
-		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_START)
-		
-	if does_market_end_today():
-		EmailUtil.new_message(EmailUtil.MessageTypes.MARKET_END)
 
 
 func day(p_month: int = date.month, p_day: int = date.day) -> Day:
@@ -134,7 +128,8 @@ func does_market_start_today() -> bool:
 		if date.month == market_period.start.month and date.day == market_period.start.day:
 			return true
 	return false
-	
+
+
 func does_market_end_today() -> bool:
 	for market_period: Dictionary in MARKET_PERIODS:
 		if date.month == market_period.end.month and date.day == market_period.end.day:

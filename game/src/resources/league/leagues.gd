@@ -38,7 +38,7 @@ func get_league_by_id(league_id: int) -> League:
 	return null
 
 
-func get_leagues_by_nation(nation:Const.Nations = Const.Nations.get(0)) -> Array[League]:
+func get_leagues_by_nation(nation: Const.Nations = Const.Nations.get(0)) -> Array[League]:
 	var leagues_by_nation: Array[League] = []
 	for league:League in list:
 		if league.nation == nation:

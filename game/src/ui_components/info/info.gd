@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name VisualInfo
 extends Control
 
 @onready var generation_seed:LineEdit = $VBoxContainer/GenerationSeed/GenerationSeed

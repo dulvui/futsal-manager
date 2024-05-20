@@ -1,8 +1,8 @@
 # SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
-extends Node
 class_name Generator
+extends Node
 
 const NAMES_DIR: String = "res://data/player_names/"
 const LEAGUES_DIR: String = "res://data/leagues/"
@@ -82,10 +82,11 @@ func assign_players_to_team(p_team: Team, p_league:League, prestige: int) -> Tea
 			amount = 3
 		
 		for i in amount:
-			var random_nation:Const.Nations = get_random_nationality(p_league.nation, prestige, p_league.pyramid_level)
+			var random_nation: Const.Nations = get_random_nationality(p_league.nation, prestige, p_league.pyramid_level)
 			var player: Player = create_player(random_nation, position, nr, prestige)
 			nr += 1
 			player.team = p_team.name
+			player.team_id = p_team.id
 			player.league = p_league.name
 			p_team.players.append(player)
 		
@@ -182,7 +183,7 @@ func get_technical(age: int, prestige: int, position: Player.Position) -> Techni
 
 func get_mental(age: int, prestige: int) -> Mental:
 	
-	var attribtues:Mental = Mental.new()
+	var attribtues: Mental = Mental.new()
 	
 	var age_factor: int = get_age_factor(age)
 
@@ -265,7 +266,7 @@ func get_random_morality() -> Player.Morality:
 	return Player.Morality.Excellent
 
 
-func get_contract(prestige: int, position: int, age: int, contract:Contract) -> Contract:
+func get_contract(prestige: int, position: int, age: int, contract: Contract) -> Contract:
 	contract.income = prestige * age * position # TODO use correct logic 
 	contract.start_date = Time.get_date_dict_from_system()
 	contract.end_date = Time.get_date_dict_from_system()
@@ -280,18 +281,18 @@ func get_contract(prestige: int, position: int, age: int, contract:Contract) -> 
 	return contract
 
 
-func get_player_name(nationality:Const.Nations) -> String:
-	var nation_string: String = Const.Nations.keys()[nationality].to_lower()
+func get_player_name(nationality: Const.Nations) -> String:
+	var nation_string: String = (Const.Nations.keys()[nationality] as String).to_lower()
 	
 	if Config.generation_gender == Const.Gender.MALE:
-		var size: int = names[nation_string]["first_names_male"].size()
+		var size: int = (names[nation_string]["first_names_male"] as Array).size()
 		return names[nation_string]["first_names_male"][Config.rng.randi() % size]
 	elif Config.generation_gender == Const.Gender.FEMALE:
-		var size: int = names[nation_string]["first_names_female"].size()
+		var size: int = (names[nation_string]["first_names_female"] as Array).size()
 		return names[nation_string]["first_names_female"][Config.rng.randi() % size]
 	else:
-		var size_female: int = names[nation_string]["first_names_female"].size()
-		var size_male: int = names[nation_string]["first_names_male"].size()
+		var size_female: int = (names[nation_string]["first_names_female"] as Array).size()
+		var size_male: int = (names[nation_string]["first_names_male"] as Array).size()
 		var female_names: Array =  names[nation_string]["first_names_female"]
 		var male_names: Array =  names[nation_string]["first_names_male"]
 		
@@ -302,14 +303,15 @@ func get_player_name(nationality:Const.Nations) -> String:
 		return mixed_names[Config.rng.randi() % (size_female + size_male)]
 
 
-func get_surname(nationality:Const.Nations) -> String:
+func get_surname(nationality: Const.Nations) -> String:
 	# TODO combine with other nations, but with low probability
-	var nation_string: String = Const.Nations.keys()[nationality].to_lower()
-	var size: int = names[nation_string]["last_names"].size()
+	var nation_string: String = Const.Nations.keys()[nationality]
+	nation_string = nation_string.to_lower()
+	var size: int = (names[nation_string]["last_names"] as Array).size()
 	return names[nation_string]["last_names"][Config.rng.randi() % size]
 
 
-func create_player(nationality:Const.Nations, position: Player.Position, nr: int, p_prestige: int) -> Player:
+func create_player(nationality: Const.Nations, position: Player.Position, nr: int, p_prestige: int) -> Player:
 	var player: Player = Player.new()
 	# Config.rng.random date from 1970 to 2007
 	var birth_date: Dictionary = Time.get_datetime_dict_from_unix_time(Config.rng.randi_range(0, max_timestamp))
@@ -363,7 +365,7 @@ func get_team_prestige(pyramid_level: int) -> int:
 	return in_bounds(randi_range(minp, maxp))
 
 
-func get_random_nationality(nationality:Const.Nations, prestige: int, pyramid_level: int) -> Const.Nations:
+func get_random_nationality(nationality: Const.Nations, prestige: int, pyramid_level: int) -> Const.Nations:
 	# (100 - prestige)% given nation, prestige% random nation
 	# with prestige, lower division teams have less players from other nations
 	if Config.rng.randi_range(1, 100) > 100 - (prestige * 2 / pyramid_level):

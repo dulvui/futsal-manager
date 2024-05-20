@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name VisualEmailMessageList
 extends Control
 
 signal show_message(message:EmailMessage)

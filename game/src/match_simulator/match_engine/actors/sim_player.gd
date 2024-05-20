@@ -18,7 +18,7 @@ enum State {
 	RECEIVE,
 }
 
-const DECELERATION = 0.01
+const DECELERATION: float = 0.01
 
 var state:State
 

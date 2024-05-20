@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name SwitchOptionButton
 extends Control
-class_name  SwitchOptionButton
 
 signal item_selected(index: int)
 

@@ -4,8 +4,9 @@
 
 class_name Table
 extends Resource
-	
+
 @export var teams: Array[TableValues]
+
 
 func _init(
 		p_teams: Array[TableValues] = [],

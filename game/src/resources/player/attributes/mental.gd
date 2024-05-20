@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Resource
 class_name Mental
+extends Resource
 
 @export var aggression: int
 @export var anticipation: int

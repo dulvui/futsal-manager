@@ -16,10 +16,10 @@ const DASHBOARD_DAY_DELAY:float = 0.5
 @onready var email_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/Email
 
 # content views 
-@onready var email: Control = $MainContainer/VBoxContainer/MainView/Content/Email
-@onready var table: Control = $MainContainer/VBoxContainer/MainView/Content/Table
-@onready var visual_calendar: Control = $MainContainer/VBoxContainer/MainView/Content/Calendar
-@onready var info: Control = $MainContainer/VBoxContainer/MainView/Content/Info
+@onready var email: VisualEmail = $MainContainer/VBoxContainer/MainView/Content/Email
+@onready var table: VisualTable = $MainContainer/VBoxContainer/MainView/Content/Table
+@onready var visual_calendar: VisualCalendar = $MainContainer/VBoxContainer/MainView/Content/Calendar
+@onready var info: VisualInfo = $MainContainer/VBoxContainer/MainView/Content/Info
 
 # labels
 @onready var budget_label: Label = $MainContainer/VBoxContainer/TopBar/Budget
@@ -28,15 +28,12 @@ const DASHBOARD_DAY_DELAY:float = 0.5
 @onready var team_label: Label = $MainContainer/VBoxContainer/TopBar/TeamName
 
 # full screen views
-@onready var formation: Control = $MainContainer/VBoxContainer/MainView/Content/Formation
-@onready var all_players_list: Control = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
+@onready var formation: VisualFormation = $MainContainer/VBoxContainer/MainView/Content/Formation
+@onready var all_players_list: VisualPlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 
 # pop ups
-@onready var player_offer: Control = $PlayerOffer
-@onready var contract_offer: Control = $ContractOffer
-
-# match engine
-#@onready var match_engine:MatchEngine = $MatchEngine
+@onready var player_offer: PlayerOffer = $PlayerOffer
+@onready var contract_offer: ContractOffer = $ContractOffer
 
 var match_ready: bool = false
 var next_season: bool = false

@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Resource
 class_name Formation
+extends Resource
 
 # first value is goalkeeper, seoncd defense etc...
 enum Variations {
@@ -44,7 +44,7 @@ func _init(
 
 func set_variation(p_variation:Variations) -> void:
 	variation = p_variation
-	var string_values:PackedStringArray = Variations.keys()[variation].split()
+	var string_values:PackedStringArray = (String)(Variations.keys()[variation]).split()
 	string_values.remove_at(0) # remove F
 	
 	# extract int values

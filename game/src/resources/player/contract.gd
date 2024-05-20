@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Contract
 extends Resource
+class_name Contract
 
 @export var id: int
 @export var income: int

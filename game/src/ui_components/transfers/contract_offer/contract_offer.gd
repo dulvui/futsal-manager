@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name ContractOffer
 extends Control
 
 signal cancel
@@ -20,13 +21,13 @@ var buy_clause: int = 0
 
 var team: Team
 var player: Player
-var transfer:Transfer
+var transfer: Transfer
 
 
 func _ready() -> void:
 	team = Config.team
 	
-func set_up(p_transfer:Transfer) -> void:
+func set_up(p_transfer: Transfer) -> void:
 	transfer = p_transfer
 	player = transfer.player
 	
@@ -70,7 +71,7 @@ func _on_BuyClauseMore_pressed() -> void:
 func _on_Confirm_pressed() -> void:
 	# add contract to pendng contracts 
 
-	var contract:Contract = Contract.new()
+	var contract: Contract = Contract.new()
 	contract.buy_clause = buy_clause
 	contract.income = income
 

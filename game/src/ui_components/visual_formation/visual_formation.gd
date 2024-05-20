@@ -2,13 +2,14 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name VisualFormation
 extends Control
 
 signal change
 
 const FormationPlayer: PackedScene = preload("res://src/ui_components/visual_formation/player/formation_player.tscn")
 
-@onready var player_list: Control = $HBoxContainer/PlayerList
+@onready var player_list: VisualPlayerList = $HBoxContainer/PlayerList
 @onready var players: VBoxContainer = $HBoxContainer/LineUp/Field/Players
 @onready var subs: VBoxContainer = $HBoxContainer/Subs/List
 
@@ -49,7 +50,7 @@ func _set_players() -> void:
 	var pos_count: int = 0
 	# add golakeeper
 	if team.formation.goalkeeper > 0:
-		var formation_goal_keeper: Control = FormationPlayer.instantiate()
+		var formation_goal_keeper: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_goal_keeper.set_player(team.get_goalkeeper(), team)
 		formation_goal_keeper.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		goalkeeper.add_child(formation_goal_keeper)
@@ -57,7 +58,7 @@ func _set_players() -> void:
 	
 	# add defenders
 	for i: int in team.formation.defense:
-		var formation_player: Control = FormationPlayer.instantiate()
+		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		defense.add_child(formation_player)
@@ -65,7 +66,7 @@ func _set_players() -> void:
 		
 	# add center
 	for i: int in team.formation.center:
-		var formation_player: Control = FormationPlayer.instantiate()
+		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		center.add_child(formation_player)
@@ -73,7 +74,7 @@ func _set_players() -> void:
 		
 	# add attack
 	for i: int in team.formation.attack:
-		var formation_player: Control = FormationPlayer.instantiate()
+		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		attack.add_child(formation_player)
@@ -81,7 +82,7 @@ func _set_players() -> void:
 		
 	# add subs
 	for i: int in team.get_sub_players().size():
-		var formation_player: Control = FormationPlayer.instantiate()
+		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
 		formation_player.change_player.connect(_on_line_up_select_player.bind(pos_count))
 		subs.add_child(formation_player)

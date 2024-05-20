@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name VisualMatchList
 extends Control
 
 const MatchRowScene: PackedScene = preload("res://src/ui_components/visual_calendar/match_list/match_list_row/match_list_row.tscn")

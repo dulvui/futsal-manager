@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node
 class_name PlayerProgress
+extends Node
 
 const NOISE = 20
 const AGE_PHYSICAL_DEGARDE = 30
@@ -22,7 +22,7 @@ static func _player_season_progress(player: Player) -> void:
 	# age factor only affects fisical attributes neagtively
 	# high prestige player has smaller age factor, that means his physical attributes
 	# dergade less and later 
-	var age: int = Config.calendar().start_date.year - player.birth_date.year
+	var age: int = Config.start_date.year - player.birth_date.year
 	
 	# -1/+1 depending on player age and prestige
 	var age_factor: int = AGE_PHYSICAL_DEGARDE - age + (player.prestige / 12)

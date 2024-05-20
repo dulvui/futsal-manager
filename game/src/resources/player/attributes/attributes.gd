@@ -6,13 +6,13 @@ class_name Attributes
 extends Resource
 
 @export var goalkeeper:Goalkeeper
-@export var mental:Mental
+@export var mental: Mental
 @export var technical:Technical
 @export var physical:Physical
 
 func _init(
 	p_goalkeeper:Goalkeeper = Goalkeeper.new(),
-	p_mental:Mental = Mental.new(),
+	p_mental: Mental = Mental.new(),
 	p_technical:Technical = Technical.new(),
 	p_physical:Physical = Physical.new(),
 ) -> void:

@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-late
 
-extends Node2D
 class_name  VisualBall
+extends Node2D
 
 var sim_ball:SimBall
 

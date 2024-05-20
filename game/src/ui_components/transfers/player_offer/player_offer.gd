@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name PlayerOffer
 extends PanelContainer
 
 signal confirm
@@ -119,11 +120,10 @@ func _on_Amount_text_changed(new_text: String) -> void:
 		amount_label.text = str(amount)
 		
 	_calc_total()
-	amount_label.set_cursor_position(amount_label.text.length())
 
 
 func _on_Confirm_pressed() -> void:
-	var transfer:Transfer = Transfer.new()
+	var transfer: Transfer = Transfer.new()
 	transfer.player = player
 	transfer.price = amount
 	transfer.exchange_players = selected_players
@@ -131,7 +131,7 @@ func _on_Confirm_pressed() -> void:
 	transfer.state = Transfer.State.OFFER
 	transfer.buy_team = Config.team
 	# TODO fix me
-	transfer.sell_team = Config.get_team_by_name(player.team)
+	transfer.sell_team = Config.leagues.get_team_by_id(player.team_id)
 	
 	TransferUtil.make_offer(transfer)
 	confirm.emit()

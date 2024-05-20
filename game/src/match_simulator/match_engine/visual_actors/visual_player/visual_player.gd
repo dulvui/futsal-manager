@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-late
 
-extends Node2D
 class_name VisualPlayer
+extends Node2D
 
 @onready var body:Sprite2D = $Sprites/Body
 @onready var sprites:Node2D = $Sprites

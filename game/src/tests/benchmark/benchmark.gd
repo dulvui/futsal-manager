@@ -2,15 +2,14 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Node
 class_name Benchmark
+extends Node
 
 var match_engine:MatchEngine
 var generator:Generator
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	
 	generator = Generator.new()
 	match_engine = MatchEngine.new()
@@ -26,9 +25,7 @@ func _ready() -> void:
 			if league.calendar.is_match_day():
 				return
 	
-	for matchz:Match in leagues.damatches:
-		var result_match:Match = match_engine.simulate(matchz)
-		matchz.set_result(result_match.home_goals, result_match.away_goals)
+	leagues.random_results()
 	print("Benchmark done.")
 	
 

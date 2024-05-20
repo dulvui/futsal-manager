@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Resource
 class_name Technical
+extends Resource
 
 @export var crossing: int
 @export var passing: int

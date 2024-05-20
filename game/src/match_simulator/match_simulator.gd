@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
 class_name MatchSimulator
+extends Control
 
 signal action_message
 signal half_time

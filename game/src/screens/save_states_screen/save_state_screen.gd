@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
 class_name  SaveStateScreen
+extends Control
 
 const SaveStateEntryScene: PackedScene = preload("res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn")
 @onready var entry_list: VBoxContainer = $VBoxContainer/ScrollContainer/EntryList

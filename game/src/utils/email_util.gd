@@ -8,6 +8,7 @@ signal refresh_inbox
 
 # const MAX_MESSAGES: int = 50
 
+
 func latest() -> EmailMessage:
 	if Config.inbox.list.size() == 0:
 		return null
@@ -19,17 +20,14 @@ func count_unread_messages() -> int:
 		if not message["read"]:
 			counter += 1
 	return counter
-	
+
+
 func _add_message(message:EmailMessage) -> void:
 	Config.inbox.list.append(message)
 	# if Config.inbox.list.size() > MAX_MESSAGES:
 	# 	Config.inbox.list.pop_front()
 	refresh_inbox.emit()
 
-func new_message(type: int) -> void:
-	print("new " + str(type) + " mail")
-	var message:EmailMessage = EmailMessage.new()
-	_add_message(message)
 
 func next_match(p_match:Match) -> void:
 	var team_name: String = p_match.home.name
@@ -45,7 +43,7 @@ func next_match(p_match:Match) -> void:
 	_add_message(message)
 
 
-func transfer_message(transfer:Transfer) -> void:
+func transfer_message(transfer: Transfer) -> void:
 	var message:EmailMessage = EmailMessage.new()
 	message.date = Config.calendar().format_date()
 
@@ -86,10 +84,9 @@ func transfer_message(transfer:Transfer) -> void:
 			message.subject = "ERROR"
 			message.text = "Error in code " + transfer.player.get_full_name()
 
-
 	_add_message(message)
 
-		
+
 func welcome_manager() -> void:
 	var message:EmailMessage = EmailMessage.new()
 	message.subject = tr("WELCOME")

@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Resource
 class_name Goalkeeper
+extends Resource
 
 @export var reflexes: int
 @export var positioning: int

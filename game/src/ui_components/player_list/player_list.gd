@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name VisualPlayerList
 extends Control
-class_name PlayerList
 
 signal select_player(player: Player)
 
@@ -12,7 +12,7 @@ const INFO_TYPES: Array = ["mental","physical","technical","goalkeeper"]
 var base_headers: Array[String] = ["position", "surname", "attributes_average"]
 
 @onready var table: PlayerTable = $VBoxContainer/Table
-@onready var player_profile: Control = $PlayerProfile
+@onready var player_profile: PlayerProfile = $PlayerProfile
 # select filters
 @onready var info_select:OptionButton = $VBoxContainer/HBoxContainer/InfoSelect
 @onready var team_select:OptionButton = $VBoxContainer/HBoxContainer/TeamSelect
@@ -96,7 +96,7 @@ func _on_NameSearch_text_changed(text: String) -> void:
 	if text.length() > 2:
 		active_filters["surname"] = text
 		_filter_table()
-	elif "surname" in active_filters and active_filters["surname"].length() > 0:
+	elif "surname" in active_filters and (active_filters["surname"] as String).length() > 0:
 		active_filters["surname"] = ""
 		_filter_table()
 

@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-late
 
+class_name VisualMatch
 extends Node2D
-class_name  VisualMatch
 
 @onready var home_team:VisualTeam = $VisualTeamHome
 @onready var away_team:VisualTeam = $VisualTeamAway
