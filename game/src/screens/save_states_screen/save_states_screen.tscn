@@ -41,6 +41,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 30
 
 [node name="Menu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
