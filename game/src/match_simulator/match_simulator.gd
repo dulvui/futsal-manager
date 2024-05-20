@@ -84,6 +84,3 @@ func start_match() -> void:
 	timer.start()
 
 
-func change_players(home_team: Team,away_team: Team) -> void:
-	visual_match.change_players(home_team,away_team)
-

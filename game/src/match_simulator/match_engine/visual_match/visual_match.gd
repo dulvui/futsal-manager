@@ -34,6 +34,3 @@ func update() -> void:
 func half_time() -> void:
 	match_engine.half_time()
 
-
-func change_players(p_home_team: Team, p_away_team: Team) -> void:
-	match_engine.chage_players(p_home_team, p_away_team)
