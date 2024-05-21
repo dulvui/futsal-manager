@@ -127,9 +127,9 @@ func block_shot() -> bool:
 	if is_touching_ball():
 		# stop blocking for x seconds
 		block_counter = Const.TICKS_PER_SECOND * 2
-		# best case 59 + 20 * 2 = 99
-		# worst case 59 + 1 * 2 = 62
-		return Config.match_rng.randi_range(0, 100) < 39 + player_res.attributes.goalkeeper.handling * 2
+		# best case 49 + 20 * 2 = 89
+		# worst case 49 + 1 * 2 = 52
+		return Config.match_rng.randi_range(0, 100) < 49 + player_res.attributes.goalkeeper.handling * 2
 	return false
 
 

@@ -181,11 +181,11 @@ func _on_sim_ball_goal_line_out() -> void:
 	# goalkeeper ball
 	elif ball.pos.x < 600:
 		# left
-		ball.set_pos(30, 300)
+		ball.set_pos(field.line_left + 40, field.size.y / 2)
 		set_goalkeeper_ball(home_plays_left)
 	else:
 		# right
-		ball.set_pos(1170, 300)
+		ball.set_pos(field.line_right - 40, field.size.y / 2)
 		set_goalkeeper_ball(not home_plays_left)
 
 
@@ -221,6 +221,17 @@ func _on_sim_ball_touch_line_out() -> void:
 		home_possess()
 		home_team.stats.kick_ins += 1
 		nearest_player = home_team.nearest_player_to_ball()
+	
+	# set ball pos
+	if ball.pos.y < field.size.y / 2:
+		# up
+		ball.set_pos(ball.pos.x, field.line_top)
+		set_goalkeeper_ball(home_plays_left)
+	else:
+		# down
+		ball.set_pos(ball.pos.x, field.line_bottom)
+		set_goalkeeper_ball(not home_plays_left)
+	
 	
 	nearest_player.set_pos(ball.pos)
 	nearest_player.short_pass.emit()

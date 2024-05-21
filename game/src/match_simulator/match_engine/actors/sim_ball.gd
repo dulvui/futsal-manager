@@ -79,11 +79,10 @@ func shoot(p_destination:Vector2, force:float) -> void:
 func check_field_bounds() -> void:
 	# kick in
 	if pos.y < field.BORDER_SIZE:
-		set_pos(pos.x, field.BORDER_SIZE)
 		touch_line_out.emit()
 		return
-	if pos.y > field.size.y + field.BORDER_SIZE:
-		set_pos(pos.x, field.size.y + field.BORDER_SIZE)
+	if pos.y > field.size.y - field.BORDER_SIZE:
+		set_pos(pos.x, field.size.y - field.BORDER_SIZE)
 		touch_line_out.emit()
 		return
 	
@@ -94,8 +93,6 @@ func check_field_bounds() -> void:
 			return
 		# corner
 		else:
-			var corner_pos:Vector2 = field.get_corner_pos(pos)
-			set_pos(corner_pos.x, corner_pos.y)
 			goal_line_out.emit()
 			return
 
