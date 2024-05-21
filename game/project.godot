@@ -53,7 +53,6 @@ gdscript/warnings/unsafe_method_access=2
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/transparent=true
 window/stretch/mode="viewport"
 window/size/width=1920
 window/size/height=1080
