@@ -21,6 +21,9 @@ var destination:Vector2
 var speed:float
 
 var interception_radius: int #TODO reduce radius with low stamina
+# so goalkeeper cant block infinitly,
+# but when once blocked, time has to pass to block again
+var block_counter: int = 0 
 
 func set_up(
 	p_player_res: Player,
@@ -52,9 +55,9 @@ func defend() -> void:
 			if block_shot():
 				ball.stop()
 				interception.emit()
-
-	follow_ball()
-
+	
+	if block_counter == 0:
+		follow_ball()
 
 
 func attack() -> void:
@@ -118,10 +121,15 @@ func is_touching_ball() -> bool:
 
 
 func block_shot() -> bool:
+	if block_counter > 0:
+		block_counter -= 1
+		return false
 	if is_touching_ball():
+		# stop blocking for x seconds
+		block_counter = Const.TICKS_PER_SECOND * 2
 		# best case 59 + 20 * 2 = 99
 		# worst case 59 + 1 * 2 = 62
-		return Config.match_rng.randi_range(0, 100) < 59 + player_res.attributes.goalkeeper.handling * 2
+		return Config.match_rng.randi_range(0, 100) < 39 + player_res.attributes.goalkeeper.handling * 2
 	return false
 
 

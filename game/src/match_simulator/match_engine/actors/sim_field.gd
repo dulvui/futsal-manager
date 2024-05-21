@@ -138,7 +138,7 @@ func get_corner_pos(ball_exit_pos:Vector2) -> Vector2:
 
 
 func is_goal(ball_pos:Vector2) -> bool:
-	return ball_pos.y > goal_post_bottom and ball_pos.y < goal_post_top
+	return ball_pos.y < goal_post_bottom and ball_pos.y > goal_post_top
 
 
 func get_goalkeeper_pos(plays_left: bool) -> Vector2:

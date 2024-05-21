@@ -132,7 +132,7 @@ func _should_shoot() -> bool:
 	if ball.empty_net:
 		return true
 	if  ball.players_in_shoot_trajectory < 2:
-		return Config.match_rng.randi_range(1, 100) > 99
+		return Config.match_rng.randi_range(1, 100) > 95
 	return false
 	
 	

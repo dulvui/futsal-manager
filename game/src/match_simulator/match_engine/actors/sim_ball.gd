@@ -28,7 +28,6 @@ var field:SimField
 
 func set_up(p_field:SimField) -> void:
 	field = p_field
-	
 	pos = field.center
 	last_pos = pos
 	state = State.STOP
@@ -80,7 +79,7 @@ func shoot(p_destination:Vector2, force:float) -> void:
 func check_field_bounds() -> void:
 	# kick in
 	if pos.y < field.BORDER_SIZE:
-		set_pos(pos.x, 0)
+		set_pos(pos.x, field.BORDER_SIZE)
 		touch_line_out.emit()
 		return
 	if pos.y > field.size.y + field.BORDER_SIZE:
@@ -88,7 +87,7 @@ func check_field_bounds() -> void:
 		touch_line_out.emit()
 		return
 	
-	if pos.x < field.BORDER_SIZE or pos.x > field.size.x + field.BORDER_SIZE:
+	if pos.x < field.BORDER_SIZE or pos.x > field.size.x - field.BORDER_SIZE:
 		# TODO check if post was hit => reflect
 		if field.is_goal(pos):
 			goal.emit()
