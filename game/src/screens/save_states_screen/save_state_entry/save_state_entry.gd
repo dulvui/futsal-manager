@@ -55,4 +55,7 @@ func _on_delete_dialog_confirmed() -> void:
 	Config.save_states.delete(save_state)
 	Config.save_config()
 	Config.save_save_states()
-	get_tree().change_scene_to_file("res://src/screens/save_states_screen/save_states_screen.tscn")
+	if Config.save_states.list.size() == 0:
+		get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+	else:
+		get_tree().change_scene_to_file("res://src/screens/save_states_screen/save_states_screen.tscn")
