@@ -9,7 +9,7 @@ signal interception
 
 # resources
 var player_res: Player
-var ball:SimBall
+var ball: SimBall
 var field:SimField
 var left_half: bool
 # positions
@@ -27,7 +27,7 @@ var block_counter: int = 0
 
 func set_up(
 	p_player_res: Player,
-	p_ball:SimBall,
+	p_ball: SimBall,
 	p_field:SimField,
 	p_left_half: bool,
 ) -> void:

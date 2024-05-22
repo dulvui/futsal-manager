@@ -5,7 +5,7 @@
 class_name MatchEngine
 
 var field:SimField
-var ball:SimBall
+var ball: SimBall
 var home_team:SimTeam
 var away_team:SimTeam
 

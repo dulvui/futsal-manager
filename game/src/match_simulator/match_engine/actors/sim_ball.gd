@@ -12,7 +12,7 @@ enum State {PASS, SHOOT, STOP, DRIBBLE}
 
 const DECELERATION: float = 0.01
 
-var state:State
+var state: State
 
 var pos:Vector2
 # to save last position and be bale to get segment between ticks, for itnerceptions

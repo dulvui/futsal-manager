@@ -11,7 +11,7 @@ var res_team: Team
 var goalkeeper:SimGoalkeeper
 var players: Array[SimPlayer]
 
-var ball:SimBall
+var ball: SimBall
 var field:SimField
 var has_ball: bool
 var left_half: bool
@@ -25,7 +25,7 @@ var sort_x_right:Callable
 func set_up(
 	p_res_team: Team,
 	p_field:SimField,
-	p_ball:SimBall,
+	p_ball: SimBall,
 	p_left_half: bool,
 	p_has_ball: bool,
 	) -> void:

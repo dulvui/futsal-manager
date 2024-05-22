@@ -9,7 +9,7 @@ extends Resource
 @export var name: String
 # 0 to 4 active, 5 to x subs
 @export var lineup_player_ids: Array[int]
-@export var formation:Formation
+@export var formation: Formation
 @export var budget: int
 @export var salary_budget: int
 @export var players: Array[Player]
