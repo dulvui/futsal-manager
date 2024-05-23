@@ -19,10 +19,11 @@ extends Node
 
 func make_season_development() -> void:
 	pass
-	
+
+
 func make_training() -> void:
 	pass
 
+
 func check_injuries() -> void:
 	pass
-

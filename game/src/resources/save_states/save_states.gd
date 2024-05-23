@@ -13,16 +13,16 @@ extends Resource
 
 
 func _init(
-		p_list: Array[SaveState] = [],
-		p_active_id: String = "",
-	) -> void:
+	p_list: Array[SaveState] = [],
+	p_active_id: String = "",
+) -> void:
 	list = p_list
 	active_id = p_active_id
 
 
 func new_temp_state() -> void:
 	var temp_id: String = str(int(Time.get_unix_time_from_system()))
-	print("temp_id: ",temp_id)
+	print("temp_id: ", temp_id)
 	temp_state = SaveState.new()
 	temp_state.id = temp_id
 
@@ -35,7 +35,7 @@ func get_active() -> SaveState:
 	# use temp, if exists
 	if temp_state:
 		return temp_state
-	
+
 	for state: SaveState in list:
 		if state.id == active_id:
 			return state
@@ -52,7 +52,7 @@ func get_active_path(relative_path: String = "") -> String:
 func make_temp_active() -> void:
 	# assign metadata
 	temp_state.save_metadata()
-	
+
 	# make active
 	list.append(temp_state)
 	active_id = temp_state.id
@@ -66,5 +66,3 @@ func delete(p_state: SaveState) -> int:
 			list.erase(state)
 			return OK
 	return ERR_FILE_NOT_FOUND
-	
-

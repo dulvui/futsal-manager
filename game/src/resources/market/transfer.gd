@@ -48,6 +48,7 @@ func _init(
 	delay_days = p_delay_days
 	exchange_players = p_exchange_players
 
+
 func update() -> bool:
 	# wait for user to make offer/contract
 	if state == State.CONTRACT:
@@ -62,34 +63,35 @@ func update() -> bool:
 		return true
 	return false
 
+
 func accept_offer() -> void:
 	state = State.CONTRACT
+
 
 func _update_state() -> void:
 	match state:
 		State.OFFER:
 			# TODO use real values like prestige etc...
-			var success: bool = randi()%2 == 0
+			var success: bool = randi() % 2 == 0
 			if DEBUG:
 				success = true
 			if success:
 				state = State.CONTRACT
 			else:
-				var fail: bool = randi()%2 == 0
+				var fail: bool = randi() % 2 == 0
 				if fail:
 					state = State.OFFER_DECLINED
 				else:
 					state = State.OFFER
 		State.CONTRACT_PENDING:
-			var success: bool = randi()%2 == 0
+			var success: bool = randi() % 2 == 0
 			if DEBUG:
 				success = true
 			if success:
 				state = State.SUCCESS
 			else:
-				var fail: bool = randi()%2 == 0
+				var fail: bool = randi() % 2 == 0
 				if fail:
 					state = State.CONTRACT_DECLINED
 				else:
 					state = State.CONTRACT
-			

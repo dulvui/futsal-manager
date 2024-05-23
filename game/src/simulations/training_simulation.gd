@@ -7,8 +7,9 @@ extends Node
 # will be emitted on injury with player and injury details as parameter
 signal injury
 
-# trains the players and increases therir stats depending on 
-# training plan, players can also injure during training 
+
+# trains the players and increases therir stats depending on
+# training plan, players can also injure during training
 func train_players() -> void:
 	pass
 

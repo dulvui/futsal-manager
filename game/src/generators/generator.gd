@@ -20,7 +20,7 @@ var min_timestamp: int
 
 
 func generate() -> Leagues:
-	var leagues:Leagues = Leagues.new()
+	var leagues: Leagues = Leagues.new()
 	# create date ranges
 	# starts from current year and substracts min/max years
 	# youngest player can be 15 and oldest 45
@@ -32,20 +32,24 @@ func generate() -> Leagues:
 	max_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 	max_date.year -= 30
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
-	
+
 	# initalize names
 	for nation: String in Const.Nations:
-		var names_file:FileAccess = FileAccess.open(NAMES_DIR + nation.to_lower()  + ".json", FileAccess.READ)
+		var names_file: FileAccess = FileAccess.open(
+			NAMES_DIR + nation.to_lower() + ".json", FileAccess.READ
+		)
 		names[nation.to_lower()] = JSON.parse_string(names_file.get_as_text())
 
 	# create leagues. teams and players
 	for nation: String in Const.Nations:
-		var leagues_file:FileAccess = FileAccess.open(LEAGUES_DIR + nation.to_lower() + ".json", FileAccess.READ)
+		var leagues_file: FileAccess = FileAccess.open(
+			LEAGUES_DIR + nation.to_lower() + ".json", FileAccess.READ
+		)
 		leagues_data[nation] = JSON.parse_string(leagues_file.get_as_text())
-		 # used for prestige calculation, so that high leagues have better prestige
+		# used for prestige calculation, so that high leagues have better prestige
 		var pyramid_level: int = 1
 		for l: Dictionary in leagues_data[nation]:
-			var league:League = League.new()
+			var league: League = League.new()
 			league.name = l.name
 			league.pyramid_level = pyramid_level
 			league.nation = Const.Nations.get(nation)
@@ -55,60 +59,76 @@ func generate() -> Leagues:
 				team.budget = Config.rng.randi_range(500000, 100000000)
 				team.salary_budget = Config.rng.randi_range(500000, 100000000)
 				team.colors = []
-				team.colors.append(Color(Config.rng.randf_range(0, 1), Config.rng.randf_range(0, 1), Config.rng.randf_range(0, 1)))
+				team.colors.append(
+					Color(
+						Config.rng.randf_range(0, 1),
+						Config.rng.randf_range(0, 1),
+						Config.rng.randf_range(0, 1)
+					)
+				)
 				team.colors.append(team.colors[0].inverted())
-				team.colors.append(Color(Config.rng.randf_range(0, 1), Config.rng.randf_range(0, 1), Config.rng.randf_range(0, 1)))
-				
+				team.colors.append(
+					Color(
+						Config.rng.randf_range(0, 1),
+						Config.rng.randf_range(0, 1),
+						Config.rng.randf_range(0, 1)
+					)
+				)
+
 				team.create_stadium(t + "Stadium", 1234, 1990)
-				
+
 				var temp_team_prestige: int = get_team_prestige(pyramid_level)
 				assign_players_to_team(team, league, temp_team_prestige)
-				
+
 				league.add_team(team)
-				
+
 			leagues.add_league(league)
 			pyramid_level += 1
-	
+
 	return leagues
 
 
-func assign_players_to_team(p_team: Team, p_league:League, prestige: int) -> Team:
+func assign_players_to_team(p_team: Team, p_league: League, prestige: int) -> Team:
 	var nr: int = 1
-	
+
 	for position: int in Player.Position.values():
-		
 		var amount: int = Config.rng.randi_range(2, 5)
 		if position == Player.Position.G:
 			amount = 3
-		
+
 		for i in amount:
-			var random_nation: Const.Nations = get_random_nationality(p_league.nation, prestige, p_league.pyramid_level)
+			var random_nation: Const.Nations = get_random_nationality(
+				p_league.nation, prestige, p_league.pyramid_level
+			)
 			var player: Player = create_player(random_nation, position, nr, prestige)
 			nr += 1
 			player.team = p_team.name
 			player.team_id = p_team.id
 			player.league = p_league.name
 			p_team.players.append(player)
-		
+
 			# Config.rng.random lineup assingment
 			if position == Player.Position.G and p_team.lineup_player_ids.is_empty():
 				p_team.lineup_player_ids.append(player.id)
-			elif position != Player.Position.G and p_team.lineup_player_ids.size() < Const.LINEUP_PLAYERS_AMOUNT:
+			elif (
+				position != Player.Position.G
+				and p_team.lineup_player_ids.size() < Const.LINEUP_PLAYERS_AMOUNT
+			):
 				p_team.lineup_player_ids.append(player.id)
 
 	return p_team
 
 
 func get_goalkeeper_attributes(age: int, prestige: int, position: Player.Position) -> Goalkeeper:
-	var attributes:Goalkeeper = Goalkeeper.new()
-	
+	var attributes: Goalkeeper = Goalkeeper.new()
+
 	var age_factor: int = get_age_factor(age)
 	#var factor: int = min(Config.rng.randi_range(NOISE + 1, age_factor), max(prestige, NOISE + 1))
 	var factor: int = in_bounds(prestige + age_factor)
-	
-	# goalkeepers have max potential of 20 
+
+	# goalkeepers have max potential of 20
 	var max_potential: int = in_bounds(factor + noise())
-	
+
 	# non-goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position != Player.Position.G:
 		max_potential /= 2
@@ -123,33 +143,33 @@ func get_goalkeeper_attributes(age: int, prestige: int, position: Player.Positio
 
 
 func get_physical(age: int, prestige: int, position: Player.Position) -> Physical:
-	var attributes:Physical = Physical.new()
+	var attributes: Physical = Physical.new()
 
 	var age_factor: int = get_physical_age_factor(age)
 
 	var pace_factor: int = in_bounds(prestige + age_factor + noise())
 	var physical_factor: int = in_bounds(prestige + age_factor + noise())
-	
+
 	# non goalkeepers have max potential
 	var max_potential: int = in_bounds(prestige + noise())
-	
+
 	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position == Player.Position.G:
-		max_potential /=  2
-	
+		max_potential /= 2
+
 	attributes.pace = in_bounds(pace_factor + noise(), max_potential)
 	attributes.acceleration = in_bounds(pace_factor + noise(), max_potential)
 	attributes.stamina = in_bounds(physical_factor + noise(), max_potential)
 	attributes.strength = in_bounds(physical_factor + noise(), max_potential)
 	attributes.agility = in_bounds(physical_factor + noise(), max_potential)
 	attributes.jump = in_bounds(physical_factor + noise(), max_potential)
-	
+
 	return attributes
 
 
 func get_technical(age: int, prestige: int, position: Player.Position) -> Technical:
-	var attributes:Technical = Technical.new()
-	
+	var attributes: Technical = Technical.new()
+
 	var age_factor: int = get_age_factor(age)
 
 	# use also pos i calculation
@@ -158,14 +178,13 @@ func get_technical(age: int, prestige: int, position: Player.Position) -> Techni
 	var technique_factor: int = in_bounds(prestige + age_factor + noise())
 	var defense_factor: int = in_bounds(prestige + age_factor + noise())
 
-	
 	# non goalkeepers have max potential
 	var max_potential: int = in_bounds(prestige + noise())
-	
+
 	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
 	if position == Player.Position.G:
-		max_potential /=  2
-	
+		max_potential /= 2
+
 	attributes.crossing = in_bounds(pass_factor + noise(), max_potential)
 	attributes.passing = in_bounds(pass_factor + noise(), max_potential)
 	attributes.long_passing = in_bounds(pass_factor + noise(), max_potential)
@@ -182,27 +201,26 @@ func get_technical(age: int, prestige: int, position: Player.Position) -> Techni
 
 
 func get_mental(age: int, prestige: int) -> Mental:
-	
 	var attribtues: Mental = Mental.new()
-	
+
 	var age_factor: int = get_age_factor(age)
 
 	var offensive_factor: int = in_bounds(prestige + age_factor + noise())
 	var defensive_factor: int = in_bounds(prestige + age_factor + noise())
-	
+
 	var max_potential: int = in_bounds(prestige + noise())
 
 	attribtues.aggression = in_bounds(defensive_factor + noise(), max_potential)
 	attribtues.anticipation = in_bounds(defensive_factor + noise(), max_potential)
 	attribtues.marking = in_bounds(defensive_factor + noise(), max_potential)
-	
+
 	attribtues.decisions = in_bounds(offensive_factor + noise(), max_potential)
 	attribtues.concentration = in_bounds(offensive_factor + noise(), max_potential)
 	attribtues.teamwork = in_bounds(offensive_factor + noise(), max_potential)
 	attribtues.vision = in_bounds(offensive_factor + noise(), max_potential)
 	attribtues.work_rate = in_bounds(offensive_factor + noise(), max_potential)
 	attribtues.offensive_movement = in_bounds(offensive_factor + noise(), max_potential)
-	
+
 	return attribtues
 
 
@@ -235,7 +253,7 @@ func get_price(age: int, prestige: int, position: Player.Position) -> int:
 
 	var total_factor: int = age_factor + pos_factor + prestige
 
-	return Config.rng.randi_range(total_factor-20, total_factor) * 10000
+	return Config.rng.randi_range(total_factor - 20, total_factor) * 10000
 
 
 func get_random_foot() -> Player.Foot:
@@ -245,7 +263,7 @@ func get_random_foot() -> Player.Foot:
 
 
 func get_random_form() -> Player.Form:
-	var factor: int =  Config.rng.randi() % 100
+	var factor: int = Config.rng.randi() % 100
 	if factor < 5:
 		return Player.Form.Injured
 	elif factor < 15:
@@ -256,7 +274,7 @@ func get_random_form() -> Player.Form:
 
 
 func get_random_morality() -> Player.Morality:
-	var factor: int =  Config.rng.randi() % 100
+	var factor: int = Config.rng.randi() % 100
 	if factor < 5:
 		return Player.Morality.Horrible
 	elif factor < 15:
@@ -267,7 +285,7 @@ func get_random_morality() -> Player.Morality:
 
 
 func get_contract(prestige: int, position: int, age: int, contract: Contract) -> Contract:
-	contract.income = prestige * age * position # TODO use correct logic 
+	contract.income = prestige * age * position  # TODO use correct logic
 	contract.start_date = Time.get_date_dict_from_system()
 	contract.end_date = Time.get_date_dict_from_system()
 	contract.bonus_goal = 0
@@ -283,7 +301,7 @@ func get_contract(prestige: int, position: int, age: int, contract: Contract) ->
 
 func get_player_name(nationality: Const.Nations) -> String:
 	var nation_string: String = (Const.Nations.keys()[nationality] as String).to_lower()
-	
+
 	if Config.generation_gender == Const.Gender.MALE:
 		var size: int = (names[nation_string]["first_names_male"] as Array).size()
 		return names[nation_string]["first_names_male"][Config.rng.randi() % size]
@@ -293,13 +311,13 @@ func get_player_name(nationality: Const.Nations) -> String:
 	else:
 		var size_female: int = (names[nation_string]["first_names_female"] as Array).size()
 		var size_male: int = (names[nation_string]["first_names_male"] as Array).size()
-		var female_names: Array =  names[nation_string]["first_names_female"]
-		var male_names: Array =  names[nation_string]["first_names_male"]
-		
+		var female_names: Array = names[nation_string]["first_names_female"]
+		var male_names: Array = names[nation_string]["first_names_male"]
+
 		var mixed_names: Array = []
 		mixed_names.append_array(female_names)
 		mixed_names.append_array(male_names)
-		
+
 		return mixed_names[Config.rng.randi() % (size_female + size_male)]
 
 
@@ -311,14 +329,18 @@ func get_surname(nationality: Const.Nations) -> String:
 	return names[nation_string]["last_names"][Config.rng.randi() % size]
 
 
-func create_player(nationality: Const.Nations, position: Player.Position, nr: int, p_prestige: int) -> Player:
+func create_player(
+	nationality: Const.Nations, position: Player.Position, nr: int, p_prestige: int
+) -> Player:
 	var player: Player = Player.new()
 	# Config.rng.random date from 1970 to 2007
-	var birth_date: Dictionary = Time.get_datetime_dict_from_unix_time(Config.rng.randi_range(0, max_timestamp))
-	
+	var birth_date: Dictionary = Time.get_datetime_dict_from_unix_time(
+		Config.rng.randi_range(0, max_timestamp)
+	)
+
 	var prestige: int = get_player_prestige(p_prestige)
 
-	player.price = get_price(date.year-birth_date.year, prestige, position)
+	player.price = get_price(date.year - birth_date.year, prestige, position)
 	player.name = get_player_name(nationality)
 	player.surname = get_surname(nationality)
 	player.birth_date = birth_date
@@ -330,18 +352,20 @@ func create_player(nationality: Const.Nations, position: Player.Position, nr: in
 	player.form = get_random_form()
 	player.prestige = prestige
 	player.injury_factor = Config.rng.randi_range(1, 20)
-	player.loyality = Config.rng.randi_range(1, 20) # if player is loyal, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
-	player.contract = get_contract(prestige, position, date.year-birth_date.year, player.contract)
+	player.loyality = Config.rng.randi_range(1, 20)  # if player is loyal, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
+	player.contract = get_contract(prestige, position, date.year - birth_date.year, player.contract)
 	player.nr = nr
-	
+
 	player.attributes = Attributes.new()
-	player.attributes.goalkeeper =  get_goalkeeper_attributes(date.year-birth_date.year, prestige, position)
-	player.attributes.mental = get_mental(date.year-birth_date.year, prestige)
-	player.attributes.technical = get_technical(date.year-birth_date.year, prestige, position)
-	player.attributes.physical = get_physical(date.year-birth_date.year, prestige, position)
-	
+	player.attributes.goalkeeper = get_goalkeeper_attributes(
+		date.year - birth_date.year, prestige, position
+	)
+	player.attributes.mental = get_mental(date.year - birth_date.year, prestige)
+	player.attributes.technical = get_technical(date.year - birth_date.year, prestige, position)
+	player.attributes.physical = get_physical(date.year - birth_date.year, prestige, position)
+
 	# TODO  create Config.rng.random history
-	var statistics:Statistics = Statistics.new()
+	var statistics: Statistics = Statistics.new()
 	statistics.team_name = "Test"
 	statistics.games_played = 0
 	statistics.goals = 0
@@ -350,7 +374,7 @@ func create_player(nationality: Const.Nations, position: Player.Position, nr: in
 	statistics.red_card = 0
 	statistics.average_vote = 0
 	player.statistics.append(statistics)
-	
+
 	return player
 
 
@@ -365,7 +389,9 @@ func get_team_prestige(pyramid_level: int) -> int:
 	return in_bounds(randi_range(minp, maxp))
 
 
-func get_random_nationality(nationality: Const.Nations, prestige: int, pyramid_level: int) -> Const.Nations:
+func get_random_nationality(
+	nationality: Const.Nations, prestige: int, pyramid_level: int
+) -> Const.Nations:
 	# (100 - prestige)% given nation, prestige% random nation
 	# with prestige, lower division teams have less players from other nations
 	if Config.rng.randi_range(1, 100) > 100 - (prestige * 2 / pyramid_level):

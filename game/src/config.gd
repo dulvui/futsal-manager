@@ -8,7 +8,7 @@ const VERSION: String = "1"
 const CONFIG_VERSION: String = "1"
 
 # config
-var config:ConfigFile
+var config: ConfigFile
 
 var language: String
 var currency: int
@@ -22,7 +22,7 @@ var start_date: Dictionary
 # generator config
 var generation_seed: String
 var generation_state: int
-var generation_gender:Const.Gender
+var generation_gender: Const.Gender
 # saves which season this is, starting from 0
 var current_season: int
 # global game states
@@ -32,24 +32,23 @@ var dashboard_active_content: int
 var id_by_type: Dictionary
 
 # rng's
-var rng:RandomNumberGenerator
-var match_rng:RandomNumberGenerator
+var rng: RandomNumberGenerator
+var match_rng: RandomNumberGenerator
 
 # resources
-var leagues:Leagues
+var leagues: Leagues
 var team: Team
-var manager:Manager
+var manager: Manager
 var transfers: Transfers
-var inbox:Inbox
+var inbox: Inbox
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("version " + Config.VERSION)
-	
+
 	_load_config()
 	load_save_state()
-
 	Config.set_lang(language)
 
 
@@ -59,10 +58,10 @@ func _load_config() -> void:
 	# if not, something went wrong with the file loading
 	if err != OK:
 		print("error loading user://settings.cfg")
-	currency = config.get_value("settings","currency",CurrencyUtil.Currencies.EURO)
-	theme_index = config.get_value("settings","theme_index",0)
-	language = config.get_value("settings","language","")
-	
+	currency = config.get_value("settings", "currency", CurrencyUtil.Currencies.EURO)
+	theme_index = config.get_value("settings", "theme_index", 0)
+	language = config.get_value("settings", "language", "")
+
 	# save states
 	if ResourceLoader.exists("user://save_states.tres"):
 		print("loading user://save_states.tres")
@@ -82,7 +81,7 @@ func load_save_state() -> void:
 		generation_seed = save_sate.generation_seed
 		generation_state = save_sate.generation_state
 		generation_gender = save_sate.generation_gender
-		
+
 		_load_resources()
 		_set_up_rngs()
 
@@ -97,9 +96,9 @@ func save_active_state() -> void:
 	save_sate.generation_seed = generation_seed
 	save_sate.generation_state = generation_state
 	save_sate.generation_gender = generation_gender
-	
+
 	save_sate.save_metadata()
-	
+
 	ResourceSaver.save(leagues, save_states.get_active_path("leagues.tres"))
 	ResourceSaver.save(inbox, save_states.get_active_path("inbox.tres"))
 	ResourceSaver.save(team, save_states.get_active_path("team.tres"))
@@ -119,9 +118,9 @@ func _set_up_rngs() -> void:
 
 
 func save_config() -> void:
-	config.set_value("settings","currency",currency)
-	config.set_value("settings","theme_index", theme_index)
-	config.set_value("settings","language",language)
+	config.set_value("settings", "currency", currency)
+	config.set_value("settings", "theme_index", theme_index)
+	config.set_value("settings", "language", language)
 
 	config.save("user://settings.cfg")
 	print("config saved")
@@ -137,7 +136,7 @@ func _load_resources() -> void:
 	if ResourceLoader.exists(save_states.get_active_path("manager.tres")):
 		print("loading user://manager.tres")
 		manager = ResourceLoader.load(save_states.get_active_path("manager.tres"))
-	
+
 	if ResourceLoader.exists(save_states.get_active_path("inbox.tres")):
 		print("loading user://inbox.tres")
 		inbox = ResourceLoader.load(save_states.get_active_path("inbox.tres"))
@@ -150,11 +149,11 @@ func _load_resources() -> void:
 		transfers = Transfers.new()
 
 
-func generate_leagues(p_generation_seed: String, p_generation_gender:Const.Gender) -> void:
+func generate_leagues(p_generation_seed: String, p_generation_gender: Const.Gender) -> void:
 	generation_seed = p_generation_seed
 	generation_gender = p_generation_gender
 	set_seed(generation_seed)
-	var generator:Generator = Generator.new()
+	var generator: Generator = Generator.new()
 	leagues = generator.generate()
 
 
@@ -164,7 +163,7 @@ func save_all_data() -> void:
 	save_config()
 
 
-func set_seed(p_generation_seed: String=generation_seed) -> void:
+func set_seed(p_generation_seed: String = generation_seed) -> void:
 	generation_seed = p_generation_seed
 	rng.seed = hash(generation_seed) + generation_gender
 
@@ -172,44 +171,43 @@ func set_seed(p_generation_seed: String=generation_seed) -> void:
 func set_lang(lang: String) -> void:
 	TranslationServer.set_locale(lang)
 	language = lang
-	config.set_value("settings","language", language)
+	config.set_value("settings", "language", language)
 	config.save("user://settings.cfg")
 
 
-func select_team(p_league:League, p_team: Team) -> void:
+func select_team(p_league: League, p_team: Team) -> void:
 	leagues.active_id = p_league.id
 	team = p_team
 
 
 func next_season() -> void:
 	current_season += 1
-		
+
 	# TODO
 	# teams go to upper/lower division
 	# financial stuff
 	# set new goals for manager
 	# player contracts
-	
+
 	PlayerProgress.players_progress_season()
-	
-	for league:League in Config.leagues.list:
+
+	for league: League in Config.leagues.list:
 		league.calendar.initialize(true)
-	
+
 	MatchMaker.inizialize_matches(leagues)
-	
+
 	Config.save_all_data()
-	
+
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
-# shortcut to active leagues calendar 
+# shortcut to active leagues calendar
 func calendar() -> Calendar:
 	return Config.leagues.get_active().calendar
-
 
 # disable save, too heavy on close, breaks game
 # save on quit on mobile
 #func _notification(what: int) -> void:
-	#if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		#save_all_data()
-		#get_tree().quit() # default behavior
+#if what == NOTIFICATION_WM_CLOSE_REQUEST:
+#save_all_data()
+#get_tree().quit() # default behavior

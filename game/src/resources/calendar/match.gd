@@ -12,22 +12,25 @@ extends Resource
 @export var home_goals: int
 @export var away_goals: int
 
+
 func _init(
 	p_home: Team = Team.new(),
 	p_away: Team = Team.new(),
 	p_home_goals: int = -1,
 	p_away_goals: int = -1,
-	) -> void:
+) -> void:
 	home = p_home
 	away = p_away
 	home_goals = p_home_goals
 	away_goals = p_away_goals
 	id = IdUtil.next_id(IdUtil.Types.MATCH)
 
+
 func set_result(p_home_goals: int, p_away_goals: int) -> void:
 	home_goals = p_home_goals
 	away_goals = p_away_goals
 	over = true
+
 
 func get_result() -> String:
 	if home_goals == -1 and away_goals == -1:

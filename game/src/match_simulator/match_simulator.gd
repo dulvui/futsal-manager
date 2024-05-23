@@ -10,26 +10,26 @@ signal half_time
 signal match_end
 signal update
 
-@onready var visual_match:VisualMatch = $SubViewportContainer/SubViewport/VisualMatch
-@onready var sub_viewport:SubViewport = $SubViewportContainer/SubViewport
-@onready var camera:Camera2D = $SubViewportContainer/SubViewport/Camera2D
+@onready var visual_match: VisualMatch = $SubViewportContainer/SubViewport/VisualMatch
+@onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
+@onready var camera: Camera2D = $SubViewportContainer/SubViewport/Camera2D
 
 var ticks: int = 0
 var time: int = 0
-var timer:Timer
+var timer: Timer
 
 
-func _process(_delta:float) -> void:
+func _process(_delta: float) -> void:
 	camera.position = visual_match.ball.global_position
 
 
 #var home_has_ball: bool
 func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
-	visual_match.set_up(home_team,away_team, match_seed)
-	
+	visual_match.set_up(home_team, away_team, match_seed)
+
 	# adjust sub viewport to field size + borders
 	sub_viewport.size = visual_match.visual_field.field.size
-	
+
 	# intialize timer
 	timer = Timer.new()
 	timer.wait_time = 1.0 / (Const.TICKS_PER_SECOND * Config.speed_factor)
@@ -82,5 +82,3 @@ func set_time() -> void:
 
 func start_match() -> void:
 	timer.start()
-
-

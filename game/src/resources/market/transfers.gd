@@ -7,6 +7,7 @@ extends Resource
 
 @export var list: Array[Transfer]
 
+
 func _init(
 	p_list: Array[Transfer] = [],
 ) -> void:

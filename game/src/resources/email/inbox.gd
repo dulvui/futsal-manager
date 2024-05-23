@@ -7,8 +7,8 @@ extends Resource
 
 @export var list: Array[EmailMessage]
 
+
 func _init(
 	p_list: Array[EmailMessage] = [],
-	) -> void:
+) -> void:
 	list = p_list
-

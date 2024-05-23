@@ -4,13 +4,13 @@
 
 class_name Action
 
-enum State {NORMAL, KICK_OFF, PENALTY, FREE_KICK, KICK_IN, CORNER}
-enum Defense {INTERCEPT, WAIT, TACKLE, RUN, BLOCK, HEADER}
-enum Attack {PASS, CROSS, DRIBBLE, RUN, SHOOT}
+enum State { NORMAL, KICK_OFF, PENALTY, FREE_KICK, KICK_IN, CORNER }
+enum Defense { INTERCEPT, WAIT, TACKLE, RUN, BLOCK, HEADER }
+enum Attack { PASS, CROSS, DRIBBLE, RUN, SHOOT }
 
 # in which sector of the field the player is situated
 # so better decisions can be made depeneding on the sector a player is
-enum Sector {ATTACK, CENTER, DEFENSE}
+enum Sector { ATTACK, CENTER, DEFENSE }
 
 var attack: int
 var state: int

@@ -5,32 +5,32 @@
 class_name Player
 extends Resource
 
-enum Position {G, D, W, U, P}
-enum Foot {L, R}
-enum Morality {Horrible, Bad, Good, Excellent}
-enum Form {Injured, Recover, Good, Excellent}
+enum Position { G, D, W, U, P }
+enum Foot { L, R }
+enum Morality { Horrible, Bad, Good, Excellent }
+enum Form { Injured, Recover, Good, Excellent }
 
 @export var id: int
 @export var price: int
-@export var nr: int # shirt number
+@export var nr: int  # shirt number
 @export var loyality: int
-@export var prestige: int # 1-100
+@export var prestige: int  # 1-100
 @export var moral: int
 @export var injury_factor: int
 @export var name: String
-@export var team: String # team name for easier filtering etc...
-@export var team_id: int # team name for easier filtering etc...
-@export var league: String # league name for easier filtering etc...
+@export var team: String  # team name for easier filtering etc...
+@export var team_id: int  # team name for easier filtering etc...
+@export var league: String  # league name for easier filtering etc...
 @export var surname: String
 @export var nation: Const.Nations
 @export var birth_date: Dictionary
-@export var form:Form
-@export var morality:Morality
+@export var form: Form
+@export var morality: Morality
 @export var statistics: Array[Statistics]
-@export var foot:Foot
-@export var position:Position
+@export var foot: Foot
+@export var position: Position
 @export var contract: Contract
-@export var attributes:Attributes
+@export var attributes: Attributes
 
 
 func _init(
@@ -48,13 +48,13 @@ func _init(
 	p_surname: String = "",
 	p_nation: Const.Nations = Const.Nations.ITALY,
 	p_birth_date: Dictionary = {},
-	p_form:Form = Form.Good,
-	p_morality:Morality = Morality.Good,
+	p_form: Form = Form.Good,
+	p_morality: Morality = Morality.Good,
 	p_statistics: Array[Statistics] = [],
-	p_foot:Foot = Foot.R,
-	p_position:Position = Position.G,
+	p_foot: Foot = Foot.R,
+	p_position: Position = Position.G,
 	p_contract: Contract = Contract.new(),
-	p_attributes:Attributes = Attributes.new(),
+	p_attributes: Attributes = Attributes.new(),
 ) -> void:
 	id = p_id
 	price = p_price
@@ -83,7 +83,7 @@ func get_full_name() -> String:
 	return name + " " + surname
 
 
-func get_attack_attributes(attack:Action.Attack) -> int:
+func get_attack_attributes(attack: Action.Attack) -> int:
 	match attack:
 		Action.Attack.SHOOT:
 			# check sector and pick long_shoot
@@ -97,14 +97,14 @@ func get_attack_attributes(attack:Action.Attack) -> int:
 #		Action.Attack.HEADER:
 #			return attributes.technical.heading"]
 		Action.Attack.RUN:
-			var attacker_attributes: int =  attributes.physical.pace
+			var attacker_attributes: int = attributes.physical.pace
 			attacker_attributes += attributes.physical.acceleration
 			return attacker_attributes
 	# should never happen
 	return -1
 
 
-func get_defense_attributes(attack:Action.Attack) -> int:
+func get_defense_attributes(attack: Action.Attack) -> int:
 	match attack:
 		Action.Attack.SHOOT:
 			# check sector and pick long_shoot

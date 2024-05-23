@@ -9,8 +9,8 @@ extends Resource
 
 
 func _init(
-		p_teams: Array[TableValues] = [],
-	) -> void:
+	p_teams: Array[TableValues] = [],
+) -> void:
 	teams = p_teams
 
 
@@ -21,20 +21,20 @@ func add_team(team: Team) -> void:
 	teams.append(values)
 
 
-func add_result(home_id: int,home_goals: int,away_id: int,away_goals: int) -> void:
+func add_result(home_id: int, home_goals: int, away_id: int, away_goals: int) -> void:
 	var home: TableValues = _find_by_id(home_id)
 	var away: TableValues = _find_by_id(away_id)
-	
+
 	home.goals_made += home_goals
 	home.goals_against += away_goals
 	away.goals_made += away_goals
 	away.goals_against += home_goals
-	
+
 	if home_goals > away_goals:
 		home.wins += 1
 		home.points += 3
 		away.lost += 1
-	elif  home_goals == away_goals:
+	elif home_goals == away_goals:
 		home.draws += 1
 		home.points += 1
 		away.draws += 1
@@ -47,7 +47,7 @@ func add_result(home_id: int,home_goals: int,away_id: int,away_goals: int) -> vo
 	away.games_played += 1
 
 
-func get_position(team_id : int = Config.team.id) -> int:
+func get_position(team_id: int = Config.team.id) -> int:
 	var position: int = 0
 	var list: Array[TableValues] = to_sorted_array()
 	while list[position].team_id != team_id:
@@ -77,5 +77,3 @@ func _find_by_id(team_id: int) -> TableValues:
 			return value
 	print("ERROR while searching team in table with id: " + str(team_id))
 	return null
-
-

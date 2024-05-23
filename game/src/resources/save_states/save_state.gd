@@ -25,22 +25,22 @@ extends Resource
 
 
 func _init(
-		p_generation_seed: String = "SuchDefaultSeed",
-		p_generation_state: int = 0,
-		p_generation_gender: Const.Gender = 0,
-		p_current_season: int = 1,
-		p_speed_factor: int = 1,
-		p_dashboard_active_content: int = 0,
-		p_id: String = str(int(Time.get_unix_time_from_system())),
-		p_id_by_type: Dictionary = {},
-		p_config_version: String = Config.CONFIG_VERSION,
-		p_start_date: Dictionary = Time.get_datetime_dict_from_system(),
-		p_meta_team_name: String = "",
-		p_meta_manager_name: String = "",
-		p_meta_team_position: String = "",
-		p_meta_last_save: Dictionary = {},
-		p_meta_game_date: Dictionary = {},
-	) -> void:
+	p_generation_seed: String = "SuchDefaultSeed",
+	p_generation_state: int = 0,
+	p_generation_gender: Const.Gender = 0,
+	p_current_season: int = 1,
+	p_speed_factor: int = 1,
+	p_dashboard_active_content: int = 0,
+	p_id: String = str(int(Time.get_unix_time_from_system())),
+	p_id_by_type: Dictionary = {},
+	p_config_version: String = Config.CONFIG_VERSION,
+	p_start_date: Dictionary = Time.get_datetime_dict_from_system(),
+	p_meta_team_name: String = "",
+	p_meta_manager_name: String = "",
+	p_meta_team_position: String = "",
+	p_meta_last_save: Dictionary = {},
+	p_meta_game_date: Dictionary = {},
+) -> void:
 	id = p_id
 	config_version = p_config_version
 	start_date = p_start_date
@@ -65,7 +65,7 @@ func create_dir() -> void:
 		var err: int = user_dir.make_dir(id)
 		if err != OK:
 			print("error while creating save state dir")
-	
+
 	# save static metadata
 	meta_team_name = Config.team.name
 	meta_manager_name = Config.manager.get_full_name()
@@ -80,15 +80,18 @@ func delete_dir() -> void:
 			# remove all files
 			var file_name: String = user_dir.get_next()
 			while file_name != "":
-					OS.move_to_trash(ProjectSettings.globalize_path("user://" + id + "/" + file_name))
-					file_name = user_dir.get_next()
+				OS.move_to_trash(ProjectSettings.globalize_path("user://" + id + "/" + file_name))
+				file_name = user_dir.get_next()
 		# delete folder
 		user_dir.change_dir("..")
 		OS.move_to_trash(ProjectSettings.globalize_path("user://" + id))
 
 
 func save_metadata() -> void:
-	meta_team_position = str(Config.leagues.get_active().table.get_position()) + ". " + Config.leagues.get_active().name
+	meta_team_position = (
+		str(Config.leagues.get_active().table.get_position())
+		+ ". "
+		+ Config.leagues.get_active().name
+	)
 	meta_last_save = Time.get_datetime_dict_from_system()
 	meta_game_date = Config.calendar().date
-

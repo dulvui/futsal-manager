@@ -5,11 +5,12 @@
 extends Node
 
 const THEMES: Dictionary = {
-	"DARK" : "res://themes/default/theme.tres",
-	"LIGHT" : "res://themes/light/theme_light.tres",
+	"DARK": "res://themes/default/theme.tres",
+	"LIGHT": "res://themes/light/theme_light.tres",
 }
 
-var active_theme:Theme
+var active_theme: Theme
+
 
 func _ready() -> void:
 	set_active_theme(Config.theme_index)

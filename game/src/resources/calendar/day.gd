@@ -13,6 +13,7 @@ extends Resource
 @export var year: int
 #@export var trainings: Array
 
+
 func _init(
 	p_matches: Array[Match] = [],
 	p_market: bool = false,
@@ -20,7 +21,7 @@ func _init(
 	p_day: int = 1,
 	p_month: int = 1,
 	p_year: int = 1970,
-	) -> void:
+) -> void:
 	matches = p_matches
 	market = p_market
 	weekday = p_weekday

@@ -8,6 +8,7 @@ extends Resource
 @export var days: Array[Day]
 @export var name: String
 
+
 func _init(
 	p_name: String = "",
 	p_days: Array[Day] = [],

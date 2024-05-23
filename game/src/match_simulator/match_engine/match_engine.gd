@@ -4,25 +4,25 @@
 
 class_name MatchEngine
 
-var field:SimField
+var field: SimField
 var ball: SimBall
-var home_team:SimTeam
-var away_team:SimTeam
+var home_team: SimTeam
+var away_team: SimTeam
 
 var home_plays_left: bool
 
 var ticks: int
 
-# for trajectory calculations 
-var post_bottom:Vector2
-var post_top:Vector2
+# for trajectory calculations
+var post_bottom: Vector2
+var post_top: Vector2
 var players: Array[SimPlayer]
-var goalkeeper:SimGoalkeeper
+var goalkeeper: SimGoalkeeper
 
-var nearest_player:SimPlayer
+var nearest_player: SimPlayer
 
 # stats
-var possession_counter:float
+var possession_counter: float
 
 
 func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
@@ -31,19 +31,19 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	ball.goal_line_out.connect(_on_sim_ball_goal_line_out)
 	ball.touch_line_out.connect(_on_sim_ball_touch_line_out)
 	ball.goal.connect(_on_sim_ball_goal)
-	
+
 	field.set_up()
 	ball.set_up(field)
-	
+
 	ticks = 0
 	possession_counter = 0.0
-	
+
 	Config.match_rng.state = 0
 	Config.match_rng.seed = hash(match_seed)
 
 	home_plays_left = Config.match_rng.randi_range(0, 1) == 0
 	var home_has_ball: bool = Config.match_rng.randi_range(0, 1) == 0
-	
+
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, home_has_ball)
 	home_team.possess.connect(_on_home_team_possess)
@@ -55,7 +55,7 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 func update() -> void:
 	ball.update()
-	
+
 	# defend/attack
 	if home_team.has_ball:
 		home_team.attack()
@@ -63,12 +63,12 @@ func update() -> void:
 	else:
 		away_team.attack()
 		home_team.defend(away_team.players)
-	
+
 	calc_distances()
-	
+
 	home_team.move()
 	away_team.move()
-	
+
 	# update posession stats
 	ticks += 1
 	if home_team.has_ball:
@@ -77,10 +77,10 @@ func update() -> void:
 	away_team.stats.possession = 100 - home_team.stats.possession
 
 
-func simulate(matchz:Match) -> Match:
+func simulate(matchz: Match) -> Match:
 	var start_time: int = Time.get_ticks_msec()
 	set_up(matchz.home, matchz.away, matchz.id)
-	
+
 	# first half
 	for i: int in Const.HALF_TIME_SECONDS * Const.TICKS_PER_SECOND:
 		update()
@@ -88,13 +88,22 @@ func simulate(matchz:Match) -> Match:
 	# second half
 	for i: int in Const.HALF_TIME_SECONDS * Const.TICKS_PER_SECOND:
 		update()
-		
+
 	matchz.home_goals = home_team.stats.goals
 	matchz.away_goals = away_team.stats.goals
-	
+
 	var end_time: int = Time.get_ticks_msec()
-	print("benchmark: " + str(end_time - start_time) + " result: " + str(matchz.home_goals) + ":" + str(matchz.away_goals))
-	print("shots: h%d - a%d"%[home_team.stats.shots, away_team.stats.shots])
+	print(
+		(
+			"benchmark: "
+			+ str(end_time - start_time)
+			+ " result: "
+			+ str(matchz.home_goals)
+			+ ":"
+			+ str(matchz.away_goals)
+		)
+	)
+	print("shots: h%d - a%d" % [home_team.stats.shots, away_team.stats.shots])
 	return matchz
 
 
@@ -113,46 +122,48 @@ func calc_distances() -> void:
 	calc_free_shoot_trajectory()
 
 
-func calc_distance_to_goal(player:SimPlayer, left_half: bool) -> void:
+func calc_distance_to_goal(player: SimPlayer, left_half: bool) -> void:
 	if left_half:
 		player.distance_to_goal = calc_distance_to(player.pos, field.goal_right)
 	player.distance_to_goal = calc_distance_to(player.pos, field.goal_left)
 
 
-func calc_distance_to_own_goal(player:SimPlayer, left_half: bool) -> void:
+func calc_distance_to_own_goal(player: SimPlayer, left_half: bool) -> void:
 	if left_half:
 		player.distance_to_own_goal = calc_distance_to(player.pos, field.goal_left)
 	player.distance_to_own_goal = calc_distance_to(player.pos, field.goal_right)
 
 
-func calc_player_to_ball_distance(player:SimPlayer) -> void:
+func calc_player_to_ball_distance(player: SimPlayer) -> void:
 	player.distance_to_ball = calc_distance_to(player.pos, ball.pos)
 
 
-func calc_distance_to(from:Vector2, to:Vector2) -> float:
+func calc_distance_to(from: Vector2, to: Vector2) -> float:
 	return from.distance_to(to)
 
 
 func calc_free_shoot_trajectory() -> void:
 	ball.players_in_shoot_trajectory = 0
-	
+
 	if home_team.has_ball:
 		goalkeeper = away_team.goalkeeper
 		players = away_team.players
 	else:
 		goalkeeper = home_team.goalkeeper
 		players = home_team.players
-	
+
 	if left_is_active_goal():
 		post_bottom = field.goal_post_bottom_left
 		post_top = field.goal_post_top_left
 	else:
 		post_bottom = field.goal_post_bottom_right
 		post_top = field.goal_post_bottom_left
-	
-	ball.empty_net = not Geometry2D.point_is_inside_triangle(goalkeeper.pos, ball.pos, post_bottom, post_top)
-	
-	for player:SimPlayer in players:
+
+	ball.empty_net = not Geometry2D.point_is_inside_triangle(
+		goalkeeper.pos, ball.pos, post_bottom, post_top
+	)
+
+	for player: SimPlayer in players:
 		if Geometry2D.point_is_inside_triangle(player.pos, ball.pos, post_bottom, post_top):
 			ball.players_in_shoot_trajectory += 1
 
@@ -170,13 +181,17 @@ func left_is_active_goal() -> bool:
 func _on_sim_ball_goal_line_out() -> void:
 	# TODO create signal for corner left/right
 	# for goalkeeper kick ins
-	
+
 	# check if corner kick
-	if (home_team.has_ball and home_plays_left and ball.pos.x < 600) \
-		or (home_team.has_ball and not home_plays_left and ball.pos.x > 600):
+	if (
+		(home_team.has_ball and home_plays_left and ball.pos.x < 600)
+		or (home_team.has_ball and not home_plays_left and ball.pos.x > 600)
+	):
 		set_corner(true)
-	elif (away_team.has_ball and home_plays_left and ball.pos.x > 600) \
-		or (home_team.has_ball and not home_plays_left and ball.pos.x < 600):
+	elif (
+		(away_team.has_ball and home_plays_left and ball.pos.x > 600)
+		or (home_team.has_ball and not home_plays_left and ball.pos.x < 600)
+	):
 		set_corner(false)
 	# goalkeeper ball
 	elif ball.pos.x < 600:
@@ -221,7 +236,7 @@ func _on_sim_ball_touch_line_out() -> void:
 		home_possess()
 		home_team.stats.kick_ins += 1
 		nearest_player = home_team.nearest_player_to_ball()
-	
+
 	# set ball pos
 	if ball.pos.y < field.size.y / 2:
 		# up
@@ -231,8 +246,7 @@ func _on_sim_ball_touch_line_out() -> void:
 		# down
 		ball.set_pos(ball.pos.x, field.line_bottom)
 		set_goalkeeper_ball(not home_plays_left)
-	
-	
+
 	nearest_player.set_pos(ball.pos)
 	nearest_player.short_pass.emit()
 

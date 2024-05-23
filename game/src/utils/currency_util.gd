@@ -4,24 +4,15 @@
 
 extends Node
 
-enum Currencies {
-	EURO,
-	DOLLAR,
-	POUND,
-	BITCOIN
-}
+enum Currencies { EURO, DOLLAR, POUND, BITCOIN }
 
-const SIGNS: Array = [
-	"€",
-	"$",
-	"£",
-	"₿"
-]
+const SIGNS: Array = ["€", "$", "£", "₿"]
 
 
 func convert_to() -> int:
 	return 0
-	
+
+
 func get_sign(amount: int = -1) -> String:
 	if amount >= 0:
 		return str(amount) + " " + SIGNS[Config.currency]

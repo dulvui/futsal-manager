@@ -8,6 +8,7 @@ signal transfer_mail
 
 const REQUEST_FACTOR: int = 20
 
+
 func update_day() -> void:
 	#check with calendar if treansfer market is open, then send start/stop mail
 	if Config.calendar().is_market_active():
@@ -20,15 +21,17 @@ func update_day() -> void:
 				# for transfers affectiing own team
 				# otehrwhise send a news id if important, or simply add to market history
 				EmailUtil.transfer_message(transfer)
-				
+
 				if transfer.state == Transfer.State.SUCCESS:
 					make_transfer(transfer)
 	else:
 		print("TODO cancel all remaining transfers and send market clossed email")
 
+
 func make_offer(transfer: Transfer) -> void:
 	EmailUtil.transfer_message(transfer)
 	Config.transfers.list.append(transfer)
+
 
 # TODO move to trasnfer util
 func get_transfer_id(id: int) -> Transfer:
@@ -37,6 +40,7 @@ func get_transfer_id(id: int) -> Transfer:
 			return transfer
 	print("ERROR: transfer not found with id: " + str(id))
 	return null
+
 
 func _request_players() -> void:
 	if randi_range(1, REQUEST_FACTOR) == REQUEST_FACTOR:
