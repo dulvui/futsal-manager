@@ -75,7 +75,9 @@ func attack() -> void:
 				state = State.BALL
 				ball.stop()
 		State.BALL:
-			if _should_pass():
+			if _should_dribble():
+				state = State.BALL
+			elif _should_pass():
 				short_pass.emit()
 				state = State.NO_BALL
 			elif _should_shoot():
@@ -97,6 +99,10 @@ func move() -> void:
 	if pos.distance_to(destination) < 20 or speed == 0:
 		destination = Vector2.INF
 		stop()
+	
+	if state == State.BALL and speed > 0:
+		ball.dribble(destination, speed)
+		
 
 
 func is_touching_ball() -> bool:
@@ -130,9 +136,9 @@ func stop() -> void:
 	speed = 0
 
 
-func _should_run() -> bool:
+func _should_dribble() -> bool:
 	# check something, but for now, nothing comes to my mind
-	return Config.match_rng.randi_range(1, 100) > 50
+	return Config.match_rng.randi_range(1, 100) > 30
 
 
 func _should_shoot() -> bool:

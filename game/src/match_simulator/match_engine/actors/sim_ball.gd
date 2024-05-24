@@ -77,6 +77,12 @@ func shoot(p_destination: Vector2, force: float) -> void:
 	state = State.SHOOT
 
 
+func dribble(p_destination: Vector2, force: float) -> void:
+	speed = force + 4  # ball moves a bit faster that the force is
+	direction = pos.direction_to(p_destination)
+	state = State.DRIBBLE
+
+
 func check_field_bounds() -> void:
 	# kick in
 	if pos.y < field.BORDER_SIZE:
