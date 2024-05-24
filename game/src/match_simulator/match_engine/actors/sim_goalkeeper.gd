@@ -10,36 +10,37 @@ signal interception
 # resources
 var player_res: Player
 var ball: SimBall
-var field:SimField
+var field: SimField
 var left_half: bool
 # positions
-var start_pos:Vector2
-var pos:Vector2
+var start_pos: Vector2
+var pos: Vector2
 # movements
-var direction:Vector2
-var destination:Vector2
-var speed:float
+var direction: Vector2
+var destination: Vector2
+var speed: float
 
-var interception_radius: int #TODO reduce radius with low stamina
+var interception_radius: int  #TODO reduce radius with low stamina
 # so goalkeeper cant block infinitly,
 # but when once blocked, time has to pass to block again
-var block_counter: int = 0 
+var block_counter: int = 0
+
 
 func set_up(
 	p_player_res: Player,
 	p_ball: SimBall,
-	p_field:SimField,
+	p_field: SimField,
 	p_left_half: bool,
 ) -> void:
 	player_res = p_player_res
 	ball = p_ball
 	field = p_field
-	
+
 	left_half = p_left_half
-	
+
 	start_pos = field.get_goalkeeper_pos(left_half)
 	pos = start_pos
-	
+
 	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 60
 
 
@@ -55,7 +56,7 @@ func defend() -> void:
 			if block_shot():
 				ball.stop()
 				interception.emit()
-	
+
 	if block_counter == 0:
 		follow_ball()
 
@@ -64,7 +65,7 @@ func attack() -> void:
 	if is_touching_ball():
 		ball.stop()
 		short_pass.emit()
-		
+
 	follow_ball()
 
 
@@ -91,7 +92,7 @@ func set_penalty_area_bounds() -> void:
 		pos.y = field.penalty_area_y_top + 10
 	elif pos.y < field.penalty_area_y_bottom - 10:
 		pos.y = field.penalty_area_y_bottom - 10
-	
+
 	if left_half:
 		if pos.x > field.penalty_area_left_x + 10:
 			pos.x = field.penalty_area_left_x + 10
@@ -99,14 +100,15 @@ func set_penalty_area_bounds() -> void:
 			pos.x = -10
 	else:
 		if pos.x < field.penalty_area_right_x - 10:
-				pos.x = field.penalty_area_right_x - 10
+			pos.x = field.penalty_area_right_x - 10
 		elif pos.x > field.size.x + field.BORDER_SIZE + 10:
 			pos.x = field.size.x + field.BORDER_SIZE + 10
+
 
 func move() -> void:
 	if speed > 0:
 		pos += direction * speed
-	
+
 	if pos.distance_to(destination) < 5 or speed == 0:
 		destination = Vector2.INF
 		stop()
@@ -129,11 +131,14 @@ func block_shot() -> bool:
 		block_counter = Const.TICKS_PER_SECOND * 2
 		# best case 49 + 20 * 2 = 89
 		# worst case 49 + 1 * 2 = 52
-		return Config.match_rng.randi_range(0, 100) < 49 + player_res.attributes.goalkeeper.handling * 2
+		return (
+			Config.match_rng.randi_range(0, 100)
+			< 49 + player_res.attributes.goalkeeper.handling * 2
+		)
 	return false
 
 
-func set_pos(p_pos:Vector2 = pos) -> void:
+func set_pos(p_pos: Vector2 = pos) -> void:
 	pos = p_pos
 	# reset values
 	speed = 0

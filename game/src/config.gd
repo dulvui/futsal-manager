@@ -46,7 +46,6 @@ var inbox: Inbox
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("version " + Config.VERSION)
-
 	_load_config()
 	load_save_state()
 	Config.set_lang(language)
