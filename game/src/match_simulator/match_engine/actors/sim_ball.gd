@@ -70,6 +70,7 @@ func stop() -> void:
 
 func short_pass(p_destination: Vector2, force: float) -> void:
 	speed = force + 0.2  # ball moves a bit faster that the force is
+	speed *= Const.SPEED
 	direction = pos.direction_to(p_destination)
 	state = State.PASS
 	under_control = false
@@ -77,6 +78,7 @@ func short_pass(p_destination: Vector2, force: float) -> void:
 
 func shoot(p_destination: Vector2, force: float) -> void:
 	speed = force + 4  # ball moves a bit faster that the force is
+	speed *= Const.SPEED
 	direction = pos.direction_to(p_destination)
 	state = State.SHOOT
 	under_control = false
@@ -84,6 +86,7 @@ func shoot(p_destination: Vector2, force: float) -> void:
 
 func dribble(p_destination: Vector2, force: float) -> void:
 	speed = force + 4  # ball moves a bit faster that the force is
+	speed *= Const.SPEED
 	direction = pos.direction_to(p_destination)
 	state = State.SHOOT
 

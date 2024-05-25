@@ -107,7 +107,7 @@ func set_penalty_area_bounds() -> void:
 
 func move() -> void:
 	if speed > 0:
-		pos += direction * speed
+		pos += direction * speed * Const.SPEED
 
 	if pos.distance_to(destination) < 5 or speed == 0:
 		destination = Vector2.INF

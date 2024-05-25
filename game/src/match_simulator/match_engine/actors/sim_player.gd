@@ -18,6 +18,7 @@ enum State {
 	RECEIVE,
 }
 
+
 const DECELERATION: float = 0.01
 
 var state: State
@@ -34,11 +35,11 @@ var pos: Vector2
 var direction: Vector2
 var destination: Vector2
 var speed: int
-# fisical attributes
+# fiscal attributes
 var stamina: float
 var interception_radius: int  #TODO reduce radius with low stamina
 
-# distances, calculated by actiopn util
+# distances, calculated by action util
 var distance_to_goal: float
 var distance_to_own_goal: float
 var distance_to_ball: float
@@ -52,7 +53,7 @@ func set_up(
 	player_res = p_player_res
 	ball = p_ball
 
-	# inital test values
+	# initial test values
 	destination = Vector2.INF
 	interception_radius = 10
 	speed = 15
@@ -92,7 +93,7 @@ func kick_off(p_pos: Vector2) -> void:
 
 func move() -> void:
 	if state != State.RECEIVE and speed > 0:
-		pos += direction * speed
+		pos += direction * speed * Const.SPEED
 		speed -= DECELERATION
 		stamina -= 0.01
 

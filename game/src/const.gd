@@ -9,7 +9,8 @@ enum Gender { MALE, FEMALE, MIXED }
 
 # match engine
 const HALF_TIME_SECONDS: int = 60 * 20
-const TICKS_PER_SECOND: int = 2
+const TICKS_PER_SECOND: int = 1
+const SPEED: int = 4
 
 const ATTRIBUTES: Dictionary = {
 	"mental":
@@ -45,7 +46,7 @@ const ATTRIBUTES: Dictionary = {
 
 const MAX_PRESTIGE: int = 20
 
-const LINEUP_PLAYERS_AMOUNT = 12
+const LINEUP_PLAYERS_AMOUNT:int = 12
 
 const MONTH_STRINGS: Array = [
 	"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC"
