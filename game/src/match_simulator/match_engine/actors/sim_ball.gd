@@ -16,7 +16,7 @@ var under_control: bool
 var state: State
 
 var pos: Vector2
-# to save last position and be bale to get segment between ticks, for itnerceptions
+# to save last position and be bale to get segment between ticks, for interceptions
 var last_pos: Vector2
 
 var speed: float

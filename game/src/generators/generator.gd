@@ -22,7 +22,7 @@ var min_timestamp: int
 func generate() -> Leagues:
 	var leagues: Leagues = Leagues.new()
 	# create date ranges
-	# starts from current year and substracts min/max years
+	# starts from current year and subtracts min/max years
 	# youngest player can be 15 and oldest 45
 	date = Config.start_date
 	var max_date: Dictionary = date.duplicate()
@@ -33,7 +33,7 @@ func generate() -> Leagues:
 	max_date.year -= 30
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 
-	# initalize names
+	# initialize names
 	for nation: String in Const.Nations:
 		var names_file: FileAccess = FileAccess.open(
 			NAMES_DIR + nation.to_lower() + ".json", FileAccess.READ
@@ -48,6 +48,7 @@ func generate() -> Leagues:
 		leagues_data[nation] = JSON.parse_string(leagues_file.get_as_text())
 		# used for prestige calculation, so that high leagues have better prestige
 		var pyramid_level: int = 1
+
 		for l: Dictionary in leagues_data[nation]:
 			var league: League = League.new()
 			league.name = l.name
@@ -107,7 +108,7 @@ func assign_players_to_team(p_team: Team, p_league: League, prestige: int) -> Te
 			player.league = p_league.name
 			p_team.players.append(player)
 
-			# Config.rng.random lineup assingment
+			# Config.rng.random lineup assignment
 			if position == Player.Position.G and p_team.lineup_player_ids.is_empty():
 				p_team.lineup_player_ids.append(player.id)
 			elif (
@@ -129,7 +130,7 @@ func get_goalkeeper_attributes(age: int, prestige: int, position: Player.Positio
 	# goalkeepers have max potential of 20
 	var max_potential: int = in_bounds(factor + noise())
 
-	# non-goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
+	# non-goalkeepers have max potential of 10, since they could play as goalkeeper in a 4 + 1 field player situation
 	if position != Player.Position.G:
 		max_potential /= 2
 
@@ -153,7 +154,7 @@ func get_physical(age: int, prestige: int, position: Player.Position) -> Physica
 	# non goalkeepers have max potential
 	var max_potential: int = in_bounds(prestige + noise())
 
-	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
+	# goalkeepers have max potential of 10, since they could play as goalkeeper in a 4 + 1 field player situation
 	if position == Player.Position.G:
 		max_potential /= 2
 
@@ -181,7 +182,7 @@ func get_technical(age: int, prestige: int, position: Player.Position) -> Techni
 	# non goalkeepers have max potential
 	var max_potential: int = in_bounds(prestige + noise())
 
-	# goalkeepers have max potential of 10, since they could play as gaolkeeer in a 4 + 1 fieldplayer situation
+	# goalkeepers have max potential of 10, since they could play as goalkeeper in a 4 + 1 field player situation
 	if position == Player.Position.G:
 		max_potential /= 2
 
@@ -225,14 +226,14 @@ func get_mental(age: int, prestige: int) -> Mental:
 
 
 func get_physical_age_factor(age: int) -> int:
-	# for  24 +- noise <  age factor is negativ
+	# for  24 +- noise <  age factor is negative
 	if age < 24 + noise():
 		return Config.rng.randi_range(-5, 3)
 	return Config.rng.randi_range(1, 7)
 
 
 func get_age_factor(age: int) -> int:
-	# for  34 +- noise < age < 18 +- noise age factor is negativ
+	# for  34 +- noise < age < 18 +- noise age factor is negative
 	if age > 34 + noise() or age < 18 + noise():
 		return Config.rng.randi_range(-5, 1)
 	# else age factor is positive
@@ -379,7 +380,7 @@ func create_player(
 
 
 func get_player_prestige(team_prestige: int) -> int:
-	# player presitge is teams prestige +- 5
+	# player prestige is teams prestige +- 5
 	return in_bounds(team_prestige + noise())
 
 
