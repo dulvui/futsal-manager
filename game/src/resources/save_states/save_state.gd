@@ -28,7 +28,7 @@ func _init(
 	p_generation_seed: String = "SuchDefaultSeed",
 	p_generation_state: int = 0,
 	p_generation_gender: Const.Gender = 0,
-	p_current_season: int = 1,
+	p_current_season: int = 0,
 	p_speed_factor: int = 1,
 	p_dashboard_active_content: int = 0,
 	p_id: String = str(int(Time.get_unix_time_from_system())),

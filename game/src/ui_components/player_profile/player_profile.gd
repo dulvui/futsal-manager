@@ -64,8 +64,8 @@ func set_up_info(_player: Player) -> void:
 			#label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 			attributes.get_node(attribute.capitalize()).add_child(label)
 			var value: ColorNumber = DetailNumber.instantiate()
-			value.set_up((player.attributes.get(attribute) as Resource).get(key))
 			attributes.get_node(attribute.capitalize()).add_child(value)
+			value.set_up((player.attributes.get(attribute) as Resource).get(key))
 
 	#history
 	goals.text = str(player.statistics[Config.current_season].goals)
