@@ -4,11 +4,12 @@
 [ext_resource type="Script" path="res://src/ui_components/player_list/table/name_label/name_label.gd" id="2"]
 
 [node name="NameLabel" type="Control"]
-custom_minimum_size = Vector2(252, 36)
+custom_minimum_size = Vector2(252, 24)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 253.0
-offset_bottom = 36.0
+anchor_right = 0.131
+anchor_bottom = 0.022
+offset_right = 0.47998
+offset_bottom = 0.239998
 theme = ExtResource("1")
 script = ExtResource("2")
 
@@ -27,8 +28,8 @@ color = Color(0.980392, 0.207843, 0.207843, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.996
-anchor_bottom = 1.028
-offset_right = 0.0119934
-offset_bottom = -0.00799942
+anchor_bottom = 0.958
+offset_right = 0.00798035
+offset_bottom = 0.00799942
 text = "Player Name"
 text_overrun_behavior = 3

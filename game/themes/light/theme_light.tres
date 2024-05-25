@@ -10,13 +10,12 @@ bg_color = Color(0.819029, 0.922513, 0.982261, 1)
 
 [resource]
 default_font = SubResource("SystemFont_2ye78")
-default_font_size = 24
+default_font_size = 16
 Button/colors/font_color = Color(1, 0.992157, 0.992157, 1)
 Button/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
 Button/colors/font_color_hover = Color(0.94, 0.94, 0.94, 1)
 Button/colors/font_color_pressed = Color(1, 1, 1, 1)
 Button/constants/hseparation = 2
-Button/font_sizes/font_size = 24
 Button/styles/disabled = ExtResource("1_d41hq")
 Button/styles/focus = ExtResource("1_d41hq")
 Button/styles/hover = ExtResource("1_d41hq")
