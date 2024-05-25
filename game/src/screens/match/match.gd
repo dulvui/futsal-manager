@@ -36,7 +36,6 @@ const MAX_COMMENTS: int = 16
 @onready var formation_button: Button = $Main/Content/Buttons/Formation
 @onready var tactics_button: Button = $Main/Content/Buttons/Tactics
 
-
 var last_active_view: Control
 
 var home_team: Team
@@ -53,7 +52,7 @@ var away_stats: MatchStatistics
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	
+
 	matchz = Config.calendar().get_next_match()
 
 	for team: Team in Config.leagues.get_active().teams:
@@ -66,7 +65,7 @@ func _ready() -> void:
 	away_name.text = matchz.away.name
 
 	formation.set_up(true)
-	match_simulator.set_up(home_team,away_team, matchz.id)
+	match_simulator.set_up(home_team, away_team, matchz.id)
 
 	last_active_view = match_simulator
 
@@ -75,7 +74,7 @@ func _ready() -> void:
 	away_color.color = away_team.get_away_color(home_color.color)
 
 	speed_factor_label.text = str(Config.speed_factor) + " X"
-	
+
 	# to easier access stats
 	home_stats = match_simulator.visual_match.match_engine.home_team.stats
 	away_stats = match_simulator.visual_match.match_engine.away_team.stats
@@ -83,14 +82,14 @@ func _ready() -> void:
 
 func _on_match_simulator_update() -> void:
 	stats.update_stats(home_stats, away_stats)
-	time_label.text = "%02d:%02d"%[int(match_simulator.time)/60,int(match_simulator.time)%60]
+	time_label.text = "%02d:%02d" % [int(match_simulator.time) / 60, int(match_simulator.time) % 60]
 
 	time_bar.value = match_simulator.time
 	possess_bar.value = home_stats.possession
 
 	home_possession.text = str(home_stats.possession) + " %"
 	away_possession.text = str(away_stats.possession) + " %"
-	result_label.text = "%d - %d"%[home_stats.goals,away_stats.goals]
+	result_label.text = "%d - %d" % [home_stats.goals, away_stats.goals]
 
 
 func match_end() -> void:
@@ -100,10 +99,12 @@ func match_end() -> void:
 	pause_button.hide()
 	dashboard_button.show()
 	match_simulator.match_finished()
-	Config.leagues.get_active().table.add_result(home_team.id,home_stats.goals,away_team.id,away_stats.goals)
+	Config.leagues.get_active().table.add_result(
+		home_team.id, home_stats.goals, away_team.id, away_stats.goals
+	)
 
 	#assign result
-	matchz.set_result(home_stats.goals,  away_stats.goals)
+	matchz.set_result(home_stats.goals, away_stats.goals)
 	# calc other matches
 	Config.leagues.random_results()
 	Config.save_all_data()

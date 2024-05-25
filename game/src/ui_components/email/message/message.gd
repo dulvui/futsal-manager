@@ -5,17 +5,18 @@
 class_name VisualEmailMessage
 extends Control
 
-signal email_action(message:EmailMessage)
+signal email_action(message: EmailMessage)
 
 @onready var subject: Label = $MarginContainer/VBoxContainer/TopBar/SubjectText
 @onready var sender: Label = $MarginContainer/VBoxContainer/Details/Sender
 @onready var date: Label = $MarginContainer/VBoxContainer/Details/Date
-@onready var text:RichTextLabel = $MarginContainer/VBoxContainer/Message
+@onready var text: RichTextLabel = $MarginContainer/VBoxContainer/Message
 @onready var action_button: Button = $MarginContainer/VBoxContainer/BottomBar/Action
 
-var message:EmailMessage
+var message: EmailMessage
 
-func show_message(p_message:EmailMessage) -> void:
+
+func show_message(p_message: EmailMessage) -> void:
 	message = p_message
 	subject.text = message.subject
 	sender.text = message.sender

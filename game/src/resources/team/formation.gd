@@ -5,7 +5,7 @@
 class_name Formation
 extends Resource
 
-# first value is goalkeeper, seoncd defense etc...
+# first value is goalkeeper, second defense etc...
 enum Variations {
 	F1202,
 	F1121,
@@ -14,11 +14,6 @@ enum Variations {
 	F1103,
 	F1301,
 	F1400,
-	# TODO add power play
-	#F0023,
-	#F0032,
-	#F0014,
-	#F0113
 }
 
 @export var variation: int
@@ -42,6 +37,7 @@ func _init(
 	tactic_defense = p_tactic_defense
 	tactic_offense = p_tactic_offense
 
+
 func set_variation(p_variation:Variations) -> void:
 	variation = p_variation
 	var string_values:PackedStringArray = (String)(Variations.keys()[variation]).split()
@@ -57,25 +53,25 @@ func set_variation(p_variation:Variations) -> void:
 	defense = int_values[1]
 	center = int_values[2]
 	attack = int_values[3]
-	
+
+
 func get_start_pos(field_size:Vector2, index: int, left_side: bool) -> Vector2:
 	var pos:Vector2 = Vector2.ZERO
 	
 	if index < defense:
 		pos = Vector2(field_size.x / 4, field_size.y / defense * index)
-		# centre position and move slightli towards own half (field_size.x / 20)
+		# centre position and move slightly towards own half (field_size.x / 20)
 		pos += Vector2(-field_size.x / 20, field_size.y / defense / 2)
 	elif index < defense + center:
 		index -= defense
 		pos = Vector2(field_size.x / 3, field_size.y / center * index)
-		# centre position and move slightli towards own half (field_size.x / 20)
+		# centre position and move slightly towards own half (field_size.x / 20)
 		pos += Vector2(-field_size.x / 20, field_size.y / center / 2)
 	else:
 		index -= defense + center
 		pos = Vector2(field_size.x / 2, field_size.y / attack * index)
-		# centre position and move slightli towards own half (field_size.x / 20)
+		# centre position and move slightly towards own half (field_size.x / 20)
 		pos += Vector2(-field_size.x / 20, field_size.y / attack / 2)
-	
 
 	# invert, if right side
 	if not left_side:

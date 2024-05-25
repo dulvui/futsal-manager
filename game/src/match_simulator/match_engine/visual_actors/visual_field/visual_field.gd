@@ -5,9 +5,10 @@
 class_name VisualField
 extends Node2D
 
-@onready var lines:Node2D = $Lines
+@onready var lines: Node2D = $Lines
 
-var field:SimField
+var field: SimField
+
 
 func _draw() -> void:
 	# TODO use draw_rect
@@ -16,40 +17,69 @@ func _draw() -> void:
 	# center circle
 	draw_circle(field.center, field.CENTER_CIRCLE_RADIUS + field.LINE_WIDTH, Color.WHITE)
 	draw_circle(field.center, field.CENTER_CIRCLE_RADIUS, Color.ORANGE)
-	
+
 	# outer lines
-	draw_line(Vector2(field.line_left, field.line_top), Vector2(field.line_right,  field.line_top), Color.WHITE, field.LINE_WIDTH)
-	draw_line(Vector2(field.line_right,  field.line_top), Vector2(field.line_right,  field.line_bottom), Color.WHITE, field.LINE_WIDTH)
-	draw_line(Vector2(field.line_right,  field.line_bottom), Vector2(field.line_left,  field.line_bottom), Color.WHITE, field.LINE_WIDTH)
-	draw_line(Vector2(field.line_left, field.line_top), Vector2(field.line_left,  field.line_bottom), Color.WHITE, field.LINE_WIDTH)
-	
+	draw_line(
+		Vector2(field.line_left, field.line_top),
+		Vector2(field.line_right, field.line_top),
+		Color.WHITE,
+		field.LINE_WIDTH
+	)
+	draw_line(
+		Vector2(field.line_right, field.line_top),
+		Vector2(field.line_right, field.line_bottom),
+		Color.WHITE,
+		field.LINE_WIDTH
+	)
+	draw_line(
+		Vector2(field.line_right, field.line_bottom),
+		Vector2(field.line_left, field.line_bottom),
+		Color.WHITE,
+		field.LINE_WIDTH
+	)
+	draw_line(
+		Vector2(field.line_left, field.line_top),
+		Vector2(field.line_left, field.line_bottom),
+		Color.WHITE,
+		field.LINE_WIDTH
+	)
+
 	# goals
-	draw_dashed_line(field.goal_post_top_left, field.goal_post_bottom_left, Color.FIREBRICK, field.LINE_WIDTH * 1.5, field.LINE_WIDTH * 1.5)
-	draw_dashed_line(field.goal_post_top_right, field.goal_post_bottom_right, Color.FIREBRICK, field.LINE_WIDTH * 1.5, field.LINE_WIDTH * 1.5)
-	
+	draw_dashed_line(
+		field.goal_post_top_left,
+		field.goal_post_bottom_left,
+		Color.FIREBRICK,
+		field.LINE_WIDTH * 1.5,
+		field.LINE_WIDTH * 1.5
+	)
+	draw_dashed_line(
+		field.goal_post_top_right,
+		field.goal_post_bottom_right,
+		Color.FIREBRICK,
+		field.LINE_WIDTH * 1.5,
+		field.LINE_WIDTH * 1.5
+	)
 
 
-func set_up(p_field:SimField) -> void:
+func set_up(p_field: SimField) -> void:
 	field = p_field
-	
+
 	# penalty area lines
-	var penalty_area_line_left:Line2D = Line2D.new()
+	var penalty_area_line_left: Line2D = Line2D.new()
 	penalty_area_line_left.width = field.LINE_WIDTH
-	for point:Vector2 in field.penalty_area_left:
+	for point: Vector2 in field.penalty_area_left:
 		penalty_area_line_left.add_point(point)
 	lines.add_child(penalty_area_line_left)
-	
-	var penalty_area_line_right:Line2D = Line2D.new()
+
+	var penalty_area_line_right: Line2D = Line2D.new()
 	penalty_area_line_right.width = field.LINE_WIDTH
-	for point:Vector2 in field.penalty_area_right:
+	for point: Vector2 in field.penalty_area_right:
 		penalty_area_line_right.add_point(point)
 	lines.add_child(penalty_area_line_right)
 
-	
 	# middle line
-	var middle_line:Line2D = Line2D.new()
+	var middle_line: Line2D = Line2D.new()
 	middle_line.width = field.LINE_WIDTH
 	middle_line.add_point(Vector2(field.center.x, field.line_top))
-	middle_line.add_point(Vector2(field.center.x,  field.line_bottom))
+	middle_line.add_point(Vector2(field.center.x, field.line_bottom))
 	lines.add_child(middle_line)
-	

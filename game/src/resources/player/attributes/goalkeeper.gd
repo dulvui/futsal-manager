@@ -12,6 +12,7 @@ extends Resource
 @export var diving: int
 @export var speed: int
 
+
 func _init(
 	p_reflexes: int = 0,
 	p_positioning: int = 0,
@@ -27,6 +28,7 @@ func _init(
 	diving = p_diving
 	speed = p_speed
 
+
 func sum() -> int:
 	var value: int = 0
 	value += reflexes
@@ -36,6 +38,7 @@ func sum() -> int:
 	value += diving
 	value += speed
 	return value
+
 
 func average() -> int:
 	return sum() / 6

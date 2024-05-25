@@ -6,15 +6,16 @@ extends Control
 
 signal language_change
 
-@onready var en:TextureButton = $HBoxContainer/English
-@onready var pt:TextureButton = $HBoxContainer/Portuguese
-@onready var it:TextureButton = $HBoxContainer/Italian
-@onready var es:TextureButton = $HBoxContainer/Spanish
-@onready var de:TextureButton = $HBoxContainer/German
+@onready var en: TextureButton = $HBoxContainer/English
+@onready var pt: TextureButton = $HBoxContainer/Portuguese
+@onready var it: TextureButton = $HBoxContainer/Italian
+@onready var es: TextureButton = $HBoxContainer/Spanish
+@onready var de: TextureButton = $HBoxContainer/German
 
 
 func _ready() -> void:
 	activate_lang_button()
+
 
 func activate_lang_button() -> void:
 	if Config.language:
@@ -23,7 +24,7 @@ func activate_lang_button() -> void:
 		es.modulate.a = 0.6
 		de.modulate.a = 0.6
 		it.modulate.a = 0.6
-		
+
 		match Config.language:
 			"en":
 				en.modulate.a = 1
@@ -65,4 +66,3 @@ func _on_spanish_pressed() -> void:
 	Config.set_lang("es")
 	activate_lang_button()
 	language_change.emit()
-

@@ -4,9 +4,9 @@
 
 extends Control
 
-enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO } 
+enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO }
 
-const DASHBOARD_DAY_DELAY:float = 0.5
+const DASHBOARD_DAY_DELAY: float = 0.5
 
 @onready var team: Team = Config.team
 
@@ -15,7 +15,7 @@ const DASHBOARD_DAY_DELAY:float = 0.5
 @onready var next_match_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/NextMatch
 @onready var email_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/Email
 
-# content views 
+# content views
 @onready var email: VisualEmail = $MainContainer/VBoxContainer/MainView/Content/Email
 @onready var table: VisualTable = $MainContainer/VBoxContainer/MainView/Content/Table
 @onready var visual_calendar: VisualCalendar = $MainContainer/VBoxContainer/MainView/Content/Calendar
@@ -29,7 +29,8 @@ const DASHBOARD_DAY_DELAY:float = 0.5
 
 # full screen views
 @onready var formation: VisualFormation = $MainContainer/VBoxContainer/MainView/Content/Formation
-@onready var all_players_list: VisualPlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
+@onready
+var all_players_list: VisualPlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 
 # pop ups
 @onready var player_offer: PlayerOffer = $PlayerOffer
@@ -38,16 +39,17 @@ const DASHBOARD_DAY_DELAY:float = 0.5
 var match_ready: bool = false
 var next_season: bool = false
 
+
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	
+
 	manager_label.text = Config.manager.get_full_name()
 	team_label.text = Config.team.name
 	date_label.text = Config.calendar().format_date()
-	
+
 	all_players_list.set_up(false, true)
 	formation.set_up(false)
-	
+
 	if Config.calendar().is_match_day():
 		continue_button.text = "START_MATCH"
 		match_ready = true
@@ -59,14 +61,14 @@ func _ready() -> void:
 	if Config.leagues.get_active().calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
-		
+
 	_show_active_view()
 
 
-func _process(_delta:float) -> void:
+func _process(_delta: float) -> void:
 	var email_count: int = EmailUtil.count_unread_messages()
 	if email_count > 0:
-		email_button.text = "[" + str(EmailUtil.count_unread_messages())  + "] " + tr("EMAIL") 
+		email_button.text = "[" + str(EmailUtil.count_unread_messages()) + "] " + tr("EMAIL")
 	else:
 		email_button.text = tr("EMAIL")
 	budget_label.text = str(team["budget"]) + "" + CurrencyUtil.get_sign()
@@ -116,11 +118,11 @@ func _hide_all() -> void:
 	info.hide()
 
 
-func _show_active_view(active_view: int=-1) -> void:
+func _show_active_view(active_view: int = -1) -> void:
 	_hide_all()
 	if active_view > -1:
 		Config.dashboard_active_content = active_view
-	
+
 	match Config.dashboard_active_content:
 		ContentViews.EMAIL:
 			email.show()
@@ -147,14 +149,14 @@ func _on_Continue_pressed() -> void:
 func _on_next_match_pressed() -> void:
 	next_match_button.disabled = true
 	continue_button.disabled = true
-	
+
 	while not match_ready:
 		_next_day()
-		var timer:Timer = Timer.new()
+		var timer: Timer = Timer.new()
 		add_child(timer)
 		timer.start(DASHBOARD_DAY_DELAY)
 		await timer.timeout
-		
+
 	next_match_button.disabled = false
 	continue_button.disabled = false
 
@@ -165,9 +167,9 @@ func _next_day() -> void:
 		return
 
 	# next day in calendar
-	for league:League in Config.leagues.list:
+	for league: League in Config.leagues.list:
 		league.calendar.next_day()
-	
+
 	# next season check
 	if next_season:
 		Config.next_season()
@@ -176,12 +178,12 @@ func _next_day() -> void:
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		return
-	
+
 	# general setup
 	TransferUtil.update_day()
 	email.update_messages()
 	date_label.text = Config.calendar().format_date()
-	
+
 	# config buttons
 	if Config.calendar().is_match_day():
 		continue_button.text = "START_MATCH"
@@ -191,7 +193,7 @@ func _next_day() -> void:
 	else:
 		#simulate all other matches
 		Config.leagues.random_results()
-		
+
 	visual_calendar.set_up()
 
 
@@ -218,4 +220,3 @@ func _on_ContractOffer_cancel() -> void:
 
 func _on_ContractOffer_confirm() -> void:
 	contract_offer.hide()
-

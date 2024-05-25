@@ -31,29 +31,28 @@ extends MarginContainer
 @onready var away_red_cards: Label = $VBoxContainer/AwayRedCards
 
 
-func update_stats(home_stats:MatchStatistics, away_stats:MatchStatistics) -> void:
-	home_possession.text = "%d "%home_stats.possession + "%"
-	away_possession.text = "%d "%away_stats.possession + "%"
-	home_shots.text = "%d "%home_stats.passes
-	away_shots.text = "%d "%away_stats.passes
-	home_shots_on_target.text = "%d "%home_stats.passes_success
-	away_shots_on_target.text = "%d "%away_stats.passes_success
-	home_fouls.text = "%d "%home_stats.shots
-	away_fouls.text = "%d "%away_stats.shots
-	home_free_kicks.text = "%d "%away_stats.shots_on_target
-	away_free_kicks.text = "%d "%home_stats.shots_on_target
-	home_penalties.text = "%d "%home_stats.corners
-	away_penalties.text = "%d "%away_stats.corners
-	home_throw_in.text = "%d "%home_stats.kick_ins
-	away_throw_in.text = "%d "%away_stats.kick_ins
-	home_corners.text = "%d "%home_stats.fouls
-	away_corners.text = "%d "%away_stats.fouls
-	home_pass.text = "%d "%home_stats.free_kicks
-	away_pass.text = "%d "%away_stats.free_kicks
-	home_pass_success.text = "%d "%home_stats.penalties
-	away_pass_success.text = "%d "%away_stats.penalties
-	home_yellow_cards.text = "%d "%home_stats.yellow_cards
-	away_yellow_cards.text = "%d "%away_stats.yellow_cards
-	home_red_cards.text = "%d "%home_stats.red_cards
-	away_red_cards.text = "%d "%away_stats.red_cards
-	
+func update_stats(home_stats: MatchStatistics, away_stats: MatchStatistics) -> void:
+	home_possession.text = "%d " % home_stats.possession + "%"
+	away_possession.text = "%d " % away_stats.possession + "%"
+	home_shots.text = "%d " % home_stats.passes
+	away_shots.text = "%d " % away_stats.passes
+	home_shots_on_target.text = "%d " % home_stats.passes_success
+	away_shots_on_target.text = "%d " % away_stats.passes_success
+	home_fouls.text = "%d " % home_stats.shots
+	away_fouls.text = "%d " % away_stats.shots
+	home_free_kicks.text = "%d " % away_stats.shots_on_target
+	away_free_kicks.text = "%d " % home_stats.shots_on_target
+	home_penalties.text = "%d " % home_stats.corners
+	away_penalties.text = "%d " % away_stats.corners
+	home_throw_in.text = "%d " % home_stats.kick_ins
+	away_throw_in.text = "%d " % away_stats.kick_ins
+	home_corners.text = "%d " % home_stats.fouls
+	away_corners.text = "%d " % away_stats.fouls
+	home_pass.text = "%d " % home_stats.free_kicks
+	away_pass.text = "%d " % away_stats.free_kicks
+	home_pass_success.text = "%d " % home_stats.penalties
+	away_pass_success.text = "%d " % away_stats.penalties
+	home_yellow_cards.text = "%d " % home_stats.yellow_cards
+	away_yellow_cards.text = "%d " % away_stats.yellow_cards
+	home_red_cards.text = "%d " % home_stats.red_cards
+	away_red_cards.text = "%d " % away_stats.red_cards

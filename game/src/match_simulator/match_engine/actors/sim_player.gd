@@ -99,10 +99,9 @@ func move() -> void:
 	if pos.distance_to(destination) < 20 or speed == 0:
 		destination = Vector2.INF
 		stop()
-	
+
 	if state == State.BALL and speed > 0:
 		ball.dribble(destination, speed)
-		
 
 
 func is_touching_ball() -> bool:

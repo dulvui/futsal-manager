@@ -15,6 +15,7 @@ extends Resource
 @export var offensive_movement: int
 @export var marking: int
 
+
 func _init(
 	p_aggression: int = 0,
 	p_anticipation: int = 0,
@@ -35,6 +36,7 @@ func _init(
 	work_rate = p_work_rate
 	offensive_movement = p_offensive_movement
 	marking = p_marking
+
 
 func average() -> int:
 	var value: int = 0

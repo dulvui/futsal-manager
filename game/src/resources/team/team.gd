@@ -13,8 +13,8 @@ extends Resource
 @export var budget: int
 @export var salary_budget: int
 @export var players: Array[Player]
-@export var stadium:Stadium
-@export var board_requests:BoardRequests
+@export var stadium: Stadium
+@export var board_requests: BoardRequests
 # shirt colors
 # 0: home color, 1: away, 2 third color
 @export var colors: Array[Color]
@@ -66,7 +66,7 @@ func get_non_lineup_players() -> Array[Player]:
 	return non_lineup
 
 
-# get lineup players with goalkepper
+# get lineup players with goalkeeper
 func get_lineup_players() -> Array[Player]:
 	var lineup: Array[Player] = []
 	for player in players:
@@ -75,7 +75,7 @@ func get_lineup_players() -> Array[Player]:
 	return lineup
 
 
-# get lineup players without goalkepper
+# get lineup players without goalkeeper
 func get_field_players() -> Array[Player]:
 	var field_players: Array[Player] = []
 	for player in players:
@@ -101,7 +101,7 @@ func get_lineup_player(index: int) -> Player:
 
 func is_lineup_player(player: Player) -> bool:
 	var index: int = lineup_player_ids.find(player.id)
-	return index >= 0 and index <= 4 
+	return index >= 0 and index <= 4
 
 
 func is_sub_player(player: Player) -> bool:
@@ -123,7 +123,7 @@ func get_home_color() -> Color:
 	return colors[0]
 
 
-func get_away_color(versus_color:Color) -> Color:
+func get_away_color(versus_color: Color) -> Color:
 	if colors[1] != versus_color:
 		return colors[1]
 	if colors[2] != versus_color:
@@ -141,7 +141,7 @@ func get_prestige() -> int:
 func get_prestige_stars() -> String:
 	var relation: int = Const.MAX_PRESTIGE / 4
 	var star_factor: int = Const.MAX_PRESTIGE / relation
-	var stars: int = max(1,get_prestige() / star_factor)
-	var spaces: int = 5 - stars 
+	var stars: int = max(1, get_prestige() / star_factor)
+	var spaces: int = 5 - stars
 	# creates right padding ex: "***  "
 	return "*".repeat(stars) + "  ".repeat(spaces)

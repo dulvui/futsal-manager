@@ -90,7 +90,7 @@ func defend(other_players: Array[SimPlayer]) -> void:
 		if other_players[i].pos.y > field.center.y:
 			deviation.y -= factor * 2
 		players[i].set_destination(other_players[i].pos + deviation)
-	
+
 	# attack ball, if not under control
 	# TODO if pressing tactic, always go to ball
 	if not ball.under_control:

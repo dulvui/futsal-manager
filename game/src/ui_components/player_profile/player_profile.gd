@@ -28,29 +28,35 @@ var player: Player
 
 func set_up_info(_player: Player) -> void:
 	player = _player
-	
+
 	player_name.text = player.name + " " + player.surname
 	pos.text = str(player.position)
-	age.text = str(player.birth_date.day) + "/" + str(player.birth_date.month) + "/" + str(player.birth_date.year)
+	age.text = (
+		str(player.birth_date.day)
+		+ "/"
+		+ str(player.birth_date.month)
+		+ "/"
+		+ str(player.birth_date.year)
+	)
 	foot.text = tr(Const.Nations.keys()[player.nation])
 	nationality.text = str(player.team)
 	team.text = str(player.foot)
 	nr.text = str(player.nr)
 	attributes_average.text = str(player.get_attributes_average())
 	prestige.text = str(player.prestige)
-	
+
 	# attributes
 	for attribute: String in Const.ATTRIBUTES.keys():
 		# first remove existing values
-		for child:Node in attributes.get_node(attribute.capitalize()).get_children():
+		for child: Node in attributes.get_node(attribute.capitalize()).get_children():
 			child.queue_free()
-		
+
 		# add title and a empty label
 		var label_title: Label = Label.new()
 		label_title.text = tr(attribute.to_upper())
 		attributes.get_node(attribute.capitalize()).add_child(label_title)
 		attributes.get_node(attribute.capitalize()).add_child(Label.new())
-		
+
 		for key: String in Const.ATTRIBUTES[attribute]:
 			var label: Label = Label.new()
 			label.text = tr(key.to_upper())
@@ -60,15 +66,16 @@ func set_up_info(_player: Player) -> void:
 			var value: ColorNumber = DetailNumber.instantiate()
 			value.set_up((player.attributes.get(attribute) as Resource).get(key))
 			attributes.get_node(attribute.capitalize()).add_child(value)
-		
+
 	#history
 	goals.text = str(player.statistics[Config.current_season].goals)
 
 	show()
 
+
 func _on_select_pressed() -> void:
 	select.emit(player)
 
+
 func _on_close_pressed() -> void:
 	hide()
-

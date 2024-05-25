@@ -9,9 +9,10 @@ extends Control
 @onready var away: Label = $HBoxContainer/Away
 @onready var result: Label = $HBoxContainer/Result
 
-func set_up(matchz:Match) -> void:
+
+func set_up(matchz: Match) -> void:
 	home.text = matchz.home.name
 	away.text = matchz.away.name
-	
+
 	if matchz.over:
 		result.text = matchz.get_result()

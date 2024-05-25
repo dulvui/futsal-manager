@@ -23,19 +23,19 @@ var save_state: SaveState
 
 func set_up(p_save_state: SaveState) -> void:
 	save_state = p_save_state
-	
+
 	if save_state == null:
 		hide()
 		return
-	
+
 	theme = ThemeUtil.get_active_theme()
 	team.text = save_state.meta_team_name
 	manager.text = save_state.meta_manager_name
 	placement.text = save_state.meta_team_position
 	create_date.text = Config.calendar().format_date(save_state.meta_create_date)
 	game_date.text = Config.calendar().format_date(save_state.meta_game_date)
-	last_save_date.text  = Config.calendar().format_date(save_state.meta_last_save)
-	
+	last_save_date.text = Config.calendar().format_date(save_state.meta_last_save)
+
 	delete_button.visible = not hide_buttons
 	load_button.visible = not hide_buttons
 
@@ -58,4 +58,6 @@ func _on_delete_dialog_confirmed() -> void:
 	if Config.save_states.list.size() == 0:
 		get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 	else:
-		get_tree().change_scene_to_file("res://src/screens/save_states_screen/save_states_screen.tscn")
+		get_tree().change_scene_to_file(
+			"res://src/screens/save_states_screen/save_states_screen.tscn"
+		)

@@ -18,6 +18,7 @@ extends Resource
 @export var dribbling: int
 @export var blocking: int
 
+
 func _init(
 	p_crossing: int = 0,
 	p_passing: int = 0,
@@ -44,6 +45,7 @@ func _init(
 	finishing = p_finishing
 	dribbling = p_dribbling
 	blocking = p_blocking
+
 
 func average() -> int:
 	var value: int = 0

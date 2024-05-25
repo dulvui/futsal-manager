@@ -9,6 +9,7 @@ extends Resource
 @export var capacity: int
 @export var year_built: int
 
+
 func _init(p_name: String = "", p_capacity: int = 0, p_year_built: int = 0) -> void:
 	name = p_name
 	capacity = p_capacity

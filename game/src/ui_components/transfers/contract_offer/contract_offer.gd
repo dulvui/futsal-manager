@@ -26,17 +26,20 @@ var transfer: Transfer
 
 func _ready() -> void:
 	team = Config.team
-	
+
+
 func set_up(p_transfer: Transfer) -> void:
 	transfer = p_transfer
 	player = transfer.player
-	
+
 	info_label.text = "Offer a contract to " + player.get_full_name()
 
+
 func _on_IncomeMore_pressed() -> void:
-	if income  < team.salary_budget:
+	if income < team.salary_budget:
 		income += 1000
 	income_label.text = str(income)
+
 
 func _on_IncomeLess_pressed() -> void:
 	if income > 1000:
@@ -69,7 +72,7 @@ func _on_BuyClauseMore_pressed() -> void:
 
 
 func _on_Confirm_pressed() -> void:
-	# add contract to pendng contracts 
+	# add contract to pendng contracts
 
 	var contract: Contract = Contract.new()
 	contract.buy_clause = buy_clause
@@ -83,5 +86,3 @@ func _on_Confirm_pressed() -> void:
 
 func _on_Cancel_pressed() -> void:
 	emit_signal("cancel")
-
-

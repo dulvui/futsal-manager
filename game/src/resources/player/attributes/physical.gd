@@ -12,6 +12,7 @@ extends Resource
 @export var agility: int
 @export var jump: int
 
+
 func _init(
 	p_pace: int = 0,
 	p_acceleration: int = 0,
@@ -26,7 +27,8 @@ func _init(
 	strength = p_strength
 	agility = p_agility
 	jump = p_jump
-	
+
+
 func average() -> int:
 	var value: int = 0
 	value += pace

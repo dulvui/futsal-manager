@@ -14,13 +14,12 @@ enum Types {
 }
 
 @export var target: int
-@export var type:Types
+@export var type: Types
+
 
 func _init(
 	p_target: int = 0,
-	p_type:Types = Types.POSITION,
+	p_type: Types = Types.POSITION,
 ) -> void:
 	target = p_target
 	type = p_type
-
-
