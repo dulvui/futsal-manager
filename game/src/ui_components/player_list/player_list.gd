@@ -93,7 +93,7 @@ func set_up_players(
 		headers.append(attribute)
 	table.set_up(headers, INFO_TYPES[active_info_type], all_players, active_team, lineup_colors)
 
-	# filter after setup causes grafical glitch
+	# filter after setup causes graphical glitch
 	#_filter_table()
 
 
@@ -129,7 +129,7 @@ func _on_league_select_item_selected(index: int) -> void:
 	team_select.clear()
 	team_select.add_item("NO_TEAM")
 
-	# adjust team picker accoring to selected league
+	# adjust team picker according to selected league
 	for league: League in Config.leagues.list:
 		if active_filters["league"] == "" or active_filters["league"] == league.name:
 			for team: Team in league.teams:
@@ -188,3 +188,5 @@ func _on_table_info_player(player: Player) -> void:
 
 func _on_player_profile_select(player: Player) -> void:
 	select_player.emit(player)
+
+
