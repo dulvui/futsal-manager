@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/ui_components/email/email.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://dfs434t5wtt6x" path="res://src/ui_components/email/list/message_list.tscn" id="3_5tb6d"]
-[ext_resource type="PackedScene" uid="uid://c3l6aqkrmtjg2" path="res://src/ui_components/email/message/message.tscn" id="3_diog3"]
+[ext_resource type="PackedScene" uid="uid://c3l6aqkrmtjg2" path="res://src/ui_components/email/visual_message/visual_message.tscn" id="3_diog3"]
 
 [node name="Email" type="Control"]
 layout_mode = 3
