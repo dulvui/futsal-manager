@@ -3,20 +3,20 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name SaveStateEntry
-extends Control
+extends HBoxContainer
 
 @export var hide_buttons: bool = false
 
 @onready var delete_dialog: ConfirmationDialog = $DeleteDialog
 
-@onready var team: Label = $HBoxContainer/Details/Team
-@onready var create_date: Label = $HBoxContainer/Dates/CreateDate
-@onready var manager: Label = $HBoxContainer/Details/Manager
-@onready var placement: Label = $HBoxContainer/Details/Placement
-@onready var game_date: Label = $HBoxContainer/Dates/GameDate
-@onready var last_save_date: Label = $HBoxContainer/Dates/LastSaveDate
-@onready var delete_button: Button = $HBoxContainer/Delete
-@onready var load_button: Button = $HBoxContainer/Load
+@onready var team: Label = $Details/Team
+@onready var create_date: Label = $Dates/CreateDate
+@onready var manager: Label = $Details/Manager
+@onready var placement: Label = $Details/Placement
+@onready var game_date: Label = $Dates/GameDate
+@onready var last_save_date: Label = $Dates/LastSaveDate
+@onready var delete_button: Button = $Delete
+@onready var load_button: Button = $Load
 
 var save_state: SaveState
 

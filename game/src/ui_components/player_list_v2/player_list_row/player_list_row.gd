@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name PlayerRow
+class_name PlayerListRow
 extends Control
 
 signal info
@@ -49,7 +49,7 @@ func set_up(
 			):
 				button.disabled = true
 				button.hide()
-				name_label.text = player.surname
+				name_label.text = player.get_full_name()
 
 
 func _on_button_button_down() -> void:
