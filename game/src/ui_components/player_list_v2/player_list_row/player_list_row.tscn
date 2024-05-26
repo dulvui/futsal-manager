@@ -1,53 +1,95 @@
 [gd_scene load_steps=3 format=3 uid="uid://dismanb8n0kd"]
 
-[ext_resource type="Script" path="res://src/ui_components/player_list/player_row/player_row.gd" id="1_r8vjs"]
+[ext_resource type="Script" path="res://src/ui_components/player_list_v2/player_list_row/player_list_row.gd" id="1_fx1iw"]
 [ext_resource type="PackedScene" uid="uid://b3y6tq2i5pg3b" path="res://src/ui_components/color_number/color_number.tscn" id="2_m1dir"]
 
-[node name="PlayerListRow" type="Control"]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 3
-anchor_right = 1.0
-anchor_bottom = 0.022
-offset_bottom = 0.239998
+[node name="PlayerListRow" type="HBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.5
+offset_top = -20.0
+offset_right = 244.5
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_r8vjs")
+script = ExtResource("1_fx1iw")
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PositionLabel" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(62, 34)
+[node name="PositionLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "P"
 horizontal_alignment = 1
 
-[node name="NameLabel" type="Label" parent="HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="."]
 layout_mode = 2
 
-[node name="AttributesAverage" parent="HBoxContainer" instance=ExtResource("2_m1dir")]
+[node name="NameLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Dalvai"
+text_overrun_behavior = 3
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="AttributesAverage" parent="." instance=ExtResource("2_m1dir")]
 custom_minimum_size = Vector2(70, 40)
 layout_mode = 2
 size_flags_horizontal = 1
 
-[node name="Attributes" type="HBoxContainer" parent="HBoxContainer"]
+[node name="VSeparator4" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="Attributes" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="ColorNumber" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber2" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber3" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber4" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber5" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber6" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber7" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber8" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber9" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber10" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber11" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="ColorNumber12" parent="Attributes" instance=ExtResource("2_m1dir")]
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="."]
+layout_mode = 2
+
 [node name="Button" type="Button" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+text = ">>"
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

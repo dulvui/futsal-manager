@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://mvca6wjq0pv6"]
+[gd_scene load_steps=4 format=3 uid="uid://mvca6wjq0pv6"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_pb4bf"]
-[ext_resource type="Script" path="res://src/ui_components/player_list/player_list.gd" id="2_quq3j"]
+[ext_resource type="Script" path="res://src/ui_components/player_list_v2/player_list.gd" id="2_ajejk"]
 [ext_resource type="PackedScene" uid="uid://dismanb8n0kd" path="res://src/ui_components/player_list_v2/player_list_row/player_list_row.tscn" id="3_8jtpb"]
-[ext_resource type="PackedScene" uid="uid://dtvkd1ks3xiqc" path="res://src/ui_components/player_profile/player_profile.tscn" id="4_xesn4"]
 
-[node name="PlayerList" type="Control"]
-layout_mode = 3
+[node name="PlayerList" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,129 +13,136 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_pb4bf")
-script = ExtResource("2_quq3j")
+script = ExtResource("2_ajejk")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Filters" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="NameSearch" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="NameSearch" type="LineEdit" parent="Filters"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 placeholder_text = "NAME"
 caret_blink = true
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Filters"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="InfoSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="InfoSelect" type="OptionButton" parent="Filters"]
 layout_mode = 2
 
-[node name="LeagueSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="LeagueSelect" type="OptionButton" parent="Filters"]
 layout_mode = 2
 
-[node name="TeamSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="TeamSelect" type="OptionButton" parent="Filters"]
 layout_mode = 2
 
-[node name="PositionSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="PositionSelect" type="OptionButton" parent="Filters"]
 layout_mode = 2
 
-[node name="Players" type="VBoxContainer" parent="VBoxContainer"]
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="Header"]
+layout_mode = 2
+text = "TODO HEADER"
+
+[node name="PlayerRows" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="PlayerListRow" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow2" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow2" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow3" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow3" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow4" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow4" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow5" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow5" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow6" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow6" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow7" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow7" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow8" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow8" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow9" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow9" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow10" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow10" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow11" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow11" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow12" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow12" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow13" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow13" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow14" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow14" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow15" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow15" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow16" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow16" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow17" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow17" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow18" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow18" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow19" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow19" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PlayerListRow20" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
-[node name="PlayerListRow20" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="Footer" type="HBoxContainer" parent="."]
 layout_mode = 2
+alignment = 1
 
-[node name="PlayerListRow21" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="Prev" type="Button" parent="Footer"]
 layout_mode = 2
+text = "<"
 
-[node name="PlayerListRow22" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="Prev2" type="Button" parent="Footer"]
 layout_mode = 2
+text = "<<"
 
-[node name="PlayerListRow23" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="PageIndicator" type="Label" parent="Footer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+text = "1 / 5"
+horizontal_alignment = 1
 
-[node name="PlayerListRow24" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="Next2" type="Button" parent="Footer"]
 layout_mode = 2
+text = ">>"
 
-[node name="PlayerListRow25" parent="VBoxContainer/Players" instance=ExtResource("3_8jtpb")]
+[node name="Next" type="Button" parent="Footer"]
 layout_mode = 2
+text = ">"
 
-[node name="PlayerProfile" parent="." instance=ExtResource("4_xesn4")]
-visible = false
-layout_mode = 1
-
-[connection signal="text_changed" from="VBoxContainer/HBoxContainer/NameSearch" to="." method="_on_NameSearch_text_changed"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/InfoSelect" to="." method="_on_InfoSelect_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/LeagueSelect" to="." method="_on_league_select_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/TeamSelect" to="." method="_on_TeamSelect_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/PositionSelect" to="." method="_on_PositionSelect_item_selected"]
-[connection signal="select" from="PlayerProfile" to="." method="_on_player_profile_select"]
+[connection signal="text_changed" from="Filters/NameSearch" to="." method="_on_NameSearch_text_changed"]
+[connection signal="item_selected" from="Filters/LeagueSelect" to="." method="_on_league_select_item_selected"]
+[connection signal="item_selected" from="Filters/TeamSelect" to="." method="_on_TeamSelect_item_selected"]
+[connection signal="item_selected" from="Filters/PositionSelect" to="." method="_on_PositionSelect_item_selected"]

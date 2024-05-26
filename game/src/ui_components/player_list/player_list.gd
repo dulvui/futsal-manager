@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name PlayerList
+class_name VisualPlayerList
 extends Control
 
 signal select_player(player: Player)
