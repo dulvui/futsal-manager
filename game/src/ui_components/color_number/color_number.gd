@@ -5,10 +5,18 @@
 class_name ColorNumber
 extends Label
 
-# what number the label has
-var key: String
+@export var value_name: String
 
-func set_up(value: int) -> void:
+func _ready() -> void:
+	if value_name:
+		tooltip_text = value_name
+
+
+func set_up(p_value_name: String) -> void:
+	value_name = p_value_name
+
+
+func set_value(value: int) -> void:
 	text = str(value)
 	
 	if not label_settings:

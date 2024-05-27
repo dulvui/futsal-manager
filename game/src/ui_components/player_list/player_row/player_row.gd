@@ -31,7 +31,7 @@ func set_up(
 	position_label.set_text(Player.Position.keys()[player.position])
 	name_label.set_text(player.surname)
 
-	attributes_average.set_up(player.get_attributes_average())
+	attributes_average.set_up(player.get_overall())
 
 	for key: String in Const.ATTRIBUTES.keys():
 		for attribute: String in Const.ATTRIBUTES[key]:

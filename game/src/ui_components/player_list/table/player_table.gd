@@ -181,7 +181,7 @@ func _sort_attributes(key: String) -> void:
 func _sort_attribues_average() -> void:
 	players.sort_custom(
 		func(a: Player, b: Player) -> bool: return (
-			a.get_attributes_average() < b.get_attributes_average()
+			a.get_overall() < b.get_overall()
 		)
 	)
 

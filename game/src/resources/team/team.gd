@@ -134,7 +134,7 @@ func get_away_color(versus_color: Color) -> Color:
 func get_prestige() -> int:
 	var value: int = 0
 	for player: Player in players:
-		value += player.get_attributes_average()
+		value += player.get_overall()
 	return value / players.size()
 
 

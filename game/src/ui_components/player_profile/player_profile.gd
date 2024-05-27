@@ -42,7 +42,7 @@ func set_up_info(_player: Player) -> void:
 	nationality.text = str(player.team)
 	team.text = str(player.foot)
 	nr.text = str(player.nr)
-	attributes_average.text = str(player.get_attributes_average())
+	attributes_average.text = str(player.get_overall())
 	prestige.text = str(player.prestige)
 
 	# attributes

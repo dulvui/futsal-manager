@@ -44,7 +44,7 @@ func _ready() -> void:
 	
 	var index: int = 0
 	for player_row: PlayerListRow in player_rows.get_children() as Array[PlayerListRow]:
-		player_row.set_up(visible_players[index])
+		player_row.set_player(visible_players[index])
 		index += 1
 
 

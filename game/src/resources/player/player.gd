@@ -138,7 +138,7 @@ func get_goalkeeper_attributes() -> int:
 	return attributes.goalkeeper.sum()
 
 
-func get_attributes_average() -> int:
+func get_overall() -> int:
 	if position == Position.G:
 		return attributes.goal_keeper_average()
 	return attributes.field_player_average()

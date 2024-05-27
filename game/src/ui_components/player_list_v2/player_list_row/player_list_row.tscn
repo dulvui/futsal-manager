@@ -27,70 +27,50 @@ horizontal_alignment = 1
 [node name="VSeparator" type="VSeparator" parent="."]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="NameButton" type="Button" parent="."]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 text = "Dalvai"
+alignment = 0
 text_overrun_behavior = 3
 
 [node name="VSeparator2" type="VSeparator" parent="."]
 layout_mode = 2
 
-[node name="AttributesAverage" parent="." instance=ExtResource("2_m1dir")]
+[node name="Overall" parent="." instance=ExtResource("2_m1dir")]
 custom_minimum_size = Vector2(70, 40)
 layout_mode = 2
 size_flags_horizontal = 1
+value_name = "OVERALL"
 
 [node name="VSeparator4" type="VSeparator" parent="."]
 layout_mode = 2
 
-[node name="Attributes" type="HBoxContainer" parent="."]
+[node name="Mental" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorNumber" parent="Attributes" instance=ExtResource("2_m1dir")]
+[node name="VSeparator5" type="VSeparator" parent="."]
 layout_mode = 2
 
-[node name="ColorNumber2" parent="Attributes" instance=ExtResource("2_m1dir")]
+[node name="Technical" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSeparator6" type="VSeparator" parent="."]
 layout_mode = 2
 
-[node name="ColorNumber3" parent="Attributes" instance=ExtResource("2_m1dir")]
+[node name="Physical" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSeparator7" type="VSeparator" parent="."]
 layout_mode = 2
 
-[node name="ColorNumber4" parent="Attributes" instance=ExtResource("2_m1dir")]
+[node name="Goalkeeper" type="HBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="ColorNumber5" parent="Attributes" instance=ExtResource("2_m1dir")]
-layout_mode = 2
-
-[node name="ColorNumber6" parent="Attributes" instance=ExtResource("2_m1dir")]
-layout_mode = 2
-
-[node name="ColorNumber7" parent="Attributes" instance=ExtResource("2_m1dir")]
-layout_mode = 2
-
-[node name="ColorNumber8" parent="Attributes" instance=ExtResource("2_m1dir")]
-layout_mode = 2
-
-[node name="ColorNumber9" parent="Attributes" instance=ExtResource("2_m1dir")]
-layout_mode = 2
-
-[node name="ColorNumber10" parent="Attributes" instance=ExtResource("2_m1dir")]
-layout_mode = 2
-
-[node name="ColorNumber11" parent="Attributes" instance=ExtResource("2_m1dir")]
-layout_mode = 2
-
-[node name="ColorNumber12" parent="Attributes" instance=ExtResource("2_m1dir")]
-layout_mode = 2
-
-[node name="VSeparator3" type="VSeparator" parent="."]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 2
-text = ">>"
-
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
-[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="NameButton" to="." method="_on_name_button_mouse_entered"]
+[connection signal="mouse_exited" from="NameButton" to="." method="_on_name_button_mouse_exited"]
+[connection signal="pressed" from="NameButton" to="." method="_on_name_button_pressed"]
