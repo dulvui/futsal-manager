@@ -146,3 +146,7 @@ text = ">"
 [connection signal="item_selected" from="Filters/LeagueSelect" to="." method="_on_league_select_item_selected"]
 [connection signal="item_selected" from="Filters/TeamSelect" to="." method="_on_TeamSelect_item_selected"]
 [connection signal="item_selected" from="Filters/PositionSelect" to="." method="_on_PositionSelect_item_selected"]
+[connection signal="pressed" from="Footer/Prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="Footer/Prev2" to="." method="_on_prev_2_pressed"]
+[connection signal="pressed" from="Footer/Next2" to="." method="_on_next_2_pressed"]
+[connection signal="pressed" from="Footer/Next" to="." method="_on_next_pressed"]
