@@ -10,6 +10,8 @@ extends Control
 @onready var load_game: Button = $MarginContainer/HBoxContainer/VBoxContainer/LoadGame
 @onready var continue_game: Button = $MarginContainer/HBoxContainer/VBoxContainer/ContinueGame
 
+@onready var version: Label = $Version
+
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
@@ -21,6 +23,8 @@ func _ready() -> void:
 	continue_game.visible = Config.save_states and Config.save_states.list.size() > 0
 
 	save_state.set_up(Config.save_states.get_active())
+	
+	version.text = "v" + Config.VERSION
 
 
 func _on_new_game_pressed() -> void:

@@ -4,7 +4,7 @@
 
 extends Node
 
-const VERSION: String = "1"
+const VERSION: String = "0.0.1"
 const CONFIG_VERSION: String = "1"
 
 # config
