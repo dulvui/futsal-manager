@@ -17,11 +17,12 @@ const PAGE_SIZE:int = 20
 @onready var footer: HBoxContainer = $Footer
 @onready var page_indicator: Label = $Footer/PageIndicator
 
-var active_filters: Dictionary = {}
+var filters: Dictionary = {}
 var active_info_type: int = 0
 var team_search: String = ""
 
 var all_players: Array[Player] = []
+var players: Array[Player] = []
 var visible_players: Array[Player] = []
 
 var page:int
@@ -45,14 +46,14 @@ func _ready() -> void:
 	
 	_set_up_all_players()
 
-	page_max = all_players.size() / PAGE_SIZE
+	page_max = players.size() / PAGE_SIZE
 
 	_set_player_rows()
 	_update_page_indicator()
 	
 
 func _set_player_rows() -> void:
-	visible_players = all_players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+	visible_players = players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 	
 	var index: int = 0
 	for player_row: PlayerListRow in player_rows.get_children() as Array[PlayerListRow]:
@@ -73,35 +74,37 @@ func _set_up_all_players(p_reset_options: bool = true) -> void:
 		for team in league.teams:
 			for player in team.players:
 				all_players.append(player)
+	
+	players = all_players
 
 
 func _remove_player(player_id: int) -> void:
-	active_filters["id"] = player_id
-	_filter_table()
+	filters["id"] = player_id
+	_filter_players()
 
 
 func _on_NameSearch_text_changed(text: String) -> void:
 	if text.length() > 2:
-		active_filters["surname"] = text
-		_filter_table()
-	elif "surname" in active_filters and (active_filters["surname"] as String).length() > 0:
-		active_filters["surname"] = ""
-		_filter_table()
+		filters["surname"] = text
+		_filter_players()
+	elif "surname" in filters and (filters["surname"] as String).length() > 0:
+		filters["surname"] = ""
+		_filter_players()
 
 
 func _on_TeamSelect_item_selected(index: int) -> void:
 	if index > 0:
-		active_filters["team"] = team_select.get_item_text(index)
+		filters["team"] = team_select.get_item_text(index)
 	else:
-		active_filters["team"] = ""
-	_filter_table()
+		filters["team"] = ""
+	_filter_players()
 
 
 func _on_league_select_item_selected(index: int) -> void:
 	if index > 0:
-		active_filters["league"] = league_select.get_item_text(index)
+		filters["league"] = league_select.get_item_text(index)
 	else:
-		active_filters["league"] = ""
+		filters["league"] = ""
 
 	# clean team selector
 	team_select.clear()
@@ -109,25 +112,21 @@ func _on_league_select_item_selected(index: int) -> void:
 
 	# adjust team picker according to selected league
 	for league: League in Config.leagues.list:
-		if active_filters["league"] == "" or active_filters["league"] == league.name:
+		if filters["league"] == "" or filters["league"] == league.name:
 			for team: Team in league.teams:
 				if team == null or team.name != Config.team.name:
 					team_select.add_item(team.name)
 
-	_filter_table()
+	_filter_players()
 
 
 func _on_PositionSelect_item_selected(index: int) -> void:
 	if index > 0:
-		active_filters["position"] = Player.Position.values()[index - 1]
+		filters["position"] = Player.Position.values()[index - 1]
 	else:
-		active_filters["position"] = ""
+		filters["position"] = ""
 
-	_filter_table()
-
-
-func _filter_table() -> void:
-	pass
+	_filter_players()
 
 
 func _reset_options() -> void:
@@ -174,10 +173,37 @@ func _on_prev_2_pressed() -> void:
 
 
 func _update_page_indicator() -> void:
-	if all_players.size() <= PAGE_SIZE:
-		footer.hide()
+	page_max = players.size() / PAGE_SIZE
+	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
+
+
+func _on_name_search_text_changed(new_text: String) -> void:
+	if new_text.length() > 2:
+		filters["surname"] = new_text
 	else:
-		page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
+		filters.erase("surname")
+	_filter_players()
 
 
+func _filter_players() -> void:
+	if filters.size() > 0:
+		page = 0
+		visible_players = []
+		var filtered_players: Array[Player] = []
+		for player in players:
+			print(player.surname)
+			var filter_counter: int = 0
+			for key: String in filters.keys():
+				filter_counter += 1
+				var value: String = filters[key] as String
+				if not value.to_upper() in (player[key] as String).to_upper():
+					filter_counter += 1
+			if filter_counter == filters.size():
+				filtered_players.append(player)
+		players = filtered_players
+	else:
+		players = all_players
 
+	_set_player_rows()
+	_update_page_indicator()
+	

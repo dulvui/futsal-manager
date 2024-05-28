@@ -142,7 +142,7 @@ text = ">>"
 layout_mode = 2
 text = ">"
 
-[connection signal="text_changed" from="Filters/NameSearch" to="." method="_on_NameSearch_text_changed"]
+[connection signal="text_changed" from="Filters/NameSearch" to="." method="_on_name_search_text_changed"]
 [connection signal="item_selected" from="Filters/LeagueSelect" to="." method="_on_league_select_item_selected"]
 [connection signal="item_selected" from="Filters/TeamSelect" to="." method="_on_TeamSelect_item_selected"]
 [connection signal="item_selected" from="Filters/PositionSelect" to="." method="_on_PositionSelect_item_selected"]
