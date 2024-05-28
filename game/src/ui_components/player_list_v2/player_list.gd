@@ -104,7 +104,7 @@ func _on_league_select_item_selected(index: int) -> void:
 	if index > 0:
 		filters["league"] = league_select.get_item_text(index)
 	else:
-		filters["league"] = ""
+		filters.erase("league")
 
 	# clean team selector
 	team_select.clear()
@@ -112,7 +112,7 @@ func _on_league_select_item_selected(index: int) -> void:
 
 	# adjust team picker according to selected league
 	for league: League in Config.leagues.list:
-		if filters["league"] == "" or filters["league"] == league.name:
+		if not "league" in filters or filters["league"] == league.name:
 			for team: Team in league.teams:
 				if team == null or team.name != Config.team.name:
 					team_select.add_item(team.name)
