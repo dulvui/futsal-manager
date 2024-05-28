@@ -3,26 +3,26 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name TeamProfile
-extends Control
+extends HBoxContainer
 
-@onready var player_list: VisualPlayerList = $VBoxContainer/HBoxContainer/PlayerList
-@onready var name_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/Name
-@onready var prestige_stars_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/PresitgeStars
-@onready var prestige_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/Presitge
-@onready var budget_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/Budget
-@onready var salary_budget_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/SalaryBudget
-@onready var stadium_name_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/StadiumName
-@onready var stadium_capacity_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/StadiumCapacity
-@onready var stadium_year_label: Label = $VBoxContainer/HBoxContainer/TeamInfo/StadiumYearBuilt
+@onready var player_list: PlayerList = $PlayerList
+@onready var name_label: Label = $TeamInfo/Name
+@onready var prestige_stars_label: Label = $TeamInfo/PresitgeStars
+@onready var prestige_label: Label = $TeamInfo/Presitge
+@onready var budget_label: Label = $TeamInfo/Budget
+@onready var salary_budget_label: Label = $TeamInfo/SalaryBudget
+@onready var stadium_name_label: Label = $TeamInfo/StadiumName
+@onready var stadium_capacity_label: Label = $TeamInfo/StadiumCapacity
+@onready var stadium_year_label: Label = $TeamInfo/StadiumYearBuilt
 
 
 func set_up(team: Team) -> void:
-	player_list.set_up(false, true, team, false)
+	player_list.set_up(team.id)
 	_set_labels(team)
 
 
 func set_team(team: Team) -> void:
-	player_list.set_up_players(false, team, true)
+	player_list.set_up(team.id)
 	_set_labels(team)
 
 

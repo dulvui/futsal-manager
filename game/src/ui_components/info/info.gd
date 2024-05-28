@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualInfo
-extends Control
+extends VBoxContainer
 
-@onready var generation_seed: LineEdit = $VBoxContainer/GenerationSeed/GenerationSeed
-@onready var start_date: Label = $VBoxContainer/StartDate/StartDate
+@onready var generation_seed: LineEdit = $GenerationSeed/GenerationSeed
+@onready var start_date: Label = $StartDate/StartDate
 
 
 func _ready() -> void:

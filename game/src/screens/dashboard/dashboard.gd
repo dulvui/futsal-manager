@@ -29,8 +29,7 @@ const DASHBOARD_DAY_DELAY: float = 0.5
 
 # full screen views
 @onready var formation: VisualFormation = $MainContainer/VBoxContainer/MainView/Content/Formation
-@onready
-var all_players_list: VisualPlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
+@onready var all_players_list: PlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 
 # pop ups
 @onready var player_offer: PlayerOffer = $PlayerOffer
@@ -46,8 +45,8 @@ func _ready() -> void:
 	manager_label.text = Config.manager.get_full_name()
 	team_label.text = Config.team.name
 	date_label.text = Config.calendar().format_date()
-
-	all_players_list.set_up(false, true)
+	
+	all_players_list.set_up()
 	formation.set_up(false)
 
 	if Config.calendar().is_match_day():
@@ -61,7 +60,7 @@ func _ready() -> void:
 	if Config.leagues.get_active().calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
-
+	
 	_show_active_view()
 
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dismanb8n0kd"]
 
-[ext_resource type="Script" path="res://src/ui_components/player_list_v2/player_list_row/player_list_row.gd" id="1_fx1iw"]
-[ext_resource type="PackedScene" uid="uid://b3y6tq2i5pg3b" path="res://src/ui_components/color_number/color_number.tscn" id="2_m1dir"]
+[ext_resource type="Script" path="res://src/ui_components/player_list/player_list_row/player_list_row.gd" id="1_afwcw"]
+[ext_resource type="PackedScene" uid="uid://b3y6tq2i5pg3b" path="res://src/ui_components/color_number/color_number.tscn" id="2_nfevw"]
 
 [node name="PlayerListRow" type="HBoxContainer"]
 anchors_preset = 8
@@ -15,7 +15,7 @@ offset_right = 244.5
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_fx1iw")
+script = ExtResource("1_afwcw")
 metadata/_edit_use_anchors_ = true
 
 [node name="PositionLabel" type="Label" parent="."]
@@ -37,7 +37,7 @@ text_overrun_behavior = 3
 [node name="VSeparator2" type="VSeparator" parent="."]
 layout_mode = 2
 
-[node name="Overall" parent="." instance=ExtResource("2_m1dir")]
+[node name="Overall" parent="." instance=ExtResource("2_nfevw")]
 custom_minimum_size = Vector2(70, 40)
 layout_mode = 2
 size_flags_horizontal = 1

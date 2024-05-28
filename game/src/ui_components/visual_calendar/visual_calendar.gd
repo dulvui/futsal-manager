@@ -3,15 +3,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualCalendar
-extends Control
+extends HSplitContainer
 
 const VisualDayScene: PackedScene = preload(
 	"res://src/ui_components/visual_calendar/visual_day/visual_day.tscn"
 )
 
-@onready var match_list: VisualMatchList = $HSplitContainer/MatchList
-@onready var days: GridContainer = $HSplitContainer/Calendar/Days
-@onready var page_label: Label = $HSplitContainer/Calendar/Paginator/Page
+@onready var match_list: VisualMatchList = $MatchList
+@onready var days: GridContainer = $Calendar/Days
+@onready var page_label: Label = $Calendar/Paginator/Page
 
 # get current month and show in paginator
 # max back and forward is full current season

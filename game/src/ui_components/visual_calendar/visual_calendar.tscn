@@ -3,34 +3,22 @@
 [ext_resource type="Script" path="res://src/ui_components/visual_calendar/visual_calendar.gd" id="2_7vx37"]
 [ext_resource type="PackedScene" uid="uid://dv6e6h4lw1bqy" path="res://src/ui_components/visual_calendar/match_list/match_list.tscn" id="3_cy82g"]
 
-[node name="VisualCalendar" type="Control"]
-layout_mode = 3
+[node name="VisualCalendar" type="HSplitContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("2_7vx37")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Calendar" type="VBoxContainer" parent="HSplitContainer"]
+[node name="Calendar" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(1300, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="Paginator" type="HBoxContainer" parent="HSplitContainer/Calendar"]
+[node name="Paginator" type="HBoxContainer" parent="Calendar"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -38,87 +26,87 @@ theme_override_constants/separation = 30
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Prev" type="Button" parent="HSplitContainer/Calendar/Paginator"]
+[node name="Prev" type="Button" parent="Calendar/Paginator"]
 layout_mode = 2
 text = "<"
 
-[node name="Page" type="Label" parent="HSplitContainer/Calendar/Paginator"]
+[node name="Page" type="Label" parent="Calendar/Paginator"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "wewe"
 horizontal_alignment = 1
 
-[node name="Next" type="Button" parent="HSplitContainer/Calendar/Paginator"]
+[node name="Next" type="Button" parent="Calendar/Paginator"]
 layout_mode = 2
 text = ">"
 
-[node name="Today" type="Button" parent="HSplitContainer/Calendar/Paginator"]
+[node name="Today" type="Button" parent="Calendar/Paginator"]
 layout_mode = 2
 text = "TODAY"
 
-[node name="TrainingPopUp" type="Popup" parent="HSplitContainer/Calendar/Paginator"]
+[node name="TrainingPopUp" type="Popup" parent="Calendar/Paginator"]
 
-[node name="Panel" type="Panel" parent="HSplitContainer/Calendar/Paginator/TrainingPopUp"]
+[node name="Panel" type="Panel" parent="Calendar/Paginator/TrainingPopUp"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Calendar/Paginator/TrainingPopUp"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Calendar/Paginator/TrainingPopUp"]
 
-[node name="Days" type="GridContainer" parent="HSplitContainer/Calendar"]
+[node name="Days" type="GridContainer" parent="Calendar"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 7
 
-[node name="Monday" type="Label" parent="HSplitContainer/Calendar/Days"]
+[node name="Monday" type="Label" parent="Calendar/Days"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "MONDAY"
 horizontal_alignment = 1
 
-[node name="Tuesday" type="Label" parent="HSplitContainer/Calendar/Days"]
+[node name="Tuesday" type="Label" parent="Calendar/Days"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "TUESDAY"
 horizontal_alignment = 1
 
-[node name="Wednesday" type="Label" parent="HSplitContainer/Calendar/Days"]
+[node name="Wednesday" type="Label" parent="Calendar/Days"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "WEDNESDAY
 "
 horizontal_alignment = 1
 
-[node name="Thursday" type="Label" parent="HSplitContainer/Calendar/Days"]
+[node name="Thursday" type="Label" parent="Calendar/Days"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "THURSDAY"
 horizontal_alignment = 1
 
-[node name="Friday" type="Label" parent="HSplitContainer/Calendar/Days"]
+[node name="Friday" type="Label" parent="Calendar/Days"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "FRIDAY"
 horizontal_alignment = 1
 
-[node name="Saturday" type="Label" parent="HSplitContainer/Calendar/Days"]
+[node name="Saturday" type="Label" parent="Calendar/Days"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "SATURDAY"
 horizontal_alignment = 1
 
-[node name="Sunday" type="Label" parent="HSplitContainer/Calendar/Days"]
+[node name="Sunday" type="Label" parent="Calendar/Days"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "SUNDAY"
 horizontal_alignment = 1
 
-[node name="MatchList" parent="HSplitContainer" instance=ExtResource("3_cy82g")]
+[node name="MatchList" parent="." instance=ExtResource("3_cy82g")]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[connection signal="pressed" from="HSplitContainer/Calendar/Paginator/Prev" to="." method="_on_Prev_pressed"]
-[connection signal="pressed" from="HSplitContainer/Calendar/Paginator/Next" to="." method="_on_Next_pressed"]
-[connection signal="pressed" from="HSplitContainer/Calendar/Paginator/Today" to="." method="_on_today_pressed"]
+[connection signal="pressed" from="Calendar/Paginator/Prev" to="." method="_on_Prev_pressed"]
+[connection signal="pressed" from="Calendar/Paginator/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="Calendar/Paginator/Today" to="." method="_on_today_pressed"]

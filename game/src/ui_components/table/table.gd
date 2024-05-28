@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualTable
-extends Control
+extends VBoxContainer
 
-@onready var grid: GridContainer = $VBoxContainer/ScrollContainer/GridContainer
-@onready var leagues: SwitchOptionButton = $VBoxContainer/Leagues
+@onready var grid: GridContainer = $ScrollContainer/GridContainer
+@onready var leagues: SwitchOptionButton = $Leagues
 
 
 func _ready() -> void:

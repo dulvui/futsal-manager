@@ -73,4 +73,4 @@ func _on_select_team_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/start/start.tscn")
+	get_tree().change_scene_to_file("res://src/screens/start_game/start_game.tscn")

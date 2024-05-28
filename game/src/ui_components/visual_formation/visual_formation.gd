@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualFormation
-extends Control
+extends HBoxContainer
 
 signal change
 
@@ -11,16 +11,16 @@ const FormationPlayer: PackedScene = preload(
 	"res://src/ui_components/visual_formation/player/formation_player.tscn"
 )
 
-@onready var player_list: VisualPlayerList = $HBoxContainer/PlayerList
-@onready var players: VBoxContainer = $HBoxContainer/LineUp/Field/Players
-@onready var subs: VBoxContainer = $HBoxContainer/Subs/List
+@onready var player_list: PlayerList = $PlayerList
+@onready var players: VBoxContainer = $LineUp/Field/Players
+@onready var subs: VBoxContainer = $Subs/List
 
-@onready var formation_select: SwitchOptionButton = $HBoxContainer/LineUp/FormationSelect
+@onready var formation_select: SwitchOptionButton = $LineUp/FormationSelect
 
-@onready var goalkeeper: HBoxContainer = $HBoxContainer/LineUp/Field/Players/Goalkeeper
-@onready var defense: HBoxContainer = $HBoxContainer/LineUp/Field/Players/Defense
-@onready var center: HBoxContainer = $HBoxContainer/LineUp/Field/Players/Center
-@onready var attack: HBoxContainer = $HBoxContainer/LineUp/Field/Players/Attack
+@onready var goalkeeper: HBoxContainer = $LineUp/Field/Players/Goalkeeper
+@onready var defense: HBoxContainer = $LineUp/Field/Players/Defense
+@onready var center: HBoxContainer = $LineUp/Field/Players/Center
+@onready var attack: HBoxContainer = $LineUp/Field/Players/Attack
 
 var lineup_players: Array[int] = []
 var list_player: Player = null
@@ -32,7 +32,7 @@ var only_lineup: bool
 func set_up(p_only_lineup: bool) -> void:
 	only_lineup = p_only_lineup
 	team = Config.team
-	player_list.set_up(only_lineup, false, team)
+	player_list.set_up(team.id)
 
 	# set up fomation options
 	formation_select.set_up(Formation.Variations.keys(), team.formation.variation)
@@ -123,7 +123,7 @@ func _change_player() -> void:
 		return
 
 	_set_players()
-	player_list.set_up_players(only_lineup, team)
+	player_list.set_up(team.id)
 	change.emit()
 
 	lineup_players.clear()

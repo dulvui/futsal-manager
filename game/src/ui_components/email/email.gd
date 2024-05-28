@@ -3,12 +3,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualEmail
-extends Control
+extends HSplitContainer
 
 signal email_action(message: EmailMessage)
 
-@onready var message_list: VisualEmailMessageList = $Container/MessageList
-@onready var message_container: VisualEmailMessage = $Container/HBoxContainer/Message
+@onready var message_list: VisualEmailMessageList = $MessageList
+@onready var message_container: VisualEmailMessage = $MessageView/Message
 
 
 func _ready() -> void:
