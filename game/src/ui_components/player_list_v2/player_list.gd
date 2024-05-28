@@ -70,63 +70,13 @@ func _set_up_all_players(p_reset_options: bool = true) -> void:
 		_reset_options()
 
 	all_players = []
-	for league: League in Config.leagues.list:
-		for team in league.teams:
-			for player in team.players:
-				all_players.append(player)
+	for i in range(1000):
+		for league: League in Config.leagues.list:
+			for team in league.teams:
+				for player in team.players:
+					all_players.append(player)
 	
 	players = all_players
-
-
-func _remove_player(player_id: int) -> void:
-	filters["id"] = player_id
-	_filter_players()
-
-
-func _on_NameSearch_text_changed(text: String) -> void:
-	if text.length() > 2:
-		filters["surname"] = text
-		_filter_players()
-	elif "surname" in filters and (filters["surname"] as String).length() > 0:
-		filters["surname"] = ""
-		_filter_players()
-
-
-func _on_TeamSelect_item_selected(index: int) -> void:
-	if index > 0:
-		filters["team"] = team_select.get_item_text(index)
-	else:
-		filters["team"] = ""
-	_filter_players()
-
-
-func _on_league_select_item_selected(index: int) -> void:
-	if index > 0:
-		filters["league"] = league_select.get_item_text(index)
-	else:
-		filters.erase("league")
-
-	# clean team selector
-	team_select.clear()
-	team_select.add_item("NO_TEAM")
-
-	# adjust team picker according to selected league
-	for league: League in Config.leagues.list:
-		if not "league" in filters or filters["league"] == league.name:
-			for team: Team in league.teams:
-				if team == null or team.name != Config.team.name:
-					team_select.add_item(team.name)
-
-	_filter_players()
-
-
-func _on_PositionSelect_item_selected(index: int) -> void:
-	if index > 0:
-		filters["position"] = Player.Position.values()[index - 1]
-	else:
-		filters["position"] = ""
-
-	_filter_players()
 
 
 func _reset_options() -> void:
@@ -177,22 +127,23 @@ func _update_page_indicator() -> void:
 	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
 
 
-func _on_name_search_text_changed(new_text: String) -> void:
-	if new_text.length() > 2:
-		filters["surname"] = new_text
-	else:
-		filters.erase("surname")
-	_filter_players()
+func _filter() -> void:
+	_filter_players(players)
 
 
-func _filter_players() -> void:
+func _unfilter() -> void:
+	_filter_players(all_players)
+
+
+func _filter_players(player_base: Array[Player]) -> void:
 	if filters.size() > 0:
 		page = 0
 		visible_players = []
 		var filtered_players: Array[Player] = []
-		for player in players:
-			print(player.surname)
-			var filter_counter: int = 0
+		var filter_counter: int = 0
+		
+		for player in player_base:
+			filter_counter = 0
 			for key: String in filters.keys():
 				filter_counter += 1
 				var value: String = filters[key] as String
@@ -206,4 +157,58 @@ func _filter_players() -> void:
 
 	_set_player_rows()
 	_update_page_indicator()
-	
+
+
+func _on_name_search_text_changed(new_text: String) -> void:
+	if new_text.length() > 0:
+		if not "surname" in filters:
+			filters["surname"] = new_text
+			_filter()
+		elif new_text.length() > (filters["surname"] as String).length():
+			filters["surname"] = new_text
+			_filter()
+		else:
+			filters["surname"] = new_text
+			_unfilter()
+	else:
+		filters.erase("surname")
+		_unfilter()
+
+
+func _on_position_select_item_selected(index: int) -> void:
+	if index > 0:
+		filters["position"] = Player.Position.values()[index - 1]
+		_filter()
+	else:
+		filters["position"] = ""
+		_unfilter()
+
+
+func _on_league_select_item_selected(index: int) -> void:
+	if index > 0:
+		filters["league"] = league_select.get_item_text(index)
+		_filter()
+	else:
+		filters.erase("league")
+		_unfilter()
+
+	# clean team selector
+	team_select.clear()
+	team_select.add_item("NO_TEAM")
+
+	# adjust team picker according to selected league
+	for league: League in Config.leagues.list:
+		if not "league" in filters or filters["league"] == league.name:
+			for team: Team in league.teams:
+				if team == null or team.name != Config.team.name:
+					team_select.add_item(team.name)
+
+
+
+func _on_team_select_item_selected(index: int) -> void:
+	if index > 0:
+		filters["team"] = team_select.get_item_text(index)
+		_filter()
+	else:
+		filters["team"] = ""
+		_unfilter()
