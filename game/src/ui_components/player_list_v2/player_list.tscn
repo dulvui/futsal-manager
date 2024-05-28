@@ -30,9 +30,6 @@ caret_blink = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="InfoSelect" type="OptionButton" parent="Filters"]
-layout_mode = 2
-
 [node name="LeagueSelect" type="OptionButton" parent="Filters"]
 layout_mode = 2
 

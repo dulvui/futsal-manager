@@ -70,11 +70,13 @@ func _set_up_all_players(p_reset_options: bool = true) -> void:
 		_reset_options()
 
 	all_players = []
-	for i in range(1000):
-		for league: League in Config.leagues.list:
-			for team in league.teams:
-				for player in team.players:
-					all_players.append(player)
+	
+	# uncomment to stresstest
+	#for i in range(100):
+	for league: League in Config.leagues.list:
+		for team in league.teams:
+			for player in team.players:
+				all_players.append(player)
 	
 	players = all_players
 
@@ -136,18 +138,21 @@ func _unfilter() -> void:
 
 
 func _filter_players(player_base: Array[Player]) -> void:
+	page = 0
+	
 	if filters.size() > 0:
-		page = 0
-		visible_players = []
 		var filtered_players: Array[Player] = []
 		var filter_counter: int = 0
+		var value: String
+		var key: String
 		
 		for player in player_base:
 			filter_counter = 0
-			for key: String in filters.keys():
+			for i:int in filters.keys().size():
+				key = filters.keys()[i]
 				filter_counter += 1
-				var value: String = filters[key] as String
-				if not value.to_upper() in (player[key] as String).to_upper():
+				value = filters[key] as String
+				if not (player[key] as String).contains(value):
 					filter_counter += 1
 			if filter_counter == filters.size():
 				filtered_players.append(player)
