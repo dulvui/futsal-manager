@@ -8,6 +8,7 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -101,6 +102,27 @@ layout_mode = 2
 [node name="PlayerListRow16" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
+[node name="PlayerListRow17" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
+layout_mode = 2
+
+[node name="PlayerListRow18" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
+layout_mode = 2
+
+[node name="PlayerListRow19" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
+layout_mode = 2
+
+[node name="PlayerListRow20" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
+layout_mode = 2
+
+[node name="PlayerListRow21" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
+layout_mode = 2
+
+[node name="PlayerListRow22" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
+layout_mode = 2
+
+[node name="PlayerListRow23" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
+layout_mode = 2
+
 [node name="Footer" type="HBoxContainer" parent="."]
 layout_mode = 2
 alignment = 1
@@ -131,6 +153,7 @@ text = ">"
 [connection signal="item_selected" from="Filters/LeagueSelect" to="." method="_on_league_select_item_selected"]
 [connection signal="item_selected" from="Filters/TeamSelect" to="." method="_on_team_select_item_selected"]
 [connection signal="item_selected" from="Filters/PositionSelect" to="." method="_on_position_select_item_selected"]
+[connection signal="resized" from="PlayerRows" to="." method="_on_player_rows_resized"]
 [connection signal="pressed" from="Footer/Prev" to="." method="_on_prev_pressed"]
 [connection signal="pressed" from="Footer/Prev2" to="." method="_on_prev_2_pressed"]
 [connection signal="pressed" from="Footer/Next2" to="." method="_on_next_2_pressed"]

@@ -46,8 +46,9 @@ func _ready() -> void:
 	for league: League in Config.leagues.list:
 		league_select.add_item(league.name)
 	
-	# uncomment for testing
-	#set_up()
+	# setup automatically, if run in editor and is run by 'Run current scene'
+	if OS.has_feature("editor") and get_parent() == get_tree().root:
+		set_up()
 
 func set_up(p_active_team_id:int = -1) -> void:
 	active_team_id = p_active_team_id
