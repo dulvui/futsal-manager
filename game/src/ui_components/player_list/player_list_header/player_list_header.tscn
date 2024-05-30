@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dismanb8n0kd"]
+[gd_scene load_steps=2 format=3 uid="uid://dxwj6lw6a0xb6"]
 
-[ext_resource type="Script" path="res://src/ui_components/player_list/player_list_row/player_list_row.gd" id="1_afwcw"]
-[ext_resource type="PackedScene" uid="uid://b3y6tq2i5pg3b" path="res://src/ui_components/color_number/color_number.tscn" id="2_nfevw"]
+[ext_resource type="Script" path="res://src/ui_components/player_list/player_list_header/player_list_header.gd" id="1_cxije"]
 
-[node name="PlayerListRow" type="HBoxContainer"]
+[node name="PlayerListHeader" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -15,14 +15,11 @@ offset_right = 244.5
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_afwcw")
+script = ExtResource("1_cxije")
 
-[node name="PositionLabel" type="Label" parent="."]
-custom_minimum_size = Vector2(30, 0)
+[node name="PositionButton" type="Button" parent="."]
 layout_mode = 2
 text = "P"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="."]
 layout_mode = 2
@@ -30,18 +27,18 @@ layout_mode = 2
 [node name="NameButton" type="Button" parent="."]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-text = "Dalvai"
+text = "NAME"
 alignment = 0
 text_overrun_behavior = 3
 
 [node name="VSeparator2" type="VSeparator" parent="."]
 layout_mode = 2
 
-[node name="Overall" parent="." instance=ExtResource("2_nfevw")]
-custom_minimum_size = Vector2(32, 26)
+[node name="OverallButton" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 1
-value_name = "OVERALL"
+tooltip_text = "OVERALL"
+text = "OV"
 
 [node name="VSeparator4" type="VSeparator" parent="."]
 layout_mode = 2

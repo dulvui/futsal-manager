@@ -7,10 +7,6 @@ extends HBoxContainer
 
 signal select
 
-# player row button colors
-const COLOR_FOCUS: Color = Color(1, 1, 1, 0.2)
-const COLOR_NORMAL: Color = Color(1, 1, 1, 0)
-
 const color_number: PackedScene = preload("res://src/ui_components/color_number/color_number.tscn")
 
 @onready var name_button: Button = $NameButton

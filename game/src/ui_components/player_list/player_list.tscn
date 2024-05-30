@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://mvca6wjq0pv6"]
+[gd_scene load_steps=5 format=3 uid="uid://mvca6wjq0pv6"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_pb4bf"]
 [ext_resource type="Script" path="res://src/ui_components/player_list/player_list.gd" id="2_ajejk"]
 [ext_resource type="PackedScene" uid="uid://dismanb8n0kd" path="res://src/ui_components/player_list/player_list_row/player_list_row.tscn" id="3_8jtpb"]
+[ext_resource type="PackedScene" uid="uid://dxwj6lw6a0xb6" path="res://src/ui_components/player_list/player_list_header/player_list_header.tscn" id="3_33f82"]
 
 [node name="PlayerList" type="VBoxContainer"]
 anchors_preset = 15
@@ -40,14 +41,8 @@ layout_mode = 2
 [node name="PositionSelect" type="OptionButton" parent="Filters"]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="."]
+[node name="PlayerListHeader" parent="." instance=ExtResource("3_33f82")]
 layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Label" type="Label" parent="Header"]
-layout_mode = 2
-text = "TODO HEADER"
 
 [node name="PlayerRows" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -100,27 +95,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="PlayerListRow16" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow17" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow18" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow19" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow20" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow21" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow22" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow23" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
 layout_mode = 2
 
 [node name="Footer" type="HBoxContainer" parent="."]

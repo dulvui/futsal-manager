@@ -5,7 +5,6 @@
 class_name PlayerList
 extends VBoxContainer
 
-
 signal select_player(player: Player)
 
 @onready var filter_container: HBoxContainer = $Filters
