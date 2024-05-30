@@ -17,7 +17,9 @@ const PlayerListColumnScene = preload("res://src/ui_components/player_list/playe
 @onready var footer: HBoxContainer = $Footer
 @onready var page_indicator: Label = $Footer/PageIndicator
 
-@onready var columns: HBoxContainer = $Columns
+@onready var columns_container: HBoxContainer = $Columns
+
+var columns: Array[PlayerListColumn] = []
 
 var active_team_id: int
 
@@ -70,36 +72,54 @@ func set_up(p_active_team_id:int = -1) -> void:
 func _set_up_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
-	# names
-	var names_col: VBoxContainer = VBoxContainer.new()
-	columns.add_child(names_col)
-	var names_button: Button = Button.new()
-	names_button.text = "NAME"
-	names_col.add_child(names_button)
-	names_col.add_child(HSeparator.new())
-	var player_names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
-	for player_name:String in player_names:
-		var b: Button = Button.new()
-		b.custom_minimum_size.y = 32
-		b.text = player_name
-		names_col.add_child(b)
+	## names
+	#var names_col: VBoxContainer = VBoxContainer.new()
+	#columns_container.add_child(names_col)
+	#var names_button: Button = Button.new()
+	#names_button.text = "NAME"
+	#names_col.add_child(names_button)
+	#names_col.add_child(HSeparator.new())
+	#var player_names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
+	#for player_name:String in player_names:
+		#var b: Button = Button.new()
+		#b.custom_minimum_size.y = 32
+		#b.text = player_name
+		#names_col.add_child(b)
 	
-	## mental
-	#columns.add_child(VSeparator.new())
-	#for mental_key: String in Const.ATTRIBUTES["mental"]:
-		#var col:PlayerListColumn = PlayerListColumnScene.instantiate()
-		#columns.add_child(col)
-		#var values: Array = visible_players.map(func(p: Player) -> int: return p.attributes.mental.get(mental_key))
-		#col.set_up(mental_key, values)
+	# names
+	columns_container.add_child(VSeparator.new())
+	var name_col:PlayerListColumn = PlayerListColumnScene.instantiate()
+	columns_container.add_child(name_col)
+	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
+	name_col.set_up("NAME", names)
+	columns.append(name_col)
 
-	# technical
+	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
-		columns.add_child(VSeparator.new())
+		columns_container.add_child(VSeparator.new())
 		for value: String in Const.ATTRIBUTES[key]:
 			var col:PlayerListColumn = PlayerListColumnScene.instantiate()
-			columns.add_child(col)
-			var values: Array = visible_players.map(func(p: Player) -> int: return (p.attributes.get(key) as Resource).get(value))
+			columns_container.add_child(col)
+			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
 			col.set_up(value, values)
+			columns.append(col)
+
+
+func _update_columns() -> void:
+	visible_players = players.slice(page * page_size, (page + 1) * page_size)
+	
+	var names_col:PlayerListColumn = columns[0]
+	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
+	names_col.update_values(names)
+	
+	# attributes
+	var col_counter: int = 1 # skip names
+	for key: String in Const.ATTRIBUTES.keys():
+		for value: String in Const.ATTRIBUTES[key]:
+			var col:PlayerListColumn = columns[col_counter]
+			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
+			col.update_values(values)
+			col_counter += 1
 
 
 func _set_up_players(p_reset_options: bool = true) -> void:
@@ -135,7 +155,7 @@ func _on_next_2_pressed() -> void:
 	if page > page_max:
 		page = page_max
 	_update_page_indicator()
-	_set_up_columns()
+	_update_columns()
 
 
 func _on_next_pressed() -> void:
@@ -143,7 +163,7 @@ func _on_next_pressed() -> void:
 	if page > page_max:
 		page = 0
 	_update_page_indicator()
-	_set_up_columns()
+	_update_columns()
 
 
 func _on_prev_pressed() -> void:
@@ -151,7 +171,7 @@ func _on_prev_pressed() -> void:
 	if page < 0:
 		page = page_max
 	_update_page_indicator()
-	_set_up_columns()
+	_update_columns()
 
 
 func _on_prev_2_pressed() -> void:
@@ -159,7 +179,7 @@ func _on_prev_2_pressed() -> void:
 	if page < 0:
 		page = 0
 	_update_page_indicator()
-	_set_up_columns()
+	_update_columns()
 
 
 func _update_page_indicator() -> void:
@@ -199,7 +219,7 @@ func _filter_players(player_base: Array[Player]) -> void:
 	else:
 		players = all_players
 
-	_set_up_columns()
+	_update_columns()
 	_update_page_indicator()
 
 
