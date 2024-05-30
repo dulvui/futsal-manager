@@ -2,23 +2,18 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name ColorNumber
+class_name ColorLabel
 extends Label
 
 @export var value_name: String
 
-func _ready() -> void:
-	if value_name:
-		tooltip_text = value_name
-
-
 func set_up(p_value_name: String) -> void:
 	value_name = p_value_name
-
+	tooltip_text = value_name
 
 func set_value(value: int) -> void:
 	text = str(value)
-	
+
 	if not label_settings:
 		label_settings = LabelSettings.new()
 	

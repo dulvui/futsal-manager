@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://mvca6wjq0pv6"]
+[gd_scene load_steps=3 format=3 uid="uid://mvca6wjq0pv6"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_pb4bf"]
 [ext_resource type="Script" path="res://src/ui_components/player_list/player_list.gd" id="2_ajejk"]
-[ext_resource type="PackedScene" uid="uid://dismanb8n0kd" path="res://src/ui_components/player_list/player_list_row/player_list_row.tscn" id="3_8jtpb"]
-[ext_resource type="PackedScene" uid="uid://dxwj6lw6a0xb6" path="res://src/ui_components/player_list/player_list_header/player_list_header.tscn" id="3_33f82"]
 
 [node name="PlayerList" type="VBoxContainer"]
 anchors_preset = 15
@@ -41,60 +39,7 @@ layout_mode = 2
 [node name="PositionSelect" type="OptionButton" parent="Filters"]
 layout_mode = 2
 
-[node name="PlayerListHeader" parent="." instance=ExtResource("3_33f82")]
-layout_mode = 2
-
-[node name="PlayerRows" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 2
-
-[node name="PlayerListRow" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow2" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow3" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow4" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow5" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow6" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow7" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow8" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow9" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow10" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow11" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow12" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow13" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow14" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow15" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
-layout_mode = 2
-
-[node name="PlayerListRow16" parent="PlayerRows" instance=ExtResource("3_8jtpb")]
+[node name="Columns" type="HBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="Footer" type="HBoxContainer" parent="."]
@@ -127,7 +72,6 @@ text = ">"
 [connection signal="item_selected" from="Filters/LeagueSelect" to="." method="_on_league_select_item_selected"]
 [connection signal="item_selected" from="Filters/TeamSelect" to="." method="_on_team_select_item_selected"]
 [connection signal="item_selected" from="Filters/PositionSelect" to="." method="_on_position_select_item_selected"]
-[connection signal="resized" from="PlayerRows" to="." method="_on_player_rows_resized"]
 [connection signal="pressed" from="Footer/Prev" to="." method="_on_prev_pressed"]
 [connection signal="pressed" from="Footer/Prev2" to="." method="_on_prev_2_pressed"]
 [connection signal="pressed" from="Footer/Next2" to="." method="_on_next_2_pressed"]
