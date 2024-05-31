@@ -88,6 +88,7 @@ func _set_up_columns() -> void:
 			columns_container.add_child(col)
 			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
 			col.set_up(value, values)
+			col.sort.connect(_sort_players_by_attributes.bind(key, value))
 			columns.append(col)
 
 
@@ -184,6 +185,26 @@ func _sort_players_by_surname() -> void:
 				return a.surname < b.surname
 			else:
 				return a.surname > b.surname
+	)
+	
+	# after sorting, apply filters
+	# so if filters a removed, sort order is kept
+	_filter_players(all_players)
+
+
+func _sort_players_by_attributes(key: String, value: String) -> void:
+	var sort_key: String = key + value
+	if sort_key in sorting:
+		sorting[sort_key] = not sorting[sort_key]
+	else:
+		sorting[sort_key] = true
+	
+	all_players.sort_custom(
+		func(a:Player, b:Player) -> bool:
+			if sorting[sort_key]:
+				return a.get_value(key, value) > b.get_value(key, value)
+			else:
+				return a.get_value(key, value) < b.get_value(key, value)
 	)
 	
 	# after sorting, apply filters
