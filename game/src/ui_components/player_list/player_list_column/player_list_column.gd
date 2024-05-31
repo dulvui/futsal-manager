@@ -7,11 +7,10 @@ extends VBoxContainer
 
 const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_label/color_label.tscn")
 
-signal sort(key: String)
+signal sort
 
 @onready var sort_button: Button = $SortButton
 
-var key: String
 var color_labels: Array[ColorLabel]
 
 func _ready() -> void:
@@ -19,14 +18,13 @@ func _ready() -> void:
 
 
 func set_up(p_key:String, values: Array) -> void:
-	key = p_key
-	sort_button.text = key.substr(0,3)
+	sort_button.text = p_key.substr(0,3)
 	
 	for value: Variant in values:
 		var label: ColorLabel = ColorLabelScene.instantiate()
 		color_labels.append(label)
 		add_child(label)
-		label.set_up(key)
+		label.set_up(p_key)
 		label.set_value(value)
 
 
@@ -40,4 +38,4 @@ func update_values(values: Array) -> void:
 
 
 func _on_sort_button_pressed() -> void:
-	sort.emit(key)
+	sort.emit()

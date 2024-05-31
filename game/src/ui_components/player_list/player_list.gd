@@ -10,7 +10,6 @@ signal select_player(player: Player)
 const PlayerListColumnScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
 
 @onready var filter_container: HBoxContainer = $Filters
-@onready var player_rows: VBoxContainer = $PlayerRows
 @onready var team_select: OptionButton = $Filters/TeamSelect
 @onready var league_select: OptionButton = $Filters/LeagueSelect
 @onready var pos_select: OptionButton = $Filters/PositionSelect
@@ -23,9 +22,8 @@ var columns: Array[PlayerListColumn] = []
 
 var active_team_id: int
 
+var sorting: Dictionary = {}
 var filters: Dictionary = {}
-var active_info_type: int = 0
-var team_search: String = ""
 
 var all_players: Array[Player] = []
 var players: Array[Player] = []
@@ -72,26 +70,14 @@ func set_up(p_active_team_id:int = -1) -> void:
 func _set_up_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
-	## names
-	#var names_col: VBoxContainer = VBoxContainer.new()
-	#columns_container.add_child(names_col)
-	#var names_button: Button = Button.new()
-	#names_button.text = "NAME"
-	#names_col.add_child(names_button)
-	#names_col.add_child(HSeparator.new())
-	#var player_names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
-	#for player_name:String in player_names:
-		#var b: Button = Button.new()
-		#b.custom_minimum_size.y = 32
-		#b.text = player_name
-		#names_col.add_child(b)
-	
 	# names
 	columns_container.add_child(VSeparator.new())
 	var name_col:PlayerListColumn = PlayerListColumnScene.instantiate()
 	columns_container.add_child(name_col)
 	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
 	name_col.set_up("NAME", names)
+	name_col.custom_minimum_size.x = 200
+	name_col.sort.connect(_sort_players_by_surname)
 	columns.append(name_col)
 
 	# attributes
@@ -143,7 +129,6 @@ func _reset_options() -> void:
 	league_select.selected = 0
 	pos_select.selected = 0
 	team_select.selected = 0
-	active_info_type = 0
 
 
 func _on_player_profile_select(player: Player) -> void:
@@ -187,6 +172,25 @@ func _update_page_indicator() -> void:
 	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
 
 
+func _sort_players_by_surname() -> void:
+	if "surname" in sorting:
+		sorting["surname"] = not sorting["surname"]
+	else:
+		sorting["surname"] = true
+	
+	all_players.sort_custom(
+		func(a:Player, b:Player) -> bool:
+			if sorting["surname"]:
+				return a.surname < b.surname
+			else:
+				return a.surname > b.surname
+	)
+	
+	# after sorting, apply filters
+	# so if filters a removed, sort order is kept
+	_filter_players(all_players)
+
+
 func _filter() -> void:
 	_filter_players(players)
 
@@ -209,9 +213,9 @@ func _filter_players(player_base: Array[Player]) -> void:
 			for i:int in filters.keys().size():
 				key = filters.keys()[i]
 				filter_counter += 1
-				value = filters[key] as String
+				value = str(filters[key])
 				value = value.to_upper()
-				if not (player[key] as String).to_upper().contains(value):
+				if not str(player[key]).to_upper().contains(value):
 					filter_counter += 1
 			if filter_counter == filters.size():
 				filtered_players.append(player)
@@ -244,7 +248,7 @@ func _on_position_select_item_selected(index: int) -> void:
 		filters["position"] = Player.Position.values()[index - 1]
 		_filter()
 	else:
-		filters["position"] = ""
+		filters.erase("position")
 		_unfilter()
 
 
@@ -273,5 +277,5 @@ func _on_team_select_item_selected(index: int) -> void:
 		filters["team"] = team_select.get_item_text(index)
 		_filter()
 	else:
-		filters["team"] = ""
+		filters.erase("team")
 		_unfilter()
