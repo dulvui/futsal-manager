@@ -81,8 +81,8 @@ func _set_up_columns() -> void:
 	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
+		columns_container.add_child(VSeparator.new())
 		for value: String in Const.ATTRIBUTES[key]:
-			columns_container.add_child(VSeparator.new())
 			var col:PlayerListColumn = PlayerListColumnScene.instantiate()
 			columns_container.add_child(col)
 			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
