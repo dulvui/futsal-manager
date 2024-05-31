@@ -13,6 +13,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_pb4bf")
+alignment = 1
 script = ExtResource("2_ajejk")
 
 [node name="Filters" type="HBoxContainer" parent="."]
@@ -41,6 +42,7 @@ layout_mode = 2
 
 [node name="Columns" type="HBoxContainer" parent="."]
 layout_mode = 2
+alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]
 modulate = Color(1, 1, 1, 0)

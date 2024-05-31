@@ -24,3 +24,6 @@ func set_value(value: Variant) -> void:
 			label_settings.font_color = Color.BLUE
 		else:
 			label_settings.font_color = Color.DARK_GREEN
+	
+	else:
+		horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT

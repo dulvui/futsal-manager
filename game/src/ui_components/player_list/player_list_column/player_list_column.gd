@@ -18,12 +18,18 @@ func _ready() -> void:
 
 
 func set_up(p_key:String, values: Array) -> void:
-	sort_button.text = p_key.substr(0,3)
+	if p_key == "NAME":
+		sort_button.text = p_key
+	else:
+		sort_button.text = p_key.substr(0,2)
+	
+	sort_button.tooltip_text = p_key
 	
 	for value: Variant in values:
 		var label: ColorLabel = ColorLabelScene.instantiate()
 		color_labels.append(label)
 		add_child(label)
+		label.tooltip_text = p_key
 		label.set_up(p_key)
 		label.set_value(value)
 

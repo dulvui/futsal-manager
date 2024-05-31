@@ -71,7 +71,6 @@ func _set_up_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
 	# names
-	columns_container.add_child(VSeparator.new())
 	var name_col:PlayerListColumn = PlayerListColumnScene.instantiate()
 	columns_container.add_child(name_col)
 	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
@@ -79,11 +78,11 @@ func _set_up_columns() -> void:
 	name_col.custom_minimum_size.x = 200
 	name_col.sort.connect(_sort_players_by_surname)
 	columns.append(name_col)
-
+	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
-		columns_container.add_child(VSeparator.new())
 		for value: String in Const.ATTRIBUTES[key]:
+			columns_container.add_child(VSeparator.new())
 			var col:PlayerListColumn = PlayerListColumnScene.instantiate()
 			columns_container.add_child(col)
 			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
