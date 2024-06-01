@@ -79,6 +79,11 @@ func _set_up_columns() -> void:
 	name_col.sort.connect(_sort_players_by_surname)
 	columns.append(name_col)
 	
+	# connect player select signal
+	for i: int in visible_players.size():
+		name_col.color_labels[i].enable_button()
+		name_col.color_labels[i].pressed.connect(func() -> void: select_player.emit(visible_players[i]))
+	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
 		columns_container.add_child(VSeparator.new())
@@ -299,3 +304,4 @@ func _on_team_select_item_selected(index: int) -> void:
 	else:
 		filters.erase("team")
 		_unfilter()
+

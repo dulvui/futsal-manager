@@ -9,9 +9,11 @@ const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_labe
 
 signal sort
 
+
 @onready var sort_button: Button = $SortButton
 
-var color_labels: Array[ColorLabel]
+var color_labels: Array[ColorLabel] = []
+
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
@@ -32,6 +34,8 @@ func set_up(p_key:String, values: Array) -> void:
 		label.tooltip_text = p_key
 		label.set_up(p_key)
 		label.set_value(value)
+		if p_key == "NAME":
+			label.enable_button()
 
 
 func update_values(values: Array) -> void:

@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_00f8m"]
 [ext_resource type="Script" path="res://src/ui_components/color_label/color_label.gd" id="2_mr605"]
 
-[node name="ColorNumber" type="Label"]
+[node name="ColorNumber" type="Button"]
 custom_minimum_size = Vector2(32, 32)
 anchors_preset = 8
 anchor_left = 0.5
@@ -18,10 +18,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-mouse_filter = 0
 theme = ExtResource("1_00f8m")
+flat = true
+text_overrun_behavior = 3
+script = ExtResource("2_mr605")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
-text_overrun_behavior = 3
-script = ExtResource("2_mr605")
