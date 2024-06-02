@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8mhb22bae1my"]
+[gd_scene load_steps=12 format=3 uid="uid://c8mhb22bae1my"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/dashboard/dashboard.gd" id="2"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dual4o5whtk85" path="res://src/ui_components/info/info.tscn" id="8_bk8g0"]
 [ext_resource type="PackedScene" uid="uid://mvca6wjq0pv6" path="res://src/ui_components/player_list/player_list.tscn" id="8_nkdvo"]
 [ext_resource type="PackedScene" uid="uid://ccipqeqmthtfr" path="res://src/ui_components/transfers/contract_offer/contract_offer.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dtvkd1ks3xiqc" path="res://src/ui_components/player_profile/player_profile.tscn" id="11_838pl"]
 
 [node name="Dashboard" type="Control"]
 layout_mode = 3
@@ -170,6 +171,10 @@ layout_mode = 1
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="PlayerProfile" parent="." instance=ExtResource("11_838pl")]
+visible = false
+layout_mode = 1
+
 [connection signal="email_action" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_email_email_action"]
 [connection signal="select_player" from="MainContainer/VBoxContainer/MainView/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Menu" to="." method="_on_Menu_pressed"]
@@ -183,3 +188,4 @@ grow_vertical = 2
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="cancel" from="ContractOffer" to="." method="_on_ContractOffer_cancel"]
 [connection signal="confirm" from="ContractOffer" to="." method="_on_ContractOffer_confirm"]
+[connection signal="select" from="PlayerProfile" to="." method="_on_player_profile_select"]

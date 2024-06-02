@@ -7,7 +7,7 @@ extends Control
 
 signal select(player: Player)
 
-const DetailNumber: PackedScene = preload("res://src/ui_components/color_number/color_number.tscn")
+const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_label/color_label.tscn")
 
 var player: Player
 
@@ -26,7 +26,7 @@ var player: Player
 @onready var goals: Label = $TabContainer/History/Actual/Goals
 
 
-func set_up_info(_player: Player) -> void:
+func set_player(_player: Player) -> void:
 	player = _player
 
 	player_name.text = player.name + " " + player.surname
@@ -63,9 +63,10 @@ func set_up_info(_player: Player) -> void:
 			label.tooltip_text = tr(key.to_upper())
 			#label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 			attributes.get_node(attribute.capitalize()).add_child(label)
-			var value: ColorNumber = DetailNumber.instantiate()
+			var value: ColorLabel = ColorLabelScene.instantiate()
 			attributes.get_node(attribute.capitalize()).add_child(value)
-			value.set_up((player.attributes.get(attribute) as Resource).get(key))
+			value.set_up(key)
+			value.set_value(player.get_value(attribute,key))
 
 	#history
 	goals.text = str(player.statistics[Config.current_season].goals)

@@ -34,6 +34,7 @@ const DASHBOARD_DAY_DELAY: float = 0.5
 # pop ups
 @onready var player_offer: PlayerOffer = $PlayerOffer
 @onready var contract_offer: ContractOffer = $ContractOffer
+@onready var player_profile: PlayerProfile = $PlayerProfile
 
 var match_ready: bool = false
 var next_season: bool = false
@@ -103,7 +104,12 @@ func _on_Calendar_pressed() -> void:
 
 
 func _on_all_player_list_select_player(player: Player) -> void:
-	print("offer for " + player.surname)
+	player_profile.set_player(player)
+	player_profile.show()
+
+
+func _on_player_profile_select(player: Player) -> void:
+	player_profile.hide()
 	player_offer.set_player(player)
 	player_offer.show()
 
@@ -219,3 +225,5 @@ func _on_ContractOffer_cancel() -> void:
 
 func _on_ContractOffer_confirm() -> void:
 	contract_offer.hide()
+
+
