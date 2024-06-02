@@ -14,12 +14,15 @@ signal sort
 
 var color_labels: Array[ColorLabel] = []
 
+var col_name: String
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
 
-func set_up(p_key:String, values: Array) -> void:
+func set_up(p_key:String, values: Array, p_col_name: String = "") -> void:
+	col_name = p_col_name
+	
 	if p_key == "NAME":
 		sort_button.text = p_key
 	else:

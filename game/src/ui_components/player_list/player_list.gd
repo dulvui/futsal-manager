@@ -15,8 +15,12 @@ const PlayerListColumnScene = preload("res://src/ui_components/player_list/playe
 @onready var pos_select: OptionButton = $Filters/PositionSelect
 @onready var footer: HBoxContainer = $Footer
 @onready var page_indicator: Label = $Footer/PageIndicator
+@onready var active_view_option_button: SwitchOptionButton = $Filters/ActiveView
 
 @onready var columns_container: HBoxContainer = $Columns
+
+const views:Array[String] = ["mental", "physical", "technical", "goalkeeper"]
+var active_view: String = views[0]
 
 var columns: Array[PlayerListColumn] = []
 
@@ -49,6 +53,8 @@ func _ready() -> void:
 	for league: League in Config.leagues.list:
 		league_select.add_item(league.name)
 	
+	active_view_option_button.set_up(views)
+	
 	# setup automatically, if run in editor and is run by 'Run current scene'
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
 		set_up()
@@ -65,6 +71,7 @@ func set_up(p_active_team_id:int = -1) -> void:
 
 	_set_up_columns()
 	_update_page_indicator()
+	_show_active_column()
 
 
 func _set_up_columns() -> void:
@@ -94,7 +101,7 @@ func _set_up_columns() -> void:
 			var col:PlayerListColumn = PlayerListColumnScene.instantiate()
 			columns_container.add_child(col)
 			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
-			col.set_up(value, values)
+			col.set_up(value, values, key)
 			col.sort.connect(_sort_players_by_attributes.bind(key, value))
 			columns.append(col)
 
@@ -114,6 +121,11 @@ func _update_columns() -> void:
 			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
 			col.update_values(values)
 			col_counter += 1
+
+
+func _show_active_column() -> void:
+	for col: PlayerListColumn in columns:
+		col.visible = col.col_name == "" or col.col_name == active_view
 
 
 func _set_up_players(p_reset_options: bool = true) -> void:
@@ -308,3 +320,7 @@ func _on_team_select_item_selected(index: int) -> void:
 		filters.erase("team")
 		_unfilter()
 
+
+func _on_active_view_item_selected(index: int) -> void:
+	active_view = views[index]
+	_show_active_column()
