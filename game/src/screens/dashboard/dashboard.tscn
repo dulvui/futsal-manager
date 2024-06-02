@@ -105,6 +105,18 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="PlayerProfile" parent="MainContainer/VBoxContainer/MainView/Content" instance=ExtResource("11_838pl")]
+visible = false
+layout_mode = 2
+
+[node name="PlayerOffer" parent="MainContainer/VBoxContainer/MainView/Content" instance=ExtResource("8")]
+visible = false
+layout_mode = 2
+
+[node name="ContractOffer" parent="MainContainer/VBoxContainer/MainView/Content" instance=ExtResource("9")]
+visible = false
+layout_mode = 2
+
 [node name="HSeparator" type="HSeparator" parent="MainContainer/VBoxContainer/MainView"]
 layout_mode = 2
 
@@ -159,24 +171,14 @@ text = "NEXT_MATCH"
 layout_mode = 2
 text = "NEXT_DAY"
 
-[node name="PlayerOffer" parent="." instance=ExtResource("8")]
-visible = false
-layout_mode = 1
-offset_left = 0.0
-offset_right = 0.0
-
-[node name="ContractOffer" parent="." instance=ExtResource("9")]
-visible = false
-layout_mode = 1
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PlayerProfile" parent="." instance=ExtResource("11_838pl")]
-visible = false
-layout_mode = 1
-
 [connection signal="email_action" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_email_email_action"]
 [connection signal="select_player" from="MainContainer/VBoxContainer/MainView/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
+[connection signal="cancel" from="MainContainer/VBoxContainer/MainView/Content/PlayerProfile" to="." method="_on_player_profile_cancel"]
+[connection signal="select" from="MainContainer/VBoxContainer/MainView/Content/PlayerProfile" to="." method="_on_player_profile_select"]
+[connection signal="cancel" from="MainContainer/VBoxContainer/MainView/Content/PlayerOffer" to="." method="_on_player_offer_cancel"]
+[connection signal="confirm" from="MainContainer/VBoxContainer/MainView/Content/PlayerOffer" to="." method="_on_player_offer_confirm"]
+[connection signal="cancel" from="MainContainer/VBoxContainer/MainView/Content/ContractOffer" to="." method="_on_contract_offer_cancel"]
+[connection signal="confirm" from="MainContainer/VBoxContainer/MainView/Content/ContractOffer" to="." method="_on_contract_offer_confirm"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Menu" to="." method="_on_Menu_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Email" to="." method="_on_Email_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Info" to="." method="_on_info_pressed"]
@@ -186,6 +188,3 @@ layout_mode = 1
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/NextMatch" to="." method="_on_next_match_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="cancel" from="ContractOffer" to="." method="_on_ContractOffer_cancel"]
-[connection signal="confirm" from="ContractOffer" to="." method="_on_ContractOffer_confirm"]
-[connection signal="select" from="PlayerProfile" to="." method="_on_player_profile_select"]

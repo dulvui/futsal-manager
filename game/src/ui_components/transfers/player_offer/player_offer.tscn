@@ -115,5 +115,5 @@ text = "CONFIRM"
 [connection signal="text_changed" from="VBoxContainer/Details/Money/Amount" to="." method="_on_Amount_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Details/Money/More" to="." method="_on_More_pressed"]
 [connection signal="item_selected" from="VBoxContainer/Details/ExchangePlayers" to="." method="_on_ExchangePlayers_item_selected"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Cancel" to="." method="_on_Cancel_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Confirm" to="." method="_on_Confirm_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]

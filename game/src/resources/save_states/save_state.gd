@@ -13,7 +13,6 @@ extends Resource
 @export var generation_gender: Const.Gender
 @export var current_season: int
 @export var speed_factor: int
-@export var dashboard_active_content: int
 @export var id_by_type: Dictionary
 # metadata, only used for state entry
 @export var meta_team_name: String
@@ -30,7 +29,6 @@ func _init(
 	p_generation_gender: Const.Gender = 0,
 	p_current_season: int = 0,
 	p_speed_factor: int = 1,
-	p_dashboard_active_content: int = 0,
 	p_id: String = str(int(Time.get_unix_time_from_system())),
 	p_id_by_type: Dictionary = {},
 	p_config_version: String = Config.CONFIG_VERSION,
@@ -49,7 +47,6 @@ func _init(
 	generation_gender = p_generation_gender
 	current_season = p_current_season
 	speed_factor = p_speed_factor
-	dashboard_active_content = p_dashboard_active_content
 	id_by_type = p_id_by_type
 	meta_team_name = p_meta_team_name
 	meta_manager_name = p_meta_manager_name

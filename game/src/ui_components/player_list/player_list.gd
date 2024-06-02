@@ -68,6 +68,9 @@ func set_up(p_active_team_id:int = -1) -> void:
 
 
 func _set_up_columns() -> void:
+	for child in columns_container.get_children():
+		child.queue_free()
+	
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
 	# names

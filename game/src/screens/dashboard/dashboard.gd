@@ -4,9 +4,21 @@
 
 extends Control
 
-enum ContentViews { EMAIL, CALENDAR, TABLE, ALL_PLAYERS, FORMATION, INFO }
+enum ContentViews { 
+	EMAIL,
+	CALENDAR,
+	TABLE,
+	ALL_PLAYERS,
+	FORMATION,
+	INFO,
+	PLAYER_OFFER,
+	CONTRACT_OFFER,
+	PLAYER_PROFILE,
+}
 
 const DASHBOARD_DAY_DELAY: float = 0.5
+
+var active_view:ContentViews = 0
 
 @onready var team: Team = Config.team
 
@@ -30,11 +42,9 @@ const DASHBOARD_DAY_DELAY: float = 0.5
 # full screen views
 @onready var formation: VisualFormation = $MainContainer/VBoxContainer/MainView/Content/Formation
 @onready var all_players_list: PlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
-
-# pop ups
-@onready var player_offer: PlayerOffer = $PlayerOffer
-@onready var contract_offer: ContractOffer = $ContractOffer
-@onready var player_profile: PlayerProfile = $PlayerProfile
+@onready var player_offer: PlayerOffer = $MainContainer/VBoxContainer/MainView/Content/PlayerOffer
+@onready var contract_offer: ContractOffer = $MainContainer/VBoxContainer/MainView/Content/ContractOffer
+@onready var player_profile: PlayerProfile = $MainContainer/VBoxContainer/MainView/Content/PlayerProfile
 
 var match_ready: bool = false
 var next_season: bool = false
@@ -105,13 +115,16 @@ func _on_Calendar_pressed() -> void:
 
 func _on_all_player_list_select_player(player: Player) -> void:
 	player_profile.set_player(player)
-	player_profile.show()
+	_show_active_view(ContentViews.PLAYER_PROFILE)
 
 
 func _on_player_profile_select(player: Player) -> void:
-	player_profile.hide()
 	player_offer.set_player(player)
-	player_offer.show()
+	_show_active_view(ContentViews.PLAYER_OFFER)
+
+
+func _on_player_profile_cancel() -> void:
+	_show_active_view(ContentViews.ALL_PLAYERS)
 
 
 func _hide_all() -> void:
@@ -121,14 +134,17 @@ func _hide_all() -> void:
 	formation.hide()
 	all_players_list.hide()
 	info.hide()
+	player_offer.hide()
+	contract_offer.hide()
+	player_profile.hide()
 
 
-func _show_active_view(active_view: int = -1) -> void:
+func _show_active_view(p_active_view: int = -1) -> void:
 	_hide_all()
-	if active_view > -1:
-		Config.dashboard_active_content = active_view
+	if p_active_view > -1:
+		active_view = p_active_view
 
-	match Config.dashboard_active_content:
+	match active_view:
 		ContentViews.EMAIL:
 			email.show()
 		ContentViews.TABLE:
@@ -141,6 +157,12 @@ func _show_active_view(active_view: int = -1) -> void:
 			all_players_list.show()
 		ContentViews.INFO:
 			info.show()
+		ContentViews.PLAYER_OFFER:
+			player_offer.show()
+		ContentViews.PLAYER_PROFILE:
+			player_profile.show()
+		ContentViews.CONTRACT_OFFER:
+			contract_offer.show()
 		_:
 			email.show()
 
@@ -205,25 +227,28 @@ func _next_day() -> void:
 func _on_email_email_action(message: EmailMessage) -> void:
 	if message.type == EmailMessage.Type.CONTRACT_OFFER:
 		contract_offer.set_up(TransferUtil.get_transfer_id(message.foreign_id))
-		contract_offer.show()
+		_show_active_view(ContentViews.CONTRACT_OFFER)
 	else:
 		print("ERROR: Email action with no type. Text: " + message.text)
 
 
-func _on_PlayerOffer_hide() -> void:
-	player_offer.hide()
+func _on_contract_offer_cancel() -> void:
+	contract_offer.hide()
+	_show_active_view(ContentViews.EMAIL)
 
 
-func _on_PlayerOffer_confirm() -> void:
+func _on_contract_offer_confirm() -> void:
+	contract_offer.hide()
+	_show_active_view(ContentViews.EMAIL)
+
+
+func _on_player_offer_confirm() -> void:
 	email.update_messages()
 	player_offer.hide()
+	_show_active_view(ContentViews.ALL_PLAYERS)
 
 
-func _on_ContractOffer_cancel() -> void:
-	contract_offer.hide()
-
-
-func _on_ContractOffer_confirm() -> void:
-	contract_offer.hide()
+func _on_player_offer_cancel() -> void:
+	_show_active_view(ContentViews.ALL_PLAYERS)
 
 

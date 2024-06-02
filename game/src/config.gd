@@ -27,7 +27,6 @@ var generation_gender: Const.Gender
 var current_season: int
 # global game states
 var speed_factor: int
-var dashboard_active_content: int
 # saves current id for resources
 var id_by_type: Dictionary
 
@@ -76,7 +75,6 @@ func load_save_state() -> void:
 		id_by_type = save_sate.id_by_type
 		current_season = save_sate.current_season
 		speed_factor = save_sate.speed_factor
-		dashboard_active_content = save_sate.dashboard_active_content
 		generation_seed = save_sate.generation_seed
 		generation_state = save_sate.generation_state
 		generation_gender = save_sate.generation_gender
@@ -91,7 +89,6 @@ func save_active_state() -> void:
 	save_sate.id_by_type = id_by_type
 	save_sate.current_season = current_season
 	save_sate.speed_factor = speed_factor
-	save_sate.dashboard_active_content = dashboard_active_content
 	save_sate.generation_seed = generation_seed
 	save_sate.generation_state = generation_state
 	save_sate.generation_gender = generation_gender

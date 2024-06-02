@@ -6,6 +6,7 @@ class_name PlayerOffer
 extends PanelContainer
 
 signal confirm
+signal cancel
 
 var team: Team
 var player: Player
@@ -128,7 +129,11 @@ func _on_Amount_text_changed(new_text: String) -> void:
 	_calc_total()
 
 
-func _on_Confirm_pressed() -> void:
+func _on_cancel_pressed() -> void:
+	cancel.emit()
+
+
+func _on_confirm_pressed() -> void:
 	var transfer: Transfer = Transfer.new()
 	transfer.player = player
 	transfer.price = amount
@@ -141,9 +146,3 @@ func _on_Confirm_pressed() -> void:
 
 	TransferUtil.make_offer(transfer)
 	confirm.emit()
-
-	hide()
-
-
-func _on_Cancel_pressed() -> void:
-	hide()

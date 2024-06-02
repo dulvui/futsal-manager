@@ -3,27 +3,28 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name PlayerProfile
-extends Control
+extends VBoxContainer
 
 signal select(player: Player)
+signal cancel
 
 const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_label/color_label.tscn")
 
 var player: Player
 
-@onready var info: Control = $TabContainer/Info
-@onready var attributes: Control = $TabContainer/Attributes
+@onready var info: Control = $Info
+@onready var attributes: Control = $Attributes
 
-@onready var player_name: Label = $TabContainer/Info/Info/Name
-@onready var pos: Label = $TabContainer/Info/Info/Position
-@onready var age: Label = $TabContainer/Info/Info/Age
-@onready var foot: Label = $TabContainer/Info/Info/Foot
-@onready var nationality: Label = $TabContainer/Info/Info/Nationality
-@onready var team: Label = $TabContainer/Info/Info/Team
-@onready var nr: Label = $TabContainer/Info/Info/Nr
-@onready var attributes_average: Label = $TabContainer/Info/Info/AttributesAverage
-@onready var prestige: Label = $TabContainer/Info/Info/Prestige
-@onready var goals: Label = $TabContainer/History/Actual/Goals
+@onready var player_name: Label = $Info/Name
+@onready var pos: Label = $Info/Position
+@onready var age: Label = $Info/Age
+@onready var foot: Label = $Info/Foot
+@onready var nationality: Label = $Info/Nationality
+@onready var team: Label = $Info/Team
+@onready var nr: Label = $Info/Nr
+@onready var attributes_average: Label = $Info/AttributesAverage
+@onready var prestige: Label = $Info/Prestige
+@onready var goals: Label = $History/Goals
 
 
 func set_player(_player: Player) -> void:
@@ -71,12 +72,10 @@ func set_player(_player: Player) -> void:
 	#history
 	goals.text = str(player.statistics[Config.current_season].goals)
 
-	show()
-
 
 func _on_select_pressed() -> void:
 	select.emit(player)
 
 
 func _on_close_pressed() -> void:
-	hide()
+	cancel.emit()
