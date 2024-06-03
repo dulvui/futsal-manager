@@ -31,6 +31,7 @@ var left_half: bool
 # positions
 var start_pos: Vector2
 var pos: Vector2
+var last_pos: Vector2
 # movements
 var direction: Vector2
 var destination: Vector2
@@ -93,6 +94,7 @@ func kick_off(p_pos: Vector2) -> void:
 
 func move() -> void:
 	if state != State.RECEIVE and speed > 0:
+		last_pos = pos
 		pos += direction * speed * Const.SPEED
 		speed -= DECELERATION
 		stamina -= 0.01
@@ -125,7 +127,7 @@ func set_pos(p_pos: Vector2 = pos) -> void:
 func set_destination(p_destination: Vector2) -> void:
 	p_destination = bound_field(p_destination)
 
-	if pos.distance_to(p_destination) > 20:
+	if pos.distance_to(p_destination) > 5:
 		destination = p_destination
 		direction = pos.direction_to(destination)
 		# TODO use speed of attributes

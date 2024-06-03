@@ -21,10 +21,19 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int, update_interv
 	# get colors
 	var home_color: Color = p_home_team.get_home_color()
 	var away_color: Color = p_away_team.get_away_color(home_color)
-	home_team.set_up(match_engine.home_team, ball, home_color)
-	away_team.set_up(match_engine.away_team, ball, away_color)
+	home_team.set_up(match_engine.home_team, ball, home_color, update_interval)
+	away_team.set_up(match_engine.away_team, ball, away_color, update_interval)
 
 	visual_field.set_up(match_engine.field)
+
+
+func update(update_interval: float) -> void:
+	match_engine.update()
+	
+	# update time intervals for position interpolations
+	ball.update(update_interval)
+	home_team.update(update_interval)
+	away_team.update(update_interval)
 
 
 func half_time() -> void:

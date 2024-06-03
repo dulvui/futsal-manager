@@ -15,10 +15,15 @@ var left_half: bool
 # positions
 var start_pos: Vector2
 var pos: Vector2
+var last_pos: Vector2
 # movements
 var direction: Vector2
 var destination: Vector2
 var speed: float
+
+# base positions
+var left_base: Vector2
+var right_base: Vector2
 
 var interception_radius: int  #TODO reduce radius with low stamina
 # so goalkeeper cant block infinitly,
@@ -40,8 +45,12 @@ func set_up(
 
 	start_pos = field.get_goalkeeper_pos(left_half)
 	pos = start_pos
+	last_pos = start_pos
 
 	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 10
+	
+	left_base = Vector2(field.line_left + 30, field.size.y / 2)
+	right_base = Vector2(field.line_right - 30,  field.size.y / 2)
 
 
 func defend() -> void:
@@ -73,49 +82,60 @@ func follow_ball() -> void:
 	# only follow if in own half
 	if left_half:
 		if ball.pos.x < field.size.x / 2:
-			pos = ball.pos
-			set_penalty_area_bounds()
+			set_destination(ball.pos)
 		else:
-			pos.y = field.size.y / 2
-			pos.x = field.line_left + 30
+			set_destination(left_base)
+			
 	else:
 		if ball.pos.x > field.size.x / 2:
-			pos = ball.pos
-			set_penalty_area_bounds()
+			set_destination(ball.pos)
 		else:
-			pos.y = field.size.y / 2
-			pos.x = field.line_right - 30
+			set_destination(right_base)
 
 
-func set_penalty_area_bounds() -> void:
-	if pos.y > field.penalty_area_y_top + 10:
-		pos.y = field.penalty_area_y_top + 10
-	elif pos.y < field.penalty_area_y_bottom - 10:
-		pos.y = field.penalty_area_y_bottom - 10
+func get_penalty_area_bounds(p_pos: Vector2) -> Vector2:
+	if p_pos.y > field.penalty_area_y_top + 10:
+		p_pos.y = field.penalty_area_y_top + 10
+	elif p_pos.y < field.penalty_area_y_bottom - 10:
+		p_pos.y = field.penalty_area_y_bottom - 10
 
 	if left_half:
-		if pos.x > field.penalty_area_left_x + 10:
-			pos.x = field.penalty_area_left_x + 10
-		elif pos.x < -10:
-			pos.x = -10
+		if p_pos.x > field.penalty_area_left_x + 10:
+			p_pos.x = field.penalty_area_left_x + 10
+		elif p_pos.x < -10:
+			p_pos.x = -10
 	else:
-		if pos.x < field.penalty_area_right_x - 10:
-			pos.x = field.penalty_area_right_x - 10
-		elif pos.x > field.size.x + field.BORDER_SIZE + 10:
-			pos.x = field.size.x + field.BORDER_SIZE + 10
+		if p_pos.x < field.penalty_area_right_x - 10:
+			p_pos.x = field.penalty_area_right_x - 10
+		elif p_pos.x > field.size.x + field.BORDER_SIZE + 10:
+			p_pos.x = field.size.x + field.BORDER_SIZE + 10
+	
+	return p_pos
 
 
 func move() -> void:
 	if speed > 0:
+		last_pos = pos
 		pos += direction * speed * Const.SPEED
 
-	if pos.distance_to(destination) < 5 or speed == 0:
+	if pos.distance_to(destination) < 4 or speed <= 0:
 		destination = Vector2.INF
 		stop()
 
 
+func set_destination(p_destination: Vector2) -> void:
+	p_destination = get_penalty_area_bounds(p_destination)
+
+	if pos.distance_to(p_destination) > 1:
+		destination = p_destination
+		direction = pos.direction_to(destination)
+		# TODO use speed of attributes
+		speed = Config.match_rng.randi_range(10, 20)
+
+
 func stop() -> void:
 	speed = 0
+	last_pos = pos
 
 
 func is_touching_ball() -> bool:

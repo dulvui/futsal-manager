@@ -12,18 +12,32 @@ extends Node2D
 var sim_goal_player: SimGoalkeeper
 var visual_ball: VisualBall
 
+var last_update_time:float
+var update_interval:float
+var factor: float
+
 
 func _physics_process(delta: float) -> void:
-	global_position = global_position.lerp(
-		sim_goal_player.pos, delta * Config.speed_factor * Const.TICKS_PER_SECOND
-	)
+	last_update_time += delta
+	factor = last_update_time / update_interval
+	position = sim_goal_player.last_pos.lerp(sim_goal_player.pos, factor)
+	
 	sprites.look_at(visual_ball.global_position)
 
 
-func set_up(p_sim_goal_player: SimGoalkeeper, p_visual_ball: VisualBall, team_color: Color) -> void:
+func set_up(p_sim_goal_player: SimGoalkeeper, p_visual_ball: VisualBall, team_color: Color, p_update_interval: float) -> void:
 	sim_goal_player = p_sim_goal_player
 	visual_ball = p_visual_ball
+	
+	update_interval = p_update_interval
+	last_update_time = 0.0
+	factor = 1.0
+	
 	global_position = sim_goal_player.pos
 	body.modulate = team_color.darkened(0.5)
-
 	label.text = str(sim_goal_player.player_res.nr) + " " + (sim_goal_player.player_res.surname)
+
+
+func update(p_update_interval: float) -> void:
+	update_interval = p_update_interval
+	last_update_time = 0
