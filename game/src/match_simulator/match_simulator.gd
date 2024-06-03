@@ -43,6 +43,7 @@ func _on_timer_timeout() -> void:
 	ticks += 1
 	if ticks == Const.TICKS_PER_SECOND:
 		ticks = 0
+		time += 1
 		_update_time()
 
 
