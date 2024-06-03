@@ -13,10 +13,10 @@ extends Node2D
 var match_engine: MatchEngine
 
 
-func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
+func set_up(p_home_team: Team, p_away_team: Team, match_seed: int, update_interval: float) -> void:
 	match_engine = MatchEngine.new()
 	match_engine.set_up(p_home_team, p_away_team, match_seed)
-	ball.set_up(match_engine.ball)
+	ball.set_up(match_engine.ball, update_interval)
 
 	# get colors
 	var home_color: Color = p_home_team.get_home_color()
