@@ -23,7 +23,6 @@ func _process(_delta: float) -> void:
 	camera.position = visual_match.ball.global_position
 
 
-#var home_has_ball: bool
 func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 	visual_match.set_up(home_team, away_team, match_seed)
 

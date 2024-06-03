@@ -52,13 +52,19 @@ var away_stats: MatchStatistics
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-
-	matchz = Config.calendar().get_next_match()
+	
+	# setup automatically, if run in editor and is run by 'Run current scene'
+	if OS.has_feature("editor") and get_parent() == get_tree().root:
+		matchz = Match.new()
+		matchz.home = Config.leagues.get_active().teams[0]
+		matchz.away = Config.leagues.get_active().teams[1]
+	else:
+		matchz = Config.calendar().get_next_match()
 
 	for team: Team in Config.leagues.get_active().teams:
-		if team.name == matchz.home.name:
+		if team.id == matchz.home.id:
 			home_team = team
-		elif team.name == matchz.away.name:
+		elif team.id == matchz.away.id:
 			away_team = team
 
 	home_name.text = matchz.home.name
