@@ -27,9 +27,5 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	visual_field.set_up(match_engine.field)
 
 
-func update() -> void:
-	match_engine.update()
-
-
 func half_time() -> void:
 	match_engine.half_time()

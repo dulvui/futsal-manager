@@ -56,6 +56,7 @@ func _ready() -> void:
 	# setup automatically, if run in editor and is run by 'Run current scene'
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
 		matchz = Match.new()
+		# games needs to be started at least once with a valid save state
 		matchz.home = Config.leagues.get_active().teams[0]
 		matchz.away = Config.leagues.get_active().teams[1]
 	else:

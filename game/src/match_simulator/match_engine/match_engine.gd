@@ -55,7 +55,7 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 func update() -> void:
 	ball.update()
-
+	
 	# defend/attack
 	if home_team.has_ball:
 		home_team.attack()
