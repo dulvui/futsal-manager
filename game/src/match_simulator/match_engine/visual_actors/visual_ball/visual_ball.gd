@@ -7,14 +7,22 @@ extends Node2D
 
 var sim_ball: SimBall
 
+var last_update_time:float
+var update_interval:float
+var factor: float
 
 func _physics_process(delta: float) -> void:
-	position = position.lerp(
-		sim_ball.pos, delta * Config.speed_factor * Const.TICKS_PER_SECOND
-	)
+	last_update_time += delta
 	
-	print(str(position) + " - " + str(sim_ball.pos))
+	factor = last_update_time / update_interval
+	
+	position = sim_ball.last_pos.lerp(sim_ball.pos, factor)
+	
+	#print(str(position) + " - " + str(sim_ball.pos))
 
 
-func set_up(p_sim_ball: SimBall) -> void:
+func set_up(p_sim_ball: SimBall, p_update_interval: float) -> void:
+	update_interval = p_update_interval
 	sim_ball = p_sim_ball
+	last_update_time = 0.0
+	factor = 1.0

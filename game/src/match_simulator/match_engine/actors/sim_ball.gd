@@ -64,7 +64,7 @@ func is_moving() -> bool:
 func stop() -> void:
 	speed = 0
 	state = State.STOP
-	last_pos = pos
+	#last_pos = pos
 	under_control = true
 
 
