@@ -8,10 +8,12 @@ extends Node2D
 var sim_ball: SimBall
 
 
-func _process(delta: float) -> void:
-	global_position = global_position.lerp(
+func _physics_process(delta: float) -> void:
+	position = position.lerp(
 		sim_ball.pos, delta * Config.speed_factor * Const.TICKS_PER_SECOND
 	)
+	
+	print(str(position) + " - " + str(sim_ball.pos))
 
 
 func set_up(p_sim_ball: SimBall) -> void:

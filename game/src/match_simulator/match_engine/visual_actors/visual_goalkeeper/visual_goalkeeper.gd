@@ -13,7 +13,7 @@ var sim_goal_player: SimGoalkeeper
 var visual_ball: VisualBall
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	global_position = global_position.lerp(
 		sim_goal_player.pos, delta * Config.speed_factor * Const.TICKS_PER_SECOND
 	)

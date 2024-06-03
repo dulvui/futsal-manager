@@ -19,7 +19,7 @@ var time: int = 0
 var timer: Timer
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	camera.position = visual_match.ball.global_position
 
 
@@ -46,7 +46,7 @@ func _on_timer_timeout() -> void:
 		time += 1
 		_update_time()
 
-
+ 
 func _update_time() -> void:
 	update.emit()
 	# check half/end time
