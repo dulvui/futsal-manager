@@ -15,9 +15,7 @@ var left_half: bool
 # positions
 var start_pos: Vector2
 var pos: Vector2
-var last_pos: Vector2
 # movements
-var direction: Vector2
 var destination: Vector2
 var speed: float
 
@@ -45,7 +43,6 @@ func set_up(
 
 	start_pos = field.get_goalkeeper_pos(left_half)
 	pos = start_pos
-	last_pos = start_pos
 
 	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 10
 	
@@ -115,27 +112,17 @@ func get_penalty_area_bounds(p_pos: Vector2) -> Vector2:
 
 func move() -> void:
 	if speed > 0:
-		last_pos = pos
-		pos += direction * speed * Const.SPEED
+		pos = pos.move_toward(destination, speed * Const.SPEED)
 
-	if pos.distance_to(destination) < 4 or speed <= 0:
-		destination = Vector2.INF
-		stop()
 
 
 func set_destination(p_destination: Vector2) -> void:
 	p_destination = get_penalty_area_bounds(p_destination)
-
-	if pos.distance_to(p_destination) > 1:
-		destination = p_destination
-		direction = pos.direction_to(destination)
-		# TODO use speed of attributes
-		speed = Config.match_rng.randi_range(10, 20)
+	speed = 15
 
 
 func stop() -> void:
 	speed = 0
-	last_pos = pos
 
 
 func is_touching_ball() -> bool:

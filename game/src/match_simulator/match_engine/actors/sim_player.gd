@@ -31,13 +31,10 @@ var left_half: bool
 # positions
 var start_pos: Vector2
 var pos: Vector2
-var last_pos: Vector2
 # movements
-var direction: Vector2
 var destination: Vector2
 var speed: int
 # fiscal attributes
-var stamina: float
 var interception_radius: int  #TODO reduce radius with low stamina
 
 # distances, calculated by action util
@@ -55,9 +52,7 @@ func set_up(
 	ball = p_ball
 
 	# initial test values
-	destination = Vector2.INF
 	interception_radius = 10
-	speed = 15
 
 
 func defend() -> void:
@@ -97,14 +92,8 @@ func move() -> void:
 		return
 	
 	if speed > 0:
-		last_pos = pos
-		pos += direction * speed * Const.SPEED
+		pos = pos.move_toward(destination, speed * Const.SPEED)
 		speed -= DECELERATION
-		stamina -= 0.01
-
-	if pos.distance_to(destination) < 5 or speed == 0:
-		destination = Vector2.INF
-		stop()
 
 	if state == State.BALL and speed > 0:
 		ball.dribble(destination, speed)
@@ -122,20 +111,14 @@ func is_intercepting_ball() -> bool:
 
 func set_pos(p_pos: Vector2 = pos) -> void:
 	pos = p_pos
-	last_pos = pos
+	destination = pos
 	# reset values
 	speed = 0
-	destination = Vector2.INF
 
 
 func set_destination(p_destination: Vector2) -> void:
-	p_destination = bound_field(p_destination)
-
-	if pos.distance_to(p_destination) > 5:
-		destination = p_destination
-		direction = pos.direction_to(destination)
-		# TODO use speed of attributes
-		speed = Config.match_rng.randi_range(10, 20)
+	destination = bound_field(p_destination)
+	speed = 20
 
 
 func stop() -> void:
@@ -159,22 +142,6 @@ func _should_pass() -> bool:
 	if distance_to_enemy < 50:
 		return Config.match_rng.randi_range(1, 100) < 60
 	return false
-
-
-func _next_random_direction() -> void:
-	if destination == Vector2.INF:
-		# random destination
-		set_destination(
-			bound_field(
-				(
-					pos
-					+ Vector2(
-						Config.match_rng.randi_range(-150, 150),
-						Config.match_rng.randi_range(-150, 150)
-					)
-				)
-			)
-		)
 
 
 func bound_field(p_pos: Vector2) -> Vector2:

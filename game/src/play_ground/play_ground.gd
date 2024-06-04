@@ -34,10 +34,18 @@ func _ready() -> void:
 	
 	sim_player = SimPlayer.new()
 	sim_player.set_up(Player.new(), sim_ball)
+	
+	# start and move
 	sim_player.set_pos(Vector2(300, 400))
+	sim_player.set_destination(Vector2(400, 500))
+	
+	sim_player.state = SimPlayer.State.NO_BALL
 	visual_player.set_up(sim_player, visual_ball, Color.RED, timer.wait_time)
-	
-	
+
+
 func _on_timer_timeout() -> void:
 	sim_ball.update()
+	sim_player.move()
 	visual_ball.update(timer.wait_time)
+	visual_player.update(timer.wait_time)
+	
