@@ -93,13 +93,16 @@ func kick_off(p_pos: Vector2) -> void:
 
 
 func move() -> void:
-	if state != State.RECEIVE and speed > 0:
+	if state == State.RECEIVE:
+		return
+	
+	if speed > 0:
 		last_pos = pos
 		pos += direction * speed * Const.SPEED
 		speed -= DECELERATION
 		stamina -= 0.01
 
-	if pos.distance_to(destination) < 20 or speed == 0:
+	if pos.distance_to(destination) < 5 or speed == 0:
 		destination = Vector2.INF
 		stop()
 
@@ -119,6 +122,7 @@ func is_intercepting_ball() -> bool:
 
 func set_pos(p_pos: Vector2 = pos) -> void:
 	pos = p_pos
+	last_pos = pos
 	# reset values
 	speed = 0
 	destination = Vector2.INF
