@@ -44,4 +44,4 @@ func update(p_update_interval: float) -> void:
 	update_interval = p_update_interval
 	last_update_time = 0
 	last_pos = position
-	print(str(position) + " - " + str(sim_player.pos))
+	#print(str(position) + " - " + str(sim_player.pos))

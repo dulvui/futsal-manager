@@ -35,7 +35,7 @@ func set_up(p_sim_goal_player: SimGoalkeeper, p_visual_ball: VisualBall, team_co
 	last_update_time = 0.0
 	factor = 1.0
 	
-	global_position = sim_goal_player.pos
+	position = sim_goal_player.pos
 	body.modulate = team_color.darkened(0.5)
 	label.text = str(sim_goal_player.player_res.nr) + " " + (sim_goal_player.player_res.surname)
 

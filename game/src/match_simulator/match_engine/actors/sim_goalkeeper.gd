@@ -43,6 +43,7 @@ func set_up(
 
 	start_pos = field.get_goalkeeper_pos(left_half)
 	pos = start_pos
+	destination = pos
 
 	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 10
 	
@@ -117,7 +118,7 @@ func move() -> void:
 
 
 func set_destination(p_destination: Vector2) -> void:
-	p_destination = get_penalty_area_bounds(p_destination)
+	destination = get_penalty_area_bounds(p_destination)
 	speed = 15
 
 
