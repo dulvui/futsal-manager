@@ -11,11 +11,13 @@ var last_update_time:float
 var update_interval:float
 var factor: float
 
+var last_pos: Vector2
+
 
 func _physics_process(delta: float) -> void:
 	last_update_time += delta
 	factor = last_update_time / update_interval
-	position = sim_ball.last_pos.lerp(sim_ball.pos, factor)
+	position = last_pos.lerp(sim_ball.pos, factor)
 
 
 func set_up(p_sim_ball: SimBall, p_update_interval: float) -> void:
@@ -23,8 +25,10 @@ func set_up(p_sim_ball: SimBall, p_update_interval: float) -> void:
 	sim_ball = p_sim_ball
 	last_update_time = 0.0
 	factor = 1.0
+	last_pos = sim_ball.pos
 
 
 func update(p_update_interval: float) -> void:
 	update_interval = p_update_interval
 	last_update_time = 0
+	last_pos = position
