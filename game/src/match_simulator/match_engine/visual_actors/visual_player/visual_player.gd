@@ -26,6 +26,10 @@ func _physics_process(delta: float) -> void:
 	sprites.look_at(visual_ball.global_position)
 
 
+func _draw() -> void:
+	draw_arc(global_position, sim_player.interception_radius, 0, 360, 20, Color.RED)
+
+
 func set_up(p_sim_player: SimPlayer, p_visual_ball: VisualBall, team_color: Color, p_update_interval:float) -> void:
 	sim_player = p_sim_player
 	visual_ball = p_visual_ball
