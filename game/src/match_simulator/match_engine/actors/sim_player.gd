@@ -25,15 +25,14 @@ var state: State
 var player_res: Player
 var ball: SimBall
 var field: SimField
-var left_half: bool
 # positions
 var start_pos: Vector2
 var pos: Vector2
 # movements
 var destination: Vector2
 var speed: int
-# fiscal attributes
-var interception_radius: int  #TODO reduce radius with low stamina
+#TODO reduce radius with low stamina
+var interception_radius: int 
 
 # distances, calculated by action util
 var distance_to_goal: float
@@ -50,7 +49,7 @@ func set_up(
 	ball = p_ball
 
 	# initial test values
-	interception_radius = 20
+	interception_radius = 40
 
 
 func defend() -> void:
@@ -71,6 +70,7 @@ func attack() -> void:
 				ball.stop()
 		State.BALL:
 			if _should_dribble():
+				ball.dribble(destination, speed)
 				state = State.BALL
 			elif _should_pass():
 				short_pass.emit()
@@ -91,9 +91,6 @@ func move() -> void:
 	
 	if speed > 0:
 		pos = pos.move_toward(destination, speed * Const.SPEED)
-
-	if state == State.BALL and speed > 0 and is_touching_ball():
-		ball.dribble(destination, speed)
 
 
 func is_touching_ball() -> bool:

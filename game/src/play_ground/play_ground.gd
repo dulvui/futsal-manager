@@ -66,6 +66,6 @@ func player_moves() -> void:
 
 func player_dribble() -> void:
 	sim_player.state = SimPlayer.State.NO_BALL
-	sim_player.set_pos(Vector2(300, 400))
-	sim_player.set_destination(Vector2(1200, 400))
+	sim_player.set_pos(sim_field.center - Vector2(20, 0))
+	sim_player.set_destination(sim_ball.pos)
   

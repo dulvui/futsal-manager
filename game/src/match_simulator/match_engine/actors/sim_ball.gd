@@ -12,7 +12,6 @@ enum State { PASS, SHOOT, STOP, DRIBBLE }
 
 const DECELERATION: float = 0.01
 
-var under_control: bool
 var state: State
 
 var pos: Vector2
@@ -33,7 +32,6 @@ func set_up(p_field: SimField) -> void:
 	pos = field.center
 	last_pos = pos
 	state = State.STOP
-	under_control = true
 
 
 func set_pos(x: float, y: float) -> void:
@@ -49,7 +47,6 @@ func update() -> void:
 		move()
 	else:
 		speed = 0
-	print(pos)
 
 
 func move() -> void:
@@ -66,27 +63,24 @@ func stop() -> void:
 	speed = 0
 	state = State.STOP
 	last_pos = pos
-	under_control = true
 
 
 func short_pass(p_destination: Vector2, force: float) -> void:
 	speed = force + 0.2  # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
 	state = State.PASS
-	under_control = false
 
 
 func shoot(p_destination: Vector2, force: float) -> void:
 	speed = force + 4  # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
 	state = State.SHOOT
-	under_control = false
 
 
 func dribble(p_destination: Vector2, force: float) -> void:
-	speed = force + 4  # ball moves a bit faster that the force is
+	speed = force + 0.2  # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
-	state = State.SHOOT
+	state = State.DRIBBLE
 
 
 func check_field_bounds() -> void:
@@ -112,7 +106,6 @@ func check_field_bounds() -> void:
 
 func is_touching(p_pos: Vector2, p_radius: int) -> bool:
 	#if pos == last_pos:
-		#return Geometry2D.is_point_in_circle(pos, p_pos, p_radius)
-	#return Geometry2D.segment_intersects_circle(last_pos, pos, p_pos, p_radius) > 0
 	return Geometry2D.is_point_in_circle(p_pos, pos, p_radius)
+	#return Geometry2D.segment_intersects_circle(last_pos, pos, p_pos, p_radius) > 0
 
