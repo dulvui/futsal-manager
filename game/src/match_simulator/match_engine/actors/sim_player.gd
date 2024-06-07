@@ -19,8 +19,6 @@ enum State {
 }
 
 
-const DECELERATION: float = 0.01
-
 var state: State
 
 # resources
@@ -52,7 +50,7 @@ func set_up(
 	ball = p_ball
 
 	# initial test values
-	interception_radius = 10
+	interception_radius = 20
 
 
 func defend() -> void:
@@ -93,9 +91,8 @@ func move() -> void:
 	
 	if speed > 0:
 		pos = pos.move_toward(destination, speed * Const.SPEED)
-		speed -= DECELERATION
 
-	if state == State.BALL and speed > 0:
+	if state == State.BALL and speed > 0 and is_touching_ball():
 		ball.dribble(destination, speed)
 
 

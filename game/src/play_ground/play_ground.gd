@@ -2,7 +2,6 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-@tool
 class_name PlayGround
 extends Node2D
 
@@ -17,7 +16,7 @@ var sim_player: SimPlayer
 var timer: Timer
 
 func _ready() -> void:
-	# intialize timer
+	# setup
 	timer = Timer.new()
 	timer.wait_time = 1.0 / (Const.TICKS_PER_SECOND * Config.speed_factor)
 	add_child(timer)
@@ -35,17 +34,38 @@ func _ready() -> void:
 	sim_player = SimPlayer.new()
 	sim_player.set_up(Player.new(), sim_ball)
 	
-	# start and move
-	sim_player.set_pos(Vector2(300, 400))
-	sim_player.set_destination(Vector2(400, 500))
-	
-	sim_player.state = SimPlayer.State.NO_BALL
 	visual_player.set_up(sim_player, visual_ball, Color.RED, timer.wait_time)
+	
+	# movements 
+	#player_moves_to_ball()
+	#player_moves()
+	player_dribble()
 
 
 func _on_timer_timeout() -> void:
 	sim_ball.update()
 	sim_player.move()
+	
+	if sim_player.state == SimPlayer.State.NO_BALL:
+		sim_player.defend()
+	else:
+		sim_player.attack()
 	visual_ball.update(timer.wait_time)
 	visual_player.update(timer.wait_time)
-	
+
+
+func player_moves_to_ball() -> void:
+	sim_player.state = SimPlayer.State.NO_BALL
+	sim_player.set_pos(Vector2(300, 400))
+	sim_player.set_destination(Vector2(900, 400))
+
+func player_moves() -> void:
+	sim_player.set_pos(Vector2(300, 400))
+	sim_player.set_destination(Vector2(900, 800))
+
+
+func player_dribble() -> void:
+	sim_player.state = SimPlayer.State.NO_BALL
+	sim_player.set_pos(Vector2(300, 400))
+	sim_player.set_destination(Vector2(1200, 400))
+  
