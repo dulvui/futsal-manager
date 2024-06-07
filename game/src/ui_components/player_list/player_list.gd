@@ -42,7 +42,7 @@ func _ready() -> void:
 	team_select.add_item("NO_TEAM")
 	for league: League in Config.leagues.list:
 		for team: Team in league.teams:
-			if team == null or team.name != Config.team.name:
+			if team == null or Config.team == null or team.name != Config.team.name:
 				team_select.add_item(team.name)
 
 	pos_select.add_item("NO_POS")
