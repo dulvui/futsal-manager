@@ -71,7 +71,7 @@ func defend(other_players: Array[SimPlayer]) -> void:
 	# defend
 	goalkeeper.defend()
 	for player: SimPlayer in players:
-		player.defend()
+		player.update()
 
 	# assign positions
 	# first sort players on x-axis
@@ -101,9 +101,9 @@ func attack() -> void:
 	goalkeeper.attack()
 	# use default formation moved on x-axis for now
 	for player: SimPlayer in players:
-		player.attack()
+		player.update()
 
-		if player.state != SimPlayer.State.BALL:
+		if player.state != SimPlayer.State.DRIBBLE:
 			# y towards goal, to block goal
 			var factor: int = Config.match_rng.randi_range(30, 60)
 			var deviation: Vector2 = Vector2(-factor, factor)
@@ -141,7 +141,7 @@ func set_kick_off_formation(change_field_side: bool = false) -> void:
 	# move 2 attackers to kickoff and pass to random player
 	if has_ball:
 		players[-1].set_pos(field.center + Vector2(0, 0))
-		players[-1].state = SimPlayer.State.BALL
+		players[-1].state = SimPlayer.State.PASSING
 
 		players[-2].set_pos(field.center + Vector2(0, 100))
 
@@ -164,7 +164,7 @@ func pass_to_random_player(passing_player: SimPlayer = null) -> void:
 		random_player = players[Config.match_rng.randi_range(0, players.size() - 1)]
 
 	ball.short_pass(random_player.pos, 35)
-	random_player.state = SimPlayer.State.RECEIVE
+	random_player.state = SimPlayer.State.RECEIVE_PASS
 	random_player.stop()
 
 	stats.passes += 1

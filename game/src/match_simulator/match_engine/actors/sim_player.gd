@@ -11,11 +11,15 @@ signal dribble
 signal pass_received
 
 enum State {
-	# attack with ball
-	BALL,
-	# attack without ball
-	NO_BALL,
-	RECEIVE,
+	IDLE,
+	# attack
+	DRIBBLE,
+	PASSING,
+	RECEIVE_PASS,
+	SHOOTING,
+	POSITIONING,
+	# DEFENSE
+	MARKING,
 }
 
 
@@ -52,32 +56,32 @@ func set_up(
 	interception_radius = 40
 
 
-func defend() -> void:
+func update() -> void:
 	if is_touching_ball():
 		interception.emit()
-		state = State.BALL
 		ball.stop()
-	else:
-		state = State.NO_BALL
 
-
-func attack() -> void:
 	match state:
-		State.RECEIVE:
+		State.RECEIVE_PASS:
 			if is_touching_ball():
 				pass_received.emit()
-				state = State.BALL
 				ball.stop()
-		State.BALL:
+				state = State.IDLE
+		State.DRIBBLE:
+			ball.dribble(destination, speed)
+		State.PASSING:
+			short_pass.emit()
+			state = State.IDLE
+		State.SHOOTING:
+			shoot.emit()
+			state = State.IDLE
+		State.IDLE:
 			if _should_dribble():
-				ball.dribble(destination, speed)
-				state = State.BALL
+				state = State.DRIBBLE
 			elif _should_pass():
-				short_pass.emit()
-				state = State.NO_BALL
+				state = State.PASSING
 			elif _should_shoot():
-				shoot.emit()
-				state = State.NO_BALL
+				state = State.SHOOTING
 
 
 func kick_off(p_pos: Vector2) -> void:
@@ -86,7 +90,7 @@ func kick_off(p_pos: Vector2) -> void:
 
 
 func move() -> void:
-	if state == State.RECEIVE:
+	if state == State.RECEIVE_PASS:
 		return
 	
 	if speed > 0:
