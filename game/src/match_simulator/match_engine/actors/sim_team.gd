@@ -61,15 +61,8 @@ func set_up(
 	set_kick_off_formation()
 
 
-func move() -> void:
-	goalkeeper.move()
-	for player: SimPlayer in players:
-		player.move()
-
-
 func defend(other_players: Array[SimPlayer]) -> void:
-	# defend
-	goalkeeper.defend()
+	goalkeeper.update()
 	for player: SimPlayer in players:
 		player.update()
 
@@ -98,7 +91,7 @@ func defend(other_players: Array[SimPlayer]) -> void:
 
 
 func attack() -> void:
-	goalkeeper.attack()
+	goalkeeper.update()
 	# use default formation moved on x-axis for now
 	for player: SimPlayer in players:
 		player.update()

@@ -53,6 +53,8 @@ func move() -> void:
 	last_pos = pos
 	pos += direction * speed  * Const.SPEED
 	speed -= DECELERATION
+	
+	print(State.keys()[state])
 
 
 func is_moving() -> bool:

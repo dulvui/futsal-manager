@@ -57,10 +57,6 @@ func set_up(
 
 
 func update() -> void:
-	if is_touching_ball():
-		interception.emit()
-		ball.stop()
-
 	match state:
 		State.RECEIVE_PASS:
 			if is_touching_ball():
@@ -69,6 +65,7 @@ func update() -> void:
 				state = State.IDLE
 		State.DRIBBLE:
 			ball.dribble(destination, speed)
+			state = State.IDLE
 		State.PASSING:
 			short_pass.emit()
 			state = State.IDLE
@@ -76,12 +73,15 @@ func update() -> void:
 			shoot.emit()
 			state = State.IDLE
 		State.IDLE:
-			if _should_dribble():
-				state = State.DRIBBLE
-			elif _should_pass():
-				state = State.PASSING
-			elif _should_shoot():
-				state = State.SHOOTING
+			if is_touching_ball():
+				if _should_dribble():
+					state = State.DRIBBLE
+				elif _should_pass():
+					state = State.PASSING
+				elif _should_shoot():
+					state = State.SHOOTING
+	
+	_move()
 
 
 func kick_off(p_pos: Vector2) -> void:
@@ -89,7 +89,7 @@ func kick_off(p_pos: Vector2) -> void:
 	set_pos()
 
 
-func move() -> void:
+func _move() -> void:
 	if state == State.RECEIVE_PASS:
 		return
 	

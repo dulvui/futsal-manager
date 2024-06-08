@@ -66,9 +66,6 @@ func update() -> void:
 
 	calc_distances()
 
-	home_team.move()
-	away_team.move()
-
 	# update posession stats
 	ticks += 1
 	if home_team.has_ball:

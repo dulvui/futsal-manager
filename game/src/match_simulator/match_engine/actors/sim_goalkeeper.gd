@@ -51,7 +51,7 @@ func set_up(
 	right_base = Vector2(field.line_right - 30,  field.size.y / 2)
 
 
-func defend() -> void:
+func update() -> void:
 	match ball.state:
 		SimBall.State.PASS, SimBall.State.STOP, SimBall.State.DRIBBLE:
 			speed = 5
@@ -66,14 +66,8 @@ func defend() -> void:
 
 	if block_counter == 0:
 		follow_ball()
-
-
-func attack() -> void:
-	if is_touching_ball():
-		ball.stop()
-		short_pass.emit()
-
-	follow_ball()
+	
+	_move()
 
 
 func follow_ball() -> void:
@@ -111,7 +105,7 @@ func get_penalty_area_bounds(p_pos: Vector2) -> Vector2:
 	return p_pos
 
 
-func move() -> void:
+func _move() -> void:
 	if speed > 0:
 		pos = pos.move_toward(destination, speed * Const.SPEED)
 

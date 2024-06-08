@@ -44,12 +44,9 @@ func _ready() -> void:
 
 func _on_timer_timeout() -> void:
 	sim_ball.update()
-	sim_player.move()
 	
-	if sim_player.state == SimPlayer.State.IDLE:
-		sim_player.defend()
-	else:
-		sim_player.attack()
+	sim_player.update()
+	
 	visual_ball.update(timer.wait_time)
 	visual_player.update(timer.wait_time)
 
