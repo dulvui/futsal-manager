@@ -8,7 +8,7 @@ extends Control
 signal action_message
 signal half_time
 signal match_end
-signal update
+signal update_time
 
 const camera_speed:int = 4
 
@@ -51,7 +51,7 @@ func _on_timer_timeout() -> void:
 
  
 func _update_time() -> void:
-	update.emit()
+	update_time.emit()
 	# check half/end time
 	if time == Const.HALF_TIME_SECONDS:
 		timer.paused = true

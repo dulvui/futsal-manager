@@ -9,8 +9,8 @@ enum Gender { MALE, FEMALE, MIXED }
 
 # match engine
 const HALF_TIME_SECONDS: int = 60 * 20
-const TICKS_PER_SECOND: int = 4
-const SPEED: int = TICKS_PER_SECOND / 2
+const TICKS_PER_SECOND: int = 8
+const SPEED: int = TICKS_PER_SECOND / 4
 
 const ATTRIBUTES: Dictionary = {
 	"mental":

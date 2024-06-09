@@ -4,9 +4,9 @@
 
 class_name SimBall
 
-signal goal_line_out
-signal touch_line_out
-signal goal
+signal goal_line_out(pos: Vector2)
+signal touch_line_out(pos: Vector2)
+signal goal(pos: Vector2)
 
 enum State { PASS, SHOOT, STOP, DRIBBLE, GOALKEEPER }
 
@@ -53,8 +53,6 @@ func move() -> void:
 	last_pos = pos
 	pos += direction * speed  * Const.SPEED
 	speed -= DECELERATION
-	
-	print(State.keys()[state])
 
 
 func is_moving() -> bool:
@@ -86,18 +84,24 @@ func dribble(p_destination: Vector2, force: float) -> void:
 
 
 func check_field_bounds() -> void:
-	# kick in
-	if pos.y < field.BORDER_SIZE:
-		touch_line_out.emit()
+	# kick in / y axis
+	if pos.y < field.line_top:
+		var intersection: Vector2 = Geometry2D.segment_intersects_segment(
+			last_pos, pos, field.top_left, field.top_right
+		)
+		touch_line_out.emit(intersection)
 		return
-	if pos.y > field.size.y - field.BORDER_SIZE:
-		set_pos(pos.x, field.size.y - field.BORDER_SIZE)
-		touch_line_out.emit()
+	if pos.y > field.line_bottom:
+		var intersection: Vector2 = Geometry2D.segment_intersects_segment(
+			last_pos, pos, field.bottom_left, field.bottom_right
+		)
+		touch_line_out.emit(intersection)
 		return
 
-	if pos.x < field.BORDER_SIZE or pos.x > field.size.x - field.BORDER_SIZE:
+	# goal or corner / x axis
+	if pos.x < field.line_left or pos.x > field.line_right:
 		# TODO check if post was hit => reflect
-		if field.is_goal(pos):
+		if field.is_goal(last_pos, pos):
 			goal.emit()
 			return
 		# corner

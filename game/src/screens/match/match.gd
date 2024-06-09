@@ -87,7 +87,7 @@ func _ready() -> void:
 	away_stats = match_simulator.visual_match.match_engine.away_team.stats
 
 
-func _on_match_simulator_update() -> void:
+func _on_match_simulator_update_time() -> void:
 	stats.update_stats(home_stats, away_stats)
 	time_label.text = "%02d:%02d" % [int(match_simulator.time) / 60, int(match_simulator.time) % 60]
 

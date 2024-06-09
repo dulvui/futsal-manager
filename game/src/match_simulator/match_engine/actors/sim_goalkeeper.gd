@@ -103,8 +103,8 @@ func base_position() -> void:
 
 
 func kick_in() -> void:
-	set_destination(ball.pos)
-	state = State.PASSING
+	set_pos(ball.pos)
+	state = State.IDLE
 
 
 func follow_ball() -> void:

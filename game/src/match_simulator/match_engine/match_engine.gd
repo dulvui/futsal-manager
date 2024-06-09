@@ -54,8 +54,8 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 
 func update() -> void:
+	ticks += 1
 	ball.update()
-	
 	# defend/attack
 	if home_team.has_ball:
 		home_team.attack()
@@ -67,7 +67,6 @@ func update() -> void:
 	calc_distances()
 
 	# update posession stats
-	ticks += 1
 	if home_team.has_ball:
 		possession_counter += 1.0
 	home_team.stats.possession = (possession_counter / ticks) * 100
