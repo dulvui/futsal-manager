@@ -62,7 +62,7 @@ func set_up(
 
 
 func defend(other_players: Array[SimPlayer]) -> void:
-	goalkeeper.update()
+	goalkeeper.update(false)
 	for player: SimPlayer in players:
 		player.update(false)
 
@@ -91,7 +91,7 @@ func defend(other_players: Array[SimPlayer]) -> void:
 
 
 func attack() -> void:
-	goalkeeper.update()
+	goalkeeper.update(true)
 	# use default formation moved on x-axis for now
 	for player: SimPlayer in players:
 		player.update(true)

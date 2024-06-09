@@ -7,6 +7,18 @@ class_name SimGoalkeeper
 signal short_pass
 signal interception
 
+enum State {
+	IDLE,
+	# attack
+	PASSING,
+	#RECEIVE_PASS, TODO pass to goalie
+	POSITIONING,
+	# DEFENSE
+	SAVE_SHOT,
+}
+
+var state: State
+
 # resources
 var player_res: Player
 var ball: SimBall
@@ -49,27 +61,50 @@ func set_up(
 	
 	left_base = Vector2(field.line_left + 30, field.size.y / 2)
 	right_base = Vector2(field.line_right - 30,  field.size.y / 2)
+	
+	state = State.IDLE
 
 
-func update() -> void:
-	match ball.state:
-		SimBall.State.PASS, SimBall.State.STOP, SimBall.State.DRIBBLE:
-			speed = 5
-			if is_touching_ball():
-				ball.stop()
-				interception.emit()
-				ball.state = SimBall.State.GOALKEEPER
-		SimBall.State.SHOOT:
+func update(team_has_ball: bool) -> void:
+	if not team_has_ball and ball.state == SimBall.State.SHOOT:
 			speed = player_res.attributes.goalkeeper.reflexes
+			state = State.SAVE_SHOT
+	
+	match state:
+		State.PASSING:
+			short_pass.emit()
+			state = State.IDLE
+			ball.state = SimBall.State.PASS
+		State.POSITIONING:
+			if team_has_ball:
+				base_position()
+			else:
+				follow_ball()
+			_move()
+		State.SAVE_SHOT:
+			follow_ball()
+			_move()
 			if block_shot():
 				ball.stop()
 				interception.emit()
 				ball.state = SimBall.State.GOALKEEPER
+		State.IDLE:
+			if is_touching_ball():
+				state = State.PASSING
+			else:
+				state = State.POSITIONING
 
 	if block_counter == 0:
 		follow_ball()
-	
-	_move()
+
+
+func base_position() -> void:
+	set_destination(start_pos)
+
+
+func kick_in() -> void:
+	set_destination(ball.pos)
+	state = State.PASSING
 
 
 func follow_ball() -> void:

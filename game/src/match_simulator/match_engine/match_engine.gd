@@ -221,7 +221,7 @@ func set_goalkeeper_ball(home: bool) -> void:
 	else:
 		away_possess()
 		goalkeeper = away_team.goalkeeper
-	goalkeeper.set_pos(ball.pos)
+	goalkeeper.kick_in()
 
 
 func _on_sim_ball_touch_line_out() -> void:
