@@ -56,7 +56,7 @@ func set_up(
 	interception_radius = 40
 
 
-func update() -> void:
+func update(team_has_ball: bool) -> void:
 	match state:
 		State.RECEIVE_PASS:
 			if is_touching_ball():
@@ -65,6 +65,7 @@ func update() -> void:
 				state = State.IDLE
 		State.DRIBBLE:
 			ball.dribble(destination, speed)
+			_move()
 			state = State.IDLE
 		State.PASSING:
 			short_pass.emit()
@@ -72,16 +73,23 @@ func update() -> void:
 		State.SHOOTING:
 			shoot.emit()
 			state = State.IDLE
+		State.POSITIONING:
+			_move()
+		State.MARKING:
+			_move()
 		State.IDLE:
 			if is_touching_ball():
-				if _should_dribble():
-					state = State.DRIBBLE
+				if _should_shoot():
+					state = State.SHOOTING
 				elif _should_pass():
 					state = State.PASSING
-				elif _should_shoot():
-					state = State.SHOOTING
+				elif _should_dribble():
+					state = State.DRIBBLE
+			elif team_has_ball:
+				state = State.POSITIONING
+			else:
+				state = State.MARKING
 	
-	_move()
 
 
 func kick_off(p_pos: Vector2) -> void:

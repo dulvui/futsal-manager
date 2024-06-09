@@ -58,11 +58,13 @@ func update() -> void:
 			if is_touching_ball():
 				ball.stop()
 				interception.emit()
+				ball.state = SimBall.State.GOALKEEPER
 		SimBall.State.SHOOT:
 			speed = player_res.attributes.goalkeeper.reflexes
 			if block_shot():
 				ball.stop()
 				interception.emit()
+				ball.state = SimBall.State.GOALKEEPER
 
 	if block_counter == 0:
 		follow_ball()

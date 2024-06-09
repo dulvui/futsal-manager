@@ -22,9 +22,11 @@ var last_pos:Vector2
 func _physics_process(delta: float) -> void:
 	last_update_time += delta
 	factor = last_update_time / update_interval
+	
 	if sim_goalkeeper.pos != position:
 		position = last_pos.lerp(sim_goalkeeper.pos, factor)
-		sprites.look_at(visual_ball.global_position)
+	
+	sprites.look_at(visual_ball.global_position)
 
 
 func set_up(p_sim_goalkeeper: SimGoalkeeper, p_visual_ball: VisualBall, team_color: Color, p_update_interval: float) -> void:

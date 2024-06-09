@@ -8,7 +8,7 @@ signal goal_line_out
 signal touch_line_out
 signal goal
 
-enum State { PASS, SHOOT, STOP, DRIBBLE }
+enum State { PASS, SHOOT, STOP, DRIBBLE, GOALKEEPER }
 
 const DECELERATION: float = 0.01
 

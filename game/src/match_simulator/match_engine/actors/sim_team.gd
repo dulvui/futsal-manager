@@ -64,7 +64,7 @@ func set_up(
 func defend(other_players: Array[SimPlayer]) -> void:
 	goalkeeper.update()
 	for player: SimPlayer in players:
-		player.update()
+		player.update(false)
 
 	# assign positions
 	# first sort players on x-axis
@@ -86,15 +86,15 @@ func defend(other_players: Array[SimPlayer]) -> void:
 
 	# attack ball, if not under control
 	# TODO if pressing tactic, always go to ball
-	#if not ball.under_control:
-	nearest_player_to_ball().set_destination(ball.pos)
+	if ball.state != SimBall.State.GOALKEEPER:
+		nearest_player_to_ball().set_destination(ball.pos)
 
 
 func attack() -> void:
 	goalkeeper.update()
 	# use default formation moved on x-axis for now
 	for player: SimPlayer in players:
-		player.update()
+		player.update(true)
 
 		if player.state != SimPlayer.State.DRIBBLE:
 			# y towards goal, to block goal
