@@ -67,8 +67,8 @@ func set_up(
 
 func update(team_has_ball: bool) -> void:
 	if not team_has_ball and ball.state == SimBall.State.SHOOT:
-			speed = player_res.attributes.goalkeeper.reflexes
-			state = State.SAVE_SHOT
+		speed = player_res.attributes.goalkeeper.reflexes
+		state = State.SAVE_SHOT
 	
 	match state:
 		State.PASSING:

@@ -47,8 +47,8 @@ func set_pos_xy(x: float, y: float) -> void:
 
 func update() -> void:
 	if speed > 0:
-		move()
 		check_field_bounds()
+		move()
 	else:
 		speed = 0
 
@@ -90,19 +90,22 @@ func dribble(p_destination: Vector2, force: float) -> void:
 func check_field_bounds() -> void:
 	# kick in / y axis
 	if pos.y < field.line_top:
-		var intersection: Vector2 = Geometry2D.segment_intersects_segment(
+		var intersection: Variant = Geometry2D.segment_intersects_segment(
 			last_pos, pos, field.top_left, field.top_right
 		)
-		set_pos(intersection)
-		touch_line_out.emit(intersection)
-		return
+		if intersection:
+			set_pos(intersection)
+			touch_line_out.emit()
+			return
 	if pos.y > field.line_bottom:
-		var intersection: Vector2 = Geometry2D.segment_intersects_segment(
+		var intersection: Variant = Geometry2D.segment_intersects_segment(
 			last_pos, pos, field.bottom_left, field.bottom_right
 		)
-		touch_line_out.emit(intersection)
-		return
-
+		if intersection:
+			set_pos(intersection)
+			touch_line_out.emit()
+			return
+	
 	# goal or corner / x axis
 	if pos.x < field.line_left or pos.x > field.line_right:
 		# TODO check if post was hit => reflect
