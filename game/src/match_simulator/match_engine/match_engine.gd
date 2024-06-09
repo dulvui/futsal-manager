@@ -107,7 +107,7 @@ func half_time() -> void:
 	home_plays_left = not home_plays_left
 	home_team.set_kick_off_formation(true)
 	away_team.set_kick_off_formation(true)
-	ball.set_pos(field.center.x, field.center.y)
+	ball.set_pos(field.center)
 
 
 func calc_distances() -> void:
@@ -175,10 +175,6 @@ func left_is_active_goal() -> bool:
 
 
 func _on_sim_ball_goal_line_out() -> void:
-	# TODO create signal for corner left/right
-	# for goalkeeper kick ins
-
-	# check if corner kick
 	if (
 		(home_team.has_ball and home_plays_left and ball.pos.x < 600)
 		or (home_team.has_ball and not home_plays_left and ball.pos.x > 600)
@@ -189,38 +185,16 @@ func _on_sim_ball_goal_line_out() -> void:
 		or (home_team.has_ball and not home_plays_left and ball.pos.x < 600)
 	):
 		set_corner(false)
+	
 	# goalkeeper ball
 	elif ball.pos.x < 600:
 		# left
-		ball.set_pos(field.line_left + 40, field.size.y / 2)
+		ball.set_pos_xy(field.line_left + 40, field.size.y / 2)
 		set_goalkeeper_ball(home_plays_left)
 	else:
 		# right
-		ball.set_pos(field.line_right - 40, field.size.y / 2)
+		ball.set_pos_xy(field.line_right - 40, field.size.y / 2)
 		set_goalkeeper_ball(not home_plays_left)
-
-
-func set_corner(home: bool) -> void:
-	if home:
-		home_possess()
-		nearest_player = home_team.nearest_player_to_ball()
-		home_team.stats.corners += 1
-	else:
-		away_possess()
-		nearest_player = away_team.nearest_player_to_ball()
-		away_team.stats.corners += 1
-	nearest_player.set_pos(ball.pos)
-	nearest_player.short_pass.emit()
-
-
-func set_goalkeeper_ball(home: bool) -> void:
-	if home:
-		home_possess()
-		goalkeeper = home_team.goalkeeper
-	else:
-		away_possess()
-		goalkeeper = away_team.goalkeeper
-	goalkeeper.kick_in()
 
 
 func _on_sim_ball_touch_line_out() -> void:
@@ -233,18 +207,8 @@ func _on_sim_ball_touch_line_out() -> void:
 		home_team.stats.kick_ins += 1
 		nearest_player = home_team.nearest_player_to_ball()
 
-	# set ball pos
-	if ball.pos.y < field.size.y / 2:
-		# up
-		ball.set_pos(ball.pos.x, field.line_top)
-		set_goalkeeper_ball(home_plays_left)
-	else:
-		# down
-		ball.set_pos(ball.pos.x, field.line_bottom)
-		set_goalkeeper_ball(not home_plays_left)
-
 	nearest_player.set_pos(ball.pos)
-	nearest_player.short_pass.emit()
+	nearest_player.state = SimPlayer.State.PASSING
 
 
 func _on_sim_ball_goal() -> void:
@@ -257,7 +221,48 @@ func _on_sim_ball_goal() -> void:
 	# reset formation
 	home_team.set_kick_off_formation()
 	away_team.set_kick_off_formation()
-	ball.set_pos(field.center.x, field.center.y)
+	ball.set_pos(field.center)
+
+
+func set_goalkeeper_ball(home: bool) -> void:
+	if home:
+		home_possess()
+		goalkeeper = home_team.goalkeeper
+	else:
+		away_possess()
+		goalkeeper = away_team.goalkeeper
+	goalkeeper.kick_in()
+
+
+func set_corner(home: bool) -> void:
+	if home:
+		home_possess()
+		nearest_player = home_team.nearest_player_to_ball()
+		home_team.stats.corners += 1
+	else:
+		away_possess()
+		nearest_player = away_team.nearest_player_to_ball()
+		away_team.stats.corners += 1
+	# set ball pos
+	if ball.pos.y < field.center.y:
+		# top
+		if ball.pos.x < field.center.x:
+			# left
+			ball.set_pos(field.top_left)
+		else:
+			# right
+			ball.set_pos(field.top_right)
+	else:
+		# bottom
+		if ball.pos.x < field.center.x:
+			# left
+			ball.set_pos(field.bottom_left)
+		else:
+			# right
+			ball.set_pos(field.bottom_right)
+	
+	nearest_player.set_pos(ball.pos)
+	nearest_player.state = SimPlayer.State.PASSING
 
 
 func _on_home_team_possess() -> void:

@@ -88,6 +88,7 @@ func update(team_has_ball: bool) -> void:
 				ball.stop()
 				interception.emit()
 				ball.state = SimBall.State.GOALKEEPER
+			state = State.IDLE
 		State.IDLE:
 			if is_touching_ball():
 				state = State.PASSING
