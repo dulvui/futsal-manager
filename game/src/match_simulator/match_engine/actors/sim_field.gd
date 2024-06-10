@@ -60,7 +60,7 @@ func set_up() -> void:
 	line_bottom = line_top + HEIGHT
 	line_left = BORDER_SIZE
 	line_right = line_left + WIDTH
-	
+
 	top_left = Vector2(line_left, line_top)
 	top_right = Vector2(line_right, line_top)
 	bottom_left = Vector2(line_left, line_bottom)
@@ -155,7 +155,7 @@ func get_corner_pos(ball_exit_pos: Vector2) -> Vector2:
 
 func is_goal(ball_last_pos: Vector2, ball_pos: Vector2) -> Variant:
 	var intersection: Variant
-	
+
 	# left
 	if ball_pos.x < size.x / 2:
 		intersection = Geometry2D.segment_intersects_segment(
@@ -166,7 +166,7 @@ func is_goal(ball_last_pos: Vector2, ball_pos: Vector2) -> Variant:
 		intersection = Geometry2D.segment_intersects_segment(
 			ball_last_pos, ball_pos, goal_post_bottom_right, goal_post_top_right
 		)
-	
+
 	if intersection and intersection.y < goal_post_bottom and intersection.y > goal_post_top:
 		return intersection
 	return null

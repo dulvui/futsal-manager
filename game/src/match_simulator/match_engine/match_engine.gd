@@ -185,7 +185,7 @@ func _on_sim_ball_goal_line_out() -> void:
 		or (home_team.has_ball and not home_plays_left and ball.pos.x < 600)
 	):
 		set_corner(false)
-	
+
 	# goalkeeper ball
 	elif ball.pos.x < 600:
 		# left
@@ -260,7 +260,7 @@ func set_corner(home: bool) -> void:
 		else:
 			# right
 			ball.set_pos(field.bottom_right)
-	
+
 	nearest_player.set_pos(ball.pos)
 	nearest_player.state = SimPlayer.State.PASSING
 

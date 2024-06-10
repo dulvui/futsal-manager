@@ -46,7 +46,7 @@ const ATTRIBUTES: Dictionary = {
 
 const MAX_PRESTIGE: int = 20
 
-const LINEUP_PLAYERS_AMOUNT:int = 12
+const LINEUP_PLAYERS_AMOUNT: int = 12
 
 const MONTH_STRINGS: Array = [
 	"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC"

@@ -12,29 +12,32 @@ extends Node2D
 var sim_player: SimPlayer
 var visual_ball: VisualBall
 
-var last_update_time:float
-var update_interval:float
+var last_update_time: float
+var update_interval: float
 var factor: float
 
-var last_pos:Vector2
+var last_pos: Vector2
+
 
 func _physics_process(delta: float) -> void:
 	last_update_time += delta
 	factor = last_update_time / update_interval
-	
+
 	if sim_player.pos != position:
 		position = last_pos.lerp(sim_player.pos, factor)
-	
+
 	sprites.look_at(visual_ball.global_position)
 
 
-func set_up(p_sim_player: SimPlayer, p_visual_ball: VisualBall, team_color: Color, p_update_interval:float) -> void:
+func set_up(
+	p_sim_player: SimPlayer, p_visual_ball: VisualBall, team_color: Color, p_update_interval: float
+) -> void:
 	sim_player = p_sim_player
 	visual_ball = p_visual_ball
 	update_interval = p_update_interval
 	last_update_time = 0.0
 	factor = 1.0
-	
+
 	position = sim_player.pos
 	last_pos = sim_player.pos
 	body.modulate = team_color

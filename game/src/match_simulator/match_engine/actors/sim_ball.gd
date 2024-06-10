@@ -55,7 +55,7 @@ func update() -> void:
 
 func move() -> void:
 	last_pos = pos
-	pos += direction * speed  * Const.SPEED
+	pos += direction * speed * Const.SPEED
 	speed -= DECELERATION
 
 
@@ -105,7 +105,7 @@ func check_field_bounds() -> void:
 			set_pos(intersection)
 			touch_line_out.emit()
 			return
-	
+
 	# goal or corner / x axis
 	if pos.x < field.line_left or pos.x > field.line_right:
 		# TODO check if post was hit => reflect
@@ -124,4 +124,3 @@ func is_touching(p_pos: Vector2, p_radius: int) -> bool:
 	#if pos == last_pos:
 	return Geometry2D.is_point_in_circle(p_pos, pos, p_radius)
 	#return Geometry2D.segment_intersects_circle(last_pos, pos, p_pos, p_radius) > 0
-

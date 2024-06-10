@@ -146,4 +146,3 @@ func get_overall() -> int:
 
 func get_value(key: String, value: String) -> int:
 	return (attributes.get(key) as Resource).get(value)
-

@@ -5,6 +5,7 @@
 # meta-default: true
 extends _BASE_
 
+
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	pass

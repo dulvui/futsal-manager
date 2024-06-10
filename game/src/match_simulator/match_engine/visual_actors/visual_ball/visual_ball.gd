@@ -7,8 +7,8 @@ extends Node2D
 
 var sim_ball: SimBall
 
-var last_update_time:float
-var update_interval:float
+var last_update_time: float
+var update_interval: float
 var factor: float
 
 var last_pos: Vector2

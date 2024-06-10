@@ -12,7 +12,9 @@ extends Node2D
 @onready var player4: VisualPlayer = $VisualPlayer4
 
 
-func set_up(sim_team: SimTeam, visual_ball: VisualBall, team_color: Color, update_interval: float) -> void:
+func set_up(
+	sim_team: SimTeam, visual_ball: VisualBall, team_color: Color, update_interval: float
+) -> void:
 	goalkeeper.set_up(sim_team.goalkeeper, visual_ball, team_color, update_interval)
 	player1.set_up(sim_team.players[0], visual_ball, team_color, update_interval)
 	player2.set_up(sim_team.players[1], visual_ball, team_color, update_interval)

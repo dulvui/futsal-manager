@@ -58,10 +58,10 @@ func set_up(
 	destination = pos
 
 	interception_radius = (player_res.attributes.goalkeeper.positioning / 2) + 10
-	
+
 	left_base = Vector2(field.line_left + 30, field.size.y / 2)
-	right_base = Vector2(field.line_right - 30,  field.size.y / 2)
-	
+	right_base = Vector2(field.line_right - 30, field.size.y / 2)
+
 	state = State.IDLE
 
 
@@ -69,7 +69,7 @@ func update(team_has_ball: bool) -> void:
 	if not team_has_ball and ball.state == SimBall.State.SHOOT:
 		speed = player_res.attributes.goalkeeper.reflexes
 		state = State.SAVE_SHOT
-	
+
 	match state:
 		State.PASSING:
 			short_pass.emit()
@@ -115,7 +115,7 @@ func follow_ball() -> void:
 			set_destination(ball.pos)
 		else:
 			set_destination(left_base)
-			
+
 	else:
 		if ball.pos.x > field.size.x / 2:
 			set_destination(ball.pos)
@@ -139,14 +139,13 @@ func get_penalty_area_bounds(p_pos: Vector2) -> Vector2:
 			p_pos.x = field.penalty_area_right_x - 10
 		elif p_pos.x > field.size.x + field.BORDER_SIZE + 10:
 			p_pos.x = field.size.x + field.BORDER_SIZE + 10
-	
+
 	return p_pos
 
 
 func _move() -> void:
 	if speed > 0:
 		pos = pos.move_toward(destination, speed * Const.SPEED)
-
 
 
 func set_destination(p_destination: Vector2) -> void:

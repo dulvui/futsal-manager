@@ -37,7 +37,7 @@ func add_team(team: Team) -> void:
 	table.add_team(team)
 
 	# sort alphabetically
-	teams.sort_custom(func(a:Team, b:Team) -> bool: return a.name < b.name)
+	teams.sort_custom(func(a: Team, b: Team) -> bool: return a.name < b.name)
 
 
 func get_team_by_id(team_id: int) -> Team:

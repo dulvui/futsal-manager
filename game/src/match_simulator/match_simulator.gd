@@ -10,7 +10,7 @@ signal half_time
 signal match_end
 signal update_time
 
-const camera_speed:int = 4
+const camera_speed: int = 4
 
 @onready var visual_match: VisualMatch = $SubViewportContainer/SubViewport/VisualMatch
 @onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
@@ -32,24 +32,24 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
-	
+
 	# set up visual match
 	visual_match.set_up(home_team, away_team, match_seed, timer.wait_time)
-	
+
 	# adjust sub viewport to field size + borders
 	sub_viewport.size = visual_match.visual_field.field.size
 
 
 func _on_timer_timeout() -> void:
 	visual_match.update(timer.wait_time)
-	
+
 	ticks += 1
 	if ticks == Const.TICKS_PER_SECOND:
 		ticks = 0
 		time += 1
 		_update_time()
 
- 
+
 func _update_time() -> void:
 	update_time.emit()
 	# check half/end time

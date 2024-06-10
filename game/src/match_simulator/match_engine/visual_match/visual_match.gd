@@ -29,7 +29,7 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int, update_interv
 
 func update(update_interval: float) -> void:
 	match_engine.update()
-	
+
 	# update time intervals for position interpolations
 	ball.update(update_interval)
 	home_team.update(update_interval)

@@ -22,7 +22,6 @@ enum State {
 	MARKING,
 }
 
-
 var state: State
 
 # resources
@@ -36,7 +35,7 @@ var pos: Vector2
 var destination: Vector2
 var speed: int
 #TODO reduce radius with low stamina
-var interception_radius: int 
+var interception_radius: int
 
 # distances, calculated by action util
 var distance_to_goal: float
@@ -89,7 +88,6 @@ func update(team_has_ball: bool) -> void:
 				state = State.POSITIONING
 			else:
 				state = State.MARKING
-	
 
 
 func kick_off(p_pos: Vector2) -> void:
@@ -100,7 +98,7 @@ func kick_off(p_pos: Vector2) -> void:
 func _move() -> void:
 	if state == State.RECEIVE_PASS:
 		return
-	
+
 	if speed > 0:
 		pos = pos.move_toward(destination, speed * Const.SPEED)
 
