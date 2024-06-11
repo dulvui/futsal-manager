@@ -41,6 +41,9 @@ var manager: Manager
 var transfers: Transfers
 var inbox: Inbox
 
+# saves match pause state
+var match_paused: bool
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -38,6 +38,9 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 
 	# adjust sub viewport to field size + borders
 	sub_viewport.size = visual_match.visual_field.field.size
+	
+	# reset match_paused
+	Config.match_paused = false
 
 
 func _on_timer_timeout() -> void:
@@ -64,6 +67,7 @@ func _update_time() -> void:
 
 func pause_toggle() -> bool:
 	timer.paused = not timer.paused
+	Config.match_paused = timer.paused
 	return timer.paused
 
 
