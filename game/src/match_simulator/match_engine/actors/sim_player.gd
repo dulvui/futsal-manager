@@ -47,10 +47,11 @@ var distance_to_enemy: float
 func set_up(
 	p_player_res: Player,
 	p_ball: SimBall,
+	p_field: SimField
 ) -> void:
 	player_res = p_player_res
 	ball = p_ball
-
+	field = p_field
 	# initial test values
 	interception_radius = 40
 
@@ -139,7 +140,7 @@ func _should_shoot() -> bool:
 		print('g')
 		return true
 	if ball.players_in_shoot_trajectory < 2:
-		return Config.match_rng.randi_range(1, 1000) > 999
+		return Config.match_rng.randi_range(1, 100) > 95
 	return false
 
 
@@ -150,6 +151,6 @@ func _should_pass() -> bool:
 
 
 func bound_field(p_pos: Vector2) -> Vector2:
-	p_pos.x = maxi(mini(p_pos.x, 1200), 1)
-	p_pos.y = maxi(mini(p_pos.y, 600), 1)
+	p_pos.x = maxi(mini(p_pos.x, field.line_right), 1)
+	p_pos.y = maxi(mini(p_pos.y, field.line_bottom), 1)
 	return p_pos

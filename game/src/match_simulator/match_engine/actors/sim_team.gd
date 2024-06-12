@@ -39,7 +39,7 @@ func set_up(
 	stats = MatchStatistics.new()
 
 	goalkeeper = SimGoalkeeper.new()
-	goalkeeper.set_up(res_team.get_goalkeeper(), p_ball, field, left_half)
+	goalkeeper.set_up(res_team.get_goalkeeper(), ball, field, left_half)
 	goalkeeper.short_pass.connect(pass_to_random_player)
 	goalkeeper.interception.connect(interception)
 
@@ -49,7 +49,7 @@ func set_up(
 	for player: Player in res_team.get_field_players():
 		var sim_player: SimPlayer = SimPlayer.new()
 		# setup
-		sim_player.set_up(player, p_ball)
+		sim_player.set_up(player, ball, field)
 		players.append(sim_player)
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
