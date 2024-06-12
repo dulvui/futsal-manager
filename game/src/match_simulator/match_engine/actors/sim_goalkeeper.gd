@@ -112,13 +112,13 @@ func follow_ball() -> void:
 	# only follow if in own half
 	if left_half:
 		if ball.pos.x < field.size.x / 2:
-			set_destination(ball.pos)
+			set_destination(left_base + left_base.direction_to(ball.pos) * 40)
 		else:
 			set_destination(left_base)
 
 	else:
 		if ball.pos.x > field.size.x / 2:
-			set_destination(ball.pos)
+			set_destination(right_base + right_base.direction_to(ball.pos) * 40)
 		else:
 			set_destination(right_base)
 

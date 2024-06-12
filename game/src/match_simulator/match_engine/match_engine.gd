@@ -18,6 +18,7 @@ var post_bottom: Vector2
 var post_top: Vector2
 var players: Array[SimPlayer]
 var goalkeeper: SimGoalkeeper
+var shoot_trajectory_polygon: PackedVector2Array
 
 var nearest_player: SimPlayer
 
@@ -37,6 +38,8 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 	ticks = 0
 	possession_counter = 0.0
+	
+	shoot_trajectory_polygon = PackedVector2Array()
 
 	Config.match_rng.state = 0
 	Config.match_rng.seed = hash(match_seed)
@@ -149,18 +152,29 @@ func calc_free_shoot_trajectory() -> void:
 		players = home_team.players
 
 	if left_is_active_goal():
-		post_bottom = field.goal_post_bottom_left
 		post_top = field.goal_post_top_left
+		post_bottom = field.goal_post_bottom_left
 	else:
+		post_top = field.goal_post_top_right
 		post_bottom = field.goal_post_bottom_right
-		post_top = field.goal_post_bottom_left
+	
+	# square from ball +/- 150 to goal posts and +/- 50 to ball
+	# used to check empty net and players in trajectory
+	# point_is_in_triangle() is too narrow
+	shoot_trajectory_polygon.clear()
+	shoot_trajectory_polygon.append(ball.pos + Vector2(0, 50))
+	shoot_trajectory_polygon.append(ball.pos + Vector2(0, -50))
+	shoot_trajectory_polygon.append(post_top + Vector2(0, -150))
+	shoot_trajectory_polygon.append(post_bottom + Vector2(0, 150))
 
-	ball.empty_net = not Geometry2D.point_is_inside_triangle(
-		goalkeeper.pos, ball.pos, post_bottom, post_top
-	)
+	ball.empty_net = not Geometry2D.is_point_in_polygon(goalkeeper.pos, shoot_trajectory_polygon)
+	
+	#if ball.empty_net:
+		#print(goalkeeper.pos)
+		#print(polygon)
 
 	for player: SimPlayer in players:
-		if Geometry2D.point_is_inside_triangle(player.pos, ball.pos, post_bottom, post_top):
+		if Geometry2D.is_point_in_polygon(player.pos, shoot_trajectory_polygon):
 			ball.players_in_shoot_trajectory += 1
 
 
