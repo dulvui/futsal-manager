@@ -169,10 +169,6 @@ func calc_free_shoot_trajectory() -> void:
 
 	ball.empty_net = not Geometry2D.is_point_in_polygon(goalkeeper.pos, shoot_trajectory_polygon)
 	
-	#if ball.empty_net:
-		#print(goalkeeper.pos)
-		#print(polygon)
-
 	for player: SimPlayer in players:
 		if Geometry2D.is_point_in_polygon(player.pos, shoot_trajectory_polygon):
 			ball.players_in_shoot_trajectory += 1
@@ -236,6 +232,8 @@ func _on_sim_ball_goal() -> void:
 	home_team.set_kick_off_formation()
 	away_team.set_kick_off_formation()
 	ball.set_pos(field.center)
+	
+	print("%s : %s"%[home_team.stats.goals, away_team.stats.goals])
 
 
 func set_goalkeeper_ball(home: bool) -> void:

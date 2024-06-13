@@ -121,6 +121,6 @@ func check_field_bounds() -> void:
 
 
 func is_touching(p_pos: Vector2, p_radius: int) -> bool:
-	#if pos == last_pos:
-	return Geometry2D.is_point_in_circle(p_pos, pos, p_radius)
-	#return Geometry2D.segment_intersects_circle(last_pos, pos, p_pos, p_radius) > 0
+	if pos.distance_to(last_pos) < 5:
+		return Geometry2D.is_point_in_circle(p_pos, pos, p_radius)
+	return Geometry2D.segment_intersects_circle(last_pos, pos, p_pos, p_radius) != -1

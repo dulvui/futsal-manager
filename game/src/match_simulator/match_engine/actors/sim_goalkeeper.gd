@@ -36,9 +36,6 @@ var left_base: Vector2
 var right_base: Vector2
 
 var interception_radius: int  #TODO reduce radius with low stamina
-# so goalkeeper cant block infinitly,
-# but when once blocked, time has to pass to block again
-var block_counter: int = 0
 
 
 func set_up(
@@ -69,6 +66,10 @@ func update(team_has_ball: bool) -> void:
 	if not team_has_ball and ball.state == SimBall.State.SHOOT:
 		speed = player_res.attributes.goalkeeper.reflexes
 		state = State.SAVE_SHOT
+	
+	# reset save, if ball is no longer in shoot state
+	if state == State.SAVE_SHOT and ball.state != SimBall.State.SHOOT:
+		state = State.IDLE
 
 	match state:
 		State.PASSING:
@@ -88,15 +89,15 @@ func update(team_has_ball: bool) -> void:
 				ball.stop()
 				interception.emit()
 				ball.state = SimBall.State.GOALKEEPER
-			state = State.IDLE
+				print("no block")
+				state = State.IDLE
+			else:
+				print("no block")
 		State.IDLE:
 			if is_touching_ball():
 				state = State.PASSING
 			else:
 				state = State.POSITIONING
-
-	if block_counter == 0:
-		follow_ball()
 
 
 func base_position() -> void:
@@ -162,17 +163,10 @@ func is_touching_ball() -> bool:
 
 
 func block_shot() -> bool:
-	if block_counter > 0:
-		block_counter -= 1
-		return false
 	if is_touching_ball():
-		# stop blocking for x seconds
-		block_counter = Const.TICKS_PER_SECOND * 2
-		# best case 49 + 20 * 2 = 89
-		# worst case 49 + 1 * 2 = 52
 		return (
 			Config.match_rng.randi_range(0, 100)
-			< 49 + player_res.attributes.goalkeeper.handling * 2
+			< 69 + player_res.attributes.goalkeeper.handling * 2
 		)
 	return false
 
