@@ -31,6 +31,8 @@ var field: SimField
 # positions
 var start_pos: Vector2
 var pos: Vector2
+var last_pos: Vector2
+
 # movements
 var destination: Vector2
 var speed: int
@@ -101,6 +103,7 @@ func _move() -> void:
 		return
 
 	if speed > 0:
+		last_pos = pos
 		pos = pos.move_toward(destination, speed * Const.SPEED)
 
 
@@ -116,6 +119,7 @@ func is_intercepting_ball() -> bool:
 
 func set_pos(p_pos: Vector2 = pos) -> void:
 	pos = p_pos
+	last_pos = pos
 	destination = pos
 	# reset values
 	speed = 0
@@ -128,6 +132,7 @@ func set_destination(p_destination: Vector2) -> void:
 
 func stop() -> void:
 	speed = 0
+	last_pos = pos
 
 
 func _should_dribble() -> bool:

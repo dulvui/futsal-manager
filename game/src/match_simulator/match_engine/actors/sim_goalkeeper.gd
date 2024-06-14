@@ -27,6 +27,8 @@ var left_half: bool
 # positions
 var start_pos: Vector2
 var pos: Vector2
+var last_pos: Vector2
+
 # movements
 var destination: Vector2
 var speed: float
@@ -89,10 +91,7 @@ func update(team_has_ball: bool) -> void:
 				ball.stop()
 				interception.emit()
 				ball.state = SimBall.State.GOALKEEPER
-				print("no block")
 				state = State.IDLE
-			else:
-				print("no block")
 		State.IDLE:
 			if is_touching_ball():
 				state = State.PASSING
@@ -146,6 +145,7 @@ func get_penalty_area_bounds(p_pos: Vector2) -> Vector2:
 
 func _move() -> void:
 	if speed > 0:
+		last_pos = pos
 		pos = pos.move_toward(destination, speed * Const.SPEED)
 
 
@@ -156,6 +156,7 @@ func set_destination(p_destination: Vector2) -> void:
 
 func stop() -> void:
 	speed = 0
+	last_pos = pos
 
 
 func is_touching_ball() -> bool:
@@ -173,6 +174,7 @@ func block_shot() -> bool:
 
 func set_pos(p_pos: Vector2 = pos) -> void:
 	pos = p_pos
+	last_pos = pos
 	# reset values
 	speed = 0
 	destination = Vector2.INF
