@@ -17,12 +17,12 @@ const PlayerListColumnScene = preload("res://src/ui_components/player_list/playe
 @onready var page_indicator: Label = $Footer/PageIndicator
 @onready var active_view_option_button: SwitchOptionButton = $Filters/ActiveView
 
-@onready var columns_container: HBoxContainer = $Columns
+@onready var views_container: HBoxContainer = $Views
 
 const views:Array[String] = ["general", "mental", "physical", "technical", "goalkeeper"]
 var active_view: String = views[0]
 
-var columns: Array[PlayerListColumn] = []
+var views_list: Dictionary = {}
 
 var active_team_id: int
 
@@ -75,34 +75,34 @@ func set_up(p_active_team_id:int = -1) -> void:
 
 
 func _set_up_columns() -> void:
-	for child in columns_container.get_children():
+	for child in views_container.get_children():
 		child.queue_free()
 	
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
 	# names
 	var name_col: PlayerListColumn = PlayerListColumnScene.instantiate()
-	columns_container.add_child(name_col)
+	views_container.add_child(name_col)
 	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
 	name_col.set_up("NAME", names)
 	name_col.custom_minimum_size.x = 200
 	name_col.sort.connect(_sort_players.bind("surname"))
-	columns.append(name_col)
+	views_list["name"] = name_col
 
 	# general
 	var nat_col: PlayerListColumn = PlayerListColumnScene.instantiate()
-	columns_container.add_child(nat_col)
+	views_container.add_child(nat_col)
 	var nationalities: Array = visible_players.map(func(p: Player) -> String: return Const.Nations.keys()[p.nation])
 	nat_col.set_up("NATION", nationalities, "general")
 	nat_col.sort.connect(_sort_players.bind("nation"))
-	columns.append(nat_col)
+	views_list["nation"] = nat_col
 	
 	var pos_col: PlayerListColumn = PlayerListColumnScene.instantiate()
-	columns_container.add_child(pos_col)
+	views_container.add_child(pos_col)
 	var positions: Array = visible_players.map(func(p: Player) -> String: return Player.Position.keys()[p.position])
 	pos_col.set_up("POSITION", positions, "general")
 	pos_col.sort.connect(_sort_players.bind("position"))
-	columns.append(pos_col)
+	views_list["position"] = pos_col
 	
 	# connect player select signal
 	for i: int in visible_players.size():
@@ -111,20 +111,20 @@ func _set_up_columns() -> void:
 	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
-		columns_container.add_child(VSeparator.new())
+		views_container.add_child(VSeparator.new())
 		for value: String in Const.ATTRIBUTES[key]:
 			var col:PlayerListColumn = PlayerListColumnScene.instantiate()
-			columns_container.add_child(col)
+			views_container.add_child(col)
 			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
 			col.set_up(value, values, key)
 			col.sort.connect(_sort_players.bind(key, value))
-			columns.append(col)
+			views_list[value] = col
 
 
 func _update_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 	
-	var name_col:PlayerListColumn = columns[0]
+	var name_col:PlayerListColumn = views_list["name"]
 	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
 	name_col.update_values(names)
 	# connect player select signal
@@ -133,26 +133,24 @@ func _update_columns() -> void:
 		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
 	
 
-	var nat_col:PlayerListColumn = columns[1]
+	var nat_col:PlayerListColumn = views_list["nation"]
 	var nations: Array = visible_players.map(func(p: Player) -> String: return Const.Nations.keys()[p.nation])
 	nat_col.update_values(nations)
 	
-	var pos_col:PlayerListColumn = columns[2]
+	var pos_col:PlayerListColumn = views_list["position"]
 	var positions: Array = visible_players.map(func(p: Player) -> String: return Player.Position.keys()[p.position])
 	pos_col.update_values(positions)
 	
 	# attributes
-	var col_counter: int = 3 # skip names, nat
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
-			var col:PlayerListColumn = columns[col_counter]
+			var col:PlayerListColumn = views_list[value]
 			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
 			col.update_values(values)
-			col_counter += 1
 
 
 func _show_active_column() -> void:
-	for col: PlayerListColumn in columns:
+	for col: PlayerListColumn in views_list.values():
 		col.visible = col.col_name == "" or col.col_name == active_view
 
 

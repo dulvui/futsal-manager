@@ -44,7 +44,7 @@ layout_mode = 2
 [node name="PositionSelect" type="OptionButton" parent="Filters"]
 layout_mode = 2
 
-[node name="Columns" type="HBoxContainer" parent="."]
+[node name="Views" type="HBoxContainer" parent="."]
 layout_mode = 2
 alignment = 1
 
