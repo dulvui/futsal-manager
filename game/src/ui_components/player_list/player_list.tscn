@@ -20,7 +20,6 @@ script = ExtResource("2_ajejk")
 [node name="Filters" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
 [node name="ActiveView" parent="Filters" instance=ExtResource("3_x6w1m")]
 layout_mode = 2
@@ -46,7 +45,6 @@ layout_mode = 2
 
 [node name="Views" type="HBoxContainer" parent="."]
 layout_mode = 2
-alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]
 modulate = Color(1, 1, 1, 0)

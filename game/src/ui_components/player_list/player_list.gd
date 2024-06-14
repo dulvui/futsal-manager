@@ -63,7 +63,8 @@ func set_up(p_active_team_id:int = -1) -> void:
 	active_team_id = p_active_team_id
 	
 	if active_team_id != -1:
-		filter_container.hide()
+		team_select.hide()
+		league_select.hide()
 	
 	_set_up_players()
 	
@@ -88,6 +89,10 @@ func _set_up_columns() -> void:
 	name_col.custom_minimum_size.x = 200
 	name_col.sort.connect(_sort_players.bind("surname"))
 	views_list["name"] = name_col
+	
+	# separator
+	views_container.add_child(VSeparator.new())
+	
 
 	# general
 	var nat_col: PlayerListColumn = PlayerListColumnScene.instantiate()
@@ -118,7 +123,6 @@ func _set_up_columns() -> void:
 	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
-		views_container.add_child(VSeparator.new())
 		for value: String in Const.ATTRIBUTES[key]:
 			var col:PlayerListColumn = PlayerListColumnScene.instantiate()
 			views_container.add_child(col)
