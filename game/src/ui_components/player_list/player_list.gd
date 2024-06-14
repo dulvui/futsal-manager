@@ -19,7 +19,7 @@ const PlayerListColumnScene = preload("res://src/ui_components/player_list/playe
 
 @onready var columns_container: HBoxContainer = $Columns
 
-const views:Array[String] = ["mental", "physical", "technical", "goalkeeper"]
+const views:Array[String] = ["general", "mental", "physical", "technical", "goalkeeper"]
 var active_view: String = views[0]
 
 var columns: Array[PlayerListColumn] = []
@@ -81,13 +81,27 @@ func _set_up_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
 	# names
-	var name_col:PlayerListColumn = PlayerListColumnScene.instantiate()
+	var name_col: PlayerListColumn = PlayerListColumnScene.instantiate()
 	columns_container.add_child(name_col)
 	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
 	name_col.set_up("NAME", names)
 	name_col.custom_minimum_size.x = 200
 	name_col.sort.connect(_sort_players_by_surname)
 	columns.append(name_col)
+
+	# general
+	var nat_col: PlayerListColumn = PlayerListColumnScene.instantiate()
+	columns_container.add_child(nat_col)
+	var nationalities: Array = visible_players.map(func(p: Player) -> String: return Const.Nations.keys()[p.nation])
+	nat_col.set_up("NATIONALITY", nationalities, "general")
+	columns.append(nat_col)
+	
+	var pos_col: PlayerListColumn = PlayerListColumnScene.instantiate()
+	columns_container.add_child(pos_col)
+	var positions: Array = visible_players.map(func(p: Player) -> String: return Player.Position.keys()[p.position])
+	pos_col.set_up("POSITIONS", positions, "general")
+	columns.append(pos_col)
+	
 	
 	# connect player select signal
 	for i: int in visible_players.size():
