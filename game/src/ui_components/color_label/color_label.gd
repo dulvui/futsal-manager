@@ -3,12 +3,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name ColorLabel
-extends Button
+extends Control
 
 signal select
 
 @export var value_name: String
 @onready var label: Label = $Label
+@onready var button: Button = $Button
 
 
 func set_up(p_value_name: String) -> void:
@@ -35,8 +36,8 @@ func set_value(value: Variant) -> void:
 
 
 func enable_button() -> void:
-	disabled = false
-	flat = false
+	button.disabled = false
+	button.flat = false
 
 
 func _on_button_pressed() -> void:

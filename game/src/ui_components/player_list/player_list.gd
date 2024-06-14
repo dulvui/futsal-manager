@@ -107,7 +107,7 @@ func _set_up_columns() -> void:
 	# connect player select signal
 	for i: int in visible_players.size():
 		name_col.color_labels[i].enable_button()
-		name_col.color_labels[i].pressed.connect(func() -> void: select_player.emit(visible_players[i]))
+		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
 	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
@@ -124,9 +124,14 @@ func _set_up_columns() -> void:
 func _update_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 	
-	var names_col:PlayerListColumn = columns[0]
+	var name_col:PlayerListColumn = columns[0]
 	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
-	names_col.update_values(names)
+	name_col.update_values(names)
+	# connect player select signal
+	for i: int in visible_players.size():
+		name_col.color_labels[i].enable_button()
+		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
+	
 
 	var nat_col:PlayerListColumn = columns[1]
 	var nations: Array = visible_players.map(func(p: Player) -> String: return Const.Nations.keys()[p.nation])

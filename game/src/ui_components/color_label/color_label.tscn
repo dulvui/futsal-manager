@@ -3,8 +3,9 @@
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_00f8m"]
 [ext_resource type="Script" path="res://src/ui_components/color_label/color_label.gd" id="2_mr605"]
 
-[node name="ColorNumber" type="Button"]
+[node name="ColorNumber" type="Control"]
 custom_minimum_size = Vector2(32, 32)
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -19,9 +20,16 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_00f8m")
-flat = true
-text_overrun_behavior = 3
 script = ExtResource("2_mr605")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
