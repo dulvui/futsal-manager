@@ -104,6 +104,13 @@ func _set_up_columns() -> void:
 	pos_col.sort.connect(_sort_players.bind("position"))
 	views_list["position"] = pos_col
 	
+	var price_col: PlayerListColumn = PlayerListColumnScene.instantiate()
+	views_container.add_child(price_col)
+	var prices: Array = visible_players.map(func(p: Player) -> String: return CurrencyUtil.get_sign(p.price))
+	price_col.set_up("PRICE", prices, "general")
+	price_col.sort.connect(_sort_players.bind("price"))
+	views_list["price"] = price_col
+	
 	# connect player select signal
 	for i: int in visible_players.size():
 		name_col.color_labels[i].enable_button()
@@ -131,7 +138,6 @@ func _update_columns() -> void:
 	for i: int in visible_players.size():
 		name_col.color_labels[i].enable_button()
 		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
-	
 
 	var nat_col:PlayerListColumn = views_list["nation"]
 	var nations: Array = visible_players.map(func(p: Player) -> String: return Const.Nations.keys()[p.nation])
@@ -140,6 +146,10 @@ func _update_columns() -> void:
 	var pos_col:PlayerListColumn = views_list["position"]
 	var positions: Array = visible_players.map(func(p: Player) -> String: return Player.Position.keys()[p.position])
 	pos_col.update_values(positions)
+	
+	var price_col:PlayerListColumn = views_list["price"]
+	var prices: Array = visible_players.map(func(p: Player) -> String: return CurrencyUtil.get_sign(p.price))
+	price_col.update_values(prices)
 	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
