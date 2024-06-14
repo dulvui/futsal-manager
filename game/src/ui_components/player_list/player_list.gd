@@ -86,22 +86,23 @@ func _set_up_columns() -> void:
 	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
 	name_col.set_up("NAME", names)
 	name_col.custom_minimum_size.x = 200
-	name_col.sort.connect(_sort_players_by_surname)
+	name_col.sort.connect(_sort_players.bind("surname"))
 	columns.append(name_col)
 
 	# general
 	var nat_col: PlayerListColumn = PlayerListColumnScene.instantiate()
 	columns_container.add_child(nat_col)
 	var nationalities: Array = visible_players.map(func(p: Player) -> String: return Const.Nations.keys()[p.nation])
-	nat_col.set_up("NATIONALITY", nationalities, "general")
+	nat_col.set_up("NATION", nationalities, "general")
+	nat_col.sort.connect(_sort_players.bind("nation"))
 	columns.append(nat_col)
 	
 	var pos_col: PlayerListColumn = PlayerListColumnScene.instantiate()
 	columns_container.add_child(pos_col)
 	var positions: Array = visible_players.map(func(p: Player) -> String: return Player.Position.keys()[p.position])
-	pos_col.set_up("POSITIONS", positions, "general")
+	pos_col.set_up("POSITION", positions, "general")
+	pos_col.sort.connect(_sort_players.bind("position"))
 	columns.append(pos_col)
-	
 	
 	# connect player select signal
 	for i: int in visible_players.size():
@@ -116,7 +117,7 @@ func _set_up_columns() -> void:
 			columns_container.add_child(col)
 			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
 			col.set_up(value, values, key)
-			col.sort.connect(_sort_players_by_attributes.bind(key, value))
+			col.sort.connect(_sort_players.bind(key, value))
 			columns.append(col)
 
 
@@ -126,9 +127,17 @@ func _update_columns() -> void:
 	var names_col:PlayerListColumn = columns[0]
 	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
 	names_col.update_values(names)
+
+	var nat_col:PlayerListColumn = columns[1]
+	var nations: Array = visible_players.map(func(p: Player) -> String: return Const.Nations.keys()[p.nation])
+	nat_col.update_values(nations)
+	
+	var pos_col:PlayerListColumn = columns[2]
+	var positions: Array = visible_players.map(func(p: Player) -> String: return Player.Position.keys()[p.position])
+	pos_col.update_values(positions)
 	
 	# attributes
-	var col_counter: int = 1 # skip names
+	var col_counter: int = 3 # skip names, nat
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
 			var col:PlayerListColumn = columns[col_counter]
@@ -225,20 +234,29 @@ func _sort_players_by_surname() -> void:
 	_filter_players(all_players)
 
 
-func _sort_players_by_attributes(key: String, value: String) -> void:
+func _sort_players(key: String, value: String = "") -> void:
 	var sort_key: String = key + value
 	if sort_key in sorting:
 		sorting[sort_key] = not sorting[sort_key]
 	else:
 		sorting[sort_key] = true
 	
-	all_players.sort_custom(
-		func(a:Player, b:Player) -> bool:
-			if sorting[sort_key]:
-				return a.get_value(key, value) > b.get_value(key, value)
-			else:
-				return a.get_value(key, value) < b.get_value(key, value)
-	)
+	if value != "":
+		all_players.sort_custom(
+			func(a:Player, b:Player) -> bool:
+				if sorting[sort_key]:
+					return a.get_value(key, value) > b.get_value(key, value)
+				else:
+					return a.get_value(key, value) < b.get_value(key, value)
+		)
+	else:
+		all_players.sort_custom(
+			func(a:Player, b:Player) -> bool:
+				if sorting[sort_key]:
+					return a.get(key) > b.get(key)
+				else:
+					return a.get(key) < b.get(key)
+		)
 	
 	# after sorting, apply filters
 	# so if filters a removed, sort order is kept

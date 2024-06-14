@@ -297,7 +297,6 @@ autostart = true
 [connection signal="half_time" from="Main/Content/CentralContainer/MainBar/MatchSimulator" to="." method="_on_match_simulator_half_time"]
 [connection signal="match_end" from="Main/Content/CentralContainer/MainBar/MatchSimulator" to="." method="_on_match_simulator_match_end"]
 [connection signal="update_time" from="Main/Content/CentralContainer/MainBar/MatchSimulator" to="." method="_on_match_simulator_update_time"]
-[connection signal="change" from="Main/Content/CentralContainer/MainBar/Formation" to="." method="_on_Formation_change"]
 [connection signal="pressed" from="Main/Content/Buttons/Field" to="." method="_on_Field_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Stats" to="." method="_on_Stats_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Events" to="." method="_on_Events_pressed"]
