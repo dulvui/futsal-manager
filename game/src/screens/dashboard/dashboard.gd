@@ -8,6 +8,7 @@ enum ContentViews {
 	EMAIL,
 	CALENDAR,
 	TABLE,
+	PLAYERS,
 	ALL_PLAYERS,
 	FORMATION,
 	INFO,
@@ -41,6 +42,7 @@ var active_view:ContentViews = 0
 
 # full screen views
 @onready var formation: VisualFormation = $MainContainer/VBoxContainer/MainView/Content/Formation
+@onready var player_list: PlayerList = $MainContainer/VBoxContainer/MainView/Content/PlayerList
 @onready var all_players_list: PlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 @onready var player_offer: PlayerOffer = $MainContainer/VBoxContainer/MainView/Content/PlayerOffer
 @onready var contract_offer: ContractOffer = $MainContainer/VBoxContainer/MainView/Content/ContractOffer
@@ -58,6 +60,7 @@ func _ready() -> void:
 	date_label.text = Config.calendar().format_date()
 	
 	all_players_list.set_up()
+	player_list.set_up(Config.team.id)
 	formation.set_up(false)
 
 	if Config.calendar().is_match_day():
@@ -84,12 +87,12 @@ func _process(_delta: float) -> void:
 	budget_label.text = str(team["budget"]) + "" + CurrencyUtil.get_sign()
 
 
-func _on_Menu_pressed() -> void:
+func _on_menu_pressed() -> void:
 	Config.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
 
-func _on_SearchPlayer_pressed() -> void:
+func _on_search_player_pressed() -> void:
 	_show_active_view(ContentViews.ALL_PLAYERS)
 
 
@@ -97,23 +100,32 @@ func _on_info_pressed() -> void:
 	_show_active_view(ContentViews.INFO)
 
 
-func _on_Formation_pressed() -> void:
+func _on_formation_pressed() -> void:
 	_show_active_view(ContentViews.FORMATION)
 
 
-func _on_Email_pressed() -> void:
+func _on_email_pressed() -> void:
 	_show_active_view(ContentViews.EMAIL)
 
 
-func _on_Table_pressed() -> void:
+func _on_table_pressed() -> void:
 	_show_active_view(ContentViews.TABLE)
 
 
-func _on_Calendar_pressed() -> void:
+func _on_calendar_pressed() -> void:
 	_show_active_view(ContentViews.CALENDAR)
 
 
+func _on_players_pressed() -> void:
+	_show_active_view(ContentViews.PLAYERS)
+
+
 func _on_all_player_list_select_player(player: Player) -> void:
+	player_profile.set_player(player)
+	_show_active_view(ContentViews.PLAYER_PROFILE)
+
+
+func _on_player_list_select_player(player: Player) -> void:
 	player_profile.set_player(player)
 	_show_active_view(ContentViews.PLAYER_PROFILE)
 
@@ -133,6 +145,7 @@ func _hide_all() -> void:
 	visual_calendar.hide()
 	formation.hide()
 	all_players_list.hide()
+	player_list.hide()
 	info.hide()
 	player_offer.hide()
 	contract_offer.hide()
@@ -155,6 +168,8 @@ func _show_active_view(p_active_view: int = -1) -> void:
 			formation.show()
 		ContentViews.ALL_PLAYERS:
 			all_players_list.show()
+		ContentViews.PLAYERS:
+			player_list.show()
 		ContentViews.INFO:
 			info.show()
 		ContentViews.PLAYER_OFFER:
@@ -167,7 +182,7 @@ func _show_active_view(p_active_view: int = -1) -> void:
 			email.show()
 
 
-func _on_Continue_pressed() -> void:
+func _on_continue_pressed() -> void:
 	_next_day()
 	# remove comment to test player progress
 	# PlayerProgress.update_players()
@@ -176,7 +191,7 @@ func _on_Continue_pressed() -> void:
 func _on_next_match_pressed() -> void:
 	next_match_button.disabled = true
 	continue_button.disabled = true
-
+	
 	while not match_ready:
 		_next_day()
 		var timer: Timer = Timer.new()

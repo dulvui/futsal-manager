@@ -101,6 +101,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="PlayerList" parent="MainContainer/VBoxContainer/MainView/Content" instance=ExtResource("8_nkdvo")]
+visible = false
+layout_mode = 2
+
 [node name="Info" parent="MainContainer/VBoxContainer/MainView/Content" instance=ExtResource("8_bk8g0")]
 visible = false
 layout_mode = 2
@@ -154,6 +158,10 @@ text = "TABLE"
 layout_mode = 2
 text = "FORMATION"
 
+[node name="Players" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
+layout_mode = 2
+text = "PLAYERS"
+
 [node name="SearchPlayer" type="Button" parent="MainContainer/VBoxContainer/MainView/Buttons"]
 layout_mode = 2
 text = "SEARCH_PLAYER"
@@ -173,18 +181,20 @@ text = "NEXT_DAY"
 
 [connection signal="email_action" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_email_email_action"]
 [connection signal="select_player" from="MainContainer/VBoxContainer/MainView/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
+[connection signal="select_player" from="MainContainer/VBoxContainer/MainView/Content/PlayerList" to="." method="_on_player_list_select_player"]
 [connection signal="cancel" from="MainContainer/VBoxContainer/MainView/Content/PlayerProfile" to="." method="_on_player_profile_cancel"]
 [connection signal="select" from="MainContainer/VBoxContainer/MainView/Content/PlayerProfile" to="." method="_on_player_profile_select"]
 [connection signal="cancel" from="MainContainer/VBoxContainer/MainView/Content/PlayerOffer" to="." method="_on_player_offer_cancel"]
 [connection signal="confirm" from="MainContainer/VBoxContainer/MainView/Content/PlayerOffer" to="." method="_on_player_offer_confirm"]
 [connection signal="cancel" from="MainContainer/VBoxContainer/MainView/Content/ContractOffer" to="." method="_on_contract_offer_cancel"]
 [connection signal="confirm" from="MainContainer/VBoxContainer/MainView/Content/ContractOffer" to="." method="_on_contract_offer_confirm"]
-[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Menu" to="." method="_on_Menu_pressed"]
-[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Email" to="." method="_on_Email_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Email" to="." method="_on_email_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Info" to="." method="_on_info_pressed"]
-[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Calendar" to="." method="_on_Calendar_pressed"]
-[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Table" to="." method="_on_Table_pressed"]
-[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Formation" to="." method="_on_Formation_pressed"]
-[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/SearchPlayer" to="." method="_on_SearchPlayer_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Calendar" to="." method="_on_calendar_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Table" to="." method="_on_table_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Formation" to="." method="_on_formation_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Players" to="." method="_on_players_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/SearchPlayer" to="." method="_on_search_player_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/NextMatch" to="." method="_on_next_match_pressed"]
-[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Continue" to="." method="_on_continue_pressed"]
