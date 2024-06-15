@@ -24,6 +24,7 @@ var player: Player
 @onready var nr: Label = $Info/Nr
 @onready var attributes_average: Label = $Info/AttributesAverage
 @onready var prestige: Label = $Info/Prestige
+@onready var price: Label = $Info/Price
 @onready var goals: Label = $History/Goals
 
 
@@ -45,6 +46,8 @@ func set_player(_player: Player) -> void:
 	nr.text = str(player.nr)
 	attributes_average.text = str(player.get_overall())
 	prestige.text = str(player.prestige)
+	price.text = CurrencyUtil.get_sign(player.price)
+
 
 	# attributes
 	for attribute: String in Const.ATTRIBUTES.keys():

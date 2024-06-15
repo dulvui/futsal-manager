@@ -84,7 +84,7 @@ func _process(_delta: float) -> void:
 		email_button.text = "[" + str(EmailUtil.count_unread_messages()) + "] " + tr("EMAIL")
 	else:
 		email_button.text = tr("EMAIL")
-	budget_label.text = str(team["budget"]) + "" + CurrencyUtil.get_sign()
+	budget_label.text = CurrencyUtil.get_sign(team.budget)
 
 
 func _on_menu_pressed() -> void:

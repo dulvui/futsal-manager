@@ -132,6 +132,14 @@ text = "PRESTIGE"
 layout_mode = 2
 text = "Bronzolo"
 
+[node name="PriceLabel" type="Label" parent="Info"]
+layout_mode = 2
+text = "PRICE"
+
+[node name="Price" type="Label" parent="Info"]
+layout_mode = 2
+text = "1234 $"
+
 [node name="Buttons" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 40
