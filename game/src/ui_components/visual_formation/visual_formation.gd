@@ -111,7 +111,7 @@ func _on_player_list_select_player(player: Player) -> void:
 
 func _change_player() -> void:
 	# switch betwenn list and lineup
-	if lineup_players.size() == 1:
+	if lineup_players.size() == 1 and list_player:
 		team.lineup_player_ids[lineup_players[0]] = list_player.id
 	# switch betwenn lineup and lineup
 	elif lineup_players.size() == 2:
