@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://brmxp0ulenogn" path="res://src/match_simulator/match_engine/visual_actors/visual_ball/visual_ball.tscn" id="5_g1vg2"]
 
 [node name="VisualMatch" type="Node2D"]
+position = Vector2(724, 338)
 script = ExtResource("1_moskm")
 
 [node name="VisualField" parent="." instance=ExtResource("4_jqh82")]

@@ -7,7 +7,8 @@ extends Control
 const MAX_SPEED_FACTOR: int = 20
 const MAX_COMMENTS: int = 16
 
-@onready var match_simulator: MatchSimulator = $Main/Content/CentralContainer/MainBar/MatchSimulator
+#@onready var match_simulator: MatchSimulator = $Main/Content/CentralContainer/MainBar/MatchSimulator
+@onready var match_simulator: MatchSimulator = $MatchSimulator
 @onready var stats: VisualMatchStats = $Main/Content/CentralContainer/MainBar/Stats
 @onready var comments: VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
 @onready var events: ScrollContainer = $Main/Content/CentralContainer/MainBar/Events
