@@ -241,7 +241,7 @@ func get_age_factor(age: int) -> int:
 
 
 func get_price(age: int, prestige: int, position: Player.Position) -> int:
-	var age_factor: int = min(abs(age - 30), 20)
+	var age_factor: int = max(min(abs(age - 30), 20), 1)
 	var pos_factor: int = 0
 	if position == Player.Position.G:
 		pos_factor = 5
@@ -254,7 +254,7 @@ func get_price(age: int, prestige: int, position: Player.Position) -> int:
 
 	var total_factor: int = age_factor + pos_factor + prestige
 
-	return Config.rng.randi_range(total_factor - 20, total_factor) * 10000
+	return Config.rng.randi_range(max(total_factor - 20, 0), total_factor) * 1000
 
 
 func get_random_foot() -> Player.Foot:
