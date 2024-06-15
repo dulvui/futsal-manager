@@ -116,6 +116,13 @@ func _set_up_columns() -> void:
 	price_col.sort.connect(_sort_players.bind("price"))
 	views_list["price"] = price_col
 	
+	var birth_date_col: PlayerListColumn = PlayerListColumnScene.instantiate()
+	views_container.add_child(birth_date_col)
+	var birth_dates: Array = visible_players.map(func(p: Player) -> String: return Config.calendar().format_date(p.birth_date))
+	birth_date_col.set_up("BIRTH DATE", birth_dates, "general")
+	birth_date_col.sort.connect(_sort_players.bind("birth_date"))
+	views_list["birth_date"] = birth_date_col
+	
 	# connect player select signal
 	for i: int in visible_players.size():
 		name_col.color_labels[i].enable_button()
@@ -154,6 +161,10 @@ func _update_columns() -> void:
 	var price_col:PlayerListColumn = views_list["price"]
 	var prices: Array = visible_players.map(func(p: Player) -> String: return CurrencyUtil.get_sign(p.price))
 	price_col.update_values(prices)
+	
+	var birth_date_col:PlayerListColumn = views_list["birth_date"]
+	var birth_date: Array = visible_players.map(func(p: Player) -> String: return Config.calendar().format_date(p.birth_date))
+	birth_date_col.update_values(birth_date)
 	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
@@ -232,25 +243,6 @@ func _update_page_indicator() -> void:
 	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
 
 
-func _sort_players_by_surname() -> void:
-	if "surname" in sorting:
-		sorting["surname"] = not sorting["surname"]
-	else:
-		sorting["surname"] = true
-	
-	all_players.sort_custom(
-		func(a:Player, b:Player) -> bool:
-			if sorting["surname"]:
-				return a.surname < b.surname
-			else:
-				return a.surname > b.surname
-	)
-	
-	# after sorting, apply filters
-	# so if filters a removed, sort order is kept
-	_filter_players(all_players)
-
-
 func _sort_players(key: String, value: String = "") -> void:
 	var sort_key: String = key + value
 	if sort_key in sorting:
@@ -259,6 +251,7 @@ func _sort_players(key: String, value: String = "") -> void:
 		sorting[sort_key] = true
 	
 	if value != "":
+		# attributes
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
 				if sorting[sort_key]:
@@ -266,7 +259,19 @@ func _sort_players(key: String, value: String = "") -> void:
 				else:
 					return a.get_value(key, value) < b.get_value(key, value)
 		)
+	elif "date" in key:
+		# dates
+		all_players.sort_custom(
+			func(a:Player, b:Player) -> bool:
+				var a_unix: int = Time.get_unix_time_from_datetime_dict(a.get(key))
+				var b_unix: int = Time.get_unix_time_from_datetime_dict(b.get(key))
+				if sorting[sort_key]:
+					return a_unix > b_unix
+				else:
+					return a_unix < b_unix
+		)
 	else:
+		# normal properties
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
 				if sorting[sort_key]:
