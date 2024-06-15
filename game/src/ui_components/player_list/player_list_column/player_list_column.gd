@@ -13,31 +13,37 @@ signal sort
 
 var color_labels: Array[ColorLabel] = []
 
+var view_name: String
 var col_name: String
+
 
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
 
-func set_up(p_key: String, values: Array, p_col_name: String = "") -> void:
+func set_up(p_view_name: String, p_col_name: String, values: Array) -> void:
+	view_name = p_view_name
 	col_name = p_col_name
 
-	if p_key == "NAME":
-		sort_button.text = p_key
-	else:
-		sort_button.text = p_key.substr(0, 2)
+	#if p_col_name == "NAME":
+		#sort_button.text = p_col_name
+	#else:
+		#sort_button.text = p_col_name.substr(0, 2)
+		
+	sort_button.text = p_col_name
+	
 
-	sort_button.tooltip_text = p_key
+	sort_button.tooltip_text = p_col_name
 
 	for value: Variant in values:
 		var label: ColorLabel = ColorLabelScene.instantiate()
 		color_labels.append(label)
 		add_child(label)
-		label.tooltip_text = p_key
-		label.set_up(p_key)
+		label.tooltip_text = p_col_name
+		label.set_up(p_col_name)
 		label.set_value(value)
-		if p_key == "NAME":
+		if p_col_name == "surname":
 			label.enable_button()
 
 

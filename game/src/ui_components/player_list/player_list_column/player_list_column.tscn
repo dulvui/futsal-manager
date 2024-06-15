@@ -17,10 +17,12 @@ grow_vertical = 2
 script = ExtResource("1_mrrrx")
 
 [node name="SortButton" type="Button" parent="."]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "NAME"
 alignment = 0
+text_overrun_behavior = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]
 layout_mode = 2
