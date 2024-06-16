@@ -73,6 +73,7 @@ func pause_toggle() -> bool:
 
 func pause() -> void:
 	timer.paused = true
+	Config.match_paused = timer.paused
 
 
 func continue_match() -> void:
