@@ -146,3 +146,12 @@ func get_overall() -> int:
 
 func get_value(key: String, value: String) -> int:
 	return (attributes.get(key) as Resource).get(value)
+
+
+func get_prestige_stars() -> String:
+	var relation: int = Const.MAX_PRESTIGE / 4
+	var star_factor: int = Const.MAX_PRESTIGE / relation
+	var stars: int = max(1, prestige / star_factor)
+	var spaces: int = 5 - stars
+	# creates right padding ex: "***  "
+	return "*".repeat(stars) + "  ".repeat(spaces)

@@ -109,6 +109,8 @@ func _set_up_columns() -> void:
 	var birth_dates: Array = visible_players.map(func(p: Player) -> String: return Config.calendar().format_date(p.birth_date))
 	_add_column("general", "birth_date", birth_dates)
 	
+	var presitge_stars: Array = visible_players.map(func(p: Player) -> String: return p.get_prestige_stars())
+	_add_column("general", "prestige", presitge_stars)
 
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
@@ -147,6 +149,10 @@ func _update_columns() -> void:
 	var birth_date_col:PlayerListColumn = views_list["birth_date"]
 	var birth_date: Array = visible_players.map(func(p: Player) -> String: return Config.calendar().format_date(p.birth_date))
 	birth_date_col.update_values(birth_date)
+	
+	var prestige_col:PlayerListColumn = views_list["prestige"]
+	var presitge_stars: Array = visible_players.map(func(p: Player) -> String: return p.get_prestige_stars())
+	prestige_col.update_values(presitge_stars)
 	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
