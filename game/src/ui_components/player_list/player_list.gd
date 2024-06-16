@@ -115,6 +115,10 @@ func _set_up_columns() -> void:
 	
 	var moralities: Callable = func(p: Player) -> int: return p.morality
 	_add_column("general", "morality", moralities)
+	
+	# contract
+	var incomes: Callable = func(p: Player) -> int: return p.contract.income
+	_add_column("contract", "income", incomes)
 
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
