@@ -70,7 +70,7 @@ func set_player(_player: Player) -> void:
 			var value: ColorLabel = ColorLabelScene.instantiate()
 			attributes.get_node(attribute.capitalize()).add_child(value)
 			value.set_up(key)
-			value.set_value(player.get_value(attribute,key))
+			value.set_value(player.get_res_value([attribute,key]))
 
 	#history
 	goals.text = str(player.statistics[Config.current_season].goals)

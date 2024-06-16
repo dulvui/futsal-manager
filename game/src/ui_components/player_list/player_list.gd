@@ -123,7 +123,7 @@ func _set_up_columns() -> void:
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
-			var attributes: Callable = func(p: Player) -> int: return p.get_value(key, value)
+			var attributes: Callable = func(p: Player) -> int: return p.get_res_value(["attributes", key, value])
 			_add_column(key, value, attributes)
 
 
@@ -225,9 +225,18 @@ func _sort_players(key: String, value: String) -> void:
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
 				if sorting[sort_key]:
-					return a.get_value(key, value) > b.get_value(key, value)
+					return a.get_res_value(["attributes", key, value]) > b.get_res_value(["attributes", key, value])
 				else:
-					return a.get_value(key, value) < b.get_value(key, value)
+					return a.get_res_value(["attributes", key, value]) < b.get_res_value(["attributes", key, value])
+		)
+	elif key == "contract":
+		# contract 
+		all_players.sort_custom(
+			func(a:Player, b:Player) -> bool:
+				if sorting[sort_key]:
+					return a.get_res_value(["contract", value]) > b.get_res_value(["contract", value])
+				else:
+					return a.get_res_value(["contract", value]) < b.get_res_value(["contract", value])
 		)
 	elif "date" in key:
 		# dates
