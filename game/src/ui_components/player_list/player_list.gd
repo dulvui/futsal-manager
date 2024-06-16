@@ -19,10 +19,10 @@ const PlayerListColumnScene = preload("res://src/ui_components/player_list/playe
 
 @onready var views_container: HBoxContainer = $Views
 
-const views:Array[String] = ["general", "mental", "physical", "technical", "goalkeeper"]
-var active_view: String = views[0]
 
-var views_list: Dictionary = {}
+var views: Array[String]
+var columns: Dictionary = {}
+var active_view: String
 
 var active_team_id: int
 
@@ -53,8 +53,6 @@ func _ready() -> void:
 	for league: League in Config.leagues.list:
 		league_select.add_item(league.name)
 	
-	active_view_option_button.set_up(views)
-	
 	# setup automatically, if run in editor and is run by 'Run current scene'
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
 		set_up()
@@ -71,6 +69,9 @@ func set_up(p_active_team_id:int = -1) -> void:
 	page_max = players.size() / page_size
 
 	_set_up_columns()
+	active_view = views[0]
+	active_view_option_button.set_up(views)
+
 	_update_page_indicator()
 	_show_active_column()
 
@@ -84,7 +85,7 @@ func _set_up_columns() -> void:
 	# names
 	var names: Callable = func(p: Player) -> String: return p.surname
 	_add_column("surname", "surname", names)
-	var name_col: PlayerListColumn = views_list["surname"]
+	var name_col: PlayerListColumn = columns["surname"]
 	name_col.custom_minimum_size.x = 200
 	# connect name button  signal
 	for i: int in visible_players.size():
@@ -125,7 +126,7 @@ func _set_up_columns() -> void:
 func _update_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 	
-	for col: PlayerListColumn in views_list.values():
+	for col: PlayerListColumn in columns.values():
 		col.update_values(visible_players)
 
 
@@ -134,11 +135,13 @@ func _add_column(view_name:String, col_name: String, map_function: Callable) -> 
 	views_container.add_child(col)
 	col.set_up(view_name, col_name, visible_players, map_function)
 	col.sort.connect(_sort_players.bind(view_name, col_name))
-	views_list[col_name] = col
+	columns[col_name] = col
+	if view_name != "surname" and not view_name in views:
+		views.append(view_name)
 
 
 func _show_active_column() -> void:
-	for col: PlayerListColumn in views_list.values():
+	for col: PlayerListColumn in columns.values():
 		col.visible = col.view_name == "surname" or col.view_name == active_view
 
 
