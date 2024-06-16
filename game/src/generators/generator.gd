@@ -346,7 +346,6 @@ func create_player(
 	player.surname = get_surname(nationality)
 	player.birth_date = birth_date
 	player.nation = nationality
-	player.moral = Config.rng.randi_range(1, 4)  # 1 to 4, 1 low 4 good
 	player.position = position
 	player.foot = get_random_foot()
 	player.morality = get_random_morality()

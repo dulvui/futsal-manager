@@ -16,15 +16,16 @@ var color_labels: Array[ColorLabel] = []
 var view_name: String
 var col_name: String
 
-
+var map_function: Callable
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
 
-func set_up(p_view_name: String, p_col_name: String, values: Array) -> void:
+func set_up(p_view_name: String, p_col_name: String, players: Array[Player], p_map_function: Callable) -> void:
 	view_name = p_view_name
 	col_name = p_col_name
+	map_function = p_map_function
 
 	#if p_col_name == "NAME":
 		#sort_button.text = p_col_name
@@ -35,7 +36,9 @@ func set_up(p_view_name: String, p_col_name: String, values: Array) -> void:
 	
 
 	sort_button.tooltip_text = p_col_name
-
+	
+	var values: Array[Variant] = players.map(map_function)
+	
 	for value: Variant in values:
 		var label: ColorLabel = ColorLabelScene.instantiate()
 		color_labels.append(label)
@@ -47,7 +50,9 @@ func set_up(p_view_name: String, p_col_name: String, values: Array) -> void:
 			label.enable_button()
 
 
-func update_values(values: Array) -> void:
+func update_values(players: Array[Player]) -> void:
+	var values: Array[Variant] = players.map(map_function)
+	
 	for i: int in color_labels.size():
 		if i < values.size():
 			color_labels[i].show()

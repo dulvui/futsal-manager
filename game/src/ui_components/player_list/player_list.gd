@@ -82,7 +82,7 @@ func _set_up_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
 	# names
-	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
+	var names: Callable = func(p: Player) -> String: return p.surname
 	_add_column("surname", "surname", names)
 	var name_col: PlayerListColumn = views_list["surname"]
 	name_col.custom_minimum_size.x = 200
@@ -97,76 +97,43 @@ func _set_up_columns() -> void:
 	
 
 	# general
-	var nationalities: Array = visible_players.map(func(p: Player) -> String: return Const.Nations.keys()[p.nation])
+	var nationalities: Callable = func(p: Player) -> String: return Const.Nations.keys()[p.nation]
 	_add_column("general", "nation", nationalities)
 	
-	var positions: Array = visible_players.map(func(p: Player) -> String: return Player.Position.keys()[p.position])
+	var positions: Callable = func(p: Player) -> String: return Player.Position.keys()[p.position]
 	_add_column("general", "position", positions)
 	
-	var prices: Array = visible_players.map(func(p: Player) -> String: return CurrencyUtil.get_sign(p.price))
+	var prices: Callable = func(p: Player) -> String: return CurrencyUtil.get_sign(p.price)
 	_add_column("general", "price", prices)
 	
-	var birth_dates: Array = visible_players.map(func(p: Player) -> String: return Config.calendar().format_date(p.birth_date))
+	var birth_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.birth_date)
 	_add_column("general", "birth_date", birth_dates)
 	
-	var presitge_stars: Array = visible_players.map(func(p: Player) -> String: return p.get_prestige_stars())
+	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()
 	_add_column("general", "prestige", presitge_stars)
+	
+	var moralities: Callable = func(p: Player) -> int: return p.morality
+	_add_column("general", "morality", moralities)
 
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
-			var col:PlayerListColumn = PlayerListColumnScene.instantiate()
-			views_container.add_child(col)
-			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
-			col.set_up(key, value, values)
-			col.sort.connect(_sort_players.bind(key, value))
-			views_list[value] = col
+			var attributes: Callable = func(p: Player) -> int: return p.get_value(key, value)
+			_add_column(key, value, attributes)
 
 
 func _update_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 	
-	var name_col:PlayerListColumn = views_list["surname"]
-	var names: Array = visible_players.map(func(p: Player) -> String: return p.surname)
-	name_col.update_values(names)
-	# connect player select signal
-	for i: int in visible_players.size():
-		name_col.color_labels[i].enable_button()
-		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
-
-	var nat_col:PlayerListColumn = views_list["nation"]
-	var nations: Array = visible_players.map(func(p: Player) -> String: return Const.Nations.keys()[p.nation])
-	nat_col.update_values(nations)
-	
-	var pos_col:PlayerListColumn = views_list["position"]
-	var positions: Array = visible_players.map(func(p: Player) -> String: return Player.Position.keys()[p.position])
-	pos_col.update_values(positions)
-	
-	var price_col:PlayerListColumn = views_list["price"]
-	var prices: Array = visible_players.map(func(p: Player) -> String: return CurrencyUtil.get_sign(p.price))
-	price_col.update_values(prices)
-	
-	var birth_date_col:PlayerListColumn = views_list["birth_date"]
-	var birth_date: Array = visible_players.map(func(p: Player) -> String: return Config.calendar().format_date(p.birth_date))
-	birth_date_col.update_values(birth_date)
-	
-	var prestige_col:PlayerListColumn = views_list["prestige"]
-	var presitge_stars: Array = visible_players.map(func(p: Player) -> String: return p.get_prestige_stars())
-	prestige_col.update_values(presitge_stars)
-	
-	# attributes
-	for key: String in Const.ATTRIBUTES.keys():
-		for value: String in Const.ATTRIBUTES[key]:
-			var col:PlayerListColumn = views_list[value]
-			var values: Array = visible_players.map(func(p: Player) -> int: return p.get_value(key, value))
-			col.update_values(values)
+	for col: PlayerListColumn in views_list.values():
+		col.update_values(visible_players)
 
 
-func _add_column(view_name:String, col_name: String, values: Array[Variant]) -> void:
+func _add_column(view_name:String, col_name: String, map_function: Callable) -> void:
 	var col: PlayerListColumn = PlayerListColumnScene.instantiate()
 	views_container.add_child(col)
-	col.set_up(view_name, col_name, values)
-	col.sort.connect(_sort_players.bind(col_name))
+	col.set_up(view_name, col_name, visible_players, map_function)
+	col.sort.connect(_sort_players.bind(view_name, col_name))
 	views_list[col_name] = col
 
 
@@ -239,14 +206,14 @@ func _update_page_indicator() -> void:
 	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
 
 
-func _sort_players(key: String, value: String = "") -> void:
-	var sort_key: String = key + value
+func _sort_players(key: String, value: String) -> void:
+	var sort_key: String = value
 	if sort_key in sorting:
 		sorting[sort_key] = not sorting[sort_key]
 	else:
 		sorting[sort_key] = true
 	
-	if value != "":
+	if value in str(Const.ATTRIBUTES.values()):
 		# attributes
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
@@ -259,8 +226,8 @@ func _sort_players(key: String, value: String = "") -> void:
 		# dates
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
-				var a_unix: int = Time.get_unix_time_from_datetime_dict(a.get(key))
-				var b_unix: int = Time.get_unix_time_from_datetime_dict(b.get(key))
+				var a_unix: int = Time.get_unix_time_from_datetime_dict(a.get(value))
+				var b_unix: int = Time.get_unix_time_from_datetime_dict(b.get(value))
 				if sorting[sort_key]:
 					return a_unix > b_unix
 				else:
@@ -271,9 +238,9 @@ func _sort_players(key: String, value: String = "") -> void:
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
 				if sorting[sort_key]:
-					return a.get(key) > b.get(key)
+					return a.get(value) > b.get(value)
 				else:
-					return a.get(key) < b.get(key)
+					return a.get(value) < b.get(value)
 		)
 	
 	# after sorting, apply filters

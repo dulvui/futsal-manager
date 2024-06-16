@@ -15,7 +15,6 @@ enum Form { Injured, Recover, Good, Excellent }
 @export var nr: int  # shirt number
 @export var loyality: int
 @export var prestige: int  # 1-100
-@export var moral: int
 @export var injury_factor: int
 @export var name: String
 @export var team: String  # team name for easier filtering etc...
@@ -39,7 +38,6 @@ func _init(
 	p_nr: int = 0,
 	p_loyality: int = 0,
 	p_prestige: int = 0,
-	p_moral: int = 0,
 	p_injury_factor: int = 0,
 	p_name: String = "",
 	p_team: String = "",
@@ -61,7 +59,6 @@ func _init(
 	nr = p_nr
 	loyality = p_loyality
 	prestige = p_prestige
-	moral = p_moral
 	injury_factor = p_injury_factor
 	name = p_name
 	team = p_team
