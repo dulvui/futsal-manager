@@ -119,6 +119,9 @@ func _set_up_columns() -> void:
 	# contract
 	var incomes: Callable = func(p: Player) -> int: return p.contract.income
 	_add_column("contract", "income", incomes)
+	
+	var end_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.contract.end_date)
+	_add_column("contract", "end_date", end_dates)
 
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
@@ -229,15 +232,6 @@ func _sort_players(key: String, value: String) -> void:
 				else:
 					return a.get_res_value(["attributes", key, value]) < b.get_res_value(["attributes", key, value])
 		)
-	elif key == "contract":
-		# contract 
-		all_players.sort_custom(
-			func(a:Player, b:Player) -> bool:
-				if sorting[sort_key]:
-					return a.get_res_value(["contract", value]) > b.get_res_value(["contract", value])
-				else:
-					return a.get_res_value(["contract", value]) < b.get_res_value(["contract", value])
-		)
 	elif "date" in key:
 		# dates
 		all_players.sort_custom(
@@ -248,6 +242,15 @@ func _sort_players(key: String, value: String) -> void:
 					return a_unix > b_unix
 				else:
 					return a_unix < b_unix
+		)
+	elif key == "contract":
+		# contract 
+		all_players.sort_custom(
+			func(a:Player, b:Player) -> bool:
+				if sorting[sort_key]:
+					return a.get_res_value(["contract", value]) > b.get_res_value(["contract", value])
+				else:
+					return a.get_res_value(["contract", value]) < b.get_res_value(["contract", value])
 		)
 	else:
 		# normal properties
