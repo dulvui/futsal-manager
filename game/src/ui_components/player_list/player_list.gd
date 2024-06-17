@@ -52,20 +52,20 @@ func _ready() -> void:
 	league_select.add_item("ALL_LEAGUES")
 	for league: League in Config.leagues.list:
 		league_select.add_item(league.name)
-	
+
 	# setup automatically, if run in editor and is run by 'Run current scene'
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
 		set_up()
 
 func set_up(p_active_team_id:int = -1) -> void:
 	active_team_id = p_active_team_id
-	
+
 	if active_team_id != -1:
 		team_select.hide()
 		league_select.hide()
-	
+
 	_set_up_players()
-	
+
 	page_max = players.size() / page_size
 
 	_set_up_columns()
@@ -79,7 +79,7 @@ func set_up(p_active_team_id:int = -1) -> void:
 func _set_up_columns() -> void:
 	for child in views_container.get_children():
 		child.queue_free()
-	
+
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
 	# names
@@ -91,57 +91,58 @@ func _set_up_columns() -> void:
 	for i: int in visible_players.size():
 		name_col.color_labels[i].enable_button()
 		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
-	
-	
+
+
 	# separator
 	views_container.add_child(VSeparator.new())
-	
+
 
 	# general
 	var nationalities: Callable = func(p: Player) -> String: return Const.Nations.keys()[p.nation]
 	_add_column("general", "nation", nationalities)
-	
+
 	var positions: Callable = func(p: Player) -> String: return Player.Position.keys()[p.position]
 	_add_column("general", "position", positions)
-	
+
 	var prices: Callable = func(p: Player) -> String: return CurrencyUtil.get_sign(p.price)
 	_add_column("general", "price", prices)
-	
+
 	var birth_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.birth_date)
 	_add_column("general", "birth_date", birth_dates)
-	
+
 	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()
 	_add_column("general", "prestige", presitge_stars)
-	
+
 	var moralities: Callable = func(p: Player) -> int: return p.morality
 	_add_column("general", "morality", moralities)
-	
+
 	# contract
 	var incomes: Callable = func(p: Player) -> int: return p.contract.income
-	_add_column("contract", "income", incomes)
-	
+	_add_column("contract", "income", incomes, ["contract", "income"])
+
 	var end_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.contract.end_date)
-	_add_column("contract", "end_date", end_dates)
+	_add_column("contract", "end_date", end_dates, ["contract", "end_date"])
 
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
-			var attributes: Callable = func(p: Player) -> int: return p.get_res_value(["attributes", key, value])
-			_add_column(key, value, attributes)
+			var value_path: Array[String] = ["attributes", key, value]
+			var attributes: Callable = func(p: Player) -> int: return p.get_res_value(value_path)
+			_add_column(key, value, attributes, value_path)
 
 
 func _update_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
-	
+
 	for col: PlayerListColumn in columns.values():
 		col.update_values(visible_players)
 
 
-func _add_column(view_name:String, col_name: String, map_function: Callable) -> void:
+func _add_column(view_name:String, col_name: String, map_function: Callable, value_path: Array[String] = [col_name]) -> void:
 	var col: PlayerListColumn = PlayerListColumnScene.instantiate()
 	views_container.add_child(col)
 	col.set_up(view_name, col_name, visible_players, map_function)
-	col.sort.connect(_sort_players.bind(view_name, col_name))
+	col.sort.connect(_sort_players.bind(col_name, value_path))
 	columns[col_name] = col
 	if view_name != "surname" and not view_name in views:
 		views.append(view_name)
@@ -157,7 +158,7 @@ func _set_up_players(p_reset_options: bool = true) -> void:
 		_reset_options()
 
 	all_players = []
-	
+
 	# uncomment to stresstest
 	#for i in range(10):
 	for league: League in Config.leagues.list:
@@ -165,7 +166,7 @@ func _set_up_players(p_reset_options: bool = true) -> void:
 			if active_team_id == -1 or active_team_id == team.id:
 				for player in team.players:
 					all_players.append(player)
-	
+
 	players = all_players
 
 
@@ -216,52 +217,34 @@ func _update_page_indicator() -> void:
 	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
 
 
-func _sort_players(key: String, value: String) -> void:
+func _sort_players(value: String, valuepath: Array[String]) -> void:
 	var sort_key: String = value
 	if sort_key in sorting:
 		sorting[sort_key] = not sorting[sort_key]
 	else:
 		sorting[sort_key] = true
-	
-	if value in str(Const.ATTRIBUTES.values()):
-		# attributes
-		all_players.sort_custom(
-			func(a:Player, b:Player) -> bool:
-				if sorting[sort_key]:
-					return a.get_res_value(["attributes", key, value]) > b.get_res_value(["attributes", key, value])
-				else:
-					return a.get_res_value(["attributes", key, value]) < b.get_res_value(["attributes", key, value])
-		)
-	elif "date" in key:
+
+	if "date" in value:
 		# dates
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
-				var a_unix: int = Time.get_unix_time_from_datetime_dict(a.get(value))
-				var b_unix: int = Time.get_unix_time_from_datetime_dict(b.get(value))
+				var a_unix: int = Time.get_unix_time_from_datetime_dict(a.get_res_value(valuepath))
+				var b_unix: int = Time.get_unix_time_from_datetime_dict(b.get_res_value(valuepath))
 				if sorting[sort_key]:
 					return a_unix > b_unix
 				else:
 					return a_unix < b_unix
 		)
-	elif key == "contract":
-		# contract 
-		all_players.sort_custom(
-			func(a:Player, b:Player) -> bool:
-				if sorting[sort_key]:
-					return a.get_res_value(["contract", value]) > b.get_res_value(["contract", value])
-				else:
-					return a.get_res_value(["contract", value]) < b.get_res_value(["contract", value])
-		)
 	else:
-		# normal properties
+		# normal props
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
 				if sorting[sort_key]:
-					return a.get(value) > b.get(value)
+					return a.get_res_value(valuepath) > b.get_res_value(valuepath)
 				else:
-					return a.get(value) < b.get(value)
+					return a.get_res_value(valuepath) < b.get_res_value(valuepath)
 		)
-	
+
 	# after sorting, apply filters
 	# so if filters a removed, sort order is kept
 	_filter_players(all_players)
@@ -277,13 +260,13 @@ func _unfilter() -> void:
 
 func _filter_players(player_base: Array[Player]) -> void:
 	page = 0
-	
+
 	if filters.size() > 0:
 		var filtered_players: Array[Player] = []
 		var filter_counter: int = 0
 		var value: String
 		var key: String
-		
+
 		for player in player_base:
 			filter_counter = 0
 			for i:int in filters.keys().size():

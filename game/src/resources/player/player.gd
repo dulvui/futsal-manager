@@ -145,6 +145,8 @@ func get_res_value(keys: Array[String], p_res: Resource = null) -> Variant:
 	# iterate recursivly over properties and attributes
 	# to get dynamically nested resource values
 	if keys.size() == 1:
+		if p_res == null:
+			return get(keys[0])
 		return p_res.get(keys[0])
 	if p_res == null:
 		return get_res_value(keys.slice(1, keys.size()), get(keys[0]))
