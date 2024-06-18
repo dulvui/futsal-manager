@@ -38,10 +38,13 @@ func set_up(p_view_name: String, p_col_name: String, players: Array[Player], p_m
 		var label: ColorLabel = ColorLabelScene.instantiate()
 		color_labels.append(label)
 		add_child(label)
-		label.tooltip_text = p_col_name
-		label.set_up(p_col_name)
-		label.set_value(value)
-		if p_col_name == "surname":
+		label.tooltip_text = col_name
+		label.set_up(col_name)
+		if "date" in col_name:
+			label.set_value(Config.calendar().format_date(value))
+		else:
+			label.set_value(value)
+		if col_name == "surname":
 			label.enable_button()
 
 
@@ -51,7 +54,10 @@ func update_values(players: Array[Player]) -> void:
 	for i: int in color_labels.size():
 		if i < values.size():
 			color_labels[i].show()
-			color_labels[i].set_value(values[i])
+			if "date" in col_name:
+				color_labels[i].set_value(Config.calendar().format_date(values[i]))
+			else:
+				color_labels[i].set_value(values[i])
 		else:
 			color_labels[i].hide()
 
