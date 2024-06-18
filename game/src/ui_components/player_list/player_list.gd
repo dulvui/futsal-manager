@@ -92,37 +92,33 @@ func _set_up_columns() -> void:
 		name_col.color_labels[i].enable_button()
 		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
 
-
 	# separator
 	views_container.add_child(VSeparator.new())
-
 
 	# general
 	var nationalities: Callable = func(p: Player) -> String: return Const.Nations.keys()[p.nation]
 	_add_column("general", "nation", nationalities)
-
 	var positions: Callable = func(p: Player) -> String: return Player.Position.keys()[p.position]
 	_add_column("general", "position", positions)
-
 	var prices: Callable = func(p: Player) -> String: return CurrencyUtil.get_sign(p.price)
 	_add_column("general", "price", prices)
-
 	var birth_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.birth_date)
 	_add_column("general", "birth_date", birth_dates)
-
 	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()
 	_add_column("general", "prestige", presitge_stars)
-
 	var moralities: Callable = func(p: Player) -> int: return p.morality
 	_add_column("general", "morality", moralities)
 
 	# contract
 	var incomes: Callable = func(p: Player) -> int: return p.contract.income
 	_add_column("contract", "income", incomes, ["contract", "income"])
-
+	var start_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.contract.start_date)
+	_add_column("contract", "start_date", start_dates, ["contract", "start_date"])
 	var end_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.contract.end_date)
 	_add_column("contract", "end_date", end_dates, ["contract", "end_date"])
-
+	var buy_clauses: Callable = func(p: Player) -> int: return p.contract.buy_clause
+	_add_column("contract", "buy_clause", buy_clauses, ["contract", "buy_clause"])
+	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
