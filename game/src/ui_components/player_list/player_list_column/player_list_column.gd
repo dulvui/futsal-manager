@@ -26,12 +26,7 @@ func set_up(p_view_name: String, p_col_name: String, players: Array[Player], p_m
 	view_name = p_view_name
 	col_name = p_col_name
 	map_function = p_map_function
-
-	#if p_col_name == "NAME":
-		#sort_button.text = p_col_name
-	#else:
-		#sort_button.text = p_col_name.substr(0, 2)
-		
+	
 	sort_button.text = p_col_name
 	
 

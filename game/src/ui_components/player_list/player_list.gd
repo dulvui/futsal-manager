@@ -96,13 +96,16 @@ func _set_up_columns() -> void:
 	views_container.add_child(VSeparator.new())
 
 	# general
+	var team_names: Callable = func(p: Player) -> String: return p.team
+	_add_column("general", "team", team_names)
 	var nationalities: Callable = func(p: Player) -> String: return Const.Nations.keys()[p.nation]
 	_add_column("general", "nation", nationalities)
 	var positions: Callable = func(p: Player) -> String: return Player.Position.keys()[p.position]
 	_add_column("general", "position", positions)
 	var prices: Callable = func(p: Player) -> String: return CurrencyUtil.get_sign(p.price)
 	_add_column("general", "price", prices)
-	var birth_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.birth_date)
+	#var birth_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.birth_date)
+	var birth_dates: Callable = func(p: Player) -> Dictionary: return p.birth_date
 	_add_column("general", "birth_date", birth_dates)
 	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()
 	_add_column("general", "prestige", presitge_stars)
@@ -111,20 +114,24 @@ func _set_up_columns() -> void:
 
 	# contract
 	var incomes: Callable = func(p: Player) -> int: return p.contract.income
-	_add_column("contract", "income", incomes, ["contract", "income"])
-	var start_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.contract.start_date)
-	_add_column("contract", "start_date", start_dates, ["contract", "start_date"])
-	var end_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.contract.end_date)
-	_add_column("contract", "end_date", end_dates, ["contract", "end_date"])
+	_add_column("contract", "income", incomes)
+	var start_dates: Callable = func(p: Player) -> Dictionary: return p.contract.start_date
+	_add_column("contract", "start_date", start_dates)
+	var end_dates: Callable = func(p: Player) -> Dictionary: return p.contract.end_date
+	_add_column("contract", "end_date", end_dates)
 	var buy_clauses: Callable = func(p: Player) -> int: return p.contract.buy_clause
-	_add_column("contract", "buy_clause", buy_clauses, ["contract", "buy_clause"])
+	_add_column("contract", "buy_clause", buy_clauses)
+	
+	# statistics
+	var games_played: Callable = func(p: Player) -> int: return p.statistics[0].games_played
+	_add_column("statistics", "games_played", games_played)
 	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
 			var value_path: Array[String] = ["attributes", key, value]
 			var attributes: Callable = func(p: Player) -> int: return p.get_res_value(value_path)
-			_add_column(key, value, attributes, value_path)
+			_add_column(key, value, attributes)
 
 
 func _update_columns() -> void:
@@ -134,11 +141,11 @@ func _update_columns() -> void:
 		col.update_values(visible_players)
 
 
-func _add_column(view_name:String, col_name: String, map_function: Callable, value_path: Array[String] = [col_name]) -> void:
+func _add_column(view_name:String, col_name: String, map_function: Callable) -> void:
 	var col: PlayerListColumn = PlayerListColumnScene.instantiate()
 	views_container.add_child(col)
 	col.set_up(view_name, col_name, visible_players, map_function)
-	col.sort.connect(_sort_players.bind(col_name, value_path))
+	col.sort.connect(_sort_players.bind(col_name, map_function))
 	columns[col_name] = col
 	if view_name != "surname" and not view_name in views:
 		views.append(view_name)
@@ -213,7 +220,7 @@ func _update_page_indicator() -> void:
 	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
 
 
-func _sort_players(value: String, valuepath: Array[String]) -> void:
+func _sort_players(value: String, map_function: Callable) -> void:
 	var sort_key: String = value
 	if sort_key in sorting:
 		sorting[sort_key] = not sorting[sort_key]
@@ -224,8 +231,8 @@ func _sort_players(value: String, valuepath: Array[String]) -> void:
 		# dates
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
-				var a_unix: int = Time.get_unix_time_from_datetime_dict(a.get_res_value(valuepath))
-				var b_unix: int = Time.get_unix_time_from_datetime_dict(b.get_res_value(valuepath))
+				var a_unix: int = Time.get_unix_time_from_datetime_dict(map_function.call(a))
+				var b_unix: int = Time.get_unix_time_from_datetime_dict(map_function.call(b))
 				if sorting[sort_key]:
 					return a_unix > b_unix
 				else:
@@ -236,9 +243,9 @@ func _sort_players(value: String, valuepath: Array[String]) -> void:
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
 				if sorting[sort_key]:
-					return a.get_res_value(valuepath) > b.get_res_value(valuepath)
+					return map_function.call(a) > map_function.call(b)
 				else:
-					return a.get_res_value(valuepath) < b.get_res_value(valuepath)
+					return map_function.call(a) < map_function.call(b)
 		)
 
 	# after sorting, apply filters
