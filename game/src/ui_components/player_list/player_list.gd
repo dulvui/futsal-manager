@@ -113,23 +113,27 @@ func _set_up_columns() -> void:
 	_add_column("general", "morality", moralities)
 
 	# contract
-	var incomes: Callable = func(p: Player) -> int: return p.contract.income
-	_add_column("contract", "income", incomes)
-	var start_dates: Callable = func(p: Player) -> Dictionary: return p.contract.start_date
-	_add_column("contract", "start_date", start_dates)
-	var end_dates: Callable = func(p: Player) -> Dictionary: return p.contract.end_date
-	_add_column("contract", "end_date", end_dates)
-	var buy_clauses: Callable = func(p: Player) -> int: return p.contract.buy_clause
-	_add_column("contract", "buy_clause", buy_clauses)
+	#var incomes: Callable = func(p: Player) -> int: return p.contract.income
+	#_add_column("contract", "income", incomes)
+	#var start_dates: Callable = func(p: Player) -> Dictionary: return p.contract.start_date
+	#_add_column("contract", "start_date", start_dates)
+	#var end_dates: Callable = func(p: Player) -> Dictionary: return p.contract.end_date
+	#_add_column("contract", "end_date", end_dates)
+	#var buy_clauses: Callable = func(p: Player) -> int: return p.contract.buy_clause
+	#_add_column("contract", "buy_clause", buy_clauses)
 	
+	# contract
+	for c: Dictionary in Contract.new().get_property_list():
+		if c.usage == 4102:
+			var stats: Callable = func(p: Player) -> Variant: return p.contract.get(c.name)
+			_add_column("contract", c.name, stats)
+
 	# statistics
-	var games_played: Callable = func(p: Player) -> int: return p.statistics[0].games_played
-	_add_column("statistics", "games_played", games_played)
-	var goals: Callable = func(p: Player) -> int: return p.statistics[0].goals
-	_add_column("statistics", "goals", goals)
-	var assists: Callable = func(p: Player) -> int: return p.statistics[0].assists
-	_add_column("statistics", "assists", assists)
-	
+	for s: Dictionary in Statistics.new().get_property_list():
+		if s.usage == 4102:
+			var stats: Callable = func(p: Player) -> Variant: return p.statistics[0].get(s.name)
+			_add_column("statistics", s.name, stats)
+
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
