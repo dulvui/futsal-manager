@@ -125,6 +125,10 @@ func _set_up_columns() -> void:
 	# statistics
 	var games_played: Callable = func(p: Player) -> int: return p.statistics[0].games_played
 	_add_column("statistics", "games_played", games_played)
+	var goals: Callable = func(p: Player) -> int: return p.statistics[0].goals
+	_add_column("statistics", "goals", goals)
+	var assists: Callable = func(p: Player) -> int: return p.statistics[0].assists
+	_add_column("statistics", "assists", assists)
 	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
