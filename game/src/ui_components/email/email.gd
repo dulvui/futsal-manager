@@ -3,12 +3,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualEmail
-extends HSplitContainer
+extends VBoxContainer
 
 signal email_action(message: EmailMessage)
 
-@onready var message_list: VisualEmailMessageList = $MessageList
-@onready var message_container: VisualEmailMessage = $MessageView/Message
+@onready var message_list: VisualEmailMessageList = $HSplitContainer/MessageList
+@onready var message_container: VisualEmailMessage = $HSplitContainer/MessageView/Message
 
 
 func _ready() -> void:
@@ -34,3 +34,15 @@ func _on_message_list_show_message(message: EmailMessage) -> void:
 	message_container.show_message(message)
 	message.read = true
 	update_messages()
+
+
+func _on_search_text_changed(new_text: String) -> void:
+	message_list.search(new_text)
+
+
+func _on_only_unread_toggled(toggled_on: bool) -> void:
+	message_list.unread(toggled_on)
+
+
+func _on_starred_toggled(toggled_on: bool) -> void:
+	message_list.starred(toggled_on)

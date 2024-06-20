@@ -13,19 +13,55 @@ const MessageRowScene: PackedScene = preload(
 
 @onready var list: VBoxContainer = $ScrollContainer/List
 
+var search_text: String = ""
+var only_starred: bool = false
+var only_unread: bool = false
+
 
 func update() -> void:
 	for child in list.get_children():
 		child.queue_free()
+	
+	var  inbox_list: Array[EmailMessage] = Config.inbox.list
+	
+	if only_starred:
+		inbox_list = inbox_list.filter(func(m: EmailMessage) -> bool: return m.starred)
+	if only_unread:
+		inbox_list = inbox_list.filter(func(m: EmailMessage) -> bool: return not m.read)
+	if search_text.length() > 0:
+		inbox_list = inbox_list.filter(
+			func(m: EmailMessage) -> bool:
+				return m.text.contains(search_text) or \
+				m.subject.contains(search_text) or \
+				m.sender.contains(search_text) \
+			)
+	
 
-	for i in range(Config.inbox.list.size() - 1, -1, -1):  # reverse list
+	for i in range(inbox_list.size() - 1, -1, -1):  # reverse list
+		var message: EmailMessage = inbox_list[i]
+		
 		var row: MessageRow = MessageRowScene.instantiate()
 		list.add_child(row)
-		row.click.connect(_on_row_click.bind(Config.inbox.list[i]))
-		row.set_up(Config.inbox.list[i])
+		row.click.connect(_on_row_click.bind(message))
+		row.set_up(message)
 
 		if i > 0:
 			list.add_child(HSeparator.new())
+
+
+func starred(p_only_starred: bool) -> void:
+	only_starred = p_only_starred
+	update()
+
+
+func unread(p_only_unread: bool) -> void:
+	only_unread = p_only_unread
+	update()
+
+
+func search(text: String) -> void:
+	search_text = text
+	update()
 
 
 func _on_row_click(message: EmailMessage) -> void:

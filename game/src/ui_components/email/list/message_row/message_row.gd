@@ -12,17 +12,22 @@ const COLOR_FOCUS: Color = Color(1, 1, 1, 0.2)
 const COLOR_NORMAL: Color = Color(1, 1, 1, 0)
 
 @onready var button: Button = $Button
-@onready var subject_label: Label = $HBoxContainer/Subject
-@onready var sender_label: Label = $HBoxContainer/Sender
-@onready var date_label: Label = $HBoxContainer/Date
+@onready var subject_label: Label = $Button/HBoxContainer/Subject
+@onready var sender_label: Label = $Button/HBoxContainer/Sender
+@onready var date_label: Label = $Button/HBoxContainer/Date
+@onready var star: CheckBox = $Button/HBoxContainer/Star
 
+var message: EmailMessage
 
-func set_up(message: EmailMessage) -> void:
+func set_up(p_message: EmailMessage) -> void:
+	message = p_message
+	
 	button.tooltip_text = tr("Click to read message")
 
 	subject_label.set_text(message.subject)
 	sender_label.set_text(message.sender)
 	date_label.set_text(message.date)
+	star.button_pressed = message.starred
 
 	if not message.read:
 		# make bold
@@ -41,3 +46,7 @@ func _on_button_mouse_entered() -> void:
 
 func _on_button_mouse_exited() -> void:
 	button.self_modulate = COLOR_NORMAL
+
+
+func _on_star_toggled(toggled_on: bool) -> void:
+	message.starred = toggled_on

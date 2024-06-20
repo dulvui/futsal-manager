@@ -27,6 +27,7 @@ enum Type {
 @export var sender: String
 @export var date: String
 @export var read: bool
+@export var starred: bool
 
 
 func _init(
@@ -37,6 +38,7 @@ func _init(
 	p_sender: String = "",
 	p_date: String = "",
 	p_read: bool = false,
+	p_starred: bool = false,
 ) -> void:
 	id = p_id
 	type = p_type
@@ -45,3 +47,4 @@ func _init(
 	sender = p_sender
 	date = p_date
 	read = p_read
+	starred = p_starred
