@@ -189,12 +189,12 @@ func _on_sim_ball_goal_line_out() -> void:
 		(home_team.has_ball and home_plays_left and ball.pos.x < 600)
 		or (home_team.has_ball and not home_plays_left and ball.pos.x > 600)
 	):
-		set_corner(true)
+		set_corner(false)
 	elif (
 		(away_team.has_ball and home_plays_left and ball.pos.x > 600)
 		or (home_team.has_ball and not home_plays_left and ball.pos.x < 600)
 	):
-		set_corner(false)
+		set_corner(true)
 
 	# goalkeeper ball
 	elif ball.pos.x < 600:
