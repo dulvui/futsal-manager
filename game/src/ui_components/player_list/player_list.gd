@@ -113,16 +113,6 @@ func _set_up_columns() -> void:
 	_add_column("general", "morality", moralities)
 
 	# contract
-	#var incomes: Callable = func(p: Player) -> int: return p.contract.income
-	#_add_column("contract", "income", incomes)
-	#var start_dates: Callable = func(p: Player) -> Dictionary: return p.contract.start_date
-	#_add_column("contract", "start_date", start_dates)
-	#var end_dates: Callable = func(p: Player) -> Dictionary: return p.contract.end_date
-	#_add_column("contract", "end_date", end_dates)
-	#var buy_clauses: Callable = func(p: Player) -> int: return p.contract.buy_clause
-	#_add_column("contract", "buy_clause", buy_clauses)
-	
-	# contract
 	for c: Dictionary in Contract.new().get_property_list():
 		if c.usage == 4102:
 			var stats: Callable = func(p: Player) -> Variant: return p.contract.get(c.name)
