@@ -31,10 +31,8 @@ func update() -> void:
 	if search_text.length() > 0:
 		inbox_list = inbox_list.filter(
 			func(m: EmailMessage) -> bool:
-				return m.text.contains(search_text) or \
-				m.subject.contains(search_text) or \
-				m.sender.contains(search_text) \
-			)
+				return (m.text.to_lower() + m.subject.to_lower() + m.sender.to_lower()).contains(search_text.to_lower())
+		)
 	
 
 	for i in range(inbox_list.size() - 1, -1, -1):  # reverse list
