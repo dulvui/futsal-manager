@@ -73,7 +73,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Subs" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="List" type="VBoxContainer" parent="Subs"]

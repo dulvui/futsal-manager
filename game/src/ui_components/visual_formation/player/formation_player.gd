@@ -7,8 +7,9 @@ extends Control
 
 signal change_player
 
-@onready var name_label: Label = $VBoxContainer/Name
-@onready var nr_label: Label = $VBoxContainer/Nr
+@onready var name_label: Label = $ColorRect/MarginContainer/VBoxContainer/Name
+@onready var prestige: Label = $ColorRect/MarginContainer/VBoxContainer/Prestige
+@onready var nr_label: Label = $ColorRect/MarginContainer/VBoxContainer/Nr
 @onready var state_color: ColorRect = $ColorRect
 
 var color: Color
@@ -20,6 +21,7 @@ func _ready() -> void:
 	nr_label.text = str(player.nr)
 	name_label.text = player.surname
 	state_color.color = color
+	prestige.text = player.get_prestige_stars()
 
 
 func set_player(_player: Player, team: Team = null) -> void:
