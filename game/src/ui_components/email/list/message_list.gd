@@ -34,7 +34,8 @@ func update() -> void:
 				return (m.text.to_lower() + m.subject.to_lower() + m.sender.to_lower()).contains(search_text.to_lower())
 		)
 	
-
+	# to test perfomrance of email view
+	#for j in range(1000):
 	for i in range(inbox_list.size() - 1, -1, -1):  # reverse list
 		var message: EmailMessage = inbox_list[i]
 		
