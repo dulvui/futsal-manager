@@ -14,7 +14,14 @@ const FormationPlayer: PackedScene = preload(
 @onready var players: VBoxContainer = $LineUp/Field/Players
 @onready var subs: VBoxContainer = $Subs/List
 
-@onready var formation_select: SwitchOptionButton = $LineUp/FormationSelect
+@onready var formation_select: SwitchOptionButton = $Tactics/FormationSelect
+
+@onready var tactic_select_offense: SwitchOptionButton = $Tactics/TacticSelectOffense
+@onready var tactic_offense_intensity: HSlider = $Tactics/TacticOffenseIntensity
+
+@onready var tactic_select_pressing: SwitchOptionButton = $Tactics/TacticSelectPressing
+@onready var tactic_select_marking: SwitchOptionButton = $Tactics/TacticSelectMarking
+
 
 @onready var goalkeeper: HBoxContainer = $LineUp/Field/Players/Goalkeeper
 @onready var defense: HBoxContainer = $LineUp/Field/Players/Defense
@@ -38,6 +45,17 @@ func set_up(p_only_lineup: bool) -> void:
 
 	# set up fomation options
 	formation_select.set_up(Formation.Variations.keys(), team.formation.variation)
+	
+	# tactics offense
+	tactic_select_offense.set_up(TacticOffense.Tactics.keys(), \
+		TacticOffense.Tactics.values()[team.formation.tactic_offense.tactic])
+	tactic_offense_intensity.value = team.formation.tactic_offense.intensity
+	
+	# tactics defense
+	tactic_select_marking.set_up(TacticDefense.Marking.keys(), \
+		TacticDefense.Marking.values()[team.formation.tactic_defense.marking])
+	tactic_select_pressing.set_up(TacticDefense.Pressing.keys(), \
+		TacticDefense.Pressing.values()[team.formation.tactic_defense.pressing])
 
 	_set_players()
 
