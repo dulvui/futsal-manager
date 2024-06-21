@@ -109,6 +109,20 @@ func is_sub_player(player: Player) -> bool:
 	return index > 4 and index < Const.LINEUP_PLAYERS_AMOUNT
 
 
+func change_players(player_id1: int, player_id2: int) -> void:
+	if player_id1 in lineup_player_ids and player_id2 in lineup_player_ids:
+		var index1: int = lineup_player_ids.find(player_id1)
+		var index2: int = lineup_player_ids.find(player_id2)
+		lineup_player_ids[index1] = player_id2
+		lineup_player_ids[index2] = player_id1
+	elif player_id1 in lineup_player_ids:
+		var index1: int = lineup_player_ids.find(player_id1)
+		lineup_player_ids[index1] = player_id2
+	elif player_id2 in lineup_player_ids:
+		var index2: int = lineup_player_ids.find(player_id2)
+		lineup_player_ids[index2] = player_id1
+
+
 func remove_player(p_player: Player) -> void:
 	players.erase(p_player)
 	for l_id: int in lineup_player_ids:

@@ -28,8 +28,6 @@ func set_up(p_view_name: String, p_col_name: String, players: Array[Player], p_m
 	map_function = p_map_function
 	
 	sort_button.text = p_col_name
-	
-
 	sort_button.tooltip_text = p_col_name
 	
 	var values: Array[Variant] = players.map(map_function)
