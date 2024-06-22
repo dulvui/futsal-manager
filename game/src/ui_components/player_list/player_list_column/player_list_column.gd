@@ -39,7 +39,7 @@ func set_up(p_view_name: String, p_col_name: String, players: Array[Player], p_m
 		label.tooltip_text = col_name
 		label.set_up(col_name)
 		if "date" in col_name:
-			label.set_value(Config.calendar().format_date(value))
+			label.set_value(FormatUtil.format_date(value))
 		else:
 			label.set_value(value)
 		if col_name == "surname":
@@ -53,7 +53,7 @@ func update_values(players: Array[Player]) -> void:
 		if i < values.size():
 			color_labels[i].show()
 			if "date" in col_name:
-				color_labels[i].set_value(Config.calendar().format_date(values[i]))
+				color_labels[i].set_value(FormatUtil.format_date(values[i]))
 			else:
 				color_labels[i].set_value(values[i])
 		else:

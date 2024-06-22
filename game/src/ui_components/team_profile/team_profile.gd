@@ -30,8 +30,8 @@ func _set_labels(team: Team) -> void:
 	name_label.text = team.name
 	prestige_stars_label.text = tr("PRESTIGE") + " " + team.get_prestige_stars()
 	prestige_label.text = str(team.get_prestige())
-	budget_label.text = tr("BUDGET") + " " + CurrencyUtil.get_sign(team.budget)
-	salary_budget_label.text = tr("SALARY_BUDGET") + " " + CurrencyUtil.get_sign(team.salary_budget)
+	budget_label.text = tr("BUDGET") + " " + FormatUtil.get_sign(team.budget)
+	salary_budget_label.text = tr("SALARY_BUDGET") + " " + FormatUtil.get_sign(team.salary_budget)
 	stadium_name_label.text = team.stadium.name
 	stadium_capacity_label.text = str(team.stadium.capacity) + " " + tr("PERSONS")
 	stadium_year_label.text = tr("YEAR") + " " + str(team.stadium.year_built)

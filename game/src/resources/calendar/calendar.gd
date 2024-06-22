@@ -150,15 +150,7 @@ func is_season_finished() -> bool:
 
 
 func format_date(p_date: Dictionary = date) -> String:
-	return (
-		Const.DAY_STRINGS[p_date.weekday]
-		+ " "
-		+ str(p_date.day)
-		+ " "
-		+ Const.MONTH_STRINGS[p_date.month - 1]
-		+ " "
-		+ str(p_date.year)
-	)
+	return FormatUtil.format_date(p_date)
 
 
 func get_next_match() -> Match:

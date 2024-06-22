@@ -59,7 +59,7 @@ func _load_config() -> void:
 	# if not, something went wrong with the file loading
 	if err != OK:
 		print("error loading user://settings.cfg")
-	currency = config.get_value("settings", "currency", CurrencyUtil.Currencies.EURO)
+	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	theme_index = config.get_value("settings", "theme_index", 0)
 	language = config.get_value("settings", "language", "")
 

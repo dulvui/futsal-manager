@@ -46,7 +46,7 @@ func set_player(_player: Player) -> void:
 	nr.text = str(player.nr)
 	attributes_average.text = str(player.get_overall())
 	prestige.text = str(player.prestige)
-	price.text = CurrencyUtil.get_sign(player.price)
+	price.text = FormatUtil.get_sign(player.price)
 
 
 	# attributes

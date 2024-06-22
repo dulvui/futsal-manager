@@ -102,9 +102,9 @@ func _set_up_columns() -> void:
 	_add_column("general", "nation", nationalities)
 	var positions: Callable = func(p: Player) -> String: return Player.Position.keys()[p.position]
 	_add_column("general", "position", positions)
-	var prices: Callable = func(p: Player) -> String: return CurrencyUtil.get_sign(p.price)
+	var prices: Callable = func(p: Player) -> String: return FormatUtil.get_sign(p.price)
 	_add_column("general", "price", prices)
-	#var birth_dates: Callable = func(p: Player) -> String: return Config.calendar().format_date(p.birth_date)
+	#var birth_dates: Callable = func(p: Player) -> String: return FormatUtil.format_date(p.birth_date)
 	var birth_dates: Callable = func(p: Player) -> Dictionary: return p.birth_date
 	_add_column("general", "birth_date", birth_dates)
 	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()

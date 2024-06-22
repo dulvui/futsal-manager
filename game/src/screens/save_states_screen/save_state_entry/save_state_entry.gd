@@ -32,9 +32,9 @@ func set_up(p_save_state: SaveState) -> void:
 	team.text = save_state.meta_team_name
 	manager.text = save_state.meta_manager_name
 	placement.text = save_state.meta_team_position
-	create_date.text = Config.calendar().format_date(save_state.meta_create_date)
-	game_date.text = Config.calendar().format_date(save_state.meta_game_date)
-	last_save_date.text = Config.calendar().format_date(save_state.meta_last_save)
+	create_date.text = FormatUtil.format_date(save_state.meta_create_date)
+	game_date.text = FormatUtil.format_date(save_state.meta_game_date)
+	last_save_date.text = FormatUtil.format_date(save_state.meta_last_save)
 
 	delete_button.visible = not hide_buttons
 	load_button.visible = not hide_buttons
