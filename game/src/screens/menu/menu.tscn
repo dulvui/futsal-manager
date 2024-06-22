@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4woicggddkls"]
+[gd_scene load_steps=4 format=3 uid="uid://b4woicggddkls"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://caxdir30m2j4v" path="res://icon.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://dj3ts0dee4m6" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn" id="4_5irse"]
 
 [node name="Menu" type="Control"]
@@ -25,69 +24,69 @@ grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.566667
+anchor_right = 0.5
+anchor_bottom = 0.566667
+offset_left = -342.5
+offset_top = -393.5
+offset_right = 342.5
+offset_bottom = 393.5
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 120
-alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("3")
-stretch_mode = 5
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="SaveState" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_5irse")]
-layout_mode = 2
-hide_buttons = true
-
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 
-[node name="ContinueGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="SaveState" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_5irse")]
+layout_mode = 2
+hide_buttons = true
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="ContinueGame" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CONTINUE"
 
-[node name="NewGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "START NEW"
 
-[node name="LoadGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="LoadGame" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "LOAD GAME"
 
-[node name="Settings" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "SETTINGS"
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="LinkButton" type="LinkButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "simondalvai.org"
@@ -104,9 +103,11 @@ offset_left = 0.319946
 offset_top = -0.0800781
 grow_horizontal = 0
 grow_vertical = 0
+text = "V0.1.22.3"
+horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ContinueGame" to="." method="_on_continue_game_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueGame" to="." method="_on_continue_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
