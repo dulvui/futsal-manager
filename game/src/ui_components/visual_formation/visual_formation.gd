@@ -113,6 +113,11 @@ func _set_players() -> void:
 		pos_count += 1
 
 	# add subs
+	var subs_label: Label = Label.new()
+	subs_label.text = "SUBS"
+	subs_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	subs.add_child(subs_label)
+	
 	for i: int in team.get_sub_players().size():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
@@ -124,6 +129,11 @@ func _set_players() -> void:
 	
 	subs.add_child(HSeparator.new())
 	# add non lineup players
+	var non_lineup_label: Label = Label.new()
+	non_lineup_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	non_lineup_label.text = "REST"
+	subs.add_child(non_lineup_label)
+	
 	for p: Player in team.get_non_lineup_players():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(p, team)
