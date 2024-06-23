@@ -122,3 +122,4 @@ layout_mode = 2
 alignment = 1
 
 [connection signal="item_selected" from="Tactics/FormationSelect" to="." method="_on_formation_button_item_selected"]
+[connection signal="item_selected" from="Tactics/TacticSelectOffense" to="." method="_on_tactic_select_offense_item_selected"]

@@ -162,3 +162,7 @@ func _change_player() -> void:
 
 func _on_formation_button_item_selected(index: int) -> void:
 	_update_formation(index)
+
+
+func _on_tactic_select_offense_item_selected(index: int) -> void:
+	team.formation.tactic_offense.tactic = index
