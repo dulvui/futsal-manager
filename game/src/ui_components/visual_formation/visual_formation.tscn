@@ -123,3 +123,6 @@ alignment = 1
 
 [connection signal="item_selected" from="Tactics/FormationSelect" to="." method="_on_formation_button_item_selected"]
 [connection signal="item_selected" from="Tactics/TacticSelectOffense" to="." method="_on_tactic_select_offense_item_selected"]
+[connection signal="value_changed" from="Tactics/TacticOffenseIntensity" to="." method="_on_tactic_offense_intensity_value_changed"]
+[connection signal="item_selected" from="Tactics/TacticSelectMarking" to="." method="_on_tactic_select_marking_item_selected"]
+[connection signal="item_selected" from="Tactics/TacticSelectPressing" to="." method="_on_tactic_select_pressing_item_selected"]

@@ -49,6 +49,7 @@ func set_up(p_only_lineup: bool) -> void:
 	# tactics offense
 	tactic_select_offense.set_up(TacticOffense.Tactics.keys(), \
 		TacticOffense.Tactics.values()[team.formation.tactic_offense.tactic])
+	
 	tactic_offense_intensity.value = team.formation.tactic_offense.intensity
 	
 	# tactics defense
@@ -166,3 +167,15 @@ func _on_formation_button_item_selected(index: int) -> void:
 
 func _on_tactic_select_offense_item_selected(index: int) -> void:
 	team.formation.tactic_offense.tactic = index
+
+
+func _on_tactic_select_marking_item_selected(index: int) -> void:
+	team.formation.tactic_defense.marking = index
+
+
+func _on_tactic_select_pressing_item_selected(index: int) -> void:
+	team.formation.tactic_defense.pressing = index
+
+
+func _on_tactic_offense_intensity_value_changed(value: float) -> void:
+	team.formation.tactic_offense.intensity = int(value)
