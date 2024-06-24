@@ -10,7 +10,7 @@ signal goal
 
 enum State { PASS, SHOOT, STOP, DRIBBLE, GOALKEEPER }
 
-const DECELERATION: float = 0.01
+const DECELERATION: float = 0.1
 
 var state: State
 

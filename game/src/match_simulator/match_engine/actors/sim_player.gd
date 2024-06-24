@@ -65,7 +65,13 @@ func update(team_has_ball: bool) -> void:
 				pass_received.emit()
 				ball.stop()
 				state = State.IDLE
+				
+				# small movement when receving ball
+				speed = Config.match_rng.randi_range(3, 7)
+				ball.dribble(destination, speed)
+				_move()
 		State.DRIBBLE:
+			speed = Config.match_rng.randi_range(5, 20)
 			ball.dribble(destination, speed)
 			_move()
 			state = State.IDLE
