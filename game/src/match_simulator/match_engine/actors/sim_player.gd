@@ -20,6 +20,7 @@ enum State {
 	POSITIONING,
 	# DEFENSE
 	MARKING,
+	PRESS
 }
 
 var state: State
@@ -65,8 +66,7 @@ func update(team_has_ball: bool) -> void:
 				pass_received.emit()
 				ball.stop()
 				state = State.IDLE
-				
-				# small movement when receving ball
+				# small movement when stopping ball
 				speed = Config.match_rng.randi_range(3, 7)
 				ball.dribble(destination, speed)
 				_move()
@@ -85,6 +85,8 @@ func update(team_has_ball: bool) -> void:
 			_move()
 		State.MARKING:
 			_move()
+		State.PRESS:
+			_move()
 		State.IDLE:
 			if is_touching_ball():
 				if _should_shoot():
@@ -97,6 +99,8 @@ func update(team_has_ball: bool) -> void:
 				state = State.POSITIONING
 			else:
 				state = State.MARKING
+			# update immedialty after idle, to fasten up decisions
+			update(team_has_ball)
 
 
 func kick_off(p_pos: Vector2) -> void:

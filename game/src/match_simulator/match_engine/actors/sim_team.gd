@@ -87,7 +87,9 @@ func defend(other_players: Array[SimPlayer]) -> void:
 	# attack ball, if not under control
 	# TODO if pressing tactic, always go to ball
 	if ball.state != SimBall.State.GOALKEEPER:
-		nearest_player_to_ball().set_destination(ball.pos)
+		var nearest_player: SimPlayer = nearest_player_to_ball()
+		nearest_player.set_destination(ball.pos)
+		nearest_player.state = SimPlayer.State.PRESS
 
 
 func attack() -> void:
