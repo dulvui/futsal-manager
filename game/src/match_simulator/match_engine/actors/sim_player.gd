@@ -80,6 +80,7 @@ func update(team_has_ball: bool) -> void:
 			state = State.IDLE
 		State.SHOOTING:
 			shoot.emit()
+			ball.shoot(destination, speed)
 			state = State.IDLE
 		State.POSITIONING:
 			_move()
@@ -100,7 +101,7 @@ func update(team_has_ball: bool) -> void:
 			else:
 				state = State.MARKING
 			# update immedialty after idle, to fasten up decisions
-			update(team_has_ball)
+			#update(team_has_ball)
 
 
 func kick_off(p_pos: Vector2) -> void:

@@ -233,7 +233,7 @@ func _on_sim_ball_goal() -> void:
 	away_team.set_kick_off_formation()
 	ball.set_pos(field.center)
 	
-	print("%s : %s"%[home_team.stats.goals, away_team.stats.goals])
+	#print("%s : %s"%[home_team.stats.goals, away_team.stats.goals])
 
 
 func set_goalkeeper_ball(home: bool) -> void:

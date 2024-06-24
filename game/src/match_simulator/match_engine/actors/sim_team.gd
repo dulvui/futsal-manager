@@ -55,7 +55,7 @@ func set_up(
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		sim_player.pass_received.connect(func() -> void: stats.passes_success += 1)
 		sim_player.interception.connect(interception)
-		sim_player.shoot.connect(shoot_on_goal)
+		sim_player.shoot.connect(shoot_on_goal.bind(sim_player.player_res.attributes.technical.shooting))
 		#sim_player.dribble.connect(pass_to_random_player)
 
 	set_kick_off_formation()
@@ -165,17 +165,19 @@ func pass_to_random_player(passing_player: SimPlayer = null) -> void:
 	stats.passes += 1
 
 
-func shoot_on_goal() -> void:
-	var r_pos: Vector2
+func shoot_on_goal(power: float) -> void:
+	var random_target: Vector2
 	if left_half:
-		r_pos = field.goal_right
+		random_target = field.goal_right
 	else:
-		r_pos = field.goal_left
-	r_pos += Vector2(0, Config.match_rng.randi_range(-field.GOAL_SIZE * 1.5, field.GOAL_SIZE * 1.5))
-	ball.shoot(r_pos, 100)
+		random_target = field.goal_left
+	
+	random_target += Vector2(0, Config.match_rng.randi_range(-field.GOAL_SIZE * 1.5, field.GOAL_SIZE * 1.5))
+	
+	ball.shoot(random_target, power * Config.match_rng.randi_range(2, 6))
 
 	stats.shots += 1
-
+	print("shoot " + str(power))
 	# TODO this doesnt work
 	#if field.is_goal(r_pos):
 	#stats.shots_on_target += 1
