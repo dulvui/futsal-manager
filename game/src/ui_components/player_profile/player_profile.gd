@@ -27,6 +27,11 @@ var player: Player
 @onready var price: Label = $Info/Price
 @onready var goals: Label = $History/Goals
 
+func _ready() -> void:
+	# setup automatically, if run in editor and is run by 'Run current scene'
+	if OS.has_feature("editor") and get_parent() == get_tree().root:
+		set_player(Config.team.players[0])
+
 
 func set_player(_player: Player) -> void:
 	player = _player
@@ -70,7 +75,7 @@ func set_player(_player: Player) -> void:
 			var value: ColorLabel = ColorLabelScene.instantiate()
 			attributes.get_node(attribute.capitalize()).add_child(value)
 			value.set_up(key)
-			value.set_value(player.get_res_value([attribute,key]))
+			value.set_value(player.get_res_value(["attributes", attribute, key]))
 
 	#history
 	goals.text = str(player.statistics[Config.current_season].goals)
