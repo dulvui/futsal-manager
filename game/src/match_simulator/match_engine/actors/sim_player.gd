@@ -65,11 +65,11 @@ func update(team_has_ball: bool) -> void:
 			if is_touching_ball():
 				pass_received.emit()
 				ball.stop()
-				state = State.IDLE
 				# small movement when stopping ball
 				speed = Config.match_rng.randi_range(3, 7)
 				ball.dribble(destination, speed)
 				_move()
+				state = State.IDLE
 		State.DRIBBLE:
 			speed = Config.match_rng.randi_range(5, 20)
 			ball.dribble(destination, speed)
@@ -84,24 +84,31 @@ func update(team_has_ball: bool) -> void:
 			state = State.IDLE
 		State.POSITIONING:
 			_move()
+			state = State.IDLE
 		State.MARKING:
 			_move()
+			state = State.IDLE
 		State.PRESS:
 			_move()
+			state = State.IDLE
 		State.IDLE:
-			if is_touching_ball():
-				if _should_shoot():
-					state = State.SHOOTING
-				elif _should_pass():
-					state = State.PASSING
-				elif _should_dribble():
-					state = State.DRIBBLE
-			elif team_has_ball:
-				state = State.POSITIONING
+			if team_has_ball:
+				if is_touching_ball():
+					if _should_shoot():
+						state = State.SHOOTING
+					elif _should_pass():
+						state = State.PASSING
+					elif _should_dribble():
+						state = State.DRIBBLE
+					else:
+						stop()
+						ball.stop()
+					print(State.keys()[state])
+				else:
+					state = State.POSITIONING
 			else:
-				state = State.MARKING
-			# update immedialty after idle, to fasten up decisions
-			#update(team_has_ball)
+				if is_touching_ball():
+					interception.emit()
 
 
 func kick_off(p_pos: Vector2) -> void:
@@ -148,7 +155,7 @@ func stop() -> void:
 
 func _should_dribble() -> bool:
 	# check something, but for now, nothing comes to my mind
-	return Config.match_rng.randi_range(1, 100) > 30
+	return Config.match_rng.randi_range(1, 100) > 70
 
 
 func _should_shoot() -> bool:

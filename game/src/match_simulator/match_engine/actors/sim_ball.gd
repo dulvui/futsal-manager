@@ -10,7 +10,7 @@ signal goal
 
 enum State { PASS, SHOOT, STOP, DRIBBLE, GOALKEEPER }
 
-const DECELERATION: float = 0.1
+const DECELERATION: float = 1
 
 var state: State
 
@@ -82,7 +82,7 @@ func shoot(p_destination: Vector2, force: float) -> void:
 
 
 func dribble(p_destination: Vector2, force: float) -> void:
-	speed = force + 0.2  # ball moves a bit faster that the force is
+	speed = force 
 	direction = pos.direction_to(p_destination)
 	state = State.DRIBBLE
 
