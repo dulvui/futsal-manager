@@ -5,7 +5,6 @@
 class_name Player
 extends Resource
 
-enum Position { G, D, W, U, P }
 enum Foot { L, R }
 enum Morality { Horrible, Bad, Good, Excellent }
 enum Form { Injured, Recover, Good, Excellent }
@@ -28,6 +27,7 @@ enum Form { Injured, Recover, Good, Excellent }
 @export var statistics: Array[Statistics]
 @export var foot: Foot
 @export var position: Position
+@export var alt_positions: Array[Position]
 @export var contract: Contract
 @export var attributes: Attributes
 
