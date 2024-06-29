@@ -2,14 +2,21 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Position
+class_name FormationPosition
 extends Resource
 
-enum Variations { 
-	G,
-	D,
-	WL,
-	WR,
-	U,
-	P
-}
+@export var id: int
+@export var name: String
+@export var description: String
+@export var coordinates: Vector2
+
+func _init(
+	p_id: int = IdUtil.next_id(IdUtil.Types.PLAYER),
+	p_name: String = "",
+	p_description: String = "",
+	p_coordinates: Vector2 = Vector2.ZERO,
+	) -> void:
+	id = p_id
+	name = p_name
+	description = p_description
+	coordinates = p_coordinates
