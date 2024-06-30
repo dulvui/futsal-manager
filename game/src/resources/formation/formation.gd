@@ -18,21 +18,21 @@ enum Variations {
 
 @export var variation: int
 
-#@export var goalkeeper: int
-#@export var defense: int
-#@export var center: int
-#@export var attack: int
+@export var goalkeeper: int
+@export var defense: int
+@export var center: int
+@export var attack: int
 
 @export var tactic_defense:TacticDefense
 @export var tactic_offense:TacticOffense
 
-@export var positions: Array[FormationPosition]
+@export var positions: Array[Position]
 
 func _init(
 	p_variation:Variations = Variations.F1121,
 	p_tactic_defense:TacticDefense = TacticDefense.new(),
 	p_tactic_offense:TacticOffense = TacticOffense.new(),
-	p_positions: Array[FormationPosition] = [],
+	p_positions: Array[Position] = [],
 ) -> void:
 	variation = p_variation
 	set_variation(variation)

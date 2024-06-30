@@ -2,15 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Manager
-extends Resource
-
-@export var id: int
-@export var nationality: String
-@export var name: String
-@export var surname: String
-@export var prestige: int  # 1-20
-
+class_name President
+extends Person
 
 func _init(
 	p_id: int = IdUtil.next_id(IdUtil.Types.MANAGER),
@@ -24,7 +17,8 @@ func _init(
 	name = p_name
 	surname = p_surname
 	prestige = p_prestige
-
+	
+	role = Person.Role.PRESIDENT
 
 func get_full_name() -> String:
 	return name + " " + surname

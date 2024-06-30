@@ -2,26 +2,39 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Position
+class_name BasePosition
 extends Resource
 
-@export var id: int
+# 9X9 grid + goalkeeper
+enum Type {
+	G,
+	DL,
+	DC,
+	DR,
+	C,
+	WL,
+	WR,
+	PL,
+	PC,
+	PR,
+}
+
 @export var name: String
 @export var description: String
 @export var coordinates: Vector2
-# 0, if player can't play position
-@export var confidence: int
+@export var type: Type
+@export var variations: Array[Position]
 
 
 func _init(
-	p_id: int = IdUtil.next_id(IdUtil.Types.PLAYER),
 	p_name: String = "",
 	p_description: String = "",
 	p_coordinates: Vector2 = Vector2.ZERO,
-	p_confidence: int = 0,
+	p_type: Type = Type.G,
+	p_variations: Array[Position] = []
 	) -> void:
-	id = p_id
 	name = p_name
 	description = p_description
 	coordinates = p_coordinates
-	confidence = p_confidence
+	type = p_type
+	variations = p_variations

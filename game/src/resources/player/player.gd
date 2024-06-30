@@ -3,32 +3,26 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Player
-extends Resource
+extends Person
 
 enum Foot { L, R }
 enum Morality { Horrible, Bad, Good, Excellent }
 enum Form { Injured, Recover, Good, Excellent }
 
-@export var id: int
 @export var price: int
 @export var nr: int  # shirt number
 @export var loyality: int
-@export var prestige: int  # 1-100
 @export var injury_factor: int
-@export var name: String
 @export var team: String  # team name for easier filtering etc...
 @export var team_id: int  # team name for easier filtering etc...
 @export var league: String  # league name for easier filtering etc...
-@export var surname: String
 @export var nation: Const.Nations
 @export var birth_date: Dictionary
 @export var form: Form
 @export var morality: Morality
 @export var statistics: Array[Statistics]
 @export var foot: Foot
-@export var position: FormationPosition
-@export var alt_positions: Array[FormationPosition]
-@export var contract: Contract
+@export var position: Position
 @export var attributes: Attributes
 
 
@@ -50,7 +44,7 @@ func _init(
 	p_morality: Morality = Morality.Good,
 	p_statistics: Array[Statistics] = [],
 	p_foot: Foot = Foot.R,
-	p_position: FormationPosition = FormationPosition.Variations.G,
+	p_position: Position = Position.new(),
 	p_contract: Contract = Contract.new(),
 	p_attributes: Attributes = Attributes.new(),
 ) -> void:
@@ -74,10 +68,8 @@ func _init(
 	position = p_position
 	contract = p_contract
 	attributes = p_attributes
-
-
-func get_full_name() -> String:
-	return name + " " + surname
+	
+	role = Person.Role.PLAYER
 
 
 func get_attack_attributes(attack: Action.Attack) -> int:
@@ -136,7 +128,7 @@ func get_goalkeeper_attributes() -> int:
 
 
 func get_overall() -> int:
-	if position == Position.G:
+	if position.base.type == BasePosition.Type.G:
 		return attributes.goal_keeper_average()
 	return attributes.field_player_average()
 

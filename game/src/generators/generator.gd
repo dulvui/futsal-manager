@@ -92,9 +92,9 @@ func generate() -> Leagues:
 func assign_players_to_team(p_team: Team, p_league: League, prestige: int) -> Team:
 	var nr: int = 1
 
-	for position: int in Player.Position.values():
+	for position: int in BasePosition.Type.values():
 		var amount: int = Config.rng.randi_range(2, 5)
-		if position == Player.Position.G:
+		if position == BasePosition.Type.G:
 			amount = 3
 
 		for i in amount:
@@ -109,10 +109,10 @@ func assign_players_to_team(p_team: Team, p_league: League, prestige: int) -> Te
 			p_team.players.append(player)
 
 			# Config.rng.random lineup assignment
-			if position == Player.Position.G and p_team.lineup_player_ids.is_empty():
+			if position == BasePosition.Type.G and p_team.lineup_player_ids.is_empty():
 				p_team.lineup_player_ids.append(player.id)
 			elif (
-				position != Player.Position.G
+				position != BasePosition.Type.G
 				and p_team.lineup_player_ids.size() < Const.LINEUP_PLAYERS_AMOUNT
 			):
 				p_team.lineup_player_ids.append(player.id)
@@ -120,7 +120,7 @@ func assign_players_to_team(p_team: Team, p_league: League, prestige: int) -> Te
 	return p_team
 
 
-func get_goalkeeper_attributes(age: int, prestige: int, position: Player.Position) -> Goalkeeper:
+func get_goalkeeper_attributes(age: int, prestige: int, position: BasePosition) -> Goalkeeper:
 	var attributes: Goalkeeper = Goalkeeper.new()
 
 	var age_factor: int = get_age_factor(age)
@@ -131,7 +131,7 @@ func get_goalkeeper_attributes(age: int, prestige: int, position: Player.Positio
 	var max_potential: int = in_bounds(factor + noise())
 
 	# non-goalkeepers have max potential of 10, since they could play as goalkeeper in a 4 + 1 field player situation
-	if position != Player.Position.G:
+	if position.type != BasePosition.Type.G:
 		max_potential /= 2
 
 	attributes.reflexes = in_bounds(factor + noise(), max_potential)
@@ -143,7 +143,7 @@ func get_goalkeeper_attributes(age: int, prestige: int, position: Player.Positio
 	return attributes
 
 
-func get_physical(age: int, prestige: int, position: Player.Position) -> Physical:
+func get_physical(age: int, prestige: int, position: BasePosition.Type) -> Physical:
 	var attributes: Physical = Physical.new()
 
 	var age_factor: int = get_physical_age_factor(age)
@@ -155,7 +155,7 @@ func get_physical(age: int, prestige: int, position: Player.Position) -> Physica
 	var max_potential: int = in_bounds(prestige + noise())
 
 	# goalkeepers have max potential of 10, since they could play as goalkeeper in a 4 + 1 field player situation
-	if position == Player.Position.G:
+	if position == BasePosition.Type.G:
 		max_potential /= 2
 
 	attributes.pace = in_bounds(pace_factor + noise(), max_potential)
@@ -168,7 +168,7 @@ func get_physical(age: int, prestige: int, position: Player.Position) -> Physica
 	return attributes
 
 
-func get_technical(age: int, prestige: int, position: Player.Position) -> Technical:
+func get_technical(age: int, prestige: int, position: BasePosition.Type) -> Technical:
 	var attributes: Technical = Technical.new()
 
 	var age_factor: int = get_age_factor(age)
@@ -183,7 +183,7 @@ func get_technical(age: int, prestige: int, position: Player.Position) -> Techni
 	var max_potential: int = in_bounds(prestige + noise())
 
 	# goalkeepers have max potential of 10, since they could play as goalkeeper in a 4 + 1 field player situation
-	if position == Player.Position.G:
+	if position == BasePosition.Type.G:
 		max_potential /= 2
 
 	attributes.crossing = in_bounds(pass_factor + noise(), max_potential)
@@ -240,14 +240,14 @@ func get_age_factor(age: int) -> int:
 	return Config.rng.randi_range(-1, 5)
 
 
-func get_price(age: int, prestige: int, position: Player.Position) -> int:
+func get_price(age: int, prestige: int, position: BasePosition) -> int:
 	var age_factor: int = max(min(abs(age - 30), 20), 1)
 	var pos_factor: int = 0
-	if position == Player.Position.G:
+	if position.type == BasePosition.Type.G:
 		pos_factor = 5
-	elif position == Player.Position.D:
+	elif position.type == BasePosition.Type.D:
 		pos_factor = 10
-	elif position == Player.Position.W:
+	elif position.type == BasePosition.Type.W:
 		pos_factor = 15
 	else:
 		pos_factor = 20
@@ -331,7 +331,7 @@ func get_surname(nationality: Const.Nations) -> String:
 
 
 func create_player(
-	nationality: Const.Nations, position: Player.Position, nr: int, p_prestige: int
+	nationality: Const.Nations, position: Position, nr: int, p_prestige: int
 ) -> Player:
 	var player: Player = Player.new()
 	# Config.rng.random date from 1970 to 2007
@@ -341,7 +341,7 @@ func create_player(
 
 	var prestige: int = get_player_prestige(p_prestige)
 
-	player.price = get_price(date.year - birth_date.year, prestige, position)
+	player.price = get_price(date.year - birth_date.year, prestige, position.base)
 	player.name = get_player_name(nationality)
 	player.surname = get_surname(nationality)
 	player.birth_date = birth_date
@@ -353,7 +353,7 @@ func create_player(
 	player.prestige = prestige
 	player.injury_factor = Config.rng.randi_range(1, 20)
 	player.loyality = Config.rng.randi_range(1, 20)  # if player is loyal, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
-	player.contract = get_contract(prestige, position, date.year - birth_date.year, player.contract)
+	player.contract = get_contract(prestige, position.base, date.year - birth_date.year, player.contract)
 	player.nr = nr
 
 	player.attributes = Attributes.new()
