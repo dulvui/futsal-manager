@@ -46,7 +46,7 @@ func _ready() -> void:
 				team_select.add_item(team.name)
 
 	pos_select.add_item("NO_POS")
-	for pos: String in Player.Position.keys():
+	for pos: String in Position.Type.keys():
 		pos_select.add_item(pos)
 
 	league_select.add_item("ALL_LEAGUES")
@@ -100,7 +100,7 @@ func _set_up_columns() -> void:
 	_add_column("general", "team", team_names)
 	var nationalities: Callable = func(p: Player) -> String: return Const.Nations.keys()[p.nation]
 	_add_column("general", "nation", nationalities)
-	var positions: Callable = func(p: Player) -> String: return Player.Position.keys()[p.position]
+	var positions: Callable = func(p: Player) -> String: return Position.Type.keys()[p.position.type]
 	_add_column("general", "position", positions)
 	var prices: Callable = func(p: Player) -> String: return FormatUtil.get_sign(p.price)
 	_add_column("general", "price", prices)
@@ -305,7 +305,7 @@ func _on_name_search_text_changed(new_text: String) -> void:
 
 func _on_position_select_item_selected(index: int) -> void:
 	if index > 0:
-		filters["position"] = Player.Position.values()[index - 1]
+		filters["position"] = Position.Type.values()[index - 1]
 		_filter()
 	else:
 		filters.erase("position")

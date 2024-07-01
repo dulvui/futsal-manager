@@ -37,7 +37,7 @@ func set_player(_player: Player) -> void:
 	player = _player
 
 	player_name.text = player.name + " " + player.surname
-	pos.text = str(player.position)
+	pos.text = str(Position.Type.keys()[player.position.type])
 	age.text = (
 		str(player.birth_date.day)
 		+ "/"

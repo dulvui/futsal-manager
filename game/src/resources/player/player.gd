@@ -128,7 +128,7 @@ func get_goalkeeper_attributes() -> int:
 
 
 func get_overall() -> int:
-	if position.base.type == BasePosition.Type.G:
+	if position.type == Position.Type.G:
 		return attributes.goal_keeper_average()
 	return attributes.field_player_average()
 

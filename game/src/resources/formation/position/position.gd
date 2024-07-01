@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name BasePosition
+class_name Position
 extends Resource
 
 # 9X9 grid + goalkeeper
