@@ -101,10 +101,7 @@ func assign_players_to_team(p_team: Team, p_league: League, prestige: int) -> Te
 			var random_nation: Const.Nations = get_random_nationality(
 				p_league.nation, prestige, p_league.pyramid_level
 			)
-			var position: Position = Position.new()
-			# TODO add random variations
-			position.type = position_type
-			var player: Player = create_player(random_nation, position, nr, prestige)
+			var player: Player = create_player(random_nation, nr, prestige, position_type)
 			nr += 1
 			player.team = p_team.name
 			player.team_id = p_team.id
@@ -112,10 +109,10 @@ func assign_players_to_team(p_team: Team, p_league: League, prestige: int) -> Te
 			p_team.players.append(player)
 
 			# Config.rng.random lineup assignment
-			if position.type == Position.Type.G and p_team.lineup_player_ids.is_empty():
+			if position_type == Position.Type.G and p_team.lineup_player_ids.is_empty():
 				p_team.lineup_player_ids.append(player.id)
 			elif (
-				position.type != Position.Type.G
+				position_type != Position.Type.G
 				and p_team.lineup_player_ids.size() < Const.LINEUP_PLAYERS_AMOUNT
 			):
 				p_team.lineup_player_ids.append(player.id)
@@ -289,7 +286,7 @@ func get_random_morality() -> Player.Morality:
 
 
 func get_contract(prestige: int, age: int, contract: Contract) -> Contract:
-	contract.income = prestige * age  # TODO use correct logic
+	contract.income = prestige * age  # TODO use better logic
 	contract.start_date = Time.get_date_dict_from_system()
 	contract.end_date = Time.get_date_dict_from_system()
 	contract.bonus_goal = 0
@@ -327,6 +324,8 @@ func get_player_name(nationality: Const.Nations) -> String:
 
 func get_surname(nationality: Const.Nations) -> String:
 	# TODO combine with other nations, but with low probability
+	# to have players with other nations surnames in different nation
+	# biiger proability for neighbour nations (needs data)
 	var nation_string: String = Const.Nations.keys()[nationality]
 	nation_string = nation_string.to_lower()
 	var size: int = (names[nation_string]["last_names"] as Array).size()
@@ -334,9 +333,11 @@ func get_surname(nationality: Const.Nations) -> String:
 
 
 func create_player(
-	nationality: Const.Nations, position: Position, nr: int, p_prestige: int
+	nationality: Const.Nations, nr: int, p_prestige: int, p_position_type: Position.Type
 ) -> Player:
 	var player: Player = Player.new()
+	random_positions(player, p_position_type)
+	
 	# Config.rng.random date from 1970 to 2007
 	var birth_date: Dictionary = Time.get_datetime_dict_from_unix_time(
 		Config.rng.randi_range(0, max_timestamp)
@@ -344,12 +345,11 @@ func create_player(
 
 	var prestige: int = get_player_prestige(p_prestige)
 
-	player.price = get_price(date.year - birth_date.year, prestige, position)
+	player.price = get_price(date.year - birth_date.year, prestige, player.position)
 	player.name = get_player_name(nationality)
 	player.surname = get_surname(nationality)
 	player.birth_date = birth_date
 	player.nation = nationality
-	player.position = position
 	player.foot = get_random_foot()
 	player.morality = get_random_morality()
 	player.form = get_random_form()
@@ -361,11 +361,11 @@ func create_player(
 
 	player.attributes = Attributes.new()
 	player.attributes.goalkeeper = get_goalkeeper_attributes(
-		date.year - birth_date.year, prestige, position
+		date.year - birth_date.year, prestige, player.position
 	)
 	player.attributes.mental = get_mental(date.year - birth_date.year, prestige)
-	player.attributes.technical = get_technical(date.year - birth_date.year, prestige, position)
-	player.attributes.physical = get_physical(date.year - birth_date.year, prestige, position)
+	player.attributes.technical = get_technical(date.year - birth_date.year, prestige, player.position)
+	player.attributes.physical = get_physical(date.year - birth_date.year, prestige, player.position)
 
 	# TODO  create Config.rng.random history
 	var statistics: Statistics = Statistics.new()
@@ -379,6 +379,15 @@ func create_player(
 	player.statistics.append(statistics)
 
 	return player
+
+func random_positions(player: Player, p_position_type: Position.Type) -> void:
+	# assign main positions
+	var position: Position = Position.new()
+	position.type = p_position_type
+	player.position = position
+
+	# TODO assign alt positions
+	
 
 
 func get_player_prestige(team_prestige: int) -> int:

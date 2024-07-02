@@ -5,6 +5,39 @@
 class_name PositionVariation
 extends Resource
 
+enum G {
+	NORMAL,
+	FLYING,
+}
+
+enum D {
+	NORMAL,
+	STAY_BACK,
+	ATTACK,
+}
+
+enum C {
+	NORMAL,
+	STAY_BACK,
+	PLAYMAKER,
+	ATTACK,
+}
+
+
+enum W {
+	NORMAL,
+	STAY_BACK,
+	FULL,
+	ATTACK,
+}
+
+enum A {
+	NORMAL,
+	PIVOT,
+	DYNAMIC,
+}  
+
+
 @export var id: int
 @export var name: String
 @export var description: String

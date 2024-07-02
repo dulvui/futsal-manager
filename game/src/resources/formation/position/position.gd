@@ -23,7 +23,7 @@ enum Type {
 @export var description: String
 @export var coordinates: Vector2
 @export var type: Type
-@export var variations: Array[Position]
+@export var variations: Array[PositionVariation]
 
 
 func _init(
@@ -31,7 +31,7 @@ func _init(
 	p_description: String = "",
 	p_coordinates: Vector2 = Vector2.ZERO,
 	p_type: Type = Type.G,
-	p_variations: Array[Position] = []
+	p_variations: Array[PositionVariation] = []
 	) -> void:
 	name = p_name
 	description = p_description
