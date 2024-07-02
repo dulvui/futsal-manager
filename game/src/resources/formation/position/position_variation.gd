@@ -31,7 +31,7 @@ enum W {
 	ATTACK,
 }
 
-enum A {
+enum P {
 	NORMAL,
 	PIVOT,
 	DYNAMIC,
@@ -44,6 +44,7 @@ enum A {
 @export var coordinates: Vector2
 # 0, if player can't play position
 @export var confidence: int
+@export var type: String
 
 
 func _init(
@@ -52,9 +53,11 @@ func _init(
 	p_description: String = "",
 	p_coordinates: Vector2 = Vector2.ZERO,
 	p_confidence: int = 0,
+	p_type: String = "",
 	) -> void:
 	id = p_id
 	name = p_name
 	description = p_description
 	coordinates = p_coordinates
 	confidence = p_confidence
+	type = p_type

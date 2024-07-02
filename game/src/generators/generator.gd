@@ -384,6 +384,7 @@ func random_positions(player: Player, p_position_type: Position.Type) -> void:
 	# assign main positions
 	var position: Position = Position.new()
 	position.type = p_position_type
+	position.random_variations()
 	player.position = position
 
 	# TODO assign alt positions
