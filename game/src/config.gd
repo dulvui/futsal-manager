@@ -204,6 +204,17 @@ func next_season() -> void:
 func calendar() -> Calendar:
 	return Config.leagues.get_active().calendar
 
+
+# shuffle array using global RuandomNumberGenerator
+func shuffle(array: Array[Variant]) -> void:
+	for i in array.size():
+		var index: int = rng.randi_range(0, array.size() - 1)
+		if index != i:
+			var temp: Variant = array[index]
+			array[index] = array[i]
+			array[i] = temp
+
+
 # disable save, too heavy on close, breaks game
 # save on quit on mobile
 #func _notification(what: int) -> void:

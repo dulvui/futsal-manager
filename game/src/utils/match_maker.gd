@@ -15,7 +15,7 @@ func inizialize_matches(leagues: Leagues) -> void:
 		match_day = 0
 
 		var random_teams: Array[Team] = teams.duplicate(true)
-		random_teams.shuffle()
+		Config.shuffle(random_teams)
 
 		var last_team: Team = random_teams.pop_front()
 
