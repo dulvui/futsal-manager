@@ -37,6 +37,11 @@ func _ready() -> void:
 	start_year_spinbox.get_line_edit().text = str(Config.start_date.year)
 
 
+func _on_generated_seed_line_edit_text_changed(new_text: String) -> void:
+	if new_text.length() > 0:
+		generation_seed = new_text
+
+
 func _on_genearate_seed_button_pressed() -> void:
 	generation_seed = (
 		str(randi_range(100000, 999999))
@@ -74,3 +79,4 @@ func _on_continue_pressed() -> void:
 		Config.generate_leagues(generation_seed, gender_option.selected)
 		Config.manager = manager
 		get_tree().change_scene_to_file("res://src/screens/team_select/team_select.tscn")
+

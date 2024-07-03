@@ -399,7 +399,7 @@ func get_player_prestige(team_prestige: int) -> int:
 func get_team_prestige(pyramid_level: int) -> int:
 	var minp: int = Const.MAX_PRESTIGE - pyramid_level * ((Config.rng.randi() % 5) + 1)
 	var maxp: int = Const.MAX_PRESTIGE - ((pyramid_level - 1) * 3)
-	return in_bounds(randi_range(minp, maxp))
+	return in_bounds(Config.rng.randi_range(minp, maxp))
 
 
 func get_random_nationality(

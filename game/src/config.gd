@@ -112,8 +112,20 @@ func save_save_states() -> void:
 func _set_up_rngs() -> void:
 	match_rng = RandomNumberGenerator.new()
 	rng = RandomNumberGenerator.new()
+	rng.seed = hash(generation_seed) + generation_gender
 	rng.state = generation_state
-	set_seed()
+
+
+func reset_seed(p_generation_seed: String, p_generation_gender: int) -> void:
+	generation_seed = p_generation_seed
+	generation_gender = p_generation_gender
+	
+	rng = RandomNumberGenerator.new()
+	rng.seed = hash(generation_seed + str(generation_gender))
+	generation_state = rng.state
+	print(generation_seed)
+	print(rng.seed)
+	print(rng.state)
 
 
 func save_config() -> void:
@@ -149,9 +161,7 @@ func _load_resources() -> void:
 
 
 func generate_leagues(p_generation_seed: String, p_generation_gender: Const.Gender) -> void:
-	generation_seed = p_generation_seed
-	generation_gender = p_generation_gender
-	set_seed(generation_seed)
+	reset_seed(p_generation_seed, p_generation_gender)
 	var generator: Generator = Generator.new()
 	leagues = generator.generate()
 
@@ -160,11 +170,6 @@ func save_all_data() -> void:
 	save_active_state()
 	save_save_states()
 	save_config()
-
-
-func set_seed(p_generation_seed: String = generation_seed) -> void:
-	generation_seed = p_generation_seed
-	rng.seed = hash(generation_seed) + generation_gender
 
 
 func set_lang(lang: String) -> void:
@@ -207,6 +212,8 @@ func calendar() -> Calendar:
 
 # shuffle array using global RuandomNumberGenerator
 func shuffle(array: Array[Variant]) -> void:
+	print(rng.seed)
+	print(rng.state)
 	for i in array.size():
 		var index: int = rng.randi_range(0, array.size() - 1)
 		if index != i:

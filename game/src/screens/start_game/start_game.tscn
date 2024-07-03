@@ -174,5 +174,6 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="VBoxContainer/Seed/GridContainer/GenearateSeedButton" to="." method="_on_genearate_seed_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Seed/GridContainer/DefaultSeedButton" to="." method="_on_default_seed_button_pressed"]
+[connection signal="text_changed" from="VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit" to="." method="_on_generated_seed_line_edit_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Continue" to="." method="_on_continue_pressed"]
