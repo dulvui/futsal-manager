@@ -36,7 +36,7 @@ var visible_players: Array[Player] = []
 var page:int
 var page_max:int
 var page_size:int = 16
-
+ 
 
 func _ready() -> void:
 	team_select.add_item("NO_TEAM")
@@ -57,7 +57,7 @@ func _ready() -> void:
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
 		set_up()
 
-func set_up(p_active_team_id:int = -1) -> void:
+func set_up(p_active_team_id: int = -1) -> void:
 	active_team_id = p_active_team_id
 
 	if active_team_id != -1:
@@ -74,6 +74,16 @@ func set_up(p_active_team_id:int = -1) -> void:
 
 	_update_page_indicator()
 	_show_active_column()
+
+
+func update_team(p_active_team_id: int) -> void:
+	active_team_id = p_active_team_id
+	_set_up_players()
+	_update_columns()
+
+	_update_page_indicator()
+	_show_active_column()
+
 
 
 func _set_up_columns() -> void:
@@ -162,11 +172,14 @@ func _set_up_players(p_reset_options: bool = true) -> void:
 
 	# uncomment to stresstest
 	#for i in range(10):
-	for league: League in Config.leagues.list:
-		for team in league.teams:
-			if active_team_id == -1 or active_team_id == team.id:
+	if active_team_id == -1:
+		for league: League in Config.leagues.list:
+			for team in league.teams:
 				for player in team.players:
 					all_players.append(player)
+	else:
+		for player: Player in Config.leagues.get_team_by_id(active_team_id).players:
+			all_players.append(player)
 
 	players = all_players
 

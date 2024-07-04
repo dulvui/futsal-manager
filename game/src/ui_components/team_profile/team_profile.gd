@@ -22,7 +22,7 @@ func set_up(team: Team) -> void:
 
 
 func set_team(team: Team) -> void:
-	player_list.set_up(team.id)
+	player_list.update_team(team.id)
 	_set_labels(team)
 
 
