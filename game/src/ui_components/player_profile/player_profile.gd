@@ -17,6 +17,7 @@ var player: Player
 
 @onready var player_name: Label = $Info/Name
 @onready var pos: Label = $Info/Position
+@onready var alt_pos: Label = $Info/AltPosition
 @onready var age: Label = $Info/Age
 @onready var foot: Label = $Info/Foot
 @onready var nationality: Label = $Info/Nationality
@@ -38,6 +39,8 @@ func set_player(_player: Player) -> void:
 
 	player_name.text = player.name + " " + player.surname
 	pos.text = str(Position.Type.keys()[player.position.type])
+	alt_pos.text = str(player.alt_position.map(func(p: Position) -> String: return p.name + ","))
+	
 	age.text = (
 		str(player.birth_date.day)
 		+ "/"

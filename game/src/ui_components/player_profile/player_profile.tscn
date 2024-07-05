@@ -77,6 +77,14 @@ text = "POSITION"
 layout_mode = 2
 text = "PIVOT"
 
+[node name="AltPositionLabel" type="Label" parent="Info"]
+layout_mode = 2
+text = "ALT_POSITION"
+
+[node name="AltPosition" type="Label" parent="Info"]
+layout_mode = 2
+text = "PIVOT"
+
 [node name="AgeLabel" type="Label" parent="Info"]
 layout_mode = 2
 text = "AGE"
