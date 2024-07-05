@@ -387,8 +387,20 @@ func random_positions(player: Player, p_position_type: Position.Type) -> void:
 	position.random_variations()
 	player.position = position
 
-	# TODO assign alt positions
+	# TODO should goalkeeper have alt positions?
+	# TODO adapt to make alteratrios more cohereant
+	# to attributes, like defender should have good defense stats
+	var alt_positions: Array[Position] = []
+	var alt_positions_keys: Array[Variant] = Position.Type.values()
+	Config.shuffle(alt_positions_keys)
 	
+	for i: int in Config.rng.randi_range(0, alt_positions_keys.size()):
+		var alt_position: Position = Position.new()
+		alt_position.type = alt_positions_keys[i]
+		alt_position.random_variations()
+		alt_positions.append(alt_position)
+	
+	player.alt_positions = alt_positions
 
 
 func get_player_prestige(team_prestige: int) -> int:

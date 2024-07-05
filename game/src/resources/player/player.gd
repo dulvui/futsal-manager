@@ -23,7 +23,7 @@ enum Form { Injured, Recover, Good, Excellent }
 @export var statistics: Array[Statistics]
 @export var foot: Foot
 @export var position: Position
-@export var alt_position: Array[Position]
+@export var alt_positions: Array[Position]
 @export var attributes: Attributes
 
 
@@ -46,7 +46,7 @@ func _init(
 	p_statistics: Array[Statistics] = [],
 	p_foot: Foot = Foot.R,
 	p_position: Position = Position.new(),
-	p_alt_position: Array[Position] = [],
+	p_alt_positions: Array[Position] = [],
 	p_contract: Contract = Contract.new(),
 	p_attributes: Attributes = Attributes.new(),
 ) -> void:
@@ -68,7 +68,7 @@ func _init(
 	statistics = p_statistics
 	foot = p_foot
 	position = p_position
-	alt_position = p_alt_position
+	alt_positions = p_alt_positions
 	contract = p_contract
 	attributes = p_attributes
 	

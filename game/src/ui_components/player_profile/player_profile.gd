@@ -39,7 +39,11 @@ func set_player(_player: Player) -> void:
 
 	player_name.text = player.name + " " + player.surname
 	pos.text = str(Position.Type.keys()[player.position.type])
-	alt_pos.text = str(player.alt_position.map(func(p: Position) -> String: return p.name + ","))
+	alt_pos.text = str(player.alt_positions.map(
+		func(p: Position) -> String:
+			return Position.Type.keys()[p.type]
+			)
+		)
 	
 	age.text = (
 		str(player.birth_date.day)
