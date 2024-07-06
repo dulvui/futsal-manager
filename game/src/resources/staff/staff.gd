@@ -5,7 +5,7 @@
 class_name Staff
 extends Resource
 
-s
+
 @export var president: President
 @export var scout: Scout
 @export var manager: Manager
