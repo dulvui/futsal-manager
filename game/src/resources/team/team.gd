@@ -13,6 +13,8 @@ extends Resource
 @export var budget: int
 @export var salary_budget: int
 @export var players: Array[Player]
+
+@export var staff: Staff
 @export var stadium: Stadium
 @export var board_requests: BoardRequests
 # shirt colors
@@ -28,6 +30,7 @@ func _init(
 	p_players: Array[Player] = [],
 	p_formation: Formation = Formation.new(),
 	p_lineup_player_ids: Array[int] = [],
+	p_staff: Staff = Staff.new(),
 	p_stadium: Stadium = Stadium.new(),
 	p_board_requests: BoardRequests = BoardRequests.new(),
 	p_colors: Array[Color] = [Color(0, 0, 0), Color(0, 0, 0), Color(0, 0, 0)],
@@ -37,6 +40,7 @@ func _init(
 	budget = p_budget
 	salary_budget = p_salary_budget
 	players = p_players
+	staff = p_staff
 	stadium = p_stadium
 	colors = p_colors
 	formation = p_formation
