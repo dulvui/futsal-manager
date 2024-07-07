@@ -60,7 +60,6 @@ func set_player(_player: Player) -> void:
 	prestige.text = str(player.prestige)
 	price.text = FormatUtil.get_sign(player.price)
 
-
 	# attributes
 	for attribute: String in Const.ATTRIBUTES.keys():
 		# first remove existing values

@@ -81,7 +81,6 @@ func load_save_state() -> void:
 		generation_seed = save_sate.generation_seed
 		generation_state = save_sate.generation_state
 		generation_gender = save_sate.generation_gender
-
 		_load_resources()
 		_set_up_rngs()
 
