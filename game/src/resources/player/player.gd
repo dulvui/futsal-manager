@@ -16,8 +16,6 @@ enum Form { Injured, Recover, Good, Excellent }
 @export var team: String  # team name for easier filtering etc...
 @export var team_id: int  # team name for easier filtering etc...
 @export var league: String  # league name for easier filtering etc...
-@export var nation: Const.Nations
-@export var birth_date: Dictionary
 @export var form: Form
 @export var morality: Morality
 @export var statistics: Array[Statistics]
@@ -146,7 +144,6 @@ func get_res_value(keys: Array[String], p_res: Resource = null) -> Variant:
 	if p_res == null:
 		return get_res_value(keys.slice(1, keys.size()), get(keys[0]))
 	return get_res_value(keys.slice(1, keys.size()), p_res.get(keys[0]))
-	
 
 
 func get_prestige_stars() -> String:

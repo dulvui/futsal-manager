@@ -9,7 +9,7 @@ extends Control
 
 const DEFAULT_SEED: String = "SuchDefaultSeed"
 
-@onready var nationality: OptionButton = $VBoxContainer/Manager/Container/Nat
+@onready var nations: OptionButton = $VBoxContainer/Manager/Container/Nat
 @onready var m_name: LineEdit = $VBoxContainer/Manager/Container/Name
 @onready var m_surname: LineEdit = $VBoxContainer/Manager/Container/SurName
 
@@ -28,7 +28,7 @@ func _ready() -> void:
 	Config.load_save_state()
 
 	for nation: String in Const.Nations:
-		nationality.add_item(nation)
+		nations.add_item(nation)
 
 	for gender: String in Const.Gender:
 		gender_option.add_item(gender)
@@ -67,7 +67,7 @@ func _on_continue_pressed() -> void:
 		var manager: Manager = Manager.new()
 		manager.name = m_name.text
 		manager.surname = m_surname.text
-		manager.nationality = nationality.get_item_text(nationality.selected)
+		manager.nation = Const.Nations.keys()[nations.selected]
 
 		# start date in fomrat YYYY-MM-DDTHH:MM:SS
 		var start_year: String = start_year_spinbox.get_line_edit().text
