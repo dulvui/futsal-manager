@@ -2,17 +2,17 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Benchmark
+class_name TestBenchmark
 extends Node
 
 var match_engine: MatchEngine
 var generator: Generator
 
 
-func _ready() -> void:
+func test() -> void:
 	generator = Generator.new()
 	match_engine = MatchEngine.new()
-	var leagues: Leagues = generator.generate()
+	var leagues: Leagues = generator.generate_leagues()
 	print("Start benchmark...")
 	MatchMaker.inizialize_matches(leagues)
 

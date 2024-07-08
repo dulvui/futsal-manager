@@ -22,7 +22,6 @@ func _init(
 
 func new_temp_state() -> void:
 	var temp_id: String = str(int(Time.get_unix_time_from_system()))
-	print("temp_id: ", temp_id)
 	temp_state = SaveState.new()
 	temp_state.id = temp_id
 

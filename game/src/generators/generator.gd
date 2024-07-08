@@ -19,7 +19,7 @@ var max_timestamp: int
 var min_timestamp: int
 
 
-func generate() -> Leagues:
+func generate_leagues() -> Leagues:
 	var leagues: Leagues = Leagues.new()
 	# create date ranges
 	# starts from current year and subtracts min/max years

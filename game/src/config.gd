@@ -122,9 +122,9 @@ func reset_seed(p_generation_seed: String, p_generation_gender: int) -> void:
 	rng = RandomNumberGenerator.new()
 	rng.seed = hash(generation_seed + str(generation_gender))
 	generation_state = rng.state
-	print(generation_seed)
-	print(rng.seed)
-	print(rng.state)
+	#print(generation_seed)
+	#print(rng.seed)
+	#print(rng.state)
 
 
 func save_config() -> void:
@@ -162,7 +162,7 @@ func _load_resources() -> void:
 func generate_leagues(p_generation_seed: String, p_generation_gender: Const.Gender) -> void:
 	reset_seed(p_generation_seed, p_generation_gender)
 	var generator: Generator = Generator.new()
-	leagues = generator.generate()
+	leagues = generator.generate_leagues()
 
 
 func save_all_data() -> void:
@@ -211,8 +211,6 @@ func calendar() -> Calendar:
 
 # shuffle array using global RuandomNumberGenerator
 func shuffle(array: Array[Variant]) -> void:
-	print(rng.seed)
-	print(rng.state)
 	for i in array.size():
 		var index: int = rng.randi_range(0, array.size() - 1)
 		if index != i:
