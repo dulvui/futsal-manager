@@ -339,7 +339,7 @@ func create_staff(team_prestige: int, team_nationality: Const.Nations, pyramid_l
 	var staff: Staff = Staff.new()
 	staff.manager = create_manager(team_prestige, team_nationality, pyramid_level)
 	staff.president = create_president(team_prestige, team_nationality, pyramid_level)
-	staff.scout = create_scout(team_prestige, team_nationality, pyramid_level)s
+	staff.scout = create_scout(team_prestige, team_nationality, pyramid_level)
 	return staff
 
 
