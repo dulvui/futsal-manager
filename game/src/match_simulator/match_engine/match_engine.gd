@@ -97,9 +97,7 @@ func simulate(matchz: Match) -> Match:
 			"benchmark: "
 			+ str(end_time - start_time)
 			+ " result: "
-			+ str(matchz.home_goals)
-			+ ":"
-			+ str(matchz.away_goals)
+			+ matchz.get_result()
 		)
 	)
 	print("shots: h%d - a%d" % [home_team.stats.shots, away_team.stats.shots])

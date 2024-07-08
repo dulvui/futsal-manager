@@ -11,8 +11,11 @@ extends Node
 func _ready() -> void:
 	print("Start test suite")
 	
-	test_generator.test()
+	# use new temp state
+	Config.save_states.new_temp_state()
+	Config.load_save_state()
 	
 	test_benchmark.test()
+	test_generator.test()
 	
 	print("Stop test suite")

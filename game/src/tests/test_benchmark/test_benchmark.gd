@@ -14,14 +14,18 @@ func test() -> void:
 	generator = Generator.new()
 	match_engine = MatchEngine.new()
 	var leagues: Leagues = generator.generate_leagues()
+	
+	leagues.initialize_calendars()
+	
 	MatchMaker.inizialize_matches(leagues)
-
-	while true:
-		# next day in calendar
-		for league: League in leagues.list:
+	
+	# find next match day in calendars
+	for league: League in leagues.list:
+		print(league.name)
+		print(league.teams.size())
+		while league.calendar.day().matches.size() == 0:
 			league.calendar.next_day()
-			if league.calendar.is_match_day():
-				return
+			
 
 	leagues.random_results()
 	print("test: benchmark done.")

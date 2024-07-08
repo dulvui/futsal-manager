@@ -25,6 +25,7 @@ func generate_leagues() -> Leagues:
 	# starts from current year and subtracts min/max years
 	# youngest player can be 15 and oldest 45
 	date = Config.start_date
+	
 	var max_date: Dictionary = date.duplicate()
 	max_date.month = 1
 	max_date.day = 1
