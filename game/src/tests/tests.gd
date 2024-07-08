@@ -4,10 +4,15 @@
 
 extends Node
 
-@onready var benchmark: TestBenchmark = $Benchmark
-@onready var generator_test: TestGenerator = $GeneratorTest
+@onready var test_benchmark: TestBenchmark = $TestBenchmark
+@onready var test_generator: TestGenerator = $TestGenerator
 
 
 func _ready() -> void:
-	generator_test.test()
-	benchmark.test()
+	print("Start test suite")
+	
+	test_generator.test()
+	
+	test_benchmark.test()
+	
+	print("Stop test suite")

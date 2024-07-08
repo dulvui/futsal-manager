@@ -6,13 +6,18 @@ extends Node
 
 
 func test() -> void:
-	print("test: generator")
+	print("test: generator...")
+	Config.reset_seed("TestSeed", 0)
+	
 	var generator: Generator = Generator.new()
 	var reference_leagues: Leagues = generator.generate_leagues()
 	
 	# test generations 10x time
 	for i: int in range(3):
 		print("test: run " + str(i + 1))
+		
+		Config.reset_seed("TestSeed", 0)
+		
 		var test_leagues: Leagues = generator.generate_leagues()
 		assert(test_leagues.list.size() == reference_leagues.list.size())
 		assert(test_leagues.list[0].teams.size() == reference_leagues.list[0].teams.size())
@@ -21,4 +26,4 @@ func test() -> void:
 		assert(test_leagues.list[0].teams[1].players[1].name == reference_leagues.list[0].teams[1].players[1].name)
 		assert(test_leagues.list[0].teams[2].players[2].name == reference_leagues.list[0].teams[2].players[2].name)
 	
-	print("test: finished")
+	print("test: generator done.")
