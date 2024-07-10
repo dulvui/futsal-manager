@@ -6,6 +6,7 @@ extends Node
 
 @onready var test_benchmark: TestBenchmark = $TestBenchmark
 @onready var test_generator: TestGenerator = $TestGenerator
+@onready var test_match_engine: TestMatchEngine = $TestMatchEngine
 
 
 func _ready() -> void:
@@ -15,6 +16,7 @@ func _ready() -> void:
 	Config.save_states.new_temp_state()
 	Config.load_save_state()
 	
+	test_match_engine.test()
 	test_benchmark.test()
 	test_generator.test()
 	
