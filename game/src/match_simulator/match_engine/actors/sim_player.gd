@@ -56,7 +56,7 @@ func set_up(
 	ball = p_ball
 	field = p_field
 	# initial test values
-	interception_radius = 40
+	interception_radius = 80
 
 
 func update(team_has_ball: bool) -> void:
@@ -103,7 +103,7 @@ func update(team_has_ball: bool) -> void:
 					else:
 						stop()
 						ball.stop()
-					print(State.keys()[state])
+					#print(State.keys()[state])
 				else:
 					state = State.POSITIONING
 			else:
