@@ -3,7 +3,19 @@
 
 extends Node
 
-enum Types { LEAGUE, TEAM, PLAYER, MANAGER, TRANSFER, CONTRACT, EMAIL, MATCH }
+enum Types {
+	LEAGUE,
+	TEAM,
+	PLAYER,
+	MANAGER,
+	AGENT,
+	SCOUT,
+	PRESIDENT,
+	TRANSFER,
+	CONTRACT,
+	EMAIL,
+	MATCH,
+}
 
 
 # max int value is 9223372036854775807, so quite safe to use
