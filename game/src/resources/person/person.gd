@@ -9,7 +9,8 @@ enum Role {
 	PLAYER,
 	MANAGER,
 	PRESIDENT,
-	SCOUT
+	SCOUT,
+	AGENT,
 }
 
 @export var id: int

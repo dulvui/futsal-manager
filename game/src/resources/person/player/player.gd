@@ -23,6 +23,7 @@ enum Form { Injured, Recover, Good, Excellent }
 @export var position: Position
 @export var alt_positions: Array[Position]
 @export var attributes: Attributes
+@export var agent: Agent
 
 
 func _init(
@@ -47,6 +48,7 @@ func _init(
 	p_alt_positions: Array[Position] = [],
 	p_contract: Contract = Contract.new(),
 	p_attributes: Attributes = Attributes.new(),
+	p_agent: Agent = Agent.new(),
 ) -> void:
 	id = p_id
 	price = p_price
@@ -69,6 +71,7 @@ func _init(
 	alt_positions = p_alt_positions
 	contract = p_contract
 	attributes = p_attributes
+	agent = p_agent
 	
 	role = Person.Role.PLAYER
 

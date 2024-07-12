@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name President
+class_name Manager
 extends Person
 
 func _init(
@@ -20,7 +20,4 @@ func _init(
 	birth_date = p_birth_date
 	prestige = p_prestige
 	
-	role = Person.Role.PRESIDENT
-
-func get_full_name() -> String:
-	return name + " " + surname
+	role = Person.Role.MANAGER

@@ -2,11 +2,11 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Manager
+class_name President
 extends Person
 
 func _init(
-	p_id: int = IdUtil.next_id(IdUtil.Types.MANAGER),
+	p_id: int = IdUtil.next_id(IdUtil.Types.PRESIDENT),
 	p_nation: Const.Nations = Const.Nations.ITALY,
 	p_name: String = "",
 	p_surname: String = "",
@@ -20,7 +20,4 @@ func _init(
 	birth_date = p_birth_date
 	prestige = p_prestige
 	
-	role = Person.Role.MANAGER
-
-func get_full_name() -> String:
-	return name + " " + surname
+	role = Person.Role.PRESIDENT
