@@ -27,9 +27,15 @@ func _init(
 	p_name: String = "",
 	p_budget: int = 0,
 	p_salary_budget: int = 0,
-	p_players: Array[Player] = [],
+	p_players: Array[Player] = [
+		Player.new(1),
+		Player.new(2),
+		Player.new(3),
+		Player.new(4),
+		Player.new(5)
+	],
 	p_formation: Formation = Formation.new(),
-	p_lineup_player_ids: Array[int] = [],
+	p_lineup_player_ids: Array[int] = [1, 2, 3, 4, 5],
 	p_staff: Staff = Staff.new(),
 	p_stadium: Stadium = Stadium.new(),
 	p_board_requests: BoardRequests = BoardRequests.new(),
