@@ -39,6 +39,14 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="TranslationInstructions" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "TRANSLATION_INSTRUCTIONS"
+
+[node name="TranslationsLink" type="LinkButton" parent="VBoxContainer"]
+layout_mode = 2
+text = "translation link"
+
 [node name="Theme" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
