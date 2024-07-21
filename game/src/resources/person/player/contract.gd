@@ -31,8 +31,8 @@ func _init(
 	p_bonus_nat_cup_title: int = 0,
 	p_bonus_inter_cup_title: int = 0,
 	p_buy_clause: int = 0,
-	p_start_date: Dictionary = {},  # unixtimestamp
-	p_end_date: Dictionary = {},
+	p_start_date: Dictionary = Time.get_datetime_dict_from_system(),
+	p_end_date: Dictionary = Time.get_datetime_dict_from_system(),
 	p_is_on_loan: bool = false,
 ) -> void:
 	id = p_id

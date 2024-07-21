@@ -45,7 +45,7 @@ func get_full_name() -> String:
 	return name + " " + surname
 
 
-func get_age(date: Dictionary = Config.calendar().date) -> int:
+func get_age(date: Dictionary = Config.start_date) -> int:
 	return date.year - birth_date.year
 
 

@@ -42,7 +42,7 @@ func _init(
 	p_birth_date: Dictionary = Time.get_datetime_dict_from_system(),
 	p_form: Form = Form.Good,
 	p_morality: Morality = Morality.Good,
-	p_statistics: Array[Statistics] = [],
+	p_statistics: Array[Statistics] = [Statistics.new()],
 	p_foot: Foot = Foot.R,
 	p_position: Position = Position.new(),
 	p_alt_positions: Array[Position] = [],
