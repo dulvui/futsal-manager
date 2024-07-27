@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		last_update_time += delta
 		factor = last_update_time / update_interval
 		position = last_pos.lerp(sim_player.pos, factor)
-		sprites.look_at(visual_ball.global_position)
+		sprites.look_at(visual_ball.position)
 
 
 func set_up(

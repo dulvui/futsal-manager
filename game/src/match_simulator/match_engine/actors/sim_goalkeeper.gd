@@ -41,10 +41,10 @@ var interception_radius: int  #TODO reduce radius with low stamina
 
 
 func set_up(
-	p_player_res: Player,
-	p_ball: SimBall,
-	p_field: SimField,
-	p_left_half: bool,
+	p_player_res: Player = Player.new(),
+	p_ball: SimBall = SimBall.new(),
+	p_field: SimField = SimField.new(),
+	p_left_half: bool = false,
 ) -> void:
 	player_res = p_player_res
 	ball = p_ball

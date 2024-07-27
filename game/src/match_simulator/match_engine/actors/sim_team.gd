@@ -24,11 +24,11 @@ var sort_x_right: Callable
 
 
 func set_up(
-	p_res_team: Team,
-	p_field: SimField,
-	p_ball: SimBall,
-	p_left_half: bool,
-	p_has_ball: bool,
+	p_res_team: Team = Team.new(),
+	p_field: SimField = SimField.new(),
+	p_ball: SimBall = SimBall.new(),
+	p_left_half: bool = false,
+	p_has_ball: bool = false,
 ) -> void:
 	res_team = p_res_team
 	field = p_field

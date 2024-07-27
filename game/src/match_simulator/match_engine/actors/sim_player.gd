@@ -56,7 +56,7 @@ func set_up(
 	ball = p_ball
 	field = p_field
 	# initial test values
-	interception_radius = 80
+	interception_radius = 20
 
 
 func update(team_has_ball: bool) -> void:
