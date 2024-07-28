@@ -58,7 +58,11 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 func update() -> void:
 	ticks += 1
+	
 	ball.update()
+	
+	calc_distances()
+
 	# defend/attack
 	if home_team.has_ball:
 		home_team.attack()
@@ -66,8 +70,6 @@ func update() -> void:
 	else:
 		away_team.attack()
 		home_team.defend(away_team.players)
-
-	calc_distances()
 
 	# update posession stats
 	if home_team.has_ball:
@@ -136,7 +138,7 @@ func calc_player_to_ball_distance(player: SimPlayer) -> void:
 
 
 func calc_distance_to(from: Vector2, to: Vector2) -> float:
-	return from.distance_to(to)
+	return from.distance_squared_to(to)
 
 
 func calc_free_shoot_trajectory() -> void:

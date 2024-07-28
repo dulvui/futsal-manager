@@ -89,15 +89,20 @@ func defend(other_players: Array[SimPlayer]) -> void:
 	if ball.state != SimBall.State.GOALKEEPER:
 		var nearest_player: SimPlayer = nearest_player_to_ball()
 		nearest_player.set_destination(ball.pos)
-		nearest_player.state = SimPlayer.State.PRESS
+		nearest_player.state = SimPlayer.State.MOVE
 
 
 func attack() -> void:
 	goalkeeper.update(true)
+	
+	var nearest_player: SimPlayer = nearest_player_to_ball()
+	nearest_player.set_destination(ball.pos)
+	
 	# use default formation moved on x-axis for now
 	for player: SimPlayer in players:
 		player.update(true)
-
+		
+		# set destinations
 		if player.state != SimPlayer.State.DRIBBLE:
 			# y towards goal, to block goal
 			var factor: int = Config.match_rng.randi_range(30, 60)

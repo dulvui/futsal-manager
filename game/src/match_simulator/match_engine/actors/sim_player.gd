@@ -12,15 +12,14 @@ signal pass_received
 
 enum State {
 	IDLE,
-	# attack
+	# attacker
 	DRIBBLE,
 	PASSING,
-	RECEIVE_PASS,
 	SHOOTING,
-	POSITIONING,
-	# DEFENSE
-	MARKING,
-	PRESS
+	# supporter
+	RECEIVE_PASS,
+	# stay high
+	MOVE,
 }
 
 var state: State
@@ -60,6 +59,9 @@ func set_up(
 
 
 func update(team_has_ball: bool) -> void:
+	#if player_res.surname == 'Verga':
+		#print("pre: " + State.keys()[state])
+
 	match state:
 		State.RECEIVE_PASS:
 			if is_touching_ball():
@@ -82,15 +84,10 @@ func update(team_has_ball: bool) -> void:
 			shoot.emit()
 			ball.shoot(destination, speed)
 			state = State.IDLE
-		State.POSITIONING:
+		State.MOVE:
 			_move()
 			state = State.IDLE
-		State.MARKING:
-			_move()
-			state = State.IDLE
-		State.PRESS:
-			_move()
-			state = State.IDLE
+		
 		State.IDLE:
 			if team_has_ball:
 				if is_touching_ball():
@@ -105,10 +102,15 @@ func update(team_has_ball: bool) -> void:
 						ball.stop()
 					#print(State.keys()[state])
 				else:
-					state = State.POSITIONING
+					state = State.MOVE
 			else:
 				if is_touching_ball():
 					interception.emit()
+				else:
+					state = State.MOVE
+
+	#if player_res.surname == 'Verga':
+		#print("post: " + State.keys()[state])
 
 
 func kick_off(p_pos: Vector2) -> void:
@@ -126,7 +128,7 @@ func _move() -> void:
 
 
 func is_touching_ball() -> bool:
-	return ball.is_touching(pos, interception_radius)
+	return ball.is_touching(pos, interception_radius, player_res.surname == 'Verga')
 
 
 func is_intercepting_ball() -> bool:
