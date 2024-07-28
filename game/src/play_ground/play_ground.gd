@@ -33,7 +33,7 @@ func _ready() -> void:
 	visual_ball.set_up(sim_ball, 0.25)
 
 	sim_player = SimPlayer.new()
-	sim_player.set_up(Player.new(), sim_ball)
+	sim_player.set_up(Player.new(), sim_ball, sim_field)
 
 	visual_player.set_up(sim_player, visual_ball, Color.RED, timer.wait_time)
 
