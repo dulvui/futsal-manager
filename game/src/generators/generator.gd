@@ -327,11 +327,16 @@ func get_person_name(nationality: Const.Nations) -> String:
 
 
 func get_person_surname(nationality: Const.Nations) -> String:
-	# TODO combine with other nations, but with low probability
-	# to have players with other nations surnames in different nation
-	# biiger proability for neighbour nations (needs data)
+	# TODO bigger proability for neighbour nations (needs data)
+	
+	# 10% change of having random nation's surname
+	var different_nation_factor: int = Config.rng.randi() % 100
+	if different_nation_factor > 90:
+		nationality = Config.pick_random(Const.Nations.values())
+	
 	var nation_string: String = Const.Nations.keys()[nationality]
 	nation_string = nation_string.to_lower()
+	
 	var size: int = (names[nation_string]["last_names"] as Array).size()
 	return names[nation_string]["last_names"][Config.rng.randi() % size]
 

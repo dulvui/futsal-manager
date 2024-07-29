@@ -218,6 +218,10 @@ func shuffle(array: Array[Variant]) -> void:
 			array[index] = array[i]
 			array[i] = temp
 
+# shuffle array using global RuandomNumberGenerator
+func pick_random(array: Array[Variant]) -> Variant:
+	return array[rng.randi() % array.size() - 1]
+
 
 # disable save, too heavy on close, breaks game
 # save on quit on mobile
