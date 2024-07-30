@@ -189,11 +189,12 @@ func _show_active_view(p_active_view: int = -1, from_history: bool = false) -> v
 			view_history = view_history.slice(0, view_history_index + 1)
 		
 		# add to history
-		view_history.append(active_view)
-		if view_history.size() > 100:
-			view_history.pop_front()
-		# set history index to latest
-		view_history_index = view_history.size() - 1
+		if view_history.size() == 0 or active_view != view_history[-1]:
+			view_history.append(active_view)
+			if view_history.size() > 100:
+				view_history.pop_front()
+			# set history index to latest
+			view_history_index = view_history.size() - 1
 
 
 
