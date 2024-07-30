@@ -46,6 +46,14 @@ theme_override_constants/separation = 30
 layout_mode = 2
 theme_override_constants/separation = 20
 
+[node name="PrevView" type="Button" parent="MainContainer/VBoxContainer/TopBar"]
+layout_mode = 2
+text = "<"
+
+[node name="NextView" type="Button" parent="MainContainer/VBoxContainer/TopBar"]
+layout_mode = 2
+text = ">"
+
 [node name="ManagerName" type="Label" parent="MainContainer/VBoxContainer/TopBar"]
 layout_mode = 2
 text = "Hans Viustel"
@@ -179,6 +187,8 @@ text = "NEXT_MATCH"
 layout_mode = 2
 text = "NEXT_DAY"
 
+[connection signal="pressed" from="MainContainer/VBoxContainer/TopBar/PrevView" to="." method="_on_prev_view_pressed"]
+[connection signal="pressed" from="MainContainer/VBoxContainer/TopBar/NextView" to="." method="_on_next_view_pressed"]
 [connection signal="email_action" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_email_email_action"]
 [connection signal="select_player" from="MainContainer/VBoxContainer/MainView/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
 [connection signal="select_player" from="MainContainer/VBoxContainer/MainView/Content/PlayerList" to="." method="_on_player_list_select_player"]

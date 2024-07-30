@@ -19,8 +19,6 @@ enum ContentViews {
 
 const DASHBOARD_DAY_DELAY: float = 0.5
 
-var active_view:ContentViews = 0
-
 @onready var team: Team = Config.team
 
 # buttons
@@ -50,6 +48,10 @@ var active_view:ContentViews = 0
 
 var match_ready: bool = false
 var next_season: bool = false
+
+var view_history: Array[ContentViews]
+var view_history_index: int
+var active_view:ContentViews = 0
 
 
 func _ready() -> void:
@@ -180,6 +182,10 @@ func _show_active_view(p_active_view: int = -1) -> void:
 			contract_offer.show()
 		_:
 			email.show()
+	
+	view_history.append(active_view)
+	if view_history.size() > 100:
+		view_history.pop_front()
 
 
 func _on_continue_pressed() -> void:
@@ -267,3 +273,9 @@ func _on_player_offer_cancel() -> void:
 	_show_active_view(ContentViews.ALL_PLAYERS)
 
 
+func _on_prev_view_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_next_view_pressed() -> void:
+	pass # Replace with function body.
