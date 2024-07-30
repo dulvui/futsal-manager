@@ -50,7 +50,7 @@ var match_ready: bool = false
 var next_season: bool = false
 
 var view_history: Array[ContentViews]
-var view_history_index: int
+var view_history_index: int = 0
 var active_view:ContentViews = 0
 
 
@@ -154,7 +154,7 @@ func _hide_all() -> void:
 	player_profile.hide()
 
 
-func _show_active_view(p_active_view: int = -1) -> void:
+func _show_active_view(p_active_view: int = -1, from_history: bool = false) -> void:
 	_hide_all()
 	if p_active_view > -1:
 		active_view = p_active_view
@@ -183,9 +183,18 @@ func _show_active_view(p_active_view: int = -1) -> void:
 		_:
 			email.show()
 	
-	view_history.append(active_view)
-	if view_history.size() > 100:
-		view_history.pop_front()
+	if not from_history:
+		# overwrite history, if other view clicked, while in prevois view
+		if view_history_index < view_history.size() - 1:
+			view_history = view_history.slice(0, view_history_index + 1)
+		
+		# add to history
+		view_history.append(active_view)
+		if view_history.size() > 100:
+			view_history.pop_front()
+		# set history index to latest
+		view_history_index = view_history.size() - 1
+
 
 
 func _on_continue_pressed() -> void:
@@ -274,8 +283,20 @@ func _on_player_offer_cancel() -> void:
 
 
 func _on_prev_view_pressed() -> void:
-	pass # Replace with function body.
+	view_history_index -= 1
+	if view_history_index < 1:
+		view_history_index = 0
+		# TODO emit other negative click sound
+	
+	active_view = view_history[view_history_index]
+	_show_active_view(active_view, true)
 
 
 func _on_next_view_pressed() -> void:
-	pass # Replace with function body.
+	view_history_index += 1
+	if view_history_index > view_history.size() - 1:
+		view_history_index = view_history.size() - 1
+		# TODO emit other negative click sound
+	
+	active_view = view_history[view_history_index]
+	_show_active_view(active_view, true)
