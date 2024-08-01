@@ -15,9 +15,21 @@ extends Resource
 
 
 func _init(
-	p_teams: Array[TableValues] = [],
+	p_id: int = IdUtil.next_id(IdUtil.Types.LEAGUE),
+	p_nation: Const.Nations = Const.Nations.ITALY,
+	p_pyramid_level: int = 1,
+	p_table: Table = Table.new(),
+	p_name: String = "",
+	p_teams: Array[Team] = [],
+	p_calendar: Calendar = Calendar.new(),
 ) -> void:
+	id = p_id
+	nation = p_nation
+	pyramid_level = p_pyramid_level
+	table = p_table
+	name = p_name
 	teams = p_teams
+	calendar = p_calendar
 
 
 func add_team(team: Team) -> void:

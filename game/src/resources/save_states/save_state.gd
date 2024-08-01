@@ -7,6 +7,7 @@ extends Resource
 
 @export var id: String
 @export var config_version: String
+@export var config_version_history: Dictionary
 @export var start_date: Dictionary
 @export var generation_seed: String
 @export var generation_state: int
