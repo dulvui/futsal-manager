@@ -8,6 +8,8 @@ extends Resource
 @export var calendar: Calendar
 
 @export var leagues: Leagues
+@export var nation_cups: Array[Tournament]
+
 
 # clubs
 @export var world_cup: Tournament

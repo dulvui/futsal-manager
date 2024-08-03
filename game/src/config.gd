@@ -35,7 +35,9 @@ var rng: RandomNumberGenerator
 var match_rng: RandomNumberGenerator
 
 # resources
-var leagues: Leagues
+
+var leagues: Leagues # TODO replace with competitions
+var competitions: Competitions
 var team: Team
 var manager: Manager
 var transfers: Transfers
@@ -98,6 +100,7 @@ func save_active_state() -> void:
 	save_sate.save_metadata()
 
 	ResourceSaver.save(leagues, save_states.get_active_path("leagues.tres"))
+	ResourceSaver.save(competitions, save_states.get_active_path("competitions.tres"))
 	ResourceSaver.save(inbox, save_states.get_active_path("inbox.tres"))
 	ResourceSaver.save(team, save_states.get_active_path("team.tres"))
 	ResourceSaver.save(manager, save_states.get_active_path("manager.tres"))
@@ -140,13 +143,15 @@ func _load_resources() -> void:
 	if ResourceLoader.exists(save_states.get_active_path("leagues.tres")):
 		print("loading user://leagues.tres")
 		leagues = ResourceLoader.load(save_states.get_active_path("leagues.tres"))
+	if ResourceLoader.exists(save_states.get_active_path("competitions.tres")):
+		print("loading user://competitions.tres")
+		leagues = ResourceLoader.load(save_states.get_active_path("leagues.tres"))
 	if ResourceLoader.exists(save_states.get_active_path("team.tres")):
 		print("loading user://team.tres")
 		team = ResourceLoader.load(save_states.get_active_path("team.tres"))
 	if ResourceLoader.exists(save_states.get_active_path("manager.tres")):
 		print("loading user://manager.tres")
 		manager = ResourceLoader.load(save_states.get_active_path("manager.tres"))
-
 	if ResourceLoader.exists(save_states.get_active_path("inbox.tres")):
 		print("loading user://inbox.tres")
 		inbox = ResourceLoader.load(save_states.get_active_path("inbox.tres"))
