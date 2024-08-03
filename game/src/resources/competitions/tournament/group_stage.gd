@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Tournament
+class_name GroupStage
 extends Resource
 
 @export var id: int

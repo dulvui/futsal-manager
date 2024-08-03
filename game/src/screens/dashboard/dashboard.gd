@@ -197,7 +197,6 @@ func _show_active_view(p_active_view: int = -1, from_history: bool = false) -> v
 			view_history_index = view_history.size() - 1
 
 
-
 func _on_continue_pressed() -> void:
 	_next_day()
 	# remove comment to test player progress

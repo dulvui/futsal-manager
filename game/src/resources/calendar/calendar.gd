@@ -10,6 +10,7 @@ const DAY_IN_SECONDS: int = 86400
 # season end 30th of november
 const SEASON_END_DAY: int = 30
 const SEASON_END_MONTH: int = 11
+
 # market dates
 const MARKET_PERIODS: Array = [
 	{
