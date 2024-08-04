@@ -100,7 +100,7 @@ func save_active_state() -> void:
 	save_sate.save_metadata()
 
 	ResourceSaver.save(leagues, save_states.get_active_path("leagues.tres"))
-	ResourceSaver.save(competitions, save_states.get_active_path("competitions.tres"))
+	ResourceSaver.save(competitions, save_states.get_active_path("competitionss.tres"))
 	ResourceSaver.save(inbox, save_states.get_active_path("inbox.tres"))
 	ResourceSaver.save(team, save_states.get_active_path("team.tres"))
 	ResourceSaver.save(manager, save_states.get_active_path("manager.tres"))
