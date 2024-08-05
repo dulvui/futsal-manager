@@ -36,8 +36,7 @@ var match_rng: RandomNumberGenerator
 
 # resources
 
-var leagues: Leagues # TODO replace with competitions
-var competitions: Competitions
+var world: World
 var team: Team
 var manager: Manager
 var transfers: Transfers
@@ -99,8 +98,7 @@ func save_active_state() -> void:
 
 	save_sate.save_metadata()
 
-	ResourceSaver.save(leagues, save_states.get_active_path("leagues.tres"))
-	ResourceSaver.save(competitions, save_states.get_active_path("competitionss.tres"))
+	ResourceSaver.save(world, save_states.get_active_path("world.tres"))
 	ResourceSaver.save(inbox, save_states.get_active_path("inbox.tres"))
 	ResourceSaver.save(team, save_states.get_active_path("team.tres"))
 	ResourceSaver.save(manager, save_states.get_active_path("manager.tres"))
@@ -140,12 +138,9 @@ func save_config() -> void:
 
 
 func _load_resources() -> void:
-	if ResourceLoader.exists(save_states.get_active_path("leagues.tres")):
+	if ResourceLoader.exists(save_states.get_active_path("world.tres")):
 		print("loading user://leagues.tres")
-		leagues = ResourceLoader.load(save_states.get_active_path("leagues.tres"))
-	if ResourceLoader.exists(save_states.get_active_path("competitions.tres")):
-		print("loading user://competitions.tres")
-		leagues = ResourceLoader.load(save_states.get_active_path("leagues.tres"))
+		world = ResourceLoader.load(save_states.get_active_path("world.tres"))
 	if ResourceLoader.exists(save_states.get_active_path("team.tres")):
 		print("loading user://team.tres")
 		team = ResourceLoader.load(save_states.get_active_path("team.tres"))
@@ -167,7 +162,7 @@ func _load_resources() -> void:
 func generate_leagues(p_generation_seed: String, p_generation_gender: Const.Gender) -> void:
 	reset_seed(p_generation_seed, p_generation_gender)
 	var generator: Generator = Generator.new()
-	leagues = generator.generate_leagues()
+	world = generator.generate_leagues()
 
 
 func save_all_data() -> void:

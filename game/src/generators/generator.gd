@@ -18,6 +18,30 @@ var date: Dictionary
 var max_timestamp: int
 var min_timestamp: int
 
+func generate_world() -> World:
+	var world: World = World.new()
+	
+	var africa: Continent = Continent.new()
+	var asia: Continent = Continent.new()
+	var australia: Continent = Continent.new()
+	var europe: Continent = Continent.new()
+	
+	var north_america: Continent = Continent.new()
+	var south_america: Continent = Continent.new()
+	
+	# TODO read nations from csv
+	
+	world.continents.append(africa)
+	world.continents.append(asia)
+	world.continents.append(australia)
+	world.continents.append(europe)
+	world.continents.append(north_america)
+	world.continents.append(south_america)
+	
+	
+	return world
+	
+
 
 func generate_leagues() -> Leagues:
 	var leagues: Leagues = Leagues.new()
