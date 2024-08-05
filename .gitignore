@@ -23,3 +23,6 @@ game/android/
 
 # VSCode/VSCodium
 game/.vscode/
+
+# libre office temp files
+*.~lock*
