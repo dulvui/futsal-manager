@@ -511,18 +511,12 @@ func read_world_from_csv() -> World:
 	for header: String in header_line:
 		headers.append(header.to_lower())
 	
-	
-	
 	while not file.eof_reached():
 		var line: PackedStringArray = file.get_csv_line()
 		if line.size() > 1:
 			var continent: String = line[0]
 			var nation: String = line[1]
 			var city: String = line[2]
-			var population: int = int(line[3])
-			
-			
-			
-			var con
-			
+			#var population: int = int(line[3])
+			world.add_club(continent, nation, city)
 	return world

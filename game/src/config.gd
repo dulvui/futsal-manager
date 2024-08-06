@@ -35,10 +35,14 @@ var rng: RandomNumberGenerator
 var match_rng: RandomNumberGenerator
 
 # resources
-
 var world: World
+# active resources references
 var team: Team
+var league: League
+var tournaments: Array[Tournament]
 var manager: Manager
+
+var calendar: Calendar
 var transfers: Transfers
 var inbox: Inbox
 
@@ -162,7 +166,7 @@ func _load_resources() -> void:
 func generate_leagues(p_generation_seed: String, p_generation_gender: Const.Gender) -> void:
 	reset_seed(p_generation_seed, p_generation_gender)
 	var generator: Generator = Generator.new()
-	world = generator.generate_leagues()
+	world = generator.generate_world()
 
 
 func save_all_data() -> void:
@@ -179,7 +183,7 @@ func set_lang(lang: String) -> void:
 
 
 func select_team(p_league: League, p_team: Team) -> void:
-	leagues.active_id = p_league.id
+	league = p_league
 	team = p_team
 
 
@@ -193,20 +197,17 @@ func next_season() -> void:
 	# player contracts
 
 	PlayerProgress.players_progress_season()
+	
+	for c: Continent in world.continents:
+		for n: Nation in c.nations:
+			for l: League in n.leagues.list:
+				l.calendar.initialize(true)
 
-	for league: League in Config.leagues.list:
-		league.calendar.initialize(true)
-
-	MatchMaker.inizialize_matches(leagues)
+			MatchMaker.inizialize_matches(n.leagues)
 
 	Config.save_all_data()
 
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
-
-
-# shortcut to active leagues calendar
-func calendar() -> Calendar:
-	return Config.leagues.get_active().calendar
 
 
 # shuffle array using global RuandomNumberGenerator

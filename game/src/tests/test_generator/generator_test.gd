@@ -10,6 +10,9 @@ func test() -> void:
 	Config.reset_seed("TestSeed", 0)
 	
 	var generator: Generator = Generator.new()
+	var world: World = generator.generate_world()
+	assert(world.continents.size()  > 0)
+	
 	var reference_leagues: Leagues = generator.generate_leagues()
 	
 	# test generations 10x time
