@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ghq404qcojpm"
+
+[deps]
+
+files=["res://data/world/world.NATION.translation", "res://data/world/world.CITY.translation", "res://data/world/world.POPULATION.translation"]
+
+source_file="res://data/world/world.csv"
+dest_files=["res://data/world/world.NATION.translation", "res://data/world/world.CITY.translation", "res://data/world/world.POPULATION.translation"]
+
+[params]
+
+compress=true
+delimiter=0

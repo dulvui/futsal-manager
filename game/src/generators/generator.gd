@@ -6,6 +6,7 @@ extends Node
 
 const NAMES_DIR: String = "res://data/player_names/"
 const LEAGUES_DIR: String = "res://data/leagues/"
+const WORLD_CSV_PATH: String = "res://data/world/world.csv"
 
 # defines noise added to attribute factors
 const NOISE: int = 3
@@ -19,28 +20,10 @@ var max_timestamp: int
 var min_timestamp: int
 
 func generate_world() -> World:
-	var world: World = World.new()
-	
-	var africa: Continent = Continent.new()
-	var asia: Continent = Continent.new()
-	var australia: Continent = Continent.new()
-	var europe: Continent = Continent.new()
-	
-	var north_america: Continent = Continent.new()
-	var south_america: Continent = Continent.new()
-	
-	# TODO read nations from csv
-	
-	world.continents.append(africa)
-	world.continents.append(asia)
-	world.continents.append(australia)
-	world.continents.append(europe)
-	world.continents.append(north_america)
-	world.continents.append(south_america)
-	
-	
+	var world: World = read_world_from_csv()
+	# TODO generate leagues
+	# TODO generate tournaments
 	return world
-	
 
 
 func generate_leagues() -> Leagues:
@@ -513,3 +496,33 @@ func in_bounds_random(value: int, max_bound: int = Const.MAX_PRESTIGE) -> int:
 # returns value between 1 and 20
 func in_bounds(value: int, max_bound: int = Const.MAX_PRESTIGE) -> int:
 	return maxi(mini(value, max_bound), 1)
+
+
+func read_world_from_csv() -> World:
+	var world: World = World.new()
+	
+	var file: FileAccess = FileAccess.open(WORLD_CSV_PATH, FileAccess.READ)
+	
+	# get header row
+	# CONTINENT, NATION, CITY, POPULATION
+	var header_line: PackedStringArray = file.get_csv_line()
+	var headers: Array[String] = []
+	# transform to array and make lower case
+	for header: String in header_line:
+		headers.append(header.to_lower())
+	
+	
+	
+	while not file.eof_reached():
+		var line: PackedStringArray = file.get_csv_line()
+		if line.size() > 1:
+			var continent: String = line[0]
+			var nation: String = line[1]
+			var city: String = line[2]
+			var population: int = int(line[3])
+			
+			
+			
+			var con
+			
+	return world
