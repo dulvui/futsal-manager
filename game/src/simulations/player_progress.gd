@@ -10,10 +10,12 @@ const AGE_PHYSICAL_DEGARDE = 30
 
 
 static func players_progress_season() -> void:
-	for league: League in Config.leagues.list:
-		for team: Team in league.teams:
-			for player in team.players:
-				_player_season_progress(player)
+	for c: Continent in Config.world.continents:
+		for n: Nation in c.nations:
+			for league: League in n.leagues.list:
+				for team: Team in league.teams:
+					for player in team.players:
+						_player_season_progress(player)
 
 
 static func _player_season_progress(player: Player) -> void:

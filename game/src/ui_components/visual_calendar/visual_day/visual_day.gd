@@ -45,7 +45,7 @@ func set_up(p_date: Day = Day.new()) -> void:
 	else:
 		match_label.hide()
 
-	if date.day == Config.calendar().day().day and Config.calendar().day().month == date.month:
+	if date.day == Config.calendar.day().day and Config.calendar.day().month == date.month:
 		if background.color != HOME_MATCH_DAY_COLOR:
 			background.color = Color.LIGHT_GREEN
 		elif background.color != AWAY_MATCH_DAY_COLOR:

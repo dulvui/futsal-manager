@@ -22,7 +22,7 @@ func set_up(day: Day) -> void:
 	# add active league games
 	if day.matches.size() > 0:
 		var active_league_label: Label = Label.new()
-		active_league_label.text = Config.leagues.get_active().name
+		active_league_label.text = Config.league.name
 		UiUtil.bold(active_league_label)
 		matches_list.add_child(active_league_label)
 		for matchz: Match in day.matches:

@@ -60,7 +60,7 @@ func initialize_calendars() -> void:
 		league.calendar.initialize()
 
 
-func is_match_day(day: Day = Config.calendar().day()) -> bool:
+func is_match_day(day: Day = Config.calendar.day()) -> bool:
 	for league: League in list:
 		if league.calendar.day(day.month, day.day).matches.size() > 0:
 			return true

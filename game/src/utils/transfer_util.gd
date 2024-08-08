@@ -11,7 +11,7 @@ const REQUEST_FACTOR: int = 20
 
 func update_day() -> void:
 	#check with calendar if treansfer market is open, then send start/stop mail
-	if Config.calendar().is_market_active():
+	if Config.calendar.is_market_active():
 		_request_players()
 
 		# do transfers

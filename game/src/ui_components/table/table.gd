@@ -14,7 +14,7 @@ func _ready() -> void:
 	set_up()
 
 
-func set_up(league: League = Config.leagues.get_active()) -> void:
+func set_up(league: League = Config.league) -> void:
 	# clear grid
 	for child: Node in grid.get_children():
 		child.queue_free()

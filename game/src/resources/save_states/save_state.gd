@@ -87,9 +87,9 @@ func delete_dir() -> void:
 
 func save_metadata() -> void:
 	meta_team_position = (
-		str(Config.leagues.get_active().table.get_position())
+		str(Config.league.table.get_position())
 		+ ". "
-		+ Config.leagues.get_active().name
+		+ Config.league.name
 	)
 	meta_last_save = Time.get_datetime_dict_from_system()
-	meta_game_date = Config.calendar().date
+	meta_game_date = Config.calendar.date

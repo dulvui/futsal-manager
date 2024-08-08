@@ -58,12 +58,12 @@ func _ready() -> void:
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
 		matchz = Match.new()
 		# games needs to be started at least once with a valid save state
-		matchz.home = Config.leagues.get_active().teams[0]
-		matchz.away = Config.leagues.get_active().teams[1]
+		matchz.home = Config.league.teams[0]
+		matchz.away = Config.league.teams[1]
 	else:
-		matchz = Config.calendar().get_next_match()
+		matchz = Config.calendar.get_next_match()
 
-	for team: Team in Config.leagues.get_active().teams:
+	for team: Team in Config.league.teams:
 		if team.id == matchz.home.id:
 			home_team = team
 		elif team.id == matchz.away.id:
@@ -107,7 +107,7 @@ func match_end() -> void:
 	pause_button.hide()
 	dashboard_button.show()
 	match_simulator.match_finished()
-	Config.leagues.get_active().table.add_result(
+	Config.league.table.add_result(
 		home_team.id, home_stats.goals, away_team.id, away_stats.goals
 	)
 
