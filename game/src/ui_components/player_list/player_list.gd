@@ -40,7 +40,7 @@ var page_size:int = 16
 
 func _ready() -> void:
 	team_select.add_item("NO_TEAM")
-	for league: League in Config.leagues.list:
+	for league: League in Config.world.get_all_leagues():
 		for team: Team in league.teams:
 			if team == null or Config.team == null or team.name != Config.team.name:
 				team_select.add_item(team.name)
@@ -50,7 +50,7 @@ func _ready() -> void:
 		pos_select.add_item(pos)
 
 	league_select.add_item("ALL_LEAGUES")
-	for league: League in Config.leagues.list:
+	for league: League in Config.world.get_all_leagues():
 		league_select.add_item(league.name)
 
 	# setup automatically, if run in editor and is run by 'Run current scene'
@@ -173,7 +173,7 @@ func _set_up_players(p_reset_options: bool = true) -> void:
 	# uncomment to stresstest
 	#for i in range(10):
 	if active_team_id == -1:
-		for league: League in Config.leagues.list:
+		for league: League in Config.world.get_all_leagues():
 			for team in league.teams:
 				for player in team.players:
 					all_players.append(player)
@@ -338,7 +338,7 @@ func _on_league_select_item_selected(index: int) -> void:
 	team_select.add_item("NO_TEAM")
 
 	# adjust team picker according to selected league
-	for league: League in Config.leagues.list:
+	for league: League in Config.world.get_all_leagues():
 		if not "league" in filters or filters["league"] == league.name:
 			for team: Team in league.teams:
 				if team == null or team.name != Config.team.name:

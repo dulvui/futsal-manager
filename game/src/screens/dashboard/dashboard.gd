@@ -224,7 +224,7 @@ func _next_day() -> void:
 		return
 
 	# next day in calendar
-	for league: League in Config.leagues.list:
+	for league: League in Config.world.get_all_leagues():
 		league.calendar.next_day()
 
 	# next season check

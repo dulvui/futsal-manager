@@ -49,3 +49,9 @@ func add_club(continent_name: String, nation_name: String, team_name: String) ->
 	nation.leagues.list.append(team)
 	
 	
+func get_all_leagues() -> Array[League]:
+	var leagues: Array[League] = []
+	for c: Continent in Config.world.continents:
+		for n: Nation in c.nations:
+			leagues.append_array(n.leagues.list)
+	return leagues

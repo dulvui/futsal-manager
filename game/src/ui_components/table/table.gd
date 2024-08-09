@@ -10,7 +10,7 @@ extends VBoxContainer
 
 
 func _ready() -> void:
-	leagues.set_up(Config.leagues.list.map(func(league: League) -> String: return league.name))
+	leagues.set_up(Config.world.get_all_leagues().map(func(league: League) -> String: return league.name))
 	set_up()
 
 
@@ -95,4 +95,4 @@ func style_label(label: Label) -> void:
 
 
 func _on_leagues_item_selected(index: int) -> void:
-	set_up(Config.leagues.list[index])
+	set_up(Config.world.get_all_leagues()[index])
