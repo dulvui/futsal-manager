@@ -249,7 +249,7 @@ func _next_day() -> void:
 		next_match_button.hide()
 	else:
 		#simulate all other matches
-		Config.leagues.random_results()
+		for leagueConfig.world.get_all_leagues().random_results()
 
 	visual_calendar.set_up()
 

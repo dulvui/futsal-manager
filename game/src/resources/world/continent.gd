@@ -5,6 +5,7 @@
 class_name Continent
 extends Resource
 
+@export var calendar: Calendar
 @export var name: String
 @export var nations: Array[Nation]
 @export var cup_clubs: Tournament

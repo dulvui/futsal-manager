@@ -33,15 +33,16 @@ func set_up(day: Day) -> void:
 		matches_list.add_child(HSeparator.new())
 
 	# add other leagues matches
-	for league: League in Config.leagues.get_others():
-		if league.calendar.day(day.month, day.day).matches.size() > 0:
-			var league_label: Label = Label.new()
-			league_label.text = league.name
-			UiUtil.bold(league_label)
-			matches_list.add_child(league_label)
-			for matchz: Match in league.calendar.day(day.month, day.day).matches:
-				var match_row: MatchListRow = MatchRowScene.instantiate()
-				matches_list.add_child(match_row)
-				match_row.set_up(matchz)
+	for league: League in Config.world.get_all_leagues():
+		if league.id != Config.league.id:
+			if league.calendar.day(day.month, day.day).matches.size() > 0:
+				var league_label: Label = Label.new()
+				league_label.text = league.name
+				UiUtil.bold(league_label)
+				matches_list.add_child(league_label)
+				for matchz: Match in league.calendar.day(day.month, day.day).matches:
+					var match_row: MatchListRow = MatchRowScene.instantiate()
+					matches_list.add_child(match_row)
+					match_row.set_up(matchz)
 
-			matches_list.add_child(HSeparator.new())
+				matches_list.add_child(HSeparator.new())

@@ -142,7 +142,7 @@ func _on_confirm_pressed() -> void:
 	transfer.state = Transfer.State.OFFER
 	transfer.buy_team = Config.team
 	# TODO fix me
-	transfer.sell_team = Config.leagues.get_team_by_id(player.team_id)
+	transfer.sell_team = Config.world.get_all_leagues().get_team_by_id(player.team_id)
 
 	TransferUtil.make_offer(transfer)
 	confirm.emit()

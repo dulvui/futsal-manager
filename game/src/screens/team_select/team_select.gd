@@ -23,7 +23,7 @@ func _ready() -> void:
 		button.pressed.connect(_on_nation_select.bind(nation))
 
 	set_teams()
-	var first_league: League = Config.leagues.get_leagues_by_nation(0)[0]
+	var first_league: League = Config.world.get_all_leagues().get_leagues_by_nation(0)[0]
 	active_league = first_league
 	active_team = first_league.teams[0]
 	team_profile.set_up(active_team)
@@ -39,7 +39,7 @@ func set_teams(nation: Const.Nations = 0) -> void:
 	for child: Node in team_list.get_children():
 		child.queue_free()
 
-	for league: League in Config.leagues.get_leagues_by_nation(nation):
+	for league: League in Config.world.get_all_leagues().get_leagues_by_nation(nation):
 		var league_label: Label = Label.new()
 		league_label.text = league.name
 		team_list.add_child(league_label)
@@ -54,16 +54,16 @@ func set_teams(nation: Const.Nations = 0) -> void:
 
 func _on_nation_select(nation: String) -> void:
 	set_teams(Const.Nations.get(nation))
-	var first_league: League = Config.leagues.get_leagues_by_nation(Const.Nations.get(nation))[0]
+	var first_league: League = Config.world.get_all_leagues().get_leagues_by_nation(Const.Nations.get(nation))[0]
 	show_team(first_league, first_league.teams[0])
 
 
 func _on_select_team_pressed() -> void:
 	Config.select_team(active_league, active_team)
 	print("team saved")
-	Config.leagues.initialize_calendars()
+	Config.world.get_all_leagues().initialize_calendars()
 	print("calendars created")
-	MatchMaker.inizialize_matches(Config.leagues)
+	MatchMaker.inizialize_matches(Config.world.get_all_leagues())
 	print("matches initialized")
 	EmailUtil.welcome_manager()
 

@@ -7,6 +7,7 @@ extends Resource
 
 const DAY_IN_SECONDS: int = 86400
 
+# TODO replace with different dates per nation/contintent
 # season end 30th of november
 const SEASON_END_DAY: int = 30
 const SEASON_END_MONTH: int = 11

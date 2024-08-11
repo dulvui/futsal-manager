@@ -28,8 +28,10 @@ func set_up(p_date: Day = Day.new()) -> void:
 	date = p_date
 	# activate button
 	button.show()
-
-	ball_texture.visible = Config.leagues.is_match_day(date)
+	
+	# TODO show ball on matchday of own team
+	#ball_texture.visible = Config.league.is_match_day(date)
+	ball_texture.visible = false
 
 	month_day_label.text = str(date.day)
 	var team_name: String

@@ -7,7 +7,6 @@ extends Resource
 
 @export var id: int
 @export var table: Table
-@export var calendar: Calendar
 @export var nation: Const.Nations
 @export var pyramid_level: int
 @export var name: String
@@ -21,7 +20,6 @@ func _init(
 	p_table: Table = Table.new(),
 	p_name: String = "",
 	p_teams: Array[Team] = [],
-	p_calendar: Calendar = Calendar.new(),
 ) -> void:
 	id = p_id
 	nation = p_nation
@@ -29,7 +27,6 @@ func _init(
 	table = p_table
 	name = p_name
 	teams = p_teams
-	calendar = p_calendar
 
 
 func add_team(team: Team) -> void:
