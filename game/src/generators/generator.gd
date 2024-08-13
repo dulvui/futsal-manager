@@ -26,8 +26,8 @@ func generate_world() -> World:
 	return world
 
 
-func generate_leagues() -> Leagues:
-	var leagues: Leagues = Leagues.new()
+func generate_leagues() -> Array[League]:
+	var leagues: Array[League] = []
 	# create date ranges
 	# starts from current year and subtracts min/max years
 	# youngest player can be 15 and oldest 45
@@ -93,7 +93,7 @@ func generate_leagues() -> Leagues:
 				team.staff = create_staff(team.get_prestige(), league.nation, league.pyramid_level)
 				league.add_team(team)
 
-			leagues.add_league(league)
+			leagues.append(league)
 			pyramid_level += 1
 
 	return leagues

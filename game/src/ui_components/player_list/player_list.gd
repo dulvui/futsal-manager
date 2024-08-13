@@ -178,7 +178,7 @@ func _set_up_players(p_reset_options: bool = true) -> void:
 				for player in team.players:
 					all_players.append(player)
 	else:
-		for player: Player in Config.world.get_all_leagues().get_team_by_id(active_team_id).players:
+		for player: Player in Config.world.get_team_by_id(active_team_id).players:
 			all_players.append(player)
 
 	players = all_players

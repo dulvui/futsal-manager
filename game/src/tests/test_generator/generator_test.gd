@@ -22,11 +22,11 @@ func test() -> void:
 		Config.reset_seed("TestSeed", 0)
 		
 		var test_leagues: Leagues = generator.generate_leagues()
-		assert(test_leagues.list.size() == reference_leagues.list.size())
-		assert(test_leagues.list[0].teams.size() == reference_leagues.list[0].teams.size())
-		assert(test_leagues.list[0].teams[0].players.size() == reference_leagues.list[0].teams[0].players.size())
-		assert(test_leagues.list[0].teams[0].players[0].name == reference_leagues.list[0].teams[0].players[0].name)
-		assert(test_leagues.list[0].teams[1].players[1].name == reference_leagues.list[0].teams[1].players[1].name)
-		assert(test_leagues.list[0].teams[2].players[2].name == reference_leagues.list[0].teams[2].players[2].name)
+		assert(test_leagues.size() == reference_leagues.size())
+		assert(test_leagues[0].teams.size() == reference_leagues[0].teams.size())
+		assert(test_leagues[0].teams[0].players.size() == reference_leagues[0].teams[0].players.size())
+		assert(test_leagues[0].teams[0].players[0].name == reference_leagues[0].teams[0].players[0].name)
+		assert(test_leagues[0].teams[1].players[1].name == reference_leagues[0].teams[1].players[1].name)
+		assert(test_leagues[0].teams[2].players[2].name == reference_leagues[0].teams[2].players[2].name)
 	
 	print("test: generator done.")

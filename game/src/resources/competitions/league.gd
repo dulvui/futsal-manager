@@ -5,6 +5,7 @@
 class_name League
 extends Resource
 
+@export var calendar: Calendar
 @export var id: int
 @export var table: Table
 @export var nation: Const.Nations

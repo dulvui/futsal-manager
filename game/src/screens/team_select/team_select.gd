@@ -54,14 +54,14 @@ func set_teams(nation: Const.Nations = 0) -> void:
 
 func _on_nation_select(nation: String) -> void:
 	set_teams(Const.Nations.get(nation))
-	var first_league: League = Config.world.get_all_leagues().get_leagues_by_nation(Const.Nations.get(nation))[0]
+	var first_league: League = Config.world.get_all_leagues()[0]
 	show_team(first_league, first_league.teams[0])
 
 
 func _on_select_team_pressed() -> void:
 	Config.select_team(active_league, active_team)
 	print("team saved")
-	Config.world.get_all_leagues().initialize_calendars()
+	Config.world.initialize_calendars()
 	print("calendars created")
 	MatchMaker.inizialize_matches(Config.world.get_all_leagues())
 	print("matches initialized")

@@ -200,7 +200,7 @@ func next_season() -> void:
 	
 	for c: Continent in world.continents:
 		for n: Nation in c.nations:
-			for l: League in n.leagues.list:
+			for l: League in n.leagues:
 				l.calendar.initialize(true)
 
 			MatchMaker.inizialize_matches(n.leagues)

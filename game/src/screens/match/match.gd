@@ -114,7 +114,7 @@ func match_end() -> void:
 	#assign result
 	matchz.set_result(home_stats.goals, away_stats.goals)
 	# calc other matches
-	Config.world.get_all_leagues().random_results()
+	Config.world.random_results()
 	Config.save_all_data()
 
 

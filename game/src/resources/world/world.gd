@@ -45,13 +45,33 @@ func add_club(continent_name: String, nation_name: String, team_name: String) ->
 	# add team
 	var team: Team = Team.new()
 	team.name = team_name
-	nation.leagues = Leagues.new()
-	nation.leagues.list.append(team)
-	
-	
+	nation.leagues = []
+	nation.leagues.append(team)
+
+
+func initialize_calendars() -> void:
+	# TODO initialize all calendars
+	pass
+
+
+func random_results() -> void:
+	for c: Continent in Config.world.continents:
+		for n: Nation in c.nations:
+			n.random_results()
+
+
+func get_team_by_id(team_id: int) -> Team:
+	for l: League in get_all_leagues():
+		for t: Team in l.teams:
+			if t.id == team_id:
+				return t
+	printerr("no team with id " + str(team_id))
+	return null
+
+
 func get_all_leagues() -> Array[League]:
 	var leagues: Array[League] = []
 	for c: Continent in Config.world.continents:
 		for n: Nation in c.nations:
-			leagues.append_array(n.leagues.list)
+			leagues.append_array(n.leagues)
 	return leagues

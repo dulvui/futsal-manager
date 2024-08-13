@@ -8,8 +8,8 @@ var match_days: Array[Array]
 var match_day: int = 0
 
 
-func inizialize_matches(leagues: Leagues) -> void:
-	for league: League in leagues.list:
+func inizialize_matches(leagues: Array[League]) -> void:
+	for league: League in leagues:
 		var teams: Array = league.teams.duplicate(true)
 		match_days = []
 		match_day = 0
