@@ -67,7 +67,7 @@ func _on_continue_pressed() -> void:
 		var manager: Manager = Manager.new()
 		manager.name = m_name.text
 		manager.surname = m_surname.text
-		manager.nation = Config.world.get_all_nations()[nations.selected]
+		manager.nation = Config.world.get_all_nations()[nations.selected].name
 
 		# start date in fomrat YYYY-MM-DDTHH:MM:SS
 		var start_year: String = start_year_spinbox.get_line_edit().text

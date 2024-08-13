@@ -42,26 +42,25 @@ func generate_leagues() -> Array[League]:
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 
 	# initialize names
-	for nation: String in Const.Nations:
+	for nation: Nation in Config.world.get_all_nations():
 		var names_file: FileAccess = FileAccess.open(
-			NAMES_DIR + nation.to_lower() + ".json", FileAccess.READ
+			NAMES_DIR + nation.name.to_lower() + ".json", FileAccess.READ
 		)
-		names[nation.to_lower()] = JSON.parse_string(names_file.get_as_text())
+		names[nation.name.to_lower()] = JSON.parse_string(names_file.get_as_text())
 
 	# create leagues. teams and players
-	for nation: String in Const.Nations:
+	for nation: Nation in Config.world.get_all_nations():
 		var leagues_file: FileAccess = FileAccess.open(
-			LEAGUES_DIR + nation.to_lower() + ".json", FileAccess.READ
+			LEAGUES_DIR + nation.name.to_lower() + ".json", FileAccess.READ
 		)
-		leagues_data[nation] = JSON.parse_string(leagues_file.get_as_text())
+		leagues_data[nation.name] = JSON.parse_string(leagues_file.get_as_text())
 		# used for prestige calculation, so that high leagues have better prestige
 		var pyramid_level: int = 1
 
-		for l: Dictionary in leagues_data[nation]:
+		for l: Dictionary in leagues_data[nation.name]:
 			var league: League = League.new()
 			league.name = l.name
 			league.pyramid_level = pyramid_level
-			league.nation = Const.Nations.get(nation)
 			for t: String in l.teams:
 				var team: Team = Team.new()
 				team.name = t
@@ -88,9 +87,9 @@ func generate_leagues() -> Array[League]:
 				
 
 				var temp_team_prestige: int = get_team_prestige(pyramid_level)
-				assign_players_to_team(team, league, temp_team_prestige)
+				assign_players_to_team(team, league, nation, temp_team_prestige)
 
-				team.staff = create_staff(team.get_prestige(), league.nation, league.pyramid_level)
+				team.staff = create_staff(team.get_prestige(), nation, league.pyramid_level)
 				league.add_team(team)
 
 			leagues.append(league)
@@ -99,7 +98,7 @@ func generate_leagues() -> Array[League]:
 	return leagues
 
 
-func assign_players_to_team(p_team: Team, p_league: League, prestige: int) -> Team:
+func assign_players_to_team(p_team: Team, p_league: League, p_nation: Nation, prestige: int) -> Team:
 	var nr: int = 1
 
 	for position_type: int in Position.Type.values():
@@ -108,8 +107,8 @@ func assign_players_to_team(p_team: Team, p_league: League, prestige: int) -> Te
 			amount = 3
 
 		for i in amount:
-			var random_nation: Const.Nations = get_random_nationality(
-				p_league.nation, prestige, p_league.pyramid_level
+			var random_nation: Nation = get_random_nationality(
+				p_nation, prestige, p_league.pyramid_level
 			)
 			var player: Player = create_player(random_nation, nr, prestige, position_type)
 			nr += 1
@@ -310,10 +309,10 @@ func get_contract(person: Person) -> Contract:
 	return contract
 
 
-func get_person_name(nationality: Const.Nations) -> String:
+func get_person_name(nation: Nation) -> String:
 	# TODO randomly use names from other nations, with low probability 
-	var nation_string: String = (Const.Nations.keys()[nationality] as String).to_lower()
-
+	var nation_string: String = nation.name.to_lower()
+	
 	if Config.generation_gender == Const.Gender.MALE:
 		var size: int = (names[nation_string]["first_names_male"] as Array).size()
 		return names[nation_string]["first_names_male"][Config.rng.randi() % size]
@@ -333,63 +332,65 @@ func get_person_name(nationality: Const.Nations) -> String:
 		return mixed_names[Config.rng.randi() % (size_female + size_male)]
 
 
-func get_person_surname(nationality: Const.Nations) -> String:
+func get_person_surname(nation: Nation) -> String:
 	# TODO bigger proability for neighbour nations (needs data)
 	
 	# 10% change of having random nation's surname
 	var different_nation_factor: int = Config.rng.randi() % 100
 	if different_nation_factor > 90:
-		nationality = Config.pick_random(Const.Nations.values())
+		nation = Config.pick_random(Config.world.get_all_nations())
 	
-	var nation_string: String = Const.Nations.keys()[nationality]
-	nation_string = nation_string.to_lower()
+	var nation_string: String = nation.name.to_lower()
 	
 	var size: int = (names[nation_string]["last_names"] as Array).size()
 	return names[nation_string]["last_names"][Config.rng.randi() % size]
 
 
-func create_staff(team_prestige: int, team_nationality: Const.Nations, pyramid_level: int) -> Staff:
+func create_staff(team_prestige: int, team_nation: Nation, pyramid_level: int) -> Staff:
 	var staff: Staff = Staff.new()
-	staff.manager = create_manager(team_prestige, team_nationality, pyramid_level)
-	staff.president = create_president(team_prestige, team_nationality, pyramid_level)
-	staff.scout = create_scout(team_prestige, team_nationality, pyramid_level)
+	staff.manager = create_manager(team_prestige, team_nation, pyramid_level)
+	staff.president = create_president(team_prestige, team_nation, pyramid_level)
+	staff.scout = create_scout(team_prestige, team_nation, pyramid_level)
 	return staff
 
 
-func create_manager(team_prestige: int, team_nation: Const.Nations, pyramid_level: int) -> Manager:
+func create_manager(team_prestige: int, team_nation: Nation, pyramid_level: int) -> Manager:
 	var manager: Manager = Manager.new()
 	manager.prestige = in_bounds_random(team_prestige)
-	manager.name = get_person_name(manager.nation)
-	manager.surname = get_person_surname(manager.nation)
-	manager.nation = get_random_nationality(team_nation, team_prestige, pyramid_level)
+	var nation: Nation = get_random_nationality(team_nation, team_prestige, pyramid_level)
+	manager.nation = nation.name
+	manager.name = get_person_name(nation)
+	manager.surname = get_person_surname(nation)
 	
 	manager.contract = get_contract(manager)
 	
 	return manager
 
 
-func create_president(team_prestige: int, team_nation: Const.Nations, pyramid_level: int) -> President:
+func create_president(team_prestige: int, team_nation: Nation, pyramid_level: int) -> President:
 	var president: President = President.new()
 	president.prestige = in_bounds_random(team_prestige)
-	president.name = get_person_name(president.nation)
-	president.surname = get_person_surname(president.nation)
-	president.nation = get_random_nationality(team_nation, team_prestige, pyramid_level)
+	var nation: Nation = get_random_nationality(team_nation, team_prestige, pyramid_level)
+	president.nation = nation.name
+	president.name = get_person_name(nation)
+	president.surname = get_person_surname(nation)
 	president.contract = get_contract(president)
 	return president
 
 
-func create_scout(team_prestige: int, team_nation: Const.Nations, pyramid_level: int) -> Scout:
+func create_scout(team_prestige: int, team_nation: Nation, pyramid_level: int) -> Scout:
 	var scout: Scout = Scout.new()
 	scout.prestige = in_bounds_random(team_prestige)
-	scout.name = get_person_name(scout.nation)
-	scout.surname = get_person_surname(scout.nation)
-	scout.nation = get_random_nationality(team_nation, team_prestige, pyramid_level)
+	var nation: Nation = get_random_nationality(team_nation, team_prestige, pyramid_level)
+	scout.nation = nation.name
+	scout.name = get_person_name(nation)
+	scout.surname = get_person_surname(nation)
 	scout.contract = get_contract(scout)
 	return scout
 
 
 func create_player(
-	nationality: Const.Nations, nr: int, p_prestige: int, p_position_type: Position.Type
+	nation: Nation, nr: int, p_prestige: int, p_position_type: Position.Type
 ) -> Player:
 	var player: Player = Player.new()
 	random_positions(player, p_position_type)
@@ -402,10 +403,10 @@ func create_player(
 	var prestige: int = get_player_prestige(p_prestige)
 
 	player.price = get_price(date.year - birth_date.year, prestige, player.position)
-	player.name = get_person_name(nationality)
-	player.surname = get_person_surname(nationality)
+	player.name = get_person_name(nation)
+	player.surname = get_person_surname(nation)
 	player.birth_date = birth_date
-	player.nation = nationality
+	player.nation = nation.name
 	player.foot = get_random_foot()
 	player.morality = get_random_morality()
 	player.form = get_random_form()
@@ -471,13 +472,13 @@ func get_team_prestige(pyramid_level: int) -> int:
 
 
 func get_random_nationality(
-	nationality: Const.Nations, prestige: int, pyramid_level: int
-) -> Const.Nations:
+	nation: Nation, prestige: int, pyramid_level: int
+) -> Nation:
 	# (100 - prestige)% given nation, prestige% random nation
 	# with prestige, lower division teams have less players from other nations
 	if Config.rng.randi_range(1, 100) > 100 - (prestige * 2 / pyramid_level):
-		return Const.Nations.values()[Config.rng.randi_range(0, Const.Nations.values().size() - 1)]
-	return nationality
+		return Config.world.get_all_nations()[Config.rng.randi_range(0, Config.world.get_all_nations().size() - 1)]
+	return nation
 
 
 func noise(factor: int = NOISE) -> int:
