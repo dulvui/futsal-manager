@@ -8,7 +8,6 @@ extends Resource
 @export var id: int
 @export var table: Table
 @export var calendar: Calendar
-@export var nation: Const.Nations
 @export var pyramid_level: int
 @export var name: String
 @export var group_stage: String

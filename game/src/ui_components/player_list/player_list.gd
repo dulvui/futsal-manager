@@ -108,7 +108,7 @@ func _set_up_columns() -> void:
 	# general
 	var team_names: Callable = func(p: Player) -> String: return p.team
 	_add_column("general", "team", team_names)
-	var nationalities: Callable = func(p: Player) -> String: return Const.Nations.keys()[p.nation]
+	var nationalities: Callable = func(p: Player) -> String:return Config.world.continents.keys()[p.nation]
 	_add_column("general", "nation", nationalities)
 	var positions: Callable = func(p: Player) -> String: return Position.Type.keys()[p.position.type]
 	_add_column("general", "position", positions)

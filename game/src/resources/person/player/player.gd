@@ -38,7 +38,7 @@ func _init(
 	p_team_id: int = 0,
 	p_league: String = "",
 	p_surname: String = "",
-	p_nation: Const.Nations = Const.Nations.ITALY,
+	p_nation: String = "",
 	p_birth_date: Dictionary = Time.get_datetime_dict_from_system(),
 	p_form: Form = Form.Good,
 	p_morality: Morality = Morality.Good,

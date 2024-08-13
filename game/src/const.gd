@@ -4,7 +4,6 @@
 
 extends Node
 
-enum Nations { ITALY, SPAIN, ROMANIA }
 enum Gender { MALE, FEMALE, MIXED }
 
 # match engine

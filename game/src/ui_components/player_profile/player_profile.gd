@@ -52,7 +52,7 @@ func set_player(_player: Player) -> void:
 		+ "/"
 		+ str(player.birth_date.year)
 	)
-	foot.text = tr(Const.Nations.keys()[player.nation])
+	foot.text = Player.Foot.keys()[player.foot]
 	nationality.text = str(player.team)
 	team.text = str(player.foot)
 	nr.text = str(player.nr)

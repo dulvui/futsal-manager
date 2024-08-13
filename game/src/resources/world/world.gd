@@ -68,6 +68,12 @@ func get_team_by_id(team_id: int) -> Team:
 	printerr("no team with id " + str(team_id))
 	return null
 
+func get_all_nations() -> Array[Nation]:
+	var all_nations: Array[Nation] = []
+	for c: Continent in continents:
+		all_nations.append_array(c.nations)
+	return all_nations
+
 
 func get_all_leagues() -> Array[League]:
 	var leagues: Array[League] = []

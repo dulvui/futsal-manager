@@ -16,14 +16,14 @@ var active_team: Team
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
-	for nation: String in Const.Nations:
+	for nation: Nation in Config.world.get_all_nations():
 		var button: Button = Button.new()
 		button.text = nation
 		nations_container.add_child(button)
-		button.pressed.connect(_on_nation_select.bind(nation))
+		button.pressed.connect(_on_nation_select.bind(nation.name))
 
 	set_teams()
-	var first_league: League = Config.world.get_all_leagues().get_leagues_by_nation(0)[0]
+	var first_league: League = Config.world.get_all_leagues()[0]
 	active_league = first_league
 	active_team = first_league.teams[0]
 	team_profile.set_up(active_team)
@@ -35,11 +35,12 @@ func show_team(league: League, team: Team) -> void:
 	team_profile.set_team(active_team)
 
 
-func set_teams(nation: Const.Nations = 0) -> void:
+func set_teams(_nation: Nation = Config.world.get_all_nations()[0]) -> void:
 	for child: Node in team_list.get_children():
 		child.queue_free()
-
-	for league: League in Config.world.get_all_leagues().get_leagues_by_nation(nation):
+	
+	# TODO get leagues by continetn -> nation
+	for league: League in Config.world.get_all_leagues():
 		var league_label: Label = Label.new()
 		league_label.text = league.name
 		team_list.add_child(league_label)

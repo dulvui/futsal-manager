@@ -7,7 +7,7 @@ extends Person
 
 func _init(
 	p_id: int = IdUtil.next_id(IdUtil.Types.PRESIDENT),
-	p_nation: Const.Nations = Const.Nations.ITALY,
+	p_nation: String = "",
 	p_name: String = "",
 	p_surname: String = "",
 	p_birth_date: Dictionary = Time.get_datetime_dict_from_system(),

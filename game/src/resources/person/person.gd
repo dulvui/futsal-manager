@@ -14,7 +14,7 @@ enum Role {
 }
 
 @export var id: int
-@export var nation: Const.Nations
+@export var nation: String
 @export var name: String
 @export var surname: String
 @export var birth_date: Dictionary
@@ -24,7 +24,7 @@ enum Role {
 
 
 func _init(
-	p_nation: Const.Nations = Const.Nations.ITALY,
+	p_nation: String = "",
 	p_name: String = "",
 	p_surname: String = "",
 	p_birth_date: Dictionary = Time.get_datetime_dict_from_system(),

@@ -8,7 +8,6 @@ extends Resource
 @export var calendar: Calendar
 @export var id: int
 @export var table: Table
-@export var nation: Const.Nations
 @export var pyramid_level: int
 @export var name: String
 @export var teams: Array[Team]
@@ -16,14 +15,12 @@ extends Resource
 
 func _init(
 	p_id: int = IdUtil.next_id(IdUtil.Types.LEAGUE),
-	p_nation: Const.Nations = Const.Nations.ITALY,
 	p_pyramid_level: int = 1,
 	p_table: Table = Table.new(),
 	p_name: String = "",
 	p_teams: Array[Team] = [],
 ) -> void:
 	id = p_id
-	nation = p_nation
 	pyramid_level = p_pyramid_level
 	table = p_table
 	name = p_name
