@@ -13,7 +13,7 @@ func test() -> void:
 	var world: World = generator.generate_world()
 	assert(world.continents.size()  > 0)
 	
-	var reference_leagues: Leagues = generator.generate_leagues()
+	var reference_leagues: Array[League] = generator.generate_leagues()
 	
 	# test generations 10x time
 	for i: int in range(3):
@@ -21,7 +21,7 @@ func test() -> void:
 		
 		Config.reset_seed("TestSeed", 0)
 		
-		var test_leagues: Leagues = generator.generate_leagues()
+		var test_leagues: Array[League] = generator.generate_leagues()
 		assert(test_leagues.size() == reference_leagues.size())
 		assert(test_leagues[0].teams.size() == reference_leagues[0].teams.size())
 		assert(test_leagues[0].teams[0].players.size() == reference_leagues[0].teams[0].players.size())
