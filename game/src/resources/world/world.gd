@@ -5,6 +5,8 @@
 class_name World
 extends Resource
 
+const WORLD_CSV_PATH: String = "res://data/world/world.csv"
+
 @export var calendar: Calendar
 @export var continents: Array[Continent]
 @export var cup_clubs: Tournament
@@ -21,6 +23,32 @@ func _init(
 	continents = p_continents
 	cup_clubs = p_cup_clubs
 	cup_nations = p_cup_nations
+
+
+func init_from_csv() -> void:
+	var file: FileAccess = FileAccess.open(WORLD_CSV_PATH, FileAccess.READ)
+	
+	# get header row
+	# CONTINENT, NATION, CITY, POPULATION
+	var header_line: PackedStringArray = file.get_csv_line()
+	var headers: Array[String] = []
+	# transform to array and make lower case
+	for header: String in header_line:
+		headers.append(header.to_lower())
+	
+	while not file.eof_reached():
+		var line: PackedStringArray = file.get_csv_line()
+		if line.size() > 1:
+			var continent: String = line[0]
+			var nation: String = line[1]
+			var city: String = line[2]
+			#var population: int = int(line[3])
+			add_club(continent, nation, city)
+
+
+func initialize_calendars() -> void:
+	# TODO initialize all calendars
+	pass
 
 
 func add_club(continent_name: String, nation_name: String, team_name: String) -> void:
@@ -47,11 +75,6 @@ func add_club(continent_name: String, nation_name: String, team_name: String) ->
 	team.name = team_name
 	nation.leagues = []
 	nation.leagues.append(team)
-
-
-func initialize_calendars() -> void:
-	# TODO initialize all calendars
-	pass
 
 
 func random_results() -> void:

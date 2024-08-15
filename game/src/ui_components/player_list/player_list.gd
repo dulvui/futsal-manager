@@ -57,6 +57,7 @@ func _ready() -> void:
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
 		set_up()
 
+
 func set_up(p_active_team_id: int = -1) -> void:
 	active_team_id = p_active_team_id
 
@@ -83,7 +84,6 @@ func update_team(p_active_team_id: int) -> void:
 
 	_update_page_indicator()
 	_show_active_column()
-
 
 
 func _set_up_columns() -> void:

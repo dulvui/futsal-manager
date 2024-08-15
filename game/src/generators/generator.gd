@@ -6,7 +6,6 @@ extends Node
 
 const NAMES_DIR: String = "res://data/player_names/"
 const LEAGUES_DIR: String = "res://data/leagues/"
-const WORLD_CSV_PATH: String = "res://data/world/world.csv"
 
 # defines noise added to attribute factors
 const NOISE: int = 3
@@ -18,12 +17,6 @@ var names: Dictionary = {}
 var date: Dictionary
 var max_timestamp: int
 var min_timestamp: int
-
-func generate_world() -> World:
-	var world: World = read_world_from_csv()
-	# TODO generate leagues
-	# TODO generate tournaments
-	return world
 
 
 func generate_leagues() -> Array[League]:
@@ -498,26 +491,3 @@ func in_bounds_random(value: int, max_bound: int = Const.MAX_PRESTIGE) -> int:
 func in_bounds(value: int, max_bound: int = Const.MAX_PRESTIGE) -> int:
 	return maxi(mini(value, max_bound), 1)
 
-
-func read_world_from_csv() -> World:
-	var world: World = World.new()
-	
-	var file: FileAccess = FileAccess.open(WORLD_CSV_PATH, FileAccess.READ)
-	
-	# get header row
-	# CONTINENT, NATION, CITY, POPULATION
-	var header_line: PackedStringArray = file.get_csv_line()
-	var headers: Array[String] = []
-	# transform to array and make lower case
-	for header: String in header_line:
-		headers.append(header.to_lower())
-	
-	while not file.eof_reached():
-		var line: PackedStringArray = file.get_csv_line()
-		if line.size() > 1:
-			var continent: String = line[0]
-			var nation: String = line[1]
-			var city: String = line[2]
-			#var population: int = int(line[3])
-			world.add_club(continent, nation, city)
-	return world
