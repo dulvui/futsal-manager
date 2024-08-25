@@ -58,4 +58,3 @@ func random_results() -> void:
 				league.table.add_result(
 					matchz.home.id, result_match.home_goals, matchz.away.id, result_match.away_goals
 				)
-

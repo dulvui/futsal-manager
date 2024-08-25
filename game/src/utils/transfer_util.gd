@@ -4,8 +4,6 @@
 
 extends Node
 
-signal transfer_mail
-
 const REQUEST_FACTOR: int = 20
 
 

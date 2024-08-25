@@ -20,4 +20,3 @@ func _init(
 	prestige = p_prestige
 	
 	role = Person.Role.AGENT
-

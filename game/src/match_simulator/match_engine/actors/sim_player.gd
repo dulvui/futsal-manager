@@ -7,7 +7,7 @@ class_name SimPlayer
 signal interception
 signal short_pass
 signal shoot
-signal dribble
+#signal dribble
 signal pass_received
 
 enum State {

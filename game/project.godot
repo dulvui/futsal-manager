@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Futsal Manager"
 run/main_scene="res://src/screens/splash/splash_screen.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.3")
 boot_splash/bg_color=Color(1, 1, 1, 1)
 config/icon="res://icon.png"
 
@@ -42,12 +42,12 @@ gdscript/warnings/shadowed_variable_base_class=2
 gdscript/warnings/shadowed_global_identifier=2
 gdscript/warnings/unreachable_code=2
 gdscript/warnings/unreachable_pattern=2
-gdscript/warnings/property_used_as_function=2
-gdscript/warnings/constant_used_as_function=2
-gdscript/warnings/function_used_as_property=2
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/unsafe_property_access=2
 gdscript/warnings/unsafe_method_access=2
+gdscript/warnings/property_used_as_function=2
+gdscript/warnings/constant_used_as_function=2
+gdscript/warnings/function_used_as_property=2
 
 [display]
 

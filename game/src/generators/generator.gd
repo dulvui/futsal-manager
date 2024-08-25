@@ -490,4 +490,3 @@ func in_bounds_random(value: int, max_bound: int = Const.MAX_PRESTIGE) -> int:
 # returns value between 1 and 20
 func in_bounds(value: int, max_bound: int = Const.MAX_PRESTIGE) -> int:
 	return maxi(mini(value, max_bound), 1)
-
