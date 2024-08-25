@@ -19,7 +19,7 @@ const DEFAULT_SEED: String = "SuchDefaultSeed"
 @onready var seed_edit: LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
 
 var generation_seed: String = DEFAULT_SEED
-var temp_world: World
+
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
@@ -27,10 +27,10 @@ func _ready() -> void:
 	Config.save_states.new_temp_state()
 	Config.load_save_state()
 	
-	temp_world = World.new()
-	temp_world.init_from_csv()
+	Config.world = World.new()
+	Config.world.init_from_csv()
 
-	for nation: Nation in temp_world.get_all_nations():
+	for nation: Nation in Config.world.get_all_nations():
 		nations.add_item(nation.name)
 
 	for gender: String in Const.Gender:
@@ -79,7 +79,6 @@ func _on_continue_pressed() -> void:
 		)
 		Config.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
 		
-		# TODO use temp world here
-		Config.generate_leagues(generation_seed, gender_option.selected)
+		#Config.generate_leagues(generation_seed, gender_option.selected)
 		Config.manager = manager
 		get_tree().change_scene_to_file("res://src/screens/team_select/team_select.tscn")

@@ -18,9 +18,9 @@ func _ready() -> void:
 
 	for nation: Nation in Config.world.get_all_nations():
 		var button: Button = Button.new()
-		button.text = nation
+		button.text = nation.name
 		nations_container.add_child(button)
-		button.pressed.connect(_on_nation_select.bind(nation.name))
+		button.pressed.connect(_on_nation_select.bind(nation))
 
 	set_teams()
 	var first_league: League = Config.world.get_all_leagues()[0]
@@ -53,8 +53,8 @@ func set_teams(_nation: Nation = Config.world.get_all_nations()[0]) -> void:
 			team_list.add_child(team_button)
 
 
-func _on_nation_select(nation: String) -> void:
-	set_teams(Const.Nations.get(nation))
+func _on_nation_select(nation: Nation) -> void:
+	set_teams(nation)
 	var first_league: League = Config.world.get_all_leagues()[0]
 	show_team(first_league, first_league.teams[0])
 

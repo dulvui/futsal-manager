@@ -8,14 +8,13 @@ extends Resource
 @export var calendar: Calendar
 @export var name: String
 @export var leagues: Array[League]
-# TODO replace leagues with league array
-#@export var leagues: Array[League]
 @export var cup_clubs: Tournament
 
 #func _init(
-	#p_id: int = IdUtil.next_id(IdUtil.Types.TEAM),
+	#p_calendar: Calendar = Calendar.new(),
 	#p_name: String = "",
-	#p_team: Team = Team.new(),
+	#p_leagues: Team = Team.new(),
+	#p_cup_clubs: Team = Team.new(),
 #) -> void:
 	#id = p_id
 	#name = p_name

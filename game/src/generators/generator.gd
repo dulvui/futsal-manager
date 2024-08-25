@@ -43,9 +43,8 @@ func generate_leagues() -> Array[League]:
 
 	# create leagues. teams and players
 	for nation: Nation in Config.world.get_all_nations():
-		var leagues_file: FileAccess = FileAccess.open(
-			LEAGUES_DIR + nation.name.to_lower() + ".json", FileAccess.READ
-		)
+		var leagues_file_name: String = LEAGUES_DIR + nation.name.to_lower() + ".json"
+		var leagues_file: FileAccess = FileAccess.open(leagues_file_name + ".json", FileAccess.READ)
 		leagues_data[nation.name] = JSON.parse_string(leagues_file.get_as_text())
 		# used for prestige calculation, so that high leagues have better prestige
 		var pyramid_level: int = 1

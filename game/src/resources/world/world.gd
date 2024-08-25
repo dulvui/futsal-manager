@@ -46,11 +46,6 @@ func init_from_csv() -> void:
 			add_club(continent, nation, city)
 
 
-func initialize_calendars() -> void:
-	# TODO initialize all calendars
-	pass
-
-
 func add_club(continent_name: String, nation_name: String, team_name: String) -> void:
 	# setup continent, if not done yet
 	var continent: Continent
@@ -58,6 +53,7 @@ func add_club(continent_name: String, nation_name: String, team_name: String) ->
 	if continent_filter.size() == 0:
 		continent = Continent.new()
 		continent.name = continent_name
+		continents.append(continent)
 	else:
 		continent = continent_filter[0]
 	
@@ -67,14 +63,31 @@ func add_club(continent_name: String, nation_name: String, team_name: String) ->
 	if nation_filter.size() == 0:
 		nation = Nation.new()
 		nation.name = nation_name
+		continent.nations.append(nation)
 	else:
 		nation = nation_filter[0]
+	
+	# setup league, if note done yet or last league is full
+	var league: League
+	if nation.leagues.size() == 0 or nation.leagues[-1].teams.size() == 10:
+		league = League.new()
+		# TODO better league names
+		league.name = nation.name + " " + str(league.id)
+		league.pyramid_level = 1
+		nation.leagues.append(league)
+	else:
+		league = nation.leagues[-1]
 	
 	# add team
 	var team: Team = Team.new()
 	team.name = team_name
-	nation.leagues = []
-	nation.leagues.append(team)
+	league.add_team(team)
+
+
+
+func initialize_calendars() -> void:
+	# TODO initialize all calendars
+	pass
 
 
 func random_results() -> void:
@@ -90,6 +103,7 @@ func get_team_by_id(team_id: int) -> Team:
 				return t
 	printerr("no team with id " + str(team_id))
 	return null
+
 
 func get_all_nations() -> Array[Nation]:
 	var all_nations: Array[Nation] = []
