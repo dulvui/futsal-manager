@@ -28,7 +28,7 @@ func _ready() -> void:
 	Config.load_save_state()
 	
 	Config.world = World.new()
-	Config.world.init_from_csv()
+	Config.world.initialize()
 
 	for nation: Nation in Config.world.get_all_nations():
 		nations.add_item(nation.name)

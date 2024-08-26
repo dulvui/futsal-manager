@@ -61,7 +61,7 @@ func _ready() -> void:
 		matchz.home = Config.league.teams[0]
 		matchz.away = Config.league.teams[1]
 	else:
-		matchz = Config.calendar.get_next_match()
+		matchz = Config.world.calendar.get_next_match()
 
 	for team: Team in Config.league.teams:
 		if team.id == matchz.home.id:

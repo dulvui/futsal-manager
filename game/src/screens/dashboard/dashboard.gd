@@ -59,13 +59,13 @@ func _ready() -> void:
 
 	manager_label.text = Config.manager.get_full_name()
 	team_label.text = Config.team.name
-	date_label.text = Config.calendar.format_date()
+	date_label.text = Config.world.calendar.format_date()
 	
 	all_players_list.set_up()
 	player_list.set_up(Config.team.id)
 	formation.set_up(false)
 
-	if Config.calendar.is_match_day():
+	if Config.world.calendar.is_match_day():
 		continue_button.text = "START_MATCH"
 		match_ready = true
 		next_match_button.hide()
@@ -231,7 +231,7 @@ func _next_day() -> void:
 	if next_season:
 		Config.next_season()
 		return
-	if Config.calendar.is_season_finished():
+	if Config.world.calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		return
@@ -239,17 +239,17 @@ func _next_day() -> void:
 	# general setup
 	TransferUtil.update_day()
 	email.update_messages()
-	date_label.text = Config.calendar.format_date()
+	date_label.text = Config.world.calendar.format_date()
 
 	# config buttons
-	if Config.calendar.is_match_day():
+	if Config.world.calendar.is_match_day():
 		continue_button.text = "START_MATCH"
 		match_ready = true
 		next_match_button.disabled = true
 		next_match_button.hide()
 	else:
 		#simulate all other matches
-		for leagueConfig.world.get_all_leagues().random_results()
+		Config.world.random_results()
 
 	visual_calendar.set_up()
 

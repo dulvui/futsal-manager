@@ -5,8 +5,8 @@
 class_name ContractOffer
 extends Control
 
-signal cancel
-signal confirm
+#signal cancel
+#signal confirm
 
 const MAX_BUY_CLAUSE: int = 999999999
 

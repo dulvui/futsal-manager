@@ -19,13 +19,13 @@ var current_month: int
 
 
 func _ready() -> void:
-	current_month = Config.calendar.date.month
+	current_month = Config.world.calendar.date.month
 	set_up()
 
 
 func set_up() -> void:
 	set_up_days()
-	match_list.set_up(Config.calendar.day())
+	match_list.set_up(Config.world.calendar.day())
 
 
 func set_up_days() -> void:
@@ -36,21 +36,21 @@ func set_up_days() -> void:
 
 	# to start with monday, fill other days with transparent days
 	var monday_counter: int = 7
-	while Config.calendar.month(current_month).days[monday_counter].weekday != "MON":
+	while Config.world.calendar.month(current_month).days[monday_counter].weekday != "MON":
 		var calendar_day: VisualDay = VisualDayScene.instantiate()
 		days.add_child(calendar_day)
 		calendar_day.modulate = Color(0, 0, 0, 0)
 		monday_counter -= 1
 
 	# add days
-	for day: Day in Config.calendar.month(current_month).days:
+	for day: Day in Config.world.calendar.month(current_month).days:
 		var calendar_day: VisualDay = VisualDayScene.instantiate()
 		days.add_child(calendar_day)
 		calendar_day.set_up(day)
 		calendar_day.show_match_list.connect(_on_calendar_day_pressed.bind(day))
 
 		# make current day active
-		if day == Config.calendar.day():
+		if day == Config.world.calendar.day():
 			calendar_day.select()
 
 	page_label.text = Const.MONTH_STRINGS[current_month - 1]
@@ -75,5 +75,5 @@ func _on_Next_pressed() -> void:
 
 
 func _on_today_pressed() -> void:
-	current_month = Config.calendar.date.month
+	current_month = Config.world.calendar.date.month
 	set_up()

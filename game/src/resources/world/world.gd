@@ -25,6 +25,12 @@ func _init(
 	cup_nations = p_cup_nations
 
 
+func initialize() -> void: 
+	init_from_csv()
+	calendar = Calendar.new()
+	calendar.initialize()
+
+
 func init_from_csv() -> void:
 	var file: FileAccess = FileAccess.open(WORLD_CSV_PATH, FileAccess.READ)
 	

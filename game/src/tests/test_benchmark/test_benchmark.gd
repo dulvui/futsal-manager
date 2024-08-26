@@ -15,9 +15,6 @@ func test() -> void:
 	match_engine = MatchEngine.new()
 	var leagues: Array[League] = generator.generate_leagues()
 	
-	for l: League in leagues:
-		l.initialize_calendars()
-	
 	MatchMaker.inizialize_matches(leagues)
 	
 	# find next match day in calendars
@@ -28,5 +25,5 @@ func test() -> void:
 			league.calendar.next_day()
 			
 
-	leagues.random_results()
+	Config.world.random_results()
 	print("test: benchmark done.")

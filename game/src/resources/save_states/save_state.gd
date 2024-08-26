@@ -92,4 +92,4 @@ func save_metadata() -> void:
 		+ Config.league.name
 	)
 	meta_last_save = Time.get_datetime_dict_from_system()
-	meta_game_date = Config.calendar.date
+	meta_game_date = Config.world.calendar.date
