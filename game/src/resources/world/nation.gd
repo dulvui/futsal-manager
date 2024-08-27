@@ -20,6 +20,10 @@ extends Resource
 	#name = p_name
 	#team = p_team
 
+func initialize() -> void:
+	for league: League in leagues:
+		league.calendar.initialize()
+
 
 func add_league(league: League) -> void:
 	leagues.append(league)
@@ -39,11 +43,6 @@ func get_team_by_id(team_id: int) -> Team:
 			return found_team
 	print("ERROR: team not found with id: " + str(team_id))
 	return null
-
-
-func initialize_calendars() -> void:
-	for league: League in leagues:
-		league.calendar.initialize()
 
 
 func random_results() -> void:

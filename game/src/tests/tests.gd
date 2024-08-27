@@ -10,7 +10,6 @@ extends Node
 @onready var test_benchmark: TestBenchmark = $TestBenchmark
 
 
-
 func _ready() -> void:
 	print("Start test suite")
 	

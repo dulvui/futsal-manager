@@ -47,17 +47,19 @@ func init_from_csv() -> void:
 		if line.size() > 1:
 			var continent: String = line[0]
 			var nation: String = line[1]
-			var city: String = line[2]
-			#var population: int = int(line[3])
-			add_club(continent, nation, city)
+			var league: String = line[2]
+			var city: String = line[3]
+			print(city)
+			initialize_club(continent, nation,league, city)
 
 
-func add_club(continent_name: String, nation_name: String, team_name: String) -> void:
+func initialize_club(continent_name: String, nation_name: String, league_name: String, team_name: String) -> void:
 	# setup continent, if not done yet
 	var continent: Continent
 	var continent_filter: Array[Continent] = continents.filter(func(c: Continent) -> bool: return c.name == continent_name)
 	if continent_filter.size() == 0:
 		continent = Continent.new()
+		continent.initialize()
 		continent.name = continent_name
 		continents.append(continent)
 	else:
@@ -68,6 +70,7 @@ func add_club(continent_name: String, nation_name: String, team_name: String) ->
 	var nation_filter: Array[Nation] = continent.nations.filter(func(n: Nation) -> bool: return n.name == nation_name)
 	if nation_filter.size() == 0:
 		nation = Nation.new()
+		nation.initialize()
 		nation.name = nation_name
 		continent.nations.append(nation)
 	else:
@@ -75,20 +78,21 @@ func add_club(continent_name: String, nation_name: String, team_name: String) ->
 	
 	# setup league, if note done yet or last league is full
 	var league: League
-	if nation.leagues.size() == 0 or nation.leagues[-1].teams.size() == 10:
+	var league_filter: Array[League] = nation.leagues.filter(func(l: League) -> bool: return l.name == league_name)
+	if league_filter.size() == 0:
 		league = League.new()
-		# TODO better league names
-		league.name = nation.name + " " + str(league.id)
-		league.pyramid_level = 1
+		league.name = league_name
+		# could bea added direclty to csv
+		# with this code, leagues/teams need to be in pyramid level order
+		league.pyramid_level = nation.leagues.size() + 1
 		nation.leagues.append(league)
 	else:
-		league = nation.leagues[-1]
+		league = league_filter[0]
 	
 	# add team
 	var team: Team = Team.new()
 	team.name = team_name
 	league.add_team(team)
-
 
 
 func initialize_calendars() -> void:

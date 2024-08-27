@@ -163,13 +163,6 @@ func _load_resources() -> void:
 		transfers = Transfers.new()
 
 
-func generate_leagues(p_generation_seed: String, p_generation_gender: Const.Gender) -> void:
-	reset_seed(p_generation_seed, p_generation_gender)
-	var generator: Generator = Generator.new()
-	# TODO assign leagues to nations
-	generator.generate_leagues()
-
-
 func save_all_data() -> void:
 	save_active_state()
 	save_save_states()

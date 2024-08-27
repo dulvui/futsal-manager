@@ -27,8 +27,11 @@ func _ready() -> void:
 	Config.save_states.new_temp_state()
 	Config.load_save_state()
 	
-	Config.world = World.new()
-	Config.world.initialize()
+	# TODO use temp world, to not override active world
+	var generator: Generator = Generator.new()
+	Config.world = generator.generate_world()
+	
+	
 
 	for nation: Nation in Config.world.get_all_nations():
 		nations.add_item(nation.name)

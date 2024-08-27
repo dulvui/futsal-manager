@@ -12,12 +12,19 @@ extends Resource
 @export var cup_nations: Tournament
 
 
-#func _init(
-	#p_id: int = IdUtil.next_id(IdUtil.Types.TEAM),
-	#p_name: String = "",
-	#p_team: Team = Team.new(),
-#) -> void:
-	#id = p_id
-	#name = p_name
-	#team = p_team
+func _init(
+	p_calendar: Calendar = Calendar.new(),
+	p_name: String = "",
+	p_nations: Array[Nation] = [],
+	p_cup_clubs: Tournament = Tournament.new(),
+	p_cup_nations: Tournament = Tournament.new(),
+) -> void:
+	calendar = p_calendar
+	name = p_name
+	nations = p_nations
+	cup_clubs = p_cup_clubs
+	cup_nations = p_cup_nations
 
+
+func initialize() -> void:
+	calendar.initialize()

@@ -18,9 +18,23 @@ var date: Dictionary
 var max_timestamp: int
 var min_timestamp: int
 
+func generate_world() -> World:
+	load_person_names()
+	
+	var world: World = World.new()
+	world.initialize()
+	
+	# generate players
+	for c: Continent in world.continents:
+		for n: Nation in c.nations:
+			for l: League in n.leagues:
+				for t: Team in l.teams:
+					generate_players(n, l, t)
+	
+	return world
 
-func generate_leagues() -> Array[League]:
-	var leagues: Array[League] = []
+
+func generate_players(nation: Nation, league: League, team: Team) -> void:
 	# create date ranges
 	# starts from current year and subtracts min/max years
 	# youngest player can be 15 and oldest 45
@@ -33,61 +47,33 @@ func generate_leagues() -> Array[League]:
 	max_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 	max_date.year -= 30
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
-
-	# initialize names
-	for nation: Nation in Config.world.get_all_nations():
-		var names_file: FileAccess = FileAccess.open(
-			NAMES_DIR + nation.name.to_lower() + ".json", FileAccess.READ
+	
+	# create team
+	team.budget = Config.rng.randi_range(500000, 100000000)
+	team.salary_budget = Config.rng.randi_range(500000, 100000000)
+	team.colors = []
+	team.colors.append(
+		Color(
+			Config.rng.randf_range(0, 1),
+			Config.rng.randf_range(0, 1),
+			Config.rng.randf_range(0, 1)
 		)
-		names[nation.name.to_lower()] = JSON.parse_string(names_file.get_as_text())
+	)
+	team.colors.append(team.colors[0].inverted())
+	team.colors.append(
+		Color(
+			Config.rng.randf_range(0, 1),
+			Config.rng.randf_range(0, 1),
+			Config.rng.randf_range(0, 1)
+		)
+	)
+	
+	team.create_stadium(team.name + " Stadium", 1234, 1990)
+	
+	var temp_team_prestige: int = get_team_prestige(league.pyramid_level)
+	assign_players_to_team(team, league, nation, temp_team_prestige)
 
-	# create leagues. teams and players
-	for nation: Nation in Config.world.get_all_nations():
-		var leagues_file_name: String = LEAGUES_DIR + nation.name.to_lower() + ".json"
-		var leagues_file: FileAccess = FileAccess.open(leagues_file_name + ".json", FileAccess.READ)
-		leagues_data[nation.name] = JSON.parse_string(leagues_file.get_as_text())
-		# used for prestige calculation, so that high leagues have better prestige
-		var pyramid_level: int = 1
-
-		for l: Dictionary in leagues_data[nation.name]:
-			var league: League = League.new()
-			league.name = l.name
-			league.pyramid_level = pyramid_level
-			for t: String in l.teams:
-				var team: Team = Team.new()
-				team.name = t
-				team.budget = Config.rng.randi_range(500000, 100000000)
-				team.salary_budget = Config.rng.randi_range(500000, 100000000)
-				team.colors = []
-				team.colors.append(
-					Color(
-						Config.rng.randf_range(0, 1),
-						Config.rng.randf_range(0, 1),
-						Config.rng.randf_range(0, 1)
-					)
-				)
-				team.colors.append(team.colors[0].inverted())
-				team.colors.append(
-					Color(
-						Config.rng.randf_range(0, 1),
-						Config.rng.randf_range(0, 1),
-						Config.rng.randf_range(0, 1)
-					)
-				)
-
-				team.create_stadium(t + "Stadium", 1234, 1990)
-				
-
-				var temp_team_prestige: int = get_team_prestige(pyramid_level)
-				assign_players_to_team(team, league, nation, temp_team_prestige)
-
-				team.staff = create_staff(team.get_prestige(), nation, league.pyramid_level)
-				league.add_team(team)
-
-			leagues.append(league)
-			pyramid_level += 1
-
-	return leagues
+	team.staff = create_staff(team.get_prestige(), nation, league.pyramid_level)
 
 
 func assign_players_to_team(p_team: Team, p_league: League, p_nation: Nation, prestige: int) -> Team:
@@ -489,3 +475,11 @@ func in_bounds_random(value: int, max_bound: int = Const.MAX_PRESTIGE) -> int:
 # returns value between 1 and 20
 func in_bounds(value: int, max_bound: int = Const.MAX_PRESTIGE) -> int:
 	return maxi(mini(value, max_bound), 1)
+
+
+func load_person_names() -> void:
+	for nation: Nation in Config.world.get_all_nations():
+		var names_file: FileAccess = FileAccess.open(
+			NAMES_DIR + nation.name.to_lower() + ".json", FileAccess.READ
+		)
+		names[nation.name.to_lower()] = JSON.parse_string(names_file.get_as_text())

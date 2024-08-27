@@ -1,14 +1,91 @@
-CONTINENT,NATION,CITY,POPULATION
-europe,italy,rome,2600000
-europe,italy,milan,1250000
-europe,italy,naples,960000
-europe,italy,turin,870000
-europe,italy,palermo,660000
-europe,italy,genoa,580000
-europe,italy,bologna,370000
-europe,italy,florence,360000
-europe,italy,bari,315000
-europe,italy,catania,290000
-europe,spain,madrid,3400000
-europe,spain,barcelona,1.6
-south america,brazil,sao paolo,12400000
+CONTINENT,NATION,LEAGUE,CITY
+Europe,Italy,Serie a,Rome
+Europe,Italy,Serie a,Milan
+Europe,Italy,Serie a,Naples
+Europe,Italy,Serie a,Turin
+Europe,Italy,Serie a,Palermo
+Europe,Italy,Serie a,Genoa
+Europe,Italy,Serie a,Bologna
+Europe,Italy,Serie a,Florence
+Europe,Italy,Serie a,Bari
+Europe,Italy,Serie a,Catania
+Europe,Italy,Serie b,Bolzano
+Europe,Italy,Serie b,Trento
+Europe,Italy,Serie b,Verona
+Europe,Italy,Serie b,Palermo
+Europe,Italy,Serie b,Latina
+Europe,Italy,Serie b,Pisa
+Europe,Italy,Serie b,Livorno
+Europe,Italy,Serie b,Rovereto
+Europe,Italy,Serie b,Reggio Calabria
+Europe,Italy,Serie b,Messina
+Europe,Italy,Serie c1,Laives
+Europe,Italy,Serie c1,Brunico
+Europe,Italy,Serie c1,Salerno
+Europe,Italy,Serie c1,Monza
+Europe,Italy,Serie c1,Foggia
+Europe,Italy,Serie c1,Siracusa
+Europe,Italy,Serie c1,Ferrara
+Europe,Italy,Serie c1,Pescara
+Europe,Italy,Serie c1,Andria
+Europe,Italy,Serie c1,Lecce
+Europe,Italy,Serie c2,Udine
+Europe,Italy,Serie c2,Sassari
+Europe,Italy,Serie c2,Cesena
+Europe,Italy,Serie c2,Venezia
+Europe,Italy,Serie c2,Bergamo
+Europe,Italy,Serie c2,Ancona
+Europe,Italy,Serie c2,Ravenna
+Europe,Italy,Serie c2,Cesenatico
+Europe,Italy,Serie c2,Novara
+Europe,Italy,Serie c2,Arezzo
+Europe,Spain,Liga 1,Barcelona
+Europe,Spain,Liga 1,Madrid
+Europe,Spain,Liga 1,Valencia
+Europe,Spain,Liga 1,Seville
+Europe,Spain,Liga 1,Bilbao
+Europe,Spain,Liga 1,Málaga
+Europe,Spain,Liga 1,Asturias
+Europe,Spain,Liga 1,Alicante
+Europe,Spain,Liga 1,Las Palmas
+Europe,Spain,Liga 1,Zaragoza
+Europe,Spain,Liga 2,Murcia
+Europe,Spain,Liga 2,Santa Cruz de Tenerife
+Europe,Spain,Liga 2,Granada
+Europe,Spain,Liga 2,Palma de Mallorca
+Europe,Spain,Liga 2,Vigo
+Europe,Spain,Liga 2,Cartagena
+Europe,Spain,Liga 2,Cádiz
+Europe,Spain,Liga 2,San Sebastián
+Europe,Spain,Liga 2,A Coruña
+Europe,Spain,Liga 2,Valladolid
+Europe,Spain,Liga 3,Tarragona
+Europe,Spain,Liga 3,Córdoba
+Europe,Spain,Liga 3,Pamplona
+Europe,Spain,Liga 3,Castellón de la Plana
+Europe,Spain,Liga 3,Bay of Santander
+Europe,Spain,Liga 3,Alzira-Xàtiva
+Europe,Spain,Liga 3,Vitoria-Gasteiz
+Europe,Spain,Liga 3,Algeciras-La Línea
+Europe,Spain,Liga 3,Huelva
+Europe,Spain,Liga 3,Almería
+South America,Brazil,Campeonato 1,São Paulo
+South America,Brazil,Campeonato 1,Rio de Janeiro
+South America,Brazil,Campeonato 1,Brasília
+South America,Brazil,Campeonato 1,Fortaleza
+South America,Brazil,Campeonato 1,Salvador
+South America,Brazil,Campeonato 1,Belo Horizonte
+South America,Brazil,Campeonato 1,Manaus
+South America,Brazil,Campeonato 1,Curitiba
+South America,Brazil,Campeonato 1,Recife
+South America,Brazil,Campeonato 1,Goiânia
+South America,Brazil,Campeonato 2,Porto Alegre
+South America,Brazil,Campeonato 2,Belém
+South America,Brazil,Campeonato 2,Guarulhos
+South America,Brazil,Campeonato 2,Campinas
+South America,Brazil,Campeonato 2,São Luís
+South America,Brazil,Campeonato 2,Maceió
+South America,Brazil,Campeonato 2,Campo Grande
+South America,Brazil,Campeonato 2,São Gonçalo
+South America,Brazil,Campeonato 2,Teresina
+South America,Brazil,Campeonato 2,João Pessoa
