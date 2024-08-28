@@ -16,11 +16,15 @@ var active_team: Team
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
-	for nation: Nation in Config.world.get_all_nations():
-		var button: Button = Button.new()
-		button.text = nation.name
-		nations_container.add_child(button)
-		button.pressed.connect(_on_nation_select.bind(nation))
+	for continent: Continent in Config.world.continents:
+		var continent_label: Label = Label.new()
+		continent_label.text = continent.name
+		nations_container.add_child(continent_label)
+		for nation: Nation in continent.nations:
+			var button: Button = Button.new()
+			button.text = nation.name
+			nations_container.add_child(button)
+			button.pressed.connect(_on_nation_select.bind(nation))
 
 	set_teams()
 	var first_league: League = Config.world.get_all_leagues()[0]

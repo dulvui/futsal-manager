@@ -1,4 +1,64 @@
 CONTINENT,NATION,LEAGUE,CITY
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 1,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 2,
+Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 3,
+Europe,Spain,Liga 1,Barcelona
+Europe,Spain,Liga 1,Madrid
+Europe,Spain,Liga 1,Valencia
+Europe,Spain,Liga 1,Seville
+Europe,Spain,Liga 1,Bilbao
+Europe,Spain,Liga 1,Málaga
+Europe,Spain,Liga 1,Asturias
+Europe,Spain,Liga 1,Alicante
+Europe,Spain,Liga 1,Las Palmas
+Europe,Spain,Liga 1,Zaragoza
+Europe,Spain,Liga 2,Murcia
+Europe,Spain,Liga 2,Santa Cruz de Tenerife
+Europe,Spain,Liga 2,Granada
+Europe,Spain,Liga 2,Palma de Mallorca
+Europe,Spain,Liga 2,Vigo
+Europe,Spain,Liga 2,Cartagena
+Europe,Spain,Liga 2,Cádiz
+Europe,Spain,Liga 2,San Sebastián
+Europe,Spain,Liga 2,A Coruña
+Europe,Spain,Liga 2,Valladolid
+Europe,Spain,Liga 3,Tarragona
+Europe,Spain,Liga 3,Córdoba
+Europe,Spain,Liga 3,Pamplona
+Europe,Spain,Liga 3,Castellón de la Plana
+Europe,Spain,Liga 3,Bay of Santander
+Europe,Spain,Liga 3,Alzira-Xàtiva
+Europe,Spain,Liga 3,Vitoria-Gasteiz
+Europe,Spain,Liga 3,Algeciras-La Línea
+Europe,Spain,Liga 3,Huelva
+Europe,Spain,Liga 3,Almería
 Europe,Italy,Serie a,Rome
 Europe,Italy,Serie a,Milan
 Europe,Italy,Serie a,Naples
@@ -39,36 +99,36 @@ Europe,Italy,Serie c2,Ravenna
 Europe,Italy,Serie c2,Cesenatico
 Europe,Italy,Serie c2,Novara
 Europe,Italy,Serie c2,Arezzo
-Europe,Spain,Liga 1,Barcelona
-Europe,Spain,Liga 1,Madrid
-Europe,Spain,Liga 1,Valencia
-Europe,Spain,Liga 1,Seville
-Europe,Spain,Liga 1,Bilbao
-Europe,Spain,Liga 1,Málaga
-Europe,Spain,Liga 1,Asturias
-Europe,Spain,Liga 1,Alicante
-Europe,Spain,Liga 1,Las Palmas
-Europe,Spain,Liga 1,Zaragoza
-Europe,Spain,Liga 2,Murcia
-Europe,Spain,Liga 2,Santa Cruz de Tenerife
-Europe,Spain,Liga 2,Granada
-Europe,Spain,Liga 2,Palma de Mallorca
-Europe,Spain,Liga 2,Vigo
-Europe,Spain,Liga 2,Cartagena
-Europe,Spain,Liga 2,Cádiz
-Europe,Spain,Liga 2,San Sebastián
-Europe,Spain,Liga 2,A Coruña
-Europe,Spain,Liga 2,Valladolid
-Europe,Spain,Liga 3,Tarragona
-Europe,Spain,Liga 3,Córdoba
-Europe,Spain,Liga 3,Pamplona
-Europe,Spain,Liga 3,Castellón de la Plana
-Europe,Spain,Liga 3,Bay of Santander
-Europe,Spain,Liga 3,Alzira-Xàtiva
-Europe,Spain,Liga 3,Vitoria-Gasteiz
-Europe,Spain,Liga 3,Algeciras-La Línea
-Europe,Spain,Liga 3,Huelva
-Europe,Spain,Liga 3,Almería
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat a,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat b,
+Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat c1,
 South America,Brazil,Campeonato 1,São Paulo
 South America,Brazil,Campeonato 1,Rio de Janeiro
 South America,Brazil,Campeonato 1,Brasília
@@ -89,3 +149,43 @@ South America,Brazil,Campeonato 2,Campo Grande
 South America,Brazil,Campeonato 2,São Gonçalo
 South America,Brazil,Campeonato 2,Teresina
 South America,Brazil,Campeonato 2,João Pessoa
+South America,Brazil,Campeonato 3,São Bernardo do Campo
+South America,Brazil,Campeonato 3,
+South America,Brazil,Campeonato 3,
+South America,Brazil,Campeonato 3,
+South America,Brazil,Campeonato 3,
+South America,Brazil,Campeonato 3,
+South America,Brazil,Campeonato 3,
+South America,Brazil,Campeonato 3,
+South America,Brazil,Campeonato 3,
+South America,Brazil,Campeonato 3,
+South America,Argentina,Division 1,
+South America,Argentina,Division 1,
+South America,Argentina,Division 1,
+South America,Argentina,Division 1,
+South America,Argentina,Division 1,
+South America,Argentina,Division 1,
+South America,Argentina,Division 1,
+South America,Argentina,Division 1,
+South America,Argentina,Division 1,
+South America,Argentina,Division 1,
+South America,Argentina,Division 2,
+South America,Argentina,Division 2,
+South America,Argentina,Division 2,
+South America,Argentina,Division 2,
+South America,Argentina,Division 2,
+South America,Argentina,Division 2,
+South America,Argentina,Division 2,
+South America,Argentina,Division 2,
+South America,Argentina,Division 2,
+South America,Argentina,Division 2,
+South America,Argentina,Division 3,
+South America,Argentina,Division 3,
+South America,Argentina,Division 3,
+South America,Argentina,Division 3,
+South America,Argentina,Division 3,
+South America,Argentina,Division 3,
+South America,Argentina,Division 3,
+South America,Argentina,Division 3,
+South America,Argentina,Division 3,
+South America,Argentina,Division 3,
