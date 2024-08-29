@@ -1,34 +1,34 @@
 CONTINENT,NATION,LEAGUE,CITY
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 1,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 2,
-Europe,Portugal,Liga Futsal 3,
-Europe,Portugal,Liga Futsal 3,
-Europe,Portugal,Liga Futsal 3,
-Europe,Portugal,Liga Futsal 3,
-Europe,Portugal,Liga Futsal 3,
-Europe,Portugal,Liga Futsal 3,
-Europe,Portugal,Liga Futsal 3,
-Europe,Portugal,Liga Futsal 3,
-Europe,Portugal,Liga Futsal 3,
-Europe,Portugal,Liga Futsal 3,
+Europe,Portugal,Liga Futsal 1,Lisbon
+Europe,Portugal,Liga Futsal 1,Porto
+Europe,Portugal,Liga Futsal 1,Vila Nova de Gaia
+Europe,Portugal,Liga Futsal 1,Amadora
+Europe,Portugal,Liga Futsal 1,Braga
+Europe,Portugal,Liga Futsal 1,Coimbra
+Europe,Portugal,Liga Futsal 1,Funchal
+Europe,Portugal,Liga Futsal 1,Setúbal
+Europe,Portugal,Liga Futsal 1,Almada
+Europe,Portugal,Liga Futsal 1,Agualva-Cacém
+Europe,Portugal,Liga Futsal 2,Queluz
+Europe,Portugal,Liga Futsal 2,Rio Tinto
+Europe,Portugal,Liga Futsal 2,Barreiro
+Europe,Portugal,Liga Futsal 2,Aveiro
+Europe,Portugal,Liga Futsal 2,Viseu
+Europe,Portugal,Liga Futsal 2,Odivelas
+Europe,Portugal,Liga Futsal 2,Guimarães
+Europe,Portugal,Liga Futsal 2,Leiria
+Europe,Portugal,Liga Futsal 2,Faro
+Europe,Portugal,Liga Futsal 2,Matosinhos
+Europe,Portugal,Liga Futsal 3,Loures
+Europe,Portugal,Liga Futsal 3,Portimão
+Europe,Portugal,Liga Futsal 3,Póvoa de Varzim
+Europe,Portugal,Liga Futsal 3,Amora
+Europe,Portugal,Liga Futsal 3,Maia
+Europe,Portugal,Liga Futsal 3,Évora
+Europe,Portugal,Liga Futsal 3,Montijo
+Europe,Portugal,Liga Futsal 3,Ponta Delgada
+Europe,Portugal,Liga Futsal 3,Santa Maria da Feira
+Europe,Portugal,Liga Futsal 3,Ermesinde
 Europe,Spain,Liga 1,Barcelona
 Europe,Spain,Liga 1,Madrid
 Europe,Spain,Liga 1,Valencia
@@ -99,36 +99,36 @@ Europe,Italy,Serie c2,Ravenna
 Europe,Italy,Serie c2,Cesenatico
 Europe,Italy,Serie c2,Novara
 Europe,Italy,Serie c2,Arezzo
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat a,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat b,
-Europe,Romania,Campeonat c1,
-Europe,Romania,Campeonat c1,
-Europe,Romania,Campeonat c1,
-Europe,Romania,Campeonat c1,
-Europe,Romania,Campeonat c1,
-Europe,Romania,Campeonat c1,
-Europe,Romania,Campeonat c1,
-Europe,Romania,Campeonat c1,
-Europe,Romania,Campeonat c1,
-Europe,Romania,Campeonat c1,
+Europe,Romania,Campeonat a,Bucharest
+Europe,Romania,Campeonat a,Cluj-Napoca
+Europe,Romania,Campeonat a,Iași
+Europe,Romania,Campeonat a,Constanța
+Europe,Romania,Campeonat a,Timișoara
+Europe,Romania,Campeonat a,Brașov
+Europe,Romania,Campeonat a,Craiova
+Europe,Romania,Campeonat a,Galați
+Europe,Romania,Campeonat a,Oradea
+Europe,Romania,Campeonat a,Ploiești
+Europe,Romania,Campeonat b,Brăila
+Europe,Romania,Campeonat b,Arad
+Europe,Romania,Campeonat b,Pitești
+Europe,Romania,Campeonat b,Bacău
+Europe,Romania,Campeonat b,Sibiu
+Europe,Romania,Campeonat b,Târgu Mureș
+Europe,Romania,Campeonat b,Baia Mare
+Europe,Romania,Campeonat b,Buzău
+Europe,Romania,Campeonat b,Râmnicu Vâlcea
+Europe,Romania,Campeonat b,Satu Mare
+Europe,Romania,Campeonat c1,Botoșani
+Europe,Romania,Campeonat c1,Suceava
+Europe,Romania,Campeonat c1,Drobeta-Turnu Severin
+Europe,Romania,Campeonat c1,Piatra Neamț
+Europe,Romania,Campeonat c1,Bistrița
+Europe,Romania,Campeonat c1,Târgu Jiu
+Europe,Romania,Campeonat c1,Târgoviște
+Europe,Romania,Campeonat c1,Focșani
+Europe,Romania,Campeonat c1,Tulcea
+Europe,Romania,Campeonat c1,Alba Iulia
 South America,Brazil,Campeonato 1,São Paulo
 South America,Brazil,Campeonato 1,Rio de Janeiro
 South America,Brazil,Campeonato 1,Brasília
@@ -150,42 +150,42 @@ South America,Brazil,Campeonato 2,São Gonçalo
 South America,Brazil,Campeonato 2,Teresina
 South America,Brazil,Campeonato 2,João Pessoa
 South America,Brazil,Campeonato 3,São Bernardo do Campo
-South America,Brazil,Campeonato 3,
-South America,Brazil,Campeonato 3,
-South America,Brazil,Campeonato 3,
-South America,Brazil,Campeonato 3,
-South America,Brazil,Campeonato 3,
-South America,Brazil,Campeonato 3,
-South America,Brazil,Campeonato 3,
-South America,Brazil,Campeonato 3,
-South America,Brazil,Campeonato 3,
-South America,Argentina,Division 1,
-South America,Argentina,Division 1,
-South America,Argentina,Division 1,
-South America,Argentina,Division 1,
-South America,Argentina,Division 1,
-South America,Argentina,Division 1,
-South America,Argentina,Division 1,
-South America,Argentina,Division 1,
-South America,Argentina,Division 1,
-South America,Argentina,Division 1,
-South America,Argentina,Division 2,
-South America,Argentina,Division 2,
-South America,Argentina,Division 2,
-South America,Argentina,Division 2,
-South America,Argentina,Division 2,
-South America,Argentina,Division 2,
-South America,Argentina,Division 2,
-South America,Argentina,Division 2,
-South America,Argentina,Division 2,
-South America,Argentina,Division 2,
-South America,Argentina,Division 3,
-South America,Argentina,Division 3,
-South America,Argentina,Division 3,
-South America,Argentina,Division 3,
-South America,Argentina,Division 3,
-South America,Argentina,Division 3,
-South America,Argentina,Division 3,
-South America,Argentina,Division 3,
-South America,Argentina,Division 3,
-South America,Argentina,Division 3,
+South America,Brazil,Campeonato 3,Duque de Caxias
+South America,Brazil,Campeonato 3,Nova Iguaçu
+South America,Brazil,Campeonato 3,Natal
+South America,Brazil,Campeonato 3,Santo André
+South America,Brazil,Campeonato 3,Osasco
+South America,Brazil,Campeonato 3,Sorocaba
+South America,Brazil,Campeonato 3,Uberlândia
+South America,Brazil,Campeonato 3,Ribeirão Preto
+South America,Brazil,Campeonato 3,São José dos Campos
+South America,Argentina,Division 1,Buenos Aires
+South America,Argentina,Division 1,Córdoba
+South America,Argentina,Division 1,Rosario
+South America,Argentina,Division 1,La Plata
+South America,Argentina,Division 1,Mar del Plata
+South America,Argentina,Division 1,San Miguel de Tucumán
+South America,Argentina,Division 1,Salta
+South America,Argentina,Division 1,Santa Fe de la Vera Cruz
+South America,Argentina,Division 1,Vicente López Partido
+South America,Argentina,Division 1,Corrientes
+South America,Argentina,Division 2,Pilar
+South America,Argentina,Division 2,Bahía Blanca
+South America,Argentina,Division 2,Resistencia
+South America,Argentina,Division 2,Posadas
+South America,Argentina,Division 2,San Salvador de Jujuy
+South America,Argentina,Division 2,Santiago del Estero
+South America,Argentina,Division 2,Paraná
+South America,Argentina,Division 2,Merlo
+South America,Argentina,Division 2,Neuquén
+South America,Argentina,Division 2,Quilmes
+South America,Argentina,Division 3,Banfield
+South America,Argentina,Division 3,Formosa
+South America,Argentina,Division 3,José C. Paz
+South America,Argentina,Division 3,Lanús
+South America,Argentina,Division 3,Godoy Cruz
+South America,Argentina,Division 3,Las Heras
+South America,Argentina,Division 3,La Rioja
+South America,Argentina,Division 3,Gregorio de Laferrère
+South America,Argentina,Division 3,Comodoro Rivadavia
+South America,Argentina,Division 3,San Luis
