@@ -39,12 +39,11 @@ func show_team(league: League, team: Team) -> void:
 	team_profile.set_team(active_team)
 
 
-func set_teams(_nation: Nation = Config.world.get_all_nations()[0]) -> void:
+func set_teams(p_nation: Nation = Config.world.get_all_nations()[0]) -> void:
 	for child: Node in team_list.get_children():
 		child.queue_free()
 	
-	# TODO get leagues by continetn -> nation
-	for league: League in Config.world.get_all_leagues():
+	for league: League in p_nation.leagues:
 		var league_label: Label = Label.new()
 		league_label.text = league.name
 		team_list.add_child(league_label)
@@ -59,7 +58,7 @@ func set_teams(_nation: Nation = Config.world.get_all_nations()[0]) -> void:
 
 func _on_nation_select(nation: Nation) -> void:
 	set_teams(nation)
-	var first_league: League = Config.world.get_all_leagues()[0]
+	var first_league: League = nation.leagues[0]
 	show_team(first_league, first_league.teams[0])
 
 
