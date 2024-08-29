@@ -17,20 +17,19 @@ var names: Dictionary = {}
 var date: Dictionary
 var max_timestamp: int
 var min_timestamp: int
+var world: World
 
 func generate_world() -> World:
-	load_person_names()
-	
-	var world: World = World.new()
+	world = World.new()
 	world.initialize()
 	
 	# generate players
+	load_person_names()
 	for c: Continent in world.continents:
 		for n: Nation in c.nations:
 			for l: League in n.leagues:
 				for t: Team in l.teams:
 					generate_players(n, l, t)
-	
 	return world
 
 
@@ -316,7 +315,7 @@ func get_person_surname(nation: Nation) -> String:
 	# 10% change of having random nation's surname
 	var different_nation_factor: int = Config.rng.randi() % 100
 	if different_nation_factor > 90:
-		nation = Config.pick_random(Config.world.get_all_nations())
+		nation = Config.pick_random(world.get_all_nations())
 	
 	var nation_string: String = nation.name.to_lower()
 	
@@ -455,7 +454,7 @@ func get_random_nationality(
 	# (100 - prestige)% given nation, prestige% random nation
 	# with prestige, lower division teams have less players from other nations
 	if Config.rng.randi_range(1, 100) > 100 - (prestige * 2 / pyramid_level):
-		return Config.world.get_all_nations()[Config.rng.randi_range(0, Config.world.get_all_nations().size() - 1)]
+		return world.get_all_nations()[Config.rng.randi_range(0, world.get_all_nations().size() - 1)]
 	return nation
 
 
@@ -478,7 +477,7 @@ func in_bounds(value: int, max_bound: int = Const.MAX_PRESTIGE) -> int:
 
 
 func load_person_names() -> void:
-	for nation: Nation in Config.world.get_all_nations():
+	for nation: Nation in world.get_all_nations():
 		var names_file: FileAccess = FileAccess.open(
 			NAMES_DIR + nation.name.to_lower() + ".json", FileAccess.READ
 		)

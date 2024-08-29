@@ -49,11 +49,10 @@ func init_from_csv() -> void:
 			var nation: String = line[1]
 			var league: String = line[2]
 			var city: String = line[3]
-			print(city)
-			initialize_club(continent, nation,league, city)
+			initialize_city(continent, nation,league, city)
 
 
-func initialize_club(continent_name: String, nation_name: String, league_name: String, team_name: String) -> void:
+func initialize_city(continent_name: String, nation_name: String, league_name: String, team_name: String) -> void:
 	# setup continent, if not done yet
 	var continent: Continent
 	var continent_filter: Array[Continent] = continents.filter(func(c: Continent) -> bool: return c.name == continent_name)

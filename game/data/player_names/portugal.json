@@ -1,5 +1,5 @@
 {
-    first_names_male: [
+    "first_names_male": [
         "Afonso",
         "Alexandre",
         "Álvaro",
@@ -101,7 +101,7 @@
         "Wilson",
         "Xavier"
     ],
-    first_names_female: [
+    "first_names_female": [
         "Adriana",
         "Alexandra",
         "Alice",
@@ -204,7 +204,7 @@
         "Yara",
         "Yasmin"
     ],
-    last_names: [
+    "last_names": [
         "Abreu",
         "Almeida",
         "Alves",
