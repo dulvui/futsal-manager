@@ -9,16 +9,22 @@ extends Resource
 @export var name: String
 @export var leagues: Array[League]
 @export var cup_clubs: Tournament
+@export var team: Team
 
-#func _init(
-	#p_calendar: Calendar = Calendar.new(),
-	#p_name: String = "",
-	#p_leagues: Team = Team.new(),
-	#p_cup_clubs: Team = Team.new(),
-#) -> void:
-	#id = p_id
-	#name = p_name
-	#team = p_team
+
+func _init(
+	p_calendar: Calendar = Calendar.new(),
+	p_name: String = "",
+	p_leagues: Array[League] = [],
+	p_cup_clubs: Tournament = Tournament.new(),
+	p_team: Team = Team.new(),
+) -> void:
+	calendar = p_calendar
+	name = p_name
+	leagues = p_leagues
+	cup_clubs = p_cup_clubs
+	team = p_team
+
 
 func initialize() -> void:
 	for league: League in leagues:

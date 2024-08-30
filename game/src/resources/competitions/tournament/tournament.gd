@@ -10,4 +10,17 @@ extends Resource
 @export var calendar: Calendar
 @export var pyramid_level: int
 @export var name: String
-@export var group_stage: String
+
+
+func _init(
+	p_id: int = -1,
+	p_table: Table = Table.new(),
+	p_calendar: Calendar = Calendar.new(),
+	p_pyramid_level: int = -1,
+	p_name: String = "",
+) -> void:
+	id = p_id
+	table = p_table
+	calendar = p_calendar
+	pyramid_level = p_pyramid_level
+	name = p_name
