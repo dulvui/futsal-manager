@@ -14,6 +14,9 @@ var language: String
 var currency: int
 var theme_index: int
 
+# .res for binary/compressed resource data
+# .tres for text resource data
+var res_suffix: String = ".tres"
 # save states
 var save_states: SaveStates
 
@@ -54,6 +57,13 @@ func _ready() -> void:
 	print("version " + Config.VERSION)
 	_load_config()
 	load_save_state()
+	_load_resources()
+	_set_up_rngs()
+	# assign references after resources are loaded
+	if world:
+		team = world.get_active_team()
+		league = world.get_active_league()
+		manager = team.staff.manager
 	Config.set_lang(language)
 
 
@@ -68,9 +78,9 @@ func _load_config() -> void:
 	language = config.get_value("settings", "language", "")
 
 	# save states
-	if ResourceLoader.exists("user://save_states.tres"):
-		print("loading user://save_states.tres")
-		save_states = ResourceLoader.load("user://save_states.tres")
+	if ResourceLoader.exists("user://save_states" + res_suffix):
+		print("loading user://save_states" + res_suffix)
+		save_states = ResourceLoader.load("user://save_states" + res_suffix)
 	else:
 		save_states = SaveStates.new()
 
@@ -85,8 +95,6 @@ func load_save_state() -> void:
 		generation_seed = save_sate.generation_seed
 		generation_state = save_sate.generation_state
 		generation_gender = save_sate.generation_gender
-		_load_resources()
-		_set_up_rngs()
 
 
 func save_active_state() -> void:
@@ -101,14 +109,14 @@ func save_active_state() -> void:
 
 	save_sate.save_metadata()
 
-	ResourceSaver.save(world, save_states.get_active_path("world.tres"))
-	ResourceSaver.save(inbox, save_states.get_active_path("inbox.tres"))
-	ResourceSaver.save(transfers, save_states.get_active_path("transfers.tres"))
-	ResourceSaver.save(save_states, "user://save_states.tres")
+	ResourceSaver.save(world, save_states.get_active_path("world" + res_suffix))
+	ResourceSaver.save(inbox, save_states.get_active_path("inbox" + res_suffix))
+	ResourceSaver.save(transfers, save_states.get_active_path("transfers" + res_suffix))
+	ResourceSaver.save(save_states, "user://save_states" + res_suffix)
 
 
 func save_save_states() -> void:
-	ResourceSaver.save(save_states, "user://save_states.tres")
+	ResourceSaver.save(save_states, "user://save_states" + res_suffix)
 
 
 func _set_up_rngs() -> void:
@@ -140,21 +148,17 @@ func save_config() -> void:
 
 
 func _load_resources() -> void:
-	if ResourceLoader.exists(save_states.get_active_path("world.tres")):
-		print("loading user://world.tres")
-		world = ResourceLoader.load(save_states.get_active_path("world.tres"))
-		team = world.get_active_team()
-		league = world.get_active_league()
-		manager = team.staff.manager
-		
-	if ResourceLoader.exists(save_states.get_active_path("inbox.tres")):
-		print("loading user://inbox.tres")
-		inbox = ResourceLoader.load(save_states.get_active_path("inbox.tres"))
+	if ResourceLoader.exists(save_states.get_active_path("world" + res_suffix)):
+		print("loading user://world" + res_suffix)
+		world = ResourceLoader.load(save_states.get_active_path("world" + res_suffix))
+	if ResourceLoader.exists(save_states.get_active_path("inbox" + res_suffix)):
+		print("loading user://inbox" + res_suffix)
+		inbox = ResourceLoader.load(save_states.get_active_path("inbox" + res_suffix))
 	else:
 		inbox = Inbox.new()
-	if ResourceLoader.exists(save_states.get_active_path("transfers.tres")):
-		print("loading user://transfers.tres")
-		transfers = ResourceLoader.load(save_states.get_active_path("transfers.tres"))
+	if ResourceLoader.exists(save_states.get_active_path("transfers" + res_suffix)):
+		print("loading user://transfers" + res_suffix)
+		transfers = ResourceLoader.load(save_states.get_active_path("transfers" + res_suffix))
 	else:
 		transfers = Transfers.new()
 
