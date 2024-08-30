@@ -12,17 +12,21 @@ const WORLD_CSV_PATH: String = "res://data/world/world.csv"
 @export var cup_clubs: Tournament
 @export var cup_nations: Tournament
 
+@export var active_team_id: int
+
 
 func _init(
 	p_calendar: Calendar = Calendar.new(),
 	p_continents: Array[Continent] = [],
 	p_cup_clubs: Tournament = Tournament.new(),
 	p_cup_nations: Tournament = Tournament.new(),
+	p_active_team_id: int = -1,
 ) -> void:
 	calendar = p_calendar
 	continents = p_continents
 	cup_clubs = p_cup_clubs
 	cup_nations = p_cup_nations
+	active_team_id = p_active_team_id
 
 
 func initialize() -> void: 
@@ -103,6 +107,19 @@ func random_results() -> void:
 	for c: Continent in Config.world.continents:
 		for n: Nation in c.nations:
 			n.random_results()
+
+
+func get_active_team() -> Team:
+	return get_team_by_id(active_team_id)
+
+
+func get_active_league() -> League:
+	for l: League in get_all_leagues():
+		for t: Team in l.teams:
+			if t.id == active_team_id:
+				return l
+	printerr("no league/team with id " + str(active_team_id))
+	return null
 
 
 func get_team_by_id(team_id: int) -> Team:

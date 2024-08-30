@@ -39,7 +39,6 @@ var world: World
 # active resources references
 var team: Team
 var league: League
-var tournaments: Array[Tournament]
 var manager: Manager
 
 var calendar: Calendar
@@ -104,9 +103,8 @@ func save_active_state() -> void:
 
 	ResourceSaver.save(world, save_states.get_active_path("world.tres"))
 	ResourceSaver.save(inbox, save_states.get_active_path("inbox.tres"))
-	ResourceSaver.save(team, save_states.get_active_path("team.tres"))
-	ResourceSaver.save(manager, save_states.get_active_path("manager.tres"))
 	ResourceSaver.save(transfers, save_states.get_active_path("transfers.tres"))
+	ResourceSaver.save(save_states, "user://save_states.tres")
 
 
 func save_save_states() -> void:
@@ -143,14 +141,12 @@ func save_config() -> void:
 
 func _load_resources() -> void:
 	if ResourceLoader.exists(save_states.get_active_path("world.tres")):
-		print("loading user://leagues.tres")
+		print("loading user://world.tres")
 		world = ResourceLoader.load(save_states.get_active_path("world.tres"))
-	if ResourceLoader.exists(save_states.get_active_path("team.tres")):
-		print("loading user://team.tres")
-		team = ResourceLoader.load(save_states.get_active_path("team.tres"))
-	if ResourceLoader.exists(save_states.get_active_path("manager.tres")):
-		print("loading user://manager.tres")
-		manager = ResourceLoader.load(save_states.get_active_path("manager.tres"))
+		team = world.get_active_team()
+		league = world.get_active_league()
+		manager = team.staff.manager
+		
 	if ResourceLoader.exists(save_states.get_active_path("inbox.tres")):
 		print("loading user://inbox.tres")
 		inbox = ResourceLoader.load(save_states.get_active_path("inbox.tres"))
