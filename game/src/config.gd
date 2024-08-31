@@ -179,6 +179,7 @@ func set_lang(lang: String) -> void:
 func select_team(p_league: League, p_team: Team) -> void:
 	league = p_league
 	team = p_team
+	world.active_team_id = team.id
 
 
 func next_season() -> void:
