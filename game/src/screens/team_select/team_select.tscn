@@ -70,9 +70,9 @@ alignment = 1
 layout_mode = 2
 text = "BACK"
 
-[node name="SelectTeam2" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+[node name="SelectTeam" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "SELECT"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/SelectTeam2" to="." method="_on_select_team_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/SelectTeam" to="." method="_on_select_team_pressed"]

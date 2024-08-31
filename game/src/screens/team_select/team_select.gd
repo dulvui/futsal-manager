@@ -63,6 +63,7 @@ func _on_nation_select(nation: Nation) -> void:
 
 
 func _on_select_team_pressed() -> void:
+	active_team.staff.manager = Config.manager
 	Config.select_team(active_league, active_team)
 	print("team saved")
 	Config.world.initialize_calendars()

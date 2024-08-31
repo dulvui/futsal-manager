@@ -5,8 +5,8 @@
 class_name ContractOffer
 extends Control
 
-#signal cancel
-#signal confirm
+signal cancel
+signal confirm
 
 const MAX_BUY_CLAUSE: int = 999999999
 
@@ -35,43 +35,43 @@ func set_up(p_transfer: Transfer) -> void:
 	info_label.text = "Offer a contract to " + player.get_full_name()
 
 
-func _on_IncomeMore_pressed() -> void:
+func _on_income_more_pressed() -> void:
 	if income < team.salary_budget:
 		income += 1000
 	income_label.text = str(income)
 
 
-func _on_IncomeLess_pressed() -> void:
+func _on_income_less_pressed() -> void:
 	if income > 1000:
 		income -= 1000
 		income_label.text = str(income)
 
 
-func _on_YearsLess_pressed() -> void:
+func _on_years_less_pressed() -> void:
 	if years > 1:
 		years -= 1
 		years_label.text = str(years)
 
 
-func _on_YearsMore_pressed() -> void:
+func _on_years_more_pressed() -> void:
 	if years < 4:
 		years += 1
 		years_label.text = str(years)
 
 
-func _on_BuyClauseLess_pressed() -> void:
+func _on_buy_clause_less_pressed() -> void:
 	if buy_clause > 1000:
 		buy_clause -= 1000
 		buy_clause_label.text = str(buy_clause)
 
 
-func _on_BuyClauseMore_pressed() -> void:
+func _on_buy_clause_more_pressed() -> void:
 	if buy_clause < MAX_BUY_CLAUSE:
 		buy_clause += 1000
 		buy_clause_label.text = str(buy_clause)
 
 
-func _on_Confirm_pressed() -> void:
+func _on_confirm_pressed() -> void:
 	# add contract to pendng contracts
 
 	var contract: Contract = Contract.new()
@@ -81,8 +81,8 @@ func _on_Confirm_pressed() -> void:
 	transfer.contract = contract
 	transfer.state = Transfer.State.CONTRACT_PENDING
 	EmailUtil.transfer_message(transfer)
-	emit_signal("confirm")
+	confirm.emit()
 
 
-func _on_Cancel_pressed() -> void:
-	emit_signal("cancel")
+func _on_cancel_pressed() -> void:
+	cancel.emit()

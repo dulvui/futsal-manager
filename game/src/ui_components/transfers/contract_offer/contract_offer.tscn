@@ -85,11 +85,11 @@ text = "CONFIRM"
 layout_mode = 2
 text = "CANCEL"
 
-[connection signal="pressed" from="VBoxContainer/GridContainer/IncomeLess" to="." method="_on_IncomeLess_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/IncomeMore" to="." method="_on_IncomeMore_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/YearsLess" to="." method="_on_YearsLess_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/YearsMore" to="." method="_on_YearsMore_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/BuyClauseLess" to="." method="_on_BuyClauseLess_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/BuyClauseMore" to="." method="_on_BuyClauseMore_pressed"]
-[connection signal="pressed" from="VBoxContainer/Confirm" to="." method="_on_Confirm_pressed"]
-[connection signal="pressed" from="VBoxContainer/Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/IncomeLess" to="." method="_on_income_less_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/IncomeMore" to="." method="_on_income_more_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/YearsLess" to="." method="_on_years_less_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/YearsMore" to="." method="_on_years_more_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/BuyClauseLess" to="." method="_on_buy_clause_less_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/BuyClauseMore" to="." method="_on_buy_clause_more_pressed"]
+[connection signal="pressed" from="VBoxContainer/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="pressed" from="VBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
