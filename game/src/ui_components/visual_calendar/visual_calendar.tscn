@@ -107,6 +107,6 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[connection signal="pressed" from="Calendar/Paginator/Prev" to="." method="_on_Prev_pressed"]
-[connection signal="pressed" from="Calendar/Paginator/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="Calendar/Paginator/Prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="Calendar/Paginator/Next" to="." method="_on_next_pressed"]
 [connection signal="pressed" from="Calendar/Paginator/Today" to="." method="_on_today_pressed"]

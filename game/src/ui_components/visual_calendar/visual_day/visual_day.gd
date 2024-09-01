@@ -29,8 +29,6 @@ func set_up(p_date: Day = Day.new()) -> void:
 	# activate button
 	button.show()
 	
-	# TODO show ball on matchday of own team
-	#ball_texture.visible = Config.league.is_match_day(date)
 	ball_texture.visible = false
 
 	month_day_label.text = str(date.day)
@@ -40,9 +38,11 @@ func set_up(p_date: Day = Day.new()) -> void:
 			if Config.team.name == matchz.home.name:
 				team_name = matchz.away.name
 				background.color = HOME_MATCH_DAY_COLOR
+				ball_texture.visible = true
 			elif Config.team.name == matchz.away.name:
 				team_name = matchz.home.name
 				background.color = AWAY_MATCH_DAY_COLOR
+				ball_texture.visible = true
 		match_label.text = team_name
 	else:
 		match_label.hide()
