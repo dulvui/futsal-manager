@@ -43,14 +43,14 @@ func set_up_days() -> void:
 		monday_counter -= 1
 
 	# add days
-	for day: Day in Config.league.calendar.month(current_month).days:
+	for day: Day in Config.world.calendar.month(current_month).days:
 		var calendar_day: VisualDay = VisualDayScene.instantiate()
 		days.add_child(calendar_day)
 		calendar_day.set_up(day)
 		calendar_day.show_match_list.connect(_on_calendar_day_pressed.bind(day))
 
 		# make current day active
-		if day == Config.league.calendar.day():
+		if day == Config.world.calendar.day():
 			calendar_day.select()
 
 	page_label.text = Const.MONTH_STRINGS[current_month - 1]

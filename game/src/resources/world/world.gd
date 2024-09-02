@@ -62,7 +62,6 @@ func initialize_city(continent_name: String, nation_name: String, league_name: S
 	var continent_filter: Array[Continent] = continents.filter(func(c: Continent) -> bool: return c.name == continent_name)
 	if continent_filter.size() == 0:
 		continent = Continent.new()
-		continent.initialize()
 		continent.name = continent_name
 		continents.append(continent)
 	else:
@@ -73,7 +72,6 @@ func initialize_city(continent_name: String, nation_name: String, league_name: S
 	var nation_filter: Array[Nation] = continent.nations.filter(func(n: Nation) -> bool: return n.name == nation_name)
 	if nation_filter.size() == 0:
 		nation = Nation.new()
-		nation.initialize()
 		nation.name = nation_name
 		continent.nations.append(nation)
 	else:

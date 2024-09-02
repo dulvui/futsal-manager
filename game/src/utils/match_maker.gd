@@ -10,9 +10,6 @@ var match_day: int = 0
 
 func inizialize_matches(leagues: Array[League]) -> void:
 	for league: League in leagues:
-		league.calendar = Calendar.new()
-		league.calendar.initialize()
-		
 		var teams: Array = league.teams.duplicate(true)
 		match_days = []
 		match_day = 0
@@ -69,56 +66,60 @@ func inizialize_matches(leagues: Array[League]) -> void:
 		############
 		# add to calendar
 		############
-		var day: int = league.calendar.day().day
-		var month: int = league.calendar.day().month
+		# TODO use actual league start/end date
+		# TODO allow also over 2 years
+		#var day: int = Config.world.calendar.day().day
+		#var month: int = Config.world.calendar.day().month
+		var day: int = 0
+		var month: int = 6
 
 		# start with saturday of next week
 		for i in range(8, 1, -1):
-			if league.calendar.day(month, i).weekday == "FRI":
+			if Config.world.calendar.day(month, i).weekday == "FRI":
 				day = i
 				break
 
 		for matches: Array[Match] in match_days:
 			# check if next month
-			if day > league.calendar.month(month).days.size() - 1:
+			if day > Config.world.calendar.month(month).days.size() - 1:
 				month += 1
 				day = 0
 				# start also new month with saturday
 				for i in 7:
-					if league.calendar.day(month, i).weekday == "FRI":
+					if Config.world.calendar.day(month, i).weekday == "FRI":
 						day = i
 						break
 
 			# assign match friday
-			league.calendar.day(month, day).matches.append_array(
+			Config.world.calendar.day(month, day).get_matches().append_array(
 				matches.slice(0, matches.size() / 4)
 			)
 			## assign match saturday
 			day += 1
 			# check if next month
-			if day > league.calendar.month(month).days.size() - 1:
+			if day > Config.world.calendar.month(month).days.size() - 1:
 				month += 1
 				day = 0
 				# start also new month with saturday
 				for i in 7:
-					if league.calendar.day(month, i).weekday == "SAT":
+					if Config.world.calendar.day(month, i).weekday == "SAT":
 						day = i
 						break
-			league.calendar.day(month, day).matches.append_array(
+			Config.world.calendar.day(month, day).get_matches(league.id).append_array(
 				matches.slice(matches.size() / 4, matches.size() / 2)
 			)
 			## assign match sunday
 			day += 1
 			# check if next month
-			if day > league.calendar.month(month).days.size() - 1:
+			if day > Config.world.calendar.month(month).days.size() - 1:
 				month += 1
 				day = 0
 				# start also new month with saturday
 				for i in 7:
-					if league.calendar.day(month, i).weekday == "SUN":
+					if Config.world.calendar.day(month, i).weekday == "SUN":
 						day = i
 						break
-			league.calendar.day(month, day).matches.append_array(
+			Config.world.calendar.day(month, day).get_matches(league.id).append_array(
 				matches.slice(matches.size() / 2, matches.size())
 			)
 			# restart from friday

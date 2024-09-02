@@ -73,7 +73,7 @@ func _ready() -> void:
 		continue_button.text = "NEXT_DAY"
 		match_ready = false
 
-	if Config.league.calendar.is_season_finished():
+	if Config.world.calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 	
@@ -224,8 +224,7 @@ func _next_day() -> void:
 		return
 
 	# next day in calendar
-	for league: League in Config.world.get_all_leagues():
-		league.calendar.next_day()
+	Config.world.calendar.next_day()
 
 	# next season check
 	if next_season:

@@ -20,12 +20,12 @@ func set_up(day: Day) -> void:
 		child.queue_free()
 
 	# add active league games
-	if day.matches.size() > 0:
+	if day.get_matches().size() > 0:
 		var active_league_label: Label = Label.new()
 		active_league_label.text = Config.league.name
 		UiUtil.bold(active_league_label)
 		matches_list.add_child(active_league_label)
-		for matchz: Match in day.matches:
+		for matchz: Match in day.get_matches():
 			var match_row: MatchListRow = MatchRowScene.instantiate()
 			matches_list.add_child(match_row)
 			match_row.set_up(matchz)
@@ -35,12 +35,13 @@ func set_up(day: Day) -> void:
 	# add other leagues matches
 	for league: League in Config.world.get_all_leagues():
 		if league.id != Config.league.id:
-			if league.calendar.day(day.month, day.day).matches.size() > 0:
+			var matches: Array[Match] = Config.world.calendar.day(day.month, day.day).get_matches(league.id)
+			if matches.size() > 0:
 				var league_label: Label = Label.new()
 				league_label.text = league.name
 				UiUtil.bold(league_label)
 				matches_list.add_child(league_label)
-				for matchz: Match in league.calendar.day(day.month, day.day).matches:
+				for matchz: Match in matches:
 					var match_row: MatchListRow = MatchRowScene.instantiate()
 					matches_list.add_child(match_row)
 					match_row.set_up(matchz)

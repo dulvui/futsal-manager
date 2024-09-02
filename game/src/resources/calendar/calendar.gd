@@ -62,12 +62,16 @@ func initialize(next_season: bool = false) -> void:
 
 		date = _get_next_day(date)
 	else:
-		date = Config.start_date
+		date = Time.get_datetime_dict_from_system()
 
 	# start date in fomrat YYYY-MM-DDTHH:MM:SS
 	var first_january: String = str(date.year) + "-01-01T00:00:00"
 	var temp_date: Dictionary = Time.get_datetime_dict_from_datetime_string(first_january, true)
-
+	
+	# assign start_date
+	if not next_season:
+		Config.start_date = date
+	
 	# create months
 	for month_string: String in Const.MONTH_STRINGS:
 		var new_month: Month = Month.new()
@@ -156,7 +160,7 @@ func format_date(p_date: Dictionary = date) -> String:
 
 
 func get_next_match() -> Match:
-	for matchz: Match in day().matches:
+	for matchz: Match in day().get_matches():
 		if matchz.home.name == Config.team.name or matchz.away.name == Config.team.name:
 			return matchz
 	return null

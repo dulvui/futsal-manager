@@ -33,8 +33,8 @@ func set_up(p_date: Day = Day.new()) -> void:
 
 	month_day_label.text = str(date.day)
 	var team_name: String
-	if date.matches.size() > 0:
-		for matchz: Match in date.matches:
+	if date.get_matches().size() > 0:
+		for matchz: Match in date.get_matches():
 			if Config.team.name == matchz.home.name:
 				team_name = matchz.away.name
 				background.color = HOME_MATCH_DAY_COLOR

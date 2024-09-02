@@ -5,7 +5,6 @@
 class_name Nation
 extends Resource
 
-@export var calendar: Calendar
 @export var name: String
 @export var leagues: Array[League]
 @export var cup_clubs: Tournament
@@ -13,22 +12,15 @@ extends Resource
 
 
 func _init(
-	p_calendar: Calendar = Calendar.new(),
 	p_name: String = "",
 	p_leagues: Array[League] = [],
 	p_cup_clubs: Tournament = Tournament.new(),
 	p_team: Team = Team.new(),
 ) -> void:
-	calendar = p_calendar
 	name = p_name
 	leagues = p_leagues
 	cup_clubs = p_cup_clubs
 	team = p_team
-
-
-func initialize() -> void:
-	for league: League in leagues:
-		league.calendar.initialize()
 
 
 func add_league(league: League) -> void:
@@ -54,8 +46,7 @@ func get_team_by_id(team_id: int) -> Team:
 func random_results() -> void:
 	var match_engine: MatchEngine = MatchEngine.new()
 	for league: League in leagues:
-		var league_calendar: Calendar = league.calendar
-		for matchz: Match in league_calendar.day().matches:
+		for matchz: Match in Config.world.calendar.day().get_matches(league.id):
 			if matchz.home.id != Config.team.id and matchz.away.id != Config.team.id:
 				var result_match: Match = match_engine.simulate(matchz)
 				matchz.set_result(result_match.home_goals, result_match.away_goals)

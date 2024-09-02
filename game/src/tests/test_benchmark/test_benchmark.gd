@@ -22,8 +22,8 @@ func test() -> void:
 	for league: League in test_leagues:
 		print(league.name)
 		print(league.teams.size())
-		while league.calendar.day().matches.size() == 0:
-			league.calendar.next_day()
+		while world.calendar.day().get_matches().size() == 0:
+			world.calendar.next_day()
 			
 
 	Config.world.random_results()

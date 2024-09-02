@@ -5,7 +5,6 @@
 class_name Continent
 extends Resource
 
-@export var calendar: Calendar
 @export var name: String
 @export var nations: Array[Nation]
 @export var cup_clubs: Tournament
@@ -13,18 +12,12 @@ extends Resource
 
 
 func _init(
-	p_calendar: Calendar = Calendar.new(),
 	p_name: String = "",
 	p_nations: Array[Nation] = [],
 	p_cup_clubs: Tournament = Tournament.new(),
 	p_cup_nations: Tournament = Tournament.new(),
 ) -> void:
-	calendar = p_calendar
 	name = p_name
 	nations = p_nations
 	cup_clubs = p_cup_clubs
 	cup_nations = p_cup_nations
-
-
-func initialize() -> void:
-	calendar.initialize()

@@ -5,7 +5,8 @@
 class_name Day
 extends Resource
 
-@export var matches: Array[Match]
+# matches by leauge/tournament id
+@export var matches: Dictionary
 @export var market: bool
 @export var weekday: String
 @export var day: int
@@ -15,7 +16,7 @@ extends Resource
 
 
 func _init(
-	p_matches: Array[Match] = [],
+	p_matches: Dictionary = {},
 	p_market: bool = false,
 	p_weekday: String = "MON",
 	p_day: int = 1,
@@ -28,6 +29,12 @@ func _init(
 	day = p_day
 	month = p_month
 	year = p_year
+
+
+func get_matches(event_id: int = Config.league.id) -> Array[Match]:
+	if not event_id in matches:
+		matches[event_id] = Array([], TYPE_OBJECT, "Resource", Match)
+	return matches[event_id]
 
 
 func to_format_string() -> String:
