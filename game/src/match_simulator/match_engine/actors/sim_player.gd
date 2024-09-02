@@ -68,12 +68,12 @@ func update(team_has_ball: bool) -> void:
 				pass_received.emit()
 				ball.stop()
 				# small movement when stopping ball
-				speed = Config.match_rng.randi_range(3, 7)
+				speed = RngUtil.match_rng.randi_range(3, 7)
 				ball.dribble(destination, speed)
 				_move()
 				state = State.IDLE
 		State.DRIBBLE:
-			speed = Config.match_rng.randi_range(5, 20)
+			speed = RngUtil.match_rng.randi_range(5, 20)
 			ball.dribble(destination, speed)
 			_move()
 			state = State.IDLE
@@ -133,7 +133,7 @@ func is_touching_ball() -> bool:
 
 func is_intercepting_ball() -> bool:
 	return (
-		Config.match_rng.randi_range(1, 100) < 59 + player_res.attributes.technical.interception * 2
+		RngUtil.match_rng.randi_range(1, 100) < 59 + player_res.attributes.technical.interception * 2
 	)
 
 
@@ -157,7 +157,7 @@ func stop() -> void:
 
 func _should_dribble() -> bool:
 	# check something, but for now, nothing comes to my mind
-	return Config.match_rng.randi_range(1, 100) > 70
+	return RngUtil.match_rng.randi_range(1, 100) > 70
 
 
 func _should_shoot() -> bool:
@@ -165,13 +165,13 @@ func _should_shoot() -> bool:
 		print('g')
 		return true
 	if ball.players_in_shoot_trajectory < 2:
-		return Config.match_rng.randi_range(1, 100) > 95
+		return RngUtil.match_rng.randi_range(1, 100) > 95
 	return false
 
 
 func _should_pass() -> bool:
 	if distance_to_enemy < 50:
-		return Config.match_rng.randi_range(1, 100) < 60
+		return RngUtil.match_rng.randi_range(1, 100) < 60
 	return false
 
 

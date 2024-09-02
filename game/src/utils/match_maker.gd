@@ -15,7 +15,7 @@ func inizialize_matches(leagues: Array[League]) -> void:
 		match_day = 0
 
 		var random_teams: Array[Team] = teams.duplicate(true)
-		Config.shuffle(random_teams)
+		RngUtil.shuffle(random_teams)
 		# print(random_teams.map(func(t: Team) -> String: return t.name))
 
 		var last_team: Team = random_teams.pop_front()

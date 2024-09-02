@@ -166,7 +166,7 @@ func is_touching_ball() -> bool:
 func block_shot() -> bool:
 	if is_touching_ball():
 		return (
-			Config.match_rng.randi_range(0, 100)
+			RngUtil.match_rng.randi_range(0, 100)
 			< 69 + player_res.attributes.goalkeeper.handling * 2
 		)
 	return false

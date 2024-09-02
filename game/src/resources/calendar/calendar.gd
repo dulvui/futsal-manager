@@ -88,8 +88,9 @@ func initialize(next_season: bool = false) -> void:
 		new_day.year = temp_date.year
 
 		months[temp_date.month - 1].days.append(new_day)
-
+	
 		temp_date = _get_next_day(temp_date)
+
 
 
 func next_day() -> void:

@@ -78,7 +78,7 @@ func defend(other_players: Array[SimPlayer]) -> void:
 	# assign destinations
 	for i: int in players.size():
 		# y towards goal, to block goal
-		var factor: int = Config.match_rng.randi_range(30, 60)
+		var factor: int = RngUtil.match_rng.randi_range(30, 60)
 		var deviation: Vector2 = Vector2(-factor, factor)
 		if other_players[i].pos.y > field.center.y:
 			deviation.y -= factor * 2
@@ -105,7 +105,7 @@ func attack() -> void:
 		# set destinations
 		if player.state != SimPlayer.State.DRIBBLE:
 			# y towards goal, to block goal
-			var factor: int = Config.match_rng.randi_range(30, 60)
+			var factor: int = RngUtil.match_rng.randi_range(30, 60)
 			var deviation: Vector2 = Vector2(-factor, factor)
 
 			# move to other half
@@ -120,7 +120,7 @@ func attack() -> void:
 				(
 					player.start_pos
 					+ Vector2(
-						Config.match_rng.randi_range(-30, 30), Config.match_rng.randi_range(-30, 30)
+						RngUtil.match_rng.randi_range(-30, 30), RngUtil.match_rng.randi_range(-30, 30)
 					)
 				)
 			)
@@ -158,10 +158,10 @@ func pass_to_random_player(passing_player: SimPlayer = null) -> void:
 				player.player_res.id != passing_player.player_res.id
 			)
 		)
-		random_player = non_active[Config.match_rng.randi_range(0, non_active.size() - 1)]
+		random_player = non_active[RngUtil.match_rng.randi_range(0, non_active.size() - 1)]
 	else:
 		# goalkeeper pass
-		random_player = players[Config.match_rng.randi_range(0, players.size() - 1)]
+		random_player = players[RngUtil.match_rng.randi_range(0, players.size() - 1)]
 
 	ball.short_pass(random_player.pos, 35)
 	random_player.state = SimPlayer.State.RECEIVE_PASS
@@ -177,9 +177,9 @@ func shoot_on_goal(power: float) -> void:
 	else:
 		random_target = field.goal_left
 	
-	random_target += Vector2(0, Config.match_rng.randi_range(-field.GOAL_SIZE * 1.5, field.GOAL_SIZE * 1.5))
+	random_target += Vector2(0, RngUtil.match_rng.randi_range(-field.GOAL_SIZE * 1.5, field.GOAL_SIZE * 1.5))
 	
-	ball.shoot(random_target, power * Config.match_rng.randi_range(2, 6))
+	ball.shoot(random_target, power * RngUtil.match_rng.randi_range(2, 6))
 
 	stats.shots += 1
 	print("shoot " + str(power))

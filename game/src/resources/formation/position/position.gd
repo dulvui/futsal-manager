@@ -55,8 +55,8 @@ func random_variations() -> void:
 			base = PositionVariation.P.keys()
 	
 	var size: int = base.size()
-	for i: int in Config.rng.randi_range(1, size):
-		var random_pick: int = Config.rng.randi_range(0, base.size() - 1)
+	for i: int in RngUtil.rng.randi_range(1, size):
+		var random_pick: int = RngUtil.rng.randi_range(0, base.size() - 1)
 		var variation: PositionVariation = PositionVariation.new()
 		variation.type = base[random_pick]
 		base.remove_at(random_pick)
@@ -64,7 +64,7 @@ func random_variations() -> void:
 		if i == 1:
 			variation.confidence = 5
 		else:
-			variation.confidence = Config.rng.randi_range(1, 4)
+			variation.confidence = RngUtil.rng.randi_range(1, 4)
 		
 		variations.append(variation)
 	

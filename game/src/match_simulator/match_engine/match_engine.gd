@@ -41,11 +41,11 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	
 	shoot_trajectory_polygon = PackedVector2Array()
 
-	#Config.match_rng.state = 0
-	Config.match_rng.seed = hash(match_seed)
+	#RngUtil.match_rng.state = 0
+	RngUtil.match_rng.seed = hash(match_seed)
 
-	home_plays_left = Config.match_rng.randi_range(0, 1) == 0
-	var home_has_ball: bool = Config.match_rng.randi_range(0, 1) == 0
+	home_plays_left = RngUtil.match_rng.randi_range(0, 1) == 0
+	var home_has_ball: bool = RngUtil.match_rng.randi_range(0, 1) == 0
 
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, home_has_ball)

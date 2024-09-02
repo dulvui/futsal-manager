@@ -7,7 +7,7 @@ extends Node
 
 func test() -> void:
 	print("test: generator...")
-	Config.reset_seed("TestSeed", 0)
+	RngUtil.reset_seed("TestSeed", 0)
 	
 	var generator: Generator = Generator.new()
 	var reference_world: World = generator.generate_world()
@@ -17,7 +17,7 @@ func test() -> void:
 	for i: int in range(3):
 		print("test: run " + str(i + 1))
 		
-		Config.reset_seed("TestSeed", 0)
+		RngUtil.reset_seed("TestSeed", 0)
 		
 		var test_world: World = generator.generate_world()
 		
