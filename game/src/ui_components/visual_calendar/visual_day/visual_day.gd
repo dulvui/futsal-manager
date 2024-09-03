@@ -47,7 +47,7 @@ func set_up(p_date: Day = Day.new()) -> void:
 	else:
 		match_label.hide()
 
-	if date.day == Config.world.calendar.day().day and Config.world.calendar.day().month == date.month:
+	if date.is_same_day(Config.world.calendar.day()):
 		if background.color != HOME_MATCH_DAY_COLOR:
 			background.color = Color.LIGHT_GREEN
 		elif background.color != AWAY_MATCH_DAY_COLOR:

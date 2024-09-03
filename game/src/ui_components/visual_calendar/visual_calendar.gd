@@ -9,17 +9,19 @@ const VisualDayScene: PackedScene = preload(
 	"res://src/ui_components/visual_calendar/visual_day/visual_day.tscn"
 )
 
+var current_month: int
+var current_year: int
+var max_months: int
+
 @onready var match_list: VisualMatchList = $MatchList
 @onready var days: GridContainer = $Calendar/Days
 @onready var page_label: Label = $Calendar/Paginator/Page
 
-# get current month and show in paginator
-# max back and forward is full current season
-var current_month: int
-
 
 func _ready() -> void:
+	max_months = Config.world.calendar.months.size()
 	current_month = Config.world.calendar.date.month
+	current_year = Config.world.calendar.date.year
 	set_up()
 
 
@@ -53,7 +55,8 @@ func set_up_days() -> void:
 		if day == Config.world.calendar.day():
 			calendar_day.select()
 
-	page_label.text = Const.MONTH_STRINGS[current_month - 1]
+	var active_year: int = current_year + ((current_month - 1) / 12)
+	page_label.text = Const.MONTH_STRINGS[(current_month % 12) - 1] + " " + str(active_year)
 
 
 func _on_calendar_day_pressed(day: Day) -> void:
@@ -69,8 +72,8 @@ func _on_prev_pressed() -> void:
 
 func _on_next_pressed() -> void:
 	current_month += 1
-	if current_month > 12:
-		current_month = 12
+	if current_month > max_months:
+		current_month = max_months
 	set_up()
 
 

@@ -39,3 +39,13 @@ func get_matches(event_id: int = Config.league.id) -> Array[Match]:
 
 func to_format_string() -> String:
 	return weekday + " " + str(day) + " " + Const.MONTH_STRINGS[month - 1] + " " + str(year)
+
+
+func is_same_day(p_day: Day) -> bool:
+	if day != p_day.day:
+		return false
+	if month != p_day.month:
+		return false
+	if year != p_day.year:
+		return false
+	return true
