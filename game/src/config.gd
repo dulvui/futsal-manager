@@ -52,11 +52,6 @@ func _ready() -> void:
 	_load_config()
 	load_save_state()
 	RngUtil.set_up_rngs()
-	# assign references after resources are loaded
-	if world:
-		team = world.get_active_team()
-		league = world.get_active_league()
-		manager = team.staff.manager
 	Config.set_lang(language)
 
 
@@ -177,6 +172,12 @@ func _load_resources() -> void:
 		transfers = ResourceLoader.load(save_states.get_active_path("transfers" + res_suffix))
 	else:
 		transfers = Transfers.new()
+	
+	# assign references after resources are loaded
+	if world:
+		team = world.get_active_team()
+		league = world.get_active_league()
+		manager = team.staff.manager
 
 # disable save, too heavy on close, breaks game
 # save on quit on mobile
