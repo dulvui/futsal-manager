@@ -35,7 +35,7 @@ func set_up(day: Day) -> void:
 	# add other leagues matches
 	for league: League in Config.world.get_all_leagues():
 		if league.id != Config.league.id:
-			var matches: Array[Match] = Config.world.calendar.day(day.month, day.day).get_matches(league.id)
+			var matches: Array = Config.world.calendar.day(day.month, day.day).get_matches(league.id)
 			if matches.size() > 0:
 				var league_label: Label = Label.new()
 				league_label.text = league.name

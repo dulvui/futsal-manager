@@ -12,7 +12,7 @@ var config: ConfigFile
 
 # .res for binary/compressed resource data
 # .tres for text resource data
-var res_suffix: String = ".tres"
+var res_suffix: String = ".res"
 # save states
 var save_states: SaveStates
 
@@ -51,7 +51,6 @@ func _ready() -> void:
 	print("version " + Config.VERSION)
 	_load_config()
 	load_save_state()
-	_load_resources()
 	RngUtil.set_up_rngs()
 	# assign references after resources are loaded
 	if world:
@@ -71,9 +70,11 @@ func load_save_state() -> void:
 		generation_seed = save_sate.generation_seed
 		generation_state = save_sate.generation_state
 		generation_gender = save_sate.generation_gender
+		_load_resources()
 
 
 func save_active_state() -> void:
+	print("saving save state...")
 	var save_sate: SaveState = save_states.get_active()
 	save_sate.start_date = start_date
 	save_sate.id_by_type = id_by_type
@@ -88,7 +89,7 @@ func save_active_state() -> void:
 	ResourceSaver.save(world, save_states.get_active_path("world" + res_suffix))
 	ResourceSaver.save(inbox, save_states.get_active_path("inbox" + res_suffix))
 	ResourceSaver.save(transfers, save_states.get_active_path("transfers" + res_suffix))
-	ResourceSaver.save(save_states, "user://save_states" + res_suffix)
+	print("save state saved")
 
 
 func save_save_states() -> void:
@@ -101,7 +102,6 @@ func save_config() -> void:
 	config.set_value("settings", "language", language)
 
 	config.save("user://settings.cfg")
-	print("config saved")
 
 
 func save_all_data() -> void:

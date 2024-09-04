@@ -31,7 +31,7 @@ func _init(
 	year = p_year
 
 
-func get_matches(event_id: int = Config.league.id) -> Array[Match]:
+func get_matches(event_id: int = Config.league.id) -> Array:
 	if not event_id in matches:
 		matches[event_id] = Array([], TYPE_OBJECT, "Resource", Match)
 	return matches[event_id]

@@ -28,6 +28,7 @@ func _ready() -> void:
 	Config.load_save_state()
 	
 	# TODO use temp world, to not override active world
+	# TODO or use default world, so its laoded only once at start
 	var generator: Generator = Generator.new()
 	Config.world = generator.generate_world()
 
