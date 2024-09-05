@@ -18,6 +18,7 @@ var col_name: String
 
 var map_function: Callable
 
+
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 

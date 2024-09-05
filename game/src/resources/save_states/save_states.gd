@@ -10,6 +10,8 @@ extends Resource
 # for temporary save state, when creating new save state
 # becomes active_save_state, once setup is completed
 @export var temp_state: SaveState
+@export var temp_world: World
+@export var temp_manager: Manager
 
 
 func _init(

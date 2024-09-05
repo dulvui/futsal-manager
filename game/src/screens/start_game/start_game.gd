@@ -25,14 +25,14 @@ func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
 	Config.save_states.new_temp_state()
-	Config.load_save_state()
+	#Config.load_save_state()
 	
 	# TODO use temp world, to not override active world
 	# TODO or use default world, so its laoded only once at start
 	var generator: Generator = Generator.new()
-	Config.world = generator.generate_world()
+	Config.save_states.temp_world = generator.generate_world()
 
-	for nation: Nation in Config.world.get_all_nations():
+	for nation: Nation in Config.save_states.temp_world.get_all_nations():
 		nations.add_item(nation.name)
 
 	for gender: String in Const.Gender:
@@ -82,5 +82,5 @@ func _on_continue_pressed() -> void:
 		Config.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
 		
 		#Config.generate_leagues(generation_seed, gender_option.selected)
-		Config.manager = manager
+		Config.save_states.temp_manager = manager
 		get_tree().change_scene_to_file("res://src/screens/team_select/team_select.tscn")
