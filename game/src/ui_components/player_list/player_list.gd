@@ -7,7 +7,7 @@ extends VBoxContainer
 
 signal select_player(player: Player)
 
-const PlayerListColumnScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
+const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
 
 @onready var filter_container: HBoxContainer = $Filters
 @onready var team_select: OptionButton = $Filters/TeamSelect
