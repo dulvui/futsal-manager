@@ -12,6 +12,8 @@ extends Resource
 @export var temp_state: SaveState
 @export var temp_world: World
 @export var temp_manager: Manager
+@export var temp_generation_seed: String
+@export var temp_gender: int
 
 
 func _init(

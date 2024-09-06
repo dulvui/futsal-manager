@@ -73,14 +73,15 @@ func _on_continue_pressed() -> void:
 		manager.name = m_name.text
 		manager.surname = m_surname.text
 		manager.nation = Config.world.get_all_nations()[nations.selected].name
-
+		Config.save_states.temp_manager = manager
+		
+		Config.save_states.temp_generation_seed = generation_seed
+		Config.save_states.temp_gender = gender_option.selected
+		
 		# start date in fomrat YYYY-MM-DDTHH:MM:SS
 		var start_year: String = start_year_spinbox.get_line_edit().text
 		var start_date_str: String = (
 			"%s-%02d-%02dT00:00:00" % [start_year, Const.SEASON_START_MONTH, Const.SEASON_START_DAY]
 		)
 		Config.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
-		
-		#Config.generate_leagues(generation_seed, gender_option.selected)
-		Config.save_states.temp_manager = manager
 		get_tree().change_scene_to_file("res://src/screens/team_select/team_select.tscn")
