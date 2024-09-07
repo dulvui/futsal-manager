@@ -19,9 +19,15 @@ extends Resource
 func _init(
 	p_list: Array[SaveState] = [],
 	p_active_id: String = "",
+	p_temp_manager: Manager = Manager.new(),
+	p_temp_generation_seed: String = "DefaultSeed",
+	p_temp_gender: int = 0,
 ) -> void:
 	list = p_list
 	active_id = p_active_id
+	temp_manager = p_temp_manager
+	temp_generation_seed = p_temp_generation_seed
+	temp_gender = p_temp_gender
 
 
 func new_temp_state() -> void:
