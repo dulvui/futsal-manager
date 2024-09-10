@@ -10,24 +10,14 @@ extends Resource
 # for temporary save state, when creating new save state
 # becomes active_save_state, once setup is completed
 @export var temp_state: SaveState
-@export var temp_world: World
-@export var temp_manager: Manager
-@export var temp_generation_seed: String
-@export var temp_gender: int
 
 
 func _init(
 	p_list: Array[SaveState] = [],
 	p_active_id: String = "",
-	p_temp_manager: Manager = Manager.new(),
-	p_temp_generation_seed: String = "DefaultSeed",
-	p_temp_gender: int = 0,
 ) -> void:
 	list = p_list
 	active_id = p_active_id
-	temp_manager = p_temp_manager
-	temp_generation_seed = p_temp_generation_seed
-	temp_gender = p_temp_gender
 
 
 func new_temp_state() -> void:
@@ -52,6 +42,7 @@ func get_active_path(relative_path: String = "") -> String:
 
 func make_temp_active() -> void:
 	# assign metadata
+	temp_state.meta_is_temp = false
 	temp_state.save_metadata()
 
 	# make active

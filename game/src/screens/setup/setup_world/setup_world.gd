@@ -9,10 +9,6 @@ extends Control
 
 const DEFAULT_SEED: String = "SuchDefaultSeed"
 
-@onready var nations: OptionButton = $VBoxContainer/Manager/Container/Nat
-@onready var manager_name: LineEdit = $VBoxContainer/Manager/Container/Name
-@onready var manager_surname: LineEdit = $VBoxContainer/Manager/Container/SurName
-
 @onready var gender_option: OptionButton = $VBoxContainer/Settings/Container/Gender
 @onready var start_year_spinbox: SpinBox = $VBoxContainer/Settings/Container/StartYear
 
@@ -27,23 +23,16 @@ func _ready() -> void:
 	Config.save_states.new_temp_state()
 	#Config.load_save_state()
 	
-	# TODO or use default world, so its laoded only once at start
-	var generator: Generator = Generator.new()
-	Config.save_states.temp_world = generator.generate_world()
+	# TODO add reset button, to use defualt world
+	if not Config.world:
+		var generator: Generator = Generator.new()
+		Config.world = generator.generate_world()
 	
-	# reset temp values
-	manager_name.text = Config.save_states.temp_manager.name
-	manager_surname.text = Config.save_states.temp_manager.surname
-	gender_option.selected = Config.save_states.temp_gender
-	generation_seed_edit.text = Config.save_states.temp_generation_seed
-
-	for nation: Nation in Config.save_states.temp_world.get_all_nations():
-		nations.add_item(nation.name)
-
 	for gender: String in Const.Gender:
 		gender_option.add_item(gender)
-
+	
 	generation_seed_edit.text = generation_seed
+	
 	start_year_spinbox.get_line_edit().text = str(Config.start_date.year)
 
 
@@ -73,20 +62,13 @@ func _on_back_pressed() -> void:
 
 
 func _on_continue_pressed() -> void:
-	if manager_name.text.length() * manager_surname.text.length() * generation_seed.length() > 0:
-		var manager: Manager = Manager.new()
-		manager.name = manager_name.text
-		manager.surname = manager_surname.text
-		manager.nation = Config.world.get_all_nations()[nations.selected].name
-		Config.save_states.temp_manager = manager
-		
-		Config.save_states.temp_generation_seed = generation_seed
-		Config.save_states.temp_gender = gender_option.selected
-		
+	if generation_seed.length() > 0:
 		# start date in fomrat YYYY-MM-DDTHH:MM:SS
 		var start_year: String = start_year_spinbox.get_line_edit().text
 		var start_date_str: String = (
 			"%s-%02d-%02dT00:00:00" % [start_year, Const.SEASON_START_MONTH, Const.SEASON_START_DAY]
 		)
-		Config.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
-		get_tree().change_scene_to_file("res://src/screens/team_select/team_select.tscn")
+		Config.save_states.temp_state.generation_seed = generation_seed
+		Config.save_states.temp_state.generation_gender = gender_option.selected
+		Config.save_states.temp_state.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
+		get_tree().change_scene_to_file("res://src/screens/setup/setup_manager/setup_manager.tscn")

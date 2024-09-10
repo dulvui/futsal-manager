@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func _on_new_game_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/start_game/start_game.tscn")
+	get_tree().change_scene_to_file("res://src/screens/setup/setup_world/setup_world.tscn")
 
 
 func _on_continue_game_pressed() -> void:

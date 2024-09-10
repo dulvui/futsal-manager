@@ -113,8 +113,8 @@ func set_lang(lang: String) -> void:
 
 
 func select_team(p_league: League, p_team: Team) -> void:
-	world = Config.save_states.temp_world
-	manager = Config.save_states.temp_manager
+	world = Config.world
+	manager = Config.manager
 	league = p_league
 	team = p_team
 	world.active_team_id = team.id
@@ -123,6 +123,7 @@ func select_team(p_league: League, p_team: Team) -> void:
 	print("calendars created")
 	MatchMaker.inizialize_matches(world.get_all_leagues())
 	print("matches initialized")
+	inbox = Inbox.new()
 	EmailUtil.welcome_manager()
 
 	save_states.make_temp_active()

@@ -22,6 +22,7 @@ extends Resource
 @export var meta_last_save: Dictionary
 @export var meta_game_date: Dictionary
 @export var meta_create_date: Dictionary
+@export var meta_is_temp: bool
 
 
 func _init(
@@ -39,6 +40,7 @@ func _init(
 	p_meta_team_position: String = "",
 	p_meta_last_save: Dictionary = {},
 	p_meta_game_date: Dictionary = {},
+	p_meta_is_temp: bool = true,
 ) -> void:
 	id = p_id
 	config_version = p_config_version
@@ -54,6 +56,7 @@ func _init(
 	meta_team_position = p_meta_team_position
 	meta_last_save = p_meta_last_save
 	meta_game_date = p_meta_game_date
+	meta_is_temp = p_meta_is_temp
 
 
 func create_dir() -> void:

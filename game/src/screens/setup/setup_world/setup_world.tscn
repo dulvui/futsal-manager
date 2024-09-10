@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://qppc6sbc1cn0"]
+[gd_scene load_steps=3 format=3 uid="uid://cqcsyes1j6vwi"]
 
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_382rw"]
-[ext_resource type="Script" path="res://src/screens/start_game/start_game.gd" id="2_416pw"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_lar05"]
+[ext_resource type="Script" path="res://src/screens/setup/setup_world/setup_world.gd" id="2_s01se"]
 
 [node name="Start" type="Control"]
 layout_mode = 3
@@ -10,8 +10,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_382rw")
-script = ExtResource("2_416pw")
+theme = ExtResource("1_lar05")
+script = ExtResource("2_s01se")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -36,49 +36,13 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Manager" type="VBoxContainer" parent="VBoxContainer"]
+[node name="WorldData" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="ManagerLabel" type="Label" parent="VBoxContainer/Manager"]
+[node name="Label" type="Label" parent="VBoxContainer/WorldData"]
 layout_mode = 2
-text = "MANAGER"
-
-[node name="Container" type="GridContainer" parent="VBoxContainer/Manager"]
-layout_mode = 2
-theme_override_constants/h_separation = 30
-columns = 2
-
-[node name="NameLabel" type="Label" parent="VBoxContainer/Manager/Container"]
-custom_minimum_size = Vector2(240, 0)
-layout_mode = 2
-text = "NAME"
-
-[node name="Name" type="LineEdit" parent="VBoxContainer/Manager/Container"]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Hans"
-
-[node name="SurNameLabel" type="Label" parent="VBoxContainer/Manager/Container"]
-custom_minimum_size = Vector2(240, 0)
-layout_mode = 2
-text = "SURNAME"
-
-[node name="SurName" type="LineEdit" parent="VBoxContainer/Manager/Container"]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Viustel"
-
-[node name="NatLabel" type="Label" parent="VBoxContainer/Manager/Container"]
-custom_minimum_size = Vector2(240, 0)
-layout_mode = 2
-text = "NATIONALITY"
-
-[node name="Nat" type="OptionButton" parent="VBoxContainer/Manager/Container"]
-layout_mode = 2
+text = "Soon a custom csv file can be used as data for nations, teams and players...
+Until then, only default values can be used."
 
 [node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
