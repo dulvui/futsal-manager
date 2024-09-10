@@ -36,20 +36,12 @@ func new_temp_state() -> void:
 	temp_state.id = temp_id
 
 
-func reset_temp() -> void:
-	temp_state = null
-
-
 func get_active() -> SaveState:
-	# use temp, if exists
-	if temp_state:
-		return temp_state
-
 	for state: SaveState in list:
 		if state.id == active_id:
 			return state
 
-	return null
+	return temp_state
 
 
 func get_active_path(relative_path: String = "") -> String:

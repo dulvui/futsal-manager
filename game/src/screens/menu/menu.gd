@@ -16,9 +16,6 @@ extends Control
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
-	# always reset temp state in menu
-	Config.save_states.reset_temp()
-
 	load_game.visible = Config.save_states and Config.save_states.list.size() > 0
 	continue_game.visible = Config.save_states and Config.save_states.list.size() > 0
 
