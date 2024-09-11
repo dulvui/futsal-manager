@@ -91,7 +91,7 @@ func inizialize_matches(leagues: Array[League]) -> void:
 						break
 
 			# assign match friday
-			Config.world.calendar.day(month, day).get_matches().append_array(
+			Config.world.calendar.day(month, day).get_matches(league.id).append_array(
 				matches.slice(0, matches.size() / 4)
 			)
 			## assign match saturday

@@ -46,7 +46,8 @@ func get_team_by_id(team_id: int) -> Team:
 func random_results() -> void:
 	var match_engine: MatchEngine = MatchEngine.new()
 	for league: League in leagues:
-		for matchz: Match in Config.world.calendar.day().get_matches(league.id):
+		var matches: Array = Config.world.calendar.day().get_matches(league.id)
+		for matchz: Match in matches:
 			if matchz.home.id != Config.team.id and matchz.away.id != Config.team.id:
 				var result_match: Match = match_engine.simulate(matchz)
 				matchz.set_result(result_match.home_goals, result_match.away_goals)

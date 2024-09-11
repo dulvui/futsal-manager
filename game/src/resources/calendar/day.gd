@@ -33,7 +33,7 @@ func _init(
 
 func get_matches(event_id: int = Config.league.id) -> Array:
 	if not event_id in matches:
-		matches[event_id] = Array([], TYPE_OBJECT, "Resource", Match)
+		matches[event_id] = []
 	return matches[event_id]
 
 
