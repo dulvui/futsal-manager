@@ -119,6 +119,7 @@ func select_team(p_league: League, p_team: Team) -> void:
 	team = p_team
 	world.active_team_id = team.id
 	print("team saved")
+	transfers = Transfers.new()
 	world.initialize_calendars()
 	print("calendars created")
 	MatchMaker.inizialize_matches(world.get_all_leagues())
