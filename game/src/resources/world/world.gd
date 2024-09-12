@@ -96,11 +96,6 @@ func initialize_city(continent_name: String, nation_name: String, league_name: S
 	league.add_team(team)
 
 
-func initialize_calendars() -> void:
-	# TODO initialize all calendars
-	pass
-
-
 func random_results() -> void:
 	for c: Continent in Config.world.continents:
 		for n: Nation in c.nations:

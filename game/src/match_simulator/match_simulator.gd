@@ -5,7 +5,7 @@
 class_name MatchSimulator
 extends Control
 
-signal action_message
+signal action_message(message: String)
 signal half_time
 signal match_end
 signal update_time
@@ -81,6 +81,7 @@ func continue_match() -> void:
 
 
 func match_finished() -> void:
+	action_message.emit("match finished")
 	timer.stop()
 
 
@@ -89,4 +90,5 @@ func set_time() -> void:
 
 
 func start_match() -> void:
+	action_message.emit("match started")
 	timer.start()

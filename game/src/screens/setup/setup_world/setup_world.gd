@@ -21,12 +21,9 @@ func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
 	Config.save_states.new_temp_state()
-	#Config.load_save_state()
 	
-	# TODO add reset button, to use defualt world
-	if not Config.world:
-		var generator: Generator = Generator.new()
-		Config.world = generator.generate_world()
+	var generator: Generator = Generator.new()
+	Config.world = generator.generate_world()
 	
 	for gender: String in Const.Gender:
 		gender_option.add_item(gender)

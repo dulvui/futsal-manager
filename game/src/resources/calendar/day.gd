@@ -31,9 +31,15 @@ func _init(
 	year = p_year
 
 
-func get_matches(event_id: int = Config.league.id) -> Array:
-	if not event_id in matches:
+func add_matches(p_matches: Array, event_id: int = Config.league.id) -> void:
+	if not matches.has(event_id):
 		matches[event_id] = []
+	(matches[event_id] as Array).append_array(p_matches)
+
+
+func get_matches(event_id: int = Config.league.id) -> Array:
+	if not matches.has(event_id):
+		return []
 	return matches[event_id]
 
 

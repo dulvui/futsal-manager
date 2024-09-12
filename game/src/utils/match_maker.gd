@@ -4,15 +4,11 @@
 
 extends Node
 
-var match_days: Array[Array]
-var match_day: int = 0
-
 
 func inizialize_matches(leagues: Array[League]) -> void:
 	for league: League in leagues:
 		var teams: Array = league.teams.duplicate(true)
-		match_days = []
-		match_day = 0
+		var match_days: Array[Array]
 
 		var random_teams: Array[Team] = teams.duplicate(true)
 		RngUtil.shuffle(random_teams)
@@ -91,9 +87,8 @@ func inizialize_matches(leagues: Array[League]) -> void:
 						break
 
 			# assign match friday
-			Config.world.calendar.day(month, day).get_matches(league.id).append_array(
-				matches.slice(0, matches.size() / 4)
-			)
+			Config.world.calendar.day(month, day).add_matches( \
+				matches.slice(0, matches.size() / 4), league.id)
 			## assign match saturday
 			day += 1
 			# check if next month
@@ -105,9 +100,8 @@ func inizialize_matches(leagues: Array[League]) -> void:
 					if Config.world.calendar.day(month, i).weekday == "SAT":
 						day = i
 						break
-			Config.world.calendar.day(month, day).get_matches(league.id).append_array(
-				matches.slice(matches.size() / 4, matches.size() / 2)
-			)
+			Config.world.calendar.day(month, day).add_matches( \
+					matches.slice(matches.size() / 4, matches.size() / 2), league.id)
 			## assign match sunday
 			day += 1
 			# check if next month
@@ -119,9 +113,8 @@ func inizialize_matches(leagues: Array[League]) -> void:
 					if Config.world.calendar.day(month, i).weekday == "SUN":
 						day = i
 						break
-			Config.world.calendar.day(month, day).get_matches(league.id).append_array(
-				matches.slice(matches.size() / 2, matches.size())
-			)
+			Config.world.calendar.day(month, day).add_matches( \
+					matches.slice(matches.size() / 2, matches.size()), league.id)
 			# restart from friday
 			day += 5
 
