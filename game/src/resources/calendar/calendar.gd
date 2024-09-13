@@ -55,11 +55,10 @@ func _init(
 
 
 func initialize(next_season: bool = false) -> void:
+	date.day = Const.SEASON_START_DAY
+	date.month = Const.SEASON_START_MONTH
 	if next_season:
 		date.year += 1
-		date.day = Const.SEASON_START_DAY
-		date.month = Const.SEASON_START_MONTH
-
 		date = _get_next_day(date)
 	else:
 		date = Time.get_datetime_dict_from_system()
