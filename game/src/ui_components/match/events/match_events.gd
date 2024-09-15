@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name MatchEvents
 extends ScrollContainer
 
 @onready var vbox: VBoxContainer = $VBoxContainer

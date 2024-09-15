@@ -11,7 +11,7 @@ const MAX_COMMENTS: int = 16
 @onready var match_simulator: MatchSimulator = $MatchSimulator
 @onready var stats: VisualMatchStats = $Main/Content/CentralContainer/MainBar/Stats
 @onready var comments: VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
-@onready var events: ScrollContainer = $Main/Content/CentralContainer/MainBar/Events
+@onready var events: MatchEvents = $Main/Content/CentralContainer/MainBar/Events
 @onready var formation: VisualFormation = $Main/Content/CentralContainer/MainBar/Formation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var time_label: Label = $Main/Content/CentralContainer/TopBar/Time
@@ -123,33 +123,39 @@ func half_time() -> void:
 	first_half = false
 
 
-func _on_Field_pressed() -> void:
+func _on_field_pressed() -> void:
 	_hide_views()
-	#comments.show()
 	match_simulator.show()
 	last_active_view = match_simulator
 
 
-func _on_Stats_pressed() -> void:
+
+func _on_commentary_pressed() -> void:
+	_hide_views()
+	comments.show()
+	last_active_view = comments
+
+
+func _on_stats_pressed() -> void:
 	_hide_views()
 	stats.show()
 	last_active_view = stats
 
 
-func _on_Events_pressed() -> void:
+func _on_events_pressed() -> void:
 	_hide_views()
 	events.show()
 	last_active_view = events
 
 
-func _on_Formation_pressed() -> void:
+func _on_formation_pressed() -> void:
 	_hide_views()
 	formation.show()
 	match_simulator.pause()
 	pause_button.text = tr("CONTINUE")
 
 
-func _on_Formation_change() -> void:
+func _on_formation_change() -> void:
 	print(" TODO change formation in match engine")
 
 
@@ -170,25 +176,25 @@ func _toggle_view_buttons() -> void:
 	tactics_button.disabled = not tactics_button.disabled
 
 
-func _on_Dashboard_pressed() -> void:
+func _on_dashboard_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
-func _on_Faster_pressed() -> void:
+func _on_faster_pressed() -> void:
 	if Config.speed_factor < MAX_SPEED_FACTOR:
 		Config.speed_factor += 1
 		match_simulator.set_time()
 	speed_factor_label.text = str(Config.speed_factor) + " X"
 
 
-func _on_Slower_pressed() -> void:
+func _on_slower_pressed() -> void:
 	if Config.speed_factor > 1:
 		Config.speed_factor -= 1
 		match_simulator.set_time()
 	speed_factor_label.text = str(Config.speed_factor) + " X"
 
 
-func _on_Pause_pressed() -> void:
+func _on_pause_pressed() -> void:
 	var paused: bool = match_simulator.pause_toggle()
 	if paused:
 		pause_button.text = tr("CONTINUE")
@@ -198,11 +204,11 @@ func _on_Pause_pressed() -> void:
 		last_active_view.show()
 
 
-func _on_SKIP_pressed() -> void:
+func _on_skip_pressed() -> void:
 	match_end()
 
 
-func _on_StartTimer_timeout() -> void:
+func _on_start_timer_timeout() -> void:
 	match_simulator.start_match()
 
 

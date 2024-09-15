@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://qppc6sbc1cn0"]
+[gd_scene load_steps=2 format=3 uid="uid://qppc6sbc1cn0"]
 
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_fsug1"]
 [ext_resource type="Script" path="res://src/screens/setup/setup_manager/setup_manager.gd" id="2_f1nd3"]
 
 [node name="Start" type="Control"]
@@ -10,7 +9,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_fsug1")
 script = ExtResource("2_f1nd3")
 
 [node name="Panel" type="Panel" parent="."]
