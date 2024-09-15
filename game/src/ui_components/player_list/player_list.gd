@@ -262,18 +262,11 @@ func _sort_players(value: String, map_function: Callable) -> void:
 
 	# after sorting, apply filters
 	# so if filters a removed, sort order is kept
-	_filter_players(all_players)
+	_filter()
+
 
 
 func _filter() -> void:
-	_filter_players(players)
-
-
-func _unfilter() -> void:
-	_filter_players(all_players)
-
-
-func _filter_players(player_base: Array[Player]) -> void:
 	page = 0
 
 	if filters.size() > 0:
@@ -282,7 +275,7 @@ func _filter_players(player_base: Array[Player]) -> void:
 		var value: String
 		var key: String
 
-		for player in player_base:
+		for player in all_players:
 			filter_counter = 0
 			for i:int in filters.keys().size():
 				key = filters.keys()[i]
@@ -305,36 +298,31 @@ func _on_name_search_text_changed(new_text: String) -> void:
 	if new_text.length() > 0:
 		if not "surname" in filters:
 			filters["surname"] = new_text
-			_filter()
 		elif new_text.length() > (filters["surname"] as String).length():
 			filters["surname"] = new_text
-			_filter()
 		else:
 			filters["surname"] = new_text
-			_unfilter()
 	else:
 		filters.erase("surname")
-		_unfilter()
+	_filter()
 
 
 func _on_position_select_item_selected(index: int) -> void:
 	if index > 0:
 		filters["position"] = Position.Type.values()[index - 1]
-		_filter()
 	else:
 		filters.erase("position")
-		_unfilter()
+	_filter()
 
 
 func _on_league_select_item_selected(index: int) -> void:
 	if index > 0:
 		filters["league"] = league_select.get_item_text(index)
-		_filter()
 	else:
 		filters.erase("league")
-		_unfilter()
 
 	# clean team selector
+	filters.erase("team")
 	team_select.clear()
 	team_select.add_item("NO_TEAM")
 
@@ -344,15 +332,16 @@ func _on_league_select_item_selected(index: int) -> void:
 			for team: Team in league.teams:
 				if team == null or team.name != Config.team.name:
 					team_select.add_item(team.name)
+	
+	_filter()
 
 
 func _on_team_select_item_selected(index: int) -> void:
 	if index > 0:
 		filters["team"] = team_select.get_item_text(index)
-		_filter()
 	else:
 		filters.erase("team")
-		_unfilter()
+	_filter()
 
 
 func _on_active_view_item_selected(index: int) -> void:
