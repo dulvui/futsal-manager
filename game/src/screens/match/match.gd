@@ -30,12 +30,10 @@ const MAX_COMMENTS: int = 16
 @onready var faster_button: Button = $Main/Content/Buttons/Speed/Faster
 @onready var slower_button: Button = $Main/Content/Buttons/Speed/Slower
 @onready var dashboard_button: Button = $Main/Content/Buttons/Dashboard
-@onready var change_button: Button = $Main/Content/Buttons/Change
 @onready var events_button: Button = $Main/Content/Buttons/Events
 @onready var stats_button: Button = $Main/Content/Buttons/Stats
 @onready var field_button: Button = $Main/Content/Buttons/Field
 @onready var formation_button: Button = $Main/Content/Buttons/Formation
-@onready var tactics_button: Button = $Main/Content/Buttons/Tactics
 
 var last_active_view: Control
 
@@ -168,12 +166,10 @@ func _hide_views() -> void:
 
 
 func _toggle_view_buttons() -> void:
-	change_button.disabled = not change_button.disabled
 	events_button.disabled = not events_button.disabled
 	stats_button.disabled = not stats_button.disabled
 	field_button.disabled = not field_button.disabled
 	formation_button.disabled = not formation_button.disabled
-	tactics_button.disabled = not tactics_button.disabled
 
 
 func _on_dashboard_pressed() -> void:
