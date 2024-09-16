@@ -13,18 +13,20 @@ func test() -> void:
 	print("test: benchmark...")
 	generator = Generator.new()
 	match_engine = MatchEngine.new()
-	var world: World = generator.generate_world()
+	Config.world = generator.generate_world()
 	
-	var test_leagues: Array[League] = world.continents[0].nations[0].leagues
+	var test_leagues: Array[League] = Config.world.continents[0].nations[0].leagues
 	MatchMaker.inizialize_matches(test_leagues)
 	
-	# find next match day in calendars
-	for league: League in test_leagues:
-		print(league.name)
-		print(league.teams.size())
-		while world.calendar.day().get_matches().size() == 0:
-			world.calendar.next_day()
-			
+	# set active team and league, so next match day can be found
+	Config.world.active_team_id = Config.world.continents[0].nations[0].leagues[0].teams[0].id
+	Config.team = Config.world.continents[0].nations[0].leagues[0].teams[0]
+	Config.league = Config.world.continents[0].nations[0].leagues[0]
+	
+	print("test: searching next match day")
+	while Config.world.calendar.day().get_matches().size() == 0:
+		Config.world.calendar.next_day()
 
+	print("test: calculate random results...")
 	Config.world.random_results()
 	print("test: benchmark done.")

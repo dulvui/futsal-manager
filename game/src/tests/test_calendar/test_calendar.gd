@@ -15,7 +15,8 @@ func test_months_and_days_size() -> void:
 	print("test: test_months_and_days_size...")
 	var calendar: Calendar = Calendar.new()
 	calendar.initialize()
-	assert(calendar.months.size() == 12)
+	# 24 months, since always 2 years are present
+	assert(calendar.months.size() == 24)
 	assert(calendar.months[0].days.size() == 31)
 	# TODO specialcase for february
 	#assert(calendar.months[1].days.size() == 31)
