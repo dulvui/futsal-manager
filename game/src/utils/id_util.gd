@@ -4,7 +4,7 @@
 extends Node
 
 enum Types {
-	LEAGUE,
+	COMPETITION,
 	TEAM,
 	PLAYER,
 	MANAGER,

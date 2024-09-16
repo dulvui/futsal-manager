@@ -5,7 +5,7 @@
 class_name Day
 extends Resource
 
-# matches by leauge/tournament id
+# matches by leauge/cup id
 @export var matches: Dictionary
 @export var market: bool
 @export var weekday: String

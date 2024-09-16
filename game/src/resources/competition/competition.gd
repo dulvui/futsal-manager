@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name League
+class_name Competition
 extends Resource
 
 @export var id: int
@@ -13,7 +13,7 @@ extends Resource
 
 
 func _init(
-	p_id: int = IdUtil.next_id(IdUtil.Types.LEAGUE),
+	p_id: int = IdUtil.next_id(IdUtil.Types.COMPETITION),
 	p_pyramid_level: int = 1,
 	p_table: Table = Table.new(),
 	p_name: String = "",

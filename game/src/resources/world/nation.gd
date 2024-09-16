@@ -7,14 +7,14 @@ extends Resource
 
 @export var name: String
 @export var leagues: Array[League]
-@export var cup_clubs: Tournament
+@export var cup_clubs: Cup
 @export var team: Team
 
 
 func _init(
 	p_name: String = "",
 	p_leagues: Array[League] = [],
-	p_cup_clubs: Tournament = Tournament.new(),
+	p_cup_clubs: Cup = Cup.new(),
 	p_team: Team = Team.new(),
 ) -> void:
 	name = p_name
