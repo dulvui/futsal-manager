@@ -39,6 +39,8 @@ func generate_players(nation: Nation, league: League, team: Team) -> void:
 	# youngest player can be 15 and oldest 45
 	date = Config.start_date
 	
+	var temp_team_prestige: int = get_team_prestige(league.pyramid_level)
+	
 	var max_date: Dictionary = date.duplicate()
 	max_date.month = 1
 	max_date.day = 1
@@ -48,8 +50,6 @@ func generate_players(nation: Nation, league: League, team: Team) -> void:
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 	
 	# create team
-	team.budget = RngUtil.rng.randi_range(500000, 100000000)
-	team.salary_budget = RngUtil.rng.randi_range(500000, 100000000)
 	team.colors = []
 	team.colors.append(
 		Color(
@@ -69,10 +69,14 @@ func generate_players(nation: Nation, league: League, team: Team) -> void:
 	
 	team.create_stadium(team.name + " Stadium", 1234, 1990)
 	
-	var temp_team_prestige: int = get_team_prestige(league.pyramid_level)
 	assign_players_to_team(team, league, nation, temp_team_prestige)
 
 	team.staff = create_staff(team.get_prestige(), nation, league.pyramid_level)
+	
+	# calc budget, after players/stuff have been created
+	# so budget will alwyas be bigger as minimum needed
+	team.budget = get_budget(temp_team_prestige)
+	team.salary_budget = get_salary_budget(team.players, team.staff, temp_team_prestige)
 
 
 func assign_players_to_team(p_team: Team, p_league: League, p_nation: Nation, prestige: int) -> Team:
@@ -482,3 +486,25 @@ func load_person_names() -> void:
 			NAMES_DIR + nation.name.to_lower() + ".json", FileAccess.READ
 		)
 		names[nation.name.to_lower()] = JSON.parse_string(names_file.get_as_text())
+
+
+func get_budget(prestige: int) -> int:
+	return RngUtil.rng.randi_range(prestige * 10000, prestige * 100000)
+
+
+func get_salary_budget(players: Array[Player], staff: Staff, prestige: int) -> int:
+	var salary_budget: int = 0
+	
+	# sum up all players salary
+	for player: Player in players:
+		salary_budget += player.get_salary()
+	
+	# sum up staff salary
+	salary_budget += staff.manager.get_salary()
+	salary_budget += staff.scout.get_salary()
+	salary_budget += staff.president.get_salary()
+	
+	# add random increase
+	salary_budget += RngUtil.rng.randi_range(prestige * 1000, prestige * 10000)
+	
+	return salary_budget
