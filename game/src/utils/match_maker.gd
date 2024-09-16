@@ -19,7 +19,7 @@ func initialize_matches() -> void:
 		# third, initialize continental cups
 		_initialize_club_continental_cup(continent)
 	
-	# last, initialize continental cups
+	# last, initialize world cup
 	_initialize_national_teams_world_cup()
 
 
@@ -75,7 +75,6 @@ func _initialize_club_league_matches(league: League) -> void:
 
 	# add to calendar
 	# TODO use actual league start/end date
-	# TODO allow also over 2 years
 	#var day: int = Config.world.calendar.day().day
 	#var month: int = Config.world.calendar.day().month
 	var day: int = 0
@@ -114,7 +113,7 @@ func _initialize_club_league_matches(league: League) -> void:
 					break
 		Config.world.calendar.day(month, day).add_matches( \
 				matches.slice(matches.size() / 4, matches.size() / 2), league.id)
-		## assign match sunday
+		# assign match sunday
 		day += 1
 		# check if next month
 		if day > Config.world.calendar.month(month).days.size() - 1:
@@ -140,6 +139,11 @@ func _initialize_club_continental_cup(_continent: Continent) -> void:
 
 
 func _initialize_national_teams_world_cup() -> void:
+	pass
+
+
+func _initialize_cup(_teams: Array[Team]) -> void:
+	# 
 	pass
 
 

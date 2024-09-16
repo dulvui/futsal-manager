@@ -48,7 +48,7 @@ enum P {
 
 
 func _init(
-	p_id: int = IdUtil.next_id(IdUtil.Types.PLAYER),
+	p_id: int = IdUtil.next_id(IdUtil.Types.POSITION_VARIATION),
 	p_name: String = "",
 	p_description: String = "",
 	p_coordinates: Vector2 = Vector2.ZERO,

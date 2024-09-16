@@ -56,12 +56,12 @@ func _ready() -> void:
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
 		matchz = Match.new()
 		# games needs to be started at least once with a valid save state
-		matchz.home = Config.league.teams[0]
-		matchz.away = Config.league.teams[1]
+		matchz.home = Config.leagueteams[0]
+		matchz.away = Config.leagueteams[1]
 	else:
 		matchz = Config.world.calendar.get_next_match()
 
-	for team: Team in Config.league.teams:
+	for team: Team in Config.leagueteams:
 		if team.id == matchz.home.id:
 			home_team = team
 		elif team.id == matchz.away.id:

@@ -6,6 +6,7 @@ class_name Person
 extends Resource
 
 enum Role {
+	UNEMPLOYED,
 	PLAYER,
 	MANAGER,
 	PRESIDENT,
@@ -24,21 +25,23 @@ enum Role {
 
 
 func _init(
+	p_role: Role = Role.UNEMPLOYED,
 	p_nation: String = "",
 	p_name: String = "",
 	p_surname: String = "",
 	p_birth_date: Dictionary = Time.get_datetime_dict_from_system(),
 	p_prestige: int = 10,
-	p_role: Role = Role.PLAYER,
 	p_contract: Contract = Contract.new(),
+	p_id: int = IdUtil.next_id(IdUtil.Types.PERSON),
 ) -> void:
+	role = p_role
 	nation = p_nation
 	name = p_name
 	surname = p_surname
 	birth_date = p_birth_date
 	prestige = p_prestige
-	role = p_role
 	contract = p_contract
+	id = p_id
 
 
 func get_full_name() -> String:

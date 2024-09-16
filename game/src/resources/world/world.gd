@@ -9,8 +9,7 @@ const WORLD_CSV_PATH: String = "res://data/world/world.csv"
 
 @export var calendar: Calendar
 @export var continents: Array[Continent]
-@export var cup_clubs: Cup
-@export var cup_nations: Cup
+@export var world_cup: CupMixedStage
 
 @export var active_team_id: int
 
@@ -18,14 +17,12 @@ const WORLD_CSV_PATH: String = "res://data/world/world.csv"
 func _init(
 	p_calendar: Calendar = Calendar.new(),
 	p_continents: Array[Continent] = [],
-	p_cup_clubs: Cup = Cup.new(),
-	p_cup_nations: Cup = Cup.new(),
+	p_world_cup: CupMixedStage = CupMixedStage.new(),
 	p_active_team_id: int = -1,
 ) -> void:
 	calendar = p_calendar
 	continents = p_continents
-	cup_clubs = p_cup_clubs
-	cup_nations = p_cup_nations
+	world_cup = p_world_cup
 	active_team_id = p_active_team_id
 
 

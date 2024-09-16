@@ -2,13 +2,13 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name Manager
-extends Person
+class_name Knockout
+extends Resource
 
-@export var agent: Agent
+@export var teams: Array[Team]
+
 
 func _init(
-	p_agent: Agent = Agent.new(),
+	p_teams: Array[Team] = [],
 ) -> void:
-	super(Person.Role.MANAGER)
-	agent = p_agent
+	teams = p_teams

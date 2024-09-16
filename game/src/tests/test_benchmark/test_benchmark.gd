@@ -15,7 +15,7 @@ func test() -> void:
 	match_engine = MatchEngine.new()
 	Config.world = generator.generate_world()
 	
-	MatchMaker.initialize_matches()
+	MatchMaker.inizialize_matches()
 	
 	# set active team and league, so next match day can be found
 	Config.world.active_team_id = Config.world.continents[0].nations[0].leagues[0].teams[0].id

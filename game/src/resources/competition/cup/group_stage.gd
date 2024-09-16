@@ -2,18 +2,16 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name League
-extends Competition
+class_name CupGroup
+extends Resource
 
 @export var table: Table
 @export var teams: Array[Team]
-
 
 func _init(
 	p_table: Table = Table.new(),
 	p_teams: Array[Team] = [],
 ) -> void:
-	super()
 	table = p_table
 	teams = p_teams
 

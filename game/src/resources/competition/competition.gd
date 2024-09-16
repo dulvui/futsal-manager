@@ -6,36 +6,15 @@ class_name Competition
 extends Resource
 
 @export var id: int
-@export var table: Table
 @export var pyramid_level: int
 @export var name: String
-@export var teams: Array[Team]
 
 
 func _init(
 	p_id: int = IdUtil.next_id(IdUtil.Types.COMPETITION),
 	p_pyramid_level: int = 1,
-	p_table: Table = Table.new(),
 	p_name: String = "",
-	p_teams: Array[Team] = [],
 ) -> void:
 	id = p_id
 	pyramid_level = p_pyramid_level
-	table = p_table
 	name = p_name
-	teams = p_teams
-
-
-func add_team(team: Team) -> void:
-	teams.append(team)
-	table.add_team(team)
-
-	# sort alphabetically
-	teams.sort_custom(func(a: Team, b: Team) -> bool: return a.name < b.name)
-
-
-func get_team_by_id(team_id: int) -> Team:
-	for team: Team in teams:
-		if team.id == team_id:
-			return team
-	return null

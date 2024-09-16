@@ -27,7 +27,6 @@ enum Form { Injured, Recover, Good, Excellent }
 
 
 func _init(
-	p_id: int = IdUtil.next_id(IdUtil.Types.PLAYER),
 	p_price: int = 0,
 	p_nr: int = 0,
 	p_loyality: int = 0,
@@ -50,7 +49,7 @@ func _init(
 	p_attributes: Attributes = Attributes.new(),
 	p_agent: Agent = Agent.new(),
 ) -> void:
-	id = p_id
+	super(Person.Role.PLAYER)
 	price = p_price
 	nr = p_nr
 	loyality = p_loyality
@@ -72,8 +71,6 @@ func _init(
 	contract = p_contract
 	attributes = p_attributes
 	agent = p_agent
-	
-	role = Person.Role.PLAYER
 
 
 func get_attack_attributes(attack: Action.Attack) -> int:
