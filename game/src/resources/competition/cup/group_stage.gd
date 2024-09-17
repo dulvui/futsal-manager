@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name CupGroup
+class_name Group
 extends Resource
 
 @export var table: Table
@@ -29,3 +29,10 @@ func get_team_by_id(team_id: int) -> Team:
 		if team.id == team_id:
 			return team
 	return null
+
+
+func sort_teams_by_table_pos() -> void:
+	teams.sort_custom(
+		func (a: Team, b: Team) -> bool:
+			return table.get_position(a.id) > table.get_position(b.id)
+	)

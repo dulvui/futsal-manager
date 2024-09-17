@@ -14,5 +14,5 @@ func _init(
 	knockout = p_knockout
 
 
-func add_teams(_teams: Array[Team]) -> void:
-	pass
+func set_up(teams: Array[Team]) -> void:
+	knockout.set_up(teams)
