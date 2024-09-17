@@ -284,7 +284,7 @@ autostart = true
 [connection signal="pressed" from="Main/Content/Buttons/Speed/Slower" to="." method="_on_slower_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Speed/Faster" to="." method="_on_faster_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Formation" to="." method="_on_formation_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Pause" to="." method="_on_Pause_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Skip" to="." method="_on_skip_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Dashboard" to="." method="_on_dashboard_pressed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
