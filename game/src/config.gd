@@ -65,6 +65,7 @@ func load_save_state() -> void:
 		generation_seed = save_sate.generation_seed
 		generation_state = save_sate.generation_state
 		generation_gender = save_sate.generation_gender
+		print("config speed_factor " + str(speed_factor))
 		_load_resources()
 
 
@@ -118,6 +119,7 @@ func select_team(p_league: League, p_team: Team) -> void:
 	league = p_league
 	team = p_team
 	world.active_team_id = team.id
+	
 	print("team saved")
 	transfers = Transfers.new()
 	print("calendars created")

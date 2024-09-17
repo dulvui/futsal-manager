@@ -76,6 +76,8 @@ func _ready() -> void:
 	away_color.color = away_team.get_away_color(home_color.color)
 
 	speed_factor_label.text = str(Config.speed_factor) + " X"
+	
+	print("match speed_factor" + str(Config.speed_factor))
 
 	# to easier access stats
 	home_stats = match_simulator.visual_match.match_engine.home_team.stats
