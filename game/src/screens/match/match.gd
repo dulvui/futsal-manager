@@ -52,20 +52,16 @@ var away_stats: MatchStatistics
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
+	matchz = Config.world.calendar.get_next_match()
+	if matchz != null:
+		home_team = matchz.home
+		away_team = matchz.away
 	# setup automatically, if run in editor and is run by 'Run current scene'
-	if OS.has_feature("editor") and get_parent() == get_tree().root:
+	elif OS.has_feature("editor"):
 		matchz = Match.new()
 		# games needs to be started at least once with a valid save state
-		matchz.home = Config.leagueteams[0]
-		matchz.away = Config.leagueteams[1]
-	else:
-		matchz = Config.world.calendar.get_next_match()
-
-	for team: Team in Config.leagueteams:
-		if team.id == matchz.home.id:
-			home_team = team
-		elif team.id == matchz.away.id:
-			away_team = team
+		matchz.home = Config.league.teams[0]
+		matchz.away = Config.league.teams[1]
 
 	home_name.text = matchz.home.name
 	away_name.text = matchz.away.name
@@ -105,6 +101,7 @@ func match_end() -> void:
 	pause_button.hide()
 	dashboard_button.show()
 	match_simulator.match_finished()
+	# TODO differntiate between cups and leagues
 	Config.league.table.add_result(
 		home_team.id, home_stats.goals, away_team.id, away_stats.goals
 	)
