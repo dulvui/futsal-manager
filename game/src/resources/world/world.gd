@@ -134,3 +134,12 @@ func get_all_leagues() -> Array[League]:
 		for n: Nation in c.nations:
 			leagues.append_array(n.leagues)
 	return leagues
+
+
+func get_all_club_cups() -> Array[Competition]:
+	var cups: Array[Competition] = []
+	for c: Continent in Config.world.continents:
+		cups.append(c.cup_clubs)
+		for n: Nation in c.nations:
+			cups.append(n.cup)
+	return cups
