@@ -43,12 +43,10 @@ func set_up(p_date: Day = Day.new()) -> void:
 				background.color = HOME_MATCH_DAY_COLOR
 				competition.visible = true
 				competition_name.text = matchz.competition_name
-				print(matchz.competition_name)
 			elif Config.team.name == matchz.away.name:
 				team_name = matchz.home.name
 				background.color = AWAY_MATCH_DAY_COLOR
 				competition.visible = true
-				print(matchz.competition_name)
 				competition_name.text = matchz.competition_name
 		match_label.text = team_name
 	else:
