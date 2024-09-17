@@ -12,5 +12,5 @@ func _ready() -> void:
 		get_tree().change_scene_to_file.call_deferred("res://src/screens/menu/menu.tscn")
 	else:
 		get_tree().change_scene_to_file.call_deferred(
-			"res://src/screens/start_language/start_language.tscn"
+			"res://src/screens/setup_language/setup_language.tscn"
 		)
