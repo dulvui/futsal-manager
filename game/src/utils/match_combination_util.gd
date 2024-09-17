@@ -38,9 +38,9 @@ func _initialize_club_league_matches(league: League) -> void:
 		var current_match_day: Array = []
 		var matchOne: Match
 		if home:
-			matchOne = Match.new(last_team, random_teams[0])
+			matchOne = Match.new(last_team, random_teams[0], league.id, league.name)
 		else:
-			matchOne = Match.new(random_teams[0], last_team)
+			matchOne = Match.new(random_teams[0], last_team, league.id, league.name)
 		current_match_day.append(matchOne)
 
 		var copy: Array = random_teams.duplicate(true)
@@ -52,9 +52,9 @@ func _initialize_club_league_matches(league: League) -> void:
 
 			var matchTwo: Match
 			if home:
-				matchTwo = Match.new(copy[home_index], copy[away_index])
+				matchTwo = Match.new(copy[home_index], copy[away_index], league.id, league.name)
 			else:
-				matchTwo = Match.new(copy[away_index], copy[home_index])
+				matchTwo = Match.new(copy[away_index], copy[home_index], league.id, league.name)
 			current_match_day.append(matchTwo)
 
 		match_days.append(current_match_day)
@@ -66,7 +66,7 @@ func _initialize_club_league_matches(league: League) -> void:
 	for match_dayz: Array[Match] in match_days:
 		var current_match_dayz: Array = []
 		for match_dayss: Match in match_dayz:
-			var matchzz: Match = Match.new(match_dayss.away, match_dayss.home)
+			var matchzz: Match = Match.new(match_dayss.away, match_dayss.home, league.id, league.name)
 			current_match_dayz.append(matchzz)
 		temp_match_days.append(current_match_dayz)
 
@@ -140,7 +140,7 @@ func _initialize_club_national_cup(p_nation: Nation) -> void:
 	
 	# create matches for first round group a
 	# for now, only single leg
-	var matches: Array[Match] = p_nation.cup.get_matches()
+	var matches: Array[Match] = p_nation.cup.get_cup_matches()
 	
 	# add to calendar
 	var day: int = 0

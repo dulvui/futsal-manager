@@ -19,7 +19,9 @@ const AWAY_MATCH_DAY_COLOR: Color = Color.DEEP_SKY_BLUE
 @onready var month_day_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
 @onready var market_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
 
-@onready var ball_texture: TextureRect = $MarginContainer/VBoxContainer/Ball
+@onready var competition: HBoxContainer = $MarginContainer/VBoxContainer/Competition
+@onready var competition_name: Label = $MarginContainer/VBoxContainer/Competition/CompetitionName
+
 
 var date: Day
 
@@ -29,20 +31,25 @@ func set_up(p_date: Day = Day.new()) -> void:
 	# activate button
 	button.show()
 	
-	ball_texture.visible = false
+	competition.visible = false
 
 	month_day_label.text = str(date.day)
 	var team_name: String
-	if date.get_matches().size() > 0:
-		for matchz: Match in date.get_matches():
+	var matches: Array = date.get_matches()
+	if matches.size() > 0:
+		for matchz: Match in matches:
 			if Config.team.name == matchz.home.name:
 				team_name = matchz.away.name
 				background.color = HOME_MATCH_DAY_COLOR
-				ball_texture.visible = true
+				competition.visible = true
+				competition_name.text = matchz.competition_name
+				print(matchz.competition_name)
 			elif Config.team.name == matchz.away.name:
 				team_name = matchz.home.name
 				background.color = AWAY_MATCH_DAY_COLOR
-				ball_texture.visible = true
+				competition.visible = true
+				print(matchz.competition_name)
+				competition_name.text = matchz.competition_name
 		match_label.text = team_name
 	else:
 		match_label.hide()

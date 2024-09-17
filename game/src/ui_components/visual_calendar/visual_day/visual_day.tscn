@@ -71,11 +71,19 @@ layout_mode = 2
 text = "31"
 horizontal_alignment = 2
 
-[node name="Ball" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="Competition" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Ball" type="TextureRect" parent="MarginContainer/VBoxContainer/Competition"]
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("3_y600e")
 stretch_mode = 3
+
+[node name="CompetitionName" type="Label" parent="MarginContainer/VBoxContainer/Competition"]
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
 
 [node name="Match" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

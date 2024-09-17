@@ -37,10 +37,21 @@ func add_matches(p_matches: Array, competition_id: int = Config.league.id) -> vo
 	(matches[competition_id] as Array).append_array(p_matches)
 
 
-func get_matches(competition_id: int = Config.league.id) -> Array:
+func get_matches(competition_id: int = -1) -> Array:
+	# return all matches on this day
+	if competition_id == -1:
+		#  flat array of array
+		var value_list: Array = matches.values()
+		var flat_value_list: Array = []
+		for value: Array in value_list:
+			flat_value_list.append_array(value)
+		return flat_value_list
+	# only return competition specific matches on this day
+	
 	if not matches.has(competition_id):
 		return []
 	return matches[competition_id]
+
 
 
 func to_format_string() -> String:
