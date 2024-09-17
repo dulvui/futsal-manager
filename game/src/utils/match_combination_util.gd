@@ -130,8 +130,69 @@ func _initialize_club_league_matches(league: League) -> void:
 		day += 5
 
 
-func _initialize_club_national_cup(_nation: Nation) -> void:
-	pass
+func _initialize_club_national_cup(p_nation: Nation) -> void:
+	# setup cup
+	p_nation.cup.name =  p_nation.name + " cup"
+	var all_teams_by_nation: Array[Team]
+	for league: League in p_nation.leagues:
+		all_teams_by_nation.append_array(league.teams)
+	p_nation.cup.set_up(all_teams_by_nation)
+	
+	# create matches for first round group a
+	# for now, only single leg
+	var matches: Array[Match] = p_nation.cup.get_matches()
+	
+	# add to calendar
+	var day: int = 0
+	var month: int = 6
+
+	# start with saturday of next week
+	for i in range(8, 1, -1):
+		if Config.world.calendar.day(month, i).weekday == "TUE":
+			day = i
+			break
+
+	# check if next month
+	if day > Config.world.calendar.month(month).days.size() - 1:
+		month += 1
+		day = 0
+		# start also new month with tuesday
+		for i in 7:
+			if Config.world.calendar.day(month, i).weekday == "TUE":
+				day = i
+				break
+
+	# assign match tuesday
+	Config.world.calendar.day(month, day).add_matches( \
+		matches.slice(0, matches.size() / 4), p_nation.cup.id)
+	# assign match wednesay
+	day += 1
+	# check if next month
+	if day > Config.world.calendar.month(month).days.size() - 1:
+		month += 1
+		day = 0
+		# start also new month with tuesday
+		for i in 7:
+			if Config.world.calendar.day(month, i).weekday == "TUE":
+				day = i
+				break
+	Config.world.calendar.day(month, day).add_matches( \
+			matches.slice(matches.size() / 4, matches.size() / 2), p_nation.cup.id)
+	# assign matches THURSDAY
+	day += 1
+	# check if next month
+	if day > Config.world.calendar.month(month).days.size() - 1:
+		month += 1
+		day = 0
+		# start also new month with saturday
+		for i in 7:
+			if Config.world.calendar.day(month, i).weekday == "TUE":
+				day = i
+				break
+	Config.world.calendar.day(month, day).add_matches( \
+			matches.slice(matches.size() / 2, matches.size()), p_nation.cup.id)
+	# restart from friday
+	day += 5
 
 
 func _initialize_club_continental_cup(_continent: Continent) -> void:

@@ -8,6 +8,7 @@ extends Resource
 @export var table: Table
 @export var teams: Array[Team]
 
+
 func _init(
 	p_table: Table = Table.new(),
 	p_teams: Array[Team] = [],

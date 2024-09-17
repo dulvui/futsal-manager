@@ -19,7 +19,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Config="*res://src/config.gd"
-MatchMaker="*res://src/utils/match_maker.gd"
+MatchCombinationUtil="*res://src/utils/match_combination_util.gd"
 TransferUtil="*res://src/utils/transfer_util.gd"
 EmailUtil="*res://src/utils/email_util.gd"
 Const="*res://src/const.gd"

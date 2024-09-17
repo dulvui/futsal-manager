@@ -32,6 +32,5 @@ func set_up(p_teams: Array[Team]) -> void:
 			teams_a.append(p_teams[i])
 		else:
 			teams_b.append(p_teams[i])
-		
 	
 	

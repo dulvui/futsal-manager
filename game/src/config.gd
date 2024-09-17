@@ -121,7 +121,7 @@ func select_team(p_league: League, p_team: Team) -> void:
 	print("team saved")
 	transfers = Transfers.new()
 	print("calendars created")
-	MatchMaker.initialize_matches()
+	MatchCombinationUtil.initialize_matches()
 	print("matches initialized")
 	inbox = Inbox.new()
 	EmailUtil.welcome_manager()
@@ -143,7 +143,7 @@ func next_season() -> void:
 	
 	world.calendar.initialize(true)
 	
-	MatchMaker.initialize_matches()
+	MatchCombinationUtil.initialize_matches()
 
 	Config.save_all_data()
 
