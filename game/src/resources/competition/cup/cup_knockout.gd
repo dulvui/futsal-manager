@@ -24,12 +24,12 @@ func get_cup_matches() -> Array[Match]:
 	# group a
 	for i: int in knockout.teams_a.size() / 2:
 		# assign first vs last, first + 1 vs last - 1 etc...
-		var matchz: Match = Match.new(knockout.teams_a[i], knockout.teams_a[-i], id, name)
+		var matchz: Match = Match.new(knockout.teams_a[i], knockout.teams_a[-(i + 1)], id, name)
 		matches.append(matchz)
 	# group b
 	for i: int in knockout.teams_b.size() / 2:
 		# assign first vs last, first + 1 vs last - 1 etc...
-		var matchz: Match = Match.new(knockout.teams_b[i], knockout.teams_b[-i], id, name)
+		var matchz: Match = Match.new(knockout.teams_b[i], knockout.teams_b[-(i + 1)], id, name)
 		matches.append(matchz)
 	
 	return matches
