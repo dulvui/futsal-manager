@@ -51,6 +51,6 @@ func random_results() -> void:
 			if matchz.home.id != Config.team.id and matchz.away.id != Config.team.id:
 				var result_match: Match = match_engine.simulate(matchz)
 				matchz.set_result(result_match.home_goals, result_match.away_goals)
-				league.table.add_result(
+				league.table().add_result(
 					matchz.home.id, result_match.home_goals, matchz.away.id, result_match.away_goals
 				)

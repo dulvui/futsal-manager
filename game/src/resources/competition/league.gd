@@ -5,22 +5,28 @@
 class_name League
 extends Competition
 
-@export var table: Table
 @export var teams: Array[Team]
+# includes also historical tables
+# tables[-1] is latest winner
+@export var tables: Array[Table]
 
 
 func _init(
-	p_table: Table = Table.new(),
 	p_teams: Array[Team] = [],
+	p_tables: Array[Table] = [Table.new()],
 ) -> void:
 	super()
-	table = p_table
 	teams = p_teams
+	tables = p_tables
+
+
+func table() -> Table:
+	return tables[-1]
 
 
 func add_team(team: Team) -> void:
 	teams.append(team)
-	table.add_team(team)
+	tables[-1].add_team(team)
 
 	# sort alphabetically
 	teams.sort_custom(func(a: Team, b: Team) -> bool: return a.name < b.name)

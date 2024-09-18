@@ -104,7 +104,7 @@ func match_end() -> void:
 	dashboard_button.show()
 	match_simulator.match_finished()
 	# TODO differntiate between cups and leagues
-	Config.league.table.add_result(
+	Config.league.table().add_result(
 		home_team.id, home_stats.goals, away_team.id, away_stats.goals
 	)
 

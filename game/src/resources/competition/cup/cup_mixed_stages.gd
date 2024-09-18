@@ -10,6 +10,10 @@ const TEAMS_PASS_TO_KNOCKOUT: int = 2
 
 @export var groups: Array[Group]
 @export var knockout: Knockout
+# includes also historical winners
+# winners[-1] is latest winner
+@export var winners: Array[Team]
+
 
 func _init(
 	p_groups: Array[Group] = [],

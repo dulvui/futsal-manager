@@ -22,7 +22,7 @@ func set_up(league: League = Config.league) -> void:
 	var pos: int = 1
 
 	# transform table dictionary to array
-	var table_array: Array = league.table.to_sorted_array()
+	var table_array: Array = league.table().to_sorted_array()
 
 	for team: TableValues in table_array:
 		var pos_label: Label = Label.new()

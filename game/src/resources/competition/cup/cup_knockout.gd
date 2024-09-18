@@ -6,12 +6,17 @@ class_name CupKnockout
 extends Competition
 
 @export var knockout: Knockout
+# includes also historical winners
+# winners[-1] is latest winner
+@export var winners: Array[Team]
 
 func _init(
 	p_knockout: Knockout = Knockout.new(),
+	p_winners: Array[Team] = [],
 ) -> void:
 	super()
 	knockout = p_knockout
+	winners = p_winners
 
 
 func set_up(teams: Array[Team]) -> void:

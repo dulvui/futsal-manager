@@ -141,11 +141,41 @@ func _initialize_club_national_cup(p_nation: Nation) -> void:
 	# create matches for first round group a
 	# for now, only single leg
 	var matches: Array[Match] = p_nation.cup.get_cup_matches()
-	
 	# add to calendar
 	var day: int = 0
 	var month: int = 6
+	_add_cup_matches_to_calendar(matches, p_nation.cup.id,  day, month)
 
+
+func _initialize_club_continental_cup(_continent: Continent) -> void:
+	pass
+	# setup cup
+	#p_continent.cup_clubs.name =  p_continent.name + " cup"
+	#var top_teams_by_continent: Array[Team]
+	#for nation: Nation in p_continent.nations:
+		#var top_league_by_nation: League = nation.leagues[0]
+		#
+		#top_league_by_nation.t
+		#
+		#top_league_by_nation.g
+		#all_teams_by_nation.append_array(league.teams)
+	#p_nation.cup.set_up(all_teams_by_nation)
+	#
+	## create matches for first round group a
+	## for now, only single leg
+	#var matches: Array[Match] = p_nation.cup.get_cup_matches()
+	## add to calendar
+	#var day: int = 0
+	#var month: int = 6
+	#_add_cup_matches_to_calendar(matches, p_nation.cup.id,  day, month)
+
+
+func _initialize_national_teams_world_cup() -> void:
+	pass
+
+
+
+func _add_cup_matches_to_calendar(matches: Array[Match], cup_id: int, day:int, month: int) -> void:
 	# start with saturday of next week
 	for i in range(8, 1, -1):
 		if Config.world.calendar.day(month, i).weekday == "TUE":
@@ -164,7 +194,7 @@ func _initialize_club_national_cup(p_nation: Nation) -> void:
 
 	# assign match tuesday
 	Config.world.calendar.day(month, day).add_matches( \
-		matches.slice(0, matches.size() / 4), p_nation.cup.id)
+		matches.slice(0, matches.size() / 4), cup_id)
 	# assign match wednesay
 	day += 1
 	# check if next month
@@ -177,7 +207,7 @@ func _initialize_club_national_cup(p_nation: Nation) -> void:
 				day = i
 				break
 	Config.world.calendar.day(month, day).add_matches( \
-			matches.slice(matches.size() / 4, matches.size() / 2), p_nation.cup.id)
+			matches.slice(matches.size() / 4, matches.size() / 2), cup_id)
 	# assign matches THURSDAY
 	day += 1
 	# check if next month
@@ -190,22 +220,9 @@ func _initialize_club_national_cup(p_nation: Nation) -> void:
 				day = i
 				break
 	Config.world.calendar.day(month, day).add_matches( \
-			matches.slice(matches.size() / 2, matches.size()), p_nation.cup.id)
+			matches.slice(matches.size() / 2, matches.size()), cup_id)
 	# restart from friday
 	day += 5
-
-
-func _initialize_club_continental_cup(_continent: Continent) -> void:
-	pass
-
-
-func _initialize_national_teams_world_cup() -> void:
-	pass
-
-
-func _initialize_cup(_teams: Array[Team]) -> void:
-	# 
-	pass
 
 
 func _shift_array(array: Array) -> void:

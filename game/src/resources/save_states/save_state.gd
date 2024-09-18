@@ -92,7 +92,7 @@ func delete_dir() -> void:
 
 func save_metadata() -> void:
 	meta_team_position = (
-		str(Config.league.table.get_position())
+		str(Config.league.table().get_position())
 		+ ". "
 		+ Config.league.name
 	)

@@ -136,7 +136,6 @@ func next_season() -> void:
 	current_season += 1
 
 	# TODO
-	# teams go to upper/lower division
 	# financial stuff
 	# set new goals for manager
 	# player contracts
@@ -144,6 +143,11 @@ func next_season() -> void:
 	PlayerProgress.players_progress_season()
 	
 	world.calendar.initialize(true)
+	
+	# save competition results in history
+	
+	# teams go to upper/lower division
+	
 	
 	MatchCombinationUtil.initialize_matches()
 
