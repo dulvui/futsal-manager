@@ -32,6 +32,7 @@ const DEBUG: bool = false
 @export var contract: Contract
 @export var delay_days: int
 @export var exchange_players: Array[Player]
+@export var date: Dictionary
 
 
 func _init(
@@ -45,6 +46,7 @@ func _init(
 	p_price: int = 0,
 	p_delay_days: int = 0,
 	p_exchange_players: Array[Player] = [],
+	p_date : Dictionary = {},
 ) -> void:
 	id = p_id
 	player = p_player
@@ -56,6 +58,7 @@ func _init(
 	price = p_price
 	delay_days = p_delay_days
 	exchange_players = p_exchange_players
+	date = p_date
 
 
 func update() -> bool:

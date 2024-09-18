@@ -19,7 +19,7 @@ enum Form { Injured, Recover, Good, Excellent }
 @export var form: Form
 @export var morality: Morality
 @export var statistics: Statistics
-@export var history: History
+@export var history: Array[History]
 @export var foot: Foot
 @export var position: Position
 @export var alt_positions: Array[Position]
@@ -43,7 +43,7 @@ func _init(
 	p_form: Form = Form.Good,
 	p_morality: Morality = Morality.Good,
 	p_statistics: Statistics = Statistics.new(),
-	p_history: History = History.new(),
+	p_history: Array[History] = [],
 	p_foot: Foot = Foot.R,
 	p_position: Position = Position.new(),
 	p_alt_positions: Array[Position] = [],
