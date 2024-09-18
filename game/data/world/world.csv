@@ -29,6 +29,9 @@ Europe,Portugal,Liga Futsal 3,Montijo
 Europe,Portugal,Liga Futsal 3,Ponta Delgada
 Europe,Portugal,Liga Futsal 3,Santa Maria da Feira
 Europe,Portugal,Liga Futsal 3,Ermesinde
+Europe,Portugal,Backup,Viana do Castelo
+Europe,Portugal,Backup,Vila Nova de Famalicão
+Europe,Portugal,Backup,Castelo Branco
 Europe,Spain,Liga 1,Barcelona
 Europe,Spain,Liga 1,Madrid
 Europe,Spain,Liga 1,Valencia
@@ -59,6 +62,9 @@ Europe,Spain,Liga 3,Vitoria-Gasteiz
 Europe,Spain,Liga 3,Algeciras-La Línea
 Europe,Spain,Liga 3,Huelva
 Europe,Spain,Liga 3,Almería
+Europe,Spain,Backup,Salamanca
+Europe,Spain,Backup,Jerez de la Frontera
+Europe,Spain,Backup,León
 Europe,Italy,Serie a,Rome
 Europe,Italy,Serie a,Milan
 Europe,Italy,Serie a,Naples
@@ -99,6 +105,9 @@ Europe,Italy,Serie c2,Ravenna
 Europe,Italy,Serie c2,Cesenatico
 Europe,Italy,Serie c2,Novara
 Europe,Italy,Serie c2,Arezzo
+Europe,Italy,Backup,Pescara
+Europe,Italy,Backup,Cagliari
+Europe,Italy,Backup,Rimini
 Europe,Romania,Campeonat a,Bucharest
 Europe,Romania,Campeonat a,Cluj-Napoca
 Europe,Romania,Campeonat a,Iași
@@ -129,6 +138,9 @@ Europe,Romania,Campeonat c1,Târgoviște
 Europe,Romania,Campeonat c1,Focșani
 Europe,Romania,Campeonat c1,Tulcea
 Europe,Romania,Campeonat c1,Alba Iulia
+Europe,Romania,Backup,Slatina
+Europe,Romania,Backup,Vaslui
+Europe,Romania,Backup,Reșița
 South America,Brazil,Campeonato 1,São Paulo
 South America,Brazil,Campeonato 1,Rio de Janeiro
 South America,Brazil,Campeonato 1,Brasília
@@ -159,6 +171,9 @@ South America,Brazil,Campeonato 3,Sorocaba
 South America,Brazil,Campeonato 3,Uberlândia
 South America,Brazil,Campeonato 3,Ribeirão Preto
 South America,Brazil,Campeonato 3,São José dos Campos
+South America,Brazil,Backup,Cuiabá
+South America,Brazil,Backup,Jaboatão dos Guararapes
+South America,Brazil,Backup,Contagem
 South America,Argentina,Division 1,Buenos Aires
 South America,Argentina,Division 1,Córdoba
 South America,Argentina,Division 1,Rosario
@@ -189,3 +204,6 @@ South America,Argentina,Division 3,La Rioja
 South America,Argentina,Division 3,Gregorio de Laferrère
 South America,Argentina,Division 3,Comodoro Rivadavia
 South America,Argentina,Division 3,San Luis
+South America,Argentina,Backup,Ituzaingó
+South America,Argentina,Backup,Berazategui
+South America,Argentina,Backup,González Catán
