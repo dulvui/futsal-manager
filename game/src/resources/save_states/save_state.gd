@@ -57,8 +57,6 @@ func _init(
 	meta_last_save = p_meta_last_save
 	meta_game_date = p_meta_game_date
 	meta_is_temp = p_meta_is_temp
-	print("save state init speed_factor" + str(speed_factor))
-
 
 
 func create_dir() -> void:

@@ -25,7 +25,7 @@ var world: World
 
 
 func generate_world() -> World:
-	world = _generate_world_from_csv()
+	_generate_world_from_csv()
 
 	# generate players
 	_load_person_names()
@@ -546,7 +546,7 @@ func _generate_player_history() -> void:
 	pass
 
 
-func _generate_world_from_csv() -> World:
+func _generate_world_from_csv() -> void:
 	world = World.new()
 	world.initialize()
 	var file: FileAccess = FileAccess.open(WORLD_CSV_PATH, FileAccess.READ)
@@ -567,8 +567,6 @@ func _generate_world_from_csv() -> World:
 			var league: String = line[2]
 			var city: String = line[3]
 			_initialize_city(continent, nation,league, city)
-	
-	return world
 
 
 func _initialize_city(continent_name: String, nation_name: String, league_name: String, team_name: String) -> void:
@@ -593,20 +591,25 @@ func _initialize_city(continent_name: String, nation_name: String, league_name: 
 	else:
 		nation = nation_filter[0]
 	
-	# setup league, if note done yet or last league is full
-	var league: League
-	var league_filter: Array[League] = nation.leagues.filter(func(l: League) -> bool: return l.name == league_name)
-	if league_filter.size() == 0:
-		league = League.new()
-		league.name = league_name
-		# could bea added direclty to csv
-		# with this code, leagues/teams need to be in pyramid level order
-		league.pyramid_level = nation.leagues.size() + 1
-		nation.leagues.append(league)
-	else:
-		league = league_filter[0]
-	
-	# add team
+	# create team
 	var team: Team = Team.new()
 	team.name = team_name
-	league.add_team(team)
+	s
+	# check if team is backup team
+	if league_name.to_lower().strip_edges() == "backup":
+		nation.backup_teams.append(team)
+	else:
+		# setup league, if note done yet or last league is full
+		var league: League
+		var league_filter: Array[League] = nation.leagues.filter(func(l: League) -> bool: return l.name == league_name)
+		if league_filter.size() == 0:
+			league = League.new()
+			league.name = league_name
+			# could bea added direclty to csv
+			# with this code, leagues/teams need to be in pyramid level order
+			league.pyramid_level = nation.leagues.size() + 1
+			nation.leagues.append(league)
+		else:
+			league = league_filter[0]
+
+		league.add_team(team)
