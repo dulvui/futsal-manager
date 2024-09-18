@@ -10,6 +10,9 @@ const LEAGUES_DIR: String = "res://data/leagues/"
 # defines noise added to attribute factors
 const NOISE: int = 3
 
+# defines year, when hsitory starts
+const HISTORY_START: int = 1980
+
 var leagues_data: Dictionary = {}
 var names: Dictionary = {}
 
@@ -23,7 +26,7 @@ var world: World
 func generate_world() -> World:
 	world = World.new()
 	world.initialize()
-	
+
 	# generate players
 	_load_person_names()
 	for c: Continent in world.continents:
@@ -31,9 +34,9 @@ func generate_world() -> World:
 			for l: League in n.leagues:
 				for t: Team in l.teams:
 					_generate_players(n, l, t)
-	
+
 	_generate_competition_history()
-	
+
 	return world
 
 
@@ -42,9 +45,9 @@ func _generate_players(nation: Nation, league: League, team: Team) -> void:
 	# starts from current year and subtracts min/max years
 	# youngest player can be 15 and oldest 45
 	date = Config.start_date
-	
+
 	var temp_team_prestige: int = _get_team_prestige(league.pyramid_level)
-	
+
 	var max_date: Dictionary = date.duplicate()
 	max_date.month = 1
 	max_date.day = 1
@@ -52,7 +55,7 @@ func _generate_players(nation: Nation, league: League, team: Team) -> void:
 	max_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 	max_date.year -= 30
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
-	
+
 	# create team
 	team.colors = []
 	team.colors.append(
@@ -70,13 +73,13 @@ func _generate_players(nation: Nation, league: League, team: Team) -> void:
 			RngUtil.rng.randf_range(0, 1)
 		)
 	)
-	
+
 	team.create_stadium(team.name + " Stadium", 1234, 1990)
-	
+
 	_assign_players_to_team(team, league, nation, temp_team_prestige)
 
 	team.staff =  _create_staff(team.get_prestige(), nation, league.pyramid_level)
-	
+
 	# calc budget, after players/stuff have been created
 	# so budget will alwyas be bigger as minimum needed
 	team.budget = _get_budget(temp_team_prestige)
@@ -295,9 +298,9 @@ func _get_contract(person: Person) -> Contract:
 
 
 func _get_person_name(nation: Nation) -> String:
-	# TODO randomly use names from other nations, with low probability 
+	# TODO randomly use names from other nations, with low probability
 	var nation_string: String = nation.name.to_lower()
-	
+
 	if Config.generation_gender == Const.Gender.MALE:
 		var size: int = (names[nation_string]["first_names_male"] as Array).size()
 		return names[nation_string]["first_names_male"][RngUtil.rng.randi() % size]
@@ -319,14 +322,14 @@ func _get_person_name(nation: Nation) -> String:
 
 func _get_person_surname(nation: Nation) -> String:
 	# TODO bigger proability for neighbour nations (needs data)
-	
+
 	# 10% change of having random nation's surname
 	var different_nation_factor: int = RngUtil.rng.randi() % 100
 	if different_nation_factor > 90:
 		nation = RngUtil.pick_random(world.get_all_nations())
-	
+
 	var nation_string: String = nation.name.to_lower()
-	
+
 	var size: int = (names[nation_string]["last_names"] as Array).size()
 	return names[nation_string]["last_names"][RngUtil.rng.randi() % size]
 
@@ -346,9 +349,9 @@ func _create_manager(team_prestige: int, team_nation: Nation, pyramid_level: int
 	manager.nation = nation.name
 	manager.name = _get_person_name(nation)
 	manager.surname = _get_person_surname(nation)
-	
+
 	manager.contract = _get_contract(manager)
-	
+
 	return manager
 
 
@@ -379,7 +382,7 @@ func _create_player(
 ) -> Player:
 	var player: Player = Player.new()
 	_random_positions(player, p_position_type)
-	
+
 	# RngUtil.rng.random date from 1970 to 2007
 	var birth_date: Dictionary = Time.get_datetime_dict_from_unix_time(
 		RngUtil.rng.randi_range(0, max_timestamp)
@@ -409,7 +412,6 @@ func _create_player(
 	player.attributes.technical = _get_technical(date.year - birth_date.year, prestige, player.position)
 	player.attributes.physical = _get_physical(date.year - birth_date.year, prestige, player.position)
 
-	# TODO create history
 	var statistics: Statistics = Statistics.new()
 	statistics.team_name = "Test"
 	statistics.games_played = 0
@@ -418,7 +420,8 @@ func _create_player(
 	statistics.yellow_card = 0
 	statistics.red_card = 0
 	statistics.average_vote = 0
-	player.statistics.append(statistics)
+	player.statistics = statistics
+	# TODO create history
 
 	return player
 
@@ -435,13 +438,13 @@ func _random_positions(player: Player, p_position_type: Position.Type) -> void:
 	var alt_positions: Array[Position] = []
 	var alt_positions_keys: Array[Variant] = Position.Type.values()
 	RngUtil.shuffle(alt_positions_keys)
-	
+
 	for i: int in RngUtil.rng.randi_range(0, alt_positions_keys.size()):
 		var alt_position: Position = Position.new()
 		alt_position.type = alt_positions_keys[i]
 		alt_position.random_variations()
 		alt_positions.append(alt_position)
-	
+
 	player.alt_positions = alt_positions
 
 
@@ -498,21 +501,39 @@ func _get_budget(prestige: int) -> int:
 
 func _get_salary_budget(players: Array[Player], staff: Staff, prestige: int) -> int:
 	var salary_budget: int = 0
-	
+
 	# sum up all players salary
 	for player: Player in players:
 		salary_budget += player.get_salary()
-	
+
 	# sum up staff salary
 	salary_budget += staff.manager.get_salary()
 	salary_budget += staff.scout.get_salary()
 	salary_budget += staff.president.get_salary()
-	
+
 	# add random increase
 	salary_budget += RngUtil.rng.randi_range(prestige * 1000, prestige * 10000)
-	
+
 	return salary_budget
 
 
 func _generate_competition_history() -> void:
-	pass
+	var current_year: int = Config.start_date.year
+	# TODO world cup history (once national teams exist)
+	# TODO continental national teams cup
+
+	# first calculate league tables from starting year back
+	# use league tables to define who played in cups
+	for contient: Continent in world.continents:
+		for nation: Nation in contient.nations:
+			for year: int in range(current_year, HISTORY_START - 1, -1):
+				for league: League in nation.leagues:
+					var table: Table = Table.new()
+					league.tables.push_front(table)
+
+
+	# use league tables to calulate possible cup winners
+	for contient: Continent in world.continents:
+		# continental club cup
+		for year: int in range(current_year, HISTORY_START - 1, -1):
+			contient.cup_clubs

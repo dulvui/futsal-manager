@@ -51,7 +51,7 @@ var next_season: bool = false
 
 var view_history: Array[ContentViews]
 var view_history_index: int = 0
-var active_view:ContentViews = 0
+var active_view: ContentViews = ContentViews.EMAIL
 
 
 func _ready() -> void:

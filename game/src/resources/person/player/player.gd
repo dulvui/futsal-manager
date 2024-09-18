@@ -18,7 +18,8 @@ enum Form { Injured, Recover, Good, Excellent }
 @export var league: String  # league name for easier filtering etc...
 @export var form: Form
 @export var morality: Morality
-@export var statistics: Array[Statistics]
+@export var statistics: Statistics
+@export var history: History
 @export var foot: Foot
 @export var position: Position
 @export var alt_positions: Array[Position]
@@ -41,7 +42,8 @@ func _init(
 	p_birth_date: Dictionary = Time.get_datetime_dict_from_system(),
 	p_form: Form = Form.Good,
 	p_morality: Morality = Morality.Good,
-	p_statistics: Array[Statistics] = [Statistics.new()],
+	p_statistics: Statistics = Statistics.new(),
+	p_history: History = History.new(),
 	p_foot: Foot = Foot.R,
 	p_position: Position = Position.new(),
 	p_alt_positions: Array[Position] = [],
@@ -65,6 +67,7 @@ func _init(
 	form = p_form
 	morality = p_morality
 	statistics = p_statistics
+	history = p_history
 	foot = p_foot
 	position = p_position
 	alt_positions = p_alt_positions

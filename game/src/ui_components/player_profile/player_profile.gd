@@ -84,7 +84,7 @@ func set_player(_player: Player) -> void:
 			value.set_value(player.get_res_value(["attributes", attribute, key]))
 
 	#history
-	goals.text = str(player.statistics[Config.current_season].goals)
+	goals.text = str(player.statistics.goals)
 
 
 func _on_select_pressed() -> void:
