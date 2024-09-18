@@ -22,7 +22,6 @@ const AWAY_MATCH_DAY_COLOR: Color = Color.DEEP_SKY_BLUE
 @onready var competition: HBoxContainer = $MarginContainer/VBoxContainer/Competition
 @onready var competition_name: Label = $MarginContainer/VBoxContainer/Competition/CompetitionName
 
-
 var date: Day
 
 

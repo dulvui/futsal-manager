@@ -132,7 +132,7 @@ func _set_up_columns() -> void:
 	# statistics
 	for s: Dictionary in Statistics.new().get_property_list():
 		if s.usage == 4102:
-			var stats: Callable = func(p: Player) -> Variant: return p.statistics[0].get(s.name)
+			var stats: Callable = func(p: Player) -> Variant: return p.statistics.get(s.name)
 			_add_column("statistics", s.name, stats)
 
 	# attributes

@@ -10,17 +10,23 @@ extends Resource
 @export var cup: CupKnockout
 @export var team: Team
 
+# teams that are not playing in a league at the moment
+# they will get promoted, as soon as a team gets delegated from the last league
+@export var backup_teams: Array[Team]
+
 
 func _init(
 	p_name: String = "",
 	p_leagues: Array[League] = [],
 	p_cup: CupKnockout = CupKnockout.new(),
 	p_team: Team = Team.new(),
+	p_backup_teams: Array[Team] = [],
 ) -> void:
 	name = p_name
 	leagues = p_leagues
 	cup = p_cup
 	team = p_team
+	backup_teams = p_backup_teams
 
 
 func add_league(league: League) -> void:
