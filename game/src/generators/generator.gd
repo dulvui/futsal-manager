@@ -531,7 +531,25 @@ func _generate_club_history() -> void:
 		for nation: Nation in contient.nations:
 			for year: int in range(current_year, HISTORY_START - 1, -1):
 				for league: League in nation.leagues:
+					# generate random results for previous season, with actual teams
+					# last/first x teams will be promoted delegated
+					# switch them with teams from upper/lower division
+					# regenerate results for lower division
+					# if pyramid level == leagues size, swap with backup teams
+					
+					# initialize table
 					var table: Table = Table.new()
+					for team: Team in league.teams:
+						table.add_team(team)
+					# random results
+					for i in range(0, league.teams.size()):
+						var home_team: Team = league.teams[i]
+						var away_team: Team = league.teams[-(i + 1)]
+						var home_goals: int = RngUtil.rng.randi_range(0, 10)
+						var away_goals: int = RngUtil.rng.randi_range(0, 10)
+						table.add_result(home_team.id, home_goals, away_team.id, away_goals)
+					
+					# save table in results
 					league.tables.push_front(table)
 
 
@@ -594,7 +612,7 @@ func _initialize_city(continent_name: String, nation_name: String, league_name: 
 	# create team
 	var team: Team = Team.new()
 	team.name = team_name
-	s
+	
 	# check if team is backup team
 	if league_name.to_lower().strip_edges() == "backup":
 		nation.backup_teams.append(team)
@@ -611,5 +629,5 @@ func _initialize_city(continent_name: String, nation_name: String, league_name: 
 			nation.leagues.append(league)
 		else:
 			league = league_filter[0]
-
+		
 		league.add_team(team)
