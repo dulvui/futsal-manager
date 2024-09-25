@@ -5,13 +5,10 @@ SPDX-License-Identifier: CC0-1.0
 -->
 
 # futsal-manager
-A futsal manager game created with the Godot Engine.
+A futsal manager game created with the Godot Engine.  
+Still under development.
 
-Under development.
-
-# Internal testing
-The game is currently available only for internal testing on Android and still in an early stage.
-If you want to try anyway open an issue and I'll add you to the testers.
+Join [Discord](https://discord.gg/a5DSHZKkA8) if you have questions or want to stay updated.
 
 # Licenses and copyrights
 All source code is licensed under [AGPLv3](LICENSES/AGPL-3.0-or-later.txt)  
