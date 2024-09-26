@@ -6,15 +6,18 @@ class_name VisualTable
 extends VBoxContainer
 
 @onready var grid: GridContainer = $ScrollContainer/GridContainer
-@onready var leagues: SwitchOptionButton = $Leagues
+@onready var leagues: SwitchOptionButton = $Buttons/Leagues
+@onready var seasons: SwitchOptionButton = $Buttons/Seasons
 
 
 func _ready() -> void:
 	leagues.set_up(Config.world.get_all_leagues().map(func(league: League) -> String: return league.name))
-	set_up()
+	_set_up()
 
 
-func set_up(league: League = Config.league) -> void:
+func _set_up(league: League = Config.league) -> void:
+	_set_up_seasons(league)
+	
 	# clear grid
 	for child: Node in grid.get_children():
 		child.queue_free()
@@ -26,7 +29,7 @@ func set_up(league: League = Config.league) -> void:
 
 	for team: TableValues in table_array:
 		var pos_label: Label = Label.new()
-		style_label(pos_label)
+		_style_label(pos_label)
 		pos_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		pos_label.text = str(pos)
 		pos += 1
@@ -39,37 +42,37 @@ func set_up(league: League = Config.league) -> void:
 		grid.add_child(name_label)
 
 		var games_played_label: Label = Label.new()
-		style_label(games_played_label)
+		_style_label(games_played_label)
 		games_played_label.text = str(team.wins + team.draws + team.lost)
 		grid.add_child(games_played_label)
 
 		var wins_label: Label = Label.new()
-		style_label(wins_label)
+		_style_label(wins_label)
 		wins_label.text = str(team.wins)
 		grid.add_child(wins_label)
 
 		var draws_label: Label = Label.new()
-		style_label(draws_label)
+		_style_label(draws_label)
 		draws_label.text = str(team.draws)
 		grid.add_child(draws_label)
 
 		var lost_label: Label = Label.new()
-		style_label(lost_label)
+		_style_label(lost_label)
 		lost_label.text = str(team.lost)
 		grid.add_child(lost_label)
 
 		var goals_made_label: Label = Label.new()
-		style_label(goals_made_label)
+		_style_label(goals_made_label)
 		goals_made_label.text = str(team.goals_made)
 		grid.add_child(goals_made_label)
 
 		var goals_against_label: Label = Label.new()
-		style_label(goals_against_label)
+		_style_label(goals_against_label)
 		goals_against_label.text = str(team.goals_against)
 		grid.add_child(goals_against_label)
 
 		var points_label: Label = Label.new()
-		style_label(points_label)
+		_style_label(points_label)
 		points_label.text = str(team.points)
 		grid.add_child(points_label)
 
@@ -89,10 +92,24 @@ func set_up(league: League = Config.league) -> void:
 			points_label.label_settings = label_settings
 
 
-func style_label(label: Label) -> void:
+func _set_up_seasons(p_league: League) -> void:
+	var start_year: int = Config.world.calendar.date.year
+	var end_year: int = Config.world.calendar.date.year - p_league.tables.size()
+	
+	var season_years: Array[int] = []
+	for year: int in range(start_year, end_year, -1):
+		season_years.append(year)
+	seasons.set_up(season_years)
+
+
+func _style_label(label: Label) -> void:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label.custom_minimum_size = Vector2(60, 0)
 
 
 func _on_leagues_item_selected(index: int) -> void:
-	set_up(Config.world.get_all_leagues()[index])
+	_set_up(Config.world.get_all_leagues()[index])
+
+
+func _on_seasons_item_selected(_index: int) -> void:
+	pass # Replace with function body.

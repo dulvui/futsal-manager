@@ -15,7 +15,15 @@ size_flags_vertical = 3
 theme = ExtResource("2")
 script = ExtResource("1")
 
-[node name="Leagues" parent="." instance=ExtResource("3_p68f4")]
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Leagues" parent="Buttons" instance=ExtResource("3_p68f4")]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+
+[node name="Seasons" parent="Buttons" instance=ExtResource("3_p68f4")]
 custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
 
@@ -88,4 +96,5 @@ theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 0
 columns = 9
 
-[connection signal="item_selected" from="Leagues" to="." method="_on_leagues_item_selected"]
+[connection signal="item_selected" from="Buttons/Leagues" to="." method="_on_leagues_item_selected"]
+[connection signal="item_selected" from="Buttons/Seasons" to="." method="_on_seasons_item_selected"]
