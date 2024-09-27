@@ -529,8 +529,8 @@ func _generate_club_history() -> void:
 	# use league tables to define who played in cups
 	for contient: Continent in world.continents:
 		for nation: Nation in contient.nations:
-			for year: int in range(current_year, HISTORY_START - 1, -1):
-				for league: League in nation.leagues:
+			for league: League in nation.leagues:
+				for year: int in range(current_year, HISTORY_START - 1, -1):
 					# generate random results for previous season, with actual teams
 					# last/first x teams will be promoted delegated
 					# switch them with teams from upper/lower division
