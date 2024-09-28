@@ -33,7 +33,7 @@ func generate_world() -> World:
 		for n: Nation in c.nations:
 			for l: League in n.leagues:
 				for t: Team in l.teams:
-					_generate_players(n, l, t)
+					_initialize_team(n, l, t)
 	
 	# first generate clubs history with promotions, delegations, cup wins
 	_generate_club_history()
@@ -43,7 +43,7 @@ func generate_world() -> World:
 	return world
 
 
-func _generate_players(nation: Nation, league: League, team: Team) -> void:
+func _initialize_team(nation: Nation, league: League, team: Team) -> void:
 	# create date ranges
 	# starts from current year and subtracts min/max years
 	# youngest player can be 15 and oldest 45
@@ -81,7 +81,10 @@ func _generate_players(nation: Nation, league: League, team: Team) -> void:
 
 	_assign_players_to_team(team, league, nation, temp_team_prestige)
 
-	team.staff =  _create_staff(team.get_prestige(), nation, league.pyramid_level)
+	team.staff = _create_staff(team.get_prestige(), nation, league.pyramid_level)
+	
+	# assign manager preffered formation to team
+	team.formation = team.staff.manager.formation
 
 	# calc budget, after players/stuff have been created
 	# so budget will alwyas be bigger as minimum needed
@@ -354,6 +357,13 @@ func _create_manager(team_prestige: int, team_nation: Nation, pyramid_level: int
 	manager.surname = _get_person_surname(nation)
 
 	manager.contract = _get_contract(manager)
+	
+	# create random preferred tactics
+	manager.formation.set_variation(RngUtil.pick_random(Formation.Variations.values()))
+	manager.formation.tactic_offense.intensity = RngUtil.rng.randf()
+	manager.formation.tactic_offense.tactic = RngUtil.pick_random(TacticOffense.Tactics.values())
+	manager.formation.tactic_defense.marking = RngUtil.pick_random(TacticDefense.Marking.values())
+	manager.formation.tactic_defense.pressing = RngUtil.pick_random(TacticDefense.Pressing.values())
 
 	return manager
 

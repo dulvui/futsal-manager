@@ -11,7 +11,7 @@ enum Tactics {
 }
 
 @export var tactic: Tactics
-@export var intensity: float  # between 0.0 - 1.1
+@export var intensity: float  # between 0.0 - 1.0
 
 
 func _init(
