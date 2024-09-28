@@ -15,7 +15,6 @@ func test_possess_change() -> void:
 	print("test: possess change...")
 	var match_engine: MatchEngine = MatchEngine.new()
 	match_engine.set_up(create_mock_team(), create_mock_team(), 1234)
-
 	
 	match_engine.home_team.has_ball = true
 	match_engine.away_team.has_ball = false
@@ -28,11 +27,18 @@ func test_possess_change() -> void:
 func create_mock_team() -> Team:
 	var team: Team = Team.new()
 	team.players = [
-		Player.new(1),
-		Player.new(2),
-		Player.new(3),
-		Player.new(4),
-		Player.new(5)
+		Player.new(),
+		Player.new(),
+		Player.new(),
+		Player.new(),
+		Player.new()
 	]
-	team.lineup_player_ids = [1, 2, 3, 4, 5]
+	# assign player ids for lineup
+	team.lineup_player_ids = [
+		team.players[0].id,
+		team.players[1].id,
+		team.players[2].id,
+		team.players[3].id,
+		team.players[4].id,
+	]
 	return team

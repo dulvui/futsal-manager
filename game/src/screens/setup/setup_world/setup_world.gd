@@ -11,7 +11,6 @@ const DEFAULT_SEED: String = "SuchDefaultSeed"
 
 @onready var gender_option: OptionButton = $VBoxContainer/Settings/Container/Gender
 @onready var start_year_spinbox: SpinBox = $VBoxContainer/Settings/Container/StartYear
-
 @onready var generation_seed_edit: LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
 
 var generation_seed: String = DEFAULT_SEED
@@ -19,14 +18,14 @@ var generation_seed: String = DEFAULT_SEED
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-
+	
 	Config.save_states.new_temp_state()
 	
 	for gender: String in Const.Gender:
 		gender_option.add_item(gender)
 	
 	generation_seed_edit.text = generation_seed
-	
+	# set start year to current system year
 	start_year_spinbox.get_line_edit().text = str(Time.get_datetime_dict_from_system().year)
 
 
@@ -36,6 +35,7 @@ func _on_generated_seed_line_edit_text_changed(new_text: String) -> void:
 
 
 func _on_genearate_seed_button_pressed() -> void:
+	# generate random seed like 26374-28372-887463
 	generation_seed = (
 		str(randi_range(100000, 999999))
 		+ "-"
