@@ -76,7 +76,7 @@ text = "START_YEAR"
 [node name="StartYear" type="SpinBox" parent="VBoxContainer/Settings/Container"]
 layout_mode = 2
 size_flags_horizontal = 3
-min_value = 1970.0
+min_value = 2000.0
 max_value = 3000.0
 value = 2024.0
 

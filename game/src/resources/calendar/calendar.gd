@@ -59,16 +59,15 @@ func initialize(next_season: bool = false) -> void:
 		date.year += 1
 		date = _get_next_day(date)
 	else:
-		date = Time.get_datetime_dict_from_system()
+		date = Config.save_states.temp_state.start_date
 	
 	# set start date
 	date.day = Const.SEASON_START_DAY
 	date.month = Const.SEASON_START_MONTH
 		
-	# assign start_date and add 1 year at start to have total 2 years
+	# add 1 year at start to have total 2 years
 	if not next_season:
 		_add_year(date.year)
-		Config.start_date = date
 	
 	# next season, only 1 year gets appended
 	_add_year(date.year + 1)

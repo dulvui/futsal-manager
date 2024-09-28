@@ -22,20 +22,12 @@ func _ready() -> void:
 
 	Config.save_states.new_temp_state()
 	
-	# start date in fomrat YYYY-MM-DDTHH:MM:SS
-	var start_year: String = start_year_spinbox.get_line_edit().text
-	var start_date_str: String = (
-		"%s-%02d-%02dT00:00:00" % [start_year, Const.SEASON_START_MONTH, Const.SEASON_START_DAY]
-	)
-	Config.save_states.temp_state.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
-	Config.start_date = Config.save_states.temp_state.start_date
-	
 	for gender: String in Const.Gender:
 		gender_option.add_item(gender)
 	
 	generation_seed_edit.text = generation_seed
 	
-	start_year_spinbox.get_line_edit().text = str(Config.start_date.year)
+	start_year_spinbox.get_line_edit().text = str(Time.get_datetime_dict_from_system().year)
 
 
 func _on_generated_seed_line_edit_text_changed(new_text: String) -> void:
@@ -64,13 +56,21 @@ func _on_back_pressed() -> void:
 
 
 func _on_continue_pressed() -> void:
-	if generation_seed.length() > 0:
-		Config.save_states.temp_state.generation_seed = generation_seed
-		Config.save_states.temp_state.generation_gender = gender_option.selected
-		
-		RngUtil.reset_seed(generation_seed, gender_option.selected)
-		
-		var generator: Generator = Generator.new()
-		Config.world = generator.generate_world()
-		
-		get_tree().change_scene_to_file("res://src/screens/setup/setup_manager/setup_manager.tscn")
+	if generation_seed.length() == 0:
+		generation_seed = DEFAULT_SEED
+	
+	# start date in fomrat YYYY-MM-DDTHH:MM:SS
+	var start_year: String = start_year_spinbox.get_line_edit().text
+	var start_date_str: String = (
+		"%s-%02d-%02dT00:00:00" % [start_year, Const.SEASON_START_MONTH, Const.SEASON_START_DAY]
+	)
+	Config.save_states.temp_state.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
+	Config.save_states.temp_state.generation_seed = generation_seed
+	Config.save_states.temp_state.generation_gender = gender_option.selected
+	
+	RngUtil.reset_seed(generation_seed, gender_option.selected)
+	
+	var generator: Generator = Generator.new()
+	Config.world = generator.generate_world()
+	
+	get_tree().change_scene_to_file("res://src/screens/setup/setup_manager/setup_manager.tscn")

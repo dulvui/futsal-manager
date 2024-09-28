@@ -96,9 +96,9 @@ func _set_up_seasons(p_league: League) -> void:
 	var start_year: int = Config.world.calendar.date.year
 	var end_year: int = Config.world.calendar.date.year - p_league.tables.size()
 	
-	var season_years: Array[int] = []
+	var season_years: Array[String] = []
 	for year: int in range(start_year, end_year, -1):
-		season_years.append(year)
+		season_years.append(str(year))
 	seasons.set_up(season_years)
 
 

@@ -127,7 +127,10 @@ func select_team(p_league: League, p_team: Team) -> void:
 	print("matches initialized")
 	inbox = Inbox.new()
 	EmailUtil.welcome_manager()
-
+	
+	speed_factor = Config.save_states.temp_state.speed_factor
+	start_date = Config.save_states.temp_state.start_date
+	
 	save_states.make_temp_active()
 	save_all_data()
 

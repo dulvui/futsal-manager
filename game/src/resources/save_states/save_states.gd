@@ -45,8 +45,6 @@ func make_temp_active() -> void:
 	temp_state.meta_is_temp = false
 	temp_state.save_metadata()
 	
-	Config.speed_factor = temp_state.speed_factor
-
 	# make active
 	list.append(temp_state)
 	active_id = temp_state.id

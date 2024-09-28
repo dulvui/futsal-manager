@@ -12,7 +12,7 @@ const LEAGUES_DIR: String = "res://data/leagues/"
 const NOISE: int = 3
 
 # defines year, when hsitory starts
-const HISTORY_START: int = 1980
+const HISTORY_YEARS: int = 30
 
 var leagues_data: Dictionary = {}
 var names: Dictionary = {}
@@ -47,7 +47,7 @@ func _initialize_team(nation: Nation, league: League, team: Team) -> void:
 	# create date ranges
 	# starts from current year and subtracts min/max years
 	# youngest player can be 15 and oldest 45
-	date = Config.start_date
+	date = Config.save_states.temp_state.start_date
 
 	var temp_team_prestige: int = _get_team_prestige(league.pyramid_level)
 
@@ -290,8 +290,8 @@ func _get_random_morality() -> Player.Morality:
 func _get_contract(person: Person) -> Contract:
 	var contract: Contract = Contract.new()
 	contract.income = person.prestige * person.get_age()  # TODO use better logic
-	contract.start_date = Time.get_date_dict_from_system()
-	contract.end_date = Time.get_date_dict_from_system()
+	contract.start_date = date
+	contract.end_date = date
 	contract.bonus_goal = 0
 	contract.bonus_clean_sheet = 0
 	contract.bonus_assist = 0
@@ -531,7 +531,7 @@ func _get_salary_budget(players: Array[Player], staff: Staff, prestige: int) -> 
 
 
 func _generate_club_history() -> void:
-	var current_year: int = Config.start_date.year
+	var current_year: int = date.year
 	# TODO world cup history (once national teams exist)
 	# TODO continental national teams cup
 
@@ -540,7 +540,7 @@ func _generate_club_history() -> void:
 	for contient: Continent in world.continents:
 		for nation: Nation in contient.nations:
 			for league: League in nation.leagues:
-				for year: int in range(current_year, HISTORY_START - 1, -1):
+				for year: int in range(current_year, current_year - HISTORY_YEARS, -1):
 					# generate random results for previous season, with actual teams
 					# last/first x teams will be promoted delegated
 					# switch them with teams from upper/lower division
@@ -566,7 +566,7 @@ func _generate_club_history() -> void:
 	# use league tables to calculate possible cup winners
 	for contient: Continent in world.continents:
 		# continental club cup
-		for year: int in range(current_year, HISTORY_START - 1, -1):
+		for year: int in range(current_year, current_year - HISTORY_YEARS, -1):
 			contient.cup_clubs
 
 
