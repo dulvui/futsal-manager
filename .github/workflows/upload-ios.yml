@@ -66,42 +66,41 @@ jobs:
           sed -i -e "s|VERSION_CODE|$VERSION|g" $WORKING_DIRECTORY/export_presets.cfg
           sed -i -e "s|VERSION_NAME|$VERSION|g" $WORKING_DIRECTORY/export_presets.cfg
           sed -i -e "s|IOS_APPSTORE_TEAM_ID|$IOS_APPSTORE_TEAM_ID|g" $WORKING_DIRECTORY/export_presets.cfg
+      
+      - name: Extract Provisioning profile UUID and create GODOT_IOS_PROVISIONING_PROFILE_UUID_RELEASE env variable
+        run: echo "GODOT_IOS_PROVISIONING_PROFILE_UUID_RELEASE=$(grep -a -A 1 'UUID' $PP_PATH | grep string | sed -e "s|<string>||" -e "s|</string>||" | tr -d '\t')" >> $GITHUB_ENV
 
-      - name: Export and upload
+      - name: Export XCode project
         uses: dulvui/godot4-ios-export@v1
         with:
           working-directory: $WORKING_DIRECTORY
           godot-version: $GODOT_VERSION
       
-      # Build project and uplaod to TestFlight
-      - name: Extract Provisioning profile UUID and create PP_UUID env variable
-        run: echo "PP_UUID=$(grep -a -A 1 'UUID' $PP_PATH | grep string | sed -e "s|<string>||" -e "s|</string>||" | tr -d '\t')" >> $GITHUB_ENV
-
-      - name: Resolve package dependencies
-        run: xcodebuild -resolvePackageDependencies
-
-      - name: Build the xarchive
-        run: |
-          set -eo pipefail
-          xcodebuild  clean archive \
-            -scheme $PROJECT_NAME \
-            -configuration "Release" \
-            -sdk iphoneos \
-            -archivePath "$PWD/build/$PROJECT_NAME.xcarchive" \
-            -destination "generic/platform=iOS,name=Any iOS Device" \
-            OTHER_CODE_SIGN_FLAGS="--keychain $RUNNER_TEMP/app-signing.keychain-db" \
-            CODE_SIGN_STYLE=Manual \
-            PROVISIONING_PROFILE=$PP_UUID \
-            CODE_SIGN_IDENTITY="Apple Distribution"
-
-      - name: Export .ipa
-        run: |
-          set -eo pipefail
-          xcodebuild -archivePath "$PWD/build/$PROJECT_NAME.xcarchive" \
-            -exportOptionsPlist exportOptions.plist \
-            -exportPath $PWD/build \
-            -allowProvisioningUpdates \
-            -exportArchive
+      # - name: Resolve package dependencies
+      #   run: xcodebuild -resolvePackageDependencies
+      #
+      # - name: Build the xarchive
+      #   run: |
+      #     set -eo pipefail
+      #     xcodebuild  clean archive \
+      #       -scheme $PROJECT_NAME \
+      #       -configuration "Release" \
+      #       -sdk iphoneos \
+      #       -archivePath "$PWD/build/$PROJECT_NAME.xcarchive" \
+      #       -destination "generic/platform=iOS,name=Any iOS Device" \
+      #       OTHER_CODE_SIGN_FLAGS="--keychain $RUNNER_TEMP/app-signing.keychain-db" \
+      #       CODE_SIGN_STYLE=Manual \
+      #       PROVISIONING_PROFILE=$PP_UUID \
+      #       CODE_SIGN_IDENTITY="Apple Distribution"
+      #
+      # - name: Export .ipa
+      #   run: |
+      #     set -eo pipefail
+      #     xcodebuild -archivePath "$PWD/build/$PROJECT_NAME.xcarchive" \
+      #       -exportOptionsPlist exportOptions.plist \
+      #       -exportPath $PWD/build \
+      #       -allowProvisioningUpdates \
+      #       -exportArchive
 
       - name: Publish the App on TestFlight
         if: success()
@@ -109,7 +108,7 @@ jobs:
           xcrun altool \
             --upload-app \
             -t ios \
-            -f $PWD/build/*.ipa \
+            -f *.ipa \
             -u "${{ secrets.APPLE_ID_USERNAME }}" \
             -p "${{ secrets.APPLE_ID_PASSWORD }}" \
             --verbose
