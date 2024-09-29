@@ -7,7 +7,6 @@ name: iOS upload
 on:
   push:
     paths:
-      - "version"
       - ".github/workflows/upload-ios.yml"
       - "exportOptions.plist"
       - "export_presets.ios.example"
@@ -57,14 +56,9 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-      - name: Set version and short version
-        run: echo "VERSION=$(cat version | cut -f1 -d-)" >> $GITHUB_ENV
-
       - name: Create and config export_presets.cfg
         run: |
           cp game/export_presets.ios.example game/export_presets.cfg
-          sed -i -e "s|VERSION_CODE|$VERSION|g" $WORKING_DIRECTORY/export_presets.cfg
-          sed -i -e "s|VERSION_NAME|$VERSION|g" $WORKING_DIRECTORY/export_presets.cfg
           sed -i -e "s|IOS_APPSTORE_TEAM_ID|$IOS_APPSTORE_TEAM_ID|g" $WORKING_DIRECTORY/export_presets.cfg
       
       - name: Extract Provisioning profile UUID and create GODOT_IOS_PROVISIONING_PROFILE_UUID_RELEASE env variable
