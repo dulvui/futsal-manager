@@ -6,10 +6,10 @@ name: iOS upload
 
 on:
   push:
-    paths:
-      - ".github/workflows/upload-ios.yml"
-      - "exportOptions.plist"
-      - "export_presets.ios.example"
+    # paths:
+    #   - ".github/workflows/upload-ios.yml"
+    #   - "exportOptions.plist"
+    #   - "export_presets.ios.example"
 
 env:
   GODOT_VERSION: 4.3
