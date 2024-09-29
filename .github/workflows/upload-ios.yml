@@ -15,8 +15,6 @@ env:
   GODOT_VERSION: 4.3
   PROJECT_NAME: FutsalManager
   WORKING_DIRECTORY: game
-  IOS_APPLE_ID_USERNAME: ${{ secrets.IOS_APPLE_ID_USERNAME }}
-  IOS_APPLE_ID_PASSWORD: ${{ secrets.IOS_APPLE_ID_PASSWORD }}
   BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_BUILD_CERTIFICATE_BASE64 }}
   P12_PASSWORD: ${{ secrets.IOS_P12_PASSWORD }}
   BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROVISION_PROFILE_BASE64 }}
@@ -72,32 +70,6 @@ jobs:
           working-directory: $WORKING_DIRECTORY
           godot-version: $GODOT_VERSION
       
-      # - name: Resolve package dependencies
-      #   run: xcodebuild -resolvePackageDependencies
-      #
-      # - name: Build the xarchive
-      #   run: |
-      #     set -eo pipefail
-      #     xcodebuild  clean archive \
-      #       -scheme $PROJECT_NAME \
-      #       -configuration "Release" \
-      #       -sdk iphoneos \
-      #       -archivePath "$PWD/build/$PROJECT_NAME.xcarchive" \
-      #       -destination "generic/platform=iOS,name=Any iOS Device" \
-      #       OTHER_CODE_SIGN_FLAGS="--keychain $RUNNER_TEMP/app-signing.keychain-db" \
-      #       CODE_SIGN_STYLE=Manual \
-      #       PROVISIONING_PROFILE=$PP_UUID \
-      #       CODE_SIGN_IDENTITY="Apple Distribution"
-      #
-      # - name: Export .ipa
-      #   run: |
-      #     set -eo pipefail
-      #     xcodebuild -archivePath "$PWD/build/$PROJECT_NAME.xcarchive" \
-      #       -exportOptionsPlist exportOptions.plist \
-      #       -exportPath $PWD/build \
-      #       -allowProvisioningUpdates \
-      #       -exportArchive
-
       - name: Publish the App on TestFlight
         if: success()
         run: |
@@ -105,7 +77,7 @@ jobs:
             --upload-app \
             -t ios \
             -f *.ipa \
-            -u "${{ secrets.APPLE_ID_USERNAME }}" \
-            -p "${{ secrets.APPLE_ID_PASSWORD }}" \
+            -u "${{ secrets.IOS_APPLE_ID_USERNAME }}" \
+            -p "${{ secrets.IOS_APPLE_ID_PASSWORD }}" \
             --verbose
 
