@@ -66,6 +66,8 @@ jobs:
 
       - name: Export XCode project
         uses: dulvui/godot4-ios-export@v1
+        env:
+          CODE_SIGN_IDENTITY: "Apple Distribution"
         with:
           working-directory: $WORKING_DIRECTORY
           godot-version: $GODOT_VERSION
