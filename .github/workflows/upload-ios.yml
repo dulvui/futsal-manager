@@ -68,7 +68,10 @@ jobs:
           sed -i -e "s|IOS_APPSTORE_TEAM_ID|$IOS_APPSTORE_TEAM_ID|g" $WORKING_DIRECTORY/export_presets.cfg
       
       - name: Extract Provisioning profile UUID and create GODOT_IOS_PROVISIONING_PROFILE_UUID_RELEASE env variable
-        run: echo "GODOT_IOS_PROVISIONING_PROFILE_UUID_RELEASE=$(grep -a -A 1 'UUID' $PP_PATH | grep string | sed -e "s|<string>||" -e "s|</string>||" | tr -d '\t')" >> $GITHUB_ENV
+        run: |
+          PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+          echo "GODOT_IOS_PROVISIONING_PROFILE_UUID_RELEASE=$(grep -a -A 1 'UUID' $PP_PATH | grep string | \
+                sed -e "s|<string>||" -e "s|</string>||" | tr -d '\t')" >> $GITHUB_ENV
 
       - name: Export XCode project
         uses: dulvui/godot4-ios-export@v1
