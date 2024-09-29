@@ -15,7 +15,6 @@ env:
   GODOT_VERSION: 4.3
   PROJECT_NAME: FutsalManager
   WORKING_DIRECTORY: game
-  IOS_APPSTORE_TEAM_ID: ${{ secrets.IOS_APPSTORE_TEAM_ID }}
   IOS_APPLE_ID_USERNAME: ${{ secrets.IOS_APPLE_ID_USERNAME }}
   IOS_APPLE_ID_PASSWORD: ${{ secrets.IOS_APPLE_ID_PASSWORD }}
   BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_BUILD_CERTIFICATE_BASE64 }}
@@ -56,10 +55,8 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-      - name: Create and config export_presets.cfg
-        run: |
-          cp game/export_presets.ios.example game/export_presets.cfg
-          sed -i -e "s|IOS_APPSTORE_TEAM_ID|$IOS_APPSTORE_TEAM_ID|g" $WORKING_DIRECTORY/export_presets.cfg
+      - name: Create export_presets.cfg
+        run: cp game/export_presets.ios.example game/export_presets.cfg
       
       - name: Extract Provisioning profile UUID and create GODOT_IOS_PROVISIONING_PROFILE_UUID_RELEASE env variable
         run: |
