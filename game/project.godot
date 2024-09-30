@@ -70,7 +70,7 @@ theme/custom="res://themes/default/theme.tres"
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/i18n/FutsalManagerI18N - Sheet1.de.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.en.translation", "res://assets/i18n/FutsalManagerI18N - Sheet1.it.translation")
+locale/translations=PackedStringArray("res://assets/i18n/translations.de.translation", "res://assets/i18n/translations.en.translation", "res://assets/i18n/translations.it.translation")
 
 [locale]
 
