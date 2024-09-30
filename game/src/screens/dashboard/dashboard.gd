@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name Dashboard
 extends Control
 
 enum ContentViews { 
@@ -224,7 +225,7 @@ func _next_day() -> void:
 		return
 
 	# next day in calendar
-	Config.world.calendar.next_day()
+	Config.next_day()
 
 	# next season check
 	if next_season:
@@ -236,7 +237,6 @@ func _next_day() -> void:
 		return
 
 	# general setup
-	TransferUtil.update_day()
 	email.update_messages()
 	date_label.text = Config.world.calendar.format_date()
 

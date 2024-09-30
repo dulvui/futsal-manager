@@ -135,6 +135,15 @@ func select_team(p_league: League, p_team: Team) -> void:
 	save_all_data()
 
 
+func next_day() -> void:
+	Config.world.calendar.next_day()
+	
+	if Config.world.calendar.is_match_day():
+		EmailUtil.next_match(Config.world.calendar.get_next_match())
+	
+	TransferUtil.update_day()
+
+
 func next_season() -> void:
 	current_season += 1
 
@@ -142,6 +151,7 @@ func next_season() -> void:
 	# financial stuff
 	# set new goals for manager
 	# player contracts
+	# transfer markets
 
 	PlayerProgress.players_progress_season()
 	
@@ -151,11 +161,8 @@ func next_season() -> void:
 	
 	# teams go to upper/lower division
 	
-	
 	MatchCombinationUtil.initialize_matches()
-
 	Config.save_all_data()
-
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 

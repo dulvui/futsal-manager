@@ -182,7 +182,6 @@ func shoot_on_goal(power: float) -> void:
 	ball.shoot(random_target, power * RngUtil.match_rng.randi_range(2, 6))
 
 	stats.shots += 1
-	print("shoot " + str(power))
 	# TODO this doesnt work
 	#if field.is_goal(r_pos):
 	#stats.shots_on_target += 1

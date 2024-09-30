@@ -54,7 +54,7 @@ func random_results() -> void:
 	for league: League in leagues:
 		var matches: Array = Config.world.calendar.day().get_matches(league.id)
 		for matchz: Match in matches:
-			if matchz.home.id != Config.team.id and matchz.away.id != Config.team.id:
+			if not matchz.over:
 				var result_match: Match = match_engine.simulate(matchz)
 				matchz.set_result(result_match.home_goals, result_match.away_goals)
 				league.table().add_result(

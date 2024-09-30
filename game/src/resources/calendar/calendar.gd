@@ -76,9 +76,6 @@ func initialize(next_season: bool = false) -> void:
 func next_day() -> void:
 	date = _get_next_day()
 
-	if is_match_day():
-		EmailUtil.next_match(get_next_match())
-
 
 func day(p_month: int = date.month, p_day: int = date.day) -> Day:
 	return months[p_month - 1].days[p_day - 1]
