@@ -36,7 +36,7 @@ func _ready() -> void:
 		resolution_options.add_item(resolution)
 	resolution_options.selected = 0
 
-	version_label.text = Config.VERSION
+	version_label.text = Config.version
 
 
 func _on_theme_option_button_item_selected(index: int) -> void:

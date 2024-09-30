@@ -4,8 +4,8 @@
 
 extends Node
 
-const VERSION: String = "0.2.3"
-const CONFIG_VERSION: String = "1"
+const config_version: String = "1"
+var version: String = ProjectSettings.get_setting("application/config/version")
 
 # config
 var config: ConfigFile
@@ -48,7 +48,7 @@ var match_paused: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("version " + Config.VERSION)
+	print("version " + Config.version)
 	_load_config()
 	load_save_state()
 	RngUtil.set_up_rngs()

@@ -33,7 +33,7 @@ func _init(
 	p_speed_factor: int = 1,
 	p_id: String = str(int(Time.get_unix_time_from_system())),
 	p_id_by_type: Dictionary = {},
-	p_config_version: String = Config.CONFIG_VERSION,
+	p_config_version: String = Config.config_version,
 	p_start_date: Dictionary = Time.get_datetime_dict_from_system(),
 	p_meta_team_name: String = "",
 	p_meta_manager_name: String = "",

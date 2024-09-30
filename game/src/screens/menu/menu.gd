@@ -21,7 +21,7 @@ func _ready() -> void:
 
 	save_state.set_up(Config.save_states.get_active())
 	
-	version.text = "v" + Config.VERSION
+	version.text = "v" + Config.version
 
 
 func _on_new_game_pressed() -> void:
