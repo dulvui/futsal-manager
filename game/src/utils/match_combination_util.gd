@@ -76,7 +76,7 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 	return match_days
 
 
-func add_machtes_to_calendar(
+func _add_machtes_to_calendar(
 	competition: Competition,
 	match_days: Array[Array],
 	) -> void:
@@ -139,7 +139,7 @@ func add_machtes_to_calendar(
 
 func _initialize_club_league_matches(competition: Competition, teams: Array[Team]) -> void:
 	var match_days: Array[Array] = create_combinations(competition, teams)
-	add_machtes_to_calendar(competition, match_days)
+	_add_machtes_to_calendar(competition, match_days)
 
 
 func _initialize_club_national_cup(p_nation: Nation) -> void:

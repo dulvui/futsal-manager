@@ -551,20 +551,17 @@ func _generate_club_history() -> void:
 					var table: Table = Table.new()
 					for team: Team in league.teams:
 						table.add_team(team)
+					var match_days: Array[Array] = MatchCombinationUtil.create_combinations(league, league.teams)
+					
 					# random results first season half
-					for i in range(0, league.teams.size()):
-						var home_team: Team = league.teams[i]
-						var away_team: Team = league.teams[-(i + 1)]
-						var home_goals: int = RngUtil.rng.randi_range(0, 10)
-						var away_goals: int = RngUtil.rng.randi_range(0, 10)
-						table.add_result(home_team.id, home_goals, away_team.id, away_goals)
-					# second season half
-					for i in range(0, league.teams.size()):
-						var home_team: Team = league.teams[i]
-						var away_team: Team = league.teams[-(i + 1)]
-						var home_goals: int = RngUtil.rng.randi_range(0, 10)
-						var away_goals: int = RngUtil.rng.randi_range(0, 10)
-						table.add_result(home_team.id, home_goals, away_team.id, away_goals)
+					for match_day: Array in match_days:
+						for matchz: Match in match_day:
+							var home_goals: int = RngUtil.rng.randi_range(0, 10)
+							var away_goals: int = RngUtil.rng.randi_range(0, 10)
+							matchz.set_result(home_goals, away_goals)
+							table.add_result(
+								matchz.home.id, matchz.home_goals, matchz.away.id, matchz.away_goals
+							)
 					
 					# save table in results
 					league.tables.insert(0, table)
