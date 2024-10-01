@@ -9,23 +9,31 @@ extends VBoxContainer
 @onready var leagues: SwitchOptionButton = $Buttons/Leagues
 @onready var seasons: SwitchOptionButton = $Buttons/Seasons
 
+var league_index: int
+var season_index: int
+
 
 func _ready() -> void:
+	league_index = 0
+	season_index = 0
+	
 	leagues.set_up(Config.world.get_all_leagues().map(func(league: League) -> String: return league.name))
+	_set_up_seasons()
+	
 	_set_up()
 
 
-func _set_up(league: League = Config.league) -> void:
-	_set_up_seasons(league)
-	
+func _set_up() -> void:
 	# clear grid
 	for child: Node in grid.get_children():
 		child.queue_free()
-
+	
+	var league: League = Config.world.get_all_leagues()[league_index]
+	
 	var pos: int = 1
-
+	
 	# transform table dictionary to array
-	var table_array: Array = league.table().to_sorted_array()
+	var table_array: Array = league.tables[season_index].to_sorted_array()
 
 	for team: TableValues in table_array:
 		var pos_label: Label = Label.new()
@@ -92,9 +100,9 @@ func _set_up(league: League = Config.league) -> void:
 			points_label.label_settings = label_settings
 
 
-func _set_up_seasons(p_league: League) -> void:
+func _set_up_seasons() -> void:
 	var start_year: int = Config.world.calendar.date.year
-	var end_year: int = Config.world.calendar.date.year - p_league.tables.size()
+	var end_year: int = Config.world.calendar.date.year - Config.league.tables.size()
 	
 	var season_years: Array[String] = []
 	for year: int in range(start_year, end_year, -1):
@@ -108,8 +116,10 @@ func _style_label(label: Label) -> void:
 
 
 func _on_leagues_item_selected(index: int) -> void:
-	_set_up(Config.world.get_all_leagues()[index])
+	league_index = index
+	_set_up()
 
 
-func _on_seasons_item_selected(_index: int) -> void:
-	pass # Replace with function body.
+func _on_seasons_item_selected(index: int) -> void:
+	season_index = index
+	_set_up()
