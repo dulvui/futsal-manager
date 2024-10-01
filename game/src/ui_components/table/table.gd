@@ -11,11 +11,13 @@ extends VBoxContainer
 
 var league_index: int
 var season_index: int
-
+var season_amount: int
 
 func _ready() -> void:
 	league_index = 0
-	season_index = 0
+	# start from last entry
+	season_index = Config.league.tables.size() - 1
+	season_amount = Config.league.tables.size()
 	
 	leagues.set_up(Config.world.get_all_leagues().map(func(league: League) -> String: return league.name))
 	_set_up_seasons()
@@ -28,7 +30,7 @@ func _set_up() -> void:
 	for child: Node in grid.get_children():
 		child.queue_free()
 	
-	var league: League = Config.world.get_all_leagues()[league_index]
+	var league: League = Config.world.get_all_leagues()[-league_index]
 	
 	var pos: int = 1
 	
@@ -102,7 +104,7 @@ func _set_up() -> void:
 
 func _set_up_seasons() -> void:
 	var start_year: int = Config.world.calendar.date.year
-	var end_year: int = Config.world.calendar.date.year - Config.league.tables.size()
+	var end_year: int = Config.world.calendar.date.year - season_amount
 	
 	var season_years: Array[String] = []
 	for year: int in range(start_year, end_year, -1):
@@ -121,5 +123,9 @@ func _on_leagues_item_selected(index: int) -> void:
 
 
 func _on_seasons_item_selected(index: int) -> void:
-	season_index = index
+	# substract from season amount,
+	# seasons are inserted inverted in options button
+	# -1, because arrays start from 0
+	season_index = season_amount - index - 1
+	print(season_index)
 	_set_up()
