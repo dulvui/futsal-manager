@@ -11,7 +11,7 @@ func initialize_matches() -> void:
 	
 			# first, initialize leauge matches
 			for league: League in nation.leagues:
-				_initialize_club_league_matches(league)
+				_initialize_club_league_matches(league, league.teams)
 	
 			# seconldy, initialize national cups
 			_initialize_club_national_cup(nation)
@@ -23,10 +23,10 @@ func initialize_matches() -> void:
 	_initialize_national_teams_world_cup()
 
 
-func _initialize_club_league_matches(league: League) -> void:
-	var teams: Array = league.teams.duplicate(true)
+func create_combinations(competition: Competition, p_teams: Array[Team]) -> Array[Array]:
 	var match_days: Array[Array]
-
+	var teams: Array = p_teams.duplicate(true)
+	
 	var random_teams: Array[Team] = teams.duplicate(true)
 	RngUtil.shuffle(random_teams)
 
@@ -38,9 +38,9 @@ func _initialize_club_league_matches(league: League) -> void:
 		var current_match_day: Array = []
 		var matchOne: Match
 		if home:
-			matchOne = Match.new(last_team, random_teams[0], league.id, league.name)
+			matchOne = Match.new(last_team, random_teams[0], competition.id, competition.name)
 		else:
-			matchOne = Match.new(random_teams[0], last_team, league.id, league.name)
+			matchOne = Match.new(random_teams[0], last_team, competition.id, competition.name)
 		current_match_day.append(matchOne)
 
 		var copy: Array = random_teams.duplicate(true)
@@ -52,9 +52,9 @@ func _initialize_club_league_matches(league: League) -> void:
 
 			var matchTwo: Match
 			if home:
-				matchTwo = Match.new(copy[home_index], copy[away_index], league.id, league.name)
+				matchTwo = Match.new(copy[home_index], copy[away_index], competition.id, competition.name)
 			else:
-				matchTwo = Match.new(copy[away_index], copy[home_index], league.id, league.name)
+				matchTwo = Match.new(copy[away_index], copy[home_index], competition.id, competition.name)
 			current_match_day.append(matchTwo)
 
 		match_days.append(current_match_day)
@@ -66,13 +66,20 @@ func _initialize_club_league_matches(league: League) -> void:
 	for match_dayz: Array[Match] in match_days:
 		var current_match_dayz: Array = []
 		for match_dayss: Match in match_dayz:
-			var matchzz: Match = Match.new(match_dayss.away, match_dayss.home, league.id, league.name)
+			var matchzz: Match = Match.new(match_dayss.away, match_dayss.home, competition.id, competition.name)
 			current_match_dayz.append(matchzz)
 		temp_match_days.append(current_match_dayz)
 
 	for temp: Array in temp_match_days:
 		match_days.append(temp)
+	
+	return match_days
 
+
+func add_machtes_to_calendar(
+	competition: Competition,
+	match_days: Array[Array],
+	) -> void:
 	# add to calendar
 	# TODO use actual league start/end date
 	#var day: int = Config.world.calendar.day().day
@@ -99,7 +106,7 @@ func _initialize_club_league_matches(league: League) -> void:
 
 		# assign match friday
 		Config.world.calendar.day(month, day).add_matches( \
-			matches.slice(0, matches.size() / 4), league.id)
+			matches.slice(0, matches.size() / 4), competition.id)
 		## assign match saturday
 		day += 1
 		# check if next month
@@ -112,7 +119,7 @@ func _initialize_club_league_matches(league: League) -> void:
 					day = i
 					break
 		Config.world.calendar.day(month, day).add_matches( \
-				matches.slice(matches.size() / 4, matches.size() / 2), league.id)
+				matches.slice(matches.size() / 4, matches.size() / 2), competition.id)
 		# assign match sunday
 		day += 1
 		# check if next month
@@ -125,9 +132,14 @@ func _initialize_club_league_matches(league: League) -> void:
 					day = i
 					break
 		Config.world.calendar.day(month, day).add_matches( \
-				matches.slice(matches.size() / 2, matches.size()), league.id)
+				matches.slice(matches.size() / 2, matches.size()), competition.id)
 		# restart from friday
 		day += 5
+
+
+func _initialize_club_league_matches(competition: Competition, teams: Array[Team]) -> void:
+	var match_days: Array[Array] = create_combinations(competition, teams)
+	add_machtes_to_calendar(competition, match_days)
 
 
 func _initialize_club_national_cup(p_nation: Nation) -> void:

@@ -65,6 +65,8 @@ func _on_continue_pressed() -> void:
 		"%s-%02d-%02dT00:00:00" % [start_year, Const.SEASON_START_MONTH, Const.SEASON_START_DAY]
 	)
 	Config.save_states.temp_state.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
+	# also set Config.start_date, so funcs like person.get_age work 
+	Config.start_date = Config.save_states.temp_state.start_date
 	Config.save_states.temp_state.generation_seed = generation_seed
 	Config.save_states.temp_state.generation_gender = gender_option.selected
 	

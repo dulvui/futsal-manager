@@ -9,6 +9,7 @@ extends Node
 @onready var test_match_engine: TestMatchEngine = $TestMatchEngine
 @onready var test_benchmark: TestBenchmark = $TestBenchmark
 @onready var test_gameloop: TestGameloop = $TestGameloop
+@onready var test_match_combination: TestMatchCombination = $TestMatchCombination
 
 
 func _ready() -> void:
@@ -18,6 +19,7 @@ func _ready() -> void:
 	Config.save_states.new_temp_state()
 	Config.load_save_state()
 	
+	test_match_combination.test()
 	test_calendar.test()
 	test_generator.test()
 	test_match_engine.test()

@@ -11,8 +11,8 @@ const LEAGUES_DIR: String = "res://data/leagues/"
 # defines noise added to attribute factors
 const NOISE: int = 3
 
-# defines year, when hsitory starts
-const HISTORY_YEARS: int = 30
+# defines year, when history starts
+const HISTORY_YEARS: int = 10
 
 var leagues_data: Dictionary = {}
 var names: Dictionary = {}
@@ -547,11 +547,18 @@ func _generate_club_history() -> void:
 					# regenerate results for lower division
 					# if pyramid level == leagues size, swap with backup teams
 					
-					# initialize table
+					# initialize league table
 					var table: Table = Table.new()
 					for team: Team in league.teams:
 						table.add_team(team)
-					# random results
+					# random results first season half
+					for i in range(0, league.teams.size()):
+						var home_team: Team = league.teams[i]
+						var away_team: Team = league.teams[-(i + 1)]
+						var home_goals: int = RngUtil.rng.randi_range(0, 10)
+						var away_goals: int = RngUtil.rng.randi_range(0, 10)
+						table.add_result(home_team.id, home_goals, away_team.id, away_goals)
+					# second season half
 					for i in range(0, league.teams.size()):
 						var home_team: Team = league.teams[i]
 						var away_team: Team = league.teams[-(i + 1)]
@@ -560,7 +567,7 @@ func _generate_club_history() -> void:
 						table.add_result(home_team.id, home_goals, away_team.id, away_goals)
 					
 					# save table in results
-					league.tables.push_front(table)
+					league.tables.insert(0, table)
 
 
 	# use league tables to calculate possible cup winners
