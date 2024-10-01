@@ -16,7 +16,7 @@ func set_up(items: Array, selected: int = 0) -> void:
 	option_button.selected = selected
 
 
-func _on_prev_pressed() -> void:
+func _on_next_pressed() -> void:
 	if option_button.selected > 0:
 		option_button.selected -= 1
 	else:
@@ -24,7 +24,7 @@ func _on_prev_pressed() -> void:
 	item_selected.emit(option_button.selected)
 
 
-func _on_next_pressed() -> void:
+func _on_prev_pressed() -> void:
 	if option_button.selected < option_button.item_count - 1:
 		option_button.selected += 1
 	else:
