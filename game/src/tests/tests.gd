@@ -18,10 +18,10 @@ func _ready() -> void:
 	Config.save_states.new_temp_state()
 	Config.load_save_state()
 	
-	#test_calendar.test()
-	#test_generator.test()
-	#test_match_engine.test()
-	#test_benchmark.test()
-	test_gameloop.test()
+	test_calendar.test()
+	test_generator.test()
+	test_match_engine.test()
+	test_benchmark.test()
+	#test_gameloop.test()
 	
 	print("Stop test suite")

@@ -132,4 +132,3 @@ func is_touching(p_pos: Vector2, p_radius: int, log_debug: bool = false) -> bool
 	return test
 	#return Geometry2D.segment_intersects_circle(last_pos, pos, p_pos, p_radius) != -1
 	#return Geometry2D.segment_intersects_segment(last_pos, pos, p_last_pos, p_pos) != null
-
