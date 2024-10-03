@@ -546,16 +546,9 @@ func _generate_club_history() -> void:
 			
 			var teams_buffer: Dictionary = {}
 			for year: int in range(current_year, current_year - HISTORY_YEARS, -1):
-				print(year)
 				if not teams_buffer.is_empty():
-					print()
-					for league: League in nation.leagues:
-						print("teams before" + str(league.teams.size()))
-					
 					# switch them with teams from upper/lower division
 					for league: League in nation.leagues:
-						print("pyramid level " + str(league.pyramid_level) + "\n")
-						
 						var promoted_teams: Array[Team] = teams_buffer["p"][league.pyramid_level]
 						var delegated_teams: Array[Team] = teams_buffer["d"][league.pyramid_level]
 						
@@ -613,15 +606,8 @@ func _generate_club_history() -> void:
 							# remove delegated teams
 							for team: Team in delegated_teams:
 								league.teams.erase(team)
-					
-					for league: League in nation.leagues:
-						print("teams after" + str(league.teams.size()))
-					print("backup teams " + str(nation.backup_teams.size()))
 				
-				# clear teams
-				teams_buffer["d"] = {}
-				teams_buffer["p"] = {}
-				
+				# random results
 				for league: League in nation.leagues:
 					# initialize league table
 					var table: Table = Table.new()
@@ -630,6 +616,7 @@ func _generate_club_history() -> void:
 					var match_days: Array[Array] = MatchCombinationUtil.create_combinations(league, league.teams)
 					
 					# generate random results for previous season, with actual teams
+					# TODO make sure promoed/delegate teams win/lose
 					for match_day: Array in match_days:
 						for matchz: Match in match_day:
 							var home_goals: int = RngUtil.rng.randi_range(0, 10)

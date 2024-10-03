@@ -152,14 +152,14 @@ func next_season() -> void:
 	# set new goals for manager
 	# player contracts
 	# transfer markets
-
-	PlayerProgress.players_progress_season()
-	
-	world.calendar.initialize(true)
-	
 	# save competition results in history
 	
+	PlayerProgress.players_progress_season()
+	
 	# teams go to upper/lower division
+	world.promote_and_delegate_teams()
+	
+	world.calendar.initialize(true)
 	
 	MatchCombinationUtil.initialize_matches()
 	Config.save_all_data()

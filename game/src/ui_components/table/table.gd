@@ -30,7 +30,7 @@ func _set_up() -> void:
 	for child: Node in grid.get_children():
 		child.queue_free()
 	
-	var league: League = Config.world.get_all_leagues()[-league_index]
+	var league: League = Config.world.get_all_leagues()[league_index]
 	
 	var pos: int = 1
 	
