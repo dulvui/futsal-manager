@@ -156,7 +156,6 @@ func next_season() -> void:
 	
 	PlayerProgress.players_progress_season()
 	
-	# teams go to upper/lower division
 	world.promote_and_delegate_teams()
 	
 	world.calendar.initialize(true)

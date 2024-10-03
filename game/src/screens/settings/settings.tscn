@@ -88,7 +88,7 @@ layout_mode = 2
 
 [node name="Defaults" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "DEFAULTS"
+text = "DEFAULT_SETTINGS"
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2

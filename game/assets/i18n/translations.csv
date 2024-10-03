@@ -30,3 +30,8 @@ MIXED,Female,Gemischt,Misto
 ITALY,Italy,Italien,Italia
 SPAIN,Spain,Spanien,Spagna
 ROMANIA,Romania,Rumänien,Romania
+NEW_GAME,New game,Neues Spiel,Nuova partita
+LOAD_GAME,Load game,Spiel laden,Carica partita
+DARK,Dark,Dunkel,Scuro
+LIGHT,light,Hell,Chiaro
+DEFAULT_SETTINGS,Default settings,Standardeinstellung,Impostazioni predefinite

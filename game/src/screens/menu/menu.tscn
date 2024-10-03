@@ -66,13 +66,13 @@ text = "CONTINUE"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "START NEW"
+text = "NEW_GAME"
 
 [node name="LoadGame" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "LOAD GAME"
+text = "LOAD_GAME"
 
 [node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
