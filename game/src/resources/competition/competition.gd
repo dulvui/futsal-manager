@@ -6,6 +6,7 @@ class_name Competition
 extends Resource
 
 @export var id: int
+# 1 is best, bigger is lower league
 @export var pyramid_level: int
 @export var name: String
 

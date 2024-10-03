@@ -35,7 +35,7 @@ func _set_up() -> void:
 	var pos: int = 1
 	
 	# transform table dictionary to array
-	var table_array: Array = league.tables[season_index].to_sorted_array()
+	var table_array: Array[TableValues] = league.tables[season_index].to_sorted_array()
 
 	for team: TableValues in table_array:
 		var pos_label: Label = Label.new()

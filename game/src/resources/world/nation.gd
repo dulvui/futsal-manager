@@ -40,6 +40,13 @@ func get_league_by_id(league_id: int) -> League:
 	return null
 
 
+func get_league_by_pyramid_level(pyramid_level: int) -> League:
+	for league: League in leagues:
+		if league.pyramid_level == pyramid_level:
+			return league
+	return null
+
+
 func get_team_by_id(team_id: int) -> Team:
 	for league: League in leagues:
 		var found_team: Team = league.get_team_by_id(team_id)

@@ -55,8 +55,8 @@ func get_position(team_id: int = Config.team.id) -> int:
 	return position + 1
 
 
-func to_sorted_array() -> Array:
-	var sorted: Array = teams.duplicate()
+func to_sorted_array() -> Array[TableValues]:
+	var sorted: Array[TableValues] = teams.duplicate()
 	sorted.sort_custom(_point_sorter)
 	return sorted
 

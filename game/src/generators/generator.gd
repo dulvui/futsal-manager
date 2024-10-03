@@ -538,22 +538,98 @@ func _generate_club_history() -> void:
 	# first calculate league tables from starting year back
 	# use league tables to define who played in cups
 	for contient: Continent in world.continents:
+		var continental_cup_teams: Array[Team] = []
+		
 		for nation: Nation in contient.nations:
-			for league: League in nation.leagues:
-				for year: int in range(current_year, current_year - HISTORY_YEARS, -1):
-					# generate random results for previous season, with actual teams
-					# last/first x teams will be promoted delegated
-					# switch them with teams from upper/lower division
-					# regenerate results for lower division
-					# if pyramid level == leagues size, swap with backup teams
+			print(nation.name)
+			# to save promoted/delegated teams by league
+			
+			var teams_buffer: Dictionary = {}
+			for year: int in range(current_year, current_year - HISTORY_YEARS, -1):
+				print(year)
+				if not teams_buffer.is_empty():
+					print()
+					for league: League in nation.leagues:
+						print("teams before" + str(league.teams.size()))
 					
+					# switch them with teams from upper/lower division
+					for league: League in nation.leagues:
+						print("pyramid level " + str(league.pyramid_level) + "\n")
+						
+						var promoted_teams: Array[Team] = teams_buffer["p"][league.pyramid_level]
+						var delegated_teams: Array[Team] = teams_buffer["d"][league.pyramid_level]
+						
+						# start with backup teams
+						# prevents array out of bounds, in case if only one league in nation
+						# this code runs if this is last league by pyramid level or only one league is present
+						if league.pyramid_level == nation.leagues.size():
+							# make sure there are as many backup teams as delegated
+							if nation.backup_teams.size() < delegated_teams.size():
+								delegated_teams = delegated_teams.slice(0, nation.backup_teams.size())
+							
+							# remove delegated from league
+							for team: Team in delegated_teams:
+								league.teams.erase(team)
+							
+							# add backup teams to league
+							for i: int in delegated_teams.size():
+								var backup: Team = RngUtil.pick_random(nation.backup_teams)
+								nation.backup_teams.erase(backup)
+								league.teams.append(backup)
+							
+							# add delegated to backup tems
+							nation.backup_teams.append_array(delegated_teams)
+							
+							if nation.leagues.size() > 1:
+								# promote
+								nation.get_league_by_pyramid_level(league.pyramid_level - 1).teams.append_array(promoted_teams)
+								# remove promoted teams from league
+								for team: Team in promoted_teams:
+									league.teams.erase(team)
+							else:
+								# add to cup, if only league in nation
+								continental_cup_teams.append_array(promoted_teams)
+						
+						elif league.pyramid_level > 1:
+							# promote
+							nation.get_league_by_pyramid_level(league.pyramid_level - 1).teams.append_array(promoted_teams)
+							# remove promoted teams from league
+							for team: Team in promoted_teams:
+								league.teams.erase(team)
+							
+							# delegate
+							nation.get_league_by_pyramid_level(league.pyramid_level + 1).teams.append_array(delegated_teams)
+							# remove delegated teams
+							for team: Team in delegated_teams:
+								league.teams.erase(team)
+							
+						else :
+							# first teams go to cup
+							continental_cup_teams.append_array(promoted_teams)
+							
+							# add delegated teams to lower league
+							nation.get_league_by_pyramid_level(league.pyramid_level + 1).teams.append_array(delegated_teams)
+							
+							# remove delegated teams
+							for team: Team in delegated_teams:
+								league.teams.erase(team)
+					
+					for league: League in nation.leagues:
+						print("teams after" + str(league.teams.size()))
+					print("backup teams " + str(nation.backup_teams.size()))
+				
+				# clear teams
+				teams_buffer["d"] = {}
+				teams_buffer["p"] = {}
+				
+				for league: League in nation.leagues:
 					# initialize league table
 					var table: Table = Table.new()
 					for team: Team in league.teams:
 						table.add_team(team)
 					var match_days: Array[Array] = MatchCombinationUtil.create_combinations(league, league.teams)
 					
-					# random results first season half
+					# generate random results for previous season, with actual teams
 					for match_day: Array in match_days:
 						for matchz: Match in match_day:
 							var home_goals: int = RngUtil.rng.randi_range(0, 10)
@@ -563,15 +639,33 @@ func _generate_club_history() -> void:
 								matchz.home.id, matchz.home_goals, matchz.away.id, matchz.away_goals
 							)
 					
+					# last/first x teams will be promoted delegated
+					var sorted_table: Array[TableValues] = table.to_sorted_array()
+					
+					# reassign delegated/promoted teams
+					teams_buffer["d"][league.pyramid_level] = league.teams.filter(
+						func(t: Team) -> bool:
+							# get last 2 teams
+							return t.id == sorted_table[-1].team_id || t.id == sorted_table[-2].team_id
+					)
+					teams_buffer["p"][league.pyramid_level] = league.teams.filter(
+						func(t: Team) -> bool:
+							# get first 2 teams
+							return t.id == sorted_table[0].team_id || t.id == sorted_table[1].team_id
+					)
+					
+					print("delegated " + str((teams_buffer["d"][league.pyramid_level] as Array).size()))
+					print("promoted " + str((teams_buffer["p"][league.pyramid_level] as Array).size()))
+					
 					# save table in results
 					league.tables.insert(0, table)
 
 
 	# use league tables to calculate possible cup winners
-	for contient: Continent in world.continents:
-		# continental club cup
-		for year: int in range(current_year, current_year - HISTORY_YEARS, -1):
-			contient.cup_clubs
+	#for contient: Continent in world.continents:
+		## continental club cup
+		#for year: int in range(current_year, current_year - HISTORY_YEARS, -1):
+			#contient.cup_clubs
 
 
 func _generate_player_history() -> void:
