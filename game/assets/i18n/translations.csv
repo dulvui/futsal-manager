@@ -35,3 +35,6 @@ LOAD_GAME,Load game,Spiel laden,Carica partita
 DARK,Dark,Dunkel,Scuro
 LIGHT,light,Hell,Chiaro
 DEFAULT_SETTINGS,Default settings,Standardeinstellung,Impostazioni predefinite
+THEME,Theme,Thema,Tema
+RESOLUTION,Resolution,Auflösung,Risoluzione
+VERSION,Version,Version,Versione
