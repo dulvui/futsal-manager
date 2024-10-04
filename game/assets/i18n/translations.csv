@@ -38,3 +38,34 @@ DEFAULT_SETTINGS,Default settings,Standardeinstellung,Impostazioni predefinite
 THEME,Theme,Thema,Tema
 RESOLUTION,Resolution,Auflösung,Risoluzione
 VERSION,Version,Version,Versione
+DELETE,Delete,Löschen,Cancella
+TEAM,Team,Mannschaft,Squadra
+TABLE_PLACEMENT,Table placement,Tabellenstand,Posto in classifica
+LAST_SAVE,Last save,Letzer Speicherstand,Ultimo salvataggio
+CREATED,Created,Erstellt,Creato
+GAME_DATE,Date in game,Datum im Spiel,Data nel gioco
+STAR,Start,Stern,Stella
+SUBJECT,Subject,Betreff,Oggetto
+FROM,From,Von,Da
+UNREAD,Unread,Ungelesen,Da leggere
+STARRED,Starred,Favoriten,Favoriti
+SEARCH,Search,Sucher,Cerca
+INFO,Info,Info,Info
+PLAYERS,Players,Spieler,Giocatori
+SEED,Seed,Seed,Seed
+START_DATE,Start date,Startdatum,Data inizio
+COPY,Copy,Kopieren,Copia
+MONDAY,Monday,Montag,Lunedi
+TUESDAY,Tuesday,Dienstag,Martedi
+WEDNESDAY,Wednesday,Mittwoch,Mercoledi
+THURSDAY,Thursday,Donnerstag,Giovedi
+FRIDAY,Friday,Freitag,Venerdi
+SATURDAY,Saturday,Samstag,Sabato
+SUNDAY,Sunday,Sonntag,Domenica
+MON,Mon,Mo,Lun
+TUE,Tue,Di,Mar
+WED,Wed,Mi,Mer
+THU,Thu,Do,Gio
+FRI,Fri,Fr,Ven
+SAT,Sat,Sa,Sab
+SUN,Sun,So,Dom
