@@ -43,8 +43,7 @@ label_settings = ExtResource("2_6u1l3")
 
 [node name="PlacementLabel" type="Label" parent="Details"]
 layout_mode = 2
-text = "PLACEMENT
-"
+text = "TABLE_PLACEMENT"
 
 [node name="Placement" type="Label" parent="Details"]
 layout_mode = 2
@@ -63,7 +62,7 @@ columns = 2
 
 [node name="GameDateLabel" type="Label" parent="Dates"]
 layout_mode = 2
-text = "GAME DATE"
+text = "GAME_DATE"
 
 [node name="GameDate" type="Label" parent="Dates"]
 layout_mode = 2
@@ -72,7 +71,7 @@ label_settings = ExtResource("2_6u1l3")
 
 [node name="LastSaveDateLabel" type="Label" parent="Dates"]
 layout_mode = 2
-text = "LAST SAVE"
+text = "LAST_SAVE"
 
 [node name="LastSaveDate" type="Label" parent="Dates"]
 layout_mode = 2
@@ -90,7 +89,7 @@ label_settings = ExtResource("2_6u1l3")
 
 [node name="Load" type="Button" parent="."]
 layout_mode = 2
-text = "LOAD"
+text = "LOAD_GAME"
 
 [node name="DeleteDialog" type="ConfirmationDialog" parent="."]
 title = "CONFIRM"
