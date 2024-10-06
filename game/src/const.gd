@@ -48,9 +48,9 @@ const MAX_PRESTIGE: int = 20
 const LINEUP_PLAYERS_AMOUNT: int = 12
 
 const MONTH_STRINGS: Array = [
-	"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OKT", "NOV", "DEC"
+	"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
 ]
-const DAY_STRINGS: Array = ["SUN", "MON", "TUE", "WE", "THU", "FRI", "SAT"]
+const DAY_STRINGS: Array = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 
 # season start at 1st of june
 const SEASON_START_DAY: int = 1

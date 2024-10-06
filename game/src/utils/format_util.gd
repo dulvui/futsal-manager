@@ -15,11 +15,11 @@ func get_sign(amount: int) -> String:
 
 func format_date(p_date: Dictionary) -> String:
 	return (
-		Const.DAY_STRINGS[p_date.weekday]
+		tr(Const.DAY_STRINGS[p_date.weekday])
 		+ " "
-		+ str(p_date.day)
+		+ tr(str(p_date.day))
 		+ " "
-		+ Const.MONTH_STRINGS[p_date.month - 1]
+		+ tr(Const.MONTH_STRINGS[p_date.month - 1])
 		+ " "
 		+ str(p_date.year)
 	)
