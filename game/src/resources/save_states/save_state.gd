@@ -11,7 +11,7 @@ extends Resource
 @export var start_date: Dictionary
 @export var generation_seed: String
 @export var generation_state: int
-@export var generation_gender: Const.Gender
+@export var generation_player_names: Const.PlayerNames
 @export var current_season: int
 @export var speed_factor: int
 @export var id_by_type: Dictionary
@@ -28,7 +28,7 @@ extends Resource
 func _init(
 	p_generation_seed: String = "SuchDefaultSeed",
 	p_generation_state: int = 0,
-	p_generation_gender: Const.Gender = 0,
+	p_generation_player_names: Const.PlayerNames = 0,
 	p_current_season: int = 0,
 	p_speed_factor: int = 1,
 	p_id: String = str(int(Time.get_unix_time_from_system())),
@@ -47,7 +47,7 @@ func _init(
 	start_date = p_start_date
 	generation_seed = p_generation_seed
 	generation_state = p_generation_state
-	generation_gender = p_generation_gender
+	generation_player_names = p_generation_player_names
 	current_season = p_current_season
 	speed_factor = p_speed_factor
 	id_by_type = p_id_by_type

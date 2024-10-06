@@ -3,7 +3,9 @@ CREATE_MANAGER,Create Manager,Manager erstellen,Crea allenatore
 MANAGER,Manager,Manager,Allenatore
 NAME,Name,Name,Nome
 SURNAME,Surname,Nachname,Cognome
+PLAYER_NAMES,Player names,Spieler Namen,Nomi giocatori
 BIRTH_DATE,Birth date,Geburtstag,Compleanno
+START_YEAR,Starting year,Startjahr,Anno d'inizio
 FAV_TEAM,Favourite Team,Liebliengs-Team,Squadra favorita
 NATIONALITY,Nationality,Nationalität,Naziolanità
 BACK,Back,Zurück,Indietro
@@ -24,8 +26,8 @@ START_MATCH,Start match,Spielbeginn,Inizia partita
 NEXT_DAY,Next day,Nächster Tag,Prossimo giorno
 NEXT_MATCH,Next match,Nächstes Spiel,Prossima partita
 WELCOME,Welcome,Wilkommen,Benvenuto
-MALE,Male,Männer,Uomini
-FEMALE,Female,Frauen,Donne
+MALE,Male,Männlich,Maschile
+FEMALE,Female,Weiblich,Femminile
 MIXED,Female,Gemischt,Misto
 ITALY,Italy,Italien,Italia
 SPAIN,Spain,Spanien,Spagna

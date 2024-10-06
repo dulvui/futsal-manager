@@ -11,16 +11,16 @@ var match_rng: RandomNumberGenerator
 func set_up_rngs() -> void:
 	match_rng = RandomNumberGenerator.new()
 	rng = RandomNumberGenerator.new()
-	rng.seed = hash(Config.generation_seed) + Config.generation_gender
+	rng.seed = hash(Config.generation_seed) + Config.generation_player_names
 	rng.state = Config.generation_state
 
 
-func reset_seed(p_generation_seed: String, p_generation_gender: int) -> void:
+func reset_seed(p_generation_seed: String, p_generation_player_names: int) -> void:
 	Config.generation_seed = p_generation_seed
-	Config.generation_gender = p_generation_gender
+	Config.generation_player_names = p_generation_player_names
 	
 	rng = RandomNumberGenerator.new()
-	rng.seed = hash(Config.generation_seed + str(Config.generation_gender))
+	rng.seed = hash(Config.generation_seed + str(Config.generation_player_names))
 	Config.generation_state = rng.state
 
 

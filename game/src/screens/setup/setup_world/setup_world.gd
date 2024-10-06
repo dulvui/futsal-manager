@@ -9,7 +9,7 @@ extends Control
 
 const DEFAULT_SEED: String = "SuchDefaultSeed"
 
-@onready var gender_option: OptionButton = $VBoxContainer/Settings/Container/Gender
+@onready var player_names_option: OptionButton = $VBoxContainer/Settings/Container/PlayerNames
 @onready var start_year_spinbox: SpinBox = $VBoxContainer/Settings/Container/StartYear
 @onready var generation_seed_edit: LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
 
@@ -21,8 +21,8 @@ func _ready() -> void:
 	
 	Config.save_states.new_temp_state()
 	
-	for gender: String in Const.Gender:
-		gender_option.add_item(gender)
+	for player_name: String in Const.PlayerNames:
+		player_names_option.add_item(player_name)
 	
 	generation_seed_edit.text = generation_seed
 	# set start year to current system year
@@ -68,9 +68,9 @@ func _on_continue_pressed() -> void:
 	# also set Config.start_date, so funcs like person.get_age work 
 	Config.start_date = Config.save_states.temp_state.start_date
 	Config.save_states.temp_state.generation_seed = generation_seed
-	Config.save_states.temp_state.generation_gender = gender_option.selected
+	Config.save_states.temp_state.generation_player_names = player_names_option.selected
 	
-	RngUtil.reset_seed(generation_seed, gender_option.selected)
+	RngUtil.reset_seed(generation_seed, player_names_option.selected)
 	
 	var generator: Generator = Generator.new()
 	Config.world = generator.generate_world()

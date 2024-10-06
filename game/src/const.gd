@@ -4,7 +4,7 @@
 
 extends Node
 
-enum Gender { MALE, FEMALE, MIXED }
+enum PlayerNames { MALE, FEMALE, MIXED }
 
 # match engine
 const HALF_TIME_SECONDS: int = 60 * 20

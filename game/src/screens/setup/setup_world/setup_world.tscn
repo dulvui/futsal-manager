@@ -59,12 +59,12 @@ layout_mode = 2
 theme_override_constants/h_separation = 30
 columns = 2
 
-[node name="GenderLabel" type="Label" parent="VBoxContainer/Settings/Container"]
+[node name="PlayerNamesLabel" type="Label" parent="VBoxContainer/Settings/Container"]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
-text = "GENDER"
+text = "PLAYER_NAMES"
 
-[node name="Gender" type="OptionButton" parent="VBoxContainer/Settings/Container"]
+[node name="PlayerNames" type="OptionButton" parent="VBoxContainer/Settings/Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 

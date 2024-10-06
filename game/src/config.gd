@@ -24,7 +24,7 @@ var start_date: Dictionary
 # generator config
 var generation_seed: String
 var generation_state: int
-var generation_gender: Const.Gender
+var generation_player_names: Const.PlayerNames
 # saves which season this is, starting from 0
 var current_season: int
 # global game states
@@ -64,7 +64,7 @@ func load_save_state() -> void:
 		speed_factor = save_sate.speed_factor
 		generation_seed = save_sate.generation_seed
 		generation_state = save_sate.generation_state
-		generation_gender = save_sate.generation_gender
+		generation_player_names = save_sate.generation_player_names
 		print("config speed_factor " + str(speed_factor))
 		_load_resources()
 
@@ -78,7 +78,7 @@ func save_active_state() -> void:
 	save_sate.speed_factor = speed_factor
 	save_sate.generation_seed = generation_seed
 	save_sate.generation_state = generation_state
-	save_sate.generation_gender = generation_gender
+	save_sate.generation_player_names = generation_player_names
 
 	save_sate.save_metadata()
 
