@@ -44,6 +44,7 @@ layout_mode = 2
 texture_normal = ExtResource("2_u8w0t")
 
 [node name="Portuguese" type="TextureButton" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("3_2slns")
 
@@ -52,6 +53,7 @@ layout_mode = 2
 texture_normal = ExtResource("4_y3fhi")
 
 [node name="Spanish" type="TextureButton" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("5_fhke6")
 
