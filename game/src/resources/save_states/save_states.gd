@@ -30,7 +30,6 @@ func get_active() -> SaveState:
 	for state: SaveState in list:
 		if state.id == active_id:
 			return state
-
 	return temp_state
 
 
@@ -49,6 +48,8 @@ func make_temp_active() -> void:
 	list.append(temp_state)
 	active_id = temp_state.id
 	temp_state.create_dir()
+	
+	new_temp_state()
 
 
 func delete(p_state: SaveState) -> int:

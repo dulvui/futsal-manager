@@ -51,7 +51,7 @@ func get_position(team_id: int = Config.team.id) -> int:
 	var list: Array[TableValues] = to_sorted_array()
 	for table_value: TableValues in list:
 		if table_value.team_id == team_id:
-			return list.find(table_value)
+			return list.find(table_value) + 1
 	print("error finding team position for team id " + str(team_id))
 	return -1
 
