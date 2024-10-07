@@ -19,7 +19,15 @@ script = ExtResource("1")
 layout_mode = 2
 alignment = 1
 
-[node name="Leagues" parent="Buttons" instance=ExtResource("3_p68f4")]
+[node name="Continents" parent="Buttons" instance=ExtResource("3_p68f4")]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+
+[node name="Nations" parent="Buttons" instance=ExtResource("3_p68f4")]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+
+[node name="Competitions" parent="Buttons" instance=ExtResource("3_p68f4")]
 custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
 
@@ -96,5 +104,7 @@ theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 0
 columns = 9
 
-[connection signal="item_selected" from="Buttons/Leagues" to="." method="_on_leagues_item_selected"]
+[connection signal="item_selected" from="Buttons/Continents" to="." method="_on_continents_item_selected"]
+[connection signal="item_selected" from="Buttons/Nations" to="." method="_on_nations_item_selected"]
+[connection signal="item_selected" from="Buttons/Competitions" to="." method="_on_competitions_item_selected"]
 [connection signal="item_selected" from="Buttons/Seasons" to="." method="_on_seasons_item_selected"]

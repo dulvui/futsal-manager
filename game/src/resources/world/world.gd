@@ -47,6 +47,26 @@ func get_active_league() -> League:
 	return null
 
 
+func get_active_nation() -> Nation:
+	for continent: Continent in Config.world.continents:
+		for nation: Nation in continent.nations:
+			for league: League in nation.leagues:
+				if league.id == Config.league.id:
+						return nation
+	printerr("no nation for team id " + str(active_team_id))
+	return null
+
+
+func get_active_continent() -> Continent:
+	for continent: Continent in Config.world.continents:
+		for nation: Nation in continent.nations:
+			for league: League in nation.leagues:
+				if league.id == Config.league.id:
+						return continent
+	printerr("no continent for team id " + str(active_team_id))
+	return null
+
+
 func get_team_by_id(team_id: int) -> Team:
 	for l: League in get_all_leagues():
 		for t: Team in l.teams:

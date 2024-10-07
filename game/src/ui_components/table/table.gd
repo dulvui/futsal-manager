@@ -6,24 +6,33 @@ class_name VisualTable
 extends VBoxContainer
 
 @onready var grid: GridContainer = $ScrollContainer/GridContainer
-@onready var leagues: SwitchOptionButton = $Buttons/Leagues
+@onready var continents: SwitchOptionButton = $Buttons/Continents
+@onready var nations: SwitchOptionButton = $Buttons/Nations
+@onready var competitions: SwitchOptionButton = $Buttons/Competitions
 @onready var seasons: SwitchOptionButton = $Buttons/Seasons
 
-var league_index: int
+var continent_index: int
+var nation_index: int
+var competition_index: int
 var season_index: int
 var season_amount: int
 
 func _ready() -> void:
-	var all_leagues: Array[League] = Config.world.get_all_leagues()
-	league_index = all_leagues.find(Config.league)
+	var continent: Continent = Config.world.get_active_continent()
+	var nation: Nation = Config.world.get_active_nation()
+	
+	competition_index = nation.leagues.find(Config.league)
+	continent_index = Config.world.continents.find(continent)
+	nation_index = continent.nations.find(nation)
+
+	continents.set_up(
+		Config.world.continents.map(func(c: Continent) -> String: return c.name),
+		continent_index
+	)
+	
 	# start from last entry
 	season_index = Config.league.tables.size() - 1
 	season_amount = Config.league.tables.size()
-	
-	leagues.set_up(
-		all_leagues.map(func(league: League) -> String: return league.name),
-		league_index
-	)
 	
 	_set_up_seasons()
 	_set_up()
@@ -34,7 +43,20 @@ func _set_up() -> void:
 	for child: Node in grid.get_children():
 		child.queue_free()
 	
-	var league: League = Config.world.get_all_leagues()[league_index]
+	var continent: Continent = Config.world.continents[continent_index]
+	var nation: Nation = continent.nations[nation_index]
+	
+	nations.set_up(
+		continent.nations.map(func(n: Nation) -> String: return n.name),
+		nation_index
+	)
+	
+	competitions.set_up(
+		nation.leagues.map(func(l: League) -> String: return l.name),
+		competition_index
+	)
+	
+	var league: League = nation.leagues[competition_index]
 	
 	var pos: int = 1
 	
@@ -121,14 +143,30 @@ func _style_label(label: Label) -> void:
 	label.custom_minimum_size = Vector2(60, 0)
 
 
-func _on_leagues_item_selected(index: int) -> void:
-	league_index = index
-	_set_up()
-
-
 func _on_seasons_item_selected(index: int) -> void:
 	# substract from season amount,
 	# seasons are inserted inverted in options button
 	# -1, because arrays start from 0
 	season_index = season_amount  - 1 - index
+	_set_up()
+
+
+func _on_continents_item_selected(index: int) -> void:
+	continent_index = index
+	nations.option_button.selected = 0
+	nation_index = 0
+	competitions.option_button.selected = 0
+	competition_index = 0
+	_set_up()
+
+
+func _on_nations_item_selected(index: int) -> void:
+	nation_index = index
+	competitions.option_button.selected = 0
+	competition_index = 0
+	_set_up()
+
+
+func _on_competitions_item_selected(index: int) -> void:
+	competition_index = index
 	_set_up()

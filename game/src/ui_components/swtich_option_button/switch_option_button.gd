@@ -11,6 +11,7 @@ signal item_selected(index: int)
 
 
 func set_up(items: Array, selected: int = 0) -> void:
+	option_button.clear()
 	for item: String in items:
 		option_button.add_item(item)
 	option_button.selected = selected
