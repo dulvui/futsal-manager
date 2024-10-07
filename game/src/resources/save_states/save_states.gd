@@ -52,10 +52,12 @@ func make_temp_active() -> void:
 	new_temp_state()
 
 
-func delete(p_state: SaveState) -> int:
-	for state: SaveState in list:
-		if state.id == p_state.id:
-			state.delete_dir()
-			list.erase(state)
-			return OK
-	return ERR_FILE_NOT_FOUND
+func delete(state: SaveState) -> void:
+	state.delete_dir()
+	list.erase(state)
+	
+	# set next value to active
+	if list.size() > 0:
+		active_id = list[-1].id
+	else:
+		active_id = ""
