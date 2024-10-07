@@ -14,14 +14,18 @@ var season_index: int
 var season_amount: int
 
 func _ready() -> void:
-	league_index = 0
+	var all_leagues: Array[League] = Config.world.get_all_leagues()
+	league_index = all_leagues.find(Config.league)
 	# start from last entry
 	season_index = Config.league.tables.size() - 1
 	season_amount = Config.league.tables.size()
 	
-	leagues.set_up(Config.world.get_all_leagues().map(func(league: League) -> String: return league.name))
-	_set_up_seasons()
+	leagues.set_up(
+		all_leagues.map(func(league: League) -> String: return league.name),
+		league_index
+	)
 	
+	_set_up_seasons()
 	_set_up()
 
 
