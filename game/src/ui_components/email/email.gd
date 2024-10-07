@@ -12,8 +12,8 @@ signal email_action(message: EmailMessage)
 
 
 func _ready() -> void:
-	update_messages()
 	message_container.show_message(EmailUtil.latest())
+	update_messages()
 
 	EmailUtil.refresh_inbox.connect(update_messages)
 
