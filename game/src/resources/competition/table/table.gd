@@ -49,7 +49,11 @@ func add_result(home_id: int, home_goals: int, away_id: int, away_goals: int) ->
 
 func get_position(team_id: int = Config.team.id) -> int:
 	var list: Array[TableValues] = to_sorted_array()
-	return list.find(team_id)
+	for table_value: TableValues in list:
+		if table_value.team_id == team_id:
+			return list.find(table_value)
+	print("error finding team position for team id " + str(team_id))
+	return -1
 
 
 func to_sorted_array() -> Array[TableValues]:
