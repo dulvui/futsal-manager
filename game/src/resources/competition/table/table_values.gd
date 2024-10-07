@@ -36,3 +36,13 @@ func _init(
 	wins = p_wins
 	draws = p_draws
 	lost = p_lost
+
+
+func reset_values() -> void:
+	points = 0
+	games_played = 0
+	goals_made = 0
+	goals_against = 0
+	wins = 0
+	draws = 0
+	lost = 0

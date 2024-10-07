@@ -535,7 +535,7 @@ func _generate_club_history() -> void:
 	# TODO continental national teams cup
 	
 	# calculate random results for x years
-	for year: int in HISTORY_YEARS:
+	for year: int in HISTORY_YEARS + 1:
 		for contient: Continent in world.continents:
 			for nation: Nation in contient.nations:
 				for league: League in nation.leagues:
@@ -547,8 +547,8 @@ func _generate_club_history() -> void:
 					# generate random results for every match
 					for match_day: Array in match_days:
 						for matchz: Match in match_day:
-							var home_goals: int = RngUtil.rng.randi_range(0, 10)
-							var away_goals: int = RngUtil.rng.randi_range(0, 10)
+							var home_goals: int = RngUtil.rng.randi_range(0, matchz.home.get_prestige() / 2)
+							var away_goals: int = RngUtil.rng.randi_range(0, matchz.away.get_prestige() / 2)
 							matchz.set_result(home_goals, away_goals)
 							league.table().add_result(
 								matchz.home.id,
@@ -556,7 +556,6 @@ func _generate_club_history() -> void:
 								matchz.away.id,
 								matchz.away_goals
 							)
-		
 		world.promote_and_delegate_teams()
 
 
