@@ -18,10 +18,12 @@ var message: EmailMessage
 
 func show_message(p_message: EmailMessage) -> void:
 	message = p_message
+	message.read = true
 	subject.text = message.subject
 	sender.text = message.sender
 	date.text = message.date
 	text.text = message.text
+	
 
 	if message.type == EmailMessage.Type.CONTRACT_OFFER:
 		action_button.show()
