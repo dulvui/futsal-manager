@@ -83,23 +83,31 @@ func get_all_club_cups() -> Array[Competition]:
 func promote_and_delegate_teams() -> void:
 	for contient: Continent in continents:
 		for nation: Nation in contient.nations:
-			var teams_buffer: Dictionary = {}
+			# d - delegated
+			# p - promotod
+			var teams_buffer: Dictionary = {
+				"d" = {},
+				"p" = {},
+			}
 		
 			# get teams that will delegate promote
 			for league: League in nation.leagues:
 				# last/first x teams will be promoted delegated
 				var sorted_table: Array[TableValues] = league.table().to_sorted_array()
 				
-				# reassign delegated/promoted teams
+				# assign delegated
 				teams_buffer["d"][league.pyramid_level] = league.teams.filter(
 					func(t: Team) -> bool:
 						# get last 2 teams
-						return t.id == sorted_table[-1].team_id || t.id == sorted_table[-2].team_id
+						return t.id == sorted_table[-1].team_id ||\
+							 t.id == sorted_table[-2].team_id
 				)
+				# assign promoted
 				teams_buffer["p"][league.pyramid_level] = league.teams.filter(
 					func(t: Team) -> bool:
 						# get first 2 teams
-						return t.id == sorted_table[0].team_id || t.id == sorted_table[1].team_id
+						return t.id == sorted_table[0].team_id ||\
+							 t.id == sorted_table[1].team_id
 				)
 			
 			# delegate/promote
@@ -130,7 +138,8 @@ func promote_and_delegate_teams() -> void:
 					
 					if nation.leagues.size() > 1:
 						# promote
-						nation.get_league_by_pyramid_level(league.pyramid_level - 1).teams.append_array(promoted_teams)
+						nation.get_league_by_pyramid_level(league.pyramid_level - 1)\
+							.teams.append_array(promoted_teams)
 						# remove promoted teams from league
 						for team: Team in promoted_teams:
 							league.teams.erase(team)
@@ -141,25 +150,35 @@ func promote_and_delegate_teams() -> void:
 				
 				elif league.pyramid_level > 1:
 					# promote
-					nation.get_league_by_pyramid_level(league.pyramid_level - 1).teams.append_array(promoted_teams)
+					nation.get_league_by_pyramid_level(league.pyramid_level - 1)\
+						.teams.append_array(promoted_teams)
 					# remove promoted teams from league
 					for team: Team in promoted_teams:
 						league.teams.erase(team)
 					
 					# delegate
-					nation.get_league_by_pyramid_level(league.pyramid_level + 1).teams.append_array(delegated_teams)
+					nation.get_league_by_pyramid_level(league.pyramid_level + 1)\
+						.teams.append_array(delegated_teams)
 					# remove delegated teams
 					for team: Team in delegated_teams:
 						league.teams.erase(team)
 					
 				else :
 					# first teams go to cup
-					# TODO add to ocntinental cup
+					# TODO add to continental cup
 					#continental_cup_teams.append_array(promoted_teams)
 					
 					# add delegated teams to lower league
-					nation.get_league_by_pyramid_level(league.pyramid_level + 1).teams.append_array(delegated_teams)
+					nation.get_league_by_pyramid_level(league.pyramid_level + 1)\
+						.teams.append_array(delegated_teams)
 					
 					# remove delegated teams
 					for team: Team in delegated_teams:
 						league.teams.erase(team)
+				
+			# add new seasons table
+			for league: League in nation.leagues:
+				var table: Table = Table.new()
+				for team: Team in league.teams:
+					table.add_team(team)
+				league.tables.append(table)

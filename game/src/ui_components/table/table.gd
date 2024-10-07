@@ -127,5 +127,4 @@ func _on_seasons_item_selected(index: int) -> void:
 	# seasons are inserted inverted in options button
 	# -1, because arrays start from 0
 	season_index = season_amount - index - 1
-	print(season_index)
 	_set_up()
