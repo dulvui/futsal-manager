@@ -36,7 +36,22 @@ func set_result(p_home_goals: int, p_away_goals: int) -> void:
 	home_goals = p_home_goals
 	away_goals = p_away_goals
 	over = true
-
+	
+	# save in competition table/knockout
+	var competition: Competition = Config.world.get_competition_by_id(
+		competition_id
+	)
+	
+	if competition is League:
+		(competition as League).table().add_result(
+			home.id, home_goals, away.id, away_goals
+		)
+	elif competition is CupKnockout:
+		print("TODO CupKnockout save result")
+	elif competition is CupMixedStage:
+		print("TODO CupMixedStage save result")
+	else:
+		print("error competition with no valid type; id: " + str(competition_id))
 
 func get_result() -> String:
 	if home_goals == -1 and away_goals == -1:

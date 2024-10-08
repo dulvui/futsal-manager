@@ -550,12 +550,6 @@ func _generate_club_history() -> void:
 							var home_goals: int = RngUtil.rng.randi_range(0, matchz.home.get_prestige() / 2)
 							var away_goals: int = RngUtil.rng.randi_range(0, matchz.away.get_prestige() / 2)
 							matchz.set_result(home_goals, away_goals)
-							league.table().add_result(
-								matchz.home.id,
-								matchz.home_goals,
-								matchz.away.id,
-								matchz.away_goals
-							)
 		world.promote_and_delegate_teams()
 
 

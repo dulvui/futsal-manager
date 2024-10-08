@@ -64,6 +64,3 @@ func random_results() -> void:
 			if not matchz.over:
 				var result_match: Match = match_engine.simulate(matchz)
 				matchz.set_result(result_match.home_goals, result_match.away_goals)
-				league.table().add_result(
-					matchz.home.id, result_match.home_goals, matchz.away.id, result_match.away_goals
-				)

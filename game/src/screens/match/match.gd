@@ -103,13 +103,10 @@ func match_end() -> void:
 	pause_button.hide()
 	dashboard_button.show()
 	match_simulator.match_finished()
-	# TODO differntiate between cups and leagues
-	Config.league.table().add_result(
-		home_team.id, home_stats.goals, away_team.id, away_stats.goals
-	)
-
+	
 	#assign result
 	matchz.set_result(home_stats.goals, away_stats.goals)
+	
 	# calc other matches
 	Config.world.random_results()
 	Config.save_all_data()

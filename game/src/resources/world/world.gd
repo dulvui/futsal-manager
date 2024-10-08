@@ -76,6 +76,23 @@ func get_team_by_id(team_id: int) -> Team:
 	return null
 
 
+func get_competition_by_id(competition_id: int) -> Competition:
+	if world_cup.id == competition_id:
+			return world_cup
+	for continent: Continent in Config.world.continents:
+		if continent.cup_clubs.id == competition_id:
+			return continent.cup_clubs
+		if continent.cup_nations.id == competition_id:
+			return continent.cup_nations
+		for nation: Nation in continent.nations:
+			if nation.cup.id == competition_id:
+				return nation.cup
+			for league: League in nation.leagues:
+				if league.id == competition_id:
+						return league
+	return null
+
+
 func get_all_nations() -> Array[Nation]:
 	var all_nations: Array[Nation] = []
 	for c: Continent in continents:
