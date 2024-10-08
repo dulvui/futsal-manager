@@ -48,10 +48,11 @@ custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "#"
 
-[node name="Club" type="Label" parent="Labels"]
+[node name="Team" type="Label" parent="Labels"]
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
-text = "CLUB"
+text = "TEAM
+"
 
 [node name="Played" type="Label" parent="Labels"]
 custom_minimum_size = Vector2(60, 0)
@@ -86,7 +87,7 @@ horizontal_alignment = 1
 [node name="Points" type="Label" parent="Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "Points"
+text = "POINTS"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]

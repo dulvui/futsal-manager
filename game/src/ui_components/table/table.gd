@@ -17,6 +17,7 @@ var competition_index: int
 var season_index: int
 var season_amount: int
 
+
 func _ready() -> void:
 	var continent: Continent = Config.world.get_active_continent()
 	var nation: Nation = Config.world.get_active_nation()

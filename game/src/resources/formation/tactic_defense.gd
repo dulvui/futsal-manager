@@ -7,7 +7,7 @@ extends Resource
 
 enum Marking {
 	ZONE,
-	MAN,
+	PLAYER,
 }
 
 enum Pressing {

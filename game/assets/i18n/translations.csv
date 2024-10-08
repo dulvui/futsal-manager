@@ -96,3 +96,23 @@ OCT,Oct,Okt,Ott
 NOV,Nov,Nov,Nov
 DIC,Dic,Dez,Dic
 GENERATION_SEED,Generation seed,Generation Seed,Seed generazione
+GENERATION_SEED_DESCRIPTION,GENERATION_SEED_DESCRIPTION,GENERATION_SEED_DESCRIPTION,GENERATION_SEED_DESCRIPTION
+PLAYED,Played,Gespielt,Giocate
+WIN,Win,Gewonnen,Vinte
+DRAW,Draw,Ausgleich,Pareggi
+LOOSE,Loose,Verloren,Perse
+GOALS,Goals,Tore,Gol
+POINTS,Points,Punkte,Punti
+TACTIC_OFFENSE,Offensive tactic,Offensivtaktik,Tattica offensiva
+TACTIC_DEFENSE,Defensive tactic,Defensivtaktik,Tattica difensiva
+INTENSITY,Intensity,Intesität,Intensità
+MARKING,Marking,Deckung,Marcatura
+PRESSING,Pressing,Pressing,Pressing
+CUT_INSIDE,Cut inside,Nach innen ziehen,Taglia dentro
+ROTATION,Rotation,Rotation,Rotazione
+ZONE,Zone,Zone,Zona
+FULL_COURT,Full court,Ganzes Feld,Tutto campo
+HALF_COURT,Half court,Halbes Feld,Metà campo
+NO_PRESS,No pressing,Kein Pressing,Niente pressing
+SUBS,Subs,Auswechel,Cambi
+REST,Rest,Rest,Resto
