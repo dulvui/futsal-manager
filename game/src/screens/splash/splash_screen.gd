@@ -4,13 +4,23 @@
 
 extends Control
 
+@onready var loading_progress_bar: ProgressBar = $LoadingProgressBar
+
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
-	if Config.language:
-		get_tree().change_scene_to_file.call_deferred("res://src/screens/menu/menu.tscn")
-	else:
-		get_tree().change_scene_to_file.call_deferred(
-			"res://src/screens/setup_language/setup_language.tscn"
-		)
+
+func _process(_delta: float) -> void:
+	if Config.progress.size() > 0:
+		loading_progress_bar.value = Config.progress[0]
+	
+	if Config.load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+		loading_progress_bar.value = 1
+		
+		if Config.language:
+			get_tree().change_scene_to_file.call_deferred("res://src/screens/menu/menu.tscn")
+		else:
+			get_tree().change_scene_to_file.call_deferred(
+				"res://src/screens/setup_language/setup_language.tscn"
+			)

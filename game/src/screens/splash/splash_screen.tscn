@@ -33,3 +33,18 @@ offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_ad6ge")
+
+[node name="LoadingProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.402
+anchor_top = 0.727556
+anchor_right = 0.599
+anchor_bottom = 0.755556
+offset_left = -0.840027
+offset_top = 0.23999
+offset_right = -0.0800781
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 1.0
+metadata/_edit_use_anchors_ = true

@@ -18,7 +18,10 @@ func _ready() -> void:
 
 func set_active_theme(index: int) -> Theme:
 	Config.theme_index = index
-	active_theme = ResourceLoader.load(THEMES.values()[Config.theme_index], "Theme")
+	active_theme = ResourceLoader.load(
+		THEMES.values()[Config.theme_index],
+		"Theme"
+	)
 	return active_theme
 
 

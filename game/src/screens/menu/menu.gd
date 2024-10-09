@@ -5,6 +5,7 @@
 class_name Menu
 extends Control
 
+@onready var loading_progress_bar: ProgressBar = $MarginContainer/VBoxContainer/LoadingProgressBar
 @onready var save_state: SaveStateEntry = $MarginContainer/VBoxContainer/SaveState
 
 @onready var load_game: Button = $MarginContainer/VBoxContainer/LoadGame

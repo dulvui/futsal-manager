@@ -47,14 +47,45 @@ var inbox: Inbox
 # saves match pause state
 var match_paused: bool
 
+# for threaded resource loading
+var loading_resources_paths: Array[String]
+var loaded_resources_paths: Array[String]
+var progress: Array
+var load_status: ResourceLoader.ThreadLoadStatus
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	print("version " + Config.version)
 	_load_config()
 	load_save_state()
 	RngUtil.set_up_rngs()
 	Config.set_lang(language)
+
+
+func _process(_delta: float) -> void:
+	for loading_resource_path: String in loading_resources_paths:
+		load_status = ResourceLoader.load_threaded_get_status(loading_resource_path, progress)
+	
+		if load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
+			if progress.size() > 0:
+				print(progress[0])
+	
+		elif load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+			# assign references after resources are loaded
+			if world:
+				world = ResourceLoader.load_threaded_get(loading_resource_path)
+				team = world.get_active_team()
+				league = world.get_active_league()
+				manager = team.staff.manager
+				
+				# add to own array, to not remove element from 
+				# loading_resources_paths, while iterating
+				loaded_resources_paths.append(loading_resource_path)
+	
+	# remove loaded paths
+	for loaded_path: String in loaded_resources_paths:
+		loading_resources_paths.erase(loaded_path)
+	loaded_resources_paths.clear()
 
 
 func load_save_state() -> void:
@@ -186,25 +217,50 @@ func _load_config() -> void:
 
 
 func _load_resources() -> void:
-	if ResourceLoader.exists(save_states.get_active_path("world" + res_suffix)):
-		print("loading user://world" + res_suffix)
-		world = ResourceLoader.load(save_states.get_active_path("world" + res_suffix))
 	if ResourceLoader.exists(save_states.get_active_path("inbox" + res_suffix)):
-		print("loading user://inbox" + res_suffix)
-		inbox = ResourceLoader.load(save_states.get_active_path("inbox" + res_suffix))
+		inbox = load_res("inbox")
 	else:
 		inbox = Inbox.new()
 	if ResourceLoader.exists(save_states.get_active_path("transfers" + res_suffix)):
-		print("loading user://transfers" + res_suffix)
-		transfers = ResourceLoader.load(save_states.get_active_path("transfers" + res_suffix))
+		transfers = load_res("transfers")
 	else:
 		transfers = Transfers.new()
 	
-	# assign references after resources are loaded
-	if world:
-		team = world.get_active_team()
-		league = world.get_active_league()
-		manager = team.staff.manager
+	if ResourceLoader.exists(save_states.get_active_path("world" + res_suffix)):
+		load_world_res("world")
+
+
+
+func load_res(res_key: String) -> Resource:
+	var start_time: int = Time.get_ticks_msec()
+	
+	print("loading user://" + res_key + res_suffix)
+	
+	var path: String = save_states.get_active_path(res_key + res_suffix)
+	
+	#loading_resources_paths.append(path)
+	
+	ResourceLoader.load_threaded_request(path, "Resource", true)
+	
+	var res: Resource = ResourceLoader.load_threaded_get(path)
+
+	var load_time: int = Time.get_ticks_msec() - start_time
+	print("loaded in: " + str(load_time) + " ms")
+	
+	return res
+
+
+func load_world_res(res_key: String) -> void:
+	#var start_time: int = Time.get_ticks_msec()
+	
+	print("loading user://" + res_key + res_suffix)
+	
+	var path: String = save_states.get_active_path(res_key + res_suffix)
+	
+	loading_resources_paths.append(path)
+	
+	ResourceLoader.load_threaded_request(path, "Resource", true)
+
 
 # disable save, too heavy on close, breaks game
 # save on quit on mobile
