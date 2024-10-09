@@ -15,11 +15,14 @@ config/version="0.2.4"
 run/main_scene="res://src/screens/splash/splash_screen.tscn"
 config/features=PackedStringArray("4.3")
 boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="res://icon.png"
 config/icon="res://icon.png"
 
 [autoload]
 
+Global="*res://src/global.gd"
 Config="*res://src/config.gd"
+ResUtil="*res://src/utils/res_util.gd"
 MatchCombinationUtil="*res://src/utils/match_combination_util.gd"
 TransferUtil="*res://src/utils/transfer_util.gd"
 EmailUtil="*res://src/utils/email_util.gd"

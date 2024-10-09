@@ -12,10 +12,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Config.progress.size() > 0:
-		loading_progress_bar.value = Config.progress[0]
+	if ResUtil.progress.size() > 0:
+		loading_progress_bar.value = ResUtil.progress[0]
 	
-	if Config.load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+	if ResUtil.load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 		loading_progress_bar.value = 1
 		
 		if Config.language:
