@@ -16,6 +16,7 @@ const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/play
 @onready var footer: HBoxContainer = $Footer
 @onready var page_indicator: Label = $Footer/PageIndicator
 @onready var active_view_option_button: SwitchOptionButton = $Filters/ActiveView
+@onready var last: Button = $Footer/Last
 
 @onready var views_container: HBoxContainer = $Views
 
@@ -227,9 +228,22 @@ func _on_prev_2_pressed() -> void:
 	_update_columns()
 
 
+func _on_last_pressed() -> void:
+	page = page_max
+	_update_page_indicator()
+	_update_columns()
+
+
+func _on_first_pressed() -> void:
+	page = 0
+	_update_page_indicator()
+	_update_columns()
+
+
 func _update_page_indicator() -> void:
 	page_max = players.size() / page_size
 	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
+	last.text = str(page_max + 1)
 
 
 func _sort_players(value: String, map_function: Callable) -> void:

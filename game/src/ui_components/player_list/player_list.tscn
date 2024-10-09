@@ -60,6 +60,10 @@ size_flags_vertical = 3
 layout_mode = 2
 alignment = 1
 
+[node name="First" type="Button" parent="Footer"]
+layout_mode = 2
+text = "1"
+
 [node name="Prev" type="Button" parent="Footer"]
 layout_mode = 2
 text = "<"
@@ -82,12 +86,18 @@ text = ">>"
 layout_mode = 2
 text = ">"
 
+[node name="Last" type="Button" parent="Footer"]
+layout_mode = 2
+text = "299"
+
 [connection signal="text_changed" from="Filters/NameSearch" to="." method="_on_name_search_text_changed"]
 [connection signal="item_selected" from="Filters/LeagueSelect" to="." method="_on_league_select_item_selected"]
 [connection signal="item_selected" from="Filters/TeamSelect" to="." method="_on_team_select_item_selected"]
 [connection signal="item_selected" from="Filters/PositionSelect" to="." method="_on_position_select_item_selected"]
 [connection signal="item_selected" from="Filters/ActiveView" to="." method="_on_active_view_item_selected"]
+[connection signal="pressed" from="Footer/First" to="." method="_on_first_pressed"]
 [connection signal="pressed" from="Footer/Prev" to="." method="_on_prev_pressed"]
 [connection signal="pressed" from="Footer/Prev2" to="." method="_on_prev_2_pressed"]
 [connection signal="pressed" from="Footer/Next2" to="." method="_on_next_2_pressed"]
 [connection signal="pressed" from="Footer/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Footer/Last" to="." method="_on_last_pressed"]

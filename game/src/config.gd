@@ -12,7 +12,9 @@ var config: ConfigFile
 
 # .res for binary/compressed resource data
 # .tres for text resource data
-var res_suffix: String = ".tres"
+var res_suffix: String = ".res"
+#var res_suffix: String = ".tres"
+
 # save states
 var save_states: SaveStates
 
