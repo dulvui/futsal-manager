@@ -549,7 +549,7 @@ func _generate_club_history() -> void:
 						for matchz: Match in match_day:
 							var home_goals: int = RngUtil.rng.randi_range(0, matchz.home.get_prestige() / 2)
 							var away_goals: int = RngUtil.rng.randi_range(0, matchz.away.get_prestige() / 2)
-							matchz.set_result(home_goals, away_goals)
+							matchz.set_result(home_goals, away_goals, world)
 		world.promote_and_delegate_teams()
 
 

@@ -79,7 +79,7 @@ func get_team_by_id(team_id: int) -> Team:
 func get_competition_by_id(competition_id: int) -> Competition:
 	if world_cup.id == competition_id:
 			return world_cup
-	for continent: Continent in Config.world.continents:
+	for continent: Continent in continents:
 		if continent.cup_clubs.id == competition_id:
 			return continent.cup_clubs
 		if continent.cup_nations.id == competition_id:
