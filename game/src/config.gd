@@ -72,15 +72,14 @@ func _process(_delta: float) -> void:
 	
 		elif load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 			# assign references after resources are loaded
-			if world:
-				world = ResourceLoader.load_threaded_get(loading_resource_path)
-				team = world.get_active_team()
-				league = world.get_active_league()
-				manager = team.staff.manager
-				
-				# add to own array, to not remove element from 
-				# loading_resources_paths, while iterating
-				loaded_resources_paths.append(loading_resource_path)
+			world = ResourceLoader.load_threaded_get(loading_resource_path)
+			team = world.get_active_team()
+			league = world.get_active_league()
+			manager = team.staff.manager
+			
+			# add to own array, to not remove element from 
+			# loading_resources_paths, while iterating
+			loaded_resources_paths.append(loading_resource_path)
 	
 	# remove loaded paths
 	for loaded_path: String in loaded_resources_paths:
