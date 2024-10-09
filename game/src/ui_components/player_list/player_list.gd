@@ -39,13 +39,13 @@ var page_size:int = 16
  
 
 func _ready() -> void:
-	team_select.add_item("NO_TEAM")
+	team_select.add_item("ALL_TEAMS")
 	for league: League in Config.world.get_all_leagues():
 		for team: Team in league.teams:
 			if team == null or Config.team == null or team.name != Config.team.name:
 				team_select.add_item(team.name)
 
-	pos_select.add_item("NO_POS")
+	pos_select.add_item("ALL_POS")
 	for pos: String in Position.Type.keys():
 		pos_select.add_item(pos)
 
@@ -324,7 +324,7 @@ func _on_league_select_item_selected(index: int) -> void:
 	# clean team selector
 	filters.erase("team")
 	team_select.clear()
-	team_select.add_item("NO_TEAM")
+	team_select.add_item("ALL_TEAMS")
 
 	# adjust team picker according to selected league
 	for league: League in Config.world.get_all_leagues():

@@ -116,3 +116,15 @@ HALF_COURT,Half court,Halbes Feld,Metà campo
 NO_PRESS,No pressing,Kein Pressing,Niente pressing
 SUBS,Subs,Auswechel,Cambi
 REST,Rest,Rest,Resto
+ALL_POS,All positions,Alle Positionen,Tutte posizioni
+G,G,T,P
+DL,DL,VL,DS
+DR,DR,VR,DD
+DC,DC,VZ,DC
+C,C,M,C
+WL,WL,AL,AS
+WR,WR,AR,AD
+PL,PL,PL,PS
+PR,PR,PR,PD
+PC,PC,PZ,PC
+ALL_LEAGUES,All leagues,Alle Liegen,Tutte leghe
