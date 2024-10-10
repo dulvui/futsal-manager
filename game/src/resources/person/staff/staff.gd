@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Staff
-extends Resource
+extends JSONResource
 
 
 @export var president: President

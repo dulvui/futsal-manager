@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Resource
+extends JSONResource
 class_name History
 
 @export var statistics: Statistics

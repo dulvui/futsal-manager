@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name World
-extends Resource
+extends JSONResource
 
 @export var calendar: Calendar
 @export var continents: Array[Continent]

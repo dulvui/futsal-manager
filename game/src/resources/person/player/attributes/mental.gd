@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Mental
-extends Resource
+extends JSONResource
 
 @export var aggression: int
 @export var anticipation: int

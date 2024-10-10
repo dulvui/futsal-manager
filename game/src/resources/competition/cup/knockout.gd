@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Knockout
-extends Resource
+extends JSONResource
 
 # side a and side b of knockout graph
 # final is last remaining of teams_a vs teams_b

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Position
-extends Resource
+extends JSONResource
 
 # 9X9 grid + goalkeeper
 enum Type {

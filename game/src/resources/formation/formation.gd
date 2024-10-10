@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Formation
-extends Resource
+extends JSONResource
 
 # first value is goalkeeper, second defense etc...
 enum Variations {

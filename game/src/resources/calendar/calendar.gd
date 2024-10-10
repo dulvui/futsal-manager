@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Calendar
-extends Resource
+extends JSONResource
 
 const DAY_IN_SECONDS: int = 86400
 

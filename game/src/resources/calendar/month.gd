@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Month
-extends Resource
+extends JSONResource
 
 @export var days: Array[Day]
 @export var name: String

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Competition
-extends Resource
+extends JSONResource
 
 @export var id: int
 # 1 is best, bigger is lower league

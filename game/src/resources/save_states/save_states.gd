@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name SaveStates
-extends Resource
+extends JSONResource
 
 @export var list: Array[SaveState]
 @export var active_id: String

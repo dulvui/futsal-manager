@@ -45,6 +45,7 @@ var save_states: SaveStates
 func _ready() -> void:
 	print("version " + Global.version)
 	_load_config()
+	# don't load save state on start, for now
 	#load_save_state()
 	set_lang(language)
 	RngUtil.set_up_rngs()
@@ -57,6 +58,7 @@ func select_team(p_league: League, p_team: Team) -> void:
 	
 	print("team saved")
 	transfers = Transfers.new()
+	
 	print("calendars created")
 	MatchCombinationUtil.initialize_matches()
 	print("matches initialized")
@@ -67,7 +69,6 @@ func select_team(p_league: League, p_team: Team) -> void:
 	start_date = save_states.temp_state.start_date
 	
 	save_states.make_temp_active()
-	save_all_data()
 
 
 func next_day() -> void:

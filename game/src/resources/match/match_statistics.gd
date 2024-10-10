@@ -5,7 +5,7 @@
 # TODO add and save to match??
 # maybe also with key events? goals etc
 class_name MatchStatistics
-extends Resource
+extends JSONResource
 
 var goals: int = 0
 var possession: int = 50

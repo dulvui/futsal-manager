@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name Day
-extends Resource
+extends JSONResource
 
 # matches by leauge/cup id
 @export var matches: Dictionary

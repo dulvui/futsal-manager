@@ -2,6 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+class_name Tests
 extends Node
 
 @onready var test_calendar: TestCalendar = $TestCalendar
@@ -10,6 +11,7 @@ extends Node
 @onready var test_benchmark: TestBenchmark = $TestBenchmark
 @onready var test_gameloop: TestGameloop = $TestGameloop
 @onready var test_match_combination: TestMatchCombination = $TestMatchCombination
+@onready var test_res_util: TestRestUtil = $TestResUtil
 
 
 func _ready() -> void:
@@ -25,5 +27,6 @@ func _ready() -> void:
 	test_match_engine.test()
 	test_benchmark.test()
 	#test_gameloop.test()
+	test_res_util.test()
 	
 	print("Stop test suite")
