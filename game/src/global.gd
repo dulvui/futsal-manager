@@ -44,6 +44,8 @@ var save_states: SaveStates
 
 func _ready() -> void:
 	print("version " + Global.version)
+	speed_factor = 1
+	
 	_load_config()
 	# don't load save state on start, for now
 	#load_save_state()

@@ -60,22 +60,7 @@ func _initialize_team(nation: Nation, league: League, team: Team) -> void:
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 
 	# create team
-	team.colors = []
-	team.colors.append(
-		Color(
-			RngUtil.rng.randf_range(0, 1),
-			RngUtil.rng.randf_range(0, 1),
-			RngUtil.rng.randf_range(0, 1)
-		)
-	)
-	team.colors.append(team.colors[0].inverted())
-	team.colors.append(
-		Color(
-			RngUtil.rng.randf_range(0, 1),
-			RngUtil.rng.randf_range(0, 1),
-			RngUtil.rng.randf_range(0, 1)
-		)
-	)
+	team.set_random_colors()
 
 	team.create_stadium(team.name + " Stadium", 1234, 1990)
 

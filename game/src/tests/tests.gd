@@ -30,3 +30,20 @@ func _ready() -> void:
 	test_res_util.test()
 	
 	print("Stop test suite")
+
+
+static func create_mock_team() -> Team:
+	var team: Team = Team.new()
+	team.set_random_colors()
+	
+	for i: int in range(1, 6):
+		print(i)
+		var player: Player = Player.new()
+		player.name = str(i)
+		player.nr = i
+		
+		team.players.append(player)
+		# assign player ids for lineup
+		team.lineup_player_ids.append(player.id)
+	
+	return team

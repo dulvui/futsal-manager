@@ -24,8 +24,8 @@ func _ready() -> void:
 	prestige.text = player.get_prestige_stars()
 
 
-func set_player(_player: Player, team: Team = null) -> void:
-	player = _player
+func set_player(p_player: Player, team: Team = null) -> void:
+	player = p_player
 
 	if team:
 		if team.is_lineup_player(player):

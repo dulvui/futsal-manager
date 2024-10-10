@@ -52,25 +52,31 @@ var away_stats: MatchStatistics
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
-	matchz = Global.world.calendar.get_next_match()
-	if matchz != null:
-		home_team = matchz.home
-		away_team = matchz.away
+	if Global.world:
+		matchz = Global.world.calendar.get_next_match()
 	# setup automatically, if run in editor and is run by 'Run current scene'
 	elif OS.has_feature("editor"):
 		matchz = Match.new()
 		# games needs to be started at least once with a valid save state
-		matchz.home = Global.league.teams[0]
-		matchz.away = Global.league.teams[1]
+		matchz.home = Tests.create_mock_team()
+		matchz.away = Tests.create_mock_team()
+
+	home_team = matchz.home
+	away_team = matchz.away
 
 	home_name.text = matchz.home.name
 	away_name.text = matchz.away.name
 
-	formation.set_up(true)
+	# check if running in game or test
+	if Global.team:
+		formation.set_up(true, Global.team)
+	else:
+		formation.set_up(true, home_team)
+	
 	match_simulator.set_up(home_team, away_team, matchz.id)
-
+	
 	last_active_view = match_simulator
-
+	
 	# set colors
 	home_color.color = home_team.get_home_color()
 	away_color.color = away_team.get_away_color(home_color.color)
@@ -108,8 +114,9 @@ func match_end() -> void:
 	matchz.set_result(home_stats.goals, away_stats.goals)
 	
 	# calc other matches
-	Global.world.random_results()
-	Global.save_all_data()
+	if Global.world:
+		Global.world.random_results()
+		Global.save_all_data()
 
 
 func half_time() -> void:

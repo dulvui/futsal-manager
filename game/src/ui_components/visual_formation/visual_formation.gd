@@ -36,12 +36,12 @@ var only_lineup: bool
 func _ready() -> void:
 	# setup automatically, if run in editor and is run by 'Run current scene'
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
-		set_up(false)
+		set_up(false, Tests.create_mock_team())
 
 
-func set_up(p_only_lineup: bool) -> void:
+func set_up(p_only_lineup: bool, p_team: Team) -> void:
 	only_lineup = p_only_lineup
-	team = Global.team
+	team = p_team
 
 	# set up fomation options
 	formation_select.set_up(Formation.Variations.keys(), team.formation.variation)
