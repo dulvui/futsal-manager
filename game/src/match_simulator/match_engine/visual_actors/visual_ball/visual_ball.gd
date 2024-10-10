@@ -15,7 +15,7 @@ var last_pos: Vector2
 
 
 func _physics_process(delta: float) -> void:
-	if not Config.match_paused:
+	if not Global.match_paused:
 		last_update_time += delta
 		factor = last_update_time / update_interval
 		position = last_pos.lerp(sim_ball.pos, factor)

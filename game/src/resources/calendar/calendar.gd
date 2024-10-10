@@ -59,7 +59,7 @@ func initialize(next_season: bool = false) -> void:
 		date.year += 1
 		date = _get_next_day(date)
 	else:
-		date = Config.save_states.temp_state.start_date
+		date = Global.save_states.temp_state.start_date
 	
 	# set start date
 	date.day = Const.SEASON_START_DAY
@@ -126,7 +126,7 @@ func format_date(p_date: Dictionary = date) -> String:
 
 func get_next_match() -> Match:
 	for matchz: Match in day().get_matches():
-		if matchz.home.name == Config.team.name or matchz.away.name == Config.team.name:
+		if matchz.home.name == Global.team.name or matchz.away.name == Global.team.name:
 			return matchz
 	return null
 

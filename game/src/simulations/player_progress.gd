@@ -10,7 +10,7 @@ const AGE_PHYSICAL_DEGARDE = 30
 
 
 static func players_progress_season() -> void:
-	for c: Continent in Config.world.continents:
+	for c: Continent in Global.world.continents:
 		for n: Nation in c.nations:
 			for league: League in n.leagues:
 				for team: Team in league.teams:
@@ -24,7 +24,7 @@ static func _player_season_progress(player: Player) -> void:
 	# age factor only affects fisical attributes neagtively
 	# high prestige player has smaller age factor, that means his physical attributes
 	# dergade less and later
-	var age: int = Config.start_date.year - player.birth_date.year
+	var age: int = Global.start_date.year - player.birth_date.year
 
 	# -1/+1 depending on player age and prestige
 	var age_factor: int = AGE_PHYSICAL_DEGARDE - age + (player.prestige / 12)

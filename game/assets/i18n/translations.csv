@@ -51,7 +51,7 @@ SUBJECT,Subject,Betreff,Oggetto
 FROM,From,Von,Da
 UNREAD,Unread,Ungelesen,Da leggere
 STARRED,Starred,Favoriten,Favoriti
-SEARCH,Search,Sucher,Cerca
+SEARCH,Search,Suche,Cerca
 INFO,Info,Info,Info
 PLAYERS,Players,Spieler,Giocatori
 SEED,Seed,Seed,Seed
@@ -128,3 +128,4 @@ PL,PL,PL,PS
 PR,PR,PR,PD
 PC,PC,PZ,PC
 ALL_LEAGUES,All leagues,Alle Liegen,Tutte leghe
+LOADING_GAME,Loading your game…,Dein Spiel wird geladen…,Caricando la tua partita...

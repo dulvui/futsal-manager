@@ -17,7 +17,7 @@ enum Types {
 
 # max int value is 9223372036854775807, so quite safe to use
 func next_id(type: Types) -> int:
-	var state: SaveState = Config.save_states.get_active()
+	var state: SaveState = Global.save_states.get_active()
 
 	var type_key: String = Types.keys()[type]
 	if type_key not in state.id_by_type:

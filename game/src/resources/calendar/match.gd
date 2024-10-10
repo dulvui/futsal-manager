@@ -32,7 +32,7 @@ func _init(
 	id = IdUtil.next_id(IdUtil.Types.MATCH)
 
 
-func set_result(p_home_goals: int, p_away_goals: int, world: World = Config.world) -> void:
+func set_result(p_home_goals: int, p_away_goals: int, world: World = Global.world) -> void:
 	home_goals = p_home_goals
 	away_goals = p_away_goals
 	over = true

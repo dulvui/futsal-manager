@@ -29,19 +29,19 @@ func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	for theme_name: String in ThemeUtil.get_theme_names():
 		theme_options.add_item(theme_name)
-	theme_options.selected = Config.theme_index
+	theme_options.selected = Global.theme_index
 
 	# resolutions
 	for resolution: String in RESOLUTIONS.keys():
 		resolution_options.add_item(resolution)
 	resolution_options.selected = 0
 
-	version_label.text = Config.version
+	version_label.text = Global.version
 
 
 func _on_theme_option_button_item_selected(index: int) -> void:
 	theme = ThemeUtil.set_active_theme(index)
-	Config.save_config()
+	Global.save_config()
 
 
 func _on_menu_pressed() -> void:
@@ -56,4 +56,4 @@ func _on_defaults_pressed() -> void:
 	# theme
 	theme = ThemeUtil.reset_to_default()
 	# save
-	Config.save_config()
+	Global.save_config()

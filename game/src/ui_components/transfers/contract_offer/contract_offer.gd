@@ -25,7 +25,7 @@ var transfer: Transfer
 
 
 func _ready() -> void:
-	team = Config.team
+	team = Global.team
 
 
 func set_up(p_transfer: Transfer) -> void:

@@ -20,7 +20,7 @@ enum ContentViews {
 
 const DASHBOARD_DAY_DELAY: float = 0.5
 
-@onready var team: Team = Config.team
+@onready var team: Team = Global.team
 
 # buttons
 @onready var continue_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/Continue
@@ -58,15 +58,15 @@ var active_view: ContentViews = ContentViews.EMAIL
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
-	manager_label.text = Config.manager.get_full_name()
-	team_label.text = Config.team.name
-	date_label.text = Config.world.calendar.format_date()
+	manager_label.text = Global.manager.get_full_name()
+	team_label.text = Global.team.name
+	date_label.text = Global.world.calendar.format_date()
 	
 	all_players_list.set_up()
-	player_list.set_up(Config.team.id)
+	player_list.set_up(Global.team.id)
 	formation.set_up(false)
 
-	if Config.world.calendar.is_match_day():
+	if Global.world.calendar.is_match_day():
 		continue_button.text = "START_MATCH"
 		match_ready = true
 		next_match_button.hide()
@@ -74,7 +74,7 @@ func _ready() -> void:
 		continue_button.text = "NEXT_DAY"
 		match_ready = false
 
-	if Config.world.calendar.is_season_finished():
+	if Global.world.calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 	
@@ -91,7 +91,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_menu_pressed() -> void:
-	Config.save_all_data()
+	Global.save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 
 
@@ -225,30 +225,30 @@ func _next_day() -> void:
 		return
 
 	# next day in calendar
-	Config.next_day()
+	Global.next_day()
 
 	# next season check
 	if next_season:
-		Config.next_season()
+		Global.next_season()
 		return
-	if Config.world.calendar.is_season_finished():
+	if Global.world.calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
 		return
 
 	# general setup
 	email.update_messages()
-	date_label.text = Config.world.calendar.format_date()
+	date_label.text = Global.world.calendar.format_date()
 
 	# config buttons
-	if Config.world.calendar.is_match_day():
+	if Global.world.calendar.is_match_day():
 		continue_button.text = "START_MATCH"
 		match_ready = true
 		next_match_button.disabled = true
 		next_match_button.hide()
 	else:
 		#simulate all other matches
-		Config.world.random_results()
+		Global.world.random_results()
 
 	visual_calendar.set_up()
 

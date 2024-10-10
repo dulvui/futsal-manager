@@ -11,17 +11,17 @@ var match_rng: RandomNumberGenerator
 func set_up_rngs() -> void:
 	match_rng = RandomNumberGenerator.new()
 	rng = RandomNumberGenerator.new()
-	rng.seed = hash(Config.generation_seed) + Config.generation_player_names
-	rng.state = Config.generation_state
+	rng.seed = hash(Global.generation_seed) + Global.generation_player_names
+	rng.state = Global.generation_state
 
 
 func reset_seed(p_generation_seed: String, p_generation_player_names: int) -> void:
-	Config.generation_seed = p_generation_seed
-	Config.generation_player_names = p_generation_player_names
+	Global.generation_seed = p_generation_seed
+	Global.generation_player_names = p_generation_player_names
 	
 	rng = RandomNumberGenerator.new()
-	rng.seed = hash(Config.generation_seed + str(Config.generation_player_names))
-	Config.generation_state = rng.state
+	rng.seed = hash(Global.generation_seed + str(Global.generation_player_names))
+	Global.generation_state = rng.state
 
 
 # shuffle array using global RuandomNumberGenerator

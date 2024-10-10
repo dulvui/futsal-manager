@@ -16,7 +16,7 @@ var active_team: Team
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
-	for continent: Continent in Config.world.continents:
+	for continent: Continent in Global.world.continents:
 		var continent_label: Label = Label.new()
 		continent_label.text = continent.name
 		nations_container.add_child(continent_label)
@@ -27,7 +27,7 @@ func _ready() -> void:
 			button.pressed.connect(_on_nation_select.bind(nation))
 
 	set_teams()
-	var first_league: League = Config.world.get_all_leagues()[0]
+	var first_league: League = Global.world.get_all_leagues()[0]
 	active_league = first_league
 	active_team = first_league.teams[0]
 	team_profile.set_up(active_team)
@@ -39,7 +39,7 @@ func show_team(league: League, team: Team) -> void:
 	team_profile.set_team(active_team)
 
 
-func set_teams(p_nation: Nation = Config.world.get_all_nations()[0]) -> void:
+func set_teams(p_nation: Nation = Global.world.get_all_nations()[0]) -> void:
 	for child: Node in team_list.get_children():
 		child.queue_free()
 	
@@ -63,8 +63,8 @@ func _on_nation_select(nation: Nation) -> void:
 
 
 func _on_select_team_pressed() -> void:
-	active_team.staff.manager = Config.manager
-	Config.select_team(active_league, active_team)
+	active_team.staff.manager = Global.manager
+	Global.select_team(active_league, active_team)
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 

@@ -29,7 +29,7 @@ func initialize() -> void:
 
 
 func random_results() -> void:
-	for c: Continent in Config.world.continents:
+	for c: Continent in Global.world.continents:
 		for n: Nation in c.nations:
 			n.random_results()
 
@@ -48,20 +48,20 @@ func get_active_league() -> League:
 
 
 func get_active_nation() -> Nation:
-	for continent: Continent in Config.world.continents:
+	for continent: Continent in Global.world.continents:
 		for nation: Nation in continent.nations:
 			for league: League in nation.leagues:
-				if league.id == Config.league.id:
+				if league.id == Global.league.id:
 						return nation
 	printerr("no nation for team id " + str(active_team_id))
 	return null
 
 
 func get_active_continent() -> Continent:
-	for continent: Continent in Config.world.continents:
+	for continent: Continent in Global.world.continents:
 		for nation: Nation in continent.nations:
 			for league: League in nation.leagues:
-				if league.id == Config.league.id:
+				if league.id == Global.league.id:
 						return continent
 	printerr("no continent for team id " + str(active_team_id))
 	return null
@@ -102,7 +102,7 @@ func get_all_nations() -> Array[Nation]:
 
 func get_all_leagues() -> Array[League]:
 	var leagues: Array[League] = []
-	for c: Continent in Config.world.continents:
+	for c: Continent in Global.world.continents:
 		for n: Nation in c.nations:
 			leagues.append_array(n.leagues)
 	return leagues
@@ -110,7 +110,7 @@ func get_all_leagues() -> Array[League]:
 
 func get_all_club_cups() -> Array[Competition]:
 	var cups: Array[Competition] = []
-	for c: Continent in Config.world.continents:
+	for c: Continent in Global.world.continents:
 		cups.append(c.cup_clubs)
 		for n: Nation in c.nations:
 			cups.append(n.cup)

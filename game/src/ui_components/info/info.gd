@@ -10,9 +10,9 @@ extends VBoxContainer
 
 
 func _ready() -> void:
-	generation_seed.text = Config.generation_seed
-	start_date.text = FormatUtil.format_date(Config.start_date)
+	generation_seed.text = Global.generation_seed
+	start_date.text = FormatUtil.format_date(Global.start_date)
 
 
 func _on_copy_seed_pressed() -> void:
-	DisplayServer.clipboard_set(Config.generation_seed)
+	DisplayServer.clipboard_set(Global.generation_seed)

@@ -13,13 +13,13 @@ var active_theme: Theme
 
 
 func _ready() -> void:
-	set_active_theme(Config.theme_index)
+	set_active_theme(Global.theme_index)
 
 
 func set_active_theme(index: int) -> Theme:
-	Config.theme_index = index
+	Global.theme_index = index
 	active_theme = ResourceLoader.load(
-		THEMES.values()[Config.theme_index],
+		THEMES.values()[Global.theme_index],
 		"Theme"
 	)
 	return active_theme

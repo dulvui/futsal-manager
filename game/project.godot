@@ -21,7 +21,6 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://src/global.gd"
-Config="*res://src/config.gd"
 ResUtil="*res://src/utils/res_util.gd"
 MatchCombinationUtil="*res://src/utils/match_combination_util.gd"
 TransferUtil="*res://src/utils/transfer_util.gd"

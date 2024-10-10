@@ -52,7 +52,7 @@ var away_stats: MatchStatistics
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
-	matchz = Config.world.calendar.get_next_match()
+	matchz = Global.world.calendar.get_next_match()
 	if matchz != null:
 		home_team = matchz.home
 		away_team = matchz.away
@@ -60,8 +60,8 @@ func _ready() -> void:
 	elif OS.has_feature("editor"):
 		matchz = Match.new()
 		# games needs to be started at least once with a valid save state
-		matchz.home = Config.league.teams[0]
-		matchz.away = Config.league.teams[1]
+		matchz.home = Global.league.teams[0]
+		matchz.away = Global.league.teams[1]
 
 	home_name.text = matchz.home.name
 	away_name.text = matchz.away.name
@@ -75,9 +75,9 @@ func _ready() -> void:
 	home_color.color = home_team.get_home_color()
 	away_color.color = away_team.get_away_color(home_color.color)
 
-	speed_factor_label.text = str(Config.speed_factor) + " X"
+	speed_factor_label.text = str(Global.speed_factor) + " X"
 	
-	print("match speed_factor" + str(Config.speed_factor))
+	print("match speed_factor" + str(Global.speed_factor))
 
 	# to easier access stats
 	home_stats = match_simulator.visual_match.match_engine.home_team.stats
@@ -108,8 +108,8 @@ func match_end() -> void:
 	matchz.set_result(home_stats.goals, away_stats.goals)
 	
 	# calc other matches
-	Config.world.random_results()
-	Config.save_all_data()
+	Global.world.random_results()
+	Global.save_all_data()
 
 
 func half_time() -> void:
@@ -173,17 +173,17 @@ func _on_dashboard_pressed() -> void:
 
 
 func _on_faster_pressed() -> void:
-	if Config.speed_factor < MAX_SPEED_FACTOR:
-		Config.speed_factor += 1
+	if Global.speed_factor < MAX_SPEED_FACTOR:
+		Global.speed_factor += 1
 		match_simulator.set_time()
-	speed_factor_label.text = str(Config.speed_factor) + " X"
+	speed_factor_label.text = str(Global.speed_factor) + " X"
 
 
 func _on_slower_pressed() -> void:
-	if Config.speed_factor > 1:
-		Config.speed_factor -= 1
+	if Global.speed_factor > 1:
+		Global.speed_factor -= 1
 		match_simulator.set_time()
-	speed_factor_label.text = str(Config.speed_factor) + " X"
+	speed_factor_label.text = str(Global.speed_factor) + " X"
 
 
 func _on_pause_pressed() -> void:

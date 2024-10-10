@@ -4,16 +4,6 @@
 
 extends Node
 
-# resources
-var world: World
-var transfers: Transfers
-var inbox: Inbox
-# active resources references, from world
-var team: Team
-var league: League
-var manager: Manager
-# save states
-var save_states: SaveStates
 
 # .res for binary/compressed resource data
 # .tres for text resource data
@@ -30,16 +20,12 @@ func _process(_delta: float) -> void:
 	for loading_resource_path: String in loading_resources_paths:
 		load_status = ResourceLoader.load_threaded_get_status(loading_resource_path, progress)
 	
-		if load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
-			if progress.size() > 0:
-				print(progress[0])
-	
-		elif load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+		if load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 			# assign references after resources are loaded
-			world = ResourceLoader.load_threaded_get(loading_resource_path)
-			team = world.get_active_team()
-			league = world.get_active_league()
-			manager = team.staff.manager
+			Global.world = ResourceLoader.load_threaded_get(loading_resource_path)
+			Global.team = Global.world.get_active_team()
+			Global.league = Global.world.get_active_league()
+			Global.manager = Global.team.staff.manager
 			
 			# add to own array, to not remove element from 
 			# loading_resources_paths, while iterating
@@ -51,78 +37,61 @@ func _process(_delta: float) -> void:
 	loaded_resources_paths.clear()
 
 
+func save_save_states() -> void:
+	ResourceSaver.save(
+		Global.save_states,
+		"user://save_states" + res_suffix,
+		ResourceSaver.FLAG_COMPRESS
+	)
+
+
+func load_save_states() -> SaveStates:
+	if ResourceLoader.exists("user://save_states" + res_suffix):
+		print("loading user://save_states" + res_suffix)
+		return ResourceLoader.load("user://save_states" + res_suffix)
+	return SaveStates.new()
+
+
 func load_resources() -> void:
-	if ResourceLoader.exists(save_states.get_active_path("inbox" + res_suffix)):
-		inbox = _load_res("inbox")
+	if ResourceLoader.exists(Global.save_states.get_active_path("inbox" + res_suffix)):
+		Global.inbox = load_resource("inbox")
 	else:
-		inbox = Inbox.new()
-	if ResourceLoader.exists(save_states.get_active_path("transfers" + res_suffix)):
-		transfers = _load_res("transfers")
+		Global.inbox = Inbox.new()
+	if ResourceLoader.exists(Global.save_states.get_active_path("transfers" + res_suffix)):
+		Global.transfers = load_resource("transfers")
 	else:
-		transfers = Transfers.new()
+		Global.transfers = Transfers.new()
 	
-	if ResourceLoader.exists(save_states.get_active_path("world" + res_suffix)):
-		load_world_res("world")
+	if ResourceLoader.exists(Global.save_states.get_active_path("world" + res_suffix)):
+		load_world_resource("world")
 
 
-func load_world_res(res_key: String) -> void:
+func load_world_resource(res_key: String) -> void:
 	#var start_time: int = Time.get_ticks_msec()
 	
 	print("loading user://" + res_key + res_suffix)
 	
-	var path: String = save_states.get_active_path(res_key + res_suffix)
+	var path: String = Global.save_states.get_active_path(res_key + res_suffix)
 	
 	loading_resources_paths.append(path)
 	
 	ResourceLoader.load_threaded_request(path, "Resource", true)
 
 
-func load_save_state() -> void:
-	var save_sate: SaveState = save_states.get_active()
-	if save_sate:
-		Config.start_date = save_sate.start_date
-		Config.id_by_type = save_sate.id_by_type
-		Config.current_season = save_sate.current_season
-		Config.speed_factor = save_sate.speed_factor
-		Config.generation_seed = save_sate.generation_seed
-		Config.generation_state = save_sate.generation_state
-		Config.generation_player_names = save_sate.generation_player_names
-		print("config speed_factor " + str(Config.speed_factor))
-		load_resources()
+func save_resource(res_key: String, resource: Resource) -> void:
+	ResourceSaver.save(
+		resource,
+		Global.save_states.get_active_path(res_key + res_suffix),
+		ResourceSaver.FLAG_COMPRESS
+	)
 
 
-func save_active_state() -> void:
-	print("saving save state...")
-	var save_sate: SaveState = save_states.get_active()
-	save_sate.start_date = Config.start_date
-	save_sate.id_by_type = Config.id_by_type
-	save_sate.current_season = Config.current_season
-	save_sate.speed_factor = Config.speed_factor
-	save_sate.generation_seed = Config.generation_seed
-	save_sate.generation_state = Config.generation_state
-	save_sate.generation_player_names = Config.generation_player_names
-
-	save_sate.save_metadata()
-
-	print("save state saved")
-
-
-func save_save_states() -> void:
-	ResourceSaver.save(save_states, "user://save_states" + res_suffix)
-
-
-func save_resources() -> void:
-	ResourceSaver.save(world, save_states.get_active_path("world" + res_suffix), ResourceSaver.FLAG_COMPRESS)
-	ResourceSaver.save(inbox, save_states.get_active_path("inbox" + res_suffix), ResourceSaver.FLAG_COMPRESS)
-	ResourceSaver.save(transfers, save_states.get_active_path("transfers" + res_suffix), ResourceSaver.FLAG_COMPRESS)
-
-
-func _load_res(res_key: String) -> Resource:
+func load_resource(res_key: String) -> Resource:
 	var start_time: int = Time.get_ticks_msec()
 	
 	print("loading user://" + res_key + res_suffix)
 	
-	var path: String = save_states.get_active_path(res_key + res_suffix)
+	var path: String = Global.save_states.get_active_path(res_key + res_suffix)
 	
 	#loading_resources_paths.append(path)
 	

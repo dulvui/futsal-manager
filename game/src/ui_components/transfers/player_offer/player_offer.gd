@@ -35,7 +35,7 @@ func _ready() -> void:
 
 	amount_label.text = str(amount)
 
-	team = Config.team
+	team = Global.team
 	for t_player: Player in team.players:
 		exchange_players_button.add_item(t_player.name + " " + str(t_player.price / 1000) + "K")
 		exchange_players.append(t_player)
@@ -49,10 +49,10 @@ func set_player(new_player: Player) -> void:
 	player = new_player
 	info_label.text = "The player " + player.name + " has a value of " + str(player.price)
 
-	if player.price <= Config.team.budget:
+	if player.price <= Global.team.budget:
 		amount = player.price
 	else:
-		amount = Config.team.budget
+		amount = Global.team.budget
 
 	total = amount
 	amount_label.text = str(amount)
@@ -140,8 +140,8 @@ func _on_confirm_pressed() -> void:
 	transfer.exchange_players = selected_players
 	transfer.delay_days = (randi() % 5) + 1
 	transfer.state = Transfer.State.OFFER
-	transfer.buy_team = Config.team
-	transfer.sell_team = Config.world.get_team_by_id(player.team_id)
+	transfer.buy_team = Global.team
+	transfer.sell_team = Global.world.get_team_by_id(player.team_id)
 
 	TransferUtil.make_offer(transfer)
 	confirm.emit()

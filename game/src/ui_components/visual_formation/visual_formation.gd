@@ -41,7 +41,7 @@ func _ready() -> void:
 
 func set_up(p_only_lineup: bool) -> void:
 	only_lineup = p_only_lineup
-	team = Config.team
+	team = Global.team
 
 	# set up fomation options
 	formation_select.set_up(Formation.Variations.keys(), team.formation.variation)

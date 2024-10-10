@@ -9,11 +9,11 @@ const REQUEST_FACTOR: int = 20
 
 func update_day() -> void:
 	#check with calendar if treansfer market is open, then send start/stop mail
-	if Config.world.calendar.is_market_active():
+	if Global.world.calendar.is_market_active():
 		_request_players()
 
 		# do transfers
-		for transfer: Transfer in Config.transfers.list:
+		for transfer: Transfer in Global.transfers.list:
 			if transfer.update():
 				# TODO once other teams can make trades between themselfes, only send email
 				# for transfers affectiing own team
@@ -28,12 +28,12 @@ func update_day() -> void:
 
 func make_offer(transfer: Transfer) -> void:
 	EmailUtil.transfer_message(transfer)
-	Config.transfers.list.append(transfer)
+	Global.transfers.list.append(transfer)
 
 
 # TODO move to trasnfer util
 func get_transfer_id(id: int) -> Transfer:
-	for transfer: Transfer in Config.transfers.list:
+	for transfer: Transfer in Global.transfers.list:
 		if transfer.id == id:
 			return transfer
 	print("ERROR: transfer not found with id: " + str(id))

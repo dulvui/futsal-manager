@@ -6,7 +6,7 @@ extends Node
 
 
 func initialize_matches() -> void:
-	for continent: Continent in Config.world.continents:
+	for continent: Continent in Global.world.continents:
 		for nation: Nation in continent.nations:
 	
 			# first, initialize leauge matches
@@ -82,56 +82,56 @@ func _add_machtes_to_calendar(
 	) -> void:
 	# add to calendar
 	# TODO use actual league start/end date
-	#var day: int = Config.world.calendar.day().day
-	#var month: int = Config.world.calendar.day().month
+	#var day: int = Global.world.calendar.day().day
+	#var month: int = Global.world.calendar.day().month
 	var day: int = 0
 	var month: int = 6
 
 	# start with saturday of next week
 	for i in range(8, 1, -1):
-		if Config.world.calendar.day(month, i).weekday == "FRI":
+		if Global.world.calendar.day(month, i).weekday == "FRI":
 			day = i
 			break
 
 	for matches: Array[Match] in match_days:
 		# check if next month
-		if day > Config.world.calendar.month(month).days.size() - 1:
+		if day > Global.world.calendar.month(month).days.size() - 1:
 			month += 1
 			day = 0
 			# start also new month with saturday
 			for i in 7:
-				if Config.world.calendar.day(month, i).weekday == "FRI":
+				if Global.world.calendar.day(month, i).weekday == "FRI":
 					day = i
 					break
 
 		# assign match friday
-		Config.world.calendar.day(month, day).add_matches( \
+		Global.world.calendar.day(month, day).add_matches( \
 			matches.slice(0, matches.size() / 4), competition.id)
 		## assign match saturday
 		day += 1
 		# check if next month
-		if day > Config.world.calendar.month(month).days.size() - 1:
+		if day > Global.world.calendar.month(month).days.size() - 1:
 			month += 1
 			day = 0
 			# start also new month with saturday
 			for i in 7:
-				if Config.world.calendar.day(month, i).weekday == "SAT":
+				if Global.world.calendar.day(month, i).weekday == "SAT":
 					day = i
 					break
-		Config.world.calendar.day(month, day).add_matches( \
+		Global.world.calendar.day(month, day).add_matches( \
 				matches.slice(matches.size() / 4, matches.size() / 2), competition.id)
 		# assign match sunday
 		day += 1
 		# check if next month
-		if day > Config.world.calendar.month(month).days.size() - 1:
+		if day > Global.world.calendar.month(month).days.size() - 1:
 			month += 1
 			day = 0
 			# start also new month with saturday
 			for i in 7:
-				if Config.world.calendar.day(month, i).weekday == "SUN":
+				if Global.world.calendar.day(month, i).weekday == "SUN":
 					day = i
 					break
-		Config.world.calendar.day(month, day).add_matches( \
+		Global.world.calendar.day(month, day).add_matches( \
 				matches.slice(matches.size() / 2, matches.size()), competition.id)
 		# restart from friday
 		day += 5
@@ -190,48 +190,48 @@ func _initialize_national_teams_world_cup() -> void:
 func _add_cup_matches_to_calendar(matches: Array[Match], cup_id: int, day:int, month: int) -> void:
 	# start with saturday of next week
 	for i in range(8, 1, -1):
-		if Config.world.calendar.day(month, i).weekday == "TUE":
+		if Global.world.calendar.day(month, i).weekday == "TUE":
 			day = i
 			break
 
 	# check if next month
-	if day > Config.world.calendar.month(month).days.size() - 1:
+	if day > Global.world.calendar.month(month).days.size() - 1:
 		month += 1
 		day = 0
 		# start also new month with tuesday
 		for i in 7:
-			if Config.world.calendar.day(month, i).weekday == "TUE":
+			if Global.world.calendar.day(month, i).weekday == "TUE":
 				day = i
 				break
 
 	# assign match tuesday
-	Config.world.calendar.day(month, day).add_matches( \
+	Global.world.calendar.day(month, day).add_matches( \
 		matches.slice(0, matches.size() / 4), cup_id)
 	# assign match wednesay
 	day += 1
 	# check if next month
-	if day > Config.world.calendar.month(month).days.size() - 1:
+	if day > Global.world.calendar.month(month).days.size() - 1:
 		month += 1
 		day = 0
 		# start also new month with tuesday
 		for i in 7:
-			if Config.world.calendar.day(month, i).weekday == "TUE":
+			if Global.world.calendar.day(month, i).weekday == "TUE":
 				day = i
 				break
-	Config.world.calendar.day(month, day).add_matches( \
+	Global.world.calendar.day(month, day).add_matches( \
 			matches.slice(matches.size() / 4, matches.size() / 2), cup_id)
 	# assign matches THURSDAY
 	day += 1
 	# check if next month
-	if day > Config.world.calendar.month(month).days.size() - 1:
+	if day > Global.world.calendar.month(month).days.size() - 1:
 		month += 1
 		day = 0
 		# start also new month with saturday
 		for i in 7:
-			if Config.world.calendar.day(month, i).weekday == "TUE":
+			if Global.world.calendar.day(month, i).weekday == "TUE":
 				day = i
 				break
-	Config.world.calendar.day(month, day).add_matches( \
+	Global.world.calendar.day(month, day).add_matches( \
 			matches.slice(matches.size() / 2, matches.size()), cup_id)
 	# restart from friday
 	day += 5

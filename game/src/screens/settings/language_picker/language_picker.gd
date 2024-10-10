@@ -18,14 +18,14 @@ func _ready() -> void:
 
 
 func activate_lang_button() -> void:
-	if Config.language:
+	if Global.language:
 		en.modulate.a = 0.6
 		pt.modulate.a = 0.6
 		es.modulate.a = 0.6
 		de.modulate.a = 0.6
 		it.modulate.a = 0.6
 
-		match Config.language:
+		match Global.language:
 			"en":
 				en.modulate.a = 1
 			"pt":
@@ -39,30 +39,30 @@ func activate_lang_button() -> void:
 
 
 func _on_english_pressed() -> void:
-	Config.set_lang("en")
+	Global.set_lang("en")
 	activate_lang_button()
 	language_change.emit()
 
 
 func _on_portuguese_pressed() -> void:
-	Config.set_lang("pt")
+	Global.set_lang("pt")
 	activate_lang_button()
 	language_change.emit()
 
 
 func _on_italian_pressed() -> void:
-	Config.set_lang("it")
+	Global.set_lang("it")
 	activate_lang_button()
 	language_change.emit()
 
 
 func _on_german_pressed() -> void:
-	Config.set_lang("de")
+	Global.set_lang("de")
 	activate_lang_button()
 	language_change.emit()
 
 
 func _on_spanish_pressed() -> void:
-	Config.set_lang("es")
+	Global.set_lang("es")
 	activate_lang_button()
 	language_change.emit()

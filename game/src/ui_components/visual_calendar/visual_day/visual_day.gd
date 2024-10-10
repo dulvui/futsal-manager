@@ -37,12 +37,12 @@ func set_up(p_date: Day = Day.new()) -> void:
 	var matches: Array = date.get_matches()
 	if matches.size() > 0:
 		for matchz: Match in matches:
-			if Config.team.name == matchz.home.name:
+			if Global.team.name == matchz.home.name:
 				team_name = matchz.away.name
 				background.color = HOME_MATCH_DAY_COLOR
 				competition.visible = true
 				competition_name.text = matchz.competition_name
-			elif Config.team.name == matchz.away.name:
+			elif Global.team.name == matchz.away.name:
 				team_name = matchz.home.name
 				background.color = AWAY_MATCH_DAY_COLOR
 				competition.visible = true
@@ -51,7 +51,7 @@ func set_up(p_date: Day = Day.new()) -> void:
 	else:
 		match_label.hide()
 
-	if date.is_same_day(Config.world.calendar.day()):
+	if date.is_same_day(Global.world.calendar.day()):
 		if background.color != HOME_MATCH_DAY_COLOR:
 			background.color = Color.LIGHT_GREEN
 		elif background.color != AWAY_MATCH_DAY_COLOR:

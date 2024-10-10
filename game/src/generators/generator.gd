@@ -47,7 +47,7 @@ func _initialize_team(nation: Nation, league: League, team: Team) -> void:
 	# create date ranges
 	# starts from current year and subtracts min/max years
 	# youngest player can be 15 and oldest 45
-	date = Config.save_states.temp_state.start_date
+	date = Global.save_states.temp_state.start_date
 
 	var temp_team_prestige: int = _get_team_prestige(league.pyramid_level)
 
@@ -307,10 +307,10 @@ func _get_person_name(nation: Nation) -> String:
 	# TODO randomly use names from other nations, with low probability
 	var nation_string: String = nation.name.to_lower()
 
-	if Config.generation_player_names == Const.PlayerNames.MALE:
+	if Global.generation_player_names == Const.PlayerNames.MALE:
 		var size: int = (names[nation_string]["first_names_male"] as Array).size()
 		return names[nation_string]["first_names_male"][RngUtil.rng.randi() % size]
-	elif Config.generation_player_names == Const.PlayerNames.FEMALE:
+	elif Global.generation_player_names == Const.PlayerNames.FEMALE:
 		var size: int = (names[nation_string]["first_names_female"] as Array).size()
 		return names[nation_string]["first_names_female"][RngUtil.rng.randi() % size]
 	else:

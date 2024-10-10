@@ -42,9 +42,9 @@ func set_up(p_save_state: SaveState) -> void:
 
 func _on_load_pressed() -> void:
 	print("load save state with id ", save_state.id)
-	Config.save_states.active_id = save_state.id
-	Config.load_save_state()
-	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+	Global.save_states.active_id = save_state.id
+	Global.load_save_state()
+	get_tree().change_scene_to_file("res://src/screens/loading_screen/loading_screen.tscn")
 
 
 func _on_delete_pressed() -> void:
@@ -52,10 +52,10 @@ func _on_delete_pressed() -> void:
 
 
 func _on_delete_dialog_confirmed() -> void:
-	Config.save_states.delete(save_state)
-	Config.save_config()
-	Config.save_save_states()
-	if Config.save_states.list.size() == 0:
+	Global.save_states.delete(save_state)
+	Global.save_config()
+	ResUtil.save_save_states()
+	if Global.save_states.list.size() == 0:
 		get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 	else:
 		get_tree().change_scene_to_file(

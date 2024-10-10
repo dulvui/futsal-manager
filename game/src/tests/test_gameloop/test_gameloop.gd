@@ -21,10 +21,10 @@ func test() -> void:
 func test_full_season() -> void:
 	print("test: test full season...")
 	
-	while not Config.world.calendar.is_season_finished():
-		Config.world.calendar.next_day()
-		Config.world.random_results()
+	while not Global.world.calendar.is_season_finished():
+		Global.world.calendar.next_day()
+		Global.world.random_results()
 	
-	Config.next_season()
+	Global.next_season()
 	
 	print("test: test full season done...")

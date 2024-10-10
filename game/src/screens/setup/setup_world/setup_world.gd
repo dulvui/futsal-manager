@@ -19,7 +19,7 @@ var generation_seed: String = DEFAULT_SEED
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
-	Config.save_states.new_temp_state()
+	Global.save_states.new_temp_state()
 	
 	for player_name: String in Const.PlayerNames:
 		player_names_option.add_item(player_name)
@@ -64,15 +64,15 @@ func _on_continue_pressed() -> void:
 	var start_date_str: String = (
 		"%s-%02d-%02dT00:00:00" % [start_year, Const.SEASON_START_MONTH, Const.SEASON_START_DAY]
 	)
-	Config.save_states.temp_state.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
-	# also set Config.start_date, so funcs like person.get_age work 
-	Config.start_date = Config.save_states.temp_state.start_date
-	Config.save_states.temp_state.generation_seed = generation_seed
-	Config.save_states.temp_state.generation_player_names = player_names_option.selected
+	Global.save_states.temp_state.start_date = Time.get_datetime_dict_from_datetime_string(start_date_str, true)
+	# also set Global.start_date, so funcs like person.get_age work 
+	Global.start_date = Global.save_states.temp_state.start_date
+	Global.save_states.temp_state.generation_seed = generation_seed
+	Global.save_states.temp_state.generation_player_names = player_names_option.selected
 	
 	RngUtil.reset_seed(generation_seed, player_names_option.selected)
 	
 	var generator: Generator = Generator.new()
-	Config.world = generator.generate_world()
+	Global.world = generator.generate_world()
 	
 	get_tree().change_scene_to_file("res://src/screens/setup/setup_manager/setup_manager.tscn")

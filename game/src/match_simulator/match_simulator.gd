@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 	# intialize timer
 	timer = Timer.new()
-	timer.wait_time = 1.0 / (Const.TICKS_PER_SECOND * Config.speed_factor)
+	timer.wait_time = 1.0 / (Const.TICKS_PER_SECOND * Global.speed_factor)
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
@@ -40,7 +40,7 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 	sub_viewport.size = visual_match.visual_field.field.size
 	
 	# reset match_paused
-	Config.match_paused = false
+	Global.match_paused = false
 
 
 func _on_timer_timeout() -> void:
@@ -67,13 +67,13 @@ func _update_time() -> void:
 
 func pause_toggle() -> bool:
 	timer.paused = not timer.paused
-	Config.match_paused = timer.paused
+	Global.match_paused = timer.paused
 	return timer.paused
 
 
 func pause() -> void:
 	timer.paused = true
-	Config.match_paused = timer.paused
+	Global.match_paused = timer.paused
 
 
 func continue_match() -> void:
@@ -86,7 +86,7 @@ func match_finished() -> void:
 
 
 func set_time() -> void:
-	timer.wait_time = 1.0 / (Const.TICKS_PER_SECOND * Config.speed_factor)
+	timer.wait_time = 1.0 / (Const.TICKS_PER_SECOND * Global.speed_factor)
 
 
 func start_match() -> void:

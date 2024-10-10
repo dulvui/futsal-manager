@@ -22,7 +22,7 @@ func update() -> void:
 	for child in list.get_children():
 		child.queue_free()
 	
-	var  inbox_list: Array[EmailMessage] = Config.inbox.list
+	var  inbox_list: Array[EmailMessage] = Global.inbox.list
 	
 	if only_starred:
 		inbox_list = inbox_list.filter(func(m: EmailMessage) -> bool: return m.starred)

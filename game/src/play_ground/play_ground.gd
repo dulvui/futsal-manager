@@ -19,7 +19,7 @@ var timer: Timer
 func _ready() -> void:
 	# setup
 	timer = Timer.new()
-	timer.wait_time = 1.0 / (Const.TICKS_PER_SECOND * Config.speed_factor)
+	timer.wait_time = 1.0 / (Const.TICKS_PER_SECOND * Global.speed_factor)
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()

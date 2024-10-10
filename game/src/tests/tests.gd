@@ -16,8 +16,8 @@ func _ready() -> void:
 	print("Start test suite")
 	
 	# use new temp state
-	Config.save_states.new_temp_state()
-	Config.load_save_state()
+	Global.save_states.new_temp_state()
+	Global.load_save_state()
 	
 	test_match_combination.test()
 	test_calendar.test()

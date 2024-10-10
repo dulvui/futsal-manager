@@ -14,7 +14,7 @@ const SaveStateEntryScene: PackedScene = preload(
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
-	for save_state: SaveState in Config.save_states.list:
+	for save_state: SaveState in Global.save_states.list:
 		var entry: SaveStateEntry = SaveStateEntryScene.instantiate()
 		entry_list.add_child(entry)
 		entry.set_up(save_state)

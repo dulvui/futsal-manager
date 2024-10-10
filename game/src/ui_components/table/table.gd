@@ -19,21 +19,21 @@ var season_amount: int
 
 
 func _ready() -> void:
-	var continent: Continent = Config.world.get_active_continent()
-	var nation: Nation = Config.world.get_active_nation()
+	var continent: Continent = Global.world.get_active_continent()
+	var nation: Nation = Global.world.get_active_nation()
 	
-	competition_index = nation.leagues.find(Config.league)
-	continent_index = Config.world.continents.find(continent)
+	competition_index = nation.leagues.find(Global.league)
+	continent_index = Global.world.continents.find(continent)
 	nation_index = continent.nations.find(nation)
 
 	continents.set_up(
-		Config.world.continents.map(func(c: Continent) -> String: return c.name),
+		Global.world.continents.map(func(c: Continent) -> String: return c.name),
 		continent_index
 	)
 	
 	# start from last entry
-	season_index = Config.league.tables.size() - 1
-	season_amount = Config.league.tables.size()
+	season_index = Global.league.tables.size() - 1
+	season_amount = Global.league.tables.size()
 	
 	_set_up_seasons()
 	_set_up()
@@ -44,7 +44,7 @@ func _set_up() -> void:
 	for child: Node in grid.get_children():
 		child.queue_free()
 	
-	var continent: Continent = Config.world.continents[continent_index]
+	var continent: Continent = Global.world.continents[continent_index]
 	var nation: Nation = continent.nations[nation_index]
 	
 	nations.set_up(
@@ -117,7 +117,7 @@ func _set_up() -> void:
 		label_settings.font_size = get_theme_default_font_size()
 		label_settings.font_color = Color.GOLD
 
-		if team.team_name == Config.team.name:
+		if team.team_name == Global.team.name:
 			pos_label.label_settings = label_settings
 			name_label.label_settings = label_settings
 			games_played_label.label_settings = label_settings
@@ -130,8 +130,8 @@ func _set_up() -> void:
 
 
 func _set_up_seasons() -> void:
-	var start_year: int = Config.world.calendar.date.year
-	var end_year: int = Config.world.calendar.date.year - season_amount
+	var start_year: int = Global.world.calendar.date.year
+	var end_year: int = Global.world.calendar.date.year - season_amount
 	
 	var season_years: Array[String] = []
 	for year: int in range(start_year, end_year, -1):

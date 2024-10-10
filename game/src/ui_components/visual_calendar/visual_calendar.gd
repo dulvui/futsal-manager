@@ -19,15 +19,15 @@ var max_months: int
 
 
 func _ready() -> void:
-	max_months = Config.world.calendar.months.size()
-	current_month = Config.world.calendar.date.month
-	current_year = Config.world.calendar.date.year
+	max_months = Global.world.calendar.months.size()
+	current_month = Global.world.calendar.date.month
+	current_year = Global.world.calendar.date.year
 	set_up()
 
 
 func set_up() -> void:
 	set_up_days()
-	match_list.set_up(Config.world.calendar.day())
+	match_list.set_up(Global.world.calendar.day())
 
 
 func set_up_days() -> void:
@@ -38,21 +38,21 @@ func set_up_days() -> void:
 
 	# to start with monday, fill other days with transparent days
 	var monday_counter: int = 7
-	while Config.world.calendar.month(current_month).days[monday_counter].weekday != "MON":
+	while Global.world.calendar.month(current_month).days[monday_counter].weekday != "MON":
 		var calendar_day: VisualDay = VisualDayScene.instantiate()
 		days.add_child(calendar_day)
 		calendar_day.modulate = Color(0, 0, 0, 0)
 		monday_counter -= 1
 
 	# add days
-	for day: Day in Config.world.calendar.month(current_month).days:
+	for day: Day in Global.world.calendar.month(current_month).days:
 		var calendar_day: VisualDay = VisualDayScene.instantiate()
 		days.add_child(calendar_day)
 		calendar_day.set_up(day)
 		calendar_day.show_match_list.connect(_on_calendar_day_pressed.bind(day))
 
 		# make current day active
-		if day == Config.world.calendar.day():
+		if day == Global.world.calendar.day():
 			calendar_day.select()
 
 	var active_year: int = current_year + ((current_month - 1) / 12)
@@ -78,5 +78,5 @@ func _on_next_pressed() -> void:
 
 
 func _on_today_pressed() -> void:
-	current_month = Config.world.calendar.date.month
+	current_month = Global.world.calendar.date.month
 	set_up()

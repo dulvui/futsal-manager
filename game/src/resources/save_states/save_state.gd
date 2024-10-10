@@ -33,7 +33,7 @@ func _init(
 	p_speed_factor: int = 1,
 	p_id: String = str(int(Time.get_unix_time_from_system())),
 	p_id_by_type: Dictionary = {},
-	p_config_version: String = Config.config_version,
+	p_config_version: String = Global.config_version,
 	p_start_date: Dictionary = Time.get_datetime_dict_from_system(),
 	p_meta_team_name: String = "",
 	p_meta_manager_name: String = "",
@@ -68,8 +68,8 @@ func create_dir() -> void:
 			print("error while creating save state dir")
 
 	# save static metadata
-	meta_team_name = Config.team.name
-	meta_manager_name = Config.manager.get_full_name()
+	meta_team_name = Global.team.name
+	meta_manager_name = Global.manager.get_full_name()
 	meta_create_date = Time.get_datetime_dict_from_system()
 
 
@@ -90,9 +90,9 @@ func delete_dir() -> void:
 
 func save_metadata() -> void:
 	meta_team_position = (
-		str(Config.league.table().get_position())
+		str(Global.league.table().get_position())
 		+ ". "
-		+ Config.league.name
+		+ Global.league.name
 	)
 	meta_last_save = Time.get_datetime_dict_from_system()
-	meta_game_date = Config.world.calendar.date
+	meta_game_date = Global.world.calendar.date

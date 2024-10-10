@@ -31,7 +31,7 @@ var player: Player
 func _ready() -> void:
 	# setup automatically, if run in editor and is run by 'Run current scene'
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
-		set_player(Config.team.players[0])
+		set_player(Global.team.players[0])
 
 
 func set_player(_player: Player) -> void:

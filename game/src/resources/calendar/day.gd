@@ -31,7 +31,7 @@ func _init(
 	year = p_year
 
 
-func add_matches(p_matches: Array, competition_id: int = Config.league.id) -> void:
+func add_matches(p_matches: Array, competition_id: int = Global.league.id) -> void:
 	if not matches.has(competition_id):
 		matches[competition_id] = []
 	(matches[competition_id] as Array).append_array(p_matches)

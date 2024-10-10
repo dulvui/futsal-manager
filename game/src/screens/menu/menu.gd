@@ -16,12 +16,12 @@ extends Control
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
-	load_game.visible = Config.save_states and Config.save_states.list.size() > 0
-	continue_game.visible = Config.save_states and Config.save_states.list.size() > 0
+	load_game.visible = Global.save_states and Global.save_states.list.size() > 0
+	continue_game.visible = Global.save_states and Global.save_states.list.size() > 0
 
-	save_state.set_up(Config.save_states.get_active())
+	save_state.set_up(Global.save_states.get_active())
 	
-	version.text = "v" + Config.version
+	version.text = "v" + Global.version
 
 
 func _on_new_game_pressed() -> void:
@@ -29,8 +29,8 @@ func _on_new_game_pressed() -> void:
 
 
 func _on_continue_game_pressed() -> void:
-	Config.load_save_state()
-	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+	Global.load_save_state()
+	get_tree().change_scene_to_file("res://src/screens/loading_screen/loading_screen.tscn")
 
 
 func _on_settings_pressed() -> void:

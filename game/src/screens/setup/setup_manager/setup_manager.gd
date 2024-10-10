@@ -18,11 +18,11 @@ func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
 	# reset temp values
-	if Config.manager:
-		manager_name.text = Config.manager.name
-		manager_surname.text = Config.manager.surname
+	if Global.manager:
+		manager_name.text = Global.manager.name
+		manager_surname.text = Global.manager.surname
 
-	for nation: Nation in Config.world.get_all_nations():
+	for nation: Nation in Global.world.get_all_nations():
 		nations.add_item(nation.name)
 
 
@@ -35,7 +35,7 @@ func _on_continue_pressed() -> void:
 		var manager: Manager = Manager.new()
 		manager.name = manager_name.text
 		manager.surname = manager_surname.text
-		manager.nation = Config.world.get_all_nations()[nations.selected].name
-		Config.manager = manager
+		manager.nation = Global.world.get_all_nations()[nations.selected].name
+		Global.manager = manager
 		
 		get_tree().change_scene_to_file("res://src/screens/setup/setup_team/setup_team.tscn")
