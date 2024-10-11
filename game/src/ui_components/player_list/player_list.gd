@@ -121,19 +121,19 @@ func _set_up_columns() -> void:
 	_add_column("general", "birth_date", birth_dates)
 	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()
 	_add_column("general", "prestige", presitge_stars)
-	var moralities: Callable = func(p: Player) -> int: return p.morality
+	var moralities: Callable = func(p: Player) -> String: return Player.Morality.keys()[p.morality]
 	_add_column("general", "morality", moralities)
 
 	# contract
 	for c: Dictionary in Contract.new().get_property_list():
 		if c.usage == 4102:
-			var stats: Callable = func(p: Player) -> Variant: return p.contract.get(c.name)
+			var stats: Callable = func(p: Player) -> String: return str(p.contract.get(c.name))
 			_add_column("contract", c.name, stats)
 
 	# statistics
 	for s: Dictionary in Statistics.new().get_property_list():
 		if s.usage == 4102:
-			var stats: Callable = func(p: Player) -> Variant: return p.statistics.get(s.name)
+			var stats: Callable = func(p: Player) -> String: return str(p.statistics.get(s.name))
 			_add_column("statistics", s.name, stats)
 
 	# attributes
