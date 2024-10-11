@@ -6,11 +6,11 @@ extends Control
 
 signal language_change
 
-@onready var en: TextureButton = $HBoxContainer/English
-@onready var pt: TextureButton = $HBoxContainer/Portuguese
-@onready var it: TextureButton = $HBoxContainer/Italian
-@onready var es: TextureButton = $HBoxContainer/Spanish
-@onready var de: TextureButton = $HBoxContainer/German
+@onready var en: Button = $HBoxContainer/English
+@onready var pt: Button = $HBoxContainer/Portuguese
+@onready var it: Button = $HBoxContainer/Italian
+@onready var es: Button = $HBoxContainer/Spanish
+@onready var de: Button = $HBoxContainer/German
 
 
 func _ready() -> void:
