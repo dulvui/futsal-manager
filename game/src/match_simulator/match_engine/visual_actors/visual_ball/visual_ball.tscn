@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://brmxp0ulenogn"]
 
 [ext_resource type="Script" path="res://src/match_simulator/match_engine/visual_actors/visual_ball/visual_ball.gd" id="1_dxacx"]
-[ext_resource type="Texture2D" uid="uid://csak1pwgr8dde" path="res://assets/ball.png" id="2_x8ybp"]
+[ext_resource type="Texture2D" uid="uid://b4igo2k8ytmf7" path="res://assets/ball.svg" id="2_ktxve"]
 
 [node name="VisualBall" type="Node2D"]
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_dxacx")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_x8ybp")
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_ktxve")

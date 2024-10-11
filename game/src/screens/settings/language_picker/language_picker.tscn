@@ -1,11 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://djrvl8pvkr7aa"]
+[gd_scene load_steps=2 format=3 uid="uid://djrvl8pvkr7aa"]
 
 [ext_resource type="Script" path="res://src/screens/settings/language_picker/language_picker.gd" id="1_1ma02"]
-[ext_resource type="Texture2D" uid="uid://dmt5mivw06ki0" path="res://assets/flags/united-kingdom.png" id="2_u8w0t"]
-[ext_resource type="Texture2D" uid="uid://bgupmt8asi7fi" path="res://assets/flags/portugal.png" id="3_2slns"]
-[ext_resource type="Texture2D" uid="uid://3do6v0mqyp8x" path="res://assets/flags/italy.png" id="4_y3fhi"]
-[ext_resource type="Texture2D" uid="uid://00354b2lyni3" path="res://assets/flags/spain.png" id="5_fhke6"]
-[ext_resource type="Texture2D" uid="uid://bgodv33es1ehh" path="res://assets/flags/germany.png" id="6_v1gfj"]
 
 [node name="LanguagePicker" type="Control"]
 layout_mode = 3
@@ -32,34 +27,34 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -328.0
-offset_top = -64.0
+offset_top = -13.0
 offset_right = 328.0
-offset_bottom = 64.0
+offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="English" type="TextureButton" parent="HBoxContainer"]
+[node name="English" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("2_u8w0t")
+text = "ENGLISH"
 
-[node name="Portuguese" type="TextureButton" parent="HBoxContainer"]
+[node name="Portuguese" type="Button" parent="HBoxContainer"]
 visible = false
 layout_mode = 2
-texture_normal = ExtResource("3_2slns")
+text = "PORTUGUES"
 
-[node name="Italian" type="TextureButton" parent="HBoxContainer"]
+[node name="Italian" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("4_y3fhi")
+text = "ITALIANO"
 
-[node name="Spanish" type="TextureButton" parent="HBoxContainer"]
+[node name="Spanish" type="Button" parent="HBoxContainer"]
 visible = false
 layout_mode = 2
-texture_normal = ExtResource("5_fhke6")
+text = "ESPAÑOL"
 
-[node name="German" type="TextureButton" parent="HBoxContainer"]
+[node name="German" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("6_v1gfj")
+text = "DEUTSCH"
 
 [connection signal="pressed" from="HBoxContainer/English" to="." method="_on_english_pressed"]
 [connection signal="pressed" from="HBoxContainer/Portuguese" to="." method="_on_portuguese_pressed"]

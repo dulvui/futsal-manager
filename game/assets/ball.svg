@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:cc="http://web.resource.org/cc/"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:ns1="http://sozi.baierouge.fr"
+    viewBox="0 0 450 483"
+  >
+  <defs
+    >
+    <linearGradient
+        id="imagebot_24"
+        y2=".14519"
+        y1=".42728"
+        x2=".13875"
+        x1="1.0197"
+      >
+      <stop
+          id="imagebot_45"
+          stop-color="#000000"
+          offset="0"
+      />
+      <stop
+          id="imagebot_44"
+          stop-color="#000000"
+          stop-opacity="0"
+          offset="1"
+      />
+    </linearGradient
+    >
+    <linearGradient
+        id="imagebot_26"
+        y2=".49577"
+        y1=".35019"
+        x2="1.0193"
+        x1=".11003"
+      >
+      <stop
+          id="imagebot_47"
+          stop-color="#000000"
+          offset="0"
+      />
+      <stop
+          id="imagebot_46"
+          stop-color="#000000"
+          stop-opacity="0"
+          offset="1"
+      />
+    </linearGradient
+    >
+    <radialGradient
+        id="imagebot_28"
+        gradientUnits="userSpaceOnUse"
+        cx="311.43"
+        cy="1062.9"
+        r="225.06"
+        gradientTransform="matrix(1 0 0 1.0001 167.18 -512.7)"
+      >
+      <stop
+          id="imagebot_50"
+          stop-color="#ffffff"
+          offset="0"
+      />
+      <stop
+          id="imagebot_49"
+          stop-color="#ffffff"
+          offset=".4702"
+      />
+      <stop
+          id="imagebot_48"
+          stop-color="#d6d6d6"
+          offset="1"
+      />
+    </radialGradient
+    >
+    <radialGradient
+        id="imagebot_30"
+        gradientUnits="userSpaceOnUse"
+        cx="317.61"
+        cy="207.49"
+        r="245.83"
+        gradientTransform="matrix(.83833 0 0 .83833 211.22 370.35)"
+      >
+      <stop
+          id="imagebot_52"
+          stop-color="#6a6a6a"
+          offset="0"
+      />
+      <stop
+          id="imagebot_51"
+          stop-color="#000000"
+          offset="1"
+      />
+    </radialGradient
+    >
+    <linearGradient
+        id="imagebot_22"
+        y2="-.47343"
+        y1=".35517"
+        x2=".37601"
+        x1=".23348"
+      >
+      <stop
+          id="imagebot_43"
+          stop-color="#333333"
+          offset="0"
+      />
+      <stop
+          id="imagebot_42"
+          stop-color="#000000"
+          stop-opacity="0"
+          offset="1"
+      />
+    </linearGradient
+    >
+  </defs
+  >
+  <g
+      id="imagebot_2"
+      label="Ebene 1"
+    >
+    <path
+        id="imagebot_29"
+        d="m687.14 591.56c0 124.25-100.84 225.09-225.08 225.09-124.25 0-225.09-100.84-225.09-225.09 0-124.24 100.84-225.08 225.09-225.08 124.24 0 225.08 100.84 225.08 225.08z"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke-width="5.5734"
+        fill="url(#imagebot_30)"
+    />
+    <path
+        id="imagebot_27"
+        d="m462.05 366.48c-49.13 0-94.58 15.79-131.6 42.53-16.11 19.49-27.4 39-27.4 39l-20.56 7.88c-28.56 37.73-45.5 84.75-45.5 135.69 0 4.75 0.14 9.47 0.43 14.15 5.12 9.14 8.94 14.97 8.94 14.97l-2.62 25.69c14.7 58.68 52.45 108.24 103.06 138.5 3.61 2.34 6.63 3.75 9.95 5.63-1.76-1.66-2.3-2.11-3.45-3.16-13.25-13.71-24.41-29.72-24.41-29.72l32.03-29.47s20.6 15.56 43.72 23.62c23.13 8.06 48.78 8.63 48.78 8.63l15.88 40.75s-14.03 7.19-33.94 10.72c-3.56 0.63-7.33 1.14-11.09 1.56 12.29 2.08 24.9 3.19 37.78 3.19 52.04 0 99.99-17.69 138.12-47.38 11.93-15.98 19.75-29.72 19.75-29.72l17.38-6.81c30.83-38.22 49.43-86.72 49.81-139.53-6.12-18.16-12.81-28.81-12.81-28.81s1.71-16.58-0.69-34.85c-0.38-2.87 1.55-1.85 3.87-3.4-0.69-2.6-3.19-10.31-4.45-13.99-4.96-14.5-9.84-21.41-13.04-27.82 6.24 3.48-0.03-0.02-0.04-0.04-38.13-70.16-112.48-117.81-197.9-117.81zm27.22 8.56c18.7 0.26 38.22 6.32 38.22 6.32s22.17 8.52 38 20.56c15.82 12.04 25.31 27.59 25.31 27.59l-40.25 27.82s-21.67-14.85-44.31-22.85c-22.65-8-46.29-9.15-46.29-9.15l-11.4-41.54s17.26-8.11 37-8.71c1.23-0.04 2.47-0.05 3.72-0.04zm-131.53 111.19c13.82 0.07 25.31 1.72 25.31 1.72l20.81 88.44-66.81 63.62s-20.86-13.23-35.91-26.18c-15.04-12.96-24.28-25.63-24.28-25.63s2.72-25.65 8.84-47.72c6.13-22.06 15.69-40.53 15.69-40.53s16.52-9.51 36.94-12.5c6.38-0.94 13.12-1.25 19.41-1.22zm216.53 63.16s18.83 8.25 34.03 20.4c15.19 12.16 26.75 28.22 26.75 28.22s-1.08 22-8.35 44.88c-7.26 22.87-20.71 46.62-20.71 46.62s-18.78 6.89-38.6 8.75c-19.81 1.86-40.69-1.31-40.69-1.31l-10.34-43.28-10.66-44.5s14.15-17.05 31.29-32 37.28-27.78 37.28-27.78z"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke-width="5.103"
+        fill="url(#imagebot_28)"
+    />
+    <path
+        id="imagebot_25"
+        stroke-linejoin="round"
+        d="m633.37 598.68s-1.05 21.44-8.13 43.72-20.18 45.4-20.18 45.4-18.29 6.73-37.6 8.54c-19.3 1.81-39.61-1.29-39.61-1.29l-10.09-42.15-10.37-43.33s13.77-16.64 30.47-31.2c16.69-14.56 36.31-27.05 36.31-27.05s18.35 8.06 33.15 19.89c14.8 11.84 26.05 27.47 26.05 27.47z"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="url(#imagebot_26)"
+        stroke-width="4.8705"
+        fill="none"
+    />
+    <path
+        id="imagebot_23"
+        stroke-linejoin="round"
+        d="m337.13 638.06s-20.33-12.9-35-25.53c-14.66-12.62-23.65-24.97-23.65-24.97s2.63-24.99 8.61-46.5c5.97-21.51 15.28-39.53 15.28-39.53s16.1-9.26 36-12.17c19.91-2.92 43.62 0.5 43.62 0.5l20.28 86.21-65.14 61.99z"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="url(#imagebot_24)"
+        stroke-width="4.874"
+        fill="none"
+    />
+    <path
+        id="imagebot_21"
+        d="m526.54 385.59s19.47 7.5 33.37 18.08c13.9 10.57 22.24 24.23 22.24 24.23l-35.36 24.43s-19.03-13.05-38.92-20.08-47.71-9.8-47.71-9.8l-9.32-36.84s19.39-6.77 36.73-7.3c17.33-0.54 38.97 7.28 38.97 7.28z"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="url(#imagebot_22)"
+        stroke-width="5.0158"
+        fill="none"
+    />
+    <path
+        id="imagebot_20"
+        d="m382.01 489.15s36.18-48.08 78.43-64.33"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_19"
+        d="m552.78 456.1s26.98 42.93 23.48 91.93"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#ececec"
+        stroke-width="3"
+        fill="none"
+    />
+    <path
+        id="imagebot_18"
+        d="m550.37 456.61s27.58 44.38 24.08 93.38"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_17"
+        d="m587.8 429.25s59.78 23.6 86.03 98.35"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_16"
+        d="m635.42 597.89s21.04-1.64 39.43-32.75"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_15"
+        d="m620.39 739.32s2.92-18.13-14.52-50.95"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_14"
+        d="m453.67 760.93s32.35-8.57 73.36-65.14"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_13"
+        d="m336.82 639.22s-1.95 50.38 23.16 89.98"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_12"
+        d="m328.88 757.9s-7.43 0.1-35.55-16.85"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_11"
+        d="m277.33 588.14s-20.15 8.46-31 31.91"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_10"
+        d="m302.7 448.25s-7.23 27.91-0.95 51.36"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_9"
+        d="m326.92 412.6s60.05-50.9 121.22-28.27"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_8"
+        d="m469.15 801.22s52.39 13.45 133.19-34.24"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#666666"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_7"
+        d="m382.2 485.55s30.09-41.45 74.34-61.32"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#f2f2f2"
+        stroke-linecap="square"
+        stroke-width="3"
+        fill="none"
+    />
+    <path
+        id="imagebot_6"
+        d="m454.49 762.67s30.82-5.95 71.83-62.52"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#ffffff"
+        stroke-width="3"
+        fill="none"
+    />
+    <path
+        id="imagebot_5"
+        d="m334.79 640.34s-1.94 50.4 23.16 90"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#ffffff"
+        stroke-width="3"
+        fill="none"
+    />
+    <path
+        id="imagebot_4"
+        d="m404.35 576.56s26.34 6.18 101.29 32.7"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#999999"
+        stroke-width="1px"
+        fill="none"
+    />
+    <path
+        id="imagebot_3"
+        d="m404.35 575.28s26.34 6.19 101.29 32.7"
+        fill-rule="evenodd"
+        transform="translate(.000045776 4.7773) matrix(1 0 0 1 -236.97 -366.48)"
+        label="Ebene 1"
+        stroke="#ececec"
+        stroke-width="1px"
+        fill="none"
+    />
+    <title
+      >Ebene 1</title
+    >
+  </g
+  >
+  <metadata
+    >
+    <rdf:RDF
+      >
+      <cc:Work
+        >
+        <dc:format
+          >image/svg+xml</dc:format
+        >
+        <dc:type
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+        />
+        <cc:license
+            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
+        />
+        <dc:publisher
+          >
+          <cc:Agent
+              rdf:about="http://openclipart.org/"
+            >
+            <dc:title
+              >Openclipart</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:publisher
+        >
+        <dc:title
+          >Soccerball noShadow</dc:title
+        >
+        <dc:date
+          >2012-02-07T01:16:22</dc:date
+        >
+        <dc:description
+        />
+        <dc:source
+          >https://openclipart.org/detail/167872/soccerball-noshadow-by-rduris</dc:source
+        >
+        <dc:creator
+          >
+          <cc:Agent
+            >
+            <dc:title
+              >rduris</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:creator
+        >
+        <dc:subject
+          >
+          <rdf:Bag
+            >
+            <rdf:li
+              >soccer</rdf:li
+            >
+            <rdf:li
+              >ball</rdf:li
+            >
+            <rdf:li
+              >football</rdf:li
+            >
+            <rdf:li
+              >game</rdf:li
+            >
+            <rdf:li
+              >sports</rdf:li
+            >
+            <rdf:li
+              >play</rdf:li
+            >
+            <rdf:li
+              >exercise</rdf:li
+            >
+          </rdf:Bag
+          >
+        </dc:subject
+        >
+      </cc:Work
+      >
+      <cc:License
+          rdf:about="http://creativecommons.org/licenses/publicdomain/"
+        >
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Reproduction"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Distribution"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+        />
+      </cc:License
+      >
+    </rdf:RDF
+    >
+  </metadata
+  >
+</svg
+>

@@ -1,8 +1,15 @@
-# icon
-icon: <a href='https://www.freepik.com/vectors/football'>Football vector created by freepik - www.freepik.com</a>
-https://publicdomainvectors.org/en/free-clipart/Football-player-color-silhouette/60322.html
-https://openclipart.org/detail/319993/football-player-silhouette
+<!--
+SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
 
+SPDX-License-Identifier: CC0-1.0
+-->
+
+# icon
+Player silhoutte is licensed under public domain, taken from  
+https://publicdomainvectors.org/en/free-clipart/Football-player-color-silhouette/60322.html
+
+# ball svg
+https://openclipart.org/download/167872/soccerballnoshadow.svg
 
 # player names
 https://github.com/joke2k/faker

@@ -1,0 +1,72 @@
+# SPDX-FileCopyrightText: 2024 Simon Dalvai <info@simondalvai.org>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+version = 1
+SPDX-PackageName = "Futsal Manager"
+SPDX-PackageSupplier = "Simon Dalvai <info@simondalvai.org>"
+SPDX-PackageDownloadLocation = "https://github.com/dulvui/futsal-manager"
+
+[[annotations]]
+path = [
+    "game/src/**.tscn",
+    "game/project.godot",
+    "**.import",
+    "game/export_presets.**",
+    "game/themes/**",
+    "game/assets/i18n/translations.csv",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2022 Simon Dalvai <info@simondalvai.org>"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = [
+    "fsm-icon.png",
+    "fsm-icon.xcf",
+    "game/icon.png",
+    "game/assets/body.png",
+    "game/assets/head.png",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2022 Simon Dalvai <info@simondalvai.org>"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = [
+    ".gitignore",
+    "version",
+    "game/default_profile.build",
+    "game/export_credentials.android.example",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2022 Simon Dalvai <info@simondalvai.org>"
+SPDX-License-Identifier = "CC0-1.0"
+
+######################
+# THIRD PARTY ASSETS AND DATA
+#####################
+
+# city names taken from Wikipedia
+[[annotations]]
+path = "game/data/world/world.csv"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Wikipedia"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+# city names taken from Wikipedia
+[[annotations]]
+path = [
+    "game/data/player_names/**.json",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Copyright (c) 2012 Daniele Faraglia"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = [
+    "game/assets/ball.svg",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Copyright (c) 2012 Ross Duris"
+SPDX-License-Identifier = "CC0-1.0"
