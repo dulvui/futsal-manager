@@ -39,7 +39,7 @@ func _ready() -> void:
 		set_up(false, Tests.create_mock_team())
 
 
-func set_up(p_only_lineup: bool, p_team: Team) -> void:
+func set_up(p_only_lineup: bool, p_team: Team = Global.team) -> void:
 	only_lineup = p_only_lineup
 	team = p_team
 

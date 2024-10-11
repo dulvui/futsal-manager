@@ -69,7 +69,7 @@ func _ready() -> void:
 
 	# check if running in game or test
 	if Global.team:
-		formation.set_up(true, Global.team)
+		formation.set_up(true)
 	else:
 		formation.set_up(true, home_team)
 	
