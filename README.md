@@ -24,5 +24,5 @@ All source code is licensed under [AGPLv3](LICENSES/AGPL-3.0-or-later.txt)
 All assets made by me, are licensed under [CC BY-SA 4.0](LICENSES/CC-BY-SA-4.0.txt)
 
 This project uses the [FSFE reuse tool](https://github.com/fsfe/reuse-tool) to license files.  
-Check out all licenses and copyrights holders [here](RESUE.toml).  
+Check out all licenses and copyrights holders [here](REUSE.toml).  
 The corresponding full license texts can be found in the [LICENSES/](./LICENSES/) directory.
