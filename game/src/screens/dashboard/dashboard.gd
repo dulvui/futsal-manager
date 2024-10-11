@@ -273,7 +273,7 @@ func _on_player_offer_confirm() -> void:
 
 
 func _on_player_offer_cancel() -> void:
-	_show_active_view(ContentViews.ALL_PLAYERS)
+	_show_active_view(ContentViews.PLAYER_PROFILE)
 
 
 func _on_prev_view_pressed() -> void:
