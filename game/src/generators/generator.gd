@@ -92,6 +92,7 @@ func _assign_players_to_team(p_team: Team, p_league: League, p_nation: Nation, p
 			var player: Player = _create_player(random_nation, nr, prestige, position_type)
 			nr += 1
 			player.team = p_team.name
+			player.statistics.team_name = p_team.name
 			player.team_id = p_team.id
 			player.league = p_league.name
 			p_team.players.append(player)
@@ -411,7 +412,6 @@ func _create_player(
 	player.attributes.physical = _get_physical(date.year - birth_date.year, prestige, player.position)
 
 	var statistics: Statistics = Statistics.new()
-	statistics.team_name = "Test"
 	statistics.games_played = 0
 	statistics.goals = 0
 	statistics.assists = 0
