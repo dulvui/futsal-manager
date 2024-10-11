@@ -133,11 +133,6 @@ func _on_player_list_select_player(player: Player) -> void:
 	_show_active_view(ContentViews.PLAYER_PROFILE)
 
 
-func _on_player_profile_select(player: Player) -> void:
-	player_offer.set_player(player)
-	_show_active_view(ContentViews.PLAYER_OFFER)
-
-
 func _on_player_profile_cancel() -> void:
 	_show_active_view(ContentViews.ALL_PLAYERS)
 
@@ -299,3 +294,8 @@ func _on_next_view_pressed() -> void:
 	
 	active_view = view_history[view_history_index]
 	_show_active_view(active_view, true)
+
+
+func _on_player_profile_offer(player: Player) -> void:
+	player_offer.set_player(player)
+	_show_active_view(ContentViews.PLAYER_OFFER)

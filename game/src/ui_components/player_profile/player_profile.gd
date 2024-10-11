@@ -5,7 +5,7 @@
 class_name PlayerProfile
 extends VBoxContainer
 
-signal select(player: Player)
+signal offer(player: Player)
 signal cancel
 
 const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_label/color_label.tscn")
@@ -27,6 +27,7 @@ var player: Player
 @onready var prestige: Label = $Main/Info/Prestige
 @onready var price: Label = $Main/Info/Price
 @onready var goals: Label = $Main/History/Goals
+@onready var offer_button: Button = $Buttons/Offer
 
 
 func _ready() -> void:
@@ -35,8 +36,11 @@ func _ready() -> void:
 		set_player(Tests.create_mock_player())
 
 
-func set_player(_player: Player) -> void:
-	player = _player
+func set_player(p_player: Player) -> void:
+	player = p_player
+	
+	# show offer button, only for players that are not in your team
+	offer_button.visible = not Global.team.players.has(player)
 
 	player_name.text = player.name + " " + player.surname
 	pos.text = str(Position.Type.keys()[player.position.type])
@@ -88,8 +92,8 @@ func set_player(_player: Player) -> void:
 	goals.text = str(player.statistics.goals)
 
 
-func _on_select_pressed() -> void:
-	select.emit(player)
+func _on_offer_pressed() -> void:
+	offer.emit(player)
 
 
 func _on_close_pressed() -> void:
