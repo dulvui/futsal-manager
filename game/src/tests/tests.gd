@@ -47,3 +47,13 @@ static func create_mock_team() -> Team:
 		team.lineup_player_ids.append(player.id)
 	
 	return team
+
+
+static func create_mock_player() -> Player:
+	var player: Player = Player.new()
+	
+	player.name = "Mock"
+	player.surname = "Player"
+	player.nr = 1
+	
+	return player

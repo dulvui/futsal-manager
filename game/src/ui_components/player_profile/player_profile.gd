@@ -12,26 +12,27 @@ const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_labe
 
 var player: Player
 
-@onready var info: Control = $Info
-@onready var attributes: Control = $Attributes
+@onready var info: Control = $Main/Info
+@onready var attributes: Control = $Main/Attributes
 
-@onready var player_name: Label = $Info/Name
-@onready var pos: Label = $Info/Position
-@onready var alt_pos: Label = $Info/AltPosition
-@onready var age: Label = $Info/Age
-@onready var foot: Label = $Info/Foot
-@onready var nationality: Label = $Info/Nationality
-@onready var team: Label = $Info/Team
-@onready var nr: Label = $Info/Nr
-@onready var attributes_average: Label = $Info/AttributesAverage
-@onready var prestige: Label = $Info/Prestige
-@onready var price: Label = $Info/Price
-@onready var goals: Label = $History/Goals
+@onready var player_name: Label = $Main/Info/Name
+@onready var pos: Label = $Main/Info/Position
+@onready var alt_pos: Label = $Main/Info/AltPosition
+@onready var age: Label = $Main/Info/Age
+@onready var foot: Label = $Main/Info/Foot
+@onready var nationality: Label = $Main/Info/Nationality
+@onready var team: Label = $Main/Info/Team
+@onready var nr: Label = $Main/Info/Nr
+@onready var attributes_average: Label = $Main/Info/AttributesAverage
+@onready var prestige: Label = $Main/Info/Prestige
+@onready var price: Label = $Main/Info/Price
+@onready var goals: Label = $Main/History/Goals
+
 
 func _ready() -> void:
 	# setup automatically, if run in editor and is run by 'Run current scene'
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
-		set_player(Global.team.players[0])
+		set_player(Tests.create_mock_player())
 
 
 func set_player(_player: Player) -> void:

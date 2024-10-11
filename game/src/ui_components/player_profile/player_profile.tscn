@@ -9,148 +9,159 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1")
 script = ExtResource("2")
 metadata/_edit_use_anchors_ = true
 
-[node name="Attributes" type="HBoxContainer" parent="."]
+[node name="Main" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Info" type="GridContainer" parent="Main"]
+layout_mode = 2
+columns = 2
+
+[node name="NameLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "NAME"
+
+[node name="Name" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "Viustel Hans"
+
+[node name="PositionLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "POSITION"
+
+[node name="Position" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "PIVOT"
+
+[node name="AltPositionLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "ALT_POSITION"
+
+[node name="AltPosition" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "PIVOT"
+
+[node name="AgeLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "AGE"
+
+[node name="Age" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "32"
+
+[node name="FootLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "FOOT"
+
+[node name="Foot" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "32"
+
+[node name="NationalityLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "NATIONALITY"
+
+[node name="Nationality" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "Italiana"
+
+[node name="TeamLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "TEAM"
+
+[node name="Team" type="Label" parent="Main/Info"]
+layout_mode = 2
+
+[node name="NrLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "NR"
+
+[node name="Nr" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "Bronzolo"
+
+[node name="AttributesAverageLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "ATTRIBUTES_AVERGE"
+
+[node name="AttributesAverage" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "Bronzolo"
+
+[node name="PrestigeLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "PRESTIGE"
+
+[node name="Prestige" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "Bronzolo"
+
+[node name="PriceLabel" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "PRICE"
+
+[node name="Price" type="Label" parent="Main/Info"]
+layout_mode = 2
+text = "1234 $"
+
+[node name="VSeparator2" type="VSeparator" parent="Main"]
+layout_mode = 2
+
+[node name="History" type="GridContainer" parent="Main"]
+layout_mode = 2
+columns = 2
+
+[node name="GoalsLabel" type="Label" parent="Main/History"]
+layout_mode = 2
+text = "GOALS"
+
+[node name="Goals" type="Label" parent="Main/History"]
+layout_mode = 2
+text = "Viustel Hans"
+
+[node name="VSeparator" type="VSeparator" parent="Main"]
+layout_mode = 2
+
+[node name="Attributes" type="HBoxContainer" parent="Main"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Goalkeeper" type="GridContainer" parent="Attributes"]
+[node name="Goalkeeper" type="GridContainer" parent="Main/Attributes"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 columns = 2
 
-[node name="Physical" type="GridContainer" parent="Attributes"]
+[node name="Physical" type="GridContainer" parent="Main/Attributes"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 columns = 2
 
-[node name="Mental" type="GridContainer" parent="Attributes"]
+[node name="Mental" type="GridContainer" parent="Main/Attributes"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 columns = 2
 
-[node name="Technical" type="GridContainer" parent="Attributes"]
+[node name="Technical" type="GridContainer" parent="Main/Attributes"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 columns = 2
-
-[node name="History" type="GridContainer" parent="."]
-layout_mode = 2
-columns = 2
-
-[node name="GoalsLabel" type="Label" parent="History"]
-layout_mode = 2
-text = "GOALS"
-
-[node name="Goals" type="Label" parent="History"]
-layout_mode = 2
-text = "Viustel Hans"
-
-[node name="Contract" type="Control" parent="."]
-layout_mode = 2
-
-[node name="Info" type="GridContainer" parent="."]
-layout_mode = 2
-columns = 2
-
-[node name="NameLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "NAME"
-
-[node name="Name" type="Label" parent="Info"]
-layout_mode = 2
-text = "Viustel Hans"
-
-[node name="PositionLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "POSITION"
-
-[node name="Position" type="Label" parent="Info"]
-layout_mode = 2
-text = "PIVOT"
-
-[node name="AltPositionLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "ALT_POSITION"
-
-[node name="AltPosition" type="Label" parent="Info"]
-layout_mode = 2
-text = "PIVOT"
-
-[node name="AgeLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "AGE"
-
-[node name="Age" type="Label" parent="Info"]
-layout_mode = 2
-text = "32"
-
-[node name="FootLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "FOOT"
-
-[node name="Foot" type="Label" parent="Info"]
-layout_mode = 2
-text = "32"
-
-[node name="NationalityLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "NATIONALITY"
-
-[node name="Nationality" type="Label" parent="Info"]
-layout_mode = 2
-text = "Italiana"
-
-[node name="TeamLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "TEAM"
-
-[node name="Team" type="Label" parent="Info"]
-layout_mode = 2
-
-[node name="NrLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "NR"
-
-[node name="Nr" type="Label" parent="Info"]
-layout_mode = 2
-text = "Bronzolo"
-
-[node name="AttributesAverageLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "ATTRIBUTES_AVERGE"
-
-[node name="AttributesAverage" type="Label" parent="Info"]
-layout_mode = 2
-text = "Bronzolo"
-
-[node name="PrestigeLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "PRESTIGE"
-
-[node name="Prestige" type="Label" parent="Info"]
-layout_mode = 2
-text = "Bronzolo"
-
-[node name="PriceLabel" type="Label" parent="Info"]
-layout_mode = 2
-text = "PRICE"
-
-[node name="Price" type="Label" parent="Info"]
-layout_mode = 2
-text = "1234 $"
 
 [node name="Buttons" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 40
+alignment = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Close" type="Button" parent="Buttons"]
