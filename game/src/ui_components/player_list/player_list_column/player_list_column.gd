@@ -9,6 +9,11 @@ const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_labe
 
 signal sort
 
+const NOT_TRANSLATED_COLUMS: Array[StringName] = [
+	Const.SURNAME,
+	"TEAM",
+]
+
 @onready var sort_button: Button = $SortButton
 
 var color_labels: Array[ColorLabel] = []
@@ -28,8 +33,8 @@ func set_up(p_view_name: String, p_col_name: String, players: Array[Player], p_m
 	col_name = p_col_name
 	map_function = p_map_function
 	
-	sort_button.text = p_col_name
-	sort_button.tooltip_text = p_col_name
+	sort_button.text = p_col_name.to_upper()
+	sort_button.tooltip_text = p_col_name.to_upper()
 	
 	var values: Array[Variant] = players.map(map_function)
 	
@@ -39,12 +44,16 @@ func set_up(p_view_name: String, p_col_name: String, players: Array[Player], p_m
 		add_child(label)
 		label.tooltip_text = col_name
 		label.set_up(col_name)
-		if "date" in col_name:
+		
+		if is_instance_of(value, TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
+			value = str(value).to_upper()
+		
+		if col_name == Const.SURNAME:
+			label.enable_button()
+		if "DATE" in col_name:
 			label.set_value(FormatUtil.format_date(value))
 		else:
 			label.set_value(value)
-		if col_name == "surname":
-			label.enable_button()
 
 
 func update_values(players: Array[Player]) -> void:
@@ -53,7 +62,9 @@ func update_values(players: Array[Player]) -> void:
 	for i: int in color_labels.size():
 		if i < values.size():
 			color_labels[i].show()
-			if "date" in col_name:
+			if is_instance_of(values[i], TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
+				values[i] = str(values[i]).to_upper()
+			if "DATE" in col_name:
 				color_labels[i].set_value(FormatUtil.format_date(values[i]))
 			else:
 				color_labels[i].set_value(values[i])

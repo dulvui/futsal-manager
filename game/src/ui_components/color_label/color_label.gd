@@ -36,7 +36,7 @@ func set_value(value: Variant) -> void:
 			label.label_settings.outline_color = Color.DARK_GREEN
 	
 	# check if not number, treadet as string
-	elif not (value as String).is_valid_int():
+	elif is_instance_of(value, TYPE_STRING) and not (value as String).is_valid_int():
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 
 

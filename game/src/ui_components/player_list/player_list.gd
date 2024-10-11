@@ -95,8 +95,8 @@ func _set_up_columns() -> void:
 
 	# names
 	var names: Callable = func(p: Player) -> String: return p.surname
-	_add_column("surname", "surname", names)
-	var name_col: PlayerListColumn = columns["surname"]
+	_add_column(Const.SURNAME, Const.SURNAME, names)
+	var name_col: PlayerListColumn = columns[Const.SURNAME]
 	name_col.custom_minimum_size.x = 200
 	# connect name button  signal
 	for i: int in visible_players.size():
@@ -108,21 +108,21 @@ func _set_up_columns() -> void:
 
 	# general
 	var team_names: Callable = func(p: Player) -> String: return p.team
-	_add_column("general", "team", team_names)
+	_add_column("GENERAL", "TEAM", team_names)
 	# TODO fix nationalitys, get nation by nation name sabed in player res
-	#var nationalities: Callable = func(p: Player) -> String:return Global.world.continents.keys()[p.nation]
-	#_add_column("general", "nation", nationalities)
+	var nationalities: Callable = func(p: Player) -> String: return p.nation
+	_add_column("GENERAL", "NATION", nationalities)
 	var positions: Callable = func(p: Player) -> String: return Position.Type.keys()[p.position.type]
-	_add_column("general", "position", positions)
+	_add_column("GENERAL", Const.POSITION, positions)
 	var prices: Callable = func(p: Player) -> String: return FormatUtil.get_sign(p.price)
-	_add_column("general", "price", prices)
+	_add_column("GENERAL", "PRICE", prices)
 	#var birth_dates: Callable = func(p: Player) -> String: return FormatUtil.format_date(p.birth_date)
 	var birth_dates: Callable = func(p: Player) -> Dictionary: return p.birth_date
-	_add_column("general", "birth_date", birth_dates)
+	_add_column("GENERAL", "BIRTH_DATE", birth_dates)
 	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()
-	_add_column("general", "prestige", presitge_stars)
+	_add_column("GENERAL", "PRESTIGE", presitge_stars)
 	var moralities: Callable = func(p: Player) -> String: return Player.Morality.keys()[p.morality]
-	_add_column("general", "morality", moralities)
+	_add_column("GENERAL", "MORALITY", moralities)
 
 	# contract
 	for c: Dictionary in Contract.new().get_property_list():
@@ -133,20 +133,20 @@ func _set_up_columns() -> void:
 				if typeof(value) == Variant.Type.TYPE_DICTIONARY:
 					return value
 				return str(value)
-			_add_column("contract", c.name, stats)
+			_add_column("CONTARCT", c.name, stats)
 
 	# statistics
 	for s: Dictionary in Statistics.new().get_property_list():
 		if s.usage == 4102:
 			var stats: Callable = func(p: Player) -> String: return str(p.statistics.get(s.name))
-			_add_column("statistics", s.name, stats)
+			_add_column("STATISTICS", s.name, stats)
 
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
 			var value_path: Array[String] = ["attributes", key, value]
 			var attributes: Callable = func(p: Player) -> int: return p.get_res_value(value_path)
-			_add_column(key, value, attributes)
+			_add_column(key.to_upper(), value, attributes)
 
 
 func _update_columns() -> void:
@@ -158,17 +158,19 @@ func _update_columns() -> void:
 
 func _add_column(view_name:String, col_name: String, map_function: Callable) -> void:
 	var col: PlayerListColumn = PlayerListColumnScene.instantiate()
+	view_name = view_name
+	
 	views_container.add_child(col)
 	col.set_up(view_name, col_name, visible_players, map_function)
 	col.sort.connect(_sort_players.bind(col_name, map_function))
 	columns[col_name] = col
-	if view_name != "surname" and not view_name in views:
+	if view_name != Const.SURNAME and not view_name in views:
 		views.append(view_name)
 
 
 func _show_active_column() -> void:
 	for col: PlayerListColumn in columns.values():
-		col.visible = col.view_name == "surname" or col.view_name == active_view
+		col.visible = col.view_name == Const.SURNAME or col.view_name == active_view
 
 
 func _set_up_players(p_reset_options: bool = true) -> void:
@@ -284,7 +286,6 @@ func _sort_players(value: String, map_function: Callable) -> void:
 	_filter()
 
 
-
 func _filter() -> void:
 	page = 0
 
@@ -294,14 +295,18 @@ func _filter() -> void:
 		var value: String
 		var key: String
 
-		for player in all_players:
+		for player: Player in all_players:
 			filter_counter = 0
-			for i:int in filters.keys().size():
+			for i: int in filters.keys().size():
 				key = filters.keys()[i]
 				filter_counter += 1
 				value = str(filters[key])
 				value = value.to_upper()
-				if not str(player[key]).to_upper().contains(value):
+				
+				if key == Const.POSITION:
+					if not str(player.position.type) == value:
+						filter_counter += 1
+				elif not str(player[key.to_lower()]).to_upper().contains(value):
 					filter_counter += 1
 			if filter_counter == filters.size():
 				filtered_players.append(player)
@@ -315,22 +320,22 @@ func _filter() -> void:
 
 func _on_name_search_text_changed(new_text: String) -> void:
 	if new_text.length() > 0:
-		if not "surname" in filters:
-			filters["surname"] = new_text
-		elif new_text.length() > (filters["surname"] as String).length():
-			filters["surname"] = new_text
+		if not Const.SURNAME in filters:
+			filters[Const.SURNAME] = new_text
+		elif new_text.length() > (filters[Const.SURNAME] as String).length():
+			filters[Const.SURNAME] = new_text
 		else:
-			filters["surname"] = new_text
+			filters[Const.SURNAME] = new_text
 	else:
-		filters.erase("surname")
+		filters.erase(Const.SURNAME)
 	_filter()
 
 
 func _on_position_select_item_selected(index: int) -> void:
 	if index > 0:
-		filters["position"] = Position.Type.values()[index - 1]
+		filters[Const.POSITION] = Position.Type.values()[index - 1]
 	else:
-		filters.erase("position")
+		filters.erase(Const.POSITION)
 	_filter()
 
 
