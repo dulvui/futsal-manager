@@ -127,7 +127,12 @@ func _set_up_columns() -> void:
 	# contract
 	for c: Dictionary in Contract.new().get_property_list():
 		if c.usage == 4102:
-			var stats: Callable = func(p: Player) -> String: return str(p.contract.get(c.name))
+			var stats: Callable = func(p: Player) -> Variant:
+				var value: Variant = p.contract.get(c.name)
+				# for dates
+				if typeof(value) == Variant.Type.TYPE_DICTIONARY:
+					return value
+				return str(value)
 			_add_column("contract", c.name, stats)
 
 	# statistics
