@@ -9,6 +9,7 @@ const SaveStateEntryScene: PackedScene = preload(
 	"res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn"
 )
 @onready var entry_list: VBoxContainer = $VBoxContainer/ScrollContainer/EntryList
+@onready var loading_screen: LoadingScreen = $LoadingScreen
 
 
 func _ready() -> void:
@@ -18,7 +19,12 @@ func _ready() -> void:
 		var entry: SaveStateEntry = SaveStateEntryScene.instantiate()
 		entry_list.add_child(entry)
 		entry.set_up(save_state)
+		entry.load_game.connect(func() -> void: loading_screen.show())
 
 
 func _on_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+
+
+func _on_loading_screen_loaded() -> void:
+	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")

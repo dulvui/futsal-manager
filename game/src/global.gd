@@ -156,7 +156,7 @@ func load_save_state() -> void:
 		generation_player_names = save_sate.generation_player_names
 		ResUtil.load_resources()
 	else:
-		ResUtil.load_status = ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED
+		LoadingUtil.done()
 
 
 func _load_config() -> void:

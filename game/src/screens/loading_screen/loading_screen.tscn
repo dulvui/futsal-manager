@@ -37,9 +37,9 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Message" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "LOADING_GAME"
+text = "LOADING"
 
 [node name="LoadingProgressBar" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2

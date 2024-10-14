@@ -7,6 +7,8 @@ extends Control
 
 @onready var save_state: SaveStateEntry = $MarginContainer/VBoxContainer/SaveState
 
+@onready var loading_screen: LoadingScreen = $LoadingScreen
+
 @onready var load_game: Button = $MarginContainer/VBoxContainer/LoadGame
 @onready var continue_game: Button = $MarginContainer/VBoxContainer/ContinueGame
 
@@ -30,7 +32,8 @@ func _on_new_game_pressed() -> void:
 
 func _on_continue_game_pressed() -> void:
 	Global.load_save_state()
-	get_tree().change_scene_to_file("res://src/screens/loading_screen/loading_screen.tscn")
+	LoadingUtil.start("LOADING_GAME")
+	loading_screen.show()
 
 
 func _on_settings_pressed() -> void:
@@ -39,3 +42,7 @@ func _on_settings_pressed() -> void:
 
 func _on_load_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/save_states_screen/save_states_screen.tscn")
+
+
+func _on_loading_screen_loaded() -> void:
+	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")

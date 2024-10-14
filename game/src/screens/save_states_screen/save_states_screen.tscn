@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8ns73g7247l3"]
+[gd_scene load_steps=3 format=3 uid="uid://b8ns73g7247l3"]
 
 [ext_resource type="Script" path="res://src/screens/save_states_screen/save_state_screen.gd" id="1_er0yh"]
+[ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="2_j7bth"]
 
 [node name="SaveStates" type="Control"]
 layout_mode = 3
@@ -48,4 +49,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "MENU"
 
+[node name="LoadingScreen" parent="." instance=ExtResource("2_j7bth")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]

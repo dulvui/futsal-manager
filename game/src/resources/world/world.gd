@@ -121,7 +121,7 @@ func promote_and_delegate_teams() -> void:
 	for contient: Continent in continents:
 		for nation: Nation in contient.nations:
 			# d - delegated
-			# p - promotod
+			# p - promoted
 			var teams_buffer: Dictionary = {
 				"d" = {},
 				"p" = {},

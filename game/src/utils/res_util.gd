@@ -19,7 +19,9 @@ var load_status: ResourceLoader.ThreadLoadStatus
 func _process(_delta: float) -> void:
 	for loading_resource_path: String in loading_resources_paths:
 		load_status = ResourceLoader.load_threaded_get_status(loading_resource_path, progress)
-	
+		
+		LoadingUtil.update(progress[0])
+		
 		if load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 			# assign references after resources are loaded
 			Global.world = ResourceLoader.load_threaded_get(loading_resource_path)
@@ -30,6 +32,7 @@ func _process(_delta: float) -> void:
 			# add to own array, to not remove element from 
 			# loading_resources_paths, while iterating
 			loaded_resources_paths.append(loading_resource_path)
+			LoadingUtil.done()
 	
 	# remove loaded paths
 	for loaded_path: String in loaded_resources_paths:

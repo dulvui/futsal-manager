@@ -5,6 +5,8 @@
 class_name SaveStateEntry
 extends HBoxContainer
 
+signal load_game
+
 @export var hide_buttons: bool = false
 
 @onready var delete_dialog: ConfirmationDialog = $DeleteDialog
@@ -44,7 +46,8 @@ func _on_load_pressed() -> void:
 	print("load save state with id ", save_state.id)
 	Global.save_states.active_id = save_state.id
 	Global.load_save_state()
-	get_tree().change_scene_to_file("res://src/screens/loading_screen/loading_screen.tscn")
+	LoadingUtil.start("LOADING_GAME")
+	load_game.emit()
 
 
 func _on_delete_pressed() -> void:
