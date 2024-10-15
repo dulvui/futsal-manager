@@ -84,8 +84,9 @@ func delete_dir() -> void:
 				OS.move_to_trash(ProjectSettings.globalize_path("user://" + id + "/" + file_name))
 				file_name = user_dir.get_next()
 		# delete folder
-		user_dir.change_dir("..")
-		OS.move_to_trash(ProjectSettings.globalize_path("user://" + id))
+		err = user_dir.change_dir("..")
+		if err == OK and user_dir.dir_exists(ProjectSettings.globalize_path("user://" + id)):
+			OS.move_to_trash(ProjectSettings.globalize_path("user://" + id))
 
 
 func save_metadata() -> void:

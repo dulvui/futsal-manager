@@ -43,18 +43,20 @@ func _process(_delta: float) -> void:
 func save_save_states() -> void:
 	print("saving save state...")
 	var save_sate: SaveState = Global.save_states.get_active()
-	save_sate.start_date = Global.start_date
-	save_sate.id_by_type = Global.id_by_type
-	save_sate.current_season = Global.current_season
-	save_sate.speed_factor = Global.speed_factor
-	save_sate.generation_seed = Global.generation_seed
-	save_sate.generation_state = Global.generation_state
-	save_sate.generation_player_names = Global.generation_player_names
+	if not save_sate.meta_is_temp:
+		save_sate.start_date = Global.start_date
+		save_sate.id_by_type = Global.id_by_type
+		save_sate.current_season = Global.current_season
+		save_sate.speed_factor = Global.speed_factor
+		save_sate.generation_seed = Global.generation_seed
+		save_sate.generation_state = Global.generation_state
+		save_sate.generation_player_names = Global.generation_player_names
 
-	save_sate.save_metadata()
+		save_sate.save_metadata()
 	
-	save_resource("inbox", Global.inbox)
-	save_resource("transfers", Global.transfers)
+		save_resource("inbox", Global.inbox)
+		save_resource("transfers", Global.transfers)
+	
 	ResourceSaver.save(
 		Global.save_states,
 		"user://save_states" + res_suffix,
