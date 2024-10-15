@@ -15,6 +15,12 @@ var loaded_resources_paths: Array[String]
 var progress: Array
 var load_status: ResourceLoader.ThreadLoadStatus
 
+var save_world_thread: Thread
+
+
+func _ready() -> void:
+	save_world_thread = Thread.new()
+
 
 func _process(_delta: float) -> void:
 	for loading_resource_path: String in loading_resources_paths:
@@ -41,11 +47,43 @@ func _process(_delta: float) -> void:
 
 
 func save_save_states() -> void:
+	print("saving save state...")
+	var save_sate: SaveState = Global.save_states.get_active()
+	save_sate.start_date = Global.start_date
+	save_sate.id_by_type = Global.id_by_type
+	save_sate.current_season = Global.current_season
+	save_sate.speed_factor = Global.speed_factor
+	save_sate.generation_seed = Global.generation_seed
+	save_sate.generation_state = Global.generation_state
+	save_sate.generation_player_names = Global.generation_player_names
+
+	save_sate.save_metadata()
+	
+	save_resource("inbox", Global.inbox)
+	save_resource("transfers", Global.transfers)
 	ResourceSaver.save(
 		Global.save_states,
 		"user://save_states" + res_suffix,
 		ResourceSaver.FLAG_COMPRESS
 	)
+	
+	# save world with thread
+	if save_world_thread.is_started():
+		print("save world thread is already saving")
+		return
+	
+	save_world_thread.start(_save_world, Thread.Priority.PRIORITY_HIGH)
+
+
+func _save_world() -> void:
+	print("save world in thread...")
+	save_resource("world", Global.world)
+	call_deferred("_on_world_saved")
+
+
+func _on_world_saved() -> void:
+	LoadingUtil.done()
+	print("save world in thread done.")
 
 
 func load_save_states() -> SaveStates:
@@ -106,3 +144,7 @@ func load_resource(res_key: String) -> Resource:
 	print("loaded in: " + str(load_time) + " ms")
 	
 	return res
+
+
+func _exit_tree() -> void:
+	save_world_thread.wait_to_finish()

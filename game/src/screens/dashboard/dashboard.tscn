@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8mhb22bae1my"]
+[gd_scene load_steps=13 format=3 uid="uid://c8mhb22bae1my"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/dashboard/dashboard.gd" id="2"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://mvca6wjq0pv6" path="res://src/ui_components/player_list/player_list.tscn" id="8_nkdvo"]
 [ext_resource type="PackedScene" uid="uid://ccipqeqmthtfr" path="res://src/ui_components/transfers/contract_offer/contract_offer.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://dtvkd1ks3xiqc" path="res://src/ui_components/player_profile/player_profile.tscn" id="11_838pl"]
+[ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="12_7y8jj"]
 
 [node name="Dashboard" type="Control"]
 layout_mode = 3
@@ -187,6 +188,10 @@ text = "NEXT_MATCH"
 layout_mode = 2
 text = "NEXT_DAY"
 
+[node name="LoadingScreen" parent="." instance=ExtResource("12_7y8jj")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="MainContainer/VBoxContainer/TopBar/PrevView" to="." method="_on_prev_view_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/TopBar/NextView" to="." method="_on_next_view_pressed"]
 [connection signal="email_action" from="MainContainer/VBoxContainer/MainView/Content/Email" to="." method="_on_email_email_action"]
@@ -208,3 +213,4 @@ text = "NEXT_DAY"
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/SearchPlayer" to="." method="_on_search_player_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/NextMatch" to="." method="_on_next_match_pressed"]
 [connection signal="pressed" from="MainContainer/VBoxContainer/MainView/Buttons/Continue" to="." method="_on_continue_pressed"]
+[connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]

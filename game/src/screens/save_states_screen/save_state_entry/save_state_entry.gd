@@ -46,7 +46,7 @@ func _on_load_pressed() -> void:
 	print("load save state with id ", save_state.id)
 	Global.save_states.active_id = save_state.id
 	Global.load_save_state()
-	LoadingUtil.start("LOADING_GAME")
+	LoadingUtil.start("LOADING_GAME", LoadingUtil.Type.LOAD_GAME)
 	load_game.emit()
 
 

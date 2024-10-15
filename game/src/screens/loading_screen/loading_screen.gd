@@ -15,10 +15,22 @@ func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	loading_progress_bar.indeterminate = LoadingUtil.indeterminate
 	# connect loaded signal also here
-	LoadingUtil.loaded.connect(func() -> void: loaded.emit())
+	LoadingUtil.loaded.connect(_loaded)
 
 
 func _process(_delta: float) -> void:
 	if not LoadingUtil.indeterminate:
+		message_label.text = LoadingUtil.message
+		loading_progress_bar.value = LoadingUtil.progress
+
+
+func _loaded(type: LoadingUtil.Type) -> void:
+	print(type)
+	loaded.emit()
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		loading_progress_bar.indeterminate = LoadingUtil.indeterminate
 		message_label.text = LoadingUtil.message
 		loading_progress_bar.value = LoadingUtil.progress

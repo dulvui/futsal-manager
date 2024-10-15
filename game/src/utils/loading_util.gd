@@ -4,16 +4,26 @@
 
 extends Node
 
-signal loaded
+enum Type {
+	LOAD_GAME,
+	SAVE_GAME,
+	MATCH_RESULTS,
+	NEXT_SEASON,
+	GENERATION,
+}
 
-var message: String
+signal loaded(type: Type)
+
 var progress: float
+var message: String
+var type: Type
 var indeterminate: bool
 
 
-func start(p_message: String, p_indeterminate: bool = false) -> void:
-	indeterminate = p_indeterminate
+func start(p_message: String, p_type: Type, p_indeterminate: bool = false) -> void:
 	message = p_message
+	type = p_type
+	indeterminate = p_indeterminate
 	progress = 0
 
 
@@ -22,4 +32,4 @@ func update(p_progress: float) -> void:
 
 
 func done() -> void:
-	loaded.emit()
+	loaded.emit(type)

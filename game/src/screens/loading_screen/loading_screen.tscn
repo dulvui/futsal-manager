@@ -45,3 +45,5 @@ text = "LOADING"
 layout_mode = 2
 max_value = 1.0
 metadata/_edit_use_anchors_ = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

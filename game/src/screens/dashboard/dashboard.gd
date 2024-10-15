@@ -46,6 +46,7 @@ const DASHBOARD_DAY_DELAY: float = 0.5
 @onready var player_offer: PlayerOffer = $MainContainer/VBoxContainer/MainView/Content/PlayerOffer
 @onready var contract_offer: ContractOffer = $MainContainer/VBoxContainer/MainView/Content/ContractOffer
 @onready var player_profile: PlayerProfile = $MainContainer/VBoxContainer/MainView/Content/PlayerProfile
+@onready var loading_screen: LoadingScreen = $LoadingScreen
 
 var match_ready: bool = false
 var next_season: bool = false
@@ -91,8 +92,11 @@ func _process(_delta: float) -> void:
 
 
 func _on_menu_pressed() -> void:
+	LoadingUtil.start("SAVING_GAME", LoadingUtil.Type.SAVE_GAME, true)
+	loading_screen.show()
 	Global.save_all_data()
-	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+	# wait for _on_loading_screen_loaded
+	
 
 
 func _on_search_player_pressed() -> void:
@@ -299,3 +303,8 @@ func _on_next_view_pressed() -> void:
 func _on_player_profile_offer(player: Player) -> void:
 	player_offer.set_player(player)
 	_show_active_view(ContentViews.PLAYER_OFFER)
+
+
+func _on_loading_screen_loaded() -> void:
+	# TODO use type to differntiate different loading screens
+	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")

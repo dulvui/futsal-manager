@@ -103,26 +103,6 @@ func next_season() -> void:
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
-func save_active_state() -> void:
-	print("saving save state...")
-	var save_sate: SaveState = save_states.get_active()
-	save_sate.start_date = start_date
-	save_sate.id_by_type = id_by_type
-	save_sate.current_season = current_season
-	save_sate.speed_factor = speed_factor
-	save_sate.generation_seed = generation_seed
-	save_sate.generation_state = generation_state
-	save_sate.generation_player_names = generation_player_names
-
-	save_sate.save_metadata()
-
-	ResUtil.save_resource("world", world)
-	ResUtil.save_resource("inbox", inbox)
-	ResUtil.save_resource("transfers", transfers)
-	
-	print("save state saved")
-
-
 func save_config() -> void:
 	config.set_value("settings", "currency", currency)
 	config.set_value("settings", "theme_index", theme_index)
@@ -132,7 +112,6 @@ func save_config() -> void:
 
 
 func save_all_data() -> void:
-	save_active_state()
 	ResUtil.save_save_states()
 	save_config()
 
