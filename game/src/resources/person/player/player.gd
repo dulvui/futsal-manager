@@ -15,7 +15,6 @@ enum Form { Injured, Recover, Good, Excellent }
 @export var injury_factor: int
 @export var team: String  # team name for easier filtering etc...
 @export var team_id: int  # team name for easier filtering etc...
-@export var league: String  # league name for easier filtering etc...
 @export var form: Form
 @export var morality: Morality
 @export var statistics: Statistics
@@ -36,7 +35,6 @@ func _init(
 	p_name: String = "",
 	p_team: String = "",
 	p_team_id: int = 0,
-	p_league: String = "",
 	p_surname: String = "",
 	p_nation: String = "",
 	p_birth_date: Dictionary = Time.get_datetime_dict_from_system(),
@@ -60,7 +58,6 @@ func _init(
 	name = p_name
 	team = p_team
 	team_id = p_team_id
-	league = p_league
 	surname = p_surname
 	nation = p_nation
 	birth_date = p_birth_date
