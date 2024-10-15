@@ -6,10 +6,11 @@ name: iOS upload
 
 on:
   push:
-    # paths:
-    #   - ".github/workflows/upload-ios.yml"
-    #   - "exportOptions.plist"
-    #   - "export_presets.ios.example"
+    paths:
+      - ".github/workflows/upload-ios.yml"
+      - "exportOptions.plist"
+      - "export_presets.ios.example"
+      - "version"
 
 env:
   GODOT_VERSION: 4.3
@@ -22,7 +23,7 @@ env:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/prod'
     runs-on: macos-latest
     steps:
       - name: Checkout source code
