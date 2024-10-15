@@ -15,12 +15,6 @@ var loaded_resources_paths: Array[String]
 var progress: Array
 var load_status: ResourceLoader.ThreadLoadStatus
 
-var save_world_thread: Thread
-
-
-func _ready() -> void:
-	save_world_thread = Thread.new()
-
 
 func _process(_delta: float) -> void:
 	for loading_resource_path: String in loading_resources_paths:
@@ -67,23 +61,7 @@ func save_save_states() -> void:
 		ResourceSaver.FLAG_COMPRESS
 	)
 	
-	# save world with thread
-	if save_world_thread.is_started():
-		print("save world thread is already saving")
-		return
-	
-	save_world_thread.start(_save_world, Thread.Priority.PRIORITY_HIGH)
-
-
-func _save_world() -> void:
-	print("save world in thread...")
-	save_resource("world", Global.world)
-	call_deferred("_on_world_saved")
-
-
-func _on_world_saved() -> void:
-	LoadingUtil.done()
-	print("save world in thread done.")
+	ThreadUtil.save_world()
 
 
 func load_save_states() -> SaveStates:
@@ -144,7 +122,3 @@ func load_resource(res_key: String) -> Resource:
 	print("loaded in: " + str(load_time) + " ms")
 	
 	return res
-
-
-func _exit_tree() -> void:
-	save_world_thread.wait_to_finish()

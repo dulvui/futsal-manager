@@ -32,6 +32,7 @@ IdUtil="*res://src/utils/id_util.gd"
 RngUtil="*res://src/utils/rng_util.gd"
 ThemeUtil="*res://src/utils/theme_util.gd"
 LoadingUtil="*res://src/utils/loading_util.gd"
+ThreadUtil="*res://src/utils/thread_util.gd"
 
 [debug]
 
