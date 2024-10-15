@@ -44,5 +44,5 @@ func _on_load_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/save_states_screen/save_states_screen.tscn")
 
 
-func _on_loading_screen_loaded() -> void:
+func _on_loading_screen_loaded(_type: LoadingUtil.Type) -> void:
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")

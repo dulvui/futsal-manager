@@ -112,11 +112,6 @@ func match_end() -> void:
 	
 	#assign result
 	matchz.set_result(home_stats.goals, away_stats.goals)
-	
-	# calc other matches
-	if Global.world:
-		Global.world.random_results()
-		Global.save_all_data()
 
 
 func half_time() -> void:

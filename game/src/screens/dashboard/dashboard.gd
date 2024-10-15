@@ -95,8 +95,6 @@ func _on_menu_pressed() -> void:
 	LoadingUtil.start("SAVING_GAME", LoadingUtil.Type.SAVE_GAME, true)
 	loading_screen.show()
 	Global.save_all_data()
-	# wait for _on_loading_screen_loaded
-	
 
 
 func _on_search_player_pressed() -> void:
@@ -245,9 +243,12 @@ func _next_day() -> void:
 		match_ready = true
 		next_match_button.disabled = true
 		next_match_button.hide()
-	else:
+	elif Global.world.calendar.day().matches.size() > 0:
 		#simulate all other matches
-		Global.world.random_results()
+		LoadingUtil.start("CALCULATING_RESULTS", LoadingUtil.Type.MATCH_RESULTS, true)
+		loading_screen.show()
+		ThreadUtil.random_results()
+		#Global.world.random_results()
 
 	visual_calendar.set_up()
 
@@ -305,6 +306,13 @@ func _on_player_profile_offer(player: Player) -> void:
 	_show_active_view(ContentViews.PLAYER_OFFER)
 
 
-func _on_loading_screen_loaded() -> void:
-	# TODO use type to differntiate different loading screens
-	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+func _on_loading_screen_loaded(type: LoadingUtil.Type) -> void:
+	match type:
+		LoadingUtil.Type.SAVE_GAME:
+			print("loading done save game")
+			get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+		LoadingUtil.Type.MATCH_RESULTS:
+			print("loading done match results")
+			loading_screen.hide()
+		_:
+			print("loading done default")

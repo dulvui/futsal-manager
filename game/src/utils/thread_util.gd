@@ -8,28 +8,38 @@ extends Node
 var thread: Thread
 
 
-func _ready() -> void:
-	thread = Thread.new()
-
-
 func save_world() -> void:
-	# save world with thread
-	if thread.is_started():
-		print("save world thread is already saving")
+	if thread and thread.is_started():
+		print("thread is already running")
 		return
-	
+	thread = Thread.new()
 	thread.start(_save_world, Thread.Priority.PRIORITY_HIGH)
+
+
+func random_results() -> void:
+	if thread and thread.is_started():
+		print("thread is already running")
+		return
+	thread = Thread.new()
+	thread.start(_random_results, Thread.Priority.PRIORITY_HIGH)
 
 
 func _save_world() -> void:
 	print("save world in thread...")
 	ResUtil.save_resource("world", Global.world)
-	call_deferred("_on_world_saved")
+	call_deferred("_loading_done")
 
 
-func _on_world_saved() -> void:
+func _random_results() -> void:
+	print("calculating random result in thread...")
+	Global.world.random_results()
+	call_deferred("_loading_done")
+
+
+func _loading_done() -> void:
 	LoadingUtil.done()
-	print("save world in thread done.")
+	thread.wait_to_finish()
+	print("thread done.")
 
 
 func _exit_tree() -> void:
