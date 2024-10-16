@@ -47,11 +47,10 @@ func get_matches(competition_id: int = -1) -> Array:
 			flat_value_list.append_array(value)
 		return flat_value_list
 	# only return competition specific matches on this day
-	
+
 	if not matches.has(competition_id):
 		return []
 	return matches[competition_id]
-
 
 
 func to_format_string() -> String:

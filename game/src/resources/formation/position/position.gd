@@ -32,7 +32,7 @@ func _init(
 	p_coordinates: Vector2 = Vector2.ZERO,
 	p_type: Type = Type.G,
 	p_variations: Array[PositionVariation] = []
-	) -> void:
+) -> void:
 	name = p_name
 	description = p_description
 	coordinates = p_coordinates
@@ -53,19 +53,19 @@ func random_variations() -> void:
 			base = PositionVariation.W.keys()
 		Type.PR, Type.PC, Type.PL:
 			base = PositionVariation.P.keys()
-	
+
 	var size: int = base.size()
 	for i: int in RngUtil.rng.randi_range(1, size):
 		var random_pick: int = RngUtil.rng.randi_range(0, base.size() - 1)
 		var variation: PositionVariation = PositionVariation.new()
 		variation.type = base[random_pick]
 		base.remove_at(random_pick)
-		
+
 		if i == 1:
 			variation.confidence = 5
 		else:
 			variation.confidence = RngUtil.rng.randi_range(1, 4)
-		
+
 		variations.append(variation)
-	
+
 	#print(variations)

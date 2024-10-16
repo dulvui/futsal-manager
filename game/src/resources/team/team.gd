@@ -153,7 +153,7 @@ func get_prestige() -> int:
 	# prevent division by 0
 	if players.size() == 0:
 		return 0
-	
+
 	var value: int = 0
 	for player: Player in players:
 		value += player.get_overall()

@@ -5,7 +5,6 @@
 class_name Staff
 extends JSONResource
 
-
 @export var president: President
 @export var scout: Scout
 @export var manager: Manager

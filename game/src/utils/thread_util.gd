@@ -4,7 +4,6 @@
 
 extends Node
 
-
 var thread: Thread
 
 

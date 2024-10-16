@@ -24,7 +24,7 @@ func _init(
 	active_team_id = p_active_team_id
 
 
-func initialize() -> void: 
+func initialize() -> void:
 	calendar.initialize()
 
 
@@ -52,7 +52,7 @@ func get_active_nation() -> Nation:
 		for nation: Nation in continent.nations:
 			for league: League in nation.leagues:
 				if league.id == Global.league.id:
-						return nation
+					return nation
 	printerr("no nation for team id " + str(active_team_id))
 	return null
 
@@ -62,7 +62,7 @@ func get_active_continent() -> Continent:
 		for nation: Nation in continent.nations:
 			for league: League in nation.leagues:
 				if league.id == Global.league.id:
-						return continent
+					return continent
 	printerr("no continent for team id " + str(active_team_id))
 	return null
 
@@ -78,7 +78,7 @@ func get_team_by_id(team_id: int) -> Team:
 
 func get_competition_by_id(competition_id: int) -> Competition:
 	if world_cup.id == competition_id:
-			return world_cup
+		return world_cup
 	for continent: Continent in continents:
 		if continent.cup_clubs.id == competition_id:
 			return continent.cup_clubs
@@ -89,7 +89,7 @@ func get_competition_by_id(competition_id: int) -> Competition:
 				return nation.cup
 			for league: League in nation.leagues:
 				if league.id == competition_id:
-						return league
+					return league
 	return null
 
 
@@ -122,36 +122,45 @@ func promote_and_delegate_teams() -> void:
 		for nation: Nation in contient.nations:
 			# d - delegated
 			# p - promoted
-			var teams_buffer: Dictionary = {
-				"d" = {},
-				"p" = {},
-			}
-		
+			var teams_buffer: Dictionary = {}
+			teams_buffer["d"] = {}
+			teams_buffer["p"] = {}
+
 			# get teams that will delegate promote
 			for league: League in nation.leagues:
 				# last/first x teams will be promoted delegated
 				var sorted_table: Array[TableValues] = league.table().to_sorted_array()
-				
+
 				# assign delegated
-				teams_buffer["d"][league.pyramid_level] = league.teams.filter(
-					func(t: Team) -> bool:
-						# get last 2 teams
-						return t.id == sorted_table[-1].team_id ||\
-							 t.id == sorted_table[-2].team_id
+				teams_buffer["d"][league.pyramid_level] = (
+					league
+					. teams
+					. filter(
+						func(t: Team) -> bool: return (
+							# get last 2 teams
+							t.id == sorted_table[-1].team_id
+							|| t.id == sorted_table[-2].team_id
+						)
+					)
 				)
 				# assign promoted
-				teams_buffer["p"][league.pyramid_level] = league.teams.filter(
-					func(t: Team) -> bool:
-						# get first 2 teams
-						return t.id == sorted_table[0].team_id ||\
-							 t.id == sorted_table[1].team_id
+				teams_buffer["p"][league.pyramid_level] = (
+					league
+					. teams
+					. filter(
+						func(t: Team) -> bool: return (
+							# get first 2 teams
+							t.id == sorted_table[0].team_id
+							|| t.id == sorted_table[1].team_id
+						)
+					)
 				)
-			
+
 			# delegate/promote
 			for league: League in nation.leagues:
 				var promoted_teams: Array[Team] = teams_buffer["p"][league.pyramid_level]
 				var delegated_teams: Array[Team] = teams_buffer["d"][league.pyramid_level]
-				
+
 				# start with backup teams
 				# prevents array out of bounds, in case if only one league in nation
 				# this code runs if this is last league by pyramid level or only one league is present
@@ -159,60 +168,67 @@ func promote_and_delegate_teams() -> void:
 					# make sure there are as many backup teams as delegated
 					if nation.backup_teams.size() < delegated_teams.size():
 						delegated_teams = delegated_teams.slice(0, nation.backup_teams.size())
-					
+
 					# remove delegated from league
 					for team: Team in delegated_teams:
 						league.teams.erase(team)
-					
+
 					# add backup teams to league
 					for i: int in delegated_teams.size():
 						var backup: Team = RngUtil.pick_random(nation.backup_teams)
 						nation.backup_teams.erase(backup)
 						league.teams.append(backup)
-					
+
 					# add delegated to backup tems
 					nation.backup_teams.append_array(delegated_teams)
-					
+
 					if nation.leagues.size() > 1:
 						# promote
-						nation.get_league_by_pyramid_level(league.pyramid_level - 1)\
-							.teams.append_array(promoted_teams)
+						(
+							nation
+							. get_league_by_pyramid_level(league.pyramid_level - 1)
+							. teams
+							. append_array(promoted_teams)
+						)
 						# remove promoted teams from league
 						for team: Team in promoted_teams:
 							league.teams.erase(team)
 					#else:
-						# TODO add to ocntinental cup
-						# add to cup, if only league in nation
-						#continental_cup_teams.append_array(promoted_teams)
-				
+					# TODO add to ocntinental cup
+					# add to cup, if only league in nation
+					#continental_cup_teams.append_array(promoted_teams)
+
 				elif league.pyramid_level > 1:
 					# promote
-					nation.get_league_by_pyramid_level(league.pyramid_level - 1)\
-						.teams.append_array(promoted_teams)
+					nation.get_league_by_pyramid_level(league.pyramid_level - 1).teams.append_array(
+						promoted_teams
+					)
 					# remove promoted teams from league
 					for team: Team in promoted_teams:
 						league.teams.erase(team)
-					
+
 					# delegate
-					nation.get_league_by_pyramid_level(league.pyramid_level + 1)\
-						.teams.append_array(delegated_teams)
+					nation.get_league_by_pyramid_level(league.pyramid_level + 1).teams.append_array(
+						delegated_teams
+					)
 					# remove delegated teams
 					for team: Team in delegated_teams:
 						league.teams.erase(team)
-					
-				else :
+
+				else:
 					# first teams go to cup
 					# TODO add to continental cup
 					#continental_cup_teams.append_array(promoted_teams)
-					
+
 					# add delegated teams to lower league
-					nation.get_league_by_pyramid_level(league.pyramid_level + 1)\
-						.teams.append_array(delegated_teams)
-					
+					nation.get_league_by_pyramid_level(league.pyramid_level + 1).teams.append_array(
+						delegated_teams
+					)
+
 					# remove delegated teams
 					for team: Team in delegated_teams:
 						league.teams.erase(team)
-				
+
 			# add new seasons table
 			for league: League in nation.leagues:
 				var table: Table = Table.new()

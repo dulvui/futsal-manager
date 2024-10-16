@@ -21,24 +21,26 @@ var only_unread: bool = false
 func update() -> void:
 	for child in list.get_children():
 		child.queue_free()
-	
-	var  inbox_list: Array[EmailMessage] = Global.inbox.list
-	
+
+	var inbox_list: Array[EmailMessage] = Global.inbox.list
+
 	if only_starred:
 		inbox_list = inbox_list.filter(func(m: EmailMessage) -> bool: return m.starred)
 	if only_unread:
 		inbox_list = inbox_list.filter(func(m: EmailMessage) -> bool: return not m.read)
 	if search_text.length() > 0:
 		inbox_list = inbox_list.filter(
-			func(m: EmailMessage) -> bool:
-				return (m.text.to_lower() + m.subject.to_lower() + m.sender.to_lower()).contains(search_text.to_lower())
+			func(m: EmailMessage) -> bool: return (
+				(m.text.to_lower() + m.subject.to_lower() + m.sender.to_lower())
+				. contains(search_text.to_lower())
+			)
 		)
-	
+
 	# to test perfomrance of email view
 	#for j in range(1000):
 	for i in range(inbox_list.size() - 1, -1, -1):  # reverse list
 		var message: EmailMessage = inbox_list[i]
-		
+
 		var row: MessageRow = MessageRowScene.instantiate()
 		list.add_child(row)
 		row.click.connect(_on_row_click.bind(message))

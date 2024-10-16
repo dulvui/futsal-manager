@@ -38,7 +38,7 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 	ticks = 0
 	possession_counter = 0.0
-	
+
 	shoot_trajectory_polygon = PackedVector2Array()
 
 	#RngUtil.match_rng.state = 0
@@ -58,9 +58,9 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 func update() -> void:
 	ticks += 1
-	
+
 	ball.update()
-	
+
 	calc_distances()
 
 	# defend/attack
@@ -95,7 +95,7 @@ func simulate(matchz: Match) -> Match:
 
 	var load_time: int = Time.get_ticks_msec() - start_time
 	print("benchmark in: " + str(load_time) + " ms")
-	
+
 	print("result: " + matchz.get_result())
 	print("shots: h%d - a%d" % [home_team.stats.shots, away_team.stats.shots])
 	return matchz
@@ -152,7 +152,7 @@ func calc_free_shoot_trajectory() -> void:
 	else:
 		post_top = field.goal_post_top_right
 		post_bottom = field.goal_post_bottom_right
-	
+
 	# square from ball +/- 150 to goal posts and +/- 50 to ball
 	# used to check empty net and players in trajectory
 	# point_is_in_triangle() is too narrow
@@ -163,7 +163,7 @@ func calc_free_shoot_trajectory() -> void:
 	shoot_trajectory_polygon.append(post_bottom + Vector2(0, 150))
 
 	ball.empty_net = not Geometry2D.is_point_in_polygon(goalkeeper.pos, shoot_trajectory_polygon)
-	
+
 	for player: SimPlayer in players:
 		if Geometry2D.is_point_in_polygon(player.pos, shoot_trajectory_polygon):
 			ball.players_in_shoot_trajectory += 1
@@ -227,7 +227,7 @@ func _on_sim_ball_goal() -> void:
 	home_team.set_kick_off_formation()
 	away_team.set_kick_off_formation()
 	ball.set_pos(field.center)
-	
+
 	#print("%s : %s"%[home_team.stats.goals, away_team.stats.goals])
 
 

@@ -46,7 +46,7 @@ func _init(
 	p_price: int = 0,
 	p_delay_days: int = 0,
 	p_exchange_players: Array[Player] = [],
-	p_date : Dictionary = {},
+	p_date: Dictionary = {},
 ) -> void:
 	id = p_id
 	player = p_player

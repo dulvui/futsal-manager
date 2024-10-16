@@ -22,7 +22,6 @@ const FormationPlayer: PackedScene = preload(
 @onready var tactic_select_pressing: SwitchOptionButton = $Tactics/TacticSelectPressing
 @onready var tactic_select_marking: SwitchOptionButton = $Tactics/TacticSelectMarking
 
-
 @onready var goalkeeper: HBoxContainer = $LineUp/Field/Players/Goalkeeper
 @onready var defense: HBoxContainer = $LineUp/Field/Players/Defense
 @onready var center: HBoxContainer = $LineUp/Field/Players/Center
@@ -32,6 +31,7 @@ var change_players: Array[int] = []
 
 var team: Team
 var only_lineup: bool
+
 
 func _ready() -> void:
 	# setup automatically, if run in editor and is run by 'Run current scene'
@@ -45,18 +45,24 @@ func set_up(p_only_lineup: bool, p_team: Team = Global.team) -> void:
 
 	# set up fomation options
 	formation_select.set_up(Formation.Variations.keys(), team.formation.variation)
-	
+
 	# tactics offense
-	tactic_select_offense.set_up(TacticOffense.Tactics.keys(), \
-		TacticOffense.Tactics.values()[team.formation.tactic_offense.tactic])
-	
+	tactic_select_offense.set_up(
+		TacticOffense.Tactics.keys(),
+		TacticOffense.Tactics.values()[team.formation.tactic_offense.tactic]
+	)
+
 	tactic_offense_intensity.value = team.formation.tactic_offense.intensity
-	
+
 	# tactics defense
-	tactic_select_marking.set_up(TacticDefense.Marking.keys(), \
-		TacticDefense.Marking.values()[team.formation.tactic_defense.marking])
-	tactic_select_pressing.set_up(TacticDefense.Pressing.keys(), \
-		TacticDefense.Pressing.values()[team.formation.tactic_defense.pressing])
+	tactic_select_marking.set_up(
+		TacticDefense.Marking.keys(),
+		TacticDefense.Marking.values()[team.formation.tactic_defense.marking]
+	)
+	tactic_select_pressing.set_up(
+		TacticDefense.Pressing.keys(),
+		TacticDefense.Pressing.values()[team.formation.tactic_defense.pressing]
+	)
 
 	_set_players()
 
@@ -86,9 +92,7 @@ func _set_players() -> void:
 	for i: int in team.formation.defense:
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(
-			_on_select_player.bind(formation_player.player.id)
-		)
+		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
 		defense.add_child(formation_player)
 		pos_count += 1
 
@@ -96,9 +100,7 @@ func _set_players() -> void:
 	for i: int in team.formation.center:
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(
-			_on_select_player.bind(formation_player.player.id)
-		)
+		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
 		center.add_child(formation_player)
 		pos_count += 1
 
@@ -106,9 +108,7 @@ func _set_players() -> void:
 	for i: int in team.formation.attack:
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(
-			_on_select_player.bind(formation_player.player.id)
-		)
+		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
 		attack.add_child(formation_player)
 		pos_count += 1
 
@@ -117,29 +117,25 @@ func _set_players() -> void:
 	subs_label.text = "SUBS"
 	subs_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	subs.add_child(subs_label)
-	
+
 	for i: int in team.get_sub_players().size():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(
-			_on_select_player.bind(formation_player.player.id)
-		)
+		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
 		subs.add_child(formation_player)
 		pos_count += 1
-	
+
 	subs.add_child(HSeparator.new())
 	# add non lineup players
 	var non_lineup_label: Label = Label.new()
 	non_lineup_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	non_lineup_label.text = "REST"
 	subs.add_child(non_lineup_label)
-	
+
 	for p: Player in team.get_non_lineup_players():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(p, team)
-		formation_player.change_player.connect(
-			_on_select_player.bind(formation_player.player.id)
-		)
+		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
 		subs.add_child(formation_player)
 
 

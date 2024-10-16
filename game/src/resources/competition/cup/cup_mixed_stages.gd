@@ -26,11 +26,8 @@ func _init(
 
 func add_teams(p_teams: Array[Team]) -> void:
 	# sort teams by presitge
-	p_teams.sort_custom(
-		func(a: Team, b: Team) -> bool:
-			return a.get_prestige() > b.get_prestige()
-			)
-	
+	p_teams.sort_custom(func(a: Team, b: Team) -> bool: return a.get_prestige() > b.get_prestige())
+
 	# set up groups
 	for i: int in GROUPS_SIZE:
 		var group: Group = Group.new()
@@ -42,13 +39,13 @@ func add_teams(p_teams: Array[Team]) -> void:
 
 func setup_knockout() -> void:
 	var knockout_teams: Array[Team] = []
-	
+
 	# sort teams by table pos
 	for group: Group in groups:
 		group.sort_teams_by_table_pos()
-	
+
 	# add winning teams to knockout stage
 	for group: Group in groups:
 		knockout_teams.append_array(group.teams.slice(0, TEAMS_PASS_TO_KNOCKOUT))
-	
+
 	knockout.set_up(knockout_teams)

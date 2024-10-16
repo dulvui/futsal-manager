@@ -18,7 +18,7 @@ func set_up_rngs() -> void:
 func reset_seed(p_generation_seed: String, p_generation_player_names: int) -> void:
 	Global.generation_seed = p_generation_seed
 	Global.generation_player_names = p_generation_player_names
-	
+
 	rng = RandomNumberGenerator.new()
 	rng.seed = hash(Global.generation_seed + str(Global.generation_player_names))
 	Global.generation_state = rng.state
@@ -32,6 +32,7 @@ func shuffle(array: Array[Variant]) -> void:
 			var temp: Variant = array[index]
 			array[index] = array[i]
 			array[i] = temp
+
 
 # shuffle array using global RuandomNumberGenerator
 func pick_random(array: Array[Variant]) -> Variant:

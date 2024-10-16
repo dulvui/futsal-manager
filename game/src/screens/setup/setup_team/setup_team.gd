@@ -42,7 +42,7 @@ func show_team(league: League, team: Team) -> void:
 func set_teams(p_nation: Nation = Global.world.get_all_nations()[0]) -> void:
 	for child: Node in team_list.get_children():
 		child.queue_free()
-	
+
 	for league: League in p_nation.leagues:
 		var league_label: Label = Label.new()
 		league_label.text = league.name

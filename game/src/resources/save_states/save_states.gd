@@ -43,19 +43,19 @@ func make_temp_active() -> void:
 	# assign metadata
 	temp_state.meta_is_temp = false
 	temp_state.save_metadata()
-	
+
 	# make active
 	list.append(temp_state)
 	active_id = temp_state.id
 	temp_state.create_dir()
-	
+
 	new_temp_state()
 
 
 func delete(state: SaveState) -> void:
 	state.delete_dir()
 	list.erase(state)
-	
+
 	# set next value to active
 	if list.size() > 0:
 		active_id = list[-1].id

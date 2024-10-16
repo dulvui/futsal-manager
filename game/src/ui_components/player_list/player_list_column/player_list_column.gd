@@ -28,26 +28,28 @@ func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
 
-func set_up(p_view_name: String, p_col_name: String, players: Array[Player], p_map_function: Callable) -> void:
+func set_up(
+	p_view_name: String, p_col_name: String, players: Array[Player], p_map_function: Callable
+) -> void:
 	view_name = p_view_name
 	col_name = p_col_name
 	map_function = p_map_function
-	
+
 	sort_button.text = p_col_name.to_upper()
 	sort_button.tooltip_text = p_col_name.to_upper()
-	
+
 	var values: Array[Variant] = players.map(map_function)
-	
+
 	for value: Variant in values:
 		var label: ColorLabel = ColorLabelScene.instantiate()
 		color_labels.append(label)
 		add_child(label)
 		label.tooltip_text = col_name
 		label.set_up(col_name)
-		
+
 		if is_instance_of(value, TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
 			value = str(value).to_upper()
-		
+
 		if col_name == Const.SURNAME:
 			label.enable_button()
 		if "DATE" in col_name:
@@ -58,7 +60,7 @@ func set_up(p_view_name: String, p_col_name: String, players: Array[Player], p_m
 
 func update_values(players: Array[Player]) -> void:
 	var values: Array[Variant] = players.map(map_function)
-	
+
 	for i: int in color_labels.size():
 		if i < values.size():
 			color_labels[i].show()

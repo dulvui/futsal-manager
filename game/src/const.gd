@@ -51,7 +51,6 @@ const LINEUP_PLAYERS_AMOUNT: int = 12
 const SEASON_START_DAY: int = 1
 const SEASON_START_MONTH: int = 6
 
-
 # STRINGS
 const MONTH_STRINGS: Array[StringName] = [
 	"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"

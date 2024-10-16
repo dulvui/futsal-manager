@@ -21,16 +21,11 @@ func _init(
 
 func set_up(p_teams: Array[Team]) -> void:
 	# sort teams by presitge
-	p_teams.sort_custom(
-		func(a: Team, b: Team) -> bool:
-			return a.get_prestige() > b.get_prestige()
-			)
-	
+	p_teams.sort_custom(func(a: Team, b: Team) -> bool: return a.get_prestige() > b.get_prestige())
+
 	# add teams alterning to part a/b
 	for i: int in p_teams.size():
 		if i % 2 == 0:
 			teams_a.append(p_teams[i])
 		else:
 			teams_b.append(p_teams[i])
-	
-	

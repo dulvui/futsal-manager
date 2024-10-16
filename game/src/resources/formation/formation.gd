@@ -23,15 +23,16 @@ enum Variations {
 @export var center: int
 @export var attack: int
 
-@export var tactic_defense:TacticDefense
-@export var tactic_offense:TacticOffense
+@export var tactic_defense: TacticDefense
+@export var tactic_offense: TacticOffense
 
 @export var positions: Array[Position]
 
+
 func _init(
-	p_variation:Variations = Variations.F1121,
-	p_tactic_defense:TacticDefense = TacticDefense.new(),
-	p_tactic_offense:TacticOffense = TacticOffense.new(),
+	p_variation: Variations = Variations.F1121,
+	p_tactic_defense: TacticDefense = TacticDefense.new(),
+	p_tactic_offense: TacticOffense = TacticOffense.new(),
 	p_positions: Array[Position] = [],
 ) -> void:
 	variation = p_variation
@@ -42,26 +43,26 @@ func _init(
 	positions = p_positions
 
 
-func set_variation(p_variation:Variations) -> void:
+func set_variation(p_variation: Variations) -> void:
 	variation = p_variation
-	var string_values:PackedStringArray = (String)(Variations.keys()[variation]).split()
-	string_values.remove_at(0) # remove F
-	
+	var string_values: PackedStringArray = str(Variations.keys()[variation]).split()
+	string_values.remove_at(0)  # remove F
+
 	# extract int values
 	var int_values: Array[int] = []
 	for value in string_values:
 		var int_value: int = int(value)
 		int_values.append(int_value)
-	
+
 	goalkeeper = int_values[0]
 	defense = int_values[1]
 	center = int_values[2]
 	attack = int_values[3]
 
 
-func get_start_pos(field_size:Vector2, index: int, left_side: bool) -> Vector2:
-	var pos:Vector2 = Vector2.ZERO
-	
+func get_start_pos(field_size: Vector2, index: int, left_side: bool) -> Vector2:
+	var pos: Vector2 = Vector2.ZERO
+
 	if index < defense:
 		pos = Vector2(field_size.x / 4, field_size.y / defense * index)
 		# centre position and move slightly towards own half (field_size.x / 20)
@@ -80,5 +81,5 @@ func get_start_pos(field_size:Vector2, index: int, left_side: bool) -> Vector2:
 	# invert, if right side
 	if not left_side:
 		pos = field_size - pos
-	
+
 	return pos

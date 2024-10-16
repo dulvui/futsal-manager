@@ -10,6 +10,7 @@ extends Competition
 # winners[-1] is latest winner
 @export var winners: Array[Team]
 
+
 func _init(
 	p_knockout: Knockout = Knockout.new(),
 	p_winners: Array[Team] = [],
@@ -25,7 +26,7 @@ func set_up(teams: Array[Team]) -> void:
 
 func get_cup_matches() -> Array[Match]:
 	var matches: Array[Match] = []
-	
+
 	# group a
 	for i: int in knockout.teams_a.size() / 2:
 		# assign first vs last, first + 1 vs last - 1 etc...
@@ -36,5 +37,5 @@ func get_cup_matches() -> Array[Match]:
 		# assign first vs last, first + 1 vs last - 1 etc...
 		var matchz: Match = Match.new(knockout.teams_b[i], knockout.teams_b[-(i + 1)], id, name)
 		matches.append(matchz)
-	
+
 	return matches

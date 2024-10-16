@@ -23,7 +23,6 @@ func show_message(p_message: EmailMessage) -> void:
 	sender.text = message.sender
 	date.text = message.date
 	text.text = message.text
-	
 
 	if message.type == EmailMessage.Type.CONTRACT_OFFER:
 		action_button.show()

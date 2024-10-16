@@ -38,18 +38,16 @@ func _ready() -> void:
 
 func set_player(p_player: Player) -> void:
 	player = p_player
-	
+
 	# show offer button, only for players that are not in your team
 	offer_button.visible = not Global.team.players.has(player)
 
 	player_name.text = player.name + " " + player.surname
 	pos.text = str(Position.Type.keys()[player.position.type])
-	alt_pos.text = str(player.alt_positions.map(
-		func(p: Position) -> String:
-			return Position.Type.keys()[p.type]
-			)
-		)
-	
+	alt_pos.text = str(
+		player.alt_positions.map(func(p: Position) -> String: return Position.Type.keys()[p.type])
+	)
+
 	age.text = (
 		str(player.birth_date.day)
 		+ "/"

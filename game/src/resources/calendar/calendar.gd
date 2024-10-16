@@ -60,15 +60,15 @@ func initialize(next_season: bool = false) -> void:
 		date = _get_next_day(date)
 	else:
 		date = Global.save_states.temp_state.start_date
-	
+
 	# set start date
 	date.day = Const.SEASON_START_DAY
 	date.month = Const.SEASON_START_MONTH
-		
+
 	# add 1 year at start to have total 2 years
 	if not next_season:
 		_add_year(date.year)
-	
+
 	# next season, only 1 year gets appended
 	_add_year(date.year + 1)
 
@@ -140,7 +140,7 @@ func _add_year(year: int) -> void:
 		var new_month: Month = Month.new()
 		new_month.name = month_string
 		months.append(new_month)
-	
+
 	var month_shift: int = (year - date.year) * 12
 	while temp_date.year == year:
 		var new_day: Day = Day.new()
@@ -150,7 +150,7 @@ func _add_year(year: int) -> void:
 		new_day.month = temp_date.month
 		new_day.year = temp_date.year
 		months[temp_date.month - 1 + month_shift].days.append(new_day)
-		
+
 		temp_date = _get_next_day(temp_date)
 
 

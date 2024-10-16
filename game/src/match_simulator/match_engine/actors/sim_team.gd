@@ -55,7 +55,9 @@ func set_up(
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		sim_player.pass_received.connect(func() -> void: stats.passes_success += 1)
 		sim_player.interception.connect(interception)
-		sim_player.shoot.connect(shoot_on_goal.bind(sim_player.player_res.attributes.technical.shooting))
+		sim_player.shoot.connect(
+			shoot_on_goal.bind(sim_player.player_res.attributes.technical.shooting)
+		)
 		#sim_player.dribble.connect(pass_to_random_player)
 
 	set_kick_off_formation()
@@ -94,14 +96,14 @@ func defend(other_players: Array[SimPlayer]) -> void:
 
 func attack() -> void:
 	goalkeeper.update(true)
-	
+
 	var nearest_player: SimPlayer = nearest_player_to_ball()
 	nearest_player.set_destination(ball.pos)
-	
+
 	# use default formation moved on x-axis for now
 	for player: SimPlayer in players:
 		player.update(true)
-		
+
 		# set destinations
 		if player.state != SimPlayer.State.DRIBBLE:
 			# y towards goal, to block goal
@@ -120,7 +122,8 @@ func attack() -> void:
 				(
 					player.start_pos
 					+ Vector2(
-						RngUtil.match_rng.randi_range(-30, 30), RngUtil.match_rng.randi_range(-30, 30)
+						RngUtil.match_rng.randi_range(-30, 30),
+						RngUtil.match_rng.randi_range(-30, 30)
 					)
 				)
 			)
@@ -176,9 +179,11 @@ func shoot_on_goal(power: float) -> void:
 		random_target = field.goal_right
 	else:
 		random_target = field.goal_left
-	
-	random_target += Vector2(0, RngUtil.match_rng.randi_range(-field.GOAL_SIZE * 1.5, field.GOAL_SIZE * 1.5))
-	
+
+	random_target += Vector2(
+		0, RngUtil.match_rng.randi_range(-field.GOAL_SIZE * 1.5, field.GOAL_SIZE * 1.5)
+	)
+
 	ball.shoot(random_target, power * RngUtil.match_rng.randi_range(2, 6))
 
 	stats.shots += 1

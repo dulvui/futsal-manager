@@ -81,25 +81,15 @@ func delete_dir() -> void:
 			# remove all files
 			var file_name: String = user_dir.get_next()
 			while file_name != "":
-				OS.move_to_trash(
-					ProjectSettings.globalize_path(
-						"user://" + id + "/" + file_name
-					)
-				)
+				OS.move_to_trash(ProjectSettings.globalize_path("user://" + id + "/" + file_name))
 				file_name = user_dir.get_next()
 		# delete folder
 		err = user_dir.change_dir("..")
-		if err == OK and user_dir.dir_exists(
-			ProjectSettings.globalize_path("user://" + id)
-		):
+		if err == OK and user_dir.dir_exists(ProjectSettings.globalize_path("user://" + id)):
 			OS.move_to_trash(ProjectSettings.globalize_path("user://" + id))
 
 
 func save_metadata() -> void:
-	meta_team_position = (
-		str(Global.league.table().get_position())
-		+ ". "
-		+ Global.league.name
-	)
+	meta_team_position = (str(Global.league.table().get_position()) + ". " + Global.league.name)
 	meta_last_save = Time.get_datetime_dict_from_system()
 	meta_game_date = Global.world.calendar.date

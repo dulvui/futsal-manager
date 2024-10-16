@@ -18,10 +18,7 @@ func _ready() -> void:
 
 func set_active_theme(index: int) -> Theme:
 	Global.theme_index = index
-	active_theme = ResourceLoader.load(
-		THEMES.values()[Global.theme_index],
-		"Theme"
-	)
+	active_theme = ResourceLoader.load(THEMES.values()[Global.theme_index], "Theme")
 	return active_theme
 
 

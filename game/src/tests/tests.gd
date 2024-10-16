@@ -16,11 +16,11 @@ extends Node
 
 func _ready() -> void:
 	print("Start test suite")
-	
+
 	# use new temp state
 	Global.save_states.new_temp_state()
 	Global.load_save_state()
-	
+
 	test_match_combination.test()
 	test_calendar.test()
 	test_generator.test()
@@ -28,7 +28,7 @@ func _ready() -> void:
 	test_benchmark.test()
 	#test_gameloop.test()
 	test_res_util.test()
-	
+
 	print("Stop test suite")
 
 
@@ -36,25 +36,25 @@ static func create_mock_team() -> Team:
 	var team: Team = Team.new()
 	team.set_random_colors()
 	team.name = "Mock Team " + str(randi() % 100)
-	
+
 	for i: int in range(1, 6):
 		var player: Player = Player.new()
 		player.name = "Mock"
 		player.surname = "Player"
 		player.nr = i
-		
+
 		team.players.append(player)
 		# assign player ids for lineup
 		team.lineup_player_ids.append(player.id)
-	
+
 	return team
 
 
 static func create_mock_player() -> Player:
 	var player: Player = Player.new()
-	
+
 	player.name = "Mock"
 	player.surname = "Player"
 	player.nr = 1
-	
+
 	return player

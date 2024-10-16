@@ -31,5 +31,5 @@ func test_months_and_days_size() -> void:
 	assert(calendar.months[9].days.size() == 31)
 	assert(calendar.months[10].days.size() == 30)
 	assert(calendar.months[11].days.size() == 31)
-	
+
 	print("test: test_months_and_days_size done...")

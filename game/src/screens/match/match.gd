@@ -51,7 +51,7 @@ var away_stats: MatchStatistics
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	
+
 	if Global.world:
 		matchz = Global.world.calendar.get_next_match()
 	# setup automatically, if run in editor and is run by 'Run current scene'
@@ -72,17 +72,17 @@ func _ready() -> void:
 		formation.set_up(true)
 	else:
 		formation.set_up(true, home_team)
-	
+
 	match_simulator.set_up(home_team, away_team, matchz.id)
-	
+
 	last_active_view = match_simulator
-	
+
 	# set colors
 	home_color.color = home_team.get_home_color()
 	away_color.color = away_team.get_away_color(home_color.color)
 
 	speed_factor_label.text = str(Global.speed_factor) + " X"
-	
+
 	print("match speed_factor" + str(Global.speed_factor))
 
 	# to easier access stats
@@ -109,7 +109,7 @@ func match_end() -> void:
 	pause_button.hide()
 	dashboard_button.show()
 	match_simulator.match_finished()
-	
+
 	#assign result
 	matchz.set_result(home_stats.goals, away_stats.goals)
 
@@ -123,7 +123,6 @@ func _on_field_pressed() -> void:
 	_hide_views()
 	match_simulator.show()
 	last_active_view = match_simulator
-
 
 
 func _on_commentary_pressed() -> void:

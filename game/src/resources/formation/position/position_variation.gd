@@ -23,7 +23,6 @@ enum C {
 	ATTACK,
 }
 
-
 enum W {
 	NORMAL,
 	STAY_BACK,
@@ -35,8 +34,7 @@ enum P {
 	NORMAL,
 	PIVOT,
 	DYNAMIC,
-}  
-
+}
 
 @export var id: int
 @export var name: String
@@ -54,7 +52,7 @@ func _init(
 	p_coordinates: Vector2 = Vector2.ZERO,
 	p_confidence: int = 0,
 	p_type: String = "",
-	) -> void:
+) -> void:
 	id = p_id
 	name = p_name
 	description = p_description

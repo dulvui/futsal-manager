@@ -46,11 +46,7 @@ var distance_to_ball: float
 var distance_to_enemy: float
 
 
-func set_up(
-	p_player_res: Player,
-	p_ball: SimBall,
-	p_field: SimField
-) -> void:
+func set_up(p_player_res: Player, p_ball: SimBall, p_field: SimField) -> void:
 	player_res = p_player_res
 	ball = p_ball
 	field = p_field
@@ -59,9 +55,6 @@ func set_up(
 
 
 func update(team_has_ball: bool) -> void:
-	#if player_res.surname == 'Verga':
-		#print("pre: " + State.keys()[state])
-
 	match state:
 		State.RECEIVE_PASS:
 			if is_touching_ball():
@@ -87,7 +80,7 @@ func update(team_has_ball: bool) -> void:
 		State.MOVE:
 			_move()
 			state = State.IDLE
-		
+
 		State.IDLE:
 			if team_has_ball:
 				if is_touching_ball():
@@ -109,9 +102,6 @@ func update(team_has_ball: bool) -> void:
 				else:
 					state = State.MOVE
 
-	#if player_res.surname == 'Verga':
-		#print("post: " + State.keys()[state])
-
 
 func kick_off(p_pos: Vector2) -> void:
 	start_pos = p_pos
@@ -128,12 +118,13 @@ func _move() -> void:
 
 
 func is_touching_ball() -> bool:
-	return ball.is_touching(pos, interception_radius, player_res.surname == 'Verga')
+	return ball.is_touching(pos, interception_radius, player_res.surname == "Verga")
 
 
 func is_intercepting_ball() -> bool:
 	return (
-		RngUtil.match_rng.randi_range(1, 100) < 59 + player_res.attributes.technical.interception * 2
+		RngUtil.match_rng.randi_range(1, 100)
+		< 59 + player_res.attributes.technical.interception * 2
 	)
 
 

@@ -29,7 +29,7 @@ func set_up(p_date: Day = Day.new()) -> void:
 	date = p_date
 	# activate button
 	button.show()
-	
+
 	competition.visible = false
 
 	month_day_label.text = str(date.day)

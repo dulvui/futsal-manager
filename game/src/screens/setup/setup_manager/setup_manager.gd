@@ -37,5 +37,5 @@ func _on_continue_pressed() -> void:
 		manager.surname = manager_surname.text
 		manager.nation = Global.world.get_all_nations()[nations.selected].name
 		Global.manager = manager
-		
+
 		get_tree().change_scene_to_file("res://src/screens/setup/setup_team/setup_team.tscn")

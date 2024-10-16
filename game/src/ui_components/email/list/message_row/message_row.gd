@@ -19,9 +19,10 @@ const COLOR_NORMAL: Color = Color(1, 1, 1, 0)
 
 var message: EmailMessage
 
+
 func set_up(p_message: EmailMessage) -> void:
 	message = p_message
-	
+
 	button.tooltip_text = tr("Click to read message")
 
 	subject_label.set_text(message.subject)

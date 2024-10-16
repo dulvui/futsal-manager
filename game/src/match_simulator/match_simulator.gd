@@ -38,7 +38,7 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 
 	# adjust sub viewport to field size + borders
 	sub_viewport.size = visual_match.visual_field.field.size
-	
+
 	# reset match_paused
 	Global.match_paused = false
 

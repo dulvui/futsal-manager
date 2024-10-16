@@ -140,7 +140,7 @@ func _set_up_columns() -> void:
 		if s.usage == 4102:
 			var stats: Callable = func(p: Player) -> String: return str(p.statistics.get(s.name))
 			_add_column("STATISTICS", s.name, stats)
-
+	
 	# attributes
 	for key: String in Const.ATTRIBUTES.keys():
 		for value: String in Const.ATTRIBUTES[key]:
@@ -151,7 +151,7 @@ func _set_up_columns() -> void:
 
 func _update_columns() -> void:
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
-
+	
 	for col: PlayerListColumn in columns.values():
 		col.update_values(visible_players)
 

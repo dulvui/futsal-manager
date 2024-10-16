@@ -68,7 +68,7 @@ func update(team_has_ball: bool) -> void:
 	if not team_has_ball and ball.state == SimBall.State.SHOOT:
 		speed = player_res.attributes.goalkeeper.reflexes
 		state = State.SAVE_SHOT
-	
+
 	# reset save, if ball is no longer in shoot state
 	if state == State.SAVE_SHOT and ball.state != SimBall.State.SHOOT:
 		state = State.IDLE

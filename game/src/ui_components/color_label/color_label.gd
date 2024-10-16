@@ -24,7 +24,7 @@ func set_value(value: Variant) -> void:
 		if not label.label_settings:
 			label.label_settings = LabelSettings.new()
 			label.label_settings.outline_size = 2
-		
+
 		if value < 11:
 			#label.label_settings.font_color = Color.RED
 			label.label_settings.outline_color = Color.RED
@@ -34,7 +34,7 @@ func set_value(value: Variant) -> void:
 		else:
 			#label.label_settings.font_color = Color.DARK_GREEN
 			label.label_settings.outline_color = Color.DARK_GREEN
-	
+
 	# check if not number, treadet as string
 	elif is_instance_of(value, TYPE_STRING) and not (value as String).is_valid_int():
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT

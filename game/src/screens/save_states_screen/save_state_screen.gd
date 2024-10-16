@@ -10,16 +10,17 @@ const SaveStateEntryScene: PackedScene = preload(
 )
 @onready var entry_list: VBoxContainer = $VBoxContainer/ScrollContainer/EntryList
 @onready var loading_screen: LoadingScreen = $LoadingScreen
-@onready var active_save_state_entry: SaveStateEntry = $VBoxContainer/ScrollContainer/EntryList/ActiveSaveState
+@onready
+var active_save_state_entry: SaveStateEntry = $VBoxContainer/ScrollContainer/EntryList/ActiveSaveState
 
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	
+
 	var active_save_state: SaveState = Global.save_states.get_active()
 	active_save_state_entry.set_up(active_save_state)
 	active_save_state_entry.load_game.connect(func() -> void: loading_screen.show())
-	
+
 	for save_state: SaveState in Global.save_states.list:
 		if save_state.id != active_save_state.id:
 			var entry: SaveStateEntry = SaveStateEntryScene.instantiate()

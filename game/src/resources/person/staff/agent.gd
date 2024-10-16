@@ -4,5 +4,6 @@
 class_name Agent
 extends Person
 
+
 func _init() -> void:
 	super(Person.Role.AGENT)

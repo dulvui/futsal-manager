@@ -45,7 +45,7 @@ var save_states: SaveStates
 func _ready() -> void:
 	print("version " + Global.version)
 	speed_factor = 1
-	
+
 	_load_config()
 	# don't load save state on start, for now
 	#load_save_state()
@@ -57,28 +57,28 @@ func select_team(p_league: League, p_team: Team) -> void:
 	league = p_league
 	team = p_team
 	world.active_team_id = team.id
-	
+
 	print("team saved")
 	transfers = Transfers.new()
-	
+
 	print("calendars created")
 	MatchCombinationUtil.initialize_matches()
 	print("matches initialized")
 	inbox = Inbox.new()
 	EmailUtil.welcome_manager()
-	
+
 	speed_factor = save_states.temp_state.speed_factor
 	start_date = save_states.temp_state.start_date
-	
+
 	save_states.make_temp_active()
 
 
 func next_day() -> void:
 	world.calendar.next_day()
-	
+
 	if world.calendar.is_match_day():
 		EmailUtil.next_match(world.calendar.get_next_match())
-	
+
 	TransferUtil.update_day()
 
 
@@ -91,13 +91,13 @@ func next_season() -> void:
 	# player contracts
 	# transfer markets
 	# save competition results in history
-	
+
 	PlayerProgress.players_progress_season()
-	
+
 	world.promote_and_delegate_teams()
-	
+
 	world.calendar.initialize(true)
-	
+
 	MatchCombinationUtil.initialize_matches()
 	save_all_data()
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
@@ -150,7 +150,6 @@ func _load_config() -> void:
 
 	# save states
 	save_states = ResUtil.load_save_states()
-
 
 # disable save, too heavy on close, breaks game
 # save on quit on mobile

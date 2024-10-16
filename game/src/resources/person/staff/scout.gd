@@ -5,5 +5,6 @@
 class_name Scout
 extends Person
 
+
 func _init() -> void:
 	super(Person.Role.SCOUT)

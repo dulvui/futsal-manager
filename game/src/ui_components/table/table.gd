@@ -21,20 +21,19 @@ var season_amount: int
 func _ready() -> void:
 	var continent: Continent = Global.world.get_active_continent()
 	var nation: Nation = Global.world.get_active_nation()
-	
+
 	competition_index = nation.leagues.find(Global.league)
 	continent_index = Global.world.continents.find(continent)
 	nation_index = continent.nations.find(nation)
 
 	continents.set_up(
-		Global.world.continents.map(func(c: Continent) -> String: return c.name),
-		continent_index
+		Global.world.continents.map(func(c: Continent) -> String: return c.name), continent_index
 	)
-	
+
 	# start from last entry
 	season_index = Global.league.tables.size() - 1
 	season_amount = Global.league.tables.size()
-	
+
 	_set_up_seasons()
 	_set_up()
 
@@ -43,24 +42,20 @@ func _set_up() -> void:
 	# clear grid
 	for child: Node in grid.get_children():
 		child.queue_free()
-	
+
 	var continent: Continent = Global.world.continents[continent_index]
 	var nation: Nation = continent.nations[nation_index]
-	
-	nations.set_up(
-		continent.nations.map(func(n: Nation) -> String: return n.name),
-		nation_index
-	)
-	
+
+	nations.set_up(continent.nations.map(func(n: Nation) -> String: return n.name), nation_index)
+
 	competitions.set_up(
-		nation.leagues.map(func(l: League) -> String: return l.name),
-		competition_index
+		nation.leagues.map(func(l: League) -> String: return l.name), competition_index
 	)
-	
+
 	var league: League = nation.leagues[competition_index]
-	
+
 	var pos: int = 1
-	
+
 	# transform table dictionary to array
 	var table_array: Array[TableValues] = league.tables[season_index].to_sorted_array()
 
@@ -132,7 +127,7 @@ func _set_up() -> void:
 func _set_up_seasons() -> void:
 	var start_year: int = Global.world.calendar.date.year
 	var end_year: int = Global.world.calendar.date.year - season_amount
-	
+
 	var season_years: Array[String] = []
 	for year: int in range(start_year, end_year, -1):
 		season_years.append(str(year))
@@ -148,7 +143,7 @@ func _on_seasons_item_selected(index: int) -> void:
 	# substract from season amount,
 	# seasons are inserted inverted in options button
 	# -1, because arrays start from 0
-	season_index = season_amount  - 1 - index
+	season_index = season_amount - 1 - index
 	_set_up()
 
 

@@ -34,6 +34,5 @@ func get_team_by_id(team_id: int) -> Team:
 
 func sort_teams_by_table_pos() -> void:
 	teams.sort_custom(
-		func (a: Team, b: Team) -> bool:
-			return table.get_position(a.id) > table.get_position(b.id)
+		func(a: Team, b: Team) -> bool: return table.get_position(a.id) > table.get_position(b.id)
 	)

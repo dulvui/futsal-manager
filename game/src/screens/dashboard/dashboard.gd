@@ -5,7 +5,7 @@
 class_name Dashboard
 extends Control
 
-enum ContentViews { 
+enum ContentViews {
 	EMAIL,
 	CALENDAR,
 	TABLE,
@@ -42,10 +42,13 @@ const DASHBOARD_DAY_DELAY: float = 0.5
 # full screen views
 @onready var formation: VisualFormation = $MainContainer/VBoxContainer/MainView/Content/Formation
 @onready var player_list: PlayerList = $MainContainer/VBoxContainer/MainView/Content/PlayerList
-@onready var all_players_list: PlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
+@onready
+var all_players_list: PlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
 @onready var player_offer: PlayerOffer = $MainContainer/VBoxContainer/MainView/Content/PlayerOffer
-@onready var contract_offer: ContractOffer = $MainContainer/VBoxContainer/MainView/Content/ContractOffer
-@onready var player_profile: PlayerProfile = $MainContainer/VBoxContainer/MainView/Content/PlayerProfile
+@onready
+var contract_offer: ContractOffer = $MainContainer/VBoxContainer/MainView/Content/ContractOffer
+@onready
+var player_profile: PlayerProfile = $MainContainer/VBoxContainer/MainView/Content/PlayerProfile
 @onready var loading_screen: LoadingScreen = $LoadingScreen
 
 var match_ready: bool = false
@@ -62,7 +65,7 @@ func _ready() -> void:
 	manager_label.text = Global.manager.get_full_name()
 	team_label.text = Global.team.name
 	date_label.text = Global.world.calendar.format_date()
-	
+
 	all_players_list.set_up()
 	player_list.set_up(Global.team.id)
 	formation.set_up(false)
@@ -78,7 +81,7 @@ func _ready() -> void:
 	if Global.world.calendar.is_season_finished():
 		next_season = true
 		continue_button.text = "NEXT_SEASON"
-	
+
 	_show_active_view()
 
 
@@ -180,12 +183,12 @@ func _show_active_view(p_active_view: int = -1, from_history: bool = false) -> v
 			contract_offer.show()
 		_:
 			email.show()
-	
+
 	if not from_history:
 		# overwrite history, if other view clicked, while in prevois view
 		if view_history_index < view_history.size() - 1:
 			view_history = view_history.slice(0, view_history_index + 1)
-		
+
 		# add to history
 		if view_history.size() == 0 or active_view != view_history[-1]:
 			view_history.append(active_view)
@@ -204,7 +207,7 @@ func _on_continue_pressed() -> void:
 func _on_next_match_pressed() -> void:
 	next_match_button.disabled = true
 	continue_button.disabled = true
-	
+
 	while not match_ready:
 		_next_day()
 		var timer: Timer = Timer.new()
@@ -286,7 +289,7 @@ func _on_prev_view_pressed() -> void:
 	if view_history_index < 1:
 		view_history_index = 0
 		# TODO emit other negative click sound
-	
+
 	active_view = view_history[view_history_index]
 	_show_active_view(active_view, true)
 
@@ -296,7 +299,7 @@ func _on_next_view_pressed() -> void:
 	if view_history_index > view_history.size() - 1:
 		view_history_index = view_history.size() - 1
 		# TODO emit other negative click sound
-	
+
 	active_view = view_history[view_history_index]
 	_show_active_view(active_view, true)
 
