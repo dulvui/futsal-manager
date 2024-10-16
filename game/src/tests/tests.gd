@@ -35,11 +35,12 @@ func _ready() -> void:
 static func create_mock_team() -> Team:
 	var team: Team = Team.new()
 	team.set_random_colors()
+	team.name = "Mock Team " + str(randi() % 100)
 	
 	for i: int in range(1, 6):
-		print(i)
 		var player: Player = Player.new()
-		player.name = str(i)
+		player.name = "Mock"
+		player.surname = "Player"
 		player.nr = i
 		
 		team.players.append(player)
