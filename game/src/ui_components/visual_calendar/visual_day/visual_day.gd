@@ -10,19 +10,17 @@ signal show_match_list
 const HOME_MATCH_DAY_COLOR: Color = Color.DODGER_BLUE
 const AWAY_MATCH_DAY_COLOR: Color = Color.DEEP_SKY_BLUE
 
+var date: Day
+
 @onready var background: ColorRect = $Background
 @onready var color_active: ColorRect = $ColorActive
-
 @onready var button: Button = $Button
-
 @onready var match_label: Label = $MarginContainer/VBoxContainer/Match
 @onready var month_day_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/MonthDay
 @onready var market_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Market
-
 @onready var competition: HBoxContainer = $MarginContainer/VBoxContainer/Competition
 @onready var competition_name: Label = $MarginContainer/VBoxContainer/Competition/CompetitionName
 
-var date: Day
 
 
 func set_up(p_date: Day = Day.new()) -> void:

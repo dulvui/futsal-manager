@@ -9,11 +9,11 @@ extends Control
 
 const DEFAULT_SEED: String = "SuchDefaultSeed"
 
+var generation_seed: String = DEFAULT_SEED
+
 @onready var player_names_option: OptionButton = $VBoxContainer/Settings/Container/PlayerNames
 @onready var start_year_spinbox: SpinBox = $VBoxContainer/Settings/Container/StartYear
 @onready var generation_seed_edit: LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
-
-var generation_seed: String = DEFAULT_SEED
 
 
 func _ready() -> void:

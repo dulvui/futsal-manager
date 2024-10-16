@@ -5,15 +5,15 @@
 class_name PlayGround
 extends Node2D
 
-@onready var visual_field: VisualField = $VisualField
-@onready var visual_ball: VisualBall = $VisualBall
-@onready var visual_player: VisualPlayer = $VisualPlayer
-
 var sim_field: SimField
 var sim_ball: SimBall
 var sim_player: SimPlayer
 
 var timer: Timer
+
+@onready var visual_field: VisualField = $VisualField
+@onready var visual_ball: VisualBall = $VisualBall
+@onready var visual_player: VisualPlayer = $VisualPlayer
 
 
 func _ready() -> void:

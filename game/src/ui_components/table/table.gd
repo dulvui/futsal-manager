@@ -5,17 +5,17 @@
 class_name VisualTable
 extends VBoxContainer
 
-@onready var grid: GridContainer = $ScrollContainer/GridContainer
-@onready var continents: SwitchOptionButton = $Buttons/Continents
-@onready var nations: SwitchOptionButton = $Buttons/Nations
-@onready var competitions: SwitchOptionButton = $Buttons/Competitions
-@onready var seasons: SwitchOptionButton = $Buttons/Seasons
-
 var continent_index: int
 var nation_index: int
 var competition_index: int
 var season_index: int
 var season_amount: int
+
+@onready var grid: GridContainer = $ScrollContainer/GridContainer
+@onready var continents: SwitchOptionButton = $Buttons/Continents
+@onready var nations: SwitchOptionButton = $Buttons/Nations
+@onready var competitions: SwitchOptionButton = $Buttons/Competitions
+@onready var seasons: SwitchOptionButton = $Buttons/Seasons
 
 
 func _ready() -> void:

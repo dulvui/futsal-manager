@@ -6,6 +6,18 @@ extends Control
 
 const MAX_SPEED_FACTOR: int = 20
 const MAX_COMMENTS: int = 16
+var last_active_view: Control
+
+var home_team: Team
+var away_team: Team
+
+var match_started: bool = false
+var first_half: bool = true
+
+var matchz: Match
+
+var home_stats: MatchStatistics
+var away_stats: MatchStatistics
 
 #@onready var match_simulator: MatchSimulator = $Main/Content/CentralContainer/MainBar/MatchSimulator
 @onready var match_simulator: MatchSimulator = $MatchSimulator
@@ -34,19 +46,6 @@ const MAX_COMMENTS: int = 16
 @onready var stats_button: Button = $Main/Content/Buttons/Stats
 @onready var field_button: Button = $Main/Content/Buttons/Field
 @onready var formation_button: Button = $Main/Content/Buttons/Formation
-
-var last_active_view: Control
-
-var home_team: Team
-var away_team: Team
-
-var match_started: bool = false
-var first_half: bool = true
-
-var matchz: Match
-
-var home_stats: MatchStatistics
-var away_stats: MatchStatistics
 
 
 func _ready() -> void:

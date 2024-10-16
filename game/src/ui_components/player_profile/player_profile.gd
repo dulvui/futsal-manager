@@ -14,7 +14,6 @@ var player: Player
 
 @onready var info: Control = $Main/Info
 @onready var attributes: Control = $Main/Attributes
-
 @onready var player_name: Label = $Main/Info/Name
 @onready var pos: Label = $Main/Info/Position
 @onready var alt_pos: Label = $Main/Info/AltPosition

@@ -11,26 +11,22 @@ const FormationPlayer: PackedScene = preload(
 	"res://src/ui_components/visual_formation/player/formation_player.tscn"
 )
 
+
+var change_players: Array[int] = []
+var team: Team
+var only_lineup: bool
+
 @onready var players: VBoxContainer = $LineUp/Field/Players
 @onready var subs: VBoxContainer = $Subs/List
-
 @onready var formation_select: SwitchOptionButton = $Tactics/FormationSelect
-
 @onready var tactic_select_offense: SwitchOptionButton = $Tactics/TacticSelectOffense
 @onready var tactic_offense_intensity: HSlider = $Tactics/TacticOffenseIntensity
-
 @onready var tactic_select_pressing: SwitchOptionButton = $Tactics/TacticSelectPressing
 @onready var tactic_select_marking: SwitchOptionButton = $Tactics/TacticSelectMarking
-
 @onready var goalkeeper: HBoxContainer = $LineUp/Field/Players/Goalkeeper
 @onready var defense: HBoxContainer = $LineUp/Field/Players/Defense
 @onready var center: HBoxContainer = $LineUp/Field/Players/Center
 @onready var attack: HBoxContainer = $LineUp/Field/Players/Attack
-
-var change_players: Array[int] = []
-
-var team: Team
-var only_lineup: bool
 
 
 func _ready() -> void:

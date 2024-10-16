@@ -20,6 +20,13 @@ enum ContentViews {
 
 const DASHBOARD_DAY_DELAY: float = 0.5
 
+var match_ready: bool = false
+var next_season: bool = false
+
+var view_history: Array[ContentViews]
+var view_history_index: int = 0
+var active_view: ContentViews = ContentViews.EMAIL
+
 @onready var team: Team = Global.team
 
 # buttons
@@ -50,13 +57,6 @@ var contract_offer: ContractOffer = $MainContainer/VBoxContainer/MainView/Conten
 @onready
 var player_profile: PlayerProfile = $MainContainer/VBoxContainer/MainView/Content/PlayerProfile
 @onready var loading_screen: LoadingScreen = $LoadingScreen
-
-var match_ready: bool = false
-var next_season: bool = false
-
-var view_history: Array[ContentViews]
-var view_history_index: int = 0
-var active_view: ContentViews = ContentViews.EMAIL
 
 
 func _ready() -> void:

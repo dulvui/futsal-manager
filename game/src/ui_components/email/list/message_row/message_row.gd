@@ -11,13 +11,13 @@ signal click
 const COLOR_FOCUS: Color = Color(1, 1, 1, 0.2)
 const COLOR_NORMAL: Color = Color(1, 1, 1, 0)
 
+var message: EmailMessage
+
 @onready var button: Button = $Button
 @onready var subject_label: Label = $Button/HBoxContainer/Subject
 @onready var sender_label: Label = $Button/HBoxContainer/Sender
 @onready var date_label: Label = $Button/HBoxContainer/Date
 @onready var star: CheckBox = $Button/HBoxContainer/Star
-
-var message: EmailMessage
 
 
 func set_up(p_message: EmailMessage) -> void:

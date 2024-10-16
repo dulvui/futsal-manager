@@ -10,11 +10,6 @@ signal confirm
 
 const MAX_BUY_CLAUSE: int = 999999999
 
-@onready var income_label: Label = $VBoxContainer/GridContainer/Income
-@onready var info_label: Label = $VBoxContainer/Info
-@onready var years_label: Label = $VBoxContainer/GridContainer/Years
-@onready var buy_clause_label: Label = $VBoxContainer/GridContainer/BuyClause
-
 var income: int = 0
 var years: int = 1
 var buy_clause: int = 0
@@ -22,6 +17,11 @@ var buy_clause: int = 0
 var team: Team
 var player: Player
 var transfer: Transfer
+
+@onready var income_label: Label = $VBoxContainer/GridContainer/Income
+@onready var info_label: Label = $VBoxContainer/Info
+@onready var years_label: Label = $VBoxContainer/GridContainer/Years
+@onready var buy_clause_label: Label = $VBoxContainer/GridContainer/BuyClause
 
 
 func _ready() -> void:

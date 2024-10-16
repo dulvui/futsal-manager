@@ -111,7 +111,8 @@ func remove_from_list(p_player: Player) -> void:
 func _calc_total() -> void:
 	total = amount
 	for selected_player: Player in selected_players:
-		total += selected_player.price  # use other calculated value be setimating importanc efor new tweam
+		 # use other calculated value to estimate importance for new team
+		total += selected_player.price
 
 
 func _on_Amount_text_changed(new_text: String) -> void:

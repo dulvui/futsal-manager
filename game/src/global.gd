@@ -4,8 +4,8 @@
 
 extends Node
 
-const config_version: String = "1"
-var version: String = ProjectSettings.get_setting("application/config/version")
+var config_version: StringName = "1"
+var version: StringName = ProjectSettings.get_setting("application/config/version")
 
 # config
 var config: ConfigFile

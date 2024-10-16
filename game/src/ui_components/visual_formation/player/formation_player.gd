@@ -7,14 +7,13 @@ extends Control
 
 signal change_player
 
+var color: Color
+var player: Player
+
 @onready var name_label: Label = $ColorRect/MarginContainer/VBoxContainer/Name
 @onready var prestige: Label = $ColorRect/MarginContainer/VBoxContainer/Prestige
 @onready var nr_label: Label = $ColorRect/MarginContainer/VBoxContainer/Nr
 @onready var state_color: ColorRect = $ColorRect
-
-var color: Color
-
-var player: Player
 
 
 func _ready() -> void:

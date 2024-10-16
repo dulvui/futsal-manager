@@ -5,10 +5,6 @@
 class_name VisualGoalkeeper
 extends Node2D
 
-@onready var body: Sprite2D = $Sprites/Body
-@onready var sprites: Node2D = $Sprites
-@onready var label: Label = $Info/Label
-
 var sim_goalkeeper: SimGoalkeeper
 var visual_ball: VisualBall
 
@@ -17,6 +13,10 @@ var update_interval: float
 var factor: float
 
 var last_pos: Vector2
+
+@onready var body: Sprite2D = $Sprites/Body
+@onready var sprites: Node2D = $Sprites
+@onready var label: Label = $Info/Label
 
 
 func _physics_process(delta: float) -> void:

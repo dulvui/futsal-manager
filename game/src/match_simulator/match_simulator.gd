@@ -12,13 +12,13 @@ signal update_time
 
 const camera_speed: int = 4
 
-@onready var visual_match: VisualMatch = $SubViewportContainer/SubViewport/VisualMatch
-@onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
-@onready var camera: Camera2D = $SubViewportContainer/SubViewport/Camera2D
-
 var ticks: int = 0
 var time: int = 0
 var timer: Timer
+
+@onready var visual_match: VisualMatch = $SubViewportContainer/SubViewport/VisualMatch
+@onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
+@onready var camera: Camera2D = $SubViewportContainer/SubViewport/Camera2D
 
 
 func _physics_process(delta: float) -> void:

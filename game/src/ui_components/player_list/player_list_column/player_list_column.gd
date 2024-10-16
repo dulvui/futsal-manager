@@ -5,23 +5,21 @@
 class_name PlayerListColumn
 extends VBoxContainer
 
-const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_label/color_label.tscn")
-
 signal sort
+
+const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_label/color_label.tscn")
 
 const NOT_TRANSLATED_COLUMS: Array[StringName] = [
 	Const.SURNAME,
 	"TEAM",
 ]
 
-@onready var sort_button: Button = $SortButton
-
 var color_labels: Array[ColorLabel] = []
-
 var view_name: String
 var col_name: String
-
 var map_function: Callable
+
+@onready var sort_button: Button = $SortButton
 
 
 func _ready() -> void:

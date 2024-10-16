@@ -11,11 +11,11 @@ const MessageRowScene: PackedScene = preload(
 	"res://src/ui_components/email/list/message_row/message_row.tscn"
 )
 
-@onready var list: VBoxContainer = $ScrollContainer/List
-
 var search_text: String = ""
 var only_starred: bool = false
 var only_unread: bool = false
+
+@onready var list: VBoxContainer = $ScrollContainer/List
 
 
 func update() -> void:

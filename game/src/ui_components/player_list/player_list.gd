@@ -9,18 +9,6 @@ signal select_player(player: Player)
 
 const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
 
-@onready var filter_container: HBoxContainer = $Filters
-@onready var team_select: OptionButton = $Filters/TeamSelect
-@onready var league_select: OptionButton = $Filters/LeagueSelect
-@onready var pos_select: OptionButton = $Filters/PositionSelect
-@onready var footer: HBoxContainer = $Footer
-@onready var page_indicator: Label = $Footer/PageIndicator
-@onready var active_view_option_button: SwitchOptionButton = $Filters/ActiveView
-@onready var last: Button = $Footer/Last
-
-@onready var views_container: HBoxContainer = $Views
-
-
 var views: Array[String]
 var columns: Dictionary = {}
 var active_view: String
@@ -38,6 +26,16 @@ var page:int
 var page_max:int
 var page_size:int = 16
  
+@onready var filter_container: HBoxContainer = $Filters
+@onready var team_select: OptionButton = $Filters/TeamSelect
+@onready var league_select: OptionButton = $Filters/LeagueSelect
+@onready var pos_select: OptionButton = $Filters/PositionSelect
+@onready var footer: HBoxContainer = $Footer
+@onready var page_indicator: Label = $Footer/PageIndicator
+@onready var active_view_option_button: SwitchOptionButton = $Filters/ActiveView
+@onready var last: Button = $Footer/Last
+@onready var views_container: HBoxContainer = $Views
+
 
 func _ready() -> void:
 	team_select.add_item("ALL_TEAMS")

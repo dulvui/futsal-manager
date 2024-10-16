@@ -5,9 +5,9 @@
 class_name VisualField
 extends Node2D
 
-@onready var lines: Node2D = $Lines
-
 var field: SimField
+
+@onready var lines: Node2D = $Lines
 
 
 func _draw() -> void:

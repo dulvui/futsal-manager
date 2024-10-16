@@ -7,6 +7,8 @@ extends HBoxContainer
 
 signal load_game
 
+var save_state: SaveState
+
 @export var hide_buttons: bool = false
 
 @onready var delete_dialog: ConfirmationDialog = $DeleteDialog
@@ -19,8 +21,6 @@ signal load_game
 @onready var last_save_date: Label = $Dates/LastSaveDate
 @onready var delete_button: Button = $Delete
 @onready var load_button: Button = $Load
-
-var save_state: SaveState
 
 
 func set_up(p_save_state: SaveState) -> void:
