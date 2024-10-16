@@ -245,7 +245,7 @@ func _next_day() -> void:
 		next_match_button.hide()
 	elif Global.world.calendar.day().matches.size() > 0:
 		#simulate all other matches
-		LoadingUtil.start("CALCULATING_RESULTS", LoadingUtil.Type.MATCH_RESULTS, true)
+		LoadingUtil.start("SIMULATIN_RESULTS", LoadingUtil.Type.MATCH_RESULTS, true)
 		loading_screen.show()
 		ThreadUtil.random_results()
 		#Global.world.random_results()

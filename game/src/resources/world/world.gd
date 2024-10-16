@@ -29,9 +29,9 @@ func initialize() -> void:
 
 
 func random_results() -> void:
-	for c: Continent in continents:
-		for n: Nation in c.nations:
-			n.random_results()
+	for continet: Continent in continents:
+		for nation: Nation in continet.nations:
+			nation.random_results()
 
 
 func get_active_team() -> Team:

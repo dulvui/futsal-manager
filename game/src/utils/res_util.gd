@@ -4,16 +4,23 @@
 
 extends Node
 
-
 # .res for binary/compressed resource data
 # .tres for text resource data
-var res_suffix: String = ".res"
-#var res_suffix: String = ".tres"
+const RES_SUFFIX: StringName = ".res"
+const BACKUP_SUFFIX: StringName = ".backup.res"
+#var RES_SUFFIX: String = ".tres"
 
 var loading_resources_paths: Array[String]
+var backup_resources_paths: Array[String]
 var loaded_resources_paths: Array[String]
 var progress: Array
 var load_status: ResourceLoader.ThreadLoadStatus
+
+
+func _ready() -> void:
+	loading_resources_paths = []
+	backup_resources_paths = []
+	loaded_resources_paths = []
 
 
 func _process(_delta: float) -> void:
@@ -21,6 +28,9 @@ func _process(_delta: float) -> void:
 		load_status = ResourceLoader.load_threaded_get_status(loading_resource_path, progress)
 		
 		LoadingUtil.update(progress[0])
+		
+		if load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
+			continue
 		
 		if load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 			# assign references after resources are loaded
@@ -33,10 +43,31 @@ func _process(_delta: float) -> void:
 			# loading_resources_paths, while iterating
 			loaded_resources_paths.append(loading_resource_path)
 			LoadingUtil.done()
-	
+		elif load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_FAILED \
+			|| load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_INVALID_RESOURCE:
+			print("restore backup for %s..."%loading_resource_path)
+			
+			_restore_backup(loading_resource_path)
+			
+			loaded_resources_paths.append(loading_resource_path)
+			backup_resources_paths.append(loading_resource_path + BACKUP_SUFFIX)
+			
+			var err: Error = ResourceLoader.load_threaded_request(
+				loading_resource_path + BACKUP_SUFFIX,
+				"Resource",
+				true,
+			)
+			if err:
+				print(err)
+
 	# remove loaded paths
 	for loaded_path: String in loaded_resources_paths:
 		loading_resources_paths.erase(loaded_path)
+	# add new loaded resource paths
+	for backup_resource_path: String in backup_resources_paths:
+		loading_resources_paths.append(backup_resource_path)
+	
+	backup_resources_paths.clear()
 	loaded_resources_paths.clear()
 
 
@@ -56,71 +87,95 @@ func save_save_states() -> void:
 	
 		save_resource("inbox", Global.inbox)
 		save_resource("transfers", Global.transfers)
+			
+		ThreadUtil.save_world()
+		#ResUtil.save_resource("world", Global.world)
 	
-	ResourceSaver.save(
-		Global.save_states,
-		"user://save_states" + res_suffix,
-		ResourceSaver.FLAG_COMPRESS
-	)
-	
-	ThreadUtil.save_world()
+	# always save save_states
+	const path: StringName = "user://save_states" + RES_SUFFIX
+	_create_backup(path)
+	# save new save state
+	ResourceSaver.save(Global.save_states, path, ResourceSaver.FLAG_COMPRESS)
+
+
+func save_resource(res_key: String, resource: Resource) -> void:
+	var path: String = Global.save_states.get_active_path(res_key + RES_SUFFIX)
+	_create_backup(path)
+	ResourceSaver.save(resource, path, ResourceSaver.FLAG_COMPRESS)
 
 
 func load_save_states() -> SaveStates:
-	if ResourceLoader.exists("user://save_states" + res_suffix):
-		print("loading user://save_states" + res_suffix)
-		return ResourceLoader.load("user://save_states" + res_suffix)
-	return SaveStates.new()
+	var save_sates: SaveStates  = load_resource("save_states", true)
+	if save_sates == null:
+		return SaveStates.new()
+	return save_sates
 
 
 func load_resources() -> void:
-	if ResourceLoader.exists(Global.save_states.get_active_path("inbox" + res_suffix)):
-		Global.inbox = load_resource("inbox")
-	else:
+	Global.inbox = load_resource("inbox")
+	if Global.inbox == null:
 		Global.inbox = Inbox.new()
-	if ResourceLoader.exists(Global.save_states.get_active_path("transfers" + res_suffix)):
-		Global.transfers = load_resource("transfers")
-	else:
+	
+	Global.transfers = load_resource("transfers")
+	if Global.inbox == null:
 		Global.transfers = Transfers.new()
 	
-	if ResourceLoader.exists(Global.save_states.get_active_path("world" + res_suffix)):
-		load_world_resource("world")
+	load_threaded_resource("world")
 
 
-func load_world_resource(res_key: String) -> void:
+func load_threaded_resource(res_key: String) -> void:
 	#var start_time: int = Time.get_ticks_msec()
 	
-	print("loading user://" + res_key + res_suffix)
-	
-	var path: String = Global.save_states.get_active_path(res_key + res_suffix)
+	var path: String = Global.save_states.get_active_path(res_key + RES_SUFFIX)
+	print("loading threaded %s..." + path)
 	
 	loading_resources_paths.append(path)
 	
 	ResourceLoader.load_threaded_request(path, "Resource", true)
 
 
-func save_resource(res_key: String, resource: Resource) -> void:
-	ResourceSaver.save(
-		resource,
-		Global.save_states.get_active_path(res_key + res_suffix),
-		ResourceSaver.FLAG_COMPRESS
-	)
-
-
-func load_resource(res_key: String) -> Resource:
+func load_resource(res_key: String, root_path: bool = false) -> Resource:
 	var start_time: int = Time.get_ticks_msec()
 	
-	print("loading user://" + res_key + res_suffix)
+	var path: String = "user://" + res_key + RES_SUFFIX
 	
-	var path: String = Global.save_states.get_active_path(res_key + res_suffix)
+	if not root_path:
+		path = Global.save_states.get_active_path(res_key + RES_SUFFIX)
 	
-	#loading_resources_paths.append(path)
+	print("loading resource %s..."%path)
 	
-	ResourceLoader.load_threaded_request(path, "Resource", true)
 	
-	var res: Resource = ResourceLoader.load_threaded_get(path)
+	var resource: Resource = ResourceLoader.load(path)
+	
+	if resource == null:
+		print("restoring backup...")
+		_restore_backup(path)
+		# try loading again
+		resource = ResourceLoader.load(path)
+		if resource == null:
+			print("restoring backup gone wrong")
+		else:
+			print("restoring backup done.")
 
 	var load_time: int = Time.get_ticks_msec() - start_time
 	print("loaded in: " + str(load_time) + " ms")
 	
-	return res
+	return resource
+
+
+func _create_backup(path: StringName) -> void:
+	print("creating backup for %s..."%path )
+	var dir_access: DirAccess = DirAccess.open(path.get_base_dir())
+	if dir_access:
+		# create backup
+		dir_access.rename(path, path + BACKUP_SUFFIX)
+		print("creating backup for %s done."%path)
+	else:
+		print("creating backup for %s gone wrong."%path )
+
+
+func _restore_backup(path: StringName) -> void:
+	var dir_access: DirAccess = DirAccess.open(path.get_base_dir())
+	if dir_access:
+		# create backup, and always keep a backup
+		dir_access.copy(path + BACKUP_SUFFIX, path)
