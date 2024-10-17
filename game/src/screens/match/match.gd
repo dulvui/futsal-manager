@@ -19,7 +19,6 @@ var matchz: Match
 var home_stats: MatchStatistics
 var away_stats: MatchStatistics
 
-#@onready var match_simulator: MatchSimulator = $Main/Content/CentralContainer/MainBar/MatchSimulator
 @onready var match_simulator: MatchSimulator = $MatchSimulator
 @onready var stats: VisualMatchStats = $Main/Content/CentralContainer/MainBar/Stats
 @onready var comments: VBoxContainer = $Main/Content/CentralContainer/MainBar/Log

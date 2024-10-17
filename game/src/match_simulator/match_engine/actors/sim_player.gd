@@ -166,6 +166,6 @@ func _should_pass() -> bool:
 
 
 func bound_field(p_pos: Vector2) -> Vector2:
-	p_pos.x = maxi(mini(p_pos.x, field.line_right), 1)
-	p_pos.y = maxi(mini(p_pos.y, field.line_bottom), 1)
+	p_pos.x = maxi(mini(int(p_pos.x), int(field.line_right)), 1)
+	p_pos.y = maxi(mini(int(p_pos.y), int(field.line_bottom)), 1)
 	return p_pos

@@ -42,4 +42,5 @@ func _loading_done() -> void:
 
 
 func _exit_tree() -> void:
-	thread.wait_to_finish()
+	if thread and thread.is_started():
+		thread.wait_to_finish()
