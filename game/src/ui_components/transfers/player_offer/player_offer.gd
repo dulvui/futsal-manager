@@ -111,7 +111,7 @@ func remove_from_list(p_player: Player) -> void:
 func _calc_total() -> void:
 	total = amount
 	for selected_player: Player in selected_players:
-		 # use other calculated value to estimate importance for new team
+		# use other calculated value to estimate importance for new team
 		total += selected_player.price
 
 

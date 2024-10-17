@@ -7,12 +7,11 @@ extends HBoxContainer
 
 signal load_game
 
-var save_state: SaveState
-
 @export var hide_buttons: bool = false
 
-@onready var delete_dialog: ConfirmationDialog = $DeleteDialog
+var save_state: SaveState
 
+@onready var delete_dialog: ConfirmationDialog = $DeleteDialog
 @onready var team: Label = $Details/Team
 @onready var create_date: Label = $Dates/CreateDate
 @onready var manager: Label = $Details/Manager

@@ -127,7 +127,8 @@ func _get_goalkeeper_attributes(age: int, prestige: int, position: Position) -> 
 	# goalkeepers have max potential of 20
 	var max_potential: int = _in_bounds_random(factor)
 
-	# non-goalkeepers have max potential of 10, since they could play as goalkeeper in a 4 + 1 field player situation
+	# non-goalkeepers have max potential of 10,
+	# since they could play as goalkeeper in a 4 + 1 field player situation
 	if position.type != Position.Type.G:
 		max_potential /= 2
 
@@ -151,7 +152,8 @@ func _get_physical(age: int, prestige: int, position: Position) -> Physical:
 	# non goalkeepers have max potential
 	var max_potential: int = _in_bounds_random(prestige)
 
-	# goalkeepers have max potential of 10, since they could play as goalkeeper in a 4 + 1 field player situation
+	# goalkeepers have max potential of 10,
+	# since they could play as goalkeeper in a 4 + 1 field player situation
 	if position.type == Position.Type.G:
 		max_potential /= 2
 
@@ -179,7 +181,8 @@ func _get_technical(age: int, prestige: int, position: Position) -> Technical:
 	# non goalkeepers have max potential
 	var max_potential: int = _in_bounds_random(prestige)
 
-	# goalkeepers have max potential of 10, since they could play as goalkeeper in a 4 + 1 field player situation
+	# goalkeepers have max potential of 10,
+	# since they could play as goalkeeper in a 4 + 1 field player situation
 	if position.type == Position.Type.G:
 		max_potential /= 2
 
@@ -267,23 +270,23 @@ func _get_random_foot() -> Player.Foot:
 func _get_random_form() -> Player.Form:
 	var factor: int = RngUtil.rng.randi() % 100
 	if factor < 5:
-		return Player.Form.Injured
-	elif factor < 15:
-		return Player.Form.Recover
-	elif factor < 60:
-		return Player.Form.Good
-	return Player.Form.Excellent
+		return Player.Form.INJURED
+	if factor < 15:
+		return Player.Form.RECOVER
+	if factor < 60:
+		return Player.Form.GOOD
+	return Player.Form.EXCELLENT
 
 
 func _get_random_morality() -> Player.Morality:
 	var factor: int = RngUtil.rng.randi() % 100
 	if factor < 5:
-		return Player.Morality.Horrible
-	elif factor < 15:
-		return Player.Morality.Bad
-	elif factor < 60:
-		return Player.Morality.Good
-	return Player.Morality.Excellent
+		return Player.Morality.HORRIBLE
+	if factor < 15:
+		return Player.Morality.BAD
+	if factor < 60:
+		return Player.Morality.GOOD
+	return Player.Morality.EXCELLENT
 
 
 func _get_contract(person: Person) -> Contract:
@@ -309,20 +312,20 @@ func _get_person_name(nation: Nation) -> String:
 	if Global.generation_player_names == Const.PlayerNames.MALE:
 		var size: int = (names[nation_string]["first_names_male"] as Array).size()
 		return names[nation_string]["first_names_male"][RngUtil.rng.randi() % size]
-	elif Global.generation_player_names == Const.PlayerNames.FEMALE:
+	if Global.generation_player_names == Const.PlayerNames.FEMALE:
 		var size: int = (names[nation_string]["first_names_female"] as Array).size()
 		return names[nation_string]["first_names_female"][RngUtil.rng.randi() % size]
-	else:
-		var size_female: int = (names[nation_string]["first_names_female"] as Array).size()
-		var size_male: int = (names[nation_string]["first_names_male"] as Array).size()
-		var female_names: Array = names[nation_string]["first_names_female"]
-		var male_names: Array = names[nation_string]["first_names_male"]
 
-		var mixed_names: Array = []
-		mixed_names.append_array(female_names)
-		mixed_names.append_array(male_names)
+	var size_female: int = (names[nation_string]["first_names_female"] as Array).size()
+	var size_male: int = (names[nation_string]["first_names_male"] as Array).size()
+	var female_names: Array = names[nation_string]["first_names_female"]
+	var male_names: Array = names[nation_string]["first_names_male"]
 
-		return mixed_names[RngUtil.rng.randi() % (size_female + size_male)]
+	var mixed_names: Array = []
+	mixed_names.append_array(female_names)
+	mixed_names.append_array(male_names)
+
+	return mixed_names[RngUtil.rng.randi() % (size_female + size_male)]
 
 
 func _get_person_surname(world: World, nation: Nation) -> String:
@@ -424,7 +427,9 @@ func _create_player(
 	player.form = _get_random_form()
 	player.prestige = prestige
 	player.injury_factor = RngUtil.rng.randi_range(1, 20)
-	player.loyality = RngUtil.rng.randi_range(1, 20)  # if player is loyal, he doesnt want to leave the club, otherwise he leaves esaily, also on its own
+	# if player is loyal, he doesnt want to leave the club,
+	# otherwise he leaves esaily, also on its own
+	player.loyality = RngUtil.rng.randi_range(1, 20)
 	player.contract = _get_contract(player)
 	player.nr = nr
 

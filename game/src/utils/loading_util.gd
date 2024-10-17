@@ -4,6 +4,8 @@
 
 extends Node
 
+signal loaded(type: Type)
+
 enum Type {
 	LOAD_GAME,
 	SAVE_GAME,
@@ -11,8 +13,6 @@ enum Type {
 	NEXT_SEASON,
 	GENERATION,
 }
-
-signal loaded(type: Type)
 
 var progress: float
 var message: String

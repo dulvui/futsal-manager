@@ -172,9 +172,9 @@ func calc_free_shoot_trajectory() -> void:
 func left_is_active_goal() -> bool:
 	if home_plays_left and home_team.has_ball:
 		return false
-	elif home_plays_left and away_team.has_ball:
+	if home_plays_left and away_team.has_ball:
 		return true
-	elif not home_plays_left and home_team.has_ball:
+	if not home_plays_left and home_team.has_ball:
 		return true
 	return false
 

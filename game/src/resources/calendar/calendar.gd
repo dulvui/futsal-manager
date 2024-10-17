@@ -154,14 +154,14 @@ func _add_year(year: int) -> void:
 		temp_date = _get_next_day(temp_date)
 
 
-func _get_next_day(_date: Dictionary = date) -> Dictionary:
+func _get_next_day(p_date: Dictionary = date) -> Dictionary:
 	# increment date by one day
-	var unix_time: int = Time.get_unix_time_from_datetime_dict(_date)
+	var unix_time: int = Time.get_unix_time_from_datetime_dict(p_date)
 	unix_time += DAY_IN_SECONDS
-	var _next_day: Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
+	var next_day_date: Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
 
-	_next_day.erase("hour")
-	_next_day.erase("minute")
-	_next_day.erase("second")
+	next_day_date.erase("hour")
+	next_day_date.erase("minute")
+	next_day_date.erase("second")
 
-	return _next_day
+	return next_day_date

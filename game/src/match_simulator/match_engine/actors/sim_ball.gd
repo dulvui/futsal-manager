@@ -115,9 +115,8 @@ func check_field_bounds() -> void:
 			goal.emit()
 			return
 		# corner
-		else:
-			goal_line_out.emit()
-			return
+		goal_line_out.emit()
+		return
 
 
 func is_touching(p_pos: Vector2, p_radius: int, log_debug: bool = false) -> bool:

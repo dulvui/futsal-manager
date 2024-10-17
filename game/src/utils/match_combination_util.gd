@@ -35,12 +35,12 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 
 	for i in random_teams.size():
 		var current_match_day: Array = []
-		var matchOne: Match
+		var match_one: Match
 		if home:
-			matchOne = Match.new(last_team, random_teams[0], competition.id, competition.name)
+			match_one = Match.new(last_team, random_teams[0], competition.id, competition.name)
 		else:
-			matchOne = Match.new(random_teams[0], last_team, competition.id, competition.name)
-		current_match_day.append(matchOne)
+			match_one = Match.new(random_teams[0], last_team, competition.id, competition.name)
+		current_match_day.append(match_one)
 
 		var copy: Array = random_teams.duplicate(true)
 		copy.remove_at(0)
@@ -49,16 +49,16 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 			var home_index: int = j
 			var away_index: int = -j - 1
 
-			var matchTwo: Match
+			var match_two: Match
 			if home:
-				matchTwo = Match.new(
+				match_two = Match.new(
 					copy[home_index], copy[away_index], competition.id, competition.name
 				)
 			else:
-				matchTwo = Match.new(
+				match_two = Match.new(
 					copy[away_index], copy[home_index], competition.id, competition.name
 				)
-			current_match_day.append(matchTwo)
+			current_match_day.append(match_two)
 
 		match_days.append(current_match_day)
 		_shift_array(random_teams)

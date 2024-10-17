@@ -11,7 +11,6 @@ const FormationPlayer: PackedScene = preload(
 	"res://src/ui_components/visual_formation/player/formation_player.tscn"
 )
 
-
 var change_players: Array[int] = []
 var team: Team
 var only_lineup: bool

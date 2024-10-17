@@ -22,7 +22,6 @@ var date: Day
 @onready var competition_name: Label = $MarginContainer/VBoxContainer/Competition/CompetitionName
 
 
-
 func set_up(p_date: Day = Day.new()) -> void:
 	date = p_date
 	# activate button

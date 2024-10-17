@@ -11,8 +11,8 @@ const SaveStateEntryScene: PackedScene = preload(
 
 @onready var entry_list: VBoxContainer = $VBoxContainer/ScrollContainer/EntryList
 @onready var loading_screen: LoadingScreen = $LoadingScreen
-@onready var active_save_state_entry: SaveStateEntry = \
-	$VBoxContainer/ScrollContainer/EntryList/ActiveSaveState
+@onready
+var active_save_state_entry: SaveStateEntry = $VBoxContainer/ScrollContainer/EntryList/ActiveSaveState
 
 
 func _ready() -> void:

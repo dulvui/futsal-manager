@@ -97,7 +97,7 @@ func save_save_states() -> void:
 		#ResUtil.save_resource("world", Global.world)
 
 	# always save save_states
-	const path: StringName = "user://save_states" + RES_SUFFIX
+	var path: StringName = "user://save_states" + RES_SUFFIX
 	_create_backup(path)
 	# save new save state
 	ResourceSaver.save(Global.save_states, path, ResourceSaver.FLAG_COMPRESS)

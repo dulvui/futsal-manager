@@ -2,8 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends JSONResource
 class_name Contract
+extends JSONResource
 
 @export var id: int
 @export var income: int
