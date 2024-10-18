@@ -4,6 +4,8 @@
 
 class_name MatchEngine
 
+const INTERCEPTION_TIMER_START: int = 2
+
 var field: SimField
 var ball: SimBall
 var home_team: SimTeam
@@ -27,7 +29,7 @@ var possession_counter: float
 
 # count ticks passed between last interception
 # to prevent constant possess change and stuck ball
-var interception_timer: int 
+var interception_timer: int
 
 func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	field = SimField.new()
@@ -281,28 +283,24 @@ func set_corner(home: bool) -> void:
 
 
 func _on_home_team_possess() -> void:
-	print("home possess")
 	home_possess()
 
 
 func _on_away_team_possess() -> void:
-	print("away possess")
 	away_possess()
 
 
 func _on_home_team_interception() -> void:
 	if interception_timer > 0:
 		return
-	interception_timer = 2
-	print("home interception")
+	interception_timer = INTERCEPTION_TIMER_START
 	home_possess()
 
 
 func _on_away_team_interception() -> void:
 	if interception_timer > 0:
 		return
-	interception_timer = 2
-	print("away interception")
+	interception_timer = INTERCEPTION_TIMER_START
 	away_possess()
 
 

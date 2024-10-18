@@ -64,7 +64,6 @@ func set_up(
 
 
 func defend(other_players: Array[SimPlayer]) -> void:
-	print("team defends")
 	goalkeeper.update(false)
 	for player: SimPlayer in players:
 		player.update(false)
@@ -96,7 +95,6 @@ func defend(other_players: Array[SimPlayer]) -> void:
 
 
 func attack() -> void:
-	print("team attack")
 	goalkeeper.update(true)
 
 	var nearest_player: SimPlayer = nearest_player_to_ball()

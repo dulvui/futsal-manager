@@ -36,6 +36,7 @@ ThreadUtil="*res://src/utils/thread_util.gd"
 
 [debug]
 
+file_logging/enable_file_logging=true
 gdscript/warnings/unassigned_variable=2
 gdscript/warnings/unassigned_variable_op_assign=2
 gdscript/warnings/unused_variable=2
