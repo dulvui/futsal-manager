@@ -15,7 +15,7 @@ const DECELERATION: float = 1
 var state: State
 
 var pos: Vector2
-# to save last position and be bale to get segment between ticks, for interceptions
+# to save last position and be able to get segment between ticks, for interceptions
 var last_pos: Vector2
 
 var speed: float

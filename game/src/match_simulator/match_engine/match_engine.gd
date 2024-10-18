@@ -25,6 +25,9 @@ var nearest_player: SimPlayer
 # stats
 var possession_counter: float
 
+# count ticks passed between last interception
+# to prevent constant possess change and stuck ball
+var interception_timer: int 
 
 func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	field = SimField.new()
@@ -49,11 +52,13 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, home_has_ball)
-	home_team.possess.connect(_on_home_team_possess)
+	home_team.interception.connect(_on_home_team_interception)
 
 	away_team = SimTeam.new()
 	away_team.set_up(p_away_team, field, ball, not home_plays_left, not home_has_ball)
-	away_team.possess.connect(_on_away_team_possess)
+	away_team.interception.connect(_on_away_team_interception)
+
+	interception_timer = 0
 
 
 func update() -> void:
@@ -65,17 +70,20 @@ func update() -> void:
 
 	# defend/attack
 	if home_team.has_ball:
-		home_team.attack()
 		away_team.defend(home_team.players)
+		home_team.attack()
 	else:
-		away_team.attack()
 		home_team.defend(away_team.players)
+		away_team.attack()
 
 	# update posession stats
 	if home_team.has_ball:
 		possession_counter += 1.0
-	home_team.stats.possession = (possession_counter / ticks) * 100
+	home_team.stats.possession = possession_counter / ticks * 100
 	away_team.stats.possession = 100 - home_team.stats.possession
+
+	if interception_timer > 0:
+		interception_timer -= 1
 
 
 func simulate(matchz: Match) -> Match:
@@ -273,10 +281,28 @@ func set_corner(home: bool) -> void:
 
 
 func _on_home_team_possess() -> void:
+	print("home possess")
 	home_possess()
 
 
 func _on_away_team_possess() -> void:
+	print("away possess")
+	away_possess()
+
+
+func _on_home_team_interception() -> void:
+	if interception_timer > 0:
+		return
+	interception_timer = 2
+	print("home interception")
+	home_possess()
+
+
+func _on_away_team_interception() -> void:
+	if interception_timer > 0:
+		return
+	interception_timer = 2
+	print("away interception")
 	away_possess()
 
 

@@ -4,7 +4,7 @@
 
 class_name SimTeam
 
-signal possess
+signal interception 
 
 var res_team: Team
 
@@ -41,7 +41,7 @@ func set_up(
 	goalkeeper = SimGoalkeeper.new()
 	goalkeeper.set_up(res_team.get_goalkeeper(), ball, field, left_half)
 	goalkeeper.short_pass.connect(pass_to_random_player)
-	goalkeeper.interception.connect(interception)
+	goalkeeper.interception.connect(_on_player_interception)
 
 	sort_x_left = func(a: SimPlayer, b: SimPlayer) -> bool: return a.pos.x < b.pos.x
 	sort_x_right = func(a: SimPlayer, b: SimPlayer) -> bool: return a.pos.x > b.pos.x
@@ -54,7 +54,7 @@ func set_up(
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		sim_player.pass_received.connect(func() -> void: stats.passes_success += 1)
-		sim_player.interception.connect(interception)
+		sim_player.interception.connect(_on_player_interception)
 		sim_player.shoot.connect(
 			shoot_on_goal.bind(sim_player.player_res.attributes.technical.shooting)
 		)
@@ -64,6 +64,7 @@ func set_up(
 
 
 func defend(other_players: Array[SimPlayer]) -> void:
+	print("team defends")
 	goalkeeper.update(false)
 	for player: SimPlayer in players:
 		player.update(false)
@@ -95,6 +96,7 @@ func defend(other_players: Array[SimPlayer]) -> void:
 
 
 func attack() -> void:
+	print("team attack")
 	goalkeeper.update(true)
 
 	var nearest_player: SimPlayer = nearest_player_to_ball()
@@ -149,8 +151,9 @@ func set_kick_off_formation(change_field_side: bool = false) -> void:
 		players[-2].set_pos(field.center + Vector2(0, 100))
 
 
-func interception() -> void:
-	possess.emit()
+func _on_player_interception() -> void:
+	print("interception")
+	interception.emit()
 
 
 func pass_to_random_player(passing_player: SimPlayer = null) -> void:

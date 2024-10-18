@@ -82,8 +82,9 @@ func update(team_has_ball: bool) -> void:
 			state = State.IDLE
 
 		State.IDLE:
-			if team_has_ball:
-				if is_touching_ball():
+			if is_touching_ball():
+				print("touchgin ball " + str(team_has_ball))
+				if team_has_ball:
 					if _should_shoot():
 						state = State.SHOOTING
 					elif _should_pass():
@@ -93,14 +94,12 @@ func update(team_has_ball: bool) -> void:
 					else:
 						stop()
 						ball.stop()
-					#print(State.keys()[state])
 				else:
-					state = State.MOVE
-			else:
-				if is_touching_ball():
+					print(player_res.nr)
 					interception.emit()
-				else:
-					state = State.MOVE
+				print(State.keys()[state])
+			else:
+				state = State.MOVE
 
 
 func kick_off(p_pos: Vector2) -> void:

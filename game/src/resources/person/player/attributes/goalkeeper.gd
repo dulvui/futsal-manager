@@ -5,6 +5,8 @@
 class_name Goalkeeper
 extends JSONResource
 
+const AMOUNT: int = 6
+
 @export var reflexes: int
 @export var positioning: int
 @export var kicking: int
@@ -41,4 +43,5 @@ func sum() -> int:
 
 
 func average() -> int:
-	return sum() / 6
+	return sum() / AMOUNT
+

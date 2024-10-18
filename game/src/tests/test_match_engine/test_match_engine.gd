@@ -19,7 +19,7 @@ func test_possess_change() -> void:
 
 	match_engine.home_team.has_ball = true
 	match_engine.away_team.has_ball = false
-	match_engine.away_team.interception()
+	match_engine.away_team.interception.emit()
 	assert(match_engine.away_team.has_ball == true)
 	assert(match_engine.home_team.has_ball == false)
 	print("test: possess change done...")
