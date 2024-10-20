@@ -45,10 +45,8 @@ var save_states: SaveStates
 func _ready() -> void:
 	print("version " + Global.version)
 	speed_factor = 1
-
 	_load_config()
-	# don't load save state on start, for now
-	#load_save_state()
+	save_states = ResUtil.load_save_states()
 	set_lang(language)
 	RngUtil.set_up_rngs()
 
@@ -110,6 +108,8 @@ func save_config() -> void:
 
 	config.save("user://settings.cfg")
 
+	BackupUtil.create_backup("user://settings", ".cfg")
+
 
 func save_all_data() -> void:
 	ResUtil.save_save_states()
@@ -119,8 +119,7 @@ func save_all_data() -> void:
 func set_lang(lang: String) -> void:
 	TranslationServer.set_locale(lang)
 	language = lang
-	config.set_value("settings", "language", language)
-	config.save("user://settings.cfg")
+	save_config()
 
 
 func load_save_state() -> void:
@@ -144,16 +143,12 @@ func _load_config() -> void:
 	# if not, something went wrong with the file loading
 	if err != OK:
 		print("error loading user://settings.cfg")
+		BackupUtil.restore_backup("user://settings", ".cfg")
+		err = config.load("user://settings.cfg")
+		if err != OK:
+			print("error restoring backup for user://settings.cfg")
+	
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	theme_index = config.get_value("settings", "theme_index", 0)
 	language = config.get_value("settings", "language", "")
 
-	# save states
-	save_states = ResUtil.load_save_states()
-
-# disable save, too heavy on close, breaks game
-# save on quit on mobile
-#func _notification(what: int) -> void:
-#if what == NOTIFICATION_WM_CLOSE_REQUEST:
-#save_all_data()
-#get_tree().quit() # default behavior

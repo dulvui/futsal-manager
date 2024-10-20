@@ -49,15 +49,15 @@ func _process(_delta: float) -> void:
 		):
 			print("restore backup for %s..." % loading_resource_path)
 
-			_restore_backup(loading_resource_path)
+			var backup_path: StringName = BackupUtil.restore_backup(loading_resource_path, RES_SUFFIX)
 
 			loaded_resources_paths.append(loading_resource_path)
-			backup_resources_paths.append(loading_resource_path + BACKUP_SUFFIX)
+			backup_resources_paths.append(backup_path)
 
 			var err: Error = (
 				ResourceLoader
 				. load_threaded_request(
-					loading_resource_path + BACKUP_SUFFIX,
+					backup_path,
 					"Resource",
 					true,
 				)
@@ -97,16 +97,16 @@ func save_save_states() -> void:
 		#ResUtil.save_resource("world", Global.world)
 
 	# always save save_states
-	var path: StringName = "user://save_states" + RES_SUFFIX
-	_create_backup(path)
+	var path: StringName = "user://save_states"
+	var resource_path: StringName = BackupUtil.create_backup(path, RES_SUFFIX)
 	# save new save state
-	ResourceSaver.save(Global.save_states, path, ResourceSaver.FLAG_COMPRESS)
+	ResourceSaver.save(Global.save_states, resource_path, ResourceSaver.FLAG_COMPRESS)
 
 
-func save_resource(res_key: String, resource: Resource) -> void:
-	var path: String = Global.save_states.get_active_path(res_key + RES_SUFFIX)
-	_create_backup(path)
-	ResourceSaver.save(resource, path, ResourceSaver.FLAG_COMPRESS)
+func save_resource(res_key: StringName, resource: Resource) -> void:
+	var path: StringName = Global.save_states.get_active_path(res_key)
+	var resource_path: StringName = BackupUtil.create_backup(path, RES_SUFFIX)
+	ResourceSaver.save(resource, resource_path, ResourceSaver.FLAG_COMPRESS)
 
 
 func load_save_states() -> SaveStates:
@@ -153,9 +153,9 @@ func load_resource(res_key: String, root_path: bool = false) -> Resource:
 
 	if resource == null:
 		print("restoring backup...")
-		_restore_backup(path)
+		var resource_path: StringName = BackupUtil.restore_backup(path, RES_SUFFIX)
 		# try loading again
-		resource = ResourceLoader.load(path)
+		resource = ResourceLoader.load(resource_path)
 		if resource == null:
 			print("restoring backup gone wrong")
 		else:
@@ -167,19 +167,3 @@ func load_resource(res_key: String, root_path: bool = false) -> Resource:
 	return resource
 
 
-func _create_backup(path: StringName) -> void:
-	print("creating backup for %s..." % path)
-	var dir_access: DirAccess = DirAccess.open(path.get_base_dir())
-	if dir_access:
-		# create backup
-		dir_access.rename(path, path + BACKUP_SUFFIX)
-		print("creating backup for %s done." % path)
-	else:
-		print("creating backup for %s gone wrong." % path)
-
-
-func _restore_backup(path: StringName) -> void:
-	var dir_access: DirAccess = DirAccess.open(path.get_base_dir())
-	if dir_access:
-		# create backup, and always keep a backup
-		dir_access.copy(path + BACKUP_SUFFIX, path)

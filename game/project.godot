@@ -34,6 +34,7 @@ ThemeUtil="*res://src/utils/theme_util.gd"
 LoadingUtil="*res://src/utils/loading_util.gd"
 ThreadUtil="*res://src/utils/thread_util.gd"
 Focus="*res://src/focus.gd"
+BackupUtil="*res://src/utils/backup_util.gd"
 
 [debug]
 
