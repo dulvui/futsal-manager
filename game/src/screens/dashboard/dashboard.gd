@@ -94,6 +94,11 @@ func _process(_delta: float) -> void:
 	budget_label.text = FormatUtil.get_sign(team.budget)
 
 
+func _input(_event: InputEvent) -> void:
+	if Focus.input_is_action_pressed("search"):
+		print("go search")
+
+
 func _on_menu_pressed() -> void:
 	LoadingUtil.start("SAVING_GAME", LoadingUtil.Type.SAVE_GAME, true)
 	loading_screen.show()
