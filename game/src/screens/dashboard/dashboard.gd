@@ -97,6 +97,8 @@ func _process(_delta: float) -> void:
 func _input(_event: InputEvent) -> void:
 	if Focus.input_is_action_pressed("search"):
 		print("go search")
+		all_players_list.focus_search_bar()
+		player_list.focus_search_bar()
 
 
 func _on_menu_pressed() -> void:
