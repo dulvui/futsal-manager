@@ -39,12 +39,12 @@ func set_up_days() -> void:
 	# to start with monday, fill other days with placeholders
 	var monday_counter: int = 7
 	while Global.world.calendar.month(current_month).days[monday_counter].weekday != "MON":
+		monday_counter -= 1
+
 		var placeholder: Control = Control.new()
 		placeholder.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		placeholder.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		days.add_child(placeholder)
-		
-		monday_counter -= 1
+		days.add_child(placeholder)	
 
 	# add days
 	for day: Day in Global.world.calendar.month(current_month).days:

@@ -12,12 +12,14 @@ const AWAY_MATCH_DAY_COLOR: Color = Color.DEEP_SKY_BLUE
 
 var date: Day
 
-@onready var button: Button = $Button
-@onready var match_label: Label = $Button/MarginContainer/VBoxContainer/Match
-@onready var month_day_label: Label = $Button/MarginContainer/VBoxContainer/HBoxContainer/MonthDay
-@onready var market_label: Label = $Button/MarginContainer/VBoxContainer/HBoxContainer/Market
-@onready var competition: HBoxContainer = $Button/MarginContainer/VBoxContainer/Competition
-@onready var competition_name: Label = $Button/MarginContainer/VBoxContainer/Competition/CompetitionName
+@onready var button: Button = $MarginContainer/Button
+@onready var match_label: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/Match
+@onready var month_day_label: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer/MonthDay
+@onready var market_label: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer/Market
+@onready var competition: HBoxContainer = $MarginContainer/Button/MarginContainer/VBoxContainer/Competition
+@onready var competition_name: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/Competition/CompetitionName
+@onready var match_color: ColorRect = $MarginContainer/Button/MarginContainer/VBoxContainer/MatchColor
+@onready var day_color: ColorRect = $DayColor
 
 
 func set_up(p_date: Day = Day.new()) -> void:
@@ -34,25 +36,27 @@ func set_up(p_date: Day = Day.new()) -> void:
 		for matchz: Match in matches:
 			if Global.team.name == matchz.home.name:
 				team_name = matchz.away.name
-				# background.color = HOME_MATCH_DAY_COLOR
+				match_color.show()
+				match_color.color = HOME_MATCH_DAY_COLOR
 				competition.visible = true
 				competition_name.text = matchz.competition_name
 			elif Global.team.name == matchz.away.name:
 				team_name = matchz.home.name
-				# background.color = AWAY_MATCH_DAY_COLOR
+				match_color.show()
+				match_color.color = AWAY_MATCH_DAY_COLOR
 				competition.visible = true
 				competition_name.text = matchz.competition_name
 		match_label.text = team_name
 	else:
 		match_label.hide()
 
-	# if date.is_same_day(Global.world.calendar.day()):
-	# 	if background.color != HOME_MATCH_DAY_COLOR:
-	# 		background.color = Color.LIGHT_GREEN
-	# 	elif background.color != AWAY_MATCH_DAY_COLOR:
-	# 		background.color = Color.MEDIUM_SPRING_GREEN
-	# 	else:
-	# 		background.color = Color.LIGHT_PINK
+	if date.is_same_day(Global.world.calendar.day()):
+		if day_color.color != HOME_MATCH_DAY_COLOR:
+			day_color.color = Color.LIGHT_GREEN
+		elif day_color.color != AWAY_MATCH_DAY_COLOR:
+			day_color.color = Color.MEDIUM_SPRING_GREEN
+		else:
+			day_color.color = Color.LIGHT_PINK
 
 	# check if market is active
 	if date.market:

@@ -47,8 +47,8 @@ text = "TODAY"
 [node name="Days" type="GridContainer" parent="Calendar"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
 columns = 7
 
 [node name="Monday" type="Label" parent="Calendar/Days"]
