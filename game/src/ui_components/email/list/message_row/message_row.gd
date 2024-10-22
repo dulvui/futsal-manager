@@ -7,10 +7,6 @@ extends Control
 
 signal click
 
-# player row button colors
-const COLOR_FOCUS: Color = Color(1, 1, 1, 0.2)
-const COLOR_NORMAL: Color = Color(1, 1, 1, 0)
-
 var message: EmailMessage
 
 @onready var button: Button = $Button
@@ -39,14 +35,6 @@ func set_up(p_message: EmailMessage) -> void:
 
 func _on_button_button_down() -> void:
 	click.emit()
-
-
-func _on_button_mouse_entered() -> void:
-	button.self_modulate = COLOR_FOCUS
-
-
-func _on_button_mouse_exited() -> void:
-	button.self_modulate = COLOR_NORMAL
 
 
 func _on_star_toggled(toggled_on: bool) -> void:

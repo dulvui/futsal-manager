@@ -27,6 +27,8 @@ const RESOLUTIONS: Dictionary = {
 func _ready() -> void:
 	# theme
 	theme = ThemeUtil.get_active_theme()
+	InputUtil.start_focus(self)
+
 	for theme_name: String in ThemeUtil.get_theme_names():
 		theme_options.add_item(theme_name)
 	theme_options.selected = Global.theme_index
@@ -55,5 +57,8 @@ func _on_resolution_option_button_item_selected(index: int) -> void:
 func _on_defaults_pressed() -> void:
 	# theme
 	theme = ThemeUtil.reset_to_default()
+	theme_options.selected = 0
+	size = RESOLUTIONS[RESOLUTIONS.keys()[2]]
+	resolution_options.selected = 2
 	# save
 	Global.save_config()

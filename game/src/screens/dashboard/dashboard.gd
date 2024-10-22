@@ -83,6 +83,7 @@ func _ready() -> void:
 		continue_button.text = "NEXT_SEASON"
 
 	_show_active_view()
+	email_button.grab_focus()
 
 
 func _process(_delta: float) -> void:
@@ -92,13 +93,6 @@ func _process(_delta: float) -> void:
 	else:
 		email_button.text = tr("EMAIL")
 	budget_label.text = FormatUtil.get_sign(team.budget)
-
-
-func _input(_event: InputEvent) -> void:
-	if Focus.input_is_action_pressed("search"):
-		print("go search")
-		all_players_list.focus_search_bar()
-		player_list.focus_search_bar()
 
 
 func _on_menu_pressed() -> void:

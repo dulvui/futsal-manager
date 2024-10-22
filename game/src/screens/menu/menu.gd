@@ -17,6 +17,7 @@ extends Control
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
+	InputUtil.start_focus(self)
 
 	load_game.visible = Global.save_states and Global.save_states.list.size() > 0
 	continue_game.visible = Global.save_states and Global.save_states.list.size() > 0
@@ -24,6 +25,14 @@ func _ready() -> void:
 	save_state.set_up(Global.save_states.get_active())
 
 	version.text = "v" + Global.version
+
+
+func _move(direction: InputUtil.Direction) -> void:
+	if direction == InputUtil.Direction.UP:
+		var view_port: Viewport = get_viewport()
+		if view_port.gui_get_focus_owner() == null:
+			var next_focus: Control = find_next_valid_focus()
+			next_focus.grab_focus()
 
 
 func _on_new_game_pressed() -> void:
