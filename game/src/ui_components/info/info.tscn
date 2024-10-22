@@ -26,13 +26,9 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "SEED"
 
-[node name="GenerationSeed" type="LineEdit" parent="GenerationSeed"]
+[node name="GenerationSeed" type="Label" parent="GenerationSeed"]
 layout_mode = 2
-theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
 text = "palpalpalpa"
-editable = false
-expand_to_text_length = true
-flat = true
 
 [node name="CopySeed" type="Button" parent="GenerationSeed"]
 layout_mode = 2

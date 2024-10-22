@@ -5,7 +5,7 @@
 class_name VisualInfo
 extends VBoxContainer
 
-@onready var generation_seed: LineEdit = $GenerationSeed/GenerationSeed
+@onready var generation_seed: Label = $GenerationSeed/GenerationSeed
 @onready var start_date: Label = $StartDate/StartDate
 
 
