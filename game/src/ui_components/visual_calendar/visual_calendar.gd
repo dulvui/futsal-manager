@@ -44,7 +44,7 @@ func set_up_days() -> void:
 		var placeholder: Control = Control.new()
 		placeholder.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		placeholder.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		days.add_child(placeholder)	
+		days.add_child(placeholder)
 
 	# add days
 	for day: Day in Global.world.calendar.month(current_month).days:

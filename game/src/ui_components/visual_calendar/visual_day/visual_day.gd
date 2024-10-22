@@ -14,11 +14,16 @@ var date: Day
 
 @onready var button: Button = $MarginContainer/Button
 @onready var match_label: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/Match
-@onready var month_day_label: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer/MonthDay
-@onready var market_label: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer/Market
-@onready var competition: HBoxContainer = $MarginContainer/Button/MarginContainer/VBoxContainer/Competition
-@onready var competition_name: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/Competition/CompetitionName
-@onready var match_color: ColorRect = $MarginContainer/Button/MarginContainer/VBoxContainer/MatchColor
+@onready
+var month_day_label: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer/MonthDay
+@onready
+var market_label: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer/Market
+@onready
+var competition: HBoxContainer = $MarginContainer/Button/MarginContainer/VBoxContainer/Competition
+@onready
+var competition_name: Label = $MarginContainer/Button/MarginContainer/VBoxContainer/Competition/CompetitionName
+@onready
+var match_color: ColorRect = $MarginContainer/Button/MarginContainer/VBoxContainer/MatchColor
 @onready var day_color: ColorRect = $DayColor
 
 

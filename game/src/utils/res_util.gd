@@ -49,7 +49,9 @@ func _process(_delta: float) -> void:
 		):
 			print("restore backup for %s..." % loading_resource_path)
 
-			var backup_path: StringName = BackupUtil.restore_backup(loading_resource_path, RES_SUFFIX)
+			var backup_path: StringName = BackupUtil.restore_backup(
+				loading_resource_path, RES_SUFFIX
+			)
 
 			loaded_resources_paths.append(loading_resource_path)
 			backup_resources_paths.append(backup_path)
@@ -165,5 +167,3 @@ func load_resource(res_key: String, root_path: bool = false) -> Resource:
 	print("loaded in: " + str(load_time) + " ms")
 
 	return resource
-
-

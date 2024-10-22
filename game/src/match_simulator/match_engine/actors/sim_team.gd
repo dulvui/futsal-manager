@@ -4,7 +4,7 @@
 
 class_name SimTeam
 
-signal interception 
+signal interception
 
 var res_team: Team
 

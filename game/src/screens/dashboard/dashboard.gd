@@ -31,13 +31,15 @@ var active_view: ContentViews = ContentViews.EMAIL
 
 # buttons
 @onready var continue_button: Button = $MarginContainer/HBoxContainer/MainContainer/TopBar/Continue
-@onready var next_match_button: Button = $MarginContainer/HBoxContainer/MainContainer/TopBar/NextMatch
+@onready
+var next_match_button: Button = $MarginContainer/HBoxContainer/MainContainer/TopBar/NextMatch
 @onready var email_button: Button = $MarginContainer/HBoxContainer/Buttons/Email
 
 # content views
 @onready var email: VisualEmail = $MarginContainer/HBoxContainer/MainContainer/Content/Email
 @onready var table: VisualTable = $MarginContainer/HBoxContainer/MainContainer/Content/Table
-@onready var visual_calendar: VisualCalendar = $MarginContainer/HBoxContainer/MainContainer/Content/Calendar
+@onready
+var visual_calendar: VisualCalendar = $MarginContainer/HBoxContainer/MainContainer/Content/Calendar
 @onready var info: VisualInfo = $MarginContainer/HBoxContainer/MainContainer/Content/Info
 
 # labels
@@ -47,11 +49,14 @@ var active_view: ContentViews = ContentViews.EMAIL
 @onready var team_label: Label = $MarginContainer/HBoxContainer/MainContainer/TopBar/TeamName
 
 # full screen views
-@onready var formation: VisualFormation = $MarginContainer/HBoxContainer/MainContainer/Content/Formation
-@onready var player_list: PlayerList = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerList
+@onready
+var formation: VisualFormation = $MarginContainer/HBoxContainer/MainContainer/Content/Formation
+@onready
+var player_list: PlayerList = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerList
 @onready
 var all_players_list: PlayerList = $MarginContainer/HBoxContainer/MainContainer/Content/AllPlayerList
-@onready var player_offer: PlayerOffer = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerOffer
+@onready
+var player_offer: PlayerOffer = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerOffer
 @onready
 var contract_offer: ContractOffer = $MarginContainer/HBoxContainer/MainContainer/Content/ContractOffer
 @onready

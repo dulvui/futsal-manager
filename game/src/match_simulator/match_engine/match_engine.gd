@@ -31,6 +31,7 @@ var possession_counter: float
 # to prevent constant possess change and stuck ball
 var interception_timer: int
 
+
 func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	field = SimField.new()
 	ball = SimBall.new()

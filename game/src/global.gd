@@ -147,8 +147,7 @@ func _load_config() -> void:
 		err = config.load("user://settings.cfg")
 		if err != OK:
 			print("error restoring backup for user://settings.cfg")
-	
+
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	theme_index = config.get_value("settings", "theme_index", 0)
 	language = config.get_value("settings", "language", "")
-

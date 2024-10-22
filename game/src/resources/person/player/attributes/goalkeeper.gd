@@ -44,4 +44,3 @@ func sum() -> int:
 
 func average() -> int:
 	return sum() / AMOUNT
-
