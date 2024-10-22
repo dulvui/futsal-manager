@@ -95,7 +95,7 @@ text = "SUNDAY"
 horizontal_alignment = 1
 
 [node name="MatchList" parent="." instance=ExtResource("3_cy82g")]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
 [connection signal="pressed" from="Calendar/Paginator/Prev" to="." method="_on_prev_pressed"]

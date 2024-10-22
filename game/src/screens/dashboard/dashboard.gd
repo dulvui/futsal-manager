@@ -30,32 +30,32 @@ var active_view: ContentViews = ContentViews.EMAIL
 @onready var team: Team = Global.team
 
 # buttons
-@onready var continue_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/Continue
-@onready var next_match_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/NextMatch
-@onready var email_button: Button = $MainContainer/VBoxContainer/MainView/Buttons/Email
+@onready var continue_button: Button = $MarginContainer/HBoxContainer/MainContainer/TopBar/Continue
+@onready var next_match_button: Button = $MarginContainer/HBoxContainer/MainContainer/TopBar/NextMatch
+@onready var email_button: Button = $MarginContainer/HBoxContainer/Buttons/Email
 
 # content views
-@onready var email: VisualEmail = $MainContainer/VBoxContainer/MainView/Content/Email
-@onready var table: VisualTable = $MainContainer/VBoxContainer/MainView/Content/Table
-@onready var visual_calendar: VisualCalendar = $MainContainer/VBoxContainer/MainView/Content/Calendar
-@onready var info: VisualInfo = $MainContainer/VBoxContainer/MainView/Content/Info
+@onready var email: VisualEmail = $MarginContainer/HBoxContainer/MainContainer/Content/Email
+@onready var table: VisualTable = $MarginContainer/HBoxContainer/MainContainer/Content/Table
+@onready var visual_calendar: VisualCalendar = $MarginContainer/HBoxContainer/MainContainer/Content/Calendar
+@onready var info: VisualInfo = $MarginContainer/HBoxContainer/MainContainer/Content/Info
 
 # labels
-@onready var budget_label: Label = $MainContainer/VBoxContainer/TopBar/Budget
-@onready var date_label: Label = $MainContainer/VBoxContainer/TopBar/Date
-@onready var manager_label: Label = $MainContainer/VBoxContainer/TopBar/ManagerName
-@onready var team_label: Label = $MainContainer/VBoxContainer/TopBar/TeamName
+@onready var budget_label: Label = $MarginContainer/HBoxContainer/MainContainer/TopBar/Budget
+@onready var date_label: Label = $MarginContainer/HBoxContainer/MainContainer/TopBar/Date
+@onready var manager_label: Label = $MarginContainer/HBoxContainer/MainContainer/TopBar/ManagerName
+@onready var team_label: Label = $MarginContainer/HBoxContainer/MainContainer/TopBar/TeamName
 
 # full screen views
-@onready var formation: VisualFormation = $MainContainer/VBoxContainer/MainView/Content/Formation
-@onready var player_list: PlayerList = $MainContainer/VBoxContainer/MainView/Content/PlayerList
+@onready var formation: VisualFormation = $MarginContainer/HBoxContainer/MainContainer/Content/Formation
+@onready var player_list: PlayerList = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerList
 @onready
-var all_players_list: PlayerList = $MainContainer/VBoxContainer/MainView/Content/AllPlayerList
-@onready var player_offer: PlayerOffer = $MainContainer/VBoxContainer/MainView/Content/PlayerOffer
+var all_players_list: PlayerList = $MarginContainer/HBoxContainer/MainContainer/Content/AllPlayerList
+@onready var player_offer: PlayerOffer = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerOffer
 @onready
-var contract_offer: ContractOffer = $MainContainer/VBoxContainer/MainView/Content/ContractOffer
+var contract_offer: ContractOffer = $MarginContainer/HBoxContainer/MainContainer/Content/ContractOffer
 @onready
-var player_profile: PlayerProfile = $MainContainer/VBoxContainer/MainView/Content/PlayerProfile
+var player_profile: PlayerProfile = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerProfile
 @onready var loading_screen: LoadingScreen = $LoadingScreen
 
 
