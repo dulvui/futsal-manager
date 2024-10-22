@@ -18,30 +18,22 @@ size_flags_vertical = 3
 theme = ExtResource("1_njb33")
 script = ExtResource("2_ub0fh")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.609659, 0.733236, 0.946432, 1)
+alignment = 0
+text_overrun_behavior = 3
+clip_text = true
 
-[node name="ColorActive" type="ColorRect" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="Button"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
@@ -49,60 +41,46 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Button/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Market" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Market" type="Label" parent="Button/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "MARKET"
 horizontal_alignment = 2
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Button/MarginContainer/VBoxContainer/HBoxContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MonthDay" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MonthDay" type="Label" parent="Button/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "31"
 horizontal_alignment = 2
 
-[node name="Competition" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Competition" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Ball" type="TextureRect" parent="MarginContainer/VBoxContainer/Competition"]
+[node name="Ball" type="TextureRect" parent="Button/MarginContainer/VBoxContainer/Competition"]
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("3_kqdli")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CompetitionName" type="Label" parent="MarginContainer/VBoxContainer/Competition"]
+[node name="CompetitionName" type="Label" parent="Button/MarginContainer/VBoxContainer/Competition"]
 layout_mode = 2
 size_flags_horizontal = 3
 text_overrun_behavior = 3
 
-[node name="Match" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Match" type="Label" parent="Button/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "ROMA"
 text_overrun_behavior = 3
-
-[node name="Button" type="Button" parent="."]
-visible = false
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Match day"
-alignment = 0
-text_overrun_behavior = 3
-clip_text = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
