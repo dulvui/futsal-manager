@@ -5,9 +5,9 @@
 
 [node name="SaveState" type="HBoxContainer"]
 anchors_preset = -1
-anchor_right = 0.315
+anchor_right = 0.379
 anchor_bottom = 0.091
-offset_right = -604.8
+offset_right = -727.68
 offset_bottom = -98.28
 size_flags_horizontal = 3
 script = ExtResource("1_yugvl")
