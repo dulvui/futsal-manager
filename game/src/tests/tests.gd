@@ -37,7 +37,7 @@ static func create_mock_team() -> Team:
 	team.set_random_colors()
 	team.name = "Mock Team " + str(randi() % 100)
 
-	for i: int in range(1, 6):
+	for i: int in range(1, Const.LINEUP_PLAYERS_AMOUNT):
 		var player: Player = Player.new()
 		player.name = "Mock"
 		player.surname = "Player"

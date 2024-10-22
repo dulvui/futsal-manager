@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj7f2r54xkpt1"]
+
+[ext_resource type="Script" path="res://src/ui_components/visual_formation/players_bar/players_bar.gd" id="1_ehtta"]
+
+[node name="PlayersBar" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ehtta")
+
+[node name="Players" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="Bench" type="HBoxContainer" parent="."]
+layout_mode = 2

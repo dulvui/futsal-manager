@@ -9,10 +9,13 @@ enum Foot { L, R }
 enum Morality { HORRIBLE, BAD, GOOD, EXCELLENT }
 enum Form { INJURED, RECOVER, GOOD, EXCELLENT }
 
+const STAMINA_FACTOR: float = 0.001
+
 @export var price: int
 @export var nr: int  # shirt number
 @export var loyality: int
 @export var injury_factor: int
+@export var stamina: float
 @export var team: String  # team name for easier filtering etc...
 @export var team_id: int  # team name for easier filtering etc...
 @export var form: Form
@@ -32,6 +35,7 @@ func _init(
 	p_loyality: int = 0,
 	p_prestige: int = 0,
 	p_injury_factor: int = 0,
+	p_stamina: float = 1,
 	p_name: String = "",
 	p_team: String = "",
 	p_team_id: int = 0,
@@ -55,6 +59,7 @@ func _init(
 	loyality = p_loyality
 	prestige = p_prestige
 	injury_factor = p_injury_factor
+	stamina = p_stamina
 	name = p_name
 	team = p_team
 	team_id = p_team_id
@@ -153,3 +158,12 @@ func get_prestige_stars() -> String:
 	var spaces: int = 5 - stars
 	# creates right padding ex: "***  "
 	return "*".repeat(stars) + "  ".repeat(spaces)
+
+
+func recover_stamina() -> void:
+	stamina = minf(1, stamina + STAMINA_FACTOR)
+
+
+func consume_stamina() -> void:
+	stamina = maxf(0, stamina - STAMINA_FACTOR)
+

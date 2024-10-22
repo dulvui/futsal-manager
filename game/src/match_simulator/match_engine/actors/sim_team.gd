@@ -10,11 +10,14 @@ var res_team: Team
 
 var goalkeeper: SimGoalkeeper
 var players: Array[SimPlayer]
+var bench: Array[SimPlayer]
 
 var ball: SimBall
 var field: SimField
 var has_ball: bool
 var left_half: bool
+# false, if team is controlled by player
+var simulated: bool
 
 var stats: MatchStatistics
 
@@ -29,12 +32,18 @@ func set_up(
 	p_ball: SimBall = SimBall.new(),
 	p_left_half: bool = false,
 	p_has_ball: bool = false,
+	p_simulated: bool = false,
 ) -> void:
 	res_team = p_res_team
 	field = p_field
 	ball = p_ball
 	has_ball = p_has_ball
 	left_half = p_left_half
+	simulated = p_simulated
+
+	# check if team is player's team
+	simulated = Global.team and Global.team.id != res_team.id
+	print(simulated)
 
 	stats = MatchStatistics.new()
 
@@ -45,7 +54,8 @@ func set_up(
 
 	sort_x_left = func(a: SimPlayer, b: SimPlayer) -> bool: return a.pos.x < b.pos.x
 	sort_x_right = func(a: SimPlayer, b: SimPlayer) -> bool: return a.pos.x > b.pos.x
-
+	
+	# field players
 	for player: Player in res_team.get_field_players():
 		var sim_player: SimPlayer = SimPlayer.new()
 		# setup
@@ -59,8 +69,25 @@ func set_up(
 			shoot_on_goal.bind(sim_player.player_res.attributes.technical.shooting)
 		)
 		#sim_player.dribble.connect(pass_to_random_player)
+	
+	# bench
+	for player: Player in res_team.get_sub_players():
+		var sim_player: SimPlayer = SimPlayer.new()
+		# setup
+		sim_player.set_up(player, ball, field)
+		bench.append(sim_player)
 
 	set_kick_off_formation()
+
+
+func update() -> void:
+	# TODO
+	# recover bench players stamina
+	for player: SimPlayer in bench:
+		player.recover_stamina()
+	# check injuries
+	# auto substitutes/rotations
+	pass
 
 
 func defend(other_players: Array[SimPlayer]) -> void:

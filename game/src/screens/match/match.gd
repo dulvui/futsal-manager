@@ -27,10 +27,8 @@ var away_stats: MatchStatistics
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var time_label: Label = $Main/Content/CentralContainer/TopBar/Time
 @onready var result_label: Label = $Main/Content/CentralContainer/TopBar/Result
-@onready var pause_button: Button = $Main/Content/Buttons/Pause
 @onready var home_color: ColorRect = $Main/Content/CentralContainer/TopBar/HomeColor
 @onready var away_color: ColorRect = $Main/Content/CentralContainer/TopBar/AwayColor
-@onready var speed_factor_label: Label = $Main/Content/Buttons/Speed/SpeedFactor
 @onready var home_possession: Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Home
 @onready var away_possession: Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Away
 @onready var home_name: Label = $Main/Content/CentralContainer/TopBar/Home
@@ -38,13 +36,16 @@ var away_stats: MatchStatistics
 @onready var time_bar: ProgressBar = $Main/Content/CentralContainer/TopBar/TimeBar
 @onready var possess_bar: ProgressBar = $Main/Content/CentralContainer/BottomBar/PossessBar
 
-@onready var faster_button: Button = $Main/Content/Buttons/Speed/Faster
-@onready var slower_button: Button = $Main/Content/Buttons/Speed/Slower
-@onready var dashboard_button: Button = $Main/Content/Buttons/Dashboard
-@onready var events_button: Button = $Main/Content/Buttons/Events
-@onready var stats_button: Button = $Main/Content/Buttons/Stats
-@onready var field_button: Button = $Main/Content/Buttons/Field
-@onready var formation_button: Button = $Main/Content/Buttons/Formation
+@onready var pause_button: Button = $Main/Content/CentralContainer/Buttons/Pause
+@onready var faster_button: Button = $Main/Content/CentralContainer/Buttons/Speed/Faster
+@onready var slower_button: Button = $Main/Content/CentralContainer/Buttons/Speed/Slower
+@onready var speed_factor_label: Label = $Main/Content/CentralContainer/Buttons/Speed/SpeedFactor
+@onready var dashboard_button: Button = $Main/Content/CentralContainer/Buttons/Dashboard
+@onready var events_button: Button = $Main/Content/CentralContainer/Buttons/Events
+@onready var stats_button: Button = $Main/Content/CentralContainer/Buttons/Stats
+@onready var field_button: Button = $Main/Content/CentralContainer/Buttons/Field
+@onready var formation_button: Button = $Main/Content/CentralContainer/Buttons/Formation
+@onready var players_bar: PlayersBar = $Main/Content/CentralContainer/PlayersBar
 
 
 func _ready() -> void:
@@ -58,6 +59,10 @@ func _ready() -> void:
 		# games needs to be started at least once with a valid save state
 		matchz.home = Tests.create_mock_team()
 		matchz.away = Tests.create_mock_team()
+		# if running match scene, set Global team to home team
+		if not Global.team:
+			Global.team = matchz.home
+
 
 	home_team = matchz.home
 	away_team = matchz.away
@@ -65,15 +70,10 @@ func _ready() -> void:
 	home_name.text = matchz.home.name
 	away_name.text = matchz.away.name
 
-	# check if running in game or test
-	if Global.team:
-		formation.set_up(true)
-	else:
-		formation.set_up(true, home_team)
+	formation.set_up(true)
+	players_bar.set_up()
 
 	match_simulator.set_up(home_team, away_team, matchz.id)
-
-	last_active_view = match_simulator
 
 	# set colors
 	home_color.color = home_team.get_home_color()
@@ -86,6 +86,10 @@ func _ready() -> void:
 	# to easier access stats
 	home_stats = match_simulator.visual_match.match_engine.home_team.stats
 	away_stats = match_simulator.visual_match.match_engine.away_team.stats
+	
+	last_active_view = match_simulator
+	last_active_view.show()
+
 
 
 func _on_match_simulator_update_time() -> void:

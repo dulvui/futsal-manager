@@ -46,7 +46,11 @@ var distance_to_ball: float
 var distance_to_enemy: float
 
 
-func set_up(p_player_res: Player, p_ball: SimBall, p_field: SimField) -> void:
+func set_up(
+	p_player_res: Player,
+	p_ball: SimBall,
+	p_field: SimField,
+) -> void:
 	player_res = p_player_res
 	ball = p_ball
 	field = p_field
@@ -114,6 +118,7 @@ func _move() -> void:
 	if speed > 0:
 		last_pos = pos
 		pos = pos.move_toward(destination, speed * Const.SPEED)
+		player_res.consume_stamina()
 
 
 func is_touching_ball() -> bool:
@@ -168,3 +173,9 @@ func bound_field(p_pos: Vector2) -> Vector2:
 	p_pos.x = maxi(mini(int(p_pos.x), int(field.line_right)), 1)
 	p_pos.y = maxi(mini(int(p_pos.y), int(field.line_bottom)), 1)
 	return p_pos
+
+
+func recover_stamina() -> void:
+	player_res.recover_stamina()
+
+

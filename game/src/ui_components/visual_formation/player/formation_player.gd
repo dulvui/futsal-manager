@@ -10,17 +10,25 @@ signal change_player
 var color: Color
 var player: Player
 
-@onready var name_label: Label = $ColorRect/MarginContainer/VBoxContainer/Name
-@onready var prestige: Label = $ColorRect/MarginContainer/VBoxContainer/Prestige
-@onready var nr_label: Label = $ColorRect/MarginContainer/VBoxContainer/Nr
+@onready var name_label: Label = $MarginContainer/VBoxContainer/Name
+@onready var prestige: Label = $MarginContainer/VBoxContainer/Prestige
+@onready var nr_label: Label = $MarginContainer/VBoxContainer/Nr
 @onready var state_color: ColorRect = $ColorRect
+@onready var stamina: ProgressBar = $MarginContainer/VBoxContainer/Stamina
 
 
 func _ready() -> void:
-	nr_label.text = str(player.nr)
-	name_label.text = player.surname
-	state_color.color = color
-	prestige.text = player.get_prestige_stars()
+	if player:
+		nr_label.text = str(player.nr)
+		name_label.text = player.surname
+		state_color.color = color
+		prestige.text = player.get_prestige_stars()
+		stamina.value = player.stamina
+
+
+func _process(_delta: float) -> void:
+	if player:
+		stamina.value = player.stamina
 
 
 func set_player(p_player: Player, team: Team = null) -> void:
@@ -35,5 +43,5 @@ func set_player(p_player: Player, team: Team = null) -> void:
 			color = Color.DARK_RED
 
 
-func _on_Change_pressed() -> void:
+func _on_change_pressed() -> void:
 	change_player.emit()

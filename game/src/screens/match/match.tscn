@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://0u70bm8qumdr"]
+[gd_scene load_steps=12 format=3 uid="uid://0u70bm8qumdr"]
 
 [ext_resource type="PackedScene" uid="uid://bubq3rsb3hm6e" path="res://src/match_simulator/match_simulator.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bc6kfu3avld0" path="res://src/ui_components/match/statistics/match_stats.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui_components/visual_formation/visual_formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://5agy8ull675s" path="res://src/ui_components/match/events/match_events.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://bj7f2r54xkpt1" path="res://src/ui_components/visual_formation/players_bar/players_bar.tscn" id="7_kly0w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3ady1"]
 font_size = 84
@@ -93,6 +94,60 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Main/Content/CentralContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Field" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+layout_mode = 2
+text = "FIELD"
+
+[node name="Commentary" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+layout_mode = 2
+text = "COMMENTARY"
+
+[node name="Stats" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+layout_mode = 2
+text = "STATS"
+
+[node name="Events" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+layout_mode = 2
+text = "EVENTS"
+
+[node name="Speed" type="HBoxContainer" parent="Main/Content/CentralContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Slower" type="Button" parent="Main/Content/CentralContainer/Buttons/Speed"]
+layout_mode = 2
+text = "-1"
+
+[node name="SpeedFactor" type="Label" parent="Main/Content/CentralContainer/Buttons/Speed"]
+layout_mode = 2
+text = "X2"
+
+[node name="Faster" type="Button" parent="Main/Content/CentralContainer/Buttons/Speed"]
+layout_mode = 2
+text = "+1"
+
+[node name="Formation" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+layout_mode = 2
+text = "FORMATION"
+
+[node name="Pause" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+layout_mode = 2
+text = "PAUSE"
+
+[node name="Skip" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+layout_mode = 2
+text = "SKIP"
+
+[node name="Dashboard" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "DASHBOARD"
 
 [node name="TopBar" type="HBoxContainer" parent="Main/Content/CentralContainer"]
 layout_mode = 2
@@ -192,59 +247,8 @@ size_flags_horizontal = 3
 text = "44%"
 horizontal_alignment = 1
 
-[node name="Buttons" type="HBoxContainer" parent="Main/Content"]
+[node name="PlayersBar" parent="Main/Content/CentralContainer" instance=ExtResource("7_kly0w")]
 layout_mode = 2
-alignment = 1
-
-[node name="Field" type="Button" parent="Main/Content/Buttons"]
-layout_mode = 2
-text = "FIELD"
-
-[node name="Commentary" type="Button" parent="Main/Content/Buttons"]
-layout_mode = 2
-text = "COMMENTARY"
-
-[node name="Stats" type="Button" parent="Main/Content/Buttons"]
-layout_mode = 2
-text = "STATS"
-
-[node name="Events" type="Button" parent="Main/Content/Buttons"]
-layout_mode = 2
-text = "EVENTS"
-
-[node name="Speed" type="HBoxContainer" parent="Main/Content/Buttons"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Slower" type="Button" parent="Main/Content/Buttons/Speed"]
-layout_mode = 2
-text = "-1"
-
-[node name="SpeedFactor" type="Label" parent="Main/Content/Buttons/Speed"]
-layout_mode = 2
-text = "X2"
-
-[node name="Faster" type="Button" parent="Main/Content/Buttons/Speed"]
-layout_mode = 2
-text = "+1"
-
-[node name="Formation" type="Button" parent="Main/Content/Buttons"]
-layout_mode = 2
-text = "FORMATION"
-
-[node name="Pause" type="Button" parent="Main/Content/Buttons"]
-layout_mode = 2
-text = "PAUSE"
-
-[node name="Skip" type="Button" parent="Main/Content/Buttons"]
-layout_mode = 2
-text = "SKIP"
-
-[node name="Dashboard" type="Button" parent="Main/Content/Buttons"]
-visible = false
-layout_mode = 2
-text = "DASHBOARD"
 
 [node name="Goal" type="Label" parent="."]
 visible = false
@@ -274,14 +278,14 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
-[connection signal="pressed" from="Main/Content/Buttons/Field" to="." method="_on_field_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Commentary" to="." method="_on_commentary_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Stats" to="." method="_on_stats_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Events" to="." method="_on_events_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Speed/Slower" to="." method="_on_slower_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Speed/Faster" to="." method="_on_faster_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Formation" to="." method="_on_formation_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Pause" to="." method="_on_pause_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Skip" to="." method="_on_skip_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Dashboard" to="." method="_on_dashboard_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Field" to="." method="_on_field_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Commentary" to="." method="_on_commentary_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Stats" to="." method="_on_stats_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Events" to="." method="_on_events_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Speed/Slower" to="." method="_on_slower_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Speed/Faster" to="." method="_on_faster_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Formation" to="." method="_on_formation_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Skip" to="." method="_on_skip_pressed"]
+[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Dashboard" to="." method="_on_dashboard_pressed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

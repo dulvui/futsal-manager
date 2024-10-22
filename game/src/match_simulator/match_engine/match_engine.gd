@@ -78,6 +78,10 @@ func update() -> void:
 	else:
 		home_team.defend(away_team.players)
 		away_team.attack()
+	
+	# update teams
+	home_team.update()
+	away_team.update()
 
 	# update posession stats
 	if home_team.has_ball:
