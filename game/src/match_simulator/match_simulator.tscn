@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bubq3rsb3hm6e"]
 
 [ext_resource type="Script" path="res://src/match_simulator/match_simulator.gd" id="1_tnm3q"]
-[ext_resource type="PackedScene" uid="uid://b3xqapw5jfje0" path="res://src/match_simulator/match_engine/visual_match/visual_match.tscn" id="2_1u7kc"]
+[ext_resource type="PackedScene" uid="uid://b3xqapw5jfje0" path="res://src/match_simulator/visual_match/visual_match.tscn" id="2_1u7kc"]
 
 [node name="MatchSimulator" type="Control"]
 layout_mode = 3

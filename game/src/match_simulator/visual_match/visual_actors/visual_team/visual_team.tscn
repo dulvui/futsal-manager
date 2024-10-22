@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://blsnafnkw14i7"]
 
-[ext_resource type="Script" path="res://src/match_simulator/match_engine/visual_actors/visual_team/visual_team.gd" id="1_e5wh8"]
-[ext_resource type="PackedScene" uid="uid://e16svljok4fi" path="res://src/match_simulator/match_engine/visual_actors/visual_goalkeeper/visual_goalkeeper.tscn" id="2_udmdt"]
-[ext_resource type="PackedScene" uid="uid://doptire10wp2v" path="res://src/match_simulator/match_engine/visual_actors/visual_player/visual_player.tscn" id="3_ycu0j"]
+[ext_resource type="Script" path="res://src/match_simulator/visual_match/visual_actors/visual_team/visual_team.gd" id="1_e5wh8"]
+[ext_resource type="PackedScene" uid="uid://e16svljok4fi" path="res://src/match_simulator/visual_match/visual_actors/visual_goalkeeper/visual_goalkeeper.tscn" id="2_udmdt"]
+[ext_resource type="PackedScene" uid="uid://doptire10wp2v" path="res://src/match_simulator/visual_match/visual_actors/visual_player/visual_player.tscn" id="3_ycu0j"]
 
 [node name="VisualTeam" type="Node2D"]
 script = ExtResource("1_e5wh8")
