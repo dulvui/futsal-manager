@@ -9,8 +9,6 @@ enum Foot { L, R }
 enum Morality { HORRIBLE, BAD, GOOD, EXCELLENT }
 enum Form { INJURED, RECOVER, GOOD, EXCELLENT }
 
-const STAMINA_FACTOR: float = 0.001
-
 @export var price: int
 @export var nr: int  # shirt number
 @export var loyality: int
@@ -152,8 +150,8 @@ func get_res_value(keys: Array[String], p_res: Resource = null) -> Variant:
 
 
 func get_prestige_stars() -> String:
-	var relation: int = Const.MAX_PRESTIGE / 4
-	var star_factor: int = Const.MAX_PRESTIGE / relation
+	var relation: float = Const.MAX_PRESTIGE / 4.0
+	var star_factor: float = Const.MAX_PRESTIGE / relation
 	var stars: int = max(1, prestige / star_factor)
 	var spaces: int = 5 - stars
 	# creates right padding ex: "***  "
@@ -161,9 +159,14 @@ func get_prestige_stars() -> String:
 
 
 func recover_stamina() -> void:
-	stamina = minf(1, stamina + STAMINA_FACTOR)
+	stamina = minf(1, stamina + Const.STAMINA_FACTOR)
 
 
 func consume_stamina() -> void:
-	stamina = maxf(0, stamina - STAMINA_FACTOR)
+	# consume stamina with  calc 21 - [20,1]
+	# best case Const.MAX_PRESTIGE * 1
+	# worst case Const.MAX_PRESTIGE * 20
+	var consumation: float = Const.STAMINA_FACTOR * (Const.MAX_PRESTIGE + 1 - attributes.physical.stamina)
+	print("stamina: %d consumtion: %f"%[attributes.physical.stamina, consumation])
+	stamina = maxf(0, stamina - consumation)
 

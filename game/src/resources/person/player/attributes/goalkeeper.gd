@@ -16,12 +16,12 @@ const AMOUNT: int = 6
 
 
 func _init(
-	p_reflexes: int = 0,
-	p_positioning: int = 0,
-	p_kicking: int = 0,
-	p_handling: int = 0,
-	p_diving: int = 0,
-	p_speed: int = 0,
+	p_reflexes: int = Const.MAX_PRESTIGE,
+	p_positioning: int = Const.MAX_PRESTIGE,
+	p_kicking: int = Const.MAX_PRESTIGE,
+	p_handling: int = Const.MAX_PRESTIGE,
+	p_diving: int = Const.MAX_PRESTIGE,
+	p_speed: int = Const.MAX_PRESTIGE,
 ) -> void:
 	reflexes = p_reflexes
 	positioning = p_positioning

@@ -10,6 +10,10 @@ enum PlayerNames { MALE, FEMALE, MIXED }
 const HALF_TIME_SECONDS: int = 60 * 20
 const TICKS_PER_SECOND: int = 4
 const SPEED: int = 2
+# stamina range [0, 1]
+# this factor makes sure a player with attribute stamina 20
+# can play a full game running all the time
+const STAMINA_FACTOR: float = 1.0 / (HALF_TIME_SECONDS * 2 * TICKS_PER_SECOND)
 
 const ATTRIBUTES: Dictionary = {
 	"mental":

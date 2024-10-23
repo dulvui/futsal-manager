@@ -278,6 +278,10 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
+[connection signal="action_message" from="MatchSimulator" to="." method="_on_match_simulator_action_message"]
+[connection signal="half_time" from="MatchSimulator" to="." method="_on_match_simulator_half_time"]
+[connection signal="match_end" from="MatchSimulator" to="." method="_on_match_simulator_match_end"]
+[connection signal="update_time" from="MatchSimulator" to="." method="_on_match_simulator_update_time"]
 [connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Field" to="." method="_on_field_pressed"]
 [connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Commentary" to="." method="_on_commentary_pressed"]
 [connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Stats" to="." method="_on_stats_pressed"]
