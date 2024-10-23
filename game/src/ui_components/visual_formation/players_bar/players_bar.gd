@@ -19,7 +19,7 @@ func _ready() -> void:
 func set_up(team: Team = Global.team) -> void:
 
 	# field players
-	for player: Player in team.get_field_players():
+	for player: Player in team.get_lineup_players():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		# setup
 		formation_player.set_player(player)

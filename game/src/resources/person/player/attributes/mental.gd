@@ -17,15 +17,15 @@ extends JSONResource
 
 
 func _init(
-	p_aggression: int = 0,
-	p_anticipation: int = 0,
-	p_decisions: int = 0,
-	p_concentration: int = 0,
-	p_teamwork: int = 0,
-	p_vision: int = 0,
-	p_work_rate: int = 0,
-	p_offensive_movement: int = 0,
-	p_marking: int = 0,
+	p_aggression: int = Const.MAX_PRESTIGE,
+	p_anticipation: int = Const.MAX_PRESTIGE,
+	p_decisions: int = Const.MAX_PRESTIGE,
+	p_concentration: int = Const.MAX_PRESTIGE,
+	p_teamwork: int = Const.MAX_PRESTIGE,
+	p_vision: int = Const.MAX_PRESTIGE,
+	p_work_rate: int = Const.MAX_PRESTIGE,
+	p_offensive_movement: int = Const.MAX_PRESTIGE,
+	p_marking: int = Const.MAX_PRESTIGE,
 ) -> void:
 	aggression = p_aggression
 	anticipation = p_anticipation

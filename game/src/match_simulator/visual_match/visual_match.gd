@@ -38,3 +38,9 @@ func update(update_interval: float) -> void:
 
 func half_time() -> void:
 	match_engine.half_time()
+
+
+func full_time() -> void:
+	match_engine.full_time()
+
+

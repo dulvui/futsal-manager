@@ -85,69 +85,70 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="Content" type="VBoxContainer" parent="Main"]
+[node name="Content" type="BoxContainer" parent="Main"]
 layout_mode = 2
 theme_override_constants/separation = 40
-alignment = 1
+vertical = true
 
-[node name="CentralContainer" type="VBoxContainer" parent="Main/Content"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-
-[node name="Buttons" type="HBoxContainer" parent="Main/Content/CentralContainer"]
+[node name="Buttons" type="BoxContainer" parent="Main/Content"]
 layout_mode = 2
 alignment = 1
 
-[node name="Field" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+[node name="Field" type="Button" parent="Main/Content/Buttons"]
 layout_mode = 2
 text = "FIELD"
 
-[node name="Commentary" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+[node name="Commentary" type="Button" parent="Main/Content/Buttons"]
 layout_mode = 2
 text = "COMMENTARY"
 
-[node name="Stats" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+[node name="Stats" type="Button" parent="Main/Content/Buttons"]
 layout_mode = 2
 text = "STATS"
 
-[node name="Events" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+[node name="Events" type="Button" parent="Main/Content/Buttons"]
 layout_mode = 2
 text = "EVENTS"
 
-[node name="Speed" type="HBoxContainer" parent="Main/Content/CentralContainer/Buttons"]
+[node name="Formation" type="Button" parent="Main/Content/Buttons"]
+layout_mode = 2
+text = "FORMATION"
+
+[node name="Pause" type="Button" parent="Main/Content/Buttons"]
+layout_mode = 2
+text = "PAUSE"
+
+[node name="Skip" type="Button" parent="Main/Content/Buttons"]
+layout_mode = 2
+text = "SKIP"
+
+[node name="Speed" type="HBoxContainer" parent="Main/Content/Buttons"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Slower" type="Button" parent="Main/Content/CentralContainer/Buttons/Speed"]
+[node name="Slower" type="Button" parent="Main/Content/Buttons/Speed"]
 layout_mode = 2
 text = "-1"
 
-[node name="SpeedFactor" type="Label" parent="Main/Content/CentralContainer/Buttons/Speed"]
+[node name="SpeedFactor" type="Label" parent="Main/Content/Buttons/Speed"]
 layout_mode = 2
 text = "X2"
 
-[node name="Faster" type="Button" parent="Main/Content/CentralContainer/Buttons/Speed"]
+[node name="Faster" type="Button" parent="Main/Content/Buttons/Speed"]
 layout_mode = 2
 text = "+1"
 
-[node name="Formation" type="Button" parent="Main/Content/CentralContainer/Buttons"]
-layout_mode = 2
-text = "FORMATION"
-
-[node name="Pause" type="Button" parent="Main/Content/CentralContainer/Buttons"]
-layout_mode = 2
-text = "PAUSE"
-
-[node name="Skip" type="Button" parent="Main/Content/CentralContainer/Buttons"]
-layout_mode = 2
-text = "SKIP"
-
-[node name="Dashboard" type="Button" parent="Main/Content/CentralContainer/Buttons"]
+[node name="Dashboard" type="Button" parent="Main/Content/Buttons"]
 visible = false
 layout_mode = 2
 text = "DASHBOARD"
+
+[node name="CentralContainer" type="VBoxContainer" parent="Main/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
 [node name="TopBar" type="HBoxContainer" parent="Main/Content/CentralContainer"]
 layout_mode = 2
@@ -247,7 +248,7 @@ size_flags_horizontal = 3
 text = "44%"
 horizontal_alignment = 1
 
-[node name="PlayersBar" parent="Main/Content/CentralContainer" instance=ExtResource("7_kly0w")]
+[node name="PlayersBar" parent="Main/Content/CentralContainer/BottomBar" instance=ExtResource("7_kly0w")]
 layout_mode = 2
 
 [node name="Goal" type="Label" parent="."]
@@ -282,14 +283,14 @@ autostart = true
 [connection signal="half_time" from="MatchSimulator" to="." method="_on_match_simulator_half_time"]
 [connection signal="match_end" from="MatchSimulator" to="." method="_on_match_simulator_match_end"]
 [connection signal="update_time" from="MatchSimulator" to="." method="_on_match_simulator_update_time"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Field" to="." method="_on_field_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Commentary" to="." method="_on_commentary_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Stats" to="." method="_on_stats_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Events" to="." method="_on_events_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Speed/Slower" to="." method="_on_slower_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Speed/Faster" to="." method="_on_faster_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Formation" to="." method="_on_formation_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Pause" to="." method="_on_pause_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Skip" to="." method="_on_skip_pressed"]
-[connection signal="pressed" from="Main/Content/CentralContainer/Buttons/Dashboard" to="." method="_on_dashboard_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Field" to="." method="_on_field_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Commentary" to="." method="_on_commentary_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Stats" to="." method="_on_stats_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Events" to="." method="_on_events_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Formation" to="." method="_on_formation_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Skip" to="." method="_on_skip_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Speed/Slower" to="." method="_on_slower_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Speed/Faster" to="." method="_on_faster_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Dashboard" to="." method="_on_dashboard_pressed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

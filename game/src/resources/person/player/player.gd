@@ -158,8 +158,8 @@ func get_prestige_stars() -> String:
 	return "*".repeat(stars) + "  ".repeat(spaces)
 
 
-func recover_stamina() -> void:
-	stamina = minf(1, stamina + Const.STAMINA_FACTOR)
+func recover_stamina(factor: int = 1) -> void:
+	stamina = minf(1, stamina + (Const.STAMINA_FACTOR * factor))
 
 
 func consume_stamina() -> void:
@@ -167,6 +167,6 @@ func consume_stamina() -> void:
 	# best case Const.MAX_PRESTIGE * 1
 	# worst case Const.MAX_PRESTIGE * 20
 	var consumation: float = Const.STAMINA_FACTOR * (Const.MAX_PRESTIGE + 1 - attributes.physical.stamina)
-	print("stamina: %d consumtion: %f"%[attributes.physical.stamina, consumation])
+	# print("stamina: %d consumtion: %f"%[attributes.physical.stamina, consumation])
 	stamina = maxf(0, stamina - consumation)
 

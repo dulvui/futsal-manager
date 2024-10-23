@@ -36,16 +36,17 @@ var away_stats: MatchStatistics
 @onready var time_bar: ProgressBar = $Main/Content/CentralContainer/TopBar/TimeBar
 @onready var possess_bar: ProgressBar = $Main/Content/CentralContainer/BottomBar/PossessBar
 
-@onready var pause_button: Button = $Main/Content/CentralContainer/Buttons/Pause
-@onready var faster_button: Button = $Main/Content/CentralContainer/Buttons/Speed/Faster
-@onready var slower_button: Button = $Main/Content/CentralContainer/Buttons/Speed/Slower
-@onready var speed_factor_label: Label = $Main/Content/CentralContainer/Buttons/Speed/SpeedFactor
-@onready var dashboard_button: Button = $Main/Content/CentralContainer/Buttons/Dashboard
-@onready var events_button: Button = $Main/Content/CentralContainer/Buttons/Events
-@onready var stats_button: Button = $Main/Content/CentralContainer/Buttons/Stats
-@onready var field_button: Button = $Main/Content/CentralContainer/Buttons/Field
-@onready var formation_button: Button = $Main/Content/CentralContainer/Buttons/Formation
-@onready var players_bar: PlayersBar = $Main/Content/CentralContainer/PlayersBar
+@onready var pause_button: Button = $Main/Content/Buttons/Pause
+@onready var faster_button: Button = $Main/Content/Buttons/Speed/Faster
+@onready var slower_button: Button = $Main/Content/Buttons/Speed/Slower
+@onready var speed_factor_label: Label = $Main/Content/Buttons/Speed/SpeedFactor
+@onready var dashboard_button: Button = $Main/Content/Buttons/Dashboard
+@onready var events_button: Button = $Main/Content/Buttons/Events
+@onready var stats_button: Button = $Main/Content/Buttons/Stats
+@onready var field_button: Button = $Main/Content/Buttons/Field
+@onready var formation_button: Button = $Main/Content/Buttons/Formation
+
+@onready var players_bar: PlayersBar = $Main/Content/CentralContainer/BottomBar/PlayersBar
 
 
 func _ready() -> void:
@@ -110,7 +111,6 @@ func match_end() -> void:
 	speed_factor_label.hide()
 	pause_button.hide()
 	dashboard_button.show()
-	match_simulator.match_finished()
 
 	#assign result
 	matchz.set_result(home_stats.goals, away_stats.goals)

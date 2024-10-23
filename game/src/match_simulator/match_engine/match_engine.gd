@@ -104,6 +104,7 @@ func simulate(matchz: Match) -> Match:
 	# second half
 	for i: int in Const.HALF_TIME_SECONDS * Const.TICKS_PER_SECOND:
 		update()
+	full_time()
 
 	matchz.home_goals = home_team.stats.goals
 	matchz.away_goals = away_team.stats.goals
@@ -121,6 +122,23 @@ func half_time() -> void:
 	home_team.set_kick_off_formation(true)
 	away_team.set_kick_off_formation(true)
 	ball.set_pos(field.center)
+
+	# stamina recovery 15 minutes
+	var half_time_ticks: int = 15 * Const.TICKS_PER_SECOND * 60
+	for player: SimPlayer in home_team.players:
+		player.recover_stamina(half_time_ticks)
+	for player: SimPlayer in away_team.players:
+		player.recover_stamina(half_time_ticks)
+
+
+func full_time() -> void:
+	# stamina recovery 30 minutes
+	var recovery: int = 30 * Const.TICKS_PER_SECOND * 60
+	for player: SimPlayer in home_team.players:
+		player.recover_stamina(recovery)
+	for player: SimPlayer in away_team.players:
+		player.recover_stamina(recovery)
+
 
 
 func calc_distances() -> void:

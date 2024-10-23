@@ -175,7 +175,7 @@ func bound_field(p_pos: Vector2) -> Vector2:
 	return p_pos
 
 
-func recover_stamina() -> void:
-	player_res.recover_stamina()
+func recover_stamina(factor: int = 1) -> void:
+	player_res.recover_stamina(factor)
 
 
