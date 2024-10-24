@@ -26,12 +26,15 @@ var empty_net: bool
 
 var field: SimField
 
+var clock_running: bool
+
 
 func set_up(p_field: SimField) -> void:
 	field = p_field
 	pos = field.center
 	last_pos = pos
 	state = State.STOP
+	clock_running = false
 
 
 func set_pos(p_pos: Vector2) -> void:
@@ -57,6 +60,9 @@ func move() -> void:
 	last_pos = pos
 	pos += direction * speed * Const.SPEED
 	speed -= DECELERATION
+	
+	# when the ball moves, the clock is always running
+	clock_running = true
 
 
 func is_moving() -> bool:
@@ -95,6 +101,7 @@ func check_field_bounds() -> void:
 		)
 		if intersection:
 			set_pos(intersection)
+			clock_running = false
 			touch_line_out.emit()
 			return
 	if pos.y > field.line_bottom:
@@ -103,6 +110,7 @@ func check_field_bounds() -> void:
 		)
 		if intersection:
 			set_pos(intersection)
+			clock_running = false
 			touch_line_out.emit()
 			return
 
@@ -112,9 +120,11 @@ func check_field_bounds() -> void:
 		var goal_intersection: Variant = field.is_goal(last_pos, pos)
 		if goal_intersection:
 			set_pos(goal_intersection as Vector2)
+			clock_running = false
 			goal.emit()
 			return
 		# corner
+		clock_running = false
 		goal_line_out.emit()
 		return
 

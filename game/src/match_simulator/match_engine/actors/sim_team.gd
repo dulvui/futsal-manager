@@ -48,7 +48,7 @@ func set_up(
 
 	# check if team is player's team
 	simulated = Global.team and Global.team.id != res_team.id
-	print("simlated " + str(simulated))
+	print("simulated team " + str(simulated))
 
 	stats = MatchStatistics.new()
 
@@ -79,7 +79,7 @@ func set_up(
 	set_kick_off_formation()
 
 
-func update() -> void:
+func update(clock_running: bool) -> void:
 	# TODO
 	# recover bench players stamina
 	for player: SimPlayer in players:
@@ -88,7 +88,7 @@ func update() -> void:
 	# auto substitutes/rotations
 
 	# TODO actually check, if game state is not active
-	if change_request:
+	if change_request and not clock_running:
 		all_players = all_players_buffer.duplicate()
 		players = all_players.slice(0, 5)
 		change_request = false

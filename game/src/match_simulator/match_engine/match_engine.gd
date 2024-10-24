@@ -67,8 +67,6 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 
 func update() -> void:
-	ticks += 1
-
 	ball.update()
 
 	calc_distances()
@@ -82,17 +80,22 @@ func update() -> void:
 		away_team.attack()
 	
 	# update teams
-	home_team.update()
-	away_team.update()
-
-	# update posession stats
-	if home_team.has_ball:
-		possession_counter += 1.0
-	home_team.stats.possession = possession_counter / ticks * 100
-	away_team.stats.possession = 100 - home_team.stats.possession
+	home_team.update(ball.clock_running)
+	away_team.update(ball.clock_running)
+	
 
 	if interception_timer > 0:
 		interception_timer -= 1
+
+	if ball.clock_running:
+		ticks += 1
+
+		# update posession stats
+		if home_team.has_ball:
+			possession_counter += 1.0
+		home_team.stats.possession = possession_counter / ticks * 100
+		away_team.stats.possession = 100 - home_team.stats.possession
+
 
 
 func simulate(matchz: Match) -> Match:
@@ -100,12 +103,19 @@ func simulate(matchz: Match) -> Match:
 	set_up(matchz.home, matchz.away, matchz.id)
 
 	# first half
-	for i: int in Const.HALF_TIME_SECONDS * Const.TICKS_PER_SECOND:
+	var time: int = 0
+	while time < Const.HALF_TIME_SECONDS * Const.TICKS_PER_SECOND:
 		update()
+		if ball.clock_running:
+			time += 1
+	
 	half_time()
 	# second half
-	for i: int in Const.HALF_TIME_SECONDS * Const.TICKS_PER_SECOND:
+	time = 0
+	while time < Const.HALF_TIME_SECONDS * Const.TICKS_PER_SECOND:
 		update()
+		if ball.clock_running:
+			time += 1
 	full_time()
 
 	matchz.home_goals = home_team.stats.goals
