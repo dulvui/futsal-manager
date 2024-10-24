@@ -16,13 +16,15 @@ var ticks: int = 0
 var time: int = 0
 var timer: Timer
 
+var match_engine: MatchEngine
+
 @onready var visual_match: VisualMatch = $SubViewportContainer/SubViewport/VisualMatch
 @onready var sub_viewport: SubViewport = $SubViewportContainer/SubViewport
 @onready var camera: Camera2D = $SubViewportContainer/SubViewport/Camera2D
 
 
 func _physics_process(delta: float) -> void:
-	camera.position = camera.position.lerp(visual_match.ball.global_position, delta * CAMERA_SPEED)
+	camera.position = camera.position.lerp(visual_match.visual_ball.global_position, delta * CAMERA_SPEED)
 
 
 func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
@@ -32,9 +34,13 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
+	
+	match_engine = MatchEngine.new()
+	match_engine.set_up(home_team, away_team, match_seed)
 
 	# set up visual match
-	visual_match.set_up(home_team, away_team, match_seed, timer.wait_time)
+	# get colors
+	visual_match.set_up(match_engine, timer.wait_time)
 
 	# adjust sub viewport to field size + borders
 	sub_viewport.size = visual_match.visual_field.field.size
@@ -73,6 +79,7 @@ func start_match() -> void:
 
 
 func _on_timer_timeout() -> void:
+	match_engine.update()
 	visual_match.update(timer.wait_time)
 	
 	ticks += 1
@@ -89,7 +96,6 @@ func _update_time() -> void:
 	if time == Const.HALF_TIME_SECONDS:
 		timer.paused = true
 		half_time.emit()
-		visual_match.half_time()
 	elif time == Const.HALF_TIME_SECONDS * 2:
 		timer.stop()
 		match_end.emit()

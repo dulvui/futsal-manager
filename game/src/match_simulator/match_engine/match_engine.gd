@@ -4,6 +4,10 @@
 
 class_name MatchEngine
 
+
+signal home_player_change
+signal away_player_change
+
 const INTERCEPTION_TIMER_START: int = 2
 
 var field: SimField
@@ -58,10 +62,12 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	home_team = SimTeam.new()
 	home_team.set_up(p_home_team, field, ball, home_plays_left, home_has_ball)
 	home_team.interception.connect(_on_home_team_interception)
+	home_team.player_change.connect(func() -> void: home_player_change.emit())
 
 	away_team = SimTeam.new()
 	away_team.set_up(p_away_team, field, ball, not home_plays_left, not home_has_ball)
 	away_team.interception.connect(_on_away_team_interception)
+	away_team.player_change.connect(func() -> void: away_player_change.emit())
 
 	interception_timer = 0
 

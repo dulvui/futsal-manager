@@ -5,42 +5,25 @@
 class_name VisualMatch
 extends Node2D
 
-var match_engine: MatchEngine
 
 @onready var home_team: VisualTeam = $VisualTeamHome
 @onready var away_team: VisualTeam = $VisualTeamAway
-@onready var ball: VisualBall = $VisualBall
+@onready var visual_ball: VisualBall = $VisualBall
 @onready var visual_field: VisualField = $VisualField
 
 
-func set_up(p_home_team: Team, p_away_team: Team, match_seed: int, update_interval: float) -> void:
-	match_engine = MatchEngine.new()
-	match_engine.set_up(p_home_team, p_away_team, match_seed)
-	ball.set_up(match_engine.ball, update_interval)
-
-	# get colors
-	var home_color: Color = p_home_team.get_home_color()
-	var away_color: Color = p_away_team.get_away_color(home_color)
-	home_team.set_up(match_engine.home_team, ball, home_color, update_interval)
-	away_team.set_up(match_engine.away_team, ball, away_color, update_interval)
-
+func set_up(match_engine: MatchEngine, update_interval: float) -> void:
 	visual_field.set_up(match_engine.field)
+	visual_ball.set_up(match_engine.ball, update_interval)
+	
+	var home_color: Color = match_engine.home_team.res_team.get_home_color()
+	var away_color: Color = match_engine.away_team.res_team.get_away_color(home_color)
+	home_team.set_up(match_engine.home_team, match_engine.ball, home_color, update_interval)
+	away_team.set_up(match_engine.away_team, match_engine.ball, away_color, update_interval)
 
 
 func update(update_interval: float) -> void:
-	match_engine.update()
-
 	# update time intervals for position interpolations
-	ball.update(update_interval)
+	visual_ball.update(update_interval)
 	home_team.update(update_interval)
 	away_team.update(update_interval)
-
-
-func half_time() -> void:
-	match_engine.half_time()
-
-
-func full_time() -> void:
-	match_engine.full_time()
-
-

@@ -85,8 +85,8 @@ func _ready() -> void:
 	print("match speed_factor" + str(Global.speed_factor))
 
 	# to easier access stats
-	home_stats = match_simulator.visual_match.match_engine.home_team.stats
-	away_stats = match_simulator.visual_match.match_engine.away_team.stats
+	home_stats = match_simulator.match_engine.home_team.stats
+	away_stats = match_simulator.match_engine.away_team.stats
 	
 	last_active_view = match_simulator
 	last_active_view.show()
@@ -224,5 +224,5 @@ func _on_match_simulator_action_message(message: String) -> void:
 
 
 func _on_players_bar_change_request(team: Team, p1:Player, p2:Player) -> void:
-	match_simulator.visual_match.match_engine.change_players_request(team, p1, p2)
+	match_simulator.match_engine.change_players_request(team, p1, p2)
 

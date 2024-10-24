@@ -5,6 +5,7 @@
 class_name SimTeam
 
 signal interception
+signal player_change
 
 var res_team: Team
 
@@ -81,16 +82,16 @@ func set_up(
 
 func update(clock_running: bool) -> void:
 	# TODO
+	# check injuries
+
 	# recover bench players stamina
 	for player: SimPlayer in players:
 		player.recover_stamina()
-	# check injuries
-	# auto substitutes/rotations
 
-	# TODO actually check, if game state is not active
 	if change_request and not clock_running:
 		all_players = all_players_buffer.duplicate()
 		players = all_players.slice(0, 5)
+		player_change.emit()
 		change_request = false
 
 
