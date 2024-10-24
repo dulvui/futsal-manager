@@ -172,12 +172,3 @@ func is_goal(ball_last_pos: Vector2, ball_pos: Vector2) -> Variant:
 	return null
 
 
-func get_goalkeeper_pos(plays_left: bool) -> Vector2:
-	var pos: Vector2
-	if plays_left:
-		pos = goal_left
-	else:
-		pos = goal_right
-	# move some pixels away from goal line
-	pos.x = abs(pos.x - 5)
-	return pos

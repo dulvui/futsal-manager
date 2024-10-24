@@ -5,7 +5,7 @@
 class_name VisualGoalkeeper
 extends Node2D
 
-var sim_goalkeeper: SimGoalkeeper
+var sim_player: SimPlayer
 var visual_ball: VisualBall
 
 var last_update_time: float
@@ -23,26 +23,26 @@ func _physics_process(delta: float) -> void:
 	if not Global.match_paused:
 		last_update_time += delta
 		factor = last_update_time / update_interval
-		position = last_pos.lerp(sim_goalkeeper.pos, factor)
+		position = last_pos.lerp(sim_player.pos, factor)
 		sprites.look_at(visual_ball.position)
 
 
 func set_up(
-	p_sim_goalkeeper: SimGoalkeeper,
+	p_sim_player: SimPlayer,
 	p_visual_ball: VisualBall,
 	team_color: Color,
 	p_update_interval: float
 ) -> void:
-	sim_goalkeeper = p_sim_goalkeeper
+	sim_player = p_sim_player
 	visual_ball = p_visual_ball
 
 	update_interval = p_update_interval
 	last_update_time = 0.0
 	factor = 1.0
 
-	position = sim_goalkeeper.pos
+	position = sim_player.pos
 	body.modulate = team_color.darkened(0.5)
-	label.text = str(sim_goalkeeper.player_res.nr) + " " + (sim_goalkeeper.player_res.surname)
+	label.text = str(sim_player.player_res.nr) + " " + (sim_player.player_res.surname)
 
 
 func update(p_update_interval: float) -> void:

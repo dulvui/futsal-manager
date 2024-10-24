@@ -63,7 +63,9 @@ func set_variation(p_variation: Variations) -> void:
 func get_start_pos(field_size: Vector2, index: int, left_side: bool) -> Vector2:
 	var pos: Vector2 = Vector2.ZERO
 
-	if index < defense:
+	if index < goalkeeper:
+		pos = Vector2(field_size.x / 8, field_size.y / 2)
+	elif index < defense:
 		pos = Vector2(field_size.x / 4, field_size.y / defense * index)
 		# centre position and move slightly towards own half (field_size.x / 20)
 		pos += Vector2(-field_size.x / 20, field_size.y / defense / 2)
@@ -83,3 +85,5 @@ func get_start_pos(field_size: Vector2, index: int, left_side: bool) -> Vector2:
 		pos = field_size - pos
 
 	return pos
+
+

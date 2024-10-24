@@ -19,7 +19,9 @@ var ticks: int
 var post_bottom: Vector2
 var post_top: Vector2
 var players: Array[SimPlayer]
-var goalkeeper: SimGoalkeeper
+
+var goalkeeper: SimPlayer
+
 var shoot_trajectory_polygon: PackedVector2Array
 
 var nearest_player: SimPlayer
@@ -173,10 +175,10 @@ func calc_free_shoot_trajectory() -> void:
 	ball.players_in_shoot_trajectory = 0
 
 	if home_team.has_ball:
-		goalkeeper = away_team.goalkeeper
+		goalkeeper = away_team.players[0]
 		players = away_team.players
 	else:
-		goalkeeper = home_team.goalkeeper
+		goalkeeper = home_team.players[0]
 		players = home_team.players
 
 	if left_is_active_goal():
@@ -267,11 +269,11 @@ func _on_sim_ball_goal() -> void:
 func set_goalkeeper_ball(home: bool) -> void:
 	if home:
 		home_possess()
-		goalkeeper = home_team.goalkeeper
+		goalkeeper = home_team.players[0]
 	else:
 		away_possess()
-		goalkeeper = away_team.goalkeeper
-	goalkeeper.kick_in()
+		goalkeeper = away_team.players[0]
+	goalkeeper.short_pass.emit()
 
 
 func set_corner(home: bool) -> void:

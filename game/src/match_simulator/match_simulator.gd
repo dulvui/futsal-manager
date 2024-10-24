@@ -45,15 +45,16 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 
 func _on_timer_timeout() -> void:
 	visual_match.update(timer.wait_time)
-
+	
 	ticks += 1
+	# only update tiem on clock, after TICKS_PER_SECOND passed
 	if ticks == Const.TICKS_PER_SECOND:
 		ticks = 0
-		time += 1
 		_update_time()
 
 
 func _update_time() -> void:
+	time += 1
 	update_time.emit()
 	# check half/end time
 	if time == Const.HALF_TIME_SECONDS:
