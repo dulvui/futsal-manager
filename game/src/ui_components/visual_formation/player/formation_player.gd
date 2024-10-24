@@ -5,7 +5,7 @@
 class_name VisualFormationPlayer
 extends Control
 
-signal change_player
+signal select
 
 var color: Color
 var player: Player
@@ -43,5 +43,6 @@ func set_player(p_player: Player, team: Team = null) -> void:
 			color = Color.DARK_RED
 
 
-func _on_change_pressed() -> void:
-	change_player.emit()
+func _on_select_pressed() -> void:
+	select.emit()
+

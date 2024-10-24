@@ -43,29 +43,6 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 	Global.match_paused = false
 
 
-func _on_timer_timeout() -> void:
-	visual_match.update(timer.wait_time)
-	
-	ticks += 1
-	# only update tiem on clock, after TICKS_PER_SECOND passed
-	if ticks == Const.TICKS_PER_SECOND:
-		ticks = 0
-		_update_time()
-
-
-func _update_time() -> void:
-	time += 1
-	update_time.emit()
-	# check half/end time
-	if time == Const.HALF_TIME_SECONDS:
-		timer.paused = true
-		half_time.emit()
-		visual_match.half_time()
-	elif time == Const.HALF_TIME_SECONDS * 2:
-		timer.stop()
-		match_end.emit()
-
-
 func pause_toggle() -> bool:
 	timer.paused = not timer.paused
 	Global.match_paused = timer.paused
@@ -93,3 +70,28 @@ func set_time() -> void:
 func start_match() -> void:
 	action_message.emit("match started")
 	timer.start()
+
+
+func _on_timer_timeout() -> void:
+	visual_match.update(timer.wait_time)
+	
+	ticks += 1
+	# only update tiem on clock, after TICKS_PER_SECOND passed
+	if ticks == Const.TICKS_PER_SECOND:
+		ticks = 0
+		_update_time()
+
+
+func _update_time() -> void:
+	time += 1
+	update_time.emit()
+	# check half/end time
+	if time == Const.HALF_TIME_SECONDS:
+		timer.paused = true
+		half_time.emit()
+		visual_match.half_time()
+	elif time == Const.HALF_TIME_SECONDS * 2:
+		timer.stop()
+		match_end.emit()
+
+

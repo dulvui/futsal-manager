@@ -13,6 +13,7 @@ var players: Array[SimPlayer]
 var all_players: Array[SimPlayer]
 # to apply changes only when game is ready
 var all_players_buffer: Array[SimPlayer]
+var change_request: bool
 
 var ball: SimBall
 var field: SimField
@@ -43,9 +44,11 @@ func set_up(
 	left_half = p_left_half
 	simulated = p_simulated
 
+	change_request = false
+
 	# check if team is player's team
 	simulated = Global.team and Global.team.id != res_team.id
-	print(simulated)
+	print("simlated " + str(simulated))
 
 	stats = MatchStatistics.new()
 
@@ -68,6 +71,7 @@ func set_up(
 	
 	# copy field players in own array, for easier access
 	players = all_players.slice(0, 5)
+	all_players_buffer = all_players.duplicate()
 	
 	# set goalkeeper flag
 	players[0].is_goalkeeper = true
@@ -78,11 +82,16 @@ func set_up(
 func update() -> void:
 	# TODO
 	# recover bench players stamina
-	for player: SimPlayer in players.slice(5):
+	for player: SimPlayer in players:
 		player.recover_stamina()
 	# check injuries
 	# auto substitutes/rotations
-	pass
+
+	# TODO actually check, if game state is not active
+	if change_request:
+		all_players = all_players_buffer.duplicate()
+		players = all_players.slice(0, 5)
+		change_request = false
 
 
 func defend(other_players: Array[SimPlayer]) -> void:
@@ -169,11 +178,6 @@ func set_kick_off_formation(change_field_side: bool = false) -> void:
 		players[3].set_pos(field.center + Vector2(0, 100))
 
 
-func _on_player_interception() -> void:
-	print("interception")
-	interception.emit()
-
-
 func pass_to_random_player(passing_player: SimPlayer = null) -> void:
 	var random_player: SimPlayer
 	if passing_player:
@@ -213,11 +217,31 @@ func shoot_on_goal(power: float) -> void:
 	#stats.shots_on_target += 1
 
 
-func _sort_distance_to_ball(a: SimPlayer, b: SimPlayer) -> bool:
-	return a.distance_to_ball < b.distance_to_ball
+func change_players_request(p0: SimPlayer, p1: SimPlayer) -> void:
+	# swap player positions in players buffer
+	var index_0: int = all_players_buffer.find(p0)
+	var index_1: int = all_players_buffer.find(p1)
+	all_players_buffer.erase(p0)
+	all_players_buffer.erase(p1)
+	all_players_buffer.insert(index_1, p0)
+	all_players_buffer.insert(index_0, p1)
+	# set change reqeust flag, only if actual changes are possbile
+	change_request = all_players != all_players_buffer
+	print("change request: " + str(change_request))
 
 
 func nearest_player_to_ball() -> SimPlayer:
 	var players_copy: Array[SimPlayer] = players.duplicate()
 	players_copy.sort_custom(_sort_distance_to_ball)
 	return players_copy[0]
+
+
+func _sort_distance_to_ball(a: SimPlayer, b: SimPlayer) -> bool:
+	return a.distance_to_ball < b.distance_to_ball
+
+
+func _on_player_interception() -> void:
+	print("interception")
+	interception.emit()
+
+

@@ -221,3 +221,8 @@ func _on_match_simulator_action_message(message: String) -> void:
 	var new_line: Label = Label.new()
 	new_line.text = time_label.text + " " + message
 	comments.add_child(new_line)
+
+
+func _on_players_bar_change_request(team: Team, p1:Player, p2:Player) -> void:
+	match_simulator.visual_match.match_engine.change_players_request(team, p1, p2)
+

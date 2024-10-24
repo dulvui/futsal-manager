@@ -142,6 +142,20 @@ func full_time() -> void:
 		player.recover_stamina(recovery)
 
 
+func change_players_request(team: Team, p1: Player, p2: Player) -> void:
+	var sim_team: SimTeam = away_team
+	if home_team.res_team == team:
+		sim_team = home_team
+
+	var sim_players: Array[SimPlayer] = sim_team.all_players.filter(
+		func(s: SimPlayer) -> bool:
+			return s.player_res == p1 or s.player_res == p2
+	)
+	if sim_players.size() != 2:
+		print("errore while change request, corresponding simplayers not found")
+		return
+	sim_team.change_players_request(sim_players[0], sim_players[1])
+
 
 func calc_distances() -> void:
 	for player in home_team.players + away_team.players:
@@ -214,6 +228,79 @@ func left_is_active_goal() -> bool:
 	return false
 
 
+func set_goalkeeper_ball(home: bool) -> void:
+	if home:
+		home_possess()
+		goalkeeper = home_team.players[0]
+	else:
+		away_possess()
+		goalkeeper = away_team.players[0]
+	goalkeeper.short_pass.emit()
+
+
+func set_corner(home: bool) -> void:
+	if home:
+		home_possess()
+		nearest_player = home_team.nearest_player_to_ball()
+		home_team.stats.corners += 1
+	else:
+		away_possess()
+		nearest_player = away_team.nearest_player_to_ball()
+		away_team.stats.corners += 1
+	# set ball pos
+	if ball.pos.y < field.center.y:
+		# top
+		if ball.pos.x < field.center.x:
+			# left
+			ball.set_pos(field.top_left)
+		else:
+			# right
+			ball.set_pos(field.top_right)
+	else:
+		# bottom
+		if ball.pos.x < field.center.x:
+			# left
+			ball.set_pos(field.bottom_left)
+		else:
+			# right
+			ball.set_pos(field.bottom_right)
+
+	nearest_player.set_pos(ball.pos)
+	nearest_player.state = SimPlayer.State.PASSING
+
+
+func home_possess() -> void:
+	home_team.has_ball = true
+	away_team.has_ball = false
+
+
+func away_possess() -> void:
+	away_team.has_ball = true
+	home_team.has_ball = false
+
+
+func _on_home_team_possess() -> void:
+	home_possess()
+
+
+func _on_away_team_possess() -> void:
+	away_possess()
+
+
+func _on_home_team_interception() -> void:
+	if interception_timer > 0:
+		return
+	interception_timer = INTERCEPTION_TIMER_START
+	home_possess()
+
+
+func _on_away_team_interception() -> void:
+	if interception_timer > 0:
+		return
+	interception_timer = INTERCEPTION_TIMER_START
+	away_possess()
+
+
 func _on_sim_ball_goal_line_out() -> void:
 	if (
 		(home_team.has_ball and home_plays_left and ball.pos.x < 600)
@@ -266,74 +353,3 @@ func _on_sim_ball_goal() -> void:
 	#print("%s : %s"%[home_team.stats.goals, away_team.stats.goals])
 
 
-func set_goalkeeper_ball(home: bool) -> void:
-	if home:
-		home_possess()
-		goalkeeper = home_team.players[0]
-	else:
-		away_possess()
-		goalkeeper = away_team.players[0]
-	goalkeeper.short_pass.emit()
-
-
-func set_corner(home: bool) -> void:
-	if home:
-		home_possess()
-		nearest_player = home_team.nearest_player_to_ball()
-		home_team.stats.corners += 1
-	else:
-		away_possess()
-		nearest_player = away_team.nearest_player_to_ball()
-		away_team.stats.corners += 1
-	# set ball pos
-	if ball.pos.y < field.center.y:
-		# top
-		if ball.pos.x < field.center.x:
-			# left
-			ball.set_pos(field.top_left)
-		else:
-			# right
-			ball.set_pos(field.top_right)
-	else:
-		# bottom
-		if ball.pos.x < field.center.x:
-			# left
-			ball.set_pos(field.bottom_left)
-		else:
-			# right
-			ball.set_pos(field.bottom_right)
-
-	nearest_player.set_pos(ball.pos)
-	nearest_player.state = SimPlayer.State.PASSING
-
-
-func _on_home_team_possess() -> void:
-	home_possess()
-
-
-func _on_away_team_possess() -> void:
-	away_possess()
-
-
-func _on_home_team_interception() -> void:
-	if interception_timer > 0:
-		return
-	interception_timer = INTERCEPTION_TIMER_START
-	home_possess()
-
-
-func _on_away_team_interception() -> void:
-	if interception_timer > 0:
-		return
-	interception_timer = INTERCEPTION_TIMER_START
-	away_possess()
-
-
-func home_possess() -> void:
-	home_team.has_ball = true
-	away_team.has_ball = false
-
-
-func away_possess() -> void:
-	away_team.has_ball = true
-	home_team.has_ball = false

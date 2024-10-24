@@ -15,17 +15,17 @@ var change_players: Array[int] = []
 var team: Team
 var only_lineup: bool
 
-@onready var players: VBoxContainer = $LineUp/Field/Players
+@onready var players: VBoxContainer = $LineUp
 @onready var subs: VBoxContainer = $Subs/List
 @onready var formation_select: SwitchOptionButton = $Tactics/FormationSelect
 @onready var tactic_select_offense: SwitchOptionButton = $Tactics/TacticSelectOffense
 @onready var tactic_offense_intensity: HSlider = $Tactics/TacticOffenseIntensity
 @onready var tactic_select_pressing: SwitchOptionButton = $Tactics/TacticSelectPressing
 @onready var tactic_select_marking: SwitchOptionButton = $Tactics/TacticSelectMarking
-@onready var goalkeeper: HBoxContainer = $LineUp/Field/Players/Goalkeeper
-@onready var defense: HBoxContainer = $LineUp/Field/Players/Defense
-@onready var center: HBoxContainer = $LineUp/Field/Players/Center
-@onready var attack: HBoxContainer = $LineUp/Field/Players/Attack
+@onready var goalkeeper: HBoxContainer = $LineUp/Goalkeeper
+@onready var defense: HBoxContainer = $LineUp/Defense
+@onready var center: HBoxContainer = $LineUp/Center
+@onready var attack: HBoxContainer = $LineUp/Attack
 
 
 func _ready() -> void:
@@ -77,7 +77,7 @@ func _set_players() -> void:
 	if team.formation.goalkeeper > 0:
 		var formation_goal_keeper: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_goal_keeper.set_player(team.get_goalkeeper(), team)
-		formation_goal_keeper.change_player.connect(
+		formation_goal_keeper.select.connect(
 			_on_select_player.bind(formation_goal_keeper.player.id)
 		)
 		goalkeeper.add_child(formation_goal_keeper)
@@ -87,7 +87,7 @@ func _set_players() -> void:
 	for i: int in team.formation.defense:
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
+		formation_player.select.connect(_on_select_player.bind(formation_player.player.id))
 		defense.add_child(formation_player)
 		pos_count += 1
 
@@ -95,7 +95,7 @@ func _set_players() -> void:
 	for i: int in team.formation.center:
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
+		formation_player.select.connect(_on_select_player.bind(formation_player.player.id))
 		center.add_child(formation_player)
 		pos_count += 1
 
@@ -103,7 +103,7 @@ func _set_players() -> void:
 	for i: int in team.formation.attack:
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
+		formation_player.select.connect(_on_select_player.bind(formation_player.player.id))
 		attack.add_child(formation_player)
 		pos_count += 1
 
@@ -116,7 +116,7 @@ func _set_players() -> void:
 	for i: int in team.get_sub_players().size():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(team.get_lineup_player(pos_count), team)
-		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
+		formation_player.select.connect(_on_select_player.bind(formation_player.player.id))
 		subs.add_child(formation_player)
 		pos_count += 1
 
@@ -130,7 +130,7 @@ func _set_players() -> void:
 	for p: Player in team.get_non_lineup_players():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		formation_player.set_player(p, team)
-		formation_player.change_player.connect(_on_select_player.bind(formation_player.player.id))
+		formation_player.select.connect(_on_select_player.bind(formation_player.player.id))
 		subs.add_child(formation_player)
 
 
