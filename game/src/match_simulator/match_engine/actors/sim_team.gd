@@ -5,7 +5,7 @@
 class_name SimTeam
 
 signal interception
-signal player_change
+signal player_changed
 
 var res_team: Team
 
@@ -80,7 +80,7 @@ func set_up(
 	set_kick_off_formation()
 
 
-func update(clock_running: bool) -> void:
+func update() -> void:
 	# TODO
 	# check injuries
 
@@ -88,10 +88,12 @@ func update(clock_running: bool) -> void:
 	for player: SimPlayer in players:
 		player.recover_stamina()
 
-	if change_request and not clock_running:
+
+func check_changes() -> void:
+	if change_request:
 		all_players = all_players_buffer.duplicate()
 		players = all_players.slice(0, 5)
-		player_change.emit()
+		player_changed.emit()
 		change_request = false
 
 
@@ -220,12 +222,14 @@ func shoot_on_goal(power: float) -> void:
 
 func change_players_request(p0: SimPlayer, p1: SimPlayer) -> void:
 	# swap player positions in players buffer
-	var index_0: int = all_players_buffer.find(p0)
-	var index_1: int = all_players_buffer.find(p1)
-	all_players_buffer.erase(p0)
-	all_players_buffer.erase(p1)
-	all_players_buffer.insert(index_1, p0)
-	all_players_buffer.insert(index_0, p1)
+	var index0: int = all_players_buffer.find(p0)
+	var index1: int = all_players_buffer.find(p1)
+	all_players_buffer[index0] = p1
+	all_players_buffer[index1] = p0
+	# all_players_buffer.erase(p0)
+	# all_players_buffer.insert(index_0, p1)
+	# all_players_buffer.erase(p1)
+	# all_players_buffer.insert(index_1, p0)
 	# set change reqeust flag, only if actual changes are possbile
 	change_request = all_players != all_players_buffer
 	print("change request: " + str(change_request))

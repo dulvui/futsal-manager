@@ -50,8 +50,8 @@ func set_pos_xy(x: float, y: float) -> void:
 
 func update() -> void:
 	if speed > 0:
-		check_field_bounds()
 		move()
+		check_field_bounds()
 	else:
 		speed = 0
 

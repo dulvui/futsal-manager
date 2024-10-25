@@ -10,12 +10,3 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ehtta")
 metadata/_edit_use_anchors_ = true
-
-[node name="Players" type="HBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="VSeparator" type="VSeparator" parent="."]
-layout_mode = 2
-
-[node name="Bench" type="HBoxContainer" parent="."]
-layout_mode = 2

@@ -38,6 +38,16 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 	match_engine = MatchEngine.new()
 	match_engine.set_up(home_team, away_team, match_seed)
 
+	# connect change players signals to visual teams
+	match_engine.home_team.player_changed.connect(
+		func() -> void:
+			visual_match.home_team.change_players(match_engine.home_team)
+	)
+	match_engine.away_team.player_changed.connect(
+		func() -> void:
+			visual_match.away_team.change_players(match_engine.away_team)
+	)
+
 	# set up visual match
 	# get colors
 	visual_match.set_up(match_engine, timer.wait_time)
@@ -99,5 +109,4 @@ func _update_time() -> void:
 	elif time == Const.HALF_TIME_SECONDS * 2:
 		timer.stop()
 		match_end.emit()
-
 

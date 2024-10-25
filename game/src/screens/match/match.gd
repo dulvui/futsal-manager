@@ -74,7 +74,7 @@ func _ready() -> void:
 	players_bar.set_up()
 
 	match_simulator.set_up(home_team, away_team, matchz.id)
-
+	
 	# set colors
 	home_color.color = home_team.get_home_color()
 	away_color.color = away_team.get_away_color(home_color.color)
