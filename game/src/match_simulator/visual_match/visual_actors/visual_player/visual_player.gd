@@ -6,7 +6,7 @@ class_name VisualPlayer
 extends Node2D
 
 var sim_player: SimPlayer
-var sim_ball: SimBall
+var ball: VisualBall
 
 var last_update_time: float
 var update_interval: float
@@ -25,17 +25,17 @@ func _physics_process(delta: float) -> void:
 		last_update_time += delta
 		factor = last_update_time / update_interval
 		position = last_pos.lerp(sim_player.pos, factor)
-		sprites.look_at(sim_ball.pos)
+		sprites.look_at(ball.position)
 
 
 func set_up(
 	p_sim_player: SimPlayer,
-	p_sim_ball: SimBall,
+	p_ball: VisualBall,
 	shirt_color: Color,
 	p_update_interval: float,
 ) -> void:
 	sim_player = p_sim_player
-	sim_ball = p_sim_ball
+	ball = p_ball
 	update_interval = p_update_interval
 	last_update_time = 0.0
 	factor = 1.0

@@ -14,13 +14,13 @@ extends Node2D
 
 
 func set_up(
-	sim_team: SimTeam, sim_ball: SimBall, shirt_color: Color, update_interval: float
+	sim_team: SimTeam, visual_ball: VisualBall, shirt_color: Color, update_interval: float
 ) -> void:
-	player1.set_up(sim_team.players[0], sim_ball, shirt_color.lightened(0.4), update_interval)
-	player2.set_up(sim_team.players[1], sim_ball, shirt_color, update_interval)
-	player3.set_up(sim_team.players[2], sim_ball, shirt_color, update_interval)
-	player4.set_up(sim_team.players[3], sim_ball, shirt_color, update_interval)
-	player5.set_up(sim_team.players[4], sim_ball, shirt_color, update_interval)
+	player1.set_up(sim_team.players[0], visual_ball, shirt_color.lightened(0.4), update_interval)
+	player2.set_up(sim_team.players[1], visual_ball, shirt_color, update_interval)
+	player3.set_up(sim_team.players[2], visual_ball, shirt_color, update_interval)
+	player4.set_up(sim_team.players[3], visual_ball, shirt_color, update_interval)
+	player5.set_up(sim_team.players[4], visual_ball, shirt_color, update_interval)
 
 
 func update(update_interval: float) -> void:
