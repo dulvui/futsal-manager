@@ -24,7 +24,6 @@ var away_stats: MatchStatistics
 @onready var comments: VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
 @onready var events: MatchEvents = $Main/Content/CentralContainer/MainBar/Events
 @onready var formation: VisualFormation = $Main/Content/CentralContainer/MainBar/Formation
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var time_label: Label = $Main/Content/CentralContainer/TopBar/Time
 @onready var result_label: Label = $Main/Content/CentralContainer/TopBar/Result
 @onready var home_color: ColorRect = $Main/Content/CentralContainer/TopBar/HomeColor
