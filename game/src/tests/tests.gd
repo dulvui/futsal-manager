@@ -46,6 +46,15 @@ static func create_mock_team() -> Team:
 		team.players.append(player)
 		# assign player ids for lineup
 		team.lineup_player_ids.append(player.id)
+	
+	# add 8 more non lineup players
+	for i: int in range(Const.LINEUP_PLAYERS_AMOUNT, Const.LINEUP_PLAYERS_AMOUNT + 8):
+		var player: Player = Player.new()
+		player.name = "Mock"
+		player.surname = "Player"
+		player.nr = i
+
+		team.players.append(player)
 
 	return team
 
