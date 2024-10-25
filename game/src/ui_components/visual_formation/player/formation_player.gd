@@ -31,16 +31,16 @@ func _process(_delta: float) -> void:
 		stamina.value = player.stamina
 
 
-func set_player(p_player: Player, team: Team = null) -> void:
+func set_player(p_player: Player, _team: Team = null) -> void:
 	player = p_player
 
-	if team:
-		if team.is_lineup_player(player):
-			color = Color.PALE_GREEN
-		elif team.is_sub_player(player):
-			color = Color.SKY_BLUE
-		else:
-			color = Color.DARK_RED
+	# if team:
+	# 	if team.is_lineup_player(player):
+	# 		color = Color.PALE_GREEN
+	# 	elif team.is_sub_player(player):
+	# 		color = Color.SKY_BLUE
+	# 	else:
+	# 		color = Color.DARK_RED
 
 
 func _on_select_pressed() -> void:

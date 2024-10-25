@@ -91,19 +91,6 @@ func _ready() -> void:
 	last_active_view.show()
 
 
-
-func _on_match_simulator_update_time() -> void:
-	stats.update_stats(home_stats, away_stats)
-	time_label.text = "%02d:%02d" % [int(match_simulator.time) / 60, int(match_simulator.time) % 60]
-
-	time_bar.value = match_simulator.time
-	possess_bar.value = home_stats.possession
-
-	home_possession.text = str(home_stats.possession) + " %"
-	away_possession.text = str(away_stats.possession) + " %"
-	result_label.text = "%d - %d" % [home_stats.goals, away_stats.goals]
-
-
 func match_end() -> void:
 	faster_button.hide()
 	slower_button.hide()
@@ -149,10 +136,6 @@ func _on_formation_pressed() -> void:
 	formation.show()
 	match_simulator.pause()
 	pause_button.text = tr("CONTINUE")
-
-
-func _on_formation_change() -> void:
-	print(" TODO change formation in match engine")
 
 
 func _hide_views() -> void:
@@ -220,6 +203,22 @@ func _on_match_simulator_action_message(message: String) -> void:
 	var new_line: Label = Label.new()
 	new_line.text = time_label.text + " " + message
 	comments.add_child(new_line)
+
+
+func _on_match_simulator_update_time() -> void:
+	stats.update_stats(home_stats, away_stats)
+	time_label.text = "%02d:%02d" % [int(match_simulator.time) / 60, int(match_simulator.time) % 60]
+
+	time_bar.value = match_simulator.time
+	possess_bar.value = home_stats.possession
+
+	home_possession.text = str(home_stats.possession) + " %"
+	away_possession.text = str(away_stats.possession) + " %"
+	result_label.text = "%d - %d" % [home_stats.goals, away_stats.goals]
+
+
+func _on_formation_change_request(team:Team, p1:Player, p2:Player) -> void:
+	match_simulator.match_engine.change_players_request(team, p1, p2)
 
 
 func _on_players_bar_change_request(team: Team, p1:Player, p2:Player) -> void:

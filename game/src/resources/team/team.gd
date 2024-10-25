@@ -7,11 +7,10 @@ extends JSONResource
 
 @export var id: int
 @export var name: String
-# 0 to 4 active, 5 to x subs
-@export var lineup_player_ids: Array[int]
 @export var formation: Formation
 @export var budget: int
 @export var salary_budget: int
+# 0 to 4 active, 5 to 12 subs, 12 to x rest
 @export var players: Array[Player]
 
 @export var staff: Staff
@@ -25,7 +24,6 @@ extends JSONResource
 func _init(
 	p_id: int = IdUtil.next_id(IdUtil.Types.TEAM),
 	p_players: Array[Player] = [],
-	p_lineup_player_ids: Array[int] = [],
 	p_name: String = "",
 	p_budget: int = 0,
 	p_salary_budget: int = 0,
@@ -45,94 +43,46 @@ func _init(
 	colors = p_colors
 	formation = p_formation
 	board_requests = p_board_requests
-	lineup_player_ids = p_lineup_player_ids
-
-
-func create_stadium(_name: String, capacity: int, year_built: int) -> void:
-	stadium = Stadium.new()
-	stadium.name = _name
-	stadium.capacity = capacity
-	stadium.year_built = year_built
-
 
 func get_goalkeeper() -> Player:
-	for player in players:
-		if player.id == lineup_player_ids[0]:
-			return player
-	return null
+	return players[0]
 
 
 func get_starting_players() -> Array[Player]:
-	var field_players: Array[Player] = []
-	for player in players:
-		if player.id in lineup_player_ids.slice(0, 5):
-			field_players.append(player)
-	return field_players
+	return players.slice(0, 5)
 
 
 func get_sub_players() -> Array[Player]:
-	var sub: Array[Player] = []
-	for player in players:
-		if player.id in lineup_player_ids.slice(5, Const.LINEUP_PLAYERS_AMOUNT):
-			sub.append(player)
-	return sub
+	return players.slice(5, Const.LINEUP_PLAYERS_AMOUNT)
 
 
 func get_lineup_players() -> Array[Player]:
-	var lineup: Array[Player] = []
-	for player in players:
-		if player.id in lineup_player_ids:
-			lineup.append(player)
-	return lineup
+	return players.slice(0, Const.LINEUP_PLAYERS_AMOUNT)
 
 
 func get_non_lineup_players() -> Array[Player]:
-	var non_lineup: Array[Player] = []
-	for player in players:
-		if player.id not in lineup_player_ids:
-			non_lineup.append(player)
-	return non_lineup
-
-
-func get_lineup_player(index: int) -> Player:
-	for player in players:
-		if player.id == lineup_player_ids[index]:
-			return player
-	return null
+	return players.slice(Const.LINEUP_PLAYERS_AMOUNT, players.size())
 
 
 func is_lineup_player(player: Player) -> bool:
-	var index: int = lineup_player_ids.find(player.id)
+	var index: int = players.find(player.id)
 	return index >= 0 and index <= 4
 
 
 func is_sub_player(player: Player) -> bool:
-	var index: int = lineup_player_ids.find(player.id)
+	var index: int = players.find(player.id)
 	return index > 4 and index < Const.LINEUP_PLAYERS_AMOUNT
 
 
-func change_players(player_id1: int, player_id2: int) -> void:
-	if player_id1 in lineup_player_ids and player_id2 in lineup_player_ids:
-		var index1: int = lineup_player_ids.find(player_id1)
-		var index2: int = lineup_player_ids.find(player_id2)
-		lineup_player_ids[index1] = player_id2
-		lineup_player_ids[index2] = player_id1
-	elif player_id1 in lineup_player_ids:
-		var index1: int = lineup_player_ids.find(player_id1)
-		lineup_player_ids[index1] = player_id2
-	elif player_id2 in lineup_player_ids:
-		var index2: int = lineup_player_ids.find(player_id2)
-		lineup_player_ids[index2] = player_id1
+func change_players(p1: Player, p2: Player) -> void:
+	var index1: int = players.find(p1)
+	var index2: int = players.find(p2)
+	players[index1] = p2
+	players[index2] = p1
 
 
 func remove_player(p_player: Player) -> void:
 	players.erase(p_player)
-	for l_id: int in lineup_player_ids:
-		if l_id == p_player.id:
-			# TODO choose player for same position
-			lineup_player_ids.erase(l_id)
-			lineup_player_ids.append(players[-1].id)
-			break
 
 
 func get_home_color() -> Color:

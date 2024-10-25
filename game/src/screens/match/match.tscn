@@ -293,5 +293,6 @@ autostart = true
 [connection signal="pressed" from="Main/Content/Buttons/Speed/Slower" to="." method="_on_slower_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Speed/Faster" to="." method="_on_faster_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Dashboard" to="." method="_on_dashboard_pressed"]
+[connection signal="change_request" from="Main/Content/CentralContainer/MainBar/Formation" to="." method="_on_formation_change_request"]
 [connection signal="change_request" from="Main/Content/CentralContainer/BottomBar/PlayersBar" to="." method="_on_players_bar_change_request"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

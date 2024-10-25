@@ -20,8 +20,7 @@ func test() -> void:
 		for nation: Nation in continent.nations:
 			for league: League in nation.leagues:
 				for team: Team in league.teams:
-					assert(team.lineup_player_ids.size() == Const.LINEUP_PLAYERS_AMOUNT)
-					assert(team.players.size() > 10)
+					assert(team.players.size() > Const.LINEUP_PLAYERS_AMOUNT)
 					assert(team.get_goalkeeper() != null)
 	print("test: rqeuired properties done.")
 

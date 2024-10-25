@@ -70,14 +70,20 @@ func _initialize_team(
 	# create team
 	team.set_random_colors()
 
-	team.create_stadium(team.name + " Stadium", 1234, 1990)
-
-	_assign_players_to_team(world, team, league_pyramid_level, nation, temp_team_prestige)
+	team.stadium = Stadium.new()
+	team.stadium.name = team.name + " Stadium"
+	team.stadium.capacity = RngUtil.rng.randi_range(
+		temp_team_prestige * 1000, temp_team_prestige * 10000
+	)
+	team.stadium.year_built = RngUtil.rng.randi_range(date.year - 70, date.year - 1)
 
 	team.staff = _create_staff(world, team.get_prestige(), nation, league_pyramid_level)
 
 	# assign manager preffered formation to team
 	team.formation = team.staff.manager.formation
+	
+	# assign players after formation has been choosen, to assign correct players positions
+	_assign_players_to_team(world, team, league_pyramid_level, nation, temp_team_prestige)
 
 	# calc budget, after players/stuff have been created
 	# so budget will alwyas be bigger as minimum needed
@@ -89,7 +95,58 @@ func _assign_players_to_team(
 	world: World, p_team: Team, league_pyramid_level: int, p_nation: Nation, prestige: int
 ) -> Team:
 	var nr: int = 1
+	
+	# lineup
+	for amount: int in p_team.formation.goalkeeper:
+		var position_type: Position.Type = Position.Type.G
 
+		var random_nation: Nation = _get_random_nationality(
+			world, p_nation, prestige, league_pyramid_level
+		)
+		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
+		nr += 1
+		player.team = p_team.name
+		player.statistics.team_name = p_team.name
+		player.team_id = p_team.id
+		p_team.players.append(player)
+	for amount: int in p_team.formation.defense:
+		var position_type: Position.Type = _get_random_defense_position_type()
+
+		var random_nation: Nation = _get_random_nationality(
+			world, p_nation, prestige, league_pyramid_level
+		)
+		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
+		nr += 1
+		player.team = p_team.name
+		player.statistics.team_name = p_team.name
+		player.team_id = p_team.id
+		p_team.players.append(player)
+	for amount: int in p_team.formation.center:
+		var position_type: Position.Type = _get_random_center_position_type()
+
+		var random_nation: Nation = _get_random_nationality(
+			world, p_nation, prestige, league_pyramid_level
+		)
+		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
+		nr += 1
+		player.team = p_team.name
+		player.statistics.team_name = p_team.name
+		player.team_id = p_team.id
+		p_team.players.append(player)
+	for amount: int in p_team.formation.attack:
+		var position_type: Position.Type = _get_random_attack_position_type()
+
+		var random_nation: Nation = _get_random_nationality(
+			world, p_nation, prestige, league_pyramid_level
+		)
+		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
+		nr += 1
+		player.team = p_team.name
+		player.statistics.team_name = p_team.name
+		player.team_id = p_team.id
+		p_team.players.append(player)
+	
+	# bench and rest
 	for position_type: int in Position.Type.values():
 		var amount: int = RngUtil.rng.randi_range(2, 5)
 		if position_type == Position.Type.G:
@@ -106,16 +163,32 @@ func _assign_players_to_team(
 			player.team_id = p_team.id
 			p_team.players.append(player)
 
-			# RngUtil.rng.random lineup assignment
-			if position_type == Position.Type.G and p_team.lineup_player_ids.is_empty():
-				p_team.lineup_player_ids.append(player.id)
-			elif (
-				position_type != Position.Type.G
-				and p_team.lineup_player_ids.size() < Const.LINEUP_PLAYERS_AMOUNT
-			):
-				p_team.lineup_player_ids.append(player.id)
 
 	return p_team
+
+
+func _get_random_defense_position_type() -> Position.Type:
+	var positions: Array[Position.Type] = []
+	positions.append(Position.Type.DC)
+	positions.append(Position.Type.DL)
+	positions.append(Position.Type.DR)
+	return RngUtil.pick_random(positions)  
+
+
+func _get_random_center_position_type() -> Position.Type:
+	var positions: Array[Position.Type] = []
+	positions.append(Position.Type.C)
+	positions.append(Position.Type.WL)
+	positions.append(Position.Type.WR)
+	return RngUtil.pick_random(positions)  
+
+
+func _get_random_attack_position_type() -> Position.Type:
+	var positions: Array[Position.Type] = []
+	positions.append(Position.Type.PC)
+	positions.append(Position.Type.PL)
+	positions.append(Position.Type.PR)
+	return RngUtil.pick_random(positions)  
 
 
 func _get_goalkeeper_attributes(age: int, prestige: int, position: Position) -> Goalkeeper:
