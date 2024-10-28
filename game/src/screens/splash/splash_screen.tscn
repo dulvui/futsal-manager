@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/splash/splash_screen.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://caxdir30m2j4v" path="res://icon.png" id="3_ad6ge"]
+[ext_resource type="Texture2D" uid="uid://bq33qmggqr3fr" path="res://icon.png" id="3_ad6ge"]
 
 [node name="SplashScreen" type="Control"]
 layout_mode = 3
@@ -26,13 +26,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = -562.0
+offset_top = -606.0
+offset_right = 562.0
+offset_bottom = 606.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_ad6ge")
+expand_mode = 1
 
 [node name="LoadingProgressBar" type="ProgressBar" parent="."]
 layout_mode = 1

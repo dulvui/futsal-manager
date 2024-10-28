@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Futsal Manager"
+config/name="99Managers: Futsal Edition"
 config/version="0.2.4"
 run/main_scene="res://src/screens/splash/splash_screen.tscn"
 config/features=PackedStringArray("4.3")
