@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqcsyes1j6vwi"]
+[gd_scene load_steps=4 format=3 uid="uid://cqcsyes1j6vwi"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://themes/default/theme.tres" id="1_lar05"]
 [ext_resource type="Script" path="res://src/screens/setup/setup_world/setup_world.gd" id="2_s01se"]
+[ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="3_jkofa"]
 
 [node name="Start" type="Control"]
 layout_mode = 3
@@ -136,8 +137,13 @@ layout_mode = 2
 text = "CONTINUE"
 metadata/_edit_use_anchors_ = true
 
+[node name="LoadingScreen" parent="." instance=ExtResource("3_jkofa")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="VBoxContainer/Seed/GridContainer/GenearateSeedButton" to="." method="_on_genearate_seed_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Seed/GridContainer/DefaultSeedButton" to="." method="_on_default_seed_button_pressed"]
 [connection signal="text_changed" from="VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit" to="." method="_on_generated_seed_line_edit_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Continue" to="." method="_on_continue_pressed"]
+[connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]

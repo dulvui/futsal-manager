@@ -15,6 +15,14 @@ func save_world() -> void:
 	thread.start(_save_world, Thread.Priority.PRIORITY_HIGH)
 
 
+func generate_world() -> void:
+	if thread and thread.is_started():
+		print("thread is already running")
+		return
+	thread = Thread.new()
+	thread.start(_generate_world, Thread.Priority.PRIORITY_HIGH)
+
+
 func random_results() -> void:
 	if thread and thread.is_started():
 		print("thread is already running")
@@ -26,6 +34,13 @@ func random_results() -> void:
 func _save_world() -> void:
 	print("save world in thread...")
 	ResUtil.save_resource("world", Global.world)
+	call_deferred("_loading_done")
+
+
+func _generate_world() -> void:
+	print("generating world in thread...")
+	var generator: Generator = Generator.new()
+	Global.world = generator.generate_world()
 	call_deferred("_loading_done")
 
 

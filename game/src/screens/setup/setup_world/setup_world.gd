@@ -14,6 +14,7 @@ var generation_seed: String = DEFAULT_SEED
 @onready var player_names_option: OptionButton = $VBoxContainer/Settings/Container/PlayerNames
 @onready var start_year_spinbox: SpinBox = $VBoxContainer/Settings/Container/StartYear
 @onready var generation_seed_edit: LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
+@onready var loading_screen: LoadingScreen = $LoadingScreen
 
 
 func _ready() -> void:
@@ -67,14 +68,18 @@ func _on_continue_pressed() -> void:
 	Global.save_states.temp_state.start_date = Time.get_datetime_dict_from_datetime_string(
 		start_date_str, true
 	)
-	# also set Global.start_date, so funcs like person.get_age work
+	# also set Global.start_date, so functions like person.get_age work
 	Global.start_date = Global.save_states.temp_state.start_date
 	Global.save_states.temp_state.generation_seed = generation_seed
 	Global.save_states.temp_state.generation_player_names = player_names_option.selected
 
 	RngUtil.reset_seed(generation_seed, player_names_option.selected)
 
-	var generator: Generator = Generator.new()
-	Global.world = generator.generate_world()
+	LoadingUtil.start(tr("GENERATING_PLAYERS"), LoadingUtil.Type.GENERATION, true)
+	loading_screen.show()
+	ThreadUtil.generate_world()
 
+
+func _on_loading_screen_loaded(_type:int) -> void:
 	get_tree().change_scene_to_file("res://src/screens/setup/setup_manager/setup_manager.tscn")
+
