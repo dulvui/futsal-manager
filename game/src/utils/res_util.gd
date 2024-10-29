@@ -47,25 +47,29 @@ func _process(_delta: float) -> void:
 			load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_FAILED
 			|| load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_INVALID_RESOURCE
 		):
-			print("restore backup for %s..." % loading_resource_path)
+			if BackupUtil.BACKUP_SUFFIX in loading_resource_path:
+				print("restoring backup for %s gone wrong..." % loading_resource_path)
+				loading_resources_paths.append(loading_resource_path)
+			else:
+				print("restore backup for %s..." % loading_resource_path)
 
-			var backup_path: StringName = BackupUtil.restore_backup(
-				loading_resource_path, RES_SUFFIX
-			)
-
-			loaded_resources_paths.append(loading_resource_path)
-			backup_resources_paths.append(backup_path)
-
-			var err: Error = (
-				ResourceLoader
-				. load_threaded_request(
-					backup_path,
-					"Resource",
-					true,
+				var backup_path: StringName = BackupUtil.restore_backup(
+					loading_resource_path, RES_SUFFIX
 				)
-			)
-			if err:
-				print(err)
+
+				loaded_resources_paths.append(loading_resource_path)
+				backup_resources_paths.append(backup_path)
+
+				var err: Error = (
+					ResourceLoader
+					. load_threaded_request(
+						backup_path,
+						"Resource",
+						true,
+					)
+				)
+				if err:
+					print(err)
 
 	# remove loaded paths
 	for loaded_path: String in loaded_resources_paths:

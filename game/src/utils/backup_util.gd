@@ -21,7 +21,9 @@ func create_backup(path: StringName, file_suffix: StringName) -> StringName:
 	return file_path
 
 
-func restore_backup(path: StringName, file_suffix: StringName) -> StringName:
+func restore_backup(path: String, file_suffix: StringName) -> StringName:
+	#  first, make sure, path has no suffix
+	path = path.replace(file_suffix, "")
 	var file_path: StringName = path + file_suffix
 	print("restoring backup for %s..." % file_path)
 	var backup_path: StringName = path + BACKUP_SUFFIX + file_suffix
