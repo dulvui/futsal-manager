@@ -28,9 +28,9 @@ func set_up(p_message: EmailMessage) -> void:
 
 	if not message.read:
 		# make bold
-		UiUtil.bold(subject_label)
-		UiUtil.bold(sender_label)
-		UiUtil.bold(date_label)
+		ThemeUtil.bold(subject_label)
+		ThemeUtil.bold(sender_label)
+		ThemeUtil.bold(date_label)
 
 
 func _on_button_button_down() -> void:

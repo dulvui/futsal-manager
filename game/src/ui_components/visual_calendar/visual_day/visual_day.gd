@@ -70,12 +70,12 @@ func set_up(p_date: Day = Day.new()) -> void:
 
 func unselect() -> void:
 	# color_active.color = Color(0, 0, 0, 0)
-	UiUtil.remove_bold(month_day_label)
+	ThemeUtil.remove_bold(month_day_label)
 
 
 func select() -> void:
 	# color_active.color = Color(0, 0, 0, 0.3)
-	UiUtil.bold(month_day_label)
+	ThemeUtil.bold(month_day_label)
 
 
 func _on_button_pressed() -> void:

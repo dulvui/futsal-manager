@@ -47,7 +47,7 @@ func set_teams(p_nation: Nation = Global.world.get_all_nations()[0]) -> void:
 		var league_label: Label = Label.new()
 		league_label.text = league.name
 		team_list.add_child(league_label)
-		UiUtil.bold(league_label)
+		ThemeUtil.bold(league_label)
 		for team: Team in league.teams:
 			var team_button: Button = Button.new()
 			team_button.alignment = HORIZONTAL_ALIGNMENT_LEFT

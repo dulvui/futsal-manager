@@ -31,11 +31,11 @@ modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
-[node name="OnlyUnread" type="CheckBox" parent="Filters"]
+[node name="OnlyUnread" type="CheckButton" parent="Filters"]
 layout_mode = 2
 text = "UNREAD"
 
-[node name="Starred" type="CheckBox" parent="Filters"]
+[node name="Starred" type="CheckButton" parent="Filters"]
 layout_mode = 2
 text = "STARRED"
 

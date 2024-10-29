@@ -1,7 +1,9 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://pt1hrfiuwfpg"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://pt1hrfiuwfpg"]
 
 [ext_resource type="StyleBox" uid="uid://chg0wkddlahe7" path="res://themes/default/button-pressed.tres" id="1_t6bqk"]
 [ext_resource type="StyleBox" uid="uid://b1urai8cerekk" path="res://themes/default/button-normal.tres" id="2_s5ox7"]
+[ext_resource type="StyleBox" uid="uid://d3ggndc83085" path="res://themes/default/progress_bar_background.tres" id="3_xj1a6"]
+[ext_resource type="StyleBox" uid="uid://b44kqgu4ich55" path="res://themes/default/progress_bar_fill.tres" id="4_dkjew"]
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(0.0588235, 0.215686, 0.290196, 1)
@@ -26,4 +28,6 @@ MarginContainer/constants/margin_left = 40
 MarginContainer/constants/margin_right = 40
 MarginContainer/constants/margin_top = 40
 Panel/styles/panel = SubResource("1")
+ProgressBar/styles/background = ExtResource("3_xj1a6")
+ProgressBar/styles/fill = ExtResource("4_dkjew")
 VBoxContainer/constants/separation = 8

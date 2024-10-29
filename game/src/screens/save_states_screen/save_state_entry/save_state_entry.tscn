@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dj3ts0dee4m6"]
+[gd_scene load_steps=2 format=3 uid="uid://dj3ts0dee4m6"]
 
 [ext_resource type="Script" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.gd" id="1_yugvl"]
-[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://themes/bold_label_settings.tres" id="2_6u1l3"]
 
 [node name="SaveState" type="HBoxContainer"]
 anchors_preset = -1
@@ -30,7 +29,6 @@ text = "TEAM"
 [node name="Team" type="Label" parent="Details"]
 layout_mode = 2
 text = "Bolzano"
-label_settings = ExtResource("2_6u1l3")
 
 [node name="ManagerLabel" type="Label" parent="Details"]
 layout_mode = 2
@@ -39,7 +37,6 @@ text = "MANAGER"
 [node name="Manager" type="Label" parent="Details"]
 layout_mode = 2
 text = "Simon Dalvai"
-label_settings = ExtResource("2_6u1l3")
 
 [node name="PlacementLabel" type="Label" parent="Details"]
 layout_mode = 2
@@ -48,7 +45,6 @@ text = "TABLE_PLACEMENT"
 [node name="Placement" type="Label" parent="Details"]
 layout_mode = 2
 text = "Serie A - 3."
-label_settings = ExtResource("2_6u1l3")
 
 [node name="VSeparator" type="VSeparator" parent="."]
 layout_mode = 2
@@ -67,7 +63,6 @@ text = "GAME_DATE"
 [node name="GameDate" type="Label" parent="Dates"]
 layout_mode = 2
 text = "12.08.2025"
-label_settings = ExtResource("2_6u1l3")
 
 [node name="LastSaveDateLabel" type="Label" parent="Dates"]
 layout_mode = 2
@@ -76,7 +71,6 @@ text = "LAST_SAVE"
 [node name="LastSaveDate" type="Label" parent="Dates"]
 layout_mode = 2
 text = "03.04.2024"
-label_settings = ExtResource("2_6u1l3")
 
 [node name="CreateDateLabel" type="Label" parent="Dates"]
 layout_mode = 2
@@ -85,7 +79,6 @@ text = "CREATED"
 [node name="CreateDate" type="Label" parent="Dates"]
 layout_mode = 2
 text = "01.01.2024"
-label_settings = ExtResource("2_6u1l3")
 
 [node name="Load" type="Button" parent="."]
 layout_mode = 2

@@ -39,7 +39,7 @@ func _add_matches(competition: Competition, day: Day) -> void:
 	if matches.size() > 0:
 		var competition_label: Label = Label.new()
 		competition_label.text = competition.name
-		UiUtil.bold(competition_label)
+		ThemeUtil.bold(competition_label)
 		matches_list.add_child(competition_label)
 		for matchz: Match in matches:
 			var match_row: MatchListRow = MatchRowScene.instantiate()
