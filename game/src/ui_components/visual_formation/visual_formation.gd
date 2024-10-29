@@ -68,6 +68,8 @@ func set_up(p_only_lineup: bool, p_team: Team = Global.team) -> void:
 
 
 func set_players() -> void:
+	change_players.clear()
+
 	# clean field
 	for hbox: HBoxContainer in lineup.get_children():
 		for player: Control in hbox.get_children():

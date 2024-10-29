@@ -226,7 +226,7 @@ func _on_match_simulator_update_time() -> void:
 
 
 func _on_formation_change_request() -> void:
-	players_bar.set_players()
+	players_bar.update_players()
 	match_simulator.match_engine.home_team.change_players_request()
 	match_simulator.match_engine.away_team.change_players_request()
 

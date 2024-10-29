@@ -6,7 +6,7 @@ class_name PlayersBar
 extends HBoxContainer
 
 
-signal change_request()
+signal change_request
 
 const FormationPlayer: PackedScene = preload("res://src/ui_components/visual_formation/player/formation_player.tscn")
 
@@ -21,10 +21,7 @@ func _ready() -> void:
 
 func set_up(p_team: Team) -> void:
 	team = p_team
-	set_players()
 
-
-func set_players() -> void:
 	for child: Node in get_children():
 		child.queue_free()
 	
@@ -34,12 +31,10 @@ func set_players() -> void:
 		# setup
 		formation_player.set_player(player)
 		formation_player.select.connect(_on_formation_player_select.bind(player))
-		# set unique node name to player id, so it can be accessed easily
-		formation_player.name = str(player.id)
+		# set node name to player id, so it can be accessed easily
 		add_child(formation_player)
+		formation_player.name = str(player.id)
 	
-	add_child(VSeparator.new())
-
 	# bench
 	for player: Player in team.get_sub_players():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
@@ -47,8 +42,15 @@ func set_players() -> void:
 		formation_player.set_player(player)
 		formation_player.select.connect(_on_formation_player_select.bind(player))
 		# set unique node name to player id, so it can be accessed easily
-		formation_player.name = str(player.id)
 		add_child(formation_player)
+		formation_player.name = str(player.id)
+
+
+func update_players() -> void:
+	for i: int in team.get_lineup_players().size():
+		var player: Player = team.players[i]
+		var visual_player: VisualFormationPlayer = get_node(str(player.id))
+		move_child(visual_player, i)
 
 
 func _on_formation_player_select(player: Player) -> void:
@@ -56,8 +58,10 @@ func _on_formation_player_select(player: Player) -> void:
 		change_players.append(player)
 		if change_players.size() == 2:
 			# access player easily with player id set as node name in setup
-			var player0: VisualFormationPlayer = get_node(str(change_players[0].id))
-			var player1: VisualFormationPlayer = get_node(str(change_players[1].id))
+			var id0: String = str(change_players[0].id)
+			var id1: String = str(change_players[1].id)
+			var player0: VisualFormationPlayer = get_node(id0)
+			var player1: VisualFormationPlayer = get_node(id1)
 			var index0: int = player0.get_index()
 			var index1: int = player1.get_index()
 			move_child(player0, index1)
