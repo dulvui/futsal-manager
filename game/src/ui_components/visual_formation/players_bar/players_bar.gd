@@ -6,7 +6,7 @@ class_name PlayersBar
 extends HBoxContainer
 
 
-signal change_request(team: Team, p1: Player, p2: Player)
+signal change_request()
 
 const FormationPlayer: PackedScene = preload("res://src/ui_components/visual_formation/player/formation_player.tscn")
 
@@ -19,9 +19,15 @@ func _ready() -> void:
 	change_players = []
 
 
-func set_up(p_team: Team = Global.team) -> void:
+func set_up(p_team: Team) -> void:
 	team = p_team
+	set_players()
 
+
+func set_players() -> void:
+	for child: Node in get_children():
+		child.queue_free()
+	
 	# field players
 	for player: Player in team.get_starting_players():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
@@ -30,7 +36,6 @@ func set_up(p_team: Team = Global.team) -> void:
 		formation_player.select.connect(_on_formation_player_select.bind(player))
 		# set unique node name to player id, so it can be accessed easily
 		formation_player.name = str(player.id)
-		formation_player.unique_name_in_owner = true
 		add_child(formation_player)
 	
 	add_child(VSeparator.new())
@@ -43,7 +48,6 @@ func set_up(p_team: Team = Global.team) -> void:
 		formation_player.select.connect(_on_formation_player_select.bind(player))
 		# set unique node name to player id, so it can be accessed easily
 		formation_player.name = str(player.id)
-		formation_player.unique_name_in_owner = true
 		add_child(formation_player)
 
 
@@ -51,8 +55,6 @@ func _on_formation_player_select(player: Player) -> void:
 	if player not in change_players:
 		change_players.append(player)
 		if change_players.size() == 2:
-			change_request.emit(team, change_players[0], change_players[1])
-			
 			# access player easily with player id set as node name in setup
 			var player0: VisualFormationPlayer = get_node(str(change_players[0].id))
 			var player1: VisualFormationPlayer = get_node(str(change_players[1].id))
@@ -61,6 +63,9 @@ func _on_formation_player_select(player: Player) -> void:
 			move_child(player0, index1)
 			move_child(player1, index0)
 
+			team.change_players(change_players[0], change_players[1])
+			change_request.emit()
+			
 			change_players.clear()
 	else:
 		change_players.erase(player)

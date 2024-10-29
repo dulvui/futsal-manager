@@ -203,7 +203,6 @@ layout_mode = 1
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/NextMatch" to="." method="_on_next_match_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/Continue" to="." method="_on_continue_pressed"]
 [connection signal="email_action" from="MarginContainer/HBoxContainer/MainContainer/Content/Email" to="." method="_on_email_email_action"]
-[connection signal="change_request" from="MarginContainer/HBoxContainer/MainContainer/Content/Formation" to="." method="_on_formation_change_request"]
 [connection signal="select_player" from="MarginContainer/HBoxContainer/MainContainer/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
 [connection signal="select_player" from="MarginContainer/HBoxContainer/MainContainer/Content/PlayerList" to="." method="_on_player_list_select_player"]
 [connection signal="cancel" from="MarginContainer/HBoxContainer/MainContainer/Content/PlayerProfile" to="." method="_on_player_profile_cancel"]

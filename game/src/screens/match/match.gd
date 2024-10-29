@@ -64,14 +64,22 @@ func _ready() -> void:
 			Global.team = matchz.home
 
 
-	home_team = matchz.home
-	away_team = matchz.away
+	# duplicate teams to not change real teams references
+	# player order, tactics ecc. changes live only during match
+	# no deep copy, since players itself acutally should keep changes
+	home_team = matchz.home.duplicate()
+	away_team = matchz.away.duplicate()
 
 	home_name.text = matchz.home.name
 	away_name.text = matchz.away.name
 
-	formation.set_up(true)
-	players_bar.set_up()
+	# set up formations with player controlled teams copy	
+	if home_team.id == Global.team.id:
+		formation.set_up(true, home_team)
+		players_bar.set_up(home_team)
+	else:
+		formation.set_up(true, away_team)
+		players_bar.set_up(away_team)
 
 	match_simulator.set_up(home_team, away_team, matchz.id)
 	
@@ -89,7 +97,7 @@ func _ready() -> void:
 	
 	last_active_view = match_simulator
 	last_active_view.show()
-
+	
 
 func match_end() -> void:
 	faster_button.hide()
@@ -217,10 +225,14 @@ func _on_match_simulator_update_time() -> void:
 	result_label.text = "%d - %d" % [home_stats.goals, away_stats.goals]
 
 
-func _on_formation_change_request(team:Team, p1:Player, p2:Player) -> void:
-	match_simulator.match_engine.change_players_request(team, p1, p2)
+func _on_formation_change_request() -> void:
+	players_bar.set_players()
+	match_simulator.match_engine.home_team.change_players_request()
+	match_simulator.match_engine.away_team.change_players_request()
 
 
-func _on_players_bar_change_request(team: Team, p1:Player, p2:Player) -> void:
-	match_simulator.match_engine.change_players_request(team, p1, p2)
+func _on_players_bar_change_request() -> void:
+	formation.set_players()
+	match_simulator.match_engine.home_team.change_players_request()
+	match_simulator.match_engine.away_team.change_players_request()
 

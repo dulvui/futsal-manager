@@ -326,7 +326,3 @@ func _on_loading_screen_loaded(type: LoadingUtil.Type) -> void:
 		_:
 			print("loading done default")
 
-
-func _on_formation_change_request(_team:Team, p1:Player, p2:Player) -> void:
-	team.change_players(p1, p2)
-

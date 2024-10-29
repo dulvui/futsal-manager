@@ -44,6 +44,7 @@ func _init(
 	formation = p_formation
 	board_requests = p_board_requests
 
+
 func get_goalkeeper() -> Player:
 	return players[0]
 

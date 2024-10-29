@@ -12,8 +12,7 @@ var res_team: Team
 var players: Array[SimPlayer]
 # players in field
 var all_players: Array[SimPlayer]
-# to apply changes only when game is ready
-var all_players_buffer: Array[SimPlayer]
+
 var change_request: bool
 
 var ball: SimBall
@@ -72,7 +71,6 @@ func set_up(
 	
 	# copy field players in own array, for easier access
 	players = all_players.slice(0, 5)
-	all_players_buffer = all_players.duplicate()
 	
 	# set goalkeeper flag
 	players[0].is_goalkeeper = true
@@ -91,7 +89,18 @@ func update() -> void:
 
 func check_changes() -> void:
 	if change_request:
-		all_players = all_players_buffer.duplicate()
+		# adjust all_players order to res teams players order
+		var lineup_players: Array[Player] = res_team.get_lineup_players()
+		for i: int in lineup_players.size():
+			var player: Player = lineup_players[i]
+			if all_players[i].player_res.id != player.id:
+				var sim_player: SimPlayer
+				for sp: SimPlayer in all_players:
+					if sp.player_res.id == player.id:
+						sim_player = sp
+				all_players.erase(sim_player)
+				all_players.insert(i, sim_player)
+
 		players = all_players.slice(0, 5)
 		player_changed.emit()
 		change_request = false
@@ -220,19 +229,14 @@ func shoot_on_goal(power: float) -> void:
 	#stats.shots_on_target += 1
 
 
-func change_players_request(p0: SimPlayer, p1: SimPlayer) -> void:
-	# swap player positions in players buffer
-	var index0: int = all_players_buffer.find(p0)
-	var index1: int = all_players_buffer.find(p1)
-	all_players_buffer[index0] = p1
-	all_players_buffer[index1] = p0
-	# all_players_buffer.erase(p0)
-	# all_players_buffer.insert(index_0, p1)
-	# all_players_buffer.erase(p1)
-	# all_players_buffer.insert(index_1, p0)
-	# set change reqeust flag, only if actual changes are possbile
-	change_request = all_players != all_players_buffer
-	print("change request: " + str(change_request))
+func change_players_request() -> void:
+	# compare sim players and team players order
+	# if different, set change request flag
+	for i: int in all_players.size():
+		if all_players[i].player_res.id != res_team.players[i].id:
+			change_request = true
+			print("change request")
+			return
 
 
 func nearest_player_to_ball() -> SimPlayer:

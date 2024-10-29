@@ -155,23 +155,8 @@ func full_time() -> void:
 		player.recover_stamina(recovery)
 
 
-func change_players_request(team: Team, p1: Player, p2: Player) -> void:
-	var sim_team: SimTeam = away_team
-	if home_team.res_team == team:
-		sim_team = home_team
-
-	var sim_players: Array[SimPlayer] = sim_team.all_players.filter(
-		func(s: SimPlayer) -> bool:
-			return s.player_res == p1 or s.player_res == p2
-	)
-	if sim_players.size() != 2:
-		print("errore while change request, corresponding simplayers not found")
-		return
-	sim_team.change_players_request(sim_players[0], sim_players[1])
-
-
 func calc_distances() -> void:
-	for player in home_team.players + away_team.players:
+	for player: SimPlayer in home_team.players + away_team.players:
 		calc_distance_to_goal(player, home_team.left_half)
 		calc_distance_to_own_goal(player, home_team.left_half)
 		calc_player_to_ball_distance(player)

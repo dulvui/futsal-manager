@@ -5,7 +5,7 @@
 class_name VisualFormation
 extends HBoxContainer
 
-signal change_request(team: Team, p1: Player, p2: Player)
+signal change_request
 signal tactic_request
 signal formation_request
 
@@ -64,10 +64,10 @@ func set_up(p_only_lineup: bool, p_team: Team = Global.team) -> void:
 		TacticDefense.Pressing.values()[team.formation.tactic_defense.pressing]
 	)
 
-	_set_players()
+	set_players()
 
 
-func _set_players() -> void:
+func set_players() -> void:
 	# clean field
 	for hbox: HBoxContainer in lineup.get_children():
 		for player: Control in hbox.get_children():
@@ -142,7 +142,7 @@ func _set_players() -> void:
 
 func _update_formation(index: int) -> void:
 	team.formation = Formation.new(index)
-	_set_players()
+	set_players()
 
 
 func _on_select_player(player: VisualFormationPlayer) -> void:
@@ -156,10 +156,7 @@ func _on_select_player(player: VisualFormationPlayer) -> void:
 
 func _change_player() -> void:
 	if change_players.size() == 2:
-		change_request.emit(team, change_players[0].player, change_players[1].player)
-
 		# access player easily with player id set as node name in setup
-		# % is needed, to access in child nodes
 		var player0: VisualFormationPlayer = change_players[0]
 		var player1: VisualFormationPlayer = change_players[1]
 		var index0: int = player0.get_index()
@@ -170,6 +167,9 @@ func _change_player() -> void:
 		player1.reparent(parent0)
 		parent0.move_child(player1, index0)
 		parent1.move_child(player0, index1)
+		
+		team.change_players(change_players[0].player, change_players[1].player)
+		change_request.emit()
 
 	else:
 		print("error in substitution")
