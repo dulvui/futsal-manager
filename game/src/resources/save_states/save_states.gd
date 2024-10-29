@@ -30,6 +30,8 @@ func get_active() -> SaveState:
 	for state: SaveState in list:
 		if state.id == active_id:
 			return state
+	if not temp_state:
+		new_temp_state()
 	return temp_state
 
 
