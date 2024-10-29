@@ -30,6 +30,9 @@ func get_active() -> SaveState:
 	for state: SaveState in list:
 		if state.id == active_id:
 			return state
+	# create new temp state, if not created yet
+	# useful when running specific scene
+	# on clean game data with non-existent save state
 	if not temp_state:
 		new_temp_state()
 	return temp_state
