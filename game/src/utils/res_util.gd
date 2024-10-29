@@ -7,25 +7,24 @@ extends Node
 # .res for binary/compressed resource data
 # .tres for text resource data
 const RES_SUFFIX: StringName = ".res"
-const BACKUP_SUFFIX: StringName = ".backup.res"
 #var RES_SUFFIX: String = ".tres"
 
-var loading_resources_paths: Array[String]
-var backup_resources_paths: Array[String]
-var loaded_resources_paths: Array[String]
+var loading_resources: Array[String]
+var backup_resources: Array[String]
+var loaded_resources: Array[String]
 var progress: Array
 var load_status: ResourceLoader.ThreadLoadStatus
 
 
 func _ready() -> void:
-	loading_resources_paths = []
-	backup_resources_paths = []
-	loaded_resources_paths = []
+	loading_resources = []
+	backup_resources = []
+	loaded_resources = []
 
 
 func _process(_delta: float) -> void:
-	for loading_resource_path: String in loading_resources_paths:
-		load_status = ResourceLoader.load_threaded_get_status(loading_resource_path, progress)
+	for loading_resource: String in loading_resources:
+		load_status = ResourceLoader.load_threaded_get_status(loading_resource, progress)
 
 		LoadingUtil.update(progress[0])
 
@@ -34,31 +33,33 @@ func _process(_delta: float) -> void:
 
 		if load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 			# assign references after resources are loaded
-			Global.world = ResourceLoader.load_threaded_get(loading_resource_path)
+			Global.world = ResourceLoader.load_threaded_get(loading_resource)
 			Global.team = Global.world.get_active_team()
 			Global.league = Global.world.get_active_league()
 			Global.manager = Global.team.staff.manager
 
 			# add to own array, to not remove element from
 			# loading_resources_paths, while iterating
-			loaded_resources_paths.append(loading_resource_path)
+			loaded_resources.append(loading_resource)
 			LoadingUtil.done()
 		elif (
 			load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_FAILED
 			|| load_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_INVALID_RESOURCE
 		):
-			if BackupUtil.BACKUP_SUFFIX in loading_resource_path:
-				print("restoring backup for %s gone wrong..." % loading_resource_path)
-				loading_resources_paths.append(loading_resource_path)
+			if BackupUtil.BACKUP_SUFFIX in loading_resource:
+				print("restoring backup for %s gone wrong..." % loading_resource)
+				loading_resources.append(loading_resource)
 			else:
-				print("restore backup for %s..." % loading_resource_path)
+				print("restore backup for %s..." % loading_resource)
+
+				LoadingUtil.start("RESTORING_BACKUP", LoadingUtil.Type.LOAD_GAME)
 
 				var backup_path: StringName = BackupUtil.restore_backup(
-					loading_resource_path, RES_SUFFIX
+					loading_resource, RES_SUFFIX
 				)
 
-				loaded_resources_paths.append(loading_resource_path)
-				backup_resources_paths.append(backup_path)
+				loaded_resources.append(loading_resource)
+				backup_resources.append(backup_path)
 
 				var err: Error = (
 					ResourceLoader
@@ -72,14 +73,14 @@ func _process(_delta: float) -> void:
 					print(err)
 
 	# remove loaded paths
-	for loaded_path: String in loaded_resources_paths:
-		loading_resources_paths.erase(loaded_path)
+	for loaded_path: String in loaded_resources:
+		loading_resources.erase(loaded_path)
 	# add new loaded resource paths
-	for backup_resource_path: String in backup_resources_paths:
-		loading_resources_paths.append(backup_resource_path)
+	for backup_resource: String in backup_resources:
+		loading_resources.append(backup_resource)
 
-	backup_resources_paths.clear()
-	loaded_resources_paths.clear()
+	backup_resources.clear()
+	loaded_resources.clear()
 
 
 func save_save_states() -> void:
@@ -140,7 +141,7 @@ func load_threaded_resource(res_key: String) -> void:
 	var path: String = Global.save_states.get_active_path(res_key + RES_SUFFIX)
 	print("loading threaded %s..." + path)
 
-	loading_resources_paths.append(path)
+	loading_resources.append(path)
 
 	ResourceLoader.load_threaded_request(path, "Resource", true)
 
