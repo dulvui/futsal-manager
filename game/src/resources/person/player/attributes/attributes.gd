@@ -33,3 +33,21 @@ func field_player_average() -> int:
 
 func goal_keeper_average() -> int:
 	return goalkeeper.average()
+
+
+# get dynamically dictionary of all attributes goalkeeper, mental ecc...
+# with all its sub attributes as string array
+func get_all_attributes() -> Dictionary:
+	var attributes: Dictionary = {}
+	for property: Dictionary in get_property_list():
+		if property.usage == 4102:
+			var sub_attributes: Array[StringName] = []
+			# get sub attributes
+			var attribute: Resource = get(property.name)
+			for a_property: Dictionary in attribute.get_property_list():
+				if a_property.usage == 4102:
+					sub_attributes.append(a_property.name)
+			
+			attributes[property.name] = sub_attributes
+
+	return attributes

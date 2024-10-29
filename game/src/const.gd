@@ -15,38 +15,6 @@ const SPEED: int = 2
 # can play a full game running all the time
 const STAMINA_FACTOR: float = 1.0 / (HALF_TIME_SECONDS * 2 * TICKS_PER_SECOND)
 
-const ATTRIBUTES: Dictionary = {
-	"mental":
-	[
-		"aggression",
-		"anticipation",
-		"decisions",
-		"concentration",
-		"teamwork",
-		"vision",
-		"work_rate",
-		"offensive_movement",
-		"marking"
-	],
-	"physical": ["pace", "acceleration", "stamina", "strength", "agility", "jump"],
-	"goalkeeper": ["reflexes", "positioning", "kicking", "handling", "diving", "speed"],
-	"technical":
-	[
-		"crossing",
-		"passing",
-		"long_passing",
-		"tackling",
-		"heading",
-		"interception",
-		"shooting",
-		"long_shooting",
-		"penalty",
-		"finishing",
-		"dribbling",
-		"blocking"
-	],
-}
-
 const MAX_PRESTIGE: int = 20
 
 const LINEUP_PLAYERS_AMOUNT: int = 12

@@ -63,7 +63,8 @@ func set_player(p_player: Player) -> void:
 	price.text = FormatUtil.get_sign(player.price)
 
 	# attributes
-	for attribute: String in Const.ATTRIBUTES.keys():
+	var attribute_names: Dictionary = player.attributes.get_all_attributes()
+	for attribute: String in attribute_names.keys():
 		# first remove existing values
 		for child: Node in attributes.get_node(attribute.capitalize()).get_children():
 			child.queue_free()
@@ -74,7 +75,7 @@ func set_player(p_player: Player) -> void:
 		attributes.get_node(attribute.capitalize()).add_child(label_title)
 		attributes.get_node(attribute.capitalize()).add_child(Label.new())
 
-		for key: String in Const.ATTRIBUTES[attribute]:
+		for key: String in attribute_names[attribute]:
 			var label: Label = Label.new()
 			label.text = tr(key.to_upper())
 			label.tooltip_text = tr(key.to_upper())

@@ -145,8 +145,9 @@ func _set_up_columns() -> void:
 			_add_column("STATISTICS", s.name, stats)
 	
 	# attributes
-	for key: String in Const.ATTRIBUTES.keys():
-		for value: String in Const.ATTRIBUTES[key]:
+	var attribute_names: Dictionary = Attributes.new().get_all_attributes()
+	for key: String in attribute_names.keys():
+		for value: String in attribute_names[key]:
 			var value_path: Array[String] = ["attributes", key, value]
 			var attributes: Callable = func(p: Player) -> int: return p.get_res_value(value_path)
 			_add_column(key.to_upper(), value, attributes)
