@@ -42,7 +42,8 @@ func _ready() -> void:
 
 
 func _on_theme_option_button_item_selected(index: int) -> void:
-	theme = ThemeUtil.set_active_theme(index)
+	theme = ThemeUtil.set_theme(index)
+	Global.theme_index = index
 	Global.save_config()
 
 

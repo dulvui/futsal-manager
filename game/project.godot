@@ -72,7 +72,7 @@ import/fbx/enabled=false
 
 [gui]
 
-theme/custom="res://themes/default/theme.tres"
+theme/custom="res://theme/theme.tres"
 
 [input]
 

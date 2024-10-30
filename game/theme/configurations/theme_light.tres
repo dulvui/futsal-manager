@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ThemeConfiguration" load_steps=4 format=3 uid="uid://d2w2d0v3kd25"]
+
+[ext_resource type="Script" path="res://src/resources/theme/theme_configuration.gd" id="1_88nk5"]
+[ext_resource type="Script" path="res://src/resources/theme/button_configuration.gd" id="1_f7oxp"]
+
+[sub_resource type="Resource" id="Resource_2dp7q"]
+script = ExtResource("1_f7oxp")
+font_color = Color(0, 0.0111171, 0.0417312, 1)
+normal_bg_color = Color(0.45591, 0.677649, 0.96422, 1)
+pressed_bg_color = Color(0.304836, 0.50174, 0.796849, 1)
+
+[resource]
+script = ExtResource("1_88nk5")
+id = 0
+name = "LIGHT"
+font_color = Color(0, 0, 0, 1)
+button = SubResource("Resource_2dp7q")
+panel_color = Color(0.982343, 0.982342, 0.982342, 1)

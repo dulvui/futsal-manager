@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ThemeConfiguration" load_steps=4 format=3 uid="uid://cphhvijcy728w"]
+
+[ext_resource type="Script" path="res://src/resources/theme/theme_configuration.gd" id="1_cehmm"]
+[ext_resource type="Script" path="res://src/resources/theme/button_configuration.gd" id="1_opw1p"]
+
+[sub_resource type="Resource" id="Resource_27s4c"]
+script = ExtResource("1_opw1p")
+font_color = Color(0.947199, 0.947199, 0.947199, 1)
+normal_bg_color = Color(0.080307, 0.19483, 0.527669, 1)
+pressed_bg_color = Color(0.381977, 0.447905, 0.924981, 1)
+
+[resource]
+script = ExtResource("1_cehmm")
+id = 0
+name = "DARK"
+font_color = Color(1, 1, 1, 1)
+button = SubResource("Resource_27s4c")
+panel_color = Color(0.0461807, 0.00988006, 0.153599, 1)
