@@ -7,5 +7,5 @@ script = ExtResource("1_cehmm")
 id = 0
 name = "LIGHT"
 font_color = Color(0.969137, 0.969137, 0.969137, 1)
-button_color = Color(0.719559, 0.751443, 0.891231, 1)
-panel_color = Color(0.0110885, 0.0110873, 0.0110872, 1)
+style_color = Color(0.225612, 0.248081, 0.232749, 1)
+background_color = Color(0, 0, 0, 1)

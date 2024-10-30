@@ -4,13 +4,27 @@
 
 extends Node
 
-
+# paths
 const THEMES_PATH: StringName = "res://themes/"
 const BASE_PATH: StringName = "res://theme_base/"
+# theme
 const THEME_FILE: StringName = BASE_PATH + "theme.tres"
-
+# label
 const LABEL_SETTINGS_FILE: StringName = BASE_PATH + "label/label_settings.tres"
 const LABEL_SETTINGS_BOLD_FILE: StringName = BASE_PATH + "label/label_settings_bold.tres"
+# style boxes flat
+const BOX_NORMAL_FILE: StringName = BASE_PATH + "styles/box_normal.tres"
+const BOX_PRESSED_FILE: StringName = BASE_PATH + "styles/box_pressed.tres"
+const BOX_FOCUS_FILE: StringName = BASE_PATH + "styles/box_focus.tres"
+const BOX_HOVER_FILE: StringName = BASE_PATH + "styles/box_hover.tres"
+const BOX_DISABLED_FILE: StringName = BASE_PATH + "styles/box_disabled.tres"
+const BOX_BACKGROUND_FILE: StringName = BASE_PATH + "styles/box_background.tres"
+# style boxes line
+const LINE_H_NORMAL_FILE: StringName = BASE_PATH + "styles/line_h_normal.tres"
+const LINE_H_FOCUS_FILE: StringName = BASE_PATH + "styles/line_h_focus.tres"
+const LINE_V_NORMAL_FILE: StringName = BASE_PATH + "styles/line_v_normal.tres"
+const LINE_V_FOCUS_FILE: StringName = BASE_PATH + "styles/line_v_focus.tres"
+
 
 const THEMES: Dictionary = {
 	"DARK" : "theme_dark.tres", 
@@ -19,14 +33,42 @@ const THEMES: Dictionary = {
 }
 
 var theme: Theme
+
 var label_settings_bold: LabelSettings
 var label_settings: LabelSettings
 
+var box_normal: StyleBoxFlat
+var box_pressed: StyleBoxFlat
+var box_focus: StyleBoxFlat
+var box_hover: StyleBoxFlat
+var box_disabled: StyleBoxFlat
+var box_background: StyleBoxFlat
+
+var line_h_normal: StyleBoxLine
+var line_h_focus: StyleBoxLine
+var line_v_normal: StyleBoxLine
+var line_v_focus: StyleBoxLine
+
 
 func _ready() -> void:
+	# load resources
 	theme = ResourceLoader.load(THEME_FILE, "Theme")
+	# label
 	label_settings = ResourceLoader.load(LABEL_SETTINGS_FILE, "LabelSettings")
 	label_settings_bold = ResourceLoader.load(LABEL_SETTINGS_BOLD_FILE, "LabelSettings")
+	# style boxes flat
+	box_normal = ResourceLoader.load(BOX_NORMAL_FILE, "StyleBoxFlat")
+	box_pressed = ResourceLoader.load(BOX_PRESSED_FILE, "StyleBoxFlat")
+	box_focus = ResourceLoader.load(BOX_FOCUS_FILE, "StyleBoxFlat")
+	box_hover = ResourceLoader.load(BOX_HOVER_FILE, "StyleBoxFlat")
+	box_disabled = ResourceLoader.load(BOX_DISABLED_FILE, "StyleBoxFlat")
+	box_background = ResourceLoader.load(BOX_BACKGROUND_FILE, "StyleBoxFlat")
+	# style boxes line
+	line_h_normal = ResourceLoader.load(LINE_H_NORMAL_FILE, "StyleBoxLine")
+	line_h_focus = ResourceLoader.load(LINE_H_FOCUS_FILE, "StyleBoxLine")
+	line_v_normal = ResourceLoader.load(LINE_V_NORMAL_FILE, "StyleBoxLine")
+	line_v_focus = ResourceLoader.load(LINE_V_FOCUS_FILE, "StyleBoxLine")
+
 	_apply_configuration(Global.theme_index)
 
 
@@ -63,51 +105,44 @@ func _apply_configuration(index: int) -> void:
 	var configuration: ThemeConfiguration = ResourceLoader.load(THEMES_PATH + theme_file)
 	configuration.set_up()
 
+	# box colors
+	box_normal.bg_color = configuration.style_color_normal
+	box_focus.bg_color = configuration.style_color_focus
+	box_focus.border_color = configuration.style_color_disabled
+	box_pressed.bg_color = configuration.style_color_pressed
+	box_hover.bg_color = configuration.style_color_hover
+	box_disabled.bg_color = configuration.style_color_disabled
+	box_background.bg_color = configuration.background_color
+	# line colors
+	line_h_normal.color = configuration.style_color_normal
+	line_h_focus.color = configuration.style_color_focus
+	line_v_normal.color = configuration.style_color_normal
+	line_v_focus.color = configuration.style_color_focus
+
 	# labels
 	theme.set_color("font_color", "Label", configuration.font_color)
 	
 	# rich text label
 	theme.set_color("default_color", "RichTextLabel", configuration.font_color)
 	
-	# button colors
+	# button  font colors
 	theme.set_color("font_color", "Button", configuration.font_color)
-	theme.set_color("font_color_hover", "Button", configuration.font_color_hover)
+	theme.set_color("font_focus_color", "Button", configuration.font_color_focus)
 	theme.set_color("font_hover_color", "Button", configuration.font_color_hover)
-	theme.set_color("font_color_pressed", "Button", configuration.font_color_pressed)
 	theme.set_color("font_pressed_color", "Button", configuration.font_color_pressed)
-
-	var button_normal: StyleBoxFlat = theme.get_stylebox("normal", "Button")
-	button_normal.bg_color = configuration.button_color_normal
-	var button_pressed: StyleBoxFlat = theme.get_stylebox("pressed", "Button")
-	button_pressed.bg_color = configuration.button_color_pressed
-	var button_hover: StyleBoxFlat = theme.get_stylebox("hover", "Button")
-	button_hover.bg_color = configuration.button_color_hover
+	theme.set_color("font_disabled_color", "Button", configuration.font_color_disabled)
 
 	# link button
 	theme.set_color("font_color", "LinkButton", configuration.font_color)
 	theme.set_color("font_hover_color", "LinkButton", configuration.font_color_hover)
 	
-	# panel
-	var panel: StyleBoxFlat = theme.get_stylebox("panel", "Panel")
-	panel.bg_color = configuration.panel_color
-
 	# progress bar
 	theme.set_color("font_color", "ProgressBar", configuration.font_color)
 
-	var progress_bg: StyleBoxFlat = theme.get_stylebox("background", "ProgressBar")
-	var progress_fill: StyleBoxFlat = theme.get_stylebox("fill", "ProgressBar")
-	progress_bg.bg_color = configuration.button_color_normal
-	progress_fill.bg_color = configuration.button_color_pressed
-	
 	# line edit
 	theme.set_color("font_color", "LineEdit", configuration.font_color_hover)
 	theme.set_color("font_selected_color", "LineEdit", configuration.font_color)
 	theme.set_color("font_placeholder_color", "LineEdit", configuration.font_color_hover)
-
-	var line_edit_normal: StyleBoxFlat = theme.get_stylebox("normal", "LineEdit")
-	var line_edit_focus: StyleBoxFlat = theme.get_stylebox("focus", "LineEdit")
-	line_edit_normal.bg_color = configuration.button_color_normal
-	line_edit_focus.bg_color = configuration.button_color_focus
 
 	# popup menu
 	theme.set_color("font_color", "PopupMenu", configuration.font_color)

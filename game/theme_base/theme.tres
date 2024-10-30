@@ -1,38 +1,15 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://pt1hrfiuwfpg"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://pt1hrfiuwfpg"]
 
-[ext_resource type="StyleBox" uid="uid://chg0wkddlahe7" path="res://theme_base/button/button_pressed.tres" id="1_155qx"]
-[ext_resource type="StyleBox" uid="uid://b1urai8cerekk" path="res://theme_base/button/button_normal.tres" id="2_im8lb"]
-[ext_resource type="StyleBox" uid="uid://bo1qjiqq33rso" path="res://theme_base/panel/panel.tres" id="3_clgnq"]
-[ext_resource type="StyleBox" uid="uid://5qt5eu11k8a5" path="res://theme_base/line_edit/line_edit_focus.tres" id="3_gjojj"]
-[ext_resource type="StyleBox" uid="uid://xh6gunsm2aow" path="res://theme_base/line_edit/line_edit_normal.tres" id="3_tsbkv"]
-[ext_resource type="StyleBox" uid="uid://d3ggndc83085" path="res://theme_base/progress_bar/progress_bar_background.tres" id="4_l5kj6"]
-[ext_resource type="StyleBox" uid="uid://b44kqgu4ich55" path="res://theme_base/progress_bar/progress_bar_fill.tres" id="5_a136s"]
-[ext_resource type="StyleBox" uid="uid://bvmtss1jrsxgf" path="res://theme_base/button/button_hover.tres" id="6_rfwm4"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_2rjhg"]
-color = Color(0.3578, 0.514101, 0.865173, 1)
-thickness = 11
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_t2gvl"]
-color = Color(0.370455, 0.617165, 0.885045, 1)
-thickness = 11
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_iskne"]
-color = Color(0.787759, 0.787759, 0.787759, 1)
-thickness = 11
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6bla"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ryy2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5th8"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_niln8"]
-thickness = 10
-vertical = true
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_flp65"]
-thickness = 10
+[ext_resource type="StyleBox" uid="uid://dyng6f1l62yql" path="res://theme_base/styles/box_disabled.tres" id="1_bsse3"]
+[ext_resource type="StyleBox" uid="uid://bu0iiymb5yho4" path="res://theme_base/styles/box_normal.tres" id="1_mv613"]
+[ext_resource type="StyleBox" uid="uid://cp40vtqbeqo0j" path="res://theme_base/styles/box_pressed.tres" id="2_5jo4c"]
+[ext_resource type="StyleBox" uid="uid://bb782pesemrwx" path="res://theme_base/styles/box_focus.tres" id="2_5ubep"]
+[ext_resource type="StyleBox" uid="uid://bt604gpeq6q71" path="res://theme_base/styles/box_background.tres" id="3_hquur"]
+[ext_resource type="StyleBox" uid="uid://caiipvh0cr6qa" path="res://theme_base/styles/box_hover.tres" id="3_yiga3"]
+[ext_resource type="StyleBox" uid="uid://c72pk8l2h3vdv" path="res://theme_base/styles/line_h_normal.tres" id="6_u6m04"]
+[ext_resource type="StyleBox" uid="uid://ckqpd4kmg8gf4" path="res://theme_base/styles/line_h_focus.tres" id="7_e6vru"]
+[ext_resource type="StyleBox" uid="uid://4kr88nosj3w8" path="res://theme_base/styles/line_v_normal.tres" id="9_ax7m1"]
+[ext_resource type="StyleBox" uid="uid://7wyiohndriti" path="res://theme_base/styles/line_v_focus.tres" id="10_afd75"]
 
 [sub_resource type="SystemFont" id="SystemFont_2ye78"]
 
@@ -40,38 +17,46 @@ thickness = 10
 default_font = SubResource("SystemFont_2ye78")
 default_font_size = 18
 Button/constants/hseparation = 2
-Button/styles/disabled = ExtResource("1_155qx")
-Button/styles/focus = ExtResource("1_155qx")
-Button/styles/hover = ExtResource("6_rfwm4")
-Button/styles/normal = ExtResource("2_im8lb")
-Button/styles/pressed = ExtResource("1_155qx")
-HSlider/styles/grabber_area = SubResource("StyleBoxLine_2rjhg")
-HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_t2gvl")
-HSlider/styles/slider = SubResource("StyleBoxLine_iskne")
+Button/styles/disabled = ExtResource("1_bsse3")
+Button/styles/focus = ExtResource("2_5ubep")
+Button/styles/hover = ExtResource("3_yiga3")
+Button/styles/normal = ExtResource("1_mv613")
+Button/styles/pressed = ExtResource("2_5jo4c")
+HScrollBar/styles/grabber = ExtResource("1_mv613")
+HScrollBar/styles/grabber_highlight = ExtResource("3_yiga3")
+HScrollBar/styles/grabber_pressed = ExtResource("2_5jo4c")
+HScrollBar/styles/scroll = ExtResource("6_u6m04")
+HScrollBar/styles/scroll_focus = ExtResource("7_e6vru")
+HSlider/styles/grabber_area = ExtResource("7_e6vru")
+HSlider/styles/grabber_area_highlight = ExtResource("7_e6vru")
+HSlider/styles/slider = ExtResource("6_u6m04")
 Label/colors/font_color = Color(1, 1, 1, 1)
 LineEdit/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 LineEdit/colors/font_placeholder_color = Color(0.875, 0.875, 0.875, 0.6)
 LineEdit/colors/font_selected_color = Color(1, 1, 1, 1)
-LineEdit/styles/focus = ExtResource("3_gjojj")
-LineEdit/styles/normal = ExtResource("3_tsbkv")
-LineEdit/styles/read_only = null
+LineEdit/styles/focus = ExtResource("2_5ubep")
+LineEdit/styles/normal = ExtResource("1_mv613")
+LineEdit/styles/read_only = ExtResource("1_mv613")
 LinkButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 MarginContainer/constants/margin_bottom = 40
 MarginContainer/constants/margin_left = 40
 MarginContainer/constants/margin_right = 40
 MarginContainer/constants/margin_top = 40
-Panel/styles/panel = ExtResource("3_clgnq")
+Panel/styles/panel = ExtResource("3_hquur")
 PopupMenu/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 PopupMenu/colors/font_hover_color = Color(0.875, 0.875, 0.875, 1)
-PopupMenu/styles/hover = ExtResource("6_rfwm4")
-PopupMenu/styles/panel = ExtResource("2_im8lb")
+PopupMenu/styles/hover = ExtResource("2_5jo4c")
+PopupMenu/styles/panel = ExtResource("1_mv613")
 ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
-ProgressBar/styles/background = ExtResource("4_l5kj6")
-ProgressBar/styles/fill = ExtResource("5_a136s")
+ProgressBar/styles/background = ExtResource("2_5jo4c")
+ProgressBar/styles/fill = ExtResource("1_mv613")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
 VBoxContainer/constants/separation = 8
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_s6bla")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_8ryy2")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_d5th8")
-VScrollBar/styles/scroll = SubResource("StyleBoxLine_niln8")
-VScrollBar/styles/scroll_focus = SubResource("StyleBoxLine_flp65")
+VScrollBar/styles/grabber = ExtResource("1_mv613")
+VScrollBar/styles/grabber_highlight = ExtResource("2_5jo4c")
+VScrollBar/styles/grabber_pressed = ExtResource("2_5jo4c")
+VScrollBar/styles/scroll = ExtResource("9_ax7m1")
+VScrollBar/styles/scroll_focus = ExtResource("10_afd75")
+VSlider/styles/grabber_area = ExtResource("10_afd75")
+VSlider/styles/grabber_area_highlight = ExtResource("10_afd75")
+VSlider/styles/slider = ExtResource("9_ax7m1")
