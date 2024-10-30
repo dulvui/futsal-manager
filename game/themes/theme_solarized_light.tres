@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ThemeConfiguration" load_steps=2 format=3 uid="uid://cyylr2jqd7c8n"]
+
+[ext_resource type="Script" path="res://src/resources/theme/theme_configuration.gd" id="1_h0fmv"]
+
+[resource]
+script = ExtResource("1_h0fmv")
+id = 0
+name = "SOLARIZED_LIGHT"
+font_color = Color(0.576471, 0.631373, 0.631373, 1)
+button_color = Color(0.846699, 0.840408, 0.852831, 1)
+panel_color = Color(0.992157, 0.964706, 0.890196, 1)

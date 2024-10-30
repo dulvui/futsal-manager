@@ -1,10 +1,10 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://pt1hrfiuwfpg"]
 
-[ext_resource type="StyleBox" uid="uid://chg0wkddlahe7" path="res://theme/button/button-pressed.tres" id="1_346b4"]
-[ext_resource type="StyleBox" uid="uid://b1urai8cerekk" path="res://theme/button/button-normal.tres" id="2_alhps"]
-[ext_resource type="StyleBox" uid="uid://bo1qjiqq33rso" path="res://theme/panel/panel.tres" id="3_034f0"]
-[ext_resource type="StyleBox" uid="uid://d3ggndc83085" path="res://theme/progress_bar/progress_bar_background.tres" id="3_srfto"]
-[ext_resource type="StyleBox" uid="uid://b44kqgu4ich55" path="res://theme/progress_bar/progress_bar_fill.tres" id="4_i0ooy"]
+[ext_resource type="StyleBox" uid="uid://chg0wkddlahe7" path="res://theme_base/button/button-pressed.tres" id="1_346b4"]
+[ext_resource type="StyleBox" uid="uid://b1urai8cerekk" path="res://theme_base/button/button-normal.tres" id="2_alhps"]
+[ext_resource type="StyleBox" uid="uid://bo1qjiqq33rso" path="res://theme_base/panel/panel.tres" id="3_034f0"]
+[ext_resource type="StyleBox" uid="uid://d3ggndc83085" path="res://theme_base/progress_bar/progress_bar_background.tres" id="3_srfto"]
+[ext_resource type="StyleBox" uid="uid://b44kqgu4ich55" path="res://theme_base/progress_bar/progress_bar_fill.tres" id="4_i0ooy"]
 
 [sub_resource type="SystemFont" id="SystemFont_2ye78"]
 
