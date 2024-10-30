@@ -14,6 +14,9 @@ var config: ConfigFile
 var language: String
 var currency: int
 var theme_index: int
+var theme_custom_font_color: Color
+var theme_custom_style_color: Color
+var theme_custom_background_color: Color
 var start_date: Dictionary
 # generator config
 var generation_seed: String
@@ -103,8 +106,11 @@ func next_season() -> void:
 
 func save_config() -> void:
 	config.set_value("settings", "currency", currency)
-	config.set_value("settings", "theme_index", theme_index)
 	config.set_value("settings", "language", language)
+	config.set_value("settings", "theme_index", theme_index)
+	config.set_value("settings", "theme_custom_font_color", theme_custom_font_color)
+	config.set_value("settings", "theme_custom_style_color", theme_custom_style_color)
+	config.set_value("settings", "theme_custom_background_color", theme_custom_background_color)
 
 	config.save("user://settings.cfg")
 
@@ -149,5 +155,9 @@ func _load_config() -> void:
 			print("error restoring backup for user://settings.cfg")
 
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
-	theme_index = config.get_value("settings", "theme_index", 0)
 	language = config.get_value("settings", "language", "")
+	theme_index = config.get_value("settings", "theme_index", 0)
+	theme_custom_font_color = config.get_value("settings", "theme_custom_font_color", Color.BLACK)
+	theme_custom_style_color = config.get_value("settings", "theme_custom_style_color", Color.RED)
+	theme_custom_background_color = config.get_value("settings", "theme_custom_background_color", Color.WHITE)
+

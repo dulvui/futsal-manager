@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://4aoa7li1cfbc"]
+[gd_scene load_steps=4 format=3 uid="uid://4aoa7li1cfbc"]
 
 [ext_resource type="Script" path="res://src/screens/settings/settings.gd" id="1_m7cla"]
 [ext_resource type="PackedScene" uid="uid://djrvl8pvkr7aa" path="res://src/screens/settings/language_picker/language_picker.tscn" id="2_c3le7"]
+[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="3_ndxx8"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -35,6 +36,12 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "LANGUAGE
+"
+label_settings = ExtResource("3_ndxx8")
+
 [node name="LanguagePicker" parent="VBoxContainer" instance=ExtResource("2_c3le7")]
 layout_mode = 2
 size_flags_vertical = 3
@@ -42,10 +49,19 @@ size_flags_vertical = 3
 [node name="TranslationInstructions" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "TRANSLATION_INSTRUCTIONS"
+label_settings = ExtResource("3_ndxx8")
 
 [node name="TranslationsLink" type="LinkButton" parent="VBoxContainer"]
 layout_mode = 2
 text = "translation link"
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ThemeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "THEMES"
+label_settings = ExtResource("3_ndxx8")
 
 [node name="Theme" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -53,11 +69,55 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/Theme"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "THEME"
+text = "PRESETS"
 
 [node name="ThemeOptionButton" type="OptionButton" parent="VBoxContainer/Theme"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="CustomTheme" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomTheme"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CUSTOM_COLORS"
+
+[node name="Font" type="HBoxContainer" parent="VBoxContainer/CustomTheme"]
+layout_mode = 2
+
+[node name="FontColor" type="ColorPickerButton" parent="VBoxContainer/CustomTheme/Font"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomTheme/Font"]
+layout_mode = 2
+text = "FONT"
+
+[node name="Style" type="HBoxContainer" parent="VBoxContainer/CustomTheme"]
+layout_mode = 2
+
+[node name="StyleColor" type="ColorPickerButton" parent="VBoxContainer/CustomTheme/Style"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomTheme/Style"]
+layout_mode = 2
+text = "BUTTONS"
+
+[node name="Background" type="HBoxContainer" parent="VBoxContainer/CustomTheme"]
+layout_mode = 2
+
+[node name="BackgroundColor" type="ColorPickerButton" parent="VBoxContainer/CustomTheme/Background"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomTheme/Background"]
+layout_mode = 2
+text = "BACKGROUND"
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
 
 [node name="Resolution" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -70,6 +130,9 @@ text = "RESOLUTION"
 [node name="ResolutionOptionButton" type="OptionButton" parent="VBoxContainer/Resolution"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="HSeparator5" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
 
 [node name="Version" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -93,11 +156,17 @@ text = "DEFAULT_SETTINGS"
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Menu2" type="Button" parent="VBoxContainer"]
+[node name="Menu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "MENU"
 
 [connection signal="item_selected" from="VBoxContainer/Theme/ThemeOptionButton" to="." method="_on_theme_option_button_item_selected"]
+[connection signal="color_changed" from="VBoxContainer/CustomTheme/Font/FontColor" to="." method="_on_font_color_color_changed"]
+[connection signal="popup_closed" from="VBoxContainer/CustomTheme/Font/FontColor" to="." method="_on_color_popup_closed"]
+[connection signal="color_changed" from="VBoxContainer/CustomTheme/Style/StyleColor" to="." method="_on_style_color_color_changed"]
+[connection signal="popup_closed" from="VBoxContainer/CustomTheme/Style/StyleColor" to="." method="_on_color_popup_closed"]
+[connection signal="color_changed" from="VBoxContainer/CustomTheme/Background/BackgroundColor" to="." method="_on_background_color_color_changed"]
+[connection signal="popup_closed" from="VBoxContainer/CustomTheme/Background/BackgroundColor" to="." method="_on_color_popup_closed"]
 [connection signal="item_selected" from="VBoxContainer/Resolution/ResolutionOptionButton" to="." method="_on_resolution_option_button_item_selected"]
 [connection signal="pressed" from="VBoxContainer/Defaults" to="." method="_on_defaults_pressed"]
-[connection signal="pressed" from="VBoxContainer/Menu2" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]

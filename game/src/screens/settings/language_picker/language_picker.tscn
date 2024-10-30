@@ -2,62 +2,40 @@
 
 [ext_resource type="Script" path="res://src/screens/settings/language_picker/language_picker.gd" id="1_1ma02"]
 
-[node name="LanguagePicker" type="Control"]
-layout_mode = 3
-anchors_preset = 15
+[node name="LanguagePicker" type="HBoxContainer"]
+anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_1ma02")
-
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -328.0
-offset_top = -13.0
-offset_right = 328.0
-offset_bottom = 13.0
+anchor_bottom = 0.024
+offset_bottom = 0.0799999
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
+script = ExtResource("1_1ma02")
 
-[node name="English" type="Button" parent="HBoxContainer"]
+[node name="English" type="Button" parent="."]
 layout_mode = 2
 text = "ENGLISH"
 
-[node name="Portuguese" type="Button" parent="HBoxContainer"]
+[node name="Portuguese" type="Button" parent="."]
 visible = false
 layout_mode = 2
 text = "PORTUGUES"
 
-[node name="Italian" type="Button" parent="HBoxContainer"]
+[node name="Italian" type="Button" parent="."]
 layout_mode = 2
 text = "ITALIANO"
 
-[node name="Spanish" type="Button" parent="HBoxContainer"]
+[node name="Spanish" type="Button" parent="."]
 visible = false
 layout_mode = 2
 text = "ESPAÑOL"
 
-[node name="German" type="Button" parent="HBoxContainer"]
+[node name="German" type="Button" parent="."]
 layout_mode = 2
 text = "DEUTSCH"
 
-[connection signal="pressed" from="HBoxContainer/English" to="." method="_on_english_pressed"]
-[connection signal="pressed" from="HBoxContainer/Portuguese" to="." method="_on_portuguese_pressed"]
-[connection signal="pressed" from="HBoxContainer/Italian" to="." method="_on_italian_pressed"]
-[connection signal="pressed" from="HBoxContainer/Spanish" to="." method="_on_spanish_pressed"]
-[connection signal="pressed" from="HBoxContainer/German" to="." method="_on_german_pressed"]
+[connection signal="pressed" from="English" to="." method="_on_english_pressed"]
+[connection signal="pressed" from="Portuguese" to="." method="_on_portuguese_pressed"]
+[connection signal="pressed" from="Italian" to="." method="_on_italian_pressed"]
+[connection signal="pressed" from="Spanish" to="." method="_on_spanish_pressed"]
+[connection signal="pressed" from="German" to="." method="_on_german_pressed"]

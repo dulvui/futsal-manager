@@ -2,15 +2,15 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Control
+extends HBoxContainer
 
 signal language_change
 
-@onready var en: Button = $HBoxContainer/English
-@onready var pt: Button = $HBoxContainer/Portuguese
-@onready var it: Button = $HBoxContainer/Italian
-@onready var es: Button = $HBoxContainer/Spanish
-@onready var de: Button = $HBoxContainer/German
+@onready var en: Button = $English
+@onready var pt: Button = $Portuguese
+@onready var it: Button = $Italian
+@onready var es: Button = $Spanish
+@onready var de: Button = $German
 
 
 func _ready() -> void:

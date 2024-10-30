@@ -27,9 +27,11 @@ const LINE_V_FOCUS_FILE: StringName = BASE_PATH + "styles/line_v_focus.tres"
 
 
 const THEMES: Dictionary = {
-	"DARK" : "theme_dark.tres", 
-	"LIGHT" : "theme_light.tres", 
-	"SOLARIZED_LIGHT" : "theme_solarized_light.tres", 
+	"DARK": "theme_dark.tres", 
+	"LIGHT": "theme_light.tres", 
+	"SOLARIZED_LIGHT": "theme_solarized_light.tres", 
+	"RED": "theme_red.tres",
+	"CUSTOM": "",
 }
 
 var theme: Theme
@@ -48,6 +50,8 @@ var line_h_normal: StyleBoxLine
 var line_h_focus: StyleBoxLine
 var line_v_normal: StyleBoxLine
 var line_v_focus: StyleBoxLine
+
+var custom_configuration: ThemeConfiguration
 
 
 func _ready() -> void:
@@ -69,16 +73,20 @@ func _ready() -> void:
 	line_v_normal = ResourceLoader.load(LINE_V_NORMAL_FILE, "StyleBoxLine")
 	line_v_focus = ResourceLoader.load(LINE_V_FOCUS_FILE, "StyleBoxLine")
 
-	_apply_configuration(Global.theme_index)
+	custom_configuration = ThemeConfiguration.new()
+	custom_configuration.font_color = Global.theme_custom_font_color
+	custom_configuration.style_color = Global.theme_custom_style_color
+	custom_configuration.background_color = Global.theme_custom_background_color
+
+	apply_theme(THEMES.keys()[Global.theme_index])
 
 
 func get_active_theme() -> Theme:
 	return theme
 
 
-func set_theme(index: int) -> Theme:
-	_apply_configuration(index)
-	return theme
+func is_custom_theme() -> bool:
+	return THEMES.keys()[Global.theme_index] == "CUSTOM"
 
 
 func get_theme_names() -> Array:
@@ -86,7 +94,7 @@ func get_theme_names() -> Array:
 
 
 func reset_to_default() -> Theme:
-	return set_theme(0)
+	return apply_theme(THEMES.keys()[0])
 
 
 func bold(label: Label) -> void:
@@ -97,14 +105,23 @@ func remove_bold(label: Label) -> void:
 	label.label_settings = label_settings
 
 
-func _apply_configuration(index: int) -> void:
-	print(theme.get_stylebox_type_list())
-	var theme_name: StringName = THEMES.keys()[index]
-	var theme_file: StringName = THEMES[theme_name]
+func apply_theme(theme_name: StringName) -> Theme:
+	if theme_name == "CUSTOM":
+		custom_configuration.font_color = Global.theme_custom_font_color
+		custom_configuration.style_color = Global.theme_custom_style_color
+		custom_configuration.background_color = Global.theme_custom_background_color
+		custom_configuration.set_up()
+		_apply_configuration(custom_configuration)
+	else:
+		var theme_file: StringName = THEMES[theme_name]
+		var configuration: ThemeConfiguration = ResourceLoader.load(THEMES_PATH + theme_file)
+		configuration.set_up()
+		_apply_configuration(configuration)
 
-	var configuration: ThemeConfiguration = ResourceLoader.load(THEMES_PATH + theme_file)
-	configuration.set_up()
+	return theme
 
+
+func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	# box colors
 	box_normal.bg_color = configuration.style_color_normal
 	box_focus.bg_color = configuration.style_color_focus
@@ -118,6 +135,9 @@ func _apply_configuration(index: int) -> void:
 	line_h_focus.color = configuration.style_color_focus
 	line_v_normal.color = configuration.style_color_normal
 	line_v_focus.color = configuration.style_color_focus
+	# label settings
+	label_settings.font_color = configuration.font_color
+	label_settings_bold.font_color = configuration.font_color
 
 	# labels
 	theme.set_color("font_color", "Label", configuration.font_color)
@@ -147,6 +167,5 @@ func _apply_configuration(index: int) -> void:
 	# popup menu
 	theme.set_color("font_color", "PopupMenu", configuration.font_color)
 	theme.set_color("font_hover_color", "PopupMenu", configuration.font_color_hover)
-
 
 

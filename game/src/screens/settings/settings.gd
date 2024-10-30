@@ -23,6 +23,10 @@ const RESOLUTIONS: Dictionary = {
 
 @onready var version_label: Label = $VBoxContainer/Version/VersionLabel
 
+@onready var custom_font_color: ColorPickerButton = $VBoxContainer/CustomTheme/Font/FontColor
+@onready var custom_style_color: ColorPickerButton = $VBoxContainer/CustomTheme/Style/StyleColor
+@onready var custom_background_color: ColorPickerButton = $VBoxContainer/CustomTheme/Background/BackgroundColor
+
 
 func _ready() -> void:
 	# theme
@@ -40,9 +44,14 @@ func _ready() -> void:
 
 	version_label.text = Global.version
 
+	custom_font_color.color = Global.theme_custom_font_color
+	custom_style_color.color = Global.theme_custom_style_color
+	custom_background_color.color = Global.theme_custom_background_color
+
 
 func _on_theme_option_button_item_selected(index: int) -> void:
-	theme = ThemeUtil.set_theme(index)
+	var theme_name: String = theme_options.get_item_text(index)
+	theme = ThemeUtil.apply_theme(theme_name)
 	Global.theme_index = index
 	Global.save_config()
 
@@ -63,3 +72,23 @@ func _on_defaults_pressed() -> void:
 	resolution_options.selected = 2
 	# save
 	Global.save_config()
+
+
+
+func _on_font_color_color_changed(color:Color) -> void:
+	Global.theme_custom_font_color = color
+
+
+func _on_style_color_color_changed(color:Color) -> void:
+	Global.theme_custom_style_color = color
+
+
+func _on_background_color_color_changed(color:Color) -> void:
+	Global.theme_custom_background_color = color
+
+
+func _on_color_popup_closed() -> void:
+	if ThemeUtil.is_custom_theme():
+		ThemeUtil.apply_theme("CUSTOM")
+
+
