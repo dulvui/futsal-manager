@@ -22,16 +22,19 @@ alignment = 1
 
 [node name="Prev" type="Button" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "<"
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 text_overrun_behavior = 3
 
 [node name="Next" type="Button" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = ">"
 
 [connection signal="pressed" from="HBoxContainer/Prev" to="." method="_on_prev_pressed"]

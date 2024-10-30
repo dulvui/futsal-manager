@@ -56,6 +56,7 @@ func remove_bold(label: Label) -> void:
 
 
 func _apply_configuration(index: int) -> void:
+	print(theme.get_stylebox_type_list())
 	var theme_name: StringName = THEMES.keys()[index]
 	var theme_file: StringName = THEMES[theme_name]
 
@@ -74,11 +75,13 @@ func _apply_configuration(index: int) -> void:
 	theme.set_color("font_hover_color", "Button", configuration.font_color_hover)
 	theme.set_color("font_color_pressed", "Button", configuration.font_color_pressed)
 	theme.set_color("font_pressed_color", "Button", configuration.font_color_pressed)
-	# button styles
+
 	var button_normal: StyleBoxFlat = theme.get_stylebox("normal", "Button")
 	button_normal.bg_color = configuration.button_color_normal
 	var button_pressed: StyleBoxFlat = theme.get_stylebox("pressed", "Button")
 	button_pressed.bg_color = configuration.button_color_pressed
+	var button_hover: StyleBoxFlat = theme.get_stylebox("hover", "Button")
+	button_hover.bg_color = configuration.button_color_hover
 
 	# link button
 	theme.set_color("font_color", "LinkButton", configuration.font_color)
@@ -87,3 +90,28 @@ func _apply_configuration(index: int) -> void:
 	# panel
 	var panel: StyleBoxFlat = theme.get_stylebox("panel", "Panel")
 	panel.bg_color = configuration.panel_color
+
+	# progress bar
+	theme.set_color("font_color", "ProgressBar", configuration.font_color)
+
+	var progress_bg: StyleBoxFlat = theme.get_stylebox("background", "ProgressBar")
+	var progress_fill: StyleBoxFlat = theme.get_stylebox("fill", "ProgressBar")
+	progress_bg.bg_color = configuration.button_color_normal
+	progress_fill.bg_color = configuration.button_color_pressed
+	
+	# line edit
+	theme.set_color("font_color", "LineEdit", configuration.font_color_hover)
+	theme.set_color("font_selected_color", "LineEdit", configuration.font_color)
+	theme.set_color("font_placeholder_color", "LineEdit", configuration.font_color_hover)
+
+	var line_edit_normal: StyleBoxFlat = theme.get_stylebox("normal", "LineEdit")
+	var line_edit_focus: StyleBoxFlat = theme.get_stylebox("focus", "LineEdit")
+	line_edit_normal.bg_color = configuration.button_color_normal
+	line_edit_focus.bg_color = configuration.button_color_focus
+
+	# popup menu
+	theme.set_color("font_color", "PopupMenu", configuration.font_color)
+	theme.set_color("font_hover_color", "PopupMenu", configuration.font_color_hover)
+
+
+
