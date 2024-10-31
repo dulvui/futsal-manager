@@ -51,6 +51,11 @@ layout_mode = 2
 text = "LOADING"
 horizontal_alignment = 1
 
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="LoadingProgressBar" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
