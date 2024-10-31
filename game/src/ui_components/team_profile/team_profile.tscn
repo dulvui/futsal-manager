@@ -4,7 +4,7 @@
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="2_e0wm0"]
 [ext_resource type="PackedScene" uid="uid://mvca6wjq0pv6" path="res://src/ui_components/player_list/player_list.tscn" id="3_mnl3l"]
 
-[node name="TeamProfile" type="HBoxContainer"]
+[node name="TeamProfile" type="TabContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,55 +12,56 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+current_tab = 0
 script = ExtResource("1_2kt4b")
 
-[node name="TeamInfo" type="VBoxContainer" parent="."]
+[node name="Info" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+metadata/_tab_index = 0
 
-[node name="Name" type="Label" parent="TeamInfo"]
+[node name="Name" type="Label" parent="Info"]
 layout_mode = 2
 label_settings = ExtResource("2_e0wm0")
 
-[node name="PresitgeStars" type="Label" parent="TeamInfo"]
+[node name="PresitgeStars" type="Label" parent="Info"]
 layout_mode = 2
 
-[node name="Presitge" type="Label" parent="TeamInfo"]
+[node name="Presitge" type="Label" parent="Info"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="TeamInfo"]
+[node name="HSeparator" type="HSeparator" parent="Info"]
 layout_mode = 2
 
-[node name="BudgetTitle" type="Label" parent="TeamInfo"]
+[node name="BudgetTitle" type="Label" parent="Info"]
 layout_mode = 2
 text = "BUDGET"
 label_settings = ExtResource("2_e0wm0")
 
-[node name="Budget" type="Label" parent="TeamInfo"]
+[node name="Budget" type="Label" parent="Info"]
 layout_mode = 2
 
-[node name="SalaryBudget" type="Label" parent="TeamInfo"]
+[node name="SalaryBudget" type="Label" parent="Info"]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="TeamInfo"]
+[node name="HSeparator2" type="HSeparator" parent="Info"]
 layout_mode = 2
 
-[node name="StadiumTitle" type="Label" parent="TeamInfo"]
+[node name="StadiumTitle" type="Label" parent="Info"]
 layout_mode = 2
 text = "STADIUM"
 label_settings = ExtResource("2_e0wm0")
 
-[node name="StadiumName" type="Label" parent="TeamInfo"]
+[node name="StadiumName" type="Label" parent="Info"]
 layout_mode = 2
 
-[node name="StadiumCapacity" type="Label" parent="TeamInfo"]
+[node name="StadiumCapacity" type="Label" parent="Info"]
 layout_mode = 2
 
-[node name="StadiumYearBuilt" type="Label" parent="TeamInfo"]
+[node name="StadiumYearBuilt" type="Label" parent="Info"]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="."]
+[node name="Players" parent="." instance=ExtResource("3_mnl3l")]
+visible = false
 layout_mode = 2
-
-[node name="PlayerList" parent="." instance=ExtResource("3_mnl3l")]
-layout_mode = 2
+metadata/_tab_index = 1

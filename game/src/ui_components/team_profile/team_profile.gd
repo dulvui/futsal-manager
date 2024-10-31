@@ -3,17 +3,17 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name TeamProfile
-extends HBoxContainer
+extends TabContainer
 
-@onready var player_list: PlayerList = $PlayerList
-@onready var name_label: Label = $TeamInfo/Name
-@onready var prestige_stars_label: Label = $TeamInfo/PresitgeStars
-@onready var prestige_label: Label = $TeamInfo/Presitge
-@onready var budget_label: Label = $TeamInfo/Budget
-@onready var salary_budget_label: Label = $TeamInfo/SalaryBudget
-@onready var stadium_name_label: Label = $TeamInfo/StadiumName
-@onready var stadium_capacity_label: Label = $TeamInfo/StadiumCapacity
-@onready var stadium_year_label: Label = $TeamInfo/StadiumYearBuilt
+@onready var player_list: PlayerList = $Players
+@onready var name_label: Label = $Info/Name
+@onready var prestige_stars_label: Label = $Info/PresitgeStars
+@onready var prestige_label: Label = $Info/Presitge
+@onready var budget_label: Label = $Info/Budget
+@onready var salary_budget_label: Label = $Info/SalaryBudget
+@onready var stadium_name_label: Label = $Info/StadiumName
+@onready var stadium_capacity_label: Label = $Info/StadiumCapacity
+@onready var stadium_year_label: Label = $Info/StadiumYearBuilt
 
 
 func set_up(team: Team) -> void:
