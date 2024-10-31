@@ -90,7 +90,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/Theme"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "PRESETS"
+text = "THEMES"
 
 [node name="ThemeOptionButton" type="OptionButton" parent="VBoxContainer/Theme"]
 layout_mode = 2
@@ -99,11 +99,6 @@ size_flags_horizontal = 3
 [node name="CustomTheme" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/CustomTheme"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "CUSTOM_COLORS"
-
 [node name="Font" type="HBoxContainer" parent="VBoxContainer/CustomTheme"]
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -111,7 +106,7 @@ theme_override_constants/separation = 10
 [node name="Label" type="Label" parent="VBoxContainer/CustomTheme/Font"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "FONT"
+text = "FONT_COLOR"
 
 [node name="FontColorButton" type="Button" parent="VBoxContainer/CustomTheme/Font"]
 layout_mode = 2
@@ -124,7 +119,7 @@ theme_override_constants/separation = 10
 [node name="Label" type="Label" parent="VBoxContainer/CustomTheme/Style"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "BUTTONS"
+text = "BUTTONS_COLOR"
 
 [node name="StyleColorButton" type="Button" parent="VBoxContainer/CustomTheme/Style"]
 layout_mode = 2
@@ -137,28 +132,13 @@ theme_override_constants/separation = 10
 [node name="Label" type="Label" parent="VBoxContainer/CustomTheme/Background"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "BACKGROUND"
+text = "BACKGROUND_COLOR"
 
 [node name="BackgroundColorButton" type="Button" parent="VBoxContainer/CustomTheme/Background"]
 layout_mode = 2
 text = "CHANGE"
 
 [node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Resolution" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/Resolution"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "RESOLUTION"
-
-[node name="ResolutionOptionButton" type="OptionButton" parent="VBoxContainer/Resolution"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HSeparator5" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="Version" type="HBoxContainer" parent="VBoxContainer"]
@@ -215,7 +195,6 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="VBoxContainer/CustomTheme/Font/FontColorButton" to="." method="_on_font_color_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CustomTheme/Style/StyleColorButton" to="." method="_on_style_color_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CustomTheme/Background/BackgroundColorButton" to="." method="_on_background_color_button_pressed"]
-[connection signal="item_selected" from="VBoxContainer/Resolution/ResolutionOptionButton" to="." method="_on_resolution_option_button_item_selected"]
 [connection signal="pressed" from="VBoxContainer/Defaults" to="." method="_on_defaults_pressed"]
 [connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="color_changed" from="ColorPopupPanel/MarginContainer/ColorPicker" to="." method="_on_color_picker_color_changed"]
