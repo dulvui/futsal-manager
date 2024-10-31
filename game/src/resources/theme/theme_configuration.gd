@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name ThemeConfiguration
-extends JSONResource
+extends Resource
 
 
 @export var id: int
@@ -51,5 +51,5 @@ func set_up() -> void:
 	style_color_normal = style_color
 	style_color_focus = style_color.lightened(0.1)
 	style_color_pressed = style_color.darkened(0.1)
-	style_color_hover = style_color.lightened(0.1)
+	style_color_hover = style_color.lightened(0.2)
 	style_color_disabled = style_color.darkened(0.4)

@@ -39,6 +39,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 texture = ExtResource("3_4ikrh")

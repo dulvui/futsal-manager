@@ -22,8 +22,10 @@ const BOX_BACKGROUND_FILE: StringName = BASE_PATH + "styles/box_background.tres"
 # style boxes line
 const LINE_H_NORMAL_FILE: StringName = BASE_PATH + "styles/line_h_normal.tres"
 const LINE_H_FOCUS_FILE: StringName = BASE_PATH + "styles/line_h_focus.tres"
+const LINE_H_THIN_FILE: StringName = BASE_PATH + "styles/line_h_thin.tres"
 const LINE_V_NORMAL_FILE: StringName = BASE_PATH + "styles/line_v_normal.tres"
 const LINE_V_FOCUS_FILE: StringName = BASE_PATH + "styles/line_v_focus.tres"
+const LINE_V_THIN_FILE: StringName = BASE_PATH + "styles/line_v_thin.tres"
 
 
 const THEMES: Dictionary = {
@@ -48,8 +50,10 @@ var box_background: StyleBoxFlat
 
 var line_h_normal: StyleBoxLine
 var line_h_focus: StyleBoxLine
+var line_h_thin: StyleBoxLine
 var line_v_normal: StyleBoxLine
 var line_v_focus: StyleBoxLine
+var line_v_thin: StyleBoxLine
 
 var custom_configuration: ThemeConfiguration
 
@@ -70,8 +74,10 @@ func _ready() -> void:
 	# style boxes line
 	line_h_normal = ResourceLoader.load(LINE_H_NORMAL_FILE, "StyleBoxLine")
 	line_h_focus = ResourceLoader.load(LINE_H_FOCUS_FILE, "StyleBoxLine")
+	line_h_thin = ResourceLoader.load(LINE_H_THIN_FILE, "StyleBoxLine")
 	line_v_normal = ResourceLoader.load(LINE_V_NORMAL_FILE, "StyleBoxLine")
 	line_v_focus = ResourceLoader.load(LINE_V_FOCUS_FILE, "StyleBoxLine")
+	line_v_thin = ResourceLoader.load(LINE_V_THIN_FILE, "StyleBoxLine")
 
 	custom_configuration = ThemeConfiguration.new()
 	custom_configuration.font_color = Global.theme_custom_font_color
@@ -135,6 +141,9 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	line_h_focus.color = configuration.style_color_focus
 	line_v_normal.color = configuration.style_color_normal
 	line_v_focus.color = configuration.style_color_focus
+	# thin lines for splitters
+	line_h_thin.color = configuration.font_color
+	line_v_thin.color = configuration.font_color
 	# label settings
 	label_settings.font_color = configuration.font_color
 	label_settings_bold.font_color = configuration.font_color

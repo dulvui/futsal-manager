@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://pt1hrfiuwfpg"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://pt1hrfiuwfpg"]
 
 [ext_resource type="StyleBox" uid="uid://dyng6f1l62yql" path="res://theme_base/styles/box_disabled.tres" id="1_bsse3"]
 [ext_resource type="StyleBox" uid="uid://bu0iiymb5yho4" path="res://theme_base/styles/box_normal.tres" id="1_mv613"]
@@ -8,8 +8,10 @@
 [ext_resource type="StyleBox" uid="uid://caiipvh0cr6qa" path="res://theme_base/styles/box_hover.tres" id="3_yiga3"]
 [ext_resource type="StyleBox" uid="uid://c72pk8l2h3vdv" path="res://theme_base/styles/line_h_normal.tres" id="6_u6m04"]
 [ext_resource type="StyleBox" uid="uid://ckqpd4kmg8gf4" path="res://theme_base/styles/line_h_focus.tres" id="7_e6vru"]
+[ext_resource type="StyleBox" uid="uid://er6fnwftva8b" path="res://theme_base/styles/line_h_thin.tres" id="8_30ena"]
 [ext_resource type="StyleBox" uid="uid://4kr88nosj3w8" path="res://theme_base/styles/line_v_normal.tres" id="9_ax7m1"]
 [ext_resource type="StyleBox" uid="uid://7wyiohndriti" path="res://theme_base/styles/line_v_focus.tres" id="10_afd75"]
+[ext_resource type="StyleBox" uid="uid://b2r2brhh36eea" path="res://theme_base/styles/line_v_thin.tres" id="12_banyd"]
 
 [sub_resource type="SystemFont" id="SystemFont_2ye78"]
 
@@ -27,6 +29,7 @@ HScrollBar/styles/grabber_highlight = ExtResource("3_yiga3")
 HScrollBar/styles/grabber_pressed = ExtResource("2_5jo4c")
 HScrollBar/styles/scroll = ExtResource("6_u6m04")
 HScrollBar/styles/scroll_focus = ExtResource("7_e6vru")
+HSeparator/styles/separator = ExtResource("8_30ena")
 HSlider/styles/grabber_area = ExtResource("7_e6vru")
 HSlider/styles/grabber_area_highlight = ExtResource("7_e6vru")
 HSlider/styles/slider = ExtResource("6_u6m04")
@@ -57,6 +60,7 @@ VScrollBar/styles/grabber_highlight = ExtResource("2_5jo4c")
 VScrollBar/styles/grabber_pressed = ExtResource("2_5jo4c")
 VScrollBar/styles/scroll = ExtResource("9_ax7m1")
 VScrollBar/styles/scroll_focus = ExtResource("10_afd75")
+VSeparator/styles/separator = ExtResource("12_banyd")
 VSlider/styles/grabber_area = ExtResource("10_afd75")
 VSlider/styles/grabber_area_highlight = ExtResource("10_afd75")
 VSlider/styles/slider = ExtResource("9_ax7m1")
