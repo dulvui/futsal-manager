@@ -49,6 +49,7 @@ stretch_mode = 5
 [node name="Message" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "LOADING"
+horizontal_alignment = 1
 
 [node name="LoadingProgressBar" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2
