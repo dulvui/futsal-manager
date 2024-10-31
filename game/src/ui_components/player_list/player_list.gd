@@ -104,7 +104,6 @@ func _set_up_columns() -> void:
 	name_col.custom_minimum_size.x = 300
 	# connect name button  signal
 	for i: int in visible_players.size():
-		name_col.color_labels[i].enable_button()
 		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
 
 	# separator

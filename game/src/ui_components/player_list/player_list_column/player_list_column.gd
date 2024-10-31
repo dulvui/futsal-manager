@@ -43,13 +43,11 @@ func set_up(
 		color_labels.append(label)
 		add_child(label)
 		label.tooltip_text = col_name
-		label.set_up(col_name)
+		label.set_up(col_name, col_name == Const.SURNAME)
 
 		if is_instance_of(value, TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
 			value = str(value).to_upper()
 
-		if col_name == Const.SURNAME:
-			label.enable_button()
 		if "DATE" in col_name:
 			label.set_value(FormatUtil.format_date(value))
 		else:

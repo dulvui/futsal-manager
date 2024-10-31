@@ -25,12 +25,12 @@ script = ExtResource("2_mr605")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
-flat = true
+alignment = 0
+text_overrun_behavior = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 text_overrun_behavior = 1
