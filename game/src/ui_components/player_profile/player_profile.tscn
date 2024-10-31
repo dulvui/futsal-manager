@@ -15,14 +15,15 @@ theme = ExtResource("1")
 script = ExtResource("2")
 metadata/_edit_use_anchors_ = true
 
-[node name="Main" type="HBoxContainer" parent="."]
+[node name="Main" type="TabContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 20
+current_tab = 0
 
 [node name="Info" type="GridContainer" parent="Main"]
 layout_mode = 2
 columns = 2
+metadata/_tab_index = 0
 
 [node name="NameLabel" type="Label" parent="Main/Info"]
 layout_mode = 2
@@ -111,12 +112,11 @@ text = "PRICE"
 layout_mode = 2
 text = "1234 $"
 
-[node name="VSeparator2" type="VSeparator" parent="Main"]
-layout_mode = 2
-
 [node name="History" type="GridContainer" parent="Main"]
+visible = false
 layout_mode = 2
 columns = 2
+metadata/_tab_index = 1
 
 [node name="GoalsLabel" type="Label" parent="Main/History"]
 layout_mode = 2
@@ -126,13 +126,12 @@ text = "GOALS"
 layout_mode = 2
 text = "Viustel Hans"
 
-[node name="VSeparator" type="VSeparator" parent="Main"]
-layout_mode = 2
-
 [node name="Attributes" type="HBoxContainer" parent="Main"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
+metadata/_tab_index = 2
 
 [node name="Goalkeeper" type="GridContainer" parent="Main/Attributes"]
 layout_mode = 2
