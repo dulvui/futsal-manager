@@ -100,7 +100,8 @@ func _set_up_columns() -> void:
 	var names: Callable = func(p: Player) -> String: return p.surname
 	_add_column(Const.SURNAME, Const.SURNAME, names)
 	var name_col: PlayerListColumn = columns[Const.SURNAME]
-	name_col.custom_minimum_size.x = 200
+	# set minimum size to name column
+	name_col.custom_minimum_size.x = 300
 	# connect name button  signal
 	for i: int in visible_players.size():
 		name_col.color_labels[i].enable_button()
