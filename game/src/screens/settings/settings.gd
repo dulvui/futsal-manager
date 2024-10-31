@@ -35,7 +35,7 @@ func _ready() -> void:
 		theme_options.add_item(theme_name)
 	theme_options.selected = Global.theme_index
 
-	version_label.text = Global.version
+	version_label.text = "v" + Global.version
 
 
 func _on_theme_option_button_item_selected(index: int) -> void:
