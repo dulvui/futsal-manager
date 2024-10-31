@@ -14,6 +14,7 @@ var config: ConfigFile
 var language: String
 var currency: int
 var theme_index: int
+var theme_font_size: int
 var theme_custom_font_color: Color
 var theme_custom_style_color: Color
 var theme_custom_background_color: Color
@@ -108,6 +109,7 @@ func save_config() -> void:
 	config.set_value("settings", "currency", currency)
 	config.set_value("settings", "language", language)
 	config.set_value("settings", "theme_index", theme_index)
+	config.set_value("settings", "theme_font_size", theme_font_size)
 	config.set_value("settings", "theme_custom_font_color", theme_custom_font_color)
 	config.set_value("settings", "theme_custom_style_color", theme_custom_style_color)
 	config.set_value("settings", "theme_custom_background_color", theme_custom_background_color)
@@ -157,6 +159,7 @@ func _load_config() -> void:
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	language = config.get_value("settings", "language", "")
 	theme_index = config.get_value("settings", "theme_index", 0)
+	theme_font_size = config.get_value("settings", "theme_font_size", Const.FONT_SIZE_DEFAULT)
 	theme_custom_font_color = config.get_value("settings", "theme_custom_font_color", Color.BLACK)
 	theme_custom_style_color = config.get_value("settings", "theme_custom_style_color", Color.RED)
 	theme_custom_background_color = config.get_value("settings", "theme_custom_background_color", Color.WHITE)

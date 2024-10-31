@@ -100,6 +100,7 @@ func get_theme_names() -> Array:
 
 
 func reset_to_default() -> Theme:
+	Global.theme_index = 0
 	return apply_theme(THEMES.keys()[0])
 
 
@@ -109,6 +110,10 @@ func bold(label: Label) -> void:
 
 func remove_bold(label: Label) -> void:
 	label.label_settings = label_settings
+
+
+func reload_active_theme() -> Theme:
+	return apply_theme(THEMES.keys()[Global.theme_index])
 
 
 func apply_theme(theme_name: StringName) -> Theme:
@@ -147,6 +152,11 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	# label settings
 	label_settings.font_color = configuration.font_color
 	label_settings_bold.font_color = configuration.font_color
+
+	# fontsize
+	theme.default_font_size = Global.theme_font_size
+	label_settings.font_size = Global.theme_font_size 
+	label_settings_bold.font_size = Global.theme_font_size
 
 	# labels
 	theme.set_color("font_color", "Label", configuration.font_color)

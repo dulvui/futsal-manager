@@ -6,6 +6,10 @@ extends Node
 
 enum PlayerNames { MALE, FEMALE, MIXED }
 
+const FONT_SIZE_DEFAULT = 18
+const FONT_SIZE_MIN = 14
+const FONT_SIZE_MAX = 26
+
 # match engine
 const HALF_TIME_SECONDS: int = 60 * 20
 const TICKS_PER_SECOND: int = 4

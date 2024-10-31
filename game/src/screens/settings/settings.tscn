@@ -44,14 +44,15 @@ label_settings = ExtResource("3_ndxx8")
 
 [node name="LanguagePicker" parent="VBoxContainer" instance=ExtResource("2_c3le7")]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="TranslationInstructions" type="Label" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "TRANSLATION_INSTRUCTIONS"
 label_settings = ExtResource("3_ndxx8")
 
 [node name="TranslationsLink" type="LinkButton" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "translation link"
 
@@ -60,8 +61,28 @@ layout_mode = 2
 
 [node name="ThemeLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "THEMES"
+text = "USER_INTERFACE"
 label_settings = ExtResource("3_ndxx8")
+
+[node name="FontSize" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/FontSize"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FONT_SIZE"
+
+[node name="FontSizeSpinBox" type="SpinBox" parent="VBoxContainer/FontSize"]
+layout_mode = 2
+min_value = 8.0
+max_value = 42.0
+value = 18.0
+alignment = 2
+
+[node name="FontDefaultButton" type="Button" parent="VBoxContainer/FontSize"]
+layout_mode = 2
+text = "DEFAULT"
 
 [node name="Theme" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -160,6 +181,8 @@ layout_mode = 2
 layout_mode = 2
 text = "MENU"
 
+[connection signal="value_changed" from="VBoxContainer/FontSize/FontSizeSpinBox" to="." method="_on_font_size_spin_box_value_changed"]
+[connection signal="pressed" from="VBoxContainer/FontSize/FontDefaultButton" to="." method="_on_font_default_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/Theme/ThemeOptionButton" to="." method="_on_theme_option_button_item_selected"]
 [connection signal="color_changed" from="VBoxContainer/CustomTheme/Font/FontColor" to="." method="_on_font_color_color_changed"]
 [connection signal="popup_closed" from="VBoxContainer/CustomTheme/Font/FontColor" to="." method="_on_color_popup_closed"]

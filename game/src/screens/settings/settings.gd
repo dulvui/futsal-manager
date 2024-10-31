@@ -5,6 +5,7 @@
 class_name Settings
 extends Control
 
+
 const RESOLUTIONS: Dictionary = {
 	"3840x2160": Vector2i(3840, 2160),
 	"2560x1440": Vector2i(2560, 1080),
@@ -23,6 +24,7 @@ const RESOLUTIONS: Dictionary = {
 
 @onready var version_label: Label = $VBoxContainer/Version/VersionLabel
 
+@onready var font_size_spinbox: SpinBox = $VBoxContainer/FontSize/FontSizeSpinBox
 @onready var custom_font_color: ColorPickerButton = $VBoxContainer/CustomTheme/Font/FontColor
 @onready var custom_style_color: ColorPickerButton = $VBoxContainer/CustomTheme/Style/StyleColor
 @onready var custom_background_color: ColorPickerButton = $VBoxContainer/CustomTheme/Background/BackgroundColor
@@ -32,6 +34,10 @@ func _ready() -> void:
 	# theme
 	theme = ThemeUtil.get_active_theme()
 	InputUtil.start_focus(self)
+
+	font_size_spinbox.value = Global.theme_font_size
+	font_size_spinbox.min_value = Const.FONT_SIZE_MIN
+	font_size_spinbox.max_value = Const.FONT_SIZE_MAX
 
 	for theme_name: String in ThemeUtil.get_theme_names():
 		theme_options.add_item(theme_name)
@@ -65,12 +71,15 @@ func _on_resolution_option_button_item_selected(index: int) -> void:
 
 
 func _on_defaults_pressed() -> void:
+	# font size
+	Global.theme_font_size = Const.FONT_SIZE_DEFAULT
+	font_size_spinbox.value = Global.theme_font_size
 	# theme
 	theme = ThemeUtil.reset_to_default()
 	theme_options.selected = 0
+	# resolution
 	size = RESOLUTIONS[RESOLUTIONS.keys()[2]]
 	resolution_options.selected = 2
-	# save
 	Global.save_config()
 
 
@@ -89,6 +98,18 @@ func _on_background_color_color_changed(color:Color) -> void:
 
 func _on_color_popup_closed() -> void:
 	if ThemeUtil.is_custom_theme():
-		ThemeUtil.apply_theme("CUSTOM")
+		ThemeUtil.reload_active_theme()
 
+
+func _on_font_default_button_pressed() -> void:
+	Global.theme_font_size = Const.FONT_SIZE_DEFAULT
+	font_size_spinbox.value = Global.theme_font_size
+	ThemeUtil.reload_active_theme()
+	Global.save_config()
+
+
+func _on_font_size_spin_box_value_changed(value: float) -> void:
+	Global.theme_font_size = int(value)
+	ThemeUtil.reload_active_theme()
+	Global.save_config()
 
