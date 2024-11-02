@@ -50,10 +50,6 @@ layout_mode = 2
 
 [node name="Views" type="HBoxContainer" parent="."]
 layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Footer" type="HBoxContainer" parent="."]

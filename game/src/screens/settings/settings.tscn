@@ -84,6 +84,27 @@ alignment = 2
 layout_mode = 2
 text = "DEFAULT"
 
+[node name="Scale" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/Scale"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SCALE"
+
+[node name="ScaleSlider" type="HSlider" parent="VBoxContainer/Scale"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 1.4
+step = 0.1
+value = 1.0
+
+[node name="FontDefaultButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "DEFAULT"
+
 [node name="Theme" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -193,6 +214,8 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="value_changed" from="VBoxContainer/FontSize/FontSizeSpinBox" to="." method="_on_font_size_spin_box_value_changed"]
 [connection signal="pressed" from="VBoxContainer/FontSize/FontDefaultButton" to="." method="_on_font_default_button_pressed"]
+[connection signal="value_changed" from="VBoxContainer/Scale/ScaleSlider" to="." method="_on_scale_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/FontDefaultButton" to="." method="_on_font_default_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/Theme/ThemeOptionButton" to="." method="_on_theme_option_button_item_selected"]
 [connection signal="pressed" from="VBoxContainer/CustomTheme/Font/FontColorButton" to="." method="_on_font_color_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CustomTheme/Style/StyleColorButton" to="." method="_on_style_color_button_pressed"]

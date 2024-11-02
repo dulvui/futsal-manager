@@ -8,6 +8,7 @@ extends VBoxContainer
 signal select_player(player: Player)
 
 const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
+const PAGE_SIZE: int = 15
 
 var views: Array[String]
 var columns: Dictionary = {}
@@ -24,7 +25,6 @@ var visible_players: Array[Player] = []
 
 var page:int
 var page_max:int
-var page_size:int = 16
 
 @onready var filter_container: HBoxContainer = $Filters
 @onready var team_select: OptionButton = $Filters/TeamSelect
@@ -67,7 +67,7 @@ func set_up(p_active_team_id: int = -1) -> void:
 
 	_set_up_players()
 
-	page_max = players.size() / page_size
+	page_max = players.size() / PAGE_SIZE
 
 	_set_up_columns()
 	active_view = views[0]
@@ -94,7 +94,7 @@ func _set_up_columns() -> void:
 	for child in views_container.get_children():
 		child.queue_free()
 
-	visible_players = players.slice(page * page_size, (page + 1) * page_size)
+	visible_players = players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
 	# names
 	var names: Callable = func(p: Player) -> String: return p.surname
@@ -154,7 +154,7 @@ func _set_up_columns() -> void:
 
 
 func _update_columns() -> void:
-	visible_players = players.slice(page * page_size, (page + 1) * page_size)
+	visible_players = players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 	
 	for col: PlayerListColumn in columns.values():
 		col.update_values(visible_players)
@@ -252,7 +252,7 @@ func _on_first_pressed() -> void:
 
 
 func _update_page_indicator() -> void:
-	page_max = players.size() / page_size
+	page_max = players.size() / PAGE_SIZE
 	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
 	last.text = str(page_max + 1)
 

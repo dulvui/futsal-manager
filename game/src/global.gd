@@ -14,6 +14,7 @@ var config: ConfigFile
 var language: String
 var currency: int
 var theme_index: int
+var theme_scale: float
 var theme_font_size: int
 var theme_custom_font_color: Color
 var theme_custom_style_color: Color
@@ -53,6 +54,9 @@ func _ready() -> void:
 	save_states = ResUtil.load_save_states()
 	set_lang(language)
 	RngUtil.set_up_rngs()
+	
+	# set initial scale
+	get_tree().root.content_scale_factor = theme_scale
 
 
 func select_team(p_league: League, p_team: Team) -> void:
@@ -109,6 +113,7 @@ func save_config() -> void:
 	config.set_value("settings", "currency", currency)
 	config.set_value("settings", "language", language)
 	config.set_value("settings", "theme_index", theme_index)
+	config.set_value("settings", "theme_scale", theme_scale)
 	config.set_value("settings", "theme_font_size", theme_font_size)
 	config.set_value("settings", "theme_custom_font_color", theme_custom_font_color)
 	config.set_value("settings", "theme_custom_style_color", theme_custom_style_color)
@@ -159,6 +164,7 @@ func _load_config() -> void:
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	language = config.get_value("settings", "language", "")
 	theme_index = config.get_value("settings", "theme_index", 0)
+	theme_scale = config.get_value("settings", "theme_scale", Const.DEFAULT_SCALE)
 	theme_font_size = config.get_value("settings", "theme_font_size", Const.FONT_SIZE_DEFAULT)
 	theme_custom_font_color = config.get_value("settings", "theme_custom_font_color", Color.BLACK)
 	theme_custom_style_color = config.get_value("settings", "theme_custom_style_color", Color.RED)

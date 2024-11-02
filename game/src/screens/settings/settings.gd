@@ -109,3 +109,10 @@ func _on_color_picker_color_changed(color: Color) -> void:
 	if ThemeUtil.is_custom_theme():
 		ThemeUtil.reload_active_theme()
 
+
+
+func _on_scale_slider_value_changed(value: float) -> void:
+	get_tree().root.content_scale_factor = value
+	Global.theme_scale = value
+	Global.save_config()
+
