@@ -190,3 +190,7 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	theme.set_color("font_hover_color", "PopupMenu", configuration.font_color_hover)
 
 
+func get_default_scale() -> float:
+	if OS.get_name() in ["Android", "iOS"]:
+		return 1.5
+	return 1

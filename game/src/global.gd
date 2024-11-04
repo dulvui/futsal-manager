@@ -164,9 +164,10 @@ func _load_config() -> void:
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	language = config.get_value("settings", "language", "")
 	theme_index = config.get_value("settings", "theme_index", 0)
-	theme_scale = config.get_value("settings", "theme_scale", Const.DEFAULT_SCALE)
+	theme_scale = config.get_value("settings", "theme_scale", ThemeUtil.get_default_scale())
 	theme_font_size = config.get_value("settings", "theme_font_size", Const.FONT_SIZE_DEFAULT)
 	theme_custom_font_color = config.get_value("settings", "theme_custom_font_color", Color.BLACK)
 	theme_custom_style_color = config.get_value("settings", "theme_custom_style_color", Color.RED)
 	theme_custom_background_color = config.get_value("settings", "theme_custom_background_color", Color.WHITE)
+
 

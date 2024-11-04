@@ -6,7 +6,6 @@ extends Node
 
 enum PlayerNames { MALE, FEMALE, MIXED }
 
-const DEFAULT_SCALE: float = 1
 const FONT_SIZE_DEFAULT: int = 18
 const FONT_SIZE_MIN: int = 14
 const FONT_SIZE_MAX: int = 26
