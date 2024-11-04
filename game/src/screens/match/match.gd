@@ -45,7 +45,7 @@ var away_stats: MatchStatistics
 @onready var field_button: Button = $Main/Content/Buttons/Field
 @onready var formation_button: Button = $Main/Content/Buttons/Formation
 
-@onready var players_bar: PlayersBar = $Main/Content/CentralContainer/BottomBar/PlayersBar
+@onready var players_bar: PlayersBar = $Main/Content/CentralContainer/BottomBar/ScrollContainer/PlayersBar
 
 
 func _ready() -> void:

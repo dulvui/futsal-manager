@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://0u70bm8qumdr"]
+[gd_scene load_steps=8 format=3 uid="uid://0u70bm8qumdr"]
 
 [ext_resource type="PackedScene" uid="uid://bubq3rsb3hm6e" path="res://src/match_simulator/match_simulator.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="2"]
@@ -7,46 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui_components/visual_formation/visual_formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://5agy8ull675s" path="res://src/ui_components/match/events/match_events.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://bj7f2r54xkpt1" path="res://src/ui_components/visual_formation/players_bar/players_bar.tscn" id="7_kly0w"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_3ady1"]
-font_size = 84
-
-[sub_resource type="Animation" id="1"]
-resource_name = "Goal"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Goal:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_8fa8s"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Goal:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7wx2m"]
-_data = {
-"Goal": SubResource("1"),
-"RESET": SubResource("Animation_8fa8s")
-}
 
 [node name="Match" type="Control"]
 layout_mode = 3
@@ -210,7 +170,6 @@ visible = false
 layout_mode = 2
 
 [node name="BottomBar" type="VBoxContainer" parent="Main/Content/CentralContainer"]
-custom_minimum_size = Vector2(780, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 
@@ -248,31 +207,14 @@ size_flags_horizontal = 3
 text = "44%"
 horizontal_alignment = 1
 
-[node name="PlayersBar" parent="Main/Content/CentralContainer/BottomBar" instance=ExtResource("7_kly0w")]
+[node name="ScrollContainer" type="ScrollContainer" parent="Main/Content/CentralContainer/BottomBar"]
+clip_contents = false
 layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 0
 
-[node name="Goal" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -114.5
-offset_top = -57.5
-offset_right = 114.5
-offset_bottom = 57.5
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(120, 60)
-text = "GOAL"
-label_settings = SubResource("LabelSettings_3ady1")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_7wx2m")
-}
+[node name="PlayersBar" parent="Main/Content/CentralContainer/BottomBar/ScrollContainer" instance=ExtResource("7_kly0w")]
+layout_mode = 2
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -294,5 +236,5 @@ autostart = true
 [connection signal="pressed" from="Main/Content/Buttons/Speed/Faster" to="." method="_on_faster_pressed"]
 [connection signal="pressed" from="Main/Content/Buttons/Dashboard" to="." method="_on_dashboard_pressed"]
 [connection signal="change_request" from="Main/Content/CentralContainer/MainBar/Formation" to="." method="_on_formation_change_request"]
-[connection signal="change_request" from="Main/Content/CentralContainer/BottomBar/PlayersBar" to="." method="_on_players_bar_change_request"]
+[connection signal="change_request" from="Main/Content/CentralContainer/BottomBar/ScrollContainer/PlayersBar" to="." method="_on_players_bar_change_request"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
