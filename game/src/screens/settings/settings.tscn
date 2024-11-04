@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://4aoa7li1cfbc"]
+[gd_scene load_steps=5 format=3 uid="uid://4aoa7li1cfbc"]
 
 [ext_resource type="Script" path="res://src/screens/settings/settings.gd" id="1_m7cla"]
 [ext_resource type="PackedScene" uid="uid://djrvl8pvkr7aa" path="res://src/screens/settings/language_picker/language_picker.tscn" id="2_c3le7"]
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="3_ndxx8"]
+[ext_resource type="ButtonGroup" uid="uid://c1crppfe8on3n" path="res://src/screens/settings/scale_button_group.tres" id="4_33x86"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -65,6 +66,7 @@ text = "USER_INTERFACE"
 label_settings = ExtResource("3_ndxx8")
 
 [node name="FontSize" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 
@@ -86,24 +88,30 @@ text = "DEFAULT"
 
 [node name="Scale" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="VBoxContainer/Scale"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SCALE"
 
-[node name="ScaleSlider" type="HSlider" parent="VBoxContainer/Scale"]
+[node name="Scale1" type="Button" parent="VBoxContainer/Scale"]
 layout_mode = 2
-size_flags_horizontal = 3
-min_value = 1.0
-max_value = 1.4
-step = 0.1
-value = 1.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("4_33x86")
+text = "75%"
 
-[node name="FontDefaultButton" type="Button" parent="VBoxContainer"]
+[node name="Scale2" type="Button" parent="VBoxContainer/Scale"]
 layout_mode = 2
-text = "DEFAULT"
+toggle_mode = true
+button_group = ExtResource("4_33x86")
+text = "100%"
+
+[node name="Scale3" type="Button" parent="VBoxContainer/Scale"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("4_33x86")
+text = "150%"
 
 [node name="Theme" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -214,8 +222,9 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="value_changed" from="VBoxContainer/FontSize/FontSizeSpinBox" to="." method="_on_font_size_spin_box_value_changed"]
 [connection signal="pressed" from="VBoxContainer/FontSize/FontDefaultButton" to="." method="_on_font_default_button_pressed"]
-[connection signal="value_changed" from="VBoxContainer/Scale/ScaleSlider" to="." method="_on_scale_slider_value_changed"]
-[connection signal="pressed" from="VBoxContainer/FontDefaultButton" to="." method="_on_font_default_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Scale/Scale1" to="." method="_on_scale_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/Scale/Scale2" to="." method="_on_scale_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Scale/Scale3" to="." method="_on_scale_3_pressed"]
 [connection signal="item_selected" from="VBoxContainer/Theme/ThemeOptionButton" to="." method="_on_theme_option_button_item_selected"]
 [connection signal="pressed" from="VBoxContainer/CustomTheme/Font/FontColorButton" to="." method="_on_font_color_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CustomTheme/Style/StyleColorButton" to="." method="_on_style_color_button_pressed"]

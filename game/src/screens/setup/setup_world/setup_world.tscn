@@ -118,11 +118,6 @@ size_flags_horizontal = 3
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1

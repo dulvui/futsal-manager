@@ -39,14 +39,16 @@ text = "UNREAD"
 layout_mode = 2
 text = "STARRED"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="HSplitContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="MessageList" parent="HSplitContainer" instance=ExtResource("3_5tb6d")]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
 [node name="MessageView" type="HBoxContainer" parent="HSplitContainer"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -54,6 +56,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="Message" parent="HSplitContainer/MessageView" instance=ExtResource("3_diog3")]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
 [connection signal="text_changed" from="Filters/Search" to="." method="_on_search_text_changed"]

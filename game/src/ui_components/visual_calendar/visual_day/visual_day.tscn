@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://b4igo2k8ytmf7" path="res://assets/ball.svg" id="3_kqdli"]
 
 [node name="VisualDay" type="Control" groups=["visual-day"]]
-custom_minimum_size = Vector2(90, 60)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 3
-anchor_right = 0.081
+anchor_right = 0.064
 anchor_bottom = 0.102
-offset_right = -0.520004
-offset_bottom = -0.160004
+offset_right = -0.880005
+offset_bottom = -0.159996
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -65,18 +65,16 @@ layout_mode = 2
 
 [node name="Market" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "MARKET"
 horizontal_alignment = 2
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="MonthDay" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "31"
 horizontal_alignment = 2
+text_overrun_behavior = 1
 
 [node name="Competition" type="HBoxContainer" parent="MarginContainer/Button/MarginContainer/VBoxContainer"]
 layout_mode = 2

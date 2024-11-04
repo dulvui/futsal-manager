@@ -38,6 +38,8 @@ func _ready() -> void:
 	version_label.text = "v" + Global.version
 
 
+
+
 func _on_theme_option_button_item_selected(index: int) -> void:
 	var theme_name: String = theme_options.get_item_text(index)
 	theme = ThemeUtil.apply_theme(theme_name)
@@ -56,6 +58,10 @@ func _on_defaults_pressed() -> void:
 	# theme
 	theme = ThemeUtil.reset_to_default()
 	theme_options.selected = 0
+	#scale
+	get_tree().root.content_scale_factor = 1
+	Global.theme_scale = 1
+	
 	Global.save_config()
 
 
@@ -111,8 +117,21 @@ func _on_color_picker_color_changed(color: Color) -> void:
 
 
 
-func _on_scale_slider_value_changed(value: float) -> void:
-	get_tree().root.content_scale_factor = value
-	Global.theme_scale = value
+func _on_scale_1_pressed() -> void:
+	get_tree().root.content_scale_factor = 0.75
+	Global.theme_scale = 0.75
 	Global.save_config()
+
+
+func _on_scale_2_pressed() -> void:
+	get_tree().root.content_scale_factor = 1
+	Global.theme_scale = 1
+	Global.save_config()
+
+
+func _on_scale_3_pressed() -> void:
+	get_tree().root.content_scale_factor = 1.5
+	Global.theme_scale = 1.5
+	Global.save_config()
+
 

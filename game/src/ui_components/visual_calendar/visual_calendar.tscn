@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/ui_components/visual_calendar/visual_calendar.gd" id="2_7vx37"]
 [ext_resource type="PackedScene" uid="uid://dv6e6h4lw1bqy" path="res://src/ui_components/visual_calendar/match_list/match_list.tscn" id="3_cy82g"]
 
-[node name="VisualCalendar" type="HSplitContainer"]
+[node name="VisualCalendar" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,11 +11,13 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 40
 script = ExtResource("2_7vx37")
 
 [node name="Calendar" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(1300, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="Paginator" type="HBoxContainer" parent="Calendar"]
@@ -95,7 +97,7 @@ text = "SUNDAY"
 horizontal_alignment = 1
 
 [node name="MatchList" parent="." instance=ExtResource("3_cy82g")]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 
 [connection signal="pressed" from="Calendar/Paginator/Prev" to="." method="_on_prev_pressed"]

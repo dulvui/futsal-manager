@@ -17,35 +17,38 @@ theme = ExtResource("1_pb4bf")
 alignment = 1
 script = ExtResource("2_ajejk")
 
-[node name="Filters" type="HBoxContainer" parent="."]
+[node name="Filters1" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="NameSearch" type="LineEdit" parent="Filters"]
+[node name="NameSearch" type="LineEdit" parent="Filters1"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-placeholder_text = "NAME"
+size_flags_horizontal = 3
+placeholder_text = "Type / to search"
 caret_blink = true
 
-[node name="VSeparator" type="VSeparator" parent="Filters"]
+[node name="VSeparator2" type="VSeparator" parent="Filters1"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="LeagueSelect" type="OptionButton" parent="Filters"]
+[node name="ActiveView" parent="Filters1" instance=ExtResource("3_x6w1m")]
 layout_mode = 2
 
-[node name="TeamSelect" type="OptionButton" parent="Filters"]
+[node name="Filters2" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PositionSelect" type="OptionButton" parent="Filters2"]
 layout_mode = 2
 
-[node name="PositionSelect" type="OptionButton" parent="Filters"]
+[node name="LeagueSelect" type="OptionButton" parent="Filters2"]
 layout_mode = 2
 
-[node name="VSeparator2" type="VSeparator" parent="Filters"]
-modulate = Color(1, 1, 1, 0)
+[node name="TeamSelect" type="OptionButton" parent="Filters2"]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="ActiveView" parent="Filters" instance=ExtResource("3_x6w1m")]
+[node name="HSeparator" type="HSeparator" parent="."]
 layout_mode = 2
 
 [node name="Views" type="HBoxContainer" parent="."]
@@ -86,11 +89,11 @@ text = ">>"
 layout_mode = 2
 text = "299"
 
-[connection signal="text_changed" from="Filters/NameSearch" to="." method="_on_name_search_text_changed"]
-[connection signal="item_selected" from="Filters/LeagueSelect" to="." method="_on_league_select_item_selected"]
-[connection signal="item_selected" from="Filters/TeamSelect" to="." method="_on_team_select_item_selected"]
-[connection signal="item_selected" from="Filters/PositionSelect" to="." method="_on_position_select_item_selected"]
-[connection signal="item_selected" from="Filters/ActiveView" to="." method="_on_active_view_item_selected"]
+[connection signal="text_changed" from="Filters1/NameSearch" to="." method="_on_name_search_text_changed"]
+[connection signal="item_selected" from="Filters1/ActiveView" to="." method="_on_active_view_item_selected"]
+[connection signal="item_selected" from="Filters2/PositionSelect" to="." method="_on_position_select_item_selected"]
+[connection signal="item_selected" from="Filters2/LeagueSelect" to="." method="_on_league_select_item_selected"]
+[connection signal="item_selected" from="Filters2/TeamSelect" to="." method="_on_team_select_item_selected"]
 [connection signal="pressed" from="Footer/First" to="." method="_on_first_pressed"]
 [connection signal="pressed" from="Footer/Prev2" to="." method="_on_prev_2_pressed"]
 [connection signal="pressed" from="Footer/Prev" to="." method="_on_prev_pressed"]

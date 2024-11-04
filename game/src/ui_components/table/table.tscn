@@ -20,20 +20,23 @@ layout_mode = 2
 alignment = 1
 
 [node name="Continents" parent="Buttons" instance=ExtResource("3_p68f4")]
-custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Nations" parent="Buttons" instance=ExtResource("3_p68f4")]
-custom_minimum_size = Vector2(400, 40)
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Competitions" parent="Buttons" instance=ExtResource("3_p68f4")]
-custom_minimum_size = Vector2(400, 40)
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Seasons" parent="Buttons" instance=ExtResource("3_p68f4")]
-custom_minimum_size = Vector2(400, 40)
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HSeparator2" type="HSeparator" parent="."]
 layout_mode = 2

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualCalendar
-extends HSplitContainer
+extends HBoxContainer
 
 const VisualDayScene: PackedScene = preload(
 	"res://src/ui_components/visual_calendar/visual_day/visual_day.tscn"

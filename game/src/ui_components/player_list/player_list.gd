@@ -8,7 +8,7 @@ extends VBoxContainer
 signal select_player(player: Player)
 
 const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
-const PAGE_SIZE: int = 15
+const PAGE_SIZE: int = 11
 
 var views: Array[String]
 var columns: Dictionary = {}
@@ -26,16 +26,15 @@ var visible_players: Array[Player] = []
 var page:int
 var page_max:int
 
-@onready var filter_container: HBoxContainer = $Filters
-@onready var team_select: OptionButton = $Filters/TeamSelect
-@onready var league_select: OptionButton = $Filters/LeagueSelect
-@onready var pos_select: OptionButton = $Filters/PositionSelect
+@onready var name_search_line_edit: LineEdit = $Filters1/NameSearch
+@onready var active_view_option_button: SwitchOptionButton = $Filters1/ActiveView
+@onready var team_select: OptionButton = $Filters2/TeamSelect
+@onready var league_select: OptionButton = $Filters2/LeagueSelect
+@onready var pos_select: OptionButton = $Filters2/PositionSelect
 @onready var footer: HBoxContainer = $Footer
 @onready var page_indicator: Label = $Footer/PageIndicator
-@onready var active_view_option_button: SwitchOptionButton = $Filters/ActiveView
 @onready var last: Button = $Footer/Last
 @onready var views_container: HBoxContainer = $Views
-@onready var name_search_line_edit: LineEdit = $Filters/NameSearch
 
 
 func _ready() -> void:
@@ -101,7 +100,7 @@ func _set_up_columns() -> void:
 	_add_column(Const.SURNAME, Const.SURNAME, names)
 	var name_col: PlayerListColumn = columns[Const.SURNAME]
 	# set minimum size to name column
-	name_col.custom_minimum_size.x = 300
+	name_col.custom_minimum_size.x = 200
 	# connect name button  signal
 	for i: int in visible_players.size():
 		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))

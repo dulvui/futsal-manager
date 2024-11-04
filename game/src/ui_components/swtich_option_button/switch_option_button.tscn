@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://src/ui_components/swtich_option_button/switch_option_button.gd" id="1_6xdk8"]
 
 [node name="SwitchOptionsButton" type="MarginContainer"]
-custom_minimum_size = Vector2(200, 40)
+custom_minimum_size = Vector2(200, 30)
 anchors_preset = -1
-anchor_right = 0.141
-anchor_bottom = 0.037
+anchor_right = 0.167042
+anchor_bottom = 0.0277407
 offset_right = -150.72
 offset_bottom = 0.0400009
 theme_override_constants/margin_left = 0
@@ -22,19 +22,19 @@ alignment = 1
 
 [node name="Prev" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 8
 text = "<"
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text_overrun_behavior = 3
 
 [node name="Next" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 9
 text = ">"
 
 [connection signal="pressed" from="HBoxContainer/Prev" to="." method="_on_prev_pressed"]
