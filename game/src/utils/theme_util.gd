@@ -149,8 +149,8 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	# thin lines for splitters
 	line_h_thin.color = configuration.font_color
 	line_v_thin.color = configuration.font_color
-	line_h_thin.color.a -= 0.5
-	line_v_thin.color.a -= 0.5
+	line_h_thin.color.a *= 0.5
+	line_v_thin.color.a *= 0.5
 	# label settings
 	label_settings.font_color = configuration.font_color
 	label_settings_bold.font_color = configuration.font_color
