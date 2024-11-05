@@ -20,32 +20,32 @@ var home_stats: MatchStatistics
 var away_stats: MatchStatistics
 
 @onready var match_simulator: MatchSimulator = $MatchSimulator
-@onready var stats: VisualMatchStats = $Main/Content/CentralContainer/MainBar/Stats
-@onready var comments: VBoxContainer = $Main/Content/CentralContainer/MainBar/Log
-@onready var events: MatchEvents = $Main/Content/CentralContainer/MainBar/Events
-@onready var formation: VisualFormation = $Main/Content/CentralContainer/MainBar/Formation
-@onready var time_label: Label = $Main/Content/CentralContainer/TopBar/Time
-@onready var result_label: Label = $Main/Content/CentralContainer/TopBar/Result
-@onready var home_color: ColorRect = $Main/Content/CentralContainer/TopBar/HomeColor
-@onready var away_color: ColorRect = $Main/Content/CentralContainer/TopBar/AwayColor
-@onready var home_possession: Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Home
-@onready var away_possession: Label = $Main/Content/CentralContainer/BottomBar/PossessBar/Labels/Away
-@onready var home_name: Label = $Main/Content/CentralContainer/TopBar/Home
-@onready var away_name: Label = $Main/Content/CentralContainer/TopBar/Away
-@onready var time_bar: ProgressBar = $Main/Content/CentralContainer/TopBar/TimeBar
-@onready var possess_bar: ProgressBar = $Main/Content/CentralContainer/BottomBar/PossessBar
+@onready var stats: VisualMatchStats = %Stats
+@onready var comments: VBoxContainer = %Log
+@onready var events: MatchEvents = %Events
+@onready var formation: VisualFormation = %Formation
+@onready var time_label: Label = %Time
+@onready var result_label: Label = %Result
+@onready var home_color: ColorRect = %HomeColor
+@onready var away_color: ColorRect = %AwayColor
+@onready var home_possession: Label = %Home
+@onready var away_possession: Label = %Away
+@onready var home_name: Label = %Home
+@onready var away_name: Label = %Away
+@onready var time_bar: ProgressBar = %TimeBar
+@onready var possess_bar: ProgressBar = %PossessBar
 
-@onready var pause_button: Button = $Main/Content/Buttons/Pause
-@onready var faster_button: Button = $Main/Content/Buttons/Speed/Faster
-@onready var slower_button: Button = $Main/Content/Buttons/Speed/Slower
-@onready var speed_factor_label: Label = $Main/Content/Buttons/Speed/SpeedFactor
-@onready var dashboard_button: Button = $Main/Content/Buttons/Dashboard
-@onready var events_button: Button = $Main/Content/Buttons/Events
-@onready var stats_button: Button = $Main/Content/Buttons/Stats
-@onready var field_button: Button = $Main/Content/Buttons/Field
-@onready var formation_button: Button = $Main/Content/Buttons/Formation
+@onready var pause_button: Button = %PauseButton
+@onready var faster_button: Button = %FasterButton
+@onready var slower_button: Button = %SlowerButton
+@onready var speed_factor_label: Label = %SpeedFactor
+@onready var dashboard_button: Button = %DashboardButton
+@onready var events_button: Button = %EventsButton
+@onready var stats_button: Button = %StatsButton
+@onready var field_button: Button = %FieldButton
+@onready var formation_button: Button = %FormationButton
 
-@onready var players_bar: PlayersBar = $Main/Content/CentralContainer/BottomBar/ScrollContainer/PlayersBar
+@onready var players_bar: PlayersBar = %PlayersBar
 
 
 func _ready() -> void:
@@ -115,31 +115,31 @@ func half_time() -> void:
 	first_half = false
 
 
-func _on_field_pressed() -> void:
+func _on_field_button_pressed() -> void:
 	_hide_views()
 	match_simulator.show()
 	last_active_view = match_simulator
 
 
-func _on_commentary_pressed() -> void:
+func _on_commentary_button_pressed() -> void:
 	_hide_views()
 	comments.show()
 	last_active_view = comments
 
 
-func _on_stats_pressed() -> void:
+func _on_stats_button_pressed() -> void:
 	_hide_views()
 	stats.show()
 	last_active_view = stats
 
 
-func _on_events_pressed() -> void:
+func _on_events_button_pressed() -> void:
 	_hide_views()
 	events.show()
 	last_active_view = events
 
 
-func _on_formation_pressed() -> void:
+func _on_formation_button_pressed() -> void:
 	_hide_views()
 	formation.show()
 	match_simulator.pause()
@@ -161,25 +161,25 @@ func _toggle_view_buttons() -> void:
 	formation_button.disabled = not formation_button.disabled
 
 
-func _on_dashboard_pressed() -> void:
+func _on_dashboard_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
-func _on_faster_pressed() -> void:
+func _on_faster_button_pressed() -> void:
 	if Global.speed_factor < MAX_SPEED_FACTOR:
 		Global.speed_factor += 1
 		match_simulator.set_time()
 	speed_factor_label.text = str(Global.speed_factor) + " X"
 
 
-func _on_slower_pressed() -> void:
+func _on_slower_button_pressed() -> void:
 	if Global.speed_factor > 1:
 		Global.speed_factor -= 1
 		match_simulator.set_time()
 	speed_factor_label.text = str(Global.speed_factor) + " X"
 
 
-func _on_pause_pressed() -> void:
+func _on_pause_button_pressed() -> void:
 	var paused: bool = match_simulator.pause_toggle()
 	if paused:
 		pause_button.text = tr("CONTINUE")
@@ -189,7 +189,7 @@ func _on_pause_pressed() -> void:
 		last_active_view.show()
 
 
-func _on_skip_pressed() -> void:
+func _on_skip_button_pressed() -> void:
 	match_end()
 
 

@@ -2,12 +2,20 @@
 
 [ext_resource type="Script" path="res://src/ui_components/visual_formation/players_bar/players_bar.gd" id="1_ehtta"]
 
-[node name="PlayersBar" type="HBoxContainer"]
+[node name="PlayersBar" type="ScrollContainer"]
+clip_contents = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+vertical_scroll_mode = 0
 script = ExtResource("1_ehtta")
 metadata/_edit_use_anchors_ = true
+
+[node name="Players" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

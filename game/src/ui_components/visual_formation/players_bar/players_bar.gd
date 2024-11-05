@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name PlayersBar
-extends HBoxContainer
+extends ScrollContainer
 
 
 signal change_request
@@ -12,6 +12,8 @@ const FormationPlayer: PackedScene = preload("res://src/ui_components/visual_for
 
 var change_players: Array[Player]
 var team: Team
+
+@onready var players: HBoxContainer = $Players
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
@@ -22,18 +24,16 @@ func _ready() -> void:
 func set_up(p_team: Team) -> void:
 	team = p_team
 
-	for child: Node in get_children():
-		child.queue_free()
-	
-	# field players
 	for player: Player in team.get_starting_players():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
 		# setup
 		formation_player.set_player(player)
 		formation_player.select.connect(_on_formation_player_select.bind(player))
 		# set node name to player id, so it can be accessed easily
-		add_child(formation_player)
+		players.add_child(formation_player)
 		formation_player.name = str(player.id)
+	
+	players.add_child(VSeparator.new())
 	
 	# bench
 	for player: Player in team.get_sub_players():
@@ -42,7 +42,7 @@ func set_up(p_team: Team) -> void:
 		formation_player.set_player(player)
 		formation_player.select.connect(_on_formation_player_select.bind(player))
 		# set unique node name to player id, so it can be accessed easily
-		add_child(formation_player)
+		players.add_child(formation_player)
 		formation_player.name = str(player.id)
 
 
@@ -50,7 +50,7 @@ func update_players() -> void:
 	for i: int in team.get_lineup_players().size():
 		var player: Player = team.players[i]
 		var visual_player: VisualFormationPlayer = get_node(str(player.id))
-		move_child(visual_player, i)
+		players.move_child(visual_player, i)
 
 
 func _on_formation_player_select(player: Player) -> void:
@@ -60,12 +60,12 @@ func _on_formation_player_select(player: Player) -> void:
 			# access player easily with player id set as node name in setup
 			var id0: String = str(change_players[0].id)
 			var id1: String = str(change_players[1].id)
-			var player0: VisualFormationPlayer = get_node(id0)
-			var player1: VisualFormationPlayer = get_node(id1)
+			var player0: VisualFormationPlayer = players.get_node(id0)
+			var player1: VisualFormationPlayer = players.get_node(id1)
 			var index0: int = player0.get_index()
 			var index1: int = player1.get_index()
-			move_child(player0, index1)
-			move_child(player1, index0)
+			players.move_child(player0, index1)
+			players.move_child(player1, index0)
 
 			team.change_players(change_players[0], change_players[1])
 			change_request.emit()

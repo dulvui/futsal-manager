@@ -54,31 +54,38 @@ vertical = true
 layout_mode = 2
 alignment = 1
 
-[node name="Field" type="Button" parent="Main/Content/Buttons"]
+[node name="FieldButton" type="Button" parent="Main/Content/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "FIELD"
 
-[node name="Commentary" type="Button" parent="Main/Content/Buttons"]
+[node name="CommentaryButton" type="Button" parent="Main/Content/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "COMMENTARY"
 
-[node name="Stats" type="Button" parent="Main/Content/Buttons"]
+[node name="StatsButton" type="Button" parent="Main/Content/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "STATS"
 
-[node name="Events" type="Button" parent="Main/Content/Buttons"]
+[node name="EventsButton" type="Button" parent="Main/Content/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "EVENTS"
 
-[node name="Formation" type="Button" parent="Main/Content/Buttons"]
+[node name="FormationButton" type="Button" parent="Main/Content/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "FORMATION"
 
-[node name="Pause" type="Button" parent="Main/Content/Buttons"]
+[node name="PauseButton" type="Button" parent="Main/Content/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "PAUSE"
 
-[node name="Skip" type="Button" parent="Main/Content/Buttons"]
+[node name="SkipButton" type="Button" parent="Main/Content/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "SKIP"
 
@@ -87,19 +94,23 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Slower" type="Button" parent="Main/Content/Buttons/Speed"]
+[node name="SlowerButton" type="Button" parent="Main/Content/Buttons/Speed"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "-1"
 
 [node name="SpeedFactor" type="Label" parent="Main/Content/Buttons/Speed"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "X2"
 
-[node name="Faster" type="Button" parent="Main/Content/Buttons/Speed"]
+[node name="FasterButton" type="Button" parent="Main/Content/Buttons/Speed"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "+1"
 
-[node name="Dashboard" type="Button" parent="Main/Content/Buttons"]
+[node name="DashboardButton" type="Button" parent="Main/Content/Buttons"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "DASHBOARD"
@@ -117,10 +128,12 @@ alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Time" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "00:00"
 
 [node name="TimeBar" type="ProgressBar" parent="Main/Content/CentralContainer/TopBar"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -130,22 +143,27 @@ value = 1.0
 show_percentage = false
 
 [node name="HomeColor" type="ColorRect" parent="Main/Content/CentralContainer/TopBar"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 
 [node name="Home" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Robledo"
 
 [node name="Result" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "0:0"
 
 [node name="Away" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Cisneros"
 
 [node name="AwayColor" type="ColorRect" parent="Main/Content/CentralContainer/TopBar"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 
@@ -154,18 +172,22 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Log" type="VBoxContainer" parent="Main/Content/CentralContainer/MainBar"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="Stats" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("4")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="Events" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("6")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="Formation" parent="Main/Content/CentralContainer/MainBar" instance=ExtResource("5")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
@@ -174,6 +196,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="PossessBar" type="ProgressBar" parent="Main/Content/CentralContainer/BottomBar"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 step = 1.0
@@ -207,13 +230,8 @@ size_flags_horizontal = 3
 text = "44%"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Main/Content/CentralContainer/BottomBar"]
-clip_contents = false
-layout_mode = 2
-size_flags_vertical = 3
-vertical_scroll_mode = 0
-
-[node name="PlayersBar" parent="Main/Content/CentralContainer/BottomBar/ScrollContainer" instance=ExtResource("7_kly0w")]
+[node name="PlayersBar" parent="Main/Content/CentralContainer/BottomBar" instance=ExtResource("7_kly0w")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="StartTimer" type="Timer" parent="."]
@@ -225,16 +243,16 @@ autostart = true
 [connection signal="half_time" from="MatchSimulator" to="." method="_on_match_simulator_half_time"]
 [connection signal="match_end" from="MatchSimulator" to="." method="_on_match_simulator_match_end"]
 [connection signal="update_time" from="MatchSimulator" to="." method="_on_match_simulator_update_time"]
-[connection signal="pressed" from="Main/Content/Buttons/Field" to="." method="_on_field_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Commentary" to="." method="_on_commentary_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Stats" to="." method="_on_stats_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Events" to="." method="_on_events_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Formation" to="." method="_on_formation_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Pause" to="." method="_on_pause_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Skip" to="." method="_on_skip_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Speed/Slower" to="." method="_on_slower_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Speed/Faster" to="." method="_on_faster_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Dashboard" to="." method="_on_dashboard_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/FieldButton" to="." method="_on_field_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/CommentaryButton" to="." method="_on_commentary_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/StatsButton" to="." method="_on_stats_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/EventsButton" to="." method="_on_events_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/FormationButton" to="." method="_on_formation_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/SkipButton" to="." method="_on_skip_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Speed/SlowerButton" to="." method="_on_slower_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Speed/FasterButton" to="." method="_on_faster_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/DashboardButton" to="." method="_on_dashboard_button_pressed"]
 [connection signal="change_request" from="Main/Content/CentralContainer/MainBar/Formation" to="." method="_on_formation_change_request"]
-[connection signal="change_request" from="Main/Content/CentralContainer/BottomBar/ScrollContainer/PlayersBar" to="." method="_on_players_bar_change_request"]
+[connection signal="change_request" from="Main/Content/CentralContainer/BottomBar/PlayersBar" to="." method="_on_players_bar_change_request"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
