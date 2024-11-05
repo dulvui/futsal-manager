@@ -29,38 +29,28 @@ var active_view: ContentViews = ContentViews.EMAIL
 
 @onready var team: Team = Global.team
 
+# top bar
+@onready var continue_button: Button = %ContinueButton
+@onready var next_match_button: Button = %NextMatchButton
+@onready var budget_label: Label = %Budget
+@onready var date_label: Label = %Date
+@onready var manager_label: Label = %ManagerName
+@onready var team_label: Label = %TeamName
+
 # buttons
-@onready var continue_button: Button = $MarginContainer/HBoxContainer/MainContainer/TopBar/Continue
-@onready
-var next_match_button: Button = $MarginContainer/HBoxContainer/MainContainer/TopBar/NextMatch
-@onready var email_button: Button = $MarginContainer/HBoxContainer/Buttons/Email
+@onready var email_button: Button = %EmailButton
 
 # content views
-@onready var email: VisualEmail = $MarginContainer/HBoxContainer/MainContainer/Content/Email
-@onready var table: VisualTable = $MarginContainer/HBoxContainer/MainContainer/Content/Table
-@onready
-var visual_calendar: VisualCalendar = $MarginContainer/HBoxContainer/MainContainer/Content/Calendar
-@onready var info: VisualInfo = $MarginContainer/HBoxContainer/MainContainer/Content/Info
-
-# labels
-@onready var budget_label: Label = $MarginContainer/HBoxContainer/MainContainer/TopBar/Budget
-@onready var date_label: Label = $MarginContainer/HBoxContainer/MainContainer/TopBar/Date
-@onready var manager_label: Label = $MarginContainer/HBoxContainer/MainContainer/TopBar/ManagerName
-@onready var team_label: Label = $MarginContainer/HBoxContainer/MainContainer/TopBar/TeamName
-
-# full screen views
-@onready
-var formation: VisualFormation = $MarginContainer/HBoxContainer/MainContainer/Content/Formation
-@onready
-var player_list: PlayerList = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerList
-@onready
-var all_players_list: PlayerList = $MarginContainer/HBoxContainer/MainContainer/Content/AllPlayerList
-@onready
-var player_offer: PlayerOffer = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerOffer
-@onready
-var contract_offer: ContractOffer = $MarginContainer/HBoxContainer/MainContainer/Content/ContractOffer
-@onready
-var player_profile: PlayerProfile = $MarginContainer/HBoxContainer/MainContainer/Content/PlayerProfile
+@onready var email: VisualEmail = %Email
+@onready var table: VisualTable = %Table
+@onready var visual_calendar: VisualCalendar = %Calendar
+@onready var info: VisualInfo = %Info
+@onready var formation: VisualFormation = %Formation
+@onready var player_list: PlayerList = %PlayerList
+@onready var all_players_list: PlayerList = %AllPlayerList
+@onready var player_offer: PlayerOffer = %PlayerOffer
+@onready var contract_offer: ContractOffer = %ContractOffer
+@onready var player_profile: PlayerProfile = %PlayerProfile
 @onready var loading_screen: LoadingScreen = $LoadingScreen
 
 
@@ -100,37 +90,37 @@ func _process(_delta: float) -> void:
 	budget_label.text = FormatUtil.get_sign(team.budget)
 
 
-func _on_menu_pressed() -> void:
+func _on_menu_button_pressed() -> void:
 	LoadingUtil.start("SAVING_GAME", LoadingUtil.Type.SAVE_GAME, true)
 	loading_screen.show()
 	Global.save_all_data()
 
 
-func _on_search_player_pressed() -> void:
+func _on_search_player_button_pressed() -> void:
 	_show_active_view(ContentViews.ALL_PLAYERS)
 
 
-func _on_info_pressed() -> void:
+func _on_info_button_pressed() -> void:
 	_show_active_view(ContentViews.INFO)
 
 
-func _on_formation_pressed() -> void:
+func _on_formation_button_pressed() -> void:
 	_show_active_view(ContentViews.FORMATION)
 
 
-func _on_email_pressed() -> void:
+func _on_email_button_pressed() -> void:
 	_show_active_view(ContentViews.EMAIL)
 
 
-func _on_table_pressed() -> void:
+func _on_table_button_pressed() -> void:
 	_show_active_view(ContentViews.TABLE)
 
 
-func _on_calendar_pressed() -> void:
+func _on_calendar_button_pressed() -> void:
 	_show_active_view(ContentViews.CALENDAR)
 
 
-func _on_players_pressed() -> void:
+func _on_players_button_pressed() -> void:
 	_show_active_view(ContentViews.PLAYERS)
 
 
@@ -204,13 +194,13 @@ func _show_active_view(p_active_view: int = -1, from_history: bool = false) -> v
 			view_history_index = view_history.size() - 1
 
 
-func _on_continue_pressed() -> void:
+func _on_continue_button_pressed() -> void:
 	_next_day()
 	# remove comment to test player progress
 	# PlayerProgress.update_players()
 
 
-func _on_next_match_pressed() -> void:
+func _on_next_match_button_pressed() -> void:
 	next_match_button.disabled = true
 	continue_button.disabled = true
 
@@ -290,7 +280,7 @@ func _on_player_offer_cancel() -> void:
 	_show_active_view(ContentViews.PLAYER_PROFILE)
 
 
-func _on_prev_view_pressed() -> void:
+func _on_prev_view_button_pressed() -> void:
 	view_history_index -= 1
 	if view_history_index < 1:
 		view_history_index = 0
@@ -300,7 +290,7 @@ func _on_prev_view_pressed() -> void:
 	_show_active_view(active_view, true)
 
 
-func _on_next_view_pressed() -> void:
+func _on_next_view_button_pressed() -> void:
 	view_history_index += 1
 	if view_history_index > view_history.size() - 1:
 		view_history_index = view_history.size() - 1

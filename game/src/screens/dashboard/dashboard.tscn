@@ -47,44 +47,52 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Menu" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="MenuButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "MENU"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="Email" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="EmailButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "EMAIL"
 
-[node name="Info" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="InfoButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "INFO"
 
-[node name="Calendar" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="CalendarButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "CALENDAR"
 
-[node name="Table" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="TableButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "TABLE"
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="Formation" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="FormationButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "FORMATION"
 
-[node name="Players" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="PlayersButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "PLAYERS"
 
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="SearchPlayer" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="SearchPlayerButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "SEARCH_PLAYER"
 
@@ -100,23 +108,28 @@ theme_override_constants/separation = 30
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="PrevView" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+[node name="PrevViewButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "<"
 
-[node name="NextView" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+[node name="NextViewButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = ">"
 
 [node name="ManagerName" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Hans Viustel"
 
 [node name="TeamName" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Barcellona"
 
 [node name="Budget" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "400.000 $"
 
@@ -126,14 +139,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Date" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "24/08/2002"
 
-[node name="NextMatch" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+[node name="NextMatchButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "NEXT_MATCH"
 
-[node name="Continue" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+[node name="ContinueButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "CONTINUE"
 
@@ -146,42 +162,52 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Email" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("6")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="Table" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("7")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="Calendar" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("3")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="Formation" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("5")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="AllPlayerList" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("8_nkdvo")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="PlayerList" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("8_nkdvo")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="Info" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("8_bk8g0")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="PlayerProfile" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("11_838pl")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="PlayerOffer" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("8")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
 [node name="ContractOffer" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("9")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
@@ -190,18 +216,18 @@ visible = false
 custom_minimum_size = Vector2(1920, 800)
 layout_mode = 1
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/Menu" to="." method="_on_menu_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/Email" to="." method="_on_email_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/Info" to="." method="_on_info_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/Calendar" to="." method="_on_calendar_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/Table" to="." method="_on_table_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/Formation" to="." method="_on_formation_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/Players" to="." method="_on_players_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/SearchPlayer" to="." method="_on_search_player_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/PrevView" to="." method="_on_prev_view_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/NextView" to="." method="_on_next_view_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/NextMatch" to="." method="_on_next_match_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/EmailButton" to="." method="_on_email_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/InfoButton" to="." method="_on_info_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/CalendarButton" to="." method="_on_calendar_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/TableButton" to="." method="_on_table_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/FormationButton" to="." method="_on_formation_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/PlayersButton" to="." method="_on_players_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/SearchPlayerButton" to="." method="_on_search_player_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/PrevViewButton" to="." method="_on_prev_view_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/NextViewButton" to="." method="_on_next_view_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/NextMatchButton" to="." method="_on_next_match_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MainContainer/TopBar/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="email_action" from="MarginContainer/HBoxContainer/MainContainer/Content/Email" to="." method="_on_email_email_action"]
 [connection signal="select_player" from="MarginContainer/HBoxContainer/MainContainer/Content/AllPlayerList" to="." method="_on_all_player_list_select_player"]
 [connection signal="select_player" from="MarginContainer/HBoxContainer/MainContainer/Content/PlayerList" to="." method="_on_player_list_select_player"]
