@@ -80,6 +80,7 @@ horizontal_alignment = 2
 text_overrun_behavior = 1
 
 [node name="Competition" type="HBoxContainer" parent="MarginContainer/Button/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Ball" type="TextureRect" parent="MarginContainer/Button/MarginContainer/VBoxContainer/Competition"]
