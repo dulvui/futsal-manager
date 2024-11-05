@@ -4,7 +4,7 @@ SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
 SPDX-License-Identifier: CC0-1.0
 -->
 
-# 99Managers: Futsal Edition
+# 99 Managers™ Futsal Edition
 A futsal manager game created with the Godot Engine.  
 **Still under development.**
 
