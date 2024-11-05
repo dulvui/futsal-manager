@@ -5,12 +5,12 @@
 class_name Menu
 extends Control
 
-@onready var save_state: SaveStateEntry = $MarginContainer/VBoxContainer/SaveState
+@onready var save_state: SaveStateEntry = %SaveState
 
 @onready var loading_screen: LoadingScreen = $LoadingScreen
 
-@onready var load_game: Button = $MarginContainer/VBoxContainer/LoadGame
-@onready var continue_game: Button = $MarginContainer/VBoxContainer/ContinueGame
+@onready var load_game: Button = %LoadGame
+@onready var continue_game: Button = %ContinueGame
 
 @onready var version: Label = $Version
 
