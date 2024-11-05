@@ -27,10 +27,11 @@ const LINE_V_NORMAL_FILE: StringName = BASE_PATH + "styles/line_v_normal.tres"
 const LINE_V_FOCUS_FILE: StringName = BASE_PATH + "styles/line_v_focus.tres"
 const LINE_V_THIN_FILE: StringName = BASE_PATH + "styles/line_v_thin.tres"
 
+
 const THEMES: Dictionary = {
-	"DARK": "theme_dark.tres",
-	"LIGHT": "theme_light.tres",
-	"SOLARIZED_LIGHT": "theme_solarized_light.tres",
+	"DARK": "theme_dark.tres", 
+	"LIGHT": "theme_light.tres", 
+	"SOLARIZED_LIGHT": "theme_solarized_light.tres", 
 	"RED": "theme_red.tres",
 	"CUSTOM": "",
 }
@@ -156,15 +157,15 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 
 	# fontsize
 	theme.default_font_size = Global.theme_font_size
-	label_settings.font_size = Global.theme_font_size
+	label_settings.font_size = Global.theme_font_size 
 	label_settings_bold.font_size = Global.theme_font_size
 
 	# labels
 	theme.set_color("font_color", "Label", configuration.font_color)
-
+	
 	# rich text label
 	theme.set_color("default_color", "RichTextLabel", configuration.font_color)
-
+	
 	# button  font colors
 	theme.set_color("font_color", "Button", configuration.font_color)
 	theme.set_color("font_focus_color", "Button", configuration.font_color_focus)
@@ -175,7 +176,7 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	# link button
 	theme.set_color("font_color", "LinkButton", configuration.font_color)
 	theme.set_color("font_hover_color", "LinkButton", configuration.font_color_hover)
-
+	
 	# progress bar
 	theme.set_color("font_color", "ProgressBar", configuration.font_color)
 

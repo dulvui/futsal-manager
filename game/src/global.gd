@@ -54,7 +54,7 @@ func _ready() -> void:
 	save_states = ResUtil.load_save_states()
 	set_lang(language)
 	RngUtil.set_up_rngs()
-
+	
 	# set initial scale
 	get_tree().root.content_scale_factor = theme_scale
 
@@ -168,6 +168,6 @@ func _load_config() -> void:
 	theme_font_size = config.get_value("settings", "theme_font_size", Const.FONT_SIZE_DEFAULT)
 	theme_custom_font_color = config.get_value("settings", "theme_custom_font_color", Color.BLACK)
 	theme_custom_style_color = config.get_value("settings", "theme_custom_style_color", Color.RED)
-	theme_custom_background_color = config.get_value(
-		"settings", "theme_custom_background_color", Color.WHITE
-	)
+	theme_custom_background_color = config.get_value("settings", "theme_custom_background_color", Color.WHITE)
+
+

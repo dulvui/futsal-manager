@@ -5,21 +5,19 @@
 class_name PlayersBar
 extends ScrollContainer
 
+
 signal change_request
 
-const FormationPlayer: PackedScene = preload(
-	"res://src/ui_components/visual_formation/player/formation_player.tscn"
-)
+const FormationPlayer: PackedScene = preload("res://src/ui_components/visual_formation/player/formation_player.tscn")
 
 var change_players: Array[Player]
 var team: Team
 
 @onready var players: HBoxContainer = $Players
 
-
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-
+	
 	change_players = []
 
 
@@ -34,9 +32,9 @@ func set_up(p_team: Team) -> void:
 		# set node name to player id, so it can be accessed easily
 		players.add_child(formation_player)
 		formation_player.name = str(player.id)
-
+	
 	players.add_child(VSeparator.new())
-
+	
 	# bench
 	for player: Player in team.get_sub_players():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
@@ -71,7 +69,8 @@ func _on_formation_player_select(player: Player) -> void:
 
 			team.change_players(change_players[0], change_players[1])
 			change_request.emit()
-
+			
 			change_players.clear()
 	else:
 		change_players.erase(player)
+

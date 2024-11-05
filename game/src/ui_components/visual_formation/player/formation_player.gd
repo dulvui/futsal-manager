@@ -45,3 +45,4 @@ func set_player(p_player: Player, _team: Team = null) -> void:
 
 func _on_select_pressed() -> void:
 	select.emit()
+

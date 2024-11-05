@@ -42,8 +42,9 @@ func from_json(json: Dictionary) -> void:
 	var json_resource_class_list: Array = (
 		global_class_list
 		. filter(
-			func(d: Dictionary) -> bool:
-				return str(d.path).begins_with("res://") and d.base == "JSONResource"
+			func(d: Dictionary) -> bool: return (
+				str(d.path).begins_with("res://") and d.base == "JSONResource"
+			)
 		)
 		. map(func(d: Dictionary) -> String: return d.class)
 	)
@@ -53,11 +54,9 @@ func from_json(json: Dictionary) -> void:
 		json_resource_class_list_copy = (
 			global_class_list
 			. filter(
-				func(d: Dictionary) -> bool:
-					return (
-						str(d.path).begins_with("res://")
-						and d.base in json_resource_class_list_copy
-					)
+				func(d: Dictionary) -> bool: return (
+					str(d.path).begins_with("res://") and d.base in json_resource_class_list_copy
+				)
 			)
 			. map(func(d: Dictionary) -> String: return d.class)
 		)

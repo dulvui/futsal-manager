@@ -24,9 +24,7 @@ var match_engine: MatchEngine
 
 
 func _physics_process(delta: float) -> void:
-	camera.position = camera.position.lerp(
-		visual_match.visual_ball.global_position, delta * CAMERA_SPEED
-	)
+	camera.position = camera.position.lerp(visual_match.visual_ball.global_position, delta * CAMERA_SPEED)
 
 
 func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
@@ -36,16 +34,18 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
-
+	
 	match_engine = MatchEngine.new()
 	match_engine.set_up(home_team, away_team, match_seed)
 
 	# connect change players signals to visual teams
 	match_engine.home_team.player_changed.connect(
-		func() -> void: visual_match.home_team.change_players(match_engine.home_team)
+		func() -> void:
+			visual_match.home_team.change_players(match_engine.home_team)
 	)
 	match_engine.away_team.player_changed.connect(
-		func() -> void: visual_match.away_team.change_players(match_engine.away_team)
+		func() -> void:
+			visual_match.away_team.change_players(match_engine.away_team)
 	)
 
 	# set up visual match
@@ -91,7 +91,7 @@ func start_match() -> void:
 func _on_timer_timeout() -> void:
 	match_engine.update()
 	visual_match.update(timer.wait_time)
-
+	
 	ticks += 1
 	# only update tiem on clock, after TICKS_PER_SECOND passed
 	if ticks == Const.TICKS_PER_SECOND:
@@ -109,3 +109,4 @@ func _update_time() -> void:
 	elif time == Const.HALF_TIME_SECONDS * 2:
 		timer.stop()
 		match_end.emit()
+

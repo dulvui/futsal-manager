@@ -5,11 +5,12 @@
 class_name ThemeConfiguration
 extends Resource
 
+
 @export var id: int
 @export var name: String
 
 @export var font_color: Color
-@export var style_color: Color
+@export var style_color: Color 
 @export var background_color: Color
 
 var font_color_normal: Color

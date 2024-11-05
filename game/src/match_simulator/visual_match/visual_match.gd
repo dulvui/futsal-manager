@@ -5,6 +5,7 @@
 class_name VisualMatch
 extends Node2D
 
+
 @onready var home_team: VisualTeam = $VisualTeamHome
 @onready var away_team: VisualTeam = $VisualTeamAway
 @onready var visual_ball: VisualBall = $VisualBall
@@ -14,7 +15,7 @@ extends Node2D
 func set_up(match_engine: MatchEngine, update_interval: float) -> void:
 	visual_field.set_up(match_engine.field)
 	visual_ball.set_up(match_engine.ball, update_interval)
-
+	
 	var home_color: Color = match_engine.home_team.res_team.get_home_color()
 	var away_color: Color = match_engine.away_team.res_team.get_away_color(home_color)
 	home_team.set_up(match_engine.home_team, visual_ball, home_color, update_interval)

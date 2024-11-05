@@ -7,9 +7,7 @@ extends VBoxContainer
 
 signal select_player(player: Player)
 
-const PlayerListColumnScene: PackedScene = preload(
-	"res://src/ui_components/player_list/player_list_column/player_list_column.tscn"
-)
+const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
 const PAGE_SIZE: int = 11
 
 var views: Array[String]
@@ -25,8 +23,8 @@ var all_players: Array[Player] = []
 var players: Array[Player] = []
 var visible_players: Array[Player] = []
 
-var page: int
-var page_max: int
+var page:int
+var page_max:int
 
 @onready var name_search_line_edit: LineEdit = $Filters1/NameSearch
 @onready var active_view_option_button: SwitchOptionButton = $Filters1/ActiveView
@@ -105,9 +103,7 @@ func _set_up_columns() -> void:
 	name_col.custom_minimum_size.x = 200
 	# connect name button  signal
 	for i: int in visible_players.size():
-		name_col.color_labels[i].button.pressed.connect(
-			func() -> void: select_player.emit(visible_players[i])
-		)
+		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
 
 	# separator
 	views_container.add_child(VSeparator.new())
@@ -118,8 +114,7 @@ func _set_up_columns() -> void:
 	# TODO fix nationalitys, get nation by nation name sabed in player res
 	var nationalities: Callable = func(p: Player) -> String: return p.nation
 	_add_column("GENERAL", "NATION", nationalities)
-	var positions: Callable = func(p: Player) -> String:
-		return Position.Type.keys()[p.position.type]
+	var positions: Callable = func(p: Player) -> String: return Position.Type.keys()[p.position.type]
 	_add_column("GENERAL", Const.POSITION, positions)
 	var prices: Callable = func(p: Player) -> String: return FormatUtil.get_sign(p.price)
 	_add_column("GENERAL", "PRICE", prices)
@@ -147,7 +142,7 @@ func _set_up_columns() -> void:
 		if s.usage == 4102:
 			var stats: Callable = func(p: Player) -> String: return str(p.statistics.get(s.name))
 			_add_column("STATISTICS", s.name, stats)
-
+	
 	# attributes
 	var attribute_names: Dictionary = Attributes.new().get_all_attributes()
 	for key: String in attribute_names.keys():
@@ -159,15 +154,15 @@ func _set_up_columns() -> void:
 
 func _update_columns() -> void:
 	visible_players = players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
-
+	
 	for col: PlayerListColumn in columns.values():
 		col.update_values(visible_players)
 
 
-func _add_column(view_name: String, col_name: String, map_function: Callable) -> void:
+func _add_column(view_name:String, col_name: String, map_function: Callable) -> void:
 	var col: PlayerListColumn = PlayerListColumnScene.instantiate()
 	view_name = view_name
-
+	
 	views_container.add_child(col)
 	col.set_up(view_name, col_name, visible_players, map_function)
 	col.sort.connect(_sort_players.bind(col_name, map_function))
@@ -271,7 +266,7 @@ func _sort_players(value: String, map_function: Callable) -> void:
 	if "date" in value:
 		# dates
 		all_players.sort_custom(
-			func(a: Player, b: Player) -> bool:
+			func(a:Player, b:Player) -> bool:
 				var a_unix: int = Time.get_unix_time_from_datetime_dict(map_function.call(a))
 				var b_unix: int = Time.get_unix_time_from_datetime_dict(map_function.call(b))
 				if sorting[sort_key]:
@@ -282,7 +277,7 @@ func _sort_players(value: String, map_function: Callable) -> void:
 	else:
 		# normal props
 		all_players.sort_custom(
-			func(a: Player, b: Player) -> bool:
+			func(a:Player, b:Player) -> bool:
 				if sorting[sort_key]:
 					return map_function.call(a) > map_function.call(b)
 				else:
@@ -310,7 +305,7 @@ func _filter() -> void:
 				filter_counter += 1
 				value = str(filters[key])
 				value = value.to_upper()
-
+				
 				if key == Const.POSITION:
 					if not str(player.position.type) == value:
 						filter_counter += 1
@@ -364,7 +359,7 @@ func _on_league_select_item_selected(index: int) -> void:
 			for team: Team in league.teams:
 				if team == null or team.name != Global.team.name:
 					team_select.add_item(team.name)
-
+	
 	_filter()
 
 

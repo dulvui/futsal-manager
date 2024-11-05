@@ -166,8 +166,7 @@ func consume_stamina() -> void:
 	# consume stamina with  calc 21 - [20,1]
 	# best case Const.MAX_PRESTIGE * 1
 	# worst case Const.MAX_PRESTIGE * 20
-	var consumation: float = (
-		Const.STAMINA_FACTOR * (Const.MAX_PRESTIGE + 1 - attributes.physical.stamina)
-	)
+	var consumation: float = Const.STAMINA_FACTOR * (Const.MAX_PRESTIGE + 1 - attributes.physical.stamina)
 	# print("stamina: %d consumtion: %f"%[attributes.physical.stamina, consumation])
 	stamina = maxf(0, stamina - consumation)
+

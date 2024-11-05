@@ -67,7 +67,7 @@ func set_up(
 	left_half = p_left_half
 	# initial test values
 	interception_radius = 20
-
+	
 	# goalkeeper properties
 	left_base = Vector2(field.line_left + 30, field.size.y / 2)
 	right_base = Vector2(field.line_right - 30, field.size.y / 2)
@@ -164,6 +164,7 @@ func goalkeeper_update(team_has_ball: bool) -> void:
 				state = State.PASSING
 			else:
 				state = State.POSITIONING
+
 
 
 func kick_off(p_pos: Vector2) -> void:
@@ -284,3 +285,5 @@ func _move() -> void:
 		last_pos = pos
 		pos = pos.move_toward(destination, speed * Const.SPEED)
 		player_res.consume_stamina()
+
+
