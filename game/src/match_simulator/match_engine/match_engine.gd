@@ -78,7 +78,7 @@ func update() -> void:
 	else:
 		home_team.defend(away_team.players)
 		away_team.attack()
-	
+
 	# update teams
 	home_team.update()
 	away_team.update()
@@ -100,7 +100,6 @@ func update() -> void:
 		print("BALL OUT")
 
 
-
 func simulate(matchz: Match) -> Match:
 	var start_time: int = Time.get_ticks_msec()
 	set_up(matchz.home, matchz.away, matchz.id)
@@ -111,7 +110,7 @@ func simulate(matchz: Match) -> Match:
 		update()
 		if ball.clock_running:
 			time += 1
-	
+
 	half_time()
 	# second half
 	time = 0
@@ -349,5 +348,3 @@ func _on_sim_ball_goal() -> void:
 	ball.set_pos(field.center)
 
 	#print("%s : %s"%[home_team.stats.goals, away_team.stats.goals])
-
-

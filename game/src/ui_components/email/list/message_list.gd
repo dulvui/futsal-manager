@@ -30,10 +30,10 @@ func update() -> void:
 		inbox_list = inbox_list.filter(func(m: EmailMessage) -> bool: return not m.read)
 	if search_text.length() > 0:
 		inbox_list = inbox_list.filter(
-			func(m: EmailMessage) -> bool: return (
-				(m.text.to_lower() + m.subject.to_lower() + m.sender.to_lower())
-				. contains(search_text.to_lower())
-			)
+			func(m: EmailMessage) -> bool:
+				return (m.text.to_lower() + m.subject.to_lower() + m.sender.to_lower()).contains(
+					search_text.to_lower()
+				)
 		)
 
 	# to test perfomrance of email view

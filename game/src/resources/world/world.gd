@@ -132,29 +132,17 @@ func promote_and_delegate_teams() -> void:
 				var sorted_table: Array[TableValues] = league.table().to_sorted_array()
 
 				# assign delegated
-				teams_buffer["d"][league.pyramid_level] = (
-					league
-					. teams
-					. filter(
-						func(t: Team) -> bool: return (
-							# get last 2 teams
-							t.id == sorted_table[-1].team_id
-							|| t.id == sorted_table[-2].team_id
-						)
-					)
-				)
+				teams_buffer["d"][league.pyramid_level] = (league.teams.filter(
+					func(t: Team) -> bool:
+						return t.id == sorted_table[-1].team_id || t.id == sorted_table[-2].team_id
+						# get last 2 teams
+				))
 				# assign promoted
-				teams_buffer["p"][league.pyramid_level] = (
-					league
-					. teams
-					. filter(
-						func(t: Team) -> bool: return (
-							# get first 2 teams
-							t.id == sorted_table[0].team_id
-							|| t.id == sorted_table[1].team_id
-						)
-					)
-				)
+				teams_buffer["p"][league.pyramid_level] = (league.teams.filter(
+					func(t: Team) -> bool:
+						return t.id == sorted_table[0].team_id || t.id == sorted_table[1].team_id
+						# get first 2 teams
+				))
 
 			# delegate/promote
 			for league: League in nation.leagues:

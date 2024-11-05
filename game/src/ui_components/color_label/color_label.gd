@@ -14,7 +14,7 @@ signal select
 
 func set_up(p_value_name: String, is_button: bool = false) -> void:
 	value_name = p_value_name
-	
+
 	button.disabled = not is_button
 	button.visible = is_button
 

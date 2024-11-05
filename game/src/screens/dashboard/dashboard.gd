@@ -315,4 +315,3 @@ func _on_loading_screen_loaded(type: LoadingUtil.Type) -> void:
 			loading_screen.hide()
 		_:
 			print("loading done default")
-

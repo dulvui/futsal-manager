@@ -5,7 +5,6 @@
 class_name VisualTeam
 extends Node2D
 
-
 @onready var player1: VisualPlayer = $VisualPlayer1
 @onready var player2: VisualPlayer = $VisualPlayer2
 @onready var player3: VisualPlayer = $VisualPlayer3
@@ -37,4 +36,3 @@ func change_players(sim_team: SimTeam) -> void:
 	player3.change_player(sim_team.players[2])
 	player4.change_player(sim_team.players[3])
 	player5.change_player(sim_team.players[4])
-

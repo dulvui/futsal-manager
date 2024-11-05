@@ -39,7 +39,7 @@ func set_up(
 	update_interval = p_update_interval
 	last_update_time = 0.0
 	factor = 1.0
-	
+
 	position = sim_player.pos
 	last_pos = position
 
@@ -58,5 +58,3 @@ func update(p_update_interval: float) -> void:
 func change_player(p_sim_player: SimPlayer) -> void:
 	sim_player = p_sim_player
 	label.text = str(sim_player.player_res.nr) + " " + (sim_player.player_res.surname)
-
-

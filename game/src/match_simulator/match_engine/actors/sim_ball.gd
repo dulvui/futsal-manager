@@ -60,7 +60,7 @@ func move() -> void:
 	last_pos = pos
 	pos += direction * speed * Const.SPEED
 	speed -= DECELERATION
-	
+
 	# when the ball moves, the clock is always running
 	clock_running = true
 

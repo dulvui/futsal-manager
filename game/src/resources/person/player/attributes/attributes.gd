@@ -47,7 +47,7 @@ func get_all_attributes() -> Dictionary:
 			for a_property: Dictionary in attribute.get_property_list():
 				if a_property.usage == 4102:
 					sub_attributes.append(a_property.name)
-			
+
 			attributes[property.name] = sub_attributes
 
 	return attributes

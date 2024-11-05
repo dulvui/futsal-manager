@@ -63,7 +63,6 @@ func _ready() -> void:
 		if not Global.team:
 			Global.team = matchz.home
 
-
 	# duplicate teams to not change real teams references
 	# player order, tactics ecc. changes live only during match
 	# no deep copy, since players itself acutally should keep changes
@@ -73,7 +72,7 @@ func _ready() -> void:
 	home_name.text = matchz.home.name
 	away_name.text = matchz.away.name
 
-	# set up formations with player controlled teams copy	
+	# set up formations with player controlled teams copy
 	if home_team.id == Global.team.id:
 		formation.set_up(true, home_team)
 		players_bar.set_up(home_team)
@@ -82,7 +81,7 @@ func _ready() -> void:
 		players_bar.set_up(away_team)
 
 	match_simulator.set_up(home_team, away_team, matchz.id)
-	
+
 	# set colors
 	home_color.color = home_team.get_home_color()
 	away_color.color = away_team.get_away_color(home_color.color)
@@ -94,10 +93,10 @@ func _ready() -> void:
 	# to easier access stats
 	home_stats = match_simulator.match_engine.home_team.stats
 	away_stats = match_simulator.match_engine.away_team.stats
-	
+
 	last_active_view = match_simulator
 	last_active_view.show()
-	
+
 
 func match_end() -> void:
 	faster_button.hide()
@@ -235,4 +234,3 @@ func _on_players_bar_change_request() -> void:
 	formation.set_players()
 	match_simulator.match_engine.home_team.change_players_request()
 	match_simulator.match_engine.away_team.change_players_request()
-

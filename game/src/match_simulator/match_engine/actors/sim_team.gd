@@ -54,7 +54,7 @@ func set_up(
 
 	sort_x_left = func(a: SimPlayer, b: SimPlayer) -> bool: return a.pos.x < b.pos.x
 	sort_x_right = func(a: SimPlayer, b: SimPlayer) -> bool: return a.pos.x > b.pos.x
-	
+
 	for player: Player in res_team.get_lineup_players():
 		var sim_player: SimPlayer = SimPlayer.new()
 		# setup
@@ -68,13 +68,13 @@ func set_up(
 			shoot_on_goal.bind(sim_player.player_res.attributes.technical.shooting)
 		)
 		#sim_player.dribble.connect(pass_to_random_player)
-	
+
 	# copy field players in own array, for easier access
 	players = all_players.slice(0, 5)
-	
+
 	# set goalkeeper flag
 	players[0].is_goalkeeper = true
-	
+
 	set_kick_off_formation()
 
 
@@ -194,14 +194,13 @@ func pass_to_random_player(passing_player: SimPlayer = null) -> void:
 	var random_player: SimPlayer
 	if passing_player:
 		var non_active: Array[SimPlayer] = players.filter(
-			func(player: SimPlayer) -> bool: return (
-				player.player_res.id != passing_player.player_res.id
-			)
+			func(player: SimPlayer) -> bool:
+				return player.player_res.id != passing_player.player_res.id
 		)
 		random_player = non_active[RngUtil.match_rng.randi_range(0, non_active.size() - 1)]
 	else:
 		# goalkeeper pass, so count from 1, sicne 0 is goalkeeper
-		random_player = players[RngUtil.match_rng.randi_range(1,  players.size() - 1)]
+		random_player = players[RngUtil.match_rng.randi_range(1, players.size() - 1)]
 
 	ball.short_pass(random_player.pos, 35)
 	random_player.state = SimPlayer.State.RECEIVE_PASS
@@ -252,5 +251,3 @@ func _sort_distance_to_ball(a: SimPlayer, b: SimPlayer) -> bool:
 func _on_player_interception() -> void:
 	print("interception")
 	interception.emit()
-
-

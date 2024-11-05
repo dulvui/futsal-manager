@@ -80,6 +80,5 @@ func _on_continue_pressed() -> void:
 	ThreadUtil.generate_world()
 
 
-func _on_loading_screen_loaded(_type:int) -> void:
+func _on_loading_screen_loaded(_type: int) -> void:
 	get_tree().change_scene_to_file("res://src/screens/setup/setup_manager/setup_manager.tscn")
-

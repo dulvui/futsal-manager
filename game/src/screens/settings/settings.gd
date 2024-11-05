@@ -59,7 +59,7 @@ func _on_defaults_pressed() -> void:
 	#scale
 	get_tree().root.content_scale_factor = ThemeUtil.get_default_scale()
 	Global.theme_scale = ThemeUtil.get_default_scale()
-	
+
 	Global.save_config()
 
 
@@ -130,5 +130,3 @@ func _on_scale_3_pressed() -> void:
 	get_tree().root.content_scale_factor = 1.5
 	Global.theme_scale = 1.5
 	Global.save_config()
-
-

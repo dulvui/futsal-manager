@@ -170,5 +170,3 @@ func is_goal(ball_last_pos: Vector2, ball_pos: Vector2) -> Variant:
 	if intersection and intersection.y < goal_post_bottom and intersection.y > goal_post_top:
 		return intersection
 	return null
-
-
