@@ -39,6 +39,7 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="Button" type="Button" parent="MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 0
 text_overrun_behavior = 3
@@ -64,12 +65,14 @@ theme_override_constants/separation = 3
 layout_mode = 2
 
 [node name="Market" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "MARKET"
 horizontal_alignment = 2
 
 [node name="MonthDay" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "31"
@@ -87,16 +90,19 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="CompetitionName" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/Competition"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text_overrun_behavior = 3
 
 [node name="Match" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "ROMA"
 text_overrun_behavior = 3
 
 [node name="MatchColor" type="ColorRect" parent="MarginContainer/Button/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
