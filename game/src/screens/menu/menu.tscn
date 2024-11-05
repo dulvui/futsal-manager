@@ -60,6 +60,7 @@ custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 
 [node name="ContinueGame" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -72,6 +73,7 @@ size_flags_horizontal = 4
 text = "NEW_GAME"
 
 [node name="LoadGame" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
