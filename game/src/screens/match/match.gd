@@ -28,10 +28,10 @@ var away_stats: MatchStatistics
 @onready var result_label: Label = %Result
 @onready var home_color: ColorRect = %HomeColor
 @onready var away_color: ColorRect = %AwayColor
-@onready var home_possession: Label = %Home
-@onready var away_possession: Label = %Away
-@onready var home_name: Label = %Home
-@onready var away_name: Label = %Away
+@onready var home_possession: Label = %HomePossessionLabel
+@onready var away_possession: Label = %AwayPossessionLabel
+@onready var home_name: Label = %HomeNameLabel
+@onready var away_name: Label = %AwayNameLabel
 @onready var time_bar: ProgressBar = %TimeBar
 @onready var possess_bar: ProgressBar = %PossessBar
 

@@ -147,7 +147,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 
-[node name="Home" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+[node name="HomeNameLabel" type="Label" parent="Main/Content/CentralContainer/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Robledo"
@@ -157,7 +157,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "0:0"
 
-[node name="Away" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+[node name="AwayNameLabel" type="Label" parent="Main/Content/CentralContainer/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Cisneros"
@@ -212,7 +212,8 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Home" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+[node name="HomePossessionLabel" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "56%"
@@ -224,7 +225,8 @@ size_flags_horizontal = 3
 text = "POSSESSION"
 horizontal_alignment = 1
 
-[node name="Away" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+[node name="AwayPossessionLabel" type="Label" parent="Main/Content/CentralContainer/BottomBar/PossessBar/Labels"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "44%"
