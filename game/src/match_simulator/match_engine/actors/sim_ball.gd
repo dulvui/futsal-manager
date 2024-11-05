@@ -10,7 +10,7 @@ signal goal
 
 enum State { PASS, SHOOT, STOP, DRIBBLE, GOALKEEPER }
 
-const DECELERATION: float = 1
+const DECELERATION: float = 2
 
 var state: State
 
@@ -20,6 +20,8 @@ var last_pos: Vector2
 
 var speed: float
 var direction: Vector2
+# left -1, right 1, no roatation 0
+var rotation: float
 
 var players_in_shoot_trajectory: int
 var empty_net: bool
@@ -54,6 +56,13 @@ func update() -> void:
 		check_field_bounds()
 	else:
 		speed = 0
+	
+	if rotation > 0.1:
+		rotation -= 0.05
+	elif rotation < 0.1:
+		rotation += 0.05
+	else:
+		rotation = 0
 
 
 func move() -> void:
@@ -70,18 +79,21 @@ func is_moving() -> bool:
 
 
 func stop() -> void:
+	rotation = 0
 	speed = 0
 	state = State.STOP
 	last_pos = pos
 
 
 func short_pass(p_destination: Vector2, force: float) -> void:
+	_random_rotation()
 	speed = force + 0.2  # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
 	state = State.PASS
 
 
 func shoot(p_destination: Vector2, force: float) -> void:
+	_random_rotation()
 	speed = force + 4  # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
 	state = State.SHOOT
@@ -141,3 +153,7 @@ func is_touching(p_pos: Vector2, p_radius: int, log_debug: bool = false) -> bool
 	return test
 	#return Geometry2D.segment_intersects_circle(last_pos, pos, p_pos, p_radius) != -1
 	#return Geometry2D.segment_intersects_segment(last_pos, pos, p_last_pos, p_pos) != null
+
+
+func _random_rotation() -> void:
+	rotation = RngUtil.match_rng.randf_range(-0.8, 0.8)

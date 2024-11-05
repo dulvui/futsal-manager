@@ -203,7 +203,7 @@ func pass_to_random_player(passing_player: SimPlayer = null) -> void:
 		# goalkeeper pass, so count from 1, sicne 0 is goalkeeper
 		random_player = players[RngUtil.match_rng.randi_range(1,  players.size() - 1)]
 
-	ball.short_pass(random_player.pos, 35)
+	ball.short_pass(random_player.pos, 55)
 	random_player.state = SimPlayer.State.RECEIVE_PASS
 	random_player.stop()
 
