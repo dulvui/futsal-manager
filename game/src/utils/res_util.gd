@@ -112,8 +112,9 @@ func save_save_states() -> void:
 
 func save_resource(res_key: StringName, resource: Resource) -> void:
 	var path: StringName = Global.save_states.get_active_path(res_key)
-	var resource_path: StringName = BackupUtil.create_backup(path, RES_SUFFIX)
+	var resource_path: StringName = path + RES_SUFFIX
 	ResourceSaver.save(resource, resource_path, ResourceSaver.FLAG_COMPRESS)
+	BackupUtil.create_backup(path, RES_SUFFIX)
 
 
 func load_save_states() -> SaveStates:
