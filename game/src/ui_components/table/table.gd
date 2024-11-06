@@ -9,8 +9,8 @@ var competition: Competition
 var season_index: int
 var season_amount: int
 
-@onready var grid: GridContainer = $Positions/ScrollContainer/GridContainer
-@onready var seasons: SwitchOptionButton = $Buttons/Seasons
+@onready var grid: GridContainer = %TableValuesGrid 
+@onready var seasons: SwitchOptionButton = %SeasonsButton
 @onready var competitions_tree: CompetitionsTree = %CompetitionsTree
 
 
@@ -117,7 +117,7 @@ func _style_label(label: Label) -> void:
 	label.custom_minimum_size = Vector2(60, 0)
 
 
-func _on_seasons_item_selected(index: int) -> void:
+func _on_seasons_button_item_selected(index: int) -> void:
 	# substract from season amount,
 	# seasons are inserted inverted in options button
 	# -1, because arrays start from 0
@@ -127,5 +127,13 @@ func _on_seasons_item_selected(index: int) -> void:
 
 func _on_competitions_tree_competition_selected(p_competition: Competition) -> void:
 	competition = p_competition
+	_set_up()
+
+
+func _on_active_button_pressed() -> void:
+	competition = Global.league
+	competitions_tree.select(competition.name)
+	season_index = season_amount - 1
+	seasons.option_button.selected = 0
 	_set_up()
 

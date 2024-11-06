@@ -18,7 +18,7 @@ func _ready() -> void:
 	items = []
 
 
-func set_up(selected_text: String = "") -> void:
+func set_up(competition_name: String = "") -> void:
 	# world competitons
 	var world_item: TreeItem = _create_item("WORLD")
 	_create_item("WORLD CUP", world_item)
@@ -38,9 +38,14 @@ func set_up(selected_text: String = "") -> void:
 		_create_item(continent.cup_nations.name, continent_item)
 		_create_item(continent.cup_clubs.name, continent_item)
 	
+	select(competition_name)
+
+
+func select(competition_name: String) -> void:
+	deselect_all()
 	# set selected item
 	for item: TreeItem in items:
-		if item.get_text(0) == selected_text:
+		if item.get_text(0) == competition_name:
 			set_selected(item, 0)
 			return
 

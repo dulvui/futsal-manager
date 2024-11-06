@@ -16,30 +16,6 @@ size_flags_vertical = 3
 theme = ExtResource("2")
 script = ExtResource("1")
 
-[node name="Buttons" type="HBoxContainer" parent="."]
-visible = false
-layout_mode = 2
-alignment = 1
-
-[node name="Continents" parent="Buttons" instance=ExtResource("3_p68f4")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Nations" parent="Buttons" instance=ExtResource("3_p68f4")]
-custom_minimum_size = Vector2(0, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Competitions" parent="Buttons" instance=ExtResource("3_p68f4")]
-custom_minimum_size = Vector2(0, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Seasons" parent="Buttons" instance=ExtResource("3_p68f4")]
-custom_minimum_size = Vector2(0, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="Positions" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -103,7 +79,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="Positions/ScrollContainer"]
+[node name="TableValuesGrid" type="GridContainer" parent="Positions/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
@@ -119,6 +96,7 @@ layout_mode = 2
 text = "SHOW_ACTIVE"
 
 [node name="SeasonsButton" parent="Competitions" instance=ExtResource("3_p68f4")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -127,9 +105,6 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 
-[connection signal="item_selected" from="Buttons/Continents" to="." method="_on_continents_item_selected"]
-[connection signal="item_selected" from="Buttons/Nations" to="." method="_on_nations_item_selected"]
-[connection signal="item_selected" from="Buttons/Competitions" to="." method="_on_competitions_item_selected"]
-[connection signal="item_selected" from="Buttons/Seasons" to="." method="_on_seasons_item_selected"]
-[connection signal="item_selected" from="Competitions/SeasonsButton" to="." method="_on_seasons_item_selected"]
+[connection signal="pressed" from="Competitions/ActiveButton" to="." method="_on_active_button_pressed"]
+[connection signal="item_selected" from="Competitions/SeasonsButton" to="." method="_on_seasons_button_item_selected"]
 [connection signal="competition_selected" from="Competitions/CompetitionsTree" to="." method="_on_competitions_tree_competition_selected"]
