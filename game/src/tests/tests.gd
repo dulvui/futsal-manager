@@ -56,3 +56,20 @@ static func create_mock_player() -> Player:
 	player.nr = 1
 
 	return player
+
+
+static func create_mock_world() -> World:
+	return World.new()
+
+
+static func create_mock_league(teams: int = 10) -> League:
+	var league: League = League.new()
+
+	for i: int in range(teams):
+		var team: Team = Team.new()
+		team.name = "Team " + str(i)
+		team.players = [Player.new(), Player.new(), Player.new(), Player.new(), Player.new()]
+
+		league.add_team(team)
+
+	return league
