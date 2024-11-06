@@ -7,7 +7,7 @@ extends JSONResource
 
 @export var calendar: Calendar
 @export var continents: Array[Continent]
-@export var world_cup: CupMixedStage
+@export var world_cup: Cup
 
 @export var active_team_id: int
 
@@ -15,7 +15,7 @@ extends JSONResource
 func _init(
 	p_calendar: Calendar = Calendar.new(),
 	p_continents: Array[Continent] = [],
-	p_world_cup: CupMixedStage = CupMixedStage.new(),
+	p_world_cup: Cup = Cup.new(),
 	p_active_team_id: int = -1,
 ) -> void:
 	calendar = p_calendar

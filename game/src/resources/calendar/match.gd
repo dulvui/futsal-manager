@@ -43,10 +43,8 @@ func set_result(p_home_goals: int, p_away_goals: int, world: World = Global.worl
 
 		if competition is League:
 			(competition as League).table().add_result(home.id, home_goals, away.id, away_goals)
-		elif competition is CupKnockout:
-			print("TODO CupKnockout save result")
-		elif competition is CupMixedStage:
-			print("TODO CupMixedStage save result")
+		elif competition is Cup:
+			print("TODO CupK save result")
 		else:
 			print("error competition with no valid type; id: " + str(competition_id))
 

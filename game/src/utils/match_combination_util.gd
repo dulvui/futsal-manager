@@ -33,7 +33,7 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 
 	var home: bool = true
 
-	for i in random_teams.size():
+	for i: int in random_teams.size():
 		var current_match_day: Array = []
 		var match_one: Match
 		if home:
@@ -81,10 +81,50 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 	return match_days
 
 
-func _add_machtes_to_calendar(
-	competition: Competition,
-	match_days: Array[Array],
-) -> void:
+func _initialize_club_league_matches(competition: Competition, teams: Array[Team]) -> void:
+	var match_days: Array[Array] = create_combinations(competition, teams)
+	_add_matches_to_calendar(competition, match_days)
+
+
+func _initialize_club_national_cup(p_nation: Nation) -> void:
+	# setup cup
+	p_nation.cup.name = p_nation.name + " " + tr("CUP")
+	var all_teams_by_nation: Array[Team]
+	for league: League in p_nation.leagues:
+		all_teams_by_nation.append_array(league.teams)
+	p_nation.cup.set_up_knockout(all_teams_by_nation)
+
+	# create matches for first round group a
+	# for now, only single leg
+	var matches: Array[Match] = p_nation.cup.get_knockout_matches()
+	# add to calendar
+	var day: int = 0
+	var month: int = 6
+	_add_knockout_matches_to_calendar(matches, p_nation.cup.id, day, month)
+
+
+func _initialize_club_continental_cup(p_continent: Continent) -> void:
+	# setup cup
+	p_continent.cup_clubs.name =  p_continent.name + " " + tr("CUP")
+	var teams: Array[Team]
+
+	# get qualified teams from every nation
+	for nation: Nation in p_continent.nations:
+		teams.append_array(nation.get_continental_cup_qualified_teams())
+
+	p_continent.cup_clubs.set_up(teams)
+
+	# create matches for first round group a
+	# for now, only single leg
+	var matches: Array[Array] = p_continent.cup_clubs.get_group_matches()
+	_add_matches_to_calendar(p_continent.cup_clubs, matches)
+
+
+func _initialize_national_teams_world_cup() -> void:
+	pass
+
+
+func _add_matches_to_calendar(competition: Competition, match_days: Array[Array]) -> void:
 	# add to calendar
 	# TODO use actual league start/end date
 	#var day: int = Global.world.calendar.day().day
@@ -145,56 +185,7 @@ func _add_machtes_to_calendar(
 		day += 5
 
 
-func _initialize_club_league_matches(competition: Competition, teams: Array[Team]) -> void:
-	var match_days: Array[Array] = create_combinations(competition, teams)
-	_add_machtes_to_calendar(competition, match_days)
-
-
-func _initialize_club_national_cup(p_nation: Nation) -> void:
-	# setup cup
-	p_nation.cup.name = p_nation.name + " cup"
-	var all_teams_by_nation: Array[Team]
-	for league: League in p_nation.leagues:
-		all_teams_by_nation.append_array(league.teams)
-	p_nation.cup.set_up(all_teams_by_nation)
-
-	# create matches for first round group a
-	# for now, only single leg
-	var matches: Array[Match] = p_nation.cup.get_cup_matches()
-	# add to calendar
-	var day: int = 0
-	var month: int = 6
-	_add_cup_matches_to_calendar(matches, p_nation.cup.id, day, month)
-
-
-func _initialize_club_continental_cup(_continent: Continent) -> void:
-	pass
-	# setup cup
-	#p_continent.cup_clubs.name =  p_continent.name + " cup"
-	#var top_teams_by_continent: Array[Team]
-	#for nation: Nation in p_continent.nations:
-	#var top_league_by_nation: League = nation.leagues[0]
-	#
-	#top_league_by_nation.t
-	#
-	#top_league_by_nation.g
-	#all_teams_by_nation.append_array(league.teams)
-	#p_nation.cup.set_up(all_teams_by_nation)
-	#
-	## create matches for first round group a
-	## for now, only single leg
-	#var matches: Array[Match] = p_nation.cup.get_cup_matches()
-	## add to calendar
-	#var day: int = 0
-	#var month: int = 6
-	#_add_cup_matches_to_calendar(matches, p_nation.cup.id,  day, month)
-
-
-func _initialize_national_teams_world_cup() -> void:
-	pass
-
-
-func _add_cup_matches_to_calendar(matches: Array[Match], cup_id: int, day: int, month: int) -> void:
+func _add_knockout_matches_to_calendar(matches: Array[Match], cup_id: int, day: int, month: int) -> void:
 	# start with saturday of next week
 	for i in range(8, 1, -1):
 		if Global.world.calendar.day(month, i).weekday == "TUE":
