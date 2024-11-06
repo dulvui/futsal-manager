@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7bh7ukttbkvu"]
+[gd_scene load_steps=5 format=3 uid="uid://c7bh7ukttbkvu"]
 
 [ext_resource type="Script" path="res://src/ui_components/table/table.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://cw32i6hnqrgbi" path="res://src/ui_components/competition_tree/competitions_tree.tscn" id="3_3wwbc"]
 [ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui_components/swtich_option_button/switch_option_button.tscn" id="3_p68f4"]
 
-[node name="Table" type="VBoxContainer"]
+[node name="Table" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,6 +17,7 @@ theme = ExtResource("2")
 script = ExtResource("1")
 
 [node name="Buttons" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -38,69 +40,70 @@ custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSeparator2" type="HSeparator" parent="."]
+[node name="Positions" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Labels" type="HBoxContainer" parent="."]
+[node name="Labels" type="HBoxContainer" parent="Positions"]
 layout_mode = 2
 theme_override_constants/separation = 5
 alignment = 1
 
-[node name="Pos" type="Label" parent="Labels"]
+[node name="Pos" type="Label" parent="Positions/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "#"
 
-[node name="Team" type="Label" parent="Labels"]
+[node name="Team" type="Label" parent="Positions/Labels"]
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
 text = "TEAM
 "
 
-[node name="Played" type="Label" parent="Labels"]
+[node name="Played" type="Label" parent="Positions/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "PLAYED"
 horizontal_alignment = 1
 
-[node name="Win" type="Label" parent="Labels"]
+[node name="Win" type="Label" parent="Positions/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "WIN"
 horizontal_alignment = 1
 
-[node name="Draw" type="Label" parent="Labels"]
+[node name="Draw" type="Label" parent="Positions/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "DRAW"
 horizontal_alignment = 1
 
-[node name="Loose" type="Label" parent="Labels"]
+[node name="Loose" type="Label" parent="Positions/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "LOOSE"
 horizontal_alignment = 1
 
-[node name="Goals" type="Label" parent="Labels"]
+[node name="Goals" type="Label" parent="Positions/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "GOALS"
 horizontal_alignment = 1
 
-[node name="Points" type="Label" parent="Labels"]
+[node name="Points" type="Label" parent="Positions/Labels"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "POINTS"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="."]
+[node name="HSeparator" type="HSeparator" parent="Positions"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="Positions"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="Positions/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
@@ -108,7 +111,25 @@ theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 0
 columns = 9
 
+[node name="Competitions" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ActiveButton" type="Button" parent="Competitions"]
+layout_mode = 2
+text = "SHOW_ACTIVE"
+
+[node name="SeasonsButton" parent="Competitions" instance=ExtResource("3_p68f4")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CompetitionsTree" parent="Competitions" instance=ExtResource("3_3wwbc")]
+unique_name_in_owner = true
+layout_mode = 2
+
 [connection signal="item_selected" from="Buttons/Continents" to="." method="_on_continents_item_selected"]
 [connection signal="item_selected" from="Buttons/Nations" to="." method="_on_nations_item_selected"]
 [connection signal="item_selected" from="Buttons/Competitions" to="." method="_on_competitions_item_selected"]
 [connection signal="item_selected" from="Buttons/Seasons" to="." method="_on_seasons_item_selected"]
+[connection signal="item_selected" from="Competitions/SeasonsButton" to="." method="_on_seasons_item_selected"]
+[connection signal="competition_selected" from="Competitions/CompetitionsTree" to="." method="_on_competitions_tree_competition_selected"]
