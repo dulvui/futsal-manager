@@ -89,6 +89,7 @@ func start_match() -> void:
 
 
 func _on_timer_timeout() -> void:
+	print("TIMEEEEEE")
 	match_engine.update()
 	visual_match.update(timer.wait_time)
 	

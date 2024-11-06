@@ -66,7 +66,7 @@ func set_up(
 	field = p_field
 	left_half = p_left_half
 	# initial test values
-	interception_radius = 20
+	interception_radius = 10
 	
 	# goalkeeper properties
 	left_base = Vector2(field.line_left + 30, field.size.y / 2)
@@ -84,6 +84,22 @@ func update(team_has_ball: bool) -> void:
 
 func player_update(team_has_ball: bool) -> void:
 	match state:
+		State.IDLE:
+			if is_touching_ball():
+				if team_has_ball:
+					if _should_shoot():
+						state = State.SHOOTING
+					elif _should_pass():
+						state = State.PASSING
+					elif _should_dribble():
+						state = State.DRIBBLE
+					else:
+						stop()
+						ball.stop()
+				else:
+					interception.emit()
+			else:
+				state = State.MOVE
 		State.RECEIVE_PASS:
 			if is_touching_ball():
 				pass_received.emit()
@@ -108,26 +124,7 @@ func player_update(team_has_ball: bool) -> void:
 		State.MOVE:
 			_move()
 			state = State.IDLE
-
-		State.IDLE:
-			if is_touching_ball():
-				print("touchgin ball " + str(team_has_ball))
-				if team_has_ball:
-					if _should_shoot():
-						state = State.SHOOTING
-					elif _should_pass():
-						state = State.PASSING
-					elif _should_dribble():
-						state = State.DRIBBLE
-					else:
-						stop()
-						ball.stop()
-				else:
-					print(player_res.nr)
-					interception.emit()
-				print(State.keys()[state])
-			else:
-				state = State.MOVE
+	print("nr %d has ball %s state %s"%[player_res.nr, team_has_ball, State.keys()[state]])
 
 
 func goalkeeper_update(team_has_ball: bool) -> void:
@@ -143,22 +140,21 @@ func goalkeeper_update(team_has_ball: bool) -> void:
 		State.PASSING:
 			short_pass.emit()
 			state = State.IDLE
-			ball.state = SimBall.State.PASS
 		State.POSITIONING:
 			if team_has_ball:
 				# back to base position
 				set_destination(start_pos)
 			else:
-				follow_ball()
+				goalkeeper_follow_ball()
 			_move()
 		State.SAVE_SHOT:
-			follow_ball()
+			goalkeeper_follow_ball()
 			_move()
 			if block_shot():
 				ball.stop()
 				interception.emit()
-				ball.state = SimBall.State.GOALKEEPER
 				state = State.IDLE
+				ball.state = SimBall.State.GOALKEEPER
 		State.IDLE:
 			if is_touching_ball():
 				state = State.PASSING
@@ -173,7 +169,7 @@ func kick_off(p_pos: Vector2) -> void:
 
 
 func is_touching_ball() -> bool:
-	return ball.is_touching(pos, interception_radius, player_res.surname == "Verga")
+	return ball.is_touching(pos, interception_radius)
 
 
 func is_intercepting_ball() -> bool:
@@ -208,7 +204,7 @@ func recover_stamina(factor: int = 1) -> void:
 	player_res.recover_stamina(factor)
 
 
-func follow_ball() -> void:
+func goalkeeper_follow_ball() -> void:
 	# only follow if in own half
 	if left_half:
 		if ball.pos.x < field.size.x / 2:
@@ -268,13 +264,13 @@ func _should_shoot() -> bool:
 		return true
 	if ball.players_in_shoot_trajectory < 2:
 		return RngUtil.match_rng.randi_range(1, 100) > 95
-	return false
+	return RngUtil.match_rng.randi_range(1, 100) > 98
 
 
 func _should_pass() -> bool:
 	if distance_to_enemy < 50:
 		return RngUtil.match_rng.randi_range(1, 100) < 60
-	return false
+	return RngUtil.match_rng.randi_range(1, 100) < 10
 
 
 func _move() -> void:
