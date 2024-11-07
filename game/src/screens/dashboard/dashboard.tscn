@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c51vyn54bk7q4" path="res://src/ui_components/visual_calendar/visual_calendar.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui_components/visual_formation/visual_formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dcv0qm4k1wi4q" path="res://src/ui_components/email/email.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui_components/table/table.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui_components/visual_table/visual_table.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://cbijtmv151qg7" path="res://src/ui_components/transfers/player_offer/player_offer.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://dual4o5whtk85" path="res://src/ui_components/info/info.tscn" id="8_bk8g0"]
 [ext_resource type="PackedScene" uid="uid://mvca6wjq0pv6" path="res://src/ui_components/player_list/player_list.tscn" id="8_nkdvo"]
