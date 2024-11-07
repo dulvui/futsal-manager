@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://c7bh7ukttbkvu"]
 
-[ext_resource type="Script" path="res://src/ui_components/visual_table/visual_table.gd" id="1"]
-[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="2"]
-[ext_resource type="PackedScene" uid="uid://cw32i6hnqrgbi" path="res://src/ui_components/competition_tree/competitions_tree.tscn" id="3_3wwbc"]
-[ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui_components/swtich_option_button/switch_option_button.tscn" id="3_p68f4"]
+[ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1_k4jv8"]
+[ext_resource type="Script" path="res://src/ui_components/visual_competitions/visual_competitions.gd" id="2_5cr6f"]
+[ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui_components/swtich_option_button/switch_option_button.tscn" id="3_88ilj"]
+[ext_resource type="PackedScene" uid="uid://cw32i6hnqrgbi" path="res://src/ui_components/competition_tree/competitions_tree.tscn" id="4_113m2"]
 
-[node name="VisualTable" type="HBoxContainer"]
+[node name="VisualCompetitions" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,8 +13,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2")
-script = ExtResource("1")
+theme = ExtResource("1_k4jv8")
+script = ExtResource("2_5cr6f")
 
 [node name="Positions" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -95,13 +95,13 @@ layout_mode = 2
 layout_mode = 2
 text = "SHOW_ACTIVE"
 
-[node name="SeasonsButton" parent="Competitions" instance=ExtResource("3_p68f4")]
+[node name="SeasonsButton" parent="Competitions" instance=ExtResource("3_88ilj")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CompetitionsTree" parent="Competitions" instance=ExtResource("3_3wwbc")]
+[node name="CompetitionsTree" parent="Competitions" instance=ExtResource("4_113m2")]
 unique_name_in_owner = true
 layout_mode = 2
 

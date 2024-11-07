@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c51vyn54bk7q4" path="res://src/ui_components/visual_calendar/visual_calendar.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui_components/visual_formation/visual_formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dcv0qm4k1wi4q" path="res://src/ui_components/email/email.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui_components/visual_table/visual_table.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui_components/visual_competitions/visual_competitions.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://cbijtmv151qg7" path="res://src/ui_components/transfers/player_offer/player_offer.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://dual4o5whtk85" path="res://src/ui_components/info/info.tscn" id="8_bk8g0"]
 [ext_resource type="PackedScene" uid="uid://mvca6wjq0pv6" path="res://src/ui_components/player_list/player_list.tscn" id="8_nkdvo"]
@@ -70,10 +70,10 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "CALENDAR"
 
-[node name="TableButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="CompetitionsButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "TABLE"
+text = "COMPETITIONS"
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
@@ -166,7 +166,7 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Table" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("7")]
+[node name="Competitions" parent="MarginContainer/HBoxContainer/MainContainer/Content" instance=ExtResource("7")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -220,7 +220,7 @@ layout_mode = 1
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/EmailButton" to="." method="_on_email_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/InfoButton" to="." method="_on_info_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/CalendarButton" to="." method="_on_calendar_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/TableButton" to="." method="_on_table_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/CompetitionsButton" to="." method="_on_competitions_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/FormationButton" to="." method="_on_formation_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/PlayersButton" to="." method="_on_players_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/SearchPlayerButton" to="." method="_on_search_player_button_pressed"]

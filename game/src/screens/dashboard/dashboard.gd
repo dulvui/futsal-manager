@@ -8,7 +8,7 @@ extends Control
 enum ContentViews {
 	EMAIL,
 	CALENDAR,
-	TABLE,
+	COMPETITIONS,
 	PLAYERS,
 	ALL_PLAYERS,
 	FORMATION,
@@ -27,7 +27,7 @@ var view_history: Array[ContentViews]
 var view_history_index: int = 0
 var active_view: ContentViews = ContentViews.EMAIL
 
-@onready var team: Team = Global.team
+@onready var team: Team
 
 # top bar
 @onready var continue_button: Button = %ContinueButton
@@ -42,7 +42,7 @@ var active_view: ContentViews = ContentViews.EMAIL
 
 # content views
 @onready var email: VisualEmail = %Email
-@onready var table: VisualTable = %Table
+@onready var competitions: VisualCompetitions = %Competitions
 @onready var visual_calendar: VisualCalendar = %Calendar
 @onready var info: VisualInfo = %Info
 @onready var formation: VisualFormation = %Formation
@@ -56,6 +56,9 @@ var active_view: ContentViews = ContentViews.EMAIL
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
+	# Tests.setup_mock_world(true)
+
+	team = Global.team
 
 	manager_label.text = Global.manager.get_full_name()
 	team_label.text = Global.team.name
@@ -112,8 +115,8 @@ func _on_email_button_pressed() -> void:
 	_show_active_view(ContentViews.EMAIL)
 
 
-func _on_table_button_pressed() -> void:
-	_show_active_view(ContentViews.TABLE)
+func _on_competitions_button_pressed() -> void:
+	_show_active_view(ContentViews.COMPETITIONS)
 
 
 func _on_calendar_button_pressed() -> void:
@@ -139,7 +142,7 @@ func _on_player_profile_cancel() -> void:
 
 
 func _hide_all() -> void:
-	table.hide()
+	competitions.hide()
 	email.hide()
 	visual_calendar.hide()
 	formation.hide()
@@ -159,8 +162,8 @@ func _show_active_view(p_active_view: int = -1, from_history: bool = false) -> v
 	match active_view:
 		ContentViews.EMAIL:
 			email.show()
-		ContentViews.TABLE:
-			table.show()
+		ContentViews.COMPETITIONS:
+			competitions.show()
 		ContentViews.CALENDAR:
 			visual_calendar.show()
 		ContentViews.FORMATION:
@@ -315,4 +318,5 @@ func _on_loading_screen_loaded(type: LoadingUtil.Type) -> void:
 			loading_screen.hide()
 		_:
 			print("loading done default")
+
 

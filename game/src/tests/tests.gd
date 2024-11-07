@@ -33,11 +33,14 @@ func _ready() -> void:
 
 
 static func setup_mock_world(use_test_file: bool) -> void:
-	Global.start_date = Time.get_datetime_dict_from_system()
-	Global.world = create_mock_world(use_test_file)
-	var league: League = Global.world.continents[0].nations[0].leagues[0]
-	var team: Team = league.teams[0]
-	Global.select_team(league, team, true)
+	if Global.world == null:
+		print("testing visual table")
+		Global.start_date = Time.get_datetime_dict_from_system()
+		Global.manager = create_mock_manager()
+		Global.world = create_mock_world(use_test_file)
+		var league: League = Global.world.continents[0].nations[0].leagues[0]
+		var team: Team = league.teams[0]
+		Global.select_team(league, team, true)
 
 
 static func create_mock_world(use_test_file: bool) -> World:
@@ -92,5 +95,12 @@ static func create_mock_player(nr: int = randi_range(1, 99)) -> Player:
 	player.nr = nr
 
 	return player
+
+
+static func create_mock_manager() -> Manager:
+	var manager: Manager = Manager.new()
+	manager.name = "Mike"
+	manager.surname = "Mock"
+	return manager
 
 

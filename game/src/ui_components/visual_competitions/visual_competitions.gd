@@ -2,7 +2,7 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name VisualTable
+class_name VisualCompetitions
 extends HBoxContainer
 
 var competition: Competition
@@ -17,9 +17,7 @@ var season_amount: int
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
-	if not Global.world:
-		print("testing visual table")
-		Tests.setup_mock_world(true)
+	Tests.setup_mock_world(true)
 
 	# start from last entry
 	season_index = Global.league.tables.size() - 1

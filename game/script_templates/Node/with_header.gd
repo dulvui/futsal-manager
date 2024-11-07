@@ -8,7 +8,7 @@ extends _BASE_
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	pass
+	Tests.setup_mock_world(true)
 
 
 func _process(delta: float) -> void:

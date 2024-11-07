@@ -14,10 +14,7 @@ var items: Array[TreeItem]
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	
-	if not Global.world:
-		print("testing visual table")
-		Tests.setup_mock_world(true)
+	Tests.setup_mock_world(true)
 	
 	competitions = {}
 	items = []

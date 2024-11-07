@@ -64,7 +64,6 @@ func select_team(p_league: League, p_team: Team, testing: bool = false)-> void:
 	team = p_team
 	world.active_team_id = team.id
 
-	print("team saved")
 	transfers = Transfers.new()
 
 	print("calendars created")
