@@ -4,9 +4,9 @@
 class_name Generator
 extends Node
 
+const TEST_WORLD_CSV_PATH: String = "res://data/world/test_world.csv"
 const WORLD_CSV_PATH: String = "res://data/world/world.csv"
 const NAMES_DIR: String = "res://data/player_names/"
-const LEAGUES_DIR: String = "res://data/leagues/"
 
 # defines noise added to attribute factors
 const NOISE: int = 3
@@ -23,8 +23,8 @@ var max_timestamp: int
 var min_timestamp: int
 
 
-func generate_world() -> World:
-	var world: World = _generate_world_from_csv()
+func generate_world(test: bool = false) -> World:
+	var world: World = _generate_world_from_csv(test)
 
 	# generate players
 	_load_person_names(world)
@@ -657,10 +657,15 @@ func _generate_player_history(_world: World) -> void:
 	pass
 
 
-func _generate_world_from_csv() -> World:
+func _generate_world_from_csv(test: bool = false) -> World:
 	var world: World = World.new()
 	world.initialize()
-	var file: FileAccess = FileAccess.open(WORLD_CSV_PATH, FileAccess.READ)
+	
+	var world_csv: String = WORLD_CSV_PATH
+	if test:
+		world_csv = TEST_WORLD_CSV_PATH
+
+	var file: FileAccess = FileAccess.open(world_csv, FileAccess.READ)
 
 	# get header row
 	# CONTINENT, NATION, CITY, POPULATION
