@@ -15,10 +15,11 @@ var season_amount: int
 
 
 func _ready() -> void:
-	if not Global.league:
+	theme = ThemeUtil.get_active_theme()
+
+	if not Global.world:
 		print("testing visual table")
 		Tests.setup_mock_world(true)
-
 
 	# start from last entry
 	season_index = Global.league.tables.size() - 1
