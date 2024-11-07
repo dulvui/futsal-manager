@@ -15,6 +15,11 @@ var season_amount: int
 
 
 func _ready() -> void:
+	if not Global.league:
+		print("testing visual table")
+		Tests.setup_mock_world(true)
+
+
 	# start from last entry
 	season_index = Global.league.tables.size() - 1
 	season_amount = Global.league.tables.size()

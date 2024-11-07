@@ -59,7 +59,7 @@ func _ready() -> void:
 	get_tree().root.content_scale_factor = theme_scale
 
 
-func select_team(p_league: League, p_team: Team) -> void:
+func select_team(p_league: League, p_team: Team, testing: bool = false)-> void:
 	league = p_league
 	team = p_team
 	world.active_team_id = team.id
@@ -75,8 +75,9 @@ func select_team(p_league: League, p_team: Team) -> void:
 
 	speed_factor = save_states.temp_state.speed_factor
 	start_date = save_states.temp_state.start_date
-
-	save_states.make_temp_active()
+	
+	if not testing:
+		save_states.make_temp_active()
 
 
 func next_day() -> void:
