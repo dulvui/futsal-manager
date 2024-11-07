@@ -56,7 +56,7 @@ var active_view: ContentViews = ContentViews.EMAIL
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	# Tests.setup_mock_world(true)
+	Tests.setup_mock_world(true)
 
 	team = Global.team
 

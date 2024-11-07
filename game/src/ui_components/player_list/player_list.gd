@@ -38,6 +38,9 @@ var page_max:int
 
 
 func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+	Tests.setup_mock_world(true)
+
 	team_select.add_item("ALL_TEAMS")
 	for league: League in Global.world.get_all_leagues():
 		for team: Team in league.teams:
@@ -51,10 +54,6 @@ func _ready() -> void:
 	league_select.add_item("ALL_LEAGUES")
 	for league: League in Global.world.get_all_leagues():
 		league_select.add_item(league.name)
-
-	# setup automatically, if run in editor and is run by 'Run current scene'
-	if OS.has_feature("editor") and get_parent() == get_tree().root:
-		set_up()
 
 
 func set_up(p_active_team_id: int = -1) -> void:
@@ -103,7 +102,7 @@ func _set_up_columns() -> void:
 	name_col.custom_minimum_size.x = 200
 	# connect name button  signal
 	for i: int in visible_players.size():
-		name_col.color_labels[i].button.pressed.connect(func() -> void: select_player.emit(visible_players[i]))
+		name_col.buttons[i].pressed.connect(func() -> void: select_player.emit(visible_players[i]))
 
 	# separator
 	views_container.add_child(VSeparator.new())
@@ -118,8 +117,7 @@ func _set_up_columns() -> void:
 	_add_column("GENERAL", Const.POSITION, positions)
 	var prices: Callable = func(p: Player) -> String: return FormatUtil.get_sign(p.price)
 	_add_column("GENERAL", "PRICE", prices)
-	#var birth_dates: Callable = func(p: Player) -> String: return FormatUtil.format_date(p.birth_date)
-	var birth_dates: Callable = func(p: Player) -> Dictionary: return p.birth_date
+	var birth_dates: Callable = func(p: Player) -> String: return FormatUtil.format_date(p.birth_date)
 	_add_column("GENERAL", "BIRTH_DATE", birth_dates)
 	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()
 	_add_column("GENERAL", "PRESTIGE", presitge_stars)
@@ -133,7 +131,7 @@ func _set_up_columns() -> void:
 				var value: Variant = p.contract.get(c.name)
 				# for dates
 				if typeof(value) == Variant.Type.TYPE_DICTIONARY:
-					return value
+					return FormatUtil.format_date(value)
 				return str(value)
 			_add_column("CONTARCT", c.name, stats)
 

@@ -15,15 +15,12 @@ const NOT_TRANSLATED_COLUMS: Array[StringName] = [
 ]
 
 var color_labels: Array[ColorLabel] = []
+var buttons: Array[Button] = []
 var view_name: String
 var col_name: String
 var map_function: Callable
 
 @onready var sort_button: Button = $SortButton
-
-
-func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 
 
 func set_up(
@@ -39,18 +36,24 @@ func set_up(
 	var values: Array[Variant] = players.map(map_function)
 
 	for value: Variant in values:
-		var label: ColorLabel = ColorLabelScene.instantiate()
-		color_labels.append(label)
-		add_child(label)
-		label.tooltip_text = col_name
-		label.set_up(col_name, col_name == Const.SURNAME)
-
-		if is_instance_of(value, TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
-			value = str(value).to_upper()
-
-		if "DATE" in col_name:
-			label.set_value(FormatUtil.format_date(value))
+		if col_name == Const.SURNAME :
+			var button: Button = Button.new()	
+			button.text = str(value)
+			button.tooltip_text = col_name
+			button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+			add_child(button)
+			buttons.append(button)
 		else:
+			var label: ColorLabel = ColorLabelScene.instantiate()
+			color_labels.append(label)
+			add_child(label)
+			label.tooltip_text = col_name
+			label.set_up(col_name)
+
+			if is_instance_of(value, TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
+				value = str(value).to_upper()
+
 			label.set_value(value)
 
 
@@ -62,10 +65,7 @@ func update_values(players: Array[Player]) -> void:
 			color_labels[i].show()
 			if is_instance_of(values[i], TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
 				values[i] = str(values[i]).to_upper()
-			if "DATE" in col_name:
-				color_labels[i].set_value(FormatUtil.format_date(values[i]))
-			else:
-				color_labels[i].set_value(values[i])
+			color_labels[i].set_value(values[i])
 		else:
 			color_labels[i].hide()
 
