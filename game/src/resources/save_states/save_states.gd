@@ -52,7 +52,6 @@ func make_temp_active() -> void:
 	# make active
 	list.append(temp_state)
 	active_id = temp_state.id
-	temp_state.create_dir()
 
 	new_temp_state()
 

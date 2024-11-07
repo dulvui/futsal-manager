@@ -59,20 +59,6 @@ func _init(
 	meta_is_temp = p_meta_is_temp
 
 
-func create_dir() -> void:
-	# create save state directory, if not exist yet
-	var user_dir: DirAccess = DirAccess.open("user://")
-	if user_dir and not user_dir.dir_exists(id):
-		var err: int = user_dir.make_dir(id)
-		if err != OK:
-			print("error while creating save state dir")
-
-	# save static metadata
-	meta_team_name = Global.team.name
-	meta_manager_name = Global.manager.get_full_name()
-	meta_create_date = Time.get_datetime_dict_from_system()
-
-
 func delete_dir() -> void:
 	var user_dir: DirAccess = DirAccess.open("user://")
 	if user_dir:
@@ -90,6 +76,22 @@ func delete_dir() -> void:
 
 
 func save_metadata() -> void:
+	_create_dir()
+	# save static metadata
+	meta_team_name = Global.team.name
+	meta_manager_name = Global.manager.get_full_name()
+	meta_create_date = Time.get_datetime_dict_from_system()
 	meta_team_position = (str(Global.league.table().get_position()) + ". " + Global.league.name)
 	meta_last_save = Time.get_datetime_dict_from_system()
 	meta_game_date = Global.world.calendar.date
+
+
+func _create_dir() -> void:
+	# create save state directory, if not exist yet
+	var user_dir: DirAccess = DirAccess.open("user://")
+	if user_dir and not user_dir.dir_exists(id):
+		var err: int = user_dir.make_dir(id)
+		if err != OK:
+			print("error while creating save state dir")
+
+
