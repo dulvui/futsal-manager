@@ -51,6 +51,7 @@ theme_override_constants/separation = 10
 unique_name_in_owner = true
 layout_mode = 2
 text = "MENU"
+alignment = 0
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
@@ -59,21 +60,25 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "EMAIL"
+alignment = 0
 
 [node name="InfoButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "INFO"
+alignment = 0
 
 [node name="CalendarButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "CALENDAR"
+alignment = 0
 
 [node name="CompetitionsButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "COMPETITIONS"
+alignment = 0
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
@@ -82,11 +87,13 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "FORMATION"
+alignment = 0
 
 [node name="PlayersButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "PLAYERS"
+alignment = 0
 
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
@@ -95,6 +102,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "SEARCH_PLAYER"
+alignment = 0
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
