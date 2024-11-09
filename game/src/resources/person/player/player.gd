@@ -14,8 +14,11 @@ enum Form { INJURED, RECOVER, GOOD, EXCELLENT }
 @export var loyality: int
 @export var injury_factor: int
 @export var stamina: float
-@export var team: String  # team name for easier filtering etc...
-@export var team_id: int  # team name for easier filtering etc...
+# for easier filtering
+@export var league: String
+@export var league_id: int
+@export var team: String
+@export var team_id: int
 @export var form: Form
 @export var morality: Morality
 @export var statistics: Statistics
@@ -35,6 +38,8 @@ func _init(
 	p_injury_factor: int = 0,
 	p_stamina: float = 1,
 	p_name: String = "",
+	p_league: String = "",
+	p_league_id: int = 0,
 	p_team: String = "",
 	p_team_id: int = 0,
 	p_surname: String = "",
@@ -59,6 +64,8 @@ func _init(
 	injury_factor = p_injury_factor
 	stamina = p_stamina
 	name = p_name
+	league = p_league
+	league_id = p_league_id
 	team = p_team
 	team_id = p_team_id
 	surname = p_surname

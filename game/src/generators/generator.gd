@@ -31,12 +31,15 @@ func generate_world(test: bool = false) -> World:
 	for continent: Continent in world.continents:
 		for nation: Nation in continent.nations:
 			# backup teams
+			var backup_league: League = League.new()
+			backup_league.name = "BACKUP"
+			backup_league.pyramid_level = nation.leagues.size() + 1
 			for team: Team in nation.backup_teams:
-				_initialize_team(world, nation, nation.leagues.size() + 1, team)
+				_initialize_team(world, nation, backup_league, team)
 			# league teams
 			for league: League in nation.leagues:
 				for team: Team in league.teams:
-					_initialize_team(world, nation, league.pyramid_level, team)
+					_initialize_team(world, nation, league, team)
 
 	# first generate clubs history with promotions, delegations, cup wins
 	_generate_club_history(world)
@@ -49,7 +52,7 @@ func generate_world(test: bool = false) -> World:
 func _initialize_team(
 	world: World,
 	nation: Nation,
-	league_pyramid_level: int,
+	league: League,
 	team: Team,
 ) -> void:
 	# create date ranges
@@ -57,7 +60,7 @@ func _initialize_team(
 	# youngest player can be 15 and oldest 45
 	date = Global.save_states.temp_state.start_date
 
-	var temp_team_prestige: int = _get_team_prestige(league_pyramid_level)
+	var temp_team_prestige: int = _get_team_prestige(league.pyramid_level)
 
 	var max_date: Dictionary = date.duplicate()
 	max_date.month = 1
@@ -77,13 +80,13 @@ func _initialize_team(
 	)
 	team.stadium.year_built = RngUtil.rng.randi_range(date.year - 70, date.year - 1)
 
-	team.staff = _create_staff(world, team.get_prestige(), nation, league_pyramid_level)
+	team.staff = _create_staff(world, team.get_prestige(), nation, league.pyramid_level)
 
 	# assign manager preffered formation to team
 	team.formation = team.staff.manager.formation
 	
 	# assign players after formation has been choosen, to assign correct players positions
-	_assign_players_to_team(world, team, league_pyramid_level, nation, temp_team_prestige)
+	_assign_players_to_team(world, league, team, nation, temp_team_prestige)
 
 	# calc budget, after players/stuff have been created
 	# so budget will alwyas be bigger as minimum needed
@@ -92,59 +95,61 @@ func _initialize_team(
 
 
 func _assign_players_to_team(
-	world: World, p_team: Team, league_pyramid_level: int, p_nation: Nation, prestige: int
+	world: World,league: League, team: Team, nation: Nation, prestige: int
 ) -> Team:
 	var nr: int = 1
 	
 	# lineup
-	for amount: int in p_team.formation.goalkeeper:
+	for amount: int in team.formation.goalkeeper:
 		var position_type: Position.Type = Position.Type.G
 
 		var random_nation: Nation = _get_random_nationality(
-			world, p_nation, prestige, league_pyramid_level
+			world, nation, prestige, league.pyramid_level
 		)
 		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
 		nr += 1
-		player.team = p_team.name
-		player.statistics.team_name = p_team.name
-		player.team_id = p_team.id
-		p_team.players.append(player)
-	for amount: int in p_team.formation.defense:
+		player.team = team.name
+		player.team_id = team.id
+		player.league = league.name
+		player.league_id = league.id
+		player.statistics.team_name = team.name
+		team.players.append(player)
+	for amount: int in team.formation.defense:
 		var position_type: Position.Type = _get_random_defense_position_type()
 
 		var random_nation: Nation = _get_random_nationality(
-			world, p_nation, prestige, league_pyramid_level
+			world, nation, prestige, league.pyramid_level
 		)
 		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
 		nr += 1
-		player.team = p_team.name
-		player.statistics.team_name = p_team.name
-		player.team_id = p_team.id
-		p_team.players.append(player)
-	for amount: int in p_team.formation.center:
+		player.team = team.name
+		player.statistics.team_name = team.name
+		player.team_id = team.id
+		team.players.append(player)
+	for amount: int in team.formation.center:
 		var position_type: Position.Type = _get_random_center_position_type()
 
 		var random_nation: Nation = _get_random_nationality(
-			world, p_nation, prestige, league_pyramid_level
+			world, nation, prestige, league.pyramid_level
 		)
 		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
 		nr += 1
-		player.team = p_team.name
-		player.statistics.team_name = p_team.name
-		player.team_id = p_team.id
-		p_team.players.append(player)
-	for amount: int in p_team.formation.attack:
+		player.team = team.name
+		player.statistics.team_name = team.name
+		player.team_id = team.id
+		team.players.append(player)
+	for amount: int in team.formation.attack:
 		var position_type: Position.Type = _get_random_attack_position_type()
 
 		var random_nation: Nation = _get_random_nationality(
-			world, p_nation, prestige, league_pyramid_level
+			world, nation, prestige, league.pyramid_level
 		)
 		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
 		nr += 1
-		player.team = p_team.name
-		player.statistics.team_name = p_team.name
-		player.team_id = p_team.id
-		p_team.players.append(player)
+		player.team = team.name
+		player.statistics.team_name = team.name
+		player.team_id = team.id
+		team.players.append(player)
 	
 	# bench and rest
 	for position_type: int in Position.Type.values():
@@ -154,17 +159,16 @@ func _assign_players_to_team(
 
 		for i in amount:
 			var random_nation: Nation = _get_random_nationality(
-				world, p_nation, prestige, league_pyramid_level
+				world, nation, prestige, league.pyramid_level
 			)
 			var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
 			nr += 1
-			player.team = p_team.name
-			player.statistics.team_name = p_team.name
-			player.team_id = p_team.id
-			p_team.players.append(player)
+			player.team = team.name
+			player.statistics.team_name = team.name
+			player.team_id = team.id
+			team.players.append(player)
 
-
-	return p_team
+	return team
 
 
 func _get_random_defense_position_type() -> Position.Type:

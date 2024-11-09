@@ -8,7 +8,7 @@ extends VBoxContainer
 signal select_player(player: Player)
 
 const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
-const PAGE_SIZE: int = 11
+const PAGE_SIZE: int = 18
 
 var views: Array[String]
 var columns: Dictionary = {}
