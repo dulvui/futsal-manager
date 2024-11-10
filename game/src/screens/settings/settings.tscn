@@ -194,9 +194,9 @@ text = "DEFAULT_SETTINGS"
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Menu" type="Button" parent="VBoxContainer"]
+[node name="Back" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "MENU"
+text = "BACK"
 
 [node name="ColorPopupPanel" type="PopupPanel" parent="."]
 size = Vector2i(400, 526)
@@ -230,5 +230,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="VBoxContainer/CustomTheme/Style/StyleColorButton" to="." method="_on_style_color_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CustomTheme/Background/BackgroundColorButton" to="." method="_on_background_color_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Defaults" to="." method="_on_defaults_pressed"]
-[connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="color_changed" from="ColorPopupPanel/MarginContainer/ColorPicker" to="." method="_on_color_picker_color_changed"]

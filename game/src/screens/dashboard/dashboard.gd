@@ -320,3 +320,7 @@ func _on_loading_screen_loaded(type: LoadingUtil.Type) -> void:
 			print("loading done default")
 
 
+func _on_settings_button_pressed() -> void:
+	Global.settings_screen = Settings.Screen.DASHBOARD
+	get_tree().change_scene_to_file("res://src/screens/settings/settings.tscn")
+

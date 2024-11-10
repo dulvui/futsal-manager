@@ -46,6 +46,7 @@ func _on_continue_game_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
+	Global.settings_screen = Settings.Screen.MENU
 	get_tree().change_scene_to_file("res://src/screens/settings/settings.tscn")
 
 

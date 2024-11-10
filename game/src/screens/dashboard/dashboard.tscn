@@ -53,6 +53,12 @@ layout_mode = 2
 text = "MENU"
 alignment = 0
 
+[node name="SettingsButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SETTINGS"
+alignment = 0
+
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
 
@@ -225,6 +231,7 @@ custom_minimum_size = Vector2(1920, 800)
 layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/EmailButton" to="." method="_on_email_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/InfoButton" to="." method="_on_info_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/CalendarButton" to="." method="_on_calendar_button_pressed"]

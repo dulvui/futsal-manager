@@ -5,6 +5,12 @@
 class_name Settings
 extends Control
 
+enum Screen {
+	MENU,
+	DASHBOARD,
+	MATCH,
+}
+
 enum ColorType {
 	FONT,
 	STYLE,
@@ -45,8 +51,15 @@ func _on_theme_option_button_item_selected(index: int) -> void:
 	Global.save_config()
 
 
-func _on_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+func _on_back_pressed() -> void:
+	match Global.settings_screen:
+		Screen.MENU:
+			get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+		Screen.DASHBOARD:
+			get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+		_:
+			get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+
 
 
 func _on_defaults_pressed() -> void:

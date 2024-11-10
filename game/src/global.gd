@@ -46,6 +46,8 @@ var manager: Manager
 # save states
 var save_states: SaveStates
 
+var settings_screen: Settings.Screen
+
 
 func _ready() -> void:
 	print("version " + Global.version)
