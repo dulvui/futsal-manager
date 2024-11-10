@@ -8,7 +8,11 @@ extends VBoxContainer
 signal select_player(player: Player)
 
 const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
-const PAGE_SIZE: int = 18
+
+# depending on scale
+const PAGE_SIZE_1: int = 32
+const PAGE_SIZE_2: int = 18
+const PAGE_SIZE_3: int = 11
 
 var views: Array[String]
 var columns: Dictionary = {}
@@ -23,8 +27,9 @@ var all_players: Array[Player] = []
 var players: Array[Player] = []
 var visible_players: Array[Player] = []
 
-var page:int
-var page_max:int
+var page: int
+var page_max: int
+var page_size: int
 
 @onready var name_search_line_edit: LineEdit = $Filters1/NameSearch
 @onready var active_view_option_button: SwitchOptionButton = $Filters1/ActiveView
@@ -54,6 +59,14 @@ func _ready() -> void:
 	league_select.add_item("ALL_LEAGUES")
 	for league: League in Global.world.get_all_leagues():
 		league_select.add_item(league.name)
+	
+	match Global.theme_scale:
+		Const.SCALE_1:
+			page_size = PAGE_SIZE_1
+		Const.SCALE_2:
+			page_size = PAGE_SIZE_2
+		Const.SCALE_3:
+			page_size = PAGE_SIZE_3
 
 
 func set_up(p_active_team_id: int = -1) -> void:
@@ -65,7 +78,7 @@ func set_up(p_active_team_id: int = -1) -> void:
 
 	_set_up_players()
 
-	page_max = players.size() / PAGE_SIZE
+	page_max = players.size() / page_size
 
 	_set_up_columns()
 	active_view = views[0]
@@ -92,7 +105,7 @@ func _set_up_columns() -> void:
 	for child in views_container.get_children():
 		child.queue_free()
 
-	visible_players = players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
 	# names
 	var names: Callable = func(p: Player) -> String: return p.surname
@@ -151,7 +164,7 @@ func _set_up_columns() -> void:
 
 
 func _update_columns() -> void:
-	visible_players = players.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 	
 	for col: PlayerListColumn in columns.values():
 		col.update_values(visible_players)
@@ -249,7 +262,7 @@ func _on_first_pressed() -> void:
 
 
 func _update_page_indicator() -> void:
-	page_max = players.size() / PAGE_SIZE
+	page_max = players.size() / page_size
 	page_indicator.text = "%d / %d" % [page + 1, page_max + 1]
 	last.text = str(page_max + 1)
 

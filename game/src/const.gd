@@ -10,6 +10,11 @@ const FONT_SIZE_DEFAULT: int = 18
 const FONT_SIZE_MIN: int = 14
 const FONT_SIZE_MAX: int = 26
 
+
+const SCALE_1: float = 0.75
+const SCALE_2: float = 1.0
+const SCALE_3: float = 1.50
+
 # match engine
 const HALF_TIME_SECONDS: int = 60 * 20
 const TICKS_PER_SECOND: int = 4

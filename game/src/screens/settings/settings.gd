@@ -128,20 +128,20 @@ func _on_color_picker_color_changed(color: Color) -> void:
 
 
 func _on_scale_1_pressed() -> void:
-	get_tree().root.content_scale_factor = 0.75
-	Global.theme_scale = 0.75
+	get_tree().root.content_scale_factor = Const.SCALE_1
+	Global.theme_scale = Const.SCALE_1
 	Global.save_config()
 
 
 func _on_scale_2_pressed() -> void:
-	get_tree().root.content_scale_factor = 1
-	Global.theme_scale = 1
+	get_tree().root.content_scale_factor = Const.SCALE_2
+	Global.theme_scale = Const.SCALE_2
 	Global.save_config()
 
 
 func _on_scale_3_pressed() -> void:
-	get_tree().root.content_scale_factor = 1.5
-	Global.theme_scale = 1.5
+	get_tree().root.content_scale_factor = Const.SCALE_3
+	Global.theme_scale = Const.SCALE_3
 	Global.save_config()
 
 
