@@ -68,6 +68,14 @@ func update_values(players: Array[Player]) -> void:
 			color_labels[i].set_value(values[i])
 		else:
 			color_labels[i].hide()
+	
+	# name buttons
+	for i: int in buttons.size():
+		if i < values.size():
+			buttons[i].show()
+			buttons[i].text = str(values[i])
+		else:
+			buttons[i].hide()
 
 
 func _on_sort_button_pressed() -> void:
