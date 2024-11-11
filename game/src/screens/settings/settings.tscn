@@ -1,9 +1,110 @@
-[gd_scene load_steps=5 format=3 uid="uid://4aoa7li1cfbc"]
+[gd_scene load_steps=24 format=3 uid="uid://4aoa7li1cfbc"]
 
 [ext_resource type="Script" path="res://src/screens/settings/settings.gd" id="1_m7cla"]
 [ext_resource type="PackedScene" uid="uid://djrvl8pvkr7aa" path="res://src/screens/settings/language_picker/language_picker.tscn" id="2_c3le7"]
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="3_ndxx8"]
 [ext_resource type="ButtonGroup" uid="uid://c1crppfe8on3n" path="res://src/screens/settings/scale_button_group.tres" id="4_33x86"]
+[ext_resource type="StyleBox" uid="uid://dyng6f1l62yql" path="res://theme_base/styles/box_disabled.tres" id="5_8ad3h"]
+[ext_resource type="StyleBox" uid="uid://bb782pesemrwx" path="res://theme_base/styles/box_focus.tres" id="6_telly"]
+[ext_resource type="StyleBox" uid="uid://caiipvh0cr6qa" path="res://theme_base/styles/box_hover.tres" id="7_girmt"]
+[ext_resource type="StyleBox" uid="uid://bu0iiymb5yho4" path="res://theme_base/styles/box_normal.tres" id="8_xk3g4"]
+[ext_resource type="StyleBox" uid="uid://cp40vtqbeqo0j" path="res://theme_base/styles/box_pressed.tres" id="9_8687e"]
+[ext_resource type="StyleBox" uid="uid://ckqpd4kmg8gf4" path="res://theme_base/styles/line_h_focus.tres" id="10_djy4p"]
+[ext_resource type="StyleBox" uid="uid://er6fnwftva8b" path="res://theme_base/styles/line_h_thin.tres" id="11_dbnjf"]
+[ext_resource type="StyleBox" uid="uid://c72pk8l2h3vdv" path="res://theme_base/styles/line_h_normal.tres" id="12_tn15e"]
+[ext_resource type="StyleBox" uid="uid://bt604gpeq6q71" path="res://theme_base/styles/box_background.tres" id="13_soo78"]
+[ext_resource type="StyleBox" uid="uid://7wyiohndriti" path="res://theme_base/styles/line_v_focus.tres" id="14_1vtgl"]
+[ext_resource type="StyleBox" uid="uid://b2r2brhh36eea" path="res://theme_base/styles/line_v_thin.tres" id="15_cym62"]
+[ext_resource type="StyleBox" uid="uid://4kr88nosj3w8" path="res://theme_base/styles/line_v_normal.tres" id="16_81g1y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7y11w"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.160784, 0.490196, 0.913725, 0.443137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfa6h"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.160784, 0.490196, 0.913725, 0.784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0okc"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.160784, 0.490196, 0.913725, 0.768627)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u18qh"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.133562, 0.458717, 0.870625, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5m0ef"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.160784, 0.490196, 0.913725, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_2ye78"]
+
+[sub_resource type="Theme" id="Theme_t2yuu"]
+default_font = SubResource("SystemFont_2ye78")
+default_font_size = 18
+Button/constants/hseparation = 2
+Button/styles/disabled = SubResource("StyleBoxFlat_7y11w")
+Button/styles/focus = SubResource("StyleBoxFlat_yfa6h")
+Button/styles/hover = SubResource("StyleBoxFlat_r0okc")
+Button/styles/normal = SubResource("StyleBoxFlat_u18qh")
+Button/styles/pressed = SubResource("StyleBoxFlat_5m0ef")
+HScrollBar/styles/grabber = ExtResource("8_xk3g4")
+HScrollBar/styles/grabber_highlight = ExtResource("7_girmt")
+HScrollBar/styles/grabber_pressed = ExtResource("9_8687e")
+HScrollBar/styles/scroll = ExtResource("5_8ad3h")
+HScrollBar/styles/scroll_focus = ExtResource("10_djy4p")
+HSeparator/styles/separator = ExtResource("11_dbnjf")
+HSlider/styles/grabber_area = ExtResource("10_djy4p")
+HSlider/styles/grabber_area_highlight = ExtResource("10_djy4p")
+HSlider/styles/slider = ExtResource("12_tn15e")
+Label/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+LineEdit/colors/font_placeholder_color = Color(0.875, 0.875, 0.875, 0.6)
+LineEdit/colors/font_selected_color = Color(1, 1, 1, 1)
+LineEdit/styles/focus = ExtResource("6_telly")
+LineEdit/styles/normal = ExtResource("8_xk3g4")
+LineEdit/styles/read_only = ExtResource("8_xk3g4")
+LinkButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+MarginContainer/constants/margin_bottom = 40
+MarginContainer/constants/margin_left = 40
+MarginContainer/constants/margin_right = 40
+MarginContainer/constants/margin_top = 40
+Panel/styles/panel = ExtResource("13_soo78")
+PopupMenu/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+PopupMenu/colors/font_hover_color = Color(0.875, 0.875, 0.875, 1)
+PopupMenu/styles/hover = ExtResource("9_8687e")
+PopupMenu/styles/panel = ExtResource("8_xk3g4")
+ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
+ProgressBar/styles/background = ExtResource("8_xk3g4")
+ProgressBar/styles/fill = ExtResource("5_8ad3h")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+TabContainer/constants/side_margin = 0
+TabContainer/styles/panel = ExtResource("13_soo78")
+TabContainer/styles/tab_disabled = ExtResource("5_8ad3h")
+TabContainer/styles/tab_focus = ExtResource("6_telly")
+TabContainer/styles/tab_hovered = ExtResource("7_girmt")
+TabContainer/styles/tab_selected = ExtResource("6_telly")
+TabContainer/styles/tab_unselected = ExtResource("8_xk3g4")
+TabContainer/styles/tabbar_background = ExtResource("13_soo78")
+VBoxContainer/constants/separation = 8
+VScrollBar/styles/grabber = ExtResource("8_xk3g4")
+VScrollBar/styles/grabber_highlight = ExtResource("9_8687e")
+VScrollBar/styles/grabber_pressed = ExtResource("9_8687e")
+VScrollBar/styles/scroll = ExtResource("5_8ad3h")
+VScrollBar/styles/scroll_focus = ExtResource("14_1vtgl")
+VSeparator/styles/separator = ExtResource("15_cym62")
+VSlider/styles/grabber_area = ExtResource("14_1vtgl")
+VSlider/styles/grabber_area_highlight = ExtResource("14_1vtgl")
+VSlider/styles/slider = ExtResource("16_81g1y")
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -189,6 +290,7 @@ layout_mode = 2
 
 [node name="Defaults" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_t2yuu")
 text = "DEFAULT_SETTINGS"
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
