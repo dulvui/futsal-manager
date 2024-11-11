@@ -29,13 +29,17 @@ func new_temp_state() -> void:
 
 
 func get_active() -> SaveState:
-	# direclty return active
-	if active != null:
-		return active
-
-	# load and then return active
-	if active_id != "":
+	# load active
+	if active == null and active_id != "":
 		active = load_state(active_id)
+		if active == null:
+			print("error while loading save state with id %s, removing it"%active_id)
+			id_list.erase(active_id)
+			active_id = ""
+
+
+	
+	if active != null:
 		return active
 
 	# create new temp state, if not created yet

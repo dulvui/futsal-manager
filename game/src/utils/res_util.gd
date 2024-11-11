@@ -90,7 +90,7 @@ func save_save_states() -> void:
 	ResourceSaver.save(Global.save_states, Const.SAVE_STATES_PATH + "save_states.res" , ResourceSaver.FLAG_COMPRESS)
 	BackupUtil.create_backup(Const.SAVE_STATES_PATH + "save_states", RES_SUFFIX)
 	
-	# save resources and active save satte 
+	# save resources and active save state 
 	var save_state: SaveState = Global.save_states.get_active()
 	if not save_state.meta_is_temp:
 		save_state.start_date = Global.start_date
