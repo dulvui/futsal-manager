@@ -5,63 +5,89 @@
 class_name SaveStates
 extends JSONResource
 
-@export var list: Array[SaveState]
-@export var active_id: String
+var active: SaveState
 # for temporary save state, when creating new save state
 # becomes active_save_state, once setup is completed
-@export var temp_state: SaveState
+var temp_state: SaveState
+
+@export var id_list: Array[String]
+@export var active_id: String
 
 
 func _init(
-	p_list: Array[SaveState] = [],
+	p_id_list: Array[String] = [],
 	p_active_id: String = "",
 ) -> void:
-	list = p_list
+	id_list = p_id_list
 	active_id = p_active_id
 
 
 func new_temp_state() -> void:
-	var temp_id: String = str(int(Time.get_unix_time_from_system()))
+	var temp_id: String = RngUtil.uuid()
 	temp_state = SaveState.new()
 	temp_state.id = temp_id
 
 
 func get_active() -> SaveState:
-	for state: SaveState in list:
-		if state.id == active_id:
-			return state
+	# direclty return active
+	if active != null:
+		return active
+
+	# load and then return active
+	if active_id != "":
+		active = load_state(active_id)
+		return active
+
 	# create new temp state, if not created yet
 	# useful when running specific scene
 	# on clean game data with non-existent save state
 	if not temp_state:
+		print("create temp")
 		new_temp_state()
 	return temp_state
 
 
 func get_active_path(relative_path: String = "") -> String:
-	if get_active():
-		return "user://" + get_active().id + "/" + relative_path
+	if active != null:
+		return Const.SAVE_STATES_PATH + active.id + "/" + relative_path
 	return ""
 
 
 func make_temp_active() -> void:
 	# assign metadata
 	temp_state.meta_is_temp = false
-	temp_state.save_metadata()
+	temp_state.initialize()
 
 	# make active
-	list.append(temp_state)
+	id_list.append(temp_state.id)
 	active_id = temp_state.id
+	active = temp_state
 
 	new_temp_state()
 
 
 func delete(state: SaveState) -> void:
-	state.delete_dir()
-	list.erase(state)
+	state.delete()
+	id_list.erase(state.id)
 
 	# set next value to active
-	if list.size() > 0:
-		active_id = list[-1].id
+	if id_list.size() > 0:
+		active = load_state(id_list[-1])
 	else:
-		active_id = ""
+		active = null
+
+
+func load_state(id: String) -> SaveState:
+	return ResUtil.load_resource(Const.SAVE_STATES_PATH + id + "/save_state", true)
+
+
+# scan for new save states, that not exist in save_states.res yet
+func scan() -> void:
+	var dir: DirAccess = DirAccess.open(Const.SAVE_STATES_PATH)
+	if dir:
+		dir.list_dir_begin()
+		var file: String = dir.get_next()
+		if dir.current_is_dir():
+			print("new state id found %s"%file)
+			id_list.append(file)
+

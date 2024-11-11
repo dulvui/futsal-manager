@@ -22,8 +22,9 @@ func _ready() -> void:
 	active_save_state_entry.set_up(active_save_state)
 	active_save_state_entry.load_game.connect(func() -> void: loading_screen.show())
 
-	for save_state: SaveState in Global.save_states.list:
-		if save_state.id != active_save_state.id:
+	for save_state_id: String in Global.save_states.id_list:
+		if save_state_id != active_save_state.id:
+			var save_state: SaveState = Global.save_states.load_state(save_state_id)
 			var entry: SaveStateEntry = SaveStateEntryScene.instantiate()
 			entry_list.add_child(entry)
 			entry.set_up(save_state)

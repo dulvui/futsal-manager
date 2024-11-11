@@ -5,6 +5,7 @@
 class_name SaveState
 extends JSONResource
 
+
 @export var id: String
 @export var config_version: String
 @export var config_version_history: Dictionary
@@ -28,10 +29,10 @@ extends JSONResource
 func _init(
 	p_generation_seed: String = "SuchDefaultSeed",
 	p_generation_state: int = 0,
-	p_generation_player_names: Const.PlayerNames = 0,
+	p_generation_player_names: Const.PlayerNames = Const.PlayerNames.MALE,
 	p_current_season: int = 0,
 	p_speed_factor: int = 1,
-	p_id: String = str(int(Time.get_unix_time_from_system())),
+	p_id: String = "",
 	p_id_by_type: Dictionary = {},
 	p_config_version: String = Global.config_version,
 	p_start_date: Dictionary = Time.get_datetime_dict_from_system(),
@@ -59,23 +60,7 @@ func _init(
 	meta_is_temp = p_meta_is_temp
 
 
-func delete_dir() -> void:
-	var user_dir: DirAccess = DirAccess.open("user://")
-	if user_dir:
-		var err: int = user_dir.change_dir(id)
-		if err == OK:
-			# remove all files
-			var file_name: String = user_dir.get_next()
-			while file_name != "":
-				OS.move_to_trash(ProjectSettings.globalize_path("user://" + id + "/" + file_name))
-				file_name = user_dir.get_next()
-		# delete folder
-		err = user_dir.change_dir("..")
-		if err == OK and user_dir.dir_exists(ProjectSettings.globalize_path("user://" + id)):
-			OS.move_to_trash(ProjectSettings.globalize_path("user://" + id))
-
-
-func save_metadata() -> void:
+func initialize() -> void:
 	_create_dir()
 	# save static metadata
 	meta_team_name = Global.team.name
@@ -86,11 +71,33 @@ func save_metadata() -> void:
 	meta_game_date = Global.world.calendar.date
 
 
+func delete() -> void:
+	var user_dir: DirAccess = DirAccess.open(Const.SAVE_STATES_PATH)
+	if user_dir:
+		var err: int = user_dir.change_dir(id)
+		if err == OK:
+			# remove all files
+			var file_name: String = user_dir.get_next()
+			while file_name != "":
+				OS.move_to_trash(ProjectSettings.globalize_path(Const.SAVE_STATES_PATH + id + "/" + file_name))
+				file_name = user_dir.get_next()
+		# delete folder
+		err = user_dir.change_dir(Const.SAVE_STATES_PATH)
+		if err == OK and user_dir.dir_exists(ProjectSettings.globalize_path(Const.SAVE_STATES_PATH + id)):
+			OS.move_to_trash(ProjectSettings.globalize_path(Const.SAVE_STATES_PATH + id))
+
+
 func _create_dir() -> void:
-	# create save state directory, if not exist yet
-	var user_dir: DirAccess = DirAccess.open("user://")
-	if user_dir and not user_dir.dir_exists(id):
-		var err: int = user_dir.make_dir(id)
+	# create save states directory, if not exist yet
+	var user_dir: DirAccess = DirAccess.open(Const.USER_PATH)
+	if not user_dir.dir_exists(Const.SAVE_STATES_DIR):
+		print("dir %s not found, creating now..."%Const.SAVE_STATES_PATH)
+		user_dir.make_dir(Const.SAVE_STATES_DIR)
+	
+	# create id directory, if not exist yet
+	var save_state_dir: DirAccess = DirAccess.open(Const.SAVE_STATES_PATH)
+	if save_state_dir and not save_state_dir.dir_exists(id):
+		var err: int = save_state_dir.make_dir(id)
 		if err != OK:
 			print("error while creating save state dir")
 

@@ -37,3 +37,14 @@ func shuffle(array: Array[Variant]) -> void:
 # shuffle array using global RuandomNumberGenerator
 func pick_random(array: Array[Variant]) -> Variant:
 	return array[rng.randi() % array.size() - 1]
+
+
+func uuid() -> String:
+	# generate random seed like 26374-28372-887463
+	return (
+		str(randi_range(100000, 999999))
+		+ "-"
+		+ str(randi_range(100000, 999999))
+		+ "-"
+		+ str(randi_range(100000, 999999))
+	)

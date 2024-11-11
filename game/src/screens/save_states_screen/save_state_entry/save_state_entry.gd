@@ -57,7 +57,7 @@ func _on_delete_dialog_confirmed() -> void:
 	Global.save_states.delete(save_state)
 	Global.save_config()
 	ResUtil.save_save_states()
-	if Global.save_states.list.size() == 0:
+	if Global.save_states.id_list.size() == 0:
 		get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 	else:
 		get_tree().change_scene_to_file(

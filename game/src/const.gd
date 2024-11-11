@@ -10,7 +10,6 @@ const FONT_SIZE_DEFAULT: int = 18
 const FONT_SIZE_MIN: int = 14
 const FONT_SIZE_MAX: int = 26
 
-
 const SCALE_1: float = 0.75
 const SCALE_2: float = 1.0
 const SCALE_3: float = 1.50
@@ -31,6 +30,10 @@ const LINEUP_PLAYERS_AMOUNT: int = 12
 # season start at 1st of june
 const SEASON_START_DAY: int = 1
 const SEASON_START_MONTH: int = 6
+
+const USER_PATH: StringName = "user://"
+const SAVE_STATES_DIR: StringName = "save_states/"
+const SAVE_STATES_PATH: StringName = "user://save_states/"
 
 # STRINGS
 const MONTH_STRINGS: Array[StringName] = [

@@ -36,14 +36,7 @@ func _on_generated_seed_line_edit_text_changed(new_text: String) -> void:
 
 
 func _on_genearate_seed_button_pressed() -> void:
-	# generate random seed like 26374-28372-887463
-	generation_seed = (
-		str(randi_range(100000, 999999))
-		+ "-"
-		+ str(randi_range(100000, 999999))
-		+ "-"
-		+ str(randi_range(100000, 999999))
-	)
+	generation_seed = RngUtil.uuid()
 	generation_seed_edit.text = generation_seed
 
 

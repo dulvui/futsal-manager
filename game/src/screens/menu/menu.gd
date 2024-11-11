@@ -19,8 +19,8 @@ func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	InputUtil.start_focus(self)
 
-	load_game.visible = Global.save_states and Global.save_states.list.size() > 0
-	continue_game.visible = Global.save_states and Global.save_states.list.size() > 0
+	load_game.visible = Global.save_states and Global.save_states.id_list.size() > 0
+	continue_game.visible = Global.save_states and Global.save_states.id_list.size() > 0
 
 	save_state.set_up(Global.save_states.get_active())
 

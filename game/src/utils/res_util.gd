@@ -84,30 +84,34 @@ func _process(_delta: float) -> void:
 
 
 func save_save_states() -> void:
-	print("saving save state...")
-	var save_sate: SaveState = Global.save_states.get_active()
-	if not save_sate.meta_is_temp:
-		save_sate.start_date = Global.start_date
-		save_sate.id_by_type = Global.id_by_type
-		save_sate.current_season = Global.current_season
-		save_sate.speed_factor = Global.speed_factor
-		save_sate.generation_seed = Global.generation_seed
-		save_sate.generation_state = Global.generation_state
-		save_sate.generation_player_names = Global.generation_player_names
+	print("saving save states...")
+	
+	# save save states
+	ResourceSaver.save(Global.save_states, Const.SAVE_STATES_PATH + "save_states.res" , ResourceSaver.FLAG_COMPRESS)
+	BackupUtil.create_backup(Const.SAVE_STATES_PATH + "save_states", RES_SUFFIX)
+	
+	# save resources and active save satte 
+	var save_state: SaveState = Global.save_states.get_active()
+	if not save_state.meta_is_temp:
+		save_state.start_date = Global.start_date
+		save_state.id_by_type = Global.id_by_type
+		save_state.current_season = Global.current_season
+		save_state.speed_factor = Global.speed_factor
+		save_state.generation_seed = Global.generation_seed
+		save_state.generation_state = Global.generation_state
+		save_state.generation_player_names = Global.generation_player_names
 
-		save_sate.save_metadata()
+		save_state.initialize()
 
 		save_resource("inbox", Global.inbox)
 		save_resource("transfers", Global.transfers)
+		save_resource("save_state", save_state)
 
 		ThreadUtil.save_world()
 		#ResUtil.save_resource("world", Global.world)
+	
+	print("saving save states done.")
 
-	# always save save_states
-	var path: StringName = "user://save_states"
-	var resource_path: StringName = BackupUtil.create_backup(path, RES_SUFFIX)
-	# save new save state
-	ResourceSaver.save(Global.save_states, resource_path, ResourceSaver.FLAG_COMPRESS)
 
 
 func save_resource(res_key: StringName, resource: Resource) -> void:
@@ -118,10 +122,12 @@ func save_resource(res_key: StringName, resource: Resource) -> void:
 
 
 func load_save_states() -> SaveStates:
-	var save_sates: SaveStates = load_resource("save_states", true)
-	if save_sates == null:
+	var save_states: SaveStates = load_resource(Const.SAVE_STATES_PATH + "save_states", true)
+	if save_states == null:
 		return SaveStates.new()
-	return save_sates
+	# scane for new save states
+	save_states.scan()
+	return save_states
 
 
 func load_resources() -> void:
@@ -140,20 +146,26 @@ func load_threaded_resource(res_key: String) -> void:
 	#var start_time: int = Time.get_ticks_msec()
 
 	var path: String = Global.save_states.get_active_path(res_key + RES_SUFFIX)
-	print("loading threaded %s..." + path)
+	print("loading threaded %s..."%path)
 
 	loading_resources.append(path)
 
 	ResourceLoader.load_threaded_request(path, "Resource", true)
 
 
-func load_resource(res_key: String, root_path: bool = false) -> Resource:
+func load_resource(res_key: String, absolute_path: bool = false) -> Resource:
 	var start_time: int = Time.get_ticks_msec()
 
-	var path: String = "user://" + res_key + RES_SUFFIX
+	var path: String = res_key + RES_SUFFIX
 
-	if not root_path:
+	if not absolute_path:
 		path = Global.save_states.get_active_path(res_key + RES_SUFFIX)
+	
+	# check first, if file exists
+	var file_access: FileAccess = FileAccess.open(path, FileAccess.READ)
+	if file_access == null:
+		print("resource file %s does not exist"%path)
+		return null
 
 	print("loading resource %s..." % path)
 

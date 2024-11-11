@@ -65,6 +65,9 @@ func select_team(p_league: League, p_team: Team, testing: bool = false)-> void:
 	league = p_league
 	team = p_team
 	world.active_team_id = team.id
+	
+	if not testing:
+		save_states.make_temp_active()
 
 	transfers = Transfers.new()
 
@@ -76,9 +79,6 @@ func select_team(p_league: League, p_team: Team, testing: bool = false)-> void:
 
 	speed_factor = save_states.temp_state.speed_factor
 	start_date = save_states.temp_state.start_date
-	
-	if not testing:
-		save_states.make_temp_active()
 
 
 func next_day() -> void:
@@ -121,9 +121,9 @@ func save_config() -> void:
 	config.set_value("settings", "theme_custom_style_color", theme_custom_style_color)
 	config.set_value("settings", "theme_custom_background_color", theme_custom_background_color)
 
-	config.save("user://settings.cfg")
+	config.save(Const.USER_PATH + "settings.cfg")
 
-	BackupUtil.create_backup("user://settings", ".cfg")
+	BackupUtil.create_backup(Const.USER_PATH + "settings", ".cfg")
 
 
 func save_all_data() -> void:
@@ -154,14 +154,14 @@ func load_save_state() -> void:
 
 func _load_config() -> void:
 	config = ConfigFile.new()
-	var err: int = config.load("user://settings.cfg")
+	var err: int = config.load(Const.USER_PATH + "settings.cfg")
 	# if not, something went wrong with the file loading
 	if err != OK:
-		print("error loading user://settings.cfg")
-		BackupUtil.restore_backup("user://settings", ".cfg")
-		err = config.load("user://settings.cfg")
+		print("error loading settings.cfg")
+		BackupUtil.restore_backup(Const.USER_PATH + "settings", ".cfg")
+		err = config.load(Const.USER_PATH + "settings.cfg")
 		if err != OK:
-			print("error restoring backup for user://settings.cfg")
+			print("error restoring backup for settings.cfg")
 
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	language = config.get_value("settings", "language", "")

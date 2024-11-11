@@ -20,20 +20,20 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Const="*res://src/const.gd"
 Global="*res://src/global.gd"
+BackupUtil="*res://src/utils/backup_util.gd"
 ResUtil="*res://src/utils/res_util.gd"
+IdUtil="*res://src/utils/id_util.gd"
 MatchCombinationUtil="*res://src/utils/match_combination_util.gd"
 TransferUtil="*res://src/utils/transfer_util.gd"
 EmailUtil="*res://src/utils/email_util.gd"
-Const="*res://src/const.gd"
 FormatUtil="*res://src/utils/format_util.gd"
-IdUtil="*res://src/utils/id_util.gd"
 RngUtil="*res://src/utils/rng_util.gd"
 ThemeUtil="*res://src/utils/theme_util.gd"
 LoadingUtil="*res://src/utils/loading_util.gd"
 ThreadUtil="*res://src/utils/thread_util.gd"
 InputUtil="*res://src/utils/input_util.gd"
-BackupUtil="*res://src/utils/backup_util.gd"
 
 [debug]
 

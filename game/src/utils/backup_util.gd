@@ -9,8 +9,8 @@ const BACKUP_SUFFIX: StringName = ".backup"
 
 func create_backup(path: StringName, file_suffix: StringName) -> StringName:
 	var file_path: StringName = path + file_suffix
-	print("creating backup for %s..." % file_suffix)
 	var backup_path: StringName = path + BACKUP_SUFFIX + file_suffix
+	print("creating backup for %s..." % backup_path)
 
 	var dir_access: DirAccess = DirAccess.open(file_path.get_base_dir())
 	if dir_access:
@@ -25,6 +25,13 @@ func restore_backup(path: String, file_suffix: StringName) -> StringName:
 	#  first, make sure, path has no suffix
 	path = path.replace(file_suffix, "")
 	var file_path: StringName = path + file_suffix
+	
+	# check first, if file exists
+	var file_access: FileAccess = FileAccess.open(file_path, FileAccess.READ)
+	if file_access == null:
+		print("backup file %s does not exist"%file_path)
+		return ""
+
 	print("restoring backup for %s..." % file_path)
 	var backup_path: StringName = path + BACKUP_SUFFIX + file_suffix
 
