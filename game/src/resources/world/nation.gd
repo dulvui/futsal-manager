@@ -30,11 +30,7 @@ func _init(
 
 
 func add_league(league: League) -> void:
-	leagues.append(league)
-
-
-func set_up_national_team() -> void:
-	team.name = name
+	leagues.append(league)	
 
 
 func get_league_by_id(league_id: int) -> League:

@@ -25,6 +25,10 @@ enum Type {
 @export var type: Type
 @export var variations: Array[PositionVariation]
 
+static var defense_types: Array[Type] = [Type.DL, Type.DC, Type.DR]
+static var center_types: Array[Type] = [Type.WL, Type.C, Type.WR]
+static var attack_types: Array[Type] = [Type.PL, Type.PC, Type.PR]
+
 
 func _init(
 	p_name: String = "",

@@ -100,18 +100,87 @@ func get_competition_by_id(competition_id: int) -> Competition:
 	return null
 
 
+func get_all_players() -> Array[Player]:
+	var players: Array[Player] = []
+	for league: League in get_all_leagues():
+		for team in league.teams:
+			players.append_array(team.players)
+	return players
+
+
+func get_all_players_by_nationality(nation: Nation) -> Array[Player]:
+	var players: Array[Player] = []
+	for league: League in get_all_leagues():
+		for team in league.teams:
+			for player: Player in team.players:
+				if player.nation == nation.name:
+					players.append(player)
+	return players
+
+
+func get_best_players_by_nationality(nation: Nation) -> Array[Player]:
+	var best_players: Array[Player] = []
+	var players: Array[Player] = get_all_players_by_nationality(nation)
+	
+	# goal keepers
+	var best_goalkeepers: Array[Player] = players.filter(
+		func(player: Player) -> bool:
+			return player.position.type == Position.Type.G
+	)
+	best_goalkeepers.sort_custom(
+		func(a: Player, b: Player) -> bool:
+			return a.get_goalkeeper_attributes() > b.get_goalkeeper_attributes() 
+	)
+	best_players.append_array(best_goalkeepers.slice(0, 3))
+	
+	# defenders
+	var best_defenders: Array[Player] = players.filter(
+		func(player: Player) -> bool:
+			return player.position.type in Position.defense_types
+	)
+	best_defenders.sort_custom(
+		func(a: Player, b: Player) -> bool:
+			return a.get_overall() > b.get_overall()
+	)
+	best_players.append_array(best_defenders.slice(0, 5))
+
+	# centers
+	var best_centers: Array[Player] = players.filter(
+		func(player: Player) -> bool:
+			return player.position.type in Position.center_types
+	)
+	best_centers.sort_custom(
+		func(a: Player, b: Player) -> bool:
+			return a.get_overall() > b.get_overall()
+	)
+	best_players.append_array(best_centers.slice(0, 5))
+
+	# attackers
+	var best_attackers: Array[Player] = players.filter(
+		func(player: Player) -> bool:
+			return player.position.type in Position.attack_types
+	)
+	best_attackers.sort_custom(
+		func(a: Player, b: Player) -> bool:
+			return a.get_overall() > b.get_overall()
+	)
+	best_players.append_array(best_attackers.slice(0, 5))
+
+	return best_players
+
+
 func get_all_nations() -> Array[Nation]:
 	var all_nations: Array[Nation] = []
-	for c: Continent in continents:
-		all_nations.append_array(c.nations)
+	for continent: Continent in continents:
+		all_nations.append_array(continent.nations)
 	return all_nations
 
 
 func get_all_leagues() -> Array[League]:
 	var leagues: Array[League] = []
-	for c: Continent in continents:
-		for n: Nation in c.nations:
-			leagues.append_array(n.leagues)
+	for continent: Continent in continents:
+		for nation: Nation in continent.nations:
+			leagues.append_array(nation.leagues)
 	return leagues
 
 

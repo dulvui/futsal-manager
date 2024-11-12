@@ -36,10 +36,20 @@ func generate_world(test: bool = false) -> World:
 			backup_league.pyramid_level = nation.leagues.size() + 1
 			for team: Team in nation.backup_teams:
 				_initialize_team(world, nation, backup_league, team)
+			
 			# league teams
 			for league: League in nation.leagues:
 				for team: Team in league.teams:
 					_initialize_team(world, nation, league, team)
+
+			# national team
+			nation.team.name = nation.name
+			# add nations best players
+			nation.team.players = world.get_best_players_by_nationality(nation)
+			nation.team.staff = _create_staff(world, nation.team.get_prestige(), nation, 1)
+			nation.team.formation = nation.team.staff.manager.formation
+			# TODO replace with actual national colors
+			nation.team.set_random_colors()
 
 	# first generate clubs history with promotions, delegations, cup wins
 	_generate_club_history(world)
@@ -720,8 +730,6 @@ func _initialize_city(
 		nation = Nation.new()
 		nation.name = nation_name
 		continent.nations.append(nation)
-		# setup national team
-		nation.set_up_national_team()
 	else:
 		nation = nation_filter[0]
 

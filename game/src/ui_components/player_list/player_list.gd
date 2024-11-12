@@ -196,10 +196,7 @@ func _set_up_players(p_reset_options: bool = true) -> void:
 	# uncomment to stresstest
 	#for i in range(10):
 	if active_team_id == -1:
-		for league: League in Global.world.get_all_leagues():
-			for team in league.teams:
-				for player in team.players:
-					all_players.append(player)
+		all_players.append_array(Global.world.get_all_players())
 	else:
 		for player: Player in Global.world.get_team_by_id(active_team_id).players:
 			all_players.append(player)
