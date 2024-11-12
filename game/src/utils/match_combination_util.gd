@@ -5,8 +5,8 @@
 extends Node
 
 
-func initialize_matches() -> void:
-	for continent: Continent in Global.world.continents:
+func initialize_matches(world: World = Global.world) -> void:
+	for continent: Continent in world.continents:
 		for nation: Nation in continent.nations:
 			# first, initialize leauge matches
 			for league: League in nation.leagues:
@@ -19,7 +19,7 @@ func initialize_matches() -> void:
 		_initialize_club_continental_cup(continent)
 
 	# last, initialize world cup
-	_initialize_national_teams_world_cup()
+	_initialize_national_teams_world_cup(world)
 
 
 func create_combinations(competition: Competition, p_teams: Array[Team]) -> Array[Array]:
@@ -81,56 +81,13 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 	return match_days
 
 
-func _initialize_club_league_matches(competition: Competition, teams: Array[Team]) -> void:
-	var match_days: Array[Array] = create_combinations(competition, teams)
-	_add_matches_to_calendar(competition, match_days)
-
-
-func _initialize_club_national_cup(p_nation: Nation) -> void:
-	# setup cup
-	p_nation.cup.name = p_nation.name + " " + tr("CUP")
-	var all_teams_by_nation: Array[Team]
-	for league: League in p_nation.leagues:
-		all_teams_by_nation.append_array(league.teams)
-	p_nation.cup.set_up_knockout(all_teams_by_nation)
-
-	# create matches for first round group a
-	# for now, only single leg
-	var matches: Array[Match] = p_nation.cup.get_knockout_matches()
+func add_matches_to_calendar(
+	competition: Competition,
+	match_days: Array[Array],
+	day: int = 0,
+	month: int = 6,
+) -> void:
 	# add to calendar
-	var day: int = 0
-	var month: int = 6
-	_add_knockout_matches_to_calendar(matches, p_nation.cup.id, day, month)
-
-
-func _initialize_club_continental_cup(p_continent: Continent) -> void:
-	# setup cup
-	p_continent.cup_clubs.name =  p_continent.name + " " + tr("CUP")
-	var teams: Array[Team]
-
-	# get qualified teams from every nation
-	for nation: Nation in p_continent.nations:
-		teams.append_array(nation.get_continental_cup_qualified_teams())
-
-	p_continent.cup_clubs.set_up(teams)
-
-	# create matches for first round group a
-	# for now, only single leg
-	var matches: Array[Array] = p_continent.cup_clubs.get_group_matches()
-	_add_matches_to_calendar(p_continent.cup_clubs, matches)
-
-
-func _initialize_national_teams_world_cup() -> void:
-	pass
-
-
-func _add_matches_to_calendar(competition: Competition, match_days: Array[Array]) -> void:
-	# add to calendar
-	# TODO use actual league start/end date
-	#var day: int = Global.world.calendar.day().day
-	#var month: int = Global.world.calendar.day().month
-	var day: int = 0
-	var month: int = 6
 
 	# start with saturday of next week
 	for i in range(8, 1, -1):
@@ -185,55 +142,57 @@ func _add_matches_to_calendar(competition: Competition, match_days: Array[Array]
 		day += 5
 
 
-func _add_knockout_matches_to_calendar(matches: Array[Match], cup_id: int, day: int, month: int) -> void:
-	# start with saturday of next week
-	for i in range(8, 1, -1):
-		if Global.world.calendar.day(month, i).weekday == "TUE":
-			day = i
-			break
+func _initialize_club_league_matches(competition: Competition, teams: Array[Team]) -> void:
+	var match_days: Array[Array] = create_combinations(competition, teams)
+	add_matches_to_calendar(competition, match_days)
 
-	# check if next month
-	if day > Global.world.calendar.month(month).days.size() - 1:
-		month += 1
-		day = 0
-		# start also new month with tuesday
-		for i in 7:
-			if Global.world.calendar.day(month, i).weekday == "TUE":
-				day = i
-				break
 
-	# assign match tuesday
-	Global.world.calendar.day(month, day).add_matches(matches.slice(0, matches.size() / 4), cup_id)
-	# assign match wednesay
-	day += 1
-	# check if next month
-	if day > Global.world.calendar.month(month).days.size() - 1:
-		month += 1
-		day = 0
-		# start also new month with tuesday
-		for i in 7:
-			if Global.world.calendar.day(month, i).weekday == "TUE":
-				day = i
-				break
-	Global.world.calendar.day(month, day).add_matches(
-		matches.slice(matches.size() / 4, matches.size() / 2), cup_id
-	)
-	# assign matches THURSDAY
-	day += 1
-	# check if next month
-	if day > Global.world.calendar.month(month).days.size() - 1:
-		month += 1
-		day = 0
-		# start also new month with saturday
-		for i in 7:
-			if Global.world.calendar.day(month, i).weekday == "TUE":
-				day = i
-				break
-	Global.world.calendar.day(month, day).add_matches(
-		matches.slice(matches.size() / 2, matches.size()), cup_id
-	)
-	# restart from friday
-	day += 5
+func _initialize_club_national_cup(p_nation: Nation) -> void:
+	# setup cup
+	p_nation.cup.name = p_nation.name + " " + tr("CUP")
+	var all_teams_by_nation: Array[Team]
+	for league: League in p_nation.leagues:
+		all_teams_by_nation.append_array(league.teams)
+	p_nation.cup.set_up_knockout(all_teams_by_nation, 2)
+
+	# create matches for first round group a
+	var matches: Array[Array] = p_nation.cup.get_knockout_matches()
+	# add to calendar
+	add_matches_to_calendar(p_nation.cup, matches)
+
+
+func _initialize_club_continental_cup(p_continent: Continent) -> void:
+	# setup cup
+	p_continent.cup_clubs.name =  p_continent.name + " " + tr("CUP")
+	var teams: Array[Team]
+
+	# get qualified teams from every nation
+	for nation: Nation in p_continent.nations:
+		teams.append_array(nation.get_continental_cup_qualified_teams())
+
+	p_continent.cup_clubs.set_up(teams)
+
+	# create matches for first round group a
+	# for now, only single leg
+	var matches: Array[Array] = p_continent.cup_clubs.get_group_matches()
+	add_matches_to_calendar(p_continent.cup_clubs, matches)
+
+
+func _initialize_national_teams_world_cup(world: World) -> void:
+	# setup cup
+	world.world_cup.name = tr("WORLD CUP")
+
+	var teams: Array[Team]
+	for continent: Continent in world.continents:
+		for nation: Nation in continent.nations:
+			teams.append(nation.team)
+	
+	world.world_cup.set_up(teams)
+
+	# create matches for first round group a
+	var matches: Array[Array] = world.world_cup.get_knockout_matches()
+	# add to calendar
+	add_matches_to_calendar(world.world_cup, matches)
 
 
 func _shift_array(array: Array) -> void:

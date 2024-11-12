@@ -38,13 +38,16 @@ func set_result(p_home_goals: int, p_away_goals: int, world: World = Global.worl
 	over = true
 
 	# save in competition table/knockout
+	# needs to be done here, so it can be used from match and dashboard
 	if world:
 		var competition: Competition = world.get_competition_by_id(competition_id)
 
 		if competition is League:
-			(competition as League).table().add_result(home.id, home_goals, away.id, away_goals)
+			var league: League = (competition as League)
+			league.table().add_result(home.id, home_goals, away.id, away_goals)
 		elif competition is Cup:
-			print("TODO CupK save result")
+			var cup: Cup = (competition as Cup)
+			cup.add_result(home.id, home_goals, away.id, away_goals)
 		else:
 			print("error competition with no valid type; id: " + str(competition_id))
 

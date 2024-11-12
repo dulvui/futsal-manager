@@ -37,8 +37,6 @@ func get_active() -> SaveState:
 			id_list.erase(active_id)
 			active_id = ""
 
-
-	
 	if active != null:
 		return active
 

@@ -70,11 +70,3 @@ func get_team_by_id(team_id: int) -> Team:
 	return null
 
 
-func random_results() -> void:
-	var match_engine: MatchEngine = MatchEngine.new()
-	for league: League in leagues:
-		var matches: Array = Global.world.calendar.day().get_matches(league.id)
-		for matchz: Match in matches:
-			if not matchz.over:
-				var result_match: Match = match_engine.simulate(matchz)
-				matchz.set_result(result_match.home_goals, result_match.away_goals)

@@ -239,7 +239,7 @@ func _next_day() -> void:
 	email.update_messages()
 	date_label.text = Global.world.calendar.format_date()
 
-	# config buttons
+	# check matches
 	if Global.world.calendar.is_match_day():
 		continue_button.text = "START_MATCH"
 		match_ready = true

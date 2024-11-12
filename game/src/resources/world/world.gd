@@ -29,9 +29,16 @@ func initialize() -> void:
 
 
 func random_results() -> void:
-	for continet: Continent in continents:
-		for nation: Nation in continet.nations:
-			nation.random_results()
+	var match_engine: MatchEngine = MatchEngine.new()
+	var matches: Array = Global.world.calendar.day().get_matches()
+	for matchz: Match in matches:
+		if not matchz.over:
+			var result_match: Match = match_engine.simulate(matchz)
+			matchz.set_result(result_match.home_goals, result_match.away_goals)
+
+	# check if cups are ready for next stage
+	for cup: Cup in get_all_cups():
+		cup.next_stage()
 
 
 func get_active_team() -> Team:
@@ -108,12 +115,19 @@ func get_all_leagues() -> Array[League]:
 	return leagues
 
 
-func get_all_club_cups() -> Array[Competition]:
+func get_all_cups() -> Array[Competition]:
 	var cups: Array[Competition] = []
-	for c: Continent in continents:
-		cups.append(c.cup_clubs)
-		for n: Nation in c.nations:
-			cups.append(n.cup)
+	# world
+	cups.append(cup_clubs)
+	cups.append(cup_nations)
+	# continent
+	for contient: Continent in continents:
+		cups.append(contient.cup_clubs)
+		cups.append(contient.cup_nations)
+		# nations
+		for nation: Nation in contient.nations:
+			cups.append(nation.cup)
+
 	return cups
 
 

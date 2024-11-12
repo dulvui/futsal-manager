@@ -28,7 +28,7 @@ func set_up(day: Day) -> void:
 			_add_matches(league, day)
 
 	# add cups
-	for cup: Competition in Global.world.get_all_club_cups():
+	for cup: Competition in Global.world.get_all_cups():
 		_add_matches(cup, day)
 
 
