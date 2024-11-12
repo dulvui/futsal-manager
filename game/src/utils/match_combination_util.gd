@@ -19,7 +19,7 @@ func initialize_matches(world: World = Global.world) -> void:
 		_initialize_club_continental_cup(continent)
 
 	# last, initialize world cup
-	_initialize_national_teams_world_cup(world)
+	_initialize_world_cup(world)
 
 
 func create_combinations(competition: Competition, p_teams: Array[Team]) -> Array[Array]:
@@ -178,7 +178,7 @@ func _initialize_club_continental_cup(p_continent: Continent) -> void:
 	add_matches_to_calendar(p_continent.cup_clubs, matches)
 
 
-func _initialize_national_teams_world_cup(world: World) -> void:
+func _initialize_world_cup(world: World) -> void:
 	# setup cup
 	world.world_cup.name = tr("WORLD CUP")
 
@@ -190,7 +190,7 @@ func _initialize_national_teams_world_cup(world: World) -> void:
 	world.world_cup.set_up(teams)
 
 	# create matches for first round group a
-	var matches: Array[Array] = world.world_cup.get_knockout_matches()
+	var matches: Array[Array] = world.world_cup.get_group_matches()
 	# add to calendar
 	add_matches_to_calendar(world.world_cup, matches)
 

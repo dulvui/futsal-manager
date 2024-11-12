@@ -720,6 +720,8 @@ func _initialize_city(
 		nation = Nation.new()
 		nation.name = nation_name
 		continent.nations.append(nation)
+		# setup national team
+		nation.set_up_national_team()
 	else:
 		nation = nation_filter[0]
 

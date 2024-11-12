@@ -33,6 +33,10 @@ func add_league(league: League) -> void:
 	leagues.append(league)
 
 
+func set_up_national_team() -> void:
+	team.name = name
+
+
 func get_league_by_id(league_id: int) -> League:
 	for league: League in leagues:
 		if league.id == league_id:
@@ -58,7 +62,6 @@ func get_continental_cup_qualified_teams() -> Array[Team]:
 		teams.append(get_team_by_id(table[i].team_id))
 
 	return teams
-
 
 
 func get_team_by_id(team_id: int) -> Team:
