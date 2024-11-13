@@ -23,8 +23,8 @@ var max_timestamp: int
 var min_timestamp: int
 
 
-func generate_world(test: bool = false) -> World:
-	var world: World = _generate_world_from_csv(test)
+func generate_world(use_test_file: bool = false) -> World:
+	var world: World = _generate_world_from_csv(use_test_file)
 
 	# generate players
 	_load_person_names(world)
@@ -674,12 +674,12 @@ func _generate_player_history(_world: World) -> void:
 	pass
 
 
-func _generate_world_from_csv(test: bool = false) -> World:
+func _generate_world_from_csv(use_test_file: bool = false) -> World:
 	var world: World = World.new()
 	world.initialize()
 	
 	var world_csv: String = WORLD_CSV_PATH
-	if test:
+	if use_test_file:
 		world_csv = TEST_WORLD_CSV_PATH
 
 	var file: FileAccess = FileAccess.open(world_csv, FileAccess.READ)
