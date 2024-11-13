@@ -23,7 +23,7 @@ func _ready() -> void:
 func set_up(competition_name: String = "") -> void:
 	# world competitons
 	var world_item: TreeItem = _create_item("WORLD")
-	_create_item("WORLD CUP", world_item)
+	_create_item("WORLD CUP", world_item, Global.world.world_cup)
 	var continents_item: TreeItem = _create_item("CONTINENTS", world_item)
 	# continents
 	for continent: Continent in Global.world.continents:
@@ -35,10 +35,10 @@ func set_up(competition_name: String = "") -> void:
 			for league: League in nation.leagues:
 				_create_item(league.name, nation_item, league)
 			# nation cups
-			_create_item(nation.cup.name, nation_item)
+			_create_item(nation.cup.name, nation_item, nation.cup)
 		# continental cups
-		_create_item(continent.cup_nations.name, continent_item)
-		_create_item(continent.cup_clubs.name, continent_item)
+		_create_item(continent.cup_clubs.name, continent_item, continent.cup_clubs)
+		_create_item(continent.cup_nations.name, continent_item, continent.cup_nations)
 	
 	select(competition_name)
 

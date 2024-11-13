@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1_k4jv8"]
 [ext_resource type="Script" path="res://src/ui_components/visual_competitions/visual_competitions.gd" id="2_5cr6f"]
 [ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui_components/swtich_option_button/switch_option_button.tscn" id="3_88ilj"]
-[ext_resource type="PackedScene" uid="uid://cw32i6hnqrgbi" path="res://src/ui_components/competition_tree/competitions_tree.tscn" id="4_113m2"]
+[ext_resource type="PackedScene" uid="uid://cw32i6hnqrgbi" path="res://src/ui_components/visual_competitions/competition_tree/competitions_tree.tscn" id="4_113m2"]
 
 [node name="VisualCompetitions" type="HBoxContainer"]
 anchors_preset = 15
@@ -16,77 +16,10 @@ size_flags_vertical = 3
 theme = ExtResource("1_k4jv8")
 script = ExtResource("2_5cr6f")
 
-[node name="Positions" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Labels" type="HBoxContainer" parent="Positions"]
-layout_mode = 2
-theme_override_constants/separation = 5
-alignment = 1
-
-[node name="Pos" type="Label" parent="Positions/Labels"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-text = "#"
-
-[node name="Team" type="Label" parent="Positions/Labels"]
-custom_minimum_size = Vector2(330, 0)
-layout_mode = 2
-text = "TEAM
-"
-
-[node name="Played" type="Label" parent="Positions/Labels"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-text = "PLAYED"
-horizontal_alignment = 1
-
-[node name="Win" type="Label" parent="Positions/Labels"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-text = "WIN"
-horizontal_alignment = 1
-
-[node name="Draw" type="Label" parent="Positions/Labels"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-text = "DRAW"
-horizontal_alignment = 1
-
-[node name="Loose" type="Label" parent="Positions/Labels"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-text = "LOOSE"
-horizontal_alignment = 1
-
-[node name="Goals" type="Label" parent="Positions/Labels"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-text = "GOALS"
-horizontal_alignment = 1
-
-[node name="Points" type="Label" parent="Positions/Labels"]
-custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
-text = "POINTS"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="Positions"]
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Positions"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="TableValuesGrid" type="GridContainer" parent="Positions/ScrollContainer"]
+[node name="Main" type="ScrollContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 0
-columns = 9
+size_flags_horizontal = 3
 
 [node name="Competitions" type="VBoxContainer" parent="."]
 layout_mode = 2
