@@ -28,6 +28,7 @@ func _ready() -> void:
 	# test_gameloop.test()
 
 	print("Stop test suite")
+	get_tree().quit()
 
 
 static func setup_mock_world(use_test_file: bool) -> void:
