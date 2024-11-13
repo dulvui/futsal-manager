@@ -124,7 +124,7 @@ func player_update(team_has_ball: bool) -> void:
 		State.MOVE:
 			_move()
 			state = State.IDLE
-	print("nr %d has ball %s state %s"%[player_res.nr, team_has_ball, State.keys()[state]])
+	# print("nr %d has ball %s state %s"%[player_res.nr, team_has_ball, State.keys()[state]])
 
 
 func goalkeeper_update(team_has_ball: bool) -> void:

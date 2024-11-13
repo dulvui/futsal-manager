@@ -16,18 +16,16 @@ extends Node
 
 func _ready() -> void:
 	print("Start test suite")
-
-	# use new temp state
-	Global.save_states.new_temp_state()
-	Global.load_save_state()
-
+	
 	test_match_combination.test()
 	test_calendar.test()
 	test_generator.test()
 	test_match_engine.test()
 	test_benchmark.test()
-	#test_gameloop.test()
 	test_res_util.test()
+
+	# intensive tests
+	# test_gameloop.test()
 
 	print("Stop test suite")
 

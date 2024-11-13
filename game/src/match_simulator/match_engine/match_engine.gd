@@ -97,7 +97,7 @@ func update() -> void:
 	else:
 		home_team.check_changes()
 		away_team.check_changes()
-		print("BALL OUT")
+		# print("BALL OUT")
 
 
 

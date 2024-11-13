@@ -250,7 +250,7 @@ func _sort_distance_to_ball(a: SimPlayer, b: SimPlayer) -> bool:
 
 
 func _on_player_interception() -> void:
-	print("interception")
+	# print("interception")
 	interception.emit()
 
 

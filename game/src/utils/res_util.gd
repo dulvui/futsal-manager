@@ -146,6 +146,7 @@ func load_threaded_resource(res_key: String) -> void:
 	#var start_time: int = Time.get_ticks_msec()
 
 	var path: String = Global.save_states.get_active_path(res_key + RES_SUFFIX)
+	breakpoint
 	print("loading threaded %s..."%path)
 
 	loading_resources.append(path)

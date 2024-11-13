@@ -64,7 +64,7 @@ func update() -> void:
 	else:
 		rotation = 0
 	
-	print("ball state %s"%State.keys()[state])
+	# print("ball state %s"%State.keys()[state])
 
 
 func move() -> void:

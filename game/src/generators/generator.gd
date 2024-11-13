@@ -68,7 +68,10 @@ func _initialize_team(
 	# create date ranges
 	# starts from current year and subtracts min/max years
 	# youngest player can be 15 and oldest 45
-	date = Global.save_states.temp_state.start_date
+	if Global.save_states and Global.save_states.temp_state:
+		date = Global.save_states.temp_state.start_date
+	else:
+		date = Time.get_date_dict_from_system()
 
 	var temp_team_prestige: int = _get_team_prestige(league.pyramid_level)
 
@@ -378,7 +381,7 @@ func _get_random_morality() -> Player.Morality:
 
 func _get_contract(person: Person) -> Contract:
 	var contract: Contract = Contract.new()
-	contract.income = person.prestige * person.get_age()  # TODO use better logic
+	contract.income = person.prestige * person.get_age(date)  # TODO use better logic
 	contract.start_date = date
 	contract.end_date = date
 	contract.bonus_goal = 0
