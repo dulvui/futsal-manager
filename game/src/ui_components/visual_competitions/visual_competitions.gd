@@ -11,7 +11,7 @@ var competition: Competition
 var season_index: int
 var season_amount: int
 
-@onready var main: ScrollContainer = %Main
+@onready var main: VBoxContainer = %Main
 @onready var seasons: SwitchOptionButton = %SeasonsButton
 @onready var competitions_tree: CompetitionsTree = %CompetitionsTree
 
@@ -42,14 +42,19 @@ func _set_up() -> void:
 		table.set_up(league.tables[season_index])
 	else:
 		var cup: Cup = (competition as Cup)
-		var box: VBoxContainer = VBoxContainer.new()
-		main.add_child(box)
 		if cup.stage == Cup.Stage.GROUP:
 			for group: Group in cup.groups:
+				# label
+				var label: Label = Label.new()
+				var index: int = cup.groups.find(group) + 1
+				label.text = tr("GROUP") + " " + str(index)
+				ThemeUtil.bold(label)
+				main.add_child(label)
+				# table
 				var table: VisualTable = VisualtableScene.instantiate()
-				box.add_child(table)
+				main.add_child(table)
 				table.set_up(group.table)
-				box.add_child(HSeparator.new())
+				main.add_child(HSeparator.new())
 
 
 func _set_up_seasons() -> void:
