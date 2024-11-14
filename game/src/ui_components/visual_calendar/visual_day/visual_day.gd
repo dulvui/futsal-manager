@@ -8,7 +8,7 @@ extends Control
 signal show_match_list
 
 const HOME_MATCH_DAY_COLOR: Color = Color.DODGER_BLUE
-const AWAY_MATCH_DAY_COLOR: Color = Color.DEEP_SKY_BLUE
+const AWAY_MATCH_DAY_COLOR: Color = Color.FIREBRICK
 
 var date: Day
 
