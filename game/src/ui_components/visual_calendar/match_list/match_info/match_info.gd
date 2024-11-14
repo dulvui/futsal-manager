@@ -2,12 +2,12 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name MatchListRow
-extends Control
+class_name MatchInfo
+extends HBoxContainer
 
-@onready var home: Label = $HBoxContainer/Home
-@onready var away: Label = $HBoxContainer/Away
-@onready var result: Label = $HBoxContainer/Result
+@onready var home: Label = $Home
+@onready var away: Label = $Away
+@onready var result: Label = $Result
 
 
 func set_up(matchz: Match) -> void:

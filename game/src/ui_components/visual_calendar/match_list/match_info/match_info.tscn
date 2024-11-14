@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://sswh30in3uin"]
+
+[ext_resource type="Script" path="res://src/ui_components/visual_calendar/match_list/match_info/match_info.gd" id="1_kuvam"]
+
+[node name="MatchInfo" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("1_kuvam")
+
+[node name="Home" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Home"
+
+[node name="Result" type="Label" parent="."]
+layout_mode = 2
+text = "vs"
+
+[node name="Away" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Away"
+horizontal_alignment = 2

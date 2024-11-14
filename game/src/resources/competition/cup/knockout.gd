@@ -19,8 +19,9 @@ enum Legs {
 @export var legs_semi_finals: Legs
 @export var legs_final: Legs
 # saves all matches in every round, for easier visualization
-@export var semi_finals_a: Array[Match]
-@export var semi_finals_b: Array[Match]
+@export var rounds: int
+@export var matches_by_round_a: Array[Array]
+@export var matches_by_round_b: Array[Array]
 @export var final: Match
 
 
@@ -29,16 +30,18 @@ func _init(
 	p_teams_b: Array[Team] = [],
 	p_legs_semi_finals: Legs = Legs.DOUBLE,
 	p_legs_final: Legs = Legs.SINGLE,
-	p_semi_finals_a: Array[Match] = [],
-	p_semi_finals_b: Array[Match] = [],
+	p_rounds: int = 1,
+	p_matches_by_round_a: Array[Array] = [],
+	p_matches_by_round_b: Array[Array] = [],
 	p_final: Match = null,
 ) -> void:
 	teams_a = p_teams_a
 	teams_b = p_teams_b
 	legs_semi_finals = p_legs_semi_finals
 	legs_final = p_legs_final
-	semi_finals_a = p_semi_finals_a
-	semi_finals_b = p_semi_finals_b
+	rounds = p_rounds
+	matches_by_round_a = p_matches_by_round_a
+	matches_by_round_b = p_matches_by_round_b
 	final = p_final
 
 
@@ -51,6 +54,29 @@ func set_up(
 	legs_final = p_legs_final
 	# sort teams by presitge
 	p_teams.sort_custom(func(a: Team, b: Team) -> bool: return a.get_prestige() > b.get_prestige())
+
+	# adjust teams size, to fit knockout format, sicne can only be 64,32,16,8,4,2
+	if p_teams.size() >= 64:
+		p_teams = p_teams.slice(0, 64)
+		rounds = 5
+	elif p_teams.size() >= 32:
+		p_teams = p_teams.slice(0, 32)
+		rounds = 4
+	elif p_teams.size() >= 16:
+		p_teams = p_teams.slice(0, 16)
+		rounds = 3
+	elif p_teams.size() >= 8:
+		p_teams = p_teams.slice(0, 8)
+		rounds = 2
+	elif p_teams.size() >= 4:
+		p_teams = p_teams.slice(0, 4)
+		rounds = 1
+	elif p_teams.size() >= 2:
+		p_teams = p_teams.slice(0, 2)
+		rounds = 0
+	else:
+		print("error while setting up knockout, not enouh teams")
+		return
 
 	# add teams alterning to part a/b
 	for i: int in p_teams.size():
@@ -65,18 +91,25 @@ func get_matches(cup: Cup) -> Array[Array]:
 	# semifinals
 	if teams_a.size() > 1:
 		var match_day: Array[Match] = []
+		matches_by_round_a.append([])
+		matches_by_round_b.append([])
 		# group a
 		for i: int in teams_a.size() / 2:
 			# assign first vs last, first + 1 vs last - 1 etc...
 			var matchz: Match = Match.new()
 			matchz.set_up(teams_a[i], teams_a[-(i + 1)], cup.id, cup.name)
 			match_day.append(matchz)
+			# save also in matches by round
+			matches_by_round_a[-1].append(matchz)
 		# group b
 		for i: int in teams_b.size() / 2:
 			# assign first vs last, first + 1 vs last - 1 etc...
 			var matchz: Match = Match.new()
 			matchz.set_up(teams_b[i], teams_b[-(i + 1)], cup.id, cup.name)
 			match_day.append(matchz)
+			# save also in matches by round
+			matches_by_round_b[-1].append(matchz)
+
 		matches.append(match_day)
 		
 		# second leg
@@ -87,6 +120,12 @@ func get_matches(cup: Cup) -> Array[Array]:
 				var matchz: Match = Match.new()
 				matchz.set_up(matchz_1.away, matchz_1.home, cup.id, cup.name, matchz_1)
 				match_day_2.append(matchz)
+				# save also in matches by round
+				if matchz.home in teams_a:
+					matches_by_round_a[-1].append(matchz)
+				else:
+					matches_by_round_b[-1].append(matchz)
+
 			matches.append(match_day_2)
 
 	else:
@@ -105,32 +144,41 @@ func get_matches(cup: Cup) -> Array[Array]:
 
 
 func prepare_next_round() -> bool:
-	for matchz: Match in semi_finals_a + semi_finals_b:
+	var a_ready: bool = _prepare_next_round(matches_by_round_a[-1], teams_a)
+	var b_ready: bool = _prepare_next_round(matches_by_round_b[-1], teams_b)
+
+	if a_ready != b_ready:
+		print("error during preparing next round of knockout, group a and b are both ready")
+		return false
+
+	return a_ready and b_ready
+
+
+func _prepare_next_round(matches: Array[Match], teams: Array) -> bool:
+	for matchz: Match in matches:
 		if not matchz.over:
 			return false
 	
 	# eliminate teams
-	var matches_to_check: int = teams_a.size() / 2 * (legs_semi_finals + 1)
-	# teams a
-	for i: int in range(-1 , -matches_to_check, -1):
+	for matchz: Match in matches:
 		if legs_semi_finals == Legs.SINGLE:
-			var matchz: Match = semi_finals_a[i]
 			if matchz.home_goals > matchz.away_goals:
-				teams_a.erase(matchz.away)
+				teams.erase(matchz.away)
 			else:
-				teams_a.erase(matchz.home)
+				teams.erase(matchz.home)
 		else:
-			var second_leg: Match = semi_finals_a[i]
 			# search for matches with fist leg reference
-			if second_leg.first_leg != null:
-				var first_leg: Match = second_leg.first_leg
+			if matchz.first_leg != null:
+				var first_leg: Match = matchz.first_leg
 				
-				var team_1_goal_sum: int = first_leg.home_goals + second_leg.away_goals
-				var team_2_goal_sum: int = first_leg.away_goals + second_leg.home_goals
+				var team_1_goal_sum: int = first_leg.home_goals + matchz.away_goals
+				var team_2_goal_sum: int = first_leg.away_goals + matchz.home_goals
 
 				if  team_1_goal_sum > team_2_goal_sum:
-					teams_a.erase(first_leg.home)
+					teams.erase(first_leg.home)
 				else:
-					teams_a.erase(first_leg.away)
+					teams.erase(first_leg.away)
 
 	return true
+
+

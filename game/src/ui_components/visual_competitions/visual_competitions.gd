@@ -59,10 +59,6 @@ func _set_up() -> void:
 			main.add_child(HSeparator.new())
 
 		# knockout
-		var knockout_label: Label = Label.new()
-		knockout_label.text = tr("KNOCKOUT")
-		ThemeUtil.bold(knockout_label)
-		main.add_child(knockout_label)
 		var knockout: VisualKnockout = VisualKnockoutScene.instantiate()
 		main.add_child(knockout)
 		knockout.set_up(cup.knockout)

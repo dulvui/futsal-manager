@@ -5,9 +5,9 @@
 class_name VisualMatchList
 extends Control
 
-const MatchRowScene: PackedScene = preload(
-	"res://src/ui_components/visual_calendar/match_list/match_list_row/match_list_row.tscn"
-)
+const MatchInfoScene: PackedScene = preload(
+	"res://src/ui_components/visual_calendar/match_list/match_info/match_info.tscn"
+	)
 
 @onready var matches_list: VBoxContainer = $VBoxContainer/ScrollContainer/Matches
 @onready var date_label: Label = $VBoxContainer/Date
@@ -42,7 +42,7 @@ func _add_matches(competition: Competition, day: Day) -> void:
 		ThemeUtil.bold(competition_label)
 		matches_list.add_child(competition_label)
 		for matchz: Match in matches:
-			var match_row: MatchListRow = MatchRowScene.instantiate()
+			var match_row: MatchInfo = MatchInfoScene.instantiate()
 			matches_list.add_child(match_row)
 			match_row.set_up(matchz)
 
