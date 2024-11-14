@@ -46,7 +46,11 @@ func set_up(p_teams: Array[Team]) -> void:
 		groups[i % GROUPS].add_team(p_teams[i])
 
 
-func set_up_knockout(teams: Array[Team] = [], match_amount: int = 1) -> void:
+func set_up_knockout(
+	teams: Array[Team] = [],
+	legs_semi_finals: Knockout.Legs = Knockout.Legs.DOUBLE,
+	legs_final: Knockout.Legs = Knockout.Legs.SINGLE,
+) -> void:
 	stage = Stage.KNOCKOUT
 	# if coming from group stage
 	if teams.size() == 0:
@@ -57,13 +61,11 @@ func set_up_knockout(teams: Array[Team] = [], match_amount: int = 1) -> void:
 		for group: Group in groups:
 			teams.append_array(group.teams.slice(0, TEAMS_PASS_TO_KNOCKOUT))
 
-	knockout.set_up(teams, match_amount)
+	knockout.set_up(teams, legs_semi_finals, legs_final)
 
 
 func add_result(home_id: int, home_goals: int, away_id: int, away_goals: int) -> void:
-	if stage == Stage.KNOCKOUT:
-		knockout.add_result(home_id, home_goals, away_id, away_goals)
-	else:
+	if stage == Stage.GROUP:
 		var group: Group = _find_group_by_team_id(home_id)
 		group.table.add_result(home_id, home_goals, away_id, away_goals)
 
@@ -78,15 +80,11 @@ func next_stage() -> void:
 		if over_counter == groups.size():
 			# group stage is over
 			set_up_knockout()
-			# add it to calendar
-			return
+			MatchCombinationUtil.add_matches_to_calendar(self, get_knockout_matches())
 	else:
-		# check if current knockout stage is over 
-		if knockout.teams_a.size() == knockout.teams_b.size() \
-			and	knockout.teams_a.size() % 2 == 0:
-			# add it to calendar
-			return	
-
+		if knockout.prepare_next_round():
+			# add next round matches calendar
+			MatchCombinationUtil.add_matches_to_calendar(self, get_knockout_matches())
 
 
 func get_group_matches() -> Array[Array]:
@@ -99,29 +97,7 @@ func get_group_matches() -> Array[Array]:
 
 
 func get_knockout_matches() -> Array[Array]:
-	var matches: Array[Array] = []
-	# semifinals
-	if knockout.teams_a.size() > 1:
-		for amount: int in knockout.match_amount:
-			var match_day: Array[Match] = []
-			# group a
-			for i: int in knockout.teams_a.size() / 2:
-				# assign first vs last, first + 1 vs last - 1 etc...
-				var matchz: Match = Match.new(knockout.teams_a[i], knockout.teams_a[-(i + 1)], id, name)
-				match_day.append(matchz)
-			# group b
-			for i: int in knockout.teams_b.size() / 2:
-				# assign first vs last, first + 1 vs last - 1 etc...
-				var matchz: Match = Match.new(knockout.teams_b[i], knockout.teams_b[-(i + 1)], id, name)
-				match_day.append(matchz)
-			matches.append(match_day)
-	else:
-		# final match
-		var matchz: Match = Match.new(knockout.teams_a[0], knockout.teams_b[0], id, name)
-		matches.append_array([matchz])
-
-	return matches
-
+	return knockout.get_matches(self)
 
 func _find_group_by_team_id(team_id: int) -> Group:
 	for group: Group in groups:

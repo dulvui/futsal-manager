@@ -5,7 +5,8 @@
 class_name VisualCompetitions
 extends HBoxContainer
 
-const VisualtableScene: PackedScene = preload("res://src/ui_components/visual_competitions/visual_table/visual_table.tscn")
+const VisualTableScene: PackedScene = preload("res://src/ui_components/visual_competitions/visual_table/visual_table.tscn")
+const VisualKnockoutScene: PackedScene = preload("res://src/ui_components/visual_competitions/visual_knockout/visual_knockout.tscn")
 
 var competition: Competition
 var season_index: int
@@ -37,24 +38,34 @@ func _set_up() -> void:
 	
 	if competition is League:
 		var league: League = (competition as League)
-		var table: VisualTable = VisualtableScene.instantiate()
+		var table: VisualTable = VisualTableScene.instantiate()
 		main.add_child(table)
 		table.set_up(league.tables[season_index])
 	else:
 		var cup: Cup = (competition as Cup)
-		if cup.stage == Cup.Stage.GROUP:
-			for group: Group in cup.groups:
-				# label
-				var label: Label = Label.new()
-				var index: int = cup.groups.find(group) + 1
-				label.text = tr("GROUP") + " " + str(index)
-				ThemeUtil.bold(label)
-				main.add_child(label)
-				# table
-				var table: VisualTable = VisualtableScene.instantiate()
-				main.add_child(table)
-				table.set_up(group.table)
-				main.add_child(HSeparator.new())
+
+		# groups
+		for group: Group in cup.groups:
+			# label
+			var group_label: Label = Label.new()
+			var index: int = cup.groups.find(group) + 1
+			group_label.text = tr("GROUP") + " " + str(index)
+			ThemeUtil.bold(group_label)
+			main.add_child(group_label)
+			# table
+			var table: VisualTable = VisualTableScene.instantiate()
+			main.add_child(table)
+			table.set_up(group.table)
+			main.add_child(HSeparator.new())
+
+		# knockout
+		var knockout_label: Label = Label.new()
+		knockout_label.text = tr("KNOCKOUT")
+		ThemeUtil.bold(knockout_label)
+		main.add_child(knockout_label)
+		var knockout: VisualKnockout = VisualKnockoutScene.instantiate()
+		main.add_child(knockout)
+		knockout.set_up(cup.knockout)
 
 
 func _set_up_seasons() -> void:

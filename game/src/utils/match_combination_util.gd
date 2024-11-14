@@ -37,9 +37,11 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 		var current_match_day: Array = []
 		var match_one: Match
 		if home:
-			match_one = Match.new(last_team, random_teams[0], competition.id, competition.name)
+			match_one = Match.new()
+			match_one.set_up(last_team, random_teams[0], competition.id, competition.name)
 		else:
-			match_one = Match.new(random_teams[0], last_team, competition.id, competition.name)
+			match_one = Match.new()
+			match_one.set_up(random_teams[0], last_team, competition.id, competition.name)
 		current_match_day.append(match_one)
 
 		var copy: Array = random_teams.duplicate(true)
@@ -51,13 +53,11 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 
 			var match_two: Match
 			if home:
-				match_two = Match.new(
-					copy[home_index], copy[away_index], competition.id, competition.name
-				)
+				match_two = Match.new()
+				match_two.set_up(copy[home_index], copy[away_index], competition.id, competition.name)
 			else:
-				match_two = Match.new(
-					copy[away_index], copy[home_index], competition.id, competition.name
-				)
+				match_two = Match.new()
+				match_two.set_up(copy[away_index], copy[home_index], competition.id, competition.name)
 			current_match_day.append(match_two)
 
 		match_days.append(current_match_day)
@@ -69,9 +69,8 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 	for match_dayz: Array[Match] in match_days:
 		var current_match_dayz: Array = []
 		for match_dayss: Match in match_dayz:
-			var matchzz: Match = Match.new(
-				match_dayss.away, match_dayss.home, competition.id, competition.name
-			)
+			var matchzz: Match = Match.new()
+			matchzz.set_up(match_dayss.away, match_dayss.home, competition.id, competition.name)
 			current_match_dayz.append(matchzz)
 		temp_match_days.append(current_match_dayz)
 
@@ -153,6 +152,7 @@ func _initialize_club_national_cup(p_nation: Nation) -> void:
 	var all_teams_by_nation: Array[Team]
 	for league: League in p_nation.leagues:
 		all_teams_by_nation.append_array(league.teams)
+
 	p_nation.cup.set_up_knockout(all_teams_by_nation, 2)
 
 	# create matches for first round group a
