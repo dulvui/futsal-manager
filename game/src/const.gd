@@ -39,6 +39,6 @@ const SAVE_STATES_PATH: StringName = "user://save_states/"
 const MONTH_STRINGS: Array[StringName] = [
 	"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
 ]
-const DAY_STRINGS: Array[StringName] = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+const WEEKDAYS: Array[StringName] = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 const SURNAME: StringName = "SURNAME"
 const POSITION: StringName = "POSITION"

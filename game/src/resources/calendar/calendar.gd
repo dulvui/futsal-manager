@@ -145,7 +145,7 @@ func _add_year(year: int) -> void:
 	while temp_date.year == year:
 		var new_day: Day = Day.new()
 		new_day.market = is_market_active(temp_date)
-		new_day.weekday = Const.DAY_STRINGS[temp_date.weekday]
+		new_day.weekday = Const.WEEKDAYS[temp_date.weekday]
 		new_day.day = temp_date.day
 		new_day.month = temp_date.month
 		new_day.year = temp_date.year

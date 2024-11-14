@@ -99,6 +99,14 @@ func get_group_matches() -> Array[Array]:
 func get_knockout_matches() -> Array[Array]:
 	return knockout.get_matches(self)
 
+
+func is_final() -> bool:
+	if stage == Stage.GROUP:
+		return false
+	if knockout.final == null:
+		return false
+	return true
+
 func _find_group_by_team_id(team_id: int) -> Group:
 	for group: Group in groups:
 		if group.get_team_by_id(team_id) != null:

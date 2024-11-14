@@ -83,14 +83,24 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 func add_matches_to_calendar(
 	competition: Competition,
 	match_days: Array[Array],
-	day: int = 0,
-	month: int = 6,
+	date: Dictionary = Global.world.calendar.date,
 ) -> void:
-	# add to calendar
+	var month: int = date.month
+	var day: int = date.day
 
-	# start with saturday of next week
+	# league machtes are always saturday
+	var weekday: String = "SAT"
+	# cup matches wednesday
+	if competition is Cup:
+		weekday = "WED"
+		# except finals, are sundays
+		var cup: Cup = (competition as Cup)
+		if cup.is_final():
+			weekday = "SUN"
+		
+	# start with given weekday of next week
 	for i in range(8, 1, -1):
-		if Global.world.calendar.day(month, i).weekday == "FRI":
+		if Global.world.calendar.day(month, i).weekday == weekday:
 			day = i
 			break
 
@@ -101,44 +111,14 @@ func add_matches_to_calendar(
 			day = 0
 			# start also new month with saturday
 			for i in 7:
-				if Global.world.calendar.day(month, i).weekday == "FRI":
+				if Global.world.calendar.day(month, i).weekday == weekday:
 					day = i
 					break
 
-		# assign match friday
-		Global.world.calendar.day(month, day).add_matches(
-			matches.slice(0, matches.size() / 4), competition.id
-		)
-		## assign match saturday
-		day += 1
-		# check if next month
-		if day > Global.world.calendar.month(month).days.size() - 1:
-			month += 1
-			day = 0
-			# start also new month with saturday
-			for i in 7:
-				if Global.world.calendar.day(month, i).weekday == "SAT":
-					day = i
-					break
-		Global.world.calendar.day(month, day).add_matches(
-			matches.slice(matches.size() / 4, matches.size() / 2), competition.id
-		)
-		# assign match sunday
-		day += 1
-		# check if next month
-		if day > Global.world.calendar.month(month).days.size() - 1:
-			month += 1
-			day = 0
-			# start also new month with saturday
-			for i in 7:
-				if Global.world.calendar.day(month, i).weekday == "SUN":
-					day = i
-					break
-		Global.world.calendar.day(month, day).add_matches(
-			matches.slice(matches.size() / 2, matches.size()), competition.id
-		)
-		# restart from friday
-		day += 5
+		# assign matches
+		Global.world.calendar.day(month, day).add_matches(matches, competition.id)
+		# restart from same weekday
+		day += 7
 
 
 func _initialize_club_league_matches(competition: Competition, teams: Array[Team]) -> void:

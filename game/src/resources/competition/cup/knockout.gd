@@ -31,7 +31,7 @@ func _init(
 	p_legs_final: Legs = Legs.SINGLE,
 	p_semi_finals_a: Array[Match] = [],
 	p_semi_finals_b: Array[Match] = [],
-	p_final: Match = Match.new(),
+	p_final: Match = null,
 ) -> void:
 	teams_a = p_teams_a
 	teams_b = p_teams_b
