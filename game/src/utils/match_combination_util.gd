@@ -153,7 +153,7 @@ func _initialize_club_national_cup(p_nation: Nation) -> void:
 	for league: League in p_nation.leagues:
 		all_teams_by_nation.append_array(league.teams)
 
-	p_nation.cup.set_up_knockout(all_teams_by_nation, 2)
+	p_nation.cup.set_up_knockout(all_teams_by_nation)
 
 	# create matches for first round group a
 	var matches: Array[Array] = p_nation.cup.get_knockout_matches()

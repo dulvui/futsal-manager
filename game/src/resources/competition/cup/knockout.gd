@@ -88,7 +88,6 @@ func get_matches(cup: Cup) -> Array[Array]:
 				matchz.set_up(matchz_1.away, matchz_1.home, cup.id, cup.name, matchz_1)
 				match_day_2.append(matchz)
 			matches.append(match_day_2)
-			breakpoint
 
 	else:
 		# final match
