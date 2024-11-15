@@ -104,8 +104,9 @@ func reset_to_default() -> Theme:
 	return apply_theme(THEMES.keys()[0])
 
 
-func bold(label: Label) -> void:
-	label.label_settings = label_settings_bold
+func bold(label: Label, condition: bool = true) -> void:
+	if condition:
+		label.label_settings = label_settings_bold
 
 
 func remove_bold(label: Label) -> void:
