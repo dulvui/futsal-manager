@@ -65,6 +65,8 @@ func _add_matches(day: Day, competition: Competition) -> void:
 	if matches.size() > 0:
 		var competition_label: Label = Label.new()
 		competition_label.text = competition.name
+		if competition is League:
+			competition_label.text += " - %s"%(competition as League).nation_name
 		ThemeUtil.bold(competition_label)
 		matches_list.add_child(competition_label)
 		for matchz: Match in matches:
