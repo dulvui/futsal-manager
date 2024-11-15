@@ -6,18 +6,19 @@ class_name Menu
 extends Control
 
 @onready var save_state: SaveStateEntry = %SaveState
-
 @onready var loading_screen: LoadingScreen = $LoadingScreen
-
 @onready var load_game: Button = %LoadGame
 @onready var continue_game: Button = %ContinueGame
-
+@onready var exit: VBoxContainer = %Exit
 @onready var version: Label = $Version
 
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	InputUtil.start_focus(self)
+
+	# hide exit button for iOS
+	exit.visible = OS.get_name() != "iOS"
 
 	load_game.visible = Global.save_states and Global.save_states.id_list.size() > 0
 	continue_game.visible = Global.save_states and Global.save_states.id_list.size() > 0
@@ -56,3 +57,8 @@ func _on_load_game_pressed() -> void:
 
 func _on_loading_screen_loaded(_type: LoadingUtil.Type) -> void:
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()
+

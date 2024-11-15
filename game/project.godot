@@ -132,7 +132,7 @@ right={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/i18n/translations.de.translation", "res://assets/i18n/translations.en.translation", "res://assets/i18n/translations.it.translation")
+locale/translations=PackedStringArray("res://translations/translations.de.translation", "res://translations/translations.en.translation", "res://translations/translations.it.translation")
 
 [locale]
 
