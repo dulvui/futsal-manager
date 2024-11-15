@@ -37,6 +37,15 @@ func add_matches(p_matches: Array, competition_id: int = Global.league.id) -> vo
 	(matches[competition_id] as Array).append_array(p_matches)
 
 
+func get_active_match() -> Match:
+	for competition_id: int in matches.keys():
+		var matches_by_competition: Array = matches[competition_id]
+		for matchz: Match in matches_by_competition:
+			if Global.team in [matchz.home, matchz.away]:
+				return matchz
+	return null
+
+
 func get_matches(competition_id: int = -1) -> Array:
 	# return all matches on this day
 	if competition_id == -1:

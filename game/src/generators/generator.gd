@@ -744,7 +744,7 @@ func _initialize_city(
 	if league_name.to_lower().strip_edges() == "backup":
 		nation.backup_teams.append(team)
 	else:
-		# setup league, if note done yet or last league is full
+		# setup league, if not done yet or last league is full
 		var league: League
 		var league_filter: Array[League] = nation.leagues.filter(
 			func(l: League) -> bool: return l.name == league_name
@@ -752,6 +752,7 @@ func _initialize_city(
 		if league_filter.size() == 0:
 			league = League.new()
 			league.name = league_name
+			league.nation_name = nation.name
 			# could bea added direclty to csv
 			# with this code, leagues/teams need to be in pyramid level order
 			league.pyramid_level = nation.leagues.size() + 1

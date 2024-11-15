@@ -48,10 +48,11 @@ func set_up_days() -> void:
 
 	# add days
 	for day: Day in Global.world.calendar.month(current_month).days:
+		var matchz: Match = day.get_active_match()
 		var calendar_day: VisualDay = VisualDayScene.instantiate()
 		days.add_child(calendar_day)
-		calendar_day.set_up(day)
-		calendar_day.show_match_list.connect(_on_calendar_day_pressed.bind(day))
+		calendar_day.set_up(day, matchz)
+		calendar_day.show_match_list.connect(_on_calendar_day_pressed.bind(day, matchz))
 
 		# make current day active
 		if day == Global.world.calendar.day():
@@ -61,8 +62,11 @@ func set_up_days() -> void:
 	page_label.text = Const.MONTH_STRINGS[(current_month % 12) - 1] + " " + str(active_year)
 
 
-func _on_calendar_day_pressed(day: Day) -> void:
-	match_list.set_up(day)
+func _on_calendar_day_pressed(day: Day, matchz: Match) -> void:
+	if matchz == null:
+		match_list.set_up(day)
+	else:
+		match_list.set_up(day, Global.world.get_competition_by_id(matchz.competition_id))
 
 
 func _on_prev_pressed() -> void:

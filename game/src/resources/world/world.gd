@@ -184,8 +184,8 @@ func get_all_leagues() -> Array[League]:
 	return leagues
 
 
-func get_all_cups() -> Array[Competition]:
-	var cups: Array[Competition] = []
+func get_all_cups() -> Array[Cup]:
+	var cups: Array[Cup] = []
 	# world
 	cups.append(world_cup)
 	# continent
@@ -195,7 +195,6 @@ func get_all_cups() -> Array[Competition]:
 		# nations
 		for nation: Nation in contient.nations:
 			cups.append(nation.cup)
-
 	return cups
 
 

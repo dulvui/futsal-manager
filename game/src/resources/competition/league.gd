@@ -9,15 +9,18 @@ extends Competition
 # includes also historical tables
 # tables[-1] is latest winner
 @export var tables: Array[Table]
+@export var nation_name: String
 
 
 func _init(
 	p_teams: Array[Team] = [],
 	p_tables: Array[Table] = [Table.new()],
+	p_nation_name: String = "",
 ) -> void:
 	super()
 	teams = p_teams
 	tables = p_tables
+	nation_name = p_nation_name
 
 
 func table() -> Table:
