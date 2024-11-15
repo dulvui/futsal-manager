@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC0-1.0
 A futsal manager game created with the Godot Engine.  
 **Still under development.**
 
-Join [Discord](https://discord.gg/a5DSHZKkA8) if you have questions and want to stay updated.
+Join [Matrix](https://matrix.to/#/%23s9i.org:matrix.org) or [Discord](https://discord.gg/a5DSHZKkA8) if you have questions and want to stay updated.
 
 # Alpha version
 You can find the first versions of the game on [Github](https://github.com/dulvui/futsal-manager/releases).
