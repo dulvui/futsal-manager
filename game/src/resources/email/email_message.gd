@@ -25,6 +25,7 @@ enum Type {
 @export var subject: String
 @export var text: String
 @export var sender: String
+@export var receiver: String
 @export var date: String
 @export var read: bool
 @export var starred: bool
@@ -36,6 +37,7 @@ func _init(
 	p_subject: String = "",
 	p_text: String = "",
 	p_sender: String = "",
+	p_reveiver: String = "",
 	p_date: String = "",
 	p_read: bool = false,
 	p_starred: bool = false,
@@ -45,6 +47,7 @@ func _init(
 	subject = p_subject
 	text = p_text
 	sender = p_sender
+	receiver = p_reveiver
 	date = p_date
 	read = p_read
 	starred = p_starred

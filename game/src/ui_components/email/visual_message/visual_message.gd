@@ -11,6 +11,7 @@ var message: EmailMessage
 
 @onready var subject: Label = %Subject
 @onready var sender: Label = %Sender
+@onready var receiver: Label = %Receiver
 @onready var date: Label = %Date
 @onready var text: RichTextLabel = %Message
 @onready var action_button: Button = %Action
@@ -21,6 +22,7 @@ func show_message(p_message: EmailMessage) -> void:
 	message.read = true
 	subject.text = message.subject
 	sender.text = message.sender
+	receiver.set_text(message.receiver)
 	date.text = message.date
 	text.text = message.text
 

@@ -23,13 +23,6 @@ func count_unread_messages() -> int:
 	return counter
 
 
-func _add_message(message: EmailMessage) -> void:
-	Global.inbox.list.append(message)
-	# if Global.inbox.list.size() > MAX_MESSAGES:
-	# 	Global.inbox.list.pop_front()
-	refresh_inbox.emit()
-
-
 func next_match(p_match: Match) -> void:
 	var team_name: String = p_match.home.name
 	if team_name == Global.team.name:
@@ -39,6 +32,7 @@ func next_match(p_match: Match) -> void:
 	message.subject = tr("NEXT_MATCH") + " against " + team_name
 	message.text = "The next match is against " + team_name + ".\nThe quotes are: "
 	message.sender = "info@" + Global.team.name.to_lower() + ".com"
+	message.receiver = _get_manager_email()
 	message.date = Global.world.calendar.format_date()
 	_add_message(message)
 
@@ -46,6 +40,7 @@ func next_match(p_match: Match) -> void:
 func transfer_message(transfer: Transfer) -> void:
 	var message: EmailMessage = EmailMessage.new()
 	message.date = Global.world.calendar.format_date()
+	message.receiver = _get_manager_email()
 
 	# assign rid of transfer, so it can be used for toher purposes
 	message.foreign_id = transfer.id
@@ -113,6 +108,7 @@ func welcome_manager() -> void:
 	message.subject = tr("WELCOME")
 	message.text = "The team " + Global.team.name + " welcomes you as the new Manager!"
 	message.sender = "info@" + Global.team.name.to_lower() + ".com"
+	message.receiver = _get_manager_email()
 	message.date = Global.world.calendar.format_date()
 	_add_message(message)
 
@@ -128,3 +124,20 @@ func welcome_manager() -> void:
 	#Type.MARKET_OFFER:
 	#message["message"] = "Another team is interested in your player"
 	#message["title"] = "MARKET OFFER"
+
+
+func _add_message(message: EmailMessage) -> void:
+	Global.inbox.list.append(message)
+	# if Global.inbox.list.size() > MAX_MESSAGES:
+	# 	Global.inbox.list.pop_front()
+	refresh_inbox.emit()
+
+
+func _get_manager_email() -> String:
+	var email: String = Global.manager.name
+	email += "." + Global.manager.surname
+	email += "@" + Global.team.name + ".com"
+	email = email.to_lower()
+	return email
+
+

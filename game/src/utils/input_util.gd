@@ -17,9 +17,13 @@ const ACTION_SEARCH: StringName = "SEARCH"
 const ACTION_CONTINUE: StringName = "CONTINUE"
 
 var focused: bool = true
-
+var viewport: Viewport
+var last_focused_node: Control
 
 func _ready() -> void:
+	viewport = get_viewport()
+	# register view port focus changed signal
+	viewport.gui_focus_changed.connect(_on_gui_focus_change)
 	InputMap.add_action(ACTION_SEARCH)
 	# keyboard
 	var continue_key: InputEventKey = InputEventKey.new()
@@ -54,6 +58,15 @@ func _notification(what: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if focused:
+		# check if a nodes has focus. if not, last focused node grabs it
+		if viewport.gui_get_focus_owner() == null:
+			if last_focused_node != null:
+				print("regrab last focus")
+				last_focused_node.grab_focus()
+			else:
+				print("not able to regrab focus")
+
+		# check for actions
 		if event.is_action_pressed(ACTION_SEARCH):
 			print("search pressed")
 			search.emit()
@@ -76,9 +89,5 @@ func start_focus(control: Control) -> void:
 		# focus control
 		control.grab_focus()
 
-
-func event_is_action_pressed(event: InputEvent, action: StringName) -> bool:
-	if focused:
-		return event.is_action_pressed(action)
-
-	return false
+func _on_gui_focus_change(node: Control) -> void:
+	last_focused_node = node
