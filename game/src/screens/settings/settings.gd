@@ -19,11 +19,11 @@ enum ColorType {
 
 var active_color_type: ColorType
 
-@onready var theme_options: OptionButton = $VBoxContainer/Theme/ThemeOptionButton
+@onready var theme_options: OptionButton = %ThemeOptionButton
 
-@onready var version_label: Label = $VBoxContainer/Version/VersionLabel
+@onready var version_label: Label = %VersionLabel
 
-@onready var font_size_spinbox: SpinBox = $VBoxContainer/FontSize/FontSizeSpinBox
+@onready var font_size_spinbox: SpinBox = %FontSizeSpinBox
 @onready var color_picker_popup: PopupPanel = $ColorPopupPanel
 @onready var color_picker: ColorPicker = $ColorPopupPanel/MarginContainer/ColorPicker
 
