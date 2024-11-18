@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3l6aqkrmtjg2"]
+[gd_scene load_steps=3 format=3 uid="uid://c3l6aqkrmtjg2"]
 
 [ext_resource type="Script" path="res://src/ui_components/email/visual_message/visual_message.gd" id="1_t0t0y"]
+[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="2_a6odb"]
 
-[node name="Message" type="Control"]
+[node name="VisualMessage" type="Control"]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 3
 anchors_preset = 15
@@ -25,40 +26,55 @@ theme_override_constants/margin_right = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
 
-[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="From" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
 
-[node name="SubjectLabel" type="Label" parent="MarginContainer/VBoxContainer/TopBar"]
+[node name="FromLabel" type="Label" parent="MarginContainer/VBoxContainer/From"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "SUBJECT"
+text = "FROM"
+label_settings = ExtResource("2_a6odb")
 
-[node name="SubjectText" type="Label" parent="MarginContainer/VBoxContainer/TopBar"]
+[node name="Sender" type="Label" parent="MarginContainer/VBoxContainer/From"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Messi"
+text = "info@realmadrid.com"
+
+[node name="To" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ToLabel" type="Label" parent="MarginContainer/VBoxContainer/To"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "TO"
+label_settings = ExtResource("2_a6odb")
+
+[node name="Receiver" type="Label" parent="MarginContainer/VBoxContainer/To"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "hans.viustel@realmadrid.com"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Details" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Subject" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="From" type="Label" parent="MarginContainer/VBoxContainer/Details"]
+[node name="SubjectLabel" type="Label" parent="MarginContainer/VBoxContainer/Subject"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "FROM:"
+text = "SUBJECT"
+label_settings = ExtResource("2_a6odb")
 
-[node name="Sender" type="Label" parent="MarginContainer/VBoxContainer/Details"]
-layout_mode = 2
-text = "info@realmadrid.com"
-
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/Details"]
-modulate = Color(1, 1, 1, 0)
+[node name="Subject" type="Label" parent="MarginContainer/VBoxContainer/Subject"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Messi"
 
-[node name="Date" type="Label" parent="MarginContainer/VBoxContainer/Details"]
+[node name="Date" type="Label" parent="MarginContainer/VBoxContainer/Subject"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "29.12.2022"
 
@@ -66,6 +82,7 @@ text = "29.12.2022"
 layout_mode = 2
 
 [node name="Message" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "Rodrygo wants to join your club"
@@ -75,6 +92,7 @@ layout_mode = 2
 alignment = 2
 
 [node name="Action" type="Button" parent="MarginContainer/VBoxContainer/BottomBar"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "ACTION"

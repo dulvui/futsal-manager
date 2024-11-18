@@ -9,11 +9,11 @@ signal email_action(message: EmailMessage)
 
 var message: EmailMessage
 
-@onready var subject: Label = $MarginContainer/VBoxContainer/TopBar/SubjectText
-@onready var sender: Label = $MarginContainer/VBoxContainer/Details/Sender
-@onready var date: Label = $MarginContainer/VBoxContainer/Details/Date
-@onready var text: RichTextLabel = $MarginContainer/VBoxContainer/Message
-@onready var action_button: Button = $MarginContainer/VBoxContainer/BottomBar/Action
+@onready var subject: Label = %Subject
+@onready var sender: Label = %Sender
+@onready var date: Label = %Date
+@onready var text: RichTextLabel = %Message
+@onready var action_button: Button = %Action
 
 
 func show_message(p_message: EmailMessage) -> void:

@@ -2,58 +2,73 @@
 
 [ext_resource type="Script" path="res://src/ui_components/email/list/message_row/message_row.gd" id="1_qccam"]
 
-[node name="MessageRow" type="Control"]
-custom_minimum_size = Vector2(0, 36)
-layout_mode = 3
-anchors_preset = 15
+[node name="MessageRow" type="MarginContainer"]
+anchors_preset = -1
+anchor_top = -0.0115741
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.026
+offset_top = 6.5
+offset_bottom = -0.0799999
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 script = ExtResource("1_qccam")
+metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="."]
-self_modulate = Color(1, 1, 1, 0.721569)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ReadButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
 
-[node name="Subject" type="Label" parent="Button/HBoxContainer"]
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Subject" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Sender" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 34)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Sender" type="Label" parent="Button/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Date" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(62, 34)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="Date" type="Label" parent="Button/HBoxContainer"]
-custom_minimum_size = Vector2(62, 34)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text_overrun_behavior = 3
-
-[node name="Star" type="CheckBox" parent="Button/HBoxContainer"]
+[node name="Star" type="CheckBox" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "STAR"
 
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
-[connection signal="toggled" from="Button/HBoxContainer/Star" to="." method="_on_star_toggled"]
+[connection signal="pressed" from="ReadButton" to="." method="_on_read_button_pressed"]
+[connection signal="toggled" from="HBoxContainer/Star" to="." method="_on_star_toggled"]

@@ -21,6 +21,7 @@ var only_unread: bool = false
 func update() -> void:
 	for child in list.get_children():
 		child.queue_free()
+	print("UPDATE")
 
 	var inbox_list: Array[EmailMessage] = Global.inbox.list
 
@@ -43,7 +44,7 @@ func update() -> void:
 
 		var row: MessageRow = MessageRowScene.instantiate()
 		list.add_child(row)
-		row.click.connect(_on_row_click.bind(message))
+		row.read_button.pressed.connect(_on_row_pressed.bind(message))
 		row.set_up(message)
 
 		if i > 0:
@@ -65,5 +66,5 @@ func search(text: String) -> void:
 	update()
 
 
-func _on_row_click(message: EmailMessage) -> void:
+func _on_row_pressed(message: EmailMessage) -> void:
 	show_message.emit(message)

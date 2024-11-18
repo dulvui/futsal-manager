@@ -3,23 +3,21 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name MessageRow
-extends Control
-
-signal click
+extends MarginContainer
 
 var message: EmailMessage
 
-@onready var button: Button = $Button
-@onready var subject_label: Label = $Button/HBoxContainer/Subject
-@onready var sender_label: Label = $Button/HBoxContainer/Sender
-@onready var date_label: Label = $Button/HBoxContainer/Date
-@onready var star: CheckBox = $Button/HBoxContainer/Star
+@onready var subject_label: Label = %Subject
+@onready var sender_label: Label = %Sender
+@onready var date_label: Label = %Date
+@onready var star: CheckBox = %Star
+@onready var read_button: Button = %ReadButton
 
 
 func set_up(p_message: EmailMessage) -> void:
 	message = p_message
 
-	button.tooltip_text = tr("Click to read message")
+	read_button.tooltip_text = tr("Click to read message")
 
 	subject_label.set_text(message.subject)
 	sender_label.set_text(message.sender)
@@ -33,9 +31,12 @@ func set_up(p_message: EmailMessage) -> void:
 		ThemeUtil.bold(date_label)
 
 
-func _on_button_button_down() -> void:
-	click.emit()
-
-
 func _on_star_toggled(toggled_on: bool) -> void:
 	message.starred = toggled_on
+
+
+func _on_read_button_pressed() -> void:
+	ThemeUtil.remove_bold(subject_label)
+	ThemeUtil.remove_bold(sender_label)
+	ThemeUtil.remove_bold(date_label)
+

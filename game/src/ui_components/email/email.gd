@@ -36,7 +36,6 @@ func _on_message_email_action(message: EmailMessage) -> void:
 
 func _on_message_list_show_message(message: EmailMessage) -> void:
 	message_container.show_message(message)
-	update_messages()
 
 
 func _on_search_text_changed(new_text: String) -> void:
