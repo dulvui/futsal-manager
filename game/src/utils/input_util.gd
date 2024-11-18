@@ -13,12 +13,35 @@ enum Direction {
 	RIGHT,
 }
 
+const ACTION_SEARCH: StringName = "SEARCH"
+const ACTION_CONTINUE: StringName = "CONTINUE"
+
 var focused: bool = true
 
 
 func _ready() -> void:
-	# TODO set keybinds from settings
-	pass
+	InputMap.add_action(ACTION_SEARCH)
+	# keyboard
+	var continue_key: InputEventKey = InputEventKey.new()
+	continue_key.keycode = KEY_W
+	# joypad
+	var continue_joypad: InputEventJoypadButton = InputEventJoypadButton.new()
+	continue_joypad.button_index = JOY_BUTTON_START
+	
+
+	# keyboard
+	var search_key: InputEventKey = InputEventKey.new()
+	search_key.keycode = KEY_F
+	search_key.ctrl_pressed = true
+	InputMap.action_add_event(ACTION_SEARCH, search_key)
+	# vim
+	var search_vim: InputEventKey = InputEventKey.new()
+	search_vim.keycode = KEY_SLASH
+	InputMap.action_add_event(ACTION_SEARCH, search_vim)
+	# joypad
+	var search_joypad: InputEventJoypadButton = InputEventJoypadButton.new()
+	search_joypad.button_index = JOY_BUTTON_Y
+	InputMap.action_add_event(ACTION_SEARCH, search_joypad)
 
 
 func _notification(what: int) -> void:
@@ -31,11 +54,7 @@ func _notification(what: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if focused:
-		if event is InputEventJoypadButton:
-			print("controller")
-		if event is InputEventKey:
-			print("keyboard")
-		if event.is_action_pressed("search"):
+		if event.is_action_pressed(ACTION_SEARCH):
 			print("search pressed")
 			search.emit()
 			# Register the event as handled and stop polling
