@@ -4,7 +4,7 @@
 
 extends Node
 
-signal search
+# signal search
 
 enum Direction {
 	UP,
@@ -15,6 +15,21 @@ enum Direction {
 
 var focused: bool = true
 
+# shortcuts
+var continue_shortcut: Shortcut
+
+
+func _ready() -> void:
+	continue_shortcut = Shortcut.new()
+	# keyboard
+	var continue_key: InputEventKey = InputEventKey.new()
+	continue_key.keycode = KEY_W
+	continue_shortcut.events.append(continue_shortcut)
+	# joypad
+	var continue_joypad: InputEventJoypadButton = InputEventJoypadButton.new()
+	continue_joypad.button_index = JOY_BUTTON_START
+	continue_shortcut.events.append(continue_joypad)
+
 
 func _notification(what: int) -> void:
 	match what:
@@ -24,19 +39,19 @@ func _notification(what: int) -> void:
 			focused = true
 
 
-func _input(event: InputEvent) -> void:
-	if focused:
-		if event is InputEventJoypadButton:
-			print("controller")
-		if event is InputEventKey:
-			print("keyboard")
-		if event.is_action_pressed("search"):
-			print("search pressed")
-			search.emit()
-		return
-
-	if event is InputEventJoypadButton or event is InputEventKey:
-		print("not focused event prevented")
+# func _input(event: InputEvent) -> void:
+# 	if focused:
+# 		if event is InputEventJoypadButton:
+# 			print("controller")
+# 		if event is InputEventKey:
+# 			print("keyboard")
+# 		if event.is_action_pressed("search"):
+# 			print("search pressed")
+# 			search.emit()
+# 		return
+#
+# 	if event is InputEventJoypadButton or event is InputEventKey:
+# 		print("not focused event prevented")
 
 
 func start_focus(control: Control) -> void:
