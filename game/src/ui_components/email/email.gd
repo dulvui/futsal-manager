@@ -9,11 +9,13 @@ signal email_action(message: EmailMessage)
 
 @onready var message_list: VisualEmailMessageList = $HSplitContainer/MessageList
 @onready var message_container: VisualEmailMessage = $HSplitContainer/MessageView/Message
+@onready var search_line_edit: LineEdit = %SearchLineEdit
 
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	Tests.setup_mock_world(true)
+		
 	message_container.show_message(EmailUtil.latest())
 	update_messages()
 

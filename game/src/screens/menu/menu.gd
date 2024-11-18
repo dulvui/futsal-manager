@@ -27,9 +27,6 @@ func _ready() -> void:
 
 	version.text = "v" + Global.version
 
-	# set up continue shortcut
-	continue_game.shortcut = InputUtil.continue_shortcut
-
 
 func _move(direction: InputUtil.Direction) -> void:
 	if direction == InputUtil.Direction.UP:

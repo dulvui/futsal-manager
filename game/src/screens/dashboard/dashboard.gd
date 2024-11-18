@@ -57,6 +57,8 @@ var active_view: ContentViews = ContentViews.EMAIL
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	Tests.setup_mock_world(true)
+	
+	InputUtil.search.connect(_on_search_action)
 
 	team = Global.team
 
@@ -91,6 +93,18 @@ func _process(_delta: float) -> void:
 	else:
 		email_button.text = tr("EMAIL")
 	budget_label.text = FormatUtil.get_sign(team.budget)
+
+
+func _on_search_action() -> void:
+	match active_view:
+		ContentViews.EMAIL:
+			email.search_line_edit.grab_focus()
+		ContentViews.PLAYERS:
+			player_list.search_line_edit.grab_focus()
+		ContentViews.ALL_PLAYERS:
+			all_players_list.search_line_edit.grab_focus()
+		_:
+			return
 
 
 func _on_menu_button_pressed() -> void:

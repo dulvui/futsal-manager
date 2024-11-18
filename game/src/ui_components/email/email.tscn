@@ -21,7 +21,8 @@ script = ExtResource("1")
 layout_mode = 2
 alignment = 1
 
-[node name="Search" type="LineEdit" parent="Filters"]
+[node name="SearchLineEdit" type="LineEdit" parent="Filters"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 placeholder_text = "SEARCH"
@@ -59,7 +60,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[connection signal="text_changed" from="Filters/Search" to="." method="_on_search_text_changed"]
+[connection signal="text_changed" from="Filters/SearchLineEdit" to="." method="_on_search_text_changed"]
 [connection signal="toggled" from="Filters/OnlyUnread" to="." method="_on_only_unread_toggled"]
 [connection signal="toggled" from="Filters/Starred" to="." method="_on_starred_toggled"]
 [connection signal="show_message" from="HSplitContainer/MessageList" to="." method="_on_message_list_show_message"]

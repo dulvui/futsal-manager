@@ -31,7 +31,7 @@ var page: int
 var page_max: int
 var page_size: int
 
-@onready var name_search_line_edit: LineEdit = $Filters1/NameSearch
+@onready var search_line_edit: LineEdit = $Filters1/NameSearch
 @onready var active_view_option_button: SwitchOptionButton = $Filters1/ActiveView
 @onready var team_select: OptionButton = $Filters2/TeamSelect
 @onready var league_select: OptionButton = $Filters2/LeagueSelect
@@ -95,10 +95,6 @@ func update_team(p_active_team_id: int) -> void:
 
 	_update_page_indicator()
 	_show_active_column()
-
-
-func focus_search_bar() -> void:
-	name_search_line_edit.grab_focus()
 
 
 func _set_up_columns() -> void:
