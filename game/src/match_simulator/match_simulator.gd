@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	camera.position = camera.position.lerp(visual_match.visual_ball.global_position, delta * CAMERA_SPEED)
 
 
-func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
+func setup(home_team: Team, away_team: Team, match_seed: int) -> void:
 	# intialize timer
 	timer = Timer.new()
 	timer.wait_time = 1.0 / (Const.TICKS_PER_SECOND * Global.speed_factor)
@@ -36,7 +36,7 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 	timer.start()
 	
 	match_engine = MatchEngine.new()
-	match_engine.set_up(home_team, away_team, match_seed)
+	match_engine.setup(home_team, away_team, match_seed)
 
 	# connect change players signals to visual teams
 	match_engine.home_team.player_changed.connect(
@@ -50,7 +50,7 @@ func set_up(home_team: Team, away_team: Team, match_seed: int) -> void:
 
 	# set up visual match
 	# get colors
-	visual_match.set_up(match_engine, timer.wait_time)
+	visual_match.setup(match_engine, timer.wait_time)
 
 	# adjust sub viewport to field size + borders
 	sub_viewport.size = visual_match.visual_field.field.size

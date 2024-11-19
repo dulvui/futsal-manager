@@ -29,7 +29,7 @@ var sort_x_left: Callable
 var sort_x_right: Callable
 
 
-func set_up(
+func setup(
 	p_res_team: Team = Team.new(),
 	p_field: SimField = SimField.new(),
 	p_ball: SimBall = SimBall.new(),
@@ -58,7 +58,7 @@ func set_up(
 	for player: Player in res_team.get_lineup_players():
 		var sim_player: SimPlayer = SimPlayer.new()
 		# setup
-		sim_player.set_up(player, ball, field, left_half)
+		sim_player.setup(player, ball, field, left_half)
 		all_players.append(sim_player)
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))

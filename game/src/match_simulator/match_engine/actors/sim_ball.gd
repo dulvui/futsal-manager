@@ -31,7 +31,7 @@ var field: SimField
 var clock_running: bool
 
 
-func set_up(p_field: SimField) -> void:
+func setup(p_field: SimField) -> void:
 	field = p_field
 	pos = field.center
 	last_pos = pos

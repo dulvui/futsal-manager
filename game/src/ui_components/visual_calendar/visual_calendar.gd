@@ -22,15 +22,15 @@ func _ready() -> void:
 	max_months = Global.world.calendar.months.size()
 	current_month = Global.world.calendar.date.month
 	current_year = Global.world.calendar.date.year
-	set_up()
+	setup()
 
 
-func set_up() -> void:
-	set_up_days()
-	match_list.set_up(Global.world.calendar.day())
+func setup() -> void:
+	setup_days()
+	match_list.setup(Global.world.calendar.day())
 
 
-func set_up_days() -> void:
+func setup_days() -> void:
 	# clean grid container
 	for child in days.get_children():
 		if not child is Label:
@@ -51,7 +51,7 @@ func set_up_days() -> void:
 		var matchz: Match = day.get_active_match()
 		var calendar_day: VisualDay = VisualDayScene.instantiate()
 		days.add_child(calendar_day)
-		calendar_day.set_up(day, matchz)
+		calendar_day.setup(day, matchz)
 		calendar_day.show_match_list.connect(_on_calendar_day_pressed.bind(day, matchz))
 
 		# make current day active
@@ -64,25 +64,25 @@ func set_up_days() -> void:
 
 func _on_calendar_day_pressed(day: Day, matchz: Match) -> void:
 	if matchz == null:
-		match_list.set_up(day)
+		match_list.setup(day)
 	else:
-		match_list.set_up(day, Global.world.get_competition_by_id(matchz.competition_id))
+		match_list.setup(day, Global.world.get_competition_by_id(matchz.competition_id))
 
 
 func _on_prev_pressed() -> void:
 	current_month -= 1
 	if current_month < 1:
 		current_month = 1
-	set_up()
+	setup()
 
 
 func _on_next_pressed() -> void:
 	current_month += 1
 	if current_month > max_months:
 		current_month = max_months
-	set_up()
+	setup()
 
 
 func _on_today_pressed() -> void:
 	current_month = Global.world.calendar.date.month
-	set_up()
+	setup()

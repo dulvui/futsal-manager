@@ -8,7 +8,7 @@ var rng: RandomNumberGenerator
 var match_rng: RandomNumberGenerator
 
 
-func set_up_rngs() -> void:
+func setup_rngs() -> void:
 	match_rng = RandomNumberGenerator.new()
 	rng = RandomNumberGenerator.new()
 	rng.seed = hash(Global.generation_seed) + Global.generation_player_names

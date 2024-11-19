@@ -23,7 +23,7 @@ var map_function: Callable
 @onready var sort_button: Button = $SortButton
 
 
-func set_up(
+func setup(
 	p_view_name: String, p_col_name: String, players: Array[Player], p_map_function: Callable
 ) -> void:
 	view_name = p_view_name
@@ -49,7 +49,7 @@ func set_up(
 			color_labels.append(label)
 			add_child(label)
 			label.tooltip_text = col_name
-			label.set_up(col_name)
+			label.setup(col_name)
 
 			if is_instance_of(value, TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
 				value = str(value).to_upper()

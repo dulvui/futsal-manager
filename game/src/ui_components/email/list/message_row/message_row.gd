@@ -14,7 +14,7 @@ var message: EmailMessage
 @onready var read_button: Button = %ReadButton
 
 
-func set_up(p_message: EmailMessage) -> void:
+func setup(p_message: EmailMessage) -> void:
 	message = p_message
 
 	read_button.tooltip_text = tr("Click to read message")

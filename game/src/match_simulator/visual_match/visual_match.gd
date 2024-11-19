@@ -12,14 +12,14 @@ extends Node2D
 @onready var visual_field: VisualField = $VisualField
 
 
-func set_up(match_engine: MatchEngine, update_interval: float) -> void:
-	visual_field.set_up(match_engine.field)
-	visual_ball.set_up(match_engine.ball, update_interval)
+func setup(match_engine: MatchEngine, update_interval: float) -> void:
+	visual_field.setup(match_engine.field)
+	visual_ball.setup(match_engine.ball, update_interval)
 	
 	var home_color: Color = match_engine.home_team.res_team.get_home_color()
 	var away_color: Color = match_engine.away_team.res_team.get_away_color(home_color)
-	home_team.set_up(match_engine.home_team, visual_ball, home_color, update_interval)
-	away_team.set_up(match_engine.away_team, visual_ball, away_color, update_interval)
+	home_team.setup(match_engine.home_team, visual_ball, home_color, update_interval)
+	away_team.setup(match_engine.away_team, visual_ball, away_color, update_interval)
 
 
 func update(update_interval: float) -> void:

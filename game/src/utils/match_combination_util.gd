@@ -38,10 +38,10 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 		var match_one: Match
 		if home:
 			match_one = Match.new()
-			match_one.set_up(last_team, random_teams[0], competition.id, competition.name)
+			match_one.setup(last_team, random_teams[0], competition.id, competition.name)
 		else:
 			match_one = Match.new()
-			match_one.set_up(random_teams[0], last_team, competition.id, competition.name)
+			match_one.setup(random_teams[0], last_team, competition.id, competition.name)
 		current_match_day.append(match_one)
 
 		var copy: Array = random_teams.duplicate(true)
@@ -54,10 +54,10 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 			var match_two: Match
 			if home:
 				match_two = Match.new()
-				match_two.set_up(copy[home_index], copy[away_index], competition.id, competition.name)
+				match_two.setup(copy[home_index], copy[away_index], competition.id, competition.name)
 			else:
 				match_two = Match.new()
-				match_two.set_up(copy[away_index], copy[home_index], competition.id, competition.name)
+				match_two.setup(copy[away_index], copy[home_index], competition.id, competition.name)
 			current_match_day.append(match_two)
 
 		match_days.append(current_match_day)
@@ -70,7 +70,7 @@ func create_combinations(competition: Competition, p_teams: Array[Team]) -> Arra
 		var current_match_dayz: Array = []
 		for match_dayss: Match in match_dayz:
 			var matchzz: Match = Match.new()
-			matchzz.set_up(match_dayss.away, match_dayss.home, competition.id, competition.name)
+			matchzz.setup(match_dayss.away, match_dayss.home, competition.id, competition.name)
 			current_match_dayz.append(matchzz)
 		temp_match_days.append(current_match_dayz)
 
@@ -133,7 +133,7 @@ func _initialize_club_national_cup(p_nation: Nation) -> void:
 	for league: League in p_nation.leagues:
 		all_teams_by_nation.append_array(league.teams)
 
-	p_nation.cup.set_up_knockout(all_teams_by_nation)
+	p_nation.cup.setup_knockout(all_teams_by_nation)
 
 	# create matches for first round group a
 	var matches: Array[Array] = p_nation.cup.get_knockout_matches()
@@ -150,7 +150,7 @@ func _initialize_club_continental_cup(p_continent: Continent) -> void:
 	for nation: Nation in p_continent.nations:
 		teams.append_array(nation.get_continental_cup_qualified_teams())
 
-	p_continent.cup_clubs.set_up(teams)
+	p_continent.cup_clubs.setup(teams)
 
 	# create matches for first round group a
 	# for now, only single leg
@@ -167,7 +167,7 @@ func _initialize_world_cup(world: World) -> void:
 		for nation: Nation in continent.nations:
 			teams.append(nation.team)
 	
-	world.world_cup.set_up(teams)
+	world.world_cup.setup(teams)
 
 	# create matches for first round group a
 	var matches: Array[Array] = world.world_cup.get_group_matches()

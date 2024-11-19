@@ -22,7 +22,7 @@ var date: Day
 @onready var day_color: ColorRect = $DayColor
 
 
-func set_up(p_date: Day = Day.new(), matchz: Match = null) -> void:
+func setup(p_date: Day = Day.new(), matchz: Match = null) -> void:
 	date = p_date
 	# activate button
 	button.show()

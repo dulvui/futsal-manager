@@ -20,7 +20,7 @@ func _ready() -> void:
 	items = []
 
 
-func set_up(competition_name: String = "") -> void:
+func setup(competition_name: String = "") -> void:
 	# world competitons
 	var world_item: TreeItem = _create_item("WORLD")
 	_create_item("WORLD CUP", world_item, Global.world.world_cup)

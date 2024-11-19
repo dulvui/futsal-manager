@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 		rotate(sim_ball.rotation)
 
 
-func set_up(p_sim_ball: SimBall, p_update_interval: float) -> void:
+func setup(p_sim_ball: SimBall, p_update_interval: float) -> void:
 	update_interval = p_update_interval
 	sim_ball = p_sim_ball
 	last_update_time = 0.0

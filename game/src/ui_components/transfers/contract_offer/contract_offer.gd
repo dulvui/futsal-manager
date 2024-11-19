@@ -28,7 +28,7 @@ func _ready() -> void:
 	team = Global.team
 
 
-func set_up(p_transfer: Transfer) -> void:
+func setup(p_transfer: Transfer) -> void:
 	transfer = p_transfer
 	player = transfer.player
 

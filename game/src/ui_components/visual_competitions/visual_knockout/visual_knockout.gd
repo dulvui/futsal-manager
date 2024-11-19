@@ -19,7 +19,7 @@ func _ready() -> void:
 	Tests.setup_mock_world(true)
 
 
-func set_up(knockout: Knockout) -> void:
+func setup(knockout: Knockout) -> void:
 	# group a
 	for rounds: Array in knockout.matches_by_round_a:
 		var box: VBoxContainer = VBoxContainer.new()
@@ -28,7 +28,7 @@ func set_up(knockout: Knockout) -> void:
 		for matchz: Match in rounds:
 			var match_row: MatchInfo = MatchInfoScene.instantiate()
 			box.add_child(match_row)
-			match_row.set_up(matchz)
+			match_row.setup(matchz)
 	# group b
 	for rounds: Array in knockout.matches_by_round_b:
 		var box: VBoxContainer = VBoxContainer.new()
@@ -37,7 +37,7 @@ func set_up(knockout: Knockout) -> void:
 		for matchz: Match in rounds:
 			var match_row: MatchInfo = MatchInfoScene.instantiate()
 			box.add_child(match_row)
-			match_row.set_up(matchz)
+			match_row.setup(matchz)
 
 	if knockout.final != null:
 		final.text = knockout.final.get_result()

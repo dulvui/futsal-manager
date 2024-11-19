@@ -61,7 +61,7 @@ func _draw() -> void:
 	)
 
 
-func set_up(p_field: SimField) -> void:
+func setup(p_field: SimField) -> void:
 	field = p_field
 
 	# penalty area lines

@@ -45,7 +45,7 @@ func _init(
 	final = p_final
 
 
-func set_up(
+func setup(
 	p_teams: Array[Team],
 	p_legs_semi_finals: Legs = Legs.DOUBLE,
 	p_legs_final: Legs = Legs.SINGLE,
@@ -97,7 +97,7 @@ func get_matches(cup: Cup) -> Array[Array]:
 		for i: int in teams_a.size() / 2:
 			# assign first vs last, first + 1 vs last - 1 etc...
 			var matchz: Match = Match.new()
-			matchz.set_up(teams_a[i], teams_a[-(i + 1)], cup.id, cup.name)
+			matchz.setup(teams_a[i], teams_a[-(i + 1)], cup.id, cup.name)
 			match_day.append(matchz)
 			# save also in matches by round
 			matches_by_round_a[-1].append(matchz)
@@ -105,7 +105,7 @@ func get_matches(cup: Cup) -> Array[Array]:
 		for i: int in teams_b.size() / 2:
 			# assign first vs last, first + 1 vs last - 1 etc...
 			var matchz: Match = Match.new()
-			matchz.set_up(teams_b[i], teams_b[-(i + 1)], cup.id, cup.name)
+			matchz.setup(teams_b[i], teams_b[-(i + 1)], cup.id, cup.name)
 			match_day.append(matchz)
 			# save also in matches by round
 			matches_by_round_b[-1].append(matchz)
@@ -118,7 +118,7 @@ func get_matches(cup: Cup) -> Array[Array]:
 			# iterate over all matches of match day 1 and invert home/away
 			for matchz_1: Match in match_day:
 				var matchz: Match = Match.new()
-				matchz.set_up(matchz_1.away, matchz_1.home, cup.id, cup.name, matchz_1)
+				matchz.setup(matchz_1.away, matchz_1.home, cup.id, cup.name, matchz_1)
 				match_day_2.append(matchz)
 				# save also in matches by round
 				if matchz.home in teams_a:
@@ -131,13 +131,13 @@ func get_matches(cup: Cup) -> Array[Array]:
 	else:
 		# final match
 		var matchz: Match = Match.new()
-		matchz.set_up(teams_a[0], teams_b[0], cup.id, cup.name)
+		matchz.setup(teams_a[0], teams_b[0], cup.id, cup.name)
 		matches.append_array([matchz])
 		
 		# second leg
 		if legs_final == Legs.DOUBLE:
 			var matchz_2: Match = Match.new()
-			matchz_2.set_up(teams_b[0], teams_a[0], cup.id, cup.name, matchz)
+			matchz_2.setup(teams_b[0], teams_a[0], cup.id, cup.name, matchz)
 			matches.append_array([matchz_2])
 
 	return matches

@@ -76,13 +76,13 @@ func _ready() -> void:
 
 	# set up formations with player controlled teams copy	
 	if home_team.id == Global.team.id:
-		formation.set_up(true, home_team)
-		players_bar.set_up(home_team)
+		formation.setup(true, home_team)
+		players_bar.setup(home_team)
 	else:
-		formation.set_up(true, away_team)
-		players_bar.set_up(away_team)
+		formation.setup(true, away_team)
+		players_bar.setup(away_team)
 
-	match_simulator.set_up(home_team, away_team, matchz.id)
+	match_simulator.setup(home_team, away_team, matchz.id)
 	
 	# set colors
 	home_color.color = home_team.get_home_color()

@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 		sprites.look_at(ball.position)
 
 
-func set_up(
+func setup(
 	p_sim_player: SimPlayer,
 	p_ball: VisualBall,
 	shirt_color: Color,

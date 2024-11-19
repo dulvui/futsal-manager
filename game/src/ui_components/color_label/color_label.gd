@@ -7,7 +7,7 @@ extends Label
 
 @export var value_name: String
 
-func set_up(p_value_name: String) -> void:
+func setup(p_value_name: String) -> void:
 	value_name = p_value_name
 	tooltip_text = value_name
 

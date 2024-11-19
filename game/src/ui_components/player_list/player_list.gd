@@ -69,20 +69,20 @@ func _ready() -> void:
 			page_size = PAGE_SIZE_3
 
 
-func set_up(p_active_team_id: int = -1) -> void:
+func setup(p_active_team_id: int = -1) -> void:
 	active_team_id = p_active_team_id
 
 	if active_team_id != -1:
 		team_select.hide()
 		league_select.hide()
 
-	_set_up_players()
+	_setup_players()
 
 	page_max = players.size() / page_size
 
-	_set_up_columns()
+	_setup_columns()
 	active_view = views[0]
-	active_view_option_button.set_up(views)
+	active_view_option_button.setup(views)
 
 	_update_page_indicator()
 	_show_active_column()
@@ -90,14 +90,14 @@ func set_up(p_active_team_id: int = -1) -> void:
 
 func update_team(p_active_team_id: int) -> void:
 	active_team_id = p_active_team_id
-	_set_up_players()
+	_setup_players()
 	_update_columns()
 
 	_update_page_indicator()
 	_show_active_column()
 
 
-func _set_up_columns() -> void:
+func _setup_columns() -> void:
 	for child in views_container.get_children():
 		child.queue_free()
 
@@ -171,7 +171,7 @@ func _add_column(view_name:String, col_name: String, map_function: Callable) -> 
 	view_name = view_name
 	
 	views_container.add_child(col)
-	col.set_up(view_name, col_name, visible_players, map_function)
+	col.setup(view_name, col_name, visible_players, map_function)
 	col.sort.connect(_sort_players.bind(col_name, map_function))
 	columns[col_name] = col
 	if view_name != Const.SURNAME and not view_name in views:
@@ -183,7 +183,7 @@ func _show_active_column() -> void:
 		col.visible = col.view_name == Const.SURNAME or col.view_name == active_view
 
 
-func _set_up_players(p_reset_options: bool = true) -> void:
+func _setup_players(p_reset_options: bool = true) -> void:
 	if p_reset_options:
 		_reset_options()
 

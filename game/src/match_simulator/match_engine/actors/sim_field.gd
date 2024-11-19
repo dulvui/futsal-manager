@@ -50,7 +50,7 @@ var penalty_area_left: PackedVector2Array
 var penalty_area_right: PackedVector2Array
 
 
-func set_up() -> void:
+func setup() -> void:
 	#size = sprite.texture.get_size()
 	size = Vector2(WIDTH + BORDER_SIZE * 2, HEIGHT + BORDER_SIZE * 2)
 

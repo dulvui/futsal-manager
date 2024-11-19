@@ -32,7 +32,7 @@ func _init(
 	stage = p_stage
 
 
-func set_up(p_teams: Array[Team]) -> void:
+func setup(p_teams: Array[Team]) -> void:
 	stage = Stage.GROUP
 	# sort teams by presitge
 	p_teams.sort_custom(func(a: Team, b: Team) -> bool: return a.get_prestige() > b.get_prestige())
@@ -46,7 +46,7 @@ func set_up(p_teams: Array[Team]) -> void:
 		groups[i % GROUPS].add_team(p_teams[i])
 
 
-func set_up_knockout(
+func setup_knockout(
 	teams: Array[Team] = [],
 	legs_semi_finals: Knockout.Legs = Knockout.Legs.DOUBLE,
 	legs_final: Knockout.Legs = Knockout.Legs.SINGLE,
@@ -61,7 +61,7 @@ func set_up_knockout(
 		for group: Group in groups:
 			teams.append_array(group.teams.slice(0, TEAMS_PASS_TO_KNOCKOUT))
 
-	knockout.set_up(teams, legs_semi_finals, legs_final)
+	knockout.setup(teams, legs_semi_finals, legs_final)
 
 
 func add_result(home_id: int, home_goals: int, away_id: int, away_goals: int) -> void:
@@ -79,7 +79,7 @@ func next_stage() -> void:
 				over_counter += 1
 		if over_counter == groups.size():
 			# group stage is over
-			set_up_knockout()
+			setup_knockout()
 			MatchCombinationUtil.add_matches_to_calendar(self, get_knockout_matches())
 	else:
 		if knockout.prepare_next_round():

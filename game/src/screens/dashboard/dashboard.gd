@@ -66,9 +66,9 @@ func _ready() -> void:
 	team_label.text = Global.team.name
 	date_label.text = Global.world.calendar.format_date()
 
-	all_players_list.set_up()
-	player_list.set_up(Global.team.id)
-	formation.set_up(false)
+	all_players_list.setup()
+	player_list.setup(Global.team.id)
+	formation.setup(false)
 
 	if Global.world.calendar.is_match_day():
 		continue_button.text = "START_MATCH"
@@ -266,12 +266,12 @@ func _next_day() -> void:
 		ThreadUtil.random_results()
 		#Global.world.random_results()
 
-	visual_calendar.set_up()
+	visual_calendar.setup()
 
 
 func _on_email_email_action(message: EmailMessage) -> void:
 	if message.type == EmailMessage.Type.CONTRACT_OFFER:
-		contract_offer.set_up(TransferUtil.get_transfer_id(message.foreign_id))
+		contract_offer.setup(TransferUtil.get_transfer_id(message.foreign_id))
 		_show_active_view(ContentViews.CONTRACT_OFFER)
 	else:
 		print("ERROR: Email action with no type. Text: " + message.text)

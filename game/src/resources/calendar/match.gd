@@ -39,7 +39,7 @@ func _init(
 	first_leg = p_first_leg
 
 
-func set_up(
+func setup(
 	p_home: Team,
 	p_away: Team,
 	p_competition_id: int,

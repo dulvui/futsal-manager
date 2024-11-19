@@ -55,7 +55,7 @@ func _ready() -> void:
 	_load_config()
 	save_states = ResUtil.load_save_states()
 	set_lang(language)
-	RngUtil.set_up_rngs()
+	RngUtil.setup_rngs()
 	
 	# set initial scale
 	get_tree().root.content_scale_factor = theme_scale

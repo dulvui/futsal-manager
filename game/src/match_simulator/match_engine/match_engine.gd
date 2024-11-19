@@ -34,15 +34,15 @@ var possession_counter: float
 var interception_timer: int
 
 
-func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
+func setup(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	field = SimField.new()
 	ball = SimBall.new()
 	ball.goal_line_out.connect(_on_sim_ball_goal_line_out)
 	ball.touch_line_out.connect(_on_sim_ball_touch_line_out)
 	ball.goal.connect(_on_sim_ball_goal)
 
-	field.set_up()
-	ball.set_up(field)
+	field.setup()
+	ball.setup(field)
 
 	ticks = 0
 	possession_counter = 0.0
@@ -56,11 +56,11 @@ func set_up(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	var home_has_ball: bool = RngUtil.match_rng.randi_range(0, 1) == 0
 
 	home_team = SimTeam.new()
-	home_team.set_up(p_home_team, field, ball, home_plays_left, home_has_ball)
+	home_team.setup(p_home_team, field, ball, home_plays_left, home_has_ball)
 	home_team.interception.connect(_on_home_team_interception)
 
 	away_team = SimTeam.new()
-	away_team.set_up(p_away_team, field, ball, not home_plays_left, not home_has_ball)
+	away_team.setup(p_away_team, field, ball, not home_plays_left, not home_has_ball)
 	away_team.interception.connect(_on_away_team_interception)
 
 	interception_timer = 0
@@ -103,7 +103,7 @@ func update() -> void:
 
 func simulate(matchz: Match) -> Match:
 	var start_time: int = Time.get_ticks_msec()
-	set_up(matchz.home, matchz.away, matchz.id)
+	setup(matchz.home, matchz.away, matchz.id)
 
 	# first half
 	var time: int = 0

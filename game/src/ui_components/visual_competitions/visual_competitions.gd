@@ -25,13 +25,13 @@ func _ready() -> void:
 	season_index = Global.league.tables.size() - 1
 	season_amount = Global.league.tables.size()
 
-	_set_up_seasons()
+	_setup_seasons()
 	competition = Global.league
-	competitions_tree.set_up(competition.name)
-	_set_up()
+	competitions_tree.setup(competition.name)
+	_setup()
 
 
-func _set_up() -> void:
+func _setup() -> void:
 	# clean scroll container
 	for child: Node in main.get_children():
 		child.queue_free()
@@ -40,7 +40,7 @@ func _set_up() -> void:
 		var league: League = (competition as League)
 		var table: VisualTable = VisualTableScene.instantiate()
 		main.add_child(table)
-		table.set_up(league.tables[season_index])
+		table.setup(league.tables[season_index])
 	else:
 		var cup: Cup = (competition as Cup)
 
@@ -55,23 +55,23 @@ func _set_up() -> void:
 			# table
 			var table: VisualTable = VisualTableScene.instantiate()
 			main.add_child(table)
-			table.set_up(group.table)
+			table.setup(group.table)
 			main.add_child(HSeparator.new())
 
 		# knockout
 		var knockout: VisualKnockout = VisualKnockoutScene.instantiate()
 		main.add_child(knockout)
-		knockout.set_up(cup.knockout)
+		knockout.setup(cup.knockout)
 
 
-func _set_up_seasons() -> void:
+func _setup_seasons() -> void:
 	var start_year: int = Global.world.calendar.date.year
 	var end_year: int = Global.world.calendar.date.year - season_amount
 
 	var season_years: Array[String] = []
 	for year: int in range(start_year, end_year, -1):
 		season_years.append(str(year))
-	seasons.set_up(season_years)
+	seasons.setup(season_years)
 
 
 func _on_seasons_button_item_selected(index: int) -> void:
@@ -79,11 +79,11 @@ func _on_seasons_button_item_selected(index: int) -> void:
 	# seasons are inserted inverted in options button
 	# -1, because arrays start from 0
 	season_index = season_amount - 1 - index
-	_set_up()
+	_setup()
 
 func _on_competitions_tree_competition_selected(p_competition: Competition) -> void:
 	competition = p_competition
-	_set_up()
+	_setup()
 
 
 func _on_active_button_pressed() -> void:
@@ -91,5 +91,5 @@ func _on_active_button_pressed() -> void:
 	competitions_tree.select(competition.name)
 	season_index = season_amount - 1
 	seasons.option_button.selected = 0
-	_set_up()
+	_setup()
 

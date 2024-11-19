@@ -16,8 +16,8 @@ extends TabContainer
 @onready var stadium_year_label: Label = $Info/StadiumYearBuilt
 
 
-func set_up(team: Team) -> void:
-	player_list.set_up(team.id)
+func setup(team: Team) -> void:
+	player_list.setup(team.id)
 	_set_labels(team)
 
 

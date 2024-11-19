@@ -14,7 +14,7 @@ const MatchInfoScene: PackedScene = preload(
 @onready var date_label: Label = %Date
 
 
-func set_up(day: Day, competition: Competition = Global.league) -> void:
+func setup(day: Day, competition: Competition = Global.league) -> void:
 	# remove children
 	for child: Node in matches_list.get_children():
 		child.queue_free()
@@ -72,6 +72,6 @@ func _add_matches(day: Day, competition: Competition) -> void:
 		for matchz: Match in matches:
 			var match_row: MatchInfo = MatchInfoScene.instantiate()
 			matches_list.add_child(match_row)
-			match_row.set_up(matchz)
+			match_row.setup(matchz)
 
 		matches_list.add_child(HSeparator.new())

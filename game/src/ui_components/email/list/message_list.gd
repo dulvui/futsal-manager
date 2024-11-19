@@ -45,7 +45,7 @@ func update() -> void:
 		var row: MessageRow = MessageRowScene.instantiate()
 		list.add_child(row)
 		row.read_button.pressed.connect(_on_row_pressed.bind(message))
-		row.set_up(message)
+		row.setup(message)
 
 		if i > 0:
 			list.add_child(HSeparator.new())

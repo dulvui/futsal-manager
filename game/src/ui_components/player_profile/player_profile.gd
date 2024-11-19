@@ -83,7 +83,7 @@ func set_player(p_player: Player) -> void:
 			attributes.get_node(attribute.capitalize()).add_child(label)
 			var value: ColorLabel = ColorLabelScene.instantiate()
 			attributes.get_node(attribute.capitalize()).add_child(value)
-			value.set_up(key)
+			value.setup(key)
 			value.set_value(player.get_res_value(["attributes", attribute, key]))
 
 	#history

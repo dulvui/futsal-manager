@@ -122,12 +122,12 @@ func apply_theme(theme_name: StringName) -> Theme:
 		custom_configuration.font_color = Global.theme_custom_font_color
 		custom_configuration.style_color = Global.theme_custom_style_color
 		custom_configuration.background_color = Global.theme_custom_background_color
-		custom_configuration.set_up()
+		custom_configuration.setup()
 		_apply_configuration(custom_configuration)
 	else:
 		var theme_file: StringName = THEMES[theme_name]
 		var configuration: ThemeConfiguration = ResourceLoader.load(THEMES_PATH + theme_file)
-		configuration.set_up()
+		configuration.setup()
 		_apply_configuration(configuration)
 
 	return theme

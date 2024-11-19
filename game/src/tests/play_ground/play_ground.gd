@@ -25,17 +25,17 @@ func _ready() -> void:
 	timer.start()
 
 	sim_field = SimField.new()
-	sim_field.set_up()
-	visual_field.set_up(sim_field)
+	sim_field.setup()
+	visual_field.setup(sim_field)
 
 	sim_ball = SimBall.new()
-	sim_ball.set_up(sim_field)
-	visual_ball.set_up(sim_ball, 0.25)
+	sim_ball.setup(sim_field)
+	visual_ball.setup(sim_ball, 0.25)
 
 	sim_player = SimPlayer.new()
-	sim_player.set_up(Player.new(), sim_ball, sim_field, true)
+	sim_player.setup(Player.new(), sim_ball, sim_field, true)
 
-	visual_player.set_up(sim_player, visual_ball, Color.RED, timer.wait_time)
+	visual_player.setup(sim_player, visual_ball, Color.RED, timer.wait_time)
 
 	# movements
 	#player_moves_to_ball()

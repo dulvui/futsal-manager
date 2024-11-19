@@ -21,7 +21,7 @@ func _ready() -> void:
 	change_players = []
 
 
-func set_up(p_team: Team) -> void:
+func setup(p_team: Team) -> void:
 	team = p_team
 
 	for player: Player in team.get_starting_players():

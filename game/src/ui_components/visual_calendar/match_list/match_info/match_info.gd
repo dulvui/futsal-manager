@@ -10,7 +10,7 @@ extends HBoxContainer
 @onready var result: Label = $Result
 
 
-func set_up(matchz: Match) -> void:
+func setup(matchz: Match) -> void:
 	home.text = matchz.home.name
 	away.text = matchz.away.name
 

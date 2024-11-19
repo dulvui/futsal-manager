@@ -20,7 +20,7 @@ func _ready() -> void:
 	InputUtil.start_focus(self)
 
 	var active_save_state: SaveState = Global.save_states.get_active()
-	active_save_state_entry.set_up(active_save_state)
+	active_save_state_entry.setup(active_save_state)
 	active_save_state_entry.load_game.connect(func() -> void: loading_screen.show())
 
 	for save_state_id: String in Global.save_states.id_list:
@@ -28,7 +28,7 @@ func _ready() -> void:
 			var save_state: SaveState = Global.save_states.load_state(save_state_id)
 			var entry: SaveStateEntry = SaveStateEntryScene.instantiate()
 			entry_list.add_child(entry)
-			entry.set_up(save_state)
+			entry.setup(save_state)
 			entry.load_game.connect(func() -> void: loading_screen.show())
 
 

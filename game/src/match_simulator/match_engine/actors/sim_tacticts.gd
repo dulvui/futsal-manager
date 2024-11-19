@@ -12,7 +12,7 @@ var state: States
 var left_half: bool
 
 
-func set_up(p_formation: Formation, p_state: States, p_left_half: bool) -> void:
+func setup(p_formation: Formation, p_state: States, p_left_half: bool) -> void:
 	formation = p_formation
 	state = p_state
 	left_half = p_left_half

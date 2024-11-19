@@ -55,7 +55,7 @@ var right_base: Vector2
 var left_half: bool
 
 
-func set_up(
+func setup(
 	p_player_res: Player,
 	p_ball: SimBall,
 	p_field: SimField,

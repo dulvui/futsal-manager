@@ -12,7 +12,7 @@ func _ready() -> void:
 	Tests.setup_mock_world(true)
 
 
-func set_up(table: Table) -> void:
+func setup(table: Table) -> void:
 	# clear grid
 	for child: Node in grid.get_children():
 		child.queue_free()

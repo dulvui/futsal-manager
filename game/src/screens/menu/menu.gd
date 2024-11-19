@@ -29,7 +29,7 @@ func _ready() -> void:
 		InputUtil.start_focus(continue_game)
 
 
-	save_state.set_up(Global.save_states.get_active())
+	save_state.setup(Global.save_states.get_active())
 
 	version.text = "v" + Global.version
 

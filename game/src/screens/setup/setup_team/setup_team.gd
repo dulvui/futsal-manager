@@ -31,7 +31,7 @@ func _ready() -> void:
 	var first_league: League = Global.world.get_all_leagues()[0]
 	active_league = first_league
 	active_team = first_league.teams[0]
-	team_profile.set_up(active_team)
+	team_profile.setup(active_team)
 
 
 func show_team(league: League, team: Team) -> void:

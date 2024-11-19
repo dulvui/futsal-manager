@@ -22,7 +22,7 @@ var save_state: SaveState
 @onready var load_button: Button = $Load
 
 
-func set_up(p_save_state: SaveState) -> void:
+func setup(p_save_state: SaveState) -> void:
 	save_state = p_save_state
 
 	if save_state == null or save_state.meta_is_temp:

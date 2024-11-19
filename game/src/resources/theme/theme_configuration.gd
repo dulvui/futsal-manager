@@ -40,7 +40,7 @@ func _init(
 	background_color = p_background_color
 
 
-func set_up() -> void:
+func setup() -> void:
 	# variations
 	font_color_normal = font_color
 	font_color_focus = font_color

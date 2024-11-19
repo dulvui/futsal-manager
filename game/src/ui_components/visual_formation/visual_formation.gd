@@ -34,20 +34,20 @@ var only_lineup: bool
 func _ready() -> void:
 	# setup automatically, if run in editor and is run by 'Run current scene'
 	if OS.has_feature("editor") and get_parent() == get_tree().root:
-		set_up(false, Tests.create_mock_team())
+		setup(false, Tests.create_mock_team())
 	
 	change_players = []
 
 
-func set_up(p_only_lineup: bool, p_team: Team = Global.team) -> void:
+func setup(p_only_lineup: bool, p_team: Team = Global.team) -> void:
 	only_lineup = p_only_lineup
 	team = p_team
 
 	# set up fomation options
-	formation_select.set_up(Formation.Variations.keys(), team.formation.variation)
+	formation_select.setup(Formation.Variations.keys(), team.formation.variation)
 
 	# tactics offense
-	tactic_select_offense.set_up(
+	tactic_select_offense.setup(
 		TacticOffense.Tactics.keys(),
 		TacticOffense.Tactics.values()[team.formation.tactic_offense.tactic]
 	)
@@ -55,11 +55,11 @@ func set_up(p_only_lineup: bool, p_team: Team = Global.team) -> void:
 	tactic_offense_intensity.value = team.formation.tactic_offense.intensity
 
 	# tactics defense
-	tactic_select_marking.set_up(
+	tactic_select_marking.setup(
 		TacticDefense.Marking.keys(),
 		TacticDefense.Marking.values()[team.formation.tactic_defense.marking]
 	)
-	tactic_select_pressing.set_up(
+	tactic_select_pressing.setup(
 		TacticDefense.Pressing.keys(),
 		TacticDefense.Pressing.values()[team.formation.tactic_defense.pressing]
 	)
