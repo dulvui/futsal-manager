@@ -122,16 +122,6 @@ theme_override_constants/separation = 30
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="PrevViewButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "<"
-
-[node name="NextViewButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
-unique_name_in_owner = true
-layout_mode = 2
-text = ">"
-
 [node name="ManagerName" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -156,6 +146,16 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 text = "24/08/2002"
+
+[node name="PrevViewButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<"
+
+[node name="NextViewButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ">"
 
 [node name="NextMatchButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
 unique_name_in_owner = true

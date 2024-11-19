@@ -15,6 +15,7 @@ var active_team: Team
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
+	InputUtil.start_focus(self)
 
 	for continent: Continent in Global.world.continents:
 		var continent_label: Label = Label.new()

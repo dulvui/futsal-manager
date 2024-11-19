@@ -17,6 +17,7 @@ var active_save_state_entry: SaveStateEntry = $VBoxContainer/ScrollContainer/Ent
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
+	InputUtil.start_focus(self)
 
 	var active_save_state: SaveState = Global.save_states.get_active()
 	active_save_state_entry.set_up(active_save_state)

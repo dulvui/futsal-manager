@@ -9,6 +9,7 @@ extends Control
 @onready var loading_screen: LoadingScreen = $LoadingScreen
 @onready var load_game: Button = %LoadGame
 @onready var continue_game: Button = %ContinueGame
+@onready var new_game: Button = %NewGame
 @onready var exit: VBoxContainer = %Exit
 @onready var version: Label = $Version
 
@@ -20,8 +21,13 @@ func _ready() -> void:
 	# hide exit button for iOS
 	exit.visible = OS.get_name() != "iOS"
 
-	load_game.visible = Global.save_states and Global.save_states.id_list.size() > 0
-	continue_game.visible = Global.save_states and Global.save_states.id_list.size() > 0
+	if not Global.save_states or Global.save_states.id_list.size() == 0:
+		load_game.visible = false
+		continue_game.visible = false 
+		InputUtil.start_focus(new_game)
+	else:
+		InputUtil.start_focus(continue_game)
+
 
 	save_state.set_up(Global.save_states.get_active())
 

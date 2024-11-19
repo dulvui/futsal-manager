@@ -18,7 +18,9 @@ const ACTION_CONTINUE: StringName = "CONTINUE"
 
 var focused: bool = true
 var viewport: Viewport
-var last_focused_node: Control
+var first_focus: Control
+var last_focus: Control
+
 
 func _ready() -> void:
 	viewport = get_viewport()
@@ -32,7 +34,6 @@ func _ready() -> void:
 	var continue_joypad: InputEventJoypadButton = InputEventJoypadButton.new()
 	continue_joypad.button_index = JOY_BUTTON_START
 	
-
 	# keyboard
 	var search_key: InputEventKey = InputEventKey.new()
 	search_key.keycode = KEY_F
@@ -60,9 +61,11 @@ func _input(event: InputEvent) -> void:
 	if focused:
 		# check if a nodes has focus. if not, last focused node grabs it
 		if viewport.gui_get_focus_owner() == null:
-			if last_focused_node != null:
+			if last_focus != null and last_focus.is_inside_tree():
 				print("regrab last focus")
-				last_focused_node.grab_focus()
+				last_focus.grab_focus()
+			elif first_focus != null and first_focus.is_inside_tree():
+				first_focus.grab_focus()
 			else:
 				print("not able to regrab focus")
 
@@ -78,16 +81,18 @@ func _input(event: InputEvent) -> void:
 		print("not focused event prevented")
 
 
-func start_focus(control: Control) -> void:
+func start_focus(node: Control) -> void:
+	first_focus = node
 	# check if control can't be focused
-	if control.focus_mode == control.FOCUS_NONE:
+	if node.focus_mode == node.FOCUS_NONE:
 		# find next control to focus
-		var next_focus: Control = control.find_next_valid_focus()
-		if next_focus:
-			next_focus.grab_focus()
+		first_focus = node.find_next_valid_focus()
+	
+	if first_focus:
+		first_focus.grab_focus()
 	else:
-		# focus control
-		control.grab_focus()
+		print("start focus: not node found to focus")
+
 
 func _on_gui_focus_change(node: Control) -> void:
-	last_focused_node = node
+	last_focus = node
