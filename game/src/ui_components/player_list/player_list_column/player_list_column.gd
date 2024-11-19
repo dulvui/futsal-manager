@@ -51,7 +51,9 @@ func setup(
 			label.tooltip_text = col_name
 			label.setup(col_name)
 
-			if is_instance_of(value, TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
+			if value is Dictionary:
+				value = FormatUtil.format_date(value as Dictionary)
+			elif value is String and not col_name in NOT_TRANSLATED_COLUMS:
 				value = str(value).to_upper()
 
 			label.set_value(value)
@@ -63,7 +65,9 @@ func update_values(players: Array[Player]) -> void:
 	for i: int in color_labels.size():
 		if i < values.size():
 			color_labels[i].show()
-			if is_instance_of(values[i], TYPE_STRING) and not col_name in NOT_TRANSLATED_COLUMS:
+			if values[i] is Dictionary:
+				values[i] = FormatUtil.format_date(values[i] as Dictionary)
+			elif values[i] is String and not col_name in NOT_TRANSLATED_COLUMS:
 				values[i] = str(values[i]).to_upper()
 			color_labels[i].set_value(values[i])
 		else:

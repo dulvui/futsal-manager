@@ -109,7 +109,7 @@ func _setup_columns() -> void:
 	var name_col: PlayerListColumn = columns[Const.SURNAME]
 	# set minimum size to name column
 	name_col.custom_minimum_size.x = 200
-	# connect name button  signal
+	# connect name button pressed signal
 	for i: int in visible_players.size():
 		name_col.buttons[i].pressed.connect(func() -> void: select_player.emit(visible_players[i]))
 
@@ -117,21 +117,20 @@ func _setup_columns() -> void:
 	views_container.add_child(VSeparator.new())
 
 	# general
-	var team_names: Callable = func(p: Player) -> String: return p.team
-	_add_column("GENERAL", "TEAM", team_names)
-	# TODO fix nationalitys, get nation by nation name sabed in player res
-	var nationalities: Callable = func(p: Player) -> String: return p.nation
-	_add_column("GENERAL", "NATION", nationalities)
 	var positions: Callable = func(p: Player) -> String: return Position.Type.keys()[p.position.type]
 	_add_column("GENERAL", Const.POSITION, positions)
 	var prices: Callable = func(p: Player) -> String: return FormatUtil.get_sign(p.price)
 	_add_column("GENERAL", "PRICE", prices)
-	var birth_dates: Callable = func(p: Player) -> String: return FormatUtil.format_date(p.birth_date)
-	_add_column("GENERAL", "BIRTH_DATE", birth_dates)
 	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()
 	_add_column("GENERAL", "PRESTIGE", presitge_stars)
 	var moralities: Callable = func(p: Player) -> String: return Player.Morality.keys()[p.morality]
 	_add_column("GENERAL", "MORALITY", moralities)
+	var birth_dates: Callable = func(p: Player) -> Dictionary: return p.birth_date
+	_add_column("GENERAL", "BIRTH_DATE", birth_dates)
+	var nationalities: Callable = func(p: Player) -> String: return p.nation
+	_add_column("GENERAL", "NATION", nationalities)
+	var team_names: Callable = func(p: Player) -> String: return p.team
+	_add_column("GENERAL", "TEAM", team_names)
 
 	# contract
 	for c: Dictionary in Contract.new().get_property_list():
@@ -140,7 +139,7 @@ func _setup_columns() -> void:
 				var value: Variant = p.contract.get(c.name)
 				# for dates
 				if typeof(value) == Variant.Type.TYPE_DICTIONARY:
-					return FormatUtil.format_date(value)
+					return value
 				return str(value)
 			_add_column("CONTARCT", c.name, stats)
 
@@ -267,7 +266,7 @@ func _sort_players(value: String, map_function: Callable) -> void:
 	else:
 		sorting[sort_key] = true
 
-	if "date" in value:
+	if "date" in value.to_lower():
 		# dates
 		all_players.sort_custom(
 			func(a:Player, b:Player) -> bool:
