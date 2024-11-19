@@ -21,7 +21,6 @@ var only_unread: bool = false
 func update() -> void:
 	for child in list.get_children():
 		child.queue_free()
-	print("UPDATE")
 
 	var inbox_list: Array[EmailMessage] = Global.inbox.list
 
@@ -46,9 +45,6 @@ func update() -> void:
 		list.add_child(row)
 		row.read_button.pressed.connect(_on_row_pressed.bind(message))
 		row.setup(message)
-
-		if i > 0:
-			list.add_child(HSeparator.new())
 
 
 func starred(p_only_starred: bool) -> void:
