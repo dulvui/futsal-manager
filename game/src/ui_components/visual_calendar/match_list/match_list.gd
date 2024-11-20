@@ -55,6 +55,8 @@ func setup(day: Day, competition: Competition = Global.league) -> void:
 		for league: League in Global.world.get_all_leagues():
 			if league.id != Global.league.id:
 				_add_matches(day, league)
+	
+	if matches_list.is_empty()
 
 
 

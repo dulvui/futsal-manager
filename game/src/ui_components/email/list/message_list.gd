@@ -28,7 +28,7 @@ func update() -> void:
 		inbox_list = inbox_list.filter(func(m: EmailMessage) -> bool: return m.starred)
 	if only_unread:
 		inbox_list = inbox_list.filter(func(m: EmailMessage) -> bool: return not m.read)
-	if search_text.length() > 0:
+	if not search_text.is_empty():
 		inbox_list = inbox_list.filter(
 			func(m: EmailMessage) -> bool: return (
 				(m.text.to_lower() + m.subject.to_lower() + m.sender.to_lower())
