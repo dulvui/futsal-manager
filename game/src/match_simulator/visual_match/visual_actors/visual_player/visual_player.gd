@@ -17,7 +17,7 @@ var last_pos: Vector2
 
 @onready var body: Sprite2D = $Sprites/Body
 @onready var sprites: Node2D = $Sprites
-@onready var label: Label = $Info/Label
+@onready var name_label: Label = $Info/NameLabel
 
 
 func _physics_process(delta: float) -> void:
@@ -45,7 +45,7 @@ func setup(
 
 	body.modulate = shirt_color
 
-	label.text = str(sim_player.player_res.nr) + " " + (sim_player.player_res.surname)
+	name_label.text = str(sim_player.player_res.nr) + " " + (sim_player.player_res.surname)
 
 
 func update(p_update_interval: float) -> void:
@@ -57,6 +57,6 @@ func update(p_update_interval: float) -> void:
 
 func change_player(p_sim_player: SimPlayer) -> void:
 	sim_player = p_sim_player
-	label.text = str(sim_player.player_res.nr) + " " + (sim_player.player_res.surname)
+	name_label.text = str(sim_player.player_res.nr) + " " + (sim_player.player_res.surname)
 
 
