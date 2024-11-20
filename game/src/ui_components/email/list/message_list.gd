@@ -16,7 +16,6 @@ var only_starred: bool = false
 var only_unread: bool = false
 
 @onready var list: VBoxContainer = $ScrollContainer/List
-@onready var empty_notice: Label = %EmptyNotice
 
 
 func update() -> void:
