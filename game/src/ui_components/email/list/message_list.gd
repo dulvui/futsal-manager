@@ -16,6 +16,7 @@ var only_starred: bool = false
 var only_unread: bool = false
 
 @onready var list: VBoxContainer = $ScrollContainer/List
+@onready var empty_notice: Label = %EmptyNotice
 
 
 func update() -> void:
@@ -36,15 +37,19 @@ func update() -> void:
 			)
 		)
 
-	# to test perfomrance of email view
-	#for j in range(1000):
-	for i in range(inbox_list.size() - 1, -1, -1):  # reverse list
-		var message: EmailMessage = inbox_list[i]
-
-		var row: MessageRow = MessageRowScene.instantiate()
-		list.add_child(row)
-		row.read_button.pressed.connect(_on_row_pressed.bind(message))
-		row.setup(message)
+	if inbox_list.is_empty():
+		var label: Label = Label.new()
+		label.text = tr("NO_MESSAGE_FOUND")
+		list.add_child(label)
+	else:
+		# to test perfomrance of email view
+		#for j in range(1000):
+		for i in range(inbox_list.size() - 1, -1, -1):  # reverse list
+			var message: EmailMessage = inbox_list[i]
+			var row: MessageRow = MessageRowScene.instantiate()
+			list.add_child(row)
+			row.read_button.pressed.connect(_on_row_pressed.bind(message))
+			row.setup(message)
 
 
 func starred(p_only_starred: bool) -> void:
@@ -64,3 +69,5 @@ func search(text: String) -> void:
 
 func _on_row_pressed(message: EmailMessage) -> void:
 	show_message.emit(message)
+
+
