@@ -9,6 +9,8 @@ const MatchInfoScene: PackedScene = preload(
 	"res://src/ui_components/visual_calendar/match_list/match_info/match_info.tscn"
 	)
 
+var all_matches: Array[Match]
+
 @onready var matches_list: VBoxContainer = %Matches
 @onready var scroll_container: ScrollContainer = %ScrollContainer
 @onready var date_label: Label = %Date
@@ -18,6 +20,8 @@ func setup(day: Day, competition: Competition = Global.league) -> void:
 	# remove children
 	for child: Node in matches_list.get_children():
 		child.queue_free()
+	
+	all_matches = []
 	
 	# reset scroll posiiton
 	scroll_container.scroll_horizontal = 0
@@ -56,8 +60,11 @@ func setup(day: Day, competition: Competition = Global.league) -> void:
 			if league.id != Global.league.id:
 				_add_matches(day, league)
 	
-	if matches_list.is_empty()
-
+	# show no match notice
+	if all_matches.is_empty():
+		var label: Label = Label.new()
+		label.text = tr("NO_MATCH")
+		matches_list.add_child(label)
 
 
 func _add_matches(day: Day, competition: Competition) -> void:
@@ -65,6 +72,8 @@ func _add_matches(day: Day, competition: Competition) -> void:
 	var matches: Array = Global.world.calendar.day(day.month, day.day).get_matches(competition.id)
 	# add to list
 	if matches.size() > 0:
+		all_matches.append_array(matches)
+
 		var competition_label: Label = Label.new()
 		competition_label.text = competition.name
 		if competition is League:
