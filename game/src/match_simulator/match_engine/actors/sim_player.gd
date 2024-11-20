@@ -7,20 +7,22 @@ class_name SimPlayer
 signal interception
 signal short_pass
 signal shoot
+signal foul
 #signal dribble
 signal pass_received
 
 enum State {
+	# generic
 	IDLE,
-	# attacker
+	MOVE,
+	# attack
 	DRIBBLE,
 	PASSING,
 	SHOOTING,
-	# supporter
 	RECEIVE_PASS,
-	# stay high
-	MOVE,
-	# GOALKEEPER
+	# defense
+	TACKLE,
+	# goalkeeper
 	SAVE_SHOT,
 	POSITIONING,
 }
@@ -41,6 +43,7 @@ var destination: Vector2
 var speed: int
 #TODO reduce radius with low stamina
 var interception_radius: int
+	# generic
 
 # distances, calculated by action util
 var distance_to_goal: float
@@ -97,7 +100,7 @@ func player_update(team_has_ball: bool) -> void:
 						stop()
 						ball.stop()
 				else:
-					interception.emit()
+					state = State.TACKLE
 			else:
 				state = State.MOVE
 		State.RECEIVE_PASS:
@@ -123,6 +126,17 @@ func player_update(team_has_ball: bool) -> void:
 			state = State.IDLE
 		State.MOVE:
 			_move()
+			state = State.IDLE
+		State.TACKLE:
+			var tackle_factor: int = player_res.attributes.technical.tackling
+			var aggression_factor: int = player_res.attributes.mental.aggression
+			var random: int = RngUtil.match_rng.randi_range(1, 100)
+			# max 40% , min 2% for success tackle
+			if random > 100 - tackle_factor * 2:
+				interception.emit()
+			# max 20% , min 2% of foul
+			elif random < 42 - tackle_factor + aggression_factor:
+				foul.emit()
 			state = State.IDLE
 	# print("nr %d has ball %s state %s"%[player_res.nr, team_has_ball, State.keys()[state]])
 

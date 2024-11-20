@@ -4,6 +4,7 @@
 
 class_name SimTeam
 
+signal foul(player: Player)
 signal interception
 signal player_changed
 
@@ -63,10 +64,9 @@ func setup(
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		sim_player.pass_received.connect(func() -> void: stats.passes_success += 1)
+		sim_player.foul.connect(_on_player_foul.bind(sim_player.player_res))
 		sim_player.interception.connect(_on_player_interception)
-		sim_player.shoot.connect(
-			shoot_on_goal.bind(sim_player.player_res.attributes.technical.shooting)
-		)
+		sim_player.shoot.connect(shoot_on_goal.bind(sim_player.player_res))
 		#sim_player.dribble.connect(pass_to_random_player)
 	
 	# copy field players in own array, for easier access
@@ -210,7 +210,9 @@ func pass_to_random_player(passing_player: SimPlayer = null) -> void:
 	stats.passes += 1
 
 
-func shoot_on_goal(power: float) -> void:
+func shoot_on_goal(player: Player) -> void:
+	var power: int = player.attributes.technical.shooting
+
 	var random_target: Vector2
 	if left_half:
 		random_target = field.goal_right
@@ -249,8 +251,10 @@ func _sort_distance_to_ball(a: SimPlayer, b: SimPlayer) -> bool:
 	return a.distance_to_ball < b.distance_to_ball
 
 
+func _on_player_foul(player: Player) -> void:
+	stats.fouls += 1
+	foul.emit(player)
+
+
 func _on_player_interception() -> void:
-	# print("interception")
 	interception.emit()
-
-

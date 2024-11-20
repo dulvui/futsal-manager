@@ -57,10 +57,12 @@ func setup(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 	home_team = SimTeam.new()
 	home_team.setup(p_home_team, field, ball, home_plays_left, home_has_ball)
+	home_team.foul.connect(_on_home_team_foul)
 	home_team.interception.connect(_on_home_team_interception)
 
 	away_team = SimTeam.new()
 	away_team.setup(p_away_team, field, ball, not home_plays_left, not home_has_ball)
+	home_team.foul.connect(_on_away_team_foul)
 	away_team.interception.connect(_on_away_team_interception)
 
 	interception_timer = 0
@@ -97,8 +99,6 @@ func update() -> void:
 	else:
 		home_team.check_changes()
 		away_team.check_changes()
-		# print("BALL OUT")
-
 
 
 func simulate(matchz: Match) -> Match:
@@ -283,6 +283,16 @@ func _on_home_team_possess() -> void:
 
 func _on_away_team_possess() -> void:
 	away_possess()
+
+
+func _on_home_team_foul(player: Player) -> void:
+	print("HOME FOUL " + player.surname)
+	away_possess()
+
+
+func _on_away_team_foul(player: Player) -> void:
+	print("AWAY FOUL " + player.surname)
+	home_possess()
 
 
 func _on_home_team_interception() -> void:
