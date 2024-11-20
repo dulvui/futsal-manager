@@ -34,12 +34,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "FROM"
-label_settings = ExtResource("2_a6odb")
 
 [node name="Sender" type="Label" parent="MarginContainer/VBoxContainer/From"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "info@realmadrid.com"
+label_settings = ExtResource("2_a6odb")
 
 [node name="To" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -48,12 +48,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "TO"
-label_settings = ExtResource("2_a6odb")
 
 [node name="Receiver" type="Label" parent="MarginContainer/VBoxContainer/To"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "hans.viustel@realmadrid.com"
+label_settings = ExtResource("2_a6odb")
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -65,13 +65,13 @@ layout_mode = 2
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "SUBJECT"
-label_settings = ExtResource("2_a6odb")
 
 [node name="Subject" type="Label" parent="MarginContainer/VBoxContainer/Subject"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Messi"
+label_settings = ExtResource("2_a6odb")
 
 [node name="Date" type="Label" parent="MarginContainer/VBoxContainer/Subject"]
 unique_name_in_owner = true
