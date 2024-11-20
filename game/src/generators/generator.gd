@@ -119,50 +119,44 @@ func _assign_players_to_team(
 		var random_nation: Nation = _get_random_nationality(
 			world, nation, prestige, league.pyramid_level
 		)
-		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
-		nr += 1
-		player.team = team.name
-		player.team_id = team.id
-		player.league = league.name
-		player.league_id = league.id
-		player.statistics.team_name = team.name
+		var player: Player = _create_player(
+			world, random_nation, nr, prestige, position_type, league, team
+		)
 		team.players.append(player)
+		nr += 1
 	for amount: int in team.formation.defense:
 		var position_type: Position.Type = _get_random_defense_position_type()
 
 		var random_nation: Nation = _get_random_nationality(
 			world, nation, prestige, league.pyramid_level
 		)
-		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
-		nr += 1
-		player.team = team.name
-		player.statistics.team_name = team.name
-		player.team_id = team.id
+		var player: Player = _create_player(
+			world, random_nation, nr, prestige, position_type, league, team
+		)
 		team.players.append(player)
+		nr += 1
 	for amount: int in team.formation.center:
 		var position_type: Position.Type = _get_random_center_position_type()
 
 		var random_nation: Nation = _get_random_nationality(
 			world, nation, prestige, league.pyramid_level
 		)
-		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
-		nr += 1
-		player.team = team.name
-		player.statistics.team_name = team.name
-		player.team_id = team.id
+		var player: Player = _create_player(
+			world, random_nation, nr, prestige, position_type, league, team
+		)
 		team.players.append(player)
+		nr += 1
 	for amount: int in team.formation.attack:
 		var position_type: Position.Type = _get_random_attack_position_type()
 
 		var random_nation: Nation = _get_random_nationality(
 			world, nation, prestige, league.pyramid_level
 		)
-		var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
-		nr += 1
-		player.team = team.name
-		player.statistics.team_name = team.name
-		player.team_id = team.id
+		var player: Player = _create_player(
+			world, random_nation, nr, prestige, position_type, league, team
+		)
 		team.players.append(player)
+		nr += 1
 	
 	# bench and rest
 	for position_type: int in Position.Type.values():
@@ -174,12 +168,11 @@ func _assign_players_to_team(
 			var random_nation: Nation = _get_random_nationality(
 				world, nation, prestige, league.pyramid_level
 			)
-			var player: Player = _create_player(world, random_nation, nr, prestige, position_type)
-			nr += 1
-			player.team = team.name
-			player.statistics.team_name = team.name
-			player.team_id = team.id
+			var player: Player = _create_player(
+				world, random_nation, nr, prestige, position_type, league, team
+			)
 			team.players.append(player)
+			nr += 1
 
 	return team
 
@@ -496,6 +489,8 @@ func _create_player(
 	nr: int,
 	p_prestige: int,
 	p_position_type: Position.Type,
+	p_league: League,
+	p_team: Team,
 ) -> Player:
 	var player: Player = Player.new()
 	_random_positions(player, p_position_type)
@@ -510,6 +505,11 @@ func _create_player(
 	player.price = _get_price(date.year - birth_date.year, prestige, player.position)
 	player.name = _get_person_name(nation)
 	player.surname = _get_person_surname(world, nation)
+	player.team = p_team.name
+	player.team_id = p_team.id
+	player.league = p_league.name
+	player.league_id = p_league.id
+	player.statistics.team_name = p_team.name
 	player.birth_date = birth_date
 	player.nation = nation.name
 	player.foot = _get_random_foot()

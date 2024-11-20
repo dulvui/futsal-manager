@@ -98,9 +98,6 @@ func update_team(p_active_team_id: int) -> void:
 
 
 func _setup_columns() -> void:
-	for child in views_container.get_children():
-		child.queue_free()
-
 	visible_players = players.slice(page * page_size, (page + 1) * page_size)
 
 	# names
@@ -308,12 +305,13 @@ func _filter() -> void:
 				filter_counter += 1
 				value = str(filters[key])
 				value = value.to_upper()
-				
+
 				if key == Const.POSITION:
 					if not str(player.position.type) == value:
 						filter_counter += 1
-				elif not str(player[key.to_lower()]).to_upper().contains(value):
+				elif not str(player[key.to_lower()]).to_lower().contains(value.to_lower()):
 					filter_counter += 1
+
 			if filter_counter == filters.size():
 				filtered_players.append(player)
 		players = filtered_players
