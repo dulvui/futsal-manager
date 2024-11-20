@@ -32,6 +32,8 @@ var away_stats: MatchStatistics
 @onready var away_possession: Label = %AwayPossessionLabel
 @onready var home_name: Label = %HomeNameLabel
 @onready var away_name: Label = %AwayNameLabel
+@onready var home_fouls: Label = %HomeFouls
+@onready var away_fouls: Label = %AwayFouls
 @onready var time_bar: ProgressBar = %TimeBar
 @onready var possess_bar: ProgressBar = %PossessBar
 
@@ -114,6 +116,21 @@ func match_end() -> void:
 func half_time() -> void:
 	pause_button.text = tr("CONTINUE")
 	first_half = false
+
+
+func _on_match_simulator_update_time() -> void:
+	stats.update_stats(home_stats, away_stats)
+	time_label.text = "%02d:%02d" % [19 - int(match_simulator.time) / 60, 59 - int(match_simulator.time) % 60]
+
+	time_bar.value = match_simulator.time
+	possess_bar.value = home_stats.possession
+
+	home_possession.text = str(home_stats.possession) + " %"
+	away_possession.text = str(away_stats.possession) + " %"
+	result_label.text = "%d - %d" % [home_stats.goals, away_stats.goals]
+	
+	home_fouls.text = "(%d)"%home_stats.fouls
+	away_fouls.text = "(%d)"%away_stats.fouls
 
 
 func _on_field_button_pressed() -> void:
@@ -212,18 +229,6 @@ func _on_match_simulator_action_message(message: String) -> void:
 	var new_line: Label = Label.new()
 	new_line.text = time_label.text + " " + message
 	comments.add_child(new_line)
-
-
-func _on_match_simulator_update_time() -> void:
-	stats.update_stats(home_stats, away_stats)
-	time_label.text = "%02d:%02d" % [int(match_simulator.time) / 60, int(match_simulator.time) % 60]
-
-	time_bar.value = match_simulator.time
-	possess_bar.value = home_stats.possession
-
-	home_possession.text = str(home_stats.possession) + " %"
-	away_possession.text = str(away_stats.possession) + " %"
-	result_label.text = "%d - %d" % [home_stats.goals, away_stats.goals]
 
 
 func _on_formation_change_request() -> void:

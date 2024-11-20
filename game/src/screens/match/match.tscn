@@ -123,14 +123,9 @@ alignment = 1
 
 [node name="TopBar" type="HBoxContainer" parent="Main/Content/CentralContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
 alignment = 1
 metadata/_edit_use_anchors_ = true
-
-[node name="Time" type="Label" parent="Main/Content/CentralContainer/TopBar"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "00:00"
 
 [node name="TimeBar" type="ProgressBar" parent="Main/Content/CentralContainer/TopBar"]
 unique_name_in_owner = true
@@ -142,27 +137,54 @@ step = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="HomeColor" type="ColorRect" parent="Main/Content/CentralContainer/TopBar"]
+[node name="Info" type="HBoxContainer" parent="Main/Content/CentralContainer/TopBar/TimeBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Time" type="Label" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HomeColor" type="ColorRect" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 
-[node name="HomeNameLabel" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+[node name="HomeFouls" type="Label" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "(0)"
+
+[node name="HomeNameLabel" type="Label" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Robledo"
 
-[node name="Result" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+[node name="Result" type="Label" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0:0"
 
-[node name="AwayNameLabel" type="Label" parent="Main/Content/CentralContainer/TopBar"]
+[node name="AwayNameLabel" type="Label" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Cisneros"
 
-[node name="AwayColor" type="ColorRect" parent="Main/Content/CentralContainer/TopBar"]
+[node name="AwayFouls" type="Label" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "(0)"
+
+[node name="AwayColor" type="ColorRect" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
