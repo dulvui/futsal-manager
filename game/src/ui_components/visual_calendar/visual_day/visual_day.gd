@@ -58,7 +58,7 @@ func setup(p_date: Day = Day.new(), matchz: Match = null) -> void:
 
 	# check if market is active
 	if date.market:
-		market_label.text = tr("MARKET")
+		market_label.text = tr("TRANSFERMARKET")
 
 
 func unselect() -> void:

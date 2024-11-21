@@ -59,7 +59,7 @@ func setup_days() -> void:
 			calendar_day.select()
 
 	var active_year: int = current_year + ((current_month - 1) / 12)
-	page_label.text = Const.MONTH_STRINGS[(current_month % 12) - 1] + " " + str(active_year)
+	page_label.text = tr(Const.MONTH_STRINGS[(current_month % 12) - 1]) + " " + str(active_year)
 
 
 func _on_calendar_day_pressed(day: Day, matchz: Match) -> void:

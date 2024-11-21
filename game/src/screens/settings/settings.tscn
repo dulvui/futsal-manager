@@ -180,9 +180,9 @@ text = "translation link"
 [node name="HSeparator3" type="HSeparator" parent="Main/TabContainer/General"]
 layout_mode = 2
 
-[node name="ThemeLabel" type="Label" parent="Main/TabContainer/General"]
+[node name="IterfaceLabel" type="Label" parent="Main/TabContainer/General"]
 layout_mode = 2
-text = "USER_INTERFACE"
+text = "INTERFACE_SETTINGS"
 label_settings = ExtResource("3_ndxx8")
 
 [node name="FontSize" type="HBoxContainer" parent="Main/TabContainer/General"]

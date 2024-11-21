@@ -56,6 +56,7 @@ STARRED,Starred,Favoriten,Favoriti
 SEARCH,Search,Suche,Cerca
 INFO,Info,Info,Info
 PLAYERS,Players,Spieler,Giocatori
+PLAYER,Player,Spieler,Giocatore
 SEED,Seed,Seed,Seed
 START_DATE,Start date,Startdatum,Data inizio
 COPY,Copy,Kopieren,Copia
@@ -147,6 +148,7 @@ VALUE,Value,Wert,Valore
 SCALE,Scale,Skala,Scala
 GENERAL_SETTINGS,General,Allgemein,Generale
 INPUT_SETTINGS,Input,Eingabe,Tasti
+INTERFACE_SETTINGS,Interface,Oberfläche,Interfaccia
 THEMES,Themes,Themen,Temi
 FONT_COLOR,Font color,Schriftfarbe,Colore scrittura
 BUTTONS_COLOR,Buttons color,Knopffarbe,Colore tasti
@@ -155,3 +157,7 @@ VIM_MODE,Vim mode,Vim-Modus,Modalidità Vim
 CHANGE,Change,Ändern,Cambia
 PERSONS,Persons,Personen,Persone
 YEAR,Year,Jahr,Anno
+COMPETITIONS,Competitions,Wettbewerbe,Competizioni
+TODAY,Today,Heute,Oggi
+NO_MATCH,No match,Kein Spiel,Nessuna partita
+TRANSFERMARKET,Transfermarket,Transfermarkt,Sessione mercato

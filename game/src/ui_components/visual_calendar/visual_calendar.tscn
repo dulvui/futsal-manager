@@ -68,8 +68,7 @@ horizontal_alignment = 1
 [node name="Wednesday" type="Label" parent="Calendar/Days"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "WEDNESDAY
-"
+text = "WEDNESDAY"
 horizontal_alignment = 1
 
 [node name="Thursday" type="Label" parent="Calendar/Days"]
