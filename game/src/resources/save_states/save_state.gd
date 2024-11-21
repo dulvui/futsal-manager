@@ -83,7 +83,7 @@ func delete() -> void:
 				file_name = user_dir.get_next()
 		# delete folder
 		err = user_dir.change_dir(Const.SAVE_STATES_PATH)
-		if err == OK and user_dir.dir_exists(ProjectSettings.globalize_path(Const.SAVE_STATES_PATH + id)):
+		if err == OK and user_dir.dir_exists(id):
 			OS.move_to_trash(ProjectSettings.globalize_path(Const.SAVE_STATES_PATH + id))
 
 
