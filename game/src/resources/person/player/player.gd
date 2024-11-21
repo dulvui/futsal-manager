@@ -9,7 +9,7 @@ enum Foot { L, R }
 enum Morality { HORRIBLE, BAD, GOOD, EXCELLENT }
 enum Form { INJURED, RECOVER, GOOD, EXCELLENT }
 
-@export var price: int
+@export var value: int
 @export var nr: int  # shirt number
 @export var loyality: int
 @export var injury_factor: int
@@ -31,7 +31,7 @@ enum Form { INJURED, RECOVER, GOOD, EXCELLENT }
 
 
 func _init(
-	p_price: int = 0,
+	p_value: int = 0,
 	p_nr: int = 0,
 	p_loyality: int = 0,
 	p_prestige: int = 0,
@@ -57,7 +57,7 @@ func _init(
 	p_agent: Agent = Agent.new(),
 ) -> void:
 	super(Person.Role.PLAYER)
-	price = p_price
+	value = p_value
 	nr = p_nr
 	loyality = p_loyality
 	prestige = p_prestige

@@ -37,7 +37,7 @@ func _ready() -> void:
 
 	team = Global.team
 	for t_player: Player in team.players:
-		exchange_players_button.add_item(t_player.name + " " + str(t_player.price / 1000) + "K")
+		exchange_players_button.add_item(t_player.name + " " + str(t_player.value / 1000) + "K")
 		exchange_players.append(t_player)
 
 
@@ -47,10 +47,10 @@ func _process(_delta: float) -> void:
 
 func set_player(new_player: Player) -> void:
 	player = new_player
-	info_label.text = "The player " + player.name + " has a value of " + str(player.price)
+	info_label.text = "The player " + player.name + " has a value of " + str(player.value)
 
-	if player.price <= Global.team.budget:
-		amount = player.price
+	if player.value <= Global.team.budget:
+		amount = player.value
 	else:
 		amount = Global.team.budget
 
@@ -81,7 +81,7 @@ func _on_ExchangePlayers_item_selected(index: int) -> void:
 	selected_players.append(player)
 
 	var remove_button: Button = Button.new()
-	remove_button.text = exchange_player.name + " " + str(exchange_player.price / 1000) + "K"
+	remove_button.text = exchange_player.name + " " + str(exchange_player.value / 1000) + "K"
 	remove_button.pressed.connect(remove_from_list.bind(exchange_player))
 	selected_players_box.add_child(remove_button)
 
@@ -100,7 +100,7 @@ func remove_from_list(p_player: Player) -> void:
 	# before only _player existed
 	for selected_player: Player in selected_players:
 		var remove_button: Button = Button.new()
-		remove_button.text = selected_player.name + " " + str(selected_player.price / 1000) + "K"
+		remove_button.text = selected_player.name + " " + str(selected_player.value / 1000) + "K"
 		remove_button.pressed.connect(remove_from_list.bind(selected_player))
 		selected_players_box.add_child(remove_button)
 
@@ -112,7 +112,7 @@ func _calc_total() -> void:
 	total = amount
 	for selected_player: Player in selected_players:
 		# use other calculated value to estimate importance for new team
-		total += selected_player.price
+		total += selected_player.value
 
 
 func _on_Amount_text_changed(new_text: String) -> void:
@@ -137,7 +137,7 @@ func _on_cancel_pressed() -> void:
 func _on_confirm_pressed() -> void:
 	var transfer: Transfer = Transfer.new()
 	transfer.player = player
-	transfer.price = amount
+	transfer.cost = amount
 	transfer.exchange_players = selected_players
 	transfer.delay_days = (randi() % 5) + 1
 	transfer.state = Transfer.State.OFFER

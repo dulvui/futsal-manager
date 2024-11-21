@@ -28,7 +28,7 @@ const DEBUG: bool = false
 @export var type: Type
 @export var buy_team: Team
 @export var sell_team: Team
-@export var price: int
+@export var cost: int
 @export var contract: Contract
 @export var delay_days: int
 @export var exchange_players: Array[Player]
@@ -43,7 +43,7 @@ func _init(
 	p_buy_team: Team = Team.new(),
 	p_sell_team: Team = Team.new(),
 	p_contract: Contract = Contract.new(),
-	p_price: int = 0,
+	p_cost: int = 0,
 	p_delay_days: int = 0,
 	p_exchange_players: Array[Player] = [],
 	p_date: Dictionary = {},
@@ -55,7 +55,7 @@ func _init(
 	buy_team = p_buy_team
 	sell_team = p_sell_team
 	contract = p_contract
-	price = p_price
+	cost = p_cost
 	delay_days = p_delay_days
 	exchange_players = p_exchange_players
 	date = p_date

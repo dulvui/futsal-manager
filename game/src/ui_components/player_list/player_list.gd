@@ -116,8 +116,8 @@ func _setup_columns() -> void:
 	# general
 	var positions: Callable = func(p: Player) -> String: return Position.Type.keys()[p.position.type]
 	_add_column("GENERAL", Const.POSITION, positions)
-	var prices: Callable = func(p: Player) -> String: return FormatUtil.get_sign(p.price)
-	_add_column("GENERAL", "PRICE", prices)
+	var values: Callable = func(p: Player) -> String: return FormatUtil.get_sign(p.value)
+	_add_column("GENERAL", "VALUE", values)
 	var presitge_stars: Callable = func(p: Player) -> String: return p.get_prestige_stars()
 	_add_column("GENERAL", "PRESTIGE", presitge_stars)
 	var moralities: Callable = func(p: Player) -> String: return Player.Morality.keys()[p.morality]

@@ -323,7 +323,7 @@ func _get_age_factor(age: int) -> int:
 	return RngUtil.rng.randi_range(-1, 5)
 
 
-func _get_price(age: int, prestige: int, position: Position) -> int:
+func _get_value(age: int, prestige: int, position: Position) -> int:
 	var age_factor: int = max(min(abs(age - 30), 20), 1)
 	var pos_factor: int = 0
 	if position.type == Position.Type.G:
@@ -502,7 +502,7 @@ func _create_player(
 
 	var prestige: int = _get_player_prestige(p_prestige)
 
-	player.price = _get_price(date.year - birth_date.year, prestige, player.position)
+	player.value = _get_value(date.year - birth_date.year, prestige, player.position)
 	player.name = _get_person_name(nation)
 	player.surname = _get_person_surname(world, nation)
 	player.team = p_team.name

@@ -56,14 +56,14 @@ func transfer_message(transfer: Transfer) -> void:
 			message.subject = "OFFER: " + transfer.player.get_full_name()
 			message.text = (
 				"You made an "
-				+ str(transfer.price)
+				+ str(transfer.cost)
 				+ " offer for "
 				+ transfer.player.get_full_name()
 			)
 		Transfer.State.SUCCESS:
 			message.subject = "TRANSFER SUCCESS: " + transfer.player.get_full_name()
 			message.text = (
-				"You bought for" + str(transfer.price) + " " + transfer.player.get_full_name()
+				"You bought for" + str(transfer.cost) + " " + transfer.player.get_full_name()
 			)
 		Transfer.State.OFFER_DECLINED:
 			message.subject = "OFFER_DECLINED"

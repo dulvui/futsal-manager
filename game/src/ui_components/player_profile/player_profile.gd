@@ -12,21 +12,21 @@ const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_labe
 
 var player: Player
 
-@onready var info: Control = $Main/Info
-@onready var attributes: Control = $Main/Attributes
-@onready var player_name: Label = $Main/Info/Name
-@onready var pos: Label = $Main/Info/Position
-@onready var alt_pos: Label = $Main/Info/AltPosition
-@onready var age: Label = $Main/Info/Age
-@onready var foot: Label = $Main/Info/Foot
-@onready var nationality: Label = $Main/Info/Nationality
-@onready var team: Label = $Main/Info/Team
-@onready var nr: Label = $Main/Info/Nr
-@onready var attributes_average: Label = $Main/Info/AttributesAverage
-@onready var prestige: Label = $Main/Info/Prestige
-@onready var price: Label = $Main/Info/Price
-@onready var goals: Label = $Main/History/Goals
-@onready var offer_button: Button = $Buttons/Offer
+@onready var info: Control = %Info
+@onready var attributes: Control = %Attributes
+@onready var player_name: Label = %Name
+@onready var pos: Label = %Position
+@onready var alt_pos: Label = %AltPosition
+@onready var age: Label = %Age
+@onready var foot: Label = %Foot
+@onready var nationality: Label = %Nationality
+@onready var team: Label = %Team
+@onready var nr: Label = %Nr
+@onready var attributes_average: Label = %AttributesAverage
+@onready var prestige: Label = %Prestige
+@onready var value: Label = %Value
+@onready var goals: Label = %Goals
+@onready var offer_button: Button = %Offer
 
 
 func _ready() -> void:
@@ -39,7 +39,8 @@ func set_player(p_player: Player) -> void:
 	player = p_player
 
 	# show offer button, only for players that are not in your team
-	offer_button.visible = not Global.team.players.has(player)
+	if Global.team:
+		offer_button.visible = not Global.team.players.has(player)
 
 	player_name.text = player.name + " " + player.surname
 	pos.text = str(Position.Type.keys()[player.position.type])
@@ -60,7 +61,7 @@ func set_player(p_player: Player) -> void:
 	nr.text = str(player.nr)
 	attributes_average.text = str(player.get_overall())
 	prestige.text = str(player.prestige)
-	price.text = FormatUtil.get_sign(player.price)
+	value.text = FormatUtil.get_sign(player.value)
 
 	# attributes
 	var attribute_names: Dictionary = player.attributes.get_all_attributes()
@@ -81,10 +82,10 @@ func set_player(p_player: Player) -> void:
 			label.tooltip_text = tr(key.to_upper())
 			#label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 			attributes.get_node(attribute.capitalize()).add_child(label)
-			var value: ColorLabel = ColorLabelScene.instantiate()
-			attributes.get_node(attribute.capitalize()).add_child(value)
-			value.setup(key)
-			value.set_value(player.get_res_value(["attributes", attribute, key]))
+			var attribute_value: ColorLabel = ColorLabelScene.instantiate()
+			attributes.get_node(attribute.capitalize()).add_child(attribute_value)
+			attribute_value.setup(key)
+			attribute_value.set_value(player.get_res_value(["attributes", attribute, key]))
 
 	#history
 	goals.text = str(player.statistics.goals)
