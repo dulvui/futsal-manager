@@ -31,8 +31,9 @@ size_flags_vertical = 3
 layout_mode = 2
 
 [node name="ActiveButton" type="Button" parent="Competitions"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "SHOW_ACTIVE"
+text = "LEAGUE"
 
 [node name="SeasonsButton" parent="Competitions" instance=ExtResource("3_88ilj")]
 unique_name_in_owner = true

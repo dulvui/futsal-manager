@@ -13,7 +13,8 @@ var season_index: int
 var season_amount: int
 
 @onready var main: VBoxContainer = %Main
-@onready var seasons: SwitchOptionButton = %SeasonsButton
+@onready var active_button: Button = %ActiveButton
+@onready var seasons_button: SwitchOptionButton = %SeasonsButton
 @onready var competitions_tree: CompetitionsTree = %CompetitionsTree
 
 
@@ -24,6 +25,8 @@ func _ready() -> void:
 	# start from last entry
 	season_index = Global.league.tables.size() - 1
 	season_amount = Global.league.tables.size()
+
+	active_button.text = Global.league.name
 
 	_setup_seasons()
 	competition = Global.league
@@ -71,7 +74,7 @@ func _setup_seasons() -> void:
 	var season_years: Array[String] = []
 	for year: int in range(start_year, end_year, -1):
 		season_years.append(str(year))
-	seasons.setup(season_years)
+	seasons_button.setup(season_years)
 
 
 func _on_seasons_button_item_selected(index: int) -> void:
@@ -90,6 +93,6 @@ func _on_active_button_pressed() -> void:
 	competition = Global.league
 	competitions_tree.select(competition.name)
 	season_index = season_amount - 1
-	seasons.option_button.selected = 0
+	seasons_button.option_button.selected = 0
 	_setup()
 

@@ -3,19 +3,21 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualTable
-extends VBoxContainer
+extends GridContainer
 
-@onready var grid: GridContainer = %TableValuesGrid
+var dynamic_labels: Array[Label]
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	Tests.setup_mock_world(true)
+	
+	dynamic_labels = []
 
 
 func setup(table: Table) -> void:
 	# clear grid
-	for child: Node in grid.get_children():
-		child.queue_free()
+	for label: Label in dynamic_labels:
+		label.queue_free()
 	
 	# transform table dictionary to array
 	var table_array: Array[TableValues] = table.to_sorted_array()
@@ -26,49 +28,49 @@ func setup(table: Table) -> void:
 		_style_label(pos_label)
 		pos_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		pos_label.text = str(pos)
+		dynamic_labels.append(pos_label)
 		pos += 1
-		grid.add_child(pos_label)
 
 		var name_label: Label = Label.new()
 		name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		name_label.custom_minimum_size = Vector2(310, 0)
 		name_label.text = team.team_name
-		grid.add_child(name_label)
+		dynamic_labels.append(name_label)
 
 		var games_played_label: Label = Label.new()
 		_style_label(games_played_label)
 		games_played_label.text = str(team.wins + team.draws + team.lost)
-		grid.add_child(games_played_label)
+		dynamic_labels.append(games_played_label)
 
 		var wins_label: Label = Label.new()
 		_style_label(wins_label)
 		wins_label.text = str(team.wins)
-		grid.add_child(wins_label)
+		dynamic_labels.append(wins_label)
 
 		var draws_label: Label = Label.new()
 		_style_label(draws_label)
 		draws_label.text = str(team.draws)
-		grid.add_child(draws_label)
+		dynamic_labels.append(draws_label)
 
 		var lost_label: Label = Label.new()
 		_style_label(lost_label)
 		lost_label.text = str(team.lost)
-		grid.add_child(lost_label)
+		dynamic_labels.append(lost_label)
 
 		var goals_made_label: Label = Label.new()
 		_style_label(goals_made_label)
 		goals_made_label.text = str(team.goals_made)
-		grid.add_child(goals_made_label)
+		dynamic_labels.append(goals_made_label)
 
 		var goals_against_label: Label = Label.new()
 		_style_label(goals_against_label)
 		goals_against_label.text = str(team.goals_against)
-		grid.add_child(goals_against_label)
+		dynamic_labels.append(goals_against_label)
 
 		var points_label: Label = Label.new()
 		_style_label(points_label)
 		points_label.text = str(team.points)
-		grid.add_child(points_label)
+		dynamic_labels.append(points_label)
 
 		var label_settings: LabelSettings = LabelSettings.new()
 		label_settings.font_size = get_theme_default_font_size()
@@ -84,6 +86,9 @@ func setup(table: Table) -> void:
 			goals_made_label.label_settings = label_settings
 			goals_against_label.label_settings = label_settings
 			points_label.label_settings = label_settings
+
+	for label: Label in dynamic_labels:
+		add_child(label)
 
 
 func _style_label(label: Label) -> void:
