@@ -33,6 +33,7 @@ layout_mode = 2
 text = "<"
 
 [node name="Page" type="Label" parent="Calendar/Paginator"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "wewe"
@@ -47,6 +48,7 @@ layout_mode = 2
 text = "TODAY"
 
 [node name="Days" type="GridContainer" parent="Calendar"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 8
@@ -96,6 +98,7 @@ text = "SUNDAY"
 horizontal_alignment = 1
 
 [node name="MatchList" parent="." instance=ExtResource("3_cy82g")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 

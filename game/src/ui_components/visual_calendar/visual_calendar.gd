@@ -13,9 +13,9 @@ var current_month: int
 var current_year: int
 var max_months: int
 
-@onready var match_list: VisualMatchList = $MatchList
-@onready var days: GridContainer = $Calendar/Days
-@onready var page_label: Label = $Calendar/Paginator/Page
+@onready var match_list: VisualMatchList = %MatchList
+@onready var days: GridContainer = %Days
+@onready var page_label: Label = %Page
 
 
 func _ready() -> void:
@@ -58,8 +58,9 @@ func setup_days() -> void:
 		if day == Global.world.calendar.day():
 			calendar_day.select()
 
-	var active_year: int = current_year + ((current_month - 1) / 12)
-	page_label.text = tr(Const.MONTH_STRINGS[(current_month % 12) - 1]) + " " + str(active_year)
+	var active_year: String = str(current_year + (int(current_month - 1) / 12))
+	var active_month: String = tr(Const.MONTH_STRINGS[(current_month % 12) - 1])
+	page_label.text =  active_month + " " + active_year
 
 
 func _on_calendar_day_pressed(day: Day, matchz: Match) -> void:
