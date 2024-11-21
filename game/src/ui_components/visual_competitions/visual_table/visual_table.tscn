@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cp4q64pv8cjq6"]
+[gd_scene load_steps=3 format=3 uid="uid://cp4q64pv8cjq6"]
 
 [ext_resource type="Script" path="res://src/ui_components/visual_competitions/visual_table/visual_table.gd" id="1_kvugy"]
+[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="2_ia1mi"]
 
 [node name="VisualTable" type="GridContainer"]
 anchors_preset = 15
@@ -13,48 +14,57 @@ size_flags_vertical = 3
 columns = 9
 script = ExtResource("1_kvugy")
 
-[node name="Pos" type="Button" parent="."]
+[node name="Pos" type="Label" parent="."]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "#"
+label_settings = ExtResource("2_ia1mi")
 
-[node name="Team" type="Button" parent="."]
+[node name="Team" type="Label" parent="."]
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
 text = "TEAM
 "
+label_settings = ExtResource("2_ia1mi")
 
-[node name="Played" type="Button" parent="."]
+[node name="Played" type="Label" parent="."]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "PLAYED"
+label_settings = ExtResource("2_ia1mi")
 
-[node name="Win" type="Button" parent="."]
+[node name="Win" type="Label" parent="."]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "WIN"
+label_settings = ExtResource("2_ia1mi")
 
-[node name="Draw" type="Button" parent="."]
+[node name="Draw" type="Label" parent="."]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "DRAW"
+label_settings = ExtResource("2_ia1mi")
 
-[node name="Loose" type="Button" parent="."]
+[node name="Loose" type="Label" parent="."]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "LOOSE"
+label_settings = ExtResource("2_ia1mi")
 
-[node name="Goals" type="Button" parent="."]
+[node name="Goals" type="Label" parent="."]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "GOALS"
+label_settings = ExtResource("2_ia1mi")
 
-[node name="GoalsAgainst" type="Button" parent="."]
+[node name="GoalsAgainst" type="Label" parent="."]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "GOALS_AGAINST"
+label_settings = ExtResource("2_ia1mi")
 
-[node name="Points" type="Button" parent="."]
+[node name="Points" type="Label" parent="."]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "POINTS"
+label_settings = ExtResource("2_ia1mi")
