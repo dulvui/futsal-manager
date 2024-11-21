@@ -9,7 +9,35 @@ extends Node
 func test() -> void:
 	print("test: match engine...")
 	test_possess_change()
+	test_deterministic_simulations()
 	print("test: match engine done.")
+
+
+func test_deterministic_simulations() -> void:
+	print("test: deterministic simulation...")
+	var matches: Array[Match] = []
+	
+	const AMOUNT: int = 3
+	
+	var league: League = Tests.create_mock_league()
+
+	# simulate matches
+	for i: int in AMOUNT:
+		var match_engine: MatchEngine = MatchEngine.new()
+		var matchz: Match = Match.new()
+		# use always same match id, since match seed is match is
+		matchz.id = 1
+		matches.append(matchz)
+		matchz.setup(league.teams[0], league.teams[1], league.id, league.name)
+		match_engine.simulate(matchz)
+	
+	# check results
+	for i: int in AMOUNT:
+		assert(matches[i].home_goals == matches[i - 1].home_goals)
+		assert(matches[i].away_goals == matches[i - 1].away_goals)
+	
+
+	print("test: deterministic simulation done.")
 
 
 func test_possess_change() -> void:

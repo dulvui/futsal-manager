@@ -17,10 +17,10 @@ extends Node
 func _ready() -> void:
 	print("Start test suite")
 	
+	test_match_engine.test()
 	test_match_combination.test()
 	test_calendar.test()
 	test_generator.test()
-	test_match_engine.test()
 	test_benchmark.test()
 	test_res_util.test()
 
