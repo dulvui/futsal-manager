@@ -19,25 +19,25 @@ script = ExtResource("1_1ma02")
 
 [node name="English" type="Button" parent="."]
 layout_mode = 2
-text = "ENGLISH"
+text = "English"
 
 [node name="Portuguese" type="Button" parent="."]
 visible = false
 layout_mode = 2
-text = "PORTUGUES"
+text = "Portugues"
 
 [node name="Italian" type="Button" parent="."]
 layout_mode = 2
-text = "ITALIANO"
+text = "Italiano"
 
 [node name="Spanish" type="Button" parent="."]
 visible = false
 layout_mode = 2
-text = "ESPAÑOL"
+text = "Español"
 
 [node name="German" type="Button" parent="."]
 layout_mode = 2
-text = "DEUTSCH"
+text = "Deutsch"
 
 [connection signal="pressed" from="English" to="." method="_on_english_pressed"]
 [connection signal="pressed" from="Portuguese" to="." method="_on_portuguese_pressed"]

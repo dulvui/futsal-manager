@@ -29,7 +29,7 @@ NEXT_MATCH,Next match,Nächstes Spiel,Prossima partita
 WELCOME,Welcome,Wilkommen,Benvenuto
 MALE,Male,Männlich,Maschile
 FEMALE,Female,Weiblich,Femminile
-MIXED,Female,Gemischt,Misto
+MIXED,Mixed,Gemischt,Misto
 ITALY,Italy,Italien,Italia
 SPAIN,Spain,Spanien,Spagna
 ROMANIA,Romania,Rumänien,Romania
@@ -50,6 +50,7 @@ GAME_DATE,Date in game,Datum im Spiel,Data nel gioco
 STAR,Start,Stern,Stella
 SUBJECT,Subject,Betreff,Oggetto
 FROM,From,Von,Da
+TO,To,An,A
 UNREAD,Unread,Ungelesen,Da leggere
 STARRED,Starred,Favoriten,Favoriti
 SEARCH,Search,Suche,Cerca
@@ -133,3 +134,24 @@ ALL_TEAMS,All teams,Alle Teams,Tutte squadre
 LOADING_GAME,Loading your game…,Dein Spielstand wird geladen…,Caricando la tua partita...
 SAVING_GAME,Saving your game…,Dein Spielstand wird gespeichert…,Salvando la tua partita...
 EXIT,Exit,Beenden,Chiudi
+RANDOM,Random,Zufällig,Casuale
+DEFAULT,Default,Standard,Predefinito
+GENERATING_PLAYERS,Generating players…,Spieler erseugen…,Generando giocatori…
+SELECT,Select,Auswählen,Seleziona
+BUDGET,Budget,Budget,Bilancio
+SALARY_BUDGET,Salary budget,Gehaltsbudget,Budget salariale
+STADIUM,Stadium,Stadium,Stadio
+PRESTIGE,Prestige,Prestige,Prestigio
+POSITION,Position,Position,Posizione
+VALUE,Value,Wert,Valore
+SCALE,Scale,Skala,Scala
+GENERAL_SETTINGS,General,Allgemein,Generale
+INPUT_SETTINGS,Input,Eingabe,Tasti
+THEMES,Themes,Themen,Temi
+FONT_COLOR,Font color,Schriftfarbe,Colore scrittura
+BUTTONS_COLOR,Buttons color,Knopffarbe,Colore tasti
+BACKGROUND_COLOR,Background color,Hintergrundfarbe,Colore sfondo
+VIM_MODE,Vim mode,Vim-Modus,Modalidità Vim 
+CHANGE,Change,Ändern,Cambia
+PERSONS,Persons,Personen,Persone
+YEAR,Year,Jahr,Anno
