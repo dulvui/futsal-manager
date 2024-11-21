@@ -120,7 +120,7 @@ func half_time() -> void:
 
 func _on_match_simulator_update_time() -> void:
 	stats.update_stats(home_stats, away_stats)
-	time_label.text = "%02d:%02d" % [19 - int(match_simulator.time) / 60, 59 - int(match_simulator.time) % 60]
+	time_label.text = "%02d:%02d" % [int(match_simulator.time) / 60, int(match_simulator.time) % 60]
 
 	time_bar.value = match_simulator.time
 	possess_bar.value = home_stats.possession
@@ -207,8 +207,8 @@ func _on_pause_button_pressed() -> void:
 		last_active_view.show()
 
 
-func _on_skip_button_pressed() -> void:
-	match_end()
+func _on_simulate_button_pressed() -> void:
+	match_simulator.simulate_to_fulltime()
 
 
 func _on_start_timer_timeout() -> void:
@@ -241,4 +241,5 @@ func _on_players_bar_change_request() -> void:
 	formation.set_players()
 	match_simulator.match_engine.home_team.change_players_request()
 	match_simulator.match_engine.away_team.change_players_request()
+
 

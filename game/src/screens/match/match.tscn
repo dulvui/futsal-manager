@@ -54,62 +54,75 @@ vertical = true
 layout_mode = 2
 alignment = 1
 
-[node name="FieldButton" type="Button" parent="Main/Content/Buttons"]
+[node name="Left" type="HBoxContainer" parent="Main/Content/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FieldButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "FIELD"
 
-[node name="CommentaryButton" type="Button" parent="Main/Content/Buttons"]
+[node name="CommentaryButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "COMMENTARY"
 
-[node name="StatsButton" type="Button" parent="Main/Content/Buttons"]
+[node name="StatsButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "STATS"
 
-[node name="EventsButton" type="Button" parent="Main/Content/Buttons"]
+[node name="EventsButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "EVENTS"
 
-[node name="FormationButton" type="Button" parent="Main/Content/Buttons"]
+[node name="FormationButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "FORMATION"
 
-[node name="PauseButton" type="Button" parent="Main/Content/Buttons"]
+[node name="Center" type="HBoxContainer" parent="Main/Content/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="PauseButton" type="Button" parent="Main/Content/Buttons/Center"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "PAUSE"
 
-[node name="SkipButton" type="Button" parent="Main/Content/Buttons"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "SKIP"
-
-[node name="Speed" type="HBoxContainer" parent="Main/Content/Buttons"]
+[node name="Speed" type="HBoxContainer" parent="Main/Content/Buttons/Center"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="SlowerButton" type="Button" parent="Main/Content/Buttons/Speed"]
+[node name="SlowerButton" type="Button" parent="Main/Content/Buttons/Center/Speed"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "-1"
 
-[node name="SpeedFactor" type="Label" parent="Main/Content/Buttons/Speed"]
+[node name="SpeedFactor" type="Label" parent="Main/Content/Buttons/Center/Speed"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "X2"
 
-[node name="FasterButton" type="Button" parent="Main/Content/Buttons/Speed"]
+[node name="FasterButton" type="Button" parent="Main/Content/Buttons/Center/Speed"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "+1"
 
-[node name="DashboardButton" type="Button" parent="Main/Content/Buttons"]
+[node name="Right" type="HBoxContainer" parent="Main/Content/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="SimulateButton" type="Button" parent="Main/Content/Buttons/Right"]
+layout_mode = 2
+text = "SIMULATE"
+
+[node name="DashboardButton" type="Button" parent="Main/Content/Buttons/Right"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -267,16 +280,16 @@ autostart = true
 [connection signal="half_time" from="MatchSimulator" to="." method="_on_match_simulator_half_time"]
 [connection signal="match_end" from="MatchSimulator" to="." method="_on_match_simulator_match_end"]
 [connection signal="update_time" from="MatchSimulator" to="." method="_on_match_simulator_update_time"]
-[connection signal="pressed" from="Main/Content/Buttons/FieldButton" to="." method="_on_field_button_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/CommentaryButton" to="." method="_on_commentary_button_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/StatsButton" to="." method="_on_stats_button_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/EventsButton" to="." method="_on_events_button_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/FormationButton" to="." method="_on_formation_button_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/PauseButton" to="." method="_on_pause_button_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/SkipButton" to="." method="_on_skip_button_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Speed/SlowerButton" to="." method="_on_slower_button_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/Speed/FasterButton" to="." method="_on_faster_button_pressed"]
-[connection signal="pressed" from="Main/Content/Buttons/DashboardButton" to="." method="_on_dashboard_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Left/FieldButton" to="." method="_on_field_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Left/CommentaryButton" to="." method="_on_commentary_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Left/StatsButton" to="." method="_on_stats_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Left/EventsButton" to="." method="_on_events_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Left/FormationButton" to="." method="_on_formation_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Center/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Center/Speed/SlowerButton" to="." method="_on_slower_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Center/Speed/FasterButton" to="." method="_on_faster_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Right/SimulateButton" to="." method="_on_simulate_button_pressed"]
+[connection signal="pressed" from="Main/Content/Buttons/Right/DashboardButton" to="." method="_on_dashboard_button_pressed"]
 [connection signal="change_request" from="Main/Content/CentralContainer/MainBar/Formation" to="." method="_on_formation_change_request"]
 [connection signal="change_request" from="Main/Content/CentralContainer/BottomBar/PlayersBar" to="." method="_on_players_bar_change_request"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

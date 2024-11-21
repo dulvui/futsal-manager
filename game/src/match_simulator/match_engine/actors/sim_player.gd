@@ -101,7 +101,6 @@ func player_update(team_has_ball: bool) -> void:
 						ball.stop()
 				else:
 					state = State.TACKLE
-					breakpoint
 			else:
 				state = State.MOVE
 		State.RECEIVE_PASS:
