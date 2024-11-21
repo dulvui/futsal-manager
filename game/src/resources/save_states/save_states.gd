@@ -90,6 +90,9 @@ func scan() -> void:
 		dir.list_dir_begin()
 		var file: String = dir.get_next()
 		if dir.current_is_dir():
-			print("new state id found %s"%file)
-			id_list.append(file)
+			if load_state(file) != null:
+				print("new state id found %s"%file)
+				id_list.append(file)
+			else:
+				print("corrupt save state found")
 
