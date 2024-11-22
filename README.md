@@ -10,6 +10,8 @@ A futsal manager game created with the Godot Engine.
 
 Join [Matrix](https://matrix.to/#/%23s9i.org:matrix.org) or [Discord](https://discord.gg/a5DSHZKkA8) if you have questions and want to stay updated.
 
+Available on [Codeberg](https://codeberg.org/dulvui/99managers-futsal-edition) and [Github](https://github.com/dulvui/99managers-futsal-edition).
+
 # Alpha version
 You can find the first versions of the game on [Github](https://github.com/dulvui/futsal-manager/releases).
 # FAQ
