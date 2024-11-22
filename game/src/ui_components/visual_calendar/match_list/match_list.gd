@@ -41,11 +41,11 @@ func setup(day: Day, competition: Competition = Global.league) -> void:
 		var leagues: Array[League] = Global.world.get_all_leagues()
 		# add  leagues with same nation as active first
 		for league: League in leagues:
-			if league.id != Global.league.id and league.nation_name == active_league.nation_name:
+			if league.id != active_league.id and league.nation_name == active_league.nation_name:
 				_add_matches(day, league)
 		# add other nations
 		for league: League in leagues:
-			if league.nation_name != active_league.nation_name:
+			if league.id != active_league.id and league.nation_name != active_league.nation_name:
 				_add_matches(day, league)
 
 		# add cups
@@ -54,11 +54,11 @@ func setup(day: Day, competition: Competition = Global.league) -> void:
 	else:
 		# add cups
 		for cup: Cup in Global.world.get_all_cups():
-			_add_matches(day, cup)
+			if competition.id != cup.id:
+				_add_matches(day, cup)
 		# add other leagues matches
 		for league: League in Global.world.get_all_leagues():
-			if league.id != Global.league.id:
-				_add_matches(day, league)
+			_add_matches(day, league)
 	
 	# show no match notice
 	if all_matches.is_empty():
