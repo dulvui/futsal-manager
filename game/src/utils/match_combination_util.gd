@@ -17,6 +17,7 @@ func initialize_matches(world: World = Global.world) -> void:
 
 		# third, initialize continental cups
 		_initialize_club_continental_cup(continent)
+		_initialize_nations_continental_cup(continent)
 
 	# last, initialize world cup
 	_initialize_world_cup(world)
@@ -156,6 +157,23 @@ func _initialize_club_continental_cup(p_continent: Continent) -> void:
 	# for now, only single leg
 	var matches: Array[Array] = p_continent.cup_clubs.get_group_matches()
 	add_matches_to_calendar(p_continent.cup_clubs, matches)
+
+
+func _initialize_nations_continental_cup(p_continent: Continent) -> void:
+	# setup cup
+	p_continent.cup_nations.name =  p_continent.name + " " + tr("NATIONS_CUP")
+	var teams: Array[Team]
+
+	# get qualified teams from every nation
+	for nation: Nation in p_continent.nations:
+		teams.append(nation.team)
+
+	p_continent.cup_nations.setup(teams)
+
+	# create matches for first round group a
+	# for now, only single leg
+	var matches: Array[Array] = p_continent.cup_nations.get_group_matches()
+	add_matches_to_calendar(p_continent.cup_nations, matches)
 
 
 func _initialize_world_cup(world: World) -> void:

@@ -21,6 +21,3 @@ func _init(
 	nations = p_nations
 	cup_clubs = p_cup_clubs
 	cup_nations = p_cup_nations
-
-	cup_clubs.name = tr("CLUB_CUP") + " " + name
-	cup_nations.name = tr("NATIONS_CUP") + " " + name
