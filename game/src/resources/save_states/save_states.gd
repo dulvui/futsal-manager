@@ -58,7 +58,6 @@ func get_active_path(relative_path: String = "") -> String:
 func make_temp_active() -> void:
 	# assign metadata
 	temp_state.meta_is_temp = false
-	temp_state.initialize()
 
 	# make active
 	id_list.append(temp_state.id)

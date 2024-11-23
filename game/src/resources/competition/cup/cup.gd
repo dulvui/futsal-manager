@@ -10,15 +10,13 @@ enum Stage {
 	KNOCKOUT,
 }
 
-const GROUPS: int = 4
-const TEAMS_PASS_TO_KNOCKOUT: int = 2
-
 @export var groups: Array[Group]
 @export var knockout: Knockout
 # includes also historical winners
 # winners[-1] is latest winner
 @export var winners: Array[Team]
 @export var stage: Stage
+@export var teams_pass_to_knockout: int
 
 
 func _init(
@@ -37,13 +35,24 @@ func setup(p_teams: Array[Team]) -> void:
 	# sort teams by presitge
 	p_teams.sort_custom(func(a: Team, b: Team) -> bool: return a.get_prestige() > b.get_prestige())
 
+	# define groups size
+	var teams_amount: int = p_teams.size()
+	var group_amount: int = max(teams_amount / 4, 1)
+	# if only one group possible, go direclty to knockout
+	if group_amount == 1:
+		print("setting up direclty knockout")
+		setup_knockout(p_teams)
+		return
+
+	teams_pass_to_knockout = teams_amount / group_amount / 2
+
 	# set up groups
-	for i: int in GROUPS:
+	for i: int in group_amount:
 		var group: Group = Group.new()
 		groups.append(group)
 	# split teams in groups, according to prestige
 	for i: int in p_teams.size():
-		groups[i % GROUPS].add_team(p_teams[i])
+		groups[i % group_amount].add_team(p_teams[i])
 
 
 func setup_knockout(
@@ -59,7 +68,7 @@ func setup_knockout(
 			group.sort_teams_by_table_pos()
 		# add winning teams to knockout stage
 		for group: Group in groups:
-			teams.append_array(group.teams.slice(0, TEAMS_PASS_TO_KNOCKOUT))
+			teams.append_array(group.teams.slice(0, teams_pass_to_knockout))
 
 	knockout.setup(teams, legs_semi_finals, legs_final)
 
