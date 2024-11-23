@@ -88,14 +88,20 @@ func next_stage() -> void:
 		if over_counter == groups.size():
 			# group stage is over
 			setup_knockout()
-			MatchCombinationUtil.add_matches_to_calendar(self, get_knockout_matches())
+			MatchCombinationUtil.add_matches_to_calendar(self, get_matches())
 	else:
 		if knockout.prepare_next_round():
 			# add next round matches calendar
-			MatchCombinationUtil.add_matches_to_calendar(self, get_knockout_matches())
+			MatchCombinationUtil.add_matches_to_calendar(self, get_matches())
 
 
-func get_group_matches() -> Array[Array]:
+func get_matches() -> Array[Array]:
+	if stage == Stage.GROUP:
+		return _get_group_matches()
+	return _get_knockout_matches()
+
+
+func _get_group_matches() -> Array[Array]:
 	var matches: Array[Array] = []
 
 	for group: Group in groups:
@@ -104,7 +110,7 @@ func get_group_matches() -> Array[Array]:
 	return matches
 
 
-func get_knockout_matches() -> Array[Array]:
+func _get_knockout_matches() -> Array[Array]:
 	return knockout.get_matches(self)
 
 

@@ -137,7 +137,7 @@ func _initialize_club_national_cup(p_nation: Nation) -> void:
 	p_nation.cup.setup_knockout(all_teams_by_nation)
 
 	# create matches for first round group a
-	var matches: Array[Array] = p_nation.cup.get_knockout_matches()
+	var matches: Array[Array] = p_nation.cup.get_matches()
 	# add to calendar
 	add_matches_to_calendar(p_nation.cup, matches)
 
@@ -155,7 +155,7 @@ func _initialize_club_continental_cup(p_continent: Continent) -> void:
 
 	# create matches for first round group a
 	# for now, only single leg
-	var matches: Array[Array] = p_continent.cup_clubs.get_group_matches()
+	var matches: Array[Array] = p_continent.cup_clubs.get_matches()
 	add_matches_to_calendar(p_continent.cup_clubs, matches)
 
 
@@ -172,7 +172,7 @@ func _initialize_nations_continental_cup(p_continent: Continent) -> void:
 
 	# create matches for first round group a
 	# for now, only single leg
-	var matches: Array[Array] = p_continent.cup_nations.get_group_matches()
+	var matches: Array[Array] = p_continent.cup_nations.get_matches()
 	add_matches_to_calendar(p_continent.cup_nations, matches)
 
 
@@ -188,7 +188,7 @@ func _initialize_world_cup(world: World) -> void:
 	world.world_cup.setup(teams)
 
 	# create matches for first round group a
-	var matches: Array[Array] = world.world_cup.get_group_matches()
+	var matches: Array[Array] = world.world_cup.get_matches()
 	# add to calendar
 	add_matches_to_calendar(world.world_cup, matches)
 
