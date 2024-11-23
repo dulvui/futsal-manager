@@ -40,7 +40,6 @@ func setup(p_teams: Array[Team]) -> void:
 	var group_amount: int = max(teams_amount / 4, 1)
 	# if only one group possible, go direclty to knockout
 	if group_amount == 1:
-		print("setting up direclty knockout")
 		setup_knockout(p_teams)
 		return
 
