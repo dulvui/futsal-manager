@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualDay
-extends Control
+extends MarginContainer
 
 signal show_match_list
 
@@ -59,6 +59,9 @@ func setup(p_date: Day = Day.new(), matchz: Match = null) -> void:
 	# check if market is active
 	if date.market:
 		market_label.text = tr("TRANSFERMARKET")
+	else:
+		market_label.text = ""
+
 
 
 func unselect() -> void:
