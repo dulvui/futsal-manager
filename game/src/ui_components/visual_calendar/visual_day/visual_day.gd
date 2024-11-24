@@ -13,11 +13,11 @@ const AWAY_MATCH_DAY_COLOR: Color = Color.FIREBRICK
 var date: Day
 
 @onready var button: Button = %Button
-@onready var match_label: Label = %Match
 @onready var month_day_label: Label = %MonthDay
 @onready var market_label: Label = %Market
-@onready var competition: HBoxContainer = %Competition
+@onready var competition: VBoxContainer = %Competition
 @onready var competition_name: Label = %CompetitionName
+@onready var team_name_label: Label = %TeamName
 @onready var match_color: ColorRect = %MatchColor
 @onready var day_color: ColorRect = $DayColor
 
@@ -27,26 +27,24 @@ func setup(p_date: Day = Day.new(), matchz: Match = null) -> void:
 	# activate button
 	button.show()
 
-	competition.visible = false
-
 	month_day_label.text = str(date.day)
-	var team_name: String
+
 	if matchz != null:
 		if Global.team.name == matchz.home.name:
-			team_name = matchz.away.name
-			match_color.show()
+			competition_name.text = matchz.competition_name
+			team_name_label.text = matchz.away.name
 			match_color.color = HOME_MATCH_DAY_COLOR
-			competition.visible = true
-			competition_name.text = matchz.competition_name
-		elif Global.team.name == matchz.away.name:
-			team_name = matchz.home.name
 			match_color.show()
-			match_color.color = AWAY_MATCH_DAY_COLOR
-			competition.visible = true
+			competition.show()
+		elif Global.team.name == matchz.away.name:
 			competition_name.text = matchz.competition_name
-		match_label.text = team_name
+			team_name_label.text = matchz.home.name
+			match_color.color = AWAY_MATCH_DAY_COLOR
+			competition.show()
+			match_color.show()
 	else:
-		match_label.hide()
+		competition.hide()
+		match_color.hide()
 
 	if date.is_same_day(Global.world.calendar.day()):
 		if day_color.color != HOME_MATCH_DAY_COLOR:

@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1dale6j23rs1"]
+[gd_scene load_steps=3 format=3 uid="uid://b1dale6j23rs1"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1_njb33"]
 [ext_resource type="Script" path="res://src/ui_components/visual_calendar/visual_day/visual_day.gd" id="2_ub0fh"]
-[ext_resource type="Texture2D" uid="uid://b4igo2k8ytmf7" path="res://assets/ball.svg" id="3_kqdli"]
 
 [node name="VisualDay" type="MarginContainer" groups=["visual-day"]]
 custom_minimum_size = Vector2(60, 60)
@@ -73,24 +72,21 @@ text = "31"
 horizontal_alignment = 2
 text_overrun_behavior = 1
 
-[node name="Competition" type="HBoxContainer" parent="MarginContainer/Button/MarginContainer/VBoxContainer"]
+[node name="Competition" type="VBoxContainer" parent="MarginContainer/Button/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="Ball" type="TextureRect" parent="MarginContainer/Button/MarginContainer/VBoxContainer/Competition"]
-layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("3_kqdli")
-expand_mode = 3
-stretch_mode = 5
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
 
 [node name="CompetitionName" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/Competition"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+text = "SERIE A"
 text_overrun_behavior = 3
 
-[node name="Match" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer"]
+[node name="TeamName" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/Competition"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "ROMA"
@@ -98,7 +94,6 @@ text_overrun_behavior = 3
 
 [node name="MatchColor" type="ColorRect" parent="MarginContainer/Button/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
