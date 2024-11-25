@@ -47,10 +47,11 @@ TABLE_PLACEMENT,Table placement,Tabellenstand,Posto in classifica
 LAST_SAVE,Last save,Letzer Speicherstand,Ultimo salvataggio
 CREATED,Created,Erstellt,Creato
 GAME_DATE,Date in game,Datum im Spiel,Data nel gioco
-STAR,Start,Stern,Stella
+STAR,Star,Stern,Stella
 SUBJECT,Subject,Betreff,Oggetto
 FROM,From,Von,Da
 TO,To,An,A
+DATE,Date,Datum,Data
 UNREAD,Unread,Ungelesen,Da leggere
 STARRED,Starred,Favoriten,Favoriti
 SEARCH,Search,Suche,Cerca

@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" path="res://src/ui_components/email/list/message_list.gd" id="1_01j56"]
 
-[node name="MessageList" type="Control"]
+[node name="MessageList" type="VBoxContainer"]
 custom_minimum_size = Vector2(600, 0)
-layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,13 +13,35 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_01j56")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Subject" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SUBJECT"
+horizontal_alignment = 1
+
+[node name="From" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FROM"
+horizontal_alignment = 1
+
+[node name="Date" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DATE"
+horizontal_alignment = 1
+
+[node name="Star" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "STAR"
+horizontal_alignment = 1
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+size_flags_vertical = 3
 follow_focus = true
 
 [node name="List" type="VBoxContainer" parent="ScrollContainer"]

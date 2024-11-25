@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name VisualEmailMessageList
-extends Control
+extends VBoxContainer
 
 signal show_message(message: EmailMessage)
 
@@ -11,11 +11,17 @@ const MessageRowScene: PackedScene = preload(
 	"res://src/ui_components/email/list/message_row/message_row.tscn"
 )
 
-var search_text: String = ""
-var only_starred: bool = false
-var only_unread: bool = false
+var search_text: String
+var only_starred: bool
+var only_unread: bool
 
 @onready var list: VBoxContainer = $ScrollContainer/List
+
+
+func _ready() -> void:
+	search_text = ""
+	only_starred = false
+	only_unread = false
 
 
 func update() -> void:
