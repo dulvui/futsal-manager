@@ -10,7 +10,7 @@ anchor_bottom = 0.129
 offset_right = -0.480042
 offset_bottom = -0.320007
 size_flags_horizontal = 3
-theme_override_constants/separation = 15
+theme_override_constants/separation = 20
 script = ExtResource("1_yugvl")
 
 [node name="Info" type="HBoxContainer" parent="."]

@@ -61,22 +61,22 @@ theme_override_constants/h_separation = 30
 columns = 2
 
 [node name="PlayerNamesLabel" type="Label" parent="VBoxContainer/Settings/Container"]
-custom_minimum_size = Vector2(240, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "PLAYER_NAMES"
 
 [node name="PlayerNames" type="OptionButton" parent="VBoxContainer/Settings/Container"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="StartYearLabel" type="Label" parent="VBoxContainer/Settings/Container"]
-custom_minimum_size = Vector2(240, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "START_YEAR"
 
 [node name="StartYear" type="SpinBox" parent="VBoxContainer/Settings/Container"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 min_value = 2000.0
 max_value = 3000.0
 value = 2024.0
@@ -100,35 +100,45 @@ autowrap_mode = 2
 
 [node name="GridContainer" type="HBoxContainer" parent="VBoxContainer/Seed"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="GenearateSeedButton" type="Button" parent="VBoxContainer/Seed/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_horizontal = 4
+size_flags_vertical = 3
 text = "RANDOM"
-
-[node name="DefaultSeedButton" type="Button" parent="VBoxContainer/Seed/GridContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "DEFAULT"
 
 [node name="GeneratedSeedLineEdit" type="LineEdit" parent="VBoxContainer/Seed/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="DefaultSeedButton" type="Button" parent="VBoxContainer/Seed/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "DEFAULT"
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
 alignment = 1
 
 [node name="Back" type="Button" parent="VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "CANCEL"
 metadata/_edit_use_anchors_ = true
 
 [node name="Continue" type="Button" parent="VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "CONTINUE"
 metadata/_edit_use_anchors_ = true
 
@@ -137,8 +147,8 @@ visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/Seed/GridContainer/GenearateSeedButton" to="." method="_on_genearate_seed_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Seed/GridContainer/DefaultSeedButton" to="." method="_on_default_seed_button_pressed"]
 [connection signal="text_changed" from="VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit" to="." method="_on_generated_seed_line_edit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/Seed/GridContainer/DefaultSeedButton" to="." method="_on_default_seed_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Continue" to="." method="_on_continue_pressed"]
 [connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]

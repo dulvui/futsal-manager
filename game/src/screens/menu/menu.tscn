@@ -1,9 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4woicggddkls"]
+[gd_scene load_steps=6 format=3 uid="uid://b4woicggddkls"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dj3ts0dee4m6" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn" id="4_5irse"]
 [ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="4_qla42"]
+
+[sub_resource type="GDScript" id="GDScript_3cscb"]
+script/source = "# SPDX-FileCopyrightText: 2023 Simon Dalvai <info@simondalvai.org>
+
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+class_name NormalButton
+extends Button
+
+
+func _ready() -> void:
+	theme = ThemeUtil.get_active_theme()
+
+func _init() -> void:
+	set(\"custom_min_size\", Vector2(200, 0))
+	set(\"size_flags_horizontal\", SIZE_SHRINK_CENTER)
+
+
+"
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -65,6 +84,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CONTINUE"
+script = SubResource("GDScript_3cscb")
 
 [node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

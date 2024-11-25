@@ -65,14 +65,19 @@ layout_mode = 2
 
 [node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
 alignment = 1
 
 [node name="Back" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "BACK"
 
 [node name="SelectTeam" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "SELECT"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Back" to="." method="_on_back_pressed"]

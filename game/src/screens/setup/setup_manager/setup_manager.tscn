@@ -83,15 +83,20 @@ layout_mode = 2
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
 alignment = 1
 
 [node name="Back" type="Button" parent="VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "CANCEL"
 metadata/_edit_use_anchors_ = true
 
 [node name="Continue" type="Button" parent="VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "CONTINUE"
 metadata/_edit_use_anchors_ = true
 
