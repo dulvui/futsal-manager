@@ -86,17 +86,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "SETTINGS"
 
-[node name="Exit" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/Exit"]
-layout_mode = 2
-
-[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/Exit"]
-layout_mode = 2
 text = "EXIT"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
@@ -135,5 +129,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]

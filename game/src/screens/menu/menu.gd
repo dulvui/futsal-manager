@@ -10,7 +10,7 @@ extends Control
 @onready var load_game: Button = %LoadGame
 @onready var continue_game: Button = %ContinueGame
 @onready var new_game: Button = %NewGame
-@onready var exit: VBoxContainer = %Exit
+@onready var exit: Button = %ExitButton
 @onready var version: Label = $Version
 
 
