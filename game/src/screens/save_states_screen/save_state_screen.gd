@@ -9,10 +9,10 @@ const SaveStateEntryScene: PackedScene = preload(
 	"res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn"
 )
 
-@onready var entry_list: VBoxContainer = $VBoxContainer/ScrollContainer/EntryList
+@onready var entry_list: VBoxContainer = %EntryList
 @onready var loading_screen: LoadingScreen = $LoadingScreen
-@onready
-var active_save_state_entry: SaveStateEntry = $VBoxContainer/ScrollContainer/EntryList/ActiveSaveState
+@onready var active_save_state_entry: SaveStateEntry = %ActiveSaveState
+@onready var separator: HSeparator = %HSeparator
 
 
 func _ready() -> void:
@@ -22,6 +22,8 @@ func _ready() -> void:
 	var active_save_state: SaveState = Global.save_states.get_active()
 	active_save_state_entry.setup(active_save_state)
 	active_save_state_entry.load_game.connect(func() -> void: loading_screen.show())
+
+	separator.visible = Global.save_states.id_list.size() > 1
 
 	for save_state_id: String in Global.save_states.id_list:
 		if save_state_id != active_save_state.id:

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name SaveStateEntry
-extends HBoxContainer
+extends VBoxContainer
 
 signal load_game
 
@@ -11,15 +11,15 @@ signal load_game
 
 var save_state: SaveState
 
-@onready var delete_dialog: ConfirmationDialog = $DeleteDialog
-@onready var team: Label = $Details/Team
-@onready var create_date: Label = $Dates/CreateDate
-@onready var manager: Label = $Details/Manager
-@onready var placement: Label = $Details/Placement
-@onready var game_date: Label = $Dates/GameDate
-@onready var last_save_date: Label = $Dates/LastSaveDate
-@onready var delete_button: Button = $Delete
-@onready var load_button: Button = $Load
+@onready var delete_dialog: ConfirmationDialog = %DeleteDialog
+@onready var team: Label = %Team
+@onready var create_date: Label = %CreateDate
+@onready var manager: Label = %Manager
+@onready var placement: Label = %Placement
+@onready var game_date: Label = %GameDate
+@onready var last_save_date: Label = %LastSaveDate
+@onready var delete_button: Button = %Delete
+@onready var load_button: Button = %Load
 
 
 func setup(p_save_state: SaveState) -> void:

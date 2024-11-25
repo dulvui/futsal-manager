@@ -1,90 +1,129 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj3ts0dee4m6"]
+[gd_scene load_steps=3 format=3 uid="uid://dj3ts0dee4m6"]
 
 [ext_resource type="Script" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.gd" id="1_yugvl"]
+[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="2_mg3bp"]
 
-[node name="SaveState" type="HBoxContainer"]
+[node name="SaveState" type="VBoxContainer"]
 anchors_preset = -1
-anchor_right = 0.391
-anchor_bottom = 0.091
-offset_right = -750.72
-offset_bottom = -98.28
+anchor_right = 0.394
+anchor_bottom = 0.129
+offset_right = -0.480042
+offset_bottom = -0.320007
 size_flags_horizontal = 3
+theme_override_constants/separation = 15
 script = ExtResource("1_yugvl")
 
-[node name="Delete" type="Button" parent="."]
+[node name="Info" type="HBoxContainer" parent="."]
 layout_mode = 2
-text = "DELETE"
+alignment = 1
 
-[node name="Details" type="GridContainer" parent="."]
+[node name="Details" type="GridContainer" parent="Info"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/h_separation = 20
+size_flags_horizontal = 7
+theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="TeamLabel" type="Label" parent="Details"]
+[node name="TeamLabel" type="Label" parent="Info/Details"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "TEAM"
 
-[node name="Team" type="Label" parent="Details"]
-layout_mode = 2
-text = "Bolzano"
-
-[node name="ManagerLabel" type="Label" parent="Details"]
-layout_mode = 2
-text = "MANAGER"
-
-[node name="Manager" type="Label" parent="Details"]
-layout_mode = 2
-text = "Simon Dalvai"
-
-[node name="PlacementLabel" type="Label" parent="Details"]
-layout_mode = 2
-text = "TABLE_PLACEMENT"
-
-[node name="Placement" type="Label" parent="Details"]
-layout_mode = 2
-text = "Serie A - 3."
-
-[node name="VSeparator" type="VSeparator" parent="."]
-layout_mode = 2
-
-[node name="Dates" type="GridContainer" parent="."]
+[node name="Team" type="Label" parent="Info/Details"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/h_separation = 20
+text = "Bolzano"
+label_settings = ExtResource("2_mg3bp")
+
+[node name="ManagerLabel" type="Label" parent="Info/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MANAGER"
+
+[node name="Manager" type="Label" parent="Info/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Simon Dalvai"
+label_settings = ExtResource("2_mg3bp")
+
+[node name="PlacementLabel" type="Label" parent="Info/Details"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TABLE_PLACEMENT"
+
+[node name="Placement" type="Label" parent="Info/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Serie A - 3."
+label_settings = ExtResource("2_mg3bp")
+
+[node name="Dates" type="GridContainer" parent="Info"]
+layout_mode = 2
+size_flags_horizontal = 7
+theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="GameDateLabel" type="Label" parent="Dates"]
+[node name="GameDateLabel" type="Label" parent="Info/Dates"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "GAME_DATE"
 
-[node name="GameDate" type="Label" parent="Dates"]
+[node name="GameDate" type="Label" parent="Info/Dates"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "12.08.2025"
+label_settings = ExtResource("2_mg3bp")
 
-[node name="LastSaveDateLabel" type="Label" parent="Dates"]
+[node name="LastSaveDateLabel" type="Label" parent="Info/Dates"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "LAST_SAVE"
 
-[node name="LastSaveDate" type="Label" parent="Dates"]
+[node name="LastSaveDate" type="Label" parent="Info/Dates"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "03.04.2024"
+label_settings = ExtResource("2_mg3bp")
 
-[node name="CreateDateLabel" type="Label" parent="Dates"]
+[node name="CreateDateLabel" type="Label" parent="Info/Dates"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "CREATED"
 
-[node name="CreateDate" type="Label" parent="Dates"]
+[node name="CreateDate" type="Label" parent="Info/Dates"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "01.01.2024"
+label_settings = ExtResource("2_mg3bp")
 
-[node name="Load" type="Button" parent="."]
+[node name="Buttons" type="HBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Delete" type="Button" parent="Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "DELETE"
+
+[node name="Load" type="Button" parent="Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 text = "LOAD_GAME"
 
 [node name="DeleteDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
 title = "CONFIRM"
 initial_position = 1
 size = Vector2i(400, 300)
@@ -96,6 +135,6 @@ Read here more [link to docs]"
 dialog_autowrap = true
 cancel_button_text = "NO"
 
-[connection signal="pressed" from="Delete" to="." method="_on_delete_pressed"]
-[connection signal="pressed" from="Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Buttons/Delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="Buttons/Load" to="." method="_on_load_pressed"]
 [connection signal="confirmed" from="DeleteDialog" to="." method="_on_delete_dialog_confirmed"]
