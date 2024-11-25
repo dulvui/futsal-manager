@@ -5,9 +5,6 @@
 class_name SplashScreen
 extends Control
 
-@onready var loading_progress_bar: ProgressBar = $LoadingProgressBar
-
-
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 

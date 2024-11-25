@@ -14,8 +14,8 @@ config/name="99Managers: Futsal Edition"
 config/version="0.2.4"
 run/main_scene="res://src/screens/splash/splash_screen.tscn"
 config/features=PackedStringArray("4.3")
-boot_splash/bg_color=Color(1, 1, 1, 1)
-boot_splash/image="res://icon.png"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://icon_dark.png"
 config/icon="res://icon.png"
 
 [autoload]
