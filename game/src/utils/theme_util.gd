@@ -198,6 +198,13 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	theme.set_color("font_selected_color", "Tree", configuration.font_color_focus)
 	theme.set_color("font_outline_color", "Tree", configuration.font_color_hover)
 	theme.set_color("font_disabled_color", "Tree", configuration.font_color_disabled)
+	
+	# tab container
+	theme.set_color("font_selected_color", "TabContainer", configuration.font_color)
+	theme.set_color("font_unselected_color", "TabContainer", configuration.font_color_focus)
+	theme.set_color("font_hovered_color", "TabContainer", configuration.font_color_focus)
+	theme.set_color("font_outline_color", "TabContainer", configuration.font_color_hover)
+	theme.set_color("font_disabled_color", "TabContainer", configuration.font_color_disabled)
 
 
 func get_default_scale() -> float:
