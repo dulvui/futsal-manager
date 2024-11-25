@@ -6,6 +6,6 @@
 script = ExtResource("1_h0fmv")
 id = 0
 name = "SOLARIZED_LIGHT"
-font_color = Color(0.576471, 0.631373, 0.631373, 1)
-style_color = Color(0.027451, 0.211765, 0.258824, 1)
+font_color = Color(0.345098, 0.431373, 0.458824, 1)
+style_color = Color(0.933333, 0.909804, 0.835294, 1)
 background_color = Color(0.992157, 0.964706, 0.890196, 1)

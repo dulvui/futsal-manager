@@ -36,7 +36,12 @@ ROMANIA,Romania,Rumänien,Romania
 NEW_GAME,New game,Neues Spiel,Nuova partita
 LOAD_GAME,Load game,Spiel laden,Carica partita
 DARK,Dark,Dunkel,Scuro
-LIGHT,light,Hell,Chiaro
+LIGHT,Light,Hell,Chiaro
+SOLARIZED_LIGHT,Solarized light,Solarized hell,Solarized chiaro
+SOLARIZED_DARK,Solarized dark,Solarized dunkel,Solarized scuro
+HACKER,Hacker,Hacker,Hacker
+RED,Red,Rot,Rosso
+CUSTOM,Custom,Benutzerdefiniert,Personalizzato
 DEFAULT_SETTINGS,Default settings,Standardeinstellung,Impostazioni predefinite
 THEME,Theme,Thema,Tema
 RESOLUTION,Resolution,Auflösung,Risoluzione

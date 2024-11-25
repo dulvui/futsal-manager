@@ -32,7 +32,9 @@ const THEMES: Dictionary = {
 	"DARK": "theme_dark.tres", 
 	"LIGHT": "theme_light.tres", 
 	"SOLARIZED_LIGHT": "theme_solarized_light.tres", 
+	"SOLARIZED_DARK": "theme_solarized_dark.tres", 
 	"RED": "theme_red.tres",
+	"HACKER": "theme_hacker.tres",
 	"CUSTOM": "",
 }
 
@@ -155,6 +157,7 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	# label settings
 	label_settings.font_color = configuration.font_color
 	label_settings_bold.font_color = configuration.font_color
+	label_settings_bold.outline_color = configuration.font_color
 
 	# fontsize
 	theme.default_font_size = Global.theme_font_size
