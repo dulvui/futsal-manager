@@ -17,6 +17,6 @@ func setup(matchz: Match) -> void:
 	if matchz.over:
 		result.text = matchz.get_result()
 
-		# make winner label bold
-		ThemeUtil.bold(home, matchz.home_goals >= matchz.away_goals)
-		ThemeUtil.bold(away, matchz.home_goals <= matchz.away_goals)
+	# make selected team label bold
+	ThemeUtil.bold(home, matchz.home.id == Global.team.id)
+	ThemeUtil.bold(away, matchz.away.id == Global.team.id)
