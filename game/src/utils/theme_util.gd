@@ -193,6 +193,12 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	theme.set_color("font_color", "PopupMenu", configuration.font_color)
 	theme.set_color("font_hover_color", "PopupMenu", configuration.font_color_hover)
 
+	# tree
+	theme.set_color("font_color", "Tree", configuration.font_color)
+	theme.set_color("font_selected_color", "Tree", configuration.font_color_focus)
+	theme.set_color("font_outline_color", "Tree", configuration.font_color_hover)
+	theme.set_color("font_disabled_color", "Tree", configuration.font_color_disabled)
+
 
 func get_default_scale() -> float:
 	if OS.get_name() in ["Android", "iOS"]:
