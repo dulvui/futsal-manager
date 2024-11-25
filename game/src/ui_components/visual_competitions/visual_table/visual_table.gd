@@ -72,20 +72,16 @@ func setup(table: Table) -> void:
 		points_label.text = str(team.points)
 		dynamic_labels.append(points_label)
 
-		var label_settings: LabelSettings = LabelSettings.new()
-		label_settings.font_size = get_theme_default_font_size()
-		label_settings.font_color = Color.GOLD
-
 		if team.team_name == Global.team.name:
-			pos_label.label_settings = label_settings
-			name_label.label_settings = label_settings
-			games_played_label.label_settings = label_settings
-			wins_label.label_settings = label_settings
-			draws_label.label_settings = label_settings
-			lost_label.label_settings = label_settings
-			goals_made_label.label_settings = label_settings
-			goals_against_label.label_settings = label_settings
-			points_label.label_settings = label_settings
+			ThemeUtil.bold(pos_label)
+			ThemeUtil.bold(name_label)
+			ThemeUtil.bold(games_played_label)
+			ThemeUtil.bold(wins_label)
+			ThemeUtil.bold(draws_label)
+			ThemeUtil.bold(lost_label)
+			ThemeUtil.bold(goals_made_label)
+			ThemeUtil.bold(goals_against_label)
+			ThemeUtil.bold(points_label)
 
 	for label: Label in dynamic_labels:
 		add_child(label)
