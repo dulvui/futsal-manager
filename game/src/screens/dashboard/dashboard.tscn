@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8mhb22bae1my"]
+[gd_scene load_steps=14 format=3 uid="uid://c8mhb22bae1my"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/dashboard/dashboard.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://c51vyn54bk7q4" path="res://src/ui_components/visual_calendar/visual_calendar.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://chc845g8trbih" path="res://src/ui_components/buttons/default_button/default_button.tscn" id="3_4jm0u"]
 [ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui_components/visual_formation/visual_formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dcv0qm4k1wi4q" path="res://src/ui_components/email/email.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui_components/visual_competitions/visual_competitions.tscn" id="7"]
@@ -47,13 +48,13 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="MenuButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="MenuButton" parent="MarginContainer/HBoxContainer/Buttons" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "MENU"
 alignment = 0
 
-[node name="SettingsButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="SettingsButton" parent="MarginContainer/HBoxContainer/Buttons" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "SETTINGS"
@@ -62,25 +63,25 @@ alignment = 0
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="EmailButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="EmailButton" parent="MarginContainer/HBoxContainer/Buttons" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "EMAIL"
 alignment = 0
 
-[node name="InfoButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="InfoButton" parent="MarginContainer/HBoxContainer/Buttons" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "INFO"
 alignment = 0
 
-[node name="CalendarButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="CalendarButton" parent="MarginContainer/HBoxContainer/Buttons" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "CALENDAR"
 alignment = 0
 
-[node name="CompetitionsButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="CompetitionsButton" parent="MarginContainer/HBoxContainer/Buttons" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "COMPETITIONS"
@@ -89,13 +90,13 @@ alignment = 0
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="FormationButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="FormationButton" parent="MarginContainer/HBoxContainer/Buttons" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "FORMATION"
 alignment = 0
 
-[node name="PlayersButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="PlayersButton" parent="MarginContainer/HBoxContainer/Buttons" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "PLAYERS"
@@ -104,7 +105,7 @@ alignment = 0
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/HBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="SearchPlayerButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="SearchPlayerButton" parent="MarginContainer/HBoxContainer/Buttons" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "SEARCH_PLAYER"
@@ -147,22 +148,24 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "24/08/2002"
 
-[node name="PrevViewButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+[node name="PrevViewButton" parent="MarginContainer/HBoxContainer/MainContainer/TopBar" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "<"
 
-[node name="NextViewButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+[node name="NextViewButton" parent="MarginContainer/HBoxContainer/MainContainer/TopBar" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = ">"
 
-[node name="NextMatchButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+[node name="NextMatchButton" parent="MarginContainer/HBoxContainer/MainContainer/TopBar" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "NEXT_MATCH"
 
-[node name="ContinueButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
+[node name="ContinueButton" parent="MarginContainer/HBoxContainer/MainContainer/TopBar" instance=ExtResource("3_4jm0u")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "CONTINUE"
