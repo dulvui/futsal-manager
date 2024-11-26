@@ -180,6 +180,18 @@ text = "translation link"
 [node name="HSeparator3" type="HSeparator" parent="Main/TabContainer/General"]
 layout_mode = 2
 
+[node name="Sound" type="HBoxContainer" parent="Main/TabContainer/General"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="Main/TabContainer/General/Sound"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFX"
+
+[node name="SFXCheckButton" type="CheckButton" parent="Main/TabContainer/General/Sound"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="IterfaceLabel" type="Label" parent="Main/TabContainer/General"]
 layout_mode = 2
 text = "INTERFACE_SETTINGS"

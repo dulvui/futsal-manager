@@ -13,6 +13,7 @@ var config: ConfigFile
 # vars
 var language: String
 var currency: int
+var sfx: bool
 var theme_index: int
 var theme_scale: float
 var theme_font_size: int
@@ -111,21 +112,6 @@ func next_season() -> void:
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
-func save_config() -> void:
-	config.set_value("settings", "currency", currency)
-	config.set_value("settings", "language", language)
-	config.set_value("settings", "theme_index", theme_index)
-	config.set_value("settings", "theme_scale", theme_scale)
-	config.set_value("settings", "theme_font_size", theme_font_size)
-	config.set_value("settings", "theme_custom_font_color", theme_custom_font_color)
-	config.set_value("settings", "theme_custom_style_color", theme_custom_style_color)
-	config.set_value("settings", "theme_custom_background_color", theme_custom_background_color)
-
-	config.save(Const.USER_PATH + "settings.cfg")
-
-	BackupUtil.create_backup(Const.USER_PATH + "settings", ".cfg")
-
-
 func save_all_data() -> void:
 	ResUtil.save_save_states()
 	save_config()
@@ -152,6 +138,22 @@ func load_save_state() -> void:
 		LoadingUtil.done()
 
 
+func save_config() -> void:
+	config.set_value("settings", "currency", currency)
+	config.set_value("settings", "language", language)
+	config.set_value("settings", "sfx", sfx)
+	config.set_value("settings", "theme_index", theme_index)
+	config.set_value("settings", "theme_scale", theme_scale)
+	config.set_value("settings", "theme_font_size", theme_font_size)
+	config.set_value("settings", "theme_custom_font_color", theme_custom_font_color)
+	config.set_value("settings", "theme_custom_style_color", theme_custom_style_color)
+	config.set_value("settings", "theme_custom_background_color", theme_custom_background_color)
+
+	config.save(Const.USER_PATH + "settings.cfg")
+
+	BackupUtil.create_backup(Const.USER_PATH + "settings", ".cfg")
+
+
 func _load_config() -> void:
 	config = ConfigFile.new()
 	var err: int = config.load(Const.USER_PATH + "settings.cfg")
@@ -165,11 +167,14 @@ func _load_config() -> void:
 
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	language = config.get_value("settings", "language", "")
+	sfx = config.get_value("settings", "sfx", true)
 	theme_index = config.get_value("settings", "theme_index", 0)
 	theme_scale = config.get_value("settings", "theme_scale", ThemeUtil.get_default_scale())
 	theme_font_size = config.get_value("settings", "theme_font_size", Const.FONT_SIZE_DEFAULT)
 	theme_custom_font_color = config.get_value("settings", "theme_custom_font_color", Color.BLACK)
 	theme_custom_style_color = config.get_value("settings", "theme_custom_style_color", Color.RED)
 	theme_custom_background_color = config.get_value("settings", "theme_custom_background_color", Color.WHITE)
+
+
 
 
