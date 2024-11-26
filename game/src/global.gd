@@ -62,10 +62,10 @@ func _ready() -> void:
 	get_tree().root.content_scale_factor = theme_scale
 
 
-func select_team(p_league: League, p_team: Team, testing: bool = false)-> void:
-	league = p_league
+func select_team(p_team: Team, testing: bool = false)-> void:
 	team = p_team
 	world.active_team_id = team.id
+	league = world.get_league_by_team_id(team.id)
 	
 	if not testing:
 		save_states.make_temp_active()

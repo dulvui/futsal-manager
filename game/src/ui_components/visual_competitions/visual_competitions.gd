@@ -84,6 +84,7 @@ func _on_seasons_button_item_selected(index: int) -> void:
 	season_index = season_amount - 1 - index
 	_setup()
 
+
 func _on_competitions_tree_competition_selected(p_competition: Competition) -> void:
 	competition = p_competition
 	_setup()

@@ -10,6 +10,7 @@ anchor_bottom = 0.024
 offset_right = -199.68
 offset_bottom = -25.92
 size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Such Button"
 script = ExtResource("1_erxjj")
 

@@ -71,4 +71,5 @@ func _on_item_mouse_selected(_mouse_position: Vector2, _mouse_button_index: int)
 	var selected_name: String = get_selected().get_text(0)
 	if competitions.has(selected_name):
 		competition_selected.emit(competitions[selected_name])
+		SoundUtil.play_button_sfx()
 

@@ -12,7 +12,7 @@ const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/play
 # depending on scale
 const PAGE_SIZE_1: int = 32
 const PAGE_SIZE_2: int = 18
-const PAGE_SIZE_3: int = 11
+const PAGE_SIZE_3: int = 10
 
 var views: Array[String]
 var columns: Dictionary = {}

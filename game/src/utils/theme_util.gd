@@ -4,6 +4,8 @@
 
 extends Node
 
+const DefaultButtonScene: PackedScene = preload("res://src/ui_components/buttons/default_button/default_button.tscn")
+
 # paths
 const THEMES_PATH: StringName = "res://themes/"
 const BASE_PATH: StringName = "res://theme_base/"

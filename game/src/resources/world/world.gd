@@ -75,12 +75,22 @@ func get_active_continent() -> Continent:
 
 
 func get_team_by_id(team_id: int) -> Team:
-	for l: League in get_all_leagues():
-		for t: Team in l.teams:
-			if t.id == team_id:
-				return t
+	for league: League in get_all_leagues():
+		for team: Team in league.teams:
+			if team.id == team_id:
+				return team
 	printerr("no team with id " + str(team_id))
 	return null
+
+
+func get_league_by_team_id(team_id: int) -> League:
+	for league: League in get_all_leagues():
+		for team: Team in league.teams:
+			if team.id == team_id:
+				return league
+	printerr("no league with team id " + str(team_id))
+	return null
+
 
 
 func get_competition_by_id(competition_id: int) -> Competition:
