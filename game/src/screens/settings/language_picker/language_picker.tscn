@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://djrvl8pvkr7aa"]
+[gd_scene load_steps=3 format=3 uid="uid://djrvl8pvkr7aa"]
 
 [ext_resource type="Script" path="res://src/screens/settings/language_picker/language_picker.gd" id="1_1ma02"]
+[ext_resource type="PackedScene" uid="uid://chc845g8trbih" path="res://src/ui_components/buttons/default_button/default_button.tscn" id="2_0d6br"]
 
 [node name="LanguagePicker" type="HBoxContainer"]
 anchors_preset = 8
@@ -17,27 +18,27 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_1ma02")
 
-[node name="English" type="Button" parent="."]
+[node name="English" parent="." instance=ExtResource("2_0d6br")]
 layout_mode = 2
 text = "English"
 
-[node name="Portuguese" type="Button" parent="."]
+[node name="Portuguese" parent="." instance=ExtResource("2_0d6br")]
 visible = false
 layout_mode = 2
-text = "Portugues"
+text = "Portuguese"
 
-[node name="Italian" type="Button" parent="."]
+[node name="Italian" parent="." instance=ExtResource("2_0d6br")]
 layout_mode = 2
-text = "Italiano"
+text = "Italian"
 
-[node name="Spanish" type="Button" parent="."]
+[node name="Spanish" parent="." instance=ExtResource("2_0d6br")]
 visible = false
 layout_mode = 2
-text = "Español"
+text = "Spanish"
 
-[node name="German" type="Button" parent="."]
+[node name="German" parent="." instance=ExtResource("2_0d6br")]
 layout_mode = 2
-text = "Deutsch"
+text = "German"
 
 [connection signal="pressed" from="English" to="." method="_on_english_pressed"]
 [connection signal="pressed" from="Portuguese" to="." method="_on_portuguese_pressed"]
