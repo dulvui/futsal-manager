@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8ns73g7247l3"]
+[gd_scene load_steps=5 format=3 uid="uid://b8ns73g7247l3"]
 
 [ext_resource type="Script" path="res://src/screens/save_states_screen/save_state_screen.gd" id="1_er0yh"]
 [ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="2_j7bth"]
 [ext_resource type="PackedScene" uid="uid://dj3ts0dee4m6" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn" id="2_ydw8l"]
+[ext_resource type="PackedScene" uid="uid://chc845g8trbih" path="res://src/ui_components/buttons/default_button/default_button.tscn" id="3_vfsm6"]
 
 [node name="SaveStates" type="Control"]
 layout_mode = 3
@@ -54,10 +55,8 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Menu" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="Menu" parent="VBoxContainer" instance=ExtResource("3_vfsm6")]
 layout_mode = 2
-size_flags_horizontal = 4
 text = "MENU"
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_j7bth")]
