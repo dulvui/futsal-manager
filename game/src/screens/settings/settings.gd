@@ -43,7 +43,6 @@ func _ready() -> void:
 
 	version_label.text = "v" + Global.version
 	
-	# audio settings
 	ui_sfx_volume.value = SoundUtil.get_bus_volume(SoundUtil.AudioBus.UI_SFX)
 
 	InputUtil.search.connect(func() -> void: search_line_edit.grab_focus())
@@ -77,6 +76,9 @@ func _on_defaults_pressed() -> void:
 	#scale
 	get_tree().root.content_scale_factor = ThemeUtil.get_default_scale()
 	Global.theme_scale = ThemeUtil.get_default_scale()
+	# audio
+	SoundUtil.restore_default()
+	ui_sfx_volume.value = SoundUtil.get_bus_volume(SoundUtil.AudioBus.UI_SFX)
 	
 	Global.save_config()
 
