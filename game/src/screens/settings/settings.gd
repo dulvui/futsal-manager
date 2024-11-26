@@ -82,6 +82,7 @@ func _on_font_size_spin_box_value_changed(value: float) -> void:
 	Global.theme_font_size = int(value)
 	ThemeUtil.reload_active_theme()
 	Global.save_config()
+	SoundUtil.play_button_sfx()
 
 
 func _on_font_color_button_pressed() -> void:
