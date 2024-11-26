@@ -13,7 +13,7 @@ var config: ConfigFile
 # vars
 var language: String
 var currency: int
-var sfx: bool
+var audio: Dictionary
 var theme_index: int
 var theme_scale: float
 var theme_font_size: int
@@ -141,7 +141,7 @@ func load_save_state() -> void:
 func save_config() -> void:
 	config.set_value("settings", "currency", currency)
 	config.set_value("settings", "language", language)
-	config.set_value("settings", "sfx", sfx)
+	config.set_value("settings", "audio", audio)
 	config.set_value("settings", "theme_index", theme_index)
 	config.set_value("settings", "theme_scale", theme_scale)
 	config.set_value("settings", "theme_font_size", theme_font_size)
@@ -167,7 +167,7 @@ func _load_config() -> void:
 
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	language = config.get_value("settings", "language", "")
-	sfx = config.get_value("settings", "sfx", true)
+	audio = config.get_value("settings", "audio", {})
 	theme_index = config.get_value("settings", "theme_index", 0)
 	theme_scale = config.get_value("settings", "theme_scale", ThemeUtil.get_default_scale())
 	theme_font_size = config.get_value("settings", "theme_font_size", Const.FONT_SIZE_DEFAULT)

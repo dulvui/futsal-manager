@@ -20,7 +20,7 @@ enum ColorType {
 var active_color_type: ColorType
 
 @onready var theme_options: OptionButton = %ThemeOptionButton
-@onready var sfx_button: CheckButton = %SFXCheckButton
+@onready var ui_sfx_volume: HSlider = %UISfxVolumeSlider
 @onready var version_label: Label = %VersionLabel
 @onready var font_size_spinbox: SpinBox = %FontSizeSpinBox
 @onready var color_picker_popup: PopupPanel = $ColorPopupPanel
@@ -42,8 +42,9 @@ func _ready() -> void:
 	theme_options.selected = Global.theme_index
 
 	version_label.text = "v" + Global.version
-
-	sfx_button.button_pressed = Global.sfx
+	
+	# audio settings
+	ui_sfx_volume.value = SoundUtil.get_bus_volume(SoundUtil.AudioBus.UI_SFX)
 
 	InputUtil.search.connect(func() -> void: search_line_edit.grab_focus())
 
@@ -149,7 +150,7 @@ func _on_scale_3_pressed() -> void:
 	Global.save_config()
 
 
-func _on_sfx_button_toggled(toggled_on: bool) -> void:
-	Global.sfx = toggled_on
-	Global.save_config()
-
+func _on_ui_sfx_volume_slider_value_changed(value: float) -> void:
+	SoundUtil.set_bus_volume(SoundUtil.AudioBus.UI_SFX, value)
+	SoundUtil.set_bus_mute(SoundUtil.AudioBus.UI_SFX, value == ui_sfx_volume.min_value)
+	SoundUtil.play_button_sfx()

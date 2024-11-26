@@ -11,9 +11,5 @@ func _ready() -> void:
 
 
 func _on_pressed() -> void:
-	print("sfx press")
-
-
-func _on_focus_entered() -> void:
-	print("sfx focus")
+	SoundUtil.play_button_sfx()
 

@@ -180,17 +180,26 @@ text = "translation link"
 [node name="HSeparator3" type="HSeparator" parent="Main/TabContainer/General"]
 layout_mode = 2
 
-[node name="Sound" type="HBoxContainer" parent="Main/TabContainer/General"]
+[node name="AudioLabel" type="Label" parent="Main/TabContainer/General"]
+layout_mode = 2
+text = "AUDIO"
+label_settings = ExtResource("3_ndxx8")
+
+[node name="UISfx" type="HBoxContainer" parent="Main/TabContainer/General"]
 layout_mode = 2
 
-[node name="SFXLabel" type="Label" parent="Main/TabContainer/General/Sound"]
+[node name="UISfxVolumeLabel" type="Label" parent="Main/TabContainer/General/UISfx"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "SFX"
+text = "SFX_VOLUME"
 
-[node name="SFXCheckButton" type="CheckButton" parent="Main/TabContainer/General/Sound"]
+[node name="UISfxVolumeSlider" type="HSlider" parent="Main/TabContainer/General/UISfx"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+min_value = -60.0
+max_value = 0.0
+step = 5.0
 
 [node name="IterfaceLabel" type="Label" parent="Main/TabContainer/General"]
 layout_mode = 2
@@ -398,6 +407,8 @@ color_modes_visible = false
 presets_visible = false
 metadata/_edit_use_anchors_ = true
 
+[connection signal="drag_ended" from="Main/TabContainer/General/UISfx/UISfxVolumeSlider" to="." method="_on_ui_sfx_volume_slider_drag_ended"]
+[connection signal="value_changed" from="Main/TabContainer/General/UISfx/UISfxVolumeSlider" to="." method="_on_ui_sfx_volume_slider_value_changed"]
 [connection signal="value_changed" from="Main/TabContainer/General/FontSize/FontSizeSpinBox" to="." method="_on_font_size_spin_box_value_changed"]
 [connection signal="pressed" from="Main/TabContainer/General/FontSize/FontDefaultButton" to="." method="_on_font_default_button_pressed"]
 [connection signal="pressed" from="Main/TabContainer/General/Scale/Scale1" to="." method="_on_scale_1_pressed"]

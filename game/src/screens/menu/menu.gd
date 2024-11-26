@@ -10,7 +10,7 @@ extends Control
 @onready var load_game: Button = %LoadGame
 @onready var continue_game: Button = %ContinueGame
 @onready var new_game: Button = %NewGame
-@onready var exit: Button = %ExitButton
+@onready var exit: Button = %Exit
 @onready var version: Label = $Version
 
 
@@ -65,6 +65,6 @@ func _on_loading_screen_loaded(_type: LoadingUtil.Type) -> void:
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
-func _on_exit_button_pressed() -> void:
+func _on_exit_pressed() -> void:
 	get_tree().quit()
 

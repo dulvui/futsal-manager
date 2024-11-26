@@ -64,31 +64,24 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "CONTINUE"
 
-[node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="NewGame" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_8tsyt")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 text = "NEW_GAME"
 
-[node name="LoadGame" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="LoadGame" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_8tsyt")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 text = "LOAD_GAME"
 
-[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+[node name="Settings" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_8tsyt")]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
 text = "SETTINGS"
 
-[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Exit" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_8tsyt")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 text = "EXIT"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
@@ -127,6 +120,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="MarginContainer/VBoxContainer/ExitButton" method="_on_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]

@@ -9,12 +9,13 @@ SPDX-PackageDownloadLocation = "https://github.com/dulvui/futsal-manager"
 
 [[annotations]]
 path = [
-    "game/src/**.tscn",
+    "game/**.tscn",
+    "game/**.tres",
     "game/project.godot",
     "**.import",
     "game/export_presets.**",
     "game/themes/**",
-    "game/assets/i18n/translations.csv",
+    "game/translations/translations.csv",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2022 Simon Dalvai <info@simondalvai.org>"
@@ -22,9 +23,8 @@ SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
 path = [
-    "fsm-icon.png",
-    "fsm-icon.xcf",
     "game/icon.png",
+    "game/icon_dark.png",
     "game/assets/body.png",
     "game/assets/head.png",
 ]
@@ -49,7 +49,10 @@ SPDX-License-Identifier = "CC0-1.0"
 
 # city names taken from Wikipedia
 [[annotations]]
-path = "game/data/world/world.csv"
+path = [
+    "game/data/world/world.csv",
+    "game/data/world/test_world.csv",
+]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Wikipedia"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
@@ -69,4 +72,12 @@ path = [
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Copyright (c) 2012 Ross Duris"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = [
+    "game/assets/audio/switch_001.ogg",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Copyright (c) 2020 Kenney (kenney.nl)"
 SPDX-License-Identifier = "CC0-1.0"

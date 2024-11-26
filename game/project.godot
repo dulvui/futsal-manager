@@ -34,6 +34,7 @@ ThemeUtil="*res://src/utils/theme_util.gd"
 LoadingUtil="*res://src/utils/loading_util.gd"
 ThreadUtil="*res://src/utils/thread_util.gd"
 InputUtil="*res://src/utils/input_util.gd"
+SoundUtil="*res://src/utils/sound_util.gd"
 
 [debug]
 

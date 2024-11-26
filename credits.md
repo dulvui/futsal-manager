@@ -14,6 +14,9 @@ https://openclipart.org/download/167872/soccerballnoshadow.svg
 # player names
 https://github.com/joke2k/faker
 
+# interface sounds
+https://kenney.nl/assets/interface-sounds
+
 # city names
 Portugal
 https://en.wikipedia.org/wiki/List_of_cities_in_Portugal
