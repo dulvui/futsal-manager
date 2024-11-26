@@ -66,3 +66,12 @@ func play_button_sfx() -> void:
 		return
 	button_press.play()
 
+
+func restore_default() -> void:
+	for bus_id: int in AudioBus.values():
+		# initialize global config, if not yet done
+		Global.audio[bus_id] = {
+			"mute": false,
+			"volume": DEFAULT_VOLUME,
+		}
+
