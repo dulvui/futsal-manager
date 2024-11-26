@@ -41,11 +41,12 @@ var away_stats: MatchStatistics
 @onready var faster_button: Button = %FasterButton
 @onready var slower_button: Button = %SlowerButton
 @onready var speed_factor_label: Label = %SpeedFactor
-@onready var dashboard_button: Button = %DashboardButton
 @onready var events_button: Button = %EventsButton
 @onready var stats_button: Button = %StatsButton
 @onready var field_button: Button = %FieldButton
 @onready var formation_button: Button = %FormationButton
+@onready var simulate_button: Button = %SimulateButton
+@onready var dashboard_button: Button = %DashboardButton
 
 @onready var players_bar: PlayersBar = %PlayersBar
 
@@ -107,6 +108,8 @@ func match_end() -> void:
 	slower_button.hide()
 	speed_factor_label.hide()
 	pause_button.hide()
+	simulate_button.hide()
+
 	dashboard_button.show()
 
 	#assign result
@@ -241,5 +244,6 @@ func _on_players_bar_change_request() -> void:
 	formation.set_players()
 	match_simulator.match_engine.home_team.change_players_request()
 	match_simulator.match_engine.away_team.change_players_request()
+
 
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button/default_button.gd" id="1_erxjj"]
 
-[node name="SfxButton" type="Button"]
+[node name="DefaultButton" type="Button"]
 custom_minimum_size = Vector2(200, 0)
 anchors_preset = -1
 anchor_right = 0.104
@@ -10,7 +10,7 @@ anchor_bottom = 0.024
 offset_right = -199.68
 offset_bottom = -25.92
 size_flags_horizontal = 4
-text = "Sfx Button"
+text = "Such Button"
 script = ExtResource("1_erxjj")
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
