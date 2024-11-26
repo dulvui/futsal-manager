@@ -11,11 +11,14 @@ NATIONALITY,Nationality,Nationalität,Naziolanità
 BACK,Back,Zurück,Indietro
 CONTINUE,Continue,Weiter,Avanti
 CANCEL,Cancel,Abbrechen,Annulla
-FIELD,Field,Feld,campo
+FIELD,Field,Feld,Campo
 STATS,Stats,Stats,Stats
+PAUSE,Pause,Pause,Pausa
+SIMULATE,Simulate,Simulieren,Simula
 EVENTS,Events,Events,Eventi
 TACTICS,Tactics,Taktiken,Tattiche
 FORMATION,Formation,Aufstellung,Formazione
+COMMENTARY,Commentary,Kommentare,Commenti
 START,Start,Start,Inizia
 CALENDAR,Calendar,Kalender,Calendario
 TABLE,Table,Tabelle,Classifica
