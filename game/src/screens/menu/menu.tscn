@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4woicggddkls"]
+[gd_scene load_steps=6 format=3 uid="uid://b4woicggddkls"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dj3ts0dee4m6" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn" id="4_5irse"]
+[ext_resource type="PackedScene" uid="uid://chc845g8trbih" path="res://src/ui_components/sfx_button/sfx_button.tscn" id="4_8tsyt"]
 [ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="4_qla42"]
 
 [node name="Menu" type="Control"]
@@ -12,7 +13,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_next = NodePath("MarginContainer/VBoxContainer/ContinueGame")
 theme = ExtResource("1")
 script = ExtResource("2")
 
@@ -59,11 +59,9 @@ modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 
-[node name="ContinueGame" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ContinueGame" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_8tsyt")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 text = "CONTINUE"
 
 [node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -130,4 +128,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitButton" to="MarginContainer/VBoxContainer/ExitButton" method="_on_pressed"]
 [connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://chc845g8trbih"]
+
+[ext_resource type="Script" path="res://src/ui_components/sfx_button/sfx_button.gd" id="1_erxjj"]
+
+[node name="SfxButton" type="Button"]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = -1
+anchor_right = 0.104
+anchor_bottom = 0.024
+offset_right = -199.68
+offset_bottom = -25.92
+size_flags_horizontal = 4
+text = "Sfx Button"
+script = ExtResource("1_erxjj")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
