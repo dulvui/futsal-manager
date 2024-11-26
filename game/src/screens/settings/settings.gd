@@ -26,6 +26,7 @@ var active_color_type: ColorType
 @onready var color_picker_popup: PopupPanel = $ColorPopupPanel
 @onready var color_picker: ColorPicker = $ColorPopupPanel/MarginContainer/ColorPicker
 @onready var search_line_edit: LineEdit = %SearchLineEdit
+@onready var default_dialog: ConfirmationDialog = %DefaultDialog
 
 
 func _ready() -> void:
@@ -67,20 +68,7 @@ func _on_back_pressed() -> void:
 
 
 func _on_defaults_pressed() -> void:
-	# font size
-	Global.theme_font_size = Const.FONT_SIZE_DEFAULT
-	font_size_spinbox.value = Global.theme_font_size
-	# theme
-	theme = ThemeUtil.reset_to_default()
-	theme_options.selected = 0
-	#scale
-	get_tree().root.content_scale_factor = ThemeUtil.get_default_scale()
-	Global.theme_scale = ThemeUtil.get_default_scale()
-	# audio
-	SoundUtil.restore_default()
-	ui_sfx_volume.value = SoundUtil.get_bus_volume(SoundUtil.AudioBus.UI_SFX)
-	
-	Global.save_config()
+	default_dialog.popup_centered()
 
 
 func _on_font_default_button_pressed() -> void:
@@ -156,3 +144,20 @@ func _on_ui_sfx_volume_slider_value_changed(value: float) -> void:
 	SoundUtil.set_bus_volume(SoundUtil.AudioBus.UI_SFX, value)
 	SoundUtil.set_bus_mute(SoundUtil.AudioBus.UI_SFX, value == ui_sfx_volume.min_value)
 	SoundUtil.play_button_sfx()
+
+
+func _on_default_dialog_confirmed() -> void:
+	# font size
+	Global.theme_font_size = Const.FONT_SIZE_DEFAULT
+	font_size_spinbox.value = Global.theme_font_size
+	# theme
+	theme = ThemeUtil.reset_to_default()
+	theme_options.selected = 0
+	#scale
+	get_tree().root.content_scale_factor = ThemeUtil.get_default_scale()
+	Global.theme_scale = ThemeUtil.get_default_scale()
+	# audio
+	SoundUtil.restore_default()
+	ui_sfx_volume.value = SoundUtil.get_bus_volume(SoundUtil.AudioBus.UI_SFX)
+	
+	Global.save_config()
