@@ -26,35 +26,30 @@ grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.566667
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.566667
+anchor_bottom = 0.5
 offset_left = -342.5
 offset_top = -393.5
 offset_right = 342.5
 offset_bottom = 393.5
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-
 [node name="SaveState" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_5irse")]
 unique_name_in_owner = true
 layout_mode = 2
 hide_buttons = true
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="SaveSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
@@ -84,37 +79,40 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "EXIT"
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="LinkButton" type="LinkButton" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-focus_mode = 2
-text = "simondalvai.org"
-uri = "https://simondalvai.org"
-
 [node name="LoadingScreen" parent="." instance=ExtResource("4_qla42")]
 visible = false
 layout_mode = 1
 
-[node name="Version" type="Label" parent="."]
+[node name="Info" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.911813
-anchor_top = 0.95563
-anchor_right = 0.986458
-anchor_bottom = 0.97963
-offset_left = 0.319946
-offset_top = -0.0800781
+anchor_left = 0.979
+anchor_top = 0.959
+anchor_right = 0.979
+anchor_bottom = 0.959
+offset_left = -284.68
+offset_top = -39.7201
+offset_right = -0.680054
+offset_bottom = 0.279907
 grow_horizontal = 0
 grow_vertical = 0
+alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="Info"]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 4
+focus_mode = 2
+text = "simondalvai.org"
+uri = "https://simondalvai.org"
+
+[node name="Version" type="Label" parent="Info"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 7
 text = "V0.1.22.3"
 horizontal_alignment = 2
-metadata/_edit_use_anchors_ = true
+vertical_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueGame" to="." method="_on_continue_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]

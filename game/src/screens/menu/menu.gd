@@ -6,12 +6,13 @@ class_name Menu
 extends Control
 
 @onready var save_state: SaveStateEntry = %SaveState
+@onready var save_separator: HSeparator = %SaveSeparator
 @onready var loading_screen: LoadingScreen = $LoadingScreen
 @onready var load_game: Button = %LoadGame
 @onready var continue_game: Button = %ContinueGame
 @onready var new_game: Button = %NewGame
 @onready var exit: Button = %Exit
-@onready var version: Label = $Version
+@onready var version: Label = %Version
 
 
 func _ready() -> void:
@@ -22,8 +23,9 @@ func _ready() -> void:
 	exit.visible = OS.get_name() != "iOS"
 
 	if not Global.save_states or Global.save_states.id_list.size() == 0:
-		load_game.visible = false
-		continue_game.visible = false 
+		load_game.hide()
+		continue_game.hide() 
+		save_separator.hide()
 		InputUtil.start_focus(new_game)
 	else:
 		InputUtil.start_focus(continue_game)
