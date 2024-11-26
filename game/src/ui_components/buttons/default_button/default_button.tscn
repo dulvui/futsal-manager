@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://chc845g8trbih"]
 
-[ext_resource type="Script" path="res://src/ui_components/sfx_button/sfx_button.gd" id="1_erxjj"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button/default_button.gd" id="1_erxjj"]
 
 [node name="SfxButton" type="Button"]
 custom_minimum_size = Vector2(200, 0)
