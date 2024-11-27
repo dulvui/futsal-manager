@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="2"]
 [ext_resource type="Script" path="res://src/screens/match/match.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://bc6kfu3avld0" path="res://src/ui_components/match/statistics/match_stats.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://chc845g8trbih" path="res://src/ui_components/buttons/default_button/default_button.tscn" id="4_vsgp3"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="4_mqt4y"]
 [ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui_components/visual_formation/visual_formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://5agy8ull675s" path="res://src/ui_components/match/events/match_events.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://bj7f2r54xkpt1" path="res://src/ui_components/visual_formation/players_bar/players_bar.tscn" id="7_kly0w"]
@@ -60,30 +60,50 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="FieldButton" parent="Main/Content/Buttons/Left" instance=ExtResource("4_vsgp3")]
+[node name="FieldButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "FIELD"
+script = ExtResource("4_mqt4y")
 
-[node name="CommentaryButton" parent="Main/Content/Buttons/Left" instance=ExtResource("4_vsgp3")]
+[node name="CommentaryButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "COMMENTARY"
+script = ExtResource("4_mqt4y")
 
-[node name="StatsButton" parent="Main/Content/Buttons/Left" instance=ExtResource("4_vsgp3")]
+[node name="StatsButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "STATS"
+script = ExtResource("4_mqt4y")
 
-[node name="EventsButton" parent="Main/Content/Buttons/Left" instance=ExtResource("4_vsgp3")]
+[node name="EventsButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "EVENTS"
+script = ExtResource("4_mqt4y")
 
-[node name="FormationButton" parent="Main/Content/Buttons/Left" instance=ExtResource("4_vsgp3")]
+[node name="FormationButton" type="Button" parent="Main/Content/Buttons/Left"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "FORMATION"
+script = ExtResource("4_mqt4y")
 
 [node name="Center" type="HBoxContainer" parent="Main/Content/Buttons"]
 layout_mode = 2
@@ -96,43 +116,61 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="SlowerButton" parent="Main/Content/Buttons/Center/Speed" instance=ExtResource("4_vsgp3")]
+[node name="SlowerButton" type="Button" parent="Main/Content/Buttons/Center/Speed"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "-1"
+script = ExtResource("4_mqt4y")
 
 [node name="SpeedFactor" type="Label" parent="Main/Content/Buttons/Center/Speed"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "X2"
 
-[node name="FasterButton" parent="Main/Content/Buttons/Center/Speed" instance=ExtResource("4_vsgp3")]
+[node name="FasterButton" type="Button" parent="Main/Content/Buttons/Center/Speed"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "+1"
+script = ExtResource("4_mqt4y")
 
-[node name="PauseButton" parent="Main/Content/Buttons/Center" instance=ExtResource("4_vsgp3")]
+[node name="PauseButton" type="Button" parent="Main/Content/Buttons/Center"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "PAUSE"
+script = ExtResource("4_mqt4y")
 
 [node name="Right" type="HBoxContainer" parent="Main/Content/Buttons"]
 layout_mode = 2
 theme_override_constants/separation = 5
 alignment = 2
 
-[node name="SimulateButton" parent="Main/Content/Buttons/Right" instance=ExtResource("4_vsgp3")]
+[node name="SimulateButton" type="Button" parent="Main/Content/Buttons/Right"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "SIMULATE"
+script = ExtResource("4_mqt4y")
 
-[node name="DashboardButton" parent="Main/Content/Buttons/Right" instance=ExtResource("4_vsgp3")]
+[node name="DashboardButton" type="Button" parent="Main/Content/Buttons/Right"]
 unique_name_in_owner = true
 visible = false
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "DASHBOARD"
+script = ExtResource("4_mqt4y")
 
 [node name="CentralContainer" type="VBoxContainer" parent="Main/Content"]
 layout_mode = 2

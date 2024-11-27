@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/screens/setup/setup_team/setup_team.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bi1p42wfploqa" path="res://src/ui_components/tree_overviews/teams_tree/teams_tree.tscn" id="3_omqyr"]
 [ext_resource type="PackedScene" uid="uid://cdrmqgiuv6wf3" path="res://src/ui_components/team_profile/team_profile.tscn" id="3_sndt3"]
-[ext_resource type="PackedScene" uid="uid://chc845g8trbih" path="res://src/ui_components/buttons/default_button/default_button.tscn" id="4_dn04n"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="5_rq678"]
 
 [node name="TeamSelect" type="Control"]
 layout_mode = 3
@@ -58,13 +58,21 @@ layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Back" parent="MarginContainer/VBoxContainer/Buttons" instance=ExtResource("4_dn04n")]
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "BACK"
+script = ExtResource("5_rq678")
 
-[node name="SelectTeam" parent="MarginContainer/VBoxContainer/Buttons" instance=ExtResource("4_dn04n")]
+[node name="SelectTeam" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "SELECT"
+script = ExtResource("5_rq678")
 
 [connection signal="team_selected" from="MarginContainer/VBoxContainer/Main/TeamsTree" to="." method="_on_teams_tree_team_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Buttons/Back" to="." method="_on_back_pressed"]

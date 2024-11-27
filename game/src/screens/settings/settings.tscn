@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/screens/settings/settings.gd" id="1_m7cla"]
 [ext_resource type="PackedScene" uid="uid://djrvl8pvkr7aa" path="res://src/screens/settings/language_picker/language_picker.tscn" id="2_c3le7"]
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="3_ndxx8"]
-[ext_resource type="PackedScene" uid="uid://chc845g8trbih" path="res://src/ui_components/buttons/default_button/default_button.tscn" id="4_xjkde"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="5_mtybe"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -138,9 +138,13 @@ max_value = 42.0
 value = 18.0
 alignment = 2
 
-[node name="FontDefaultButton" parent="Main/TabContainer/General/Interface/FontSize" instance=ExtResource("4_xjkde")]
+[node name="FontDefaultButton" type="Button" parent="Main/TabContainer/General/Interface/FontSize"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "DEFAULT"
+script = ExtResource("5_mtybe")
 
 [node name="Scale" type="HBoxContainer" parent="Main/TabContainer/General/Interface"]
 layout_mode = 2
@@ -150,20 +154,29 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "SCALE"
 
-[node name="Scale1" parent="Main/TabContainer/General/Interface/Scale" instance=ExtResource("4_xjkde")]
+[node name="Scale1" type="Button" parent="Main/TabContainer/General/Interface/Scale"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "75%"
+script = ExtResource("5_mtybe")
 
-[node name="Scale2" parent="Main/TabContainer/General/Interface/Scale" instance=ExtResource("4_xjkde")]
+[node name="Scale2" type="Button" parent="Main/TabContainer/General/Interface/Scale"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "100%"
+script = ExtResource("5_mtybe")
 
-[node name="Scale3" parent="Main/TabContainer/General/Interface/Scale" instance=ExtResource("4_xjkde")]
+[node name="Scale3" type="Button" parent="Main/TabContainer/General/Interface/Scale"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "150%"
+script = ExtResource("5_mtybe")
 
 [node name="HSeparator7" type="HSeparator" parent="Main/TabContainer/General"]
 layout_mode = 2
@@ -194,9 +207,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "FONT_COLOR"
 
-[node name="FontColorButton" parent="Main/TabContainer/General/Theme/CustomTheme/Font" instance=ExtResource("4_xjkde")]
+[node name="FontColorButton" type="Button" parent="Main/TabContainer/General/Theme/CustomTheme/Font"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "CHANGE"
+script = ExtResource("5_mtybe")
 
 [node name="Style" type="HBoxContainer" parent="Main/TabContainer/General/Theme/CustomTheme"]
 layout_mode = 2
@@ -207,9 +224,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUTTONS_COLOR"
 
-[node name="StyleColorButton" parent="Main/TabContainer/General/Theme/CustomTheme/Style" instance=ExtResource("4_xjkde")]
+[node name="StyleColorButton" type="Button" parent="Main/TabContainer/General/Theme/CustomTheme/Style"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "CHANGE"
+script = ExtResource("5_mtybe")
 
 [node name="Background" type="HBoxContainer" parent="Main/TabContainer/General/Theme/CustomTheme"]
 layout_mode = 2
@@ -220,9 +241,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BACKGROUND_COLOR"
 
-[node name="BackgroundColorButton" parent="Main/TabContainer/General/Theme/CustomTheme/Background" instance=ExtResource("4_xjkde")]
+[node name="BackgroundColorButton" type="Button" parent="Main/TabContainer/General/Theme/CustomTheme/Background"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "CHANGE"
+script = ExtResource("5_mtybe")
 
 [node name="HSeparator4" type="HSeparator" parent="Main/TabContainer/General"]
 layout_mode = 2
@@ -281,13 +306,21 @@ layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Defaults" parent="Main/Buttons" instance=ExtResource("4_xjkde")]
+[node name="Defaults" type="Button" parent="Main/Buttons"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "DEFAULT_SETTINGS"
+script = ExtResource("5_mtybe")
 
-[node name="Back" parent="Main/Buttons" instance=ExtResource("4_xjkde")]
+[node name="Back" type="Button" parent="Main/Buttons"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "BACK"
+script = ExtResource("5_mtybe")
 
 [node name="ColorPopupPanel" type="PopupPanel" parent="."]
 size = Vector2i(400, 526)

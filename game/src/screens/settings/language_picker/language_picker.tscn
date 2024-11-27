@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://djrvl8pvkr7aa"]
 
 [ext_resource type="Script" path="res://src/screens/settings/language_picker/language_picker.gd" id="1_1ma02"]
-[ext_resource type="PackedScene" uid="uid://chc845g8trbih" path="res://src/ui_components/buttons/default_button/default_button.tscn" id="2_0d6br"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="2_mw0rf"]
 
 [node name="LanguagePicker" type="HBoxContainer"]
 anchors_preset = 8
@@ -18,27 +18,47 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_1ma02")
 
-[node name="English" parent="." instance=ExtResource("2_0d6br")]
+[node name="English" type="Button" parent="."]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "English"
+script = ExtResource("2_mw0rf")
 
-[node name="Portuguese" parent="." instance=ExtResource("2_0d6br")]
+[node name="Portuguese" type="Button" parent="."]
 visible = false
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Portuguese"
+script = ExtResource("2_mw0rf")
 
-[node name="Italian" parent="." instance=ExtResource("2_0d6br")]
+[node name="Italian" type="Button" parent="."]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Italian"
+script = ExtResource("2_mw0rf")
 
-[node name="Spanish" parent="." instance=ExtResource("2_0d6br")]
+[node name="Spanish" type="Button" parent="."]
 visible = false
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Spanish"
+script = ExtResource("2_mw0rf")
 
-[node name="German" parent="." instance=ExtResource("2_0d6br")]
+[node name="German" type="Button" parent="."]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "German"
+script = ExtResource("2_mw0rf")
 
 [connection signal="pressed" from="English" to="." method="_on_english_pressed"]
 [connection signal="pressed" from="Portuguese" to="." method="_on_portuguese_pressed"]

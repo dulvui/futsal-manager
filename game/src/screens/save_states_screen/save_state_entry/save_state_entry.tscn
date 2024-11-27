@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.gd" id="1_yugvl"]
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="2_mg3bp"]
-[ext_resource type="PackedScene" uid="uid://chc845g8trbih" path="res://src/ui_components/buttons/default_button/default_button.tscn" id="3_4vvh7"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_ppk54"]
 
 [node name="SaveState" type="VBoxContainer"]
 anchors_preset = -1
@@ -109,16 +109,24 @@ layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Delete" parent="Buttons" instance=ExtResource("3_4vvh7")]
+[node name="Delete" type="Button" parent="Buttons"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "DELETE"
+script = ExtResource("3_ppk54")
 
-[node name="Load" parent="Buttons" instance=ExtResource("3_4vvh7")]
+[node name="Load" type="Button" parent="Buttons"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "LOAD_GAME
 "
+script = ExtResource("3_ppk54")
 
 [node name="DeleteDialog" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
