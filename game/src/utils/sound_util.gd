@@ -62,7 +62,7 @@ func get_bus_mute(bus_id: AudioBus) -> bool:
 
 
 func play_button_sfx() -> void:
-	if Global.audio[AudioBus.UI_SFX].mute or button_press.playing:
+	if Global.audio[AudioBus.UI_SFX].mute:
 		return
 	button_press.play()
 
