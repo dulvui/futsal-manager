@@ -6,6 +6,10 @@ class_name DefaultButton
 extends Button
 
 
-func _on_pressed() -> void:
+func _ready() -> void:
+	tooltip_text = text
+
+
+func _pressed() -> void:
 	SoundUtil.play_button_sfx()
 
