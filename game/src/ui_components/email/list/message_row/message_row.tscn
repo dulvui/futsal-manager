@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://br52lmgs03oix"]
+[gd_scene load_steps=3 format=3 uid="uid://br52lmgs03oix"]
 
 [ext_resource type="Script" path="res://src/ui_components/email/list/message_row/message_row.gd" id="1_qccam"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="2_7pg3l"]
 
 [node name="MessageRow" type="MarginContainer"]
 anchors_preset = -1
@@ -22,6 +23,7 @@ metadata/_edit_use_anchors_ = true
 [node name="ReadButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("2_7pg3l")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
