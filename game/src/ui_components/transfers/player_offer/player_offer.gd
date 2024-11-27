@@ -74,7 +74,7 @@ func _on_less_pressed() -> void:
 	_calc_total()
 
 
-func _on_exchangeplayers_item_selected(index: int) -> void:
+func _on_exchange_players_item_selected(index: int) -> void:
 	var exchange_player: Player = exchange_players[index]
 	exchange_players.remove_at(index)
 
@@ -117,7 +117,6 @@ func _calc_total() -> void:
 
 func _on_amount_text_changed(new_text: String) -> void:
 	if regex.search(new_text):
-		amount_label.text = new_text
 		oldtext = amount_label.text
 	else:
 		amount_label.text = oldtext
@@ -146,3 +145,5 @@ func _on_confirm_pressed() -> void:
 
 	TransferUtil.make_offer(transfer)
 	confirm.emit()
+
+
