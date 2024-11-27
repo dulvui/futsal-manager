@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dual4o5whtk85"]
+[gd_scene load_steps=3 format=3 uid="uid://dual4o5whtk85"]
 
 [ext_resource type="Script" path="res://src/ui_components/info/info.gd" id="1_c8o2q"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="2_a2jd2"]
 
 [node name="Info" type="VBoxContainer"]
 anchors_preset = 15
@@ -33,6 +34,7 @@ text = "palpalpalpa"
 [node name="CopySeed" type="Button" parent="GenerationSeed"]
 layout_mode = 2
 text = "COPY"
+script = ExtResource("2_a2jd2")
 
 [node name="StartDate" type="HBoxContainer" parent="."]
 layout_mode = 2

@@ -118,7 +118,7 @@ alignment = 1
 
 [node name="SlowerButton" type="Button" parent="Main/Content/Buttons/Center/Speed"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -132,7 +132,7 @@ text = "X2"
 
 [node name="FasterButton" type="Button" parent="Main/Content/Buttons/Center/Speed"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

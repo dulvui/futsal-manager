@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbijtmv151qg7"]
+[gd_scene load_steps=4 format=3 uid="uid://cbijtmv151qg7"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/ui_components/transfers/player_offer/player_offer.gd" id="2"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_s2lfu"]
 
 [node name="PlayerOffer" type="PanelContainer"]
 anchors_preset = 15
@@ -52,6 +53,7 @@ size_flags_horizontal = 3
 [node name="Less" type="Button" parent="VBoxContainer/Details/Money"]
 layout_mode = 2
 text = "-"
+script = ExtResource("3_s2lfu")
 
 [node name="Amount" type="LineEdit" parent="VBoxContainer/Details/Money"]
 layout_mode = 2
@@ -61,6 +63,7 @@ text = "15000"
 [node name="More" type="Button" parent="VBoxContainer/Details/Money"]
 layout_mode = 2
 text = "+"
+script = ExtResource("3_s2lfu")
 
 [node name="DateLabel" type="Label" parent="VBoxContainer/Details"]
 layout_mode = 2
@@ -106,14 +109,16 @@ alignment = 1
 [node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "CANCEL"
+script = ExtResource("3_s2lfu")
 
 [node name="Confirm" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "CONFIRM"
+script = ExtResource("3_s2lfu")
 
-[connection signal="pressed" from="VBoxContainer/Details/Money/Less" to="." method="_on_Less_pressed"]
+[connection signal="pressed" from="VBoxContainer/Details/Money/Less" to="." method="_on_less_pressed"]
 [connection signal="text_changed" from="VBoxContainer/Details/Money/Amount" to="." method="_on_Amount_text_changed"]
-[connection signal="pressed" from="VBoxContainer/Details/Money/More" to="." method="_on_More_pressed"]
-[connection signal="item_selected" from="VBoxContainer/Details/ExchangePlayers" to="." method="_on_ExchangePlayers_item_selected"]
+[connection signal="pressed" from="VBoxContainer/Details/Money/More" to="." method="_on_more_pressed"]
+[connection signal="item_selected" from="VBoxContainer/Details/ExchangePlayers" to="." method="_on_exchange_players_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Confirm" to="." method="_on_confirm_pressed"]

@@ -58,7 +58,7 @@ func set_player(new_player: Player) -> void:
 	amount_label.text = str(amount)
 
 
-func _on_More_pressed() -> void:
+func _on_more_pressed() -> void:
 	if amount < team.budget:
 		amount += 1000
 		amount_label.text = str(amount)
@@ -66,7 +66,7 @@ func _on_More_pressed() -> void:
 	_calc_total()
 
 
-func _on_Less_pressed() -> void:
+func _on_less_pressed() -> void:
 	if amount > 0:
 		amount -= 1000
 		amount_label.text = str(amount)
@@ -74,13 +74,13 @@ func _on_Less_pressed() -> void:
 	_calc_total()
 
 
-func _on_ExchangePlayers_item_selected(index: int) -> void:
+func _on_exchangeplayers_item_selected(index: int) -> void:
 	var exchange_player: Player = exchange_players[index]
 	exchange_players.remove_at(index)
 
 	selected_players.append(player)
 
-	var remove_button: Button = Button.new()
+	var remove_button: Button = DefaultButton.new()
 	remove_button.text = exchange_player.name + " " + str(exchange_player.value / 1000) + "K"
 	remove_button.pressed.connect(remove_from_list.bind(exchange_player))
 	selected_players_box.add_child(remove_button)
@@ -99,7 +99,7 @@ func remove_from_list(p_player: Player) -> void:
 	# might be broken after Godot 4 upgrade, check _player and selected player
 	# before only _player existed
 	for selected_player: Player in selected_players:
-		var remove_button: Button = Button.new()
+		var remove_button: Button = DefaultButton.new()
 		remove_button.text = selected_player.name + " " + str(selected_player.value / 1000) + "K"
 		remove_button.pressed.connect(remove_from_list.bind(selected_player))
 		selected_players_box.add_child(remove_button)
@@ -115,7 +115,7 @@ func _calc_total() -> void:
 		total += selected_player.value
 
 
-func _on_Amount_text_changed(new_text: String) -> void:
+func _on_amount_text_changed(new_text: String) -> void:
 	if regex.search(new_text):
 		amount_label.text = new_text
 		oldtext = amount_label.text

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccipqeqmthtfr"]
+[gd_scene load_steps=4 format=3 uid="uid://ccipqeqmthtfr"]
 
 [ext_resource type="Script" path="res://src/ui_components/transfers/contract_offer/contract_offer.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="2"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_ycdro"]
 
 [node name="ContractOffer" type="PanelContainer"]
 anchors_preset = 15
@@ -31,6 +32,7 @@ text = "INCOME"
 [node name="IncomeLess" type="Button" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "-"
+script = ExtResource("3_ycdro")
 
 [node name="Income" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -40,6 +42,7 @@ text = "0"
 [node name="IncomeMore" type="Button" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "+"
+script = ExtResource("3_ycdro")
 
 [node name="YearsLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -49,6 +52,7 @@ text = "YEAR"
 [node name="YearsLess" type="Button" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "-"
+script = ExtResource("3_ycdro")
 
 [node name="Years" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -58,6 +62,7 @@ text = "1"
 [node name="YearsMore" type="Button" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "+"
+script = ExtResource("3_ycdro")
 
 [node name="BuyClauseLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -67,6 +72,7 @@ text = "BUY_CLAUSE"
 [node name="BuyClauseLess" type="Button" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "-"
+script = ExtResource("3_ycdro")
 
 [node name="BuyClause" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -76,10 +82,12 @@ text = "0"
 [node name="BuyClauseMore" type="Button" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "+"
+script = ExtResource("3_ycdro")
 
 [node name="Confirm" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "CONFIRM"
+script = ExtResource("3_ycdro")
 
 [node name="Cancel" type="Button" parent="VBoxContainer"]
 layout_mode = 2

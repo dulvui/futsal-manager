@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3l6aqkrmtjg2"]
+[gd_scene load_steps=4 format=3 uid="uid://c3l6aqkrmtjg2"]
 
 [ext_resource type="Script" path="res://src/ui_components/email/visual_message/visual_message.gd" id="1_t0t0y"]
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="2_a6odb"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_6mero"]
 
 [node name="VisualMessage" type="Control"]
 custom_minimum_size = Vector2(600, 0)
@@ -99,5 +100,6 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "ACTION"
+script = ExtResource("3_6mero")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BottomBar/Action" to="." method="_on_action_pressed"]

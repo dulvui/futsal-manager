@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://mvca6wjq0pv6"]
+[gd_scene load_steps=5 format=3 uid="uid://mvca6wjq0pv6"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1_pb4bf"]
 [ext_resource type="Script" path="res://src/ui_components/player_list/player_list.gd" id="2_ajejk"]
 [ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui_components/swtich_option_button/switch_option_button.tscn" id="3_x6w1m"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="4_k60vt"]
 
 [node name="PlayerList" type="VBoxContainer"]
 anchors_preset = 15
@@ -60,16 +61,22 @@ layout_mode = 2
 alignment = 1
 
 [node name="First" type="Button" parent="Footer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "1"
+script = ExtResource("4_k60vt")
 
 [node name="Prev2" type="Button" parent="Footer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "<<"
+script = ExtResource("4_k60vt")
 
 [node name="Prev" type="Button" parent="Footer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "<"
+script = ExtResource("4_k60vt")
 
 [node name="PageIndicator" type="Label" parent="Footer"]
 custom_minimum_size = Vector2(150, 0)
@@ -78,16 +85,22 @@ text = "1 / 5"
 horizontal_alignment = 1
 
 [node name="Next" type="Button" parent="Footer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = ">"
+script = ExtResource("4_k60vt")
 
 [node name="Next2" type="Button" parent="Footer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = ">>"
+script = ExtResource("4_k60vt")
 
 [node name="Last" type="Button" parent="Footer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "299"
+script = ExtResource("4_k60vt")
 
 [connection signal="text_changed" from="Filters1/NameSearch" to="." method="_on_name_search_text_changed"]
 [connection signal="item_selected" from="Filters1/ActiveView" to="." method="_on_active_view_item_selected"]

@@ -37,7 +37,7 @@ func setup(
 
 	for value: Variant in values:
 		if col_name == Const.SURNAME :
-			var button: Button = Button.new()	
+			var button: Button = DefaultButton.new()	
 			button.text = str(value)
 			button.tooltip_text = col_name
 			button.alignment = HORIZONTAL_ALIGNMENT_LEFT
