@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://qppc6sbc1cn0"]
+[gd_scene load_steps=3 format=3 uid="uid://qppc6sbc1cn0"]
 
 [ext_resource type="Script" path="res://src/screens/setup/setup_manager/setup_manager.gd" id="2_f1nd3"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="2_lxnvk"]
 
 [node name="Start" type="Control"]
 layout_mode = 3
@@ -91,6 +92,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CANCEL"
+script = ExtResource("2_lxnvk")
 metadata/_edit_use_anchors_ = true
 
 [node name="Continue" type="Button" parent="VBoxContainer/Buttons"]
@@ -98,6 +100,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CONTINUE"
+script = ExtResource("2_lxnvk")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="text_changed" from="VBoxContainer/Manager/Container/Name" to="." method="_on_name_text_changed"]

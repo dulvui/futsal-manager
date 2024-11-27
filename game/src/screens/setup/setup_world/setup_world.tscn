@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqcsyes1j6vwi"]
+[gd_scene load_steps=5 format=3 uid="uid://cqcsyes1j6vwi"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1_lar05"]
 [ext_resource type="Script" path="res://src/screens/setup/setup_world/setup_world.gd" id="2_s01se"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_g76wv"]
 [ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="3_jkofa"]
 
 [node name="Start" type="Control"]
@@ -108,6 +109,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 text = "RANDOM"
+script = ExtResource("3_g76wv")
 
 [node name="GeneratedSeedLineEdit" type="LineEdit" parent="VBoxContainer/Seed/GridContainer"]
 layout_mode = 2
@@ -119,6 +121,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 text = "DEFAULT"
+script = ExtResource("3_g76wv")
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
@@ -133,6 +136,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CANCEL"
+script = ExtResource("3_g76wv")
 metadata/_edit_use_anchors_ = true
 
 [node name="Continue" type="Button" parent="VBoxContainer/Buttons"]
@@ -140,6 +144,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CONTINUE"
+script = ExtResource("3_g76wv")
 metadata/_edit_use_anchors_ = true
 
 [node name="LoadingScreen" parent="." instance=ExtResource("3_jkofa")]
