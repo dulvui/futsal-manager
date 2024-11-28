@@ -6,6 +6,11 @@
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_n2piq"]
 
 [node name="General" type="VBoxContainer"]
+anchors_preset = -1
+anchor_right = 0.201
+anchor_bottom = 0.389
+offset_right = -385.92
+offset_bottom = -420.12
 size_flags_horizontal = 3
 script = ExtResource("1_gl78q")
 

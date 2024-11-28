@@ -4,8 +4,11 @@
 
 extends Node
 
+signal joypad_changed
+
+
 enum Type {
-	PS,
+	PLAYSTATION,
 	XBOX,
 	NINTENDO,
 	STEAM,
@@ -21,8 +24,16 @@ func _ready() -> void:
 	Input.joy_connection_changed.connect(_on_joypad_connected)
 
 
+func get_joypad_type_string() -> String:
+	if not joypads.is_empty():
+		var active_joypad: Dictionary = joypads.values()[0]
+		return Type.keys()[active_joypad.type]
+	return "NO_JOYPAD_CONNECTED"
+
+
 func _on_joypad_connected(device: int, connected: bool) -> void:
 	_register_joypad(device, connected)
+	joypad_changed.emit()
 
 
 func _register_joypad(id: int, connected: bool) -> void:
@@ -51,7 +62,7 @@ func _guess_type(info: Dictionary) -> Type:
 		raw_name = raw_name.to_lower()
 
 		if "sony" in raw_name:
-			return Type.PS
+			return Type.PLAYSTATION
 		if "microsoft" in raw_name:
 			return Type.XBOX
 		if "nintendo" in raw_name:
