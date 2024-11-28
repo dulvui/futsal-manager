@@ -6,44 +6,29 @@ extends HBoxContainer
 
 signal language_change
 
-@onready var en: Button = $English
-@onready var pt: Button = $Portuguese
-@onready var it: Button = $Italian
-@onready var es: Button = $Spanish
-@onready var de: Button = $German
-
+const LANGUAGES: Dictionary = {
+	"en": "English",
+	# "pt": "Portuguese",
+	"it": "Italiano",
+	# "es": "Español",
+	"de": "Deutsch",
+}
 
 func _ready() -> void:
 	# toggle active language
-	en.button_pressed = Global.language == "en" 
-	pt.button_pressed = Global.language == "pt" 
-	it.button_pressed = Global.language == "it" 
-	es.button_pressed = Global.language == "es" 
-	de.button_pressed = Global.language == "de" 
+	var button_group: ButtonGroup = ButtonGroup.new()
+	for language_key: String in LANGUAGES.keys():
+		var button: Button = DefaultButton.new()
+		button.text = LANGUAGES[language_key]
+		button.button_group = button_group
+		button.button_pressed = Global.language == language_key 
+		button.pressed.connect(_on_button_pressed.bind(language_key))
+		add_child(button)
 
 	print(Global.language)
 
 
-func _on_english_pressed() -> void:
-	Global.set_lang("en")
+func _on_button_pressed(language_key: String) -> void:
+	Global.set_lang(language_key)
 	language_change.emit()
 
-
-func _on_portuguese_pressed() -> void:
-	Global.set_lang("pt")
-	language_change.emit()
-
-
-func _on_italian_pressed() -> void:
-	Global.set_lang("it")
-	language_change.emit()
-
-
-func _on_german_pressed() -> void:
-	Global.set_lang("de")
-	language_change.emit()
-
-
-func _on_spanish_pressed() -> void:
-	Global.set_lang("es")
-	language_change.emit()
