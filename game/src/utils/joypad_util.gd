@@ -29,11 +29,8 @@ func _register_joypad(id: int, connected: bool) -> void:
 	var info: Dictionary = Input.get_joy_info(id)
 	if connected:
 		# check if can and should be ignored
-		if "vendor_id" in info and "product_id" in info:
-			var ignore_device: bool = Input.should_ignore_device(info.vendor_id, info.product_id)
-			if ignore_device:
-				print("joypad ignored id: %d info: %s"%[id, info])
-				return
+		if _should_be_ignored(info):
+			return
 		
 		# register joypad
 		joypads[id] = {
@@ -46,6 +43,8 @@ func _register_joypad(id: int, connected: bool) -> void:
 		joypads.erase(id)
 
 
+# _guess_type and _should_be_ignored currently supported only on Linux
+# Windows support PR here https://github.com/godotengine/godot/pull/91539
 func _guess_type(info: Dictionary) -> Type:
 	if "raw_name" in info:
 		var raw_name: String = info.raw_name
@@ -61,3 +60,12 @@ func _guess_type(info: Dictionary) -> Type:
 			return Type.STEAM
 
 	return Type.GENERIC
+
+
+func _should_be_ignored(info: Dictionary) -> bool:
+	if "vendor_id" in info and "product_id" in info:
+		var ignore_device: bool = Input.should_ignore_device(info.vendor_id, info.product_id)
+		if ignore_device:
+			print("joypad ignored info: %s"%info)
+			return true
+	return false
