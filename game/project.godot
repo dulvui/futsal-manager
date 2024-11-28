@@ -35,6 +35,7 @@ LoadingUtil="*res://src/utils/loading_util.gd"
 ThreadUtil="*res://src/utils/thread_util.gd"
 InputUtil="*res://src/utils/input_util.gd"
 SoundUtil="*res://src/utils/sound_util.gd"
+JoypadUtil="*res://src/utils/joypad_util.gd"
 
 [debug]
 

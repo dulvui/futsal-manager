@@ -48,6 +48,8 @@ func _input(event: InputEvent) -> void:
 			# Register the event as handled and stop polling
 			get_viewport().set_input_as_handled()
 		return
+	else:
+		get_viewport().set_input_as_handled()
 
 
 func start_focus(node: Control) -> void:
@@ -100,3 +102,4 @@ func _verify_focus() -> void:
 
 func _on_gui_focus_change(node: Control) -> void:
 	last_focus = node
+
