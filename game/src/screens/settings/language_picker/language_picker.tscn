@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://djrvl8pvkr7aa"]
+[gd_scene load_steps=4 format=3 uid="uid://djrvl8pvkr7aa"]
 
 [ext_resource type="Script" path="res://src/screens/settings/language_picker/language_picker.gd" id="1_1ma02"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="2_mw0rf"]
+[ext_resource type="ButtonGroup" uid="uid://dyptp08ejf3p2" path="res://src/screens/settings/language_picker/language_button_group.tres" id="2_qjntm"]
 
 [node name="LanguagePicker" type="HBoxContainer"]
 anchors_preset = 8
@@ -23,6 +24,8 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+toggle_mode = true
+button_group = ExtResource("2_qjntm")
 text = "English"
 script = ExtResource("2_mw0rf")
 
@@ -32,6 +35,8 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+toggle_mode = true
+button_group = ExtResource("2_qjntm")
 text = "Portuguese"
 script = ExtResource("2_mw0rf")
 
@@ -40,6 +45,8 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+toggle_mode = true
+button_group = ExtResource("2_qjntm")
 text = "Italian"
 script = ExtResource("2_mw0rf")
 
@@ -49,6 +56,8 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+toggle_mode = true
+button_group = ExtResource("2_qjntm")
 text = "Spanish"
 script = ExtResource("2_mw0rf")
 
@@ -57,6 +66,8 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+toggle_mode = true
+button_group = ExtResource("2_qjntm")
 text = "German"
 script = ExtResource("2_mw0rf")
 
