@@ -155,7 +155,7 @@ func prepare_next_round() -> bool:
 	return a_ready and b_ready
 
 
-func _prepare_next_round(matches: Array[Match], teams: Array) -> bool:
+func _prepare_next_round(matches: Array, teams: Array) -> bool:
 	for matchz: Match in matches:
 		if not matchz.over:
 			return false

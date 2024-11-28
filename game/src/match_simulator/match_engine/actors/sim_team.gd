@@ -85,6 +85,8 @@ func update() -> void:
 	# recover bench players stamina
 	for player: SimPlayer in players:
 		player.recover_stamina()
+	
+	# auto change players
 
 
 func check_changes() -> void:
@@ -167,6 +169,14 @@ func attack() -> void:
 					)
 				)
 			)
+
+
+func corner_defend(_other_players: Array[SimPlayer]) -> void:
+	pass
+
+
+func corner_attack() -> void:
+	pass
 
 
 func set_kick_off_formation(change_field_side: bool = false) -> void:

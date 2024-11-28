@@ -17,18 +17,19 @@ var team: Team
 var change_players: Array[VisualFormationPlayer]
 var only_lineup: bool
 
-@onready var formation_select: SwitchOptionButton = $Tactics/FormationSelect
-@onready var tactic_select_offense: SwitchOptionButton = $Tactics/TacticSelectOffense
-@onready var tactic_offense_intensity: HSlider = $Tactics/TacticOffenseIntensity
-@onready var tactic_select_pressing: SwitchOptionButton = $Tactics/TacticSelectPressing
-@onready var tactic_select_marking: SwitchOptionButton = $Tactics/TacticSelectMarking
+@onready var formation_select: SwitchOptionButton = %FormationSelect
+@onready var change_strategy_select: SwitchOptionButton = %ChangeStrategySelect
+@onready var tactic_select_offense: SwitchOptionButton = %TacticSelectOffense
+@onready var tactic_offense_intensity: HSlider = %TacticOffenseIntensity
+@onready var tactic_select_pressing: SwitchOptionButton = %TacticSelectPressing
+@onready var tactic_select_marking: SwitchOptionButton = %TacticSelectMarking
 
-@onready var goalkeeper: HBoxContainer = $LineUp/Goalkeeper
-@onready var defense: HBoxContainer = $LineUp/Defense
-@onready var center: HBoxContainer = $LineUp/Center
-@onready var attack: HBoxContainer = $LineUp/Attack
-@onready var lineup: VBoxContainer = $LineUp
-@onready var subs: VBoxContainer = $Subs/List
+@onready var goalkeeper: HBoxContainer = %Goalkeeper
+@onready var defense: HBoxContainer = %Defense
+@onready var center: HBoxContainer = %Center
+@onready var attack: HBoxContainer = %Attack
+@onready var lineup: VBoxContainer = %LineUp
+@onready var subs: VBoxContainer = %SubsList
 
 
 func _ready() -> void:
@@ -45,6 +46,7 @@ func setup(p_only_lineup: bool, p_team: Team = Global.team) -> void:
 
 	# set up fomation options
 	formation_select.setup(Formation.Variations.keys(), team.formation.variation)
+	change_strategy_select.setup(Formation.ChangeStrategy.keys(), team.formation.change_strategy)
 
 	# tactics offense
 	tactic_select_offense.setup(
@@ -186,6 +188,10 @@ func _on_formation_button_item_selected(index: int) -> void:
 	formation_request.emit()
 
 
+func _on_change_strategy_select_item_selected(index: int) -> void:
+	team.formation.change_strategy = index
+
+
 func _on_tactic_select_offense_item_selected(index: int) -> void:
 	team.formation.tactic_offense.tactic = index
 	tactic_request.emit()
@@ -204,4 +210,5 @@ func _on_tactic_select_pressing_item_selected(index: int) -> void:
 func _on_tactic_offense_intensity_value_changed(value: float) -> void:
 	team.formation.tactic_offense.intensity = int(value)
 	tactic_request.emit()
+
 

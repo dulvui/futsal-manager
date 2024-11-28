@@ -234,8 +234,11 @@ func _on_next_match_button_pressed() -> void:
 
 func _next_day() -> void:
 	if match_ready:
-		# simulate other matches in background
+		# thread simulation
 		ThreadUtil.random_results()
+		
+		# non threaded simulation
+		# Global.world.random_results()
 		
 		get_tree().change_scene_to_file("res://src/screens/match/match.tscn")
 		return
@@ -263,11 +266,13 @@ func _next_day() -> void:
 		next_match_button.disabled = true
 		next_match_button.hide()
 	elif Global.world.calendar.day().matches.size() > 0:
-		#simulate all other matches
-		LoadingUtil.start("SIMULATING_RESULTS", LoadingUtil.Type.MATCH_RESULTS, true)
-		loading_screen.show()
-		ThreadUtil.random_results()
-		#Global.world.random_results()
+		# threaded simulation
+		# LoadingUtil.start("SIMULATING_RESULTS", LoadingUtil.Type.MATCH_RESULTS, true)
+		# loading_screen.show()
+		# ThreadUtil.random_results()
+		
+		# non threaded simulation
+		Global.world.random_results()
 
 	visual_calendar.setup()
 

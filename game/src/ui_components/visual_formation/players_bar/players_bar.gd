@@ -13,16 +13,19 @@ const FormationPlayer: PackedScene = preload("res://src/ui_components/visual_for
 var change_players: Array[Player]
 var team: Team
 
-@onready var players: HBoxContainer = $Players
+@onready var players: HBoxContainer = %Players
+@onready var change_strategy_select: SwitchOptionButton = %ChangeStrategySelect
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	
 	change_players = []
-
+	
 
 func setup(p_team: Team) -> void:
 	team = p_team
+	
+	change_strategy_select.setup(Formation.ChangeStrategy.keys(), team.formation.change_strategy)
 
 	for player: Player in team.get_starting_players():
 		var formation_player: VisualFormationPlayer = FormationPlayer.instantiate()
@@ -73,4 +76,9 @@ func _on_formation_player_select(player: Player) -> void:
 			change_players.clear()
 	else:
 		change_players.erase(player)
+
+
+func _on_change_strategy_select_item_selected(index: int) -> void:
+	team.formation.change_strategy = index
+
 

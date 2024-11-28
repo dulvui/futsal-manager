@@ -22,34 +22,46 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="Label" type="Label" parent="Tactics"]
+[node name="FormationLabel" type="Label" parent="Tactics"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "FORMATION"
 
 [node name="FormationSelect" parent="Tactics" instance=ExtResource("4_bi7d8")]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="Tactics"]
+[node name="ChangeStrategyLabel" type="Label" parent="Tactics"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CHANGE_STRATEGY"
+
+[node name="ChangeStrategySelect" parent="Tactics" instance=ExtResource("4_bi7d8")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="HSeparator3" type="HSeparator" parent="Tactics"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="Tactics"]
+[node name="HSeparator5" type="HSeparator" parent="Tactics"]
+layout_mode = 2
+
+[node name="TacticOffenseLabel" type="Label" parent="Tactics"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "TACTIC_OFFENSE"
 
 [node name="TacticSelectOffense" parent="Tactics" instance=ExtResource("4_bi7d8")]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="Tactics"]
+[node name="TacticOffenseIntensityLabel" type="Label" parent="Tactics"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "INTENSITY"
 
 [node name="TacticOffenseIntensity" type="HSlider" parent="Tactics"]
+unique_name_in_owner = true
 layout_mode = 2
 step = 10.0
 
@@ -59,42 +71,49 @@ layout_mode = 2
 [node name="HSeparator4" type="HSeparator" parent="Tactics"]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="Tactics"]
+[node name="TacticMarkingLabel" type="Label" parent="Tactics"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "MARKING"
 
 [node name="TacticSelectMarking" parent="Tactics" instance=ExtResource("4_bi7d8")]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="Tactics"]
+[node name="TacticPressingLabel" type="Label" parent="Tactics"]
 layout_mode = 2
 text = "PRESSING"
 
 [node name="TacticSelectPressing" parent="Tactics" instance=ExtResource("4_bi7d8")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="LineUp" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="Attack" type="HBoxContainer" parent="LineUp"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Center" type="HBoxContainer" parent="LineUp"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Defense" type="HBoxContainer" parent="LineUp"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Goalkeeper" type="HBoxContainer" parent="LineUp"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
@@ -104,11 +123,13 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 follow_focus = true
 
-[node name="List" type="VBoxContainer" parent="Subs"]
+[node name="SubsList" type="VBoxContainer" parent="Subs"]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
 [connection signal="item_selected" from="Tactics/FormationSelect" to="." method="_on_formation_button_item_selected"]
+[connection signal="item_selected" from="Tactics/ChangeStrategySelect" to="." method="_on_change_strategy_select_item_selected"]
 [connection signal="item_selected" from="Tactics/TacticSelectOffense" to="." method="_on_tactic_select_offense_item_selected"]
 [connection signal="value_changed" from="Tactics/TacticOffenseIntensity" to="." method="_on_tactic_offense_intensity_value_changed"]
 [connection signal="item_selected" from="Tactics/TacticSelectMarking" to="." method="_on_tactic_select_marking_item_selected"]

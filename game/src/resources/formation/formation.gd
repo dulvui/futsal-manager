@@ -16,7 +16,16 @@ enum Variations {
 	F1400,
 }
 
-@export var variation: int
+# defines if automated changes and strategy
+enum ChangeStrategy {
+	# change players if stamina is low
+	AUTO,
+	# manual change
+	MANUAL,
+}
+
+@export var variation: Variations
+@export var change_strategy: ChangeStrategy
 
 @export var goalkeeper: int
 @export var defense: int
@@ -31,22 +40,24 @@ enum Variations {
 
 func _init(
 	p_variation: Variations = Variations.F1121,
+	p_change_strategy: ChangeStrategy = ChangeStrategy.AUTO,
 	p_tactic_defense: TacticDefense = TacticDefense.new(),
 	p_tactic_offense: TacticOffense = TacticOffense.new(),
 	p_positions: Array[Position] = [],
 ) -> void:
 	variation = p_variation
-	set_variation(variation)
-
+	change_strategy = p_change_strategy
 	tactic_defense = p_tactic_defense
 	tactic_offense = p_tactic_offense
 	positions = p_positions
+	
+	set_variation(variation)
 
 
 func set_variation(p_variation: Variations) -> void:
 	variation = p_variation
 	var string_values: PackedStringArray = str(Variations.keys()[variation]).split()
-	string_values.remove_at(0)  # remove F
+	string_values.remove_at(0)  # remove F character from Variations key string
 
 	# extract int values
 	var int_values: Array[int] = []

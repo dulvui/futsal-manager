@@ -240,11 +240,16 @@ func set_corner(home: bool) -> void:
 	if home:
 		home_possess()
 		nearest_player = home_team.nearest_player_to_ball()
+		home_team.corner_attack()
+		away_team.corner_defend(home_team.players)
 		home_team.stats.corners += 1
 	else:
 		away_possess()
 		nearest_player = away_team.nearest_player_to_ball()
+		away_team.corner_attack()
+		home_team.corner_defend(away_team.players)
 		away_team.stats.corners += 1
+	
 	# set ball pos
 	if ball.pos.y < field.center.y:
 		# top
