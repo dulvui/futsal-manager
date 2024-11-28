@@ -19,6 +19,9 @@ EVENTS,Events,Events,Eventi
 TACTICS,Tactics,Taktiken,Tattiche
 FORMATION,Formation,Aufstellung,Formazione
 COMMENTARY,Commentary,Kommentare,Commenti
+CHANGE_STRATEGY,Change strategy,Wechsel Strategie,Strategia cambi
+AUTO,Automatic,Automatisch,Automatico
+MANUAL,Manual,Manuell,Manuale
 START,Start,Start,Inizia
 CALENDAR,Calendar,Kalender,Calendario
 TABLE,Table,Tabelle,Classifica
@@ -158,6 +161,7 @@ VALUE,Value,Wert,Valore
 SCALE,Scale,Skala,Scala
 GENERAL_SETTINGS,General,Allgemein,Generale
 INPUT_SETTINGS,Input,Eingabe,Tasti
+NO_JOYPAD_CONNECTED,No joypad connected,Kein Joypad verbunden,Nessun joypad connesso
 INTERFACE_SETTINGS,Interface,Oberfläche,Interfaccia
 THEMES,Themes,Themen,Temi
 FONT_COLOR,Font color,Schriftfarbe,Colore scrittura
