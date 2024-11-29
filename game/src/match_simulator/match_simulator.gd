@@ -55,6 +55,13 @@ func setup(home_team: Team, away_team: Team, match_seed: int) -> void:
 	# adjust sub viewport to field size + borders
 	sub_viewport.size = visual_match.visual_field.field.size
 
+	# set camera limits
+	var camera_offset: int = 100
+	camera.limit_left = -camera_offset
+	camera.limit_top = -camera_offset
+	camera.limit_right = match_engine.field.size.x + camera_offset
+	camera.limit_bottom = match_engine.field.size.y + camera_offset
+
 	# reset match_paused
 	Global.match_paused = false
 
