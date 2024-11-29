@@ -86,28 +86,7 @@ func update() -> void:
 	# TODO
 	# check injuries
 
-	# auto change players, if no change request already pending
-	var auto_change: bool = res_team.formation.change_strategy == Formation.ChangeStrategy.AUTO or simulated
-	if auto_change and not change_request:
-		var low_stamina_players: Array[SimPlayer] = []
-		for player: SimPlayer in players:
-			if player.player_res.stamina < 0.5:
-				low_stamina_players.append(player)
-
-		var bench: Array[SimPlayer] = all_players.slice(5)
-		# sort bench per stamina
-		bench.sort_custom(
-			func(a: SimPlayer, b: SimPlayer) -> bool:
-				return a.player_res.stamina >= b.player_res.stamina
-		)
-		# replace player, if possible
-		# for player: SimPlayer in low_stamina_players:
-		var p1: SimPlayer = low_stamina_players.pop_front()
-		var p2: SimPlayer = bench.pop_front()
-		if p1 and p2:
-			print("auto change in %d out %d"%[p1.player_res.nr, p2.player_res.nr])
-			res_team.change_players(p1.player_res, p2.player_res)
-			change_players_request()
+	_auto_change()
 
 
 func check_changes() -> void:
@@ -289,3 +268,50 @@ func _on_player_foul(player: Player) -> void:
 
 func _on_player_interception() -> void:
 	interception.emit()
+
+
+func _auto_change() -> void:
+	# auto change players, if no change request already pending
+	var auto_change: bool = res_team.formation.change_strategy == Formation.ChangeStrategy.AUTO or simulated
+	if auto_change and not change_request:
+		var auto_change_request: bool = false
+		var low_stamina_players: Array[SimPlayer] = []
+
+		# get tired players
+		for player: SimPlayer in players:
+			if player.player_res.stamina < 0.5:
+				low_stamina_players.append(player)
+
+		# sort bench per stamina
+		var bench: Array[SimPlayer] = all_players.slice(5)
+		bench.sort_custom(
+			func(a: SimPlayer, b: SimPlayer) -> bool:
+				return a.player_res.stamina >= b.player_res.stamina
+		)
+		
+		# find best position machting player and change them
+		var no_matching: Array[SimPlayer] = []
+		for player: SimPlayer in low_stamina_players:
+			var possible_subs: Array[SimPlayer] = bench.filter(
+				func(p: SimPlayer) -> bool:
+					return p.player_res.position.match_factor(player.player_res.position) >= 0.5
+			)
+			if possible_subs.size() > 0:
+				var sub: SimPlayer = possible_subs.pop_front()
+				bench.erase(sub)
+				res_team.change_players(player.player_res, sub.player_res)
+				auto_change_request = true
+			else:
+				no_matching.append(player)
+
+		# replace players that didnt find a good position match
+		for player: SimPlayer in low_stamina_players:
+			var sub: SimPlayer = bench.pop_front()
+			res_team.change_players(player.player_res, sub.player_res)
+			auto_change_request = true
+		
+		# trigger change player request only once
+		if auto_change_request:
+			change_players_request()
+
+

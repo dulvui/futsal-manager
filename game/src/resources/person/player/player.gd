@@ -177,3 +177,12 @@ func consume_stamina() -> void:
 	# print("stamina: %d consumtion: %f"%[attributes.physical.stamina, consumation])
 	stamina = maxf(0, stamina - consumation)
 
+
+func position_match_factor(p_position: Position) -> float:
+	var factor: float = position.match_factor(p_position)
+	for alt_position: Position in alt_positions:
+		var alt_factor: float = alt_position.match_factor(p_position)
+		factor = max(factor, alt_factor)
+	return factor
+
+

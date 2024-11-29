@@ -73,3 +73,32 @@ func random_variations() -> void:
 		variations.append(variation)
 
 	#print(variations)
+
+
+func match_factor(position: Position) -> float:
+	var p_type : Type = position.type
+
+	if type == p_type:
+		return 1
+	# same sector
+	if type in attack_types and p_type in attack_types:
+		return 0.75
+	if type in center_types and p_type in center_types:
+		return 0.75
+	if type in defense_types and p_type in defense_types:
+		return 0.75
+	# nearly same sector
+	if type in attack_types and p_type in center_types:
+		return 0.5
+	if type in center_types and p_type in attack_types:
+		return 0.5
+	if type in defense_types and p_type in center_types:
+		return 0.5
+	if type in center_types and p_type in defense_types:
+		return 0.5
+	# not same sector
+	if type in attack_types and p_type in defense_types:
+		return 0.25
+	if type in defense_types and p_type in attack_types:
+		return 0.25
+	return 0
