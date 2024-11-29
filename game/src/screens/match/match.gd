@@ -73,6 +73,8 @@ func _ready() -> void:
 	# no deep copy, since players itself acutally should keep changes
 	home_team = matchz.home.duplicate()
 	away_team = matchz.away.duplicate()
+	
+	match_simulator.setup(home_team, away_team, matchz.id)
 
 	home_name.text = matchz.home.name
 	away_name.text = matchz.away.name
@@ -81,11 +83,23 @@ func _ready() -> void:
 	if home_team.id == Global.team.id:
 		formation.setup(true, home_team)
 		players_bar.setup(home_team)
+		# connect change players signals to visuals
+		match_simulator.match_engine.home_team.player_changed.connect(
+			func() -> void:
+				players_bar.update_players()
+				formation.set_players()
+		)
 	else:
 		formation.setup(true, away_team)
 		players_bar.setup(away_team)
+		# connect change players signals to visuals
+		match_simulator.match_engine.away_team.player_changed.connect(
+			func() -> void:
+				players_bar.update_players()
+				formation.set_players()
+	)
 
-	match_simulator.setup(home_team, away_team, matchz.id)
+	
 	
 	# set colors
 	home_color.color = home_team.get_home_color()
@@ -235,13 +249,13 @@ func _on_match_simulator_action_message(message: String) -> void:
 
 
 func _on_formation_change_request() -> void:
-	players_bar.update_players()
+	# players_bar.update_players()
 	match_simulator.match_engine.home_team.change_players_request()
 	match_simulator.match_engine.away_team.change_players_request()
 
 
 func _on_players_bar_change_request() -> void:
-	formation.set_players()
+	# formation.set_players()
 	match_simulator.match_engine.home_team.change_players_request()
 	match_simulator.match_engine.away_team.change_players_request()
 

@@ -52,7 +52,7 @@ func setup(p_team: Team) -> void:
 func update_players() -> void:
 	for i: int in team.get_lineup_players().size():
 		var player: Player = team.players[i]
-		var visual_player: VisualFormationPlayer = get_node(str(player.id))
+		var visual_player: VisualFormationPlayer = players.get_node(str(player.id))
 		players.move_child(visual_player, i)
 
 

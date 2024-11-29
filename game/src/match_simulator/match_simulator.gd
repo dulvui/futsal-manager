@@ -38,7 +38,7 @@ func setup(home_team: Team, away_team: Team, match_seed: int) -> void:
 	match_engine = MatchEngine.new()
 	match_engine.setup(home_team, away_team, match_seed)
 
-	# connect change players signals to visual teams
+	# connect change players signals to visuals
 	match_engine.home_team.player_changed.connect(
 		func() -> void:
 			visual_match.home_team.change_players(match_engine.home_team)

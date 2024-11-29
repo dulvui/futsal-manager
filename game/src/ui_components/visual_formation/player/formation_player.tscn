@@ -46,6 +46,13 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
+[node name="Stamina" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
 [node name="Name" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Dalvai"
@@ -59,14 +66,9 @@ label_settings = SubResource("LabelSettings_y850m")
 horizontal_alignment = 1
 
 [node name="Prestige" type="Label" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "*****"
 horizontal_alignment = 1
-
-[node name="Stamina" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-max_value = 1.0
-value = 1.0
-show_percentage = false
 
 [connection signal="pressed" from="MarginContainer/Select" to="." method="_on_select_pressed"]

@@ -10,8 +10,8 @@ signal player_changed
 
 var res_team: Team
 
-var players: Array[SimPlayer]
 # players in field
+var players: Array[SimPlayer]
 var all_players: Array[SimPlayer]
 
 var change_request: bool
@@ -79,14 +79,34 @@ func setup(
 
 
 func update() -> void:
+	# recover bench players stamina
+	for player: SimPlayer in all_players.slice(5):
+		player.recover_stamina()
+	
 	# TODO
 	# check injuries
 
-	# recover bench players stamina
-	for player: SimPlayer in players:
-		player.recover_stamina()
-	
-	# auto change players
+	# auto change players, if no change request already pending
+	if res_team.formation.change_strategy == Formation.ChangeStrategy.AUTO and not change_request:
+		var low_stamina_players: Array[SimPlayer] = []
+		for player: SimPlayer in players:
+			if player.player_res.stamina < 10:
+				low_stamina_players.append(player)
+
+		var bench: Array[SimPlayer] = all_players.slice(5)
+		# sort bench per stamina
+		bench.sort_custom(
+			func(a: SimPlayer, b: SimPlayer) -> bool:
+				return a.player_res.stamina >= b.player_res.stamina
+		)
+		# replace player, if possible
+		# for player: SimPlayer in low_stamina_players:
+		var p1: SimPlayer = low_stamina_players.pop_front()
+		var p2: SimPlayer = bench.pop_front()
+		if p1 and p2:
+			print("auto change in %d out %d"%[p1.player_res.nr, p2.player_res.nr])
+			res_team.change_players(p1.player_res, p2.player_res)
+			change_players_request()
 
 
 func check_changes() -> void:
