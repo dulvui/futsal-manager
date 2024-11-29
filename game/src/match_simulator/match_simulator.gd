@@ -67,6 +67,10 @@ func setup(home_team: Team, away_team: Team, match_seed: int) -> void:
 
 
 func simulate_to_fulltime() -> void:
+	# set simulation flags to activate auto changes ecc
+	match_engine.home_team.simulated = true
+	match_engine.away_team.simulated = true
+
 	timer.stop()
 	
 	# first half

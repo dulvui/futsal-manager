@@ -87,7 +87,8 @@ func update() -> void:
 	# check injuries
 
 	# auto change players, if no change request already pending
-	if res_team.formation.change_strategy == Formation.ChangeStrategy.AUTO and not change_request:
+	var auto_change: bool = res_team.formation.change_strategy == Formation.ChangeStrategy.AUTO or simulated
+	if auto_change and not change_request:
 		var low_stamina_players: Array[SimPlayer] = []
 		for player: SimPlayer in players:
 			if player.player_res.stamina < 0.5:
