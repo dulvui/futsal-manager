@@ -90,7 +90,7 @@ func update() -> void:
 	if res_team.formation.change_strategy == Formation.ChangeStrategy.AUTO and not change_request:
 		var low_stamina_players: Array[SimPlayer] = []
 		for player: SimPlayer in players:
-			if player.player_res.stamina < 10:
+			if player.player_res.stamina < 0.5:
 				low_stamina_players.append(player)
 
 		var bench: Array[SimPlayer] = all_players.slice(5)
