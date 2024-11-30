@@ -73,7 +73,7 @@ func setup(
 	players = all_players.slice(0, 5)
 	
 	# set goalkeeper flag
-	players[0].is_goalkeeper = true
+	players[0].make_goalkeeper()
 	
 	set_kick_off_formation()
 

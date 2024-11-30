@@ -11,28 +11,11 @@ signal foul
 #signal dribble
 signal pass_received
 
-enum State {
-	# generic
-	IDLE,
-	MOVE,
-	# attack
-	DRIBBLE,
-	PASSING,
-	SHOOTING,
-	RECEIVE_PASS,
-	# defense
-	TACKLE,
-	# goalkeeper
-	SAVE_SHOT,
-	POSITIONING,
-}
-
-var state: State
-
 # resources
 var player_res: Player
 var ball: SimBall
 var field: SimField
+var state_machine: StateMachine
 # positions
 var start_pos: Vector2
 var pos: Vector2
@@ -43,19 +26,26 @@ var destination: Vector2
 var speed: int
 #TODO reduce radius with low stamina
 var interception_radius: int
-	# generic
 
 # distances, calculated by action util
 var distance_to_goal: float
 var distance_to_own_goal: float
 var distance_to_ball: float
-var distance_to_enemy: float
+var distance_to_player: float
 
 # goalkeeper properties
 var is_goalkeeper: bool
 var left_base: Vector2
 var right_base: Vector2
 var left_half: bool
+
+
+func _init() -> void:
+	state_machine = PlayerStateMachine.new()
+	state_machine.setup(ball)
+
+	# initial test values
+	interception_radius = 10
 
 
 func setup(
@@ -68,113 +58,35 @@ func setup(
 	ball = p_ball
 	field = p_field
 	left_half = p_left_half
-	# initial test values
-	interception_radius = 10
 	
 	# goalkeeper properties
 	left_base = Vector2(field.line_left + 30, field.size.y / 2)
 	right_base = Vector2(field.line_right - 30, field.size.y / 2)
 
-	state = State.IDLE
+
+func make_goalkeeper() -> void:
+	state_machine = GoalkeeperStateMachine.new()
+	state_machine.setup(ball)
+	is_goalkeeper = true
 
 
 func update(team_has_ball: bool) -> void:
-	if is_goalkeeper:
-		goalkeeper_update(team_has_ball)
-	else:
-		player_update(team_has_ball)
+	state_machine.update(team_has_ball, is_touching_ball(), distance_to_player)
 
-
-func player_update(team_has_ball: bool) -> void:
-	match state:
-		State.IDLE:
-			if is_touching_ball():
-				if team_has_ball:
-					if _should_shoot():
-						state = State.SHOOTING
-					elif _should_pass():
-						state = State.PASSING
-					elif _should_dribble():
-						state = State.DRIBBLE
-					else:
-						stop()
-						ball.stop()
-				else:
-					state = State.TACKLE
-			else:
-				state = State.MOVE
-		State.RECEIVE_PASS:
-			if is_touching_ball():
-				pass_received.emit()
-				ball.stop()
-				# small movement when stopping ball
-				speed = RngUtil.match_rng.randi_range(3, 7)
-				ball.dribble(destination, speed)
-				_move()
-				state = State.IDLE
-		State.DRIBBLE:
-			speed = RngUtil.match_rng.randi_range(5, 20)
-			ball.dribble(destination, speed)
+	match state_machine.state:
+		StateMachine.State.MOVE, StateMachine.State.DRIBBLE:
 			_move()
-			state = State.IDLE
-		State.PASSING:
+		StateMachine.State.PASSING:
 			short_pass.emit()
-			state = State.IDLE
-		State.SHOOTING:
+		StateMachine.State.SHOOTING:
 			shoot.emit()
-			ball.shoot(destination, speed)
-			state = State.IDLE
-		State.MOVE:
-			_move()
-			state = State.IDLE
-		State.TACKLE:
-			var tackle_factor: int = player_res.attributes.technical.tackling
-			var aggression_factor: int = player_res.attributes.mental.aggression
-			var random: int = RngUtil.match_rng.randi_range(1, 100)
-			# max 40% , min 2% for success tackle
-			if random > 100 - tackle_factor * 2:
-				interception.emit()
-			# max 20% , min 2% of foul
-			elif random < 42 - tackle_factor + aggression_factor:
-				foul.emit()
-			state = State.IDLE
-	# print("nr %d has ball %s state %s"%[player_res.nr, team_has_ball, State.keys()[state]])
-
-
-func goalkeeper_update(team_has_ball: bool) -> void:
-	if not team_has_ball and ball.state == SimBall.State.SHOOT:
-		speed = player_res.attributes.goalkeeper.reflexes
-		state = State.SAVE_SHOT
-
-	# reset save, if ball is no longer in shoot state
-	if state == State.SAVE_SHOT and ball.state != SimBall.State.SHOOT:
-		state = State.IDLE
-
-	match state:
-		State.PASSING:
-			short_pass.emit()
-			state = State.IDLE
-		State.POSITIONING:
-			if team_has_ball:
-				# back to base position
-				set_destination(start_pos)
-			else:
-				goalkeeper_follow_ball()
-			_move()
-		State.SAVE_SHOT:
+		# goalkeeper
+		StateMachine.State.SAVE_SHOT:
 			goalkeeper_follow_ball()
 			_move()
-			if block_shot():
-				ball.stop()
-				interception.emit()
-				state = State.IDLE
-				ball.state = SimBall.State.GOALKEEPER
-		State.IDLE:
-			if is_touching_ball():
-				state = State.PASSING
-			else:
-				state = State.POSITIONING
-
+		StateMachine.State.POSITIONING:
+			goalkeeper_follow_ball()
+			_move()
 
 
 func kick_off(p_pos: Vector2) -> void:
@@ -233,15 +145,6 @@ func goalkeeper_follow_ball() -> void:
 			set_destination(right_base)
 
 
-func block_shot() -> bool:
-	if is_touching_ball():
-		return (
-			RngUtil.match_rng.randi_range(0, 100)
-			< 69 + player_res.attributes.goalkeeper.handling * 2
-		)
-	return false
-
-
 func get_penalty_area_bounds(p_pos: Vector2) -> Vector2:
 	if p_pos.y > field.penalty_area_y_top + 10:
 		p_pos.y = field.penalty_area_y_top + 10
@@ -268,29 +171,7 @@ func bound_field(p_pos: Vector2) -> Vector2:
 	return p_pos
 
 
-func _should_dribble() -> bool:
-	# check something, but for now, nothing comes to my mind
-	return RngUtil.match_rng.randi_range(1, 100) > 70
-
-
-func _should_shoot() -> bool:
-	if ball.empty_net:
-		return true
-	if ball.players_in_shoot_trajectory < 2:
-		return RngUtil.match_rng.randi_range(1, 100) > 95
-	return RngUtil.match_rng.randi_range(1, 100) > 98
-
-
-func _should_pass() -> bool:
-	if distance_to_enemy < 50:
-		return RngUtil.match_rng.randi_range(1, 100) < 60
-	return RngUtil.match_rng.randi_range(1, 100) < 10
-
-
 func _move() -> void:
-	if state == State.RECEIVE_PASS:
-		return
-
 	if speed > 0:
 		last_pos = pos
 		pos = pos.move_toward(destination, speed * Const.SPEED)
