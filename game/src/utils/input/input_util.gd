@@ -5,6 +5,7 @@
 extends Node
 
 signal search
+signal type_changed(type: Type)
 
 enum Direction {
 	UP,
@@ -13,16 +14,26 @@ enum Direction {
 	RIGHT,
 }
 
+enum Type {
+	JOYPAD,
+	KEYBOARD,
+	#VIRTUAL_KEYBOARD,
+	TOUCH,
+}
+
 const ACTION_SEARCH: StringName = "SEARCH"
 const ACTION_CONTINUE: StringName = "CONTINUE"
 
-var focused: bool = true
+var focused: bool
+var type: Type
 var viewport: Viewport
 var first_focus: Control
 var last_focus: Control
 
 
 func _ready() -> void:
+	focused = true
+	type = Type.KEYBOARD
 	viewport = get_viewport()
 	viewport.gui_focus_changed.connect(_on_gui_focus_change)
 
@@ -40,6 +51,7 @@ func _notification(what: int) -> void:
 func _input(event: InputEvent) -> void:
 	if focused:
 		_verify_focus()
+		_verify_joypad(event)
 
 		# check for actions
 		if event.is_action_pressed(ACTION_SEARCH):
@@ -98,6 +110,17 @@ func _verify_focus() -> void:
 			first_focus.grab_focus()
 		else:
 			print("not able to regrab focus")
+
+
+func _verify_joypad(event: InputEvent) -> void:
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		if type != Type.JOYPAD:
+			type = Type.JOYPAD
+			type_changed.emit(Type.JOYPAD)
+	else:
+		if type != Type.KEYBOARD:
+			type = Type.KEYBOARD
+			type_changed.emit(Type.KEYBOARD)
 
 
 func _on_gui_focus_change(node: Control) -> void:
