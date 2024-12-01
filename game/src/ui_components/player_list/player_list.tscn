@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://mvca6wjq0pv6"]
+[gd_scene load_steps=6 format=3 uid="uid://mvca6wjq0pv6"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1_pb4bf"]
 [ext_resource type="Script" path="res://src/ui_components/player_list/player_list.gd" id="2_ajejk"]
+[ext_resource type="PackedScene" uid="uid://dqkcly2ad5fqy" path="res://src/ui_components/line_edit/default_line_edit.tscn" id="3_ha4c3"]
 [ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui_components/swtich_option_button/switch_option_button.tscn" id="3_x6w1m"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="4_k60vt"]
 
@@ -22,12 +23,9 @@ script = ExtResource("2_ajejk")
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="NameSearch" type="LineEdit" parent="Filters1"]
-custom_minimum_size = Vector2(400, 0)
+[node name="NameSearch" parent="Filters1" instance=ExtResource("3_ha4c3")]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Type / to search"
-caret_blink = true
 
 [node name="VSeparator2" type="VSeparator" parent="Filters1"]
 modulate = Color(1, 1, 1, 0)
