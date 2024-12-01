@@ -15,23 +15,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="KeyboardShortcut" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = -13.0
-offset_bottom = 13.0
-grow_horizontal = 0
-grow_vertical = 2
-text = "/"
-script = ExtResource("2_0s5ku")
-
-[node name="JoypadShortcut" type="Button" parent="."]
-unique_name_in_owner = true
-visible = false
+custom_minimum_size = Vector2(36, 0)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -43,7 +27,25 @@ offset_top = -13.0
 offset_bottom = 13.0
 grow_horizontal = 0
 grow_vertical = 2
-text = "/\\"
+text = "/"
+script = ExtResource("2_0s5ku")
+
+[node name="JoypadShortcut" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -13.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "/"
 script = ExtResource("2_0s5ku")
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]

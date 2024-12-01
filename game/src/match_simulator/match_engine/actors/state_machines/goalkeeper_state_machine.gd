@@ -6,23 +6,22 @@ class_name GoalkeeperStateMachine
 extends StateMachine
 
 
-func update(p_team_has_ball: bool, p_is_touching_ball: bool) -> void:
-	team_has_ball = p_team_has_ball
-	is_touching_ball = p_is_touching_ball
+func update(p_team_has_ball: bool, p_is_touching_ball: bool, p_distance_to_player: float) -> void:
+	super(p_team_has_ball, p_is_touching_ball, p_distance_to_player)
 
-	if not team_has_ball and ball.state == SimBall.State.SHOOT:
-		speed = player_res.attributes.goalkeeper.reflexes
-		state = State.SAVE_SHOT
-	
-	# reset save, if ball is no longer in shoot state
-	if state == State.SAVE_SHOT and ball.state != SimBall.State.SHOOT:
-		state = State.IDLE
-		if team_has_ball:
-			# back to base position
-			set_destination(start_pos)
-		else:
-			goalkeeper_follow_ball()
-		_move()
+	# if not team_has_ball and ball.state == SimBall.State.SHOOT:
+	# 	speed = player_res.attributes.goalkeeper.reflexes
+	# 	state = State.SAVE_SHOT
+	#
+	# # reset save, if ball is no longer in shoot state
+	# if state == State.SAVE_SHOT and ball.state != SimBall.State.SHOOT:
+	# 	state = State.IDLE
+	# 	if team_has_ball:
+	# 		# back to base position
+	# 		set_destination(start_pos)
+	# 	else:
+	# 		goalkeeper_follow_ball()
+	# 	_move()
 
 	match state:
 		State.PASSING:
@@ -82,9 +81,9 @@ func _should_pass() -> bool:
 
 
 func _block_shot() -> bool:
-	if is_touching_ball:
-		return (
-			RngUtil.match_rng.randi_range(0, 100)
-			< 69 + player_res.attributes.goalkeeper.handling * 2
-		)
+	# if is_touching_ball:
+	# 	return (
+	# 		RngUtil.match_rng.randi_range(0, 100)
+	# 		< 69 + player_res.attributes.goalkeeper.handling * 2
+	# 	)
 	return false

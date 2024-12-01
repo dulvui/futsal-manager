@@ -16,6 +16,8 @@ func _ready() -> void:
 	_shortcut_visibility(true)
 	
 	InputUtil.type_changed.connect(_on_input_type_changed)
+	
+	joypad_shortcut.text = JoypadUtil.get_button_sign(JOY_BUTTON_Y)
 
 
 func _shortcut_visibility(p_visible: bool) -> void:
@@ -29,6 +31,7 @@ func _shortcut_visibility(p_visible: bool) -> void:
 
 func _on_input_type_changed(_type: InputUtil.Type) -> void:
 	_shortcut_visibility(not has_focus())
+	joypad_shortcut.text = JoypadUtil.get_button_sign(JOY_BUTTON_Y)
 
 
 func _on_focus_entered() -> void:

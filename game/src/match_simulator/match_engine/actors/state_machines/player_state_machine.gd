@@ -17,14 +17,14 @@ func update(
 		State.IDLE:
 			_state_idle()
 		State.RECEIVE_PASS:
-			_state_recive_pass()
+			_state_receive_pass()
 		State.DRIBBLE:
+			state = State.IDLE
+		State.MOVE:
 			state = State.IDLE
 		State.PASSING:
 			state = State.IDLE
 		State.SHOOTING:
-			state = State.IDLE
-		State.MOVE:
 			state = State.IDLE
 		State.TACKLE:
 			state = State.IDLE
@@ -46,7 +46,7 @@ func _state_idle() -> void:
 		state = State.MOVE
 
 
-func _state_recive_pass() -> void:
+func _state_receive_pass() -> void:
 	if is_touching_ball:
 		state = State.IDLE
 

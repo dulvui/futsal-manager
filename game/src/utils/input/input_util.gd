@@ -50,7 +50,11 @@ func _notification(what: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if focused:
-		_verify_focus()
+		
+		# only verifi focus, when pressed
+		if event.is_pressed():
+			_verify_focus()
+
 		_verify_joypad(event)
 
 		# check for actions

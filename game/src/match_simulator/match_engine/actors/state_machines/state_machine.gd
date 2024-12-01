@@ -6,14 +6,14 @@ class_name StateMachine
 
 
 enum State {
-	# generic
+	# no ball
 	IDLE,
 	MOVE,
-	# attack
+	RECEIVE_PASS,
+	# ball
 	DRIBBLE,
 	PASSING,
 	SHOOTING,
-	RECEIVE_PASS,
 	# defense
 	TACKLE,
 	# goalkeeper

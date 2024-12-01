@@ -269,7 +269,7 @@ func set_corner(home: bool) -> void:
 			ball.set_pos(field.bottom_right)
 
 	nearest_player.set_pos(ball.pos)
-	nearest_player.state = SimPlayer.State.PASSING
+	nearest_player.state_machine.state = StateMachine.State.PASSING
 
 
 func home_possess() -> void:
@@ -348,7 +348,7 @@ func _on_sim_ball_touch_line_out() -> void:
 		nearest_player = home_team.nearest_player_to_ball()
 
 	nearest_player.set_pos(ball.pos)
-	nearest_player.state = SimPlayer.State.PASSING
+	nearest_player.state_machine.state = StateMachine.State.PASSING
 
 
 func _on_sim_ball_goal() -> void:

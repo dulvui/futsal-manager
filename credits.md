@@ -30,3 +30,7 @@ Brazil
 https://en.wikipedia.org/wiki/List_of_cities_in_Brazil_by_population
 Argentina
 https://en.wikipedia.org/wiki/List_of_cities_in_Argentina_by_population
+
+# fonts
+Joypad glyph font
+https://shinmera.com/promptfont

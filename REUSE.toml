@@ -81,3 +81,11 @@ path = [
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Copyright (c) 2020 Kenney (kenney.nl)"
 SPDX-License-Identifier = "CC0-1.0"
+
+# joypad button glyphs font https://shinmera.com/promptfont
+[[annotations]]
+path = "game/assets/fonts/promptfont.ttf"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Copyright (c) Yukari 'Shinmera' Hafner"
+SPDX-License-Identifier = "OFL-1.1"
+

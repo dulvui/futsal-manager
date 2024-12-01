@@ -135,7 +135,7 @@ func defend(other_players: Array[SimPlayer]) -> void:
 	if ball.state != SimBall.State.GOALKEEPER:
 		var nearest_player: SimPlayer = nearest_player_to_ball()
 		nearest_player.set_destination(ball.pos)
-		nearest_player.state = SimPlayer.State.MOVE
+		nearest_player.state_machine.state = StateMachine.State.MOVE
 
 
 func attack() -> void:
@@ -147,7 +147,7 @@ func attack() -> void:
 		player.update(true)
 
 		# set destinations
-		if player.state != SimPlayer.State.DRIBBLE:
+		if player.state_machine.state == StateMachine.State.DRIBBLE:
 			# y towards goal, to block goal
 			var factor: int = RngUtil.match_rng.randi_range(30, 60)
 			var deviation: Vector2 = Vector2(-factor, factor)
@@ -195,7 +195,7 @@ func set_kick_off_formation(change_field_side: bool = false) -> void:
 	# move 2 attackers to kickoff and pass to random player
 	if has_ball:
 		players[4].set_pos(field.center + Vector2(0, 0))
-		players[4].state = SimPlayer.State.PASSING
+		players[4].state_machine.state = StateMachine.State.PASSING
 
 		players[3].set_pos(field.center + Vector2(0, 100))
 
@@ -214,7 +214,7 @@ func pass_to_random_player(passing_player: SimPlayer = null) -> void:
 		random_player = players[RngUtil.match_rng.randi_range(1,  players.size() - 1)]
 
 	ball.short_pass(random_player.pos, 55)
-	random_player.state = SimPlayer.State.RECEIVE_PASS
+	random_player.state_machine.state = StateMachine.State.RECEIVE_PASS
 	random_player.stop()
 
 	stats.passes += 1

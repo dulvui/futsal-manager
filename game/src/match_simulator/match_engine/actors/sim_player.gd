@@ -4,9 +4,9 @@
 
 class_name SimPlayer
 
-signal interception
 signal short_pass
 signal shoot
+signal interception
 signal foul
 #signal dribble
 signal pass_received
@@ -72,6 +72,11 @@ func make_goalkeeper() -> void:
 
 func update(team_has_ball: bool) -> void:
 	state_machine.update(team_has_ball, is_touching_ball(), distance_to_player)
+
+	# TODO use this signals
+	interception.emit()
+	pass_received.emit()
+	foul.emit()
 
 	match state_machine.state:
 		StateMachine.State.MOVE, StateMachine.State.DRIBBLE:
