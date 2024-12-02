@@ -128,7 +128,7 @@ func get_matches(cup: Cup) -> Array[Array]:
 
 			matches.append(match_day_2)
 
-	else:
+	elif teams_a.size() == 1 and teams_b.size() == 1:
 		# final match
 		var matchz: Match = Match.new()
 		matchz.setup(teams_a[0], teams_b[0], cup.id, cup.name)

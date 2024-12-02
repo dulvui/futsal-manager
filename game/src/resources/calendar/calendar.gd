@@ -59,7 +59,7 @@ func initialize(next_season: bool = false) -> void:
 		date.year += 1
 		date = _get_next_day(date)
 	else:
-		date = Global.save_states.temp_state.start_date
+		date = Global.start_date
 
 	# set start date
 	date.day = Const.SEASON_START_DAY

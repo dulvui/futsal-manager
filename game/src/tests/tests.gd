@@ -35,6 +35,7 @@ static func setup_mock_world(use_test_file: bool) -> void:
 	if Global.world == null:
 		print("setting up mock world...")
 		Global.start_date = Time.get_datetime_dict_from_system()
+		Global.save_states.new_temp_state()
 		Global.manager = create_mock_manager()
 		Global.world = create_mock_world(use_test_file)
 		var league: League = Global.world.continents[0].nations[0].leagues[0]
