@@ -75,8 +75,6 @@ func _initialize_tree(search_string: String = "") -> void:
 
 		if items.is_empty():
 			_create_item("NO_COMPETITON_FOUND")
-
-
 	
 	select(competition_name)
 
@@ -112,7 +110,7 @@ func _on_tree_item_mouse_selected(_mouse_position: Vector2, _mouse_button_index:
 		SoundUtil.play_button_sfx()
 
 
-func _on_default_line_edit_text_changed(new_text: String) -> void:
+func _on_search_line_edit_text_changed(new_text: String) -> void:
 	_initialize_tree(new_text.to_lower())
 
 

@@ -51,6 +51,8 @@ WELCOME,Welcome,Wilkommen,Benvenuto
 MALE,Male,Männlich,Maschile
 FEMALE,Female,Weiblich,Femminile
 MIXED,Mixed,Gemischt,Misto
+WORLD,World,Welt,Mondo
+CONTINENTS,Continents,Kontinente,Continenti
 ITALY,Italy,Italien,Italia
 SPAIN,Spain,Spanien,Spagna
 ROMANIA,Romania,Rumänien,Romania
@@ -190,3 +192,5 @@ COMPETITIONS,Competitions,Wettbewerbe,Competizioni
 TODAY,Today,Heute,Oggi
 NO_MATCH,No match,Kein Spiel,Nessuna partita
 TRANSFERMARKET,Transfermarket,Transfermarkt,Sessione mercato
+NO_TEAM_FOUND,No team found,Keine Mannschaft gefunden,Nessuna squadra trovata
+NO_COMPETITION_FOUND,No competition found,Kein Wettebewerb gefunden,Nessuna competizione trovata

@@ -23,5 +23,5 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[connection signal="text_changed" from="SearchLineEdit" to="." method="_on_default_line_edit_text_changed"]
+[connection signal="text_changed" from="SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
 [connection signal="item_mouse_selected" from="Tree" to="." method="_on_tree_item_mouse_selected"]
