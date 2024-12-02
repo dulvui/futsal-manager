@@ -162,5 +162,5 @@ func _buffer_append() -> void:
 	buffer.pop_front()
 
 	if same_state_count == BUFFER_SIZE / 2:
-		print("state machine stuck on state: %d"%state)
+		print("state machine stuck on state: %s"%State.keys()[state])
 

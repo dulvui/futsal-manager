@@ -79,6 +79,9 @@ func setup(
 
 
 func update() -> void:
+	# always set goalkeeper flag, since when chaging players, flag is not set
+	players[0].make_goalkeeper()
+	
 	# recover bench players stamina
 	for player: SimPlayer in all_players.slice(5):
 		player.recover_stamina()

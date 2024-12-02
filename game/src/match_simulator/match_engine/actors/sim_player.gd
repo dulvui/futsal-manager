@@ -81,6 +81,8 @@ func update(team_has_ball: bool) -> void:
 	match state_machine.state:
 		StateMachine.State.MOVE, StateMachine.State.DRIBBLE:
 			_move()
+			if Geometry2D.is_point_in_circle(pos, destination, 5):
+				state_machine.state = StateMachine.State.IDLE
 		StateMachine.State.PASSING:
 			short_pass.emit()
 		StateMachine.State.RECEIVED_PASS:
