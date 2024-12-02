@@ -99,6 +99,7 @@ metadata/_edit_use_anchors_ = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_type_variation = &"ImportantButton"
 text = "CONTINUE"
 script = ExtResource("2_lxnvk")
 metadata/_edit_use_anchors_ = true

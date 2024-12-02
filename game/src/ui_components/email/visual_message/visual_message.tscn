@@ -99,6 +99,7 @@ alignment = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+theme_type_variation = &"ImportantButton"
 text = "ACTION"
 script = ExtResource("3_6mero")
 
