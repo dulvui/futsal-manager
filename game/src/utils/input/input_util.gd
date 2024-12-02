@@ -4,7 +4,7 @@
 
 extends Node
 
-signal search
+# signal search
 signal type_changed(type: Type)
 
 enum Direction {
@@ -51,18 +51,18 @@ func _notification(what: int) -> void:
 func _input(event: InputEvent) -> void:
 	if focused:
 		
-		# only verifi focus, when pressed
+		# only verify focus, when pressed
 		if event.is_pressed():
 			_verify_focus()
 
 		_verify_joypad(event)
 
 		# check for actions
-		if event.is_action_pressed(ACTION_SEARCH):
-			print("search pressed")
-			search.emit()
-			# Register the event as handled and stop polling
-			get_viewport().set_input_as_handled()
+		# if event.is_action_pressed(ACTION_SEARCH):
+		# 	print("search pressed")
+		# 	search.emit()
+		# 	# Register the event as handled and stop polling
+		# 	get_viewport().set_input_as_handled()
 		return
 	else:
 		get_viewport().set_input_as_handled()
@@ -90,18 +90,18 @@ func _setup_actions() -> void:
 	var continue_joypad: InputEventJoypadButton = InputEventJoypadButton.new()
 	continue_joypad.button_index = JOY_BUTTON_START
 	
-	# search
-	InputMap.add_action(ACTION_SEARCH)
-	var search_key: InputEventKey = InputEventKey.new()
-	search_key.keycode = KEY_F
-	search_key.ctrl_pressed = true
-	InputMap.action_add_event(ACTION_SEARCH, search_key)
-	var search_vim: InputEventKey = InputEventKey.new()
-	search_vim.keycode = KEY_SLASH
-	InputMap.action_add_event(ACTION_SEARCH, search_vim)
-	var search_joypad: InputEventJoypadButton = InputEventJoypadButton.new()
-	search_joypad.button_index = JOY_BUTTON_Y
-	InputMap.action_add_event(ACTION_SEARCH, search_joypad)
+	# # search
+	# InputMap.add_action(ACTION_SEARCH)
+	# var search_key: InputEventKey = InputEventKey.new()
+	# search_key.keycode = KEY_F
+	# search_key.ctrl_pressed = true
+	# InputMap.action_add_event(ACTION_SEARCH, search_key)
+	# var search_vim: InputEventKey = InputEventKey.new()
+	# search_vim.keycode = KEY_SLASH
+	# InputMap.action_add_event(ACTION_SEARCH, search_vim)
+	# var search_joypad: InputEventJoypadButton = InputEventJoypadButton.new()
+	# search_joypad.button_index = JOY_BUTTON_Y
+	# InputMap.action_add_event(ACTION_SEARCH, search_joypad)
 
 
 func _verify_focus() -> void:

@@ -10,7 +10,7 @@ signal team_selected(team: Team)
 var teams: Dictionary
 var items: Array[TreeItem]
 
-@onready var search_line_edit: DefaultLineEdit = %SearchLineEdit
+@onready var search_line_edit: SearchLineEdit = %SearchLineEdit
 @onready var tree: Tree = %Tree
 
 

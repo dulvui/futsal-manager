@@ -1,10 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4woicggddkls"]
+[gd_scene load_steps=8 format=3 uid="uid://b4woicggddkls"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dj3ts0dee4m6" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn" id="4_5irse"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="4_nkxl6"]
 [ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="4_qla42"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_w4bix"]
+device = -1
+ctrl_pressed = true
+keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_s6stw"]
+button_index = 2
+pressed = true
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -63,7 +73,6 @@ size_flags_vertical = 4
 theme_type_variation = &"ImportantButton"
 text = "CONTINUE"
 script = ExtResource("4_nkxl6")
-button_index = 0
 
 [node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -91,6 +100,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "SETTINGS"
 script = ExtResource("4_nkxl6")
+key_event = SubResource("InputEventKey_w4bix")
+joypad_button_event = SubResource("InputEventJoypadButton_s6stw")
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

@@ -12,7 +12,7 @@ var competition_name: String
 var competitions: Dictionary
 var items: Array[TreeItem]
 
-@onready var search_line_edit: DefaultLineEdit = %SearchLineEdit
+@onready var search_line_edit: SearchLineEdit = %SearchLineEdit
 @onready var tree: Tree = %Tree
 
 

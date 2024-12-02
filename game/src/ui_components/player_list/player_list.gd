@@ -31,7 +31,7 @@ var page: int
 var page_max: int
 var page_size: int
 
-@onready var search_line_edit: DefaultLineEdit = $Filters1/NameSearch
+@onready var search_line_edit: SearchLineEdit = $Filters1/NameSearch
 @onready var active_view_option_button: SwitchOptionButton = $Filters1/ActiveView
 @onready var team_select: OptionButton = $Filters2/TeamSelect
 @onready var league_select: OptionButton = $Filters2/LeagueSelect

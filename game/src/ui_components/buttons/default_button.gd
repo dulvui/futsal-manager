@@ -6,8 +6,9 @@ class_name DefaultButton
 extends Button
 
 
-@export var button_index: JoyButton = JOY_BUTTON_INVALID
-@export var axis_index: JoyAxis = JOY_AXIS_INVALID
+@export var key_event: InputEventKey
+@export var joypad_button_event: InputEventJoypadButton
+@export var joypad_motion_event: InputEventJoypadMotion
 
 
 func _ready() -> void:
@@ -18,7 +19,8 @@ func _ready() -> void:
 	if text.length() > 1 or text.is_valid_int():
 		alignment = HORIZONTAL_ALIGNMENT_LEFT
 
-	_setup_shortcut()
+	_setup_shortcuts()
+	_set_shortcut_glyph()
 	
 	InputUtil.type_changed.connect(_on_input_type_changed)
 
@@ -27,20 +29,28 @@ func _pressed() -> void:
 	SoundUtil.play_button_sfx()
 
 
-func _on_input_type_changed(_type: InputUtil.Type) -> void:
-	_setup_shortcut()
+func _setup_shortcuts() -> void:
+	shortcut = Shortcut.new()
+	
+	if joypad_button_event:
+		shortcut.events.append(joypad_button_event)
+	if key_event:
+		shortcut.events.append(key_event)
 
 
-func _setup_shortcut() -> void:
-	if InputUtil.type == InputUtil.Type.JOYPAD and button_index != JOY_BUTTON_INVALID:
-		icon = JoypadUtil.get_button_icon(button_index)
-		var joypad_event: InputEventJoypadButton = InputEventJoypadButton.new()
-		joypad_event.button_index = button_index
-
-		shortcut = Shortcut.new()
-		shortcut.events.append(joypad_event)
+func _set_shortcut_glyph() -> void:
+	if InputUtil.type == InputUtil.Type.JOYPAD and joypad_button_event:
+		icon = JoypadUtil.get_button_icon(joypad_button_event.button_index)
+		text = tooltip_text
+	elif InputUtil.type == InputUtil.Type.KEYBOARD and key_event: 
+		text = tooltip_text + " " + key_event.as_text()
+		icon = null
 	else:
 		icon = null
-		shortcut = null
+		text = tooltip_text
+
+
+func _on_input_type_changed(_type: InputUtil.Type) -> void:
+	_set_shortcut_glyph()
 
 

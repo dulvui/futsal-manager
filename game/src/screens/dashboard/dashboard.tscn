@@ -221,7 +221,6 @@ size_flags_vertical = 4
 theme_type_variation = &"ImportantButton"
 text = "CONTINUE"
 script = ExtResource("3_kbasy")
-button_index = 10
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/MainContainer"]
 layout_mode = 2
