@@ -38,13 +38,14 @@ func _on_message_list_show_message(message: EmailMessage) -> void:
 	message_container.show_message(message)
 
 
-func _on_search_text_changed(new_text: String) -> void:
-	message_list.search(new_text)
-
-
 func _on_only_unread_toggled(toggled_on: bool) -> void:
 	message_list.unread(toggled_on)
 
 
 func _on_starred_toggled(toggled_on: bool) -> void:
 	message_list.starred(toggled_on)
+
+
+func _on_search_line_edit_text_changed(new_text:String) -> void:
+	message_list.search(new_text)
+

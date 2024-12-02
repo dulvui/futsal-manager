@@ -10,6 +10,7 @@ anchor_bottom = 0.0240741
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = " SEARCH"
+context_menu_enabled = false
 script = ExtResource("1_dh70n")
 metadata/_edit_use_anchors_ = true
 

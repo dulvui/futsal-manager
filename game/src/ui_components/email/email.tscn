@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcv0qm4k1wi4q"]
+[gd_scene load_steps=6 format=3 uid="uid://dcv0qm4k1wi4q"]
 
 [ext_resource type="Script" path="res://src/ui_components/email/email.gd" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://dqkcly2ad5fqy" path="res://src/ui_components/line_edit/default_line_edit.tscn" id="3_3e14y"]
 [ext_resource type="PackedScene" uid="uid://dfs434t5wtt6x" path="res://src/ui_components/email/list/message_list.tscn" id="3_5tb6d"]
 [ext_resource type="PackedScene" uid="uid://c3l6aqkrmtjg2" path="res://src/ui_components/email/visual_message/visual_message.tscn" id="3_diog3"]
 
@@ -21,11 +22,10 @@ script = ExtResource("1")
 layout_mode = 2
 alignment = 1
 
-[node name="SearchLineEdit" type="LineEdit" parent="Filters"]
+[node name="SearchLineEdit" parent="Filters" instance=ExtResource("3_3e14y")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
-placeholder_text = "SEARCH"
 
 [node name="VSeparator" type="VSeparator" parent="Filters"]
 modulate = Color(1, 1, 1, 0)
@@ -60,7 +60,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[connection signal="text_changed" from="Filters/SearchLineEdit" to="." method="_on_search_text_changed"]
+[connection signal="text_changed" from="Filters/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
 [connection signal="toggled" from="Filters/OnlyUnread" to="." method="_on_only_unread_toggled"]
 [connection signal="toggled" from="Filters/Starred" to="." method="_on_starred_toggled"]
 [connection signal="show_message" from="HSplitContainer/MessageList" to="." method="_on_message_list_show_message"]
