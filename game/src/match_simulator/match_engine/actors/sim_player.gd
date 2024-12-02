@@ -59,7 +59,7 @@ func setup(
 	field = p_field
 	left_half = p_left_half
 	
-	state_machine = PlayerStateMachine.new()
+	state_machine = StateMachine.new()
 	state_machine.setup(ball)
 	
 	# goalkeeper properties
@@ -109,8 +109,6 @@ func kick_off(p_pos: Vector2) -> void:
 
 
 func make_goalkeeper() -> void:
-	state_machine = GoalkeeperStateMachine.new()
-	state_machine.setup(ball)
 	is_goalkeeper = true
 
 
@@ -216,4 +214,12 @@ func _move() -> void:
 		pos = pos.move_toward(destination, speed * Const.SPEED)
 		player_res.consume_stamina()
 
+
+func _block_shot() -> bool:
+	if is_touching_ball():
+		return (
+			RngUtil.match_rng.randi_range(0, 100)
+			< 69 + player_res.attributes.goalkeeper.handling * 2
+		)
+	return false
 
