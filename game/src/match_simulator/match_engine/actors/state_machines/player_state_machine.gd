@@ -16,11 +16,18 @@ func update(
 	match state:
 		State.IDLE:
 			_state_idle()
-		State.RECEIVE_PASS:
+		State.RECEIVING_PASS:
 			_state_receive_pass()
+		State.RECEIVED_PASS:
+			state = State.IDLE
 		State.DRIBBLE:
 			state = State.IDLE
 		State.MOVE:
+			state = State.IDLE
+		State.PRESSING:
+			if is_touching_ball:
+				state = State.TACKLE
+		State.TACKLE:
 			state = State.IDLE
 		State.PASSING:
 			state = State.IDLE
@@ -36,10 +43,12 @@ func _state_idle() -> void:
 		if team_has_ball:
 			if _should_shoot():
 				state = State.SHOOTING
-			elif _should_pass():
+			else:
 				state = State.PASSING
-			elif _should_dribble():
-				state = State.DRIBBLE
+			# elif _should_pass():
+			# 	state = State.PASSING
+			# elif _should_dribble():
+			# 	state = State.DRIBBLE
 		else:
 			state = State.TACKLE
 	else:
@@ -48,6 +57,8 @@ func _state_idle() -> void:
 
 func _state_receive_pass() -> void:
 	if is_touching_ball:
+		state = State.RECEIVED_PASS
+	elif same_state_count > 12:
 		state = State.IDLE
 
 

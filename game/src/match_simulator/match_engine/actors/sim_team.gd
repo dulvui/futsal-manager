@@ -64,7 +64,7 @@ func setup(
 		# player signals
 		sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		sim_player.pass_received.connect(func() -> void: stats.passes_success += 1)
-		sim_player.foul.connect(_on_player_foul.bind(sim_player.player_res))
+		sim_player.tackle.connect(_on_player_tackle.bind(sim_player.player_res))
 		sim_player.interception.connect(_on_player_interception)
 		sim_player.shoot.connect(shoot_on_goal.bind(sim_player.player_res))
 		#sim_player.dribble.connect(pass_to_random_player)
@@ -134,8 +134,7 @@ func defend(other_players: Array[SimPlayer]) -> void:
 	# TODO if pressing tactic, always go to ball
 	if ball.state != SimBall.State.GOALKEEPER:
 		var nearest_player: SimPlayer = nearest_player_to_ball()
-		nearest_player.set_destination(ball.pos)
-		nearest_player.state_machine.state = StateMachine.State.MOVE
+		nearest_player.state_machine.state = StateMachine.State.PRESSING
 
 
 func attack() -> void:
@@ -192,12 +191,10 @@ func set_kick_off_formation(change_field_side: bool = false) -> void:
 		player.start_pos = start_pos
 		player.set_pos(start_pos)
 
-	# move 2 attackers to kickoff and pass to random player
+	# move 1 attacker to kickoff and pass to random player
 	if has_ball:
 		players[4].set_pos(field.center + Vector2(0, 0))
-		players[4].state_machine.state = StateMachine.State.PASSING
-
-		players[3].set_pos(field.center + Vector2(0, 100))
+		pass_to_random_player(players[4])
 
 
 func pass_to_random_player(passing_player: SimPlayer = null) -> void:
@@ -214,8 +211,7 @@ func pass_to_random_player(passing_player: SimPlayer = null) -> void:
 		random_player = players[RngUtil.match_rng.randi_range(1,  players.size() - 1)]
 
 	ball.short_pass(random_player.pos, 55)
-	random_player.state_machine.state = StateMachine.State.RECEIVE_PASS
-	random_player.stop()
+	random_player.receive_ball()
 
 	stats.passes += 1
 
@@ -261,9 +257,12 @@ func _sort_distance_to_ball(a: SimPlayer, b: SimPlayer) -> bool:
 	return a.distance_to_ball < b.distance_to_ball
 
 
-func _on_player_foul(player: Player) -> void:
-	stats.fouls += 1
-	foul.emit(player)
+func _on_player_tackle(player: Player) -> void:
+	stats.tackles += 1
+	# 95% foul
+	if RngUtil.match_rng.randi_range(0, 100) > 95:
+		stats.fouls += 1
+		foul.emit(player)
 
 
 func _on_player_interception() -> void:

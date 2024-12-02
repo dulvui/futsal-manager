@@ -9,12 +9,14 @@ enum State {
 	# no ball
 	IDLE,
 	MOVE,
-	RECEIVE_PASS,
+	RECEIVING_PASS,
+	RECEIVED_PASS,
 	# ball
 	DRIBBLE,
 	PASSING,
 	SHOOTING,
 	# defense
+	PRESSING,
 	TACKLE,
 	# goalkeeper
 	SAVE_SHOT,
@@ -37,7 +39,6 @@ var state: State:
 
 
 func _init() -> void:
-	state = State.IDLE
 	team_has_ball = false
 	is_touching_ball = false
 
@@ -46,16 +47,18 @@ func _init() -> void:
 	for i: int in BUFFER_SIZE:
 		buffer.append(-1)
 	same_state_count = 0
+	
+	state = State.IDLE
+
+
+func setup(p_ball: SimBall) -> void:
+	ball = p_ball
 
 
 func update(p_team_has_ball: bool, p_is_touching_ball: bool, p_distance_to_player: float) -> void:
 	team_has_ball = p_team_has_ball
 	is_touching_ball = p_is_touching_ball
 	distance_to_player = p_distance_to_player
-
-
-func setup(p_ball: SimBall) -> void:
-	ball = p_ball
 
 
 func _set_state(p_state: State) -> void:

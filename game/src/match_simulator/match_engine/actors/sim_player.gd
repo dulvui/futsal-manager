@@ -7,7 +7,7 @@ class_name SimPlayer
 signal short_pass
 signal shoot
 signal interception
-signal foul
+signal tackle
 #signal dribble
 signal pass_received
 
@@ -20,6 +20,8 @@ var state_machine: StateMachine
 var start_pos: Vector2
 var pos: Vector2
 var last_pos: Vector2
+
+var has_ball: bool
 
 # movements
 var destination: Vector2
@@ -41,11 +43,9 @@ var left_half: bool
 
 
 func _init() -> void:
-	state_machine = PlayerStateMachine.new()
-	state_machine.setup(ball)
-
 	# initial test values
 	interception_radius = 10
+	has_ball = false
 
 
 func setup(
@@ -59,9 +59,53 @@ func setup(
 	field = p_field
 	left_half = p_left_half
 	
+	state_machine = PlayerStateMachine.new()
+	state_machine.setup(ball)
+	
 	# goalkeeper properties
 	left_base = Vector2(field.line_left + 30, field.size.y / 2)
 	right_base = Vector2(field.line_right - 30, field.size.y / 2)
+
+
+func update(team_has_ball: bool) -> void:
+	# TODO use this signals
+	
+	var touching_ball: bool = is_touching_ball()
+	if not has_ball and touching_ball:
+		interception.emit()
+		ball.stop()
+		has_ball = true
+	elif has_ball and not touching_ball:
+		has_ball = false
+
+	match state_machine.state:
+		StateMachine.State.MOVE, StateMachine.State.DRIBBLE:
+			_move()
+		StateMachine.State.PASSING:
+			short_pass.emit()
+		StateMachine.State.RECEIVED_PASS:
+			pass_received.emit()
+		StateMachine.State.SHOOTING:
+			shoot.emit()
+		StateMachine.State.TACKLE:
+			tackle.emit()
+		StateMachine.State.PRESSING:
+			set_destination(ball.pos)
+			_move()
+		# goalkeeper
+		StateMachine.State.SAVE_SHOT:
+			goalkeeper_follow_ball()
+			_move()
+		StateMachine.State.POSITIONING:
+			goalkeeper_follow_ball()
+			_move()
+	
+	state_machine.update(team_has_ball, touching_ball, distance_to_player)
+
+
+func kick_off(p_pos: Vector2) -> void:
+	start_pos = p_pos
+	set_pos()
 
 
 func make_goalkeeper() -> void:
@@ -70,33 +114,14 @@ func make_goalkeeper() -> void:
 	is_goalkeeper = true
 
 
-func update(team_has_ball: bool) -> void:
-	state_machine.update(team_has_ball, is_touching_ball(), distance_to_player)
-
-	# TODO use this signals
-	interception.emit()
-	pass_received.emit()
-	foul.emit()
-
-	match state_machine.state:
-		StateMachine.State.MOVE, StateMachine.State.DRIBBLE:
-			_move()
-		StateMachine.State.PASSING:
-			short_pass.emit()
-		StateMachine.State.SHOOTING:
-			shoot.emit()
-		# goalkeeper
-		StateMachine.State.SAVE_SHOT:
-			goalkeeper_follow_ball()
-			_move()
-		StateMachine.State.POSITIONING:
-			goalkeeper_follow_ball()
-			_move()
+func pass_ball() -> void:
+	has_ball = true
+	state_machine.state = StateMachine.State.PASSING
 
 
-func kick_off(p_pos: Vector2) -> void:
-	start_pos = p_pos
-	set_pos()
+func receive_ball() -> void:
+	state_machine.state = StateMachine.State.RECEIVING_PASS
+	stop()
 
 
 func is_touching_ball() -> bool:
