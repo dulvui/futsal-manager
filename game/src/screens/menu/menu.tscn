@@ -63,6 +63,7 @@ size_flags_vertical = 4
 theme_type_variation = &"ImportantButton"
 text = "CONTINUE"
 script = ExtResource("4_nkxl6")
+button_index = 0
 
 [node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

@@ -106,6 +106,10 @@ func get_axis_sign(axis: JoyAxis) -> String:
 	return ""
 
 
+func get_button_icon(_button: JoyButton) -> Texture:
+	return load("res://assets/joypad_glyphs/R2.svg")
+
+
 func get_sign(input_event: InputEvent) -> String:
 	if active_joypad:
 		if input_event is InputEventJoypadButton:
@@ -115,6 +119,7 @@ func get_sign(input_event: InputEvent) -> String:
 			var joypad_motion: InputEventJoypadMotion = input_event as InputEventJoypadMotion
 			return AXIS_MAPPING[active_joypad.type][joypad_motion.axis]
 	return ""
+
 
 func _on_joypad_connected(device: int, connected: bool) -> void:
 	_register_joypad(device, connected)
