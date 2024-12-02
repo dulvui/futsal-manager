@@ -109,6 +109,8 @@ func check_changes() -> void:
 
 
 func defend(other_players: Array[SimPlayer]) -> void:
+	other_players = other_players.duplicate(true)
+
 	for player: SimPlayer in players:
 		player.update(false)
 
@@ -128,13 +130,13 @@ func defend(other_players: Array[SimPlayer]) -> void:
 		var deviation: Vector2 = Vector2(-factor, factor)
 		if other_players[i].pos.y > field.center.y:
 			deviation.y -= factor * 2
-		players[i].set_destination(other_players[i].pos + deviation)
+		players[i].mark_zone(other_players[i].pos + deviation)
 
 	# attack ball, if not under control
 	# TODO if pressing tactic, always go to ball
 	if ball.state != SimBall.State.GOALKEEPER:
 		var nearest_player: SimPlayer = nearest_player_to_ball()
-		nearest_player.state_machine.state = StateMachine.State.PRESSING
+		nearest_player.press()
 
 
 func attack() -> void:
@@ -146,7 +148,7 @@ func attack() -> void:
 		player.update(true)
 
 		# set destinations
-		if player.state_machine.state == StateMachine.State.DRIBBLE:
+		if player.has_ball:
 			# y towards goal, to block goal
 			var factor: int = RngUtil.match_rng.randi_range(30, 60)
 			var deviation: Vector2 = Vector2(-factor, factor)

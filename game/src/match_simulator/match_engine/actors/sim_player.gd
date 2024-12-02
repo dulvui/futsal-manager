@@ -44,7 +44,7 @@ var left_half: bool
 
 func _init() -> void:
 	# initial test values
-	interception_radius = 10
+	interception_radius = 25
 	has_ball = false
 
 
@@ -117,6 +117,15 @@ func make_goalkeeper() -> void:
 func pass_ball() -> void:
 	has_ball = true
 	state_machine.state = StateMachine.State.PASSING
+
+
+func press() -> void:
+	state_machine.state = StateMachine.State.PRESSING
+
+
+func mark_zone(zone_position: Vector2) -> void:
+	set_destination(zone_position)
+	state_machine.state = StateMachine.State.MOVE
 
 
 func receive_ball() -> void:

@@ -4,7 +4,7 @@
 
 class_name MatchEngine
 
-const INTERCEPTION_TIMER_START: int = 2
+const INTERCEPTION_TIMER_START: int = 3
 
 var field: SimField
 var ball: SimBall
