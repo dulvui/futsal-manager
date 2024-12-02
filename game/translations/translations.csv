@@ -21,6 +21,14 @@ FREE_KICKS,Free kicks,Freistöße,Punizioni
 PAUSE,Pause,Pause,Pausa
 PENALTIES,Penalties (6m),Strafstoße (6m),Rigore
 PENALTIES_10M,Penalties (10m),Strafstoße (10m),Tiro libero
+TACKLES,Tackles,Kontraste,Contrasti
+TACKLES_SUCCESS,Succesful tackles,Erfolgreiche Konstraste,Contrasti riusciti
+PASSES,Passes,Pässe,Passaggi
+PASSES_SUCCESS,Successful passes,Erfolgreiche Pässe,Passaggi riusciti
+KICK_INS,Kick ins,Einwürfe,Rimesse
+CORNERS,Corner kicks,Eckstöße,Calci d’angolo
+YELLOW_CARDS,Yellow cards,Gelbe Karten,Cartellini gialli
+RED_CARDS,Red cards,Rote Karten,Cartellini rossi
 SIMULATE,Simulate,Simulieren,Simula
 EVENTS,Events,Events,Eventi
 TACTICS,Tactics,Taktiken,Tattiche
