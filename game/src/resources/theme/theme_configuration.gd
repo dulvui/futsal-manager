@@ -11,19 +11,12 @@ extends Resource
 
 @export var font_color: Color
 @export var style_color: Color 
+@export var style_important_color: Color 
 @export var background_color: Color
 
-var font_color_normal: Color
-var font_color_pressed: Color
-var font_color_hover: Color
-var font_color_focus: Color
-var font_color_disabled: Color
-
-var style_color_normal: Color
-var style_color_pressed: Color
-var style_color_focus: Color
-var style_color_hover: Color
-var style_color_disabled: Color
+var font_color_variation: ColorVariation
+var style_color_variation: ColorVariation
+var style_important_color_variation: ColorVariation
 
 
 func _init(
@@ -31,25 +24,18 @@ func _init(
 	p_name: String = "",
 	p_font_color: Color = Color.BLACK,
 	p_style_color: Color = Color.RED,
+	p_style_important_color: Color = Color.BLUE,
 	p_background_color: Color = Color.WHITE,
 ) -> void:
 	id = p_id
 	name = p_name
 	font_color = p_font_color
 	style_color = p_style_color
+	style_important_color = p_style_important_color
 	background_color = p_background_color
 
 
 func setup() -> void:
-	# variations
-	font_color_normal = font_color
-	font_color_focus = font_color
-	font_color_pressed = font_color.darkened(0.1)
-	font_color_hover = font_color.lightened(0.1)
-	font_color_disabled = font_color.lightened(0.4)
-
-	style_color_normal = style_color
-	style_color_focus = style_color.lightened(0.1)
-	style_color_pressed = style_color.darkened(0.1)
-	style_color_hover = style_color.lightened(0.2)
-	style_color_disabled = style_color.darkened(0.4)
+	font_color_variation = ColorVariation.new(font_color)
+	style_color_variation = ColorVariation.new(style_color)
+	style_important_color_variation = ColorVariation.new(style_important_color)

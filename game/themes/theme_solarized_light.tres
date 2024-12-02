@@ -8,4 +8,5 @@ id = 0
 name = "SOLARIZED_LIGHT"
 font_color = Color(0.345098, 0.431373, 0.458824, 1)
 style_color = Color(0.933333, 0.909804, 0.835294, 1)
+style_important_color = Color(0.882591, 0.843325, 0.720141, 1)
 background_color = Color(0.992157, 0.964706, 0.890196, 1)
