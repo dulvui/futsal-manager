@@ -11,7 +11,6 @@ enum Screen {
 	MATCH,
 }
 
-@onready var search_line_edit: LineEdit = %SearchLineEdit
 @onready var default_dialog: ConfirmationDialog = %DefaultDialog
 @onready var general: GeneralSettings = %General
 @onready var input: InputSettings = %Input
@@ -20,7 +19,6 @@ enum Screen {
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	InputUtil.start_focus(self)
-	InputUtil.search.connect(func() -> void: search_line_edit.grab_focus())
 
 
 func _on_defaults_pressed() -> void:

@@ -13,7 +13,10 @@ extends Button
 func _ready() -> void:
 	tooltip_text = text
 	icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	alignment = HORIZONTAL_ALIGNMENT_LEFT
+
+	# don't align left on single caracters buttons or number buttons
+	if text.length() > 1 or text.is_valid_int():
+		alignment = HORIZONTAL_ALIGNMENT_LEFT
 
 	_setup_shortcut()
 	

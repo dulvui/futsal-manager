@@ -37,16 +37,6 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="SearchLineEdit" type="LineEdit" parent="Main"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-placeholder_text = "SEARCH_SETTINGS"
-
-[node name="HSeparator" type="HSeparator" parent="Main"]
-visible = false
-layout_mode = 2
-
 [node name="TabContainer" type="HBoxContainer" parent="Main"]
 layout_mode = 2
 size_flags_vertical = 3
