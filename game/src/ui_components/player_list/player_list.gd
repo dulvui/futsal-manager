@@ -131,7 +131,7 @@ func _setup_columns() -> void:
 
 	# contract
 	for c: Dictionary in Contract.new().get_property_list():
-		if c.usage == 4102:
+		if c.usage == Const.CUSTOM_PROPERTY_EXPORT:
 			var stats: Callable = func(p: Player) -> Variant:
 				var value: Variant = p.contract.get(c.name)
 				# for dates
@@ -142,7 +142,7 @@ func _setup_columns() -> void:
 
 	# statistics
 	for s: Dictionary in Statistics.new().get_property_list():
-		if s.usage == 4102:
+		if s.usage == Const.CUSTOM_PROPERTY_EXPORT:
 			var stats: Callable = func(p: Player) -> String: return str(p.statistics.get(s.name))
 			_add_column("STATISTICS", s.name, stats)
 	

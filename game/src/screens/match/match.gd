@@ -6,6 +6,7 @@ extends Control
 
 const MAX_SPEED_FACTOR: int = 10
 const MAX_COMMENTS: int = 16
+
 var last_active_view: Control
 
 var home_team: Team

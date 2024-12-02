@@ -42,3 +42,6 @@ const MONTH_STRINGS: Array[StringName] = [
 const WEEKDAYS: Array[StringName] = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 const SURNAME: StringName = "SURNAME"
 const POSITION: StringName = "POSITION"
+
+const CUSTOM_PROPERTY: int = 4096
+const CUSTOM_PROPERTY_EXPORT: int = 4102

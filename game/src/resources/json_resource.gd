@@ -11,7 +11,7 @@ func to_json() -> Dictionary:
 	var property_list: Array[Dictionary] = get_property_list()
 
 	for property: Dictionary in property_list:
-		if property.usage == 4102:
+		if property.usage == Const.CUSTOM_PROPERTY_EXPORT:
 			var property_name: String = property.name
 			var value: Variant = get(property_name)
 
@@ -64,7 +64,7 @@ func from_json(json: Dictionary) -> void:
 
 	var property_list: Array[Dictionary] = get_property_list()
 	for property: Dictionary in property_list:
-		if property.usage == 4102:
+		if property.usage == Const.CUSTOM_PROPERTY:
 			var property_name: String = property.name
 			var property_value: Variant = get(property_name)
 			var json_value: Variant = json.get(property_name)

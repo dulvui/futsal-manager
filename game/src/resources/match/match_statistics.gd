@@ -16,7 +16,7 @@ var passes_success: int = 0
 var kick_ins: int = 0
 var free_kicks: int = 0
 var penalties: int = 0
-var penalty_kick: int = 0  # after 6 fouls
+var penalties10: int = 0  # from 10 meters, after 6 fouls
 var fouls: int = 0
 var tackles: int = 0
 var tackles_success: int = 0
@@ -37,7 +37,7 @@ func _init(
 	p_kick_ins: int = 0,
 	p_free_kicks: int = 0,
 	p_penalties: int = 0,
-	p_penalty_kick: int = 0,
+	p_penalties10: int = 0,
 	p_fouls: int = 0,
 	p_tackles: int = 0,
 	p_tackles_success: int = 0,
@@ -56,7 +56,7 @@ func _init(
 	kick_ins = p_kick_ins
 	free_kicks = p_free_kicks
 	penalties = p_penalties
-	penalty_kick = p_penalty_kick
+	penalties10 = p_penalties10
 	fouls = p_fouls
 	tackles = p_tackles
 	tackles_success = p_tackles_success

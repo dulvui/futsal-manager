@@ -43,7 +43,7 @@ static func _player_season_progress(player: Player) -> void:
 
 	# mental
 	for attribute in player.attributes.mental.get_property_list():
-		if attribute.usage == 4102:  # custoom properties
+		if attribute.usage == Const.CUSTOM_PROPERTY_EXPORT:  # custom properties
 			# random value from 0 to 300
 			var value: int = (
 				RngUtil.rng.randi_range(1, Const.MAX_PRESTIGE)
@@ -57,7 +57,7 @@ static func _player_season_progress(player: Player) -> void:
 
 	# physical
 	for attribute in player.attributes.physical.get_property_list():
-		if attribute.usage == 4102:  # custoom properties
+		if attribute.usage == Const.CUSTOM_PROPERTY_EXPORT:  # custoom properties
 			var value: int = (
 				RngUtil.rng.randi_range(1, Const.MAX_PRESTIGE)
 				+ RngUtil.rng.randi_range(1, prestige_factor)
@@ -70,7 +70,7 @@ static func _player_season_progress(player: Player) -> void:
 
 	# technical
 	for attribute in player.attributes.technical.get_property_list():
-		if attribute.usage == 4102:  # custoom properties
+		if attribute.usage == Const.CUSTOM_PROPERTY_EXPORT:  # custoom properties
 			var value: int = (
 				RngUtil.rng.randi_range(1, Const.MAX_PRESTIGE)
 				+ RngUtil.rng.randi_range(1, prestige_factor)
@@ -83,7 +83,7 @@ static func _player_season_progress(player: Player) -> void:
 
 	#goalkeeper
 	for attribute in player.attributes.goalkeeper.get_property_list():
-		if attribute.usage == 4102:  # custoom properties
+		if attribute.usage == Const.CUSTOM_PROPERTY_EXPORT:  # custoom properties
 			var value: int = (
 				RngUtil.rng.randi_range(1, Const.MAX_PRESTIGE)
 				+ RngUtil.rng.randi_range(1, prestige_factor)

@@ -13,7 +13,14 @@ CONTINUE,Continue,Weiter,Avanti
 CANCEL,Cancel,Abbrechen,Annulla
 FIELD,Field,Feld,Campo
 STATS,Stats,Stats,Stats
+POSSESSION,Possession,Ballbesitz,Possesso
+SHOTS,Shots,Schüsse,Tiri
+SHOTS_ON_TARGET,Shots on target,Torschüsse,Tiri in porta
+FOULS,Fouls,Fouls,Falli
+FREE_KICKS,Free kicks,Freistöße,Punizioni
 PAUSE,Pause,Pause,Pausa
+PENALTIES,Penalties (6m),Strafstoße (6m),Rigore
+PENALTIES_10M,Penalties (10m),Strafstoße (10m),Tiro libero
 SIMULATE,Simulate,Simulieren,Simula
 EVENTS,Events,Events,Eventi
 TACTICS,Tactics,Taktiken,Tattiche
