@@ -74,7 +74,7 @@ func _initialize_tree(search_string: String = "") -> void:
 				tree_item.free()
 
 		if items.is_empty():
-			_create_item("NO_COMPETITON_FOUND")
+			_create_item("NO_COMPETITION_FOUND")
 	
 	select(competition_name)
 
