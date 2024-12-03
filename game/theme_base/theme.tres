@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=20 format=3 uid="uid://pt1hrfiuwfpg"]
+[gd_resource type="Theme" load_steps=21 format=3 uid="uid://pt1hrfiuwfpg"]
 
 [ext_resource type="StyleBox" uid="uid://dyng6f1l62yql" path="res://theme_base/styles/box/box_disabled.tres" id="1_e26vn"]
 [ext_resource type="StyleBox" uid="uid://bb782pesemrwx" path="res://theme_base/styles/box/box_focus.tres" id="2_sokwu"]
@@ -19,11 +19,15 @@
 [ext_resource type="StyleBox" uid="uid://b2r2brhh36eea" path="res://theme_base/styles/lines/line_v_thin.tres" id="16_88jne"]
 [ext_resource type="StyleBox" uid="uid://4kr88nosj3w8" path="res://theme_base/styles/lines/line_v_normal.tres" id="17_mp45d"]
 
-[sub_resource type="SystemFont" id="SystemFont_2ye78"]
-fallbacks = Array[Font]([ExtResource("13_54pck")])
+[sub_resource type="FontVariation" id="FontVariation_xctls"]
+base_font = ExtResource("13_54pck")
+baseline_offset = -0.06
+
+[sub_resource type="SystemFont" id="SystemFont_vgl4r"]
+fallbacks = Array[Font]([SubResource("FontVariation_xctls")])
 
 [resource]
-default_font = SubResource("SystemFont_2ye78")
+default_font = SubResource("SystemFont_vgl4r")
 default_font_size = 18
 Button/constants/hseparation = 2
 Button/styles/disabled = ExtResource("1_e26vn")
