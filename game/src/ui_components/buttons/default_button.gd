@@ -14,16 +14,12 @@ extends Button
 func _ready() -> void:
 	tooltip_text = text
 	icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	alignment = HORIZONTAL_ALIGNMENT_LEFT
 	expand_icon = true
 	shortcut_in_tooltip = false
 
-	# don't align left on single caracters buttons or number buttons
-	if text.length() == 1 or text.is_valid_int():
-		alignment = HORIZONTAL_ALIGNMENT_CENTER
-
 	_setup_shortcuts()
 	_set_shortcut_glyph()
+	_set_alignment()
 
 	InputUtil.type_changed.connect(_on_input_type_changed)
 
@@ -51,9 +47,20 @@ func _set_shortcut_glyph() -> void:
 		icon = null
 	else:
 		icon = null
+	
+
+func _set_alignment() -> void:
+	# don't align left on single caracters buttons or number buttons
+	if text.length() == 1 or text.is_valid_int():
+		alignment = HORIZONTAL_ALIGNMENT_CENTER
+	elif InputUtil.type == InputUtil.Type.JOYPAD:
+		alignment = HORIZONTAL_ALIGNMENT_LEFT
+	else:
+		alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 
 func _on_input_type_changed(_type: InputUtil.Type) -> void:
 	_set_shortcut_glyph()
+	_set_alignment()
 
 
