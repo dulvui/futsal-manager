@@ -14,14 +14,17 @@ extends Button
 func _ready() -> void:
 	tooltip_text = text
 	icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	alignment = HORIZONTAL_ALIGNMENT_LEFT
+	expand_icon = true
+	shortcut_in_tooltip = false
 
 	# don't align left on single caracters buttons or number buttons
-	if text.length() > 1 or text.is_valid_int():
-		alignment = HORIZONTAL_ALIGNMENT_LEFT
+	if text.length() == 1 or text.is_valid_int():
+		alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 	_setup_shortcuts()
 	_set_shortcut_glyph()
-	
+
 	InputUtil.type_changed.connect(_on_input_type_changed)
 
 
@@ -41,13 +44,13 @@ func _setup_shortcuts() -> void:
 func _set_shortcut_glyph() -> void:
 	if InputUtil.type == InputUtil.Type.JOYPAD and joypad_button_event:
 		icon = JoypadUtil.get_button_icon(joypad_button_event.button_index)
-		text = tooltip_text
+		# text = tooltip_text + " %s"%JoypadUtil.get_button_sign(joypad_button_event.button_index)
+		# text = tooltip_text
 	elif InputUtil.type == InputUtil.Type.KEYBOARD and key_event: 
-		text = tooltip_text + " " + key_event.as_text()
+		# text = tooltip_text + " " + key_event.as_text()
 		icon = null
 	else:
 		icon = null
-		text = tooltip_text
 
 
 func _on_input_type_changed(_type: InputUtil.Type) -> void:

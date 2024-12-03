@@ -37,6 +37,7 @@ offset_top = -13.0
 offset_bottom = 13.0
 grow_horizontal = 0
 grow_vertical = 2
+shortcut_in_tooltip = false
 script = ExtResource("2_2kr7t")
 key_event = SubResource("InputEventKey_84wx2")
 joypad_button_event = SubResource("InputEventJoypadButton_f1fas")

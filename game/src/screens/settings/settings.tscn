@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://4aoa7li1cfbc"]
+[gd_scene load_steps=6 format=3 uid="uid://4aoa7li1cfbc"]
 
 [ext_resource type="Script" path="res://src/screens/settings/settings.gd" id="1_m7cla"]
 [ext_resource type="PackedScene" uid="uid://cywaob6jab2pj" path="res://src/screens/settings/general/general_settings.tscn" id="2_rfuel"]
 [ext_resource type="PackedScene" uid="uid://bw4rsu0jiwjj0" path="res://src/screens/settings/input/input_settings.tscn" id="3_i3rqu"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="5_mtybe"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_nppw4"]
+button_index = 1
+pressed = true
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -81,6 +85,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "BACK"
 script = ExtResource("5_mtybe")
+joypad_button_event = SubResource("InputEventJoypadButton_nppw4")
 
 [node name="DefaultDialog" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true

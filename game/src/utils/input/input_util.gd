@@ -6,6 +6,12 @@ extends Node
 
 signal type_changed(type: Type)
 
+
+enum DetectionMode {
+	AUTO,
+	MANUAL,
+}
+
 enum Type {
 	JOYPAD,
 	KEYBOARD,
@@ -15,6 +21,7 @@ enum Type {
 
 var focused: bool
 var type: Type
+var detection_mode: DetectionMode
 var viewport: Viewport
 var first_focus: Control
 var last_focus: Control
@@ -75,6 +82,9 @@ func _verify_focus() -> void:
 
 
 func _verify_type(event: InputEvent) -> void:
+	if detection_mode == DetectionMode.MANUAL:
+		return
+
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		if type != Type.JOYPAD:
 			type = Type.JOYPAD

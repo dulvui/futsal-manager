@@ -32,28 +32,30 @@ func get_joypad_type_string() -> String:
 
 func get_button_sign(button: JoyButton) -> String:
 	if active_joypad:
-		return Mapping.BUTTON_MAPPING[active_joypad.type][button]
+		return Mapping.BUTTON_GLYPHS[active_joypad.type][button]
 	return ""
 
 
 func get_axis_sign(axis: JoyAxis) -> String:
 	if active_joypad:
-		return Mapping.AXIS_MAPPING[active_joypad.type][axis]
+		return Mapping.AXIS_GLYPHS[active_joypad.type][axis]
 	return ""
 
 
-func get_button_icon(_button: JoyButton) -> Texture:
-	return load("res://assets/joypad_glyphs/R2.svg")
+func get_button_icon(button: JoyButton) -> Texture:
+	if active_joypad:
+		return Mapping.BUTTON_ICONS[active_joypad.type][button]
+	return null
 
 
 func get_sign(input_event: InputEvent) -> String:
 	if active_joypad:
 		if input_event is InputEventJoypadButton:
 			var joypad_button: InputEventJoypadButton = input_event as InputEventJoypadButton
-			return Mapping.BUTTON_MAPPING[active_joypad.type][joypad_button.button_index]
+			return Mapping.BUTTON_GLYPHS[active_joypad.type][joypad_button.button_index]
 		elif input_event is InputEventJoypadMotion:
 			var joypad_motion: InputEventJoypadMotion = input_event as InputEventJoypadMotion
-			return Mapping.AXIS_MAPPING[active_joypad.type][joypad_motion.axis]
+			return Mapping.AXIS_GLYPHS[active_joypad.type][joypad_motion.axis]
 	return ""
 
 

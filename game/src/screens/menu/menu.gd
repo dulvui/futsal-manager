@@ -34,6 +34,8 @@ func _ready() -> void:
 	save_state.setup(Global.save_states.get_active())
 
 	version.text = "v" + Global.version
+	
+	DisplayServer.virtual_keyboard_show("hello")
 
 
 func _on_new_game_pressed() -> void:

@@ -14,6 +14,7 @@ var config: ConfigFile
 var language: String
 var currency: int
 var audio: Dictionary
+var detection_mode: InputUtil.DetectionMode
 var theme_index: int
 var theme_scale: float
 var theme_font_size: int
@@ -141,6 +142,7 @@ func load_save_state() -> void:
 func save_config() -> void:
 	config.set_value("settings", "currency", currency)
 	config.set_value("settings", "language", language)
+	config.set_value("settings", "detection_mode", detection_mode)
 	config.set_value("settings", "audio", audio)
 	config.set_value("settings", "theme_index", theme_index)
 	config.set_value("settings", "theme_scale", theme_scale)
@@ -167,6 +169,7 @@ func _load_config() -> void:
 
 	currency = config.get_value("settings", "currency", FormatUtil.Currencies.EURO)
 	language = config.get_value("settings", "language", "")
+	detection_mode = config.get_value("settings", "detection_mode", InputUtil.DetectionMode.AUTO)
 	audio = config.get_value("settings", "audio", {})
 	theme_index = config.get_value("settings", "theme_index", 0)
 	theme_scale = config.get_value("settings", "theme_scale", ThemeUtil.get_default_scale())
