@@ -20,16 +20,16 @@ enum Type {
 }
 
 var focused: bool
-var type: Type
-var detection_mode: DetectionMode
 var viewport: Viewport
 var first_focus: Control
 var last_focus: Control
+var type: Type:
+	set = set_type
 
 
 func _ready() -> void:
 	focused = true
-	type = Type.KEYBOARD
+	type = Global.input_type
 	viewport = get_viewport()
 	viewport.gui_focus_changed.connect(_on_gui_focus_change)
 
@@ -69,6 +69,12 @@ func start_focus(node: Control) -> void:
 		print("start focus: not node found to focus")
 
 
+func set_type(p_type: Type) -> void:
+	type = p_type
+	Global.input_type = type
+	type_changed.emit(type)
+
+
 func _verify_focus() -> void:
 	# check if a nodes has focus, if not, last or first focused node grabs it
 	if viewport.gui_get_focus_owner() == null:
@@ -82,17 +88,15 @@ func _verify_focus() -> void:
 
 
 func _verify_type(event: InputEvent) -> void:
-	if detection_mode == DetectionMode.MANUAL:
+	if Global.input_detection_mode == DetectionMode.MANUAL:
 		return
 
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		if type != Type.JOYPAD:
 			type = Type.JOYPAD
-			type_changed.emit(Type.JOYPAD)
 	else:
 		if type != Type.KEYBOARD:
 			type = Type.KEYBOARD
-			type_changed.emit(Type.KEYBOARD)
 
 
 func _on_gui_focus_change(node: Control) -> void:

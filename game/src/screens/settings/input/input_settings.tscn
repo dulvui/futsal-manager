@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw4rsu0jiwjj0"]
+[gd_scene load_steps=4 format=3 uid="uid://bw4rsu0jiwjj0"]
 
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="1_cunc8"]
 [ext_resource type="Script" path="res://src/screens/settings/input/input_settings.gd" id="1_e4wd1"]
+[ext_resource type="PackedScene" uid="uid://b2mwv4cl5sm6t" path="res://src/ui_components/swtich_option_button/switch_option_button.tscn" id="3_g1iho"]
 
 [node name="Input" type="VBoxContainer"]
 anchors_preset = -1
@@ -22,6 +23,7 @@ layout_mode = 2
 
 [node name="VimMode" type="HBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="VimModeLabel" type="Label" parent="VimMode"]
 layout_mode = 2
@@ -33,9 +35,11 @@ layout_mode = 2
 
 [node name="Joypad" type="HBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="JoypadLabel" type="Label" parent="Joypad"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "JOYPAD"
 
 [node name="JoypadInfo" type="Label" parent="Joypad"]
@@ -43,3 +47,32 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "NO_JOYPAD_CONNECTED"
 label_settings = ExtResource("1_cunc8")
+
+[node name="DetectionMode" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="DetectionModeLabel" type="Label" parent="DetectionMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DETECTION_MODE"
+
+[node name="DetectionModeButton" parent="DetectionMode" instance=ExtResource("3_g1iho")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Type" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TypeLabel" type="Label" parent="Type"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TYPE"
+
+[node name="TypeButton" parent="Type" instance=ExtResource("3_g1iho")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="item_selected" from="DetectionMode/DetectionModeButton" to="." method="_on_detection_mode_button_item_selected"]
+[connection signal="item_selected" from="Type/TypeButton" to="." method="_on_type_button_item_selected"]
