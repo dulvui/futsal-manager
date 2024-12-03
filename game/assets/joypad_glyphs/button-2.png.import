@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdj8of1n7eak4"
-path="res://.godot/imported/R2.svg-82950bb4d54f7baad982ef7dddbaf37e.ctex"
+uid="uid://bu1y64n0ulawc"
+path="res://.godot/imported/button-2.png-991b095b2c618ece03d63c53257a4915.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/joypad_glyphs/R2.svg"
-dest_files=["res://.godot/imported/R2.svg-82950bb4d54f7baad982ef7dddbaf37e.ctex"]
+source_file="res://assets/joypad_glyphs/button-2.png"
+dest_files=["res://.godot/imported/button-2.png-991b095b2c618ece03d63c53257a4915.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=0.05
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

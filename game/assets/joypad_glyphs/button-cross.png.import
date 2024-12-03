@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw2gm2y1lkxvg"
-path="res://.godot/imported/button-circle.svg-16204215b925c94b85bc5b0948bc9ceb.ctex"
+uid="uid://b5gja55gpbw4b"
+path="res://.godot/imported/button-cross.png-3743f3bf9161f1f96c01b9a3a16fc366.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/joypad_glyphs/button-circle.svg"
-dest_files=["res://.godot/imported/button-circle.svg-16204215b925c94b85bc5b0948bc9ceb.ctex"]
+source_file="res://assets/joypad_glyphs/button-cross.png"
+dest_files=["res://.godot/imported/button-cross.png-3743f3bf9161f1f96c01b9a3a16fc366.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

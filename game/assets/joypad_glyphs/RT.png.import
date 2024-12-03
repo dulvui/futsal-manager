@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4y2s2wd4lns5"
-path="res://.godot/imported/button-triangle.svg-42085161d89aea099cce61d89a99f6fc.ctex"
+uid="uid://dvu4ufj6p8ief"
+path="res://.godot/imported/RT.png-2abb7fbb26b1e2ec0b0e70ef0364b24a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/joypad_glyphs/button-triangle.svg"
-dest_files=["res://.godot/imported/button-triangle.svg-42085161d89aea099cce61d89a99f6fc.ctex"]
+source_file="res://assets/joypad_glyphs/RT.png"
+dest_files=["res://.godot/imported/RT.png-2abb7fbb26b1e2ec0b0e70ef0364b24a.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
