@@ -36,14 +36,6 @@ func _ready() -> void:
 	version.text = "v" + Global.version
 
 
-func _move(direction: InputUtil.Direction) -> void:
-	if direction == InputUtil.Direction.UP:
-		var view_port: Viewport = get_viewport()
-		if view_port.gui_get_focus_owner() == null:
-			var next_focus: Control = find_next_valid_focus()
-			next_focus.grab_focus()
-
-
 func _on_new_game_pressed() -> void:
 	get_tree().change_scene_to_file("res://src/screens/setup/setup_world/setup_world.tscn")
 

@@ -4,15 +4,7 @@
 
 extends Node
 
-# signal search
 signal type_changed(type: Type)
-
-enum Direction {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-}
 
 enum Type {
 	JOYPAD,
@@ -20,9 +12,6 @@ enum Type {
 	#VIRTUAL_KEYBOARD,
 	TOUCH,
 }
-
-const ACTION_SEARCH: StringName = "SEARCH"
-const ACTION_CONTINUE: StringName = "CONTINUE"
 
 var focused: bool
 var type: Type
@@ -36,8 +25,6 @@ func _ready() -> void:
 	type = Type.KEYBOARD
 	viewport = get_viewport()
 	viewport.gui_focus_changed.connect(_on_gui_focus_change)
-
-	_setup_actions()
 
 
 func _notification(what: int) -> void:
@@ -55,14 +42,8 @@ func _input(event: InputEvent) -> void:
 		if event.is_pressed():
 			_verify_focus()
 
-		_verify_joypad(event)
+		_verify_type(event)
 
-		# check for actions
-		# if event.is_action_pressed(ACTION_SEARCH):
-		# 	print("search pressed")
-		# 	search.emit()
-		# 	# Register the event as handled and stop polling
-		# 	get_viewport().set_input_as_handled()
 		return
 	else:
 		get_viewport().set_input_as_handled()
@@ -81,29 +62,6 @@ func start_focus(node: Control) -> void:
 		print("start focus: not node found to focus")
 
 
-func _setup_actions() -> void:
-	# continue
-	InputMap.add_action(ACTION_CONTINUE)
-	var continue_key: InputEventKey = InputEventKey.new()
-	continue_key.keycode = KEY_W
-	InputMap.action_add_event(ACTION_CONTINUE, continue_key)
-	var continue_joypad: InputEventJoypadButton = InputEventJoypadButton.new()
-	continue_joypad.button_index = JOY_BUTTON_START
-	
-	# # search
-	# InputMap.add_action(ACTION_SEARCH)
-	# var search_key: InputEventKey = InputEventKey.new()
-	# search_key.keycode = KEY_F
-	# search_key.ctrl_pressed = true
-	# InputMap.action_add_event(ACTION_SEARCH, search_key)
-	# var search_vim: InputEventKey = InputEventKey.new()
-	# search_vim.keycode = KEY_SLASH
-	# InputMap.action_add_event(ACTION_SEARCH, search_vim)
-	# var search_joypad: InputEventJoypadButton = InputEventJoypadButton.new()
-	# search_joypad.button_index = JOY_BUTTON_Y
-	# InputMap.action_add_event(ACTION_SEARCH, search_joypad)
-
-
 func _verify_focus() -> void:
 	# check if a nodes has focus, if not, last or first focused node grabs it
 	if viewport.gui_get_focus_owner() == null:
@@ -116,7 +74,7 @@ func _verify_focus() -> void:
 			print("not able to regrab focus")
 
 
-func _verify_joypad(event: InputEvent) -> void:
+func _verify_type(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		if type != Type.JOYPAD:
 			type = Type.JOYPAD
