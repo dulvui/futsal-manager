@@ -53,10 +53,8 @@ func _set_alignment() -> void:
 	# don't align left on single caracters buttons or number buttons
 	if text.length() == 1 or text.is_valid_int():
 		alignment = HORIZONTAL_ALIGNMENT_CENTER
-	elif InputUtil.type == InputUtil.Type.JOYPAD:
-		alignment = HORIZONTAL_ALIGNMENT_LEFT
 	else:
-		alignment = HORIZONTAL_ALIGNMENT_CENTER
+		alignment = HORIZONTAL_ALIGNMENT_LEFT
 
 
 func _on_input_type_changed(_type: InputUtil.Type) -> void:
