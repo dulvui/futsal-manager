@@ -18,7 +18,8 @@ var items: Array[TreeItem]
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	Tests.setup_mock_world(true)	
+	if Tests.setup_mock_world(true):
+		setup()
 
 
 func setup(p_competition_name: String = "") -> void:
@@ -103,14 +104,20 @@ func _create_item(
 	return item
 
 
-func _on_tree_item_mouse_selected(_mouse_position: Vector2, _mouse_button_index: int) -> void:
-	var selected_name: String = tree.get_selected().get_text(0)
-	if competitions.has(selected_name):
-		competition_selected.emit(competitions[selected_name])
-		SoundUtil.play_button_sfx()
-
-
 func _on_search_line_edit_text_changed(new_text: String) -> void:
 	_initialize_tree(new_text.to_lower())
 
 
+func _on_tree_item_mouse_selected(_mouse_position: Vector2, _mouse_button_index: int) -> void:
+	_on_select()
+
+
+func _on_tree_item_activated() -> void:
+	_on_select()
+
+
+func _on_select() -> void:
+	var selected_name: String = tree.get_selected().get_text(0)
+	if competitions.has(selected_name):
+		competition_selected.emit(competitions[selected_name])
+		SoundUtil.play_button_sfx()
