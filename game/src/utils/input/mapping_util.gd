@@ -179,8 +179,8 @@ const BUTTON_ICONS: Dictionary = {
 
 const AXIS_ICONS: Dictionary = {
 	JoypadUtil.Type.PLAYSTATION: {
-		JOY_AXIS_TRIGGER_LEFT: "\u21B2", # r2
-		JOY_AXIS_TRIGGER_RIGHT: "\u21B3", # l2
+		JOY_AXIS_TRIGGER_LEFT: preload("res://assets/joypad_glyphs/L2.png"), # l2
+		JOY_AXIS_TRIGGER_RIGHT: preload("res://assets/joypad_glyphs/R2.png"), # r2
 	},
 	JoypadUtil.Type.XBOX: {
 		JOY_AXIS_TRIGGER_LEFT: "\u2196", # lt
