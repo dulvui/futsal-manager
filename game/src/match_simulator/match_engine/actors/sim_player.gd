@@ -15,7 +15,7 @@ signal pass_received
 var player_res: Player
 var ball: SimBall
 var field: SimField
-var state_machine: StateMachine
+var state_machine: PlayerStateMachine
 # positions
 var start_pos: Vector2
 var pos: Vector2
@@ -59,7 +59,7 @@ func setup(
 	field = p_field
 	left_half = p_left_half
 	
-	state_machine = StateMachine.new()
+	state_machine = PlayerStateMachine.new()
 	state_machine.setup(ball)
 	
 	# goalkeeper properties
@@ -79,26 +79,26 @@ func update(team_has_ball: bool) -> void:
 		has_ball = false
 
 	match state_machine.state:
-		StateMachine.State.MOVE, StateMachine.State.DRIBBLE:
+		PlayerStateMachine.State.MOVE, PlayerStateMachine.State.DRIBBLE:
 			_move()
 			if Geometry2D.is_point_in_circle(pos, destination, 5):
-				state_machine.state = StateMachine.State.IDLE
-		StateMachine.State.PASSING:
+				state_machine.state = PlayerStateMachine.State.IDLE
+		PlayerStateMachine.State.PASSING:
 			short_pass.emit()
-		StateMachine.State.RECEIVED_PASS:
+		PlayerStateMachine.State.RECEIVED_PASS:
 			pass_received.emit()
-		StateMachine.State.SHOOTING:
+		PlayerStateMachine.State.SHOOTING:
 			shoot.emit()
-		StateMachine.State.TACKLE:
+		PlayerStateMachine.State.TACKLE:
 			tackle.emit()
-		StateMachine.State.PRESSING:
+		PlayerStateMachine.State.PRESSING:
 			set_destination(ball.pos)
 			_move()
 		# goalkeeper
-		StateMachine.State.SAVE_SHOT:
+		PlayerStateMachine.State.SAVE_SHOT:
 			goalkeeper_follow_ball()
 			_move()
-		StateMachine.State.POSITIONING:
+		PlayerStateMachine.State.POSITIONING:
 			goalkeeper_follow_ball()
 			_move()
 	
@@ -116,20 +116,20 @@ func make_goalkeeper() -> void:
 
 func pass_ball() -> void:
 	has_ball = true
-	state_machine.state = StateMachine.State.PASSING
+	state_machine.state = PlayerStateMachine.State.PASSING
 
 
 func press() -> void:
-	state_machine.state = StateMachine.State.PRESSING
+	state_machine.state = PlayerStateMachine.State.PRESSING
 
 
 func mark_zone(zone_position: Vector2) -> void:
 	set_destination(zone_position)
-	state_machine.state = StateMachine.State.MOVE
+	state_machine.state = PlayerStateMachine.State.MOVE
 
 
 func receive_ball() -> void:
-	state_machine.state = StateMachine.State.RECEIVING_PASS
+	state_machine.state = PlayerStateMachine.State.RECEIVING_PASS
 	stop()
 
 
