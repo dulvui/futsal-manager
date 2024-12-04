@@ -199,12 +199,18 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	# rich text label
 	theme.set_color("default_color", "RichTextLabel", configuration.font_color)
 	
-	# button  font colors
+	# button font colors
 	theme.set_color("font_color", "Button", configuration.font_color)
 	theme.set_color("font_focus_color", "Button", configuration.font_color_variation.focus)
 	theme.set_color("font_hover_color", "Button", configuration.font_color_variation.hover)
 	theme.set_color("font_pressed_color", "Button", configuration.font_color_variation.pressed)
 	theme.set_color("font_disabled_color", "Button", configuration.font_color_variation.disabled)
+	# button icon colors
+	theme.set_color("icon_normal_color", "Button", configuration.font_color)
+	theme.set_color("icon_focus_color", "Button", configuration.font_color_variation.focus)
+	theme.set_color("icon_hover_color", "Button", configuration.font_color_variation.hover)
+	theme.set_color("icon_pressed_color", "Button", configuration.font_color_variation.pressed)
+	theme.set_color("icon_disabled_color", "Button", configuration.font_color_variation.disabled)
 
 	# link button
 	theme.set_color("font_color", "LinkButton", configuration.font_color)

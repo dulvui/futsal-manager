@@ -29,6 +29,11 @@ fallbacks = Array[Font]([SubResource("FontVariation_xctls")])
 [resource]
 default_font = SubResource("SystemFont_vgl4r")
 default_font_size = 18
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
 Button/constants/hseparation = 2
 Button/styles/disabled = ExtResource("1_e26vn")
 Button/styles/focus = ExtResource("2_sokwu")
