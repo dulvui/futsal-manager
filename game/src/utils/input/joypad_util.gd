@@ -44,7 +44,15 @@ func get_axis_sign(axis: JoyAxis) -> String:
 
 func get_button_icon(button: JoyButton) -> Texture:
 	if active_joypad:
-		return Mapping.BUTTON_ICONS[active_joypad.type][button]
+		if button in Mapping.BUTTON_ICONS[active_joypad.type]:
+			return Mapping.BUTTON_ICONS[active_joypad.type][button]
+	return null
+
+
+func get_axis_icon(axis: JoyAxis) -> Texture:
+	if active_joypad:
+		if axis in Mapping.AXIS_ICONS[active_joypad.type]:
+			return Mapping.AXIS_ICONS[active_joypad.type][axis]
 	return null
 
 
