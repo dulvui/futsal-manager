@@ -31,7 +31,7 @@ func _ready() -> void:
 	get_tree().quit()
 
 
-static func setup_mock_world(use_test_file: bool) -> void:
+static func setup_mock_world(use_test_file: bool) -> bool:
 	if Global.world == null:
 		print("setting up mock world...")
 		Global.start_date = Time.get_datetime_dict_from_system()
@@ -43,6 +43,8 @@ static func setup_mock_world(use_test_file: bool) -> void:
 		Global.select_team(team, true)
 		Global.start_date = Time.get_datetime_dict_from_system()
 		print("setting up mock world done.")
+		return true
+	return false
 
 
 static func create_mock_world(use_test_file: bool) -> World:
