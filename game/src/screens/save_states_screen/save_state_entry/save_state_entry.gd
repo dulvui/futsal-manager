@@ -53,7 +53,7 @@ func _on_delete_pressed() -> void:
 	delete_dialog.popup()
 
 
-func _on_delete_dialog_confirm() -> void:
+func _on_delete_dialog_confirmed() -> void:
 	Global.save_states.delete(save_state)
 	Global.save_config()
 	ResUtil.save_save_states()

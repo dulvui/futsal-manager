@@ -11,7 +11,7 @@ enum Screen {
 	MATCH,
 }
 
-@onready var default_dialog: ConfirmationDialog = %DefaultDialog
+@onready var default_dialog: DefaultConfirmDialog = %DefaultDialog
 @onready var general: GeneralSettings = %General
 @onready var input: InputSettings = %Input
 
@@ -39,5 +39,4 @@ func _on_back_pressed() -> void:
 			get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 		_:
 			get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
-
 

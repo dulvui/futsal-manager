@@ -35,8 +35,6 @@ func restore_defaults() -> void:
 	Global.input_detection_mode = 0
 	detection_mode_button.option_button.selected = 0
 
-	Global.save_config()
-
 
 func _on_detection_mode_button_item_selected(index: int) -> void:
 	Global.input_detection_mode = index

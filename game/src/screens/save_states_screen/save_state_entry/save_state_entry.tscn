@@ -138,4 +138,4 @@ Read here more [link to docs]"
 
 [connection signal="pressed" from="Buttons/Delete" to="." method="_on_delete_pressed"]
 [connection signal="pressed" from="Buttons/Load" to="." method="_on_load_pressed"]
-[connection signal="confirm" from="DeleteDialog" to="." method="_on_delete_dialog_confirm"]
+[connection signal="confirmed" from="DeleteDialog" to="." method="_on_delete_dialog_confirmed"]

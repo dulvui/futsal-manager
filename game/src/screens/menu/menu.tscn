@@ -157,4 +157,4 @@ custom_text = "EXIT_GAME_TEXT"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]
-[connection signal="confirm" from="DefaultConfirmDialog" to="." method="_on_default_confirm_dialog_confirm"]
+[connection signal="confirmed" from="DefaultConfirmDialog" to="." method="_on_default_confirm_dialog_confirmed"]

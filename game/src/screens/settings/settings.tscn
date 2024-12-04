@@ -95,4 +95,4 @@ custom_text = "RESTORE_DEFAULTS_TEXT"
 
 [connection signal="pressed" from="Main/Buttons/Defaults" to="." method="_on_defaults_pressed"]
 [connection signal="pressed" from="Main/Buttons/Back" to="." method="_on_back_pressed"]
-[connection signal="confirm" from="DefaultDialog" to="." method="_on_default_dialog_confirm"]
+[connection signal="confirmed" from="DefaultDialog" to="." method="_on_default_dialog_confirmed"]

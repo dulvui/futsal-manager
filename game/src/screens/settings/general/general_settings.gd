@@ -44,8 +44,8 @@ func restore_defaults() -> void:
 	theme = ThemeUtil.reset_to_default()
 	theme_options.selected = 0
 	#scale
-	get_tree().root.content_scale_factor = ThemeUtil.get_default_scale()
 	Global.theme_scale = ThemeUtil.get_default_scale()
+	get_tree().root.content_scale_factor = Global.theme_scale
 	# audio
 	SoundUtil.restore_default()
 	ui_sfx_volume.value = SoundUtil.get_bus_volume(SoundUtil.AudioBus.UI_SFX)
