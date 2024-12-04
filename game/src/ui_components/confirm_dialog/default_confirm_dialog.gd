@@ -6,7 +6,7 @@ class_name DefaultConfirmDialog
 extends PopupPanel
 
 signal cancel
-signal accept
+signal confirm
 
 @export var custom_title: String = ""
 @export_multiline var custom_text: String = ""
@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func _on_accept_pressed() -> void:
-	accept.emit()
+	confirm.emit()
 	hide()
 
 
