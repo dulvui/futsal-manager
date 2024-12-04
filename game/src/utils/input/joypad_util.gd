@@ -32,13 +32,15 @@ func get_joypad_type_string() -> String:
 
 func get_button_sign(button: JoyButton) -> String:
 	if active_joypad:
-		return Mapping.BUTTON_GLYPHS[active_joypad.type][button]
+		if button in Mapping.BUTTON_GLYPHS[active_joypad.type]:
+			return Mapping.BUTTON_GLYPHS[active_joypad.type][button]
 	return ""
 
 
 func get_axis_sign(axis: JoyAxis) -> String:
 	if active_joypad:
-		return Mapping.AXIS_GLYPHS[active_joypad.type][axis]
+		if axis in Mapping.AXIS_GLYPHS[active_joypad.type]:
+			return Mapping.AXIS_GLYPHS[active_joypad.type][axis]
 	return ""
 
 

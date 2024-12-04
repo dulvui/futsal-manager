@@ -33,6 +33,8 @@ func _setup_shortcuts() -> void:
 	
 	if joypad_button_event:
 		shortcut.events.append(joypad_button_event)
+	if joypad_motion_event:
+		shortcut.events.append(joypad_motion_event)
 	if key_event:
 		shortcut.events.append(key_event)
 
@@ -40,8 +42,14 @@ func _setup_shortcuts() -> void:
 func _set_shortcut_glyph() -> void:
 	if InputUtil.type == InputUtil.Type.JOYPAD and joypad_button_event:
 		icon = JoypadUtil.get_button_icon(joypad_button_event.button_index)
-		# text = tooltip_text + " %s"%JoypadUtil.get_button_sign(joypad_button_event.button_index)
-		# text = tooltip_text
+	elif InputUtil.type == InputUtil.Type.JOYPAD and joypad_motion_event:
+		icon = JoypadUtil.get_axis_icon(joypad_motion_event.axis)
+
+		# workaround until not fixed https://github.com/godotengine/godot/issues/99331
+		if joypad_motion_event.axis == JOY_AXIS_TRIGGER_LEFT:
+			JoypadAxisUtil.l2.connect(func() -> void: pressed.emit())
+		if joypad_motion_event.axis == JOY_AXIS_TRIGGER_RIGHT:
+			JoypadAxisUtil.r2.connect(func() -> void: pressed.emit())
 	elif InputUtil.type == InputUtil.Type.KEYBOARD and key_event: 
 		# text = tooltip_text + " " + key_event.as_text()
 		icon = null

@@ -60,10 +60,12 @@ func _input(event: InputEvent) -> void:
 			_verify_focus()
 
 		_verify_type(event)
+		
+		JoypadAxisUtil.handle_event(event)
 
 		return
 	else:
-		get_viewport().set_input_as_handled()
+		viewport.set_input_as_handled()
 
 
 func start_focus(node: Control) -> void:
@@ -109,11 +111,10 @@ func _verify_type(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		if type != Type.JOYPAD:
 			type = Type.JOYPAD
-	else:
+	elif event is InputEventKey or event is InputEventMouse:
 		if type != Type.KEYBOARD:
 			type = Type.KEYBOARD
 
 
 func _on_gui_focus_change(node: Control) -> void:
 	last_focus = node
-
