@@ -7,6 +7,8 @@ extends Node
 signal type_changed(type: Type)
 
 
+const DETECTION_TIMEOUT: int = 3
+
 enum DetectionMode {
 	AUTO,
 	MANUAL,
@@ -26,12 +28,20 @@ var last_focus: Control
 var type: Type:
 	set = set_type
 
+# to prevent constant type switches on detection mode auto
+var timer: Timer
+
 
 func _ready() -> void:
 	focused = true
-	type = Global.input_type
+	
 	viewport = get_viewport()
 	viewport.gui_focus_changed.connect(_on_gui_focus_change)
+
+	timer = Timer.new()
+	add_child(timer)
+	
+	type = Global.input_type
 
 
 func _notification(what: int) -> void:
@@ -74,6 +84,8 @@ func set_type(p_type: Type) -> void:
 	Global.input_type = type
 	type_changed.emit(type)
 
+	timer.start(DETECTION_TIMEOUT)
+
 
 func _verify_focus() -> void:
 	# check if a nodes has focus, if not, last or first focused node grabs it
@@ -89,6 +101,9 @@ func _verify_focus() -> void:
 
 func _verify_type(event: InputEvent) -> void:
 	if Global.input_detection_mode == DetectionMode.MANUAL:
+		return
+
+	if timer.time_left > 0.5:
 		return
 
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
