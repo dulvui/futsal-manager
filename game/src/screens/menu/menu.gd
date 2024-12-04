@@ -13,6 +13,7 @@ extends Control
 @onready var new_game: Button = %NewGame
 @onready var exit: Button = %Exit
 @onready var version: Label = %Version
+@onready var exit_confirm_dialog: DefaultConfirmDialog = %DefaultConfirmDialog
 
 
 func _ready() -> void:
@@ -62,5 +63,9 @@ func _on_loading_screen_loaded(_type: LoadingUtil.Type) -> void:
 
 
 func _on_exit_pressed() -> void:
+	exit_confirm_dialog.popup_centered()
+
+
+func _on_default_confirm_dialog_accept() -> void:
 	get_tree().quit()
 

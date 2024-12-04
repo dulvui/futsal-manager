@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8mhb22bae1my"]
+[gd_scene load_steps=17 format=3 uid="uid://c8mhb22bae1my"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/dashboard/dashboard.gd" id="2"]
@@ -13,6 +13,20 @@
 [ext_resource type="PackedScene" uid="uid://ccipqeqmthtfr" path="res://src/ui_components/transfers/contract_offer/contract_offer.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://dtvkd1ks3xiqc" path="res://src/ui_components/player_profile/player_profile.tscn" id="11_838pl"]
 [ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="12_7y8jj"]
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_nxngg"]
+axis = 5
+axis_value = 1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_j7j8p"]
+device = -1
+ctrl_pressed = true
+keycode = 67
+unicode = 99
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_e6s21"]
+button_index = 10
+pressed = true
 
 [node name="Dashboard" type="Control"]
 layout_mode = 3
@@ -201,9 +215,11 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = ">"
 script = ExtResource("3_kbasy")
+joypad_motion_event = SubResource("InputEventJoypadMotion_nxngg")
 
 [node name="NextMatchButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -221,6 +237,8 @@ size_flags_vertical = 4
 theme_type_variation = &"ImportantButton"
 text = "CONTINUE"
 script = ExtResource("3_kbasy")
+key_event = SubResource("InputEventKey_j7j8p")
+joypad_button_event = SubResource("InputEventJoypadButton_e6s21")
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/MainContainer"]
 layout_mode = 2

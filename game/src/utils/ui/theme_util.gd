@@ -18,14 +18,15 @@ const BOX_PRESSED_FILE: StringName = BASE_PATH + "styles/box/box_pressed.tres"
 const BOX_FOCUS_FILE: StringName = BASE_PATH + "styles/box/box_focus.tres"
 const BOX_HOVER_FILE: StringName = BASE_PATH + "styles/box/box_hover.tres"
 const BOX_DISABLED_FILE: StringName = BASE_PATH + "styles/box/box_disabled.tres"
-const BOX_BACKGROUND_FILE: StringName = BASE_PATH + "styles/box/box_background.tres"
 # style important boxes flat
 const BOX_IMPORTANT_NORMAL_FILE: StringName = BASE_PATH + "styles/box_important/box_important_normal.tres"
 const BOX_IMPORTANT_PRESSED_FILE: StringName = BASE_PATH + "styles/box_important/box_important_pressed.tres"
 const BOX_IMPORTANT_FOCUS_FILE: StringName = BASE_PATH + "styles/box_important/box_important_focus.tres"
 const BOX_IMPORTANT_HOVER_FILE: StringName = BASE_PATH + "styles/box_important/box_important_hover.tres"
 const BOX_IMPORTANT_DISABLED_FILE: StringName = BASE_PATH + "styles/box_important/box_important_disabled.tres"
-const BOX_IMPORTANT_BACKGROUND_FILE: StringName = BASE_PATH + "styles/box_important/box_important_background.tres"
+# style backgrounds
+const BOX_BACKGROUND_FILE: StringName = BASE_PATH + "styles/box/box_background.tres"
+const BOX_BACKGROUND_BORDERED_FILE: StringName = BASE_PATH + "styles/box/box_background_bordered.tres"
 # style boxes line
 const LINE_H_NORMAL_FILE: StringName = BASE_PATH + "styles/lines/line_h_normal.tres"
 const LINE_H_FOCUS_FILE: StringName = BASE_PATH + "styles/lines/line_h_focus.tres"
@@ -63,6 +64,7 @@ var box_important_hover: StyleBoxFlat
 var box_important_disabled: StyleBoxFlat
 
 var box_background: StyleBoxFlat
+var box_background_bordered: StyleBoxFlat
 
 var line_h_normal: StyleBoxLine
 var line_h_focus: StyleBoxLine
@@ -94,6 +96,7 @@ func _ready() -> void:
 	box_important_disabled = ResourceLoader.load(BOX_IMPORTANT_DISABLED_FILE, "StyleBoxFlat")
 	# background
 	box_background = ResourceLoader.load(BOX_BACKGROUND_FILE, "StyleBoxFlat")
+	box_background_bordered = ResourceLoader.load(BOX_BACKGROUND_BORDERED_FILE, "StyleBoxFlat")
 	# style boxes line
 	line_h_normal = ResourceLoader.load(LINE_H_NORMAL_FILE, "StyleBoxLine")
 	line_h_focus = ResourceLoader.load(LINE_H_FOCUS_FILE, "StyleBoxLine")
@@ -173,6 +176,8 @@ func _apply_configuration(configuration: ThemeConfiguration) -> void:
 	box_important_disabled.bg_color = configuration.style_important_color_variation.disabled
 	# background
 	box_background.bg_color = configuration.background_color
+	box_background_bordered.bg_color = configuration.background_color
+	box_background_bordered.border_color = configuration.font_color
 	# line colors
 	line_h_normal.color = configuration.style_color_variation.normal
 	line_h_focus.color = configuration.style_color_variation.focus

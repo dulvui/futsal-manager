@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpvg2vhxml3a1"]
+
+[ext_resource type="Script" path="res://src/ui_components/confirm_dialog/default_confirm_dialog.gd" id="1_alslp"]
+[ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="2_2aytl"]
+[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="2_7lbao"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_5teo3"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_4cqmx"]
+button_index = 1
+pressed = true
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_vnokf"]
+button_index = 10
+pressed = true
+
+[node name="DefaultConfirmDialog" type="PopupPanel"]
+initial_position = 1
+size = Vector2i(400, 300)
+visible = true
+script = ExtResource("1_alslp")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TITLE"
+label_settings = ExtResource("2_7lbao")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Text" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Hello"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "NO"
+script = ExtResource("2_2aytl")
+key_event = SubResource("InputEventKey_5teo3")
+joypad_button_event = SubResource("InputEventJoypadButton_4cqmx")
+
+[node name="Accept" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "YES"
+script = ExtResource("2_2aytl")
+joypad_button_event = SubResource("InputEventJoypadButton_vnokf")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Accept" to="." method="_on_accept_pressed"]
