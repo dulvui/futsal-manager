@@ -66,6 +66,6 @@ func _on_exit_pressed() -> void:
 	exit_confirm_dialog.popup_centered()
 
 
-func _on_default_confirm_dialog_accept() -> void:
+func _on_default_confirm_dialog_confirm() -> void:
 	get_tree().quit()
 

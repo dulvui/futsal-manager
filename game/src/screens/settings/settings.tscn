@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://4aoa7li1cfbc"]
+[gd_scene load_steps=7 format=3 uid="uid://4aoa7li1cfbc"]
 
 [ext_resource type="Script" path="res://src/screens/settings/settings.gd" id="1_m7cla"]
 [ext_resource type="PackedScene" uid="uid://cywaob6jab2pj" path="res://src/screens/settings/general/general_settings.tscn" id="2_rfuel"]
 [ext_resource type="PackedScene" uid="uid://bw4rsu0jiwjj0" path="res://src/screens/settings/input/input_settings.tscn" id="3_i3rqu"]
+[ext_resource type="PackedScene" uid="uid://bpvg2vhxml3a1" path="res://src/ui_components/confirm_dialog/default_confirm_dialog.tscn" id="5_mq35h"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="5_mtybe"]
 
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_nppw4"]
@@ -87,13 +88,11 @@ text = "BACK"
 script = ExtResource("5_mtybe")
 joypad_button_event = SubResource("InputEventJoypadButton_nppw4")
 
-[node name="DefaultDialog" type="ConfirmationDialog" parent="."]
+[node name="DefaultDialog" parent="." instance=ExtResource("5_mq35h")]
 unique_name_in_owner = true
-title = "RESTORE_DEFAULTS"
-size = Vector2i(400, 200)
-min_size = Vector2i(400, 200)
-dialog_text = "RESTORE_DEFAULTS_TEXT"
+custom_title = "RESTORE_DEFAULTS?"
+custom_text = "RESTORE_DEFAULTS_TEXT"
 
 [connection signal="pressed" from="Main/Buttons/Defaults" to="." method="_on_defaults_pressed"]
 [connection signal="pressed" from="Main/Buttons/Back" to="." method="_on_back_pressed"]
-[connection signal="confirmed" from="DefaultDialog" to="." method="_on_default_dialog_confirmed"]
+[connection signal="confirm" from="DefaultDialog" to="." method="_on_default_dialog_confirm"]

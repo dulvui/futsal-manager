@@ -11,7 +11,7 @@ signal load_game
 
 var save_state: SaveState
 
-@onready var delete_dialog: ConfirmationDialog = %DeleteDialog
+@onready var delete_dialog: DefaultConfirmDialog = %DeleteDialog
 @onready var team: Label = %Team
 @onready var create_date: Label = %CreateDate
 @onready var manager: Label = %Manager
@@ -53,7 +53,7 @@ func _on_delete_pressed() -> void:
 	delete_dialog.popup()
 
 
-func _on_delete_dialog_confirmed() -> void:
+func _on_delete_dialog_confirm() -> void:
 	Global.save_states.delete(save_state)
 	Global.save_config()
 	ResUtil.save_save_states()
@@ -63,3 +63,4 @@ func _on_delete_dialog_confirmed() -> void:
 		get_tree().change_scene_to_file(
 			"res://src/screens/save_states_screen/save_states_screen.tscn"
 		)
+
