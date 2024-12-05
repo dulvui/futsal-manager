@@ -64,11 +64,14 @@ func _ready() -> void:
 	get_tree().root.content_scale_factor = theme_scale
 
 
-func select_team(p_team: Team, testing: bool = false)-> void:
+func select_team(p_team: Team)-> void:
 	team = p_team
 	world.active_team_id = team.id
 	league = world.get_league_by_team_id(team.id)
-	
+
+
+func initialize_game(testing: bool = false) -> void:
+	# save save state and show loading screen
 	if not testing:
 		save_states.make_temp_active()
 
@@ -114,8 +117,8 @@ func next_season() -> void:
 	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
-func save_all_data() -> void:
-	ResUtil.save_save_states()
+func save_all_data(threaded: bool = true) -> void:
+	ResUtil.save_save_states(threaded)
 	save_config()
 
 

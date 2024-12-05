@@ -53,6 +53,9 @@ var active_view: ContentViews = ContentViews.EMAIL
 @onready var player_profile: PlayerProfile = %PlayerProfile
 @onready var loading_screen: LoadingScreen = $LoadingScreen
 
+# confirm dialogs
+@onready var save_confirm_dialog: DefaultConfirmDialog = %SaveConfirmDialog
+
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
@@ -105,12 +108,6 @@ func _on_search_action() -> void:
 			all_players_list.search_line_edit.grab_focus()
 		_:
 			return
-
-
-func _on_menu_button_pressed() -> void:
-	LoadingUtil.start("SAVING_GAME", LoadingUtil.Type.SAVE_GAME, true)
-	loading_screen.show()
-	Global.save_all_data()
 
 
 func _on_search_player_button_pressed() -> void:
@@ -345,4 +342,18 @@ func _on_loading_screen_loaded(type: LoadingUtil.Type) -> void:
 func _on_settings_button_pressed() -> void:
 	Global.settings_screen = Settings.Screen.DASHBOARD
 	get_tree().change_scene_to_file("res://src/screens/settings/settings.tscn")
+
+
+func _on_menu_button_pressed() -> void:
+	save_confirm_dialog.popup_centered()
+
+
+func _on_save_confirm_dialog_confirmed() -> void:
+	LoadingUtil.start("SAVING_GAME", LoadingUtil.Type.SAVE_GAME, true)
+	loading_screen.show()
+	Global.save_all_data()
+
+
+func _on_save_confirm_dialog_canceled() -> void:
+	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 

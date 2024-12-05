@@ -83,7 +83,7 @@ func _process(_delta: float) -> void:
 	loaded_resources.clear()
 
 
-func save_save_states() -> void:
+func save_save_states(thread_world_save: bool = true) -> void:
 	print("saving save states...")
 	
 	# save save states
@@ -107,8 +107,10 @@ func save_save_states() -> void:
 		save_resource("transfers", Global.transfers)
 		save_resource("save_state", save_state)
 
-		ThreadUtil.save_world()
-		#ResUtil.save_resource("world", Global.world)
+		if thread_world_save:
+			ThreadUtil.save_world()
+		else:
+			ResUtil.save_resource("world", Global.world)
 	
 	print("saving save states done.")
 

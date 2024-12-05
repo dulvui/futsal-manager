@@ -62,6 +62,7 @@ func initialize(next_season: bool = false) -> void:
 		date = Global.start_date
 
 	# set start date
+	date.year = Global.start_date.year
 	date.day = Const.SEASON_START_DAY
 	date.month = Const.SEASON_START_MONTH
 

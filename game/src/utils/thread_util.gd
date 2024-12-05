@@ -7,6 +7,14 @@ extends Node
 var thread: Thread
 
 
+func initialize_game() -> void:
+	if thread and thread.is_started():
+		print("thread is already running")
+		return
+	thread = Thread.new()
+	thread.start(_initialize_game, Thread.Priority.PRIORITY_HIGH)
+
+
 func save_world() -> void:
 	if thread and thread.is_started():
 		print("thread is already running")
@@ -29,6 +37,13 @@ func random_results() -> void:
 		return
 	thread = Thread.new()
 	thread.start(_random_results, Thread.Priority.PRIORITY_HIGH)
+
+
+func _initialize_game() -> void:
+	print("initializing game in thread...")
+	Global.initialize_game()
+	Global.save_all_data(false)
+	call_deferred("_loading_done")
 
 
 func _save_world() -> void:

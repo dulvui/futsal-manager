@@ -7,6 +7,7 @@ extends Node
 signal loaded(type: Type)
 
 enum Type {
+	INITIALIZE_GAME,
 	LOAD_GAME,
 	SAVE_GAME,
 	MATCH_RESULTS,
