@@ -248,7 +248,6 @@ func change_players_request() -> void:
 	for i: int in all_players.size():
 		if all_players[i].player_res.id != res_team.players[i].id:
 			change_request = true
-			print("change request")
 			return
 
 
@@ -309,10 +308,12 @@ func _auto_change() -> void:
 				no_matching.append(player)
 
 		# replace players that didnt find a good position match
-		for player: SimPlayer in low_stamina_players:
+		for player: SimPlayer in no_matching:
 			var sub: SimPlayer = bench.pop_front()
-			res_team.change_players(player.player_res, sub.player_res)
-			auto_change_request = true
+			# check if bench has still players
+			if sub:
+				res_team.change_players(player.player_res, sub.player_res)
+				auto_change_request = true
 		
 		# trigger change player request only once
 		if auto_change_request:
