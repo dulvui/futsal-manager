@@ -14,6 +14,7 @@ func test() -> void:
 
 func test_months_and_days_size() -> void:
 	print("test: test_months_and_days_size...")
+	Global.start_date = Time.get_date_dict_from_system()
 	var calendar: Calendar = Calendar.new()
 	calendar.initialize()
 	# 24 months, since always 2 years are present
