@@ -112,7 +112,6 @@ script = ExtResource("4_nkxl6")
 joypad_button_event = SubResource("InputEventJoypadButton_x3xqw")
 
 [node name="LoadingScreen" parent="." instance=ExtResource("4_qla42")]
-visible = false
 layout_mode = 1
 
 [node name="Info" type="HBoxContainer" parent="."]
@@ -148,8 +147,7 @@ vertical_alignment = 1
 
 [node name="DefaultConfirmDialog" parent="." instance=ExtResource("6_1a2kt")]
 unique_name_in_owner = true
-custom_title = "EXIT_GAME?"
-custom_text = "EXIT_GAME_TEXT"
+custom_text = "EXIT_GAME"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueGame" to="." method="_on_continue_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]

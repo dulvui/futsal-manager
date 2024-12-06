@@ -305,14 +305,12 @@ visible = false
 layout_mode = 2
 
 [node name="LoadingScreen" parent="." instance=ExtResource("12_7y8jj")]
-visible = false
 custom_minimum_size = Vector2(1920, 800)
 layout_mode = 1
 
 [node name="SaveConfirmDialog" parent="." instance=ExtResource("14_t4c55")]
 unique_name_in_owner = true
-custom_title = "SAVE?"
-custom_text = "SAVE_BEFORE_EXIT"
+custom_text = "SAVE_TEXT"
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]

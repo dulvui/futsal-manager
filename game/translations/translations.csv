@@ -167,7 +167,8 @@ SAVING_GAME,Saving your game…,Dein Spielstand wird gespeichert…,Salvando la 
 EXIT,Exit,Beenden,Chiudi
 RANDOM,Random,Zufällig,Casuale
 DEFAULT,Default,Standard,Predefinito
-GENERATING_PLAYERS,Generating players…,Spieler erzeugen…,Generando giocatori…
+INITIALIZE_GAME,Initlializing game…,Spiel wird initialisiert…,Inizializando gioco…
+GENERATING_PLAYERS,Generating all players…,Spieler werden generiert…,Generando tutti giocatori…
 SELECT,Select,Auswählen,Seleziona
 BUDGET,Budget,Budget,Bilancio
 SALARY_BUDGET,Salary budget,Gehaltsbudget,Budget salariale
@@ -194,3 +195,9 @@ NO_MATCH,No match,Kein Spiel,Nessuna partita
 TRANSFERMARKET,Transfermarket,Transfermarkt,Sessione mercato
 NO_TEAM_FOUND,No team found,Keine Mannschaft gefunden,Nessuna squadra trovata
 NO_COMPETITION_FOUND,No competition found,Kein Wettebewerb gefunden,Nessuna competizione trovata
+YES,Yes,Ja,Sì
+NO,No,Nein,No
+EXIT_GAME,Exit game?,Spiel verlassen?,Uscire dal gioco?
+RESTORE_DEFAULTS,Restore default settings?,Standardeinstellung wiederherstellen?,Ripristinare le impostazioni predefinite?
+RESTORE_DEFAULTS_TEXT,All changed settings will lost and restored to default value.,Alle Einstellungen gehen verloren und werden zurück gesetzt.,Tutte le impostazioni cambiate vanno perse e verranno risettate.
+SAVE_TEXT,Save game before exiting to menu?,Spiel speichern vor verlassen?,Vuoi salvare la partita prima di tornare al menu?
