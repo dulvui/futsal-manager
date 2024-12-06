@@ -128,7 +128,7 @@ func welcome_manager() -> void:
 
 
 func _add_message(message: EmailMessage) -> void:
-	call_deferred(Global.inbox.list.append(message))
+	Global.inbox.list.append(message)
 	# if Global.inbox.list.size() > MAX_MESSAGES:
 	# 	Global.inbox.list.pop_front()
 	refresh_inbox.emit()
