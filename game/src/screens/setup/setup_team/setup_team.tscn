@@ -78,7 +78,6 @@ script = ExtResource("5_rq678")
 
 [node name="LoadingScreen" parent="." instance=ExtResource("6_vntgh")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 
 [connection signal="team_selected" from="MarginContainer/VBoxContainer/Main/TeamsTree" to="." method="_on_teams_tree_team_selected"]

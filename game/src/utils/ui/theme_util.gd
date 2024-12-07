@@ -74,6 +74,7 @@ var line_v_focus: StyleBoxLine
 var line_v_thin: StyleBoxLine
 
 var custom_configuration: ThemeConfiguration
+var configuration: ThemeConfiguration
 
 
 func _ready() -> void:
@@ -152,14 +153,16 @@ func apply_theme(theme_name: StringName) -> Theme:
 		_apply_configuration(custom_configuration)
 	else:
 		var theme_file: StringName = THEMES[theme_name]
-		var configuration: ThemeConfiguration = ResourceLoader.load(THEMES_PATH + theme_file)
+		configuration = ResourceLoader.load(THEMES_PATH + theme_file)
 		configuration.setup()
 		_apply_configuration(configuration)
 
 	return theme
 
 
-func _apply_configuration(configuration: ThemeConfiguration) -> void:
+func _apply_configuration(p_configuration: ThemeConfiguration) -> void:
+	configuration = p_configuration
+
 	# box colors
 	box_normal.bg_color = configuration.style_color_variation.normal
 	box_focus.bg_color = configuration.style_color_variation.focus

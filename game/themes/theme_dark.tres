@@ -8,5 +8,5 @@ id = 0
 name = "LIGHT"
 font_color = Color(0.969137, 0.969137, 0.969137, 1)
 style_color = Color(0.225612, 0.248081, 0.232749, 1)
-style_important_color = Color(0.969149, 0.843691, 0.211618, 1)
+style_important_color = Color(0.578001, 0.0850074, 0.176575, 1)
 background_color = Color(0, 0, 0, 1)

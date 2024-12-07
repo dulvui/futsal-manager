@@ -8,4 +8,5 @@ id = 0
 name = "RED"
 font_color = Color(0.969137, 0.969137, 0.969137, 1)
 style_color = Color(0.605243, 0, 0.225228, 1)
+style_important_color = Color(0.906542, 5.5206e-05, 0.351453, 1)
 background_color = Color(1, 0.740573, 0.698339, 1)

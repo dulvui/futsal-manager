@@ -5,12 +5,12 @@
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_8v23p"]
 
 [node name="VisualDay" type="MarginContainer" groups=["visual-day"]]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(100, 100)
 anchors_preset = -1
-anchor_right = 0.107
-anchor_bottom = 0.102
-offset_right = -0.440018
-offset_bottom = -0.159996
+anchor_right = 0.109
+anchor_bottom = 0.12
+offset_right = 0.719986
+offset_bottom = 0.399994
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -81,22 +81,18 @@ size_flags_vertical = 3
 theme_override_constants/separation = 0
 alignment = 1
 
+[node name="TeamName" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/Competition"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+text = "ROMA"
+autowrap_mode = 2
+
 [node name="CompetitionName" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/Competition"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SERIE A"
 text_overrun_behavior = 3
-
-[node name="TeamName" type="Label" parent="MarginContainer/Button/MarginContainer/VBoxContainer/Competition"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "ROMA"
-text_overrun_behavior = 3
-
-[node name="MatchColor" type="ColorRect" parent="MarginContainer/Button/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]
