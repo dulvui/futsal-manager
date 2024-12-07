@@ -29,9 +29,8 @@ ctrl_pressed = true
 keycode = 67
 unicode = 99
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_vv7l5"]
-axis = 5
-axis_value = 1.0
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_k8as6"]
+button_index = 6
 
 [node name="Dashboard" type="Control"]
 layout_mode = 3
@@ -244,7 +243,7 @@ theme_type_variation = &"ImportantButton"
 text = "CONTINUE"
 script = ExtResource("3_kbasy")
 key_event = SubResource("InputEventKey_j7j8p")
-joypad_motion_event = SubResource("InputEventJoypadMotion_vv7l5")
+joypad_button_event = SubResource("InputEventJoypadButton_k8as6")
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/MainContainer"]
 layout_mode = 2
