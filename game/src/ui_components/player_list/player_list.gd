@@ -10,9 +10,9 @@ signal select_player(player: Player)
 const PlayerListColumnScene: PackedScene = preload("res://src/ui_components/player_list/player_list_column/player_list_column.tscn")
 
 # depending on scale
-const PAGE_SIZE_1: int = 32
-const PAGE_SIZE_2: int = 18
-const PAGE_SIZE_3: int = 10
+const PAGE_SIZE_1: int = 36
+const PAGE_SIZE_2: int = 22
+const PAGE_SIZE_3: int = 12
 
 var views: Array[String]
 var columns: Dictionary = {}
