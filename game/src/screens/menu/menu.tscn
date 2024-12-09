@@ -134,8 +134,8 @@ layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 4
 focus_mode = 2
-text = "simondalvai.org"
-uri = "https://simondalvai.org"
+text = "99managers.org"
+uri = "https://99managers.org"
 
 [node name="Version" type="Label" parent="Info"]
 unique_name_in_owner = true
