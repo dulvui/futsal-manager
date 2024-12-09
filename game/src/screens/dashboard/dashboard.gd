@@ -354,6 +354,6 @@ func _on_save_confirm_dialog_confirmed() -> void:
 	Global.save_all_data()
 
 
-func _on_save_confirm_dialog_canceled() -> void:
+func _on_save_confirm_dialog_denied() -> void:
 	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
 

@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="2_2aytl"]
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="2_7lbao"]
 
-[sub_resource type="InputEventKey" id="InputEventKey_5teo3"]
-device = -1
-keycode = 4194305
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_dt0pg"]
+button_index = 1
+pressed = true
 
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_4cqmx"]
-button_index = 1
+button_index = 2
 pressed = true
 
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_vnokf"]
@@ -18,7 +18,8 @@ pressed = true
 
 [node name="DefaultConfirmDialog" type="PopupPanel"]
 initial_position = 1
-size = Vector2i(400, 300)
+size = Vector2i(530, 300)
+visible = true
 script = ExtResource("1_alslp")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -60,19 +61,30 @@ theme_override_constants/separation = 15
 alignment = 1
 
 [node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "CANCEL"
+script = ExtResource("2_2aytl")
+joypad_button_event = SubResource("InputEventJoypadButton_dt0pg")
+
+[node name="No" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "NO"
 script = ExtResource("2_2aytl")
-key_event = SubResource("InputEventKey_5teo3")
 joypad_button_event = SubResource("InputEventJoypadButton_4cqmx")
 
-[node name="Accept" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Yes" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "YES"
 script = ExtResource("2_2aytl")
 joypad_button_event = SubResource("InputEventJoypadButton_vnokf")
 
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Accept" to="." method="_on_accept_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_yes_pressed"]
