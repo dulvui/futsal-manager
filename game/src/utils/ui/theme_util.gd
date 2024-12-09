@@ -48,8 +48,11 @@ const THEMES: Dictionary = {
 
 var theme: Theme
 
-var label_settings_bold: LabelSettings
 var label_settings: LabelSettings
+var label_settings_bold: LabelSettings
+var label_settings_low: LabelSettings
+var label_settings_mid: LabelSettings
+var label_settings_high: LabelSettings
 
 var box_normal: StyleBoxFlat
 var box_pressed: StyleBoxFlat
@@ -80,9 +83,16 @@ var configuration: ThemeConfiguration
 func _ready() -> void:
 	# load resources
 	theme = ResourceLoader.load(THEME_FILE, "Theme")
-	# label
+	# label settings
 	label_settings = ResourceLoader.load(LABEL_SETTINGS_FILE, "LabelSettings")
 	label_settings_bold = ResourceLoader.load(LABEL_SETTINGS_BOLD_FILE, "LabelSettings")
+	# label settings color variations
+	label_settings_low = label_settings_bold.duplicate(true)
+	label_settings_low.outline_color = Color.RED
+	label_settings_mid = label_settings_bold.duplicate(true)
+	label_settings_mid.outline_color = Color.BLUE
+	label_settings_high = label_settings_bold.duplicate(true)
+	label_settings_high.outline_color = Color.GREEN
 	# style boxes flat
 	box_normal = ResourceLoader.load(BOX_NORMAL_FILE, "StyleBoxFlat")
 	box_pressed = ResourceLoader.load(BOX_PRESSED_FILE, "StyleBoxFlat")
@@ -195,6 +205,10 @@ func _apply_configuration(p_configuration: ThemeConfiguration) -> void:
 	label_settings.font_color = configuration.font_color
 	label_settings_bold.font_color = configuration.font_color
 	label_settings_bold.outline_color = configuration.font_color
+	# label settings color variations
+	label_settings_low.font_color = configuration.font_color
+	label_settings_mid.font_color = configuration.font_color
+	label_settings_high.font_color = configuration.font_color
 
 	# fontsize
 	theme.default_font_size = Global.theme_font_size

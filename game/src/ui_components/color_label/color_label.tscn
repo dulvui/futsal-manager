@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3y6tq2i5pg3b"]
+[gd_scene load_steps=3 format=3 uid="uid://b3y6tq2i5pg3b"]
 
+[ext_resource type="LabelSettings" uid="uid://c5yfa40ut1pyv" path="res://theme_base/label/label_settings.tres" id="1_n64no"]
 [ext_resource type="Script" path="res://src/ui_components/color_label/color_label.gd" id="2_mr605"]
 
 [node name="ColorLabel" type="Label"]
@@ -16,4 +17,5 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+label_settings = ExtResource("1_n64no")
 script = ExtResource("2_mr605")
