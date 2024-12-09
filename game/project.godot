@@ -71,6 +71,10 @@ window/stretch/aspect="expand"
 window/size/width=1920
 window/size/height=1080
 
+[editor]
+
+movie_writer/mjpeg_quality=0.9
+
 [filesystem]
 
 import/blender/enabled=false

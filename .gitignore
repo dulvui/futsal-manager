@@ -26,3 +26,6 @@ game/.vscode/
 
 # libre office temp files
 *.~lock*
+
+# videos
+*.avi
