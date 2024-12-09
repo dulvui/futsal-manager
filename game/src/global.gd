@@ -75,13 +75,13 @@ func initialize_game(testing: bool = false) -> void:
 	if not testing:
 		save_states.make_temp_active()
 
-	transfers = Transfers.new()
+	transfers = world.transfers
+	inbox = world.inbox
 
 	print("calendars created")
 	MatchCombinationUtil.initialize_matches()
 	print("matches initialized")
-	inbox = Inbox.new()
-	EmailUtil.welcome_manager()
+	EmailUtil.call_deferred("welcome_manager")
 
 	speed_factor = save_states.temp_state.speed_factor
 	start_date = save_states.temp_state.start_date

@@ -5,23 +5,29 @@
 class_name World
 extends JSONResource
 
-@export var calendar: Calendar
 @export var continents: Array[Continent]
 @export var world_cup: Cup
-
 @export var active_team_id: int
+
+@export var calendar: Calendar
+@export var transfers: Transfers
+@export var inbox: Inbox
 
 
 func _init(
-	p_calendar: Calendar = Calendar.new(),
 	p_continents: Array[Continent] = [],
 	p_world_cup: Cup = Cup.new(),
 	p_active_team_id: int = -1,
+	p_calendar: Calendar = Calendar.new(),
+	p_transfers: Transfers = Transfers.new(),
+	p_inbox: Inbox = Inbox.new(),
 ) -> void:
-	calendar = p_calendar
 	continents = p_continents
 	world_cup = p_world_cup
 	active_team_id = p_active_team_id
+	calendar = p_calendar
+	transfers = p_transfers
+	inbox = p_inbox
 
 
 func initialize() -> void:

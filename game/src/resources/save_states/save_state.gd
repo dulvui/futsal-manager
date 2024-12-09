@@ -88,12 +88,6 @@ func delete() -> void:
 
 
 func _create_dir() -> void:
-	# create save states directory, if not exist yet
-	var user_dir: DirAccess = DirAccess.open(Const.USER_PATH)
-	if not user_dir.dir_exists(Const.SAVE_STATES_DIR):
-		print("dir %s not found, creating now..."%Const.SAVE_STATES_PATH)
-		user_dir.make_dir(Const.SAVE_STATES_DIR)
-	
 	# create id directory, if not exist yet
 	var save_state_dir: DirAccess = DirAccess.open(Const.SAVE_STATES_PATH)
 	if save_state_dir and not save_state_dir.dir_exists(id):

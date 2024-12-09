@@ -37,6 +37,8 @@ func _process(_delta: float) -> void:
 			Global.team = Global.world.get_active_team()
 			Global.league = Global.world.get_active_league()
 			Global.manager = Global.team.staff.manager
+			Global.transfers = Global.world.transfers
+			Global.inbox = Global.world.inbox
 
 			# add to own array, to not remove element from
 			# loading_resources_paths, while iterating
@@ -83,11 +85,15 @@ func _process(_delta: float) -> void:
 	loaded_resources.clear()
 
 
+func load_resources() -> void:
+	load_threaded_resource("world")
+
+
 func save_save_states(thread_world_save: bool = true) -> void:
 	print("saving save states...")
 	
 	# save save states
-	ResourceSaver.save(Global.save_states, Const.SAVE_STATES_PATH + "save_states.res" , ResourceSaver.FLAG_COMPRESS)
+	ResourceSaver.save(Global.save_states, Const.SAVE_STATES_PATH + "save_states" + RES_SUFFIX , ResourceSaver.FLAG_COMPRESS)
 	BackupUtil.create_backup(Const.SAVE_STATES_PATH + "save_states", RES_SUFFIX)
 	
 	# save resources and active save state 
@@ -103,8 +109,6 @@ func save_save_states(thread_world_save: bool = true) -> void:
 
 		save_state.initialize()
 
-		save_resource("inbox", Global.inbox)
-		save_resource("transfers", Global.transfers)
 		save_resource("save_state", save_state)
 
 		if thread_world_save:
@@ -113,7 +117,6 @@ func save_save_states(thread_world_save: bool = true) -> void:
 			ResUtil.save_resource("world", Global.world)
 	
 	print("saving save states done.")
-
 
 
 func save_resource(res_key: StringName, resource: Resource) -> void:
@@ -130,18 +133,6 @@ func load_save_states() -> SaveStates:
 	# scane for new save states
 	save_states.scan()
 	return save_states
-
-
-func load_resources() -> void:
-	Global.inbox = load_resource("inbox")
-	if Global.inbox == null:
-		Global.inbox = Inbox.new()
-
-	Global.transfers = load_resource("transfers")
-	if Global.inbox == null:
-		Global.transfers = Transfers.new()
-
-	load_threaded_resource("world")
 
 
 func load_threaded_resource(res_key: String) -> void:
