@@ -3,11 +3,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class_name SceneFade
-extends Panel
+extends ColorRect
 
 const DURATION: float = 0.6
-
-@export var only_once: bool = false
 
 var tween: Tween
 
@@ -18,15 +16,13 @@ func _ready() -> void:
 
 
 func fade_in() -> void:
+	modulate = Color.BLACK
 	show()
-	modulate = Color.WHITE
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, DURATION)
-	print("FADE IN")
 
 
 func fade_out() -> void:
 	modulate = Color.TRANSPARENT
-	tween.tween_property(self, "modulate", Color.WHITE, DURATION)
-	await tween.finished
-	print("FADE OUT")
+	show()
+	tween.tween_property(self, "modulate", Color.BLACK, DURATION)
 

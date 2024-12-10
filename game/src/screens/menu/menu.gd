@@ -37,6 +37,7 @@ func _ready() -> void:
 
 	version.text = "v" + Global.version
 
+	# fade in effect on first open
 	if Global.just_started:
 		Global.just_started = false
 		scene_fade.fade_in()
