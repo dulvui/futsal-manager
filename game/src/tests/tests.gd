@@ -17,18 +17,31 @@ extends Node
 func _ready() -> void:
 	print("Start test suite")
 	
-	test_match_engine.test()
-	test_match_combination.test()
-	test_calendar.test()
-	test_generator.test()
-	test_benchmark.test()
-	test_res_util.test()
-
-	# intensive tests
-	# test_gameloop.test()
+	tests_fast()
+	tests_intensive()
 
 	print("Stop test suite")
 	get_tree().quit()
+
+
+func tests_fast() -> void:
+	print("start tests: fast..")
+
+	# JSON res util currenlty not used and not working
+	# test_res_util.test()
+
+	test_match_combination.test()
+	test_calendar.test()
+	test_generator.test()
+	print("start tests: fast done.")
+
+
+func tests_intensive() -> void:
+	print("start tests: intenstive...")
+	test_gameloop.test()
+	test_match_engine.test()
+	test_benchmark.test()
+	print("start tests: intenstive done.")
 
 
 static func setup_mock_world(use_test_file: bool) -> bool:

@@ -59,10 +59,13 @@ func initialize(next_season: bool = false) -> void:
 		date.year += 1
 		date = _get_next_day(date)
 	else:
-		date = Global.start_date
+		if Global.start_date != null and Global.start_date.is_empty():
+			print("calendar: Global.start_date not set, using system time dict")
+			date = Time.get_date_dict_from_system()
+		else:
+			date = Global.start_date
 
 	# set start date
-	date.year = Global.start_date.year
 	date.day = Const.SEASON_START_DAY
 	date.month = Const.SEASON_START_MONTH
 

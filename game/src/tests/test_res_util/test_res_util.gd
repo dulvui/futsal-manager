@@ -8,9 +8,7 @@ extends Node
 
 func test() -> void:
 	print("test: res util...")
-	var world_reference: World = World.new()
-	world_reference.continents.append(Continent.new())
-	world_reference.continents.append(Continent.new())
+	var world_reference: World = Tests.create_mock_world(true)
 
 	var world_dict: Dictionary = world_reference.to_json()
 

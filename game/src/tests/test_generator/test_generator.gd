@@ -14,7 +14,7 @@ func test() -> void:
 	var reference_world: World = generator.generate_world()
 	assert(reference_world.continents.size() > 0)
 
-	print("test: rqeuired properties...")
+	print("test: required properties...")
 
 	for continent: Continent in reference_world.continents:
 		for nation: Nation in continent.nations:
@@ -22,7 +22,7 @@ func test() -> void:
 				for team: Team in league.teams:
 					assert(team.players.size() > Const.LINEUP_PLAYERS_AMOUNT)
 					assert(team.get_goalkeeper() != null)
-	print("test: rqeuired properties done.")
+	print("test: required properties done.")
 
 	print("test: deterministic...")
 	# test deterministic generations x time
