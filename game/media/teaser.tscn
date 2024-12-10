@@ -1,15 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://dut8wnvcekn5e"]
+[gd_scene load_steps=9 format=3 uid="uid://dut8wnvcekn5e"]
 
 [ext_resource type="Script" path="res://media/teaser.gd" id="1_c7xuy"]
 [ext_resource type="Texture2D" uid="uid://b68igf7j3q76v" path="res://icon_dark.png" id="2_8vk6i"]
 [ext_resource type="LabelSettings" uid="uid://1g3edv8x0q6t" path="res://media/label_settings_trailer.tres" id="4_angej"]
+[ext_resource type="LabelSettings" uid="uid://cjddrymi21bbr" path="res://media/label_settings_trailer_bold.tres" id="4_iohf3"]
+[ext_resource type="Texture2D" uid="uid://b4igo2k8ytmf7" path="res://assets/ball.svg" id="5_c8ruo"]
 
 [sub_resource type="Animation" id="Animation_6j5sk"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/path = NodePath("Icon:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +23,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ComingSoonLabel:modulate")
+tracks/1/path = NodePath("ComingSoon:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -33,39 +35,39 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("FeaturesLabel:modulate")
+tracks/2/path = NodePath("Main:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Features2Label:modulate")
+tracks/3/path = NodePath("CPUParticles2D:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_xd2ux"]
 resource_name = "Teaser"
-length = 16.0
+length = 11.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/path = NodePath("Icon:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.6, 2.3),
+"times": PackedFloat32Array(0, 2, 2.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -73,38 +75,38 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ComingSoonLabel:modulate")
+tracks/1/path = NodePath("ComingSoon:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(13.7, 14.5667, 16),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 5.43333, 5.93333, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("FeaturesLabel:modulate")
+tracks/2/path = NodePath("Main:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(2.4, 3.1, 7.3, 8.16667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2.5, 3, 4.93333, 5.43333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Features2Label:modulate")
+tracks/3/path = NodePath("CPUParticles2D:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(8.33333, 9.13333, 12.6333, 13.5333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"times": PackedFloat32Array(0, 6.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mtfew"]
@@ -139,7 +141,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Icon" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -156,72 +158,89 @@ texture = ExtResource("2_8vk6i")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="ComingSoonLabel" type="Label" parent="."]
-custom_minimum_size = Vector2(1600, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -357.0
-offset_top = -120.5
-offset_right = 357.0
-offset_bottom = 120.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Coming 2025
-
-More information on
-99managers.org"
-label_settings = ExtResource("4_angej")
-horizontal_alignment = 1
-
 [node name="FeaturesLabel" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(1600, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -13.0
-offset_right = 67.5
-offset_bottom = 13.0
+offset_left = -800.0
+offset_top = -212.0
+offset_right = 800.0
+offset_bottom = 212.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "GAMEPLAY
 
-Buy and sell players
-Choose tactics and lineups
-Guide your players during matches
-Many competitions to win
-Stay up to date with news and emails"
+"
 label_settings = ExtResource("4_angej")
 horizontal_alignment = 1
 
-[node name="Features2Label" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(1600, 0)
+[node name="Main" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -13.0
-offset_right = 67.5
-offset_bottom = 13.0
+offset_left = -377.0
+offset_top = -219.0
+offset_right = 377.0
+offset_bottom = 219.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "SPECIAL FEATURES
+theme_override_constants/separation = 64
 
-Free and Open Source
-Fantasy teams and players with generation seed
-Vim motions [ h, j, k, l, / ]
-Many light/dark themes and customizable  colors"
+[node name="Title" type="Label" parent="Main"]
+layout_mode = 2
+text = "The world's first
+Futsal manager game"
+label_settings = ExtResource("4_iohf3")
+horizontal_alignment = 1
+
+[node name="ComingSoon" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -62.0
+offset_right = 164.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+
+[node name="Title" type="Label" parent="ComingSoon"]
+layout_mode = 2
+text = "...is coming 2025!"
+label_settings = ExtResource("4_iohf3")
+horizontal_alignment = 1
+
+[node name="Text" type="Label" parent="ComingSoon"]
+layout_mode = 2
+text = "99managers.org"
 label_settings = ExtResource("4_angej")
 horizontal_alignment = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(967, 1397)
+emitting = false
+amount = 42
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.8
+fixed_fps = 60
+texture = ExtResource("5_c8ruo")
+direction = Vector2(0, -1)
+initial_velocity_min = 1500.0
+initial_velocity_max = 2000.0
+angular_velocity_min = 50.0
+angular_velocity_max = 500.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2

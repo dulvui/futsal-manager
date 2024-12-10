@@ -14,6 +14,3 @@ func _ready() -> void:
 	animation_player.play("Teaser")
 
 
-func _process(_delta: float) -> void:
-	pass
-
