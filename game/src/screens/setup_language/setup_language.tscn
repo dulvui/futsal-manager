@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://5oxrekj30gb1"]
+[gd_scene load_steps=4 format=3 uid="uid://5oxrekj30gb1"]
 
 [ext_resource type="PackedScene" uid="uid://djrvl8pvkr7aa" path="res://src/screens/settings/language_picker/language_picker.tscn" id="2_pkp0m"]
+[ext_resource type="PackedScene" uid="uid://dshn3r4bo8k3o" path="res://src/ui_components/animations/scene_fade.tscn" id="3_42pjd"]
 [ext_resource type="Script" path="res://src/screens/setup_language/setup_language.gd" id="6"]
 
 [node name="StartLanguage" type="Control"]
@@ -21,6 +22,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LanguagePicker" parent="." instance=ExtResource("2_pkp0m")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="SceneFade" parent="." instance=ExtResource("3_42pjd")]
+unique_name_in_owner = true
+visible = true
 layout_mode = 1
 
 [connection signal="language_change" from="LanguagePicker" to="." method="_on_language_picker_language_change"]

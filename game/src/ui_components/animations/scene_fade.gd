@@ -7,22 +7,24 @@ extends ColorRect
 
 const DURATION: float = 0.6
 
-var tween: Tween
 
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	tween = create_tween()
 
 
 func fade_in() -> void:
 	modulate = Color.BLACK
 	show()
+	var tween: Tween
+	tween = create_tween()
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, DURATION)
 
 
 func fade_out() -> void:
 	modulate = Color.TRANSPARENT
 	show()
+	var tween: Tween
+	tween = create_tween()
 	tween.tween_property(self, "modulate", Color.BLACK, DURATION)
 
