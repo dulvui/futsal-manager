@@ -2,16 +2,12 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#TODO
-# - random name button
-
 extends Control
 
-const DEFAULT_SEED: String = "SuchDefaultSeed"
-
-@onready var nations: OptionButton = $VBoxContainer/Manager/Container/Nat
-@onready var manager_name: LineEdit = $VBoxContainer/Manager/Container/Name
-@onready var manager_surname: LineEdit = $VBoxContainer/Manager/Container/SurName
+@onready var nations: OptionButton = %Nationality
+@onready var manager_name: LineEdit = %Name
+@onready var manager_surname: LineEdit = %SurName
+@onready var continue_button: Button = %Continue
 
 
 func _ready() -> void:
@@ -25,6 +21,8 @@ func _ready() -> void:
 
 	for nation: Nation in Global.world.get_all_nations():
 		nations.add_item(nation.name)
+	
+	continue_button.disabled = true
 
 
 func _on_back_pressed() -> void:
@@ -40,3 +38,12 @@ func _on_continue_pressed() -> void:
 		Global.manager = manager
 
 		get_tree().change_scene_to_file("res://src/screens/setup/setup_team/setup_team.tscn")
+
+
+func _on_sur_name_text_changed(_new_text: String) -> void:
+	continue_button.disabled = manager_name.text.length() * manager_surname.text.length() == 0
+
+
+func _on_name_text_changed(_new_text: String) -> void:
+	continue_button.disabled = manager_name.text.length() * manager_surname.text.length() == 0
+

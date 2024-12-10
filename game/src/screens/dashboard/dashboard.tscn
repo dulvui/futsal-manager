@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c8mhb22bae1my"]
+[gd_scene load_steps=20 format=3 uid="uid://c8mhb22bae1my"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/dashboard/dashboard.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://c51vyn54bk7q4" path="res://src/ui_components/visual_calendar/visual_calendar.tscn" id="3"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_kbasy"]
+[ext_resource type="LabelSettings" uid="uid://b4gu78rjvdfx4" path="res://theme_base/label/label_settings_title.tres" id="4_bc3th"]
 [ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui_components/visual_formation/visual_formation.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dcv0qm4k1wi4q" path="res://src/ui_components/email/email.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c7bh7ukttbkvu" path="res://src/ui_components/visual_competitions/visual_competitions.tscn" id="7"]
@@ -257,16 +258,19 @@ theme_override_constants/separation = 20
 unique_name_in_owner = true
 layout_mode = 2
 text = "Hans Viustel"
+label_settings = ExtResource("4_bc3th")
 
 [node name="TeamName" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Barcellona"
+label_settings = ExtResource("4_bc3th")
 
 [node name="Budget" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "400.000 $"
+label_settings = ExtResource("4_bc3th")
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
 self_modulate = Color(1, 1, 1, 0)
@@ -277,6 +281,7 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 text = "24/08/2002"
+label_settings = ExtResource("4_bc3th")
 
 [node name="PrevViewButton" type="Button" parent="MarginContainer/HBoxContainer/MainContainer/TopBar"]
 unique_name_in_owner = true

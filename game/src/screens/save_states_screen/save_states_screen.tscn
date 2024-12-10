@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8ns73g7247l3"]
+[gd_scene load_steps=6 format=3 uid="uid://b8ns73g7247l3"]
 
 [ext_resource type="Script" path="res://src/screens/save_states_screen/save_state_screen.gd" id="1_er0yh"]
 [ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="2_j7bth"]
+[ext_resource type="LabelSettings" uid="uid://b4gu78rjvdfx4" path="res://theme_base/label/label_settings_title.tres" id="2_nys0j"]
 [ext_resource type="PackedScene" uid="uid://dj3ts0dee4m6" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn" id="2_ydw8l"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_bn4hs"]
 
@@ -36,6 +37,14 @@ offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "SAVE_STATES"
+label_settings = ExtResource("2_nys0j")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -52,7 +61,6 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/EntryList"]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Menu" type="Button" parent="VBoxContainer"]
@@ -64,7 +72,6 @@ text = "MENU"
 script = ExtResource("3_bn4hs")
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_j7bth")]
-visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]

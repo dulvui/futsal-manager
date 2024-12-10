@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqcsyes1j6vwi"]
+[gd_scene load_steps=6 format=3 uid="uid://cqcsyes1j6vwi"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1_lar05"]
 [ext_resource type="Script" path="res://src/screens/setup/setup_world/setup_world.gd" id="2_s01se"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_g76wv"]
 [ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="3_jkofa"]
+[ext_resource type="LabelSettings" uid="uid://b4gu78rjvdfx4" path="res://theme_base/label/label_settings_title.tres" id="3_mfpia"]
 
 [node name="Start" type="Control"]
 layout_mode = 3
@@ -38,23 +39,16 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="WorldData" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/WorldData"]
-layout_mode = 2
-text = "Soon a custom csv file can be used as data for nations, teams and players...
-Until then, only default values can be used."
-
-[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
-layout_mode = 2
-
 [node name="Settings" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="SettingsLabel" type="Label" parent="VBoxContainer/Settings"]
 layout_mode = 2
-text = "SETTINGS"
+text = "PLAYER_SETTINGS"
+label_settings = ExtResource("3_mfpia")
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/Settings"]
+layout_mode = 2
 
 [node name="Container" type="GridContainer" parent="VBoxContainer/Settings"]
 layout_mode = 2
@@ -149,7 +143,6 @@ script = ExtResource("3_g76wv")
 metadata/_edit_use_anchors_ = true
 
 [node name="LoadingScreen" parent="." instance=ExtResource("3_jkofa")]
-visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="VBoxContainer/Seed/GridContainer/GenearateSeedButton" to="." method="_on_genearate_seed_button_pressed"]

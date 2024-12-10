@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cywaob6jab2pj"]
+[gd_scene load_steps=6 format=3 uid="uid://cywaob6jab2pj"]
 
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="1_6o6h0"]
 [ext_resource type="Script" path="res://src/screens/settings/general/general_settings.gd" id="1_gl78q"]
+[ext_resource type="LabelSettings" uid="uid://b4gu78rjvdfx4" path="res://theme_base/label/label_settings_title.tres" id="2_bvgsj"]
 [ext_resource type="PackedScene" uid="uid://djrvl8pvkr7aa" path="res://src/screens/settings/language_picker/language_picker.tscn" id="2_p1exx"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_n2piq"]
 
@@ -17,7 +18,7 @@ script = ExtResource("1_gl78q")
 [node name="GeneralTitleLabel" type="Label" parent="."]
 layout_mode = 2
 text = "GENERAL_SETTINGS"
-label_settings = ExtResource("1_6o6h0")
+label_settings = ExtResource("2_bvgsj")
 
 [node name="HSeparator5" type="HSeparator" parent="."]
 layout_mode = 2
@@ -230,9 +231,9 @@ auto_translate_mode = 1
 size = Vector2i(400, 526)
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorPopupPanel"]
-offset_left = 4.0
+offset_left = 10.0
 offset_top = 4.0
-offset_right = 396.0
+offset_right = 390.0
 offset_bottom = 522.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10

@@ -3,6 +3,8 @@ CREATE_MANAGER,Create Manager,Manager erstellen,Crea allenatore
 MANAGER,Manager,Manager,Allenatore
 NAME,Name,Name,Nome
 SURNAME,Surname,Nachname,Cognome
+YOUR_NAME,Your nme,Dein Name,Il tuo nome
+YOUR_SURNAME,Your surname,Dein Nachname,Il tuo cognome
 PLAYER_NAMES,Player names,Spieler Namen,Nomi giocatori
 BIRTH_DATE,Birth date,Geburtstag,Compleanno
 START_YEAR,Starting year,Startjahr,Anno d'inizio
@@ -126,7 +128,7 @@ AUG,Aug,Aug,Ago
 SEP,Sep,Sep,Set
 OCT,Oct,Okt,Ott
 NOV,Nov,Nov,Nov
-DIC,Dic,Dez,Dic
+DEC,Dec,Dez,Dic
 GENERATION_SEED,Generation seed,Generation Seed,Seed generazione
 GENERATION_SEED_DESCRIPTION,GENERATION_SEED_DESCRIPTION,GENERATION_SEED_DESCRIPTION,GENERATION_SEED_DESCRIPTION
 PLAYED,Played,Gespielt,Giocate
@@ -167,7 +169,7 @@ SAVING_GAME,Saving your game…,Dein Spielstand wird gespeichert…,Salvando la 
 EXIT,Exit,Beenden,Chiudi
 RANDOM,Random,Zufällig,Casuale
 DEFAULT,Default,Standard,Predefinito
-INITIALIZE_GAME,Initlializing game…,Spiel wird initialisiert…,Inizializando gioco…
+INITIALIZE_GAME,Initlializing game…,Spiel wird initialisiert…,Inizializzando gioco…
 GENERATING_PLAYERS,Generating all players…,Spieler werden generiert…,Generando tutti giocatori…
 SELECT,Select,Auswählen,Seleziona
 BUDGET,Budget,Budget,Bilancio
@@ -201,3 +203,6 @@ EXIT_GAME,Exit game?,Spiel verlassen?,Uscire dal gioco?
 RESTORE_DEFAULTS,Restore default settings?,Standardeinstellung wiederherstellen?,Ripristinare le impostazioni predefinite?
 RESTORE_DEFAULTS_TEXT,All changed settings will lost and restored to default value.,Alle Einstellungen gehen verloren und werden zurück gesetzt.,Tutte le impostazioni cambiate vanno perse e verranno risettate.
 SAVE_TEXT,Save game before exiting to menu?,Spiel speichern vor verlassen?,Vuoi salvare la partita prima di tornare al menu?
+PLAYER_SETTINGS,Players settings,Spieler-Einstellungen,Impostazioni dei giocatori
+CHOOSE_TEAM,Choose your team,Wähle dein Team,Scegli squadra
+SAVE_STATES,Save states,Spielstände,Salvataggi
