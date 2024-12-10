@@ -52,6 +52,10 @@ var save_states: SaveStates
 var settings_screen: Settings.Screen
 
 
+# flag if the game just started, for fade in effect in menu
+var just_started: bool
+
+
 func _ready() -> void:
 	print("version " + Global.version)
 	speed_factor = 1
@@ -62,6 +66,8 @@ func _ready() -> void:
 	
 	# set initial scale
 	get_tree().root.content_scale_factor = theme_scale
+
+	just_started = true
 
 
 func select_team(p_team: Team)-> void:

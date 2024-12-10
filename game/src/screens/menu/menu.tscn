@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4woicggddkls"]
+[gd_scene load_steps=10 format=3 uid="uid://b4woicggddkls"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="4_nkxl6"]
 [ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="4_qla42"]
 [ext_resource type="PackedScene" uid="uid://bpvg2vhxml3a1" path="res://src/ui_components/confirm_dialog/default_confirm_dialog.tscn" id="6_1a2kt"]
+[ext_resource type="PackedScene" uid="uid://dshn3r4bo8k3o" path="res://src/ui_components/animations/scene_fade.tscn" id="7_mabsp"]
 
 [sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_eu77x"]
 axis = 5
@@ -148,6 +149,10 @@ vertical_alignment = 1
 [node name="DefaultConfirmDialog" parent="." instance=ExtResource("6_1a2kt")]
 unique_name_in_owner = true
 custom_text = "EXIT_GAME"
+
+[node name="SceneFade" parent="." instance=ExtResource("7_mabsp")]
+unique_name_in_owner = true
+layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueGame" to="." method="_on_continue_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
