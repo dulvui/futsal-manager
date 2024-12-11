@@ -33,8 +33,8 @@ func _ready() -> void:
 
 
 func _on_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+	Main.change_scene("res://src/screens/menu/menu.tscn")
 
 
 func _on_loading_screen_loaded(_type: LoadingUtil.Type) -> void:
-	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+	Main.change_scene("res://src/screens/dashboard/dashboard.tscn")

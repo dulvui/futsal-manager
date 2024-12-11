@@ -41,7 +41,7 @@ func _ready() -> void:
 
 
 func _on_new_game_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/setup/setup_world/setup_world.tscn")
+	Main.change_scene("res://src/screens/setup/setup_world/setup_world.tscn")
 
 
 func _on_continue_game_pressed() -> void:
@@ -55,11 +55,11 @@ func _on_settings_pressed() -> void:
 
 
 func _on_load_game_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/save_states_screen/save_states_screen.tscn")
+	Main.change_scene("res://src/screens/save_states_screen/save_states_screen.tscn")
 
 
 func _on_loading_screen_loaded(_type: LoadingUtil.Type) -> void:
-	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+	Main.change_scene("res://src/screens/dashboard/dashboard.tscn")
 
 
 func _on_exit_pressed() -> void:

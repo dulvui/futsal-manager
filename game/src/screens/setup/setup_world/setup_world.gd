@@ -47,7 +47,7 @@ func _on_default_seed_button_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+	Main.change_scene("res://src/screens/menu/menu.tscn")
 
 
 func _on_continue_pressed() -> void:
@@ -75,5 +75,5 @@ func _on_continue_pressed() -> void:
 
 
 func _on_loading_screen_loaded(_type:int) -> void:
-	get_tree().change_scene_to_file("res://src/screens/setup/setup_manager/setup_manager.tscn")
+	Main.change_scene("res://src/screens/setup/setup_manager/setup_manager.tscn")
 

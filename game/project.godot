@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Main="*res://src/screens/main.tscn"
 Const="*res://src/const.gd"
 Global="*res://src/global.gd"
 BackupUtil="*res://src/utils/backup_util.gd"
@@ -39,7 +40,6 @@ InputUtil="*res://src/utils/input/input_util.gd"
 SoundUtil="*res://src/utils/ui/sound_util.gd"
 JoypadAxisUtil="*res://src/utils/input/joypad_axis_util.gd"
 JoypadUtil="*res://src/utils/input/joypad_util.gd"
-Main="*res://src/screens/main.tscn"
 
 [debug]
 

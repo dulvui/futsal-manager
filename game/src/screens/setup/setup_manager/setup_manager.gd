@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/setup/setup_world/setup_world.tscn")
+	Main.previous_scene()
 
 
 func _on_continue_pressed() -> void:
@@ -37,7 +37,7 @@ func _on_continue_pressed() -> void:
 		manager.nation = Global.world.get_all_nations()[nations.selected].name
 		Global.manager = manager
 
-		get_tree().change_scene_to_file("res://src/screens/setup/setup_team/setup_team.tscn")
+		Main.change_scene("res://src/screens/setup/setup_team/setup_team.tscn")
 
 
 func _on_sur_name_text_changed(_new_text: String) -> void:

@@ -112,31 +112,21 @@ text = "EXIT"
 script = ExtResource("4_nkxl6")
 joypad_button_event = SubResource("InputEventJoypadButton_x3xqw")
 
-[node name="LoadingScreen" parent="." instance=ExtResource("4_qla42")]
-layout_mode = 1
-
-[node name="Info" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.979
-anchor_top = 0.959
-anchor_right = 0.979
-anchor_bottom = 0.959
-offset_left = -132.68
-offset_top = -39.72
-offset_right = -0.679932
-offset_bottom = 0.280029
-grow_horizontal = 0
-grow_vertical = 0
-alignment = 2
-
-[node name="LinkButton" type="LinkButton" parent="Info"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-size_flags_horizontal = 7
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 2
 text = "99managers.org"
 uri = "https://99managers.org"
+
+[node name="LoadingScreen" parent="." instance=ExtResource("4_qla42")]
+layout_mode = 1
 
 [node name="DefaultConfirmDialog" parent="." instance=ExtResource("6_1a2kt")]
 unique_name_in_owner = true

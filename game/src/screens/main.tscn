@@ -22,6 +22,7 @@ grow_vertical = 2
 
 [node name="Version" type="Label" parent="."]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.6)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

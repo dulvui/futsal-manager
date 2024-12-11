@@ -41,9 +41,9 @@ func _on_select_team_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/setup/setup_manager/setup_manager.tscn")
+	Main.previous_scene()
 
 
 func _on_loading_screen_loaded(_type: int) -> void:
-	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+	Main.change_scene("res://src/screens/dashboard/dashboard.tscn")
 

@@ -198,7 +198,7 @@ func _toggle_view_buttons() -> void:
 
 
 func _on_dashboard_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
+	Main.change_scene("res://src/screens/dashboard/dashboard.tscn")
 
 
 func _on_faster_button_pressed() -> void:

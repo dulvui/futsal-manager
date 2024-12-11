@@ -117,7 +117,6 @@ func next_season() -> void:
 
 	MatchCombinationUtil.initialize_matches()
 	save_all_data()
-	get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
 
 
 func save_all_data(threaded: bool = true) -> void:

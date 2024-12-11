@@ -8,7 +8,6 @@ extends Control
 
 func _ready() -> void:
 	if Global.language:
-		# get_tree().change_scene_to_file.call_deferred("res://src/screens/menu/menu.tscn")
 		Main.change_scene("res://src/screens/menu/menu.tscn")
 	else:
 		Main.change_scene("res://src/screens/setup_language/setup_language.tscn")
