@@ -7,7 +7,6 @@ extends _BASE_
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	Tests.setup_mock_world(true)
 
 

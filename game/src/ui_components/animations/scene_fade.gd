@@ -8,11 +8,6 @@ extends ColorRect
 const DURATION: float = 0.6
 
 
-
-func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
-
-
 func fade_in() -> void:
 	modulate = Color.BLACK
 	show()

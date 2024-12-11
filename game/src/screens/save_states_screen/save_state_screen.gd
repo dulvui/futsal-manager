@@ -15,8 +15,6 @@ const SaveStateEntryScene: PackedScene = preload(
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
-
 	var active_save_state: SaveState = Global.save_states.get_active()
 	active_save_state_entry.setup(active_save_state)
 	active_save_state_entry.load_game.connect(func() -> void: loading_screen.show())

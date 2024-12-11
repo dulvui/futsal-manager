@@ -9,10 +9,6 @@ extends LineEdit
 @onready var shortcut: Button = %Shortcut
 
 
-func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
-
-
 func _on_focus_entered() -> void:
 	shortcut.hide()
 

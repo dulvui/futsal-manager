@@ -43,7 +43,6 @@ var page_size: int
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	Tests.setup_mock_world(true)
 
 	team_select.add_item("ALL_TEAMS")

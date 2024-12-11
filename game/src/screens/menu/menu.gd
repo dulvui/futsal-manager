@@ -16,7 +16,6 @@ extends Control
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	InputUtil.start_focus(self)
 
 	# hide exit button for iOS

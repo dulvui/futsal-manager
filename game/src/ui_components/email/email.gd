@@ -13,7 +13,6 @@ signal email_action(message: EmailMessage)
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	Tests.setup_mock_world(true)
 		
 	message_container.show_message(EmailUtil.latest())

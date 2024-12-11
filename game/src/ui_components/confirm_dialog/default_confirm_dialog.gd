@@ -19,7 +19,6 @@ signal confirmed
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	hide()
 
 	no_button.visible = show_cancel

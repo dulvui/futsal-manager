@@ -53,7 +53,6 @@ var away_stats: MatchStatistics
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	InputUtil.start_focus(self)
 
 	if Global.world:

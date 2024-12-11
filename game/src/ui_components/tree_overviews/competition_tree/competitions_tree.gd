@@ -17,7 +17,6 @@ var items: Array[TreeItem]
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	if Tests.setup_mock_world(true):
 		setup()
 

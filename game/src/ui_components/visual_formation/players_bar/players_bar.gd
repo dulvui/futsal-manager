@@ -17,8 +17,6 @@ var team: Team
 @onready var change_strategy_select: SwitchOptionButton = %ChangeStrategySelect
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
-	
 	change_players = []
 	
 

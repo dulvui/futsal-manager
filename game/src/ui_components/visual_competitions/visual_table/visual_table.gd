@@ -8,7 +8,6 @@ extends GridContainer
 var dynamic_labels: Array[Label]
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	Tests.setup_mock_world(true)
 	
 	dynamic_labels = []

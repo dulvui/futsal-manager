@@ -12,8 +12,6 @@ extends VBoxContainer
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
-
 	# joypad info
 	JoypadUtil.joypad_changed.connect(
 		func() -> void:

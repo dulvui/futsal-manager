@@ -152,9 +152,9 @@ func get_theme_names() -> Array:
 	return THEMES.keys()
 
 
-func reset_to_default() -> Theme:
+func reset_to_default() -> void:
 	Global.theme_index = 0
-	return apply_theme(THEMES.keys()[0])
+	apply_theme(THEMES.keys()[0])
 
 
 func bold(label: Label, condition: bool = true) -> void:
@@ -166,11 +166,11 @@ func remove_bold(label: Label) -> void:
 	label.label_settings = label_settings
 
 
-func reload_active_theme() -> Theme:
-	return apply_theme(THEMES.keys()[Global.theme_index])
+func reload_active_theme() -> void:
+	apply_theme(THEMES.keys()[Global.theme_index])
 
 
-func apply_theme(theme_name: StringName) -> Theme:
+func apply_theme(theme_name: StringName) -> void:
 	if theme_name == "CUSTOM":
 		custom_configuration.font_color = Global.theme_custom_font_color
 		custom_configuration.style_color = Global.theme_custom_style_color
@@ -182,8 +182,6 @@ func apply_theme(theme_name: StringName) -> Theme:
 		configuration = ResourceLoader.load(THEMES_PATH + theme_file)
 		configuration.setup()
 		_apply_configuration(configuration)
-
-	return theme
 
 
 func _apply_configuration(p_configuration: ThemeConfiguration) -> void:

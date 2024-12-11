@@ -29,7 +29,6 @@ func setup(p_save_state: SaveState) -> void:
 		hide()
 		return
 
-	theme = ThemeUtil.get_active_theme()
 	team.text = save_state.meta_team_name
 	manager.text = save_state.meta_manager_name
 	placement.text = save_state.meta_team_position

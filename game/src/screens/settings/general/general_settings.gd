@@ -20,9 +20,8 @@ var active_color_type: ColorType
 @onready var color_picker_popup: PopupPanel = $ColorPopupPanel
 @onready var color_picker: ColorPicker = $ColorPopupPanel/MarginContainer/ColorPicker
 
+
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
-	
 	font_size_spinbox.value = Global.theme_font_size
 	font_size_spinbox.min_value = Const.FONT_SIZE_MIN
 	font_size_spinbox.max_value = Const.FONT_SIZE_MAX
@@ -41,7 +40,7 @@ func restore_defaults() -> void:
 	Global.theme_font_size = Const.FONT_SIZE_DEFAULT
 	font_size_spinbox.value = Global.theme_font_size
 	# theme
-	theme = ThemeUtil.reset_to_default()
+	ThemeUtil.reset_to_default()
 	theme_options.selected = 0
 	#scale
 	Global.theme_scale = ThemeUtil.get_default_scale()
@@ -53,7 +52,7 @@ func restore_defaults() -> void:
 
 func _on_theme_option_button_item_selected(index: int) -> void:
 	var theme_name: String = theme_options.get_item_text(index)
-	theme = ThemeUtil.apply_theme(theme_name)
+	ThemeUtil.apply_theme(theme_name)
 	Global.theme_index = index
 	Global.save_config()
 

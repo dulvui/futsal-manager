@@ -12,7 +12,6 @@ signal loaded(type: LoadingUtil.Type)
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
 	loading_progress_bar.indeterminate = LoadingUtil.indeterminate
 	# connect loaded signal also here
 	LoadingUtil.loaded.connect(_loaded)
