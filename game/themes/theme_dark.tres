@@ -9,4 +9,5 @@ name = "LIGHT"
 font_color = Color(0.969137, 0.969137, 0.969137, 1)
 style_color = Color(0.225612, 0.248081, 0.232749, 1)
 style_important_color = Color(0.578001, 0.0850074, 0.176575, 1)
-background_color = Color(0, 0, 0, 1)
+background_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+background_secondary_color = Color(0, 0, 0, 1)

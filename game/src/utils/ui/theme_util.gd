@@ -12,6 +12,8 @@ const THEME_FILE: StringName = BASE_PATH + "theme.tres"
 # label
 const LABEL_SETTINGS_FILE: StringName = BASE_PATH + "label/label_settings.tres"
 const LABEL_SETTINGS_BOLD_FILE: StringName = BASE_PATH + "label/label_settings_bold.tres"
+const LABEL_SETTINGS_TITLE_FILE: StringName = BASE_PATH + "label/label_settings_title.tres"
+const LABEL_SETTINGS_OUTLINE_FILE: StringName = BASE_PATH + "label/label_settings_outline.tres"
 # style boxes flat
 const BOX_NORMAL_FILE: StringName = BASE_PATH + "styles/box/box_normal.tres"
 const BOX_PRESSED_FILE: StringName = BASE_PATH + "styles/box/box_pressed.tres"
@@ -26,6 +28,7 @@ const BOX_IMPORTANT_HOVER_FILE: StringName = BASE_PATH + "styles/box_important/b
 const BOX_IMPORTANT_DISABLED_FILE: StringName = BASE_PATH + "styles/box_important/box_important_disabled.tres"
 # style backgrounds
 const BOX_BACKGROUND_FILE: StringName = BASE_PATH + "styles/box/box_background.tres"
+const BOX_BACKGROUND_SECONDARY_FILE: StringName = BASE_PATH + "styles/box/box_background_secondary.tres"
 const BOX_BACKGROUND_BORDERED_FILE: StringName = BASE_PATH + "styles/box/box_background_bordered.tres"
 # style boxes line
 const LINE_H_NORMAL_FILE: StringName = BASE_PATH + "styles/lines/line_h_normal.tres"
@@ -50,6 +53,8 @@ var theme: Theme
 
 var label_settings: LabelSettings
 var label_settings_bold: LabelSettings
+var label_settings_title: LabelSettings
+var label_settings_outline: LabelSettings
 var label_settings_low: LabelSettings
 var label_settings_mid: LabelSettings
 var label_settings_high: LabelSettings
@@ -67,6 +72,7 @@ var box_important_hover: StyleBoxFlat
 var box_important_disabled: StyleBoxFlat
 
 var box_background: StyleBoxFlat
+var box_background_secondary: StyleBoxFlat
 var box_background_bordered: StyleBoxFlat
 
 var line_h_normal: StyleBoxLine
@@ -81,33 +87,42 @@ var configuration: ThemeConfiguration
 
 
 func _ready() -> void:
-	# load resources
+	# load theme
 	theme = ResourceLoader.load(THEME_FILE, "Theme")
+
 	# label settings
 	label_settings = ResourceLoader.load(LABEL_SETTINGS_FILE, "LabelSettings")
 	label_settings_bold = ResourceLoader.load(LABEL_SETTINGS_BOLD_FILE, "LabelSettings")
-	# label settings color variations
-	label_settings_low = label_settings_bold.duplicate(true)
+	label_settings_title = ResourceLoader.load(LABEL_SETTINGS_TITLE_FILE, "LabelSettings")
+	label_settings_outline = ResourceLoader.load(LABEL_SETTINGS_OUTLINE_FILE, "LabelSettings")
+
+	# label settings for ColorLabel
+	label_settings_low = label_settings_outline.duplicate(true)
 	label_settings_low.outline_color = Color.RED
-	label_settings_mid = label_settings_bold.duplicate(true)
+	label_settings_mid = label_settings_outline.duplicate(true)
 	label_settings_mid.outline_color = Color.BLUE
-	label_settings_high = label_settings_bold.duplicate(true)
+	label_settings_high = label_settings_outline.duplicate(true)
 	label_settings_high.outline_color = Color.GREEN
+
 	# style boxes flat
 	box_normal = ResourceLoader.load(BOX_NORMAL_FILE, "StyleBoxFlat")
 	box_pressed = ResourceLoader.load(BOX_PRESSED_FILE, "StyleBoxFlat")
 	box_focus = ResourceLoader.load(BOX_FOCUS_FILE, "StyleBoxFlat")
 	box_hover = ResourceLoader.load(BOX_HOVER_FILE, "StyleBoxFlat")
 	box_disabled = ResourceLoader.load(BOX_DISABLED_FILE, "StyleBoxFlat")
+	
 	# style important boxes flat
 	box_important_normal = ResourceLoader.load(BOX_IMPORTANT_NORMAL_FILE, "StyleBoxFlat")
 	box_important_pressed = ResourceLoader.load(BOX_IMPORTANT_PRESSED_FILE, "StyleBoxFlat")
 	box_important_focus = ResourceLoader.load(BOX_IMPORTANT_FOCUS_FILE, "StyleBoxFlat")
 	box_important_hover = ResourceLoader.load(BOX_IMPORTANT_HOVER_FILE, "StyleBoxFlat")
 	box_important_disabled = ResourceLoader.load(BOX_IMPORTANT_DISABLED_FILE, "StyleBoxFlat")
+
 	# background
 	box_background = ResourceLoader.load(BOX_BACKGROUND_FILE, "StyleBoxFlat")
+	box_background_secondary = ResourceLoader.load(BOX_BACKGROUND_SECONDARY_FILE, "StyleBoxFlat")
 	box_background_bordered = ResourceLoader.load(BOX_BACKGROUND_BORDERED_FILE, "StyleBoxFlat")
+
 	# style boxes line
 	line_h_normal = ResourceLoader.load(LINE_H_NORMAL_FILE, "StyleBoxLine")
 	line_h_focus = ResourceLoader.load(LINE_H_FOCUS_FILE, "StyleBoxLine")
@@ -116,6 +131,7 @@ func _ready() -> void:
 	line_v_focus = ResourceLoader.load(LINE_V_FOCUS_FILE, "StyleBoxLine")
 	line_v_thin = ResourceLoader.load(LINE_V_THIN_FILE, "StyleBoxLine")
 
+	# custom theme configuration
 	custom_configuration = ThemeConfiguration.new()
 	custom_configuration.font_color = Global.theme_custom_font_color
 	custom_configuration.style_color = Global.theme_custom_style_color
@@ -180,6 +196,7 @@ func _apply_configuration(p_configuration: ThemeConfiguration) -> void:
 	box_pressed.bg_color = configuration.style_color_variation.pressed
 	box_hover.bg_color = configuration.style_color_variation.hover
 	box_disabled.bg_color = configuration.style_color_variation.disabled
+
 	# box important colors
 	box_important_normal.bg_color = configuration.style_important_color_variation.normal
 	box_important_focus.bg_color = configuration.style_important_color_variation.focus
@@ -187,24 +204,31 @@ func _apply_configuration(p_configuration: ThemeConfiguration) -> void:
 	box_important_pressed.bg_color = configuration.style_important_color_variation.pressed
 	box_important_hover.bg_color = configuration.style_important_color_variation.hover
 	box_important_disabled.bg_color = configuration.style_important_color_variation.disabled
+	
 	# background
 	box_background.bg_color = configuration.background_color
+	box_background_secondary.bg_color = configuration.background_secondary_color
 	box_background_bordered.bg_color = configuration.background_color
 	box_background_bordered.border_color = configuration.font_color
+	
 	# line colors
 	line_h_normal.color = configuration.style_color_variation.normal
 	line_h_focus.color = configuration.style_color_variation.focus
 	line_v_normal.color = configuration.style_color_variation.normal
 	line_v_focus.color = configuration.style_color_variation.focus
+
 	# thin lines for splitters
 	line_h_thin.color = configuration.font_color
 	line_v_thin.color = configuration.font_color
 	line_h_thin.color.a *= 0.5
 	line_v_thin.color.a *= 0.5
+
 	# label settings
 	label_settings.font_color = configuration.font_color
 	label_settings_bold.font_color = configuration.font_color
-	label_settings_bold.outline_color = configuration.font_color
+	label_settings_title.font_color = configuration.font_color
+	label_settings_outline.font_color = configuration.font_color
+
 	# label settings color variations
 	label_settings_low.font_color = configuration.font_color
 	label_settings_mid.font_color = configuration.font_color
@@ -214,6 +238,8 @@ func _apply_configuration(p_configuration: ThemeConfiguration) -> void:
 	theme.default_font_size = Global.theme_font_size
 	label_settings.font_size = Global.theme_font_size 
 	label_settings_bold.font_size = Global.theme_font_size
+	label_settings_title.font_size = Global.theme_font_size * 1.4
+	label_settings_outline.font_size = Global.theme_font_size
 
 	# labels
 	theme.set_color("font_color", "Label", configuration.font_color)
@@ -227,6 +253,7 @@ func _apply_configuration(p_configuration: ThemeConfiguration) -> void:
 	theme.set_color("font_hover_color", "Button", configuration.font_color_variation.hover)
 	theme.set_color("font_pressed_color", "Button", configuration.font_color_variation.pressed)
 	theme.set_color("font_disabled_color", "Button", configuration.font_color_variation.disabled)
+
 	# button icon colors
 	theme.set_color("icon_normal_color", "Button", configuration.font_color)
 	theme.set_color("icon_focus_color", "Button", configuration.font_color_variation.focus)

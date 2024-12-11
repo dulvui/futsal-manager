@@ -3,9 +3,7 @@
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1_cn0l1"]
 [ext_resource type="Script" path="res://src/ui_components/visual_formation/player/formation_player.gd" id="2_315wa"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_jqqop"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_y850m"]
-font_size = 26
+[ext_resource type="LabelSettings" uid="uid://b4gu78rjvdfx4" path="res://theme_base/label/label_settings_title.tres" id="4_nv2a6"]
 
 [node name="FormationPlayer" type="MarginContainer"]
 custom_minimum_size = Vector2(130, 130)
@@ -62,7 +60,7 @@ text_overrun_behavior = 3
 [node name="Nr" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "10"
-label_settings = SubResource("LabelSettings_y850m")
+label_settings = ExtResource("4_nv2a6")
 horizontal_alignment = 1
 
 [node name="Prestige" type="Label" parent="MarginContainer/VBoxContainer"]

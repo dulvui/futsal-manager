@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bjh1pehl830q3"]
+
+[ext_resource type="FontVariation" uid="uid://j3o56lsudgvn" path="res://theme_base/label/font.tres" id="1_cy254"]
+
+[resource]
+font = ExtResource("1_cy254")
+font_size = 18
+outline_size = 2

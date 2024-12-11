@@ -54,6 +54,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VSeparator" type="VSeparator" parent="HSplitContainer/MessageView"]
+visible = false
 layout_mode = 2
 
 [node name="Message" parent="HSplitContainer/MessageView" instance=ExtResource("3_diog3")]

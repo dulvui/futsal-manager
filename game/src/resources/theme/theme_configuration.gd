@@ -12,7 +12,9 @@ extends Resource
 @export var font_color: Color
 @export var style_color: Color 
 @export var style_important_color: Color 
+
 @export var background_color: Color
+@export var background_secondary_color: Color
 
 var font_color_variation: ColorVariation
 var style_color_variation: ColorVariation
@@ -26,6 +28,7 @@ func _init(
 	p_style_color: Color = Color.RED,
 	p_style_important_color: Color = Color.BLUE,
 	p_background_color: Color = Color.WHITE,
+	p_background_secondary_color: Color = Color.GRAY,
 ) -> void:
 	id = p_id
 	name = p_name
@@ -33,6 +36,7 @@ func _init(
 	style_color = p_style_color
 	style_important_color = p_style_important_color
 	background_color = p_background_color
+	background_secondary_color = p_background_secondary_color
 
 
 func setup() -> void:

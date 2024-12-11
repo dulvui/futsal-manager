@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3l6aqkrmtjg2"]
+[gd_scene load_steps=5 format=3 uid="uid://c3l6aqkrmtjg2"]
 
 [ext_resource type="Script" path="res://src/ui_components/email/visual_message/visual_message.gd" id="1_t0t0y"]
 [ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="2_a6odb"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_6mero"]
+[ext_resource type="StyleBox" uid="uid://p2i8146lydw5" path="res://theme_base/styles/box/box_background_secondary.tres" id="3_judmv"]
 
 [node name="VisualMessage" type="Control"]
 custom_minimum_size = Vector2(600, 0)
@@ -55,6 +56,7 @@ layout_mode = 2
 text = "hans.viustel@realmadrid.com"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Subject" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -78,13 +80,19 @@ layout_mode = 2
 text = "29.12.2022"
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_judmv")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Message" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="Message" type="RichTextLabel" parent="MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
