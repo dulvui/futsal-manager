@@ -51,7 +51,6 @@ var active_view: ContentViews = ContentViews.EMAIL
 @onready var player_offer: PlayerOffer = %PlayerOffer
 @onready var contract_offer: ContractOffer = %ContractOffer
 @onready var player_profile: PlayerProfile = %PlayerProfile
-@onready var loading_screen: LoadingScreen = $LoadingScreen
 
 # confirm dialogs
 @onready var save_confirm_dialog: DefaultConfirmDialog = %SaveConfirmDialog
@@ -60,7 +59,7 @@ var active_view: ContentViews = ContentViews.EMAIL
 func _ready() -> void:
 	Tests.setup_mock_world(true)
 	
-	# InputUtil.search.connect(_on_search_action)
+	LoadingUtil.loaded.connect(_on_loading_util_loaded)
 
 	team = Global.team
 
@@ -236,7 +235,7 @@ func _next_day() -> void:
 		# non threaded simulation
 		# Global.world.random_results()
 		
-		Main.change_scene("res://src/screens/match/match.tscn")
+		Main.change_scene(Const.SCREEN_MATCH)
 		return
 
 	# next day in calendar
@@ -245,7 +244,7 @@ func _next_day() -> void:
 	# next season check
 	if next_season:
 		Global.next_season()
-		Main.change_scene("res://src/screens/dashboard/dashboard.tscn")
+		Main.change_scene(Const.SCREEN_DASHBOARD)
 		return
 	if Global.world.calendar.is_season_finished():
 		next_season = true
@@ -327,20 +326,8 @@ func _on_player_profile_offer(player: Player) -> void:
 	_show_active_view(ContentViews.PLAYER_OFFER)
 
 
-func _on_loading_screen_loaded(type: LoadingUtil.Type) -> void:
-	match type:
-		LoadingUtil.Type.SAVE_GAME:
-			print("loading done save game")
-			Main.change_scene("res://src/screens/menu/menu.tscn")
-		LoadingUtil.Type.MATCH_RESULTS:
-			print("loading done match results")
-			loading_screen.hide()
-		_:
-			print("loading done default")
-
-
 func _on_settings_button_pressed() -> void:
-	Main.change_scene("res://src/screens/settings/settings.tscn")
+	Main.change_scene(Const.SCREEN_SETTINGS)
 
 
 func _on_menu_button_pressed() -> void:
@@ -349,10 +336,10 @@ func _on_menu_button_pressed() -> void:
 
 func _on_save_confirm_dialog_confirmed() -> void:
 	LoadingUtil.start("SAVING_GAME", LoadingUtil.Type.SAVE_GAME, true)
-	loading_screen.show()
+	Main.show_loading_screen(Const.SCREEN_MENU)
 	Global.save_all_data()
 
 
 func _on_save_confirm_dialog_denied() -> void:
-	Main.change_scene("res://src/screens/menu/menu.tscn")
+	Main.change_scene(Const.SCREEN_MENU)
 

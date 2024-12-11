@@ -36,7 +36,7 @@ func _on_continue_pressed() -> void:
 		manager.nation = Global.world.get_all_nations()[nations.selected].name
 		Global.manager = manager
 
-		Main.change_scene("res://src/screens/setup/setup_team/setup_team.tscn")
+		Main.change_scene(Const.SCREEN_SETUP_TEAM)
 
 
 func _on_sur_name_text_changed(_new_text: String) -> void:

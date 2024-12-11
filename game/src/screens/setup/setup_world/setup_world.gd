@@ -14,12 +14,11 @@ var generation_seed: String = DEFAULT_SEED
 @onready var player_names_option: OptionButton = $VBoxContainer/Settings/Container/PlayerNames
 @onready var start_year_spinbox: SpinBox = $VBoxContainer/Settings/Container/StartYear
 @onready var generation_seed_edit: LineEdit = $VBoxContainer/Seed/GridContainer/GeneratedSeedLineEdit
-@onready var loading_screen: LoadingScreen = $LoadingScreen
 
 
 func _ready() -> void:
 	InputUtil.start_focus(self)
-
+	
 	Global.save_states.new_temp_state()
 
 	for player_name: String in Const.PlayerNames:
@@ -46,7 +45,7 @@ func _on_default_seed_button_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
-	Main.change_scene("res://src/screens/menu/menu.tscn")
+	Main.change_scene(Const.SCREEN_MENU)
 
 
 func _on_continue_pressed() -> void:
@@ -69,10 +68,6 @@ func _on_continue_pressed() -> void:
 	RngUtil.reset_seed(generation_seed, player_names_option.selected)
 
 	LoadingUtil.start(tr("GENERATING_PLAYERS"), LoadingUtil.Type.GENERATION, true)
-	loading_screen.show()
+	Main.show_loading_screen(Const.SCREEN_SETUP_MANAGER)
 	ThreadUtil.generate_world()
-
-
-func _on_loading_screen_loaded(_type:int) -> void:
-	Main.change_scene("res://src/screens/setup/setup_manager/setup_manager.tscn")
 

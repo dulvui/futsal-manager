@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4woicggddkls"]
+[gd_scene load_steps=8 format=3 uid="uid://b4woicggddkls"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/screens/menu/menu.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dj3ts0dee4m6" path="res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn" id="4_5irse"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="4_nkxl6"]
-[ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="4_qla42"]
 [ext_resource type="PackedScene" uid="uid://bpvg2vhxml3a1" path="res://src/ui_components/confirm_dialog/default_confirm_dialog.tscn" id="6_1a2kt"]
 
 [sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_eu77x"]
@@ -124,9 +123,6 @@ focus_mode = 2
 text = "99managers.org"
 uri = "https://99managers.org"
 
-[node name="LoadingScreen" parent="." instance=ExtResource("4_qla42")]
-layout_mode = 1
-
 [node name="DefaultConfirmDialog" parent="." instance=ExtResource("6_1a2kt")]
 unique_name_in_owner = true
 custom_text = "EXIT_GAME"
@@ -136,5 +132,4 @@ custom_text = "EXIT_GAME"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]
 [connection signal="confirmed" from="DefaultConfirmDialog" to="." method="_on_default_confirm_dialog_confirmed"]

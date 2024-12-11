@@ -9,12 +9,11 @@ var active_team: Team
 
 @onready var teams_tree: TeamsTree = %TeamsTree
 @onready var team_profile: TeamProfile = %TeamProfile
-@onready var loading_screen: LoadingScreen = %LoadingScreen
 
 
 func _ready() -> void:
 	InputUtil.start_focus(self)
-	
+
 	teams_tree.setup()
 	
 	var first_league: League = Global.world.get_all_leagues()[0]
@@ -36,13 +35,8 @@ func _on_select_team_pressed() -> void:
 	Global.select_team(active_team)
 	LoadingUtil.start("INITIALIZE_GAME", LoadingUtil.Type.INITIALIZE_GAME, true)
 	ThreadUtil.initialize_game()
-	loading_screen.show()
+	Main.show_loading_screen(Const.SCREEN_DASHBOARD)
 
 
 func _on_back_pressed() -> void:
 	Main.previous_scene()
-
-
-func _on_loading_screen_loaded(_type: int) -> void:
-	Main.change_scene("res://src/screens/dashboard/dashboard.tscn")
-

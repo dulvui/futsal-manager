@@ -88,6 +88,14 @@ func _process(_delta: float) -> void:
 func load_resources() -> void:
 	load_threaded_resource("world")
 
+	# Global.world = load_resource("world")
+	# Global.team = Global.world.get_active_team()
+	# Global.league = Global.world.get_active_league()
+	# Global.manager = Global.team.staff.manager
+	# Global.transfers = Global.world.transfers
+	# Global.inbox = Global.world.inbox
+	# LoadingUtil.done()
+
 
 func save_save_states(thread_world_save: bool = true) -> void:
 	print("saving save states...")

@@ -24,7 +24,7 @@ func _process(_delta: float) -> void:
 
 
 func _loaded(type: LoadingUtil.Type) -> void:
-	print(type)
+	hide()
 	loaded.emit(type)
 
 

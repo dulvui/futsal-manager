@@ -7,7 +7,6 @@ extends Control
 
 @onready var save_state: SaveStateEntry = %SaveState
 @onready var save_separator: HSeparator = %SaveSeparator
-@onready var loading_screen: LoadingScreen = $LoadingScreen
 @onready var load_game: Button = %LoadGame
 @onready var continue_game: Button = %ContinueGame
 @onready var new_game: Button = %NewGame
@@ -17,7 +16,6 @@ extends Control
 
 func _ready() -> void:
 	InputUtil.start_focus(self)
-
 	# hide exit button for iOS
 	exit.visible = OS.get_name() != "iOS"
 
@@ -34,25 +32,21 @@ func _ready() -> void:
 
 
 func _on_new_game_pressed() -> void:
-	Main.change_scene("res://src/screens/setup/setup_world/setup_world.tscn")
+	Main.change_scene(Const.SCREEN_SETUP_WORLD)
 
 
 func _on_continue_game_pressed() -> void:
 	Global.load_save_state()
 	LoadingUtil.start("LOADING_GAME", LoadingUtil.Type.LOAD_GAME)
-	loading_screen.show()
+	Main.show_loading_screen(Const.SCREEN_SETTINGS)
 
 
 func _on_settings_pressed() -> void:
-	Main.change_scene("res://src/screens/settings/settings.tscn")
+	Main.change_scene(Const.SCREEN_SETTINGS)
 
 
 func _on_load_game_pressed() -> void:
-	Main.change_scene("res://src/screens/save_states_screen/save_states_screen.tscn")
-
-
-func _on_loading_screen_loaded(_type: LoadingUtil.Type) -> void:
-	Main.change_scene("res://src/screens/dashboard/dashboard.tscn")
+	Main.change_scene(Const.SCREEN_SAVE_STATES)
 
 
 func _on_exit_pressed() -> void:

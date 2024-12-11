@@ -11,4 +11,4 @@ func _ready() -> void:
 
 
 func _on_language_picker_language_change() -> void:
-	Main.change_scene("res://src/screens/menu/menu.tscn")
+	Main.change_scene(Const.SCREEN_MENU)

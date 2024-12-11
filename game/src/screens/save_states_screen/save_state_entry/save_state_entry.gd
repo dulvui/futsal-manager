@@ -5,8 +5,6 @@
 class_name SaveStateEntry
 extends VBoxContainer
 
-signal load_game
-
 @export var hide_buttons: bool = false
 
 var save_state: SaveState
@@ -45,7 +43,7 @@ func _on_load_pressed() -> void:
 	Global.save_states.active_id = save_state.id
 	Global.load_save_state()
 	LoadingUtil.start("LOADING_GAME", LoadingUtil.Type.LOAD_GAME)
-	load_game.emit()
+	Main.show_loading_screen(Const.SCREEN_DASHBOARD)
 
 
 func _on_delete_pressed() -> void:
@@ -57,9 +55,7 @@ func _on_delete_dialog_confirmed() -> void:
 	Global.save_config()
 	ResUtil.save_save_states()
 	if Global.save_states.id_list.size() == 0:
-		Main.change_scene("res://src/screens/menu/menu.tscn")
+		Main.change_scene(Const.SCREEN_MENU)
 	else:
-		Main.change_scene(
-			"res://src/screens/save_states_screen/save_states_screen.tscn"
-		)
+		Main.change_scene(Const.SCREEN_SAVE_STATES)
 

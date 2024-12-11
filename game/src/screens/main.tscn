@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpjnf18cbkpkd"]
+[gd_scene load_steps=4 format=3 uid="uid://cpjnf18cbkpkd"]
 
 [ext_resource type="Script" path="res://src/screens/main.gd" id="1_plrm3"]
 [ext_resource type="PackedScene" uid="uid://dshn3r4bo8k3o" path="res://src/ui_components/animations/scene_fade.tscn" id="2_u1up4"]
+[ext_resource type="PackedScene" uid="uid://nnebno4d3gx2" path="res://src/screens/loading_screen/loading_screen.tscn" id="3_48lsr"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -25,14 +26,22 @@ grow_vertical = 2
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.6)
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -49.0
 offset_top = -22.0
-offset_right = 40.0
+grow_horizontal = 0
 grow_vertical = 0
 text = "v0.2.4"
 
 [node name="SceneFade" parent="." instance=ExtResource("2_u1up4")]
 unique_name_in_owner = true
 layout_mode = 1
+
+[node name="LoadingScreen" parent="." instance=ExtResource("3_48lsr")]
+layout_mode = 1
+
+[connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]

@@ -45,3 +45,16 @@ const POSITION: StringName = "POSITION"
 
 const CUSTOM_PROPERTY: int = 4096
 const CUSTOM_PROPERTY_EXPORT: int = 4102
+
+# screens
+const SCREEN_MENU: StringName = "res://src/screens/menu/menu.tscn"
+const SCREEN_SETTINGS: StringName = "res://src/screens/settings/settings.tscn"
+const SCREEN_DASHBOARD: StringName = "res://src/screens/dashboard/dashboard.tscn"
+const SCREEN_SETUP_TEAM: StringName = "res://src/screens/setup/setup_team/setup_team.tscn"
+const SCREEN_SETUP_WORLD: StringName = "res://src/screens/setup/setup_world/setup_world.tscn"
+const SCREEN_SETUP_MANAGER: StringName = "res://src/screens/setup/setup_manager/setup_manager.tscn"
+const SCREEN_SETUP_LANGUAGE: StringName = "res://src/screens/setup_language/setup_language.tscn"
+const SCREEN_MATCH: StringName = "res://src/screens/match/match.tscn"
+const SCREEN_SAVE_STATES: StringName = "res://src/screens/save_states_screen/save_states_screen.tscn"
+# scenes
+const SCENE_SAVE_STATE_ENTRY: StringName = "res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn"

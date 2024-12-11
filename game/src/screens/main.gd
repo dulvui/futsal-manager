@@ -8,14 +8,17 @@ extends Control
 @onready var version: Label = %Version
 @onready var content: PanelContainer = %Content
 @onready var scene_fade: SceneFade = %SceneFade
+@onready var loading_screen: LoadingScreen = $LoadingScreen
 
 var previous_scenes: Array[String]
+var scene_name_on_load: String
 
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 
 	previous_scenes = []
+	scene_name_on_load = ""
 	version.text = "v" + Global.version
 	
 	scene_fade.fade_in()
@@ -39,7 +42,20 @@ func previous_scene() -> void:
 		print("not valid previous scene found")
 
 
+func show_loading_screen(p_scene_name_on_load: String = "") -> void:
+	scene_name_on_load = p_scene_name_on_load
+	loading_screen.show()
+
+
 func _append_scene_to_buffer(scene_path: String) -> void:
 	previous_scenes.append(scene_path)
 	if previous_scenes.size() > 5:
 		previous_scenes.remove_at(0)
+
+
+func _on_loading_screen_loaded(_type: int) -> void:
+	loading_screen.hide()
+	if not scene_name_on_load.is_empty():
+		change_scene(scene_name_on_load)
+		scene_name_on_load = ""
+

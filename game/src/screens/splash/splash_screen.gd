@@ -8,8 +8,8 @@ extends Control
 
 func _ready() -> void:
 	if Global.language:
-		Main.change_scene("res://src/screens/menu/menu.tscn")
+		Main.change_scene(Const.SCREEN_MENU)
 	else:
-		Main.change_scene("res://src/screens/setup_language/setup_language.tscn")
+		Main.change_scene(Const.SCREEN_SETUP_LANGUAGE)
 	
 	queue_free()

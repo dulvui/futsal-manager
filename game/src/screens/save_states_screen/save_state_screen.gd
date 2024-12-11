@@ -5,19 +5,15 @@
 class_name SaveStateScreen
 extends Control
 
-const SaveStateEntryScene: PackedScene = preload(
-	"res://src/screens/save_states_screen/save_state_entry/save_state_entry.tscn"
-)
+const SaveStateEntryScene: PackedScene = preload(Const.SCENE_SAVE_STATE_ENTRY)
 
 @onready var entry_list: VBoxContainer = %EntryList
-@onready var loading_screen: LoadingScreen = $LoadingScreen
 @onready var active_save_state_entry: SaveStateEntry = %ActiveSaveState
 
 
 func _ready() -> void:
 	var active_save_state: SaveState = Global.save_states.get_active()
 	active_save_state_entry.setup(active_save_state)
-	active_save_state_entry.load_game.connect(func() -> void: loading_screen.show())
 
 	InputUtil.start_focus(active_save_state_entry.load_button)
 
@@ -27,12 +23,8 @@ func _ready() -> void:
 			var entry: SaveStateEntry = SaveStateEntryScene.instantiate()
 			entry_list.add_child(entry)
 			entry.setup(save_state)
-			entry.load_game.connect(func() -> void: loading_screen.show())
 
 
 func _on_menu_pressed() -> void:
-	Main.change_scene("res://src/screens/menu/menu.tscn")
+	Main.change_scene(Const.SCREEN_MENU)
 
-
-func _on_loading_screen_loaded(_type: LoadingUtil.Type) -> void:
-	Main.change_scene("res://src/screens/dashboard/dashboard.tscn")
