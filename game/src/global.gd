@@ -49,9 +49,6 @@ var manager: Manager
 # save states
 var save_states: SaveStates
 
-# flag if the game just started, for fade in effect in menu
-var just_started: bool
-
 
 func _ready() -> void:
 	print("version " + Global.version)
@@ -63,8 +60,6 @@ func _ready() -> void:
 	
 	# set initial scale
 	get_tree().root.content_scale_factor = theme_scale
-
-	just_started = true
 
 
 func select_team(p_team: Team)-> void:

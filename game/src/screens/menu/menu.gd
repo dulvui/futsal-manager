@@ -13,7 +13,6 @@ extends Control
 @onready var new_game: Button = %NewGame
 @onready var exit: Button = %Exit
 @onready var exit_confirm_dialog: DefaultConfirmDialog = %DefaultConfirmDialog
-@onready var scene_fade: SceneFade = %SceneFade
 
 
 func _ready() -> void:
@@ -33,11 +32,6 @@ func _ready() -> void:
 
 
 	save_state.setup(Global.save_states.get_active())
-
-	# fade in effect on first open
-	if Global.just_started:
-		Global.just_started = false
-		scene_fade.fade_in()
 
 
 func _on_new_game_pressed() -> void:

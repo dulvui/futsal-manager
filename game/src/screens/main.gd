@@ -7,6 +7,7 @@ extends Control
 
 @onready var version: Label = %Version
 @onready var content: PanelContainer = %Content
+@onready var scene_fade: SceneFade = %SceneFade
 
 var previous_scenes: Array[String]
 
@@ -16,6 +17,8 @@ func _ready() -> void:
 
 	previous_scenes = []
 	version.text = "v" + Global.version
+	
+	scene_fade.fade_in()
 
 
 func change_scene(scene_path: String) -> void:

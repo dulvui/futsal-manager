@@ -10,11 +10,6 @@ func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
 	InputUtil.start_focus(self)
 
-	# fade in effect on first open
-	if Global.just_started:
-		Global.just_started = false
-		scene_fade.fade_in()
-
 
 func _on_language_picker_language_change() -> void:
 	Main.change_scene("res://src/screens/menu/menu.tscn")
