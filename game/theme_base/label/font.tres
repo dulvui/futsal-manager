@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://j3o56lsudgvn"]
+
+[ext_resource type="FontFile" uid="uid://bsr8akfyxoj1u" path="res://assets/fonts/roboto/Roboto-Regular.ttf" id="1_mr8k4"]
+
+[resource]
+base_font = ExtResource("1_mr8k4")
+baseline_offset = 0.06

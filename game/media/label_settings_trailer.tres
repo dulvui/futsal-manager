@@ -1,4 +1,7 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://1g3edv8x0q6t"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://1g3edv8x0q6t"]
+
+[ext_resource type="FontVariation" uid="uid://j3o56lsudgvn" path="res://theme_base/label/font.tres" id="1_rrn3l"]
 
 [resource]
+font = ExtResource("1_rrn3l")
 font_size = 124

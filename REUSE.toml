@@ -92,3 +92,12 @@ precedence = "aggregate"
 SPDX-FileCopyrightText = "Copyright (c) Yukari 'Shinmera' Hafner"
 SPDX-License-Identifier = "OFL-1.1"
 
+# Roboto font https://fonts.google.com/specimen/Roboto
+[[annotations]]
+path = [
+    "game/assets/fonts/roboto/**",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Copyright (c) 2011 Google Inc."
+SPDX-License-Identifier = "Apache-2.0"
+

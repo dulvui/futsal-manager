@@ -1,6 +1,8 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://cjddrymi21bbr"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cjddrymi21bbr"]
+
+[ext_resource type="FontVariation" uid="uid://f7o270axt21i" path="res://theme_base/label/font_bold.tres" id="1_agwwr"]
 
 [resource]
+font = ExtResource("1_agwwr")
 font_size = 164
 font_color = Color(1, 0.8, 0, 1)
-outline_color = Color(1, 0.8, 0, 1)

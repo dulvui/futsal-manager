@@ -1,3 +1,7 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://c5yfa40ut1pyv"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c5yfa40ut1pyv"]
+
+[ext_resource type="FontVariation" uid="uid://j3o56lsudgvn" path="res://theme_base/label/font.tres" id="1_jb3up"]
 
 [resource]
+font = ExtResource("1_jb3up")
+font_size = 18

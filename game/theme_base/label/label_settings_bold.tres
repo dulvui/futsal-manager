@@ -1,5 +1,7 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://cc2vi4onhgmnw"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cc2vi4onhgmnw"]
+
+[ext_resource type="FontVariation" uid="uid://f7o270axt21i" path="res://theme_base/label/font_bold.tres" id="1_2csak"]
 
 [resource]
+font = ExtResource("1_2csak")
 font_size = 18
-outline_size = 2
