@@ -49,9 +49,6 @@ var manager: Manager
 # save states
 var save_states: SaveStates
 
-var settings_screen: Settings.Screen
-
-
 # flag if the game just started, for fade in effect in menu
 var just_started: bool
 

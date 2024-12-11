@@ -5,11 +5,6 @@
 class_name Settings
 extends Control
 
-enum Screen {
-	MENU,
-	DASHBOARD,
-	MATCH,
-}
 
 @onready var default_dialog: DefaultConfirmDialog = %DefaultDialog
 @onready var general: GeneralSettings = %General
@@ -32,11 +27,5 @@ func _on_default_dialog_confirmed() -> void:
 
 
 func _on_back_pressed() -> void:
-	match Global.settings_screen:
-		Screen.MENU:
-			get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
-		Screen.DASHBOARD:
-			get_tree().change_scene_to_file("res://src/screens/dashboard/dashboard.tscn")
-		_:
-			get_tree().change_scene_to_file("res://src/screens/menu/menu.tscn")
+	Main.previous_scene()
 

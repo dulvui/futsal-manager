@@ -12,7 +12,6 @@ extends Control
 @onready var continue_game: Button = %ContinueGame
 @onready var new_game: Button = %NewGame
 @onready var exit: Button = %Exit
-@onready var version: Label = %Version
 @onready var exit_confirm_dialog: DefaultConfirmDialog = %DefaultConfirmDialog
 @onready var scene_fade: SceneFade = %SceneFade
 
@@ -35,8 +34,6 @@ func _ready() -> void:
 
 	save_state.setup(Global.save_states.get_active())
 
-	version.text = "v" + Global.version
-
 	# fade in effect on first open
 	if Global.just_started:
 		Global.just_started = false
@@ -54,8 +51,7 @@ func _on_continue_game_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	Global.settings_screen = Settings.Screen.MENU
-	get_tree().change_scene_to_file("res://src/screens/settings/settings.tscn")
+	Main.change_scene("res://src/screens/settings/settings.tscn")
 
 
 func _on_load_game_pressed() -> void:

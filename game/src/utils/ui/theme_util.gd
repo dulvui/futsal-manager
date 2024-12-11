@@ -235,11 +235,11 @@ func _apply_configuration(p_configuration: ThemeConfiguration) -> void:
 	label_settings_high.font_color = configuration.font_color
 
 	# fontsize
-	theme.default_font_size = Global.theme_font_size
-	label_settings.font_size = Global.theme_font_size 
-	label_settings_bold.font_size = Global.theme_font_size
-	label_settings_title.font_size = Global.theme_font_size * 1.4
-	label_settings_outline.font_size = Global.theme_font_size
+	# theme.default_font_size = Global.theme_font_size
+	# label_settings.font_size = Global.theme_font_size 
+	# label_settings_bold.font_size = Global.theme_font_size
+	# label_settings_title.font_size = Global.theme_font_size * 1.4
+	# label_settings_outline.font_size = Global.theme_font_size
 
 	# labels
 	theme.set_color("font_color", "Label", configuration.font_color)

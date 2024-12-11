@@ -7,12 +7,10 @@ extends Control
 
 
 func _ready() -> void:
-	theme = ThemeUtil.get_active_theme()
-
-
 	if Global.language:
-		get_tree().change_scene_to_file.call_deferred("res://src/screens/menu/menu.tscn")
+		# get_tree().change_scene_to_file.call_deferred("res://src/screens/menu/menu.tscn")
+		Main.change_scene("res://src/screens/menu/menu.tscn")
 	else:
-		get_tree().change_scene_to_file.call_deferred(
-			"res://src/screens/setup_language/setup_language.tscn"
-		)
+		Main.change_scene("res://src/screens/setup_language/setup_language.tscn")
+	
+	queue_free()

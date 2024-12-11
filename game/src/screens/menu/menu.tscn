@@ -122,13 +122,13 @@ anchor_left = 0.979
 anchor_top = 0.959
 anchor_right = 0.979
 anchor_bottom = 0.959
-offset_left = -284.68
-offset_top = -39.7201
-offset_right = -0.680054
-offset_bottom = 0.279907
+offset_left = -132.68
+offset_top = -39.72
+offset_right = -0.679932
+offset_bottom = 0.280029
 grow_horizontal = 0
 grow_vertical = 0
-alignment = 1
+alignment = 2
 
 [node name="LinkButton" type="LinkButton" parent="Info"]
 layout_mode = 2
@@ -137,14 +137,6 @@ size_flags_vertical = 4
 focus_mode = 2
 text = "99managers.org"
 uri = "https://99managers.org"
-
-[node name="Version" type="Label" parent="Info"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 7
-text = "V0.1.22.3"
-horizontal_alignment = 2
-vertical_alignment = 1
 
 [node name="DefaultConfirmDialog" parent="." instance=ExtResource("6_1a2kt")]
 unique_name_in_owner = true
