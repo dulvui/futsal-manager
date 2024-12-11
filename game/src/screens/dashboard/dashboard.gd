@@ -59,8 +59,6 @@ var active_view: ContentViews = ContentViews.EMAIL
 func _ready() -> void:
 	Tests.setup_mock_world(true)
 	
-	LoadingUtil.loaded.connect(_on_loading_util_loaded)
-
 	team = Global.team
 
 	manager_label.text = Global.manager.get_full_name()
