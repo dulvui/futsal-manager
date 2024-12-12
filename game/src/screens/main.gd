@@ -22,6 +22,7 @@ func _ready() -> void:
 	version.text = "v" + Global.version
 	
 	scene_fade.fade_in()
+	print("main scene setup done")
 
 
 func change_scene(scene_path: String) -> void:

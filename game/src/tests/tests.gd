@@ -52,7 +52,7 @@ static func setup_mock_world(use_test_file: bool) -> bool:
 		Global.manager = create_mock_manager()
 		Global.world = create_mock_world(use_test_file)
 		var league: League = Global.world.continents[0].nations[0].leagues[0]
-		var team: Team = league.teams[0]
+		var team: Team = league.teams[3]
 		Global.select_team(team)
 		Global.initialize_game()
 		Global.start_date = Time.get_datetime_dict_from_system()
