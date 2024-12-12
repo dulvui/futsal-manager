@@ -61,6 +61,15 @@ static func setup_mock_world(use_test_file: bool) -> bool:
 	return false
 
 
+static func find_next_matchday() -> void:
+	if not Global.world:
+		return
+
+	# search next match day
+	while Global.world.calendar.day().get_matches().size() == 0:
+		Global.world.calendar.next_day()
+
+
 static func create_mock_world(use_test_file: bool) -> World:
 	if use_test_file:
 		var generator: Generator = Generator.new()

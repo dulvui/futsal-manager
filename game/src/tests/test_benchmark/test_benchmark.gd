@@ -22,9 +22,7 @@ func test() -> void:
 	Global.team = Global.world.continents[0].nations[0].leagues[0].teams[0]
 	Global.league = Global.world.continents[0].nations[0].leagues[0]
 
-	print("test: searching next match day")
-	while Global.world.calendar.day().get_matches().size() == 0:
-		Global.world.calendar.next_day()
+	Tests.find_next_matchday()
 
 	print("test: calculate random results...")
 	Global.world.random_results()

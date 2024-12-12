@@ -166,7 +166,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 disabled = true
-text = "WATCH_LIST"
+text = "WATCHLIST"
 alignment = 0
 script = ExtResource("3_kbasy")
 
@@ -188,7 +188,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 disabled = true
-text = "TRANSFERS"
+text = "TRANSFERMARKET"
 alignment = 0
 script = ExtResource("3_kbasy")
 

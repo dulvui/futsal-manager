@@ -14,7 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d8g5d")
-metadata/movie_file = "gameplay.avi"
+metadata/movie_file = "video.avi"
 
 [node name="Backgrund" type="ColorRect" parent="."]
 layout_mode = 1

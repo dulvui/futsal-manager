@@ -4,13 +4,11 @@
 
 extends Control
 
-
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
-	# Tests.setup_mock_world(true)
 	animation_player.play("Teaser")
 
 

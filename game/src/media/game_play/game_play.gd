@@ -16,9 +16,8 @@ func _ready() -> void:
 	Tests.setup_mock_world(true)
 	
 	# search next match day, to have real team and player names
-	while Global.world.calendar.day().get_matches().size() == 0:
-		Global.world.calendar.next_day()
-
+	Tests.find_next_matchday()
+	
 	# setup scenes
 	var match_scene: PackedScene = load(Const.SCREEN_MATCH)
 	var match_screen: MatchScreen = match_scene.instantiate()
@@ -26,7 +25,6 @@ func _ready() -> void:
 	var dashboard_scene: PackedScene = load(Const.SCREEN_DASHBOARD)
 	var dashboard_screen: Dashboard = dashboard_scene.instantiate()
 	add_child(dashboard_screen)
-
 
 	# set initial modulates
 	icon.modulate = Color.WHITE
@@ -41,13 +39,13 @@ func _ready() -> void:
 	await show_teaser(3, "The world's first\nFutsal Manager game")
 
 	# match teaser
-	await show_teaser(2, "2D Match Engine")
+	await show_teaser(2, "With 2D Match Engine")
 	
 	# match
 	await show_screen(6, match_screen)
 
 	# dashboard teaser
-	await show_teaser(1, "Full control")
+	await show_teaser(1, "Have full control")
 	# dashboard
 	await show_screen(3, dashboard_screen)
 	# show formation
