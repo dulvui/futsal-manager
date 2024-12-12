@@ -40,7 +40,7 @@ text = "FROM"
 [node name="Sender" type="Label" parent="MarginContainer/VBoxContainer/From"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "info@realmadrid.com"
+text = "info@bolzanofutsal.com"
 
 [node name="To" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -53,7 +53,7 @@ text = "TO"
 [node name="Receiver" type="Label" parent="MarginContainer/VBoxContainer/To"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "hans.viustel@realmadrid.com"
+text = "simon.dalvai@bolzanofutsal.com"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 visible = false
@@ -71,7 +71,7 @@ text = "SUBJECT"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Messi"
+text = "Transfer news"
 label_settings = ExtResource("2_a6odb")
 
 [node name="Date" type="Label" parent="MarginContainer/VBoxContainer/Subject"]
@@ -97,7 +97,17 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Rodrygo wants to join your club"
+text = "Gabriel Mota wants to join your club.
+
+His conditions are
+- Full time contract
+- Bonus for win in competitions
+- Be a starting player
+
+How should we proceed?
+
+All the best,
+You Scouting Team"
 
 [node name="BottomBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -276,13 +276,13 @@ theme_override_constants/separation = 20
 [node name="ManagerName" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/PanelContainer/MarginContainer/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Hans Viustel"
+text = "Simon Dalvai"
 label_settings = ExtResource("4_bc3th")
 
 [node name="TeamName" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/PanelContainer/MarginContainer/TopBar"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Barcellona"
+text = "Bolzano Futsal"
 label_settings = ExtResource("4_bc3th")
 
 [node name="Budget" type="Label" parent="MarginContainer/HBoxContainer/MainContainer/PanelContainer/MarginContainer/TopBar"]

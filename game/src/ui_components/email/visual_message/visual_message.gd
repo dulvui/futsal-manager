@@ -18,6 +18,8 @@ var message: EmailMessage
 
 
 func show_message(p_message: EmailMessage) -> void:
+	if p_message == null:
+		return
 	message = p_message
 	message.read = true
 	subject.text = message.subject

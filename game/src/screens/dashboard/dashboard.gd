@@ -39,6 +39,8 @@ var active_view: ContentViews = ContentViews.EMAIL
 
 # buttons
 @onready var email_button: Button = %EmailButton
+@onready var formation_button: Button = %FormationButton
+@onready var search_player_button: Button = %SearchPlayerButton
 
 # content views
 @onready var email: VisualEmail = %Email

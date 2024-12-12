@@ -1,0 +1,153 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpl48mxu3fcd4"]
+
+[ext_resource type="Script" path="res://src/media/game_play/game_play.gd" id="1_d8g5d"]
+[ext_resource type="Texture2D" uid="uid://b68igf7j3q76v" path="res://icon_dark.png" id="2_d5nec"]
+[ext_resource type="LabelSettings" uid="uid://1g3edv8x0q6t" path="res://src/media/label_settings_trailer.tres" id="3_2sq2w"]
+[ext_resource type="LabelSettings" uid="uid://cjddrymi21bbr" path="res://src/media/label_settings_trailer_bold.tres" id="4_ooicg"]
+[ext_resource type="PackedScene" uid="uid://c8mhb22bae1my" path="res://src/screens/dashboard/dashboard.tscn" id="5_jw11f"]
+[ext_resource type="PackedScene" uid="uid://0u70bm8qumdr" path="res://src/screens/match/match.tscn" id="5_qajrl"]
+[ext_resource type="LabelSettings" uid="uid://b4gu78rjvdfx4" path="res://theme_base/label/label_settings_title.tres" id="7_wffbm"]
+
+[node name="GamePlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d8g5d")
+metadata/movie_file = "gameplay.avi"
+
+[node name="Backgrund" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -682.5
+offset_top = -681.0
+offset_right = 682.5
+offset_bottom = 681.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_d5nec")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MatchTeaser" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -377.0
+offset_top = -219.0
+offset_right = 377.0
+offset_bottom = 219.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Title" type="Label" parent="MatchTeaser"]
+layout_mode = 2
+text = "2D Match engine"
+label_settings = ExtResource("4_ooicg")
+horizontal_alignment = 1
+
+[node name="Match" parent="." instance=ExtResource("5_qajrl")]
+unique_name_in_owner = true
+layout_mode = 2
+anchors_preset = 0
+
+[node name="DashboardTeaser" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -622.5
+offset_top = -219.0
+offset_right = 622.5
+offset_bottom = 219.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Title" type="Label" parent="DashboardTeaser"]
+layout_mode = 2
+text = "Full control"
+label_settings = ExtResource("4_ooicg")
+horizontal_alignment = 1
+
+[node name="Dashboard" parent="." instance=ExtResource("5_jw11f")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="ComingSoon" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -62.0
+offset_right = 164.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Title" type="Label" parent="ComingSoon"]
+layout_mode = 2
+text = "Coming 2025!"
+label_settings = ExtResource("4_ooicg")
+horizontal_alignment = 1
+
+[node name="Text" type="Label" parent="ComingSoon"]
+layout_mode = 2
+text = "99managers.org"
+label_settings = ExtResource("3_2sq2w")
+horizontal_alignment = 1
+
+[node name="WorkInProgress" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -262.0
+offset_top = -83.0
+offset_right = -44.0
+offset_bottom = -43.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="WorkInProgressLabel" type="Label" parent="WorkInProgress"]
+modulate = Color(1, 1, 1, 0.729412)
+layout_mode = 2
+text = " WORK IN PROGRESS "
+label_settings = ExtResource("7_wffbm")
