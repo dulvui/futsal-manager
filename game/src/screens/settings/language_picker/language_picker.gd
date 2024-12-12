@@ -9,6 +9,7 @@ signal language_change
 const LANGUAGES: Dictionary = {
 	"en": "English",
 	# "pt": "Portuguese",
+	# "pt_BR": "Portuguese (BR)",
 	"it": "Italiano",
 	# "es": "Español",
 	"de": "Deutsch",
@@ -25,7 +26,7 @@ func _ready() -> void:
 		button.pressed.connect(_on_button_pressed.bind(language_key))
 		add_child(button)
 
-	print(Global.language)
+	print("language set:" + Global.language)
 
 
 func _on_button_pressed(language_key: String) -> void:
