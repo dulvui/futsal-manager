@@ -226,7 +226,7 @@ func _on_pause_button_pressed() -> void:
 
 
 func _on_simulate_button_pressed() -> void:
-	match_simulator.simulate_to_fulltime()
+	match_simulator.simulate()
 
 
 func _on_start_timer_timeout() -> void:

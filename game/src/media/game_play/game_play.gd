@@ -21,10 +21,14 @@ func _ready() -> void:
 	# search next match day, to have real team and player names
 	Tests.find_next_matchday()
 	
-	# setup scenes
+	# match
 	var match_scene: PackedScene = load(Const.SCREEN_MATCH)
 	var match_screen: MatchScreen = match_scene.instantiate()
 	content.add_child(match_screen)
+	# simulate match to later state
+	match_screen.match_simulator.simulate(102)
+
+	# dashboard
 	var dashboard_scene: PackedScene = load(Const.SCREEN_DASHBOARD)
 	var dashboard_screen: Dashboard = dashboard_scene.instantiate()
 	content.add_child(dashboard_screen)
@@ -36,7 +40,7 @@ func _ready() -> void:
 	dashboard_screen.modulate = Color.TRANSPARENT
 
 	# icon
-	await wait(2)
+	await wait(1)
 	await fade_out(icon)
 	
 	await show_teaser(3, "The world's first\nFutsal Manager game")
@@ -45,7 +49,7 @@ func _ready() -> void:
 	await show_teaser(2, "With 2D Match Engine")
 	
 	# match
-	await show_screen(6, match_screen)
+	await show_screen(8, match_screen)
 
 	# dashboard teaser
 	await show_teaser(1, "Have full control")

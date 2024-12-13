@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://0u70bm8qumdr"]
+[gd_scene load_steps=10 format=3 uid="uid://0u70bm8qumdr"]
 
 [ext_resource type="PackedScene" uid="uid://bubq3rsb3hm6e" path="res://src/match_simulator/match_simulator.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bc6kfu3avld0" path="res://src/ui_components/match/statistics/match_stats.tscn" id="4"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="4_mqt4y"]
 [ext_resource type="PackedScene" uid="uid://i4nnwgwck615" path="res://src/ui_components/visual_formation/visual_formation.tscn" id="5"]
+[ext_resource type="LabelSettings" uid="uid://cc2vi4onhgmnw" path="res://theme_base/label/label_settings_bold.tres" id="5_8e8d2"]
 [ext_resource type="PackedScene" uid="uid://5agy8ull675s" path="res://src/ui_components/match/events/match_events.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://bj7f2r54xkpt1" path="res://src/ui_components/visual_formation/players_bar/players_bar.tscn" id="7_kly0w"]
 
@@ -225,16 +226,19 @@ text = "(0)"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Robledo"
+label_settings = ExtResource("5_8e8d2")
 
 [node name="Result" type="Label" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0:0"
+label_settings = ExtResource("5_8e8d2")
 
 [node name="AwayNameLabel" type="Label" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Cisneros"
+label_settings = ExtResource("5_8e8d2")
 
 [node name="AwayFouls" type="Label" parent="Main/Content/CentralContainer/TopBar/TimeBar/Info"]
 unique_name_in_owner = true
