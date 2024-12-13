@@ -10,6 +10,9 @@ extends Control
 @onready var teaser_title: Label = %Title
 @onready var teaser_text: Label = %Text
 
+# to put screens behind work in progress label
+@onready var content: Control = %Content
+
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
@@ -21,10 +24,10 @@ func _ready() -> void:
 	# setup scenes
 	var match_scene: PackedScene = load(Const.SCREEN_MATCH)
 	var match_screen: MatchScreen = match_scene.instantiate()
-	add_child(match_screen)
+	content.add_child(match_screen)
 	var dashboard_scene: PackedScene = load(Const.SCREEN_DASHBOARD)
 	var dashboard_screen: Dashboard = dashboard_scene.instantiate()
-	add_child(dashboard_screen)
+	content.add_child(dashboard_screen)
 
 	# set initial modulates
 	icon.modulate = Color.WHITE
