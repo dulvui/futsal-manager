@@ -134,11 +134,11 @@ func _should_dribble() -> bool:
 
 
 func _should_shoot() -> bool:
-	if ball.empty_net:
-		return true
+	# if ball.empty_net:
+	# 	return true
 	if ball.players_in_shoot_trajectory < 2:
-		return RngUtil.match_rng.randi_range(1, 100) > 95
-	return RngUtil.match_rng.randi_range(1, 100) > 98
+		return RngUtil.match_rng.randi_range(1, 100) > 98
+	return RngUtil.match_rng.randi_range(1, 100) > 99
 
 
 func _should_pass() -> bool:

@@ -66,7 +66,10 @@ func setup(home_team: Team, away_team: Team, match_seed: int) -> void:
 	Global.match_paused = false
 
 
-func simulate_to_fulltime() -> void:
+func simulate(end_time: int = Const.FULL_TIME_SECONDS) -> void:
+	# save simulated flags, to restore if endtime < FULL_TIME_SECONDS
+	var home_simulated: bool = match_engine.home_team.simulated
+	var away_simulated: bool = match_engine.away_team.simulated
 	# set simulation flags to activate auto changes ecc
 	match_engine.home_team.simulated = true
 	match_engine.away_team.simulated = true
@@ -78,12 +81,25 @@ func simulate_to_fulltime() -> void:
 		while time < Const.HALF_TIME_SECONDS:
 			match_engine.update()
 			_tick()
+			# stop simulation
+			if time == end_time:
+				match_engine.home_team.simulated = home_simulated
+				match_engine.away_team.simulated = away_simulated
+				timer.start()
+				return
+
 		match_engine.half_time()
 	
 	# second half
-	while time < Const.HALF_TIME_SECONDS * 2:
+	while time < Const.FULL_TIME_SECONDS:
 		match_engine.update()
 		_tick()
+		# stop simulation
+		if time == end_time:
+			match_engine.home_team.simulated = home_simulated
+			match_engine.away_team.simulated = away_simulated
+			timer.start()
+			return
 	
 	match_engine.full_time()
 

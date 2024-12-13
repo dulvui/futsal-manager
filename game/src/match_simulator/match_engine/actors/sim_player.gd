@@ -44,7 +44,7 @@ var left_half: bool
 
 func _init() -> void:
 	# initial test values
-	interception_radius = 25
+	interception_radius = 30
 	has_ball = false
 
 
@@ -81,7 +81,7 @@ func update(team_has_ball: bool) -> void:
 	match state_machine.state:
 		PlayerStateMachine.State.MOVE, PlayerStateMachine.State.DRIBBLE:
 			_move()
-			if Geometry2D.is_point_in_circle(pos, destination, 5):
+			if Geometry2D.is_point_in_circle(pos, destination, 25):
 				state_machine.state = PlayerStateMachine.State.IDLE
 		PlayerStateMachine.State.PASSING:
 			short_pass.emit()
@@ -98,6 +98,7 @@ func update(team_has_ball: bool) -> void:
 		PlayerStateMachine.State.SAVE_SHOT:
 			goalkeeper_follow_ball()
 			_move()
+			_block_shot()
 		PlayerStateMachine.State.POSITIONING:
 			goalkeeper_follow_ball()
 			_move()
@@ -176,7 +177,6 @@ func goalkeeper_follow_ball() -> void:
 			set_destination(left_base + left_base.direction_to(ball.pos) * 40)
 		else:
 			set_destination(left_base)
-
 	else:
 		if ball.pos.x > field.size.x / 2:
 			set_destination(right_base + right_base.direction_to(ball.pos) * 40)
