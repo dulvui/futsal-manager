@@ -53,7 +53,7 @@ func _on_timer_timeout() -> void:
 
 
 func player_moves_to_ball() -> void:
-	sim_player.state = SimPlayer.State.IDLE
+	sim_player.state = PlayerStateMachine.State.IDLE
 	sim_player.set_pos(Vector2(300, 400))
 	sim_player.set_destination(Vector2(900, 400))
 
@@ -64,6 +64,6 @@ func player_moves() -> void:
 
 
 func player_dribble() -> void:
-	sim_player.state = SimPlayer.State.DRIBBLE
+	sim_player.state = PlayerStateMachine.State.DRIBBLE
 	sim_player.set_pos(sim_field.center - Vector2(20, 0))
 	sim_player.set_destination(sim_ball.pos)
