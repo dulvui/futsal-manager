@@ -2,8 +2,11 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-extends Sprite2D
+extends Control
+
+@onready var cursor_texture: TextureRect = $TextureRect
 
 
 func _process(_delta: float) -> void:
-    position = get_viewport().get_mouse_position()
+	cursor_texture.position = get_viewport().get_mouse_position()
+	
