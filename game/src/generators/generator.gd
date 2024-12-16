@@ -16,15 +16,15 @@ const HISTORY_YEARS: int = 10
 
 # person colors
 const SKINTONE: Array[Color] = [
-	Color("#E8BEAC"),
 	Color("#FFE0BD"),
 	Color("#F6D3BD"),
-	Color("#C68642"),
+	Color("#E8BEAC"),
 	Color("#D4AA78"),
 	Color("#E0AC69"),
+	Color("#C68642"),
+	Color("#A16E4B"),
 	Color("#8D5524"),
 	Color("#3B2219"),
-	Color("#A16E4B"),
 ]
 const HAIR_COLORS: Array[Color] = [
 	Color("#040200"),
@@ -34,12 +34,9 @@ const HAIR_COLORS: Array[Color] = [
 	Color("#5A3825"),
 	Color("#CC9966"),
 	Color("#F6D02F"),
-	Color("#E0E0E0"),
 	Color("#F2A900"),
 	Color("#C65D3B"),
-	# Color("#D85C3B"),
-	Color("#A52A2A"),
-	Color.TRANSPARENT, # bald
+	# Color.TRANSPARENT, # bald
 ]
 const EYE_COLORS: Array[Color] = [
 	Color.BROWN,
