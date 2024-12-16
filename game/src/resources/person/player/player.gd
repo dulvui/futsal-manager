@@ -6,8 +6,8 @@ class_name Player
 extends Person
 
 enum Foot { L, R }
-enum Morality { HORRIBLE, BAD, GOOD, EXCELLENT }
-enum Form { INJURED, RECOVER, GOOD, EXCELLENT }
+enum Morality { WORST, BAD, NEUTRAL, GOOD, BEST }
+enum Form { INJURED, RECOVER, GOOD, BEST }
 
 @export var value: int
 @export var nr: int  # shirt number
@@ -46,7 +46,7 @@ func _init(
 	p_nation: String = "",
 	p_birth_date: Dictionary = Time.get_datetime_dict_from_system(),
 	p_form: Form = Form.GOOD,
-	p_morality: Morality = Morality.GOOD,
+	p_morality: Morality = Morality.NEUTRAL,
 	p_statistics: Statistics = Statistics.new(),
 	p_history: Array[History] = [],
 	p_foot: Foot = Foot.R,

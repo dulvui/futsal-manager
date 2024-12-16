@@ -43,7 +43,7 @@ layout_mode = 2
 
 [node name="SettingsLabel" type="Label" parent="VBoxContainer/Settings"]
 layout_mode = 2
-text = "PLAYER_SETTINGS"
+text = "GAME_SETTINGS"
 label_settings = ExtResource("3_mfpia")
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer/Settings"]

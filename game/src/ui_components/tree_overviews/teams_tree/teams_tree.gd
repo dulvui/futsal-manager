@@ -109,5 +109,3 @@ func _on_select() -> void:
 	if teams.has(selected_name):
 		team_selected.emit(teams[selected_name])
 		SoundUtil.play_button_sfx()
-
-

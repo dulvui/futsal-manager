@@ -80,7 +80,7 @@ func setup(p_active_team_id: int = -1) -> void:
 	page_max = players.size() / page_size
 
 	_setup_columns()
-	active_view = views[6]
+	active_view = views[0]
 	active_view_option_button.setup(views)
 
 	_update_page_indicator()
