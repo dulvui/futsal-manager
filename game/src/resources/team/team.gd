@@ -117,21 +117,3 @@ func get_prestige_stars() -> String:
 	# creates right padding ex: "***  "
 	return "*".repeat(stars) + "  ".repeat(spaces)
 
-
-func set_random_colors() -> void:
-	colors = []
-	colors.append(
-		Color(
-			RngUtil.rng.randf_range(0, 1),
-			RngUtil.rng.randf_range(0, 1),
-			RngUtil.rng.randf_range(0, 1)
-		)
-	)
-	colors.append(colors[0].inverted())
-	colors.append(
-		Color(
-			RngUtil.rng.randf_range(0, 1),
-			RngUtil.rng.randf_range(0, 1),
-			RngUtil.rng.randf_range(0, 1)
-		)
-	)

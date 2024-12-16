@@ -104,8 +104,15 @@ static func create_mock_league(nr: int = randi_range(0, 99), teams: int = 10) ->
 
 static func create_mock_team(nr: int = randi_range(1, 99)) -> Team:
 	var team: Team = Team.new()
-	team.set_random_colors()
 	team.name = "Mock Team " + str(nr)
+	# set random team colors
+	team.colors = [
+		Color(
+			RngUtil.rng.randf_range(0, 1),
+			RngUtil.rng.randf_range(0, 1),
+			RngUtil.rng.randf_range(0, 1)
+		)
+	]
 
 	for i: int in range(1, Const.LINEUP_PLAYERS_AMOUNT + 8):
 		var player: Player = create_mock_player(i)
@@ -129,5 +136,3 @@ static func create_mock_manager() -> Manager:
 	manager.name = "Mike"
 	manager.surname = "Mock"
 	return manager
-
-

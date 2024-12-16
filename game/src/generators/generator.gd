@@ -14,6 +14,40 @@ const NOISE: int = 3
 # defines year, when history starts
 const HISTORY_YEARS: int = 10
 
+# person colors
+const SKINTONE: Array[Color] = [
+	Color("#E8BEAC"),
+	Color("#FFE0BD"),
+	Color("#F6D3BD"),
+	Color("#C68642"),
+	Color("#D4AA78"),
+	Color("#E0AC69"),
+	Color("#8D5524"),
+	Color("#3B2219"),
+	Color("#A16E4B"),
+]
+const HAIR_COLORS: Array[Color] = [
+	Color("#040200"),
+	Color("#1C1C1C"),
+	Color("#23120B"),
+	Color("#3D2314"),
+	Color("#5A3825"),
+	Color("#CC9966"),
+	Color("#F6D02F"),
+	Color("#E0E0E0"),
+	Color("#F2A900"),
+	Color("#C65D3B"),
+	# Color("#D85C3B"),
+	Color("#A52A2A"),
+	Color.TRANSPARENT, # bald
+]
+const EYE_COLORS: Array[Color] = [
+	Color.BROWN,
+	Color.AQUAMARINE,
+	Color.GREEN,
+	Color.GRAY,
+]
+
 var leagues_data: Dictionary = {}
 var names: Dictionary = {}
 
@@ -21,6 +55,8 @@ var names: Dictionary = {}
 var date: Dictionary
 var max_timestamp: int
 var min_timestamp: int
+
+
 
 
 func generate_world(use_test_file: bool = false) -> World:
@@ -49,7 +85,7 @@ func generate_world(use_test_file: bool = false) -> World:
 			nation.team.staff = _create_staff(world, nation.team.get_prestige(), nation, 1)
 			nation.team.formation = nation.team.staff.manager.formation
 			# TODO replace with actual national colors
-			nation.team.set_random_colors()
+			_set_random_shirt_colors(nation.team)
 
 	# first generate clubs history with promotions, delegations, cup wins
 	_generate_club_history(world)
@@ -84,7 +120,7 @@ func _initialize_team(
 	min_timestamp = Time.get_unix_time_from_datetime_dict(max_date)
 
 	# create team
-	team.set_random_colors()
+	_set_random_shirt_colors(team)
 
 	team.stadium = Stadium.new()
 	team.stadium.name = team.name + " Stadium"
@@ -439,6 +475,7 @@ func _create_manager(
 	world: World, team_prestige: int, team_nation: Nation, pyramid_level: int
 ) -> Manager:
 	var manager: Manager = Manager.new()
+	_set_person_colors(manager)
 	manager.prestige = _in_bounds_random(team_prestige)
 	var nation: Nation = _get_random_nationality(world, team_nation, team_prestige, pyramid_level)
 	manager.nation = nation.name
@@ -461,6 +498,7 @@ func _create_president(
 	world: World, team_prestige: int, team_nation: Nation, pyramid_level: int
 ) -> President:
 	var president: President = President.new()
+	_set_person_colors(president)
 	president.prestige = _in_bounds_random(team_prestige)
 	var nation: Nation = _get_random_nationality(world, team_nation, team_prestige, pyramid_level)
 	president.nation = nation.name
@@ -474,6 +512,7 @@ func _create_scout(
 	world: World, team_prestige: int, team_nation: Nation, pyramid_level: int
 ) -> Scout:
 	var scout: Scout = Scout.new()
+	_set_person_colors(scout)
 	scout.prestige = _in_bounds_random(team_prestige)
 	var nation: Nation = _get_random_nationality(world, team_nation, team_prestige, pyramid_level)
 	scout.nation = nation.name
@@ -493,6 +532,7 @@ func _create_player(
 	p_team: Team,
 ) -> Player:
 	var player: Player = Player.new()
+	_set_person_colors(player)
 	_random_positions(player, p_position_type)
 
 	# RngUtil.rng.random date from 1970 to 2007
@@ -761,3 +801,28 @@ func _initialize_city(
 			league = league_filter[0]
 
 		league.add_team(team)
+
+
+func _set_person_colors(person: Person) -> void:
+	person.skintone = RngUtil.pick_random(SKINTONE)
+	person.haircolor = RngUtil.pick_random(HAIR_COLORS)
+	person.eyecolor = RngUtil.pick_random(EYE_COLORS)
+
+
+func _set_random_shirt_colors(team: Team) -> void:
+	team.colors = []
+	team.colors.append(
+		Color(
+			RngUtil.rng.randf_range(0, 1),
+			RngUtil.rng.randf_range(0, 1),
+			RngUtil.rng.randf_range(0, 1)
+		)
+	)
+	team.colors.append(team.colors[0].inverted())
+	team.colors.append(
+		Color(
+			RngUtil.rng.randf_range(0, 1),
+			RngUtil.rng.randf_range(0, 1),
+			RngUtil.rng.randf_range(0, 1)
+		)
+	)

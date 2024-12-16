@@ -16,6 +16,10 @@ var ball_pos: Vector2
 var last_pos: Vector2
 
 @onready var body: Sprite2D = $Sprites/Body
+@onready var head: Sprite2D = $Sprites/Head
+@onready var hair: Sprite2D = $Sprites/Hair
+@onready var eyes: Sprite2D = $Sprites/Eyes
+
 @onready var sprites: Node2D = $Sprites
 @onready var name_label: Label = $Info/NameLabel
 
@@ -46,6 +50,12 @@ func setup(
 	body.modulate = shirt_color
 
 	name_label.text = str(sim_player.player_res.nr) + " " + (sim_player.player_res.surname)
+
+
+	# set colors
+	head.modulate = sim_player.player_res.skintone
+	hair.modulate = sim_player.player_res.haircolor
+	eyes.modulate = sim_player.player_res.eyecolor
 
 
 func update(p_update_interval: float) -> void:
