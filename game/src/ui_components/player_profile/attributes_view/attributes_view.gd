@@ -9,8 +9,6 @@ const ColorLabelScene: PackedScene = preload("res://src/ui_components/color_labe
 
 
 func setup(player: Player) -> void:
-
-	# attributes
 	var attribute_names: Dictionary = player.attributes.get_all_attributes()
 	for attribute: String in attribute_names.keys():
 		# first remove existing values

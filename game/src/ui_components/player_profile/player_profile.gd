@@ -7,14 +7,12 @@ extends VBoxContainer
 
 signal offer(player: Player)
 
-
 var player: Player
 
 @onready var info_view: InfoView = %INFO
 @onready var attributes_view: AttributesView = %ATTRIBUTES
-
-@onready var goals: Label = %Goals
-@onready var offer_button: Button = %Offer
+@onready var statistics_view: StatisticsView = %STATISTICS
+@onready var contract_view: ContractView = %CONTRACT
 
 
 func _ready() -> void:
@@ -26,17 +24,9 @@ func _ready() -> void:
 func set_player(p_player: Player) -> void:
 	player = p_player
 
-	# show offer button, only for players that are not in your team
-	if Global.team:
-		offer_button.visible = not Global.team.players.has(player)
-
 	info_view.setup(player)
 	attributes_view.setup(player)
-
-	#history
-	goals.text = str(player.statistics.goals)
-
-
-func _on_offer_pressed() -> void:
-	offer.emit(player)
+	statistics_view.setup(player)
+	contract_view.setup(player)
+	contract_view.offer_button.pressed.connect(func() -> void: offer.emit(player))
 
