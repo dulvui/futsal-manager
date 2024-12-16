@@ -12,6 +12,8 @@ extends Control
 
 @onready var content: Control = %Content
 
+@onready var mouse_cursor: MouseCursor = %MouseCursor
+
 
 func _ready() -> void:
 	theme = ThemeUtil.get_active_theme()
@@ -19,6 +21,8 @@ func _ready() -> void:
 	
 	# search next match day, to have real team and player names
 	Tests.find_next_matchday()
+
+	mouse_cursor.hide()
 	
 	# match
 	var match_scene: PackedScene = load(Const.SCREEN_MATCH)
@@ -94,9 +98,11 @@ func show_teaser(time: float, title: String, text: String = "") -> void:
 
 
 func show_screen(time: float, screen: Node) -> void:
+	mouse_cursor.show()
 	await fade_in(screen)
 	await wait(time)
 	await fade_out(screen)
+	mouse_cursor.hide()
 
 
 func fade_in(node: Node) -> void:

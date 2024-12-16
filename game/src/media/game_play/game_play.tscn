@@ -108,4 +108,5 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="MouseCursor" parent="." instance=ExtResource("5_37f7r")]
+unique_name_in_owner = true
 layout_mode = 1
