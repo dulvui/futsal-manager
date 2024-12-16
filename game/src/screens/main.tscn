@@ -22,6 +22,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="SceneFade" parent="." instance=ExtResource("2_u1up4")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="LoadingScreen" parent="." instance=ExtResource("3_48lsr")]
+layout_mode = 1
+
 [node name="Version" type="Label" parent="."]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.6)
@@ -36,12 +43,5 @@ offset_top = -22.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "v0.2.4"
-
-[node name="SceneFade" parent="." instance=ExtResource("2_u1up4")]
-unique_name_in_owner = true
-layout_mode = 1
-
-[node name="LoadingScreen" parent="." instance=ExtResource("3_48lsr")]
-layout_mode = 1
 
 [connection signal="loaded" from="LoadingScreen" to="." method="_on_loading_screen_loaded"]

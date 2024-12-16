@@ -34,3 +34,7 @@ https://en.wikipedia.org/wiki/List_of_cities_in_Argentina_by_population
 # fonts
 Joypad glyph font
 https://shinmera.com/promptfont
+
+# mouse cursor
+mouse-cursor.svg
+https://openclipart.org/detail/222076/white-mouse-cursor-arrow

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd4mq2lolalam"]
+[gd_scene load_steps=3 format=3 uid="uid://bd4mq2lolalam"]
 
 [ext_resource type="Script" path="res://src/media/game_play/mouse_curser/mouse_cursor.gd" id="2_1s45y"]
+[ext_resource type="Texture2D" uid="uid://dcobdddjakkn2" path="res://assets/mouse-cursor.svg" id="2_raqhr"]
 
 [node name="MouseCursor" type="Control"]
 layout_mode = 3
@@ -12,20 +13,16 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_1s45y")
 
-[node name="CursorArrow" type="TextureRect" parent="."]
+[node name="CursorTexture" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.031
-anchor_bottom = 0.072
-offset_right = 0.479996
+anchor_left = -0.000520833
+anchor_top = -0.00185185
+anchor_right = 0.0134583
+anchor_bottom = 0.0192222
+offset_right = -0.84
 offset_bottom = 0.239998
-pivot_offset = Vector2(40, 40)
-
-[node name="CursorPointingHand" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.031
-anchor_bottom = 0.072
-offset_right = 0.479996
-offset_bottom = 0.239998
-pivot_offset = Vector2(40, 40)
+texture = ExtResource("2_raqhr")
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true

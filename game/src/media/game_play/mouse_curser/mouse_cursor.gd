@@ -4,7 +4,7 @@
 
 extends Control
 
-@onready var cursor_texture: TextureRect = $TextureRect
+@onready var cursor_texture: TextureRect = $CursorTexture
 
 
 func _process(_delta: float) -> void:

@@ -101,3 +101,11 @@ precedence = "aggregate"
 SPDX-FileCopyrightText = "Copyright (c) 2011 Google Inc."
 SPDX-License-Identifier = "Apache-2.0"
 
+# https://openclipart.org/detail/222076/white-mouse-cursor-arrow
+[[annotations]]
+path = [
+    "game/assets/mouse-cursor.svg",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Copyright (c) qubodupt"
+SPDX-License-Identifier = "CC0-1.0"

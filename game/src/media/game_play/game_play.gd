@@ -10,7 +10,6 @@ extends Control
 @onready var teaser_title: Label = %Title
 @onready var teaser_text: Label = %Text
 
-# to put screens behind work in progress label
 @onready var content: Control = %Content
 
 
