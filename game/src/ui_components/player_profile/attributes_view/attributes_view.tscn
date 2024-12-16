@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1ybc8k2e473c"]
+
+[ext_resource type="Script" path="res://src/ui_components/player_profile/attributes_view/attributes_view.gd" id="1_5b24s"]
+
+[node name="ATTRIBUTES" type="HBoxContainer"]
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("1_5b24s")
+metadata/_tab_index = 2
+
+[node name="Goalkeeper" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2
+
+[node name="Physical" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2
+
+[node name="Mental" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2
+
+[node name="Technical" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2

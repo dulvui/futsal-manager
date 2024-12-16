@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtvkd1ks3xiqc"]
+[gd_scene load_steps=6 format=3 uid="uid://dtvkd1ks3xiqc"]
 
 [ext_resource type="Theme" uid="uid://pt1hrfiuwfpg" path="res://theme_base/theme.tres" id="1"]
 [ext_resource type="Script" path="res://src/ui_components/player_profile/player_profile.gd" id="2"]
 [ext_resource type="Script" path="res://src/ui_components/buttons/default_button.gd" id="3_36isa"]
+[ext_resource type="PackedScene" uid="uid://o6iglxooy6g3" path="res://src/ui_components/player_profile/info_view/info_view.tscn" id="3_rkqc7"]
+[ext_resource type="PackedScene" uid="uid://c1ybc8k2e473c" path="res://src/ui_components/player_profile/attributes_view/attributes_view.tscn" id="3_whctl"]
 
 [node name="PlayerProfile" type="VBoxContainer"]
 anchors_preset = 15
@@ -19,176 +21,51 @@ metadata/_edit_use_anchors_ = true
 [node name="Main" type="TabContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 1
 
-[node name="Info" type="GridContainer" parent="Main"]
-unique_name_in_owner = true
-layout_mode = 2
-columns = 2
-metadata/_tab_index = 0
-
-[node name="NameLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "NAME"
-
-[node name="Name" type="Label" parent="Main/Info"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Viustel Hans"
-
-[node name="PositionLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "POSITION"
-
-[node name="Position" type="Label" parent="Main/Info"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "PIVOT"
-
-[node name="AltPositionLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "ALT_POSITION"
-
-[node name="AltPosition" type="Label" parent="Main/Info"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "PIVOT"
-
-[node name="AgeLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "AGE"
-
-[node name="Age" type="Label" parent="Main/Info"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "32"
-
-[node name="FootLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "FOOT"
-
-[node name="Foot" type="Label" parent="Main/Info"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "32"
-
-[node name="NationalityLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "NATIONALITY"
-
-[node name="Nationality" type="Label" parent="Main/Info"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Italiana"
-
-[node name="TeamLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "TEAM"
-
-[node name="Team" type="Label" parent="Main/Info"]
+[node name="INFO" parent="Main" instance=ExtResource("3_rkqc7")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="NrLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "NR"
-
-[node name="Nr" type="Label" parent="Main/Info"]
+[node name="HISTORY" type="GridContainer" parent="Main"]
 unique_name_in_owner = true
-layout_mode = 2
-text = "Bronzolo"
-
-[node name="AttributesAverageLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "ATTRIBUTES_AVERGE"
-
-[node name="AttributesAverage" type="Label" parent="Main/Info"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Bronzolo"
-
-[node name="PrestigeLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "PRESTIGE"
-
-[node name="Prestige" type="Label" parent="Main/Info"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Bronzolo"
-
-[node name="ValueLabel" type="Label" parent="Main/Info"]
-layout_mode = 2
-text = "VALUE"
-
-[node name="Value" type="Label" parent="Main/Info"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "1234 $"
-
-[node name="History" type="GridContainer" parent="Main"]
-unique_name_in_owner = true
-visible = false
 layout_mode = 2
 columns = 2
 metadata/_tab_index = 1
 
-[node name="GoalsLabel" type="Label" parent="Main/History"]
+[node name="GoalsLabel" type="Label" parent="Main/HISTORY"]
 layout_mode = 2
 text = "GOALS"
 
-[node name="Goals" type="Label" parent="Main/History"]
+[node name="Goals" type="Label" parent="Main/HISTORY"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Viustel Hans"
 
-[node name="Attributes" type="HBoxContainer" parent="Main"]
+[node name="ATTRIBUTES" parent="Main" instance=ExtResource("3_whctl")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-metadata/_tab_index = 2
 
-[node name="Goalkeeper" type="GridContainer" parent="Main/Attributes"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-columns = 2
-
-[node name="Physical" type="GridContainer" parent="Main/Attributes"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-columns = 2
-
-[node name="Mental" type="GridContainer" parent="Main/Attributes"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-columns = 2
-
-[node name="Technical" type="GridContainer" parent="Main/Attributes"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-columns = 2
-
-[node name="Buttons" type="HBoxContainer" parent="."]
+[node name="CONTRACT" type="VBoxContainer" parent="Main"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 40
-alignment = 2
+alignment = 1
 metadata/_edit_use_anchors_ = true
+metadata/_tab_index = 3
 
-[node name="Offer" type="Button" parent="Buttons"]
+[node name="ContractDetails" type="GridContainer" parent="Main/CONTRACT"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "OFFER"
-script = ExtResource("3_36isa")
+columns = 2
 
-[node name="Close" type="Button" parent="Buttons"]
+[node name="Offer" type="Button" parent="Main/CONTRACT"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "CLOSE"
+theme_type_variation = &"ImportantButton"
+text = "MAKE_OFFER"
 script = ExtResource("3_36isa")
 
-[connection signal="pressed" from="Buttons/Offer" to="." method="_on_offer_pressed"]
-[connection signal="pressed" from="Buttons/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Main/CONTRACT/Offer" to="." method="_on_offer_pressed"]

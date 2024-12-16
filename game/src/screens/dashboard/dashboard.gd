@@ -146,10 +146,6 @@ func _on_player_list_select_player(player: Player) -> void:
 	_show_active_view(ContentViews.PLAYER_PROFILE)
 
 
-func _on_player_profile_cancel() -> void:
-	_show_active_view(ContentViews.ALL_PLAYERS)
-
-
 func _hide_all() -> void:
 	competitions.hide()
 	email.hide()

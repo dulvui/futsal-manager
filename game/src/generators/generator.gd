@@ -389,18 +389,18 @@ func _get_random_form() -> Player.Form:
 		return Player.Form.RECOVER
 	if factor < 60:
 		return Player.Form.GOOD
-	return Player.Form.EXCELLENT
+	return Player.Form.BEST
 
 
 func _get_random_morality() -> Player.Morality:
 	var factor: int = RngUtil.rng.randi() % 100
 	if factor < 5:
-		return Player.Morality.HORRIBLE
+		return Player.Morality.WORST
 	if factor < 15:
 		return Player.Morality.BAD
 	if factor < 60:
 		return Player.Morality.GOOD
-	return Player.Morality.EXCELLENT
+	return Player.Morality.BEST
 
 
 func _get_contract(person: Person) -> Contract:

@@ -1,0 +1,107 @@
+[gd_scene load_steps=2 format=3 uid="uid://o6iglxooy6g3"]
+
+[ext_resource type="Script" path="res://src/ui_components/player_profile/info_view/info_view.gd" id="1_kh13b"]
+
+[node name="INFO" type="GridContainer"]
+visible = false
+columns = 2
+script = ExtResource("1_kh13b")
+metadata/_tab_index = 0
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+text = "NAME"
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Viustel Hans"
+
+[node name="PositionLabel" type="Label" parent="."]
+layout_mode = 2
+text = "POSITION"
+
+[node name="Position" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PIVOT"
+
+[node name="AltPositionLabel" type="Label" parent="."]
+layout_mode = 2
+text = "ALT_POSITION"
+
+[node name="AltPosition" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PIVOT"
+
+[node name="AgeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "AGE"
+
+[node name="Age" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "32"
+
+[node name="FootLabel" type="Label" parent="."]
+layout_mode = 2
+text = "FOOT"
+
+[node name="Foot" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "32"
+
+[node name="NationalityLabel" type="Label" parent="."]
+layout_mode = 2
+text = "NATIONALITY"
+
+[node name="Nationality" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Italiana"
+
+[node name="TeamLabel" type="Label" parent="."]
+layout_mode = 2
+text = "TEAM"
+
+[node name="Team" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NrLabel" type="Label" parent="."]
+layout_mode = 2
+text = "NR"
+
+[node name="Nr" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bronzolo"
+
+[node name="AttributesAverageLabel" type="Label" parent="."]
+layout_mode = 2
+text = "ATTRIBUTES_AVERGE"
+
+[node name="AttributesAverage" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bronzolo"
+
+[node name="PrestigeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "PRESTIGE"
+
+[node name="Prestige" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Bronzolo"
+
+[node name="ValueLabel" type="Label" parent="."]
+layout_mode = 2
+text = "VALUE"
+
+[node name="Value" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1234 $"
