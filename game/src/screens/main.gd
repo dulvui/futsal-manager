@@ -22,7 +22,6 @@ func _ready() -> void:
 	version.text = "v" + Global.version
 	
 	scene_fade.fade_in()
-	print("main scene setup done")
 
 
 func change_scene(scene_path: String) -> void:
@@ -49,6 +48,7 @@ func previous_scene() -> void:
 func show_loading_screen(p_scene_name_on_load: String = "") -> void:
 	scene_name_on_load = p_scene_name_on_load
 	loading_screen.show()
+	scene_fade.fade_out()
 
 
 func _append_scene_to_buffer(scene_path: String) -> void:
@@ -58,8 +58,10 @@ func _append_scene_to_buffer(scene_path: String) -> void:
 
 
 func _on_loading_screen_loaded(_type: int) -> void:
-	loading_screen.hide()
 	if not scene_name_on_load.is_empty():
 		change_scene(scene_name_on_load)
 		scene_name_on_load = ""
+	else:
+		scene_fade.fade_in()
+	loading_screen.hide()
 

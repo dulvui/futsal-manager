@@ -12,7 +12,6 @@ func fade_in(duration: float = DURATION) -> void:
 	if not Global.scene_fade:
 		return
 
-	modulate = Color.WHITE
 	show()
 	var tween: Tween
 	tween = create_tween()
@@ -24,7 +23,6 @@ func fade_out(duration: float = DURATION) -> void:
 	if not Global.scene_fade:
 		return
 
-	modulate = Color.TRANSPARENT
 	show()
 	var tween: Tween
 	tween = create_tween()
