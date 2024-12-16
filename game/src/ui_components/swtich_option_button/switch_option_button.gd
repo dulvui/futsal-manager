@@ -15,6 +15,7 @@ func setup(items: Array, selected: int = 0) -> void:
 	for item: String in items:
 		option_button.add_item(item)
 	option_button.selected = selected
+	option_button.tooltip_text = option_button.text
 
 
 func _on_next_pressed() -> void:
@@ -23,6 +24,7 @@ func _on_next_pressed() -> void:
 	else:
 		option_button.selected = option_button.item_count - 1
 	item_selected.emit(option_button.selected)
+	option_button.tooltip_text = option_button.text
 
 
 func _on_prev_pressed() -> void:
@@ -31,8 +33,10 @@ func _on_prev_pressed() -> void:
 	else:
 		option_button.selected = 0
 	item_selected.emit(option_button.selected)
+	option_button.tooltip_text = option_button.text
 
 
 func _on_option_button_item_selected(index: int) -> void:
 	item_selected.emit(index)
 	SoundUtil.play_button_sfx()
+	option_button.tooltip_text = option_button.text
