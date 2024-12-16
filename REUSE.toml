@@ -25,8 +25,7 @@ SPDX-License-Identifier = "AGPL-3.0-or-later"
 path = [
     "game/icon.png",
     "game/icon_dark.png",
-    "game/assets/body.png",
-    "game/assets/head.png",
+    "game/assets/player/**",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2022 Simon Dalvai <info@simondalvai.org>"

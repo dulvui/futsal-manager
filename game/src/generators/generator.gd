@@ -54,8 +54,6 @@ var max_timestamp: int
 var min_timestamp: int
 
 
-
-
 func generate_world(use_test_file: bool = false) -> World:
 	var world: World = _generate_world_from_csv(use_test_file)
 

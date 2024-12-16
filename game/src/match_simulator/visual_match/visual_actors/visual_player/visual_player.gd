@@ -15,10 +15,14 @@ var factor: float
 var ball_pos: Vector2
 var last_pos: Vector2
 
+# real player
 @onready var body: Sprite2D = $Sprites/Body
 @onready var head: Sprite2D = $Sprites/Head
 @onready var hair: Sprite2D = $Sprites/Hair
 @onready var eyes: Sprite2D = $Sprites/Eyes
+
+# simple circle
+@onready var simple_circle: Sprite2D = $SimpleCircle
 
 @onready var sprites: Node2D = $Sprites
 @onready var name_label: Label = $Info/NameLabel
@@ -48,6 +52,8 @@ func setup(
 	last_pos = position
 
 	body.modulate = shirt_color
+	
+	simple_circle.modulate = shirt_color
 
 	name_label.text = str(sim_player.player_res.nr) + " " + (sim_player.player_res.surname)
 

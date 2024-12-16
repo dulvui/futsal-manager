@@ -116,4 +116,3 @@ func get_prestige_stars() -> String:
 	var spaces: int = 5 - stars
 	# creates right padding ex: "***  "
 	return "*".repeat(stars) + "  ".repeat(spaces)
-

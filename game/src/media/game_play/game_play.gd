@@ -29,7 +29,7 @@ func _ready() -> void:
 	var match_screen: MatchScreen = match_scene.instantiate()
 	content.add_child(match_screen)
 	# simulate match to later state
-	match_screen.match_simulator.simulate(102)
+	match_screen.match_simulator.simulate(2)
 
 	# dashboard
 	var dashboard_scene: PackedScene = load(Const.SCREEN_DASHBOARD)
@@ -46,13 +46,13 @@ func _ready() -> void:
 	await wait(1)
 	await fade_out(icon)
 	
-	await show_teaser(3, "The world's first\nFutsal Manager game")
+	await show_teaser(2, "The world's first\nFutsal Manager game")
 
 	# match teaser
-	await show_teaser(2, "With 2D Match Engine")
+	await show_teaser(1, "With 2D Match Engine")
 	
 	# match
-	await show_screen(8, match_screen)
+	await show_screen(6, match_screen)
 
 	# dashboard teaser
 	await show_teaser(1, "Have full control")
@@ -61,20 +61,20 @@ func _ready() -> void:
 	# show formation
 	await show_teaser(1, "Choose tactics")
 	dashboard_screen._on_formation_button_pressed()
-	await show_screen(3, dashboard_screen)
+	await show_screen(6, dashboard_screen)
 	# show formation
 	await show_teaser(1, "Find the next talent")
 	dashboard_screen._on_search_player_button_pressed()
-	await show_screen(3, dashboard_screen)
+	await show_screen(6, dashboard_screen)
 	# show calendat
 	await show_teaser(1, "Plan your journey")
 	dashboard_screen._on_calendar_button_pressed()
-	await show_screen(3, dashboard_screen)
+	await show_screen(6, dashboard_screen)
 
 	await show_teaser(1, "Are you ready?")
 
 	# coming soon teaser
-	await show_teaser(5, "Coming 2025", "99managers.org")
+	await show_teaser(5, "Coming 2025", "99managers.org", false)
 
 	# quit scene to finish registration
 	get_tree().quit()
@@ -84,7 +84,7 @@ func wait(time: float) -> void:
 	await get_tree().create_timer(time).timeout
 
 
-func show_teaser(time: float, title: String, text: String = "") -> void:
+func show_teaser(time: float, title: String, text: String = "", do_fade_out: bool = true) -> void:
 	teaser_title.text = title
 	if text.is_empty():
 		teaser_text.hide()
@@ -94,7 +94,8 @@ func show_teaser(time: float, title: String, text: String = "") -> void:
 	
 	await fade_in(teaser)
 	await wait(time)
-	await fade_out(teaser)
+	if do_fade_out:
+		await fade_out(teaser)
 
 
 func show_screen(time: float, screen: Node) -> void:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmslh22vxx0tu"
-path="res://.godot/imported/head.png-9b3d0c39be9ea6aceb444f1daef77f41.ctex"
+uid="uid://coh1vmi045yis"
+path="res://.godot/imported/circle.svg-06bcd1ce90c4bebe4eadd237795646c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/head.png"
-dest_files=["res://.godot/imported/head.png-9b3d0c39be9ea6aceb444f1daef77f41.ctex"]
+source_file="res://assets/player/circle.svg"
+dest_files=["res://.godot/imported/circle.svg-06bcd1ce90c4bebe4eadd237795646c1.ctex"]
 
 [params]
 
@@ -25,10 +25,13 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
