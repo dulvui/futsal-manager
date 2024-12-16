@@ -22,6 +22,7 @@ var theme_font_size: int
 var theme_custom_font_color: Color
 var theme_custom_style_color: Color
 var theme_custom_background_color: Color
+var scene_fade: bool
 var start_date: Dictionary
 # generator config
 var generation_seed: String
@@ -152,6 +153,7 @@ func save_config() -> void:
 	config.set_value("settings", "theme_custom_font_color", theme_custom_font_color)
 	config.set_value("settings", "theme_custom_style_color", theme_custom_style_color)
 	config.set_value("settings", "theme_custom_background_color", theme_custom_background_color)
+	config.set_value("settings", "scene_fade", scene_fade)
 
 	config.save(Const.USER_PATH + "settings.cfg")
 
@@ -180,4 +182,5 @@ func _load_config() -> void:
 	theme_custom_font_color = config.get_value("settings", "theme_custom_font_color", Color.BLACK)
 	theme_custom_style_color = config.get_value("settings", "theme_custom_style_color", Color.RED)
 	theme_custom_background_color = config.get_value("settings", "theme_custom_background_color", Color.WHITE)
+	scene_fade = config.get_value("settings", "scene_fade", true)
 

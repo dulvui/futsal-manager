@@ -26,6 +26,8 @@ func _ready() -> void:
 
 
 func change_scene(scene_path: String) -> void:
+	await scene_fade.fade_out()
+	
 	for child: Node in content.get_children():
 		content.remove_child(child)
 		child.queue_free()
@@ -34,6 +36,7 @@ func change_scene(scene_path: String) -> void:
 	
 	var scene: PackedScene = load(scene_path)
 	content.add_child(scene.instantiate())
+	scene_fade.fade_in()
 
 
 func previous_scene() -> void:

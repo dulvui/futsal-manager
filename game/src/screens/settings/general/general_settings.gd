@@ -19,6 +19,7 @@ var active_color_type: ColorType
 @onready var font_size_spinbox: SpinBox = %FontSizeSpinBox
 @onready var color_picker_popup: PopupPanel = $ColorPopupPanel
 @onready var color_picker: ColorPicker = $ColorPopupPanel/MarginContainer/ColorPicker
+@onready var screen_fade_button: CheckButton = %ScreenFadeButton
 
 
 func _ready() -> void:
@@ -33,6 +34,7 @@ func _ready() -> void:
 	version_label.text = "v" + Global.version
 	
 	ui_sfx_volume.value = SoundUtil.get_bus_volume(SoundUtil.AudioBus.UI_SFX)
+	screen_fade_button.button_pressed = Global.scene_fade
 
 
 func restore_defaults() -> void:
@@ -48,6 +50,9 @@ func restore_defaults() -> void:
 	# audio
 	SoundUtil.restore_default()
 	ui_sfx_volume.value = SoundUtil.get_bus_volume(SoundUtil.AudioBus.UI_SFX)
+	# scene fade
+	Global.scene_fade = true
+	screen_fade_button.button_pressed = true
 
 
 func _on_theme_option_button_item_selected(index: int) -> void:
@@ -130,4 +135,10 @@ func _on_ui_sfx_volume_slider_value_changed(value: float) -> void:
 	SoundUtil.set_bus_volume(SoundUtil.AudioBus.UI_SFX, value)
 	SoundUtil.set_bus_mute(SoundUtil.AudioBus.UI_SFX, value == ui_sfx_volume.min_value)
 	Global.save_config()
+
+
+func _on_screen_fade_button_toggled(toggled_on: bool) -> void:
+	Global.scene_fade = toggled_on
+	Global.save_config()
+
 
