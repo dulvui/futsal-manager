@@ -18,7 +18,7 @@ size_flags_vertical = 4
 
 [node name="Info" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "CONTARCT"
+text = "CONTRACT"
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2

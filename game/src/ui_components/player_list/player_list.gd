@@ -137,7 +137,7 @@ func _setup_columns() -> void:
 				if typeof(value) == Variant.Type.TYPE_DICTIONARY:
 					return value
 				return str(value)
-			_add_column("CONTARCT", c.name, stats)
+			_add_column("CONTRACT", c.name, stats)
 
 	# statistics
 	for s: Dictionary in Statistics.new().get_property_list():

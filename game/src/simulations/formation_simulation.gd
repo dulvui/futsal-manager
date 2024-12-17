@@ -4,7 +4,7 @@
 
 extends Node
 
-# TODO check if final state machine would make more sense for this AIS
+# TODO check if final state machine would make more sense for this
 
 
 # makes the formation for the team to playe the next match
