@@ -34,6 +34,7 @@ SPDX-License-Identifier = "CC-BY-SA-4.0"
 [[annotations]]
 path = [
     ".gitignore",
+    "scripts/.gitignore",
     "version",
     "game/default_profile.build",
     "game/export_credentials.android.example",
