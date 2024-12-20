@@ -50,9 +50,6 @@ func setup(
 		var sim_player: SimPlayer = SimPlayer.new()
 		sim_player.setup(player, field, left_half)
 		all_players.append(sim_player)
-		# start pos
-		var start_pos: Vector2 = res_team.formation.get_start_pos(field.size, all_players.find(sim_player), left_half)
-		sim_player.start_pos = start_pos
 		# player signals
 		# sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		# sim_player.pass_received.connect(func() -> void: stats.passes_success += 1)
@@ -62,6 +59,12 @@ func setup(
 	
 	# copy field players in own array, for easier access
 	players = all_players.slice(0, 5)
+
+	# set start position for starting players
+	for player: SimPlayer in players:
+		# start pos
+		var start_pos: Vector2 = res_team.formation.get_start_pos(field.size, players.find(player), left_half)
+		player.start_pos = start_pos
 	
 	# set goalkeeper flag
 	players[0].make_goalkeeper()

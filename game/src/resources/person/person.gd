@@ -36,9 +36,9 @@ func _init(
 	p_birth_date: Dictionary = Time.get_datetime_dict_from_system(),
 	p_prestige: int = 10,
 	p_contract: Contract = Contract.new(),
-	p_skintone: Color = Color.WHITE,
-	p_haircolor: Color = Color.WHITE,
-	p_eyecolor: Color = Color.WHITE,
+	p_skintone: Color = Color.SALMON,
+	p_haircolor: Color = Color.BROWN,
+	p_eyecolor: Color = Color.BLACK,
 ) -> void:
 	role = p_role
 	id = p_id
