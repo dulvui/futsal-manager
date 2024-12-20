@@ -8,10 +8,8 @@ extends StateMachine
 var team: SimTeam
 
 func _init(p_field: SimField, p_team: SimTeam) -> void:
-	super(p_field, TeamStateEnterField.new())
+	super(p_field)
 	team = p_team
+	set_state(TeamStateEnterField.new())
 
-
-func update() -> void:
-	super()
 

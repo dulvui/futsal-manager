@@ -53,8 +53,11 @@ var penalty_area_y_bottom: int
 var penalty_area_left: PackedVector2Array
 var penalty_area_right: PackedVector2Array
 
-var ball: SimBall
 var clock_running: bool
+
+# add all resources here, so they can be accessedeasily
+# especiially inside the state machines
+var ball: SimBall
 
 # TODO create and add sectors
 

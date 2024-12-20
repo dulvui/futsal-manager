@@ -46,10 +46,13 @@ func setup(
 	stats = MatchStatistics.new()
 	
 	for player: Player in res_team.get_lineup_players():
-		var sim_player: SimPlayer = SimPlayer.new()
 		# setup
+		var sim_player: SimPlayer = SimPlayer.new()
 		sim_player.setup(player, field, left_half)
 		all_players.append(sim_player)
+		# start pos
+		var start_pos: Vector2 = res_team.formation.get_start_pos(field.size, all_players.find(sim_player), left_half)
+		sim_player.start_pos = start_pos
 		# player signals
 		# sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))
 		# sim_player.pass_received.connect(func() -> void: stats.passes_success += 1)
@@ -65,7 +68,7 @@ func setup(
 	
 
 func update() -> void:
-	state_machine.update()
+	state_machine.execute()
 
 	for player: SimPlayer in players:
 		player.update()

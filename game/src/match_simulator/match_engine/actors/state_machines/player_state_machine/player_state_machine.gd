@@ -9,9 +9,6 @@ var player: SimPlayer
 
 
 func _init(p_field: SimField, p_player: SimPlayer) -> void:
-	super(p_field, PlayerStateEnterField.new())
+	super(p_field)
 	player = p_player
-
-
-func update() -> void:
-	super()
+	set_state(PlayerStateEnterField.new())

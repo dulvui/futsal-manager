@@ -74,14 +74,9 @@ func update() -> void:
 	elif has_ball and not touching_ball:
 		has_ball = false
 
-	state_machine.update()
+	state_machine.execute()
 
 	_move()
-
-
-func kick_off(p_pos: Vector2) -> void:
-	start_pos = p_pos
-	set_pos()
 
 
 func make_goalkeeper() -> void:
@@ -113,6 +108,10 @@ func set_destination(p_destination: Vector2) -> void:
 	else:
 		destination = bound_field(p_destination)
 	speed = 20
+
+
+func destination_reached() -> bool:
+	return pos == destination
 
 
 func stop() -> void:

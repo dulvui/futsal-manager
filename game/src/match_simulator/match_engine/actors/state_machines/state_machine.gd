@@ -15,27 +15,27 @@ var state: StateMachineState
 var previous_state: StateMachineState
 
 
-func _init(p_field: SimField,  p_state: StateMachineState) -> void:
+func _init(p_field: SimField) -> void:
 	field = p_field
-	state = p_state
-	state.owner = self
 	
 	# initialize buffer
 	buffer = []
 	same_state_count = 0
 
 
-func update() -> void:
+func execute() -> void:
 	state.execute()
 
 
 func set_state(p_state: StateMachineState) -> void:
 	state = p_state
+	state.owner = self
+	state.enter()
 	_buffer_append()
 
 
 func _buffer_append() -> void:
-	if buffer[-1] == state:
+	if buffer.size() > 0 and buffer[-1] == state:
 		same_state_count += 1
 	else:
 		same_state_count = 1
@@ -46,6 +46,8 @@ func _buffer_append() -> void:
 		buffer.pop_front()
 
 	# if same_state_count == BUFFER_SIZE / 2
-	# 	print("state machine stuck on state: %s"%State.keys()[state])
+	# 	print("state machine stuck on state: %s"%state.get_class())
+	# print("state machine: %s"%state.get_class())
+
 
 

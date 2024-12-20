@@ -6,7 +6,7 @@ class_name TeamStateEnterField
 extends StateMachineState
 
 
-func update() -> void:
+func execute() -> void:
 	# move players to center
 	pass
 
