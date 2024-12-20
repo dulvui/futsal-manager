@@ -24,5 +24,5 @@ func exit() -> void:
 func change_to(new_state: StateMachineState) -> void:
 	exit()
 	new_state.owner = owner
-	owner.state = new_state
+	owner.set_state(new_state)
 

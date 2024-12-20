@@ -4,12 +4,12 @@
 
 class_name SimPlayer
 
-signal short_pass
-signal shoot
-signal interception
-signal tackle
-#signal dribble
-signal pass_received
+# signal short_pass
+# signal shoot
+# signal interception
+# signal tackle
+# signal dribble
+# signal pass_received
 
 # resources
 var player_res: Player
@@ -50,60 +50,34 @@ func _init() -> void:
 
 func setup(
 	p_player_res: Player,
-	p_ball: SimBall,
 	p_field: SimField,
+	p_ball: SimBall,
 	p_left_half: bool,
 ) -> void:
 	player_res = p_player_res
-	ball = p_ball
 	field = p_field
+	ball = p_ball
 	left_half = p_left_half
 	
 	state_machine = PlayerStateMachine.new()
-	state_machine.setup(ball)
 	
 	# goalkeeper properties
 	left_base = Vector2(field.line_left + 30, field.size.y / 2)
 	right_base = Vector2(field.line_right - 30, field.size.y / 2)
 
 
-func update(team_has_ball: bool) -> void:
+func update() -> void:
 	# TODO use this signals
 	
 	var touching_ball: bool = is_touching_ball()
 	if not has_ball and touching_ball:
-		interception.emit()
+		# interception.emit()
 		ball.stop()
 		has_ball = true
 	elif has_ball and not touching_ball:
 		has_ball = false
 
-	match state_machine.state:
-		PlayerStateMachine.State.MOVE, PlayerStateMachine.State.DRIBBLE:
-			_move()
-			if Geometry2D.is_point_in_circle(pos, destination, 25):
-				state_machine.state = PlayerStateMachine.State.IDLE
-		PlayerStateMachine.State.PASSING:
-			short_pass.emit()
-		PlayerStateMachine.State.RECEIVED_PASS:
-			pass_received.emit()
-		PlayerStateMachine.State.SHOOTING:
-			shoot.emit()
-		PlayerStateMachine.State.TACKLE:
-			tackle.emit()
-		PlayerStateMachine.State.PRESSING:
-			set_destination(ball.pos)
-			_move()
-		# goalkeeper
-		PlayerStateMachine.State.SAVE_SHOT:
-			goalkeeper_follow_ball()
-			_move()
-			_block_shot()
-		PlayerStateMachine.State.POSITIONING:
-			goalkeeper_follow_ball()
-			_move()
-	
-	state_machine.update(team_has_ball, touching_ball, distance_to_player)
+	state_machine.update()
 
 
 func kick_off(p_pos: Vector2) -> void:
@@ -113,25 +87,6 @@ func kick_off(p_pos: Vector2) -> void:
 
 func make_goalkeeper() -> void:
 	is_goalkeeper = true
-
-
-func pass_ball() -> void:
-	has_ball = true
-	state_machine.state = PlayerStateMachine.State.PASSING
-
-
-func press() -> void:
-	state_machine.state = PlayerStateMachine.State.PRESSING
-
-
-func mark_zone(zone_position: Vector2) -> void:
-	set_destination(zone_position)
-	state_machine.state = PlayerStateMachine.State.MOVE
-
-
-func receive_ball() -> void:
-	state_machine.state = PlayerStateMachine.State.RECEIVING_PASS
-	stop()
 
 
 func is_touching_ball() -> bool:

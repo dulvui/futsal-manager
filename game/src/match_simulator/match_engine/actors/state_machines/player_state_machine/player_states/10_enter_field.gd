@@ -2,13 +2,10 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name PlayerStateMachine
-extends StateMachine
-
-
-func _init() -> void:
-	super(PlayerStateEnterField.new())
+class_name PlayerStateEnterField
+extends StateMachineState
 
 
 func update() -> void:
-	pass
+	# check if start positon is reached
+	change_to(PlayerStateWait.new())

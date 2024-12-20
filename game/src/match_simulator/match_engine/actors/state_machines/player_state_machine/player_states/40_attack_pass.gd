@@ -2,12 +2,8 @@
 
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-class_name PlayerStateMachine
-extends StateMachine
-
-
-func _init() -> void:
-	super(PlayerStateEnterField.new())
+class_name PlayerStateAttackPass
+extends StateMachineState
 
 
 func update() -> void:

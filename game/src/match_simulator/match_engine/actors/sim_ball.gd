@@ -99,6 +99,22 @@ func shoot(p_destination: Vector2, force: float) -> void:
 	speed = force + 4  # ball moves a bit faster that the force is
 	direction = pos.direction_to(p_destination)
 	state = State.SHOOT
+# func shoot_on_goal(player: Player) -> void:
+# 	var power: int = player.attributes.technical.shooting
+#
+# 	var random_target: Vector2
+# 	if left_half:
+# 		random_target = field.goal_right
+# 	else:
+# 		random_target = field.goal_left
+#
+# 	random_target += Vector2(
+# 		0, RngUtil.match_rng.randi_range(-field.GOAL_SIZE * 1.5, field.GOAL_SIZE * 1.5)
+# 	)
+#
+# 	field.ball.shoot(random_target, power * RngUtil.match_rng.randi_range(2, 6))
+#
+# 	stats.shots += 1
 
 
 func dribble(p_destination: Vector2, force: float) -> void:
@@ -130,15 +146,31 @@ func check_field_bounds() -> void:
 
 	# goal or corner / x axis
 	if pos.x < field.line_left or pos.x > field.line_right:
+		clock_running = false
 		# TODO check if post was hit => reflect
 		var goal_intersection: Variant = field.is_goal(last_pos, pos)
 		if goal_intersection:
-			set_pos(goal_intersection as Vector2)
-			clock_running = false
+			set_pos(field.center)
 			goal.emit()
 			return
 		# corner
-		clock_running = false
+		if pos.y < field.center.y:
+			# top
+			if pos.x < field.center.x:
+				# left
+				set_pos(field.top_left)
+			else:
+				# right
+				set_pos(field.top_right)
+		else:
+			# bottom
+			if pos.x < field.center.x:
+				# left
+				set_pos(field.bottom_left)
+			else:
+				# right
+				set_pos(field.bottom_right)
+
 		goal_line_out.emit()
 		return
 

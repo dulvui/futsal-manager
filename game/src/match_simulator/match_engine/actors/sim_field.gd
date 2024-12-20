@@ -49,6 +49,8 @@ var penalty_area_y_bottom: int
 var penalty_area_left: PackedVector2Array
 var penalty_area_right: PackedVector2Array
 
+# TODO create and add sectors
+
 
 func setup() -> void:
 	#size = sprite.texture.get_size()

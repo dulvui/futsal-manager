@@ -36,13 +36,14 @@ var interception_timer: int
 
 func setup(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 	field = SimField.new()
+	field.setup()
+
 	ball = SimBall.new()
+	ball.setup(field)
+	
 	ball.goal_line_out.connect(_on_sim_ball_goal_line_out)
 	ball.touch_line_out.connect(_on_sim_ball_touch_line_out)
 	ball.goal.connect(_on_sim_ball_goal)
-
-	field.setup()
-	ball.setup(field)
 
 	ticks = 0
 	possession_counter = 0.0
@@ -57,12 +58,10 @@ func setup(p_home_team: Team, p_away_team: Team, match_seed: int) -> void:
 
 	home_team = SimTeam.new()
 	home_team.setup(p_home_team, field, ball, home_plays_left, home_has_ball)
-	home_team.foul.connect(_on_home_team_foul)
 	home_team.interception.connect(_on_home_team_interception)
 
 	away_team = SimTeam.new()
 	away_team.setup(p_away_team, field, ball, not home_plays_left, not home_has_ball)
-	home_team.foul.connect(_on_away_team_foul)
 	away_team.interception.connect(_on_away_team_interception)
 
 	interception_timer = 0
@@ -73,15 +72,6 @@ func update() -> void:
 
 	calc_distances()
 
-	# defend/attack
-	if home_team.has_ball:
-		away_team.defend(home_team.players)
-		home_team.attack()
-	else:
-		home_team.defend(away_team.players)
-		away_team.attack()
-	
-	# update teams
 	home_team.update()
 	away_team.update()
 
@@ -134,8 +124,6 @@ func simulate(matchz: Match) -> Match:
 
 func half_time() -> void:
 	home_plays_left = not home_plays_left
-	home_team.set_kick_off_formation(true)
-	away_team.set_kick_off_formation(true)
 	ball.set_pos(field.center)
 
 	# stamina recovery 15 minutes
@@ -233,43 +221,15 @@ func set_goalkeeper_ball(home: bool) -> void:
 	else:
 		away_possess()
 		goalkeeper = away_team.players[0]
-	goalkeeper.short_pass.emit()
 
 
 func set_corner(home: bool) -> void:
 	if home:
 		home_possess()
-		nearest_player = home_team.nearest_player_to_ball()
-		home_team.corner_attack()
-		away_team.corner_defend(home_team.players)
 		home_team.stats.corners += 1
 	else:
 		away_possess()
-		nearest_player = away_team.nearest_player_to_ball()
-		away_team.corner_attack()
-		home_team.corner_defend(away_team.players)
 		away_team.stats.corners += 1
-	
-	# set ball pos
-	if ball.pos.y < field.center.y:
-		# top
-		if ball.pos.x < field.center.x:
-			# left
-			ball.set_pos(field.top_left)
-		else:
-			# right
-			ball.set_pos(field.top_right)
-	else:
-		# bottom
-		if ball.pos.x < field.center.x:
-			# left
-			ball.set_pos(field.bottom_left)
-		else:
-			# right
-			ball.set_pos(field.bottom_right)
-
-	nearest_player.set_pos(ball.pos)
-	nearest_player.state_machine.state = PlayerStateMachine.State.PASSING
 
 
 func home_possess() -> void:
@@ -341,14 +301,9 @@ func _on_sim_ball_touch_line_out() -> void:
 	if home_team.has_ball:
 		away_possess()
 		away_team.stats.kick_ins += 1
-		nearest_player = away_team.nearest_player_to_ball()
 	else:
 		home_possess()
 		home_team.stats.kick_ins += 1
-		nearest_player = home_team.nearest_player_to_ball()
-
-	nearest_player.set_pos(ball.pos)
-	nearest_player.state_machine.state = PlayerStateMachine.State.PASSING
 
 
 func _on_sim_ball_goal() -> void:
@@ -358,10 +313,6 @@ func _on_sim_ball_goal() -> void:
 	else:
 		away_team.stats.goals += 1
 		home_possess()
-	# reset formation
-	home_team.set_kick_off_formation()
-	away_team.set_kick_off_formation()
-	ball.set_pos(field.center)
 
 	#print("%s : %s"%[home_team.stats.goals, away_team.stats.goals])
 
