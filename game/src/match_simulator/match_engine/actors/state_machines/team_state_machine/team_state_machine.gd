@@ -13,5 +13,5 @@ func _init(p_field: SimField, p_team: SimTeam) -> void:
 
 
 func update() -> void:
-	pass
+	super()
 

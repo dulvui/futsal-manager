@@ -14,4 +14,4 @@ func _init(p_field: SimField, p_player: SimPlayer) -> void:
 
 
 func update() -> void:
-	pass
+	super()

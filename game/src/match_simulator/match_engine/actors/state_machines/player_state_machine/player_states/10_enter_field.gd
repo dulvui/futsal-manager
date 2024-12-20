@@ -6,9 +6,9 @@ class_name PlayerStateEnterField
 extends StateMachineState
 
 
-func update() -> void:
+func execute() -> void:
 	# move to center
-	pass
+	(owner as PlayerStateMachine).player.set_destination(owner.field.center)
 
 	# start positon is reached
 	# change_to(PlayerStateStartPosition.new())

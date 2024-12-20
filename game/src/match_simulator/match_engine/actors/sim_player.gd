@@ -76,6 +76,8 @@ func update() -> void:
 
 	state_machine.update()
 
+	_move()
+
 
 func kick_off(p_pos: Vector2) -> void:
 	start_pos = p_pos
