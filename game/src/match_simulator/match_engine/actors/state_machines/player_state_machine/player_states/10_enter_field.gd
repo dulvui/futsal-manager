@@ -7,5 +7,8 @@ extends StateMachineState
 
 
 func update() -> void:
-	# check if start positon is reached
-	change_to(PlayerStateWait.new())
+	# move to center
+	pass
+
+	# start positon is reached
+	# change_to(PlayerStateStartPosition.new())

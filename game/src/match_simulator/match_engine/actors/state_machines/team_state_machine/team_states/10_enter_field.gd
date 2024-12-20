@@ -7,9 +7,10 @@ extends StateMachineState
 
 
 func update() -> void:
-	# GAME STARTS
+	# move players to center
+	pass
 
 	# move players to positon
 	# if reached
-	change_to(TeamStateKickoff.new())
+	# change_to(TeamStateKickoff.new())
 

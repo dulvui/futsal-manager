@@ -9,11 +9,14 @@ const BUFFER_SIZE: int = 10
 var buffer: Array[StateMachineState]
 var same_state_count: int
 
+var field: SimField
+
 var state: StateMachineState
 var previous_state: StateMachineState
 
 
-func _init(p_state: StateMachineState) -> void:
+func _init(p_field: SimField,  p_state: StateMachineState) -> void:
+	field = p_field
 	state = p_state
 	state.owner = self
 	

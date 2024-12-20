@@ -5,11 +5,13 @@
 class_name TeamStateMachine
 extends StateMachine
 
+var team: SimTeam
 
-
-func _init() -> void:
-	super(TeamStateEnterField.new())
+func _init(p_field: SimField, p_team: SimTeam) -> void:
+	super(p_field, TeamStateEnterField.new())
+	team = p_team
 
 
 func update() -> void:
 	pass
+

@@ -13,7 +13,6 @@ var stats: MatchStatistics
 var players: Array[SimPlayer] # players in field
 var all_players: Array[SimPlayer]
 var field: SimField
-var ball: SimBall
 
 var state_machine: TeamStateMachine
 
@@ -27,19 +26,17 @@ var simulated: bool
 func setup(
 	p_res_team: Team,
 	p_field: SimField,
-	p_ball: SimBall,
 	p_left_half: bool,
 	p_has_ball: bool,
 	p_simulated: bool = false,
 ) -> void:
 	res_team = p_res_team
 	field = p_field
-	ball = p_ball
 	has_ball = p_has_ball
 	left_half = p_left_half
 	simulated = p_simulated
 
-	state_machine = TeamStateMachine.new()
+	state_machine = TeamStateMachine.new(field, self)
 
 	change_request = false
 
@@ -51,7 +48,7 @@ func setup(
 	for player: Player in res_team.get_lineup_players():
 		var sim_player: SimPlayer = SimPlayer.new()
 		# setup
-		sim_player.setup(player, field, ball, left_half)
+		sim_player.setup(player, field, left_half)
 		all_players.append(sim_player)
 		# player signals
 		# sim_player.short_pass.connect(pass_to_random_player.bind(sim_player))

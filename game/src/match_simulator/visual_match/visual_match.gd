@@ -14,7 +14,7 @@ extends Node2D
 
 func setup(match_engine: MatchEngine, update_interval: float) -> void:
 	visual_field.setup(match_engine.field)
-	visual_ball.setup(match_engine.ball, update_interval)
+	visual_ball.setup(match_engine.field.ball, update_interval)
 	
 	var home_color: Color = match_engine.home_team.res_team.get_home_color()
 	var away_color: Color = match_engine.away_team.res_team.get_away_color(home_color)

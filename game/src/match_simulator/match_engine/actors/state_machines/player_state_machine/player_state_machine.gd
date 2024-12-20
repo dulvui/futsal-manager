@@ -5,9 +5,12 @@
 class_name PlayerStateMachine
 extends StateMachine
 
+var player: SimPlayer
 
-func _init() -> void:
-	super(PlayerStateEnterField.new())
+
+func _init(p_field: SimField, p_player: SimPlayer) -> void:
+	super(p_field, PlayerStateEnterField.new())
+	player = p_player
 
 
 func update() -> void:

@@ -4,6 +4,10 @@
 
 class_name SimField
 
+signal goal_line_out
+signal touch_line_out
+signal goal
+
 const PIXEL_FACTOR: int = 28
 
 # in meters * PIXEL_FACTOR
@@ -48,6 +52,9 @@ var penalty_area_y_bottom: int
 
 var penalty_area_left: PackedVector2Array
 var penalty_area_right: PackedVector2Array
+
+var ball: SimBall
+var clock_running: bool
 
 # TODO create and add sectors
 
@@ -140,6 +147,12 @@ func setup() -> void:
 	# move to opposite site
 	for i in penalty_area_right.size():
 		penalty_area_right[i] += Vector2(WIDTH, 0)
+	
+
+	ball = SimBall.new()
+	ball.setup(self)
+
+	clock_running = false
 
 
 func get_corner_pos(ball_exit_pos: Vector2) -> Vector2:
@@ -172,5 +185,58 @@ func is_goal(ball_last_pos: Vector2, ball_pos: Vector2) -> Variant:
 	if intersection and intersection.y < goal_post_bottom and intersection.y > goal_post_top:
 		return intersection
 	return null
+
+
+func check_ball_bounds() -> void:
+	# kick in / y axis
+	if ball.pos.y < line_top:
+		var intersection: Variant = Geometry2D.segment_intersects_segment(
+			ball.last_pos, ball.pos, top_left, top_right
+		)
+		if intersection:
+			ball.set_pos(intersection)
+			clock_running = false
+			touch_line_out.emit()
+			return
+	if ball.pos.y > line_bottom:
+		var intersection: Variant = Geometry2D.segment_intersects_segment(
+			ball.last_pos, ball.pos, bottom_left, bottom_right
+		)
+		if intersection:
+			ball.set_pos(intersection)
+			clock_running = false
+			touch_line_out.emit()
+			return
+
+	# goal or corner / x axis
+	if ball.pos.x < line_left or ball.pos.x > line_right:
+		clock_running = false
+		# TODO check if ball.post was hit => reflect
+		var goal_intersection: Variant = is_goal(ball.last_pos, ball.pos)
+		if goal_intersection:
+			ball.set_pos(center)
+			goal.emit()
+			return
+		# corner
+		if ball.pos.y < center.y:
+			# top
+			if ball.pos.x < center.x:
+				# left
+				ball.set_pos(top_left)
+			else:
+				# right
+				ball.set_pos(top_right)
+		else:
+			# bottom
+			if ball.pos.x < center.x:
+				# left
+				ball.set_pos(bottom_left)
+			else:
+				# right
+				ball.set_pos(bottom_right)
+
+		goal_line_out.emit()
+		return
+
 
 

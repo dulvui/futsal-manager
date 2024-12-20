@@ -13,16 +13,13 @@ class_name SimPlayer
 
 # resources
 var player_res: Player
-var ball: SimBall
 var field: SimField
 var state_machine: PlayerStateMachine
+
 # positions
 var start_pos: Vector2
 var pos: Vector2
 var last_pos: Vector2
-
-var has_ball: bool
-
 # movements
 var destination: Vector2
 var speed: int
@@ -41,6 +38,8 @@ var left_base: Vector2
 var right_base: Vector2
 var left_half: bool
 
+var has_ball: bool
+
 
 func _init() -> void:
 	# initial test values
@@ -51,15 +50,13 @@ func _init() -> void:
 func setup(
 	p_player_res: Player,
 	p_field: SimField,
-	p_ball: SimBall,
 	p_left_half: bool,
 ) -> void:
 	player_res = p_player_res
 	field = p_field
-	ball = p_ball
 	left_half = p_left_half
 	
-	state_machine = PlayerStateMachine.new()
+	state_machine = PlayerStateMachine.new(field, self)
 	
 	# goalkeeper properties
 	left_base = Vector2(field.line_left + 30, field.size.y / 2)
@@ -72,7 +69,7 @@ func update() -> void:
 	var touching_ball: bool = is_touching_ball()
 	if not has_ball and touching_ball:
 		# interception.emit()
-		ball.stop()
+		field.ball.stop()
 		has_ball = true
 	elif has_ball and not touching_ball:
 		has_ball = false
@@ -90,7 +87,7 @@ func make_goalkeeper() -> void:
 
 
 func is_touching_ball() -> bool:
-	return ball.is_touching(pos, interception_radius)
+	return field.ball.is_touching(pos, interception_radius)
 
 
 func is_intercepting_ball() -> bool:
@@ -128,13 +125,13 @@ func recover_stamina(factor: int = 1) -> void:
 func goalkeeper_follow_ball() -> void:
 	# only follow if in own half
 	if left_half:
-		if ball.pos.x < field.size.x / 2:
-			set_destination(left_base + left_base.direction_to(ball.pos) * 40)
+		if field.ball.pos.x < field.size.x / 2:
+			set_destination(left_base + left_base.direction_to(field.ball.pos) * 40)
 		else:
 			set_destination(left_base)
 	else:
-		if ball.pos.x > field.size.x / 2:
-			set_destination(right_base + right_base.direction_to(ball.pos) * 40)
+		if field.ball.pos.x > field.size.x / 2:
+			set_destination(right_base + right_base.direction_to(field.ball.pos) * 40)
 		else:
 			set_destination(right_base)
 
